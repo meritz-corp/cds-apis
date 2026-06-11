@@ -167,6 +167,10 @@ message Pair {
 
   // 실행 — 발사 시 무엇을 할지. 트리거(trigger)와 독립적으로 조합한다.
   OrderExecution execution = 14;
+
+  // ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·MakeCounterIocBalance/CounterBepScalp
+  // execution 이 공유. NAV 미사용 페어는 미설정.
+  Nav nav = 15;
 }
 
 // ============================================================================
@@ -333,7 +337,6 @@ enum PairStatus {
 // ============================================================================
 
 // ETF NAV 계산 공식 종류
-// (PdfNavHedge/PdfDecomposeHedge는 Pair 미지원 — 서버에서 거부됨)
 enum EtfNavKind {
   ETF_NAV_KIND_UNSPECIFIED = 0;
   // 지수 추종 헷지 프라이싱: (future + basis) * multiple + cash
@@ -342,6 +345,18 @@ enum EtfNavKind {
   ETF_NAV_KIND_FUTURE_BASIS = 2;
   // 레버리지/인버스 ETF용 선물 기반
   ETF_NAV_KIND_LEVERAGE_FUTURE = 3;
+  // PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)
+  ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE = 4;
+}
+
+// ETF↔Future 페어의 NAV 환산 설정 — 트리거(TargetNav)와 실행(counter BEP)이 공유.
+// base/counter 중 한쪽이 ETF, 다른쪽이 Future 여야 한다 (방향 무관).
+message Nav {
+  EtfNavKind nav_kind = 1;
+  // Bid 방향 산출용 basis (원). forward/inverse 양방향에 동일 모델 파라미터로 적용.
+  int64 bid_basis = 2;
+  // Ask 방향 산출용 basis (원)
+  int64 ask_basis = 3;
 }
 
 // ============================================================================
@@ -353,8 +368,11 @@ message TriggerCondition {
   oneof kind {
     // 양 leg 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
     PriceSpreadTrigger price_spread = 1;
-    // base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
-    ImbalanceTrigger imbalance = 2;
+    // base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
+    BestMakeQuantityImbalanceTrigger best_make_quantity_imbalance = 2;
+    // counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
+    // 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
+    TargetNavQuantityImbalanceTrigger target_nav_quantity_imbalance = 3;
   }
 }
 
@@ -366,9 +384,18 @@ message PriceSpreadTrigger {
   uint64 cooldown_ms = 2;
 }
 
-// base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
-message ImbalanceTrigger {
+// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
+message BestMakeQuantityImbalanceTrigger {
   // base 1호가 imbalance 가 이 비율 미만이면 트리거
+  double threshold_ratio = 1;
+  // 트리거 후 재트리거까지 대기시간 (ms)
+  uint64 cooldown_ms = 2;
+}
+
+// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
+// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
+message TargetNavQuantityImbalanceTrigger {
+  // 수량 불균형 임계 (BestMakeQuantityImbalanceTrigger 와 동일 판정식)
   double threshold_ratio = 1;
   // 트리거 후 재트리거까지 대기시간 (ms)
   uint64 cooldown_ms = 2;
@@ -406,12 +433,9 @@ message DualSubmitExecution {
 //   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
 //     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 message MakeCounterIocBalanceExecution {
-  // NAV 계산 공식 종류
-  EtfNavKind nav_kind = 1;
-  // Bid quote 산출용 basis 오프셋 (원, raw int64)
-  int64 bid_basis = 2;
-  // Ask quote 산출용 basis 오프셋 (원, raw int64)
-  int64 ask_basis = 3;
+  // nav_kind / bid_basis / ask_basis 는 Pair.nav 로 이동 — reserved
+  reserved 1, 2, 3;
+  reserved "nav_kind", "bid_basis", "ask_basis";
   // base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
   double recovery_ratio = 4;
   // 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
@@ -430,12 +454,9 @@ message MakeCounterIocBalanceExecution {
 // 진입 주문은 취소 없이 대기, 익절/손절 발동 시점에만 잔량 취소.
 // 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
 message CounterBepScalpExecution {
-  // counter(ETF) BEP 환산용 NAV 방식
-  EtfNavKind nav_kind = 1;
-  // counter 매수(Bid) BEP 오프셋 (원)
-  int64 bid_basis = 2;
-  // counter 매도(Ask) BEP 오프셋 (원)
-  int64 ask_basis = 3;
+  // nav_kind / bid_basis / ask_basis 는 Pair.nav 로 이동 — reserved
+  reserved 1, 2, 3;
+  reserved "nav_kind", "bid_basis", "ask_basis";
   // 익절 임계 (틱)
   uint32 take_profit_ticks = 4;
   // 손절 임계 (틱)

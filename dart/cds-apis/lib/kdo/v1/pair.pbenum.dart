@@ -124,7 +124,6 @@ class PairStatus extends $pb.ProtobufEnum {
 }
 
 /// ETF NAV 계산 공식 종류
-/// (PdfNavHedge/PdfDecomposeHedge는 Pair 미지원 — 서버에서 거부됨)
 class EtfNavKind extends $pb.ProtobufEnum {
   static const EtfNavKind ETF_NAV_KIND_UNSPECIFIED = EtfNavKind._(0, _omitEnumNames ? '' : 'ETF_NAV_KIND_UNSPECIFIED');
   /// 지수 추종 헷지 프라이싱: (future + basis) * multiple + cash
@@ -133,15 +132,18 @@ class EtfNavKind extends $pb.ProtobufEnum {
   static const EtfNavKind ETF_NAV_KIND_FUTURE_BASIS = EtfNavKind._(2, _omitEnumNames ? '' : 'ETF_NAV_KIND_FUTURE_BASIS');
   /// 레버리지/인버스 ETF용 선물 기반
   static const EtfNavKind ETF_NAV_KIND_LEVERAGE_FUTURE = EtfNavKind._(3, _omitEnumNames ? '' : 'ETF_NAV_KIND_LEVERAGE_FUTURE');
+  /// PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)
+  static const EtfNavKind ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE = EtfNavKind._(4, _omitEnumNames ? '' : 'ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE');
 
   static const $core.List<EtfNavKind> values = <EtfNavKind> [
     ETF_NAV_KIND_UNSPECIFIED,
     ETF_NAV_KIND_INDEX_TRACKING_HEDGE,
     ETF_NAV_KIND_FUTURE_BASIS,
     ETF_NAV_KIND_LEVERAGE_FUTURE,
+    ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE,
   ];
 
-  static final $core.List<EtfNavKind?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static final $core.List<EtfNavKind?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
   static EtfNavKind? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const EtfNavKind._(super.value, super.name);

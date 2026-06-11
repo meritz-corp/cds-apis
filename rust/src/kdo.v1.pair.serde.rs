@@ -94,6 +94,126 @@ impl<'de> serde::Deserialize<'de> for ActivatePairRequest {
         deserializer.deserialize_struct("kdo.v1.pair.ActivatePairRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for BestMakeQuantityImbalanceTrigger {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BestMakeQuantityImbalanceTrigger", len)?;
+        if true {
+            struct_ser.serialize_field("threshold_ratio", &self.threshold_ratio)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for BestMakeQuantityImbalanceTrigger {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "threshold_ratio",
+            "thresholdRatio",
+            "cooldown_ms",
+            "cooldownMs",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ThresholdRatio,
+            CooldownMs,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "thresholdRatio" | "threshold_ratio" => Ok(GeneratedField::ThresholdRatio),
+                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = BestMakeQuantityImbalanceTrigger;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.BestMakeQuantityImbalanceTrigger")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<BestMakeQuantityImbalanceTrigger, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut threshold_ratio__ = None;
+                let mut cooldown_ms__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ThresholdRatio => {
+                            if threshold_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("thresholdRatio"));
+                            }
+                            threshold_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CooldownMs => {
+                            if cooldown_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
+                            }
+                            cooldown_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(BestMakeQuantityImbalanceTrigger {
+                    threshold_ratio: threshold_ratio__.unwrap_or_default(),
+                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.BestMakeQuantityImbalanceTrigger", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CounterBepScalpExecution {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -111,31 +231,7 @@ impl serde::Serialize for CounterBepScalpExecution {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.CounterBepScalpExecution", len)?;
-        if true {
-            let v = EtfNavKind::try_from(self.nav_kind)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.nav_kind)))?;
-            struct_ser.serialize_field("nav_kind", &v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_basis", ToString::to_string(&self.bid_basis).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
-        }
         if true {
             struct_ser.serialize_field("take_profit_ticks", &self.take_profit_ticks)?;
         }
@@ -155,12 +251,6 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "nav_kind",
-            "navKind",
-            "bid_basis",
-            "bidBasis",
-            "ask_basis",
-            "askBasis",
             "take_profit_ticks",
             "takeProfitTicks",
             "stop_loss_ticks",
@@ -171,9 +261,6 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            NavKind,
-            BidBasis,
-            AskBasis,
             TakeProfitTicks,
             StopLossTicks,
             ExitAggressiveTicks,
@@ -199,9 +286,6 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                         E: serde::de::Error,
                     {
                         match value {
-                            "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "takeProfitTicks" | "take_profit_ticks" => Ok(GeneratedField::TakeProfitTicks),
                             "stopLossTicks" | "stop_loss_ticks" => Ok(GeneratedField::StopLossTicks),
                             "exitAggressiveTicks" | "exit_aggressive_ticks" => Ok(GeneratedField::ExitAggressiveTicks),
@@ -224,36 +308,11 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut nav_kind__ = None;
-                let mut bid_basis__ = None;
-                let mut ask_basis__ = None;
                 let mut take_profit_ticks__ = None;
                 let mut stop_loss_ticks__ = None;
                 let mut exit_aggressive_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::NavKind => {
-                            if nav_kind__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("navKind"));
-                            }
-                            nav_kind__ = Some(map_.next_value::<EtfNavKind>()? as i32);
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::TakeProfitTicks => {
                             if take_profit_ticks__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("takeProfitTicks"));
@@ -284,9 +343,6 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                     }
                 }
                 Ok(CounterBepScalpExecution {
-                    nav_kind: nav_kind__.unwrap_or_default(),
-                    bid_basis: bid_basis__.unwrap_or_default(),
-                    ask_basis: ask_basis__.unwrap_or_default(),
                     take_profit_ticks: take_profit_ticks__.unwrap_or_default(),
                     stop_loss_ticks: stop_loss_ticks__.unwrap_or_default(),
                     exit_aggressive_ticks: exit_aggressive_ticks__.unwrap_or_default(),
@@ -595,6 +651,7 @@ impl serde::Serialize for EtfNavKind {
             Self::IndexTrackingHedge => "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
             Self::FutureBasis => "ETF_NAV_KIND_FUTURE_BASIS",
             Self::LeverageFuture => "ETF_NAV_KIND_LEVERAGE_FUTURE",
+            Self::PdfDecomposeHedge => "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE",
         };
         serializer.serialize_str(variant)
     }
@@ -610,6 +667,7 @@ impl<'de> serde::Deserialize<'de> for EtfNavKind {
             "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
             "ETF_NAV_KIND_FUTURE_BASIS",
             "ETF_NAV_KIND_LEVERAGE_FUTURE",
+            "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE",
         ];
 
         struct GeneratedVisitor;
@@ -654,6 +712,7 @@ impl<'de> serde::Deserialize<'de> for EtfNavKind {
                     "ETF_NAV_KIND_INDEX_TRACKING_HEDGE" => Ok(EtfNavKind::IndexTrackingHedge),
                     "ETF_NAV_KIND_FUTURE_BASIS" => Ok(EtfNavKind::FutureBasis),
                     "ETF_NAV_KIND_LEVERAGE_FUTURE" => Ok(EtfNavKind::LeverageFuture),
+                    "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE" => Ok(EtfNavKind::PdfDecomposeHedge),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -849,126 +908,6 @@ impl<'de> serde::Deserialize<'de> for GetPairStatisticsRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair.GetPairStatisticsRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ImbalanceTrigger {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.ImbalanceTrigger", len)?;
-        if true {
-            struct_ser.serialize_field("threshold_ratio", &self.threshold_ratio)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ImbalanceTrigger {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "threshold_ratio",
-            "thresholdRatio",
-            "cooldown_ms",
-            "cooldownMs",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            ThresholdRatio,
-            CooldownMs,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "thresholdRatio" | "threshold_ratio" => Ok(GeneratedField::ThresholdRatio),
-                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ImbalanceTrigger;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.pair.ImbalanceTrigger")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ImbalanceTrigger, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut threshold_ratio__ = None;
-                let mut cooldown_ms__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::ThresholdRatio => {
-                            if threshold_ratio__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("thresholdRatio"));
-                            }
-                            threshold_ratio__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CooldownMs => {
-                            if cooldown_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
-                            }
-                            cooldown_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ImbalanceTrigger {
-                    threshold_ratio: threshold_ratio__.unwrap_or_default(),
-                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.pair.ImbalanceTrigger", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for LegStatus {
@@ -1710,31 +1649,7 @@ impl serde::Serialize for MakeCounterIocBalanceExecution {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.MakeCounterIocBalanceExecution", len)?;
-        if true {
-            let v = EtfNavKind::try_from(self.nav_kind)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.nav_kind)))?;
-            struct_ser.serialize_field("nav_kind", &v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_basis", ToString::to_string(&self.bid_basis).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
-        }
         if true {
             struct_ser.serialize_field("recovery_ratio", &self.recovery_ratio)?;
         }
@@ -1764,12 +1679,6 @@ impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "nav_kind",
-            "navKind",
-            "bid_basis",
-            "bidBasis",
-            "ask_basis",
-            "askBasis",
             "recovery_ratio",
             "recoveryRatio",
             "settle_timeout_ms",
@@ -1784,9 +1693,6 @@ impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            NavKind,
-            BidBasis,
-            AskBasis,
             RecoveryRatio,
             SettleTimeoutMs,
             ReconcileAlertAmount,
@@ -1814,9 +1720,6 @@ impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
                         E: serde::de::Error,
                     {
                         match value {
-                            "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "recoveryRatio" | "recovery_ratio" => Ok(GeneratedField::RecoveryRatio),
                             "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
                             "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
@@ -1841,9 +1744,6 @@ impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut nav_kind__ = None;
-                let mut bid_basis__ = None;
-                let mut ask_basis__ = None;
                 let mut recovery_ratio__ = None;
                 let mut settle_timeout_ms__ = None;
                 let mut reconcile_alert_amount__ = None;
@@ -1851,28 +1751,6 @@ impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
                 let mut counter_recovery_aggressive_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::NavKind => {
-                            if nav_kind__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("navKind"));
-                            }
-                            nav_kind__ = Some(map_.next_value::<EtfNavKind>()? as i32);
-                        }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
-                            }
-                            bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::RecoveryRatio => {
                             if recovery_ratio__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("recoveryRatio"));
@@ -1919,9 +1797,6 @@ impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
                     }
                 }
                 Ok(MakeCounterIocBalanceExecution {
-                    nav_kind: nav_kind__.unwrap_or_default(),
-                    bid_basis: bid_basis__.unwrap_or_default(),
-                    ask_basis: ask_basis__.unwrap_or_default(),
                     recovery_ratio: recovery_ratio__.unwrap_or_default(),
                     settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
                     reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
@@ -1931,6 +1806,148 @@ impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair.MakeCounterIocBalanceExecution", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for Nav {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.Nav", len)?;
+        if true {
+            let v = EtfNavKind::try_from(self.nav_kind)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.nav_kind)))?;
+            struct_ser.serialize_field("nav_kind", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_basis", ToString::to_string(&self.bid_basis).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Nav {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "nav_kind",
+            "navKind",
+            "bid_basis",
+            "bidBasis",
+            "ask_basis",
+            "askBasis",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            NavKind,
+            BidBasis,
+            AskBasis,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Nav;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.Nav")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Nav, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut nav_kind__ = None;
+                let mut bid_basis__ = None;
+                let mut ask_basis__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::NavKind => {
+                            if nav_kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("navKind"));
+                            }
+                            nav_kind__ = Some(map_.next_value::<EtfNavKind>()? as i32);
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
+                            }
+                            ask_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(Nav {
+                    nav_kind: nav_kind__.unwrap_or_default(),
+                    bid_basis: bid_basis__.unwrap_or_default(),
+                    ask_basis: ask_basis__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.Nav", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for OrderExecution {
@@ -2103,6 +2120,9 @@ impl serde::Serialize for Pair {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.Pair", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -2139,6 +2159,9 @@ impl serde::Serialize for Pair {
         if let Some(v) = self.execution.as_ref() {
             struct_ser.serialize_field("execution", v)?;
         }
+        if let Some(v) = self.nav.as_ref() {
+            struct_ser.serialize_field("nav", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2164,6 +2187,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
             "updateTime",
             "trigger",
             "execution",
+            "nav",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2179,6 +2203,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
             UpdateTime,
             Trigger,
             Execution,
+            Nav,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2212,6 +2237,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
                             "trigger" => Ok(GeneratedField::Trigger),
                             "execution" => Ok(GeneratedField::Execution),
+                            "nav" => Ok(GeneratedField::Nav),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2242,6 +2268,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
                 let mut update_time__ = None;
                 let mut trigger__ = None;
                 let mut execution__ = None;
+                let mut nav__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -2314,6 +2341,12 @@ impl<'de> serde::Deserialize<'de> for Pair {
                             }
                             execution__ = map_.next_value()?;
                         }
+                        GeneratedField::Nav => {
+                            if nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nav"));
+                            }
+                            nav__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2331,6 +2364,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
                     update_time: update_time__,
                     trigger: trigger__,
                     execution: execution__,
+                    nav: nav__,
                 })
             }
         }
@@ -4507,6 +4541,126 @@ impl<'de> serde::Deserialize<'de> for StreamPairStatusRequest {
         deserializer.deserialize_struct("kdo.v1.pair.StreamPairStatusRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for TargetNavQuantityImbalanceTrigger {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.TargetNavQuantityImbalanceTrigger", len)?;
+        if true {
+            struct_ser.serialize_field("threshold_ratio", &self.threshold_ratio)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for TargetNavQuantityImbalanceTrigger {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "threshold_ratio",
+            "thresholdRatio",
+            "cooldown_ms",
+            "cooldownMs",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ThresholdRatio,
+            CooldownMs,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "thresholdRatio" | "threshold_ratio" => Ok(GeneratedField::ThresholdRatio),
+                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = TargetNavQuantityImbalanceTrigger;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.TargetNavQuantityImbalanceTrigger")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<TargetNavQuantityImbalanceTrigger, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut threshold_ratio__ = None;
+                let mut cooldown_ms__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ThresholdRatio => {
+                            if threshold_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("thresholdRatio"));
+                            }
+                            threshold_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CooldownMs => {
+                            if cooldown_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
+                            }
+                            cooldown_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(TargetNavQuantityImbalanceTrigger {
+                    threshold_ratio: threshold_ratio__.unwrap_or_default(),
+                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.TargetNavQuantityImbalanceTrigger", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for TriggerCondition {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4524,8 +4678,11 @@ impl serde::Serialize for TriggerCondition {
                 trigger_condition::Kind::PriceSpread(v) => {
                     struct_ser.serialize_field("price_spread", v)?;
                 }
-                trigger_condition::Kind::Imbalance(v) => {
-                    struct_ser.serialize_field("imbalance", v)?;
+                trigger_condition::Kind::BestMakeQuantityImbalance(v) => {
+                    struct_ser.serialize_field("best_make_quantity_imbalance", v)?;
+                }
+                trigger_condition::Kind::TargetNavQuantityImbalance(v) => {
+                    struct_ser.serialize_field("target_nav_quantity_imbalance", v)?;
                 }
             }
         }
@@ -4541,13 +4698,17 @@ impl<'de> serde::Deserialize<'de> for TriggerCondition {
         const FIELDS: &[&str] = &[
             "price_spread",
             "priceSpread",
-            "imbalance",
+            "best_make_quantity_imbalance",
+            "bestMakeQuantityImbalance",
+            "target_nav_quantity_imbalance",
+            "targetNavQuantityImbalance",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             PriceSpread,
-            Imbalance,
+            BestMakeQuantityImbalance,
+            TargetNavQuantityImbalance,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4571,7 +4732,8 @@ impl<'de> serde::Deserialize<'de> for TriggerCondition {
                     {
                         match value {
                             "priceSpread" | "price_spread" => Ok(GeneratedField::PriceSpread),
-                            "imbalance" => Ok(GeneratedField::Imbalance),
+                            "bestMakeQuantityImbalance" | "best_make_quantity_imbalance" => Ok(GeneratedField::BestMakeQuantityImbalance),
+                            "targetNavQuantityImbalance" | "target_nav_quantity_imbalance" => Ok(GeneratedField::TargetNavQuantityImbalance),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4601,11 +4763,18 @@ impl<'de> serde::Deserialize<'de> for TriggerCondition {
                             kind__ = map_.next_value::<::std::option::Option<_>>()?.map(trigger_condition::Kind::PriceSpread)
 ;
                         }
-                        GeneratedField::Imbalance => {
+                        GeneratedField::BestMakeQuantityImbalance => {
                             if kind__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("imbalance"));
+                                return Err(serde::de::Error::duplicate_field("bestMakeQuantityImbalance"));
                             }
-                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(trigger_condition::Kind::Imbalance)
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(trigger_condition::Kind::BestMakeQuantityImbalance)
+;
+                        }
+                        GeneratedField::TargetNavQuantityImbalance => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("targetNavQuantityImbalance"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(trigger_condition::Kind::TargetNavQuantityImbalance)
 ;
                         }
                         GeneratedField::__SkipField__ => {

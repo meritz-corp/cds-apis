@@ -41,6 +41,10 @@ pub struct Pair {
     /// 실행 — 발사 시 무엇을 할지. 트리거(trigger)와 독립적으로 조합한다.
     #[prost(message, optional, tag="14")]
     pub execution: ::core::option::Option<OrderExecution>,
+    /// ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·MakeCounterIocBalance/CounterBepScalp
+    /// execution 이 공유. NAV 미사용 페어는 미설정.
+    #[prost(message, optional, tag="15")]
+    pub nav: ::core::option::Option<Nav>,
 }
 // ============================================================================
 // Pair Entry
@@ -138,6 +142,20 @@ pub struct PriceRatioCondition {
     #[prost(double, tag="2")]
     pub max_ratio: f64,
 }
+/// ETF↔Future 페어의 NAV 환산 설정 — 트리거(TargetNav)와 실행(counter BEP)이 공유.
+/// base/counter 중 한쪽이 ETF, 다른쪽이 Future 여야 한다 (방향 무관).
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct Nav {
+    #[prost(enumeration="EtfNavKind", tag="1")]
+    pub nav_kind: i32,
+    /// Bid 방향 산출용 basis (원). forward/inverse 양방향에 동일 모델 파라미터로 적용.
+    #[prost(int64, tag="2")]
+    pub bid_basis: i64,
+    /// Ask 방향 산출용 basis (원)
+    #[prost(int64, tag="3")]
+    pub ask_basis: i64,
+}
 // ============================================================================
 // TriggerCondition — 트리거 축
 // ============================================================================
@@ -146,7 +164,7 @@ pub struct PriceRatioCondition {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TriggerCondition {
-    #[prost(oneof="trigger_condition::Kind", tags="1, 2")]
+    #[prost(oneof="trigger_condition::Kind", tags="1, 2, 3")]
     pub kind: ::core::option::Option<trigger_condition::Kind>,
 }
 /// Nested message and enum types in `TriggerCondition`.
@@ -157,9 +175,13 @@ pub mod trigger_condition {
         /// 양 leg 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
         #[prost(message, tag="1")]
         PriceSpread(super::PriceSpreadTrigger),
-        /// base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
+        /// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
         #[prost(message, tag="2")]
-        Imbalance(super::ImbalanceTrigger),
+        BestMakeQuantityImbalance(super::BestMakeQuantityImbalanceTrigger),
+        /// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
+        /// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
+        #[prost(message, tag="3")]
+        TargetNavQuantityImbalance(super::TargetNavQuantityImbalanceTrigger),
     }
 }
 /// 양 leg 참조가격 비교 트리거
@@ -173,11 +195,23 @@ pub struct PriceSpreadTrigger {
     #[prost(uint64, tag="2")]
     pub cooldown_ms: u64,
 }
-/// base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
+/// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct ImbalanceTrigger {
+pub struct BestMakeQuantityImbalanceTrigger {
     /// base 1호가 imbalance 가 이 비율 미만이면 트리거
+    #[prost(double, tag="1")]
+    pub threshold_ratio: f64,
+    /// 트리거 후 재트리거까지 대기시간 (ms)
+    #[prost(uint64, tag="2")]
+    pub cooldown_ms: u64,
+}
+/// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
+/// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TargetNavQuantityImbalanceTrigger {
+    /// 수량 불균형 임계 (BestMakeQuantityImbalanceTrigger 와 동일 판정식)
     #[prost(double, tag="1")]
     pub threshold_ratio: f64,
     /// 트리거 후 재트리거까지 대기시간 (ms)
@@ -231,15 +265,6 @@ pub struct DualSubmitExecution {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MakeCounterIocBalanceExecution {
-    /// NAV 계산 공식 종류
-    #[prost(enumeration="EtfNavKind", tag="1")]
-    pub nav_kind: i32,
-    /// Bid quote 산출용 basis 오프셋 (원, raw int64)
-    #[prost(int64, tag="2")]
-    pub bid_basis: i64,
-    /// Ask quote 산출용 basis 오프셋 (원, raw int64)
-    #[prost(int64, tag="3")]
-    pub ask_basis: i64,
     /// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
     #[prost(double, tag="4")]
     pub recovery_ratio: f64,
@@ -264,15 +289,6 @@ pub struct MakeCounterIocBalanceExecution {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CounterBepScalpExecution {
-    /// counter(ETF) BEP 환산용 NAV 방식
-    #[prost(enumeration="EtfNavKind", tag="1")]
-    pub nav_kind: i32,
-    /// counter 매수(Bid) BEP 오프셋 (원)
-    #[prost(int64, tag="2")]
-    pub bid_basis: i64,
-    /// counter 매도(Ask) BEP 오프셋 (원)
-    #[prost(int64, tag="3")]
-    pub ask_basis: i64,
     /// 익절 임계 (틱)
     #[prost(uint32, tag="4")]
     pub take_profit_ticks: u32,
@@ -715,7 +731,6 @@ impl PairStatus {
 // ============================================================================
 
 /// ETF NAV 계산 공식 종류
-/// (PdfNavHedge/PdfDecomposeHedge는 Pair 미지원 — 서버에서 거부됨)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum EtfNavKind {
@@ -726,6 +741,8 @@ pub enum EtfNavKind {
     FutureBasis = 2,
     /// 레버리지/인버스 ETF용 선물 기반
     LeverageFuture = 3,
+    /// PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)
+    PdfDecomposeHedge = 4,
 }
 impl EtfNavKind {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -738,6 +755,7 @@ impl EtfNavKind {
             EtfNavKind::IndexTrackingHedge => "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
             EtfNavKind::FutureBasis => "ETF_NAV_KIND_FUTURE_BASIS",
             EtfNavKind::LeverageFuture => "ETF_NAV_KIND_LEVERAGE_FUTURE",
+            EtfNavKind::PdfDecomposeHedge => "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -747,6 +765,7 @@ impl EtfNavKind {
             "ETF_NAV_KIND_INDEX_TRACKING_HEDGE" => Some(Self::IndexTrackingHedge),
             "ETF_NAV_KIND_FUTURE_BASIS" => Some(Self::FutureBasis),
             "ETF_NAV_KIND_LEVERAGE_FUTURE" => Some(Self::LeverageFuture),
+            "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE" => Some(Self::PdfDecomposeHedge),
             _ => None,
         }
     }

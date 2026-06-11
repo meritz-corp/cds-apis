@@ -877,7 +877,7 @@
           "title": "지수 추종 헷지 프라이싱"
         },
         "nav": {
-          "$ref": "#/definitions/mmNav",
+          "$ref": "#/definitions/v1mmNav",
           "title": "선물 베이시스 기반 프라이싱"
         },
         "krxNav": {
@@ -1032,16 +1032,6 @@
       },
       "title": "Momentum 런타임 상태"
     },
-    "mmNav": {
-      "type": "object",
-      "properties": {
-        "etfPricing": {
-          "$ref": "#/definitions/commonEtfPricing",
-          "title": "이전 지수 (Price internal representation)"
-        }
-      },
-      "title": "EtfPricing::FutureBasis { prev_index }"
-    },
     "mmPlainFollow": {
       "type": "object",
       "title": "EtfPricing::PdfNavHedge"
@@ -1181,6 +1171,16 @@
           }
         }
       }
+    },
+    "v1mmNav": {
+      "type": "object",
+      "properties": {
+        "etfPricing": {
+          "$ref": "#/definitions/commonEtfPricing",
+          "title": "이전 지수 (Price internal representation)"
+        }
+      },
+      "title": "EtfPricing::FutureBasis { prev_index }"
     }
   }
 }

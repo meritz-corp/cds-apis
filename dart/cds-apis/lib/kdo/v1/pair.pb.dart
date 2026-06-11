@@ -36,6 +36,7 @@ class Pair extends $pb.GeneratedMessage {
     $2.Timestamp? updateTime,
     TriggerCondition? trigger,
     OrderExecution? execution,
+    Nav? nav,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -49,6 +50,7 @@ class Pair extends $pb.GeneratedMessage {
     if (updateTime != null) result.updateTime = updateTime;
     if (trigger != null) result.trigger = trigger;
     if (execution != null) result.execution = execution;
+    if (nav != null) result.nav = nav;
     return result;
   }
 
@@ -69,6 +71,7 @@ class Pair extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(12, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..aOM<TriggerCondition>(13, _omitFieldNames ? '' : 'trigger', subBuilder: TriggerCondition.create)
     ..aOM<OrderExecution>(14, _omitFieldNames ? '' : 'execution', subBuilder: OrderExecution.create)
+    ..aOM<Nav>(15, _omitFieldNames ? '' : 'nav', subBuilder: Nav.create)
     ..hasRequiredFields = false
   ;
 
@@ -210,6 +213,19 @@ class Pair extends $pb.GeneratedMessage {
   void clearExecution() => $_clearField(14);
   @$pb.TagNumber(14)
   OrderExecution ensureExecution() => $_ensure(10);
+
+  /// ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·MakeCounterIocBalance/CounterBepScalp
+  /// execution 이 공유. NAV 미사용 페어는 미설정.
+  @$pb.TagNumber(15)
+  Nav get nav => $_getN(11);
+  @$pb.TagNumber(15)
+  set nav(Nav value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasNav() => $_has(11);
+  @$pb.TagNumber(15)
+  void clearNav() => $_clearField(15);
+  @$pb.TagNumber(15)
+  Nav ensureNav() => $_ensure(11);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
@@ -604,9 +620,84 @@ class PriceRatioCondition extends $pb.GeneratedMessage {
   void clearMaxRatio() => $_clearField(2);
 }
 
+/// ETF↔Future 페어의 NAV 환산 설정 — 트리거(TargetNav)와 실행(counter BEP)이 공유.
+/// base/counter 중 한쪽이 ETF, 다른쪽이 Future 여야 한다 (방향 무관).
+class Nav extends $pb.GeneratedMessage {
+  factory Nav({
+    EtfNavKind? navKind,
+    $fixnum.Int64? bidBasis,
+    $fixnum.Int64? askBasis,
+  }) {
+    final result = create();
+    if (navKind != null) result.navKind = navKind;
+    if (bidBasis != null) result.bidBasis = bidBasis;
+    if (askBasis != null) result.askBasis = askBasis;
+    return result;
+  }
+
+  Nav._();
+
+  factory Nav.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Nav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Nav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..e<EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
+    ..aInt64(2, _omitFieldNames ? '' : 'bidBasis')
+    ..aInt64(3, _omitFieldNames ? '' : 'askBasis')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Nav clone() => Nav()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Nav copyWith(void Function(Nav) updates) => super.copyWith((message) => updates(message as Nav)) as Nav;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Nav create() => Nav._();
+  @$core.override
+  Nav createEmptyInstance() => create();
+  static $pb.PbList<Nav> createRepeated() => $pb.PbList<Nav>();
+  @$core.pragma('dart2js:noInline')
+  static Nav getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Nav>(create);
+  static Nav? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  EtfNavKind get navKind => $_getN(0);
+  @$pb.TagNumber(1)
+  set navKind(EtfNavKind value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasNavKind() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNavKind() => $_clearField(1);
+
+  /// Bid 방향 산출용 basis (원). forward/inverse 양방향에 동일 모델 파라미터로 적용.
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get bidBasis => $_getI64(1);
+  @$pb.TagNumber(2)
+  set bidBasis($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBidBasis() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBidBasis() => $_clearField(2);
+
+  /// Ask 방향 산출용 basis (원)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get askBasis => $_getI64(2);
+  @$pb.TagNumber(3)
+  set askBasis($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskBasis() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskBasis() => $_clearField(3);
+}
+
 enum TriggerCondition_Kind {
   priceSpread, 
-  imbalance, 
+  bestMakeQuantityImbalance, 
+  targetNavQuantityImbalance, 
   notSet
 }
 
@@ -614,11 +705,13 @@ enum TriggerCondition_Kind {
 class TriggerCondition extends $pb.GeneratedMessage {
   factory TriggerCondition({
     PriceSpreadTrigger? priceSpread,
-    ImbalanceTrigger? imbalance,
+    BestMakeQuantityImbalanceTrigger? bestMakeQuantityImbalance,
+    TargetNavQuantityImbalanceTrigger? targetNavQuantityImbalance,
   }) {
     final result = create();
     if (priceSpread != null) result.priceSpread = priceSpread;
-    if (imbalance != null) result.imbalance = imbalance;
+    if (bestMakeQuantityImbalance != null) result.bestMakeQuantityImbalance = bestMakeQuantityImbalance;
+    if (targetNavQuantityImbalance != null) result.targetNavQuantityImbalance = targetNavQuantityImbalance;
     return result;
   }
 
@@ -629,13 +722,15 @@ class TriggerCondition extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, TriggerCondition_Kind> _TriggerCondition_KindByTag = {
     1 : TriggerCondition_Kind.priceSpread,
-    2 : TriggerCondition_Kind.imbalance,
+    2 : TriggerCondition_Kind.bestMakeQuantityImbalance,
+    3 : TriggerCondition_Kind.targetNavQuantityImbalance,
     0 : TriggerCondition_Kind.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TriggerCondition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2, 3])
     ..aOM<PriceSpreadTrigger>(1, _omitFieldNames ? '' : 'priceSpread', subBuilder: PriceSpreadTrigger.create)
-    ..aOM<ImbalanceTrigger>(2, _omitFieldNames ? '' : 'imbalance', subBuilder: ImbalanceTrigger.create)
+    ..aOM<BestMakeQuantityImbalanceTrigger>(2, _omitFieldNames ? '' : 'bestMakeQuantityImbalance', subBuilder: BestMakeQuantityImbalanceTrigger.create)
+    ..aOM<TargetNavQuantityImbalanceTrigger>(3, _omitFieldNames ? '' : 'targetNavQuantityImbalance', subBuilder: TargetNavQuantityImbalanceTrigger.create)
     ..hasRequiredFields = false
   ;
 
@@ -671,17 +766,30 @@ class TriggerCondition extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   PriceSpreadTrigger ensurePriceSpread() => $_ensure(0);
 
-  /// base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
+  /// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
   @$pb.TagNumber(2)
-  ImbalanceTrigger get imbalance => $_getN(1);
+  BestMakeQuantityImbalanceTrigger get bestMakeQuantityImbalance => $_getN(1);
   @$pb.TagNumber(2)
-  set imbalance(ImbalanceTrigger value) => $_setField(2, value);
+  set bestMakeQuantityImbalance(BestMakeQuantityImbalanceTrigger value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasImbalance() => $_has(1);
+  $core.bool hasBestMakeQuantityImbalance() => $_has(1);
   @$pb.TagNumber(2)
-  void clearImbalance() => $_clearField(2);
+  void clearBestMakeQuantityImbalance() => $_clearField(2);
   @$pb.TagNumber(2)
-  ImbalanceTrigger ensureImbalance() => $_ensure(1);
+  BestMakeQuantityImbalanceTrigger ensureBestMakeQuantityImbalance() => $_ensure(1);
+
+  /// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
+  /// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
+  @$pb.TagNumber(3)
+  TargetNavQuantityImbalanceTrigger get targetNavQuantityImbalance => $_getN(2);
+  @$pb.TagNumber(3)
+  set targetNavQuantityImbalance(TargetNavQuantityImbalanceTrigger value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTargetNavQuantityImbalance() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTargetNavQuantityImbalance() => $_clearField(3);
+  @$pb.TagNumber(3)
+  TargetNavQuantityImbalanceTrigger ensureTargetNavQuantityImbalance() => $_ensure(2);
 }
 
 /// 양 leg 참조가격 비교 트리거
@@ -747,9 +855,9 @@ class PriceSpreadTrigger extends $pb.GeneratedMessage {
   void clearCooldownMs() => $_clearField(2);
 }
 
-/// base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
-class ImbalanceTrigger extends $pb.GeneratedMessage {
-  factory ImbalanceTrigger({
+/// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
+class BestMakeQuantityImbalanceTrigger extends $pb.GeneratedMessage {
+  factory BestMakeQuantityImbalanceTrigger({
     $core.double? thresholdRatio,
     $fixnum.Int64? cooldownMs,
   }) {
@@ -759,35 +867,97 @@ class ImbalanceTrigger extends $pb.GeneratedMessage {
     return result;
   }
 
-  ImbalanceTrigger._();
+  BestMakeQuantityImbalanceTrigger._();
 
-  factory ImbalanceTrigger.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ImbalanceTrigger.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory BestMakeQuantityImbalanceTrigger.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BestMakeQuantityImbalanceTrigger.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ImbalanceTrigger', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BestMakeQuantityImbalanceTrigger', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'thresholdRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ImbalanceTrigger clone() => ImbalanceTrigger()..mergeFromMessage(this);
+  BestMakeQuantityImbalanceTrigger clone() => BestMakeQuantityImbalanceTrigger()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ImbalanceTrigger copyWith(void Function(ImbalanceTrigger) updates) => super.copyWith((message) => updates(message as ImbalanceTrigger)) as ImbalanceTrigger;
+  BestMakeQuantityImbalanceTrigger copyWith(void Function(BestMakeQuantityImbalanceTrigger) updates) => super.copyWith((message) => updates(message as BestMakeQuantityImbalanceTrigger)) as BestMakeQuantityImbalanceTrigger;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ImbalanceTrigger create() => ImbalanceTrigger._();
+  static BestMakeQuantityImbalanceTrigger create() => BestMakeQuantityImbalanceTrigger._();
   @$core.override
-  ImbalanceTrigger createEmptyInstance() => create();
-  static $pb.PbList<ImbalanceTrigger> createRepeated() => $pb.PbList<ImbalanceTrigger>();
+  BestMakeQuantityImbalanceTrigger createEmptyInstance() => create();
+  static $pb.PbList<BestMakeQuantityImbalanceTrigger> createRepeated() => $pb.PbList<BestMakeQuantityImbalanceTrigger>();
   @$core.pragma('dart2js:noInline')
-  static ImbalanceTrigger getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImbalanceTrigger>(create);
-  static ImbalanceTrigger? _defaultInstance;
+  static BestMakeQuantityImbalanceTrigger getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BestMakeQuantityImbalanceTrigger>(create);
+  static BestMakeQuantityImbalanceTrigger? _defaultInstance;
 
   /// base 1호가 imbalance 가 이 비율 미만이면 트리거
+  @$pb.TagNumber(1)
+  $core.double get thresholdRatio => $_getN(0);
+  @$pb.TagNumber(1)
+  set thresholdRatio($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasThresholdRatio() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearThresholdRatio() => $_clearField(1);
+
+  /// 트리거 후 재트리거까지 대기시간 (ms)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get cooldownMs => $_getI64(1);
+  @$pb.TagNumber(2)
+  set cooldownMs($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCooldownMs() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCooldownMs() => $_clearField(2);
+}
+
+/// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
+/// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
+class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
+  factory TargetNavQuantityImbalanceTrigger({
+    $core.double? thresholdRatio,
+    $fixnum.Int64? cooldownMs,
+  }) {
+    final result = create();
+    if (thresholdRatio != null) result.thresholdRatio = thresholdRatio;
+    if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    return result;
+  }
+
+  TargetNavQuantityImbalanceTrigger._();
+
+  factory TargetNavQuantityImbalanceTrigger.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TargetNavQuantityImbalanceTrigger.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TargetNavQuantityImbalanceTrigger', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'thresholdRatio', $pb.PbFieldType.OD)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TargetNavQuantityImbalanceTrigger clone() => TargetNavQuantityImbalanceTrigger()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TargetNavQuantityImbalanceTrigger copyWith(void Function(TargetNavQuantityImbalanceTrigger) updates) => super.copyWith((message) => updates(message as TargetNavQuantityImbalanceTrigger)) as TargetNavQuantityImbalanceTrigger;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TargetNavQuantityImbalanceTrigger create() => TargetNavQuantityImbalanceTrigger._();
+  @$core.override
+  TargetNavQuantityImbalanceTrigger createEmptyInstance() => create();
+  static $pb.PbList<TargetNavQuantityImbalanceTrigger> createRepeated() => $pb.PbList<TargetNavQuantityImbalanceTrigger>();
+  @$core.pragma('dart2js:noInline')
+  static TargetNavQuantityImbalanceTrigger getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TargetNavQuantityImbalanceTrigger>(create);
+  static TargetNavQuantityImbalanceTrigger? _defaultInstance;
+
+  /// 수량 불균형 임계 (BestMakeQuantityImbalanceTrigger 와 동일 판정식)
   @$pb.TagNumber(1)
   $core.double get thresholdRatio => $_getN(0);
   @$pb.TagNumber(1)
@@ -964,9 +1134,6 @@ class DualSubmitExecution extends $pb.GeneratedMessage {
 ///     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
   factory MakeCounterIocBalanceExecution({
-    EtfNavKind? navKind,
-    $fixnum.Int64? bidBasis,
-    $fixnum.Int64? askBasis,
     $core.double? recoveryRatio,
     $fixnum.Int64? settleTimeoutMs,
     $fixnum.Int64? reconcileAlertAmount,
@@ -974,9 +1141,6 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
     $core.int? counterRecoveryAggressiveTicks,
   }) {
     final result = create();
-    if (navKind != null) result.navKind = navKind;
-    if (bidBasis != null) result.bidBasis = bidBasis;
-    if (askBasis != null) result.askBasis = askBasis;
     if (recoveryRatio != null) result.recoveryRatio = recoveryRatio;
     if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
     if (reconcileAlertAmount != null) result.reconcileAlertAmount = reconcileAlertAmount;
@@ -991,9 +1155,6 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
   factory MakeCounterIocBalanceExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MakeCounterIocBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..e<EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
-    ..aInt64(2, _omitFieldNames ? '' : 'bidBasis')
-    ..aInt64(3, _omitFieldNames ? '' : 'askBasis')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'recoveryRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(6, _omitFieldNames ? '' : 'reconcileAlertAmount')
@@ -1019,85 +1180,55 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
   static MakeCounterIocBalanceExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MakeCounterIocBalanceExecution>(create);
   static MakeCounterIocBalanceExecution? _defaultInstance;
 
-  /// NAV 계산 공식 종류
-  @$pb.TagNumber(1)
-  EtfNavKind get navKind => $_getN(0);
-  @$pb.TagNumber(1)
-  set navKind(EtfNavKind value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasNavKind() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearNavKind() => $_clearField(1);
-
-  /// Bid quote 산출용 basis 오프셋 (원, raw int64)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get bidBasis => $_getI64(1);
-  @$pb.TagNumber(2)
-  set bidBasis($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBidBasis() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBidBasis() => $_clearField(2);
-
-  /// Ask quote 산출용 basis 오프셋 (원, raw int64)
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get askBasis => $_getI64(2);
-  @$pb.TagNumber(3)
-  set askBasis($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasAskBasis() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAskBasis() => $_clearField(3);
-
   /// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
   @$pb.TagNumber(4)
-  $core.double get recoveryRatio => $_getN(3);
+  $core.double get recoveryRatio => $_getN(0);
   @$pb.TagNumber(4)
-  set recoveryRatio($core.double value) => $_setDouble(3, value);
+  set recoveryRatio($core.double value) => $_setDouble(0, value);
   @$pb.TagNumber(4)
-  $core.bool hasRecoveryRatio() => $_has(3);
+  $core.bool hasRecoveryRatio() => $_has(0);
   @$pb.TagNumber(4)
   void clearRecoveryRatio() => $_clearField(4);
 
   /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
   @$pb.TagNumber(5)
-  $fixnum.Int64 get settleTimeoutMs => $_getI64(4);
+  $fixnum.Int64 get settleTimeoutMs => $_getI64(1);
   @$pb.TagNumber(5)
-  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(4, value);
+  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(5)
-  $core.bool hasSettleTimeoutMs() => $_has(4);
+  $core.bool hasSettleTimeoutMs() => $_has(1);
   @$pb.TagNumber(5)
   void clearSettleTimeoutMs() => $_clearField(5);
 
   /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
   @$pb.TagNumber(6)
-  $fixnum.Int64 get reconcileAlertAmount => $_getI64(5);
+  $fixnum.Int64 get reconcileAlertAmount => $_getI64(2);
   @$pb.TagNumber(6)
-  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(5, value);
+  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(6)
-  $core.bool hasReconcileAlertAmount() => $_has(5);
+  $core.bool hasReconcileAlertAmount() => $_has(2);
   @$pb.TagNumber(6)
   void clearReconcileAlertAmount() => $_clearField(6);
 
   /// base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
   /// 0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(7)
-  $core.int get baseRecoveryAggressiveTicks => $_getIZ(6);
+  $core.int get baseRecoveryAggressiveTicks => $_getIZ(3);
   @$pb.TagNumber(7)
-  set baseRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(6, value);
+  set baseRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(3, value);
   @$pb.TagNumber(7)
-  $core.bool hasBaseRecoveryAggressiveTicks() => $_has(6);
+  $core.bool hasBaseRecoveryAggressiveTicks() => $_has(3);
   @$pb.TagNumber(7)
   void clearBaseRecoveryAggressiveTicks() => $_clearField(7);
 
   /// counter leg 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
   /// 0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(8)
-  $core.int get counterRecoveryAggressiveTicks => $_getIZ(7);
+  $core.int get counterRecoveryAggressiveTicks => $_getIZ(4);
   @$pb.TagNumber(8)
-  set counterRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(7, value);
+  set counterRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(4, value);
   @$pb.TagNumber(8)
-  $core.bool hasCounterRecoveryAggressiveTicks() => $_has(7);
+  $core.bool hasCounterRecoveryAggressiveTicks() => $_has(4);
   @$pb.TagNumber(8)
   void clearCounterRecoveryAggressiveTicks() => $_clearField(8);
 }
@@ -1107,17 +1238,11 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
 /// 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
 class CounterBepScalpExecution extends $pb.GeneratedMessage {
   factory CounterBepScalpExecution({
-    EtfNavKind? navKind,
-    $fixnum.Int64? bidBasis,
-    $fixnum.Int64? askBasis,
     $core.int? takeProfitTicks,
     $core.int? stopLossTicks,
     $core.int? exitAggressiveTicks,
   }) {
     final result = create();
-    if (navKind != null) result.navKind = navKind;
-    if (bidBasis != null) result.bidBasis = bidBasis;
-    if (askBasis != null) result.askBasis = askBasis;
     if (takeProfitTicks != null) result.takeProfitTicks = takeProfitTicks;
     if (stopLossTicks != null) result.stopLossTicks = stopLossTicks;
     if (exitAggressiveTicks != null) result.exitAggressiveTicks = exitAggressiveTicks;
@@ -1130,9 +1255,6 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
   factory CounterBepScalpExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CounterBepScalpExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..e<EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
-    ..aInt64(2, _omitFieldNames ? '' : 'bidBasis')
-    ..aInt64(3, _omitFieldNames ? '' : 'askBasis')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'takeProfitTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'stopLossTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(6, _omitFieldNames ? '' : 'exitAggressiveTicks', $pb.PbFieldType.OU3)
@@ -1156,63 +1278,33 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
   static CounterBepScalpExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CounterBepScalpExecution>(create);
   static CounterBepScalpExecution? _defaultInstance;
 
-  /// counter(ETF) BEP 환산용 NAV 방식
-  @$pb.TagNumber(1)
-  EtfNavKind get navKind => $_getN(0);
-  @$pb.TagNumber(1)
-  set navKind(EtfNavKind value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasNavKind() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearNavKind() => $_clearField(1);
-
-  /// counter 매수(Bid) BEP 오프셋 (원)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get bidBasis => $_getI64(1);
-  @$pb.TagNumber(2)
-  set bidBasis($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBidBasis() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBidBasis() => $_clearField(2);
-
-  /// counter 매도(Ask) BEP 오프셋 (원)
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get askBasis => $_getI64(2);
-  @$pb.TagNumber(3)
-  set askBasis($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasAskBasis() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAskBasis() => $_clearField(3);
-
   /// 익절 임계 (틱)
   @$pb.TagNumber(4)
-  $core.int get takeProfitTicks => $_getIZ(3);
+  $core.int get takeProfitTicks => $_getIZ(0);
   @$pb.TagNumber(4)
-  set takeProfitTicks($core.int value) => $_setUnsignedInt32(3, value);
+  set takeProfitTicks($core.int value) => $_setUnsignedInt32(0, value);
   @$pb.TagNumber(4)
-  $core.bool hasTakeProfitTicks() => $_has(3);
+  $core.bool hasTakeProfitTicks() => $_has(0);
   @$pb.TagNumber(4)
   void clearTakeProfitTicks() => $_clearField(4);
 
   /// 손절 임계 (틱)
   @$pb.TagNumber(5)
-  $core.int get stopLossTicks => $_getIZ(4);
+  $core.int get stopLossTicks => $_getIZ(1);
   @$pb.TagNumber(5)
-  set stopLossTicks($core.int value) => $_setUnsignedInt32(4, value);
+  set stopLossTicks($core.int value) => $_setUnsignedInt32(1, value);
   @$pb.TagNumber(5)
-  $core.bool hasStopLossTicks() => $_has(4);
+  $core.bool hasStopLossTicks() => $_has(1);
   @$pb.TagNumber(5)
   void clearStopLossTicks() => $_clearField(5);
 
   /// 청산 발주 시 상대 1호가 대비 추가 공격 틱 (0 = 상대호가 그대로)
   @$pb.TagNumber(6)
-  $core.int get exitAggressiveTicks => $_getIZ(5);
+  $core.int get exitAggressiveTicks => $_getIZ(2);
   @$pb.TagNumber(6)
-  set exitAggressiveTicks($core.int value) => $_setUnsignedInt32(5, value);
+  set exitAggressiveTicks($core.int value) => $_setUnsignedInt32(2, value);
   @$pb.TagNumber(6)
-  $core.bool hasExitAggressiveTicks() => $_has(5);
+  $core.bool hasExitAggressiveTicks() => $_has(2);
   @$pb.TagNumber(6)
   void clearExitAggressiveTicks() => $_clearField(6);
 }
