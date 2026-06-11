@@ -123,24 +123,6 @@ class PairStatus extends $pb.ProtobufEnum {
   const PairStatus._(super.value, super.name);
 }
 
-/// Pair leg 식별자
-class PairLeg extends $pb.ProtobufEnum {
-  static const PairLeg PAIR_LEG_UNSPECIFIED = PairLeg._(0, _omitEnumNames ? '' : 'PAIR_LEG_UNSPECIFIED');
-  static const PairLeg PAIR_LEG_BASE = PairLeg._(1, _omitEnumNames ? '' : 'PAIR_LEG_BASE');
-  static const PairLeg PAIR_LEG_COUNTER = PairLeg._(2, _omitEnumNames ? '' : 'PAIR_LEG_COUNTER');
-
-  static const $core.List<PairLeg> values = <PairLeg> [
-    PAIR_LEG_UNSPECIFIED,
-    PAIR_LEG_BASE,
-    PAIR_LEG_COUNTER,
-  ];
-
-  static final $core.List<PairLeg?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static PairLeg? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const PairLeg._(super.value, super.name);
-}
-
 /// ETF NAV 계산 공식 종류
 /// (PdfNavHedge/PdfDecomposeHedge는 Pair 미지원 — 서버에서 거부됨)
 class EtfNavKind extends $pb.ProtobufEnum {
@@ -163,26 +145,6 @@ class EtfNavKind extends $pb.ProtobufEnum {
   static EtfNavKind? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const EtfNavKind._(super.value, super.name);
-}
-
-/// NAV 환산 방향
-class NavDirection extends $pb.ProtobufEnum {
-  static const NavDirection NAV_DIRECTION_UNSPECIFIED = NavDirection._(0, _omitEnumNames ? '' : 'NAV_DIRECTION_UNSPECIFIED');
-  /// pricer=ETF → maker=선물 가격 역산
-  static const NavDirection NAV_DIRECTION_INVERSE = NavDirection._(1, _omitEnumNames ? '' : 'NAV_DIRECTION_INVERSE');
-  /// pricer=선물 → maker=ETF NAV forward 산출
-  static const NavDirection NAV_DIRECTION_FORWARD = NavDirection._(2, _omitEnumNames ? '' : 'NAV_DIRECTION_FORWARD');
-
-  static const $core.List<NavDirection> values = <NavDirection> [
-    NAV_DIRECTION_UNSPECIFIED,
-    NAV_DIRECTION_INVERSE,
-    NAV_DIRECTION_FORWARD,
-  ];
-
-  static final $core.List<NavDirection?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static NavDirection? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const NavDirection._(super.value, super.name);
 }
 
 /// 페어 실행 결과
@@ -218,44 +180,6 @@ class PairExecutionOutcome extends $pb.ProtobufEnum {
   static PairExecutionOutcome? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const PairExecutionOutcome._(super.value, super.name);
-}
-
-/// Maker-Taker 이벤트 유형
-class MakerTakerEventType extends $pb.ProtobufEnum {
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_UNSPECIFIED = MakerTakerEventType._(0, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_UNSPECIFIED');
-  /// maker 신규 발주 (FEP submit 직후)
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_MAKER_SUBMITTED = MakerTakerEventType._(1, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_MAKER_SUBMITTED');
-  /// maker 정정 (가격/수량 변경)
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_MAKER_AMENDED = MakerTakerEventType._(2, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_MAKER_AMENDED');
-  /// maker 부분/완전 체결
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_MAKER_FILLED = MakerTakerEventType._(3, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_MAKER_FILLED');
-  /// maker 주문 reject
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_MAKER_REJECTED = MakerTakerEventType._(4, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_MAKER_REJECTED');
-  /// maker 주문 거래소 auto-cancel
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_MAKER_CANCELLED = MakerTakerEventType._(5, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_MAKER_CANCELLED');
-  /// taker 헷지 주문 발주
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_TAKER_SUBMITTED = MakerTakerEventType._(6, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_TAKER_SUBMITTED');
-  /// taker 헷지 체결
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_TAKER_FILLED = MakerTakerEventType._(7, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_TAKER_FILLED');
-  /// taker 헷지 reject (수동 개입 필요)
-  static const MakerTakerEventType MAKER_TAKER_EVENT_TYPE_TAKER_REJECTED = MakerTakerEventType._(8, _omitEnumNames ? '' : 'MAKER_TAKER_EVENT_TYPE_TAKER_REJECTED');
-
-  static const $core.List<MakerTakerEventType> values = <MakerTakerEventType> [
-    MAKER_TAKER_EVENT_TYPE_UNSPECIFIED,
-    MAKER_TAKER_EVENT_TYPE_MAKER_SUBMITTED,
-    MAKER_TAKER_EVENT_TYPE_MAKER_AMENDED,
-    MAKER_TAKER_EVENT_TYPE_MAKER_FILLED,
-    MAKER_TAKER_EVENT_TYPE_MAKER_REJECTED,
-    MAKER_TAKER_EVENT_TYPE_MAKER_CANCELLED,
-    MAKER_TAKER_EVENT_TYPE_TAKER_SUBMITTED,
-    MAKER_TAKER_EVENT_TYPE_TAKER_FILLED,
-    MAKER_TAKER_EVENT_TYPE_TAKER_REJECTED,
-  ];
-
-  static final $core.List<MakerTakerEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 8);
-  static MakerTakerEventType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const MakerTakerEventType._(super.value, super.name);
 }
 
 

@@ -68,20 +68,12 @@ abstract final class PairService {
     kdov1pair.Pair.new,
   );
 
-  /// Pair 실행 로그 목록 조회 (SimultaneousCompare 모드 사이클별 기록, 페이징)
+  /// Pair 실행 로그 목록 조회 (사이클별 기록, 페이징)
   static const listPairExecutionLogs = connect.Spec(
     '/$name/ListPairExecutionLogs',
     connect.StreamType.unary,
     kdov1pair.ListPairExecutionLogsRequest.new,
     kdov1pair.ListPairExecutionLogsResponse.new,
-  );
-
-  /// Maker-Taker 이벤트 로그 목록 조회 (PricingMakerTaker 모드 전용, 페이징)
-  static const listMakerTakerEvents = connect.Spec(
-    '/$name/ListMakerTakerEvents',
-    connect.StreamType.unary,
-    kdov1pair.ListMakerTakerEventsRequest.new,
-    kdov1pair.ListMakerTakerEventsResponse.new,
   );
 
   /// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)

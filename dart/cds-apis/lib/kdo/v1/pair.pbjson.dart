@@ -104,21 +104,6 @@ final $typed_data.Uint8List pairStatusDescriptor = $convert.base64Decode(
     'NfQUNUSVZFEAESFgoSUEFJUl9TVEFUVVNfUEFVU0VEEAISGAoUUEFJUl9TVEFUVVNfQVJDSElW'
     'RUQQAw==');
 
-@$core.Deprecated('Use pairLegDescriptor instead')
-const PairLeg$json = {
-  '1': 'PairLeg',
-  '2': [
-    {'1': 'PAIR_LEG_UNSPECIFIED', '2': 0},
-    {'1': 'PAIR_LEG_BASE', '2': 1},
-    {'1': 'PAIR_LEG_COUNTER', '2': 2},
-  ],
-};
-
-/// Descriptor for `PairLeg`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List pairLegDescriptor = $convert.base64Decode(
-    'CgdQYWlyTGVnEhgKFFBBSVJfTEVHX1VOU1BFQ0lGSUVEEAASEQoNUEFJUl9MRUdfQkFTRRABEh'
-    'QKEFBBSVJfTEVHX0NPVU5URVIQAg==');
-
 @$core.Deprecated('Use etfNavKindDescriptor instead')
 const EtfNavKind$json = {
   '1': 'EtfNavKind',
@@ -135,21 +120,6 @@ final $typed_data.Uint8List etfNavKindDescriptor = $convert.base64Decode(
     'CgpFdGZOYXZLaW5kEhwKGEVURl9OQVZfS0lORF9VTlNQRUNJRklFRBAAEiUKIUVURl9OQVZfS0'
     'lORF9JTkRFWF9UUkFDS0lOR19IRURHRRABEh0KGUVURl9OQVZfS0lORF9GVVRVUkVfQkFTSVMQ'
     'AhIgChxFVEZfTkFWX0tJTkRfTEVWRVJBR0VfRlVUVVJFEAM=');
-
-@$core.Deprecated('Use navDirectionDescriptor instead')
-const NavDirection$json = {
-  '1': 'NavDirection',
-  '2': [
-    {'1': 'NAV_DIRECTION_UNSPECIFIED', '2': 0},
-    {'1': 'NAV_DIRECTION_INVERSE', '2': 1},
-    {'1': 'NAV_DIRECTION_FORWARD', '2': 2},
-  ],
-};
-
-/// Descriptor for `NavDirection`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List navDirectionDescriptor = $convert.base64Decode(
-    'CgxOYXZEaXJlY3Rpb24SHQoZTkFWX0RJUkVDVElPTl9VTlNQRUNJRklFRBAAEhkKFU5BVl9ESV'
-    'JFQ1RJT05fSU5WRVJTRRABEhkKFU5BVl9ESVJFQ1RJT05fRk9SV0FSRBAC');
 
 @$core.Deprecated('Use pairExecutionOutcomeDescriptor instead')
 const PairExecutionOutcome$json = {
@@ -176,33 +146,6 @@ final $typed_data.Uint8List pairExecutionOutcomeDescriptor = $convert.base64Deco
     'RJQUxfRkFJTFVSRRAFEiEKHVBBSVJfRVhFQ1VUSU9OX09VVENPTUVfRkFJTEVEEAYSLAooUEFJ'
     'Ul9FWEVDVVRJT05fT1VUQ09NRV9TS0lQUEVEX05PX0ZJTExFRBAH');
 
-@$core.Deprecated('Use makerTakerEventTypeDescriptor instead')
-const MakerTakerEventType$json = {
-  '1': 'MakerTakerEventType',
-  '2': [
-    {'1': 'MAKER_TAKER_EVENT_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_MAKER_SUBMITTED', '2': 1},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_MAKER_AMENDED', '2': 2},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_MAKER_FILLED', '2': 3},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_MAKER_REJECTED', '2': 4},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_MAKER_CANCELLED', '2': 5},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_TAKER_SUBMITTED', '2': 6},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_TAKER_FILLED', '2': 7},
-    {'1': 'MAKER_TAKER_EVENT_TYPE_TAKER_REJECTED', '2': 8},
-  ],
-};
-
-/// Descriptor for `MakerTakerEventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List makerTakerEventTypeDescriptor = $convert.base64Decode(
-    'ChNNYWtlclRha2VyRXZlbnRUeXBlEiYKIk1BS0VSX1RBS0VSX0VWRU5UX1RZUEVfVU5TUEVDSU'
-    'ZJRUQQABIqCiZNQUtFUl9UQUtFUl9FVkVOVF9UWVBFX01BS0VSX1NVQk1JVFRFRBABEigKJE1B'
-    'S0VSX1RBS0VSX0VWRU5UX1RZUEVfTUFLRVJfQU1FTkRFRBACEicKI01BS0VSX1RBS0VSX0VWRU'
-    '5UX1RZUEVfTUFLRVJfRklMTEVEEAMSKQolTUFLRVJfVEFLRVJfRVZFTlRfVFlQRV9NQUtFUl9S'
-    'RUpFQ1RFRBAEEioKJk1BS0VSX1RBS0VSX0VWRU5UX1RZUEVfTUFLRVJfQ0FOQ0VMTEVEEAUSKg'
-    'omTUFLRVJfVEFLRVJfRVZFTlRfVFlQRV9UQUtFUl9TVUJNSVRURUQQBhInCiNNQUtFUl9UQUtF'
-    'Ul9FVkVOVF9UWVBFX1RBS0VSX0ZJTExFRBAHEikKJU1BS0VSX1RBS0VSX0VWRU5UX1RZUEVfVE'
-    'FLRVJfUkVKRUNURUQQCA==');
-
 @$core.Deprecated('Use pairDescriptor instead')
 const Pair$json = {
   '1': 'Pair',
@@ -214,16 +157,18 @@ const Pair$json = {
     {'1': 'base', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'base'},
     {'1': 'counter', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairEntry', '8': {}, '10': 'counter'},
     {'1': 'status', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairStatus', '8': {}, '10': 'status'},
-    {'1': 'mode', '3': 10, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairMode', '10': 'mode'},
     {'1': 'create_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
+    {'1': 'trigger', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.pair.TriggerCondition', '10': 'trigger'},
+    {'1': 'execution', '3': 14, '4': 1, '5': 11, '6': '.kdo.v1.pair.OrderExecution', '10': 'execution'},
   ],
   '7': {},
   '9': [
     {'1': 7, '2': 8},
     {'1': 8, '2': 9},
+    {'1': 10, '2': 11},
   ],
-  '10': ['condition', 'exec_config'],
+  '10': ['condition', 'exec_config', 'mode'],
 };
 
 /// Descriptor for `Pair`. Decode as a `google.protobuf.DescriptorProto`.
@@ -233,11 +178,13 @@ final $typed_data.Uint8List pairDescriptor = $convert.base64Decode(
     'QgTiQQECUgtwb3J0Zm9saW9JZBIwCgRiYXNlGAUgASgLMhYua2RvLnYxLnBhaXIuUGFpckVudH'
     'J5QgTiQQECUgRiYXNlEjYKB2NvdW50ZXIYBiABKAsyFi5rZG8udjEucGFpci5QYWlyRW50cnlC'
     'BOJBAQJSB2NvdW50ZXISNQoGc3RhdHVzGAkgASgOMhcua2RvLnYxLnBhaXIuUGFpclN0YXR1c0'
-    'IE4kEBA1IGc3RhdHVzEikKBG1vZGUYCiABKAsyFS5rZG8udjEucGFpci5QYWlyTW9kZVIEbW9k'
-    'ZRJBCgtjcmVhdGVfdGltZRgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQ'
-    'NSCmNyZWF0ZVRpbWUSQQoLdXBkYXRlX3RpbWUYDCABKAsyGi5nb29nbGUucHJvdG9idWYuVGlt'
-    'ZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lOifqQSQKFGtkby5jZHNhcGlzLnh5ei9QYWlyEgxwYW'
-    'lycy97cGFpcn1KBAgHEAhKBAgIEAlSCWNvbmRpdGlvblILZXhlY19jb25maWc=');
+    'IE4kEBA1IGc3RhdHVzEkEKC2NyZWF0ZV90aW1lGAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRp'
+    'bWVzdGFtcEIE4kEBA1IKY3JlYXRlVGltZRJBCgt1cGRhdGVfdGltZRgMIAEoCzIaLmdvb2dsZS'
+    '5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWUSNwoHdHJpZ2dlchgNIAEoCzId'
+    'Lmtkby52MS5wYWlyLlRyaWdnZXJDb25kaXRpb25SB3RyaWdnZXISOQoJZXhlY3V0aW9uGA4gAS'
+    'gLMhsua2RvLnYxLnBhaXIuT3JkZXJFeGVjdXRpb25SCWV4ZWN1dGlvbjon6kEkChRrZG8uY2Rz'
+    'YXBpcy54eXovUGFpchIMcGFpcnMve3BhaXJ9SgQIBxAISgQICBAJSgQIChALUgljb25kaXRpb2'
+    '5SC2V4ZWNfY29uZmlnUgRtb2Rl');
 
 @$core.Deprecated('Use pairEntryDescriptor instead')
 const PairEntry$json = {
@@ -328,226 +275,133 @@ final $typed_data.Uint8List priceRatioConditionDescriptor = $convert.base64Decod
     'ChNQcmljZVJhdGlvQ29uZGl0aW9uEiEKCW1pbl9yYXRpbxgBIAEoAUIE4kEBAlIIbWluUmF0aW'
     '8SIQoJbWF4X3JhdGlvGAIgASgBQgTiQQECUghtYXhSYXRpbw==');
 
-@$core.Deprecated('Use pairModeDescriptor instead')
-const PairMode$json = {
-  '1': 'PairMode',
+@$core.Deprecated('Use triggerConditionDescriptor instead')
+const TriggerCondition$json = {
+  '1': 'TriggerCondition',
   '2': [
-    {'1': 'simultaneous_compare', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.SimultaneousCompare', '9': 0, '10': 'simultaneousCompare'},
-    {'1': 'pricing_maker_taker', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.PricingMakerTaker', '9': 0, '10': 'pricingMakerTaker'},
-    {'1': 'base_make_counter_ioc_and_balance', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.BaseMakeCounterIocAndBalance', '9': 0, '10': 'baseMakeCounterIocAndBalance'},
-    {'1': 'counter_bep_scalp', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.pair.CounterBepScalp', '9': 0, '10': 'counterBepScalp'},
+    {'1': 'price_spread', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.PriceSpreadTrigger', '9': 0, '10': 'priceSpread'},
+    {'1': 'imbalance', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.ImbalanceTrigger', '9': 0, '10': 'imbalance'},
   ],
   '8': [
     {'1': 'kind'},
   ],
 };
 
-/// Descriptor for `PairMode`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pairModeDescriptor = $convert.base64Decode(
-    'CghQYWlyTW9kZRJVChRzaW11bHRhbmVvdXNfY29tcGFyZRgBIAEoCzIgLmtkby52MS5wYWlyLl'
-    'NpbXVsdGFuZW91c0NvbXBhcmVIAFITc2ltdWx0YW5lb3VzQ29tcGFyZRJQChNwcmljaW5nX21h'
-    'a2VyX3Rha2VyGAIgASgLMh4ua2RvLnYxLnBhaXIuUHJpY2luZ01ha2VyVGFrZXJIAFIRcHJpY2'
-    'luZ01ha2VyVGFrZXISdAohYmFzZV9tYWtlX2NvdW50ZXJfaW9jX2FuZF9iYWxhbmNlGAMgASgL'
-    'Mikua2RvLnYxLnBhaXIuQmFzZU1ha2VDb3VudGVySW9jQW5kQmFsYW5jZUgAUhxiYXNlTWFrZU'
-    'NvdW50ZXJJb2NBbmRCYWxhbmNlEkoKEWNvdW50ZXJfYmVwX3NjYWxwGAQgASgLMhwua2RvLnYx'
-    'LnBhaXIuQ291bnRlckJlcFNjYWxwSABSD2NvdW50ZXJCZXBTY2FscEIGCgRraW5k');
+/// Descriptor for `TriggerCondition`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List triggerConditionDescriptor = $convert.base64Decode(
+    'ChBUcmlnZ2VyQ29uZGl0aW9uEkQKDHByaWNlX3NwcmVhZBgBIAEoCzIfLmtkby52MS5wYWlyLl'
+    'ByaWNlU3ByZWFkVHJpZ2dlckgAUgtwcmljZVNwcmVhZBI9CglpbWJhbGFuY2UYAiABKAsyHS5r'
+    'ZG8udjEucGFpci5JbWJhbGFuY2VUcmlnZ2VySABSCWltYmFsYW5jZUIGCgRraW5k');
 
-@$core.Deprecated('Use baseMakeCounterIocAndBalanceDescriptor instead')
-const BaseMakeCounterIocAndBalance$json = {
-  '1': 'BaseMakeCounterIocAndBalance',
+@$core.Deprecated('Use priceSpreadTriggerDescriptor instead')
+const PriceSpreadTrigger$json = {
+  '1': 'PriceSpreadTrigger',
   '2': [
-    {'1': 'imbalance_threshold_ratio', '3': 4, '4': 1, '5': 1, '10': 'imbalanceThresholdRatio'},
-    {'1': 'imbalance_recovery_ratio', '3': 5, '4': 1, '5': 1, '10': 'imbalanceRecoveryRatio'},
-    {'1': 'settle_timeout_ms', '3': 6, '4': 1, '5': 4, '10': 'settleTimeoutMs'},
-    {'1': 'reconcile_alert_amount', '3': 7, '4': 1, '5': 3, '10': 'reconcileAlertAmount'},
-    {'1': 'cooldown_ms', '3': 8, '4': 1, '5': 4, '10': 'cooldownMs'},
-    {'1': 'nav_kind', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
-    {'1': 'bid_basis', '3': 10, '4': 1, '5': 3, '10': 'bidBasis'},
-    {'1': 'ask_basis', '3': 11, '4': 1, '5': 3, '10': 'askBasis'},
-    {'1': 'base_recovery_aggressive_ticks', '3': 12, '4': 1, '5': 13, '10': 'baseRecoveryAggressiveTicks'},
-    {'1': 'counter_recovery_aggressive_ticks', '3': 13, '4': 1, '5': 13, '10': 'counterRecoveryAggressiveTicks'},
+    {'1': 'condition', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairCondition', '10': 'condition'},
+    {'1': 'cooldown_ms', '3': 2, '4': 1, '5': 4, '10': 'cooldownMs'},
   ],
-  '9': [
-    {'1': 1, '2': 2},
-    {'1': 2, '2': 3},
-    {'1': 3, '2': 4},
-  ],
-  '10': ['pricing', 'hedge_ratio', 'counter_inverse'],
 };
 
-/// Descriptor for `BaseMakeCounterIocAndBalance`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List baseMakeCounterIocAndBalanceDescriptor = $convert.base64Decode(
-    'ChxCYXNlTWFrZUNvdW50ZXJJb2NBbmRCYWxhbmNlEjoKGWltYmFsYW5jZV90aHJlc2hvbGRfcm'
-    'F0aW8YBCABKAFSF2ltYmFsYW5jZVRocmVzaG9sZFJhdGlvEjgKGGltYmFsYW5jZV9yZWNvdmVy'
-    'eV9yYXRpbxgFIAEoAVIWaW1iYWxhbmNlUmVjb3ZlcnlSYXRpbxIqChFzZXR0bGVfdGltZW91dF'
-    '9tcxgGIAEoBFIPc2V0dGxlVGltZW91dE1zEjQKFnJlY29uY2lsZV9hbGVydF9hbW91bnQYByAB'
-    'KANSFHJlY29uY2lsZUFsZXJ0QW1vdW50Eh8KC2Nvb2xkb3duX21zGAggASgEUgpjb29sZG93bk'
-    '1zEjIKCG5hdl9raW5kGAkgASgOMhcua2RvLnYxLnBhaXIuRXRmTmF2S2luZFIHbmF2S2luZBIb'
-    'CgliaWRfYmFzaXMYCiABKANSCGJpZEJhc2lzEhsKCWFza19iYXNpcxgLIAEoA1IIYXNrQmFzaX'
-    'MSQwoeYmFzZV9yZWNvdmVyeV9hZ2dyZXNzaXZlX3RpY2tzGAwgASgNUhtiYXNlUmVjb3ZlcnlB'
-    'Z2dyZXNzaXZlVGlja3MSSQohY291bnRlcl9yZWNvdmVyeV9hZ2dyZXNzaXZlX3RpY2tzGA0gAS'
-    'gNUh5jb3VudGVyUmVjb3ZlcnlBZ2dyZXNzaXZlVGlja3NKBAgBEAJKBAgCEANKBAgDEARSB3By'
-    'aWNpbmdSC2hlZGdlX3JhdGlvUg9jb3VudGVyX2ludmVyc2U=');
+/// Descriptor for `PriceSpreadTrigger`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List priceSpreadTriggerDescriptor = $convert.base64Decode(
+    'ChJQcmljZVNwcmVhZFRyaWdnZXISOAoJY29uZGl0aW9uGAEgASgLMhoua2RvLnYxLnBhaXIuUG'
+    'FpckNvbmRpdGlvblIJY29uZGl0aW9uEh8KC2Nvb2xkb3duX21zGAIgASgEUgpjb29sZG93bk1z');
 
-@$core.Deprecated('Use counterBepScalpDescriptor instead')
-const CounterBepScalp$json = {
-  '1': 'CounterBepScalp',
+@$core.Deprecated('Use imbalanceTriggerDescriptor instead')
+const ImbalanceTrigger$json = {
+  '1': 'ImbalanceTrigger',
+  '2': [
+    {'1': 'threshold_ratio', '3': 1, '4': 1, '5': 1, '10': 'thresholdRatio'},
+    {'1': 'cooldown_ms', '3': 2, '4': 1, '5': 4, '10': 'cooldownMs'},
+  ],
+};
+
+/// Descriptor for `ImbalanceTrigger`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List imbalanceTriggerDescriptor = $convert.base64Decode(
+    'ChBJbWJhbGFuY2VUcmlnZ2VyEicKD3RocmVzaG9sZF9yYXRpbxgBIAEoAVIOdGhyZXNob2xkUm'
+    'F0aW8SHwoLY29vbGRvd25fbXMYAiABKARSCmNvb2xkb3duTXM=');
+
+@$core.Deprecated('Use orderExecutionDescriptor instead')
+const OrderExecution$json = {
+  '1': 'OrderExecution',
+  '2': [
+    {'1': 'dual_submit', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.DualSubmitExecution', '9': 0, '10': 'dualSubmit'},
+    {'1': 'make_counter_ioc_balance', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.MakeCounterIocBalanceExecution', '9': 0, '10': 'makeCounterIocBalance'},
+    {'1': 'counter_bep_scalp', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.CounterBepScalpExecution', '9': 0, '10': 'counterBepScalp'},
+  ],
+  '8': [
+    {'1': 'kind'},
+  ],
+};
+
+/// Descriptor for `OrderExecution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List orderExecutionDescriptor = $convert.base64Decode(
+    'Cg5PcmRlckV4ZWN1dGlvbhJDCgtkdWFsX3N1Ym1pdBgBIAEoCzIgLmtkby52MS5wYWlyLkR1YW'
+    'xTdWJtaXRFeGVjdXRpb25IAFIKZHVhbFN1Ym1pdBJmChhtYWtlX2NvdW50ZXJfaW9jX2JhbGFu'
+    'Y2UYAiABKAsyKy5rZG8udjEucGFpci5NYWtlQ291bnRlcklvY0JhbGFuY2VFeGVjdXRpb25IAF'
+    'IVbWFrZUNvdW50ZXJJb2NCYWxhbmNlElMKEWNvdW50ZXJfYmVwX3NjYWxwGAMgASgLMiUua2Rv'
+    'LnYxLnBhaXIuQ291bnRlckJlcFNjYWxwRXhlY3V0aW9uSABSD2NvdW50ZXJCZXBTY2FscEIGCg'
+    'RraW5k');
+
+@$core.Deprecated('Use dualSubmitExecutionDescriptor instead')
+const DualSubmitExecution$json = {
+  '1': 'DualSubmitExecution',
+  '2': [
+    {'1': 'order_type', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairOrderType', '10': 'orderType'},
+  ],
+};
+
+/// Descriptor for `DualSubmitExecution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List dualSubmitExecutionDescriptor = $convert.base64Decode(
+    'ChNEdWFsU3VibWl0RXhlY3V0aW9uEjkKCm9yZGVyX3R5cGUYASABKA4yGi5rZG8udjEucGFpci'
+    '5QYWlyT3JkZXJUeXBlUglvcmRlclR5cGU=');
+
+@$core.Deprecated('Use makeCounterIocBalanceExecutionDescriptor instead')
+const MakeCounterIocBalanceExecution$json = {
+  '1': 'MakeCounterIocBalanceExecution',
   '2': [
     {'1': 'nav_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
     {'1': 'bid_basis', '3': 2, '4': 1, '5': 3, '10': 'bidBasis'},
     {'1': 'ask_basis', '3': 3, '4': 1, '5': 3, '10': 'askBasis'},
-    {'1': 'imbalance_threshold_ratio', '3': 4, '4': 1, '5': 1, '10': 'imbalanceThresholdRatio'},
-    {'1': 'cooldown_ms', '3': 5, '4': 1, '5': 4, '10': 'cooldownMs'},
-    {'1': 'take_profit_ticks', '3': 6, '4': 1, '5': 13, '10': 'takeProfitTicks'},
-    {'1': 'stop_loss_ticks', '3': 7, '4': 1, '5': 13, '10': 'stopLossTicks'},
-    {'1': 'exit_aggressive_ticks', '3': 8, '4': 1, '5': 13, '10': 'exitAggressiveTicks'},
+    {'1': 'recovery_ratio', '3': 4, '4': 1, '5': 1, '10': 'recoveryRatio'},
+    {'1': 'settle_timeout_ms', '3': 5, '4': 1, '5': 4, '10': 'settleTimeoutMs'},
+    {'1': 'reconcile_alert_amount', '3': 6, '4': 1, '5': 3, '10': 'reconcileAlertAmount'},
+    {'1': 'base_recovery_aggressive_ticks', '3': 7, '4': 1, '5': 13, '10': 'baseRecoveryAggressiveTicks'},
+    {'1': 'counter_recovery_aggressive_ticks', '3': 8, '4': 1, '5': 13, '10': 'counterRecoveryAggressiveTicks'},
   ],
 };
 
-/// Descriptor for `CounterBepScalp`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List counterBepScalpDescriptor = $convert.base64Decode(
-    'Cg9Db3VudGVyQmVwU2NhbHASMgoIbmF2X2tpbmQYASABKA4yFy5rZG8udjEucGFpci5FdGZOYX'
-    'ZLaW5kUgduYXZLaW5kEhsKCWJpZF9iYXNpcxgCIAEoA1IIYmlkQmFzaXMSGwoJYXNrX2Jhc2lz'
-    'GAMgASgDUghhc2tCYXNpcxI6ChlpbWJhbGFuY2VfdGhyZXNob2xkX3JhdGlvGAQgASgBUhdpbW'
-    'JhbGFuY2VUaHJlc2hvbGRSYXRpbxIfCgtjb29sZG93bl9tcxgFIAEoBFIKY29vbGRvd25NcxIq'
-    'ChF0YWtlX3Byb2ZpdF90aWNrcxgGIAEoDVIPdGFrZVByb2ZpdFRpY2tzEiYKD3N0b3BfbG9zc1'
-    '90aWNrcxgHIAEoDVINc3RvcExvc3NUaWNrcxIyChVleGl0X2FnZ3Jlc3NpdmVfdGlja3MYCCAB'
-    'KA1SE2V4aXRBZ2dyZXNzaXZlVGlja3M=');
+/// Descriptor for `MakeCounterIocBalanceExecution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List makeCounterIocBalanceExecutionDescriptor = $convert.base64Decode(
+    'Ch5NYWtlQ291bnRlcklvY0JhbGFuY2VFeGVjdXRpb24SMgoIbmF2X2tpbmQYASABKA4yFy5rZG'
+    '8udjEucGFpci5FdGZOYXZLaW5kUgduYXZLaW5kEhsKCWJpZF9iYXNpcxgCIAEoA1IIYmlkQmFz'
+    'aXMSGwoJYXNrX2Jhc2lzGAMgASgDUghhc2tCYXNpcxIlCg5yZWNvdmVyeV9yYXRpbxgEIAEoAV'
+    'INcmVjb3ZlcnlSYXRpbxIqChFzZXR0bGVfdGltZW91dF9tcxgFIAEoBFIPc2V0dGxlVGltZW91'
+    'dE1zEjQKFnJlY29uY2lsZV9hbGVydF9hbW91bnQYBiABKANSFHJlY29uY2lsZUFsZXJ0QW1vdW'
+    '50EkMKHmJhc2VfcmVjb3ZlcnlfYWdncmVzc2l2ZV90aWNrcxgHIAEoDVIbYmFzZVJlY292ZXJ5'
+    'QWdncmVzc2l2ZVRpY2tzEkkKIWNvdW50ZXJfcmVjb3ZlcnlfYWdncmVzc2l2ZV90aWNrcxgIIA'
+    'EoDVIeY291bnRlclJlY292ZXJ5QWdncmVzc2l2ZVRpY2tz');
 
-@$core.Deprecated('Use simultaneousCompareDescriptor instead')
-const SimultaneousCompare$json = {
-  '1': 'SimultaneousCompare',
+@$core.Deprecated('Use counterBepScalpExecutionDescriptor instead')
+const CounterBepScalpExecution$json = {
+  '1': 'CounterBepScalpExecution',
   '2': [
-    {'1': 'condition', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairCondition', '10': 'condition'},
-    {'1': 'order_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairOrderType', '10': 'orderType'},
-    {'1': 'cooldown_ms', '3': 3, '4': 1, '5': 4, '10': 'cooldownMs'},
-    {'1': 'apply_tick_offset', '3': 4, '4': 1, '5': 8, '10': 'applyTickOffset'},
+    {'1': 'nav_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
+    {'1': 'bid_basis', '3': 2, '4': 1, '5': 3, '10': 'bidBasis'},
+    {'1': 'ask_basis', '3': 3, '4': 1, '5': 3, '10': 'askBasis'},
+    {'1': 'take_profit_ticks', '3': 4, '4': 1, '5': 13, '10': 'takeProfitTicks'},
+    {'1': 'stop_loss_ticks', '3': 5, '4': 1, '5': 13, '10': 'stopLossTicks'},
+    {'1': 'exit_aggressive_ticks', '3': 6, '4': 1, '5': 13, '10': 'exitAggressiveTicks'},
   ],
 };
 
-/// Descriptor for `SimultaneousCompare`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List simultaneousCompareDescriptor = $convert.base64Decode(
-    'ChNTaW11bHRhbmVvdXNDb21wYXJlEjgKCWNvbmRpdGlvbhgBIAEoCzIaLmtkby52MS5wYWlyLl'
-    'BhaXJDb25kaXRpb25SCWNvbmRpdGlvbhI5CgpvcmRlcl90eXBlGAIgASgOMhoua2RvLnYxLnBh'
-    'aXIuUGFpck9yZGVyVHlwZVIJb3JkZXJUeXBlEh8KC2Nvb2xkb3duX21zGAMgASgEUgpjb29sZG'
-    '93bk1zEioKEWFwcGx5X3RpY2tfb2Zmc2V0GAQgASgIUg9hcHBseVRpY2tPZmZzZXQ=');
-
-@$core.Deprecated('Use pricingMakerTakerDescriptor instead')
-const PricingMakerTaker$json = {
-  '1': 'PricingMakerTaker',
-  '2': [
-    {'1': 'maker_leg', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairLeg', '8': {}, '10': 'makerLeg'},
-    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairPricingMethod', '8': {}, '10': 'pricing'},
-    {'1': 'retick', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.RetickPolicy', '10': 'retick'},
-    {'1': 'taker_order_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairOrderType', '10': 'takerOrderType'},
-  ],
-};
-
-/// Descriptor for `PricingMakerTaker`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pricingMakerTakerDescriptor = $convert.base64Decode(
-    'ChFQcmljaW5nTWFrZXJUYWtlchI3CgltYWtlcl9sZWcYASABKA4yFC5rZG8udjEucGFpci5QYW'
-    'lyTGVnQgTiQQECUghtYWtlckxlZxI+CgdwcmljaW5nGAIgASgLMh4ua2RvLnYxLnBhaXIuUGFp'
-    'clByaWNpbmdNZXRob2RCBOJBAQJSB3ByaWNpbmcSMQoGcmV0aWNrGAMgASgLMhkua2RvLnYxLn'
-    'BhaXIuUmV0aWNrUG9saWN5UgZyZXRpY2sSRAoQdGFrZXJfb3JkZXJfdHlwZRgEIAEoDjIaLmtk'
-    'by52MS5wYWlyLlBhaXJPcmRlclR5cGVSDnRha2VyT3JkZXJUeXBl');
-
-@$core.Deprecated('Use pairPricingMethodDescriptor instead')
-const PairPricingMethod$json = {
-  '1': 'PairPricingMethod',
-  '2': [
-    {'1': 'linear_basis', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.LinearBasis', '9': 0, '10': 'linearBasis'},
-    {'1': 'etf_nav', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.EtfNav', '9': 0, '10': 'etfNav'},
-  ],
-  '8': [
-    {'1': 'method'},
-  ],
-};
-
-/// Descriptor for `PairPricingMethod`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pairPricingMethodDescriptor = $convert.base64Decode(
-    'ChFQYWlyUHJpY2luZ01ldGhvZBI9CgxsaW5lYXJfYmFzaXMYASABKAsyGC5rZG8udjEucGFpci'
-    '5MaW5lYXJCYXNpc0gAUgtsaW5lYXJCYXNpcxIuCgdldGZfbmF2GAIgASgLMhMua2RvLnYxLnBh'
-    'aXIuRXRmTmF2SABSBmV0Zk5hdkIICgZtZXRob2Q=');
-
-@$core.Deprecated('Use linearBasisDescriptor instead')
-const LinearBasis$json = {
-  '1': 'LinearBasis',
-  '2': [
-    {'1': 'multiple', '3': 1, '4': 1, '5': 1, '8': {}, '10': 'multiple'},
-    {'1': 'basis_bid', '3': 2, '4': 1, '5': 3, '10': 'basisBid'},
-    {'1': 'basis_ask', '3': 3, '4': 1, '5': 3, '10': 'basisAsk'},
-  ],
-};
-
-/// Descriptor for `LinearBasis`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List linearBasisDescriptor = $convert.base64Decode(
-    'CgtMaW5lYXJCYXNpcxIgCghtdWx0aXBsZRgBIAEoAUIE4kEBAlIIbXVsdGlwbGUSGwoJYmFzaX'
-    'NfYmlkGAIgASgDUghiYXNpc0JpZBIbCgliYXNpc19hc2sYAyABKANSCGJhc2lzQXNr');
-
-@$core.Deprecated('Use etfNavDescriptor instead')
-const EtfNav$json = {
-  '1': 'EtfNav',
-  '2': [
-    {'1': 'pricing_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '8': {}, '10': 'pricingKind'},
-    {'1': 'direction', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.pair.NavDirection', '8': {}, '10': 'direction'},
-    {'1': 'ctx', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.PricingContextSnapshot', '8': {}, '10': 'ctx'},
-    {'1': 'bid_basis', '3': 4, '4': 1, '5': 3, '10': 'bidBasis'},
-    {'1': 'ask_basis', '3': 5, '4': 1, '5': 3, '10': 'askBasis'},
-    {'1': 'linear_fallback_multiplier', '3': 6, '4': 1, '5': 1, '10': 'linearFallbackMultiplier'},
-    {'1': 'prev_index', '3': 7, '4': 1, '5': 3, '10': 'prevIndex'},
-    {'1': 'prev_future', '3': 8, '4': 1, '5': 3, '10': 'prevFuture'},
-  ],
-};
-
-/// Descriptor for `EtfNav`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List etfNavDescriptor = $convert.base64Decode(
-    'CgZFdGZOYXYSQAoMcHJpY2luZ19raW5kGAEgASgOMhcua2RvLnYxLnBhaXIuRXRmTmF2S2luZE'
-    'IE4kEBAlILcHJpY2luZ0tpbmQSPQoJZGlyZWN0aW9uGAIgASgOMhkua2RvLnYxLnBhaXIuTmF2'
-    'RGlyZWN0aW9uQgTiQQECUglkaXJlY3Rpb24SOwoDY3R4GAMgASgLMiMua2RvLnYxLnBhaXIuUH'
-    'JpY2luZ0NvbnRleHRTbmFwc2hvdEIE4kEBAlIDY3R4EhsKCWJpZF9iYXNpcxgEIAEoA1IIYmlk'
-    'QmFzaXMSGwoJYXNrX2Jhc2lzGAUgASgDUghhc2tCYXNpcxI8ChpsaW5lYXJfZmFsbGJhY2tfbX'
-    'VsdGlwbGllchgGIAEoAVIYbGluZWFyRmFsbGJhY2tNdWx0aXBsaWVyEh0KCnByZXZfaW5kZXgY'
-    'ByABKANSCXByZXZJbmRleBIfCgtwcmV2X2Z1dHVyZRgIIAEoA1IKcHJldkZ1dHVyZQ==');
-
-@$core.Deprecated('Use pricingContextSnapshotDescriptor instead')
-const PricingContextSnapshot$json = {
-  '1': 'PricingContextSnapshot',
-  '2': [
-    {'1': 'nav0', '3': 1, '4': 1, '5': 3, '10': 'nav0'},
-    {'1': 'stock_ratio', '3': 2, '4': 1, '5': 1, '10': 'stockRatio'},
-    {'1': 'actual_leverage', '3': 3, '4': 1, '5': 1, '10': 'actualLeverage'},
-    {'1': 'unit_delta', '3': 4, '4': 1, '5': 3, '10': 'unitDelta'},
-    {'1': 'cash_per_share', '3': 5, '4': 1, '5': 3, '10': 'cashPerShare'},
-    {'1': 'tracking_multiple', '3': 6, '4': 1, '5': 3, '9': 0, '10': 'trackingMultiple', '17': true},
-  ],
-  '8': [
-    {'1': '_tracking_multiple'},
-  ],
-};
-
-/// Descriptor for `PricingContextSnapshot`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pricingContextSnapshotDescriptor = $convert.base64Decode(
-    'ChZQcmljaW5nQ29udGV4dFNuYXBzaG90EhIKBG5hdjAYASABKANSBG5hdjASHwoLc3RvY2tfcm'
-    'F0aW8YAiABKAFSCnN0b2NrUmF0aW8SJwoPYWN0dWFsX2xldmVyYWdlGAMgASgBUg5hY3R1YWxM'
-    'ZXZlcmFnZRIdCgp1bml0X2RlbHRhGAQgASgDUgl1bml0RGVsdGESJAoOY2FzaF9wZXJfc2hhcm'
-    'UYBSABKANSDGNhc2hQZXJTaGFyZRIwChF0cmFja2luZ19tdWx0aXBsZRgGIAEoA0gAUhB0cmFj'
-    'a2luZ011bHRpcGxliAEBQhQKEl90cmFja2luZ19tdWx0aXBsZQ==');
-
-@$core.Deprecated('Use retickPolicyDescriptor instead')
-const RetickPolicy$json = {
-  '1': 'RetickPolicy',
-  '2': [
-    {'1': 'tick_threshold', '3': 1, '4': 1, '5': 5, '10': 'tickThreshold'},
-    {'1': 'amend_cooldown_ms', '3': 2, '4': 1, '5': 4, '10': 'amendCooldownMs'},
-    {'1': 'cancel_on_stop', '3': 3, '4': 1, '5': 8, '10': 'cancelOnStop'},
-  ],
-};
-
-/// Descriptor for `RetickPolicy`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List retickPolicyDescriptor = $convert.base64Decode(
-    'CgxSZXRpY2tQb2xpY3kSJQoOdGlja190aHJlc2hvbGQYASABKAVSDXRpY2tUaHJlc2hvbGQSKg'
-    'oRYW1lbmRfY29vbGRvd25fbXMYAiABKARSD2FtZW5kQ29vbGRvd25NcxIkCg5jYW5jZWxfb25f'
-    'c3RvcBgDIAEoCFIMY2FuY2VsT25TdG9w');
+/// Descriptor for `CounterBepScalpExecution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List counterBepScalpExecutionDescriptor = $convert.base64Decode(
+    'ChhDb3VudGVyQmVwU2NhbHBFeGVjdXRpb24SMgoIbmF2X2tpbmQYASABKA4yFy5rZG8udjEucG'
+    'Fpci5FdGZOYXZLaW5kUgduYXZLaW5kEhsKCWJpZF9iYXNpcxgCIAEoA1IIYmlkQmFzaXMSGwoJ'
+    'YXNrX2Jhc2lzGAMgASgDUghhc2tCYXNpcxIqChF0YWtlX3Byb2ZpdF90aWNrcxgEIAEoDVIPdG'
+    'FrZVByb2ZpdFRpY2tzEiYKD3N0b3BfbG9zc190aWNrcxgFIAEoDVINc3RvcExvc3NUaWNrcxIy'
+    'ChVleGl0X2FnZ3Jlc3NpdmVfdGlja3MYBiABKA1SE2V4aXRBZ2dyZXNzaXZlVGlja3M=');
 
 @$core.Deprecated('Use getPairRequestDescriptor instead')
 const GetPairRequest$json = {
@@ -746,86 +600,6 @@ final $typed_data.Uint8List listPairExecutionLogsResponseDescriptor = $convert.b
     'IdLmtkby52MS5wYWlyLlBhaXJFeGVjdXRpb25Mb2dSDWV4ZWN1dGlvbkxvZ3MSJgoPbmV4dF9w'
     'YWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2VuEh8KC3RvdGFsX2NvdW50GAMgASgFUgp0b3'
     'RhbENvdW50');
-
-@$core.Deprecated('Use makerTakerEventLogDescriptor instead')
-const MakerTakerEventLog$json = {
-  '1': 'MakerTakerEventLog',
-  '2': [
-    {'1': 'pair_id', '3': 1, '4': 1, '5': 5, '10': 'pairId'},
-    {'1': 'event_type', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.pair.MakerTakerEventType', '10': 'eventType'},
-    {'1': 'cycle_id', '3': 3, '4': 1, '5': 3, '10': 'cycleId'},
-    {'1': 'maker_order_id', '3': 4, '4': 1, '5': 4, '9': 0, '10': 'makerOrderId', '17': true},
-    {'1': 'taker_order_id', '3': 5, '4': 1, '5': 4, '9': 1, '10': 'takerOrderId', '17': true},
-    {'1': 'fair_price', '3': 6, '4': 1, '5': 3, '9': 2, '10': 'fairPrice', '17': true},
-    {'1': 'new_price', '3': 7, '4': 1, '5': 3, '9': 3, '10': 'newPrice', '17': true},
-    {'1': 'fill_price', '3': 8, '4': 1, '5': 3, '9': 4, '10': 'fillPrice', '17': true},
-    {'1': 'fill_quantity', '3': 9, '4': 1, '5': 3, '9': 5, '10': 'fillQuantity', '17': true},
-    {'1': 'at', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'at'},
-    {'1': 'detail', '3': 11, '4': 1, '5': 9, '9': 6, '10': 'detail', '17': true},
-  ],
-  '8': [
-    {'1': '_maker_order_id'},
-    {'1': '_taker_order_id'},
-    {'1': '_fair_price'},
-    {'1': '_new_price'},
-    {'1': '_fill_price'},
-    {'1': '_fill_quantity'},
-    {'1': '_detail'},
-  ],
-};
-
-/// Descriptor for `MakerTakerEventLog`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List makerTakerEventLogDescriptor = $convert.base64Decode(
-    'ChJNYWtlclRha2VyRXZlbnRMb2cSFwoHcGFpcl9pZBgBIAEoBVIGcGFpcklkEj8KCmV2ZW50X3'
-    'R5cGUYAiABKA4yIC5rZG8udjEucGFpci5NYWtlclRha2VyRXZlbnRUeXBlUglldmVudFR5cGUS'
-    'GQoIY3ljbGVfaWQYAyABKANSB2N5Y2xlSWQSKQoObWFrZXJfb3JkZXJfaWQYBCABKARIAFIMbW'
-    'FrZXJPcmRlcklkiAEBEikKDnRha2VyX29yZGVyX2lkGAUgASgESAFSDHRha2VyT3JkZXJJZIgB'
-    'ARIiCgpmYWlyX3ByaWNlGAYgASgDSAJSCWZhaXJQcmljZYgBARIgCgluZXdfcHJpY2UYByABKA'
-    'NIA1IIbmV3UHJpY2WIAQESIgoKZmlsbF9wcmljZRgIIAEoA0gEUglmaWxsUHJpY2WIAQESKAoN'
-    'ZmlsbF9xdWFudGl0eRgJIAEoA0gFUgxmaWxsUXVhbnRpdHmIAQESKgoCYXQYCiABKAsyGi5nb2'
-    '9nbGUucHJvdG9idWYuVGltZXN0YW1wUgJhdBIbCgZkZXRhaWwYCyABKAlIBlIGZGV0YWlsiAEB'
-    'QhEKD19tYWtlcl9vcmRlcl9pZEIRCg9fdGFrZXJfb3JkZXJfaWRCDQoLX2ZhaXJfcHJpY2VCDA'
-    'oKX25ld19wcmljZUINCgtfZmlsbF9wcmljZUIQCg5fZmlsbF9xdWFudGl0eUIJCgdfZGV0YWls');
-
-@$core.Deprecated('Use listMakerTakerEventsRequestDescriptor instead')
-const ListMakerTakerEventsRequest$json = {
-  '1': 'ListMakerTakerEventsRequest',
-  '2': [
-    {'1': 'pair', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pair'},
-    {'1': 'page_size', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'pageSize', '17': true},
-    {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
-    {'1': 'filter', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'filter'},
-    {'1': 'order_by', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'orderBy'},
-  ],
-  '8': [
-    {'1': '_page_size'},
-    {'1': '_page_token'},
-  ],
-};
-
-/// Descriptor for `ListMakerTakerEventsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMakerTakerEventsRequestDescriptor = $convert.base64Decode(
-    'ChtMaXN0TWFrZXJUYWtlckV2ZW50c1JlcXVlc3QSMQoEcGFpchgBIAEoCUId4kEBAvpBFgoUa2'
-    'RvLmNkc2FwaXMueHl6L1BhaXJSBHBhaXISIAoJcGFnZV9zaXplGAIgASgFSABSCHBhZ2VTaXpl'
-    'iAEBEiIKCnBhZ2VfdG9rZW4YAyABKAlIAVIJcGFnZVRva2VuiAEBEhwKBmZpbHRlchgEIAEoCU'
-    'IE4kEBAVIGZmlsdGVyEh8KCG9yZGVyX2J5GAUgASgJQgTiQQEBUgdvcmRlckJ5QgwKCl9wYWdl'
-    'X3NpemVCDQoLX3BhZ2VfdG9rZW4=');
-
-@$core.Deprecated('Use listMakerTakerEventsResponseDescriptor instead')
-const ListMakerTakerEventsResponse$json = {
-  '1': 'ListMakerTakerEventsResponse',
-  '2': [
-    {'1': 'events', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.pair.MakerTakerEventLog', '10': 'events'},
-    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
-    {'1': 'total_count', '3': 3, '4': 1, '5': 5, '10': 'totalCount'},
-  ],
-};
-
-/// Descriptor for `ListMakerTakerEventsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMakerTakerEventsResponseDescriptor = $convert.base64Decode(
-    'ChxMaXN0TWFrZXJUYWtlckV2ZW50c1Jlc3BvbnNlEjcKBmV2ZW50cxgBIAMoCzIfLmtkby52MS'
-    '5wYWlyLk1ha2VyVGFrZXJFdmVudExvZ1IGZXZlbnRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEo'
-    'CVINbmV4dFBhZ2VUb2tlbhIfCgt0b3RhbF9jb3VudBgDIAEoBVIKdG90YWxDb3VudA==');
 
 @$core.Deprecated('Use streamPairStatusRequestDescriptor instead')
 const StreamPairStatusRequest$json = {

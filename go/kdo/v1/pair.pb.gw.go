@@ -479,76 +479,6 @@ func local_request_PairService_ListPairExecutionLogs_0(ctx context.Context, mars
 
 }
 
-var (
-	filter_PairService_ListMakerTakerEvents_0 = &utilities.DoubleArray{Encoding: map[string]int{"pair": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
-)
-
-func request_PairService_ListMakerTakerEvents_0(ctx context.Context, marshaler runtime.Marshaler, client PairServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListMakerTakerEventsRequest
-	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["pair"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pair")
-	}
-
-	protoReq.Pair, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pair", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_PairService_ListMakerTakerEvents_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	msg, err := client.ListMakerTakerEvents(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_PairService_ListMakerTakerEvents_0(ctx context.Context, marshaler runtime.Marshaler, server PairServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListMakerTakerEventsRequest
-	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["pair"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pair")
-	}
-
-	protoReq.Pair, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pair", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_PairService_ListMakerTakerEvents_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	msg, err := server.ListMakerTakerEvents(ctx, &protoReq)
-	return msg, metadata, err
-
-}
-
 func request_PairService_StreamPairStatus_0(ctx context.Context, marshaler runtime.Marshaler, client PairServiceClient, req *http.Request, pathParams map[string]string) (PairService_StreamPairStatusClient, runtime.ServerMetadata, error) {
 	var protoReq StreamPairStatusRequest
 	var metadata runtime.ServerMetadata
@@ -841,31 +771,6 @@ func RegisterPairServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_PairService_ListMakerTakerEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.pair.PairService/ListMakerTakerEvents", runtime.WithHTTPPathPattern("/v1/{pair=pairs/*}/makerTakerEvents"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_PairService_ListMakerTakerEvents_0(annotatedContext, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_PairService_ListMakerTakerEvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
-	})
-
 	mux.Handle("GET", pattern_PairService_StreamPairStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -1115,28 +1020,6 @@ func RegisterPairServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("GET", pattern_PairService_ListMakerTakerEvents_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.pair.PairService/ListMakerTakerEvents", runtime.WithHTTPPathPattern("/v1/{pair=pairs/*}/makerTakerEvents"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := request_PairService_ListMakerTakerEvents_0(annotatedContext, inboundMarshaler, client, req, pathParams)
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_PairService_ListMakerTakerEvents_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
-	})
-
 	mux.Handle("GET", pattern_PairService_StreamPairStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1201,8 +1084,6 @@ var (
 
 	pattern_PairService_ListPairExecutionLogs_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "pairs", "pair", "executionLogs"}, ""))
 
-	pattern_PairService_ListMakerTakerEvents_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "pairs", "pair", "makerTakerEvents"}, ""))
-
 	pattern_PairService_StreamPairStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pairs", "pair"}, "streamStatus"))
 
 	pattern_PairService_GetPairStatistics_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "pairs", "pair", "statistics"}, ""))
@@ -1224,8 +1105,6 @@ var (
 	forward_PairService_PausePair_0 = runtime.ForwardResponseMessage
 
 	forward_PairService_ListPairExecutionLogs_0 = runtime.ForwardResponseMessage
-
-	forward_PairService_ListMakerTakerEvents_0 = runtime.ForwardResponseMessage
 
 	forward_PairService_StreamPairStatus_0 = runtime.ForwardResponseStream
 

@@ -29,15 +29,18 @@ pub struct Pair {
     /// 상태
     #[prost(enumeration="PairStatus", tag="9")]
     pub status: i32,
-    /// 실행 모드 (oneof)
-    #[prost(message, optional, tag="10")]
-    pub mode: ::core::option::Option<PairMode>,
     /// 생성 시간
     #[prost(message, optional, tag="11")]
     pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 수정 시간
     #[prost(message, optional, tag="12")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 트리거 — 언제 발사할지. 실행(execution)과 독립적으로 조합한다.
+    #[prost(message, optional, tag="13")]
+    pub trigger: ::core::option::Option<TriggerCondition>,
+    /// 실행 — 발사 시 무엇을 할지. 트리거(trigger)와 독립적으로 조합한다.
+    #[prost(message, optional, tag="14")]
+    pub execution: ::core::option::Option<OrderExecution>,
 }
 // ============================================================================
 // Pair Entry
@@ -45,15 +48,15 @@ pub struct Pair {
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
 ///
-/// 모드별 필드 사용:
-/// - SimultaneousCompare: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
-/// - PricingMakerTaker: pricer leg 가 price_source 로 ref 추출 → fair 산출. maker quote = fair 그대로.
-/// - BaseMakeCounterIocAndBalance (IOC imbalance):
+/// execution 종류별 필드 사용:
+/// - DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
+/// - MakeCounterIocBalanceExecution (IOC imbalance):
 ///    - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 ///    - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
 ///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
 ///    - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
 ///      counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
+/// - CounterBepScalpExecution: counter 엔트리만 사용.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PairEntry {
@@ -67,11 +70,11 @@ pub struct PairEntry {
     #[prost(enumeration="PairSide", tag="3")]
     pub side: i32,
     /// 주문 수량 (1 이상)
-    /// BMC 모드: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
+    /// MakeCounterIocBalanceExecution: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
     #[prost(int64, tag="4")]
     pub quantity: i64,
     /// 참조 가격 소스 (entry.side 기준 자기/상대 호가).
-    /// BMC 모드에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
+    /// MakeCounterIocBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
     #[prost(enumeration="PriceSource", tag="5")]
     pub price_source: i32,
 }
@@ -136,36 +139,87 @@ pub struct PriceRatioCondition {
     pub max_ratio: f64,
 }
 // ============================================================================
-// Pair Mode (oneof wrapper)
+// TriggerCondition — 트리거 축
 // ============================================================================
 
-/// Pair 실행 모드
+/// 트리거 — 언제 발사할지. 실행(OrderExecution)과 독립적으로 조합한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PairMode {
-    #[prost(oneof="pair_mode::Kind", tags="1, 2, 3, 4")]
-    pub kind: ::core::option::Option<pair_mode::Kind>,
+pub struct TriggerCondition {
+    #[prost(oneof="trigger_condition::Kind", tags="1, 2")]
+    pub kind: ::core::option::Option<trigger_condition::Kind>,
 }
-/// Nested message and enum types in `PairMode`.
-pub mod pair_mode {
+/// Nested message and enum types in `TriggerCondition`.
+pub mod trigger_condition {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Kind {
-        /// 기존 동작: 두 시세 비교 후 조건 충족 시 양측 동시 발주
+        /// 양 leg 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
         #[prost(message, tag="1")]
-        SimultaneousCompare(super::SimultaneousCompare),
-        /// 신규: pricer 시세 기반 maker 호가 유지 + 체결 시 taker 헷지
+        PriceSpread(super::PriceSpreadTrigger),
+        /// base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
         #[prost(message, tag="2")]
-        PricingMakerTaker(super::PricingMakerTaker),
-        /// 신규: base maker 호가 유지, counter IOC 헷지 + 잔량 추적 처리
-        #[prost(message, tag="3")]
-        BaseMakeCounterIocAndBalance(super::BaseMakeCounterIocAndBalance),
-        /// 신규: base 무발주 — counter(ETF)만 BEP 지정가 진입 후 익절/손절 청산
-        #[prost(message, tag="4")]
-        CounterBepScalp(super::CounterBepScalp),
+        Imbalance(super::ImbalanceTrigger),
     }
 }
-/// BaseMakeCounterIocAndBalance 모드 설정 (IOC imbalance hotpath)
+/// 양 leg 참조가격 비교 트리거
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PriceSpreadTrigger {
+    /// 가격 비교 조건
+    #[prost(message, optional, tag="1")]
+    pub condition: ::core::option::Option<PairCondition>,
+    /// 트리거 후 재트리거까지 대기시간 (ms)
+    #[prost(uint64, tag="2")]
+    pub cooldown_ms: u64,
+}
+/// base(선물) 1호가 수량 imbalance 트리거. base.side 가 담당 deficit 방향.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ImbalanceTrigger {
+    /// base 1호가 imbalance 가 이 비율 미만이면 트리거
+    #[prost(double, tag="1")]
+    pub threshold_ratio: f64,
+    /// 트리거 후 재트리거까지 대기시간 (ms)
+    #[prost(uint64, tag="2")]
+    pub cooldown_ms: u64,
+}
+// ============================================================================
+// OrderExecution — 실행 축
+// ============================================================================
+
+/// 실행 — 발사 시 무엇을 할지. 트리거와 독립적으로 조합한다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct OrderExecution {
+    #[prost(oneof="order_execution::Kind", tags="1, 2, 3")]
+    pub kind: ::core::option::Option<order_execution::Kind>,
+}
+/// Nested message and enum types in `OrderExecution`.
+pub mod order_execution {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Kind {
+        /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
+        #[prost(message, tag="1")]
+        DualSubmit(super::DualSubmitExecution),
+        /// base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
+        #[prost(message, tag="2")]
+        MakeCounterIocBalance(super::MakeCounterIocBalanceExecution),
+        /// base 무발주 — counter(ETF) BEP 진입 + 익절/손절 청산
+        #[prost(message, tag="3")]
+        CounterBepScalp(super::CounterBepScalpExecution),
+    }
+}
+/// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DualSubmitExecution {
+    /// 주문 유형
+    #[prost(enumeration="PairOrderType", tag="1")]
+    pub order_type: i32,
+}
+/// base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
 ///
 /// PairEntry 필드 매핑:
 ///    - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
@@ -176,55 +230,40 @@ pub mod pair_mode {
 ///      counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct BaseMakeCounterIocAndBalance {
-    /// IOC 발주 시 불균형 감지 임계 비율 (잔량 / 목표수량, 이 값 초과 시 재발주)
-    #[prost(double, tag="4")]
-    pub imbalance_threshold_ratio: f64,
-    /// 불균형 회복 목표 비율 (재발주 시 목표 충족 비율)
-    #[prost(double, tag="5")]
-    pub imbalance_recovery_ratio: f64,
-    /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
-    #[prost(uint64, tag="6")]
-    pub settle_timeout_ms: u64,
-    /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
-    #[prost(int64, tag="7")]
-    pub reconcile_alert_amount: i64,
-    /// 트리거 후 재트리거까지 대기시간 (ms)
-    #[prost(uint64, tag="8")]
-    pub cooldown_ms: u64,
-    /// NAV 계산 공식 종류 (서버 런타임에 PricingContext 엔티티 조회, proto엔 종류만 지정)
-    #[prost(enumeration="EtfNavKind", tag="9")]
+pub struct MakeCounterIocBalanceExecution {
+    /// NAV 계산 공식 종류
+    #[prost(enumeration="EtfNavKind", tag="1")]
     pub nav_kind: i32,
     /// Bid quote 산출용 basis 오프셋 (원, raw int64)
-    #[prost(int64, tag="10")]
+    #[prost(int64, tag="2")]
     pub bid_basis: i64,
     /// Ask quote 산출용 basis 오프셋 (원, raw int64)
-    #[prost(int64, tag="11")]
+    #[prost(int64, tag="3")]
     pub ask_basis: i64,
+    /// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
+    #[prost(double, tag="4")]
+    pub recovery_ratio: f64,
+    /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
+    #[prost(uint64, tag="5")]
+    pub settle_timeout_ms: u64,
+    /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
+    #[prost(int64, tag="6")]
+    pub reconcile_alert_amount: i64,
     /// base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
-    /// 적용처:
-    ///    - base 측 imbalance 복구 amend — base.side 의 cross 가격 기준.
-    ///    - 종단 base cover (balance_fill AddBase) — base 평균 체결가 기준.
     /// 0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick.
-    #[prost(uint32, tag="12")]
+    #[prost(uint32, tag="7")]
     pub base_recovery_aggressive_ticks: u32,
     /// counter leg 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
-    /// 적용처: 종단 counter cover (balance_fill AddCounter) — counter_bep 기준.
     /// 0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
-    #[prost(uint32, tag="13")]
+    #[prost(uint32, tag="8")]
     pub counter_recovery_aggressive_ticks: u32,
 }
-/// CounterBepScalp 모드 설정
-///
-/// base 레그 무발주 — counter(ETF)만 BEP 지정가(FAS)로 진입하고,
-/// 진입 BEP 대비 유리 방향 take_profit_ticks 틱 이상이면 익절,
-/// 불리 방향 stop_loss_ticks 틱 이상이면 손절 청산한다.
-/// 트리거는 base(선물) 1호가 수량 imbalance (BaseMakeCounterIocAndBalance 와 동일 판정).
-/// 진입 주문은 취소 없이 대기하며, 익절/손절 발동 시점에만 잔량을 취소한다.
-/// 청산 주문은 체결될 때까지 호가를 추적(amend)해 체결을 보장한다.
+/// base 무발주 — counter(ETF) BEP 진입 + 진입 BEP 대비 틱 기준 익절/손절.
+/// 진입 주문은 취소 없이 대기, 익절/손절 발동 시점에만 잔량 취소.
+/// 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct CounterBepScalp {
+pub struct CounterBepScalpExecution {
     /// counter(ETF) BEP 환산용 NAV 방식
     #[prost(enumeration="EtfNavKind", tag="1")]
     pub nav_kind: i32,
@@ -234,166 +273,15 @@ pub struct CounterBepScalp {
     /// counter 매도(Ask) BEP 오프셋 (원)
     #[prost(int64, tag="3")]
     pub ask_basis: i64,
-    /// 진입 트리거: base 1호가 imbalance 가 이 비율 미만이면 발사
-    #[prost(double, tag="4")]
-    pub imbalance_threshold_ratio: f64,
-    /// 트리거 후 재트리거까지 대기시간 (ms)
-    #[prost(uint64, tag="5")]
-    pub cooldown_ms: u64,
-    /// 익절 임계 (틱). 진입 BEP 대비 유리 방향
-    #[prost(uint32, tag="6")]
+    /// 익절 임계 (틱)
+    #[prost(uint32, tag="4")]
     pub take_profit_ticks: u32,
-    /// 손절 임계 (틱). 진입 BEP 대비 불리 방향
-    #[prost(uint32, tag="7")]
+    /// 손절 임계 (틱)
+    #[prost(uint32, tag="5")]
     pub stop_loss_ticks: u32,
-    /// 청산 발주 시 상대 1호가에서 추가로 공격적으로 낼 틱 수 (0 = 상대호가 그대로)
-    #[prost(uint32, tag="8")]
+    /// 청산 발주 시 상대 1호가 대비 추가 공격 틱 (0 = 상대호가 그대로)
+    #[prost(uint32, tag="6")]
     pub exit_aggressive_ticks: u32,
-}
-/// SimultaneousCompare 모드 설정
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct SimultaneousCompare {
-    /// 가격 비교 조건
-    #[prost(message, optional, tag="1")]
-    pub condition: ::core::option::Option<PairCondition>,
-    /// 주문 유형
-    #[prost(enumeration="PairOrderType", tag="2")]
-    pub order_type: i32,
-    /// 트리거 후 재트리거까지 대기시간 (ms)
-    #[prost(uint64, tag="3")]
-    pub cooldown_ms: u64,
-    /// hit 직후 지정가 조정 여부
-    #[prost(bool, tag="4")]
-    pub apply_tick_offset: bool,
-}
-/// PricingMakerTaker 모드 설정
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PricingMakerTaker {
-    /// maker 역할 leg (BASE or COUNTER; 반대 leg가 pricer 겸 taker)
-    #[prost(enumeration="PairLeg", tag="1")]
-    pub maker_leg: i32,
-    /// pricer → maker 가격 환산 방식
-    #[prost(message, optional, tag="2")]
-    pub pricing: ::core::option::Option<PairPricingMethod>,
-    /// 정정(retick) 정책
-    #[prost(message, optional, tag="3")]
-    pub retick: ::core::option::Option<RetickPolicy>,
-    /// taker(헷지) 측 주문 유형
-    #[prost(enumeration="PairOrderType", tag="4")]
-    pub taker_order_type: i32,
-}
-// ============================================================================
-// Pair Pricing Method (oneof wrapper)
-// ============================================================================
-
-/// pricer 가격으로부터 maker fair price를 산출하는 방식
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PairPricingMethod {
-    #[prost(oneof="pair_pricing_method::Method", tags="1, 2")]
-    pub method: ::core::option::Option<pair_pricing_method::Method>,
-}
-/// Nested message and enum types in `PairPricingMethod`.
-pub mod pair_pricing_method {
-    #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
-    pub enum Method {
-        /// 선형 환산: maker_price = pricer_price * multiple + basis(side)
-        #[prost(message, tag="1")]
-        LinearBasis(super::LinearBasis),
-        /// ETF NAV 기반 환산 (ETF↔선물 비선형 케이스)
-        #[prost(message, tag="2")]
-        EtfNav(super::EtfNav),
-    }
-}
-/// 선형 환산 방식
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct LinearBasis {
-    /// 배율 (예: 1.0, non-zero finite)
-    #[prost(double, tag="1")]
-    pub multiple: f64,
-    /// Bid quote 산출용 basis 오프셋 (원)
-    #[prost(int64, tag="2")]
-    pub basis_bid: i64,
-    /// Ask quote 산출용 basis 오프셋 (원)
-    #[prost(int64, tag="3")]
-    pub basis_ask: i64,
-}
-/// ETF NAV 기반 환산 방식
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct EtfNav {
-    /// NAV 계산 공식 종류
-    #[prost(enumeration="EtfNavKind", tag="1")]
-    pub pricing_kind: i32,
-    /// 환산 방향 (Inverse: pricer=ETF→maker=선물, Forward: pricer=선물→maker=ETF)
-    #[prost(enumeration="NavDirection", tag="2")]
-    pub direction: i32,
-    /// 정적 pricing 파라미터 snapshot
-    #[prost(message, optional, tag="3")]
-    pub ctx: ::core::option::Option<PricingContextSnapshot>,
-    /// Bid quote 산출용 basis (원, raw int64)
-    #[prost(int64, tag="4")]
-    pub bid_basis: i64,
-    /// Ask quote 산출용 basis (원, raw int64)
-    #[prost(int64, tag="5")]
-    pub ask_basis: i64,
-    /// PDF/Pdf fallback용 선형 배율 (inverse 모드, 기본 1.0)
-    #[prost(double, tag="6")]
-    pub linear_fallback_multiplier: f64,
-    /// FutureBasis/LeverageFuture variant의 전일 기초지수 가격 (원, raw int64)
-    /// EtfNavKind가 FUTURE_BASIS 또는 LEVERAGE_FUTURE일 때 필수
-    #[prost(int64, tag="7")]
-    pub prev_index: i64,
-    /// LeverageFuture variant의 전일 선물 가격 (원, raw int64)
-    /// EtfNavKind가 LEVERAGE_FUTURE일 때 필수
-    #[prost(int64, tag="8")]
-    pub prev_future: i64,
-}
-/// PricingContext 정적 파라미터 snapshot
-/// (Price 타입은 i64 raw value 기반 — int64로 직렬화)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PricingContextSnapshot {
-    /// 전일 NAV (LeverageFuture의 nav0)
-    #[prost(int64, tag="1")]
-    pub nav0: i64,
-    /// 바스켓 내 현물(Stock/ETF) 비중 (0.0 ~ 1.0)
-    #[prost(double, tag="2")]
-    pub stock_ratio: f64,
-    /// 실질 레버리지 (= unit_delta / Nav0, 인버스면 부호 반전)
-    #[prost(double, tag="3")]
-    pub actual_leverage: f64,
-    /// 단위 델타 (unit_delta)
-    #[prost(int64, tag="4")]
-    pub unit_delta: i64,
-    /// 주당 현금 (cash_per_share)
-    #[prost(int64, tag="5")]
-    pub cash_per_share: i64,
-    /// 지수 추종 배율 (IndexTrackingHedge 시 필수, 그 외 미사용)
-    #[prost(int64, optional, tag="6")]
-    pub tracking_multiple: ::core::option::Option<i64>,
-}
-// ============================================================================
-// Retick Policy
-// ============================================================================
-
-/// maker 정정(amend) 정책
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct RetickPolicy {
-    /// fair 가격이 이 tick 수 이상 이동해야 정정 (1 이상)
-    #[prost(int32, tag="1")]
-    pub tick_threshold: i32,
-    /// 직전 정정으로부터 이만큼 경과해야 다음 정정 허용 (ms)
-    #[prost(uint64, tag="2")]
-    pub amend_cooldown_ms: u64,
-    /// stop 시 미체결 maker 주문 자동 취소 여부
-    #[prost(bool, tag="3")]
-    pub cancel_on_stop: bool,
 }
 // ============================================================================
 // Request / Response Messages — CRUD
@@ -477,7 +365,7 @@ pub struct PausePairRequest {
     pub pair: ::prost::alloc::string::String,
 }
 // ============================================================================
-// Pair Execution Log (SimultaneousCompare 모드 사이클별 기록)
+// Pair Execution Log (사이클별 기록)
 // ============================================================================
 
 /// 페어 실행 로그 레코드
@@ -568,84 +456,6 @@ pub struct ListPairExecutionLogsResponse {
     pub total_count: i32,
 }
 // ============================================================================
-// Maker-Taker Event Log (PricingMakerTaker 모드 전용)
-// ============================================================================
-
-/// Maker-Taker 이벤트 로그 레코드
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MakerTakerEventLog {
-    /// Pair ID
-    #[prost(int32, tag="1")]
-    pub pair_id: i32,
-    /// 이벤트 유형
-    #[prost(enumeration="MakerTakerEventType", tag="2")]
-    pub event_type: i32,
-    /// 사이클 식별자 (동일 사이클의 이벤트를 묶음)
-    #[prost(int64, tag="3")]
-    pub cycle_id: i64,
-    /// maker 주문 ID (해당 이벤트에서 참조 가능한 경우)
-    #[prost(uint64, optional, tag="4")]
-    pub maker_order_id: ::core::option::Option<u64>,
-    /// taker 주문 ID (TakerSubmitted / TakerFilled 시점)
-    #[prost(uint64, optional, tag="5")]
-    pub taker_order_id: ::core::option::Option<u64>,
-    /// 해당 이벤트 시점의 maker fair price (원, raw int64)
-    #[prost(int64, optional, tag="6")]
-    pub fair_price: ::core::option::Option<i64>,
-    /// 정정 시 새 호가 (MakerAmended 전용, 원, raw int64)
-    #[prost(int64, optional, tag="7")]
-    pub new_price: ::core::option::Option<i64>,
-    /// 체결 가격 (MakerFilled / TakerFilled, 원, raw int64)
-    #[prost(int64, optional, tag="8")]
-    pub fill_price: ::core::option::Option<i64>,
-    /// 체결 수량 (MakerFilled / TakerFilled)
-    #[prost(int64, optional, tag="9")]
-    pub fill_quantity: ::core::option::Option<i64>,
-    /// 이벤트 발생 시각
-    #[prost(message, optional, tag="10")]
-    pub at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// 상세 내용 (optional)
-    #[prost(string, optional, tag="11")]
-    pub detail: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListMakerTakerEventsRequest {
-    /// 리소스 이름 (pairs/{id})
-    #[prost(string, tag="1")]
-    pub pair: ::prost::alloc::string::String,
-    /// 페이지 크기 (기본: 50, 최대: 200)
-    #[prost(int32, optional, tag="2")]
-    pub page_size: ::core::option::Option<i32>,
-    /// 페이지 토큰 (다음 페이지 조회용)
-    #[prost(string, optional, tag="3")]
-    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
-    /// 필터링 조건 (optional)
-    ///
-    /// Available Fields:
-    /// * cycle_id - 사이클 ID
-    /// * event_type - 이벤트 유형
-    #[prost(string, tag="4")]
-    pub filter: ::prost::alloc::string::String,
-    /// 정렬 기준 (기본: at DESC)
-    #[prost(string, tag="5")]
-    pub order_by: ::prost::alloc::string::String,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListMakerTakerEventsResponse {
-    /// 이벤트 로그 목록
-    #[prost(message, repeated, tag="1")]
-    pub events: ::prost::alloc::vec::Vec<MakerTakerEventLog>,
-    /// 다음 페이지 토큰
-    #[prost(string, tag="2")]
-    pub next_page_token: ::prost::alloc::string::String,
-    /// 전체 건수
-    #[prost(int32, tag="3")]
-    pub total_count: i32,
-}
-// ============================================================================
 // Real-time Status Streaming
 // ============================================================================
 
@@ -717,10 +527,10 @@ pub struct PairStatistics {
     /// base + counter 누적 체결 수량
     #[prost(int64, tag="3")]
     pub total_filled: i64,
-    /// Spread 모드: 발주 성공 횟수 / PricingMakerTaker 모드: 사이클 수
+    /// 발주 성공 횟수
     #[prost(int64, tag="4")]
     pub execution_count: i64,
-    /// 실현 손익 (milli-won). 현재 메모리 카운터 기반, Spread 모드는 0.
+    /// 실현 손익 (milli-won). 현재 메모리 카운터 기반.
     #[prost(int64, tag="5")]
     pub realized_pnl: i64,
 }
@@ -900,36 +710,10 @@ impl PairStatus {
         }
     }
 }
-/// Pair leg 식별자
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum PairLeg {
-    Unspecified = 0,
-    Base = 1,
-    Counter = 2,
-}
-impl PairLeg {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            PairLeg::Unspecified => "PAIR_LEG_UNSPECIFIED",
-            PairLeg::Base => "PAIR_LEG_BASE",
-            PairLeg::Counter => "PAIR_LEG_COUNTER",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "PAIR_LEG_UNSPECIFIED" => Some(Self::Unspecified),
-            "PAIR_LEG_BASE" => Some(Self::Base),
-            "PAIR_LEG_COUNTER" => Some(Self::Counter),
-            _ => None,
-        }
-    }
-}
+// ============================================================================
+// ETF NAV Kind
+// ============================================================================
+
 /// ETF NAV 계산 공식 종류
 /// (PdfNavHedge/PdfDecomposeHedge는 Pair 미지원 — 서버에서 거부됨)
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -963,38 +747,6 @@ impl EtfNavKind {
             "ETF_NAV_KIND_INDEX_TRACKING_HEDGE" => Some(Self::IndexTrackingHedge),
             "ETF_NAV_KIND_FUTURE_BASIS" => Some(Self::FutureBasis),
             "ETF_NAV_KIND_LEVERAGE_FUTURE" => Some(Self::LeverageFuture),
-            _ => None,
-        }
-    }
-}
-/// NAV 환산 방향
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum NavDirection {
-    Unspecified = 0,
-    /// pricer=ETF → maker=선물 가격 역산
-    Inverse = 1,
-    /// pricer=선물 → maker=ETF NAV forward 산출
-    Forward = 2,
-}
-impl NavDirection {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            NavDirection::Unspecified => "NAV_DIRECTION_UNSPECIFIED",
-            NavDirection::Inverse => "NAV_DIRECTION_INVERSE",
-            NavDirection::Forward => "NAV_DIRECTION_FORWARD",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "NAV_DIRECTION_UNSPECIFIED" => Some(Self::Unspecified),
-            "NAV_DIRECTION_INVERSE" => Some(Self::Inverse),
-            "NAV_DIRECTION_FORWARD" => Some(Self::Forward),
             _ => None,
         }
     }
@@ -1047,62 +799,6 @@ impl PairExecutionOutcome {
             "PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE" => Some(Self::PartialFailure),
             "PAIR_EXECUTION_OUTCOME_FAILED" => Some(Self::Failed),
             "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED" => Some(Self::SkippedNoFilled),
-            _ => None,
-        }
-    }
-}
-/// Maker-Taker 이벤트 유형
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum MakerTakerEventType {
-    Unspecified = 0,
-    /// maker 신규 발주 (FEP submit 직후)
-    MakerSubmitted = 1,
-    /// maker 정정 (가격/수량 변경)
-    MakerAmended = 2,
-    /// maker 부분/완전 체결
-    MakerFilled = 3,
-    /// maker 주문 reject
-    MakerRejected = 4,
-    /// maker 주문 거래소 auto-cancel
-    MakerCancelled = 5,
-    /// taker 헷지 주문 발주
-    TakerSubmitted = 6,
-    /// taker 헷지 체결
-    TakerFilled = 7,
-    /// taker 헷지 reject (수동 개입 필요)
-    TakerRejected = 8,
-}
-impl MakerTakerEventType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            MakerTakerEventType::Unspecified => "MAKER_TAKER_EVENT_TYPE_UNSPECIFIED",
-            MakerTakerEventType::MakerSubmitted => "MAKER_TAKER_EVENT_TYPE_MAKER_SUBMITTED",
-            MakerTakerEventType::MakerAmended => "MAKER_TAKER_EVENT_TYPE_MAKER_AMENDED",
-            MakerTakerEventType::MakerFilled => "MAKER_TAKER_EVENT_TYPE_MAKER_FILLED",
-            MakerTakerEventType::MakerRejected => "MAKER_TAKER_EVENT_TYPE_MAKER_REJECTED",
-            MakerTakerEventType::MakerCancelled => "MAKER_TAKER_EVENT_TYPE_MAKER_CANCELLED",
-            MakerTakerEventType::TakerSubmitted => "MAKER_TAKER_EVENT_TYPE_TAKER_SUBMITTED",
-            MakerTakerEventType::TakerFilled => "MAKER_TAKER_EVENT_TYPE_TAKER_FILLED",
-            MakerTakerEventType::TakerRejected => "MAKER_TAKER_EVENT_TYPE_TAKER_REJECTED",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "MAKER_TAKER_EVENT_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "MAKER_TAKER_EVENT_TYPE_MAKER_SUBMITTED" => Some(Self::MakerSubmitted),
-            "MAKER_TAKER_EVENT_TYPE_MAKER_AMENDED" => Some(Self::MakerAmended),
-            "MAKER_TAKER_EVENT_TYPE_MAKER_FILLED" => Some(Self::MakerFilled),
-            "MAKER_TAKER_EVENT_TYPE_MAKER_REJECTED" => Some(Self::MakerRejected),
-            "MAKER_TAKER_EVENT_TYPE_MAKER_CANCELLED" => Some(Self::MakerCancelled),
-            "MAKER_TAKER_EVENT_TYPE_TAKER_SUBMITTED" => Some(Self::TakerSubmitted),
-            "MAKER_TAKER_EVENT_TYPE_TAKER_FILLED" => Some(Self::TakerFilled),
-            "MAKER_TAKER_EVENT_TYPE_TAKER_REJECTED" => Some(Self::TakerRejected),
             _ => None,
         }
     }

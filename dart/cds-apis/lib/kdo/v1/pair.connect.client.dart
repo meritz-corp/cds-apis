@@ -136,7 +136,7 @@ extension type PairServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Pair 실행 로그 목록 조회 (SimultaneousCompare 모드 사이클별 기록, 페이징)
+  /// Pair 실행 로그 목록 조회 (사이클별 기록, 페이징)
   Future<kdov1pair.ListPairExecutionLogsResponse> listPairExecutionLogs(
     kdov1pair.ListPairExecutionLogsRequest input, {
     connect.Headers? headers,
@@ -146,24 +146,6 @@ extension type PairServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.PairService.listPairExecutionLogs,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
-  /// Maker-Taker 이벤트 로그 목록 조회 (PricingMakerTaker 모드 전용, 페이징)
-  Future<kdov1pair.ListMakerTakerEventsResponse> listMakerTakerEvents(
-    kdov1pair.ListMakerTakerEventsRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.PairService.listMakerTakerEvents,
       input,
       signal: signal,
       headers: headers,

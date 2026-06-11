@@ -69,14 +69,9 @@ class PairServiceClient extends $grpc.Client {
     return $createUnaryCall(_$pausePair, request, options: options);
   }
 
-  /// Pair 실행 로그 목록 조회 (SimultaneousCompare 모드 사이클별 기록, 페이징)
+  /// Pair 실행 로그 목록 조회 (사이클별 기록, 페이징)
   $grpc.ResponseFuture<$0.ListPairExecutionLogsResponse> listPairExecutionLogs($0.ListPairExecutionLogsRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listPairExecutionLogs, request, options: options);
-  }
-
-  /// Maker-Taker 이벤트 로그 목록 조회 (PricingMakerTaker 모드 전용, 페이징)
-  $grpc.ResponseFuture<$0.ListMakerTakerEventsResponse> listMakerTakerEvents($0.ListMakerTakerEventsRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$listMakerTakerEvents, request, options: options);
   }
 
   /// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
@@ -123,10 +118,6 @@ class PairServiceClient extends $grpc.Client {
       '/kdo.v1.pair.PairService/ListPairExecutionLogs',
       ($0.ListPairExecutionLogsRequest value) => value.writeToBuffer(),
       $0.ListPairExecutionLogsResponse.fromBuffer);
-  static final _$listMakerTakerEvents = $grpc.ClientMethod<$0.ListMakerTakerEventsRequest, $0.ListMakerTakerEventsResponse>(
-      '/kdo.v1.pair.PairService/ListMakerTakerEvents',
-      ($0.ListMakerTakerEventsRequest value) => value.writeToBuffer(),
-      $0.ListMakerTakerEventsResponse.fromBuffer);
   static final _$streamPairStatus = $grpc.ClientMethod<$0.StreamPairStatusRequest, $0.PairStatusUpdate>(
       '/kdo.v1.pair.PairService/StreamPairStatus',
       ($0.StreamPairStatusRequest value) => value.writeToBuffer(),
@@ -198,13 +189,6 @@ abstract class PairServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListPairExecutionLogsRequest.fromBuffer(value),
         ($0.ListPairExecutionLogsResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListMakerTakerEventsRequest, $0.ListMakerTakerEventsResponse>(
-        'ListMakerTakerEvents',
-        listMakerTakerEvents_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.ListMakerTakerEventsRequest.fromBuffer(value),
-        ($0.ListMakerTakerEventsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StreamPairStatusRequest, $0.PairStatusUpdate>(
         'StreamPairStatus',
         streamPairStatus_Pre,
@@ -268,12 +252,6 @@ abstract class PairServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListPairExecutionLogsResponse> listPairExecutionLogs($grpc.ServiceCall call, $0.ListPairExecutionLogsRequest request);
-
-  $async.Future<$0.ListMakerTakerEventsResponse> listMakerTakerEvents_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMakerTakerEventsRequest> $request) async {
-    return listMakerTakerEvents($call, await $request);
-  }
-
-  $async.Future<$0.ListMakerTakerEventsResponse> listMakerTakerEvents($grpc.ServiceCall call, $0.ListMakerTakerEventsRequest request);
 
   $async.Stream<$0.PairStatusUpdate> streamPairStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamPairStatusRequest> $request) async* {
     yield* streamPairStatus($call, await $request);

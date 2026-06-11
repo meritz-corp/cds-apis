@@ -37,10 +37,8 @@ type PairServiceClient interface {
 	ActivatePair(ctx context.Context, in *ActivatePairRequest, opts ...grpc.CallOption) (*Pair, error)
 	// Pair 일시 중지 (hot loop 중지, status → PAUSED)
 	PausePair(ctx context.Context, in *PausePairRequest, opts ...grpc.CallOption) (*Pair, error)
-	// Pair 실행 로그 목록 조회 (SimultaneousCompare 모드 사이클별 기록, 페이징)
+	// Pair 실행 로그 목록 조회 (사이클별 기록, 페이징)
 	ListPairExecutionLogs(ctx context.Context, in *ListPairExecutionLogsRequest, opts ...grpc.CallOption) (*ListPairExecutionLogsResponse, error)
-	// Maker-Taker 이벤트 로그 목록 조회 (PricingMakerTaker 모드 전용, 페이징)
-	ListMakerTakerEvents(ctx context.Context, in *ListMakerTakerEventsRequest, opts ...grpc.CallOption) (*ListMakerTakerEventsResponse, error)
 	// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
 	StreamPairStatus(ctx context.Context, in *StreamPairStatusRequest, opts ...grpc.CallOption) (PairService_StreamPairStatusClient, error)
 	// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
@@ -127,15 +125,6 @@ func (c *pairServiceClient) ListPairExecutionLogs(ctx context.Context, in *ListP
 	return out, nil
 }
 
-func (c *pairServiceClient) ListMakerTakerEvents(ctx context.Context, in *ListMakerTakerEventsRequest, opts ...grpc.CallOption) (*ListMakerTakerEventsResponse, error) {
-	out := new(ListMakerTakerEventsResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.pair.PairService/ListMakerTakerEvents", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *pairServiceClient) StreamPairStatus(ctx context.Context, in *StreamPairStatusRequest, opts ...grpc.CallOption) (PairService_StreamPairStatusClient, error) {
 	stream, err := c.cc.NewStream(ctx, &PairService_ServiceDesc.Streams[0], "/kdo.v1.pair.PairService/StreamPairStatus", opts...)
 	if err != nil {
@@ -195,10 +184,8 @@ type PairServiceServer interface {
 	ActivatePair(context.Context, *ActivatePairRequest) (*Pair, error)
 	// Pair 일시 중지 (hot loop 중지, status → PAUSED)
 	PausePair(context.Context, *PausePairRequest) (*Pair, error)
-	// Pair 실행 로그 목록 조회 (SimultaneousCompare 모드 사이클별 기록, 페이징)
+	// Pair 실행 로그 목록 조회 (사이클별 기록, 페이징)
 	ListPairExecutionLogs(context.Context, *ListPairExecutionLogsRequest) (*ListPairExecutionLogsResponse, error)
-	// Maker-Taker 이벤트 로그 목록 조회 (PricingMakerTaker 모드 전용, 페이징)
-	ListMakerTakerEvents(context.Context, *ListMakerTakerEventsRequest) (*ListMakerTakerEventsResponse, error)
 	// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
 	StreamPairStatus(*StreamPairStatusRequest, PairService_StreamPairStatusServer) error
 	// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
@@ -233,9 +220,6 @@ func (UnimplementedPairServiceServer) PausePair(context.Context, *PausePairReque
 }
 func (UnimplementedPairServiceServer) ListPairExecutionLogs(context.Context, *ListPairExecutionLogsRequest) (*ListPairExecutionLogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPairExecutionLogs not implemented")
-}
-func (UnimplementedPairServiceServer) ListMakerTakerEvents(context.Context, *ListMakerTakerEventsRequest) (*ListMakerTakerEventsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMakerTakerEvents not implemented")
 }
 func (UnimplementedPairServiceServer) StreamPairStatus(*StreamPairStatusRequest, PairService_StreamPairStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamPairStatus not implemented")
@@ -400,24 +384,6 @@ func _PairService_ListPairExecutionLogs_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PairService_ListMakerTakerEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMakerTakerEventsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PairServiceServer).ListMakerTakerEvents(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.pair.PairService/ListMakerTakerEvents",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PairServiceServer).ListMakerTakerEvents(ctx, req.(*ListMakerTakerEventsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _PairService_StreamPairStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(StreamPairStatusRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -495,10 +461,6 @@ var PairService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPairExecutionLogs",
 			Handler:    _PairService_ListPairExecutionLogs_Handler,
-		},
-		{
-			MethodName: "ListMakerTakerEvents",
-			Handler:    _PairService_ListMakerTakerEvents_Handler,
 		},
 		{
 			MethodName: "GetPairStatistics",

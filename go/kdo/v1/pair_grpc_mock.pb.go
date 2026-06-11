@@ -378,26 +378,6 @@ func (mr *MockPairServiceClientMockRecorder) GetPairStatistics(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairStatistics", reflect.TypeOf((*MockPairServiceClient)(nil).GetPairStatistics), varargs...)
 }
 
-// ListMakerTakerEvents mocks base method.
-func (m *MockPairServiceClient) ListMakerTakerEvents(ctx context.Context, in *ListMakerTakerEventsRequest, opts ...grpc.CallOption) (*ListMakerTakerEventsResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ListMakerTakerEvents", varargs...)
-	ret0, _ := ret[0].(*ListMakerTakerEventsResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ListMakerTakerEvents indicates an expected call of ListMakerTakerEvents.
-func (mr *MockPairServiceClientMockRecorder) ListMakerTakerEvents(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMakerTakerEvents", reflect.TypeOf((*MockPairServiceClient)(nil).ListMakerTakerEvents), varargs...)
-}
-
 // ListPairExecutionLogs mocks base method.
 func (m *MockPairServiceClient) ListPairExecutionLogs(ctx context.Context, in *ListPairExecutionLogsRequest, opts ...grpc.CallOption) (*ListPairExecutionLogsResponse, error) {
 	m.ctrl.T.Helper()
@@ -594,21 +574,6 @@ func (m *MockPairServiceServer) GetPairStatistics(ctx context.Context, in *GetPa
 func (mr *MockPairServiceServerMockRecorder) GetPairStatistics(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairStatistics", reflect.TypeOf((*MockPairServiceServer)(nil).GetPairStatistics), ctx, in)
-}
-
-// ListMakerTakerEvents mocks base method.
-func (m *MockPairServiceServer) ListMakerTakerEvents(ctx context.Context, in *ListMakerTakerEventsRequest) (*ListMakerTakerEventsResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListMakerTakerEvents", ctx, in)
-	ret0, _ := ret[0].(*ListMakerTakerEventsResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ListMakerTakerEvents indicates an expected call of ListMakerTakerEvents.
-func (mr *MockPairServiceServerMockRecorder) ListMakerTakerEvents(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMakerTakerEvents", reflect.TypeOf((*MockPairServiceServer)(nil).ListMakerTakerEvents), ctx, in)
 }
 
 // ListPairExecutionLogs mocks base method.
