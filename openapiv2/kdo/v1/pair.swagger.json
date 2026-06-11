@@ -608,6 +608,52 @@
       "description": "PairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).\n    정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.\n  - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),\n    counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.",
       "title": "BaseMakeCounterIocAndBalance 모드 설정 (IOC imbalance hotpath)"
     },
+    "pairCounterBepScalp": {
+      "type": "object",
+      "properties": {
+        "navKind": {
+          "$ref": "#/definitions/pairEtfNavKind",
+          "title": "counter(ETF) BEP 환산용 NAV 방식"
+        },
+        "bidBasis": {
+          "type": "string",
+          "format": "int64",
+          "title": "counter 매수(Bid) BEP 오프셋 (원)"
+        },
+        "askBasis": {
+          "type": "string",
+          "format": "int64",
+          "title": "counter 매도(Ask) BEP 오프셋 (원)"
+        },
+        "imbalanceThresholdRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "진입 트리거: base 1호가 imbalance 가 이 비율 미만이면 발사"
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "트리거 후 재트리거까지 대기시간 (ms)"
+        },
+        "takeProfitTicks": {
+          "type": "integer",
+          "format": "int64",
+          "title": "익절 임계 (틱). 진입 BEP 대비 유리 방향"
+        },
+        "stopLossTicks": {
+          "type": "integer",
+          "format": "int64",
+          "title": "손절 임계 (틱). 진입 BEP 대비 불리 방향"
+        },
+        "exitAggressiveTicks": {
+          "type": "integer",
+          "format": "int64",
+          "title": "청산 발주 시 상대 1호가에서 추가로 공격적으로 낼 틱 수 (0 = 상대호가 그대로)"
+        }
+      },
+      "description": "base 레그 무발주 — counter(ETF)만 BEP 지정가(FAS)로 진입하고,\n진입 BEP 대비 유리 방향 take_profit_ticks 틱 이상이면 익절,\n불리 방향 stop_loss_ticks 틱 이상이면 손절 청산한다.\n트리거는 base(선물) 1호가 수량 imbalance (BaseMakeCounterIocAndBalance 와 동일 판정).\n진입 주문은 취소 없이 대기하며, 익절/손절 발동 시점에만 잔량을 취소한다.\n청산 주문은 체결될 때까지 호가를 추적(amend)해 체결을 보장한다.",
+      "title": "CounterBepScalp 모드 설정"
+    },
     "pairEtfNavKind": {
       "type": "string",
       "enum": [
@@ -1050,6 +1096,10 @@
         "baseMakeCounterIocAndBalance": {
           "$ref": "#/definitions/pairBaseMakeCounterIocAndBalance",
           "title": "신규: base maker 호가 유지, counter IOC 헷지 + 잔량 추적 처리"
+        },
+        "counterBepScalp": {
+          "$ref": "#/definitions/pairCounterBepScalp",
+          "title": "신규: base 무발주 — counter(ETF)만 BEP 지정가 진입 후 익절/손절 청산"
         }
       },
       "title": "Pair 실행 모드"

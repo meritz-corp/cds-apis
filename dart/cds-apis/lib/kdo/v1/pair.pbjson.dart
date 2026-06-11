@@ -335,6 +335,7 @@ const PairMode$json = {
     {'1': 'simultaneous_compare', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.SimultaneousCompare', '9': 0, '10': 'simultaneousCompare'},
     {'1': 'pricing_maker_taker', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.PricingMakerTaker', '9': 0, '10': 'pricingMakerTaker'},
     {'1': 'base_make_counter_ioc_and_balance', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.BaseMakeCounterIocAndBalance', '9': 0, '10': 'baseMakeCounterIocAndBalance'},
+    {'1': 'counter_bep_scalp', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.pair.CounterBepScalp', '9': 0, '10': 'counterBepScalp'},
   ],
   '8': [
     {'1': 'kind'},
@@ -348,7 +349,8 @@ final $typed_data.Uint8List pairModeDescriptor = $convert.base64Decode(
     'a2VyX3Rha2VyGAIgASgLMh4ua2RvLnYxLnBhaXIuUHJpY2luZ01ha2VyVGFrZXJIAFIRcHJpY2'
     'luZ01ha2VyVGFrZXISdAohYmFzZV9tYWtlX2NvdW50ZXJfaW9jX2FuZF9iYWxhbmNlGAMgASgL'
     'Mikua2RvLnYxLnBhaXIuQmFzZU1ha2VDb3VudGVySW9jQW5kQmFsYW5jZUgAUhxiYXNlTWFrZU'
-    'NvdW50ZXJJb2NBbmRCYWxhbmNlQgYKBGtpbmQ=');
+    'NvdW50ZXJJb2NBbmRCYWxhbmNlEkoKEWNvdW50ZXJfYmVwX3NjYWxwGAQgASgLMhwua2RvLnYx'
+    'LnBhaXIuQ291bnRlckJlcFNjYWxwSABSD2NvdW50ZXJCZXBTY2FscEIGCgRraW5k');
 
 @$core.Deprecated('Use baseMakeCounterIocAndBalanceDescriptor instead')
 const BaseMakeCounterIocAndBalance$json = {
@@ -386,6 +388,31 @@ final $typed_data.Uint8List baseMakeCounterIocAndBalanceDescriptor = $convert.ba
     'Z2dyZXNzaXZlVGlja3MSSQohY291bnRlcl9yZWNvdmVyeV9hZ2dyZXNzaXZlX3RpY2tzGA0gAS'
     'gNUh5jb3VudGVyUmVjb3ZlcnlBZ2dyZXNzaXZlVGlja3NKBAgBEAJKBAgCEANKBAgDEARSB3By'
     'aWNpbmdSC2hlZGdlX3JhdGlvUg9jb3VudGVyX2ludmVyc2U=');
+
+@$core.Deprecated('Use counterBepScalpDescriptor instead')
+const CounterBepScalp$json = {
+  '1': 'CounterBepScalp',
+  '2': [
+    {'1': 'nav_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
+    {'1': 'bid_basis', '3': 2, '4': 1, '5': 3, '10': 'bidBasis'},
+    {'1': 'ask_basis', '3': 3, '4': 1, '5': 3, '10': 'askBasis'},
+    {'1': 'imbalance_threshold_ratio', '3': 4, '4': 1, '5': 1, '10': 'imbalanceThresholdRatio'},
+    {'1': 'cooldown_ms', '3': 5, '4': 1, '5': 4, '10': 'cooldownMs'},
+    {'1': 'take_profit_ticks', '3': 6, '4': 1, '5': 13, '10': 'takeProfitTicks'},
+    {'1': 'stop_loss_ticks', '3': 7, '4': 1, '5': 13, '10': 'stopLossTicks'},
+    {'1': 'exit_aggressive_ticks', '3': 8, '4': 1, '5': 13, '10': 'exitAggressiveTicks'},
+  ],
+};
+
+/// Descriptor for `CounterBepScalp`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List counterBepScalpDescriptor = $convert.base64Decode(
+    'Cg9Db3VudGVyQmVwU2NhbHASMgoIbmF2X2tpbmQYASABKA4yFy5rZG8udjEucGFpci5FdGZOYX'
+    'ZLaW5kUgduYXZLaW5kEhsKCWJpZF9iYXNpcxgCIAEoA1IIYmlkQmFzaXMSGwoJYXNrX2Jhc2lz'
+    'GAMgASgDUghhc2tCYXNpcxI6ChlpbWJhbGFuY2VfdGhyZXNob2xkX3JhdGlvGAQgASgBUhdpbW'
+    'JhbGFuY2VUaHJlc2hvbGRSYXRpbxIfCgtjb29sZG93bl9tcxgFIAEoBFIKY29vbGRvd25NcxIq'
+    'ChF0YWtlX3Byb2ZpdF90aWNrcxgGIAEoDVIPdGFrZVByb2ZpdFRpY2tzEiYKD3N0b3BfbG9zc1'
+    '90aWNrcxgHIAEoDVINc3RvcExvc3NUaWNrcxIyChVleGl0X2FnZ3Jlc3NpdmVfdGlja3MYCCAB'
+    'KA1SE2V4aXRBZ2dyZXNzaXZlVGlja3M=');
 
 @$core.Deprecated('Use simultaneousCompareDescriptor instead')
 const SimultaneousCompare$json = {

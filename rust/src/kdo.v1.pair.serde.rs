@@ -382,6 +382,250 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalance {
         deserializer.deserialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalance", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for CounterBepScalp {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.CounterBepScalp", len)?;
+        if true {
+            let v = EtfNavKind::try_from(self.nav_kind)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.nav_kind)))?;
+            struct_ser.serialize_field("nav_kind", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_basis", ToString::to_string(&self.bid_basis).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("imbalance_threshold_ratio", &self.imbalance_threshold_ratio)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("take_profit_ticks", &self.take_profit_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("stop_loss_ticks", &self.stop_loss_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("exit_aggressive_ticks", &self.exit_aggressive_ticks)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CounterBepScalp {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "nav_kind",
+            "navKind",
+            "bid_basis",
+            "bidBasis",
+            "ask_basis",
+            "askBasis",
+            "imbalance_threshold_ratio",
+            "imbalanceThresholdRatio",
+            "cooldown_ms",
+            "cooldownMs",
+            "take_profit_ticks",
+            "takeProfitTicks",
+            "stop_loss_ticks",
+            "stopLossTicks",
+            "exit_aggressive_ticks",
+            "exitAggressiveTicks",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            NavKind,
+            BidBasis,
+            AskBasis,
+            ImbalanceThresholdRatio,
+            CooldownMs,
+            TakeProfitTicks,
+            StopLossTicks,
+            ExitAggressiveTicks,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
+                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
+                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "imbalanceThresholdRatio" | "imbalance_threshold_ratio" => Ok(GeneratedField::ImbalanceThresholdRatio),
+                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            "takeProfitTicks" | "take_profit_ticks" => Ok(GeneratedField::TakeProfitTicks),
+                            "stopLossTicks" | "stop_loss_ticks" => Ok(GeneratedField::StopLossTicks),
+                            "exitAggressiveTicks" | "exit_aggressive_ticks" => Ok(GeneratedField::ExitAggressiveTicks),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CounterBepScalp;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.CounterBepScalp")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CounterBepScalp, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut nav_kind__ = None;
+                let mut bid_basis__ = None;
+                let mut ask_basis__ = None;
+                let mut imbalance_threshold_ratio__ = None;
+                let mut cooldown_ms__ = None;
+                let mut take_profit_ticks__ = None;
+                let mut stop_loss_ticks__ = None;
+                let mut exit_aggressive_ticks__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::NavKind => {
+                            if nav_kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("navKind"));
+                            }
+                            nav_kind__ = Some(map_.next_value::<EtfNavKind>()? as i32);
+                        }
+                        GeneratedField::BidBasis => {
+                            if bid_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                            }
+                            bid_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskBasis => {
+                            if ask_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askBasis"));
+                            }
+                            ask_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ImbalanceThresholdRatio => {
+                            if imbalance_threshold_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("imbalanceThresholdRatio"));
+                            }
+                            imbalance_threshold_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CooldownMs => {
+                            if cooldown_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
+                            }
+                            cooldown_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TakeProfitTicks => {
+                            if take_profit_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("takeProfitTicks"));
+                            }
+                            take_profit_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::StopLossTicks => {
+                            if stop_loss_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("stopLossTicks"));
+                            }
+                            stop_loss_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ExitAggressiveTicks => {
+                            if exit_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitAggressiveTicks"));
+                            }
+                            exit_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CounterBepScalp {
+                    nav_kind: nav_kind__.unwrap_or_default(),
+                    bid_basis: bid_basis__.unwrap_or_default(),
+                    ask_basis: ask_basis__.unwrap_or_default(),
+                    imbalance_threshold_ratio: imbalance_threshold_ratio__.unwrap_or_default(),
+                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                    take_profit_ticks: take_profit_ticks__.unwrap_or_default(),
+                    stop_loss_ticks: stop_loss_ticks__.unwrap_or_default(),
+                    exit_aggressive_ticks: exit_aggressive_ticks__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.CounterBepScalp", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CreatePairRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3867,6 +4111,9 @@ impl serde::Serialize for PairMode {
                 pair_mode::Kind::BaseMakeCounterIocAndBalance(v) => {
                     struct_ser.serialize_field("base_make_counter_ioc_and_balance", v)?;
                 }
+                pair_mode::Kind::CounterBepScalp(v) => {
+                    struct_ser.serialize_field("counter_bep_scalp", v)?;
+                }
             }
         }
         struct_ser.end()
@@ -3885,6 +4132,8 @@ impl<'de> serde::Deserialize<'de> for PairMode {
             "pricingMakerTaker",
             "base_make_counter_ioc_and_balance",
             "baseMakeCounterIocAndBalance",
+            "counter_bep_scalp",
+            "counterBepScalp",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3892,6 +4141,7 @@ impl<'de> serde::Deserialize<'de> for PairMode {
             SimultaneousCompare,
             PricingMakerTaker,
             BaseMakeCounterIocAndBalance,
+            CounterBepScalp,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3917,6 +4167,7 @@ impl<'de> serde::Deserialize<'de> for PairMode {
                             "simultaneousCompare" | "simultaneous_compare" => Ok(GeneratedField::SimultaneousCompare),
                             "pricingMakerTaker" | "pricing_maker_taker" => Ok(GeneratedField::PricingMakerTaker),
                             "baseMakeCounterIocAndBalance" | "base_make_counter_ioc_and_balance" => Ok(GeneratedField::BaseMakeCounterIocAndBalance),
+                            "counterBepScalp" | "counter_bep_scalp" => Ok(GeneratedField::CounterBepScalp),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3958,6 +4209,13 @@ impl<'de> serde::Deserialize<'de> for PairMode {
                                 return Err(serde::de::Error::duplicate_field("baseMakeCounterIocAndBalance"));
                             }
                             kind__ = map_.next_value::<::std::option::Option<_>>()?.map(pair_mode::Kind::BaseMakeCounterIocAndBalance)
+;
+                        }
+                        GeneratedField::CounterBepScalp => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterBepScalp"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(pair_mode::Kind::CounterBepScalp)
 ;
                         }
                         GeneratedField::__SkipField__ => {

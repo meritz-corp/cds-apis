@@ -143,7 +143,7 @@ pub struct PriceRatioCondition {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PairMode {
-    #[prost(oneof="pair_mode::Kind", tags="1, 2, 3")]
+    #[prost(oneof="pair_mode::Kind", tags="1, 2, 3, 4")]
     pub kind: ::core::option::Option<pair_mode::Kind>,
 }
 /// Nested message and enum types in `PairMode`.
@@ -160,6 +160,9 @@ pub mod pair_mode {
         /// 신규: base maker 호가 유지, counter IOC 헷지 + 잔량 추적 처리
         #[prost(message, tag="3")]
         BaseMakeCounterIocAndBalance(super::BaseMakeCounterIocAndBalance),
+        /// 신규: base 무발주 — counter(ETF)만 BEP 지정가 진입 후 익절/손절 청산
+        #[prost(message, tag="4")]
+        CounterBepScalp(super::CounterBepScalp),
     }
 }
 /// BaseMakeCounterIocAndBalance 모드 설정 (IOC imbalance hotpath)
@@ -210,6 +213,42 @@ pub struct BaseMakeCounterIocAndBalance {
     /// 0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
     #[prost(uint32, tag="13")]
     pub counter_recovery_aggressive_ticks: u32,
+}
+/// CounterBepScalp 모드 설정
+///
+/// base 레그 무발주 — counter(ETF)만 BEP 지정가(FAS)로 진입하고,
+/// 진입 BEP 대비 유리 방향 take_profit_ticks 틱 이상이면 익절,
+/// 불리 방향 stop_loss_ticks 틱 이상이면 손절 청산한다.
+/// 트리거는 base(선물) 1호가 수량 imbalance (BaseMakeCounterIocAndBalance 와 동일 판정).
+/// 진입 주문은 취소 없이 대기하며, 익절/손절 발동 시점에만 잔량을 취소한다.
+/// 청산 주문은 체결될 때까지 호가를 추적(amend)해 체결을 보장한다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct CounterBepScalp {
+    /// counter(ETF) BEP 환산용 NAV 방식
+    #[prost(enumeration="EtfNavKind", tag="1")]
+    pub nav_kind: i32,
+    /// counter 매수(Bid) BEP 오프셋 (원)
+    #[prost(int64, tag="2")]
+    pub bid_basis: i64,
+    /// counter 매도(Ask) BEP 오프셋 (원)
+    #[prost(int64, tag="3")]
+    pub ask_basis: i64,
+    /// 진입 트리거: base 1호가 imbalance 가 이 비율 미만이면 발사
+    #[prost(double, tag="4")]
+    pub imbalance_threshold_ratio: f64,
+    /// 트리거 후 재트리거까지 대기시간 (ms)
+    #[prost(uint64, tag="5")]
+    pub cooldown_ms: u64,
+    /// 익절 임계 (틱). 진입 BEP 대비 유리 방향
+    #[prost(uint32, tag="6")]
+    pub take_profit_ticks: u32,
+    /// 손절 임계 (틱). 진입 BEP 대비 불리 방향
+    #[prost(uint32, tag="7")]
+    pub stop_loss_ticks: u32,
+    /// 청산 발주 시 상대 1호가에서 추가로 공격적으로 낼 틱 수 (0 = 상대호가 그대로)
+    #[prost(uint32, tag="8")]
+    pub exit_aggressive_ticks: u32,
 }
 /// SimultaneousCompare 모드 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

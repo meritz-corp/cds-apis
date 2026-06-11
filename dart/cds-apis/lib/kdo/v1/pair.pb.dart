@@ -593,6 +593,7 @@ enum PairMode_Kind {
   simultaneousCompare, 
   pricingMakerTaker, 
   baseMakeCounterIocAndBalance, 
+  counterBepScalp, 
   notSet
 }
 
@@ -602,11 +603,13 @@ class PairMode extends $pb.GeneratedMessage {
     SimultaneousCompare? simultaneousCompare,
     PricingMakerTaker? pricingMakerTaker,
     BaseMakeCounterIocAndBalance? baseMakeCounterIocAndBalance,
+    CounterBepScalp? counterBepScalp,
   }) {
     final result = create();
     if (simultaneousCompare != null) result.simultaneousCompare = simultaneousCompare;
     if (pricingMakerTaker != null) result.pricingMakerTaker = pricingMakerTaker;
     if (baseMakeCounterIocAndBalance != null) result.baseMakeCounterIocAndBalance = baseMakeCounterIocAndBalance;
+    if (counterBepScalp != null) result.counterBepScalp = counterBepScalp;
     return result;
   }
 
@@ -619,13 +622,15 @@ class PairMode extends $pb.GeneratedMessage {
     1 : PairMode_Kind.simultaneousCompare,
     2 : PairMode_Kind.pricingMakerTaker,
     3 : PairMode_Kind.baseMakeCounterIocAndBalance,
+    4 : PairMode_Kind.counterBepScalp,
     0 : PairMode_Kind.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairMode', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
+    ..oo(0, [1, 2, 3, 4])
     ..aOM<SimultaneousCompare>(1, _omitFieldNames ? '' : 'simultaneousCompare', subBuilder: SimultaneousCompare.create)
     ..aOM<PricingMakerTaker>(2, _omitFieldNames ? '' : 'pricingMakerTaker', subBuilder: PricingMakerTaker.create)
     ..aOM<BaseMakeCounterIocAndBalance>(3, _omitFieldNames ? '' : 'baseMakeCounterIocAndBalance', subBuilder: BaseMakeCounterIocAndBalance.create)
+    ..aOM<CounterBepScalp>(4, _omitFieldNames ? '' : 'counterBepScalp', subBuilder: CounterBepScalp.create)
     ..hasRequiredFields = false
   ;
 
@@ -684,6 +689,18 @@ class PairMode extends $pb.GeneratedMessage {
   void clearBaseMakeCounterIocAndBalance() => $_clearField(3);
   @$pb.TagNumber(3)
   BaseMakeCounterIocAndBalance ensureBaseMakeCounterIocAndBalance() => $_ensure(2);
+
+  /// 신규: base 무발주 — counter(ETF)만 BEP 지정가 진입 후 익절/손절 청산
+  @$pb.TagNumber(4)
+  CounterBepScalp get counterBepScalp => $_getN(3);
+  @$pb.TagNumber(4)
+  set counterBepScalp(CounterBepScalp value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCounterBepScalp() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCounterBepScalp() => $_clearField(4);
+  @$pb.TagNumber(4)
+  CounterBepScalp ensureCounterBepScalp() => $_ensure(3);
 }
 
 /// BaseMakeCounterIocAndBalance 모드 설정 (IOC imbalance hotpath)
@@ -863,6 +880,152 @@ class BaseMakeCounterIocAndBalance extends $pb.GeneratedMessage {
   $core.bool hasCounterRecoveryAggressiveTicks() => $_has(9);
   @$pb.TagNumber(13)
   void clearCounterRecoveryAggressiveTicks() => $_clearField(13);
+}
+
+/// CounterBepScalp 모드 설정
+///
+/// base 레그 무발주 — counter(ETF)만 BEP 지정가(FAS)로 진입하고,
+/// 진입 BEP 대비 유리 방향 take_profit_ticks 틱 이상이면 익절,
+/// 불리 방향 stop_loss_ticks 틱 이상이면 손절 청산한다.
+/// 트리거는 base(선물) 1호가 수량 imbalance (BaseMakeCounterIocAndBalance 와 동일 판정).
+/// 진입 주문은 취소 없이 대기하며, 익절/손절 발동 시점에만 잔량을 취소한다.
+/// 청산 주문은 체결될 때까지 호가를 추적(amend)해 체결을 보장한다.
+class CounterBepScalp extends $pb.GeneratedMessage {
+  factory CounterBepScalp({
+    EtfNavKind? navKind,
+    $fixnum.Int64? bidBasis,
+    $fixnum.Int64? askBasis,
+    $core.double? imbalanceThresholdRatio,
+    $fixnum.Int64? cooldownMs,
+    $core.int? takeProfitTicks,
+    $core.int? stopLossTicks,
+    $core.int? exitAggressiveTicks,
+  }) {
+    final result = create();
+    if (navKind != null) result.navKind = navKind;
+    if (bidBasis != null) result.bidBasis = bidBasis;
+    if (askBasis != null) result.askBasis = askBasis;
+    if (imbalanceThresholdRatio != null) result.imbalanceThresholdRatio = imbalanceThresholdRatio;
+    if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    if (takeProfitTicks != null) result.takeProfitTicks = takeProfitTicks;
+    if (stopLossTicks != null) result.stopLossTicks = stopLossTicks;
+    if (exitAggressiveTicks != null) result.exitAggressiveTicks = exitAggressiveTicks;
+    return result;
+  }
+
+  CounterBepScalp._();
+
+  factory CounterBepScalp.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CounterBepScalp.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CounterBepScalp', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..e<EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
+    ..aInt64(2, _omitFieldNames ? '' : 'bidBasis')
+    ..aInt64(3, _omitFieldNames ? '' : 'askBasis')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'imbalanceThresholdRatio', $pb.PbFieldType.OD)
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'takeProfitTicks', $pb.PbFieldType.OU3)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'stopLossTicks', $pb.PbFieldType.OU3)
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'exitAggressiveTicks', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CounterBepScalp clone() => CounterBepScalp()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CounterBepScalp copyWith(void Function(CounterBepScalp) updates) => super.copyWith((message) => updates(message as CounterBepScalp)) as CounterBepScalp;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CounterBepScalp create() => CounterBepScalp._();
+  @$core.override
+  CounterBepScalp createEmptyInstance() => create();
+  static $pb.PbList<CounterBepScalp> createRepeated() => $pb.PbList<CounterBepScalp>();
+  @$core.pragma('dart2js:noInline')
+  static CounterBepScalp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CounterBepScalp>(create);
+  static CounterBepScalp? _defaultInstance;
+
+  /// counter(ETF) BEP 환산용 NAV 방식
+  @$pb.TagNumber(1)
+  EtfNavKind get navKind => $_getN(0);
+  @$pb.TagNumber(1)
+  set navKind(EtfNavKind value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasNavKind() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNavKind() => $_clearField(1);
+
+  /// counter 매수(Bid) BEP 오프셋 (원)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get bidBasis => $_getI64(1);
+  @$pb.TagNumber(2)
+  set bidBasis($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBidBasis() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBidBasis() => $_clearField(2);
+
+  /// counter 매도(Ask) BEP 오프셋 (원)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get askBasis => $_getI64(2);
+  @$pb.TagNumber(3)
+  set askBasis($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAskBasis() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskBasis() => $_clearField(3);
+
+  /// 진입 트리거: base 1호가 imbalance 가 이 비율 미만이면 발사
+  @$pb.TagNumber(4)
+  $core.double get imbalanceThresholdRatio => $_getN(3);
+  @$pb.TagNumber(4)
+  set imbalanceThresholdRatio($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasImbalanceThresholdRatio() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearImbalanceThresholdRatio() => $_clearField(4);
+
+  /// 트리거 후 재트리거까지 대기시간 (ms)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get cooldownMs => $_getI64(4);
+  @$pb.TagNumber(5)
+  set cooldownMs($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCooldownMs() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCooldownMs() => $_clearField(5);
+
+  /// 익절 임계 (틱). 진입 BEP 대비 유리 방향
+  @$pb.TagNumber(6)
+  $core.int get takeProfitTicks => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set takeProfitTicks($core.int value) => $_setUnsignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasTakeProfitTicks() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearTakeProfitTicks() => $_clearField(6);
+
+  /// 손절 임계 (틱). 진입 BEP 대비 불리 방향
+  @$pb.TagNumber(7)
+  $core.int get stopLossTicks => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set stopLossTicks($core.int value) => $_setUnsignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasStopLossTicks() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStopLossTicks() => $_clearField(7);
+
+  /// 청산 발주 시 상대 1호가에서 추가로 공격적으로 낼 틱 수 (0 = 상대호가 그대로)
+  @$pb.TagNumber(8)
+  $core.int get exitAggressiveTicks => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set exitAggressiveTicks($core.int value) => $_setUnsignedInt32(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasExitAggressiveTicks() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearExitAggressiveTicks() => $_clearField(8);
 }
 
 /// SimultaneousCompare 모드 설정
