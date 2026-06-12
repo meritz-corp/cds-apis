@@ -111,25 +111,9 @@ impl serde::Serialize for BaseMakeCounterIocAndBalanceExecution {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalanceExecution", len)?;
         if true {
             struct_ser.serialize_field("recovery_ratio", &self.recovery_ratio)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("settle_timeout_ms", ToString::to_string(&self.settle_timeout_ms).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("reconcile_alert_amount", ToString::to_string(&self.reconcile_alert_amount).as_str())?;
         }
         if true {
             struct_ser.serialize_field("base_recovery_aggressive_ticks", &self.base_recovery_aggressive_ticks)?;
@@ -149,10 +133,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalanceExecution {
         const FIELDS: &[&str] = &[
             "recovery_ratio",
             "recoveryRatio",
-            "settle_timeout_ms",
-            "settleTimeoutMs",
-            "reconcile_alert_amount",
-            "reconcileAlertAmount",
             "base_recovery_aggressive_ticks",
             "baseRecoveryAggressiveTicks",
             "counter_recovery_aggressive_ticks",
@@ -162,8 +142,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalanceExecution {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             RecoveryRatio,
-            SettleTimeoutMs,
-            ReconcileAlertAmount,
             BaseRecoveryAggressiveTicks,
             CounterRecoveryAggressiveTicks,
             __SkipField__,
@@ -189,8 +167,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalanceExecution {
                     {
                         match value {
                             "recoveryRatio" | "recovery_ratio" => Ok(GeneratedField::RecoveryRatio),
-                            "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
-                            "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
                             "baseRecoveryAggressiveTicks" | "base_recovery_aggressive_ticks" => Ok(GeneratedField::BaseRecoveryAggressiveTicks),
                             "counterRecoveryAggressiveTicks" | "counter_recovery_aggressive_ticks" => Ok(GeneratedField::CounterRecoveryAggressiveTicks),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -213,8 +189,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalanceExecution {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut recovery_ratio__ = None;
-                let mut settle_timeout_ms__ = None;
-                let mut reconcile_alert_amount__ = None;
                 let mut base_recovery_aggressive_ticks__ = None;
                 let mut counter_recovery_aggressive_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -224,22 +198,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalanceExecution {
                                 return Err(serde::de::Error::duplicate_field("recoveryRatio"));
                             }
                             recovery_ratio__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SettleTimeoutMs => {
-                            if settle_timeout_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("settleTimeoutMs"));
-                            }
-                            settle_timeout_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ReconcileAlertAmount => {
-                            if reconcile_alert_amount__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("reconcileAlertAmount"));
-                            }
-                            reconcile_alert_amount__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -266,8 +224,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalanceExecution {
                 }
                 Ok(BaseMakeCounterIocAndBalanceExecution {
                     recovery_ratio: recovery_ratio__.unwrap_or_default(),
-                    settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
-                    reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
                     base_recovery_aggressive_ticks: base_recovery_aggressive_ticks__.unwrap_or_default(),
                     counter_recovery_aggressive_ticks: counter_recovery_aggressive_ticks__.unwrap_or_default(),
                 })
@@ -296,25 +252,9 @@ impl serde::Serialize for BaseMakeCounterTakeAndBalanceExecution {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterTakeAndBalanceExecution", len)?;
         if true {
             struct_ser.serialize_field("recovery_ratio", &self.recovery_ratio)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("settle_timeout_ms", ToString::to_string(&self.settle_timeout_ms).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("reconcile_alert_amount", ToString::to_string(&self.reconcile_alert_amount).as_str())?;
         }
         if true {
             struct_ser.serialize_field("base_recovery_aggressive_ticks", &self.base_recovery_aggressive_ticks)?;
@@ -337,10 +277,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterTakeAndBalanceExecution {
         const FIELDS: &[&str] = &[
             "recovery_ratio",
             "recoveryRatio",
-            "settle_timeout_ms",
-            "settleTimeoutMs",
-            "reconcile_alert_amount",
-            "reconcileAlertAmount",
             "base_recovery_aggressive_ticks",
             "baseRecoveryAggressiveTicks",
             "counter_recovery_aggressive_ticks",
@@ -352,8 +288,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterTakeAndBalanceExecution {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             RecoveryRatio,
-            SettleTimeoutMs,
-            ReconcileAlertAmount,
             BaseRecoveryAggressiveTicks,
             CounterRecoveryAggressiveTicks,
             CounterAggressiveTicks,
@@ -380,8 +314,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterTakeAndBalanceExecution {
                     {
                         match value {
                             "recoveryRatio" | "recovery_ratio" => Ok(GeneratedField::RecoveryRatio),
-                            "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
-                            "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
                             "baseRecoveryAggressiveTicks" | "base_recovery_aggressive_ticks" => Ok(GeneratedField::BaseRecoveryAggressiveTicks),
                             "counterRecoveryAggressiveTicks" | "counter_recovery_aggressive_ticks" => Ok(GeneratedField::CounterRecoveryAggressiveTicks),
                             "counterAggressiveTicks" | "counter_aggressive_ticks" => Ok(GeneratedField::CounterAggressiveTicks),
@@ -405,8 +337,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterTakeAndBalanceExecution {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut recovery_ratio__ = None;
-                let mut settle_timeout_ms__ = None;
-                let mut reconcile_alert_amount__ = None;
                 let mut base_recovery_aggressive_ticks__ = None;
                 let mut counter_recovery_aggressive_ticks__ = None;
                 let mut counter_aggressive_ticks__ = None;
@@ -417,22 +347,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterTakeAndBalanceExecution {
                                 return Err(serde::de::Error::duplicate_field("recoveryRatio"));
                             }
                             recovery_ratio__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SettleTimeoutMs => {
-                            if settle_timeout_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("settleTimeoutMs"));
-                            }
-                            settle_timeout_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ReconcileAlertAmount => {
-                            if reconcile_alert_amount__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("reconcileAlertAmount"));
-                            }
-                            reconcile_alert_amount__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -467,8 +381,6 @@ impl<'de> serde::Deserialize<'de> for BaseMakeCounterTakeAndBalanceExecution {
                 }
                 Ok(BaseMakeCounterTakeAndBalanceExecution {
                     recovery_ratio: recovery_ratio__.unwrap_or_default(),
-                    settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
-                    reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
                     base_recovery_aggressive_ticks: base_recovery_aggressive_ticks__.unwrap_or_default(),
                     counter_recovery_aggressive_ticks: counter_recovery_aggressive_ticks__.unwrap_or_default(),
                     counter_aggressive_ticks: counter_aggressive_ticks__.unwrap_or_default(),

@@ -1152,15 +1152,11 @@ class DualSubmitExecution extends $pb.GeneratedMessage {
 class BaseMakeCounterIocAndBalanceExecution extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalanceExecution({
     $core.double? recoveryRatio,
-    $fixnum.Int64? settleTimeoutMs,
-    $fixnum.Int64? reconcileAlertAmount,
     $core.int? baseRecoveryAggressiveTicks,
     $core.int? counterRecoveryAggressiveTicks,
   }) {
     final result = create();
     if (recoveryRatio != null) result.recoveryRatio = recoveryRatio;
-    if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
-    if (reconcileAlertAmount != null) result.reconcileAlertAmount = reconcileAlertAmount;
     if (baseRecoveryAggressiveTicks != null) result.baseRecoveryAggressiveTicks = baseRecoveryAggressiveTicks;
     if (counterRecoveryAggressiveTicks != null) result.counterRecoveryAggressiveTicks = counterRecoveryAggressiveTicks;
     return result;
@@ -1173,8 +1169,6 @@ class BaseMakeCounterIocAndBalanceExecution extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterIocAndBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'recoveryRatio', $pb.PbFieldType.OD)
-    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aInt64(6, _omitFieldNames ? '' : 'reconcileAlertAmount')
     ..a<$core.int>(7, _omitFieldNames ? '' : 'baseRecoveryAggressiveTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(8, _omitFieldNames ? '' : 'counterRecoveryAggressiveTicks', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
@@ -1207,45 +1201,25 @@ class BaseMakeCounterIocAndBalanceExecution extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearRecoveryRatio() => $_clearField(4);
 
-  /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get settleTimeoutMs => $_getI64(1);
-  @$pb.TagNumber(5)
-  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(5)
-  $core.bool hasSettleTimeoutMs() => $_has(1);
-  @$pb.TagNumber(5)
-  void clearSettleTimeoutMs() => $_clearField(5);
-
-  /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get reconcileAlertAmount => $_getI64(2);
-  @$pb.TagNumber(6)
-  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(6)
-  $core.bool hasReconcileAlertAmount() => $_has(2);
-  @$pb.TagNumber(6)
-  void clearReconcileAlertAmount() => $_clearField(6);
-
   /// base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
   /// 0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(7)
-  $core.int get baseRecoveryAggressiveTicks => $_getIZ(3);
+  $core.int get baseRecoveryAggressiveTicks => $_getIZ(1);
   @$pb.TagNumber(7)
-  set baseRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(3, value);
+  set baseRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(1, value);
   @$pb.TagNumber(7)
-  $core.bool hasBaseRecoveryAggressiveTicks() => $_has(3);
+  $core.bool hasBaseRecoveryAggressiveTicks() => $_has(1);
   @$pb.TagNumber(7)
   void clearBaseRecoveryAggressiveTicks() => $_clearField(7);
 
   /// counter leg 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
   /// 0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(8)
-  $core.int get counterRecoveryAggressiveTicks => $_getIZ(4);
+  $core.int get counterRecoveryAggressiveTicks => $_getIZ(2);
   @$pb.TagNumber(8)
-  set counterRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(4, value);
+  set counterRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(2, value);
   @$pb.TagNumber(8)
-  $core.bool hasCounterRecoveryAggressiveTicks() => $_has(4);
+  $core.bool hasCounterRecoveryAggressiveTicks() => $_has(2);
   @$pb.TagNumber(8)
   void clearCounterRecoveryAggressiveTicks() => $_clearField(8);
 }
@@ -1369,16 +1343,12 @@ class CounterIocTpSlExecution extends $pb.GeneratedMessage {
 class BaseMakeCounterTakeAndBalanceExecution extends $pb.GeneratedMessage {
   factory BaseMakeCounterTakeAndBalanceExecution({
     $core.double? recoveryRatio,
-    $fixnum.Int64? settleTimeoutMs,
-    $fixnum.Int64? reconcileAlertAmount,
     $core.int? baseRecoveryAggressiveTicks,
     $core.int? counterRecoveryAggressiveTicks,
     $core.int? counterAggressiveTicks,
   }) {
     final result = create();
     if (recoveryRatio != null) result.recoveryRatio = recoveryRatio;
-    if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
-    if (reconcileAlertAmount != null) result.reconcileAlertAmount = reconcileAlertAmount;
     if (baseRecoveryAggressiveTicks != null) result.baseRecoveryAggressiveTicks = baseRecoveryAggressiveTicks;
     if (counterRecoveryAggressiveTicks != null) result.counterRecoveryAggressiveTicks = counterRecoveryAggressiveTicks;
     if (counterAggressiveTicks != null) result.counterAggressiveTicks = counterAggressiveTicks;
@@ -1392,8 +1362,6 @@ class BaseMakeCounterTakeAndBalanceExecution extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterTakeAndBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'recoveryRatio', $pb.PbFieldType.OD)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aInt64(3, _omitFieldNames ? '' : 'reconcileAlertAmount')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'baseRecoveryAggressiveTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'counterRecoveryAggressiveTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(6, _omitFieldNames ? '' : 'counterAggressiveTicks', $pb.PbFieldType.OU3)
@@ -1427,56 +1395,36 @@ class BaseMakeCounterTakeAndBalanceExecution extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearRecoveryRatio() => $_clearField(1);
 
-  /// counter 체결 대기 한도 (ms). 초과 시 counter 잔량 취소 후 settle.
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get settleTimeoutMs => $_getI64(1);
-  @$pb.TagNumber(2)
-  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasSettleTimeoutMs() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSettleTimeoutMs() => $_clearField(2);
-
-  /// 종단 balance 불일치 알림 임계 금액 (원).
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get reconcileAlertAmount => $_getI64(2);
-  @$pb.TagNumber(3)
-  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasReconcileAlertAmount() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearReconcileAlertAmount() => $_clearField(3);
-
   /// base 공격 정정 시 상대호가 대비 추가 틱. 0 이면 상대호가 그대로.
   /// Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(4)
-  $core.int get baseRecoveryAggressiveTicks => $_getIZ(3);
+  $core.int get baseRecoveryAggressiveTicks => $_getIZ(1);
   @$pb.TagNumber(4)
-  set baseRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(3, value);
+  set baseRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(1, value);
   @$pb.TagNumber(4)
-  $core.bool hasBaseRecoveryAggressiveTicks() => $_has(3);
+  $core.bool hasBaseRecoveryAggressiveTicks() => $_has(1);
   @$pb.TagNumber(4)
   void clearBaseRecoveryAggressiveTicks() => $_clearField(4);
 
   /// 종단 counter cover 발주 시 추가 틱. 0 이면 상대호가 그대로.
   /// counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(5)
-  $core.int get counterRecoveryAggressiveTicks => $_getIZ(4);
+  $core.int get counterRecoveryAggressiveTicks => $_getIZ(2);
   @$pb.TagNumber(5)
-  set counterRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(4, value);
+  set counterRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(2, value);
   @$pb.TagNumber(5)
-  $core.bool hasCounterRecoveryAggressiveTicks() => $_has(4);
+  $core.bool hasCounterRecoveryAggressiveTicks() => $_has(2);
   @$pb.TagNumber(5)
   void clearCounterRecoveryAggressiveTicks() => $_clearField(5);
 
   /// counter 진입 주문가 = counter 상대호가 ± 이 틱 수 (0 = 상대호가 그대로).
   /// counter.side 가 Bid 면 +N*tick (더 공격적), Ask 면 -N*tick.
   @$pb.TagNumber(6)
-  $core.int get counterAggressiveTicks => $_getIZ(5);
+  $core.int get counterAggressiveTicks => $_getIZ(3);
   @$pb.TagNumber(6)
-  set counterAggressiveTicks($core.int value) => $_setUnsignedInt32(5, value);
+  set counterAggressiveTicks($core.int value) => $_setUnsignedInt32(3, value);
   @$pb.TagNumber(6)
-  $core.bool hasCounterAggressiveTicks() => $_has(5);
+  $core.bool hasCounterAggressiveTicks() => $_has(3);
   @$pb.TagNumber(6)
   void clearCounterAggressiveTicks() => $_clearField(6);
 }

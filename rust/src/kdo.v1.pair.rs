@@ -271,12 +271,6 @@ pub struct BaseMakeCounterIocAndBalanceExecution {
     /// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
     #[prost(double, tag="4")]
     pub recovery_ratio: f64,
-    /// 결제(settle) 타임아웃 (ms, 이 시간 내 미결제 시 경보)
-    #[prost(uint64, tag="5")]
-    pub settle_timeout_ms: u64,
-    /// 잔량 조정 경보 임계값 (원, 이 금액 초과 시 경보 로그)
-    #[prost(int64, tag="6")]
-    pub reconcile_alert_amount: i64,
     /// base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
     /// 0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick.
     #[prost(uint32, tag="7")]
@@ -328,12 +322,6 @@ pub struct BaseMakeCounterTakeAndBalanceExecution {
     /// base 호가 잔량 회복 비율. 회복 시 base 잔량을 상대호가로 공격 정정(강제 체결).
     #[prost(double, tag="1")]
     pub recovery_ratio: f64,
-    /// counter 체결 대기 한도 (ms). 초과 시 counter 잔량 취소 후 settle.
-    #[prost(uint64, tag="2")]
-    pub settle_timeout_ms: u64,
-    /// 종단 balance 불일치 알림 임계 금액 (원).
-    #[prost(int64, tag="3")]
-    pub reconcile_alert_amount: i64,
     /// base 공격 정정 시 상대호가 대비 추가 틱. 0 이면 상대호가 그대로.
     /// Bid 면 +N*tick, Ask 면 -N*tick.
     #[prost(uint32, tag="4")]
