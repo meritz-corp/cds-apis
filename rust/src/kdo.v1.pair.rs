@@ -226,7 +226,7 @@ pub struct TargetNavQuantityImbalanceTrigger {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OrderExecution {
-    #[prost(oneof="order_execution::Kind", tags="1, 2, 3")]
+    #[prost(oneof="order_execution::Kind", tags="1, 2, 3, 4")]
     pub kind: ::core::option::Option<order_execution::Kind>,
 }
 /// Nested message and enum types in `OrderExecution`.
@@ -243,6 +243,9 @@ pub mod order_execution {
         /// base 무발주 — counter(ETF) BEP 진입 + 익절/손절 청산
         #[prost(message, tag="3")]
         CounterBepScalp(super::CounterBepScalpExecution),
+        /// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
+        #[prost(message, tag="4")]
+        MakeCounterTakeBalance(super::MakeCounterTakeBalanceExecution),
     }
 }
 /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
@@ -305,6 +308,43 @@ pub struct CounterBepScalpExecution {
     /// 익절/손절 판정 대기 시간 (ms). 마지막 진입 체결 시각부터 이 시간 경과 후 판정 시작.
     #[prost(uint64, tag="8")]
     pub exit_delay_ms: u64,
+}
+/// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
+///
+/// MakeCounterIocBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
+/// counter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.
+/// NAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.
+///
+/// PairEntry 필드 매핑:
+///    - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
+///    - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
+///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
+///    - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///      counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MakeCounterTakeBalanceExecution {
+    /// base 호가 잔량 회복 비율. 회복 시 base 잔량을 상대호가로 공격 정정(강제 체결).
+    #[prost(double, tag="1")]
+    pub recovery_ratio: f64,
+    /// counter 체결 대기 한도 (ms). 초과 시 counter 잔량 취소 후 settle.
+    #[prost(uint64, tag="2")]
+    pub settle_timeout_ms: u64,
+    /// 종단 balance 불일치 알림 임계 금액 (원).
+    #[prost(int64, tag="3")]
+    pub reconcile_alert_amount: i64,
+    /// base 공격 정정 시 상대호가 대비 추가 틱. 0 이면 상대호가 그대로.
+    /// Bid 면 +N*tick, Ask 면 -N*tick.
+    #[prost(uint32, tag="4")]
+    pub base_recovery_aggressive_ticks: u32,
+    /// 종단 counter cover 발주 시 추가 틱. 0 이면 상대호가 그대로.
+    /// counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
+    #[prost(uint32, tag="5")]
+    pub counter_recovery_aggressive_ticks: u32,
+    /// counter 진입 주문가 = counter 상대호가 ± 이 틱 수 (0 = 상대호가 그대로).
+    /// counter.side 가 Bid 면 +N*tick (더 공격적), Ask 면 -N*tick.
+    #[prost(uint32, tag="6")]
+    pub counter_aggressive_ticks: u32,
 }
 // ============================================================================
 // Request / Response Messages — CRUD

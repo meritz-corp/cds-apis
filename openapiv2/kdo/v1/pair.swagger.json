@@ -663,6 +663,43 @@
       "description": "PairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).\n    정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.\n  - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),\n    counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.",
       "title": "base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)"
     },
+    "pairMakeCounterTakeBalanceExecution": {
+      "type": "object",
+      "properties": {
+        "recoveryRatio": {
+          "type": "number",
+          "format": "double",
+          "description": "base 호가 잔량 회복 비율. 회복 시 base 잔량을 상대호가로 공격 정정(강제 체결)."
+        },
+        "settleTimeoutMs": {
+          "type": "string",
+          "format": "uint64",
+          "description": "counter 체결 대기 한도 (ms). 초과 시 counter 잔량 취소 후 settle."
+        },
+        "reconcileAlertAmount": {
+          "type": "string",
+          "format": "int64",
+          "description": "종단 balance 불일치 알림 임계 금액 (원)."
+        },
+        "baseRecoveryAggressiveTicks": {
+          "type": "integer",
+          "format": "int64",
+          "description": "base 공격 정정 시 상대호가 대비 추가 틱. 0 이면 상대호가 그대로.\nBid 면 +N*tick, Ask 면 -N*tick."
+        },
+        "counterRecoveryAggressiveTicks": {
+          "type": "integer",
+          "format": "int64",
+          "description": "종단 counter cover 발주 시 추가 틱. 0 이면 상대호가 그대로.\ncounter.side 가 Bid 면 +N*tick, Ask 면 -N*tick."
+        },
+        "counterAggressiveTicks": {
+          "type": "integer",
+          "format": "int64",
+          "description": "counter 진입 주문가 = counter 상대호가 ± 이 틱 수 (0 = 상대호가 그대로).\ncounter.side 가 Bid 면 +N*tick (더 공격적), Ask 면 -N*tick."
+        }
+      },
+      "description": "MakeCounterIocBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라\ncounter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.\nNAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.\n\nPairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.\n  - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),\n    counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.",
+      "title": "base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance"
+    },
     "pairOrderExecution": {
       "type": "object",
       "properties": {
@@ -677,6 +714,10 @@
         "counterBepScalp": {
           "$ref": "#/definitions/pairCounterBepScalpExecution",
           "title": "base 무발주 — counter(ETF) BEP 진입 + 익절/손절 청산"
+        },
+        "makeCounterTakeBalance": {
+          "$ref": "#/definitions/pairMakeCounterTakeBalanceExecution",
+          "title": "base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance"
         }
       },
       "description": "실행 — 발사 시 무엇을 할지. 트리거와 독립적으로 조합한다."

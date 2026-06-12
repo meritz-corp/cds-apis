@@ -365,6 +365,7 @@ const OrderExecution$json = {
     {'1': 'dual_submit', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.DualSubmitExecution', '9': 0, '10': 'dualSubmit'},
     {'1': 'make_counter_ioc_balance', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.MakeCounterIocBalanceExecution', '9': 0, '10': 'makeCounterIocBalance'},
     {'1': 'counter_bep_scalp', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.CounterBepScalpExecution', '9': 0, '10': 'counterBepScalp'},
+    {'1': 'make_counter_take_balance', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.pair.MakeCounterTakeBalanceExecution', '9': 0, '10': 'makeCounterTakeBalance'},
   ],
   '8': [
     {'1': 'kind'},
@@ -377,8 +378,10 @@ final $typed_data.Uint8List orderExecutionDescriptor = $convert.base64Decode(
     'xTdWJtaXRFeGVjdXRpb25IAFIKZHVhbFN1Ym1pdBJmChhtYWtlX2NvdW50ZXJfaW9jX2JhbGFu'
     'Y2UYAiABKAsyKy5rZG8udjEucGFpci5NYWtlQ291bnRlcklvY0JhbGFuY2VFeGVjdXRpb25IAF'
     'IVbWFrZUNvdW50ZXJJb2NCYWxhbmNlElMKEWNvdW50ZXJfYmVwX3NjYWxwGAMgASgLMiUua2Rv'
-    'LnYxLnBhaXIuQ291bnRlckJlcFNjYWxwRXhlY3V0aW9uSABSD2NvdW50ZXJCZXBTY2FscEIGCg'
-    'RraW5k');
+    'LnYxLnBhaXIuQ291bnRlckJlcFNjYWxwRXhlY3V0aW9uSABSD2NvdW50ZXJCZXBTY2FscBJpCh'
+    'ltYWtlX2NvdW50ZXJfdGFrZV9iYWxhbmNlGAQgASgLMiwua2RvLnYxLnBhaXIuTWFrZUNvdW50'
+    'ZXJUYWtlQmFsYW5jZUV4ZWN1dGlvbkgAUhZtYWtlQ291bnRlclRha2VCYWxhbmNlQgYKBGtpbm'
+    'Q=');
 
 @$core.Deprecated('Use dualSubmitExecutionDescriptor instead')
 const DualSubmitExecution$json = {
@@ -447,6 +450,29 @@ final $typed_data.Uint8List counterBepScalpExecutionDescriptor = $convert.base64
     'VudHJ5X2FnZ3Jlc3NpdmVfdGlja3MYByABKA1SFGVudHJ5QWdncmVzc2l2ZVRpY2tzEiIKDWV4'
     'aXRfZGVsYXlfbXMYCCABKARSC2V4aXREZWxheU1zSgQIARACSgQIAhADSgQIAxAEUghuYXZfa2'
     'luZFIJYmlkX2Jhc2lzUglhc2tfYmFzaXM=');
+
+@$core.Deprecated('Use makeCounterTakeBalanceExecutionDescriptor instead')
+const MakeCounterTakeBalanceExecution$json = {
+  '1': 'MakeCounterTakeBalanceExecution',
+  '2': [
+    {'1': 'recovery_ratio', '3': 1, '4': 1, '5': 1, '10': 'recoveryRatio'},
+    {'1': 'settle_timeout_ms', '3': 2, '4': 1, '5': 4, '10': 'settleTimeoutMs'},
+    {'1': 'reconcile_alert_amount', '3': 3, '4': 1, '5': 3, '10': 'reconcileAlertAmount'},
+    {'1': 'base_recovery_aggressive_ticks', '3': 4, '4': 1, '5': 13, '10': 'baseRecoveryAggressiveTicks'},
+    {'1': 'counter_recovery_aggressive_ticks', '3': 5, '4': 1, '5': 13, '10': 'counterRecoveryAggressiveTicks'},
+    {'1': 'counter_aggressive_ticks', '3': 6, '4': 1, '5': 13, '10': 'counterAggressiveTicks'},
+  ],
+};
+
+/// Descriptor for `MakeCounterTakeBalanceExecution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List makeCounterTakeBalanceExecutionDescriptor = $convert.base64Decode(
+    'Ch9NYWtlQ291bnRlclRha2VCYWxhbmNlRXhlY3V0aW9uEiUKDnJlY292ZXJ5X3JhdGlvGAEgAS'
+    'gBUg1yZWNvdmVyeVJhdGlvEioKEXNldHRsZV90aW1lb3V0X21zGAIgASgEUg9zZXR0bGVUaW1l'
+    'b3V0TXMSNAoWcmVjb25jaWxlX2FsZXJ0X2Ftb3VudBgDIAEoA1IUcmVjb25jaWxlQWxlcnRBbW'
+    '91bnQSQwoeYmFzZV9yZWNvdmVyeV9hZ2dyZXNzaXZlX3RpY2tzGAQgASgNUhtiYXNlUmVjb3Zl'
+    'cnlBZ2dyZXNzaXZlVGlja3MSSQohY291bnRlcl9yZWNvdmVyeV9hZ2dyZXNzaXZlX3RpY2tzGA'
+    'UgASgNUh5jb3VudGVyUmVjb3ZlcnlBZ2dyZXNzaXZlVGlja3MSOAoYY291bnRlcl9hZ2dyZXNz'
+    'aXZlX3RpY2tzGAYgASgNUhZjb3VudGVyQWdncmVzc2l2ZVRpY2tz');
 
 @$core.Deprecated('Use getPairRequestDescriptor instead')
 const GetPairRequest$json = {

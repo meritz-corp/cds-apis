@@ -982,6 +982,7 @@ enum OrderExecution_Kind {
   dualSubmit, 
   makeCounterIocBalance, 
   counterBepScalp, 
+  makeCounterTakeBalance, 
   notSet
 }
 
@@ -991,11 +992,13 @@ class OrderExecution extends $pb.GeneratedMessage {
     DualSubmitExecution? dualSubmit,
     MakeCounterIocBalanceExecution? makeCounterIocBalance,
     CounterBepScalpExecution? counterBepScalp,
+    MakeCounterTakeBalanceExecution? makeCounterTakeBalance,
   }) {
     final result = create();
     if (dualSubmit != null) result.dualSubmit = dualSubmit;
     if (makeCounterIocBalance != null) result.makeCounterIocBalance = makeCounterIocBalance;
     if (counterBepScalp != null) result.counterBepScalp = counterBepScalp;
+    if (makeCounterTakeBalance != null) result.makeCounterTakeBalance = makeCounterTakeBalance;
     return result;
   }
 
@@ -1008,13 +1011,15 @@ class OrderExecution extends $pb.GeneratedMessage {
     1 : OrderExecution_Kind.dualSubmit,
     2 : OrderExecution_Kind.makeCounterIocBalance,
     3 : OrderExecution_Kind.counterBepScalp,
+    4 : OrderExecution_Kind.makeCounterTakeBalance,
     0 : OrderExecution_Kind.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
+    ..oo(0, [1, 2, 3, 4])
     ..aOM<DualSubmitExecution>(1, _omitFieldNames ? '' : 'dualSubmit', subBuilder: DualSubmitExecution.create)
     ..aOM<MakeCounterIocBalanceExecution>(2, _omitFieldNames ? '' : 'makeCounterIocBalance', subBuilder: MakeCounterIocBalanceExecution.create)
     ..aOM<CounterBepScalpExecution>(3, _omitFieldNames ? '' : 'counterBepScalp', subBuilder: CounterBepScalpExecution.create)
+    ..aOM<MakeCounterTakeBalanceExecution>(4, _omitFieldNames ? '' : 'makeCounterTakeBalance', subBuilder: MakeCounterTakeBalanceExecution.create)
     ..hasRequiredFields = false
   ;
 
@@ -1073,6 +1078,18 @@ class OrderExecution extends $pb.GeneratedMessage {
   void clearCounterBepScalp() => $_clearField(3);
   @$pb.TagNumber(3)
   CounterBepScalpExecution ensureCounterBepScalp() => $_ensure(2);
+
+  /// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
+  @$pb.TagNumber(4)
+  MakeCounterTakeBalanceExecution get makeCounterTakeBalance => $_getN(3);
+  @$pb.TagNumber(4)
+  set makeCounterTakeBalance(MakeCounterTakeBalanceExecution value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMakeCounterTakeBalance() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMakeCounterTakeBalance() => $_clearField(4);
+  @$pb.TagNumber(4)
+  MakeCounterTakeBalanceExecution ensureMakeCounterTakeBalance() => $_ensure(3);
 }
 
 /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
@@ -1334,6 +1351,133 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
   $core.bool hasExitDelayMs() => $_has(4);
   @$pb.TagNumber(8)
   void clearExitDelayMs() => $_clearField(8);
+}
+
+/// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
+///
+/// MakeCounterIocBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
+/// counter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.
+/// NAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.
+///
+/// PairEntry 필드 매핑:
+///   - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
+///   - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
+///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
+///   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///     counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
+class MakeCounterTakeBalanceExecution extends $pb.GeneratedMessage {
+  factory MakeCounterTakeBalanceExecution({
+    $core.double? recoveryRatio,
+    $fixnum.Int64? settleTimeoutMs,
+    $fixnum.Int64? reconcileAlertAmount,
+    $core.int? baseRecoveryAggressiveTicks,
+    $core.int? counterRecoveryAggressiveTicks,
+    $core.int? counterAggressiveTicks,
+  }) {
+    final result = create();
+    if (recoveryRatio != null) result.recoveryRatio = recoveryRatio;
+    if (settleTimeoutMs != null) result.settleTimeoutMs = settleTimeoutMs;
+    if (reconcileAlertAmount != null) result.reconcileAlertAmount = reconcileAlertAmount;
+    if (baseRecoveryAggressiveTicks != null) result.baseRecoveryAggressiveTicks = baseRecoveryAggressiveTicks;
+    if (counterRecoveryAggressiveTicks != null) result.counterRecoveryAggressiveTicks = counterRecoveryAggressiveTicks;
+    if (counterAggressiveTicks != null) result.counterAggressiveTicks = counterAggressiveTicks;
+    return result;
+  }
+
+  MakeCounterTakeBalanceExecution._();
+
+  factory MakeCounterTakeBalanceExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MakeCounterTakeBalanceExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MakeCounterTakeBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'recoveryRatio', $pb.PbFieldType.OD)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(3, _omitFieldNames ? '' : 'reconcileAlertAmount')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'baseRecoveryAggressiveTicks', $pb.PbFieldType.OU3)
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'counterRecoveryAggressiveTicks', $pb.PbFieldType.OU3)
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'counterAggressiveTicks', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MakeCounterTakeBalanceExecution clone() => MakeCounterTakeBalanceExecution()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MakeCounterTakeBalanceExecution copyWith(void Function(MakeCounterTakeBalanceExecution) updates) => super.copyWith((message) => updates(message as MakeCounterTakeBalanceExecution)) as MakeCounterTakeBalanceExecution;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MakeCounterTakeBalanceExecution create() => MakeCounterTakeBalanceExecution._();
+  @$core.override
+  MakeCounterTakeBalanceExecution createEmptyInstance() => create();
+  static $pb.PbList<MakeCounterTakeBalanceExecution> createRepeated() => $pb.PbList<MakeCounterTakeBalanceExecution>();
+  @$core.pragma('dart2js:noInline')
+  static MakeCounterTakeBalanceExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MakeCounterTakeBalanceExecution>(create);
+  static MakeCounterTakeBalanceExecution? _defaultInstance;
+
+  /// base 호가 잔량 회복 비율. 회복 시 base 잔량을 상대호가로 공격 정정(강제 체결).
+  @$pb.TagNumber(1)
+  $core.double get recoveryRatio => $_getN(0);
+  @$pb.TagNumber(1)
+  set recoveryRatio($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRecoveryRatio() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRecoveryRatio() => $_clearField(1);
+
+  /// counter 체결 대기 한도 (ms). 초과 시 counter 잔량 취소 후 settle.
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get settleTimeoutMs => $_getI64(1);
+  @$pb.TagNumber(2)
+  set settleTimeoutMs($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSettleTimeoutMs() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSettleTimeoutMs() => $_clearField(2);
+
+  /// 종단 balance 불일치 알림 임계 금액 (원).
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get reconcileAlertAmount => $_getI64(2);
+  @$pb.TagNumber(3)
+  set reconcileAlertAmount($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasReconcileAlertAmount() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearReconcileAlertAmount() => $_clearField(3);
+
+  /// base 공격 정정 시 상대호가 대비 추가 틱. 0 이면 상대호가 그대로.
+  /// Bid 면 +N*tick, Ask 면 -N*tick.
+  @$pb.TagNumber(4)
+  $core.int get baseRecoveryAggressiveTicks => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set baseRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBaseRecoveryAggressiveTicks() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBaseRecoveryAggressiveTicks() => $_clearField(4);
+
+  /// 종단 counter cover 발주 시 추가 틱. 0 이면 상대호가 그대로.
+  /// counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
+  @$pb.TagNumber(5)
+  $core.int get counterRecoveryAggressiveTicks => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set counterRecoveryAggressiveTicks($core.int value) => $_setUnsignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCounterRecoveryAggressiveTicks() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCounterRecoveryAggressiveTicks() => $_clearField(5);
+
+  /// counter 진입 주문가 = counter 상대호가 ± 이 틱 수 (0 = 상대호가 그대로).
+  /// counter.side 가 Bid 면 +N*tick (더 공격적), Ask 면 -N*tick.
+  @$pb.TagNumber(6)
+  $core.int get counterAggressiveTicks => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set counterAggressiveTicks($core.int value) => $_setUnsignedInt32(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCounterAggressiveTicks() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCounterAggressiveTicks() => $_clearField(6);
 }
 
 class GetPairRequest extends $pb.GeneratedMessage {
