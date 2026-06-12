@@ -231,6 +231,12 @@ impl serde::Serialize for CounterBepScalpExecution {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.CounterBepScalpExecution", len)?;
         if true {
             struct_ser.serialize_field("take_profit_ticks", &self.take_profit_ticks)?;
@@ -240,6 +246,14 @@ impl serde::Serialize for CounterBepScalpExecution {
         }
         if true {
             struct_ser.serialize_field("exit_aggressive_ticks", &self.exit_aggressive_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("entry_aggressive_ticks", &self.entry_aggressive_ticks)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exit_delay_ms", ToString::to_string(&self.exit_delay_ms).as_str())?;
         }
         struct_ser.end()
     }
@@ -257,6 +271,10 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
             "stopLossTicks",
             "exit_aggressive_ticks",
             "exitAggressiveTicks",
+            "entry_aggressive_ticks",
+            "entryAggressiveTicks",
+            "exit_delay_ms",
+            "exitDelayMs",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -264,6 +282,8 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
             TakeProfitTicks,
             StopLossTicks,
             ExitAggressiveTicks,
+            EntryAggressiveTicks,
+            ExitDelayMs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -289,6 +309,8 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                             "takeProfitTicks" | "take_profit_ticks" => Ok(GeneratedField::TakeProfitTicks),
                             "stopLossTicks" | "stop_loss_ticks" => Ok(GeneratedField::StopLossTicks),
                             "exitAggressiveTicks" | "exit_aggressive_ticks" => Ok(GeneratedField::ExitAggressiveTicks),
+                            "entryAggressiveTicks" | "entry_aggressive_ticks" => Ok(GeneratedField::EntryAggressiveTicks),
+                            "exitDelayMs" | "exit_delay_ms" => Ok(GeneratedField::ExitDelayMs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -311,6 +333,8 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                 let mut take_profit_ticks__ = None;
                 let mut stop_loss_ticks__ = None;
                 let mut exit_aggressive_ticks__ = None;
+                let mut entry_aggressive_ticks__ = None;
+                let mut exit_delay_ms__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::TakeProfitTicks => {
@@ -337,6 +361,22 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::EntryAggressiveTicks => {
+                            if entry_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("entryAggressiveTicks"));
+                            }
+                            entry_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ExitDelayMs => {
+                            if exit_delay_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitDelayMs"));
+                            }
+                            exit_delay_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -346,6 +386,8 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                     take_profit_ticks: take_profit_ticks__.unwrap_or_default(),
                     stop_loss_ticks: stop_loss_ticks__.unwrap_or_default(),
                     exit_aggressive_ticks: exit_aggressive_ticks__.unwrap_or_default(),
+                    entry_aggressive_ticks: entry_aggressive_ticks__.unwrap_or_default(),
+                    exit_delay_ms: exit_delay_ms__.unwrap_or_default(),
                 })
             }
         }

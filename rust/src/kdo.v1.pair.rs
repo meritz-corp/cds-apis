@@ -283,9 +283,9 @@ pub struct MakeCounterIocBalanceExecution {
     #[prost(uint32, tag="8")]
     pub counter_recovery_aggressive_ticks: u32,
 }
-/// base 무발주 — counter(ETF) BEP 진입 + 진입 BEP 대비 틱 기준 익절/손절.
-/// 진입 주문은 취소 없이 대기, 익절/손절 발동 시점에만 잔량 취소.
-/// 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
+/// base 무발주 — counter(ETF) 상대호가±N틱 pseudo-IOC 진입 + 마지막 진입 체결가 대비 틱 기준 익절/손절.
+/// 진입 주문은 상대 1호가에서 entry_aggressive_ticks 만큼 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC).
+/// 익절/손절 판정은 exit_delay_ms 경과 후 시작하며, 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CounterBepScalpExecution {
@@ -298,6 +298,13 @@ pub struct CounterBepScalpExecution {
     /// 청산 발주 시 상대 1호가 대비 추가 공격 틱 (0 = 상대호가 그대로)
     #[prost(uint32, tag="6")]
     pub exit_aggressive_ticks: u32,
+    /// 진입 발주 시 상대 1호가에서 추가로 공격적으로 낼 틱 수 (0 = 상대호가 그대로).
+    /// 진입은 BEP 가 아니라 상대호가 ± n틱의 pseudo-IOC (접수 후 잔량 즉시 취소).
+    #[prost(uint32, tag="7")]
+    pub entry_aggressive_ticks: u32,
+    /// 익절/손절 판정 대기 시간 (ms). 마지막 진입 체결 시각부터 이 시간 경과 후 판정 시작.
+    #[prost(uint64, tag="8")]
+    pub exit_delay_ms: u64,
 }
 // ============================================================================
 // Request / Response Messages — CRUD

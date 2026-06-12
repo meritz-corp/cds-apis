@@ -1233,19 +1233,23 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
   void clearCounterRecoveryAggressiveTicks() => $_clearField(8);
 }
 
-/// base 무발주 — counter(ETF) BEP 진입 + 진입 BEP 대비 틱 기준 익절/손절.
-/// 진입 주문은 취소 없이 대기, 익절/손절 발동 시점에만 잔량 취소.
-/// 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
+/// base 무발주 — counter(ETF) 상대호가±N틱 pseudo-IOC 진입 + 마지막 진입 체결가 대비 틱 기준 익절/손절.
+/// 진입 주문은 상대 1호가에서 entry_aggressive_ticks 만큼 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC).
+/// 익절/손절 판정은 exit_delay_ms 경과 후 시작하며, 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
 class CounterBepScalpExecution extends $pb.GeneratedMessage {
   factory CounterBepScalpExecution({
     $core.int? takeProfitTicks,
     $core.int? stopLossTicks,
     $core.int? exitAggressiveTicks,
+    $core.int? entryAggressiveTicks,
+    $fixnum.Int64? exitDelayMs,
   }) {
     final result = create();
     if (takeProfitTicks != null) result.takeProfitTicks = takeProfitTicks;
     if (stopLossTicks != null) result.stopLossTicks = stopLossTicks;
     if (exitAggressiveTicks != null) result.exitAggressiveTicks = exitAggressiveTicks;
+    if (entryAggressiveTicks != null) result.entryAggressiveTicks = entryAggressiveTicks;
+    if (exitDelayMs != null) result.exitDelayMs = exitDelayMs;
     return result;
   }
 
@@ -1258,6 +1262,8 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
     ..a<$core.int>(4, _omitFieldNames ? '' : 'takeProfitTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'stopLossTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(6, _omitFieldNames ? '' : 'exitAggressiveTicks', $pb.PbFieldType.OU3)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'entryAggressiveTicks', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'exitDelayMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -1307,6 +1313,27 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
   $core.bool hasExitAggressiveTicks() => $_has(2);
   @$pb.TagNumber(6)
   void clearExitAggressiveTicks() => $_clearField(6);
+
+  /// 진입 발주 시 상대 1호가에서 추가로 공격적으로 낼 틱 수 (0 = 상대호가 그대로).
+  /// 진입은 BEP 가 아니라 상대호가 ± n틱의 pseudo-IOC (접수 후 잔량 즉시 취소).
+  @$pb.TagNumber(7)
+  $core.int get entryAggressiveTicks => $_getIZ(3);
+  @$pb.TagNumber(7)
+  set entryAggressiveTicks($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(7)
+  $core.bool hasEntryAggressiveTicks() => $_has(3);
+  @$pb.TagNumber(7)
+  void clearEntryAggressiveTicks() => $_clearField(7);
+
+  /// 익절/손절 판정 대기 시간 (ms). 마지막 진입 체결 시각부터 이 시간 경과 후 판정 시작.
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get exitDelayMs => $_getI64(4);
+  @$pb.TagNumber(8)
+  set exitDelayMs($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(8)
+  $core.bool hasExitDelayMs() => $_has(4);
+  @$pb.TagNumber(8)
+  void clearExitDelayMs() => $_clearField(8);
 }
 
 class GetPairRequest extends $pb.GeneratedMessage {

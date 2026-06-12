@@ -428,6 +428,8 @@ const CounterBepScalpExecution$json = {
     {'1': 'take_profit_ticks', '3': 4, '4': 1, '5': 13, '10': 'takeProfitTicks'},
     {'1': 'stop_loss_ticks', '3': 5, '4': 1, '5': 13, '10': 'stopLossTicks'},
     {'1': 'exit_aggressive_ticks', '3': 6, '4': 1, '5': 13, '10': 'exitAggressiveTicks'},
+    {'1': 'entry_aggressive_ticks', '3': 7, '4': 1, '5': 13, '10': 'entryAggressiveTicks'},
+    {'1': 'exit_delay_ms', '3': 8, '4': 1, '5': 4, '10': 'exitDelayMs'},
   ],
   '9': [
     {'1': 1, '2': 2},
@@ -441,8 +443,10 @@ const CounterBepScalpExecution$json = {
 final $typed_data.Uint8List counterBepScalpExecutionDescriptor = $convert.base64Decode(
     'ChhDb3VudGVyQmVwU2NhbHBFeGVjdXRpb24SKgoRdGFrZV9wcm9maXRfdGlja3MYBCABKA1SD3'
     'Rha2VQcm9maXRUaWNrcxImCg9zdG9wX2xvc3NfdGlja3MYBSABKA1SDXN0b3BMb3NzVGlja3MS'
-    'MgoVZXhpdF9hZ2dyZXNzaXZlX3RpY2tzGAYgASgNUhNleGl0QWdncmVzc2l2ZVRpY2tzSgQIAR'
-    'ACSgQIAhADSgQIAxAEUghuYXZfa2luZFIJYmlkX2Jhc2lzUglhc2tfYmFzaXM=');
+    'MgoVZXhpdF9hZ2dyZXNzaXZlX3RpY2tzGAYgASgNUhNleGl0QWdncmVzc2l2ZVRpY2tzEjQKFm'
+    'VudHJ5X2FnZ3Jlc3NpdmVfdGlja3MYByABKA1SFGVudHJ5QWdncmVzc2l2ZVRpY2tzEiIKDWV4'
+    'aXRfZGVsYXlfbXMYCCABKARSC2V4aXREZWxheU1zSgQIARACSgQIAhADSgQIAxAEUghuYXZfa2'
+    'luZFIJYmlkX2Jhc2lzUglhc2tfYmFzaXM=');
 
 @$core.Deprecated('Use getPairRequestDescriptor instead')
 const GetPairRequest$json = {

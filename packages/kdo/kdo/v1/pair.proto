@@ -450,9 +450,9 @@ message MakeCounterIocBalanceExecution {
   uint32 counter_recovery_aggressive_ticks = 8;
 }
 
-// base 무발주 — counter(ETF) BEP 진입 + 진입 BEP 대비 틱 기준 익절/손절.
-// 진입 주문은 취소 없이 대기, 익절/손절 발동 시점에만 잔량 취소.
-// 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
+// base 무발주 — counter(ETF) 상대호가±N틱 pseudo-IOC 진입 + 마지막 진입 체결가 대비 틱 기준 익절/손절.
+// 진입 주문은 상대 1호가에서 entry_aggressive_ticks 만큼 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC).
+// 익절/손절 판정은 exit_delay_ms 경과 후 시작하며, 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
 message CounterBepScalpExecution {
   // nav_kind / bid_basis / ask_basis 는 Pair.nav 로 이동 — reserved
   reserved 1, 2, 3;
@@ -463,6 +463,11 @@ message CounterBepScalpExecution {
   uint32 stop_loss_ticks = 5;
   // 청산 발주 시 상대 1호가 대비 추가 공격 틱 (0 = 상대호가 그대로)
   uint32 exit_aggressive_ticks = 6;
+  // 진입 발주 시 상대 1호가에서 추가로 공격적으로 낼 틱 수 (0 = 상대호가 그대로).
+  // 진입은 BEP 가 아니라 상대호가 ± n틱의 pseudo-IOC (접수 후 잔량 즉시 취소).
+  uint32 entry_aggressive_ticks = 7;
+  // 익절/손절 판정 대기 시간 (ms). 마지막 진입 체결 시각부터 이 시간 경과 후 판정 시작.
+  uint64 exit_delay_ms = 8;
 }
 
 // ============================================================================
