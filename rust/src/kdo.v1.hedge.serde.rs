@@ -1187,6 +1187,9 @@ impl serde::Serialize for Hedge {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.Hedge", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1239,6 +1242,11 @@ impl serde::Serialize for Hedge {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.tp_code)))?;
             struct_ser.serialize_field("tp_code", &v)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("initial_wait_ms", ToString::to_string(&self.initial_wait_ms).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -1277,6 +1285,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "tickOffset",
             "tp_code",
             "tpCode",
+            "initial_wait_ms",
+            "initialWaitMs",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1296,6 +1306,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             HedgeFundCode,
             TickOffset,
             TpCode,
+            InitialWaitMs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1333,6 +1344,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "hedgeFundCode" | "hedge_fund_code" => Ok(GeneratedField::HedgeFundCode),
                             "tickOffset" | "tick_offset" => Ok(GeneratedField::TickOffset),
                             "tpCode" | "tp_code" => Ok(GeneratedField::TpCode),
+                            "initialWaitMs" | "initial_wait_ms" => Ok(GeneratedField::InitialWaitMs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1367,6 +1379,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut hedge_fund_code__ = None;
                 let mut tick_offset__ = None;
                 let mut tp_code__ = None;
+                let mut initial_wait_ms__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1465,6 +1478,14 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             }
                             tp_code__ = Some(map_.next_value::<OrderTpCode>()? as i32);
                         }
+                        GeneratedField::InitialWaitMs => {
+                            if initial_wait_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("initialWaitMs"));
+                            }
+                            initial_wait_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1486,6 +1507,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     hedge_fund_code: hedge_fund_code__.unwrap_or_default(),
                     tick_offset: tick_offset__.unwrap_or_default(),
                     tp_code: tp_code__.unwrap_or_default(),
+                    initial_wait_ms: initial_wait_ms__.unwrap_or_default(),
                 })
             }
         }

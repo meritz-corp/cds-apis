@@ -59,6 +59,9 @@ pub struct Hedge {
     /// 헷지 주문 TP 코드 (호가 구분)
     #[prost(enumeration="OrderTpCode", tag="15")]
     pub tp_code: i32,
+    /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend=true 일 때 유효, 등록 후 이 시간 동안 정정 보류 (0 = 즉시 정정 시작).
+    #[prost(uint64, tag="16")]
+    pub initial_wait_ms: u64,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]

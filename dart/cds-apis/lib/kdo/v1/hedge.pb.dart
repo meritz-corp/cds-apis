@@ -42,6 +42,7 @@ class Hedge extends $pb.GeneratedMessage {
     $core.String? hedgeFundCode,
     $core.int? tickOffset,
     OrderTpCode? tpCode,
+    $fixnum.Int64? initialWaitMs,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -59,6 +60,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (hedgeFundCode != null) result.hedgeFundCode = hedgeFundCode;
     if (tickOffset != null) result.tickOffset = tickOffset;
     if (tpCode != null) result.tpCode = tpCode;
+    if (initialWaitMs != null) result.initialWaitMs = initialWaitMs;
     return result;
   }
 
@@ -83,6 +85,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOS(13, _omitFieldNames ? '' : 'hedgeFundCode')
     ..a<$core.int>(14, _omitFieldNames ? '' : 'tickOffset', $pb.PbFieldType.O3)
     ..e<OrderTpCode>(15, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: OrderTpCode.valueOf, enumValues: OrderTpCode.values)
+    ..a<$fixnum.Int64>(16, _omitFieldNames ? '' : 'initialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -259,6 +262,16 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasTpCode() => $_has(14);
   @$pb.TagNumber(15)
   void clearTpCode() => $_clearField(15);
+
+  /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend=true 일 때 유효, 등록 후 이 시간 동안 정정 보류 (0 = 즉시 정정 시작).
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get initialWaitMs => $_getI64(15);
+  @$pb.TagNumber(16)
+  set initialWaitMs($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasInitialWaitMs() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearInitialWaitMs() => $_clearField(16);
 }
 
 enum HedgeMethod_Method {

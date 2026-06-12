@@ -434,6 +434,11 @@
                 "tpCode": {
                   "$ref": "#/definitions/hedgeOrderTpCode",
                   "title": "헷지 주문 TP 코드 (호가 구분)"
+                },
+                "initialWaitMs": {
+                  "type": "string",
+                  "format": "uint64",
+                  "description": "자동정정 시작 전 초기 대기 시간 (ms). auto_amend=true 일 때 유효, 등록 후 이 시간 동안 정정 보류 (0 = 즉시 정정 시작)."
                 }
               },
               "title": "수정할 헷지 정보",
@@ -864,6 +869,11 @@
         "tpCode": {
           "$ref": "#/definitions/hedgeOrderTpCode",
           "title": "헷지 주문 TP 코드 (호가 구분)"
+        },
+        "initialWaitMs": {
+          "type": "string",
+          "format": "uint64",
+          "description": "자동정정 시작 전 초기 대기 시간 (ms). auto_amend=true 일 때 유효, 등록 후 이 시간 동안 정정 보류 (0 = 즉시 정정 시작)."
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",
