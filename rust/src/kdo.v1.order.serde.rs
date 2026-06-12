@@ -2871,6 +2871,9 @@ impl serde::Serialize for SubmitOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.SubmitOrderRequest", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -2917,6 +2920,11 @@ impl serde::Serialize for SubmitOrderRequest {
         if let Some(v) = self.need_hedge.as_ref() {
             struct_ser.serialize_field("need_hedge", v)?;
         }
+        if let Some(v) = self.auto_amend_initial_wait_ms.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("auto_amend_initial_wait_ms", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -2945,6 +2953,8 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             "orderCondition",
             "need_hedge",
             "needHedge",
+            "auto_amend_initial_wait_ms",
+            "autoAmendInitialWaitMs",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2960,6 +2970,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             LimitPriceType,
             OrderCondition,
             NeedHedge,
+            AutoAmendInitialWaitMs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2993,6 +3004,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             "limitPriceType" | "limit_price_type" => Ok(GeneratedField::LimitPriceType),
                             "orderCondition" | "order_condition" => Ok(GeneratedField::OrderCondition),
                             "needHedge" | "need_hedge" => Ok(GeneratedField::NeedHedge),
+                            "autoAmendInitialWaitMs" | "auto_amend_initial_wait_ms" => Ok(GeneratedField::AutoAmendInitialWaitMs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3023,6 +3035,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                 let mut limit_price_type__ = None;
                 let mut order_condition__ = None;
                 let mut need_hedge__ = None;
+                let mut auto_amend_initial_wait_ms__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -3093,6 +3106,14 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             }
                             need_hedge__ = map_.next_value()?;
                         }
+                        GeneratedField::AutoAmendInitialWaitMs => {
+                            if auto_amend_initial_wait_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("autoAmendInitialWaitMs"));
+                            }
+                            auto_amend_initial_wait_ms__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3110,6 +3131,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                     limit_price_type: limit_price_type__,
                     order_condition: order_condition__,
                     need_hedge: need_hedge__,
+                    auto_amend_initial_wait_ms: auto_amend_initial_wait_ms__,
                 })
             }
         }

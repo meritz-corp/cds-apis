@@ -53,6 +53,9 @@ pub struct AmendConfig {
     /// 동시호가 정정 설정
     #[prost(message, optional, tag="2")]
     pub auction_session: ::core::option::Option<AuctionSessionConfig>,
+    /// 자동정정 시작 전 초기 대기 시간 (ms). 주문 등록 후 이 시간 동안은 정정하지 않고 최초 주문 가격을 유지한다 (0 = 즉시 정정 시작).
+    #[prost(uint64, tag="3")]
+    pub initial_wait_ms: u64,
 }
 /// 장중 자동정정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

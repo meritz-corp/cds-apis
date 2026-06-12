@@ -36,6 +36,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     LimitPriceType? limitPriceType,
     $2.OrderConditionType? orderCondition,
     $core.bool? needHedge,
+    $fixnum.Int64? autoAmendInitialWaitMs,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -49,6 +50,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (limitPriceType != null) result.limitPriceType = limitPriceType;
     if (orderCondition != null) result.orderCondition = orderCondition;
     if (needHedge != null) result.needHedge = needHedge;
+    if (autoAmendInitialWaitMs != null) result.autoAmendInitialWaitMs = autoAmendInitialWaitMs;
     return result;
   }
 
@@ -69,6 +71,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..e<LimitPriceType>(9, _omitFieldNames ? '' : 'limitPriceType', $pb.PbFieldType.OE, defaultOrMaker: LimitPriceType.LIMIT_PRICE_TYPE_UNSPECIFIED, valueOf: LimitPriceType.valueOf, enumValues: LimitPriceType.values)
     ..e<$2.OrderConditionType>(10, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $2.OrderConditionType.valueOf, enumValues: $2.OrderConditionType.values)
     ..aOB(11, _omitFieldNames ? '' : 'needHedge')
+    ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'autoAmendInitialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -200,6 +203,16 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasNeedHedge() => $_has(10);
   @$pb.TagNumber(11)
   void clearNeedHedge() => $_clearField(11);
+
+  /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0 (즉시 정정 시작).
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get autoAmendInitialWaitMs => $_getI64(11);
+  @$pb.TagNumber(12)
+  set autoAmendInitialWaitMs($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasAutoAmendInitialWaitMs() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearAutoAmendInitialWaitMs() => $_clearField(12);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {

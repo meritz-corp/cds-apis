@@ -65,6 +65,7 @@ const AmendConfig$json = {
   '2': [
     {'1': 'regular_session', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.auto_amend.RegularSessionConfig', '10': 'regularSession'},
     {'1': 'auction_session', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.auto_amend.AuctionSessionConfig', '10': 'auctionSession'},
+    {'1': 'initial_wait_ms', '3': 3, '4': 1, '5': 4, '10': 'initialWaitMs'},
   ],
 };
 
@@ -73,7 +74,7 @@ final $typed_data.Uint8List amendConfigDescriptor = $convert.base64Decode(
     'CgtBbWVuZENvbmZpZxJQCg9yZWd1bGFyX3Nlc3Npb24YASABKAsyJy5rZG8udjEuYXV0b19hbW'
     'VuZC5SZWd1bGFyU2Vzc2lvbkNvbmZpZ1IOcmVndWxhclNlc3Npb24SUAoPYXVjdGlvbl9zZXNz'
     'aW9uGAIgASgLMicua2RvLnYxLmF1dG9fYW1lbmQuQXVjdGlvblNlc3Npb25Db25maWdSDmF1Y3'
-    'Rpb25TZXNzaW9u');
+    'Rpb25TZXNzaW9uEiYKD2luaXRpYWxfd2FpdF9tcxgDIAEoBFINaW5pdGlhbFdhaXRNcw==');
 
 @$core.Deprecated('Use regularSessionConfigDescriptor instead')
 const RegularSessionConfig$json = {

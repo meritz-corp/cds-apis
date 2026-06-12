@@ -194,10 +194,12 @@ class AmendConfig extends $pb.GeneratedMessage {
   factory AmendConfig({
     RegularSessionConfig? regularSession,
     AuctionSessionConfig? auctionSession,
+    $fixnum.Int64? initialWaitMs,
   }) {
     final result = create();
     if (regularSession != null) result.regularSession = regularSession;
     if (auctionSession != null) result.auctionSession = auctionSession;
+    if (initialWaitMs != null) result.initialWaitMs = initialWaitMs;
     return result;
   }
 
@@ -209,6 +211,7 @@ class AmendConfig extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AmendConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.auto_amend'), createEmptyInstance: create)
     ..aOM<RegularSessionConfig>(1, _omitFieldNames ? '' : 'regularSession', subBuilder: RegularSessionConfig.create)
     ..aOM<AuctionSessionConfig>(2, _omitFieldNames ? '' : 'auctionSession', subBuilder: AuctionSessionConfig.create)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'initialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -252,6 +255,16 @@ class AmendConfig extends $pb.GeneratedMessage {
   void clearAuctionSession() => $_clearField(2);
   @$pb.TagNumber(2)
   AuctionSessionConfig ensureAuctionSession() => $_ensure(1);
+
+  /// 자동정정 시작 전 초기 대기 시간 (ms). 주문 등록 후 이 시간 동안은 정정하지 않고 최초 주문 가격을 유지한다 (0 = 즉시 정정 시작).
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get initialWaitMs => $_getI64(2);
+  @$pb.TagNumber(3)
+  set initialWaitMs($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasInitialWaitMs() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearInitialWaitMs() => $_clearField(3);
 }
 
 /// 장중 자동정정 설정

@@ -40,6 +40,9 @@ pub struct SubmitOrderRequest {
     /// 실제 누적되려면 (fund_code, symbol) 조합으로 Hedge 가 DB 에 등록되어 있어야 함.
     #[prost(bool, optional, tag="11")]
     pub need_hedge: ::core::option::Option<bool>,
+    /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0 (즉시 정정 시작).
+    #[prost(uint64, optional, tag="12")]
+    pub auto_amend_initial_wait_ms: ::core::option::Option<u64>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
