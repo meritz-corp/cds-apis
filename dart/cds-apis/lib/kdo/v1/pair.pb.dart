@@ -214,7 +214,7 @@ class Pair extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   OrderExecution ensureExecution() => $_ensure(10);
 
-  /// ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·MakeCounterIocBalance/CounterBepScalp
+  /// ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·BaseMakeCounterIocAndBalance/CounterIocTpSlExecution
   /// execution 이 공유. NAV 미사용 페어는 미설정.
   @$pb.TagNumber(15)
   Nav get nav => $_getN(11);
@@ -232,13 +232,13 @@ class Pair extends $pb.GeneratedMessage {
 ///
 /// execution 종류별 필드 사용:
 /// - DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
-/// - MakeCounterIocBalanceExecution (IOC imbalance):
+/// - BaseMakeCounterIocAndBalanceExecution (IOC imbalance):
 ///   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 ///   - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
 ///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
 ///   - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
 ///     counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
-/// - CounterBepScalpExecution: counter 엔트리만 사용.
+/// - CounterIocTpSlExecution: counter 엔트리만 사용.
 class PairEntry extends $pb.GeneratedMessage {
   factory PairEntry({
     $core.String? symbol,
@@ -318,7 +318,7 @@ class PairEntry extends $pb.GeneratedMessage {
   void clearSide() => $_clearField(3);
 
   /// 주문 수량 (1 이상)
-  /// MakeCounterIocBalanceExecution: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
+  /// BaseMakeCounterIocAndBalanceExecution: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
   @$pb.TagNumber(4)
   $fixnum.Int64 get quantity => $_getI64(3);
   @$pb.TagNumber(4)
@@ -329,7 +329,7 @@ class PairEntry extends $pb.GeneratedMessage {
   void clearQuantity() => $_clearField(4);
 
   /// 참조 가격 소스 (entry.side 기준 자기/상대 호가).
-  /// MakeCounterIocBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
+  /// BaseMakeCounterIocAndBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
   @$pb.TagNumber(5)
   PriceSource get priceSource => $_getN(4);
   @$pb.TagNumber(5)
@@ -980,9 +980,9 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
 
 enum OrderExecution_Kind {
   dualSubmit, 
-  makeCounterIocBalance, 
-  counterBepScalp, 
-  makeCounterTakeBalance, 
+  baseMakeCounterIocAndBalance, 
+  counterIocTpSl, 
+  baseMakeCounterTakeAndBalance, 
   notSet
 }
 
@@ -990,15 +990,15 @@ enum OrderExecution_Kind {
 class OrderExecution extends $pb.GeneratedMessage {
   factory OrderExecution({
     DualSubmitExecution? dualSubmit,
-    MakeCounterIocBalanceExecution? makeCounterIocBalance,
-    CounterBepScalpExecution? counterBepScalp,
-    MakeCounterTakeBalanceExecution? makeCounterTakeBalance,
+    BaseMakeCounterIocAndBalanceExecution? baseMakeCounterIocAndBalance,
+    CounterIocTpSlExecution? counterIocTpSl,
+    BaseMakeCounterTakeAndBalanceExecution? baseMakeCounterTakeAndBalance,
   }) {
     final result = create();
     if (dualSubmit != null) result.dualSubmit = dualSubmit;
-    if (makeCounterIocBalance != null) result.makeCounterIocBalance = makeCounterIocBalance;
-    if (counterBepScalp != null) result.counterBepScalp = counterBepScalp;
-    if (makeCounterTakeBalance != null) result.makeCounterTakeBalance = makeCounterTakeBalance;
+    if (baseMakeCounterIocAndBalance != null) result.baseMakeCounterIocAndBalance = baseMakeCounterIocAndBalance;
+    if (counterIocTpSl != null) result.counterIocTpSl = counterIocTpSl;
+    if (baseMakeCounterTakeAndBalance != null) result.baseMakeCounterTakeAndBalance = baseMakeCounterTakeAndBalance;
     return result;
   }
 
@@ -1009,17 +1009,17 @@ class OrderExecution extends $pb.GeneratedMessage {
 
   static const $core.Map<$core.int, OrderExecution_Kind> _OrderExecution_KindByTag = {
     1 : OrderExecution_Kind.dualSubmit,
-    2 : OrderExecution_Kind.makeCounterIocBalance,
-    3 : OrderExecution_Kind.counterBepScalp,
-    4 : OrderExecution_Kind.makeCounterTakeBalance,
+    2 : OrderExecution_Kind.baseMakeCounterIocAndBalance,
+    3 : OrderExecution_Kind.counterIocTpSl,
+    4 : OrderExecution_Kind.baseMakeCounterTakeAndBalance,
     0 : OrderExecution_Kind.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..oo(0, [1, 2, 3, 4])
     ..aOM<DualSubmitExecution>(1, _omitFieldNames ? '' : 'dualSubmit', subBuilder: DualSubmitExecution.create)
-    ..aOM<MakeCounterIocBalanceExecution>(2, _omitFieldNames ? '' : 'makeCounterIocBalance', subBuilder: MakeCounterIocBalanceExecution.create)
-    ..aOM<CounterBepScalpExecution>(3, _omitFieldNames ? '' : 'counterBepScalp', subBuilder: CounterBepScalpExecution.create)
-    ..aOM<MakeCounterTakeBalanceExecution>(4, _omitFieldNames ? '' : 'makeCounterTakeBalance', subBuilder: MakeCounterTakeBalanceExecution.create)
+    ..aOM<BaseMakeCounterIocAndBalanceExecution>(2, _omitFieldNames ? '' : 'baseMakeCounterIocAndBalance', subBuilder: BaseMakeCounterIocAndBalanceExecution.create)
+    ..aOM<CounterIocTpSlExecution>(3, _omitFieldNames ? '' : 'counterIocTpSl', subBuilder: CounterIocTpSlExecution.create)
+    ..aOM<BaseMakeCounterTakeAndBalanceExecution>(4, _omitFieldNames ? '' : 'baseMakeCounterTakeAndBalance', subBuilder: BaseMakeCounterTakeAndBalanceExecution.create)
     ..hasRequiredFields = false
   ;
 
@@ -1055,41 +1055,41 @@ class OrderExecution extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   DualSubmitExecution ensureDualSubmit() => $_ensure(0);
 
-  /// base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
+  /// base Limit + counter IOC + settle/recovery/balance
   @$pb.TagNumber(2)
-  MakeCounterIocBalanceExecution get makeCounterIocBalance => $_getN(1);
+  BaseMakeCounterIocAndBalanceExecution get baseMakeCounterIocAndBalance => $_getN(1);
   @$pb.TagNumber(2)
-  set makeCounterIocBalance(MakeCounterIocBalanceExecution value) => $_setField(2, value);
+  set baseMakeCounterIocAndBalance(BaseMakeCounterIocAndBalanceExecution value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasMakeCounterIocBalance() => $_has(1);
+  $core.bool hasBaseMakeCounterIocAndBalance() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMakeCounterIocBalance() => $_clearField(2);
+  void clearBaseMakeCounterIocAndBalance() => $_clearField(2);
   @$pb.TagNumber(2)
-  MakeCounterIocBalanceExecution ensureMakeCounterIocBalance() => $_ensure(1);
+  BaseMakeCounterIocAndBalanceExecution ensureBaseMakeCounterIocAndBalance() => $_ensure(1);
 
-  /// base 무발주 — counter(ETF) BEP 진입 + 익절/손절 청산
+  /// base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입 + TP/SL 청산
   @$pb.TagNumber(3)
-  CounterBepScalpExecution get counterBepScalp => $_getN(2);
+  CounterIocTpSlExecution get counterIocTpSl => $_getN(2);
   @$pb.TagNumber(3)
-  set counterBepScalp(CounterBepScalpExecution value) => $_setField(3, value);
+  set counterIocTpSl(CounterIocTpSlExecution value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasCounterBepScalp() => $_has(2);
+  $core.bool hasCounterIocTpSl() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCounterBepScalp() => $_clearField(3);
+  void clearCounterIocTpSl() => $_clearField(3);
   @$pb.TagNumber(3)
-  CounterBepScalpExecution ensureCounterBepScalp() => $_ensure(2);
+  CounterIocTpSlExecution ensureCounterIocTpSl() => $_ensure(2);
 
   /// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
   @$pb.TagNumber(4)
-  MakeCounterTakeBalanceExecution get makeCounterTakeBalance => $_getN(3);
+  BaseMakeCounterTakeAndBalanceExecution get baseMakeCounterTakeAndBalance => $_getN(3);
   @$pb.TagNumber(4)
-  set makeCounterTakeBalance(MakeCounterTakeBalanceExecution value) => $_setField(4, value);
+  set baseMakeCounterTakeAndBalance(BaseMakeCounterTakeAndBalanceExecution value) => $_setField(4, value);
   @$pb.TagNumber(4)
-  $core.bool hasMakeCounterTakeBalance() => $_has(3);
+  $core.bool hasBaseMakeCounterTakeAndBalance() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMakeCounterTakeBalance() => $_clearField(4);
+  void clearBaseMakeCounterTakeAndBalance() => $_clearField(4);
   @$pb.TagNumber(4)
-  MakeCounterTakeBalanceExecution ensureMakeCounterTakeBalance() => $_ensure(3);
+  BaseMakeCounterTakeAndBalanceExecution ensureBaseMakeCounterTakeAndBalance() => $_ensure(3);
 }
 
 /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
@@ -1140,7 +1140,7 @@ class DualSubmitExecution extends $pb.GeneratedMessage {
   void clearOrderType() => $_clearField(1);
 }
 
-/// base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
+/// base Limit + counter IOC + settle/recovery/balance
 ///
 /// PairEntry 필드 매핑:
 ///   - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
@@ -1149,8 +1149,8 @@ class DualSubmitExecution extends $pb.GeneratedMessage {
 ///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
 ///   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
 ///     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
-class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
-  factory MakeCounterIocBalanceExecution({
+class BaseMakeCounterIocAndBalanceExecution extends $pb.GeneratedMessage {
+  factory BaseMakeCounterIocAndBalanceExecution({
     $core.double? recoveryRatio,
     $fixnum.Int64? settleTimeoutMs,
     $fixnum.Int64? reconcileAlertAmount,
@@ -1166,12 +1166,12 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
     return result;
   }
 
-  MakeCounterIocBalanceExecution._();
+  BaseMakeCounterIocAndBalanceExecution._();
 
-  factory MakeCounterIocBalanceExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MakeCounterIocBalanceExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory BaseMakeCounterIocAndBalanceExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BaseMakeCounterIocAndBalanceExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MakeCounterIocBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterIocAndBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'recoveryRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(6, _omitFieldNames ? '' : 'reconcileAlertAmount')
@@ -1181,21 +1181,21 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MakeCounterIocBalanceExecution clone() => MakeCounterIocBalanceExecution()..mergeFromMessage(this);
+  BaseMakeCounterIocAndBalanceExecution clone() => BaseMakeCounterIocAndBalanceExecution()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MakeCounterIocBalanceExecution copyWith(void Function(MakeCounterIocBalanceExecution) updates) => super.copyWith((message) => updates(message as MakeCounterIocBalanceExecution)) as MakeCounterIocBalanceExecution;
+  BaseMakeCounterIocAndBalanceExecution copyWith(void Function(BaseMakeCounterIocAndBalanceExecution) updates) => super.copyWith((message) => updates(message as BaseMakeCounterIocAndBalanceExecution)) as BaseMakeCounterIocAndBalanceExecution;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MakeCounterIocBalanceExecution create() => MakeCounterIocBalanceExecution._();
+  static BaseMakeCounterIocAndBalanceExecution create() => BaseMakeCounterIocAndBalanceExecution._();
   @$core.override
-  MakeCounterIocBalanceExecution createEmptyInstance() => create();
-  static $pb.PbList<MakeCounterIocBalanceExecution> createRepeated() => $pb.PbList<MakeCounterIocBalanceExecution>();
+  BaseMakeCounterIocAndBalanceExecution createEmptyInstance() => create();
+  static $pb.PbList<BaseMakeCounterIocAndBalanceExecution> createRepeated() => $pb.PbList<BaseMakeCounterIocAndBalanceExecution>();
   @$core.pragma('dart2js:noInline')
-  static MakeCounterIocBalanceExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MakeCounterIocBalanceExecution>(create);
-  static MakeCounterIocBalanceExecution? _defaultInstance;
+  static BaseMakeCounterIocAndBalanceExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BaseMakeCounterIocAndBalanceExecution>(create);
+  static BaseMakeCounterIocAndBalanceExecution? _defaultInstance;
 
   /// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
   @$pb.TagNumber(4)
@@ -1250,11 +1250,12 @@ class MakeCounterIocBalanceExecution extends $pb.GeneratedMessage {
   void clearCounterRecoveryAggressiveTicks() => $_clearField(8);
 }
 
-/// base 무발주 — counter(ETF) 상대호가±N틱 pseudo-IOC 진입 + 마지막 진입 체결가 대비 틱 기준 익절/손절.
-/// 진입 주문은 상대 1호가에서 entry_aggressive_ticks 만큼 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC).
-/// 익절/손절 판정은 exit_delay_ms 경과 후 시작하며, 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
-class CounterBepScalpExecution extends $pb.GeneratedMessage {
-  factory CounterBepScalpExecution({
+/// base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입,
+/// 마지막 진입 체결가 기준 take_profit_ticks/stop_loss_ticks 틱 익절/손절(TP/SL),
+/// exit_delay_ms 경과 후 판정. 진입은 상대 1호가에서 entry_aggressive_ticks 만큼
+/// 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC). 청산은 체결될 때까지 호가 추적(amend).
+class CounterIocTpSlExecution extends $pb.GeneratedMessage {
+  factory CounterIocTpSlExecution({
     $core.int? takeProfitTicks,
     $core.int? stopLossTicks,
     $core.int? exitAggressiveTicks,
@@ -1270,12 +1271,12 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
     return result;
   }
 
-  CounterBepScalpExecution._();
+  CounterIocTpSlExecution._();
 
-  factory CounterBepScalpExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory CounterBepScalpExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory CounterIocTpSlExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CounterIocTpSlExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CounterBepScalpExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CounterIocTpSlExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'takeProfitTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'stopLossTicks', $pb.PbFieldType.OU3)
     ..a<$core.int>(6, _omitFieldNames ? '' : 'exitAggressiveTicks', $pb.PbFieldType.OU3)
@@ -1285,21 +1286,21 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CounterBepScalpExecution clone() => CounterBepScalpExecution()..mergeFromMessage(this);
+  CounterIocTpSlExecution clone() => CounterIocTpSlExecution()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CounterBepScalpExecution copyWith(void Function(CounterBepScalpExecution) updates) => super.copyWith((message) => updates(message as CounterBepScalpExecution)) as CounterBepScalpExecution;
+  CounterIocTpSlExecution copyWith(void Function(CounterIocTpSlExecution) updates) => super.copyWith((message) => updates(message as CounterIocTpSlExecution)) as CounterIocTpSlExecution;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static CounterBepScalpExecution create() => CounterBepScalpExecution._();
+  static CounterIocTpSlExecution create() => CounterIocTpSlExecution._();
   @$core.override
-  CounterBepScalpExecution createEmptyInstance() => create();
-  static $pb.PbList<CounterBepScalpExecution> createRepeated() => $pb.PbList<CounterBepScalpExecution>();
+  CounterIocTpSlExecution createEmptyInstance() => create();
+  static $pb.PbList<CounterIocTpSlExecution> createRepeated() => $pb.PbList<CounterIocTpSlExecution>();
   @$core.pragma('dart2js:noInline')
-  static CounterBepScalpExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CounterBepScalpExecution>(create);
-  static CounterBepScalpExecution? _defaultInstance;
+  static CounterIocTpSlExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CounterIocTpSlExecution>(create);
+  static CounterIocTpSlExecution? _defaultInstance;
 
   /// 익절 임계 (틱)
   @$pb.TagNumber(4)
@@ -1355,7 +1356,7 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
 
 /// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
 ///
-/// MakeCounterIocBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
+/// BaseMakeCounterIocAndBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
 /// counter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.
 /// NAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.
 ///
@@ -1365,8 +1366,8 @@ class CounterBepScalpExecution extends $pb.GeneratedMessage {
 ///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
 ///   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
 ///     counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
-class MakeCounterTakeBalanceExecution extends $pb.GeneratedMessage {
-  factory MakeCounterTakeBalanceExecution({
+class BaseMakeCounterTakeAndBalanceExecution extends $pb.GeneratedMessage {
+  factory BaseMakeCounterTakeAndBalanceExecution({
     $core.double? recoveryRatio,
     $fixnum.Int64? settleTimeoutMs,
     $fixnum.Int64? reconcileAlertAmount,
@@ -1384,12 +1385,12 @@ class MakeCounterTakeBalanceExecution extends $pb.GeneratedMessage {
     return result;
   }
 
-  MakeCounterTakeBalanceExecution._();
+  BaseMakeCounterTakeAndBalanceExecution._();
 
-  factory MakeCounterTakeBalanceExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MakeCounterTakeBalanceExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory BaseMakeCounterTakeAndBalanceExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BaseMakeCounterTakeAndBalanceExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MakeCounterTakeBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BaseMakeCounterTakeAndBalanceExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'recoveryRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'settleTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(3, _omitFieldNames ? '' : 'reconcileAlertAmount')
@@ -1400,21 +1401,21 @@ class MakeCounterTakeBalanceExecution extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MakeCounterTakeBalanceExecution clone() => MakeCounterTakeBalanceExecution()..mergeFromMessage(this);
+  BaseMakeCounterTakeAndBalanceExecution clone() => BaseMakeCounterTakeAndBalanceExecution()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MakeCounterTakeBalanceExecution copyWith(void Function(MakeCounterTakeBalanceExecution) updates) => super.copyWith((message) => updates(message as MakeCounterTakeBalanceExecution)) as MakeCounterTakeBalanceExecution;
+  BaseMakeCounterTakeAndBalanceExecution copyWith(void Function(BaseMakeCounterTakeAndBalanceExecution) updates) => super.copyWith((message) => updates(message as BaseMakeCounterTakeAndBalanceExecution)) as BaseMakeCounterTakeAndBalanceExecution;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MakeCounterTakeBalanceExecution create() => MakeCounterTakeBalanceExecution._();
+  static BaseMakeCounterTakeAndBalanceExecution create() => BaseMakeCounterTakeAndBalanceExecution._();
   @$core.override
-  MakeCounterTakeBalanceExecution createEmptyInstance() => create();
-  static $pb.PbList<MakeCounterTakeBalanceExecution> createRepeated() => $pb.PbList<MakeCounterTakeBalanceExecution>();
+  BaseMakeCounterTakeAndBalanceExecution createEmptyInstance() => create();
+  static $pb.PbList<BaseMakeCounterTakeAndBalanceExecution> createRepeated() => $pb.PbList<BaseMakeCounterTakeAndBalanceExecution>();
   @$core.pragma('dart2js:noInline')
-  static MakeCounterTakeBalanceExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MakeCounterTakeBalanceExecution>(create);
-  static MakeCounterTakeBalanceExecution? _defaultInstance;
+  static BaseMakeCounterTakeAndBalanceExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BaseMakeCounterTakeAndBalanceExecution>(create);
+  static BaseMakeCounterTakeAndBalanceExecution? _defaultInstance;
 
   /// base 호가 잔량 회복 비율. 회복 시 base 잔량을 상대호가로 공격 정정(강제 체결).
   @$pb.TagNumber(1)

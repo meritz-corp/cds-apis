@@ -41,7 +41,7 @@ pub struct Pair {
     /// 실행 — 발사 시 무엇을 할지. 트리거(trigger)와 독립적으로 조합한다.
     #[prost(message, optional, tag="14")]
     pub execution: ::core::option::Option<OrderExecution>,
-    /// ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·MakeCounterIocBalance/CounterBepScalp
+    /// ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·BaseMakeCounterIocAndBalance/CounterIocTpSlExecution
     /// execution 이 공유. NAV 미사용 페어는 미설정.
     #[prost(message, optional, tag="15")]
     pub nav: ::core::option::Option<Nav>,
@@ -54,13 +54,13 @@ pub struct Pair {
 ///
 /// execution 종류별 필드 사용:
 /// - DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
-/// - MakeCounterIocBalanceExecution (IOC imbalance):
+/// - BaseMakeCounterIocAndBalanceExecution (IOC imbalance):
 ///    - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 ///    - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
 ///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
 ///    - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
 ///      counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
-/// - CounterBepScalpExecution: counter 엔트리만 사용.
+/// - CounterIocTpSlExecution: counter 엔트리만 사용.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PairEntry {
@@ -74,11 +74,11 @@ pub struct PairEntry {
     #[prost(enumeration="PairSide", tag="3")]
     pub side: i32,
     /// 주문 수량 (1 이상)
-    /// MakeCounterIocBalanceExecution: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
+    /// BaseMakeCounterIocAndBalanceExecution: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
     #[prost(int64, tag="4")]
     pub quantity: i64,
     /// 참조 가격 소스 (entry.side 기준 자기/상대 호가).
-    /// MakeCounterIocBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
+    /// BaseMakeCounterIocAndBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
     #[prost(enumeration="PriceSource", tag="5")]
     pub price_source: i32,
 }
@@ -237,15 +237,15 @@ pub mod order_execution {
         /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
         #[prost(message, tag="1")]
         DualSubmit(super::DualSubmitExecution),
-        /// base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
+        /// base Limit + counter IOC + settle/recovery/balance
         #[prost(message, tag="2")]
-        MakeCounterIocBalance(super::MakeCounterIocBalanceExecution),
-        /// base 무발주 — counter(ETF) BEP 진입 + 익절/손절 청산
+        BaseMakeCounterIocAndBalance(super::BaseMakeCounterIocAndBalanceExecution),
+        /// base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입 + TP/SL 청산
         #[prost(message, tag="3")]
-        CounterBepScalp(super::CounterBepScalpExecution),
+        CounterIocTpSl(super::CounterIocTpSlExecution),
         /// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
         #[prost(message, tag="4")]
-        MakeCounterTakeBalance(super::MakeCounterTakeBalanceExecution),
+        BaseMakeCounterTakeAndBalance(super::BaseMakeCounterTakeAndBalanceExecution),
     }
 }
 /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
@@ -256,7 +256,7 @@ pub struct DualSubmitExecution {
     #[prost(enumeration="PairOrderType", tag="1")]
     pub order_type: i32,
 }
-/// base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
+/// base Limit + counter IOC + settle/recovery/balance
 ///
 /// PairEntry 필드 매핑:
 ///    - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
@@ -267,7 +267,7 @@ pub struct DualSubmitExecution {
 ///      counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MakeCounterIocBalanceExecution {
+pub struct BaseMakeCounterIocAndBalanceExecution {
     /// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
     #[prost(double, tag="4")]
     pub recovery_ratio: f64,
@@ -286,12 +286,13 @@ pub struct MakeCounterIocBalanceExecution {
     #[prost(uint32, tag="8")]
     pub counter_recovery_aggressive_ticks: u32,
 }
-/// base 무발주 — counter(ETF) 상대호가±N틱 pseudo-IOC 진입 + 마지막 진입 체결가 대비 틱 기준 익절/손절.
-/// 진입 주문은 상대 1호가에서 entry_aggressive_ticks 만큼 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC).
-/// 익절/손절 판정은 exit_delay_ms 경과 후 시작하며, 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
+/// base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입,
+/// 마지막 진입 체결가 기준 take_profit_ticks/stop_loss_ticks 틱 익절/손절(TP/SL),
+/// exit_delay_ms 경과 후 판정. 진입은 상대 1호가에서 entry_aggressive_ticks 만큼
+/// 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC). 청산은 체결될 때까지 호가 추적(amend).
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct CounterBepScalpExecution {
+pub struct CounterIocTpSlExecution {
     /// 익절 임계 (틱)
     #[prost(uint32, tag="4")]
     pub take_profit_ticks: u32,
@@ -311,7 +312,7 @@ pub struct CounterBepScalpExecution {
 }
 /// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
 ///
-/// MakeCounterIocBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
+/// BaseMakeCounterIocAndBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
 /// counter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.
 /// NAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.
 ///
@@ -323,7 +324,7 @@ pub struct CounterBepScalpExecution {
 ///      counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct MakeCounterTakeBalanceExecution {
+pub struct BaseMakeCounterTakeAndBalanceExecution {
     /// base 호가 잔량 회복 비율. 회복 시 base 잔량을 상대호가로 공격 정정(강제 체결).
     #[prost(double, tag="1")]
     pub recovery_ratio: f64,

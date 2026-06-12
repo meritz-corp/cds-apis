@@ -94,6 +94,390 @@ impl<'de> serde::Deserialize<'de> for ActivatePairRequest {
         deserializer.deserialize_struct("kdo.v1.pair.ActivatePairRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for BaseMakeCounterIocAndBalanceExecution {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalanceExecution", len)?;
+        if true {
+            struct_ser.serialize_field("recovery_ratio", &self.recovery_ratio)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("settle_timeout_ms", ToString::to_string(&self.settle_timeout_ms).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("reconcile_alert_amount", ToString::to_string(&self.reconcile_alert_amount).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("base_recovery_aggressive_ticks", &self.base_recovery_aggressive_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("counter_recovery_aggressive_ticks", &self.counter_recovery_aggressive_ticks)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for BaseMakeCounterIocAndBalanceExecution {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "recovery_ratio",
+            "recoveryRatio",
+            "settle_timeout_ms",
+            "settleTimeoutMs",
+            "reconcile_alert_amount",
+            "reconcileAlertAmount",
+            "base_recovery_aggressive_ticks",
+            "baseRecoveryAggressiveTicks",
+            "counter_recovery_aggressive_ticks",
+            "counterRecoveryAggressiveTicks",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            RecoveryRatio,
+            SettleTimeoutMs,
+            ReconcileAlertAmount,
+            BaseRecoveryAggressiveTicks,
+            CounterRecoveryAggressiveTicks,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "recoveryRatio" | "recovery_ratio" => Ok(GeneratedField::RecoveryRatio),
+                            "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
+                            "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
+                            "baseRecoveryAggressiveTicks" | "base_recovery_aggressive_ticks" => Ok(GeneratedField::BaseRecoveryAggressiveTicks),
+                            "counterRecoveryAggressiveTicks" | "counter_recovery_aggressive_ticks" => Ok(GeneratedField::CounterRecoveryAggressiveTicks),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = BaseMakeCounterIocAndBalanceExecution;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.BaseMakeCounterIocAndBalanceExecution")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<BaseMakeCounterIocAndBalanceExecution, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut recovery_ratio__ = None;
+                let mut settle_timeout_ms__ = None;
+                let mut reconcile_alert_amount__ = None;
+                let mut base_recovery_aggressive_ticks__ = None;
+                let mut counter_recovery_aggressive_ticks__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::RecoveryRatio => {
+                            if recovery_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("recoveryRatio"));
+                            }
+                            recovery_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SettleTimeoutMs => {
+                            if settle_timeout_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("settleTimeoutMs"));
+                            }
+                            settle_timeout_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ReconcileAlertAmount => {
+                            if reconcile_alert_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reconcileAlertAmount"));
+                            }
+                            reconcile_alert_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BaseRecoveryAggressiveTicks => {
+                            if base_recovery_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseRecoveryAggressiveTicks"));
+                            }
+                            base_recovery_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterRecoveryAggressiveTicks => {
+                            if counter_recovery_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterRecoveryAggressiveTicks"));
+                            }
+                            counter_recovery_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(BaseMakeCounterIocAndBalanceExecution {
+                    recovery_ratio: recovery_ratio__.unwrap_or_default(),
+                    settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
+                    reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
+                    base_recovery_aggressive_ticks: base_recovery_aggressive_ticks__.unwrap_or_default(),
+                    counter_recovery_aggressive_ticks: counter_recovery_aggressive_ticks__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.BaseMakeCounterIocAndBalanceExecution", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for BaseMakeCounterTakeAndBalanceExecution {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BaseMakeCounterTakeAndBalanceExecution", len)?;
+        if true {
+            struct_ser.serialize_field("recovery_ratio", &self.recovery_ratio)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("settle_timeout_ms", ToString::to_string(&self.settle_timeout_ms).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("reconcile_alert_amount", ToString::to_string(&self.reconcile_alert_amount).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("base_recovery_aggressive_ticks", &self.base_recovery_aggressive_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("counter_recovery_aggressive_ticks", &self.counter_recovery_aggressive_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("counter_aggressive_ticks", &self.counter_aggressive_ticks)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for BaseMakeCounterTakeAndBalanceExecution {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "recovery_ratio",
+            "recoveryRatio",
+            "settle_timeout_ms",
+            "settleTimeoutMs",
+            "reconcile_alert_amount",
+            "reconcileAlertAmount",
+            "base_recovery_aggressive_ticks",
+            "baseRecoveryAggressiveTicks",
+            "counter_recovery_aggressive_ticks",
+            "counterRecoveryAggressiveTicks",
+            "counter_aggressive_ticks",
+            "counterAggressiveTicks",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            RecoveryRatio,
+            SettleTimeoutMs,
+            ReconcileAlertAmount,
+            BaseRecoveryAggressiveTicks,
+            CounterRecoveryAggressiveTicks,
+            CounterAggressiveTicks,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "recoveryRatio" | "recovery_ratio" => Ok(GeneratedField::RecoveryRatio),
+                            "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
+                            "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
+                            "baseRecoveryAggressiveTicks" | "base_recovery_aggressive_ticks" => Ok(GeneratedField::BaseRecoveryAggressiveTicks),
+                            "counterRecoveryAggressiveTicks" | "counter_recovery_aggressive_ticks" => Ok(GeneratedField::CounterRecoveryAggressiveTicks),
+                            "counterAggressiveTicks" | "counter_aggressive_ticks" => Ok(GeneratedField::CounterAggressiveTicks),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = BaseMakeCounterTakeAndBalanceExecution;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.BaseMakeCounterTakeAndBalanceExecution")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<BaseMakeCounterTakeAndBalanceExecution, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut recovery_ratio__ = None;
+                let mut settle_timeout_ms__ = None;
+                let mut reconcile_alert_amount__ = None;
+                let mut base_recovery_aggressive_ticks__ = None;
+                let mut counter_recovery_aggressive_ticks__ = None;
+                let mut counter_aggressive_ticks__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::RecoveryRatio => {
+                            if recovery_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("recoveryRatio"));
+                            }
+                            recovery_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SettleTimeoutMs => {
+                            if settle_timeout_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("settleTimeoutMs"));
+                            }
+                            settle_timeout_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ReconcileAlertAmount => {
+                            if reconcile_alert_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reconcileAlertAmount"));
+                            }
+                            reconcile_alert_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BaseRecoveryAggressiveTicks => {
+                            if base_recovery_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseRecoveryAggressiveTicks"));
+                            }
+                            base_recovery_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterRecoveryAggressiveTicks => {
+                            if counter_recovery_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterRecoveryAggressiveTicks"));
+                            }
+                            counter_recovery_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterAggressiveTicks => {
+                            if counter_aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterAggressiveTicks"));
+                            }
+                            counter_aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(BaseMakeCounterTakeAndBalanceExecution {
+                    recovery_ratio: recovery_ratio__.unwrap_or_default(),
+                    settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
+                    reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
+                    base_recovery_aggressive_ticks: base_recovery_aggressive_ticks__.unwrap_or_default(),
+                    counter_recovery_aggressive_ticks: counter_recovery_aggressive_ticks__.unwrap_or_default(),
+                    counter_aggressive_ticks: counter_aggressive_ticks__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.BaseMakeCounterTakeAndBalanceExecution", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for BestMakeQuantityImbalanceTrigger {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -214,7 +598,7 @@ impl<'de> serde::Deserialize<'de> for BestMakeQuantityImbalanceTrigger {
         deserializer.deserialize_struct("kdo.v1.pair.BestMakeQuantityImbalanceTrigger", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for CounterBepScalpExecution {
+impl serde::Serialize for CounterIocTpSlExecution {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -237,7 +621,7 @@ impl serde::Serialize for CounterBepScalpExecution {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.CounterBepScalpExecution", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.CounterIocTpSlExecution", len)?;
         if true {
             struct_ser.serialize_field("take_profit_ticks", &self.take_profit_ticks)?;
         }
@@ -258,7 +642,7 @@ impl serde::Serialize for CounterBepScalpExecution {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
+impl<'de> serde::Deserialize<'de> for CounterIocTpSlExecution {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -320,13 +704,13 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = CounterBepScalpExecution;
+            type Value = CounterIocTpSlExecution;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.pair.CounterBepScalpExecution")
+                formatter.write_str("struct kdo.v1.pair.CounterIocTpSlExecution")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CounterBepScalpExecution, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CounterIocTpSlExecution, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -382,7 +766,7 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                         }
                     }
                 }
-                Ok(CounterBepScalpExecution {
+                Ok(CounterIocTpSlExecution {
                     take_profit_ticks: take_profit_ticks__.unwrap_or_default(),
                     stop_loss_ticks: stop_loss_ticks__.unwrap_or_default(),
                     exit_aggressive_ticks: exit_aggressive_ticks__.unwrap_or_default(),
@@ -391,7 +775,7 @@ impl<'de> serde::Deserialize<'de> for CounterBepScalpExecution {
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.pair.CounterBepScalpExecution", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.pair.CounterIocTpSlExecution", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for CreatePairRequest {
@@ -1668,390 +2052,6 @@ impl<'de> serde::Deserialize<'de> for ListPairsResponse {
         deserializer.deserialize_struct("kdo.v1.pair.ListPairsResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MakeCounterIocBalanceExecution {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.MakeCounterIocBalanceExecution", len)?;
-        if true {
-            struct_ser.serialize_field("recovery_ratio", &self.recovery_ratio)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("settle_timeout_ms", ToString::to_string(&self.settle_timeout_ms).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("reconcile_alert_amount", ToString::to_string(&self.reconcile_alert_amount).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("base_recovery_aggressive_ticks", &self.base_recovery_aggressive_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("counter_recovery_aggressive_ticks", &self.counter_recovery_aggressive_ticks)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MakeCounterIocBalanceExecution {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "recovery_ratio",
-            "recoveryRatio",
-            "settle_timeout_ms",
-            "settleTimeoutMs",
-            "reconcile_alert_amount",
-            "reconcileAlertAmount",
-            "base_recovery_aggressive_ticks",
-            "baseRecoveryAggressiveTicks",
-            "counter_recovery_aggressive_ticks",
-            "counterRecoveryAggressiveTicks",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            RecoveryRatio,
-            SettleTimeoutMs,
-            ReconcileAlertAmount,
-            BaseRecoveryAggressiveTicks,
-            CounterRecoveryAggressiveTicks,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "recoveryRatio" | "recovery_ratio" => Ok(GeneratedField::RecoveryRatio),
-                            "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
-                            "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
-                            "baseRecoveryAggressiveTicks" | "base_recovery_aggressive_ticks" => Ok(GeneratedField::BaseRecoveryAggressiveTicks),
-                            "counterRecoveryAggressiveTicks" | "counter_recovery_aggressive_ticks" => Ok(GeneratedField::CounterRecoveryAggressiveTicks),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MakeCounterIocBalanceExecution;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.pair.MakeCounterIocBalanceExecution")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MakeCounterIocBalanceExecution, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut recovery_ratio__ = None;
-                let mut settle_timeout_ms__ = None;
-                let mut reconcile_alert_amount__ = None;
-                let mut base_recovery_aggressive_ticks__ = None;
-                let mut counter_recovery_aggressive_ticks__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::RecoveryRatio => {
-                            if recovery_ratio__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("recoveryRatio"));
-                            }
-                            recovery_ratio__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SettleTimeoutMs => {
-                            if settle_timeout_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("settleTimeoutMs"));
-                            }
-                            settle_timeout_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ReconcileAlertAmount => {
-                            if reconcile_alert_amount__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("reconcileAlertAmount"));
-                            }
-                            reconcile_alert_amount__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BaseRecoveryAggressiveTicks => {
-                            if base_recovery_aggressive_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("baseRecoveryAggressiveTicks"));
-                            }
-                            base_recovery_aggressive_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CounterRecoveryAggressiveTicks => {
-                            if counter_recovery_aggressive_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("counterRecoveryAggressiveTicks"));
-                            }
-                            counter_recovery_aggressive_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MakeCounterIocBalanceExecution {
-                    recovery_ratio: recovery_ratio__.unwrap_or_default(),
-                    settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
-                    reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
-                    base_recovery_aggressive_ticks: base_recovery_aggressive_ticks__.unwrap_or_default(),
-                    counter_recovery_aggressive_ticks: counter_recovery_aggressive_ticks__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.pair.MakeCounterIocBalanceExecution", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for MakeCounterTakeBalanceExecution {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.MakeCounterTakeBalanceExecution", len)?;
-        if true {
-            struct_ser.serialize_field("recovery_ratio", &self.recovery_ratio)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("settle_timeout_ms", ToString::to_string(&self.settle_timeout_ms).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("reconcile_alert_amount", ToString::to_string(&self.reconcile_alert_amount).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("base_recovery_aggressive_ticks", &self.base_recovery_aggressive_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("counter_recovery_aggressive_ticks", &self.counter_recovery_aggressive_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("counter_aggressive_ticks", &self.counter_aggressive_ticks)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for MakeCounterTakeBalanceExecution {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "recovery_ratio",
-            "recoveryRatio",
-            "settle_timeout_ms",
-            "settleTimeoutMs",
-            "reconcile_alert_amount",
-            "reconcileAlertAmount",
-            "base_recovery_aggressive_ticks",
-            "baseRecoveryAggressiveTicks",
-            "counter_recovery_aggressive_ticks",
-            "counterRecoveryAggressiveTicks",
-            "counter_aggressive_ticks",
-            "counterAggressiveTicks",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            RecoveryRatio,
-            SettleTimeoutMs,
-            ReconcileAlertAmount,
-            BaseRecoveryAggressiveTicks,
-            CounterRecoveryAggressiveTicks,
-            CounterAggressiveTicks,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "recoveryRatio" | "recovery_ratio" => Ok(GeneratedField::RecoveryRatio),
-                            "settleTimeoutMs" | "settle_timeout_ms" => Ok(GeneratedField::SettleTimeoutMs),
-                            "reconcileAlertAmount" | "reconcile_alert_amount" => Ok(GeneratedField::ReconcileAlertAmount),
-                            "baseRecoveryAggressiveTicks" | "base_recovery_aggressive_ticks" => Ok(GeneratedField::BaseRecoveryAggressiveTicks),
-                            "counterRecoveryAggressiveTicks" | "counter_recovery_aggressive_ticks" => Ok(GeneratedField::CounterRecoveryAggressiveTicks),
-                            "counterAggressiveTicks" | "counter_aggressive_ticks" => Ok(GeneratedField::CounterAggressiveTicks),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MakeCounterTakeBalanceExecution;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.pair.MakeCounterTakeBalanceExecution")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MakeCounterTakeBalanceExecution, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut recovery_ratio__ = None;
-                let mut settle_timeout_ms__ = None;
-                let mut reconcile_alert_amount__ = None;
-                let mut base_recovery_aggressive_ticks__ = None;
-                let mut counter_recovery_aggressive_ticks__ = None;
-                let mut counter_aggressive_ticks__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::RecoveryRatio => {
-                            if recovery_ratio__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("recoveryRatio"));
-                            }
-                            recovery_ratio__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SettleTimeoutMs => {
-                            if settle_timeout_ms__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("settleTimeoutMs"));
-                            }
-                            settle_timeout_ms__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::ReconcileAlertAmount => {
-                            if reconcile_alert_amount__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("reconcileAlertAmount"));
-                            }
-                            reconcile_alert_amount__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BaseRecoveryAggressiveTicks => {
-                            if base_recovery_aggressive_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("baseRecoveryAggressiveTicks"));
-                            }
-                            base_recovery_aggressive_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CounterRecoveryAggressiveTicks => {
-                            if counter_recovery_aggressive_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("counterRecoveryAggressiveTicks"));
-                            }
-                            counter_recovery_aggressive_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::CounterAggressiveTicks => {
-                            if counter_aggressive_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("counterAggressiveTicks"));
-                            }
-                            counter_aggressive_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(MakeCounterTakeBalanceExecution {
-                    recovery_ratio: recovery_ratio__.unwrap_or_default(),
-                    settle_timeout_ms: settle_timeout_ms__.unwrap_or_default(),
-                    reconcile_alert_amount: reconcile_alert_amount__.unwrap_or_default(),
-                    base_recovery_aggressive_ticks: base_recovery_aggressive_ticks__.unwrap_or_default(),
-                    counter_recovery_aggressive_ticks: counter_recovery_aggressive_ticks__.unwrap_or_default(),
-                    counter_aggressive_ticks: counter_aggressive_ticks__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.pair.MakeCounterTakeBalanceExecution", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for Nav {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2211,14 +2211,14 @@ impl serde::Serialize for OrderExecution {
                 order_execution::Kind::DualSubmit(v) => {
                     struct_ser.serialize_field("dual_submit", v)?;
                 }
-                order_execution::Kind::MakeCounterIocBalance(v) => {
-                    struct_ser.serialize_field("make_counter_ioc_balance", v)?;
+                order_execution::Kind::BaseMakeCounterIocAndBalance(v) => {
+                    struct_ser.serialize_field("base_make_counter_ioc_and_balance", v)?;
                 }
-                order_execution::Kind::CounterBepScalp(v) => {
-                    struct_ser.serialize_field("counter_bep_scalp", v)?;
+                order_execution::Kind::CounterIocTpSl(v) => {
+                    struct_ser.serialize_field("counter_ioc_tp_sl", v)?;
                 }
-                order_execution::Kind::MakeCounterTakeBalance(v) => {
-                    struct_ser.serialize_field("make_counter_take_balance", v)?;
+                order_execution::Kind::BaseMakeCounterTakeAndBalance(v) => {
+                    struct_ser.serialize_field("base_make_counter_take_and_balance", v)?;
                 }
             }
         }
@@ -2234,20 +2234,20 @@ impl<'de> serde::Deserialize<'de> for OrderExecution {
         const FIELDS: &[&str] = &[
             "dual_submit",
             "dualSubmit",
-            "make_counter_ioc_balance",
-            "makeCounterIocBalance",
-            "counter_bep_scalp",
-            "counterBepScalp",
-            "make_counter_take_balance",
-            "makeCounterTakeBalance",
+            "base_make_counter_ioc_and_balance",
+            "baseMakeCounterIocAndBalance",
+            "counter_ioc_tp_sl",
+            "counterIocTpSl",
+            "base_make_counter_take_and_balance",
+            "baseMakeCounterTakeAndBalance",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             DualSubmit,
-            MakeCounterIocBalance,
-            CounterBepScalp,
-            MakeCounterTakeBalance,
+            BaseMakeCounterIocAndBalance,
+            CounterIocTpSl,
+            BaseMakeCounterTakeAndBalance,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2271,9 +2271,9 @@ impl<'de> serde::Deserialize<'de> for OrderExecution {
                     {
                         match value {
                             "dualSubmit" | "dual_submit" => Ok(GeneratedField::DualSubmit),
-                            "makeCounterIocBalance" | "make_counter_ioc_balance" => Ok(GeneratedField::MakeCounterIocBalance),
-                            "counterBepScalp" | "counter_bep_scalp" => Ok(GeneratedField::CounterBepScalp),
-                            "makeCounterTakeBalance" | "make_counter_take_balance" => Ok(GeneratedField::MakeCounterTakeBalance),
+                            "baseMakeCounterIocAndBalance" | "base_make_counter_ioc_and_balance" => Ok(GeneratedField::BaseMakeCounterIocAndBalance),
+                            "counterIocTpSl" | "counter_ioc_tp_sl" => Ok(GeneratedField::CounterIocTpSl),
+                            "baseMakeCounterTakeAndBalance" | "base_make_counter_take_and_balance" => Ok(GeneratedField::BaseMakeCounterTakeAndBalance),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2303,25 +2303,25 @@ impl<'de> serde::Deserialize<'de> for OrderExecution {
                             kind__ = map_.next_value::<::std::option::Option<_>>()?.map(order_execution::Kind::DualSubmit)
 ;
                         }
-                        GeneratedField::MakeCounterIocBalance => {
+                        GeneratedField::BaseMakeCounterIocAndBalance => {
                             if kind__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("makeCounterIocBalance"));
+                                return Err(serde::de::Error::duplicate_field("baseMakeCounterIocAndBalance"));
                             }
-                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(order_execution::Kind::MakeCounterIocBalance)
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(order_execution::Kind::BaseMakeCounterIocAndBalance)
 ;
                         }
-                        GeneratedField::CounterBepScalp => {
+                        GeneratedField::CounterIocTpSl => {
                             if kind__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("counterBepScalp"));
+                                return Err(serde::de::Error::duplicate_field("counterIocTpSl"));
                             }
-                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(order_execution::Kind::CounterBepScalp)
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(order_execution::Kind::CounterIocTpSl)
 ;
                         }
-                        GeneratedField::MakeCounterTakeBalance => {
+                        GeneratedField::BaseMakeCounterTakeAndBalance => {
                             if kind__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("makeCounterTakeBalance"));
+                                return Err(serde::de::Error::duplicate_field("baseMakeCounterTakeAndBalance"));
                             }
-                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(order_execution::Kind::MakeCounterTakeBalance)
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(order_execution::Kind::BaseMakeCounterTakeAndBalance)
 ;
                         }
                         GeneratedField::__SkipField__ => {

@@ -168,7 +168,7 @@ message Pair {
   // 실행 — 발사 시 무엇을 할지. 트리거(trigger)와 독립적으로 조합한다.
   OrderExecution execution = 14;
 
-  // ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·MakeCounterIocBalance/CounterBepScalp
+  // ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·BaseMakeCounterIocAndBalance/CounterIocTpSlExecution
   // execution 이 공유. NAV 미사용 페어는 미설정.
   Nav nav = 15;
 }
@@ -181,13 +181,13 @@ message Pair {
 //
 // execution 종류별 필드 사용:
 // - DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
-// - MakeCounterIocBalanceExecution (IOC imbalance):
+// - BaseMakeCounterIocAndBalanceExecution (IOC imbalance):
 //   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 //   - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
 //   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
 //   - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
 //     counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
-// - CounterBepScalpExecution: counter 엔트리만 사용.
+// - CounterIocTpSlExecution: counter 엔트리만 사용.
 message PairEntry {
   // 종목 심볼
   string symbol = 1 [
@@ -205,13 +205,13 @@ message PairEntry {
   ];
 
   // 주문 수량 (1 이상)
-  // MakeCounterIocBalanceExecution: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
+  // BaseMakeCounterIocAndBalanceExecution: base 는 필수(사이클 주문 수량), counter 는 0 허용(런타임 = base × hedge_ratio).
   int64 quantity = 4 [
     (google.api.field_behavior) = REQUIRED
   ];
 
   // 참조 가격 소스 (entry.side 기준 자기/상대 호가).
-  // MakeCounterIocBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
+  // BaseMakeCounterIocAndBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
   PriceSource price_source = 5;
 
   // 사용 안 함 — 과거에 지정가 산출 시 tick offset 으로 쓰였으나 기능 삭제.
@@ -410,12 +410,12 @@ message OrderExecution {
   oneof kind {
     // 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
     DualSubmitExecution dual_submit = 1;
-    // base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
-    MakeCounterIocBalanceExecution make_counter_ioc_balance = 2;
-    // base 무발주 — counter(ETF) BEP 진입 + 익절/손절 청산
-    CounterBepScalpExecution counter_bep_scalp = 3;
+    // base Limit + counter IOC + settle/recovery/balance
+    BaseMakeCounterIocAndBalanceExecution base_make_counter_ioc_and_balance = 2;
+    // base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입 + TP/SL 청산
+    CounterIocTpSlExecution counter_ioc_tp_sl = 3;
     // base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
-    MakeCounterTakeBalanceExecution make_counter_take_balance = 4;
+    BaseMakeCounterTakeAndBalanceExecution base_make_counter_take_and_balance = 4;
   }
 }
 
@@ -425,7 +425,7 @@ message DualSubmitExecution {
   PairOrderType order_type = 1;
 }
 
-// base Limit + counter IOC + settle/recovery/balance (구 BaseMakeCounterIocAndBalance 의 실행부)
+// base Limit + counter IOC + settle/recovery/balance
 //
 // PairEntry 필드 매핑:
 //   - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
@@ -434,7 +434,7 @@ message DualSubmitExecution {
 //   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
 //   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
 //     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
-message MakeCounterIocBalanceExecution {
+message BaseMakeCounterIocAndBalanceExecution {
   // nav_kind / bid_basis / ask_basis 는 Pair.nav 로 이동 — reserved
   reserved 1, 2, 3;
   reserved "nav_kind", "bid_basis", "ask_basis";
@@ -452,10 +452,11 @@ message MakeCounterIocBalanceExecution {
   uint32 counter_recovery_aggressive_ticks = 8;
 }
 
-// base 무발주 — counter(ETF) 상대호가±N틱 pseudo-IOC 진입 + 마지막 진입 체결가 대비 틱 기준 익절/손절.
-// 진입 주문은 상대 1호가에서 entry_aggressive_ticks 만큼 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC).
-// 익절/손절 판정은 exit_delay_ms 경과 후 시작하며, 청산 주문은 체결될 때까지 호가 추적(amend)으로 체결 보장.
-message CounterBepScalpExecution {
+// base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입,
+// 마지막 진입 체결가 기준 take_profit_ticks/stop_loss_ticks 틱 익절/손절(TP/SL),
+// exit_delay_ms 경과 후 판정. 진입은 상대 1호가에서 entry_aggressive_ticks 만큼
+// 공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC). 청산은 체결될 때까지 호가 추적(amend).
+message CounterIocTpSlExecution {
   // nav_kind / bid_basis / ask_basis 는 Pair.nav 로 이동 — reserved
   reserved 1, 2, 3;
   reserved "nav_kind", "bid_basis", "ask_basis";
@@ -474,7 +475,7 @@ message CounterBepScalpExecution {
 
 // base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
 //
-// MakeCounterIocBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
+// BaseMakeCounterIocAndBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라
 // counter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.
 // NAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.
 //
@@ -484,7 +485,7 @@ message CounterBepScalpExecution {
 //   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
 //   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
 //     counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
-message MakeCounterTakeBalanceExecution {
+message BaseMakeCounterTakeAndBalanceExecution {
   // base 호가 잔량 회복 비율. 회복 시 base 잔량을 상대호가로 공격 정정(강제 체결).
   double recovery_ratio = 1;
   // counter 체결 대기 한도 (ms). 초과 시 counter 잔량 취소 후 settle.
