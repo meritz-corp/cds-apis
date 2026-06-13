@@ -76,7 +76,7 @@ abstract final class PairService {
     kdov1pair.ListPairExecutionLogsResponse.new,
   );
 
-  /// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+  /// Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)
   static const streamPairStatus = connect.Spec(
     '/$name/StreamPairStatus',
     connect.StreamType.server,

@@ -456,7 +456,7 @@
     },
     "/v1/{pair}:streamStatus": {
       "get": {
-        "summary": "Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)",
+        "summary": "Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)",
         "operationId": "PairService_StreamPairStatus",
         "responses": {
           "200": {
@@ -509,15 +509,15 @@
         "baseRecoveryAggressiveTicks": {
           "type": "integer",
           "format": "int64",
-          "description": "base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).\n0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick."
+          "description": "base 슬롯 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).\n0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick."
         },
         "counterRecoveryAggressiveTicks": {
           "type": "integer",
           "format": "int64",
-          "description": "counter leg 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).\n0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick."
+          "description": "counter 슬롯 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).\n0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick."
         }
       },
-      "description": "PairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).\n    정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.\n  - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),\n    counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.",
+      "description": "PairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).\n    정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.\n  - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),\n    counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.",
       "title": "base Limit + counter IOC + settle/recovery/balance"
     },
     "pairBaseMakeCounterTakeAndBalanceExecution": {
@@ -544,7 +544,7 @@
           "description": "counter 진입 주문가 = counter 상대호가 ± 이 틱 수 (0 = 상대호가 그대로).\ncounter.side 가 Bid 면 +N*tick (더 공격적), Ask 면 -N*tick."
         }
       },
-      "description": "BaseMakeCounterIocAndBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라\ncounter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.\nNAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.\n\nPairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.\n  - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),\n    counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.",
+      "description": "BaseMakeCounterIocAndBalanceExecution 과 구조가 동일하되, counter 주문 가격이 NAV BEP IOC 가 아니라\ncounter 오더북 상대호가 ± counter_aggressive_ticks 틱의 지정가(체결까지 호가창에 잔류, 취소 없음)이다.\nNAV 파라미터(Pair.nav)는 이 execution 에서 사용하지 않는다.\n\nPairEntry 필드 매핑:\n  - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).\n  - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.\n  - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),\n    counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.",
       "title": "base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance"
     },
     "pairBestMakeQuantityImbalanceTrigger": {
@@ -641,7 +641,7 @@
           "title": "누적 발주 수량 (현재 세션 메모리 카운터)"
         }
       },
-      "title": "페어 단일 leg 실시간 상태 스냅샷\n(태그 번호는 클라이언트 UI 계약으로 보존됨)"
+      "title": "페어 단일 슬롯 실시간 상태 스냅샷\n(태그 번호는 클라이언트 UI 계약으로 보존됨)"
     },
     "pairListPairExecutionLogsResponse": {
       "type": "object",
@@ -813,7 +813,7 @@
           "description": "참조 가격 소스 (entry.side 기준 자기/상대 호가).\nBaseMakeCounterIocAndBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다."
         }
       },
-      "description": "execution 종류별 필드 사용:\n- DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).\n- BaseMakeCounterIocAndBalanceExecution (IOC imbalance):\n  - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).\n  - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).\n  - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,\n    counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.\n- CounterIocTpSlExecution: counter 엔트리만 사용.",
+      "description": "execution 종류별 필드 사용:\n- DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).\n- BaseMakeCounterIocAndBalanceExecution (IOC imbalance):\n  - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).\n  - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).\n  - price_source (양 슬롯): 무시. base 가격 = base.side 1호가(=BestMake) 고정,\n    counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.\n- CounterIocTpSlExecution: counter 엔트리만 사용.",
       "title": "페어의 한쪽 엔트리 (단일 심볼 주문 스펙)",
       "required": [
         "symbol",
@@ -875,22 +875,22 @@
         "baseQty": {
           "type": "string",
           "format": "int64",
-          "title": "Base 레그 최종 체결 수량"
+          "title": "Base 슬롯 최종 체결 수량"
         },
         "counterQty": {
           "type": "string",
           "format": "int64",
-          "title": "Counter 레그 최종 체결 수량"
+          "title": "Counter 슬롯 최종 체결 수량"
         },
         "baseFillPrice": {
           "type": "string",
           "format": "int64",
-          "title": "Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)"
+          "title": "Base 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)"
         },
         "counterFillPrice": {
           "type": "string",
           "format": "int64",
-          "title": "Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)"
+          "title": "Counter 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)"
         },
         "triggerToBaseSubmitUs": {
           "type": "string",
@@ -902,20 +902,20 @@
           "format": "int64",
           "title": "IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)\n비IOC 모드 또는 미적용 시 0"
         },
-        "tpslQty": {
+        "exitQty": {
           "type": "string",
           "format": "int64",
-          "title": "round-trip TP/SL 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)"
+          "title": "round-trip exit 슬롯 체결 수량 (CounterIocTpSl 전용; base+counter 실행은 미설정)"
         },
-        "tpslFillPrice": {
+        "exitFillPrice": {
           "type": "string",
           "format": "int64",
-          "title": "TP/SL 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)"
+          "title": "exit 슬롯 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)"
         },
-        "tpslOrderId": {
+        "exitOrderId": {
           "type": "string",
           "format": "uint64",
-          "title": "TP/SL 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)"
+          "title": "exit 슬롯 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)"
         }
       },
       "title": "페어 실행 로그 레코드"
@@ -1010,20 +1010,20 @@
         },
         "base": {
           "$ref": "#/definitions/pairFillStatus",
-          "title": "Base leg 상태"
+          "title": "Base 슬롯 상태"
         },
         "counter": {
           "$ref": "#/definitions/pairFillStatus",
-          "title": "Counter leg 상태"
+          "title": "Counter 슬롯 상태"
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
           "title": "스냅샷 시각"
         },
-        "tpsl": {
+        "exit": {
           "$ref": "#/definitions/pairFillStatus",
-          "description": "TP/SL(청산) leg 상태 — CounterIocTpSl round-trip 전용.\n2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐."
+          "description": "exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.\nbase+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐."
         }
       },
       "title": "StreamPairStatus 스트리밍 응답 — 페어 상태 스냅샷"
@@ -1061,7 +1061,7 @@
           "title": "트리거 후 재트리거까지 대기시간 (ms)"
         }
       },
-      "title": "양 leg 참조가격 비교 트리거"
+      "title": "양 슬롯 참조가격 비교 트리거"
     },
     "pairSpreadDirection": {
       "type": "string",
@@ -1190,7 +1190,7 @@
       "properties": {
         "priceSpread": {
           "$ref": "#/definitions/pairPriceSpreadTrigger",
-          "title": "양 leg 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)"
+          "title": "양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)"
         },
         "bestMakeQuantityImbalance": {
           "$ref": "#/definitions/pairBestMakeQuantityImbalanceTrigger",

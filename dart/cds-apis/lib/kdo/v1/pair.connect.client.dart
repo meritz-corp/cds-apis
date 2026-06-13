@@ -154,7 +154,7 @@ extension type PairServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+  /// Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)
   Stream<kdov1pair.PairStatusUpdate> streamPairStatus(
     kdov1pair.StreamPairStatusRequest input, {
     connect.Headers? headers,

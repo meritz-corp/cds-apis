@@ -584,7 +584,7 @@ func (x *Pair) GetNav() *Nav {
 //   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 //   - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
 //   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
-//   - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
+//   - price_source (양 슬롯): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
 //     counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
 //
 // - CounterIocTpSlExecution: counter 엔트리만 사용.
@@ -1093,7 +1093,7 @@ type isTriggerCondition_Kind interface {
 }
 
 type TriggerCondition_PriceSpread struct {
-	// 양 leg 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
+	// 양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
 	PriceSpread *PriceSpreadTrigger `protobuf:"bytes,1,opt,name=price_spread,json=priceSpread,proto3,oneof"`
 }
 
@@ -1114,7 +1114,7 @@ func (*TriggerCondition_BestMakeQuantityImbalance) isTriggerCondition_Kind() {}
 
 func (*TriggerCondition_TargetNavQuantityImbalance) isTriggerCondition_Kind() {}
 
-// 양 leg 참조가격 비교 트리거
+// 양 슬롯 참조가격 비교 트리거
 type PriceSpreadTrigger struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1459,7 +1459,7 @@ func (x *DualSubmitExecution) GetOrderType() PairOrderType {
 //   - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
 //     정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.
 //   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
-//   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+//   - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),
 //     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 type BaseMakeCounterIocAndBalanceExecution struct {
 	state         protoimpl.MessageState
@@ -1468,10 +1468,10 @@ type BaseMakeCounterIocAndBalanceExecution struct {
 
 	// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
 	RecoveryRatio float64 `protobuf:"fixed64,4,opt,name=recovery_ratio,json=recoveryRatio,proto3" json:"recovery_ratio,omitempty"`
-	// base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
+	// base 슬롯 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
 	// 0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick.
 	BaseRecoveryAggressiveTicks uint32 `protobuf:"varint,7,opt,name=base_recovery_aggressive_ticks,json=baseRecoveryAggressiveTicks,proto3" json:"base_recovery_aggressive_ticks,omitempty"`
-	// counter leg 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
+	// counter 슬롯 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
 	// 0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
 	CounterRecoveryAggressiveTicks uint32 `protobuf:"varint,8,opt,name=counter_recovery_aggressive_ticks,json=counterRecoveryAggressiveTicks,proto3" json:"counter_recovery_aggressive_ticks,omitempty"`
 }
@@ -1628,7 +1628,7 @@ func (x *CounterIocTpSlExecution) GetExitDelayMs() uint64 {
 //   - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
 //   - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
 //   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
-//   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+//   - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),
 //     counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
 type BaseMakeCounterTakeAndBalanceExecution struct {
 	state         protoimpl.MessageState
@@ -2153,13 +2153,13 @@ type PairExecutionLog struct {
 	DispatchedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=dispatched_at,json=dispatchedAt,proto3" json:"dispatched_at,omitempty"`
 	// 상세 내용 (오류 메시지 등, optional)
 	Detail *string `protobuf:"bytes,10,opt,name=detail,proto3,oneof" json:"detail,omitempty"`
-	// Base 레그 최종 체결 수량
+	// Base 슬롯 최종 체결 수량
 	BaseQty int64 `protobuf:"varint,11,opt,name=base_qty,json=baseQty,proto3" json:"base_qty,omitempty"`
-	// Counter 레그 최종 체결 수량
+	// Counter 슬롯 최종 체결 수량
 	CounterQty int64 `protobuf:"varint,12,opt,name=counter_qty,json=counterQty,proto3" json:"counter_qty,omitempty"`
-	// Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+	// Base 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
 	BaseFillPrice int64 `protobuf:"varint,13,opt,name=base_fill_price,json=baseFillPrice,proto3" json:"base_fill_price,omitempty"`
-	// Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+	// Counter 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
 	CounterFillPrice int64 `protobuf:"varint,14,opt,name=counter_fill_price,json=counterFillPrice,proto3" json:"counter_fill_price,omitempty"`
 	// IOC 모드에서 트리거 마켓데이터 수신 시점부터 base 최초 주문 제출 직후까지의 경과 (us)
 	// 비IOC 모드 또는 미적용 시 0
@@ -2167,12 +2167,12 @@ type PairExecutionLog struct {
 	// IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)
 	// 비IOC 모드 또는 미적용 시 0
 	TriggerToCounterSubmitUs int64 `protobuf:"varint,16,opt,name=trigger_to_counter_submit_us,json=triggerToCounterSubmitUs,proto3" json:"trigger_to_counter_submit_us,omitempty"`
-	// round-trip TP/SL 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
-	TpslQty *int64 `protobuf:"varint,17,opt,name=tpsl_qty,json=tpslQty,proto3,oneof" json:"tpsl_qty,omitempty"`
-	// TP/SL 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
-	TpslFillPrice *int64 `protobuf:"varint,18,opt,name=tpsl_fill_price,json=tpslFillPrice,proto3,oneof" json:"tpsl_fill_price,omitempty"`
-	// TP/SL 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
-	TpslOrderId *uint64 `protobuf:"varint,19,opt,name=tpsl_order_id,json=tpslOrderId,proto3,oneof" json:"tpsl_order_id,omitempty"`
+	// round-trip exit 슬롯 체결 수량 (CounterIocTpSl 전용; base+counter 실행은 미설정)
+	ExitQty *int64 `protobuf:"varint,17,opt,name=exit_qty,json=exitQty,proto3,oneof" json:"exit_qty,omitempty"`
+	// exit 슬롯 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+	ExitFillPrice *int64 `protobuf:"varint,18,opt,name=exit_fill_price,json=exitFillPrice,proto3,oneof" json:"exit_fill_price,omitempty"`
+	// exit 슬롯 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+	ExitOrderId *uint64 `protobuf:"varint,19,opt,name=exit_order_id,json=exitOrderId,proto3,oneof" json:"exit_order_id,omitempty"`
 }
 
 func (x *PairExecutionLog) Reset() {
@@ -2319,23 +2319,23 @@ func (x *PairExecutionLog) GetTriggerToCounterSubmitUs() int64 {
 	return 0
 }
 
-func (x *PairExecutionLog) GetTpslQty() int64 {
-	if x != nil && x.TpslQty != nil {
-		return *x.TpslQty
+func (x *PairExecutionLog) GetExitQty() int64 {
+	if x != nil && x.ExitQty != nil {
+		return *x.ExitQty
 	}
 	return 0
 }
 
-func (x *PairExecutionLog) GetTpslFillPrice() int64 {
-	if x != nil && x.TpslFillPrice != nil {
-		return *x.TpslFillPrice
+func (x *PairExecutionLog) GetExitFillPrice() int64 {
+	if x != nil && x.ExitFillPrice != nil {
+		return *x.ExitFillPrice
 	}
 	return 0
 }
 
-func (x *PairExecutionLog) GetTpslOrderId() uint64 {
-	if x != nil && x.TpslOrderId != nil {
-		return *x.TpslOrderId
+func (x *PairExecutionLog) GetExitOrderId() uint64 {
+	if x != nil && x.ExitOrderId != nil {
+		return *x.ExitOrderId
 	}
 	return 0
 }
@@ -2539,7 +2539,7 @@ func (x *StreamPairStatusRequest) GetPair() string {
 	return ""
 }
 
-// 페어 단일 leg 실시간 상태 스냅샷
+// 페어 단일 슬롯 실시간 상태 스냅샷
 // (태그 번호는 클라이언트 UI 계약으로 보존됨)
 type FillStatus struct {
 	state         protoimpl.MessageState
@@ -2624,15 +2624,15 @@ type PairStatusUpdate struct {
 
 	// 리소스 이름 (pairs/{id})
 	Pair string `protobuf:"bytes,1,opt,name=pair,proto3" json:"pair,omitempty"`
-	// Base leg 상태
+	// Base 슬롯 상태
 	Base *FillStatus `protobuf:"bytes,2,opt,name=base,proto3" json:"base,omitempty"`
-	// Counter leg 상태
+	// Counter 슬롯 상태
 	Counter *FillStatus `protobuf:"bytes,3,opt,name=counter,proto3" json:"counter,omitempty"`
 	// 스냅샷 시각
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// TP/SL(청산) leg 상태 — CounterIocTpSl round-trip 전용.
-	// 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
-	Tpsl *FillStatus `protobuf:"bytes,5,opt,name=tpsl,proto3" json:"tpsl,omitempty"`
+	// exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.
+	// base+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+	Exit *FillStatus `protobuf:"bytes,5,opt,name=exit,proto3" json:"exit,omitempty"`
 }
 
 func (x *PairStatusUpdate) Reset() {
@@ -2695,9 +2695,9 @@ func (x *PairStatusUpdate) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *PairStatusUpdate) GetTpsl() *FillStatus {
+func (x *PairStatusUpdate) GetExit() *FillStatus {
 	if x != nil {
-		return x.Tpsl
+		return x.Exit
 	}
 	return nil
 }
@@ -3172,20 +3172,20 @@ var file_kdo_v1_pair_proto_rawDesc = []byte{
 	0x65, 0x72, 0x5f, 0x74, 0x6f, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x5f, 0x73, 0x75,
 	0x62, 0x6d, 0x69, 0x74, 0x5f, 0x75, 0x73, 0x18, 0x10, 0x20, 0x01, 0x28, 0x03, 0x52, 0x18, 0x74,
 	0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x54, 0x6f, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x53,
-	0x75, 0x62, 0x6d, 0x69, 0x74, 0x55, 0x73, 0x12, 0x1e, 0x0a, 0x08, 0x74, 0x70, 0x73, 0x6c, 0x5f,
-	0x71, 0x74, 0x79, 0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x48, 0x03, 0x52, 0x07, 0x74, 0x70, 0x73,
-	0x6c, 0x51, 0x74, 0x79, 0x88, 0x01, 0x01, 0x12, 0x2b, 0x0a, 0x0f, 0x74, 0x70, 0x73, 0x6c, 0x5f,
+	0x75, 0x62, 0x6d, 0x69, 0x74, 0x55, 0x73, 0x12, 0x1e, 0x0a, 0x08, 0x65, 0x78, 0x69, 0x74, 0x5f,
+	0x71, 0x74, 0x79, 0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x48, 0x03, 0x52, 0x07, 0x65, 0x78, 0x69,
+	0x74, 0x51, 0x74, 0x79, 0x88, 0x01, 0x01, 0x12, 0x2b, 0x0a, 0x0f, 0x65, 0x78, 0x69, 0x74, 0x5f,
 	0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x12, 0x20, 0x01, 0x28, 0x03,
-	0x48, 0x04, 0x52, 0x0d, 0x74, 0x70, 0x73, 0x6c, 0x46, 0x69, 0x6c, 0x6c, 0x50, 0x72, 0x69, 0x63,
-	0x65, 0x88, 0x01, 0x01, 0x12, 0x27, 0x0a, 0x0d, 0x74, 0x70, 0x73, 0x6c, 0x5f, 0x6f, 0x72, 0x64,
-	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x13, 0x20, 0x01, 0x28, 0x04, 0x48, 0x05, 0x52, 0x0b, 0x74,
-	0x70, 0x73, 0x6c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x88, 0x01, 0x01, 0x42, 0x10, 0x0a,
+	0x48, 0x04, 0x52, 0x0d, 0x65, 0x78, 0x69, 0x74, 0x46, 0x69, 0x6c, 0x6c, 0x50, 0x72, 0x69, 0x63,
+	0x65, 0x88, 0x01, 0x01, 0x12, 0x27, 0x0a, 0x0d, 0x65, 0x78, 0x69, 0x74, 0x5f, 0x6f, 0x72, 0x64,
+	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x13, 0x20, 0x01, 0x28, 0x04, 0x48, 0x05, 0x52, 0x0b, 0x65,
+	0x78, 0x69, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x88, 0x01, 0x01, 0x42, 0x10, 0x0a,
 	0x0e, 0x5f, 0x62, 0x61, 0x73, 0x65, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x42,
 	0x13, 0x0a, 0x11, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x5f, 0x6f, 0x72, 0x64, 0x65,
 	0x72, 0x5f, 0x69, 0x64, 0x42, 0x09, 0x0a, 0x07, 0x5f, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x42,
-	0x0b, 0x0a, 0x09, 0x5f, 0x74, 0x70, 0x73, 0x6c, 0x5f, 0x71, 0x74, 0x79, 0x42, 0x12, 0x0a, 0x10,
-	0x5f, 0x74, 0x70, 0x73, 0x6c, 0x5f, 0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65,
-	0x42, 0x10, 0x0a, 0x0e, 0x5f, 0x74, 0x70, 0x73, 0x6c, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f,
+	0x0b, 0x0a, 0x09, 0x5f, 0x65, 0x78, 0x69, 0x74, 0x5f, 0x71, 0x74, 0x79, 0x42, 0x12, 0x0a, 0x10,
+	0x5f, 0x65, 0x78, 0x69, 0x74, 0x5f, 0x66, 0x69, 0x6c, 0x6c, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65,
+	0x42, 0x10, 0x0a, 0x0e, 0x5f, 0x65, 0x78, 0x69, 0x74, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f,
 	0x69, 0x64, 0x22, 0x92, 0x02, 0x0a, 0x1c, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x61, 0x69, 0x72, 0x45,
 	0x78, 0x65, 0x63, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x6f, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x31, 0x0a, 0x04, 0x70, 0x61, 0x69, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
@@ -3243,9 +3243,9 @@ var file_kdo_v1_pair_proto_rawDesc = []byte{
 	0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
 	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65,
 	0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74,
-	0x12, 0x2b, 0x0a, 0x04, 0x74, 0x70, 0x73, 0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17,
+	0x12, 0x2b, 0x0a, 0x04, 0x65, 0x78, 0x69, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17,
 	0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x70, 0x61, 0x69, 0x72, 0x2e, 0x46, 0x69, 0x6c,
-	0x6c, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x04, 0x74, 0x70, 0x73, 0x6c, 0x22, 0x49, 0x0a,
+	0x6c, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x04, 0x65, 0x78, 0x69, 0x74, 0x22, 0x49, 0x0a,
 	0x18, 0x47, 0x65, 0x74, 0x50, 0x61, 0x69, 0x72, 0x53, 0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69,
 	0x63, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2d, 0x0a, 0x04, 0x70, 0x61, 0x69,
 	0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x19, 0xfa, 0x41, 0x16, 0x0a, 0x14, 0x6b, 0x64,
@@ -3514,7 +3514,7 @@ var file_kdo_v1_pair_proto_depIdxs = []int32{
 	35, // 32: kdo.v1.pair.PairStatusUpdate.base:type_name -> kdo.v1.pair.FillStatus
 	35, // 33: kdo.v1.pair.PairStatusUpdate.counter:type_name -> kdo.v1.pair.FillStatus
 	39, // 34: kdo.v1.pair.PairStatusUpdate.updated_at:type_name -> google.protobuf.Timestamp
-	35, // 35: kdo.v1.pair.PairStatusUpdate.tpsl:type_name -> kdo.v1.pair.FillStatus
+	35, // 35: kdo.v1.pair.PairStatusUpdate.exit:type_name -> kdo.v1.pair.FillStatus
 	23, // 36: kdo.v1.pair.PairService.GetPair:input_type -> kdo.v1.pair.GetPairRequest
 	24, // 37: kdo.v1.pair.PairService.ListPairs:input_type -> kdo.v1.pair.ListPairsRequest
 	26, // 38: kdo.v1.pair.PairService.CreatePair:input_type -> kdo.v1.pair.CreatePairRequest

@@ -236,7 +236,7 @@ class Pair extends $pb.GeneratedMessage {
 ///   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 ///   - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
 ///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
-///   - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
+///   - price_source (양 슬롯): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
 ///     counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
 /// - CounterIocTpSlExecution: counter 엔트리만 사용.
 class PairEntry extends $pb.GeneratedMessage {
@@ -754,7 +754,7 @@ class TriggerCondition extends $pb.GeneratedMessage {
   TriggerCondition_Kind whichKind() => _TriggerCondition_KindByTag[$_whichOneof(0)]!;
   void clearKind() => $_clearField($_whichOneof(0));
 
-  /// 양 leg 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
+  /// 양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
   @$pb.TagNumber(1)
   PriceSpreadTrigger get priceSpread => $_getN(0);
   @$pb.TagNumber(1)
@@ -792,7 +792,7 @@ class TriggerCondition extends $pb.GeneratedMessage {
   TargetNavQuantityImbalanceTrigger ensureTargetNavQuantityImbalance() => $_ensure(2);
 }
 
-/// 양 leg 참조가격 비교 트리거
+/// 양 슬롯 참조가격 비교 트리거
 class PriceSpreadTrigger extends $pb.GeneratedMessage {
   factory PriceSpreadTrigger({
     PairCondition? condition,
@@ -1147,7 +1147,7 @@ class DualSubmitExecution extends $pb.GeneratedMessage {
 ///   - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
 ///     정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.
 ///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
-///   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///   - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),
 ///     counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 class BaseMakeCounterIocAndBalanceExecution extends $pb.GeneratedMessage {
   factory BaseMakeCounterIocAndBalanceExecution({
@@ -1201,7 +1201,7 @@ class BaseMakeCounterIocAndBalanceExecution extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearRecoveryRatio() => $_clearField(4);
 
-  /// base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
+  /// base 슬롯 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
   /// 0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(7)
   $core.int get baseRecoveryAggressiveTicks => $_getIZ(1);
@@ -1212,7 +1212,7 @@ class BaseMakeCounterIocAndBalanceExecution extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearBaseRecoveryAggressiveTicks() => $_clearField(7);
 
-  /// counter leg 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
+  /// counter 슬롯 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
   /// 0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
   @$pb.TagNumber(8)
   $core.int get counterRecoveryAggressiveTicks => $_getIZ(2);
@@ -1338,7 +1338,7 @@ class CounterIocTpSlExecution extends $pb.GeneratedMessage {
 ///   - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
 ///   - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
 ///   - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
-///   - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///   - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),
 ///     counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
 class BaseMakeCounterTakeAndBalanceExecution extends $pb.GeneratedMessage {
   factory BaseMakeCounterTakeAndBalanceExecution({
@@ -1869,9 +1869,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? counterFillPrice,
     $fixnum.Int64? triggerToBaseSubmitUs,
     $fixnum.Int64? triggerToCounterSubmitUs,
-    $fixnum.Int64? tpslQty,
-    $fixnum.Int64? tpslFillPrice,
-    $fixnum.Int64? tpslOrderId,
+    $fixnum.Int64? exitQty,
+    $fixnum.Int64? exitFillPrice,
+    $fixnum.Int64? exitOrderId,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1890,9 +1890,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (counterFillPrice != null) result.counterFillPrice = counterFillPrice;
     if (triggerToBaseSubmitUs != null) result.triggerToBaseSubmitUs = triggerToBaseSubmitUs;
     if (triggerToCounterSubmitUs != null) result.triggerToCounterSubmitUs = triggerToCounterSubmitUs;
-    if (tpslQty != null) result.tpslQty = tpslQty;
-    if (tpslFillPrice != null) result.tpslFillPrice = tpslFillPrice;
-    if (tpslOrderId != null) result.tpslOrderId = tpslOrderId;
+    if (exitQty != null) result.exitQty = exitQty;
+    if (exitFillPrice != null) result.exitFillPrice = exitFillPrice;
+    if (exitOrderId != null) result.exitOrderId = exitOrderId;
     return result;
   }
 
@@ -1918,9 +1918,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..aInt64(14, _omitFieldNames ? '' : 'counterFillPrice')
     ..aInt64(15, _omitFieldNames ? '' : 'triggerToBaseSubmitUs')
     ..aInt64(16, _omitFieldNames ? '' : 'triggerToCounterSubmitUs')
-    ..aInt64(17, _omitFieldNames ? '' : 'tpslQty')
-    ..aInt64(18, _omitFieldNames ? '' : 'tpslFillPrice')
-    ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'tpslOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(17, _omitFieldNames ? '' : 'exitQty')
+    ..aInt64(18, _omitFieldNames ? '' : 'exitFillPrice')
+    ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'exitOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -2043,7 +2043,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearDetail() => $_clearField(10);
 
-  /// Base 레그 최종 체결 수량
+  /// Base 슬롯 최종 체결 수량
   @$pb.TagNumber(11)
   $fixnum.Int64 get baseQty => $_getI64(10);
   @$pb.TagNumber(11)
@@ -2053,7 +2053,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   void clearBaseQty() => $_clearField(11);
 
-  /// Counter 레그 최종 체결 수량
+  /// Counter 슬롯 최종 체결 수량
   @$pb.TagNumber(12)
   $fixnum.Int64 get counterQty => $_getI64(11);
   @$pb.TagNumber(12)
@@ -2063,7 +2063,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   void clearCounterQty() => $_clearField(12);
 
-  /// Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+  /// Base 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
   @$pb.TagNumber(13)
   $fixnum.Int64 get baseFillPrice => $_getI64(12);
   @$pb.TagNumber(13)
@@ -2073,7 +2073,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearBaseFillPrice() => $_clearField(13);
 
-  /// Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+  /// Counter 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
   @$pb.TagNumber(14)
   $fixnum.Int64 get counterFillPrice => $_getI64(13);
   @$pb.TagNumber(14)
@@ -2105,35 +2105,35 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(16)
   void clearTriggerToCounterSubmitUs() => $_clearField(16);
 
-  /// round-trip TP/SL 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+  /// round-trip exit 슬롯 체결 수량 (CounterIocTpSl 전용; base+counter 실행은 미설정)
   @$pb.TagNumber(17)
-  $fixnum.Int64 get tpslQty => $_getI64(16);
+  $fixnum.Int64 get exitQty => $_getI64(16);
   @$pb.TagNumber(17)
-  set tpslQty($fixnum.Int64 value) => $_setInt64(16, value);
+  set exitQty($fixnum.Int64 value) => $_setInt64(16, value);
   @$pb.TagNumber(17)
-  $core.bool hasTpslQty() => $_has(16);
+  $core.bool hasExitQty() => $_has(16);
   @$pb.TagNumber(17)
-  void clearTpslQty() => $_clearField(17);
+  void clearExitQty() => $_clearField(17);
 
-  /// TP/SL 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+  /// exit 슬롯 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
   @$pb.TagNumber(18)
-  $fixnum.Int64 get tpslFillPrice => $_getI64(17);
+  $fixnum.Int64 get exitFillPrice => $_getI64(17);
   @$pb.TagNumber(18)
-  set tpslFillPrice($fixnum.Int64 value) => $_setInt64(17, value);
+  set exitFillPrice($fixnum.Int64 value) => $_setInt64(17, value);
   @$pb.TagNumber(18)
-  $core.bool hasTpslFillPrice() => $_has(17);
+  $core.bool hasExitFillPrice() => $_has(17);
   @$pb.TagNumber(18)
-  void clearTpslFillPrice() => $_clearField(18);
+  void clearExitFillPrice() => $_clearField(18);
 
-  /// TP/SL 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+  /// exit 슬롯 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
   @$pb.TagNumber(19)
-  $fixnum.Int64 get tpslOrderId => $_getI64(18);
+  $fixnum.Int64 get exitOrderId => $_getI64(18);
   @$pb.TagNumber(19)
-  set tpslOrderId($fixnum.Int64 value) => $_setInt64(18, value);
+  set exitOrderId($fixnum.Int64 value) => $_setInt64(18, value);
   @$pb.TagNumber(19)
-  $core.bool hasTpslOrderId() => $_has(18);
+  $core.bool hasExitOrderId() => $_has(18);
   @$pb.TagNumber(19)
-  void clearTpslOrderId() => $_clearField(19);
+  void clearExitOrderId() => $_clearField(19);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
@@ -2350,7 +2350,7 @@ class StreamPairStatusRequest extends $pb.GeneratedMessage {
   void clearPair() => $_clearField(1);
 }
 
-/// 페어 단일 leg 실시간 상태 스냅샷
+/// 페어 단일 슬롯 실시간 상태 스냅샷
 /// (태그 번호는 클라이언트 UI 계약으로 보존됨)
 class FillStatus extends $pb.GeneratedMessage {
   factory FillStatus({
@@ -2445,14 +2445,14 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
     FillStatus? base,
     FillStatus? counter,
     $2.Timestamp? updatedAt,
-    FillStatus? tpsl,
+    FillStatus? exit,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
     if (base != null) result.base = base;
     if (counter != null) result.counter = counter;
     if (updatedAt != null) result.updatedAt = updatedAt;
-    if (tpsl != null) result.tpsl = tpsl;
+    if (exit != null) result.exit = exit;
     return result;
   }
 
@@ -2466,7 +2466,7 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
     ..aOM<FillStatus>(2, _omitFieldNames ? '' : 'base', subBuilder: FillStatus.create)
     ..aOM<FillStatus>(3, _omitFieldNames ? '' : 'counter', subBuilder: FillStatus.create)
     ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
-    ..aOM<FillStatus>(5, _omitFieldNames ? '' : 'tpsl', subBuilder: FillStatus.create)
+    ..aOM<FillStatus>(5, _omitFieldNames ? '' : 'exit', subBuilder: FillStatus.create)
     ..hasRequiredFields = false
   ;
 
@@ -2497,7 +2497,7 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPair() => $_clearField(1);
 
-  /// Base leg 상태
+  /// Base 슬롯 상태
   @$pb.TagNumber(2)
   FillStatus get base => $_getN(1);
   @$pb.TagNumber(2)
@@ -2509,7 +2509,7 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   FillStatus ensureBase() => $_ensure(1);
 
-  /// Counter leg 상태
+  /// Counter 슬롯 상태
   @$pb.TagNumber(3)
   FillStatus get counter => $_getN(2);
   @$pb.TagNumber(3)
@@ -2533,18 +2533,18 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $2.Timestamp ensureUpdatedAt() => $_ensure(3);
 
-  /// TP/SL(청산) leg 상태 — CounterIocTpSl round-trip 전용.
-  /// 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+  /// exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.
+  /// base+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
   @$pb.TagNumber(5)
-  FillStatus get tpsl => $_getN(4);
+  FillStatus get exit => $_getN(4);
   @$pb.TagNumber(5)
-  set tpsl(FillStatus value) => $_setField(5, value);
+  set exit(FillStatus value) => $_setField(5, value);
   @$pb.TagNumber(5)
-  $core.bool hasTpsl() => $_has(4);
+  $core.bool hasExit() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTpsl() => $_clearField(5);
+  void clearExit() => $_clearField(5);
   @$pb.TagNumber(5)
-  FillStatus ensureTpsl() => $_ensure(4);
+  FillStatus ensureExit() => $_ensure(4);
 }
 
 /// GetPairStatistics 요청

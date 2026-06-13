@@ -58,7 +58,7 @@ pub struct Pair {
 ///    - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 ///    - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
 ///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).
-///    - price_source (양 leg): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
+///    - price_source (양 슬롯): 무시. base 가격 = base.side 1호가(=BestMake) 고정,
 ///      counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.
 /// - CounterIocTpSlExecution: counter 엔트리만 사용.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -172,7 +172,7 @@ pub mod trigger_condition {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Kind {
-        /// 양 leg 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
+        /// 양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
         #[prost(message, tag="1")]
         PriceSpread(super::PriceSpreadTrigger),
         /// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
@@ -184,7 +184,7 @@ pub mod trigger_condition {
         TargetNavQuantityImbalance(super::TargetNavQuantityImbalanceTrigger),
     }
 }
-/// 양 leg 참조가격 비교 트리거
+/// 양 슬롯 참조가격 비교 트리거
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PriceSpreadTrigger {
@@ -263,7 +263,7 @@ pub struct DualSubmitExecution {
 ///    - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
 ///      정방향 ETF → counter.side = base.side 반대, 역방향 ETF → counter.side = base.side 와 동일.
 ///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
-///    - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///    - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),
 ///      counter 가격은 NAV 기반 BEP. 서버에서 UNSPECIFIED 로 정규화한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -271,11 +271,11 @@ pub struct BaseMakeCounterIocAndBalanceExecution {
     /// base 측 잔량 비율이 이 값을 초과하면 base 공격적 정정→강제 체결
     #[prost(double, tag="4")]
     pub recovery_ratio: f64,
-    /// base leg 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
+    /// base 슬롯 공격적 정정 시 상대호가(cross price) 보다 얼마나 더 공격적으로 낼지 (tick 단위).
     /// 0 이면 상대호가/ref 그대로. Bid 면 +N*tick, Ask 면 -N*tick.
     #[prost(uint32, tag="7")]
     pub base_recovery_aggressive_ticks: u32,
-    /// counter leg 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
+    /// counter 슬롯 공격적 정정 시 상대호가에서 얼마나 더 공격적으로 낼지 (tick 단위).
     /// 0 이면 BEP 그대로. counter.side 가 Bid 면 +N*tick, Ask 면 -N*tick.
     #[prost(uint32, tag="8")]
     pub counter_recovery_aggressive_ticks: u32,
@@ -314,7 +314,7 @@ pub struct CounterIocTpSlExecution {
 ///    - base.symbol / base.fund_code / base.side / base.quantity: 사용 (필수).
 ///    - counter.symbol / counter.fund_code / counter.side: 사용 (필수, 사용자가 직접 지정).
 ///    - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio). 0 으로 비워도 된다.
-///    - PairEntry.price_source (양 leg): 무시. base 가격은 base.side 의 1호가(=BestMake),
+///    - PairEntry.price_source (양 슬롯): 무시. base 가격은 base.side 의 1호가(=BestMake),
 ///      counter 가격은 상대호가 ± counter_aggressive_ticks. 서버에서 UNSPECIFIED 로 정규화한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -454,16 +454,16 @@ pub struct PairExecutionLog {
     /// 상세 내용 (오류 메시지 등, optional)
     #[prost(string, optional, tag="10")]
     pub detail: ::core::option::Option<::prost::alloc::string::String>,
-    /// Base 레그 최종 체결 수량
+    /// Base 슬롯 최종 체결 수량
     #[prost(int64, tag="11")]
     pub base_qty: i64,
-    /// Counter 레그 최종 체결 수량
+    /// Counter 슬롯 최종 체결 수량
     #[prost(int64, tag="12")]
     pub counter_qty: i64,
-    /// Base 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+    /// Base 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
     #[prost(int64, tag="13")]
     pub base_fill_price: i64,
-    /// Counter 레그 실제 평균 체결가 (원, raw int64; 미체결이면 0)
+    /// Counter 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
     #[prost(int64, tag="14")]
     pub counter_fill_price: i64,
     /// IOC 모드에서 트리거 마켓데이터 수신 시점부터 base 최초 주문 제출 직후까지의 경과 (us)
@@ -474,15 +474,15 @@ pub struct PairExecutionLog {
     /// 비IOC 모드 또는 미적용 시 0
     #[prost(int64, tag="16")]
     pub trigger_to_counter_submit_us: i64,
-    /// round-trip TP/SL 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+    /// round-trip exit 슬롯 체결 수량 (CounterIocTpSl 전용; base+counter 실행은 미설정)
     #[prost(int64, optional, tag="17")]
-    pub tpsl_qty: ::core::option::Option<i64>,
-    /// TP/SL 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+    pub exit_qty: ::core::option::Option<i64>,
+    /// exit 슬롯 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
     #[prost(int64, optional, tag="18")]
-    pub tpsl_fill_price: ::core::option::Option<i64>,
-    /// TP/SL 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+    pub exit_fill_price: ::core::option::Option<i64>,
+    /// exit 슬롯 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
     #[prost(uint64, optional, tag="19")]
-    pub tpsl_order_id: ::core::option::Option<u64>,
+    pub exit_order_id: ::core::option::Option<u64>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -528,7 +528,7 @@ pub struct StreamPairStatusRequest {
     #[prost(string, tag="1")]
     pub pair: ::prost::alloc::string::String,
 }
-/// 페어 단일 leg 실시간 상태 스냅샷
+/// 페어 단일 슬롯 실시간 상태 스냅샷
 /// (태그 번호는 클라이언트 UI 계약으로 보존됨)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -553,19 +553,19 @@ pub struct PairStatusUpdate {
     /// 리소스 이름 (pairs/{id})
     #[prost(string, tag="1")]
     pub pair: ::prost::alloc::string::String,
-    /// Base leg 상태
+    /// Base 슬롯 상태
     #[prost(message, optional, tag="2")]
     pub base: ::core::option::Option<FillStatus>,
-    /// Counter leg 상태
+    /// Counter 슬롯 상태
     #[prost(message, optional, tag="3")]
     pub counter: ::core::option::Option<FillStatus>,
     /// 스냅샷 시각
     #[prost(message, optional, tag="4")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// TP/SL(청산) leg 상태 — CounterIocTpSl round-trip 전용.
-    /// 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+    /// exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.
+    /// base+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
     #[prost(message, optional, tag="5")]
-    pub tpsl: ::core::option::Option<FillStatus>,
+    pub exit: ::core::option::Option<FillStatus>,
 }
 // ============================================================================
 // Pair Statistics

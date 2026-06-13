@@ -39,7 +39,7 @@ type PairServiceClient interface {
 	PausePair(ctx context.Context, in *PausePairRequest, opts ...grpc.CallOption) (*Pair, error)
 	// Pair 실행 로그 목록 조회 (사이클별 기록, 페이징)
 	ListPairExecutionLogs(ctx context.Context, in *ListPairExecutionLogsRequest, opts ...grpc.CallOption) (*ListPairExecutionLogsResponse, error)
-	// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+	// Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)
 	StreamPairStatus(ctx context.Context, in *StreamPairStatusRequest, opts ...grpc.CallOption) (PairService_StreamPairStatusClient, error)
 	// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
 	GetPairStatistics(ctx context.Context, in *GetPairStatisticsRequest, opts ...grpc.CallOption) (*PairStatistics, error)
@@ -186,7 +186,7 @@ type PairServiceServer interface {
 	PausePair(context.Context, *PausePairRequest) (*Pair, error)
 	// Pair 실행 로그 목록 조회 (사이클별 기록, 페이징)
 	ListPairExecutionLogs(context.Context, *ListPairExecutionLogsRequest) (*ListPairExecutionLogsResponse, error)
-	// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+	// Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)
 	StreamPairStatus(*StreamPairStatusRequest, PairService_StreamPairStatusServer) error
 	// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
 	GetPairStatistics(context.Context, *GetPairStatisticsRequest) (*PairStatistics, error)

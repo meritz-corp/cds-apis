@@ -74,7 +74,7 @@ class PairServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listPairExecutionLogs, request, options: options);
   }
 
-  /// Pair 실시간 leg 상태 스트리밍 (카운터 변경 시마다 emit)
+  /// Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)
   $grpc.ResponseStream<$0.PairStatusUpdate> streamPairStatus($0.StreamPairStatusRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamPairStatus, $async.Stream.fromIterable([request]), options: options);
   }
