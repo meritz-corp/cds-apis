@@ -1058,6 +1058,172 @@ impl<'de> serde::Deserialize<'de> for EtfNavKind {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for FillStatus {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.FillStatus", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("unfilled_quantity", ToString::to_string(&self.unfilled_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("filled_quantity", ToString::to_string(&self.filled_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("avg_fill_price", ToString::to_string(&self.avg_fill_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("submitted_quantity", ToString::to_string(&self.submitted_quantity).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FillStatus {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "unfilled_quantity",
+            "unfilledQuantity",
+            "filled_quantity",
+            "filledQuantity",
+            "avg_fill_price",
+            "avgFillPrice",
+            "submitted_quantity",
+            "submittedQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            UnfilledQuantity,
+            FilledQuantity,
+            AvgFillPrice,
+            SubmittedQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "unfilledQuantity" | "unfilled_quantity" => Ok(GeneratedField::UnfilledQuantity),
+                            "filledQuantity" | "filled_quantity" => Ok(GeneratedField::FilledQuantity),
+                            "avgFillPrice" | "avg_fill_price" => Ok(GeneratedField::AvgFillPrice),
+                            "submittedQuantity" | "submitted_quantity" => Ok(GeneratedField::SubmittedQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FillStatus;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.FillStatus")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FillStatus, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut unfilled_quantity__ = None;
+                let mut filled_quantity__ = None;
+                let mut avg_fill_price__ = None;
+                let mut submitted_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::UnfilledQuantity => {
+                            if unfilled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unfilledQuantity"));
+                            }
+                            unfilled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FilledQuantity => {
+                            if filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledQuantity"));
+                            }
+                            filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AvgFillPrice => {
+                            if avg_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("avgFillPrice"));
+                            }
+                            avg_fill_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SubmittedQuantity => {
+                            if submitted_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("submittedQuantity"));
+                            }
+                            submitted_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FillStatus {
+                    unfilled_quantity: unfilled_quantity__.unwrap_or_default(),
+                    filled_quantity: filled_quantity__.unwrap_or_default(),
+                    avg_fill_price: avg_fill_price__.unwrap_or_default(),
+                    submitted_quantity: submitted_quantity__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.FillStatus", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for GetPairRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1246,172 +1412,6 @@ impl<'de> serde::Deserialize<'de> for GetPairStatisticsRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair.GetPairStatisticsRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for LegStatus {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.LegStatus", len)?;
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("unfilled_quantity", ToString::to_string(&self.unfilled_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("filled_quantity", ToString::to_string(&self.filled_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("avg_fill_price", ToString::to_string(&self.avg_fill_price).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("submitted_quantity", ToString::to_string(&self.submitted_quantity).as_str())?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for LegStatus {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "unfilled_quantity",
-            "unfilledQuantity",
-            "filled_quantity",
-            "filledQuantity",
-            "avg_fill_price",
-            "avgFillPrice",
-            "submitted_quantity",
-            "submittedQuantity",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            UnfilledQuantity,
-            FilledQuantity,
-            AvgFillPrice,
-            SubmittedQuantity,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "unfilledQuantity" | "unfilled_quantity" => Ok(GeneratedField::UnfilledQuantity),
-                            "filledQuantity" | "filled_quantity" => Ok(GeneratedField::FilledQuantity),
-                            "avgFillPrice" | "avg_fill_price" => Ok(GeneratedField::AvgFillPrice),
-                            "submittedQuantity" | "submitted_quantity" => Ok(GeneratedField::SubmittedQuantity),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = LegStatus;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.pair.LegStatus")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LegStatus, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut unfilled_quantity__ = None;
-                let mut filled_quantity__ = None;
-                let mut avg_fill_price__ = None;
-                let mut submitted_quantity__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::UnfilledQuantity => {
-                            if unfilled_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("unfilledQuantity"));
-                            }
-                            unfilled_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::FilledQuantity => {
-                            if filled_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("filledQuantity"));
-                            }
-                            filled_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AvgFillPrice => {
-                            if avg_fill_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("avgFillPrice"));
-                            }
-                            avg_fill_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SubmittedQuantity => {
-                            if submitted_quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("submittedQuantity"));
-                            }
-                            submitted_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(LegStatus {
-                    unfilled_quantity: unfilled_quantity__.unwrap_or_default(),
-                    filled_quantity: filled_quantity__.unwrap_or_default(),
-                    avg_fill_price: avg_fill_price__.unwrap_or_default(),
-                    submitted_quantity: submitted_quantity__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.pair.LegStatus", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListPairExecutionLogsRequest {
@@ -2981,20 +2981,20 @@ impl serde::Serialize for PairExecutionLog {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("trigger_to_counter_submit_us", ToString::to_string(&self.trigger_to_counter_submit_us).as_str())?;
         }
-        if let Some(v) = self.exit_qty.as_ref() {
+        if let Some(v) = self.tpsl_qty.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("exit_qty", ToString::to_string(&v).as_str())?;
+            struct_ser.serialize_field("tpsl_qty", ToString::to_string(&v).as_str())?;
         }
-        if let Some(v) = self.exit_fill_price.as_ref() {
+        if let Some(v) = self.tpsl_fill_price.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("exit_fill_price", ToString::to_string(&v).as_str())?;
+            struct_ser.serialize_field("tpsl_fill_price", ToString::to_string(&v).as_str())?;
         }
-        if let Some(v) = self.exit_order_id.as_ref() {
+        if let Some(v) = self.tpsl_order_id.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("exit_order_id", ToString::to_string(&v).as_str())?;
+            struct_ser.serialize_field("tpsl_order_id", ToString::to_string(&v).as_str())?;
         }
         struct_ser.end()
     }
@@ -3034,12 +3034,12 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "triggerToBaseSubmitUs",
             "trigger_to_counter_submit_us",
             "triggerToCounterSubmitUs",
-            "exit_qty",
-            "exitQty",
-            "exit_fill_price",
-            "exitFillPrice",
-            "exit_order_id",
-            "exitOrderId",
+            "tpsl_qty",
+            "tpslQty",
+            "tpsl_fill_price",
+            "tpslFillPrice",
+            "tpsl_order_id",
+            "tpslOrderId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3060,9 +3060,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             CounterFillPrice,
             TriggerToBaseSubmitUs,
             TriggerToCounterSubmitUs,
-            ExitQty,
-            ExitFillPrice,
-            ExitOrderId,
+            TpslQty,
+            TpslFillPrice,
+            TpslOrderId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3101,9 +3101,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "counterFillPrice" | "counter_fill_price" => Ok(GeneratedField::CounterFillPrice),
                             "triggerToBaseSubmitUs" | "trigger_to_base_submit_us" => Ok(GeneratedField::TriggerToBaseSubmitUs),
                             "triggerToCounterSubmitUs" | "trigger_to_counter_submit_us" => Ok(GeneratedField::TriggerToCounterSubmitUs),
-                            "exitQty" | "exit_qty" => Ok(GeneratedField::ExitQty),
-                            "exitFillPrice" | "exit_fill_price" => Ok(GeneratedField::ExitFillPrice),
-                            "exitOrderId" | "exit_order_id" => Ok(GeneratedField::ExitOrderId),
+                            "tpslQty" | "tpsl_qty" => Ok(GeneratedField::TpslQty),
+                            "tpslFillPrice" | "tpsl_fill_price" => Ok(GeneratedField::TpslFillPrice),
+                            "tpslOrderId" | "tpsl_order_id" => Ok(GeneratedField::TpslOrderId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3139,9 +3139,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut counter_fill_price__ = None;
                 let mut trigger_to_base_submit_us__ = None;
                 let mut trigger_to_counter_submit_us__ = None;
-                let mut exit_qty__ = None;
-                let mut exit_fill_price__ = None;
-                let mut exit_order_id__ = None;
+                let mut tpsl_qty__ = None;
+                let mut tpsl_fill_price__ = None;
+                let mut tpsl_order_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairId => {
@@ -3264,27 +3264,27 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::ExitQty => {
-                            if exit_qty__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("exitQty"));
+                        GeneratedField::TpslQty => {
+                            if tpsl_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tpslQty"));
                             }
-                            exit_qty__ = 
+                            tpsl_qty__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::ExitFillPrice => {
-                            if exit_fill_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("exitFillPrice"));
+                        GeneratedField::TpslFillPrice => {
+                            if tpsl_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tpslFillPrice"));
                             }
-                            exit_fill_price__ = 
+                            tpsl_fill_price__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::ExitOrderId => {
-                            if exit_order_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("exitOrderId"));
+                        GeneratedField::TpslOrderId => {
+                            if tpsl_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tpslOrderId"));
                             }
-                            exit_order_id__ = 
+                            tpsl_order_id__ = 
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
@@ -3310,9 +3310,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     counter_fill_price: counter_fill_price__.unwrap_or_default(),
                     trigger_to_base_submit_us: trigger_to_base_submit_us__.unwrap_or_default(),
                     trigger_to_counter_submit_us: trigger_to_counter_submit_us__.unwrap_or_default(),
-                    exit_qty: exit_qty__,
-                    exit_fill_price: exit_fill_price__,
-                    exit_order_id: exit_order_id__,
+                    tpsl_qty: tpsl_qty__,
+                    tpsl_fill_price: tpsl_fill_price__,
+                    tpsl_order_id: tpsl_order_id__,
                 })
             }
         }
@@ -3855,8 +3855,8 @@ impl serde::Serialize for PairStatusUpdate {
         if let Some(v) = self.updated_at.as_ref() {
             struct_ser.serialize_field("updated_at", v)?;
         }
-        if let Some(v) = self.exit.as_ref() {
-            struct_ser.serialize_field("exit", v)?;
+        if let Some(v) = self.tpsl.as_ref() {
+            struct_ser.serialize_field("tpsl", v)?;
         }
         struct_ser.end()
     }
@@ -3873,7 +3873,7 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
             "counter",
             "updated_at",
             "updatedAt",
-            "exit",
+            "tpsl",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3882,7 +3882,7 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
             Base,
             Counter,
             UpdatedAt,
-            Exit,
+            Tpsl,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3909,7 +3909,7 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                             "base" => Ok(GeneratedField::Base),
                             "counter" => Ok(GeneratedField::Counter),
                             "updatedAt" | "updated_at" => Ok(GeneratedField::UpdatedAt),
-                            "exit" => Ok(GeneratedField::Exit),
+                            "tpsl" => Ok(GeneratedField::Tpsl),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3933,7 +3933,7 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                 let mut base__ = None;
                 let mut counter__ = None;
                 let mut updated_at__ = None;
-                let mut exit__ = None;
+                let mut tpsl__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pair => {
@@ -3960,11 +3960,11 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                             }
                             updated_at__ = map_.next_value()?;
                         }
-                        GeneratedField::Exit => {
-                            if exit__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("exit"));
+                        GeneratedField::Tpsl => {
+                            if tpsl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tpsl"));
                             }
-                            exit__ = map_.next_value()?;
+                            tpsl__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -3976,7 +3976,7 @@ impl<'de> serde::Deserialize<'de> for PairStatusUpdate {
                     base: base__,
                     counter: counter__,
                     updated_at: updated_at__,
-                    exit: exit__,
+                    tpsl: tpsl__,
                 })
             }
         }

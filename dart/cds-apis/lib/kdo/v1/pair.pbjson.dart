@@ -608,17 +608,17 @@ const PairExecutionLog$json = {
     {'1': 'counter_fill_price', '3': 14, '4': 1, '5': 3, '10': 'counterFillPrice'},
     {'1': 'trigger_to_base_submit_us', '3': 15, '4': 1, '5': 3, '10': 'triggerToBaseSubmitUs'},
     {'1': 'trigger_to_counter_submit_us', '3': 16, '4': 1, '5': 3, '10': 'triggerToCounterSubmitUs'},
-    {'1': 'exit_qty', '3': 17, '4': 1, '5': 3, '9': 3, '10': 'exitQty', '17': true},
-    {'1': 'exit_fill_price', '3': 18, '4': 1, '5': 3, '9': 4, '10': 'exitFillPrice', '17': true},
-    {'1': 'exit_order_id', '3': 19, '4': 1, '5': 4, '9': 5, '10': 'exitOrderId', '17': true},
+    {'1': 'tpsl_qty', '3': 17, '4': 1, '5': 3, '9': 3, '10': 'tpslQty', '17': true},
+    {'1': 'tpsl_fill_price', '3': 18, '4': 1, '5': 3, '9': 4, '10': 'tpslFillPrice', '17': true},
+    {'1': 'tpsl_order_id', '3': 19, '4': 1, '5': 4, '9': 5, '10': 'tpslOrderId', '17': true},
   ],
   '8': [
     {'1': '_base_order_id'},
     {'1': '_counter_order_id'},
     {'1': '_detail'},
-    {'1': '_exit_qty'},
-    {'1': '_exit_fill_price'},
-    {'1': '_exit_order_id'},
+    {'1': '_tpsl_qty'},
+    {'1': '_tpsl_fill_price'},
+    {'1': '_tpsl_order_id'},
   ],
 };
 
@@ -636,10 +636,10 @@ final $typed_data.Uint8List pairExecutionLogDescriptor = $convert.base64Decode(
     'xsUHJpY2USLAoSY291bnRlcl9maWxsX3ByaWNlGA4gASgDUhBjb3VudGVyRmlsbFByaWNlEjgK'
     'GXRyaWdnZXJfdG9fYmFzZV9zdWJtaXRfdXMYDyABKANSFXRyaWdnZXJUb0Jhc2VTdWJtaXRVcx'
     'I+Chx0cmlnZ2VyX3RvX2NvdW50ZXJfc3VibWl0X3VzGBAgASgDUhh0cmlnZ2VyVG9Db3VudGVy'
-    'U3VibWl0VXMSHgoIZXhpdF9xdHkYESABKANIA1IHZXhpdFF0eYgBARIrCg9leGl0X2ZpbGxfcH'
-    'JpY2UYEiABKANIBFINZXhpdEZpbGxQcmljZYgBARInCg1leGl0X29yZGVyX2lkGBMgASgESAVS'
-    'C2V4aXRPcmRlcklkiAEBQhAKDl9iYXNlX29yZGVyX2lkQhMKEV9jb3VudGVyX29yZGVyX2lkQg'
-    'kKB19kZXRhaWxCCwoJX2V4aXRfcXR5QhIKEF9leGl0X2ZpbGxfcHJpY2VCEAoOX2V4aXRfb3Jk'
+    'U3VibWl0VXMSHgoIdHBzbF9xdHkYESABKANIA1IHdHBzbFF0eYgBARIrCg90cHNsX2ZpbGxfcH'
+    'JpY2UYEiABKANIBFINdHBzbEZpbGxQcmljZYgBARInCg10cHNsX29yZGVyX2lkGBMgASgESAVS'
+    'C3Rwc2xPcmRlcklkiAEBQhAKDl9iYXNlX29yZGVyX2lkQhMKEV9jb3VudGVyX29yZGVyX2lkQg'
+    'kKB19kZXRhaWxCCwoJX3Rwc2xfcXR5QhIKEF90cHNsX2ZpbGxfcHJpY2VCEAoOX3Rwc2xfb3Jk'
     'ZXJfaWQ=');
 
 @$core.Deprecated('Use listPairExecutionLogsRequestDescriptor instead')
@@ -696,9 +696,9 @@ final $typed_data.Uint8List streamPairStatusRequestDescriptor = $convert.base64D
     'ChdTdHJlYW1QYWlyU3RhdHVzUmVxdWVzdBItCgRwYWlyGAEgASgJQhn6QRYKFGtkby5jZHNhcG'
     'lzLnh5ei9QYWlyUgRwYWly');
 
-@$core.Deprecated('Use legStatusDescriptor instead')
-const LegStatus$json = {
-  '1': 'LegStatus',
+@$core.Deprecated('Use fillStatusDescriptor instead')
+const FillStatus$json = {
+  '1': 'FillStatus',
   '2': [
     {'1': 'unfilled_quantity', '3': 1, '4': 1, '5': 3, '10': 'unfilledQuantity'},
     {'1': 'filled_quantity', '3': 2, '4': 1, '5': 3, '10': 'filledQuantity'},
@@ -707,32 +707,32 @@ const LegStatus$json = {
   ],
 };
 
-/// Descriptor for `LegStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List legStatusDescriptor = $convert.base64Decode(
-    'CglMZWdTdGF0dXMSKwoRdW5maWxsZWRfcXVhbnRpdHkYASABKANSEHVuZmlsbGVkUXVhbnRpdH'
-    'kSJwoPZmlsbGVkX3F1YW50aXR5GAIgASgDUg5maWxsZWRRdWFudGl0eRIkCg5hdmdfZmlsbF9w'
-    'cmljZRgDIAEoA1IMYXZnRmlsbFByaWNlEi0KEnN1Ym1pdHRlZF9xdWFudGl0eRgEIAEoA1IRc3'
-    'VibWl0dGVkUXVhbnRpdHk=');
+/// Descriptor for `FillStatus`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fillStatusDescriptor = $convert.base64Decode(
+    'CgpGaWxsU3RhdHVzEisKEXVuZmlsbGVkX3F1YW50aXR5GAEgASgDUhB1bmZpbGxlZFF1YW50aX'
+    'R5EicKD2ZpbGxlZF9xdWFudGl0eRgCIAEoA1IOZmlsbGVkUXVhbnRpdHkSJAoOYXZnX2ZpbGxf'
+    'cHJpY2UYAyABKANSDGF2Z0ZpbGxQcmljZRItChJzdWJtaXR0ZWRfcXVhbnRpdHkYBCABKANSEX'
+    'N1Ym1pdHRlZFF1YW50aXR5');
 
 @$core.Deprecated('Use pairStatusUpdateDescriptor instead')
 const PairStatusUpdate$json = {
   '1': 'PairStatusUpdate',
   '2': [
     {'1': 'pair', '3': 1, '4': 1, '5': 9, '10': 'pair'},
-    {'1': 'base', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'base'},
-    {'1': 'counter', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'counter'},
+    {'1': 'base', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.FillStatus', '10': 'base'},
+    {'1': 'counter', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.FillStatus', '10': 'counter'},
     {'1': 'updated_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    {'1': 'exit', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'exit'},
+    {'1': 'tpsl', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair.FillStatus', '10': 'tpsl'},
   ],
 };
 
 /// Descriptor for `PairStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pairStatusUpdateDescriptor = $convert.base64Decode(
-    'ChBQYWlyU3RhdHVzVXBkYXRlEhIKBHBhaXIYASABKAlSBHBhaXISKgoEYmFzZRgCIAEoCzIWLm'
-    'tkby52MS5wYWlyLkxlZ1N0YXR1c1IEYmFzZRIwCgdjb3VudGVyGAMgASgLMhYua2RvLnYxLnBh'
-    'aXIuTGVnU3RhdHVzUgdjb3VudGVyEjkKCnVwZGF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG'
-    '9idWYuVGltZXN0YW1wUgl1cGRhdGVkQXQSKgoEZXhpdBgFIAEoCzIWLmtkby52MS5wYWlyLkxl'
-    'Z1N0YXR1c1IEZXhpdA==');
+    'ChBQYWlyU3RhdHVzVXBkYXRlEhIKBHBhaXIYASABKAlSBHBhaXISKwoEYmFzZRgCIAEoCzIXLm'
+    'tkby52MS5wYWlyLkZpbGxTdGF0dXNSBGJhc2USMQoHY291bnRlchgDIAEoCzIXLmtkby52MS5w'
+    'YWlyLkZpbGxTdGF0dXNSB2NvdW50ZXISOQoKdXBkYXRlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm'
+    '90b2J1Zi5UaW1lc3RhbXBSCXVwZGF0ZWRBdBIrCgR0cHNsGAUgASgLMhcua2RvLnYxLnBhaXIu'
+    'RmlsbFN0YXR1c1IEdHBzbA==');
 
 @$core.Deprecated('Use getPairStatisticsRequestDescriptor instead')
 const GetPairStatisticsRequest$json = {

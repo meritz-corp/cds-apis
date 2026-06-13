@@ -648,14 +648,14 @@ message PairExecutionLog {
   // 비IOC 모드 또는 미적용 시 0
   int64 trigger_to_counter_submit_us = 16;
 
-  // round-trip 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
-  optional int64 exit_qty = 17;
+  // round-trip TP/SL 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+  optional int64 tpsl_qty = 17;
 
-  // 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
-  optional int64 exit_fill_price = 18;
+  // TP/SL 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+  optional int64 tpsl_fill_price = 18;
 
-  // 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
-  optional uint64 exit_order_id = 19;
+  // TP/SL 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+  optional uint64 tpsl_order_id = 19;
 }
 
 // 페어 실행 결과
@@ -728,7 +728,7 @@ message StreamPairStatusRequest {
 
 // 페어 단일 leg 실시간 상태 스냅샷
 // (태그 번호는 클라이언트 UI 계약으로 보존됨)
-message LegStatus {
+message FillStatus {
   // 미체결 수량 (submitted - filled)
   int64 unfilled_quantity = 1;
   // 누적 체결 수량 (현재 세션 메모리 카운터, 재시작 시 0)
@@ -744,14 +744,14 @@ message PairStatusUpdate {
   // 리소스 이름 (pairs/{id})
   string pair = 1;
   // Base leg 상태
-  LegStatus base = 2;
+  FillStatus base = 2;
   // Counter leg 상태
-  LegStatus counter = 3;
+  FillStatus counter = 3;
   // 스냅샷 시각
   google.protobuf.Timestamp updated_at = 4;
-  // Exit(청산) leg 상태 — CounterIocTpSl round-trip 전용.
+  // TP/SL(청산) leg 상태 — CounterIocTpSl round-trip 전용.
   // 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
-  LegStatus exit = 5;
+  FillStatus tpsl = 5;
 }
 
 // ============================================================================

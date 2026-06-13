@@ -474,15 +474,15 @@ pub struct PairExecutionLog {
     /// 비IOC 모드 또는 미적용 시 0
     #[prost(int64, tag="16")]
     pub trigger_to_counter_submit_us: i64,
-    /// round-trip 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+    /// round-trip TP/SL 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
     #[prost(int64, optional, tag="17")]
-    pub exit_qty: ::core::option::Option<i64>,
-    /// 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+    pub tpsl_qty: ::core::option::Option<i64>,
+    /// TP/SL 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
     #[prost(int64, optional, tag="18")]
-    pub exit_fill_price: ::core::option::Option<i64>,
-    /// 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+    pub tpsl_fill_price: ::core::option::Option<i64>,
+    /// TP/SL 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
     #[prost(uint64, optional, tag="19")]
-    pub exit_order_id: ::core::option::Option<u64>,
+    pub tpsl_order_id: ::core::option::Option<u64>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -532,7 +532,7 @@ pub struct StreamPairStatusRequest {
 /// (태그 번호는 클라이언트 UI 계약으로 보존됨)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct LegStatus {
+pub struct FillStatus {
     /// 미체결 수량 (submitted - filled)
     #[prost(int64, tag="1")]
     pub unfilled_quantity: i64,
@@ -555,17 +555,17 @@ pub struct PairStatusUpdate {
     pub pair: ::prost::alloc::string::String,
     /// Base leg 상태
     #[prost(message, optional, tag="2")]
-    pub base: ::core::option::Option<LegStatus>,
+    pub base: ::core::option::Option<FillStatus>,
     /// Counter leg 상태
     #[prost(message, optional, tag="3")]
-    pub counter: ::core::option::Option<LegStatus>,
+    pub counter: ::core::option::Option<FillStatus>,
     /// 스냅샷 시각
     #[prost(message, optional, tag="4")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// Exit(청산) leg 상태 — CounterIocTpSl round-trip 전용.
+    /// TP/SL(청산) leg 상태 — CounterIocTpSl round-trip 전용.
     /// 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
     #[prost(message, optional, tag="5")]
-    pub exit: ::core::option::Option<LegStatus>,
+    pub tpsl: ::core::option::Option<FillStatus>,
 }
 // ============================================================================
 // Pair Statistics

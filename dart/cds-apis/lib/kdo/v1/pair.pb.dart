@@ -1869,9 +1869,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? counterFillPrice,
     $fixnum.Int64? triggerToBaseSubmitUs,
     $fixnum.Int64? triggerToCounterSubmitUs,
-    $fixnum.Int64? exitQty,
-    $fixnum.Int64? exitFillPrice,
-    $fixnum.Int64? exitOrderId,
+    $fixnum.Int64? tpslQty,
+    $fixnum.Int64? tpslFillPrice,
+    $fixnum.Int64? tpslOrderId,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1890,9 +1890,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (counterFillPrice != null) result.counterFillPrice = counterFillPrice;
     if (triggerToBaseSubmitUs != null) result.triggerToBaseSubmitUs = triggerToBaseSubmitUs;
     if (triggerToCounterSubmitUs != null) result.triggerToCounterSubmitUs = triggerToCounterSubmitUs;
-    if (exitQty != null) result.exitQty = exitQty;
-    if (exitFillPrice != null) result.exitFillPrice = exitFillPrice;
-    if (exitOrderId != null) result.exitOrderId = exitOrderId;
+    if (tpslQty != null) result.tpslQty = tpslQty;
+    if (tpslFillPrice != null) result.tpslFillPrice = tpslFillPrice;
+    if (tpslOrderId != null) result.tpslOrderId = tpslOrderId;
     return result;
   }
 
@@ -1918,9 +1918,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..aInt64(14, _omitFieldNames ? '' : 'counterFillPrice')
     ..aInt64(15, _omitFieldNames ? '' : 'triggerToBaseSubmitUs')
     ..aInt64(16, _omitFieldNames ? '' : 'triggerToCounterSubmitUs')
-    ..aInt64(17, _omitFieldNames ? '' : 'exitQty')
-    ..aInt64(18, _omitFieldNames ? '' : 'exitFillPrice')
-    ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'exitOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(17, _omitFieldNames ? '' : 'tpslQty')
+    ..aInt64(18, _omitFieldNames ? '' : 'tpslFillPrice')
+    ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'tpslOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -2105,35 +2105,35 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(16)
   void clearTriggerToCounterSubmitUs() => $_clearField(16);
 
-  /// round-trip 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+  /// round-trip TP/SL 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
   @$pb.TagNumber(17)
-  $fixnum.Int64 get exitQty => $_getI64(16);
+  $fixnum.Int64 get tpslQty => $_getI64(16);
   @$pb.TagNumber(17)
-  set exitQty($fixnum.Int64 value) => $_setInt64(16, value);
+  set tpslQty($fixnum.Int64 value) => $_setInt64(16, value);
   @$pb.TagNumber(17)
-  $core.bool hasExitQty() => $_has(16);
+  $core.bool hasTpslQty() => $_has(16);
   @$pb.TagNumber(17)
-  void clearExitQty() => $_clearField(17);
+  void clearTpslQty() => $_clearField(17);
 
-  /// 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+  /// TP/SL 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
   @$pb.TagNumber(18)
-  $fixnum.Int64 get exitFillPrice => $_getI64(17);
+  $fixnum.Int64 get tpslFillPrice => $_getI64(17);
   @$pb.TagNumber(18)
-  set exitFillPrice($fixnum.Int64 value) => $_setInt64(17, value);
+  set tpslFillPrice($fixnum.Int64 value) => $_setInt64(17, value);
   @$pb.TagNumber(18)
-  $core.bool hasExitFillPrice() => $_has(17);
+  $core.bool hasTpslFillPrice() => $_has(17);
   @$pb.TagNumber(18)
-  void clearExitFillPrice() => $_clearField(18);
+  void clearTpslFillPrice() => $_clearField(18);
 
-  /// 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+  /// TP/SL 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
   @$pb.TagNumber(19)
-  $fixnum.Int64 get exitOrderId => $_getI64(18);
+  $fixnum.Int64 get tpslOrderId => $_getI64(18);
   @$pb.TagNumber(19)
-  set exitOrderId($fixnum.Int64 value) => $_setInt64(18, value);
+  set tpslOrderId($fixnum.Int64 value) => $_setInt64(18, value);
   @$pb.TagNumber(19)
-  $core.bool hasExitOrderId() => $_has(18);
+  $core.bool hasTpslOrderId() => $_has(18);
   @$pb.TagNumber(19)
-  void clearExitOrderId() => $_clearField(19);
+  void clearTpslOrderId() => $_clearField(19);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
@@ -2352,8 +2352,8 @@ class StreamPairStatusRequest extends $pb.GeneratedMessage {
 
 /// 페어 단일 leg 실시간 상태 스냅샷
 /// (태그 번호는 클라이언트 UI 계약으로 보존됨)
-class LegStatus extends $pb.GeneratedMessage {
-  factory LegStatus({
+class FillStatus extends $pb.GeneratedMessage {
+  factory FillStatus({
     $fixnum.Int64? unfilledQuantity,
     $fixnum.Int64? filledQuantity,
     $fixnum.Int64? avgFillPrice,
@@ -2367,12 +2367,12 @@ class LegStatus extends $pb.GeneratedMessage {
     return result;
   }
 
-  LegStatus._();
+  FillStatus._();
 
-  factory LegStatus.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory LegStatus.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory FillStatus.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FillStatus.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LegStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FillStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'unfilledQuantity')
     ..aInt64(2, _omitFieldNames ? '' : 'filledQuantity')
     ..aInt64(3, _omitFieldNames ? '' : 'avgFillPrice')
@@ -2381,21 +2381,21 @@ class LegStatus extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LegStatus clone() => LegStatus()..mergeFromMessage(this);
+  FillStatus clone() => FillStatus()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LegStatus copyWith(void Function(LegStatus) updates) => super.copyWith((message) => updates(message as LegStatus)) as LegStatus;
+  FillStatus copyWith(void Function(FillStatus) updates) => super.copyWith((message) => updates(message as FillStatus)) as FillStatus;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static LegStatus create() => LegStatus._();
+  static FillStatus create() => FillStatus._();
   @$core.override
-  LegStatus createEmptyInstance() => create();
-  static $pb.PbList<LegStatus> createRepeated() => $pb.PbList<LegStatus>();
+  FillStatus createEmptyInstance() => create();
+  static $pb.PbList<FillStatus> createRepeated() => $pb.PbList<FillStatus>();
   @$core.pragma('dart2js:noInline')
-  static LegStatus getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LegStatus>(create);
-  static LegStatus? _defaultInstance;
+  static FillStatus getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FillStatus>(create);
+  static FillStatus? _defaultInstance;
 
   /// 미체결 수량 (submitted - filled)
   @$pb.TagNumber(1)
@@ -2442,17 +2442,17 @@ class LegStatus extends $pb.GeneratedMessage {
 class PairStatusUpdate extends $pb.GeneratedMessage {
   factory PairStatusUpdate({
     $core.String? pair,
-    LegStatus? base,
-    LegStatus? counter,
+    FillStatus? base,
+    FillStatus? counter,
     $2.Timestamp? updatedAt,
-    LegStatus? exit,
+    FillStatus? tpsl,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
     if (base != null) result.base = base;
     if (counter != null) result.counter = counter;
     if (updatedAt != null) result.updatedAt = updatedAt;
-    if (exit != null) result.exit = exit;
+    if (tpsl != null) result.tpsl = tpsl;
     return result;
   }
 
@@ -2463,10 +2463,10 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairStatusUpdate', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'pair')
-    ..aOM<LegStatus>(2, _omitFieldNames ? '' : 'base', subBuilder: LegStatus.create)
-    ..aOM<LegStatus>(3, _omitFieldNames ? '' : 'counter', subBuilder: LegStatus.create)
+    ..aOM<FillStatus>(2, _omitFieldNames ? '' : 'base', subBuilder: FillStatus.create)
+    ..aOM<FillStatus>(3, _omitFieldNames ? '' : 'counter', subBuilder: FillStatus.create)
     ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
-    ..aOM<LegStatus>(5, _omitFieldNames ? '' : 'exit', subBuilder: LegStatus.create)
+    ..aOM<FillStatus>(5, _omitFieldNames ? '' : 'tpsl', subBuilder: FillStatus.create)
     ..hasRequiredFields = false
   ;
 
@@ -2499,27 +2499,27 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
 
   /// Base leg 상태
   @$pb.TagNumber(2)
-  LegStatus get base => $_getN(1);
+  FillStatus get base => $_getN(1);
   @$pb.TagNumber(2)
-  set base(LegStatus value) => $_setField(2, value);
+  set base(FillStatus value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasBase() => $_has(1);
   @$pb.TagNumber(2)
   void clearBase() => $_clearField(2);
   @$pb.TagNumber(2)
-  LegStatus ensureBase() => $_ensure(1);
+  FillStatus ensureBase() => $_ensure(1);
 
   /// Counter leg 상태
   @$pb.TagNumber(3)
-  LegStatus get counter => $_getN(2);
+  FillStatus get counter => $_getN(2);
   @$pb.TagNumber(3)
-  set counter(LegStatus value) => $_setField(3, value);
+  set counter(FillStatus value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasCounter() => $_has(2);
   @$pb.TagNumber(3)
   void clearCounter() => $_clearField(3);
   @$pb.TagNumber(3)
-  LegStatus ensureCounter() => $_ensure(2);
+  FillStatus ensureCounter() => $_ensure(2);
 
   /// 스냅샷 시각
   @$pb.TagNumber(4)
@@ -2533,18 +2533,18 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $2.Timestamp ensureUpdatedAt() => $_ensure(3);
 
-  /// Exit(청산) leg 상태 — CounterIocTpSl round-trip 전용.
+  /// TP/SL(청산) leg 상태 — CounterIocTpSl round-trip 전용.
   /// 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
   @$pb.TagNumber(5)
-  LegStatus get exit => $_getN(4);
+  FillStatus get tpsl => $_getN(4);
   @$pb.TagNumber(5)
-  set exit(LegStatus value) => $_setField(5, value);
+  set tpsl(FillStatus value) => $_setField(5, value);
   @$pb.TagNumber(5)
-  $core.bool hasExit() => $_has(4);
+  $core.bool hasTpsl() => $_has(4);
   @$pb.TagNumber(5)
-  void clearExit() => $_clearField(5);
+  void clearTpsl() => $_clearField(5);
   @$pb.TagNumber(5)
-  LegStatus ensureExit() => $_ensure(4);
+  FillStatus ensureTpsl() => $_ensure(4);
 }
 
 /// GetPairStatistics 요청
