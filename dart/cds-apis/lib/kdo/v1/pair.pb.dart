@@ -1869,6 +1869,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? counterFillPrice,
     $fixnum.Int64? triggerToBaseSubmitUs,
     $fixnum.Int64? triggerToCounterSubmitUs,
+    $fixnum.Int64? exitQty,
+    $fixnum.Int64? exitFillPrice,
+    $fixnum.Int64? exitOrderId,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1887,6 +1890,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (counterFillPrice != null) result.counterFillPrice = counterFillPrice;
     if (triggerToBaseSubmitUs != null) result.triggerToBaseSubmitUs = triggerToBaseSubmitUs;
     if (triggerToCounterSubmitUs != null) result.triggerToCounterSubmitUs = triggerToCounterSubmitUs;
+    if (exitQty != null) result.exitQty = exitQty;
+    if (exitFillPrice != null) result.exitFillPrice = exitFillPrice;
+    if (exitOrderId != null) result.exitOrderId = exitOrderId;
     return result;
   }
 
@@ -1912,6 +1918,9 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..aInt64(14, _omitFieldNames ? '' : 'counterFillPrice')
     ..aInt64(15, _omitFieldNames ? '' : 'triggerToBaseSubmitUs')
     ..aInt64(16, _omitFieldNames ? '' : 'triggerToCounterSubmitUs')
+    ..aInt64(17, _omitFieldNames ? '' : 'exitQty')
+    ..aInt64(18, _omitFieldNames ? '' : 'exitFillPrice')
+    ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'exitOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -2095,6 +2104,36 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   $core.bool hasTriggerToCounterSubmitUs() => $_has(15);
   @$pb.TagNumber(16)
   void clearTriggerToCounterSubmitUs() => $_clearField(16);
+
+  /// round-trip 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get exitQty => $_getI64(16);
+  @$pb.TagNumber(17)
+  set exitQty($fixnum.Int64 value) => $_setInt64(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasExitQty() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearExitQty() => $_clearField(17);
+
+  /// 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+  @$pb.TagNumber(18)
+  $fixnum.Int64 get exitFillPrice => $_getI64(17);
+  @$pb.TagNumber(18)
+  set exitFillPrice($fixnum.Int64 value) => $_setInt64(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasExitFillPrice() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearExitFillPrice() => $_clearField(18);
+
+  /// 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get exitOrderId => $_getI64(18);
+  @$pb.TagNumber(19)
+  set exitOrderId($fixnum.Int64 value) => $_setInt64(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasExitOrderId() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearExitOrderId() => $_clearField(19);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {

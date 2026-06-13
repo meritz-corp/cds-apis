@@ -647,6 +647,15 @@ message PairExecutionLog {
   // IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)
   // 비IOC 모드 또는 미적용 시 0
   int64 trigger_to_counter_submit_us = 16;
+
+  // round-trip 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+  optional int64 exit_qty = 17;
+
+  // 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+  optional int64 exit_fill_price = 18;
+
+  // 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+  optional uint64 exit_order_id = 19;
 }
 
 // 페어 실행 결과

@@ -901,6 +901,21 @@
           "type": "string",
           "format": "int64",
           "title": "IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)\n비IOC 모드 또는 미적용 시 0"
+        },
+        "exitQty": {
+          "type": "string",
+          "format": "int64",
+          "title": "round-trip 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)"
+        },
+        "exitFillPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)"
+        },
+        "exitOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)"
         }
       },
       "title": "페어 실행 로그 레코드"

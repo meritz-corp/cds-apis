@@ -2899,6 +2899,15 @@ impl serde::Serialize for PairExecutionLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairExecutionLog", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -2972,6 +2981,21 @@ impl serde::Serialize for PairExecutionLog {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("trigger_to_counter_submit_us", ToString::to_string(&self.trigger_to_counter_submit_us).as_str())?;
         }
+        if let Some(v) = self.exit_qty.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exit_qty", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.exit_fill_price.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exit_fill_price", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.exit_order_id.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exit_order_id", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -3010,6 +3034,12 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "triggerToBaseSubmitUs",
             "trigger_to_counter_submit_us",
             "triggerToCounterSubmitUs",
+            "exit_qty",
+            "exitQty",
+            "exit_fill_price",
+            "exitFillPrice",
+            "exit_order_id",
+            "exitOrderId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3030,6 +3060,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             CounterFillPrice,
             TriggerToBaseSubmitUs,
             TriggerToCounterSubmitUs,
+            ExitQty,
+            ExitFillPrice,
+            ExitOrderId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3068,6 +3101,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "counterFillPrice" | "counter_fill_price" => Ok(GeneratedField::CounterFillPrice),
                             "triggerToBaseSubmitUs" | "trigger_to_base_submit_us" => Ok(GeneratedField::TriggerToBaseSubmitUs),
                             "triggerToCounterSubmitUs" | "trigger_to_counter_submit_us" => Ok(GeneratedField::TriggerToCounterSubmitUs),
+                            "exitQty" | "exit_qty" => Ok(GeneratedField::ExitQty),
+                            "exitFillPrice" | "exit_fill_price" => Ok(GeneratedField::ExitFillPrice),
+                            "exitOrderId" | "exit_order_id" => Ok(GeneratedField::ExitOrderId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3103,6 +3139,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut counter_fill_price__ = None;
                 let mut trigger_to_base_submit_us__ = None;
                 let mut trigger_to_counter_submit_us__ = None;
+                let mut exit_qty__ = None;
+                let mut exit_fill_price__ = None;
+                let mut exit_order_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairId => {
@@ -3225,6 +3264,30 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ExitQty => {
+                            if exit_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitQty"));
+                            }
+                            exit_qty__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::ExitFillPrice => {
+                            if exit_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitFillPrice"));
+                            }
+                            exit_fill_price__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::ExitOrderId => {
+                            if exit_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitOrderId"));
+                            }
+                            exit_order_id__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3247,6 +3310,9 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     counter_fill_price: counter_fill_price__.unwrap_or_default(),
                     trigger_to_base_submit_us: trigger_to_base_submit_us__.unwrap_or_default(),
                     trigger_to_counter_submit_us: trigger_to_counter_submit_us__.unwrap_or_default(),
+                    exit_qty: exit_qty__,
+                    exit_fill_price: exit_fill_price__,
+                    exit_order_id: exit_order_id__,
                 })
             }
         }

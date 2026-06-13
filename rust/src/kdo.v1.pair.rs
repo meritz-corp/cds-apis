@@ -474,6 +474,15 @@ pub struct PairExecutionLog {
     /// 비IOC 모드 또는 미적용 시 0
     #[prost(int64, tag="16")]
     pub trigger_to_counter_submit_us: i64,
+    /// round-trip 청산 레그 체결 수량 (CounterIocTpSl 전용; 2-leg 페어 실행은 미설정)
+    #[prost(int64, optional, tag="17")]
+    pub exit_qty: ::core::option::Option<i64>,
+    /// 청산 레그 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
+    #[prost(int64, optional, tag="18")]
+    pub exit_fill_price: ::core::option::Option<i64>,
+    /// 청산 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
+    #[prost(uint64, optional, tag="19")]
+    pub exit_order_id: ::core::option::Option<u64>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
