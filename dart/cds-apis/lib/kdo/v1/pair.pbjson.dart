@@ -722,6 +722,7 @@ const PairStatusUpdate$json = {
     {'1': 'base', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'base'},
     {'1': 'counter', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'counter'},
     {'1': 'updated_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    {'1': 'exit', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair.LegStatus', '10': 'exit'},
   ],
 };
 
@@ -730,7 +731,8 @@ final $typed_data.Uint8List pairStatusUpdateDescriptor = $convert.base64Decode(
     'ChBQYWlyU3RhdHVzVXBkYXRlEhIKBHBhaXIYASABKAlSBHBhaXISKgoEYmFzZRgCIAEoCzIWLm'
     'tkby52MS5wYWlyLkxlZ1N0YXR1c1IEYmFzZRIwCgdjb3VudGVyGAMgASgLMhYua2RvLnYxLnBh'
     'aXIuTGVnU3RhdHVzUgdjb3VudGVyEjkKCnVwZGF0ZWRfYXQYBCABKAsyGi5nb29nbGUucHJvdG'
-    '9idWYuVGltZXN0YW1wUgl1cGRhdGVkQXQ=');
+    '9idWYuVGltZXN0YW1wUgl1cGRhdGVkQXQSKgoEZXhpdBgFIAEoCzIWLmtkby52MS5wYWlyLkxl'
+    'Z1N0YXR1c1IEZXhpdA==');
 
 @$core.Deprecated('Use getPairStatisticsRequestDescriptor instead')
 const GetPairStatisticsRequest$json = {

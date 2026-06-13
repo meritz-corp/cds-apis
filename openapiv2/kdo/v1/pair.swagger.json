@@ -1020,6 +1020,10 @@
           "type": "string",
           "format": "date-time",
           "title": "스냅샷 시각"
+        },
+        "exit": {
+          "$ref": "#/definitions/pairLegStatus",
+          "description": "Exit(청산) leg 상태 — CounterIocTpSl round-trip 전용.\n2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐."
         }
       },
       "title": "StreamPairStatus 스트리밍 응답 — 페어 상태 스냅샷"

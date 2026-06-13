@@ -562,6 +562,10 @@ pub struct PairStatusUpdate {
     /// 스냅샷 시각
     #[prost(message, optional, tag="4")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// Exit(청산) leg 상태 — CounterIocTpSl round-trip 전용.
+    /// 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+    #[prost(message, optional, tag="5")]
+    pub exit: ::core::option::Option<LegStatus>,
 }
 // ============================================================================
 // Pair Statistics

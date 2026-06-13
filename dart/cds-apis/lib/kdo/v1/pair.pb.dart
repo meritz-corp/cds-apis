@@ -2445,12 +2445,14 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
     LegStatus? base,
     LegStatus? counter,
     $2.Timestamp? updatedAt,
+    LegStatus? exit,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
     if (base != null) result.base = base;
     if (counter != null) result.counter = counter;
     if (updatedAt != null) result.updatedAt = updatedAt;
+    if (exit != null) result.exit = exit;
     return result;
   }
 
@@ -2464,6 +2466,7 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
     ..aOM<LegStatus>(2, _omitFieldNames ? '' : 'base', subBuilder: LegStatus.create)
     ..aOM<LegStatus>(3, _omitFieldNames ? '' : 'counter', subBuilder: LegStatus.create)
     ..aOM<$2.Timestamp>(4, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOM<LegStatus>(5, _omitFieldNames ? '' : 'exit', subBuilder: LegStatus.create)
     ..hasRequiredFields = false
   ;
 
@@ -2529,6 +2532,19 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
   void clearUpdatedAt() => $_clearField(4);
   @$pb.TagNumber(4)
   $2.Timestamp ensureUpdatedAt() => $_ensure(3);
+
+  /// Exit(청산) leg 상태 — CounterIocTpSl round-trip 전용.
+  /// 2-leg 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+  @$pb.TagNumber(5)
+  LegStatus get exit => $_getN(4);
+  @$pb.TagNumber(5)
+  set exit(LegStatus value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasExit() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearExit() => $_clearField(5);
+  @$pb.TagNumber(5)
+  LegStatus ensureExit() => $_ensure(4);
 }
 
 /// GetPairStatistics 요청
