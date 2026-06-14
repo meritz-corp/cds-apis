@@ -59,6 +59,7 @@ const FuturesLp$json = {
     {'1': 'ask_enabled', '3': 24, '4': 1, '5': 8, '10': 'askEnabled'},
     {'1': 'imbalance_cancel_threshold_ratio', '3': 25, '4': 1, '5': 1, '10': 'imbalanceCancelThresholdRatio'},
     {'1': 'imbalance_cancel_enabled', '3': 26, '4': 1, '5': 8, '10': 'imbalanceCancelEnabled'},
+    {'1': 'thin_book_quantity_threshold', '3': 27, '4': 1, '5': 3, '10': 'thinBookQuantityThreshold'},
   ],
   '8': [
     {'1': '_bid_adjustment'},
@@ -92,9 +93,10 @@ final $typed_data.Uint8List futuresLpDescriptor = $convert.base64Decode(
     'gIUgpiaWRFbmFibGVkEh8KC2Fza19lbmFibGVkGBggASgIUgphc2tFbmFibGVkEkcKIGltYmFs'
     'YW5jZV9jYW5jZWxfdGhyZXNob2xkX3JhdGlvGBkgASgBUh1pbWJhbGFuY2VDYW5jZWxUaHJlc2'
     'hvbGRSYXRpbxI4ChhpbWJhbGFuY2VfY2FuY2VsX2VuYWJsZWQYGiABKAhSFmltYmFsYW5jZUNh'
-    'bmNlbEVuYWJsZWRCEQoPX2JpZF9hZGp1c3RtZW50QhEKD19hc2tfYWRqdXN0bWVudEIRCg9fcX'
-    'VhbnRpdHlfbGltaXRKBAgFEAZKBAgQEBFKBAgREBJKBAgSEBNSBWNhcnJ5UhBtb21lbnR1bV9l'
-    'bmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudHVtX3NlbnNpdGl2aXR5');
+    'bmNlbEVuYWJsZWQSPwocdGhpbl9ib29rX3F1YW50aXR5X3RocmVzaG9sZBgbIAEoA1IZdGhpbk'
+    'Jvb2tRdWFudGl0eVRocmVzaG9sZEIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3Rt'
+    'ZW50QhEKD19xdWFudGl0eV9saW1pdEoECAUQBkoECBAQEUoECBEQEkoECBIQE1IFY2FycnlSEG'
+    '1vbWVudHVtX2VuYWJsZWRSD21vbWVudHVtX3dpbmRvd1IUbW9tZW50dW1fc2Vuc2l0aXZpdHk=');
 
 @$core.Deprecated('Use futuresLpQuantityLimitDescriptor instead')
 const FuturesLpQuantityLimit$json = {
@@ -420,6 +422,7 @@ const UpdateFuturesLpRequest$json = {
     {'1': 'ask_enabled', '3': 18, '4': 1, '5': 8, '9': 11, '10': 'askEnabled', '17': true},
     {'1': 'imbalance_cancel_threshold_ratio', '3': 19, '4': 1, '5': 1, '9': 12, '10': 'imbalanceCancelThresholdRatio', '17': true},
     {'1': 'imbalance_cancel_enabled', '3': 20, '4': 1, '5': 8, '9': 13, '10': 'imbalanceCancelEnabled', '17': true},
+    {'1': 'thin_book_quantity_threshold', '3': 21, '4': 1, '5': 3, '9': 14, '10': 'thinBookQuantityThreshold', '17': true},
   ],
   '8': [
     {'1': '_bid_quantity'},
@@ -436,6 +439,7 @@ const UpdateFuturesLpRequest$json = {
     {'1': '_ask_enabled'},
     {'1': '_imbalance_cancel_threshold_ratio'},
     {'1': '_imbalance_cancel_enabled'},
+    {'1': '_thin_book_quantity_threshold'},
   ],
   '9': [
     {'1': 3, '2': 4},
@@ -461,13 +465,15 @@ final $typed_data.Uint8List updateFuturesLpRequestDescriptor = $convert.base64De
     'bGVkGBEgASgISApSCmJpZEVuYWJsZWSIAQESJAoLYXNrX2VuYWJsZWQYEiABKAhIC1IKYXNrRW'
     '5hYmxlZIgBARJMCiBpbWJhbGFuY2VfY2FuY2VsX3RocmVzaG9sZF9yYXRpbxgTIAEoAUgMUh1p'
     'bWJhbGFuY2VDYW5jZWxUaHJlc2hvbGRSYXRpb4gBARI9ChhpbWJhbGFuY2VfY2FuY2VsX2VuYW'
-    'JsZWQYFCABKAhIDVIWaW1iYWxhbmNlQ2FuY2VsRW5hYmxlZIgBAUIPCg1fYmlkX3F1YW50aXR5'
-    'Qg8KDV9hc2tfcXVhbnRpdHlCEQoPX2JpZF9hZGp1c3RtZW50QhEKD19hc2tfYWRqdXN0bWVudE'
-    'IMCgpfYmlkX2Jhc2lzQgwKCl9hc2tfYmFzaXNCCAoGX2RlcHRoQgkKB19vZmZzZXRCEQoPX3F1'
-    'YW50aXR5X2xpbWl0Qg4KDF9ldGZfcHJpY2luZ0IOCgxfYmlkX2VuYWJsZWRCDgoMX2Fza19lbm'
-    'FibGVkQiMKIV9pbWJhbGFuY2VfY2FuY2VsX3RocmVzaG9sZF9yYXRpb0IbChlfaW1iYWxhbmNl'
-    'X2NhbmNlbF9lbmFibGVkSgQIAxAESgQIDBANSgQIDRAOSgQIDhAPUgVjYXJyeVIQbW9tZW50dW'
-    '1fZW5hYmxlZFIPbW9tZW50dW1fd2luZG93UhRtb21lbnR1bV9zZW5zaXRpdml0eQ==');
+    'JsZWQYFCABKAhIDVIWaW1iYWxhbmNlQ2FuY2VsRW5hYmxlZIgBARJEChx0aGluX2Jvb2tfcXVh'
+    'bnRpdHlfdGhyZXNob2xkGBUgASgDSA5SGXRoaW5Cb29rUXVhbnRpdHlUaHJlc2hvbGSIAQFCDw'
+    'oNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW50aXR5QhEKD19iaWRfYWRqdXN0bWVudEIRCg9f'
+    'YXNrX2FkanVzdG1lbnRCDAoKX2JpZF9iYXNpc0IMCgpfYXNrX2Jhc2lzQggKBl9kZXB0aEIJCg'
+    'dfb2Zmc2V0QhEKD19xdWFudGl0eV9saW1pdEIOCgxfZXRmX3ByaWNpbmdCDgoMX2JpZF9lbmFi'
+    'bGVkQg4KDF9hc2tfZW5hYmxlZEIjCiFfaW1iYWxhbmNlX2NhbmNlbF90aHJlc2hvbGRfcmF0aW'
+    '9CGwoZX2ltYmFsYW5jZV9jYW5jZWxfZW5hYmxlZEIfCh1fdGhpbl9ib29rX3F1YW50aXR5X3Ro'
+    'cmVzaG9sZEoECAMQBEoECAwQDUoECA0QDkoECA4QD1IFY2FycnlSEG1vbWVudHVtX2VuYWJsZW'
+    'RSD21vbWVudHVtX3dpbmRvd1IUbW9tZW50dW1fc2Vuc2l0aXZpdHk=');
 
 @$core.Deprecated('Use getFuturesLpStatusRequestDescriptor instead')
 const GetFuturesLpStatusRequest$json = {

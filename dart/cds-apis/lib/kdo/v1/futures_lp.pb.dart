@@ -48,6 +48,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.bool? askEnabled,
     $core.double? imbalanceCancelThresholdRatio,
     $core.bool? imbalanceCancelEnabled,
+    $fixnum.Int64? thinBookQuantityThreshold,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -72,6 +73,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (askEnabled != null) result.askEnabled = askEnabled;
     if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
     if (imbalanceCancelEnabled != null) result.imbalanceCancelEnabled = imbalanceCancelEnabled;
+    if (thinBookQuantityThreshold != null) result.thinBookQuantityThreshold = thinBookQuantityThreshold;
     return result;
   }
 
@@ -103,6 +105,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..aOB(24, _omitFieldNames ? '' : 'askEnabled')
     ..a<$core.double>(25, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
     ..aOB(26, _omitFieldNames ? '' : 'imbalanceCancelEnabled')
+    ..aInt64(27, _omitFieldNames ? '' : 'thinBookQuantityThreshold')
     ..hasRequiredFields = false
   ;
 
@@ -352,6 +355,17 @@ class FuturesLp extends $pb.GeneratedMessage {
   $core.bool hasImbalanceCancelEnabled() => $_has(21);
   @$pb.TagNumber(26)
   void clearImbalanceCancelEnabled() => $_clearField(26);
+
+  /// thin-book 보정 활성화 임계치 (ETF 1~5호가 잔량 합, 주 단위).
+  /// 0 = 기능 OFF.
+  @$pb.TagNumber(27)
+  $fixnum.Int64 get thinBookQuantityThreshold => $_getI64(22);
+  @$pb.TagNumber(27)
+  set thinBookQuantityThreshold($fixnum.Int64 value) => $_setInt64(22, value);
+  @$pb.TagNumber(27)
+  $core.bool hasThinBookQuantityThreshold() => $_has(22);
+  @$pb.TagNumber(27)
+  void clearThinBookQuantityThreshold() => $_clearField(27);
 }
 
 /// 매수/매도 수량 한도
@@ -1638,6 +1652,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.bool? askEnabled,
     $core.double? imbalanceCancelThresholdRatio,
     $core.bool? imbalanceCancelEnabled,
+    $fixnum.Int64? thinBookQuantityThreshold,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1656,6 +1671,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (askEnabled != null) result.askEnabled = askEnabled;
     if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
     if (imbalanceCancelEnabled != null) result.imbalanceCancelEnabled = imbalanceCancelEnabled;
+    if (thinBookQuantityThreshold != null) result.thinBookQuantityThreshold = thinBookQuantityThreshold;
     return result;
   }
 
@@ -1681,6 +1697,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..aOB(18, _omitFieldNames ? '' : 'askEnabled')
     ..a<$core.double>(19, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
     ..aOB(20, _omitFieldNames ? '' : 'imbalanceCancelEnabled')
+    ..aInt64(21, _omitFieldNames ? '' : 'thinBookQuantityThreshold')
     ..hasRequiredFields = false
   ;
 
@@ -1866,6 +1883,17 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   $core.bool hasImbalanceCancelEnabled() => $_has(15);
   @$pb.TagNumber(20)
   void clearImbalanceCancelEnabled() => $_clearField(20);
+
+  /// thin-book 보정 활성화 임계치 (PATCH 시에만 명시).
+  /// ETF 1~5호가 잔량 합 임계치(주 단위). 0 = 기능 OFF.
+  @$pb.TagNumber(21)
+  $fixnum.Int64 get thinBookQuantityThreshold => $_getI64(16);
+  @$pb.TagNumber(21)
+  set thinBookQuantityThreshold($fixnum.Int64 value) => $_setInt64(16, value);
+  @$pb.TagNumber(21)
+  $core.bool hasThinBookQuantityThreshold() => $_has(16);
+  @$pb.TagNumber(21)
+  void clearThinBookQuantityThreshold() => $_clearField(21);
 }
 
 /// GetFuturesLpStatus

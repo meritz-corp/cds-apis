@@ -76,6 +76,10 @@ pub struct FuturesLp {
     /// false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
     #[prost(bool, tag="26")]
     pub imbalance_cancel_enabled: bool,
+    /// thin-book 보정 활성화 임계치 (ETF 1~5호가 잔량 합, 주 단위).
+    /// 0 = 기능 OFF.
+    #[prost(int64, tag="27")]
+    pub thin_book_quantity_threshold: i64,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -408,6 +412,10 @@ pub struct UpdateFuturesLpRequest {
     /// false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true.
     #[prost(bool, optional, tag="20")]
     pub imbalance_cancel_enabled: ::core::option::Option<bool>,
+    /// thin-book 보정 활성화 임계치 (PATCH 시에만 명시).
+    /// ETF 1~5호가 잔량 합 임계치(주 단위). 0 = 기능 OFF.
+    #[prost(int64, optional, tag="21")]
+    pub thin_book_quantity_threshold: ::core::option::Option<i64>,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

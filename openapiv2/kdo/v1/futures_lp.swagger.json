@@ -268,6 +268,11 @@
                 "imbalanceCancelEnabled": {
                   "type": "boolean",
                   "description": "imbalance flee 마스터 토글 (PATCH 시에만 명시).\nfalse 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true."
+                },
+                "thinBookQuantityThreshold": {
+                  "type": "string",
+                  "format": "int64",
+                  "description": "thin-book 보정 활성화 임계치 (PATCH 시에만 명시).\nETF 1~5호가 잔량 합 임계치(주 단위). 0 = 기능 OFF."
                 }
               },
               "title": "UpdateFuturesLp"
@@ -765,6 +770,11 @@
         "imbalanceCancelEnabled": {
           "type": "boolean",
           "description": "false 면 imbalance 시 deficit 측 호가 취소 + 재호가 억제를 비활성. 기본 true."
+        },
+        "thinBookQuantityThreshold": {
+          "type": "string",
+          "format": "int64",
+          "description": "thin-book 보정 활성화 임계치 (ETF 1~5호가 잔량 합, 주 단위).\n0 = 기능 OFF."
         }
       },
       "title": "선물 LP 설정"
