@@ -699,6 +699,9 @@ message ListPairExecutionLogsRequest {
 
   // outcome 필터 (UNSPECIFIED = 전체, 그 외 값이면 해당 outcome만 반환)
   PairExecutionOutcome outcome = 5;
+
+  // 날짜 필터 (YYYY-MM-DD, KST 기준 해당 일자만 조회. 빈 문자열이면 전체)
+  string date = 6;
 }
 
 message ListPairExecutionLogsResponse {

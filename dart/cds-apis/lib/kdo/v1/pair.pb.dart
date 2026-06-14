@@ -2143,6 +2143,7 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     $core.String? pageToken,
     $core.String? orderBy,
     PairExecutionOutcome? outcome,
+    $core.String? date,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
@@ -2150,6 +2151,7 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     if (pageToken != null) result.pageToken = pageToken;
     if (orderBy != null) result.orderBy = orderBy;
     if (outcome != null) result.outcome = outcome;
+    if (date != null) result.date = date;
     return result;
   }
 
@@ -2164,6 +2166,7 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
     ..aOS(4, _omitFieldNames ? '' : 'orderBy')
     ..e<PairExecutionOutcome>(5, _omitFieldNames ? '' : 'outcome', $pb.PbFieldType.OE, defaultOrMaker: PairExecutionOutcome.PAIR_EXECUTION_OUTCOME_UNSPECIFIED, valueOf: PairExecutionOutcome.valueOf, enumValues: PairExecutionOutcome.values)
+    ..aOS(6, _omitFieldNames ? '' : 'date')
     ..hasRequiredFields = false
   ;
 
@@ -2233,6 +2236,16 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
   $core.bool hasOutcome() => $_has(4);
   @$pb.TagNumber(5)
   void clearOutcome() => $_clearField(5);
+
+  /// 날짜 필터 (YYYY-MM-DD, KST 기준 해당 일자만 조회. 빈 문자열이면 전체)
+  @$pb.TagNumber(6)
+  $core.String get date => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set date($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasDate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDate() => $_clearField(6);
 }
 
 class ListPairExecutionLogsResponse extends $pb.GeneratedMessage {

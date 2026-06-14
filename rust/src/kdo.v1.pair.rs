@@ -502,6 +502,9 @@ pub struct ListPairExecutionLogsRequest {
     /// outcome 필터 (UNSPECIFIED = 전체, 그 외 값이면 해당 outcome만 반환)
     #[prost(enumeration="PairExecutionOutcome", tag="5")]
     pub outcome: i32,
+    /// 날짜 필터 (YYYY-MM-DD, KST 기준 해당 일자만 조회. 빈 문자열이면 전체)
+    #[prost(string, tag="6")]
+    pub date: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

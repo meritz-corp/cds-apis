@@ -332,6 +332,13 @@
               "PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED"
             ],
             "default": "PAIR_EXECUTION_OUTCOME_UNSPECIFIED"
+          },
+          {
+            "name": "date",
+            "description": "날짜 필터 (YYYY-MM-DD, KST 기준 해당 일자만 조회. 빈 문자열이면 전체)",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
