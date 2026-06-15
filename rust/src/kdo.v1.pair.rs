@@ -443,9 +443,6 @@ pub struct PairExecutionLog {
     /// Counter 참조 가격 (원, raw int64)
     #[prost(int64, tag="7")]
     pub counter_price: i64,
-    /// 스프레드 (base - counter, 원, raw int64)
-    #[prost(int64, tag="8")]
-    pub spread: i64,
     /// 발주 시각
     #[prost(message, optional, tag="9")]
     pub dispatched_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
@@ -481,6 +478,14 @@ pub struct PairExecutionLog {
     /// exit 슬롯 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
     #[prost(uint64, optional, tag="19")]
     pub exit_order_id: ::core::option::Option<u64>,
+    /// 발주가 대비 체결 평균가 슬리피지(원). side 반영해 불리하게 체결될수록 양수
+    /// (매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0.
+    #[prost(int64, tag="20")]
+    pub base_slippage: i64,
+    /// 발주가 대비 체결 평균가 슬리피지(원). side 반영해 불리하게 체결될수록 양수
+    /// (매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0.
+    #[prost(int64, tag="21")]
+    pub counter_slippage: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

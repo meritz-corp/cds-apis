@@ -601,7 +601,6 @@ const PairExecutionLog$json = {
     {'1': 'counter_order_id', '3': 5, '4': 1, '5': 4, '9': 1, '10': 'counterOrderId', '17': true},
     {'1': 'base_price', '3': 6, '4': 1, '5': 3, '10': 'basePrice'},
     {'1': 'counter_price', '3': 7, '4': 1, '5': 3, '10': 'counterPrice'},
-    {'1': 'spread', '3': 8, '4': 1, '5': 3, '10': 'spread'},
     {'1': 'dispatched_at', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'dispatchedAt'},
     {'1': 'detail', '3': 10, '4': 1, '5': 9, '9': 2, '10': 'detail', '17': true},
     {'1': 'base_qty', '3': 11, '4': 1, '5': 3, '10': 'baseQty'},
@@ -613,6 +612,8 @@ const PairExecutionLog$json = {
     {'1': 'exit_qty', '3': 17, '4': 1, '5': 3, '9': 3, '10': 'exitQty', '17': true},
     {'1': 'exit_fill_price', '3': 18, '4': 1, '5': 3, '9': 4, '10': 'exitFillPrice', '17': true},
     {'1': 'exit_order_id', '3': 19, '4': 1, '5': 4, '9': 5, '10': 'exitOrderId', '17': true},
+    {'1': 'base_slippage', '3': 20, '4': 1, '5': 3, '10': 'baseSlippage'},
+    {'1': 'counter_slippage', '3': 21, '4': 1, '5': 3, '10': 'counterSlippage'},
   ],
   '8': [
     {'1': '_base_order_id'},
@@ -622,6 +623,10 @@ const PairExecutionLog$json = {
     {'1': '_exit_fill_price'},
     {'1': '_exit_order_id'},
   ],
+  '9': [
+    {'1': 8, '2': 9},
+  ],
+  '10': ['spread'],
 };
 
 /// Descriptor for `PairExecutionLog`. Decode as a `google.protobuf.DescriptorProto`.
@@ -631,18 +636,19 @@ final $typed_data.Uint8List pairExecutionLogDescriptor = $convert.base64Decode(
     'dXRpb25PdXRjb21lUgdvdXRjb21lEicKDWJhc2Vfb3JkZXJfaWQYBCABKARIAFILYmFzZU9yZG'
     'VySWSIAQESLQoQY291bnRlcl9vcmRlcl9pZBgFIAEoBEgBUg5jb3VudGVyT3JkZXJJZIgBARId'
     'CgpiYXNlX3ByaWNlGAYgASgDUgliYXNlUHJpY2USIwoNY291bnRlcl9wcmljZRgHIAEoA1IMY2'
-    '91bnRlclByaWNlEhYKBnNwcmVhZBgIIAEoA1IGc3ByZWFkEj8KDWRpc3BhdGNoZWRfYXQYCSAB'
-    'KAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgxkaXNwYXRjaGVkQXQSGwoGZGV0YWlsGA'
-    'ogASgJSAJSBmRldGFpbIgBARIZCghiYXNlX3F0eRgLIAEoA1IHYmFzZVF0eRIfCgtjb3VudGVy'
-    'X3F0eRgMIAEoA1IKY291bnRlclF0eRImCg9iYXNlX2ZpbGxfcHJpY2UYDSABKANSDWJhc2VGaW'
-    'xsUHJpY2USLAoSY291bnRlcl9maWxsX3ByaWNlGA4gASgDUhBjb3VudGVyRmlsbFByaWNlEjgK'
-    'GXRyaWdnZXJfdG9fYmFzZV9zdWJtaXRfdXMYDyABKANSFXRyaWdnZXJUb0Jhc2VTdWJtaXRVcx'
-    'I+Chx0cmlnZ2VyX3RvX2NvdW50ZXJfc3VibWl0X3VzGBAgASgDUhh0cmlnZ2VyVG9Db3VudGVy'
-    'U3VibWl0VXMSHgoIZXhpdF9xdHkYESABKANIA1IHZXhpdFF0eYgBARIrCg9leGl0X2ZpbGxfcH'
-    'JpY2UYEiABKANIBFINZXhpdEZpbGxQcmljZYgBARInCg1leGl0X29yZGVyX2lkGBMgASgESAVS'
-    'C2V4aXRPcmRlcklkiAEBQhAKDl9iYXNlX29yZGVyX2lkQhMKEV9jb3VudGVyX29yZGVyX2lkQg'
-    'kKB19kZXRhaWxCCwoJX2V4aXRfcXR5QhIKEF9leGl0X2ZpbGxfcHJpY2VCEAoOX2V4aXRfb3Jk'
-    'ZXJfaWQ=');
+    '91bnRlclByaWNlEj8KDWRpc3BhdGNoZWRfYXQYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGlt'
+    'ZXN0YW1wUgxkaXNwYXRjaGVkQXQSGwoGZGV0YWlsGAogASgJSAJSBmRldGFpbIgBARIZCghiYX'
+    'NlX3F0eRgLIAEoA1IHYmFzZVF0eRIfCgtjb3VudGVyX3F0eRgMIAEoA1IKY291bnRlclF0eRIm'
+    'Cg9iYXNlX2ZpbGxfcHJpY2UYDSABKANSDWJhc2VGaWxsUHJpY2USLAoSY291bnRlcl9maWxsX3'
+    'ByaWNlGA4gASgDUhBjb3VudGVyRmlsbFByaWNlEjgKGXRyaWdnZXJfdG9fYmFzZV9zdWJtaXRf'
+    'dXMYDyABKANSFXRyaWdnZXJUb0Jhc2VTdWJtaXRVcxI+Chx0cmlnZ2VyX3RvX2NvdW50ZXJfc3'
+    'VibWl0X3VzGBAgASgDUhh0cmlnZ2VyVG9Db3VudGVyU3VibWl0VXMSHgoIZXhpdF9xdHkYESAB'
+    'KANIA1IHZXhpdFF0eYgBARIrCg9leGl0X2ZpbGxfcHJpY2UYEiABKANIBFINZXhpdEZpbGxQcm'
+    'ljZYgBARInCg1leGl0X29yZGVyX2lkGBMgASgESAVSC2V4aXRPcmRlcklkiAEBEiMKDWJhc2Vf'
+    'c2xpcHBhZ2UYFCABKANSDGJhc2VTbGlwcGFnZRIpChBjb3VudGVyX3NsaXBwYWdlGBUgASgDUg'
+    '9jb3VudGVyU2xpcHBhZ2VCEAoOX2Jhc2Vfb3JkZXJfaWRCEwoRX2NvdW50ZXJfb3JkZXJfaWRC'
+    'CQoHX2RldGFpbEILCglfZXhpdF9xdHlCEgoQX2V4aXRfZmlsbF9wcmljZUIQCg5fZXhpdF9vcm'
+    'Rlcl9pZEoECAgQCVIGc3ByZWFk');
 
 @$core.Deprecated('Use listPairExecutionLogsRequestDescriptor instead')
 const ListPairExecutionLogsRequest$json = {

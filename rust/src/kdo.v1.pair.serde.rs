@@ -2902,6 +2902,9 @@ impl serde::Serialize for PairExecutionLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairExecutionLog", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -2933,11 +2936,6 @@ impl serde::Serialize for PairExecutionLog {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("counter_price", ToString::to_string(&self.counter_price).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("spread", ToString::to_string(&self.spread).as_str())?;
         }
         if let Some(v) = self.dispatched_at.as_ref() {
             struct_ser.serialize_field("dispatched_at", v)?;
@@ -2990,6 +2988,16 @@ impl serde::Serialize for PairExecutionLog {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("exit_order_id", ToString::to_string(&v).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_slippage", ToString::to_string(&self.base_slippage).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_slippage", ToString::to_string(&self.counter_slippage).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -3012,7 +3020,6 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "basePrice",
             "counter_price",
             "counterPrice",
-            "spread",
             "dispatched_at",
             "dispatchedAt",
             "detail",
@@ -3034,6 +3041,10 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "exitFillPrice",
             "exit_order_id",
             "exitOrderId",
+            "base_slippage",
+            "baseSlippage",
+            "counter_slippage",
+            "counterSlippage",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3045,7 +3056,6 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             CounterOrderId,
             BasePrice,
             CounterPrice,
-            Spread,
             DispatchedAt,
             Detail,
             BaseQty,
@@ -3057,6 +3067,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             ExitQty,
             ExitFillPrice,
             ExitOrderId,
+            BaseSlippage,
+            CounterSlippage,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3086,7 +3098,6 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "counterOrderId" | "counter_order_id" => Ok(GeneratedField::CounterOrderId),
                             "basePrice" | "base_price" => Ok(GeneratedField::BasePrice),
                             "counterPrice" | "counter_price" => Ok(GeneratedField::CounterPrice),
-                            "spread" => Ok(GeneratedField::Spread),
                             "dispatchedAt" | "dispatched_at" => Ok(GeneratedField::DispatchedAt),
                             "detail" => Ok(GeneratedField::Detail),
                             "baseQty" | "base_qty" => Ok(GeneratedField::BaseQty),
@@ -3098,6 +3109,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "exitQty" | "exit_qty" => Ok(GeneratedField::ExitQty),
                             "exitFillPrice" | "exit_fill_price" => Ok(GeneratedField::ExitFillPrice),
                             "exitOrderId" | "exit_order_id" => Ok(GeneratedField::ExitOrderId),
+                            "baseSlippage" | "base_slippage" => Ok(GeneratedField::BaseSlippage),
+                            "counterSlippage" | "counter_slippage" => Ok(GeneratedField::CounterSlippage),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3124,7 +3137,6 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut counter_order_id__ = None;
                 let mut base_price__ = None;
                 let mut counter_price__ = None;
-                let mut spread__ = None;
                 let mut dispatched_at__ = None;
                 let mut detail__ = None;
                 let mut base_qty__ = None;
@@ -3136,6 +3148,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut exit_qty__ = None;
                 let mut exit_fill_price__ = None;
                 let mut exit_order_id__ = None;
+                let mut base_slippage__ = None;
+                let mut counter_slippage__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairId => {
@@ -3187,14 +3201,6 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                                 return Err(serde::de::Error::duplicate_field("counterPrice"));
                             }
                             counter_price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Spread => {
-                            if spread__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("spread"));
-                            }
-                            spread__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -3282,6 +3288,22 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::BaseSlippage => {
+                            if base_slippage__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseSlippage"));
+                            }
+                            base_slippage__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterSlippage => {
+                            if counter_slippage__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterSlippage"));
+                            }
+                            counter_slippage__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3295,7 +3317,6 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     counter_order_id: counter_order_id__,
                     base_price: base_price__.unwrap_or_default(),
                     counter_price: counter_price__.unwrap_or_default(),
-                    spread: spread__.unwrap_or_default(),
                     dispatched_at: dispatched_at__,
                     detail: detail__,
                     base_qty: base_qty__.unwrap_or_default(),
@@ -3307,6 +3328,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     exit_qty: exit_qty__,
                     exit_fill_price: exit_fill_price__,
                     exit_order_id: exit_order_id__,
+                    base_slippage: base_slippage__.unwrap_or_default(),
+                    counter_slippage: counter_slippage__.unwrap_or_default(),
                 })
             }
         }

@@ -1848,7 +1848,6 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? counterOrderId,
     $fixnum.Int64? basePrice,
     $fixnum.Int64? counterPrice,
-    $fixnum.Int64? spread,
     $2.Timestamp? dispatchedAt,
     $core.String? detail,
     $fixnum.Int64? baseQty,
@@ -1860,6 +1859,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? exitQty,
     $fixnum.Int64? exitFillPrice,
     $fixnum.Int64? exitOrderId,
+    $fixnum.Int64? baseSlippage,
+    $fixnum.Int64? counterSlippage,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1869,7 +1870,6 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (counterOrderId != null) result.counterOrderId = counterOrderId;
     if (basePrice != null) result.basePrice = basePrice;
     if (counterPrice != null) result.counterPrice = counterPrice;
-    if (spread != null) result.spread = spread;
     if (dispatchedAt != null) result.dispatchedAt = dispatchedAt;
     if (detail != null) result.detail = detail;
     if (baseQty != null) result.baseQty = baseQty;
@@ -1881,6 +1881,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (exitQty != null) result.exitQty = exitQty;
     if (exitFillPrice != null) result.exitFillPrice = exitFillPrice;
     if (exitOrderId != null) result.exitOrderId = exitOrderId;
+    if (baseSlippage != null) result.baseSlippage = baseSlippage;
+    if (counterSlippage != null) result.counterSlippage = counterSlippage;
     return result;
   }
 
@@ -1897,7 +1899,6 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'counterOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(6, _omitFieldNames ? '' : 'basePrice')
     ..aInt64(7, _omitFieldNames ? '' : 'counterPrice')
-    ..aInt64(8, _omitFieldNames ? '' : 'spread')
     ..aOM<$2.Timestamp>(9, _omitFieldNames ? '' : 'dispatchedAt', subBuilder: $2.Timestamp.create)
     ..aOS(10, _omitFieldNames ? '' : 'detail')
     ..aInt64(11, _omitFieldNames ? '' : 'baseQty')
@@ -1909,6 +1910,8 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..aInt64(17, _omitFieldNames ? '' : 'exitQty')
     ..aInt64(18, _omitFieldNames ? '' : 'exitFillPrice')
     ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'exitOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(20, _omitFieldNames ? '' : 'baseSlippage')
+    ..aInt64(21, _omitFieldNames ? '' : 'counterSlippage')
     ..hasRequiredFields = false
   ;
 
@@ -1999,129 +2002,141 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearCounterPrice() => $_clearField(7);
 
-  /// 스프레드 (base - counter, 원, raw int64)
-  @$pb.TagNumber(8)
-  $fixnum.Int64 get spread => $_getI64(7);
-  @$pb.TagNumber(8)
-  set spread($fixnum.Int64 value) => $_setInt64(7, value);
-  @$pb.TagNumber(8)
-  $core.bool hasSpread() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearSpread() => $_clearField(8);
-
   /// 발주 시각
   @$pb.TagNumber(9)
-  $2.Timestamp get dispatchedAt => $_getN(8);
+  $2.Timestamp get dispatchedAt => $_getN(7);
   @$pb.TagNumber(9)
   set dispatchedAt($2.Timestamp value) => $_setField(9, value);
   @$pb.TagNumber(9)
-  $core.bool hasDispatchedAt() => $_has(8);
+  $core.bool hasDispatchedAt() => $_has(7);
   @$pb.TagNumber(9)
   void clearDispatchedAt() => $_clearField(9);
   @$pb.TagNumber(9)
-  $2.Timestamp ensureDispatchedAt() => $_ensure(8);
+  $2.Timestamp ensureDispatchedAt() => $_ensure(7);
 
   /// 상세 내용 (오류 메시지 등, optional)
   @$pb.TagNumber(10)
-  $core.String get detail => $_getSZ(9);
+  $core.String get detail => $_getSZ(8);
   @$pb.TagNumber(10)
-  set detail($core.String value) => $_setString(9, value);
+  set detail($core.String value) => $_setString(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasDetail() => $_has(9);
+  $core.bool hasDetail() => $_has(8);
   @$pb.TagNumber(10)
   void clearDetail() => $_clearField(10);
 
   /// Base 슬롯 최종 체결 수량
   @$pb.TagNumber(11)
-  $fixnum.Int64 get baseQty => $_getI64(10);
+  $fixnum.Int64 get baseQty => $_getI64(9);
   @$pb.TagNumber(11)
-  set baseQty($fixnum.Int64 value) => $_setInt64(10, value);
+  set baseQty($fixnum.Int64 value) => $_setInt64(9, value);
   @$pb.TagNumber(11)
-  $core.bool hasBaseQty() => $_has(10);
+  $core.bool hasBaseQty() => $_has(9);
   @$pb.TagNumber(11)
   void clearBaseQty() => $_clearField(11);
 
   /// Counter 슬롯 최종 체결 수량
   @$pb.TagNumber(12)
-  $fixnum.Int64 get counterQty => $_getI64(11);
+  $fixnum.Int64 get counterQty => $_getI64(10);
   @$pb.TagNumber(12)
-  set counterQty($fixnum.Int64 value) => $_setInt64(11, value);
+  set counterQty($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(12)
-  $core.bool hasCounterQty() => $_has(11);
+  $core.bool hasCounterQty() => $_has(10);
   @$pb.TagNumber(12)
   void clearCounterQty() => $_clearField(12);
 
   /// Base 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
   @$pb.TagNumber(13)
-  $fixnum.Int64 get baseFillPrice => $_getI64(12);
+  $fixnum.Int64 get baseFillPrice => $_getI64(11);
   @$pb.TagNumber(13)
-  set baseFillPrice($fixnum.Int64 value) => $_setInt64(12, value);
+  set baseFillPrice($fixnum.Int64 value) => $_setInt64(11, value);
   @$pb.TagNumber(13)
-  $core.bool hasBaseFillPrice() => $_has(12);
+  $core.bool hasBaseFillPrice() => $_has(11);
   @$pb.TagNumber(13)
   void clearBaseFillPrice() => $_clearField(13);
 
   /// Counter 슬롯 실제 평균 체결가 (원, raw int64; 미체결이면 0)
   @$pb.TagNumber(14)
-  $fixnum.Int64 get counterFillPrice => $_getI64(13);
+  $fixnum.Int64 get counterFillPrice => $_getI64(12);
   @$pb.TagNumber(14)
-  set counterFillPrice($fixnum.Int64 value) => $_setInt64(13, value);
+  set counterFillPrice($fixnum.Int64 value) => $_setInt64(12, value);
   @$pb.TagNumber(14)
-  $core.bool hasCounterFillPrice() => $_has(13);
+  $core.bool hasCounterFillPrice() => $_has(12);
   @$pb.TagNumber(14)
   void clearCounterFillPrice() => $_clearField(14);
 
   /// IOC 모드에서 트리거 마켓데이터 수신 시점부터 base 최초 주문 제출 직후까지의 경과 (us)
   /// 비IOC 모드 또는 미적용 시 0
   @$pb.TagNumber(15)
-  $fixnum.Int64 get triggerToBaseSubmitUs => $_getI64(14);
+  $fixnum.Int64 get triggerToBaseSubmitUs => $_getI64(13);
   @$pb.TagNumber(15)
-  set triggerToBaseSubmitUs($fixnum.Int64 value) => $_setInt64(14, value);
+  set triggerToBaseSubmitUs($fixnum.Int64 value) => $_setInt64(13, value);
   @$pb.TagNumber(15)
-  $core.bool hasTriggerToBaseSubmitUs() => $_has(14);
+  $core.bool hasTriggerToBaseSubmitUs() => $_has(13);
   @$pb.TagNumber(15)
   void clearTriggerToBaseSubmitUs() => $_clearField(15);
 
   /// IOC 모드에서 트리거 마켓데이터 수신 시점부터 counter 최초 주문 제출 직후까지의 경과 (us)
   /// 비IOC 모드 또는 미적용 시 0
   @$pb.TagNumber(16)
-  $fixnum.Int64 get triggerToCounterSubmitUs => $_getI64(15);
+  $fixnum.Int64 get triggerToCounterSubmitUs => $_getI64(14);
   @$pb.TagNumber(16)
-  set triggerToCounterSubmitUs($fixnum.Int64 value) => $_setInt64(15, value);
+  set triggerToCounterSubmitUs($fixnum.Int64 value) => $_setInt64(14, value);
   @$pb.TagNumber(16)
-  $core.bool hasTriggerToCounterSubmitUs() => $_has(15);
+  $core.bool hasTriggerToCounterSubmitUs() => $_has(14);
   @$pb.TagNumber(16)
   void clearTriggerToCounterSubmitUs() => $_clearField(16);
 
   /// round-trip exit 슬롯 체결 수량 (CounterIocTpSl 전용; base+counter 실행은 미설정)
   @$pb.TagNumber(17)
-  $fixnum.Int64 get exitQty => $_getI64(16);
+  $fixnum.Int64 get exitQty => $_getI64(15);
   @$pb.TagNumber(17)
-  set exitQty($fixnum.Int64 value) => $_setInt64(16, value);
+  set exitQty($fixnum.Int64 value) => $_setInt64(15, value);
   @$pb.TagNumber(17)
-  $core.bool hasExitQty() => $_has(16);
+  $core.bool hasExitQty() => $_has(15);
   @$pb.TagNumber(17)
   void clearExitQty() => $_clearField(17);
 
   /// exit 슬롯 실제 평균 체결가 (원, raw int64; CounterIocTpSl 전용)
   @$pb.TagNumber(18)
-  $fixnum.Int64 get exitFillPrice => $_getI64(17);
+  $fixnum.Int64 get exitFillPrice => $_getI64(16);
   @$pb.TagNumber(18)
-  set exitFillPrice($fixnum.Int64 value) => $_setInt64(17, value);
+  set exitFillPrice($fixnum.Int64 value) => $_setInt64(16, value);
   @$pb.TagNumber(18)
-  $core.bool hasExitFillPrice() => $_has(17);
+  $core.bool hasExitFillPrice() => $_has(16);
   @$pb.TagNumber(18)
   void clearExitFillPrice() => $_clearField(18);
 
   /// exit 슬롯 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)
   @$pb.TagNumber(19)
-  $fixnum.Int64 get exitOrderId => $_getI64(18);
+  $fixnum.Int64 get exitOrderId => $_getI64(17);
   @$pb.TagNumber(19)
-  set exitOrderId($fixnum.Int64 value) => $_setInt64(18, value);
+  set exitOrderId($fixnum.Int64 value) => $_setInt64(17, value);
   @$pb.TagNumber(19)
-  $core.bool hasExitOrderId() => $_has(18);
+  $core.bool hasExitOrderId() => $_has(17);
   @$pb.TagNumber(19)
   void clearExitOrderId() => $_clearField(19);
+
+  /// 발주가 대비 체결 평균가 슬리피지(원). side 반영해 불리하게 체결될수록 양수
+  /// (매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0.
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get baseSlippage => $_getI64(18);
+  @$pb.TagNumber(20)
+  set baseSlippage($fixnum.Int64 value) => $_setInt64(18, value);
+  @$pb.TagNumber(20)
+  $core.bool hasBaseSlippage() => $_has(18);
+  @$pb.TagNumber(20)
+  void clearBaseSlippage() => $_clearField(20);
+
+  /// 발주가 대비 체결 평균가 슬리피지(원). side 반영해 불리하게 체결될수록 양수
+  /// (매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0.
+  @$pb.TagNumber(21)
+  $fixnum.Int64 get counterSlippage => $_getI64(19);
+  @$pb.TagNumber(21)
+  set counterSlippage($fixnum.Int64 value) => $_setInt64(19, value);
+  @$pb.TagNumber(21)
+  $core.bool hasCounterSlippage() => $_has(19);
+  @$pb.TagNumber(21)
+  void clearCounterSlippage() => $_clearField(21);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {

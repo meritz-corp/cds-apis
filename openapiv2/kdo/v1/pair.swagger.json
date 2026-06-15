@@ -865,11 +865,6 @@
           "format": "int64",
           "title": "Counter 참조 가격 (원, raw int64)"
         },
-        "spread": {
-          "type": "string",
-          "format": "int64",
-          "title": "스프레드 (base - counter, 원, raw int64)"
-        },
         "dispatchedAt": {
           "type": "string",
           "format": "date-time",
@@ -923,6 +918,16 @@
           "type": "string",
           "format": "uint64",
           "title": "exit 슬롯 주문 ID — 정정 추적 시 lineage 최종 ID (CounterIocTpSl 전용)"
+        },
+        "baseSlippage": {
+          "type": "string",
+          "format": "int64",
+          "description": "발주가 대비 체결 평균가 슬리피지(원). side 반영해 불리하게 체결될수록 양수\n(매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0."
+        },
+        "counterSlippage": {
+          "type": "string",
+          "format": "int64",
+          "description": "발주가 대비 체결 평균가 슬리피지(원). side 반영해 불리하게 체결될수록 양수\n(매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0."
         }
       },
       "title": "페어 실행 로그 레코드"
