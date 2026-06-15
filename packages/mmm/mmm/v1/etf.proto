@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package mmm.v1.etf;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/mmm/v1;mmm";
+
+// EtfService - 차익거래 관리 서비스
+service EtfService {
+
+  rpc GetETFManager (CodeRequest) returns (ETFManagerDetail);
+
+
+}
+
+
+message CodeRequest {
+  string code = 1;
+}
+
+message ETFManagerDetail {
+  bool active = 1;
+  bool auto = 20;
+  string code = 2;
+  string name = 3;
+  string start_at = 17;
+  string stop_at = 18;
+  string ref_price_type = 4;
+  string ref_code = 15;
+  string fundcode = 16;
+  string group_name = 36;
+  string group = 19;
+  int64 ask_tick = 5;
+  int64 bid_tick = 6;
+  int64 ask_count = 7;
+  int64 bid_count = 8;
+  int64 ask_quantity = 9;
+  int64 bid_quantity = 10;
+  int64 ask_limit = 11;
+  int64 bid_limit = 12;
+  double ask_offset = 30;
+  double bid_offset = 31;
+  double ask_basis = 42;
+  double bid_basis = 43;
+  bool lp_tagged = 32;
+  bool naked_short_allowed = 33;
+  string creation_settlement_date = 34;
+  string redemption_settlement_date = 35;
+  double refill_interval = 39;
+  double refill_floor = 37;
+  string hedge_group = 24;
+  string hedge_product_code = 25;
+  string hedge_product_name = 26;
+  string hedge_fundcode = 27;
+  string hedge_price_type = 38;
+  double hedge_dominance_threshold = 40;
+  bool hedge_auto = 41;
+  bool passive = 44;
+  bool mm = 45;
+  bool prevent_quote_turnaround = 48;
+  int64 mm_limit = 28;
+  int64 mm_quantity = 29;
+  double mm_spread = 46;
+  uint64 basis_ema_period = 47;
+  double hedge_unit_delta = 13;
+  double etf_unit_delta = 14;
+  double etfs_per_hedge = 21;
+  bool refer_ema = 22;
+  bool creatable = 23;
+  string start_amendment_at = 49;
+  double expected_price = 50;
+  bool active_amendment = 51;
+  bool project_trades = 53;
+  double nav_nav = 54;
+  double fx_ask_basis = 55;
+  double fx_bid_basis = 56;
+  int64 grace_amount = 57;
+  double dominance_threshold = 58;
+  bool advanced_tick = 59;
+  double advanced_tick_threshold = 60;
+  int64 ask_notifying_quantity = 62;
+  int64 bid_notifying_quantity = 63;
+  string position_type = 64;
+  double ask_offset_adjust = 65;
+  double bid_offset_adjust = 66;
+  double ask_basis_adjust = 67;
+  double bid_basis_adjust = 68;
+  int64 ask_limit_adjust = 69;
+  int64 bid_limit_adjust = 70;
+  int64 ask_total_limit = 71;
+  int64 bid_total_limit = 72;
+  bool ask_adjust_on = 73;
+  bool bid_adjust_on = 74;
+  double opening_ref_future_ask_price = 75;
+  double opening_ref_future_bid_price = 76;
+  double opening_ask_price = 77;
+  double opening_bid_price = 78;
+  double opening_ask_offset = 79;
+  double opening_bid_offset = 80;
+  double opening_ask_basis = 81;
+  double opening_bid_basis = 82;
+  int64 opening_ask_count = 83;
+  int64 opening_bid_count = 84;
+  int64 opening_ask_quantity = 85;
+  int64 opening_bid_quantity = 86;
+  string start_cancelling_at = 87;
+  bool opening_active = 88;
+  int64 ask_cancel_ticks = 89;
+  int64 bid_cancel_ticks = 90;
+  bool escape = 91;
+  string opening_hedge_product_code = 92;
+  string opening_hedge_product_name = 93;
+  string opening_hedge_price_type = 94;
+  double opening_hedge_dominance_threshold = 95;
+  bool opening_hedge_auto = 96;
+  int64 etf_filled_to_hedge_trigger_quantity = 97;
+  int64 hedge_etf_quantities_per_trigger = 98;
+}
+

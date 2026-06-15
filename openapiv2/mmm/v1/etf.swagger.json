@@ -1,0 +1,397 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mmm/v1/etf.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "EtfService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "etfETFManagerDetail": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "auto": {
+          "type": "boolean"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "startAt": {
+          "type": "string"
+        },
+        "stopAt": {
+          "type": "string"
+        },
+        "refPriceType": {
+          "type": "string"
+        },
+        "refCode": {
+          "type": "string"
+        },
+        "fundcode": {
+          "type": "string"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "askTick": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidTick": {
+          "type": "string",
+          "format": "int64"
+        },
+        "askCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "askQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "askLimit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidLimit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "askOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "askBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "lpTagged": {
+          "type": "boolean"
+        },
+        "nakedShortAllowed": {
+          "type": "boolean"
+        },
+        "creationSettlementDate": {
+          "type": "string"
+        },
+        "redemptionSettlementDate": {
+          "type": "string"
+        },
+        "refillInterval": {
+          "type": "number",
+          "format": "double"
+        },
+        "refillFloor": {
+          "type": "number",
+          "format": "double"
+        },
+        "hedgeGroup": {
+          "type": "string"
+        },
+        "hedgeProductCode": {
+          "type": "string"
+        },
+        "hedgeProductName": {
+          "type": "string"
+        },
+        "hedgeFundcode": {
+          "type": "string"
+        },
+        "hedgePriceType": {
+          "type": "string"
+        },
+        "hedgeDominanceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "hedgeAuto": {
+          "type": "boolean"
+        },
+        "passive": {
+          "type": "boolean"
+        },
+        "mm": {
+          "type": "boolean"
+        },
+        "preventQuoteTurnaround": {
+          "type": "boolean"
+        },
+        "mmLimit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "mmQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "mmSpread": {
+          "type": "number",
+          "format": "double"
+        },
+        "basisEmaPeriod": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "hedgeUnitDelta": {
+          "type": "number",
+          "format": "double"
+        },
+        "etfUnitDelta": {
+          "type": "number",
+          "format": "double"
+        },
+        "etfsPerHedge": {
+          "type": "number",
+          "format": "double"
+        },
+        "referEma": {
+          "type": "boolean"
+        },
+        "creatable": {
+          "type": "boolean"
+        },
+        "startAmendmentAt": {
+          "type": "string"
+        },
+        "expectedPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "activeAmendment": {
+          "type": "boolean"
+        },
+        "projectTrades": {
+          "type": "boolean"
+        },
+        "navNav": {
+          "type": "number",
+          "format": "double"
+        },
+        "fxAskBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "fxBidBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "graceAmount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dominanceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "advancedTick": {
+          "type": "boolean"
+        },
+        "advancedTickThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "askNotifyingQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidNotifyingQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "positionType": {
+          "type": "string"
+        },
+        "askOffsetAdjust": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidOffsetAdjust": {
+          "type": "number",
+          "format": "double"
+        },
+        "askBasisAdjust": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidBasisAdjust": {
+          "type": "number",
+          "format": "double"
+        },
+        "askLimitAdjust": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidLimitAdjust": {
+          "type": "string",
+          "format": "int64"
+        },
+        "askTotalLimit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidTotalLimit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "askAdjustOn": {
+          "type": "boolean"
+        },
+        "bidAdjustOn": {
+          "type": "boolean"
+        },
+        "openingRefFutureAskPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingRefFutureBidPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingAskPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingBidPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingAskOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingBidOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingAskBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingBidBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingAskCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "openingBidCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "openingAskQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "openingBidQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "startCancellingAt": {
+          "type": "string"
+        },
+        "openingActive": {
+          "type": "boolean"
+        },
+        "askCancelTicks": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bidCancelTicks": {
+          "type": "string",
+          "format": "int64"
+        },
+        "escape": {
+          "type": "boolean"
+        },
+        "openingHedgeProductCode": {
+          "type": "string"
+        },
+        "openingHedgeProductName": {
+          "type": "string"
+        },
+        "openingHedgePriceType": {
+          "type": "string"
+        },
+        "openingHedgeDominanceThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "openingHedgeAuto": {
+          "type": "boolean"
+        },
+        "etfFilledToHedgeTriggerQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hedgeEtfQuantitiesPerTrigger": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

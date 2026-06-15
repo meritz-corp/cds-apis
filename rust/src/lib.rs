@@ -146,6 +146,10 @@ pub mod mmm {
             include!("mmm.v1.notification.rs");
         }
 
+        pub mod etf {
+            include!("mmm.v1.etf.rs");
+        }
+
     }
 }
 
