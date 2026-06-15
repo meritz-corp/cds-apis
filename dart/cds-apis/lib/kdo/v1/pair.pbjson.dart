@@ -284,6 +284,7 @@ const Nav$json = {
   '2': [
     {'1': 'nav_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
     {'1': 'basis', '3': 2, '4': 1, '5': 3, '10': 'basis'},
+    {'1': 'basis_subscribe_enabled', '3': 4, '4': 1, '5': 8, '10': 'basisSubscribeEnabled'},
   ],
   '9': [
     {'1': 3, '2': 4},
@@ -294,7 +295,8 @@ const Nav$json = {
 /// Descriptor for `Nav`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List navDescriptor = $convert.base64Decode(
     'CgNOYXYSMgoIbmF2X2tpbmQYASABKA4yFy5rZG8udjEucGFpci5FdGZOYXZLaW5kUgduYXZLaW'
-    '5kEhQKBWJhc2lzGAIgASgDUgViYXNpc0oECAMQBFIJYXNrX2Jhc2lz');
+    '5kEhQKBWJhc2lzGAIgASgDUgViYXNpcxI2ChdiYXNpc19zdWJzY3JpYmVfZW5hYmxlZBgEIAEo'
+    'CFIVYmFzaXNTdWJzY3JpYmVFbmFibGVkSgQIAxAEUglhc2tfYmFzaXM=');
 
 @$core.Deprecated('Use triggerConditionDescriptor instead')
 const TriggerCondition$json = {

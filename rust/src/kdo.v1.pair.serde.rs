@@ -1995,6 +1995,9 @@ impl serde::Serialize for Nav {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.Nav", len)?;
         if true {
             let v = EtfNavKind::try_from(self.nav_kind)
@@ -2005,6 +2008,9 @@ impl serde::Serialize for Nav {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("basis_subscribe_enabled", &self.basis_subscribe_enabled)?;
         }
         struct_ser.end()
     }
@@ -2019,12 +2025,15 @@ impl<'de> serde::Deserialize<'de> for Nav {
             "nav_kind",
             "navKind",
             "basis",
+            "basis_subscribe_enabled",
+            "basisSubscribeEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             NavKind,
             Basis,
+            BasisSubscribeEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2049,6 +2058,7 @@ impl<'de> serde::Deserialize<'de> for Nav {
                         match value {
                             "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
                             "basis" => Ok(GeneratedField::Basis),
+                            "basisSubscribeEnabled" | "basis_subscribe_enabled" => Ok(GeneratedField::BasisSubscribeEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2070,6 +2080,7 @@ impl<'de> serde::Deserialize<'de> for Nav {
             {
                 let mut nav_kind__ = None;
                 let mut basis__ = None;
+                let mut basis_subscribe_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::NavKind => {
@@ -2086,6 +2097,12 @@ impl<'de> serde::Deserialize<'de> for Nav {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BasisSubscribeEnabled => {
+                            if basis_subscribe_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basisSubscribeEnabled"));
+                            }
+                            basis_subscribe_enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2094,6 +2111,7 @@ impl<'de> serde::Deserialize<'de> for Nav {
                 Ok(Nav {
                     nav_kind: nav_kind__.unwrap_or_default(),
                     basis: basis__.unwrap_or_default(),
+                    basis_subscribe_enabled: basis_subscribe_enabled__.unwrap_or_default(),
                 })
             }
         }

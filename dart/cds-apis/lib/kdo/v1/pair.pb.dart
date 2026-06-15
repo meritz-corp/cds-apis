@@ -626,10 +626,12 @@ class Nav extends $pb.GeneratedMessage {
   factory Nav({
     EtfNavKind? navKind,
     $fixnum.Int64? basis,
+    $core.bool? basisSubscribeEnabled,
   }) {
     final result = create();
     if (navKind != null) result.navKind = navKind;
     if (basis != null) result.basis = basis;
+    if (basisSubscribeEnabled != null) result.basisSubscribeEnabled = basisSubscribeEnabled;
     return result;
   }
 
@@ -641,6 +643,7 @@ class Nav extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Nav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..e<EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
     ..aInt64(2, _omitFieldNames ? '' : 'basis')
+    ..aOB(4, _omitFieldNames ? '' : 'basisSubscribeEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -680,6 +683,17 @@ class Nav extends $pb.GeneratedMessage {
   $core.bool hasBasis() => $_has(1);
   @$pb.TagNumber(2)
   void clearBasis() => $_clearField(2);
+
+  /// 선물-ETF basis 동기화 버스 구독 여부.
+  /// true 이면 pair가 버스 이벤트를 수신해 Nav.basis를 자동 갱신한다. 기본 false.
+  @$pb.TagNumber(4)
+  $core.bool get basisSubscribeEnabled => $_getBF(2);
+  @$pb.TagNumber(4)
+  set basisSubscribeEnabled($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBasisSubscribeEnabled() => $_has(2);
+  @$pb.TagNumber(4)
+  void clearBasisSubscribeEnabled() => $_clearField(4);
 }
 
 enum TriggerCondition_Kind {

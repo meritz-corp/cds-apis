@@ -1140,6 +1140,10 @@
           "type": "string",
           "format": "int64",
           "description": "NAV 베이시스 (선물 가격 축, base=선물 기준 단일값).\n양수면 선물 목표가를 보수적으로 조정."
+        },
+        "basisSubscribeEnabled": {
+          "type": "boolean",
+          "description": "선물-ETF basis 동기화 버스 구독 여부.\ntrue 이면 pair가 버스 이벤트를 수신해 Nav.basis를 자동 갱신한다. 기본 false."
         }
       },
       "description": "ETF↔Future 페어의 NAV 환산 설정 — 트리거(TargetNav)와 실행(counter BEP)이 공유.\nbase/counter 중 한쪽이 ETF, 다른쪽이 Future 여야 한다 (방향 무관)."

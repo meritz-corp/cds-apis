@@ -153,6 +153,10 @@ pub struct Nav {
     /// 양수면 선물 목표가를 보수적으로 조정.
     #[prost(int64, tag="2")]
     pub basis: i64,
+    /// 선물-ETF basis 동기화 버스 구독 여부.
+    /// true 이면 pair가 버스 이벤트를 수신해 Nav.basis를 자동 갱신한다. 기본 false.
+    #[prost(bool, tag="4")]
+    pub basis_subscribe_enabled: bool,
 }
 // ============================================================================
 // TriggerCondition — 트리거 축
