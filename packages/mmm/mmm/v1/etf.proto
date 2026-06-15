@@ -122,5 +122,24 @@ message ETFManagerDetail {
   bool opening_hedge_auto = 96;
   int64 etf_filled_to_hedge_trigger_quantity = 97;
   int64 hedge_etf_quantities_per_trigger = 98;
+  // LP 방향 모드. "EtfLpFutureHedge" (기존) / "FutureLpEtfHedge" (신규).
+  string lp_mode = 99;
+  // LP 발주 상품 코드. EtfLpFutureHedge=ETF 코드, FutureLpEtfHedge=선물 코드.
+  string lp_product_code = 100;
+  // FutureLpEtfHedge 모드에서 선물 1계약 체결 시 발주할 ETF 주수.
+  // PDF 기반 자동 계산 (refresh_offset_base). EtfLpFutureHedge 모드에서는 0.
+  double etf_hedge_quantity_per_future_filled = 102;
+  // FutureLpEtfHedge + RealNav 가격역산 scale.
+  // CU / Σ(future.multiple × PDF future quantity) — ΔETF 1won 당 ΔF won 계수.
+  // EtfLpFutureHedge 모드에서는 0.
+  double lp_real_nav_etf_to_future_scale = 103;
+  // (구) lp_orders_per_price=101 / opening_orders_per_price=104 — ask/bid 사이드 분리로 폐기.
+  reserved 101, 104;
+  // FutureLpEtfHedge 전용: 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  int64 ask_lp_orders_per_price = 105;
+  int64 bid_lp_orders_per_price = 106;
+  // FutureLpEtfHedge 전용: 장전동시호가 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  int64 ask_opening_orders_per_price = 107;
+  int64 bid_opening_orders_per_price = 108;
 }
 

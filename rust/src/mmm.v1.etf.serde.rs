@@ -390,6 +390,30 @@ impl serde::Serialize for EtfManagerDetail {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("mmm.v1.etf.ETFManagerDetail", len)?;
         if true {
             struct_ser.serialize_field("active", &self.active)?;
@@ -731,6 +755,38 @@ impl serde::Serialize for EtfManagerDetail {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("hedge_etf_quantities_per_trigger", ToString::to_string(&self.hedge_etf_quantities_per_trigger).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("lp_mode", &self.lp_mode)?;
+        }
+        if true {
+            struct_ser.serialize_field("lp_product_code", &self.lp_product_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_hedge_quantity_per_future_filled", &self.etf_hedge_quantity_per_future_filled)?;
+        }
+        if true {
+            struct_ser.serialize_field("lp_real_nav_etf_to_future_scale", &self.lp_real_nav_etf_to_future_scale)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_lp_orders_per_price", ToString::to_string(&self.ask_lp_orders_per_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_lp_orders_per_price", ToString::to_string(&self.bid_lp_orders_per_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_opening_orders_per_price", ToString::to_string(&self.ask_opening_orders_per_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_opening_orders_per_price", ToString::to_string(&self.bid_opening_orders_per_price).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -923,6 +979,22 @@ impl<'de> serde::Deserialize<'de> for EtfManagerDetail {
             "etfFilledToHedgeTriggerQuantity",
             "hedge_etf_quantities_per_trigger",
             "hedgeEtfQuantitiesPerTrigger",
+            "lp_mode",
+            "lpMode",
+            "lp_product_code",
+            "lpProductCode",
+            "etf_hedge_quantity_per_future_filled",
+            "etfHedgeQuantityPerFutureFilled",
+            "lp_real_nav_etf_to_future_scale",
+            "lpRealNavEtfToFutureScale",
+            "ask_lp_orders_per_price",
+            "askLpOrdersPerPrice",
+            "bid_lp_orders_per_price",
+            "bidLpOrdersPerPrice",
+            "ask_opening_orders_per_price",
+            "askOpeningOrdersPerPrice",
+            "bid_opening_orders_per_price",
+            "bidOpeningOrdersPerPrice",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1023,6 +1095,14 @@ impl<'de> serde::Deserialize<'de> for EtfManagerDetail {
             OpeningHedgeAuto,
             EtfFilledToHedgeTriggerQuantity,
             HedgeEtfQuantitiesPerTrigger,
+            LpMode,
+            LpProductCode,
+            EtfHedgeQuantityPerFutureFilled,
+            LpRealNavEtfToFutureScale,
+            AskLpOrdersPerPrice,
+            BidLpOrdersPerPrice,
+            AskOpeningOrdersPerPrice,
+            BidOpeningOrdersPerPrice,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1141,6 +1221,14 @@ impl<'de> serde::Deserialize<'de> for EtfManagerDetail {
                             "openingHedgeAuto" | "opening_hedge_auto" => Ok(GeneratedField::OpeningHedgeAuto),
                             "etfFilledToHedgeTriggerQuantity" | "etf_filled_to_hedge_trigger_quantity" => Ok(GeneratedField::EtfFilledToHedgeTriggerQuantity),
                             "hedgeEtfQuantitiesPerTrigger" | "hedge_etf_quantities_per_trigger" => Ok(GeneratedField::HedgeEtfQuantitiesPerTrigger),
+                            "lpMode" | "lp_mode" => Ok(GeneratedField::LpMode),
+                            "lpProductCode" | "lp_product_code" => Ok(GeneratedField::LpProductCode),
+                            "etfHedgeQuantityPerFutureFilled" | "etf_hedge_quantity_per_future_filled" => Ok(GeneratedField::EtfHedgeQuantityPerFutureFilled),
+                            "lpRealNavEtfToFutureScale" | "lp_real_nav_etf_to_future_scale" => Ok(GeneratedField::LpRealNavEtfToFutureScale),
+                            "askLpOrdersPerPrice" | "ask_lp_orders_per_price" => Ok(GeneratedField::AskLpOrdersPerPrice),
+                            "bidLpOrdersPerPrice" | "bid_lp_orders_per_price" => Ok(GeneratedField::BidLpOrdersPerPrice),
+                            "askOpeningOrdersPerPrice" | "ask_opening_orders_per_price" => Ok(GeneratedField::AskOpeningOrdersPerPrice),
+                            "bidOpeningOrdersPerPrice" | "bid_opening_orders_per_price" => Ok(GeneratedField::BidOpeningOrdersPerPrice),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1256,6 +1344,14 @@ impl<'de> serde::Deserialize<'de> for EtfManagerDetail {
                 let mut opening_hedge_auto__ = None;
                 let mut etf_filled_to_hedge_trigger_quantity__ = None;
                 let mut hedge_etf_quantities_per_trigger__ = None;
+                let mut lp_mode__ = None;
+                let mut lp_product_code__ = None;
+                let mut etf_hedge_quantity_per_future_filled__ = None;
+                let mut lp_real_nav_etf_to_future_scale__ = None;
+                let mut ask_lp_orders_per_price__ = None;
+                let mut bid_lp_orders_per_price__ = None;
+                let mut ask_opening_orders_per_price__ = None;
+                let mut bid_opening_orders_per_price__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Active => {
@@ -1946,6 +2042,66 @@ impl<'de> serde::Deserialize<'de> for EtfManagerDetail {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::LpMode => {
+                            if lp_mode__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lpMode"));
+                            }
+                            lp_mode__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LpProductCode => {
+                            if lp_product_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lpProductCode"));
+                            }
+                            lp_product_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EtfHedgeQuantityPerFutureFilled => {
+                            if etf_hedge_quantity_per_future_filled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfHedgeQuantityPerFutureFilled"));
+                            }
+                            etf_hedge_quantity_per_future_filled__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LpRealNavEtfToFutureScale => {
+                            if lp_real_nav_etf_to_future_scale__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lpRealNavEtfToFutureScale"));
+                            }
+                            lp_real_nav_etf_to_future_scale__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskLpOrdersPerPrice => {
+                            if ask_lp_orders_per_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askLpOrdersPerPrice"));
+                            }
+                            ask_lp_orders_per_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidLpOrdersPerPrice => {
+                            if bid_lp_orders_per_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidLpOrdersPerPrice"));
+                            }
+                            bid_lp_orders_per_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskOpeningOrdersPerPrice => {
+                            if ask_opening_orders_per_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOpeningOrdersPerPrice"));
+                            }
+                            ask_opening_orders_per_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidOpeningOrdersPerPrice => {
+                            if bid_opening_orders_per_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOpeningOrdersPerPrice"));
+                            }
+                            bid_opening_orders_per_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2048,6 +2204,14 @@ impl<'de> serde::Deserialize<'de> for EtfManagerDetail {
                     opening_hedge_auto: opening_hedge_auto__.unwrap_or_default(),
                     etf_filled_to_hedge_trigger_quantity: etf_filled_to_hedge_trigger_quantity__.unwrap_or_default(),
                     hedge_etf_quantities_per_trigger: hedge_etf_quantities_per_trigger__.unwrap_or_default(),
+                    lp_mode: lp_mode__.unwrap_or_default(),
+                    lp_product_code: lp_product_code__.unwrap_or_default(),
+                    etf_hedge_quantity_per_future_filled: etf_hedge_quantity_per_future_filled__.unwrap_or_default(),
+                    lp_real_nav_etf_to_future_scale: lp_real_nav_etf_to_future_scale__.unwrap_or_default(),
+                    ask_lp_orders_per_price: ask_lp_orders_per_price__.unwrap_or_default(),
+                    bid_lp_orders_per_price: bid_lp_orders_per_price__.unwrap_or_default(),
+                    ask_opening_orders_per_price: ask_opening_orders_per_price__.unwrap_or_default(),
+                    bid_opening_orders_per_price: bid_opening_orders_per_price__.unwrap_or_default(),
                 })
             }
         }

@@ -126,6 +126,18 @@ const ETFManagerDetail$json = {
     {'1': 'opening_hedge_auto', '3': 96, '4': 1, '5': 8, '10': 'openingHedgeAuto'},
     {'1': 'etf_filled_to_hedge_trigger_quantity', '3': 97, '4': 1, '5': 3, '10': 'etfFilledToHedgeTriggerQuantity'},
     {'1': 'hedge_etf_quantities_per_trigger', '3': 98, '4': 1, '5': 3, '10': 'hedgeEtfQuantitiesPerTrigger'},
+    {'1': 'lp_mode', '3': 99, '4': 1, '5': 9, '10': 'lpMode'},
+    {'1': 'lp_product_code', '3': 100, '4': 1, '5': 9, '10': 'lpProductCode'},
+    {'1': 'etf_hedge_quantity_per_future_filled', '3': 102, '4': 1, '5': 1, '10': 'etfHedgeQuantityPerFutureFilled'},
+    {'1': 'lp_real_nav_etf_to_future_scale', '3': 103, '4': 1, '5': 1, '10': 'lpRealNavEtfToFutureScale'},
+    {'1': 'ask_lp_orders_per_price', '3': 105, '4': 1, '5': 3, '10': 'askLpOrdersPerPrice'},
+    {'1': 'bid_lp_orders_per_price', '3': 106, '4': 1, '5': 3, '10': 'bidLpOrdersPerPrice'},
+    {'1': 'ask_opening_orders_per_price', '3': 107, '4': 1, '5': 3, '10': 'askOpeningOrdersPerPrice'},
+    {'1': 'bid_opening_orders_per_price', '3': 108, '4': 1, '5': 3, '10': 'bidOpeningOrdersPerPrice'},
+  ],
+  '9': [
+    {'1': 101, '2': 102},
+    {'1': 104, '2': 105},
   ],
 };
 
@@ -200,5 +212,13 @@ final $typed_data.Uint8List eTFManagerDetailDescriptor = $convert.base64Decode(
     'ChJvcGVuaW5nX2hlZGdlX2F1dG8YYCABKAhSEG9wZW5pbmdIZWRnZUF1dG8STQokZXRmX2ZpbG'
     'xlZF90b19oZWRnZV90cmlnZ2VyX3F1YW50aXR5GGEgASgDUh9ldGZGaWxsZWRUb0hlZGdlVHJp'
     'Z2dlclF1YW50aXR5EkYKIGhlZGdlX2V0Zl9xdWFudGl0aWVzX3Blcl90cmlnZ2VyGGIgASgDUh'
-    'xoZWRnZUV0ZlF1YW50aXRpZXNQZXJUcmlnZ2Vy');
+    'xoZWRnZUV0ZlF1YW50aXRpZXNQZXJUcmlnZ2VyEhcKB2xwX21vZGUYYyABKAlSBmxwTW9kZRIm'
+    'Cg9scF9wcm9kdWN0X2NvZGUYZCABKAlSDWxwUHJvZHVjdENvZGUSTQokZXRmX2hlZGdlX3F1YW'
+    '50aXR5X3Blcl9mdXR1cmVfZmlsbGVkGGYgASgBUh9ldGZIZWRnZVF1YW50aXR5UGVyRnV0dXJl'
+    'RmlsbGVkEkIKH2xwX3JlYWxfbmF2X2V0Zl90b19mdXR1cmVfc2NhbGUYZyABKAFSGWxwUmVhbE'
+    '5hdkV0ZlRvRnV0dXJlU2NhbGUSNAoXYXNrX2xwX29yZGVyc19wZXJfcHJpY2UYaSABKANSE2Fz'
+    'a0xwT3JkZXJzUGVyUHJpY2USNAoXYmlkX2xwX29yZGVyc19wZXJfcHJpY2UYaiABKANSE2JpZE'
+    'xwT3JkZXJzUGVyUHJpY2USPgocYXNrX29wZW5pbmdfb3JkZXJzX3Blcl9wcmljZRhrIAEoA1IY'
+    'YXNrT3BlbmluZ09yZGVyc1BlclByaWNlEj4KHGJpZF9vcGVuaW5nX29yZGVyc19wZXJfcHJpY2'
+    'UYbCABKANSGGJpZE9wZW5pbmdPcmRlcnNQZXJQcmljZUoECGUQZkoECGgQaQ==');
 

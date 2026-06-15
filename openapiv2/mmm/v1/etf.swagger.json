@@ -363,6 +363,42 @@
         "hedgeEtfQuantitiesPerTrigger": {
           "type": "string",
           "format": "int64"
+        },
+        "lpMode": {
+          "type": "string",
+          "description": "LP 방향 모드. \"EtfLpFutureHedge\" (기존) / \"FutureLpEtfHedge\" (신규)."
+        },
+        "lpProductCode": {
+          "type": "string",
+          "description": "LP 발주 상품 코드. EtfLpFutureHedge=ETF 코드, FutureLpEtfHedge=선물 코드."
+        },
+        "etfHedgeQuantityPerFutureFilled": {
+          "type": "number",
+          "format": "double",
+          "description": "FutureLpEtfHedge 모드에서 선물 1계약 체결 시 발주할 ETF 주수.\nPDF 기반 자동 계산 (refresh_offset_base). EtfLpFutureHedge 모드에서는 0."
+        },
+        "lpRealNavEtfToFutureScale": {
+          "type": "number",
+          "format": "double",
+          "description": "FutureLpEtfHedge + RealNav 가격역산 scale.\nCU / Σ(future.multiple × PDF future quantity) — ΔETF 1won 당 ΔF won 계수.\nEtfLpFutureHedge 모드에서는 0."
+        },
+        "askLpOrdersPerPrice": {
+          "type": "string",
+          "format": "int64",
+          "description": "FutureLpEtfHedge 전용: 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주."
+        },
+        "bidLpOrdersPerPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "askOpeningOrdersPerPrice": {
+          "type": "string",
+          "format": "int64",
+          "description": "FutureLpEtfHedge 전용: 장전동시호가 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주."
+        },
+        "bidOpeningOrdersPerPrice": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

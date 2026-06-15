@@ -201,6 +201,31 @@ pub struct EtfManagerDetail {
     pub etf_filled_to_hedge_trigger_quantity: i64,
     #[prost(int64, tag="98")]
     pub hedge_etf_quantities_per_trigger: i64,
+    /// LP 방향 모드. "EtfLpFutureHedge" (기존) / "FutureLpEtfHedge" (신규).
+    #[prost(string, tag="99")]
+    pub lp_mode: ::prost::alloc::string::String,
+    /// LP 발주 상품 코드. EtfLpFutureHedge=ETF 코드, FutureLpEtfHedge=선물 코드.
+    #[prost(string, tag="100")]
+    pub lp_product_code: ::prost::alloc::string::String,
+    /// FutureLpEtfHedge 모드에서 선물 1계약 체결 시 발주할 ETF 주수.
+    /// PDF 기반 자동 계산 (refresh_offset_base). EtfLpFutureHedge 모드에서는 0.
+    #[prost(double, tag="102")]
+    pub etf_hedge_quantity_per_future_filled: f64,
+    /// FutureLpEtfHedge + RealNav 가격역산 scale.
+    /// CU / Σ(future.multiple × PDF future quantity) — ΔETF 1won 당 ΔF won 계수.
+    /// EtfLpFutureHedge 모드에서는 0.
+    #[prost(double, tag="103")]
+    pub lp_real_nav_etf_to_future_scale: f64,
+    /// FutureLpEtfHedge 전용: 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+    #[prost(int64, tag="105")]
+    pub ask_lp_orders_per_price: i64,
+    #[prost(int64, tag="106")]
+    pub bid_lp_orders_per_price: i64,
+    /// FutureLpEtfHedge 전용: 장전동시호가 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+    #[prost(int64, tag="107")]
+    pub ask_opening_orders_per_price: i64,
+    #[prost(int64, tag="108")]
+    pub bid_opening_orders_per_price: i64,
 }
 include!("mmm.v1.etf.tonic.rs");
 include!("mmm.v1.etf.serde.rs");

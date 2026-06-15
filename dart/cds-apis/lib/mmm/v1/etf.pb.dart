@@ -161,6 +161,14 @@ class ETFManagerDetail extends $pb.GeneratedMessage {
     $core.bool? openingHedgeAuto,
     $fixnum.Int64? etfFilledToHedgeTriggerQuantity,
     $fixnum.Int64? hedgeEtfQuantitiesPerTrigger,
+    $core.String? lpMode,
+    $core.String? lpProductCode,
+    $core.double? etfHedgeQuantityPerFutureFilled,
+    $core.double? lpRealNavEtfToFutureScale,
+    $fixnum.Int64? askLpOrdersPerPrice,
+    $fixnum.Int64? bidLpOrdersPerPrice,
+    $fixnum.Int64? askOpeningOrdersPerPrice,
+    $fixnum.Int64? bidOpeningOrdersPerPrice,
   }) {
     final result = create();
     if (active != null) result.active = active;
@@ -259,6 +267,14 @@ class ETFManagerDetail extends $pb.GeneratedMessage {
     if (openingHedgeAuto != null) result.openingHedgeAuto = openingHedgeAuto;
     if (etfFilledToHedgeTriggerQuantity != null) result.etfFilledToHedgeTriggerQuantity = etfFilledToHedgeTriggerQuantity;
     if (hedgeEtfQuantitiesPerTrigger != null) result.hedgeEtfQuantitiesPerTrigger = hedgeEtfQuantitiesPerTrigger;
+    if (lpMode != null) result.lpMode = lpMode;
+    if (lpProductCode != null) result.lpProductCode = lpProductCode;
+    if (etfHedgeQuantityPerFutureFilled != null) result.etfHedgeQuantityPerFutureFilled = etfHedgeQuantityPerFutureFilled;
+    if (lpRealNavEtfToFutureScale != null) result.lpRealNavEtfToFutureScale = lpRealNavEtfToFutureScale;
+    if (askLpOrdersPerPrice != null) result.askLpOrdersPerPrice = askLpOrdersPerPrice;
+    if (bidLpOrdersPerPrice != null) result.bidLpOrdersPerPrice = bidLpOrdersPerPrice;
+    if (askOpeningOrdersPerPrice != null) result.askOpeningOrdersPerPrice = askOpeningOrdersPerPrice;
+    if (bidOpeningOrdersPerPrice != null) result.bidOpeningOrdersPerPrice = bidOpeningOrdersPerPrice;
     return result;
   }
 
@@ -364,6 +380,14 @@ class ETFManagerDetail extends $pb.GeneratedMessage {
     ..aOB(96, _omitFieldNames ? '' : 'openingHedgeAuto')
     ..aInt64(97, _omitFieldNames ? '' : 'etfFilledToHedgeTriggerQuantity')
     ..aInt64(98, _omitFieldNames ? '' : 'hedgeEtfQuantitiesPerTrigger')
+    ..aOS(99, _omitFieldNames ? '' : 'lpMode')
+    ..aOS(100, _omitFieldNames ? '' : 'lpProductCode')
+    ..a<$core.double>(102, _omitFieldNames ? '' : 'etfHedgeQuantityPerFutureFilled', $pb.PbFieldType.OD)
+    ..a<$core.double>(103, _omitFieldNames ? '' : 'lpRealNavEtfToFutureScale', $pb.PbFieldType.OD)
+    ..aInt64(105, _omitFieldNames ? '' : 'askLpOrdersPerPrice')
+    ..aInt64(106, _omitFieldNames ? '' : 'bidLpOrdersPerPrice')
+    ..aInt64(107, _omitFieldNames ? '' : 'askOpeningOrdersPerPrice')
+    ..aInt64(108, _omitFieldNames ? '' : 'bidOpeningOrdersPerPrice')
     ..hasRequiredFields = false
   ;
 
@@ -1247,6 +1271,87 @@ class ETFManagerDetail extends $pb.GeneratedMessage {
   $core.bool hasHedgeEtfQuantitiesPerTrigger() => $_has(95);
   @$pb.TagNumber(98)
   void clearHedgeEtfQuantitiesPerTrigger() => $_clearField(98);
+
+  /// LP 방향 모드. "EtfLpFutureHedge" (기존) / "FutureLpEtfHedge" (신규).
+  @$pb.TagNumber(99)
+  $core.String get lpMode => $_getSZ(96);
+  @$pb.TagNumber(99)
+  set lpMode($core.String value) => $_setString(96, value);
+  @$pb.TagNumber(99)
+  $core.bool hasLpMode() => $_has(96);
+  @$pb.TagNumber(99)
+  void clearLpMode() => $_clearField(99);
+
+  /// LP 발주 상품 코드. EtfLpFutureHedge=ETF 코드, FutureLpEtfHedge=선물 코드.
+  @$pb.TagNumber(100)
+  $core.String get lpProductCode => $_getSZ(97);
+  @$pb.TagNumber(100)
+  set lpProductCode($core.String value) => $_setString(97, value);
+  @$pb.TagNumber(100)
+  $core.bool hasLpProductCode() => $_has(97);
+  @$pb.TagNumber(100)
+  void clearLpProductCode() => $_clearField(100);
+
+  /// FutureLpEtfHedge 모드에서 선물 1계약 체결 시 발주할 ETF 주수.
+  /// PDF 기반 자동 계산 (refresh_offset_base). EtfLpFutureHedge 모드에서는 0.
+  @$pb.TagNumber(102)
+  $core.double get etfHedgeQuantityPerFutureFilled => $_getN(98);
+  @$pb.TagNumber(102)
+  set etfHedgeQuantityPerFutureFilled($core.double value) => $_setDouble(98, value);
+  @$pb.TagNumber(102)
+  $core.bool hasEtfHedgeQuantityPerFutureFilled() => $_has(98);
+  @$pb.TagNumber(102)
+  void clearEtfHedgeQuantityPerFutureFilled() => $_clearField(102);
+
+  /// FutureLpEtfHedge + RealNav 가격역산 scale.
+  /// CU / Σ(future.multiple × PDF future quantity) — ΔETF 1won 당 ΔF won 계수.
+  /// EtfLpFutureHedge 모드에서는 0.
+  @$pb.TagNumber(103)
+  $core.double get lpRealNavEtfToFutureScale => $_getN(99);
+  @$pb.TagNumber(103)
+  set lpRealNavEtfToFutureScale($core.double value) => $_setDouble(99, value);
+  @$pb.TagNumber(103)
+  $core.bool hasLpRealNavEtfToFutureScale() => $_has(99);
+  @$pb.TagNumber(103)
+  void clearLpRealNavEtfToFutureScale() => $_clearField(103);
+
+  /// FutureLpEtfHedge 전용: 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  @$pb.TagNumber(105)
+  $fixnum.Int64 get askLpOrdersPerPrice => $_getI64(100);
+  @$pb.TagNumber(105)
+  set askLpOrdersPerPrice($fixnum.Int64 value) => $_setInt64(100, value);
+  @$pb.TagNumber(105)
+  $core.bool hasAskLpOrdersPerPrice() => $_has(100);
+  @$pb.TagNumber(105)
+  void clearAskLpOrdersPerPrice() => $_clearField(105);
+
+  @$pb.TagNumber(106)
+  $fixnum.Int64 get bidLpOrdersPerPrice => $_getI64(101);
+  @$pb.TagNumber(106)
+  set bidLpOrdersPerPrice($fixnum.Int64 value) => $_setInt64(101, value);
+  @$pb.TagNumber(106)
+  $core.bool hasBidLpOrdersPerPrice() => $_has(101);
+  @$pb.TagNumber(106)
+  void clearBidLpOrdersPerPrice() => $_clearField(106);
+
+  /// FutureLpEtfHedge 전용: 장전동시호가 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  @$pb.TagNumber(107)
+  $fixnum.Int64 get askOpeningOrdersPerPrice => $_getI64(102);
+  @$pb.TagNumber(107)
+  set askOpeningOrdersPerPrice($fixnum.Int64 value) => $_setInt64(102, value);
+  @$pb.TagNumber(107)
+  $core.bool hasAskOpeningOrdersPerPrice() => $_has(102);
+  @$pb.TagNumber(107)
+  void clearAskOpeningOrdersPerPrice() => $_clearField(107);
+
+  @$pb.TagNumber(108)
+  $fixnum.Int64 get bidOpeningOrdersPerPrice => $_getI64(103);
+  @$pb.TagNumber(108)
+  set bidOpeningOrdersPerPrice($fixnum.Int64 value) => $_setInt64(103, value);
+  @$pb.TagNumber(108)
+  $core.bool hasBidOpeningOrdersPerPrice() => $_has(103);
+  @$pb.TagNumber(108)
+  void clearBidOpeningOrdersPerPrice() => $_clearField(108);
 }
 
 
