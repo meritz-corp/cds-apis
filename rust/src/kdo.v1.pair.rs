@@ -149,12 +149,10 @@ pub struct PriceRatioCondition {
 pub struct Nav {
     #[prost(enumeration="EtfNavKind", tag="1")]
     pub nav_kind: i32,
-    /// Bid 방향 산출용 basis (원). forward/inverse 양방향에 동일 모델 파라미터로 적용.
+    /// NAV 베이시스 (선물 가격 축, base=선물 기준 단일값).
+    /// 양수면 선물 목표가를 보수적으로 조정.
     #[prost(int64, tag="2")]
-    pub bid_basis: i64,
-    /// Ask 방향 산출용 basis (원)
-    #[prost(int64, tag="3")]
-    pub ask_basis: i64,
+    pub basis: i64,
 }
 // ============================================================================
 // TriggerCondition — 트리거 축

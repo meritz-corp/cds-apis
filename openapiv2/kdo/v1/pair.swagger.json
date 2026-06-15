@@ -1131,15 +1131,10 @@
         "navKind": {
           "$ref": "#/definitions/pairEtfNavKind"
         },
-        "bidBasis": {
+        "basis": {
           "type": "string",
           "format": "int64",
-          "description": "Bid 방향 산출용 basis (원). forward/inverse 양방향에 동일 모델 파라미터로 적용."
-        },
-        "askBasis": {
-          "type": "string",
-          "format": "int64",
-          "title": "Ask 방향 산출용 basis (원)"
+          "description": "NAV 베이시스 (선물 가격 축, base=선물 기준 단일값).\n양수면 선물 목표가를 보수적으로 조정."
         }
       },
       "description": "ETF↔Future 페어의 NAV 환산 설정 — 트리거(TargetNav)와 실행(counter BEP)이 공유.\nbase/counter 중 한쪽이 ETF, 다른쪽이 Future 여야 한다 (방향 무관)."

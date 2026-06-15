@@ -1995,9 +1995,6 @@ impl serde::Serialize for Nav {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.Nav", len)?;
         if true {
             let v = EtfNavKind::try_from(self.nav_kind)
@@ -2007,12 +2004,7 @@ impl serde::Serialize for Nav {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_basis", ToString::to_string(&self.bid_basis).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_basis", ToString::to_string(&self.ask_basis).as_str())?;
+            struct_ser.serialize_field("basis", ToString::to_string(&self.basis).as_str())?;
         }
         struct_ser.end()
     }
@@ -2026,17 +2018,13 @@ impl<'de> serde::Deserialize<'de> for Nav {
         const FIELDS: &[&str] = &[
             "nav_kind",
             "navKind",
-            "bid_basis",
-            "bidBasis",
-            "ask_basis",
-            "askBasis",
+            "basis",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             NavKind,
-            BidBasis,
-            AskBasis,
+            Basis,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2060,8 +2048,7 @@ impl<'de> serde::Deserialize<'de> for Nav {
                     {
                         match value {
                             "navKind" | "nav_kind" => Ok(GeneratedField::NavKind),
-                            "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
+                            "basis" => Ok(GeneratedField::Basis),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2082,8 +2069,7 @@ impl<'de> serde::Deserialize<'de> for Nav {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut nav_kind__ = None;
-                let mut bid_basis__ = None;
-                let mut ask_basis__ = None;
+                let mut basis__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::NavKind => {
@@ -2092,19 +2078,11 @@ impl<'de> serde::Deserialize<'de> for Nav {
                             }
                             nav_kind__ = Some(map_.next_value::<EtfNavKind>()? as i32);
                         }
-                        GeneratedField::BidBasis => {
-                            if bid_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidBasis"));
+                        GeneratedField::Basis => {
+                            if basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basis"));
                             }
-                            bid_basis__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskBasis => {
-                            if ask_basis__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askBasis"));
-                            }
-                            ask_basis__ = 
+                            basis__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -2115,8 +2093,7 @@ impl<'de> serde::Deserialize<'de> for Nav {
                 }
                 Ok(Nav {
                     nav_kind: nav_kind__.unwrap_or_default(),
-                    bid_basis: bid_basis__.unwrap_or_default(),
-                    ask_basis: ask_basis__.unwrap_or_default(),
+                    basis: basis__.unwrap_or_default(),
                 })
             }
         }

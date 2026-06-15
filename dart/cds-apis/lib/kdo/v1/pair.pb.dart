@@ -625,13 +625,11 @@ class PriceRatioCondition extends $pb.GeneratedMessage {
 class Nav extends $pb.GeneratedMessage {
   factory Nav({
     EtfNavKind? navKind,
-    $fixnum.Int64? bidBasis,
-    $fixnum.Int64? askBasis,
+    $fixnum.Int64? basis,
   }) {
     final result = create();
     if (navKind != null) result.navKind = navKind;
-    if (bidBasis != null) result.bidBasis = bidBasis;
-    if (askBasis != null) result.askBasis = askBasis;
+    if (basis != null) result.basis = basis;
     return result;
   }
 
@@ -642,8 +640,7 @@ class Nav extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Nav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..e<EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: EtfNavKind.valueOf, enumValues: EtfNavKind.values)
-    ..aInt64(2, _omitFieldNames ? '' : 'bidBasis')
-    ..aInt64(3, _omitFieldNames ? '' : 'askBasis')
+    ..aInt64(2, _omitFieldNames ? '' : 'basis')
     ..hasRequiredFields = false
   ;
 
@@ -673,25 +670,16 @@ class Nav extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearNavKind() => $_clearField(1);
 
-  /// Bid 방향 산출용 basis (원). forward/inverse 양방향에 동일 모델 파라미터로 적용.
+  /// NAV 베이시스 (선물 가격 축, base=선물 기준 단일값).
+  /// 양수면 선물 목표가를 보수적으로 조정.
   @$pb.TagNumber(2)
-  $fixnum.Int64 get bidBasis => $_getI64(1);
+  $fixnum.Int64 get basis => $_getI64(1);
   @$pb.TagNumber(2)
-  set bidBasis($fixnum.Int64 value) => $_setInt64(1, value);
+  set basis($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasBidBasis() => $_has(1);
+  $core.bool hasBasis() => $_has(1);
   @$pb.TagNumber(2)
-  void clearBidBasis() => $_clearField(2);
-
-  /// Ask 방향 산출용 basis (원)
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get askBasis => $_getI64(2);
-  @$pb.TagNumber(3)
-  set askBasis($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasAskBasis() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAskBasis() => $_clearField(3);
+  void clearBasis() => $_clearField(2);
 }
 
 enum TriggerCondition_Kind {

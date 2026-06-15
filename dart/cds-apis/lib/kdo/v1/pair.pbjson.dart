@@ -283,16 +283,18 @@ const Nav$json = {
   '1': 'Nav',
   '2': [
     {'1': 'nav_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair.EtfNavKind', '10': 'navKind'},
-    {'1': 'bid_basis', '3': 2, '4': 1, '5': 3, '10': 'bidBasis'},
-    {'1': 'ask_basis', '3': 3, '4': 1, '5': 3, '10': 'askBasis'},
+    {'1': 'basis', '3': 2, '4': 1, '5': 3, '10': 'basis'},
   ],
+  '9': [
+    {'1': 3, '2': 4},
+  ],
+  '10': ['ask_basis'],
 };
 
 /// Descriptor for `Nav`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List navDescriptor = $convert.base64Decode(
     'CgNOYXYSMgoIbmF2X2tpbmQYASABKA4yFy5rZG8udjEucGFpci5FdGZOYXZLaW5kUgduYXZLaW'
-    '5kEhsKCWJpZF9iYXNpcxgCIAEoA1IIYmlkQmFzaXMSGwoJYXNrX2Jhc2lzGAMgASgDUghhc2tC'
-    'YXNpcw==');
+    '5kEhQKBWJhc2lzGAIgASgDUgViYXNpc0oECAMQBFIJYXNrX2Jhc2lz');
 
 @$core.Deprecated('Use triggerConditionDescriptor instead')
 const TriggerCondition$json = {
