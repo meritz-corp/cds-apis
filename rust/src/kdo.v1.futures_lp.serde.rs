@@ -76,6 +76,9 @@ impl serde::Serialize for FuturesLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLp", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -152,6 +155,11 @@ impl serde::Serialize for FuturesLp {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("thin_book_quantity_threshold", ToString::to_string(&self.thin_book_quantity_threshold).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("thin_book_window_ticks", ToString::to_string(&self.thin_book_window_ticks).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -204,6 +212,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "imbalanceCancelEnabled",
             "thin_book_quantity_threshold",
             "thinBookQuantityThreshold",
+            "thin_book_window_ticks",
+            "thinBookWindowTicks",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -231,6 +241,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             ImbalanceCancelThresholdRatio,
             ImbalanceCancelEnabled,
             ThinBookQuantityThreshold,
+            ThinBookWindowTicks,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -276,6 +287,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "imbalanceCancelThresholdRatio" | "imbalance_cancel_threshold_ratio" => Ok(GeneratedField::ImbalanceCancelThresholdRatio),
                             "imbalanceCancelEnabled" | "imbalance_cancel_enabled" => Ok(GeneratedField::ImbalanceCancelEnabled),
                             "thinBookQuantityThreshold" | "thin_book_quantity_threshold" => Ok(GeneratedField::ThinBookQuantityThreshold),
+                            "thinBookWindowTicks" | "thin_book_window_ticks" => Ok(GeneratedField::ThinBookWindowTicks),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -318,6 +330,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut imbalance_cancel_threshold_ratio__ = None;
                 let mut imbalance_cancel_enabled__ = None;
                 let mut thin_book_quantity_threshold__ = None;
+                let mut thin_book_window_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -482,6 +495,14 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ThinBookWindowTicks => {
+                            if thin_book_window_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("thinBookWindowTicks"));
+                            }
+                            thin_book_window_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -511,6 +532,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     imbalance_cancel_threshold_ratio: imbalance_cancel_threshold_ratio__.unwrap_or_default(),
                     imbalance_cancel_enabled: imbalance_cancel_enabled__.unwrap_or_default(),
                     thin_book_quantity_threshold: thin_book_quantity_threshold__.unwrap_or_default(),
+                    thin_book_window_ticks: thin_book_window_ticks__.unwrap_or_default(),
                 })
             }
         }
@@ -3961,6 +3983,9 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -4019,6 +4044,11 @@ impl serde::Serialize for UpdateFuturesLpRequest {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("thin_book_quantity_threshold", ToString::to_string(&v).as_str())?;
         }
+        if let Some(v) = self.thin_book_window_ticks.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("thin_book_window_ticks", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -4061,6 +4091,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "imbalanceCancelEnabled",
             "thin_book_quantity_threshold",
             "thinBookQuantityThreshold",
+            "thin_book_window_ticks",
+            "thinBookWindowTicks",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4082,6 +4114,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             ImbalanceCancelThresholdRatio,
             ImbalanceCancelEnabled,
             ThinBookQuantityThreshold,
+            ThinBookWindowTicks,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4121,6 +4154,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "imbalanceCancelThresholdRatio" | "imbalance_cancel_threshold_ratio" => Ok(GeneratedField::ImbalanceCancelThresholdRatio),
                             "imbalanceCancelEnabled" | "imbalance_cancel_enabled" => Ok(GeneratedField::ImbalanceCancelEnabled),
                             "thinBookQuantityThreshold" | "thin_book_quantity_threshold" => Ok(GeneratedField::ThinBookQuantityThreshold),
+                            "thinBookWindowTicks" | "thin_book_window_ticks" => Ok(GeneratedField::ThinBookWindowTicks),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4157,6 +4191,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut imbalance_cancel_threshold_ratio__ = None;
                 let mut imbalance_cancel_enabled__ = None;
                 let mut thin_book_quantity_threshold__ = None;
+                let mut thin_book_window_ticks__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -4279,6 +4314,14 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::ThinBookWindowTicks => {
+                            if thin_book_window_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("thinBookWindowTicks"));
+                            }
+                            thin_book_window_ticks__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4302,6 +4345,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     imbalance_cancel_threshold_ratio: imbalance_cancel_threshold_ratio__,
                     imbalance_cancel_enabled: imbalance_cancel_enabled__,
                     thin_book_quantity_threshold: thin_book_quantity_threshold__,
+                    thin_book_window_ticks: thin_book_window_ticks__,
                 })
             }
         }

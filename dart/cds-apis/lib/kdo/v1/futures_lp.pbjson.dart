@@ -60,6 +60,7 @@ const FuturesLp$json = {
     {'1': 'imbalance_cancel_threshold_ratio', '3': 25, '4': 1, '5': 1, '10': 'imbalanceCancelThresholdRatio'},
     {'1': 'imbalance_cancel_enabled', '3': 26, '4': 1, '5': 8, '10': 'imbalanceCancelEnabled'},
     {'1': 'thin_book_quantity_threshold', '3': 27, '4': 1, '5': 3, '10': 'thinBookQuantityThreshold'},
+    {'1': 'thin_book_window_ticks', '3': 28, '4': 1, '5': 3, '10': 'thinBookWindowTicks'},
   ],
   '8': [
     {'1': '_bid_adjustment'},
@@ -94,9 +95,10 @@ final $typed_data.Uint8List futuresLpDescriptor = $convert.base64Decode(
     'YW5jZV9jYW5jZWxfdGhyZXNob2xkX3JhdGlvGBkgASgBUh1pbWJhbGFuY2VDYW5jZWxUaHJlc2'
     'hvbGRSYXRpbxI4ChhpbWJhbGFuY2VfY2FuY2VsX2VuYWJsZWQYGiABKAhSFmltYmFsYW5jZUNh'
     'bmNlbEVuYWJsZWQSPwocdGhpbl9ib29rX3F1YW50aXR5X3RocmVzaG9sZBgbIAEoA1IZdGhpbk'
-    'Jvb2tRdWFudGl0eVRocmVzaG9sZEIRCg9fYmlkX2FkanVzdG1lbnRCEQoPX2Fza19hZGp1c3Rt'
-    'ZW50QhEKD19xdWFudGl0eV9saW1pdEoECAUQBkoECBAQEUoECBEQEkoECBIQE1IFY2FycnlSEG'
-    '1vbWVudHVtX2VuYWJsZWRSD21vbWVudHVtX3dpbmRvd1IUbW9tZW50dW1fc2Vuc2l0aXZpdHk=');
+    'Jvb2tRdWFudGl0eVRocmVzaG9sZBIzChZ0aGluX2Jvb2tfd2luZG93X3RpY2tzGBwgASgDUhN0'
+    'aGluQm9va1dpbmRvd1RpY2tzQhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG1lbn'
+    'RCEQoPX3F1YW50aXR5X2xpbWl0SgQIBRAGSgQIEBARSgQIERASSgQIEhATUgVjYXJyeVIQbW9t'
+    'ZW50dW1fZW5hYmxlZFIPbW9tZW50dW1fd2luZG93UhRtb21lbnR1bV9zZW5zaXRpdml0eQ==');
 
 @$core.Deprecated('Use futuresLpQuantityLimitDescriptor instead')
 const FuturesLpQuantityLimit$json = {
@@ -423,6 +425,7 @@ const UpdateFuturesLpRequest$json = {
     {'1': 'imbalance_cancel_threshold_ratio', '3': 19, '4': 1, '5': 1, '9': 12, '10': 'imbalanceCancelThresholdRatio', '17': true},
     {'1': 'imbalance_cancel_enabled', '3': 20, '4': 1, '5': 8, '9': 13, '10': 'imbalanceCancelEnabled', '17': true},
     {'1': 'thin_book_quantity_threshold', '3': 21, '4': 1, '5': 3, '9': 14, '10': 'thinBookQuantityThreshold', '17': true},
+    {'1': 'thin_book_window_ticks', '3': 22, '4': 1, '5': 3, '9': 15, '10': 'thinBookWindowTicks', '17': true},
   ],
   '8': [
     {'1': '_bid_quantity'},
@@ -440,6 +443,7 @@ const UpdateFuturesLpRequest$json = {
     {'1': '_imbalance_cancel_threshold_ratio'},
     {'1': '_imbalance_cancel_enabled'},
     {'1': '_thin_book_quantity_threshold'},
+    {'1': '_thin_book_window_ticks'},
   ],
   '9': [
     {'1': 3, '2': 4},
@@ -466,14 +470,16 @@ final $typed_data.Uint8List updateFuturesLpRequestDescriptor = $convert.base64De
     '5hYmxlZIgBARJMCiBpbWJhbGFuY2VfY2FuY2VsX3RocmVzaG9sZF9yYXRpbxgTIAEoAUgMUh1p'
     'bWJhbGFuY2VDYW5jZWxUaHJlc2hvbGRSYXRpb4gBARI9ChhpbWJhbGFuY2VfY2FuY2VsX2VuYW'
     'JsZWQYFCABKAhIDVIWaW1iYWxhbmNlQ2FuY2VsRW5hYmxlZIgBARJEChx0aGluX2Jvb2tfcXVh'
-    'bnRpdHlfdGhyZXNob2xkGBUgASgDSA5SGXRoaW5Cb29rUXVhbnRpdHlUaHJlc2hvbGSIAQFCDw'
-    'oNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW50aXR5QhEKD19iaWRfYWRqdXN0bWVudEIRCg9f'
-    'YXNrX2FkanVzdG1lbnRCDAoKX2JpZF9iYXNpc0IMCgpfYXNrX2Jhc2lzQggKBl9kZXB0aEIJCg'
-    'dfb2Zmc2V0QhEKD19xdWFudGl0eV9saW1pdEIOCgxfZXRmX3ByaWNpbmdCDgoMX2JpZF9lbmFi'
-    'bGVkQg4KDF9hc2tfZW5hYmxlZEIjCiFfaW1iYWxhbmNlX2NhbmNlbF90aHJlc2hvbGRfcmF0aW'
-    '9CGwoZX2ltYmFsYW5jZV9jYW5jZWxfZW5hYmxlZEIfCh1fdGhpbl9ib29rX3F1YW50aXR5X3Ro'
-    'cmVzaG9sZEoECAMQBEoECAwQDUoECA0QDkoECA4QD1IFY2FycnlSEG1vbWVudHVtX2VuYWJsZW'
-    'RSD21vbWVudHVtX3dpbmRvd1IUbW9tZW50dW1fc2Vuc2l0aXZpdHk=');
+    'bnRpdHlfdGhyZXNob2xkGBUgASgDSA5SGXRoaW5Cb29rUXVhbnRpdHlUaHJlc2hvbGSIAQESOA'
+    'oWdGhpbl9ib29rX3dpbmRvd190aWNrcxgWIAEoA0gPUhN0aGluQm9va1dpbmRvd1RpY2tziAEB'
+    'Qg8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIRCg9fYmlkX2FkanVzdG1lbnRCEQ'
+    'oPX2Fza19hZGp1c3RtZW50QgwKCl9iaWRfYmFzaXNCDAoKX2Fza19iYXNpc0IICgZfZGVwdGhC'
+    'CQoHX29mZnNldEIRCg9fcXVhbnRpdHlfbGltaXRCDgoMX2V0Zl9wcmljaW5nQg4KDF9iaWRfZW'
+    '5hYmxlZEIOCgxfYXNrX2VuYWJsZWRCIwohX2ltYmFsYW5jZV9jYW5jZWxfdGhyZXNob2xkX3Jh'
+    'dGlvQhsKGV9pbWJhbGFuY2VfY2FuY2VsX2VuYWJsZWRCHwodX3RoaW5fYm9va19xdWFudGl0eV'
+    '90aHJlc2hvbGRCGQoXX3RoaW5fYm9va193aW5kb3dfdGlja3NKBAgDEARKBAgMEA1KBAgNEA5K'
+    'BAgOEA9SBWNhcnJ5UhBtb21lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudH'
+    'VtX3NlbnNpdGl2aXR5');
 
 @$core.Deprecated('Use getFuturesLpStatusRequestDescriptor instead')
 const GetFuturesLpStatusRequest$json = {

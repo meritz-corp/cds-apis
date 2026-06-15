@@ -175,6 +175,10 @@ message FuturesLp {
   // thin-book 보정 활성화 임계치 (ETF 1~5호가 잔량 합, 주 단위).
   // 0 = 기능 OFF.
   int64 thin_book_quantity_threshold = 27;
+
+  // thin-book 보정 윈도우 (best 호가 기준 틱 개수). 0/1 = 보정 윈도우 미적용.
+  // 기본 5. effective_reference_price 가 best 에서 (N-1) 틱 깊이까지를 윈도우로 본다.
+  int64 thin_book_window_ticks = 28;
 }
 
 // 매수/매도 수량 한도
@@ -509,6 +513,9 @@ message UpdateFuturesLpRequest {
   // thin-book 보정 활성화 임계치 (PATCH 시에만 명시).
   // ETF 1~5호가 잔량 합 임계치(주 단위). 0 = 기능 OFF.
   optional int64 thin_book_quantity_threshold = 21;
+
+  // thin-book 보정 윈도우 틱 개수 (PATCH 시에만 명시). best 호가 기준 틱 개수. 기본 5.
+  optional int64 thin_book_window_ticks = 22;
 }
 
 // GetFuturesLpStatus

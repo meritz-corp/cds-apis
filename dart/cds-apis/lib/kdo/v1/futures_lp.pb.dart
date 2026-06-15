@@ -49,6 +49,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.double? imbalanceCancelThresholdRatio,
     $core.bool? imbalanceCancelEnabled,
     $fixnum.Int64? thinBookQuantityThreshold,
+    $fixnum.Int64? thinBookWindowTicks,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -74,6 +75,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
     if (imbalanceCancelEnabled != null) result.imbalanceCancelEnabled = imbalanceCancelEnabled;
     if (thinBookQuantityThreshold != null) result.thinBookQuantityThreshold = thinBookQuantityThreshold;
+    if (thinBookWindowTicks != null) result.thinBookWindowTicks = thinBookWindowTicks;
     return result;
   }
 
@@ -106,6 +108,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..a<$core.double>(25, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
     ..aOB(26, _omitFieldNames ? '' : 'imbalanceCancelEnabled')
     ..aInt64(27, _omitFieldNames ? '' : 'thinBookQuantityThreshold')
+    ..aInt64(28, _omitFieldNames ? '' : 'thinBookWindowTicks')
     ..hasRequiredFields = false
   ;
 
@@ -366,6 +369,17 @@ class FuturesLp extends $pb.GeneratedMessage {
   $core.bool hasThinBookQuantityThreshold() => $_has(22);
   @$pb.TagNumber(27)
   void clearThinBookQuantityThreshold() => $_clearField(27);
+
+  /// thin-book 보정 윈도우 (best 호가 기준 틱 개수). 0/1 = 보정 윈도우 미적용.
+  /// 기본 5. effective_reference_price 가 best 에서 (N-1) 틱 깊이까지를 윈도우로 본다.
+  @$pb.TagNumber(28)
+  $fixnum.Int64 get thinBookWindowTicks => $_getI64(23);
+  @$pb.TagNumber(28)
+  set thinBookWindowTicks($fixnum.Int64 value) => $_setInt64(23, value);
+  @$pb.TagNumber(28)
+  $core.bool hasThinBookWindowTicks() => $_has(23);
+  @$pb.TagNumber(28)
+  void clearThinBookWindowTicks() => $_clearField(28);
 }
 
 /// 매수/매도 수량 한도
@@ -1653,6 +1667,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.double? imbalanceCancelThresholdRatio,
     $core.bool? imbalanceCancelEnabled,
     $fixnum.Int64? thinBookQuantityThreshold,
+    $fixnum.Int64? thinBookWindowTicks,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1672,6 +1687,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (imbalanceCancelThresholdRatio != null) result.imbalanceCancelThresholdRatio = imbalanceCancelThresholdRatio;
     if (imbalanceCancelEnabled != null) result.imbalanceCancelEnabled = imbalanceCancelEnabled;
     if (thinBookQuantityThreshold != null) result.thinBookQuantityThreshold = thinBookQuantityThreshold;
+    if (thinBookWindowTicks != null) result.thinBookWindowTicks = thinBookWindowTicks;
     return result;
   }
 
@@ -1698,6 +1714,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(19, _omitFieldNames ? '' : 'imbalanceCancelThresholdRatio', $pb.PbFieldType.OD)
     ..aOB(20, _omitFieldNames ? '' : 'imbalanceCancelEnabled')
     ..aInt64(21, _omitFieldNames ? '' : 'thinBookQuantityThreshold')
+    ..aInt64(22, _omitFieldNames ? '' : 'thinBookWindowTicks')
     ..hasRequiredFields = false
   ;
 
@@ -1894,6 +1911,16 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   $core.bool hasThinBookQuantityThreshold() => $_has(16);
   @$pb.TagNumber(21)
   void clearThinBookQuantityThreshold() => $_clearField(21);
+
+  /// thin-book 보정 윈도우 틱 개수 (PATCH 시에만 명시). best 호가 기준 틱 개수. 기본 5.
+  @$pb.TagNumber(22)
+  $fixnum.Int64 get thinBookWindowTicks => $_getI64(17);
+  @$pb.TagNumber(22)
+  set thinBookWindowTicks($fixnum.Int64 value) => $_setInt64(17, value);
+  @$pb.TagNumber(22)
+  $core.bool hasThinBookWindowTicks() => $_has(17);
+  @$pb.TagNumber(22)
+  void clearThinBookWindowTicks() => $_clearField(22);
 }
 
 /// GetFuturesLpStatus
