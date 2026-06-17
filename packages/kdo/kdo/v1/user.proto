@@ -112,6 +112,15 @@ message ListUsersResponse {
   string next_page_token = 2;
 }
 
+// Role represents the trading role assigned to a user.
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_LP = 1;
+  ROLE_ARBITRAGE = 2;
+  ROLE_BROKERAGE = 3;
+  ROLE_LOAN = 4;
+}
+
 message User {
   option (google.api.resource) = {
     type: "kdo.cdsapis.xyz/User",
@@ -133,6 +142,9 @@ message User {
   string employee_id = 4;
 
   string ip = 5;
+
+  // The trading role assigned to the user.
+  Role role = 6;
 
 }
 

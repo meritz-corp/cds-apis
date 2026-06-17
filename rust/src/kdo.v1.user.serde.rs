@@ -340,6 +340,86 @@ impl<'de> serde::Deserialize<'de> for ListUsersResponse {
         deserializer.deserialize_struct("kdo.v1.user.ListUsersResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for Role {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "ROLE_UNSPECIFIED",
+            Self::Lp => "ROLE_LP",
+            Self::Arbitrage => "ROLE_ARBITRAGE",
+            Self::Brokerage => "ROLE_BROKERAGE",
+            Self::Loan => "ROLE_LOAN",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for Role {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ROLE_UNSPECIFIED",
+            "ROLE_LP",
+            "ROLE_ARBITRAGE",
+            "ROLE_BROKERAGE",
+            "ROLE_LOAN",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Role;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ROLE_UNSPECIFIED" => Ok(Role::Unspecified),
+                    "ROLE_LP" => Ok(Role::Lp),
+                    "ROLE_ARBITRAGE" => Ok(Role::Arbitrage),
+                    "ROLE_BROKERAGE" => Ok(Role::Brokerage),
+                    "ROLE_LOAN" => Ok(Role::Loan),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for User {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -348,6 +428,9 @@ impl serde::Serialize for User {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -379,6 +462,11 @@ impl serde::Serialize for User {
         if true {
             struct_ser.serialize_field("ip", &self.ip)?;
         }
+        if true {
+            let v = Role::try_from(self.role)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.role)))?;
+            struct_ser.serialize_field("role", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -396,6 +484,7 @@ impl<'de> serde::Deserialize<'de> for User {
             "employee_id",
             "employeeId",
             "ip",
+            "role",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -405,6 +494,7 @@ impl<'de> serde::Deserialize<'de> for User {
             DisplayName,
             EmployeeId,
             Ip,
+            Role,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -432,6 +522,7 @@ impl<'de> serde::Deserialize<'de> for User {
                             "displayName" | "display_name" => Ok(GeneratedField::DisplayName),
                             "employeeId" | "employee_id" => Ok(GeneratedField::EmployeeId),
                             "ip" => Ok(GeneratedField::Ip),
+                            "role" => Ok(GeneratedField::Role),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -456,6 +547,7 @@ impl<'de> serde::Deserialize<'de> for User {
                 let mut display_name__ = None;
                 let mut employee_id__ = None;
                 let mut ip__ = None;
+                let mut role__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -488,6 +580,12 @@ impl<'de> serde::Deserialize<'de> for User {
                             }
                             ip__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::Role => {
+                            if role__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("role"));
+                            }
+                            role__ = Some(map_.next_value::<Role>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -499,6 +597,7 @@ impl<'de> serde::Deserialize<'de> for User {
                     display_name: display_name__.unwrap_or_default(),
                     employee_id: employee_id__.unwrap_or_default(),
                     ip: ip__.unwrap_or_default(),
+                    role: role__.unwrap_or_default(),
                 })
             }
         }

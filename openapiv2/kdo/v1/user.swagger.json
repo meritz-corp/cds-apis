@@ -165,6 +165,18 @@
       },
       "title": "ListUsersResponse\n(-- api-linter: core::0158::response-next-page-token-field=disabled\n    aip.dev/not-precedent: We need to do this because reasons. --)"
     },
+    "userRole": {
+      "type": "string",
+      "enum": [
+        "ROLE_UNSPECIFIED",
+        "ROLE_LP",
+        "ROLE_ARBITRAGE",
+        "ROLE_BROKERAGE",
+        "ROLE_LOAN"
+      ],
+      "default": "ROLE_UNSPECIFIED",
+      "description": "Role represents the trading role assigned to a user."
+    },
     "userUser": {
       "type": "object",
       "properties": {
@@ -186,6 +198,10 @@
         },
         "ip": {
           "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/userRole",
+          "description": "The trading role assigned to the user."
         }
       }
     }

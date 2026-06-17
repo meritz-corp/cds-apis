@@ -14,7 +14,11 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'user.pbenum.dart';
+
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
+export 'user.pbenum.dart';
 
 class GetUserRequest extends $pb.GeneratedMessage {
   factory GetUserRequest({
@@ -230,6 +234,7 @@ class User extends $pb.GeneratedMessage {
     $core.String? displayName,
     $core.String? employeeId,
     $core.String? ip,
+    Role? role,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -237,6 +242,7 @@ class User extends $pb.GeneratedMessage {
     if (displayName != null) result.displayName = displayName;
     if (employeeId != null) result.employeeId = employeeId;
     if (ip != null) result.ip = ip;
+    if (role != null) result.role = role;
     return result;
   }
 
@@ -251,6 +257,7 @@ class User extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'displayName')
     ..aOS(4, _omitFieldNames ? '' : 'employeeId')
     ..aOS(5, _omitFieldNames ? '' : 'ip')
+    ..e<Role>(6, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: Role.ROLE_UNSPECIFIED, valueOf: Role.valueOf, enumValues: Role.values)
     ..hasRequiredFields = false
   ;
 
@@ -319,6 +326,16 @@ class User extends $pb.GeneratedMessage {
   $core.bool hasIp() => $_has(4);
   @$pb.TagNumber(5)
   void clearIp() => $_clearField(5);
+
+  /// The trading role assigned to the user.
+  @$pb.TagNumber(6)
+  Role get role => $_getN(5);
+  @$pb.TagNumber(6)
+  set role(Role value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasRole() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRole() => $_clearField(6);
 }
 
 

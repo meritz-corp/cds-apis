@@ -80,6 +80,45 @@ pub struct User {
     pub employee_id: ::prost::alloc::string::String,
     #[prost(string, tag="5")]
     pub ip: ::prost::alloc::string::String,
+    /// The trading role assigned to the user.
+    #[prost(enumeration="Role", tag="6")]
+    pub role: i32,
+}
+/// Role represents the trading role assigned to a user.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum Role {
+    Unspecified = 0,
+    Lp = 1,
+    Arbitrage = 2,
+    Brokerage = 3,
+    Loan = 4,
+}
+impl Role {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Role::Unspecified => "ROLE_UNSPECIFIED",
+            Role::Lp => "ROLE_LP",
+            Role::Arbitrage => "ROLE_ARBITRAGE",
+            Role::Brokerage => "ROLE_BROKERAGE",
+            Role::Loan => "ROLE_LOAN",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ROLE_UNSPECIFIED" => Some(Self::Unspecified),
+            "ROLE_LP" => Some(Self::Lp),
+            "ROLE_ARBITRAGE" => Some(Self::Arbitrage),
+            "ROLE_BROKERAGE" => Some(Self::Brokerage),
+            "ROLE_LOAN" => Some(Self::Loan),
+            _ => None,
+        }
+    }
 }
 include!("kdo.v1.user.tonic.rs");
 include!("kdo.v1.user.serde.rs");

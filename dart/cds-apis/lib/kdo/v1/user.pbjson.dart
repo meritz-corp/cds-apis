@@ -14,6 +14,23 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use roleDescriptor instead')
+const Role$json = {
+  '1': 'Role',
+  '2': [
+    {'1': 'ROLE_UNSPECIFIED', '2': 0},
+    {'1': 'ROLE_LP', '2': 1},
+    {'1': 'ROLE_ARBITRAGE', '2': 2},
+    {'1': 'ROLE_BROKERAGE', '2': 3},
+    {'1': 'ROLE_LOAN', '2': 4},
+  ],
+};
+
+/// Descriptor for `Role`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List roleDescriptor = $convert.base64Decode(
+    'CgRSb2xlEhQKEFJPTEVfVU5TUEVDSUZJRUQQABILCgdST0xFX0xQEAESEgoOUk9MRV9BUkJJVF'
+    'JBR0UQAhISCg5ST0xFX0JST0tFUkFHRRADEg0KCVJPTEVfTE9BThAE');
+
 @$core.Deprecated('Use getUserRequestDescriptor instead')
 const GetUserRequest$json = {
   '1': 'GetUserRequest',
@@ -65,6 +82,7 @@ const User$json = {
     {'1': 'display_name', '3': 3, '4': 1, '5': 9, '10': 'displayName'},
     {'1': 'employee_id', '3': 4, '4': 1, '5': 9, '10': 'employeeId'},
     {'1': 'ip', '3': 5, '4': 1, '5': 9, '10': 'ip'},
+    {'1': 'role', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.user.Role', '10': 'role'},
   ],
   '7': {},
 };
@@ -73,6 +91,6 @@ const User$json = {
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
     'CgRVc2VyEhIKBG5hbWUYASABKAlSBG5hbWUSFAoCaWQYAiABKAlCBOJBAQNSAmlkEiEKDGRpc3'
     'BsYXlfbmFtZRgDIAEoCVILZGlzcGxheU5hbWUSHwoLZW1wbG95ZWVfaWQYBCABKAlSCmVtcGxv'
-    'eWVlSWQSDgoCaXAYBSABKAlSAmlwOiXqQSIKFGtkby5jZHNhcGlzLnh5ei9Vc2VyEgp1c2Vycy'
-    '97aWR9');
+    'eWVlSWQSDgoCaXAYBSABKAlSAmlwEiUKBHJvbGUYBiABKA4yES5rZG8udjEudXNlci5Sb2xlUg'
+    'Ryb2xlOiXqQSIKFGtkby5jZHNhcGlzLnh5ei9Vc2VyEgp1c2Vycy97aWR9');
 
