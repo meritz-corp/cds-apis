@@ -21,14 +21,17 @@ class NotificationType extends $pb.ProtobufEnum {
   static const NotificationType INFO = NotificationType._(1, _omitEnumNames ? '' : 'INFO');
   /// Error notification
   static const NotificationType ERROR = NotificationType._(2, _omitEnumNames ? '' : 'ERROR');
+  /// Warning notification
+  static const NotificationType WARNING = NotificationType._(3, _omitEnumNames ? '' : 'WARNING');
 
   static const $core.List<NotificationType> values = <NotificationType> [
     TYPE_UNSPECIFIED,
     INFO,
     ERROR,
+    WARNING,
   ];
 
-  static final $core.List<NotificationType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static final $core.List<NotificationType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
   static NotificationType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const NotificationType._(super.value, super.name);

@@ -105,7 +105,7 @@ class ListNotificationsRequest extends $pb.GeneratedMessage {
   ///
   /// 지원 필터 키:
   /// * state=CREATED|ACKNOWLEDGED|EXPIRED  — 알림 상태 필터
-  /// * type=INFO|ERROR                     — 알림 종류 필터
+  /// * type=INFO|WARNING|ERROR              — 알림 종류 필터
   /// * exclude_event_type=Name1,Name2,...  — 특정 event_type 제외
   /// * symbol=A,B,C                        — 심볼 CSV 화이트리스트 필터.
   ///                                         비어있지 않으면 Notification.symbol이

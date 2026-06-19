@@ -21,13 +21,14 @@ const NotificationType$json = {
     {'1': 'TYPE_UNSPECIFIED', '2': 0},
     {'1': 'INFO', '2': 1},
     {'1': 'ERROR', '2': 2},
+    {'1': 'WARNING', '2': 3},
   ],
 };
 
 /// Descriptor for `NotificationType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List notificationTypeDescriptor = $convert.base64Decode(
     'ChBOb3RpZmljYXRpb25UeXBlEhQKEFRZUEVfVU5TUEVDSUZJRUQQABIICgRJTkZPEAESCQoFRV'
-    'JST1IQAg==');
+    'JST1IQAhILCgdXQVJOSU5HEAM=');
 
 @$core.Deprecated('Use notificationStateDescriptor instead')
 const NotificationState$json = {

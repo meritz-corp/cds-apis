@@ -1465,6 +1465,7 @@ impl serde::Serialize for NotificationType {
             Self::TypeUnspecified => "TYPE_UNSPECIFIED",
             Self::Info => "INFO",
             Self::Error => "ERROR",
+            Self::Warning => "WARNING",
         };
         serializer.serialize_str(variant)
     }
@@ -1479,6 +1480,7 @@ impl<'de> serde::Deserialize<'de> for NotificationType {
             "TYPE_UNSPECIFIED",
             "INFO",
             "ERROR",
+            "WARNING",
         ];
 
         struct GeneratedVisitor;
@@ -1522,6 +1524,7 @@ impl<'de> serde::Deserialize<'de> for NotificationType {
                     "TYPE_UNSPECIFIED" => Ok(NotificationType::TypeUnspecified),
                     "INFO" => Ok(NotificationType::Info),
                     "ERROR" => Ok(NotificationType::Error),
+                    "WARNING" => Ok(NotificationType::Warning),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
