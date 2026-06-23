@@ -8,6 +8,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/hedge.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -217,6 +218,9 @@ message PairEntry {
   // 사용 안 함 — 과거에 지정가 산출 시 tick offset 으로 쓰였으나 기능 삭제.
   reserved 6;
   reserved "price_offset_ticks";
+
+  // 주문 tp_code (NONE=일반, LP=유동성공급자). 이 레그의 신규 주문에 적용. 미지정 시 NONE.
+  kdo.v1.hedge.OrderTpCode tp_code = 7;
 }
 
 // 주문 방향

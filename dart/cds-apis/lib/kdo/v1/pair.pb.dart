@@ -16,6 +16,7 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $2;
+import 'hedge.pbenum.dart' as $3;
 import 'pair.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -246,6 +247,7 @@ class PairEntry extends $pb.GeneratedMessage {
     PairSide? side,
     $fixnum.Int64? quantity,
     PriceSource? priceSource,
+    $3.OrderTpCode? tpCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -253,6 +255,7 @@ class PairEntry extends $pb.GeneratedMessage {
     if (side != null) result.side = side;
     if (quantity != null) result.quantity = quantity;
     if (priceSource != null) result.priceSource = priceSource;
+    if (tpCode != null) result.tpCode = tpCode;
     return result;
   }
 
@@ -267,6 +270,7 @@ class PairEntry extends $pb.GeneratedMessage {
     ..e<PairSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: PairSide.PAIR_SIDE_UNSPECIFIED, valueOf: PairSide.valueOf, enumValues: PairSide.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
     ..e<PriceSource>(5, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: PriceSource.PRICE_SOURCE_UNSPECIFIED, valueOf: PriceSource.valueOf, enumValues: PriceSource.values)
+    ..e<$3.OrderTpCode>(7, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: $3.OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: $3.OrderTpCode.valueOf, enumValues: $3.OrderTpCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -338,6 +342,16 @@ class PairEntry extends $pb.GeneratedMessage {
   $core.bool hasPriceSource() => $_has(4);
   @$pb.TagNumber(5)
   void clearPriceSource() => $_clearField(5);
+
+  /// 주문 tp_code (NONE=일반, LP=유동성공급자). 이 레그의 신규 주문에 적용. 미지정 시 NONE.
+  @$pb.TagNumber(7)
+  $3.OrderTpCode get tpCode => $_getN(5);
+  @$pb.TagNumber(7)
+  set tpCode($3.OrderTpCode value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasTpCode() => $_has(5);
+  @$pb.TagNumber(7)
+  void clearTpCode() => $_clearField(7);
 }
 
 enum PairCondition_Kind {

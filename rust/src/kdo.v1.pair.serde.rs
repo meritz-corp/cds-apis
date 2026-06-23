@@ -2705,6 +2705,9 @@ impl serde::Serialize for PairEntry {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairEntry", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -2727,6 +2730,11 @@ impl serde::Serialize for PairEntry {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.price_source)))?;
             struct_ser.serialize_field("price_source", &v)?;
         }
+        if true {
+            let v = super::hedge::OrderTpCode::try_from(self.tp_code)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.tp_code)))?;
+            struct_ser.serialize_field("tp_code", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2744,6 +2752,8 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
             "quantity",
             "price_source",
             "priceSource",
+            "tp_code",
+            "tpCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2753,6 +2763,7 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
             Side,
             Quantity,
             PriceSource,
+            TpCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2780,6 +2791,7 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                             "side" => Ok(GeneratedField::Side),
                             "quantity" => Ok(GeneratedField::Quantity),
                             "priceSource" | "price_source" => Ok(GeneratedField::PriceSource),
+                            "tpCode" | "tp_code" => Ok(GeneratedField::TpCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2804,6 +2816,7 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                 let mut side__ = None;
                 let mut quantity__ = None;
                 let mut price_source__ = None;
+                let mut tp_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -2838,6 +2851,12 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                             }
                             price_source__ = Some(map_.next_value::<PriceSource>()? as i32);
                         }
+                        GeneratedField::TpCode => {
+                            if tp_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tpCode"));
+                            }
+                            tp_code__ = Some(map_.next_value::<super::hedge::OrderTpCode>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2849,6 +2868,7 @@ impl<'de> serde::Deserialize<'de> for PairEntry {
                     side: side__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
                     price_source: price_source__.unwrap_or_default(),
+                    tp_code: tp_code__.unwrap_or_default(),
                 })
             }
         }

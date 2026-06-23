@@ -81,6 +81,9 @@ pub struct PairEntry {
     /// BaseMakeCounterIocAndBalanceExecution 에선 무시(base 가격은 항상 base.side 의 1호가). 입력값은 UNSPECIFIED 로 정규화된다.
     #[prost(enumeration="PriceSource", tag="5")]
     pub price_source: i32,
+    /// 주문 tp_code (NONE=일반, LP=유동성공급자). 이 레그의 신규 주문에 적용. 미지정 시 NONE.
+    #[prost(enumeration="super::hedge::OrderTpCode", tag="7")]
+    pub tp_code: i32,
 }
 // ============================================================================
 // Pair Condition (oneof wrapper)

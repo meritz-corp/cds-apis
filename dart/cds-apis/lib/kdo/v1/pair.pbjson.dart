@@ -198,6 +198,7 @@ const PairEntry$json = {
     {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairSide', '8': {}, '10': 'side'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
     {'1': 'price_source', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.pair.PriceSource', '10': 'priceSource'},
+    {'1': 'tp_code', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.hedge.OrderTpCode', '10': 'tpCode'},
   ],
   '9': [
     {'1': 6, '2': 7},
@@ -210,8 +211,9 @@ final $typed_data.Uint8List pairEntryDescriptor = $convert.base64Decode(
     'CglQYWlyRW50cnkSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSIQoJZnVuZF9jb2RlGA'
     'IgASgJQgTiQQECUghmdW5kQ29kZRIvCgRzaWRlGAMgASgOMhUua2RvLnYxLnBhaXIuUGFpclNp'
     'ZGVCBOJBAQJSBHNpZGUSIAoIcXVhbnRpdHkYBCABKANCBOJBAQJSCHF1YW50aXR5EjsKDHByaW'
-    'NlX3NvdXJjZRgFIAEoDjIYLmtkby52MS5wYWlyLlByaWNlU291cmNlUgtwcmljZVNvdXJjZUoE'
-    'CAYQB1IScHJpY2Vfb2Zmc2V0X3RpY2tz');
+    'NlX3NvdXJjZRgFIAEoDjIYLmtkby52MS5wYWlyLlByaWNlU291cmNlUgtwcmljZVNvdXJjZRIy'
+    'Cgd0cF9jb2RlGAcgASgOMhkua2RvLnYxLmhlZGdlLk9yZGVyVHBDb2RlUgZ0cENvZGVKBAgGEA'
+    'dSEnByaWNlX29mZnNldF90aWNrcw==');
 
 @$core.Deprecated('Use pairConditionDescriptor instead')
 const PairCondition$json = {
