@@ -1,4 +1,224 @@
 // @generated
+impl serde::Serialize for FutureLpBasisAdjustment {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FutureLpBasisAdjustment", len)?;
+        if true {
+            struct_ser.serialize_field("bid_adjustment", &self.bid_adjustment)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_adjustment", &self.ask_adjustment)?;
+        }
+        if true {
+            struct_ser.serialize_field("basis_pos_adj_enabled", &self.basis_pos_adj_enabled)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("turnover_limit", ToString::to_string(&self.turnover_limit).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("turnover_basis", &self.turnover_basis)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("avoidance_limit", ToString::to_string(&self.avoidance_limit).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("avoidance_basis", &self.avoidance_basis)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FutureLpBasisAdjustment {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "bid_adjustment",
+            "bidAdjustment",
+            "ask_adjustment",
+            "askAdjustment",
+            "basis_pos_adj_enabled",
+            "basisPosAdjEnabled",
+            "turnover_limit",
+            "turnoverLimit",
+            "turnover_basis",
+            "turnoverBasis",
+            "avoidance_limit",
+            "avoidanceLimit",
+            "avoidance_basis",
+            "avoidanceBasis",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            BidAdjustment,
+            AskAdjustment,
+            BasisPosAdjEnabled,
+            TurnoverLimit,
+            TurnoverBasis,
+            AvoidanceLimit,
+            AvoidanceBasis,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
+                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "basisPosAdjEnabled" | "basis_pos_adj_enabled" => Ok(GeneratedField::BasisPosAdjEnabled),
+                            "turnoverLimit" | "turnover_limit" => Ok(GeneratedField::TurnoverLimit),
+                            "turnoverBasis" | "turnover_basis" => Ok(GeneratedField::TurnoverBasis),
+                            "avoidanceLimit" | "avoidance_limit" => Ok(GeneratedField::AvoidanceLimit),
+                            "avoidanceBasis" | "avoidance_basis" => Ok(GeneratedField::AvoidanceBasis),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FutureLpBasisAdjustment;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.futures_lp.FutureLpBasisAdjustment")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FutureLpBasisAdjustment, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut bid_adjustment__ = None;
+                let mut ask_adjustment__ = None;
+                let mut basis_pos_adj_enabled__ = None;
+                let mut turnover_limit__ = None;
+                let mut turnover_basis__ = None;
+                let mut avoidance_limit__ = None;
+                let mut avoidance_basis__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::BidAdjustment => {
+                            if bid_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
+                            }
+                            bid_adjustment__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskAdjustment => {
+                            if ask_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
+                            }
+                            ask_adjustment__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BasisPosAdjEnabled => {
+                            if basis_pos_adj_enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basisPosAdjEnabled"));
+                            }
+                            basis_pos_adj_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TurnoverLimit => {
+                            if turnover_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("turnoverLimit"));
+                            }
+                            turnover_limit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TurnoverBasis => {
+                            if turnover_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("turnoverBasis"));
+                            }
+                            turnover_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AvoidanceLimit => {
+                            if avoidance_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("avoidanceLimit"));
+                            }
+                            avoidance_limit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AvoidanceBasis => {
+                            if avoidance_basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("avoidanceBasis"));
+                            }
+                            avoidance_basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FutureLpBasisAdjustment {
+                    bid_adjustment: bid_adjustment__.unwrap_or_default(),
+                    ask_adjustment: ask_adjustment__.unwrap_or_default(),
+                    basis_pos_adj_enabled: basis_pos_adj_enabled__.unwrap_or_default(),
+                    turnover_limit: turnover_limit__.unwrap_or_default(),
+                    turnover_basis: turnover_basis__.unwrap_or_default(),
+                    avoidance_limit: avoidance_limit__.unwrap_or_default(),
+                    avoidance_basis: avoidance_basis__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.futures_lp.FutureLpBasisAdjustment", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FuturesLp {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -114,17 +334,11 @@ impl serde::Serialize for FuturesLp {
         if true {
             struct_ser.serialize_field("tick_size", &self.tick_size)?;
         }
-        if let Some(v) = self.offset.as_ref() {
-            struct_ser.serialize_field("offset", v)?;
+        if let Some(v) = self.basis_adjustment.as_ref() {
+            struct_ser.serialize_field("basis_adjustment", v)?;
         }
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
-        }
-        if let Some(v) = self.bid_adjustment.as_ref() {
-            struct_ser.serialize_field("bid_adjustment", v)?;
-        }
-        if let Some(v) = self.ask_adjustment.as_ref() {
-            struct_ser.serialize_field("ask_adjustment", v)?;
         }
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
@@ -160,6 +374,12 @@ impl serde::Serialize for FuturesLp {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("thin_book_window_ticks", ToString::to_string(&self.thin_book_window_ticks).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("bid_offset", &self.bid_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
+        }
         struct_ser.end()
     }
 }
@@ -188,12 +408,9 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "depth",
             "tick_size",
             "tickSize",
-            "offset",
+            "basis_adjustment",
+            "basisAdjustment",
             "enabled",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
             "quantity_limit",
             "quantityLimit",
             "etf_pricing",
@@ -214,6 +431,10 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "thinBookQuantityThreshold",
             "thin_book_window_ticks",
             "thinBookWindowTicks",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -228,10 +449,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             AskQuantity,
             Depth,
             TickSize,
-            Offset,
+            BasisAdjustment,
             Enabled,
-            BidAdjustment,
-            AskAdjustment,
             QuantityLimit,
             EtfPricing,
             PortfolioId,
@@ -242,6 +461,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             ImbalanceCancelEnabled,
             ThinBookQuantityThreshold,
             ThinBookWindowTicks,
+            BidOffset,
+            AskOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -274,10 +495,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
                             "depth" => Ok(GeneratedField::Depth),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
-                            "offset" => Ok(GeneratedField::Offset),
+                            "basisAdjustment" | "basis_adjustment" => Ok(GeneratedField::BasisAdjustment),
                             "enabled" => Ok(GeneratedField::Enabled),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
@@ -288,6 +507,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "imbalanceCancelEnabled" | "imbalance_cancel_enabled" => Ok(GeneratedField::ImbalanceCancelEnabled),
                             "thinBookQuantityThreshold" | "thin_book_quantity_threshold" => Ok(GeneratedField::ThinBookQuantityThreshold),
                             "thinBookWindowTicks" | "thin_book_window_ticks" => Ok(GeneratedField::ThinBookWindowTicks),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -317,10 +538,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut ask_quantity__ = None;
                 let mut depth__ = None;
                 let mut tick_size__ = None;
-                let mut offset__ = None;
+                let mut basis_adjustment__ = None;
                 let mut enabled__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
                 let mut quantity_limit__ = None;
                 let mut etf_pricing__ = None;
                 let mut portfolio_id__ = None;
@@ -331,6 +550,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut imbalance_cancel_enabled__ = None;
                 let mut thin_book_quantity_threshold__ = None;
                 let mut thin_book_window_ticks__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -407,33 +628,17 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
+                        GeneratedField::BasisAdjustment => {
+                            if basis_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basisAdjustment"));
                             }
-                            offset__ = map_.next_value()?;
+                            basis_adjustment__ = map_.next_value()?;
                         }
                         GeneratedField::Enabled => {
                             if enabled__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("enabled"));
                             }
                             enabled__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
                         }
                         GeneratedField::QuantityLimit => {
                             if quantity_limit__.is_some() {
@@ -503,6 +708,22 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
+                            }
+                            bid_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -519,10 +740,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     ask_quantity: ask_quantity__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
-                    offset: offset__,
+                    basis_adjustment: basis_adjustment__,
                     enabled: enabled__.unwrap_or_default(),
-                    bid_adjustment: bid_adjustment__,
-                    ask_adjustment: ask_adjustment__,
                     quantity_limit: quantity_limit__,
                     etf_pricing: etf_pricing__.unwrap_or_default(),
                     portfolio_id: portfolio_id__.unwrap_or_default(),
@@ -533,6 +752,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     imbalance_cancel_enabled: imbalance_cancel_enabled__.unwrap_or_default(),
                     thin_book_quantity_threshold: thin_book_quantity_threshold__.unwrap_or_default(),
                     thin_book_window_ticks: thin_book_window_ticks__.unwrap_or_default(),
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
                 })
             }
         }
@@ -1338,12 +1559,6 @@ impl serde::Serialize for FuturesLpStatus {
         if true {
             struct_ser.serialize_field("bid_basis", &self.bid_basis)?;
         }
-        if let Some(v) = self.bid_adjustment.as_ref() {
-            struct_ser.serialize_field("bid_adjustment", v)?;
-        }
-        if let Some(v) = self.ask_adjustment.as_ref() {
-            struct_ser.serialize_field("ask_adjustment", v)?;
-        }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -1354,8 +1569,8 @@ impl serde::Serialize for FuturesLpStatus {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
         }
-        if let Some(v) = self.offset.as_ref() {
-            struct_ser.serialize_field("offset", v)?;
+        if let Some(v) = self.basis_adjustment.as_ref() {
+            struct_ser.serialize_field("basis_adjustment", v)?;
         }
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
@@ -1371,6 +1586,12 @@ impl serde::Serialize for FuturesLpStatus {
         }
         if let Some(v) = self.ask_enabled.as_ref() {
             struct_ser.serialize_field("ask_enabled", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_offset", &self.bid_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
         }
         struct_ser.end()
     }
@@ -1399,15 +1620,12 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             "askBasis",
             "bid_basis",
             "bidBasis",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
             "bid_quantity",
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
-            "offset",
+            "basis_adjustment",
+            "basisAdjustment",
             "quantity_limit",
             "quantityLimit",
             "depth",
@@ -1417,6 +1635,10 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1431,16 +1653,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
             Multiplier,
             AskBasis,
             BidBasis,
-            BidAdjustment,
-            AskAdjustment,
             BidQuantity,
             AskQuantity,
-            Offset,
+            BasisAdjustment,
             QuantityLimit,
             Depth,
             EtfPricing,
             BidEnabled,
             AskEnabled,
+            BidOffset,
+            AskOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1473,16 +1695,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             "multiplier" => Ok(GeneratedField::Multiplier),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "offset" => Ok(GeneratedField::Offset),
+                            "basisAdjustment" | "basis_adjustment" => Ok(GeneratedField::BasisAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "depth" => Ok(GeneratedField::Depth),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1512,16 +1734,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                 let mut multiplier__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
-                let mut offset__ = None;
+                let mut basis_adjustment__ = None;
                 let mut quantity_limit__ = None;
                 let mut depth__ = None;
                 let mut etf_pricing__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -1590,22 +1812,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::BidQuantity => {
                             if bid_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidQuantity"));
@@ -1622,11 +1828,11 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
+                        GeneratedField::BasisAdjustment => {
+                            if basis_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basisAdjustment"));
                             }
-                            offset__ = map_.next_value()?;
+                            basis_adjustment__ = map_.next_value()?;
                         }
                         GeneratedField::QuantityLimit => {
                             if quantity_limit__.is_some() {
@@ -1660,6 +1866,22 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                             }
                             ask_enabled__ = map_.next_value()?;
                         }
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
+                            }
+                            bid_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1676,16 +1898,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatus {
                     multiplier: multiplier__.unwrap_or_default(),
                     ask_basis: ask_basis__.unwrap_or_default(),
                     bid_basis: bid_basis__.unwrap_or_default(),
-                    bid_adjustment: bid_adjustment__,
-                    ask_adjustment: ask_adjustment__,
                     bid_quantity: bid_quantity__.unwrap_or_default(),
                     ask_quantity: ask_quantity__.unwrap_or_default(),
-                    offset: offset__,
+                    basis_adjustment: basis_adjustment__,
                     quantity_limit: quantity_limit__,
                     depth: depth__.unwrap_or_default(),
                     etf_pricing: etf_pricing__.unwrap_or_default(),
                     bid_enabled: bid_enabled__,
                     ask_enabled: ask_enabled__,
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
                 })
             }
         }
@@ -1775,12 +1997,6 @@ impl serde::Serialize for FuturesLpStatusUpdate {
         if let Some(v) = self.bid_basis.as_ref() {
             struct_ser.serialize_field("bid_basis", v)?;
         }
-        if let Some(v) = self.bid_adjustment.as_ref() {
-            struct_ser.serialize_field("bid_adjustment", v)?;
-        }
-        if let Some(v) = self.ask_adjustment.as_ref() {
-            struct_ser.serialize_field("ask_adjustment", v)?;
-        }
         if let Some(v) = self.bid_quantity.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -1791,8 +2007,8 @@ impl serde::Serialize for FuturesLpStatusUpdate {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
         }
-        if let Some(v) = self.offset.as_ref() {
-            struct_ser.serialize_field("offset", v)?;
+        if let Some(v) = self.basis_adjustment.as_ref() {
+            struct_ser.serialize_field("basis_adjustment", v)?;
         }
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
@@ -1808,6 +2024,12 @@ impl serde::Serialize for FuturesLpStatusUpdate {
         }
         if let Some(v) = self.ask_enabled.as_ref() {
             struct_ser.serialize_field("ask_enabled", v)?;
+        }
+        if let Some(v) = self.bid_offset.as_ref() {
+            struct_ser.serialize_field("bid_offset", v)?;
+        }
+        if let Some(v) = self.ask_offset.as_ref() {
+            struct_ser.serialize_field("ask_offset", v)?;
         }
         struct_ser.end()
     }
@@ -1831,15 +2053,12 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             "askBasis",
             "bid_basis",
             "bidBasis",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
             "bid_quantity",
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
-            "offset",
+            "basis_adjustment",
+            "basisAdjustment",
             "quantity_limit",
             "quantityLimit",
             "depth",
@@ -1849,6 +2068,10 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1860,16 +2083,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
             FillStatistics,
             AskBasis,
             BidBasis,
-            BidAdjustment,
-            AskAdjustment,
             BidQuantity,
             AskQuantity,
-            Offset,
+            BasisAdjustment,
             QuantityLimit,
             Depth,
             EtfPricing,
             BidEnabled,
             AskEnabled,
+            BidOffset,
+            AskOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1899,16 +2122,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             "fillStatistics" | "fill_statistics" => Ok(GeneratedField::FillStatistics),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "offset" => Ok(GeneratedField::Offset),
+                            "basisAdjustment" | "basis_adjustment" => Ok(GeneratedField::BasisAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "depth" => Ok(GeneratedField::Depth),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1935,16 +2158,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                 let mut fill_statistics__ = None;
                 let mut ask_basis__ = None;
                 let mut bid_basis__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
-                let mut offset__ = None;
+                let mut basis_adjustment__ = None;
                 let mut quantity_limit__ = None;
                 let mut depth__ = None;
                 let mut etf_pricing__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -1993,22 +2216,6 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::BidQuantity => {
                             if bid_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidQuantity"));
@@ -2025,11 +2232,11 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
+                        GeneratedField::BasisAdjustment => {
+                            if basis_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basisAdjustment"));
                             }
-                            offset__ = map_.next_value()?;
+                            basis_adjustment__ = map_.next_value()?;
                         }
                         GeneratedField::QuantityLimit => {
                             if quantity_limit__.is_some() {
@@ -2063,6 +2270,22 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                             }
                             ask_enabled__ = map_.next_value()?;
                         }
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
+                            }
+                            bid_offset__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2076,16 +2299,16 @@ impl<'de> serde::Deserialize<'de> for FuturesLpStatusUpdate {
                     fill_statistics: fill_statistics__,
                     ask_basis: ask_basis__,
                     bid_basis: bid_basis__,
-                    bid_adjustment: bid_adjustment__,
-                    ask_adjustment: ask_adjustment__,
                     bid_quantity: bid_quantity__,
                     ask_quantity: ask_quantity__,
-                    offset: offset__,
+                    basis_adjustment: basis_adjustment__,
                     quantity_limit: quantity_limit__,
                     depth: depth__,
                     etf_pricing: etf_pricing__,
                     bid_enabled: bid_enabled__,
                     ask_enabled: ask_enabled__,
+                    bid_offset: bid_offset__,
+                    ask_offset: ask_offset__,
                 })
             }
         }
@@ -4003,12 +4226,6 @@ impl serde::Serialize for UpdateFuturesLpRequest {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&v).as_str())?;
         }
-        if let Some(v) = self.bid_adjustment.as_ref() {
-            struct_ser.serialize_field("bid_adjustment", v)?;
-        }
-        if let Some(v) = self.ask_adjustment.as_ref() {
-            struct_ser.serialize_field("ask_adjustment", v)?;
-        }
         if let Some(v) = self.bid_basis.as_ref() {
             struct_ser.serialize_field("bid_basis", v)?;
         }
@@ -4018,8 +4235,8 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.depth.as_ref() {
             struct_ser.serialize_field("depth", v)?;
         }
-        if let Some(v) = self.offset.as_ref() {
-            struct_ser.serialize_field("offset", v)?;
+        if let Some(v) = self.basis_adjustment.as_ref() {
+            struct_ser.serialize_field("basis_adjustment", v)?;
         }
         if let Some(v) = self.quantity_limit.as_ref() {
             struct_ser.serialize_field("quantity_limit", v)?;
@@ -4049,6 +4266,12 @@ impl serde::Serialize for UpdateFuturesLpRequest {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("thin_book_window_ticks", ToString::to_string(&v).as_str())?;
         }
+        if let Some(v) = self.bid_offset.as_ref() {
+            struct_ser.serialize_field("bid_offset", v)?;
+        }
+        if let Some(v) = self.ask_offset.as_ref() {
+            struct_ser.serialize_field("ask_offset", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4067,16 +4290,13 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
-            "bid_adjustment",
-            "bidAdjustment",
-            "ask_adjustment",
-            "askAdjustment",
             "bid_basis",
             "bidBasis",
             "ask_basis",
             "askBasis",
             "depth",
-            "offset",
+            "basis_adjustment",
+            "basisAdjustment",
             "quantity_limit",
             "quantityLimit",
             "etf_pricing",
@@ -4093,6 +4313,10 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "thinBookQuantityThreshold",
             "thin_book_window_ticks",
             "thinBookWindowTicks",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4101,12 +4325,10 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             FundCode,
             BidQuantity,
             AskQuantity,
-            BidAdjustment,
-            AskAdjustment,
             BidBasis,
             AskBasis,
             Depth,
-            Offset,
+            BasisAdjustment,
             QuantityLimit,
             EtfPricing,
             BidEnabled,
@@ -4115,6 +4337,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             ImbalanceCancelEnabled,
             ThinBookQuantityThreshold,
             ThinBookWindowTicks,
+            BidOffset,
+            AskOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4141,12 +4365,10 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
-                            "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "depth" => Ok(GeneratedField::Depth),
-                            "offset" => Ok(GeneratedField::Offset),
+                            "basisAdjustment" | "basis_adjustment" => Ok(GeneratedField::BasisAdjustment),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "etfPricing" | "etf_pricing" => Ok(GeneratedField::EtfPricing),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
@@ -4155,6 +4377,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "imbalanceCancelEnabled" | "imbalance_cancel_enabled" => Ok(GeneratedField::ImbalanceCancelEnabled),
                             "thinBookQuantityThreshold" | "thin_book_quantity_threshold" => Ok(GeneratedField::ThinBookQuantityThreshold),
                             "thinBookWindowTicks" | "thin_book_window_ticks" => Ok(GeneratedField::ThinBookWindowTicks),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4178,12 +4402,10 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut fund_code__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
-                let mut bid_adjustment__ = None;
-                let mut ask_adjustment__ = None;
                 let mut bid_basis__ = None;
                 let mut ask_basis__ = None;
                 let mut depth__ = None;
-                let mut offset__ = None;
+                let mut basis_adjustment__ = None;
                 let mut quantity_limit__ = None;
                 let mut etf_pricing__ = None;
                 let mut bid_enabled__ = None;
@@ -4192,6 +4414,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut imbalance_cancel_enabled__ = None;
                 let mut thin_book_quantity_threshold__ = None;
                 let mut thin_book_window_ticks__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -4222,22 +4446,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::BidAdjustment => {
-                            if bid_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidAdjustment"));
-                            }
-                            bid_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
-                        GeneratedField::AskAdjustment => {
-                            if ask_adjustment__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askAdjustment"));
-                            }
-                            ask_adjustment__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::BidBasis => {
                             if bid_basis__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("bidBasis"));
@@ -4262,11 +4470,11 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::Offset => {
-                            if offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("offset"));
+                        GeneratedField::BasisAdjustment => {
+                            if basis_adjustment__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basisAdjustment"));
                             }
-                            offset__ = map_.next_value()?;
+                            basis_adjustment__ = map_.next_value()?;
                         }
                         GeneratedField::QuantityLimit => {
                             if quantity_limit__.is_some() {
@@ -4322,6 +4530,22 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
+                            }
+                            bid_offset__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4332,12 +4556,10 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     fund_code: fund_code__.unwrap_or_default(),
                     bid_quantity: bid_quantity__,
                     ask_quantity: ask_quantity__,
-                    bid_adjustment: bid_adjustment__,
-                    ask_adjustment: ask_adjustment__,
                     bid_basis: bid_basis__,
                     ask_basis: ask_basis__,
                     depth: depth__,
-                    offset: offset__,
+                    basis_adjustment: basis_adjustment__,
                     quantity_limit: quantity_limit__,
                     etf_pricing: etf_pricing__,
                     bid_enabled: bid_enabled__,
@@ -4346,6 +4568,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     imbalance_cancel_enabled: imbalance_cancel_enabled__,
                     thin_book_quantity_threshold: thin_book_quantity_threshold__,
                     thin_book_window_ticks: thin_book_window_ticks__,
+                    bid_offset: bid_offset__,
+                    ask_offset: ask_offset__,
                 })
             }
         }

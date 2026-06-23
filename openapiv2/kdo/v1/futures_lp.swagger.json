@@ -215,16 +215,6 @@
                   "format": "int64",
                   "title": "매도 주문 수량"
                 },
-                "bidAdjustment": {
-                  "type": "number",
-                  "format": "double",
-                  "title": "매수 호가 조정값"
-                },
-                "askAdjustment": {
-                  "type": "number",
-                  "format": "double",
-                  "title": "매도 호가 조정값"
-                },
                 "bidBasis": {
                   "type": "number",
                   "format": "double",
@@ -240,9 +230,9 @@
                   "format": "int64",
                   "title": "호가 깊이"
                 },
-                "offset": {
-                  "$ref": "#/definitions/lpEtfLpOffset",
-                  "title": "자동 offset 조정 설정"
+                "basisAdjustment": {
+                  "$ref": "#/definitions/futures_lpFutureLpBasisAdjustment",
+                  "title": "순포지션 기반 basis 청산/회피 조정 설정"
                 },
                 "quantityLimit": {
                   "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
@@ -278,6 +268,15 @@
                   "type": "string",
                   "format": "int64",
                   "description": "thin-book 보정 윈도우 틱 개수 (PATCH 시에만 명시). best 호가 기준 틱 개수. 기본 5."
+                },
+                "bidOffset": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "이론가(NAV) 기준 1호가를 띄우는 offset (틱 수, PATCH 시에만 명시). bid=아래로, ask=위로."
+                },
+                "askOffset": {
+                  "type": "number",
+                  "format": "double"
                 }
               },
               "title": "UpdateFuturesLp"
@@ -674,6 +673,43 @@
       "type": "object",
       "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
     },
+    "futures_lpFutureLpBasisAdjustment": {
+      "type": "object",
+      "properties": {
+        "bidAdjustment": {
+          "type": "number",
+          "format": "double",
+          "description": "순포지션 기반 자동 산출 delta (basis 에 가산되는 값, 런타임).\n설정이 아니라 net 으로부터 산출됨 — Update 인입 시 무시, Status 노출용."
+        },
+        "askAdjustment": {
+          "type": "number",
+          "format": "double"
+        },
+        "basisPosAdjEnabled": {
+          "type": "boolean",
+          "description": "순포지션 기반 basis 자동조정 on/off (청산+회피 동시, All 고정).\nnet = 당일 LP 누적 체결(매수-매도). delta = floor(|net|/한도) × Basis (무한 계단)."
+        },
+        "turnoverLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "청산 한도(계약) / 청산 Basis — 포지션 줄이는 쪽 호가 공격적"
+        },
+        "turnoverBasis": {
+          "type": "number",
+          "format": "double"
+        },
+        "avoidanceLimit": {
+          "type": "string",
+          "format": "int64",
+          "title": "회피 한도(계약) / 회피 Basis — 포지션 늘리는 쪽 호가 보수적"
+        },
+        "avoidanceBasis": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "description": "선물 LP 호가 조정 설정. ETF LP의 EtfLpOffset 을 선물 전용으로 대체.\n시간기반 조정 / NAV밴드(min/max) / offset 포지션조정은 제거하고,\n순포지션(net) 기반 basis 청산(turnover)+회피(avoidance) 조정만 둔다."
+    },
     "futures_lpFuturesLp": {
       "type": "object",
       "properties": {
@@ -724,23 +760,13 @@
           "format": "double",
           "title": "선물 tick 크기"
         },
-        "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "자동 offset 조정 설정 (ETF LP의 EtfLpOffset 재사용)"
+        "basisAdjustment": {
+          "$ref": "#/definitions/futures_lpFutureLpBasisAdjustment",
+          "title": "순포지션 기반 basis 청산/회피 조정 (산출 delta + 설정)"
         },
         "enabled": {
           "type": "boolean",
           "title": "LP 활성화 여부"
-        },
-        "bidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매수 호가 조정값"
-        },
-        "askAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매도 호가 조정값"
         },
         "quantityLimit": {
           "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
@@ -785,6 +811,15 @@
           "type": "string",
           "format": "int64",
           "description": "thin-book 보정 윈도우 (best 호가 기준 틱 개수). 0/1 = 보정 윈도우 미적용.\n기본 5. effective_reference_price 가 best 에서 (N-1) 틱 깊이까지를 윈도우로 본다."
+        },
+        "bidOffset": {
+          "type": "number",
+          "format": "double",
+          "description": "이론가(NAV) 기준 1호가를 띄우는 offset (틱 수). bid=아래로, ask=위로."
+        },
+        "askOffset": {
+          "type": "number",
+          "format": "double"
         }
       },
       "title": "선물 LP 설정"
@@ -946,16 +981,6 @@
           "format": "double",
           "title": "LP 마진 — bid spread"
         },
-        "bidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매수 호가 조정값"
-        },
-        "askAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매도 호가 조정값"
-        },
         "bidQuantity": {
           "type": "string",
           "format": "int64",
@@ -966,9 +991,9 @@
           "format": "int64",
           "title": "매도 주문 수량 (계약 수)"
         },
-        "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "자동 offset 조정 설정 (런타임 상태 포함)"
+        "basisAdjustment": {
+          "$ref": "#/definitions/futures_lpFutureLpBasisAdjustment",
+          "title": "순포지션 기반 basis 청산/회피 조정 (delta + 설정, 런타임 포함)"
         },
         "quantityLimit": {
           "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
@@ -990,6 +1015,15 @@
         "askEnabled": {
           "type": "boolean",
           "title": "매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)"
+        },
+        "bidOffset": {
+          "type": "number",
+          "format": "double",
+          "description": "이론가(NAV) 기준 1호가를 띄우는 offset (틱 수). bid=아래로, ask=위로."
+        },
+        "askOffset": {
+          "type": "number",
+          "format": "double"
         }
       },
       "title": "선물 LP 상태"
@@ -1027,16 +1061,6 @@
           "format": "double",
           "title": "LP 마진 — bid spread (변경 시에만 Some)"
         },
-        "bidAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매수 호가 조정값 (변경 시에만 Some)"
-        },
-        "askAdjustment": {
-          "type": "number",
-          "format": "double",
-          "title": "매도 호가 조정값 (변경 시에만 Some)"
-        },
         "bidQuantity": {
           "type": "string",
           "format": "int64",
@@ -1047,9 +1071,9 @@
           "format": "int64",
           "title": "매도 주문 수량 (변경 시에만 Some)"
         },
-        "offset": {
-          "$ref": "#/definitions/lpEtfLpOffset",
-          "title": "자동 offset 조정 설정 (변경 시에만 Some)"
+        "basisAdjustment": {
+          "$ref": "#/definitions/futures_lpFutureLpBasisAdjustment",
+          "title": "호가 조정 설정 (변경 시에만 Some)"
         },
         "quantityLimit": {
           "$ref": "#/definitions/futures_lpFuturesLpQuantityLimit",
@@ -1071,6 +1095,15 @@
         "askEnabled": {
           "type": "boolean",
           "title": "매도 호가 활성화 여부 (변경 시에만 Some)"
+        },
+        "bidOffset": {
+          "type": "number",
+          "format": "double",
+          "description": "이론가(NAV) 기준 1호가를 띄우는 offset (틱 수, 변경 시에만 Some). bid=아래로, ask=위로."
+        },
+        "askOffset": {
+          "type": "number",
+          "format": "double"
         }
       },
       "title": "선물 LP 상태 업데이트 (변경된 필드만 포함)"
@@ -1194,77 +1227,6 @@
         }
       },
       "title": "선물 LP 중지 응답"
-    },
-    "lpEtfLpOffset": {
-      "type": "object",
-      "properties": {
-        "bidOffset": {
-          "type": "number",
-          "format": "double",
-          "description": "optional: 미설정(None) 시 해당 필드를 덮어쓰지 않음.\nproto3 optional scalar → prost::Message 에서 Option\u003cT\u003e로 생성됨."
-        },
-        "askOffset": {
-          "type": "number",
-          "format": "double"
-        },
-        "minOffset": {
-          "type": "number",
-          "format": "double",
-          "title": "NAV 밴드 설정"
-        },
-        "maxOffset": {
-          "type": "number",
-          "format": "double"
-        },
-        "timeAdjustmentEnabled": {
-          "type": "boolean",
-          "title": "시간 기반 조정"
-        },
-        "adjustmentIntervalSecs": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "adjustmentStep": {
-          "type": "number",
-          "format": "double"
-        },
-        "resetOnFill": {
-          "type": "boolean"
-        },
-        "positionAdjustmentEnabled": {
-          "type": "boolean",
-          "title": "순매매량 기반 조정"
-        },
-        "positionStrategy": {
-          "$ref": "#/definitions/lpPositionAdjustmentStrategy"
-        },
-        "positionThreshold": {
-          "type": "string",
-          "format": "int64"
-        },
-        "positionAdjustmentStep": {
-          "type": "number",
-          "format": "double"
-        },
-        "netPosition": {
-          "type": "string",
-          "format": "int64",
-          "description": "누적 순포지션 (+=순매수, -=순매도): 포지션 기반 자동 조정이 추적하는 런타임 값.\n트리거 발동(offset 변경) 시 0으로 리셋됩니다.\nruntime 추적값이므로 optional 아님 — mapper에서 drop 처리."
-        }
-      },
-      "title": "자동 offset 조정 설정"
-    },
-    "lpPositionAdjustmentStrategy": {
-      "type": "string",
-      "enum": [
-        "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
-        "POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE",
-        "POSITION_ADJUSTMENT_STRATEGY_TURNOVER",
-        "POSITION_ADJUSTMENT_STRATEGY_ALL"
-      ],
-      "default": "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
-      "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
-      "title": "순매매량 기반 조정 전략"
     },
     "protobufAny": {
       "type": "object",

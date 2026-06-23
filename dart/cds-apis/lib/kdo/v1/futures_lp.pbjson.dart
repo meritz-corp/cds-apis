@@ -47,11 +47,9 @@ const FuturesLp$json = {
     {'1': 'ask_quantity', '3': 9, '4': 1, '5': 3, '10': 'askQuantity'},
     {'1': 'depth', '3': 10, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'tick_size', '3': 11, '4': 1, '5': 1, '10': 'tickSize'},
-    {'1': 'offset', '3': 12, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
+    {'1': 'basis_adjustment', '3': 31, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FutureLpBasisAdjustment', '10': 'basisAdjustment'},
     {'1': 'enabled', '3': 13, '4': 1, '5': 8, '10': 'enabled'},
-    {'1': 'bid_adjustment', '3': 14, '4': 1, '5': 1, '9': 0, '10': 'bidAdjustment', '17': true},
-    {'1': 'ask_adjustment', '3': 15, '4': 1, '5': 1, '9': 1, '10': 'askAdjustment', '17': true},
-    {'1': 'quantity_limit', '3': 19, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 2, '10': 'quantityLimit', '17': true},
+    {'1': 'quantity_limit', '3': 19, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 0, '10': 'quantityLimit', '17': true},
     {'1': 'etf_pricing', '3': 20, '4': 1, '5': 9, '10': 'etfPricing'},
     {'1': 'portfolio_id', '3': 21, '4': 1, '5': 5, '10': 'portfolioId'},
     {'1': 'pricing_method', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '10': 'pricingMethod'},
@@ -61,19 +59,22 @@ const FuturesLp$json = {
     {'1': 'imbalance_cancel_enabled', '3': 26, '4': 1, '5': 8, '10': 'imbalanceCancelEnabled'},
     {'1': 'thin_book_quantity_threshold', '3': 27, '4': 1, '5': 3, '10': 'thinBookQuantityThreshold'},
     {'1': 'thin_book_window_ticks', '3': 28, '4': 1, '5': 3, '10': 'thinBookWindowTicks'},
+    {'1': 'bid_offset', '3': 29, '4': 1, '5': 1, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 30, '4': 1, '5': 1, '10': 'askOffset'},
   ],
   '8': [
-    {'1': '_bid_adjustment'},
-    {'1': '_ask_adjustment'},
     {'1': '_quantity_limit'},
   ],
   '9': [
     {'1': 5, '2': 6},
+    {'1': 12, '2': 13},
+    {'1': 14, '2': 15},
+    {'1': 15, '2': 16},
     {'1': 16, '2': 17},
     {'1': 17, '2': 18},
     {'1': 18, '2': 19},
   ],
-  '10': ['carry', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity'],
+  '10': ['carry', 'offset', 'bid_adjustment', 'ask_adjustment', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity'],
 };
 
 /// Descriptor for `FuturesLp`. Decode as a `google.protobuf.DescriptorProto`.
@@ -83,22 +84,23 @@ final $typed_data.Uint8List futuresLpDescriptor = $convert.base64Decode(
     'Cm11bHRpcGxpZXIYBCABKAFSCm11bHRpcGxpZXISGwoJYXNrX2Jhc2lzGAYgASgBUghhc2tCYX'
     'NpcxIbCgliaWRfYmFzaXMYByABKAFSCGJpZEJhc2lzEiEKDGJpZF9xdWFudGl0eRgIIAEoA1IL'
     'YmlkUXVhbnRpdHkSIQoMYXNrX3F1YW50aXR5GAkgASgDUgthc2tRdWFudGl0eRIUCgVkZXB0aB'
-    'gKIAEoDVIFZGVwdGgSGwoJdGlja19zaXplGAsgASgBUgh0aWNrU2l6ZRIuCgZvZmZzZXQYDCAB'
-    'KAsyFi5rZG8udjEubHAuRXRmTHBPZmZzZXRSBm9mZnNldBIYCgdlbmFibGVkGA0gASgIUgdlbm'
-    'FibGVkEioKDmJpZF9hZGp1c3RtZW50GA4gASgBSABSDWJpZEFkanVzdG1lbnSIAQESKgoOYXNr'
-    'X2FkanVzdG1lbnQYDyABKAFIAVINYXNrQWRqdXN0bWVudIgBARJVCg5xdWFudGl0eV9saW1pdB'
-    'gTIAEoCzIpLmtkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRIAlINcXVh'
-    'bnRpdHlMaW1pdIgBARIfCgtldGZfcHJpY2luZxgUIAEoCVIKZXRmUHJpY2luZxIhCgxwb3J0Zm'
-    '9saW9faWQYFSABKAVSC3BvcnRmb2xpb0lkEkAKDnByaWNpbmdfbWV0aG9kGBYgASgLMhkua2Rv'
-    'LnYxLmNvbW1vbi5FdGZQcmljaW5nUg1wcmljaW5nTWV0aG9kEh8KC2JpZF9lbmFibGVkGBcgAS'
-    'gIUgpiaWRFbmFibGVkEh8KC2Fza19lbmFibGVkGBggASgIUgphc2tFbmFibGVkEkcKIGltYmFs'
-    'YW5jZV9jYW5jZWxfdGhyZXNob2xkX3JhdGlvGBkgASgBUh1pbWJhbGFuY2VDYW5jZWxUaHJlc2'
-    'hvbGRSYXRpbxI4ChhpbWJhbGFuY2VfY2FuY2VsX2VuYWJsZWQYGiABKAhSFmltYmFsYW5jZUNh'
-    'bmNlbEVuYWJsZWQSPwocdGhpbl9ib29rX3F1YW50aXR5X3RocmVzaG9sZBgbIAEoA1IZdGhpbk'
-    'Jvb2tRdWFudGl0eVRocmVzaG9sZBIzChZ0aGluX2Jvb2tfd2luZG93X3RpY2tzGBwgASgDUhN0'
-    'aGluQm9va1dpbmRvd1RpY2tzQhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG1lbn'
-    'RCEQoPX3F1YW50aXR5X2xpbWl0SgQIBRAGSgQIEBARSgQIERASSgQIEhATUgVjYXJyeVIQbW9t'
-    'ZW50dW1fZW5hYmxlZFIPbW9tZW50dW1fd2luZG93UhRtb21lbnR1bV9zZW5zaXRpdml0eQ==');
+    'gKIAEoDVIFZGVwdGgSGwoJdGlja19zaXplGAsgASgBUgh0aWNrU2l6ZRJVChBiYXNpc19hZGp1'
+    'c3RtZW50GB8gASgLMioua2RvLnYxLmZ1dHVyZXNfbHAuRnV0dXJlTHBCYXNpc0FkanVzdG1lbn'
+    'RSD2Jhc2lzQWRqdXN0bWVudBIYCgdlbmFibGVkGA0gASgIUgdlbmFibGVkElUKDnF1YW50aXR5'
+    'X2xpbWl0GBMgASgLMikua2RvLnYxLmZ1dHVyZXNfbHAuRnV0dXJlc0xwUXVhbnRpdHlMaW1pdE'
+    'gAUg1xdWFudGl0eUxpbWl0iAEBEh8KC2V0Zl9wcmljaW5nGBQgASgJUgpldGZQcmljaW5nEiEK'
+    'DHBvcnRmb2xpb19pZBgVIAEoBVILcG9ydGZvbGlvSWQSQAoOcHJpY2luZ19tZXRob2QYFiABKA'
+    'syGS5rZG8udjEuY29tbW9uLkV0ZlByaWNpbmdSDXByaWNpbmdNZXRob2QSHwoLYmlkX2VuYWJs'
+    'ZWQYFyABKAhSCmJpZEVuYWJsZWQSHwoLYXNrX2VuYWJsZWQYGCABKAhSCmFza0VuYWJsZWQSRw'
+    'ogaW1iYWxhbmNlX2NhbmNlbF90aHJlc2hvbGRfcmF0aW8YGSABKAFSHWltYmFsYW5jZUNhbmNl'
+    'bFRocmVzaG9sZFJhdGlvEjgKGGltYmFsYW5jZV9jYW5jZWxfZW5hYmxlZBgaIAEoCFIWaW1iYW'
+    'xhbmNlQ2FuY2VsRW5hYmxlZBI/Chx0aGluX2Jvb2tfcXVhbnRpdHlfdGhyZXNob2xkGBsgASgD'
+    'Uhl0aGluQm9va1F1YW50aXR5VGhyZXNob2xkEjMKFnRoaW5fYm9va193aW5kb3dfdGlja3MYHC'
+    'ABKANSE3RoaW5Cb29rV2luZG93VGlja3MSHQoKYmlkX29mZnNldBgdIAEoAVIJYmlkT2Zmc2V0'
+    'Eh0KCmFza19vZmZzZXQYHiABKAFSCWFza09mZnNldEIRCg9fcXVhbnRpdHlfbGltaXRKBAgFEA'
+    'ZKBAgMEA1KBAgOEA9KBAgPEBBKBAgQEBFKBAgREBJKBAgSEBNSBWNhcnJ5UgZvZmZzZXRSDmJp'
+    'ZF9hZGp1c3RtZW50Ug5hc2tfYWRqdXN0bWVudFIQbW9tZW50dW1fZW5hYmxlZFIPbW9tZW50dW'
+    '1fd2luZG93UhRtb21lbnR1bV9zZW5zaXRpdml0eQ==');
 
 @$core.Deprecated('Use futuresLpQuantityLimitDescriptor instead')
 const FuturesLpQuantityLimit$json = {
@@ -122,6 +124,29 @@ final $typed_data.Uint8List futuresLpQuantityLimitDescriptor = $convert.base64De
     'DG5ldF9xdWFudGl0eRgDIAEoA0gAUgtuZXRRdWFudGl0eYgBARItChBtYXhfbmV0X3F1YW50aX'
     'R5GAQgASgDSAFSDm1heE5ldFF1YW50aXR5iAEBQg8KDV9uZXRfcXVhbnRpdHlCEwoRX21heF9u'
     'ZXRfcXVhbnRpdHk=');
+
+@$core.Deprecated('Use futureLpBasisAdjustmentDescriptor instead')
+const FutureLpBasisAdjustment$json = {
+  '1': 'FutureLpBasisAdjustment',
+  '2': [
+    {'1': 'bid_adjustment', '3': 1, '4': 1, '5': 1, '10': 'bidAdjustment'},
+    {'1': 'ask_adjustment', '3': 2, '4': 1, '5': 1, '10': 'askAdjustment'},
+    {'1': 'basis_pos_adj_enabled', '3': 3, '4': 1, '5': 8, '10': 'basisPosAdjEnabled'},
+    {'1': 'turnover_limit', '3': 4, '4': 1, '5': 3, '10': 'turnoverLimit'},
+    {'1': 'turnover_basis', '3': 5, '4': 1, '5': 1, '10': 'turnoverBasis'},
+    {'1': 'avoidance_limit', '3': 6, '4': 1, '5': 3, '10': 'avoidanceLimit'},
+    {'1': 'avoidance_basis', '3': 7, '4': 1, '5': 1, '10': 'avoidanceBasis'},
+  ],
+};
+
+/// Descriptor for `FutureLpBasisAdjustment`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List futureLpBasisAdjustmentDescriptor = $convert.base64Decode(
+    'ChdGdXR1cmVMcEJhc2lzQWRqdXN0bWVudBIlCg5iaWRfYWRqdXN0bWVudBgBIAEoAVINYmlkQW'
+    'RqdXN0bWVudBIlCg5hc2tfYWRqdXN0bWVudBgCIAEoAVINYXNrQWRqdXN0bWVudBIxChViYXNp'
+    'c19wb3NfYWRqX2VuYWJsZWQYAyABKAhSEmJhc2lzUG9zQWRqRW5hYmxlZBIlCg50dXJub3Zlcl'
+    '9saW1pdBgEIAEoA1INdHVybm92ZXJMaW1pdBIlCg50dXJub3Zlcl9iYXNpcxgFIAEoAVINdHVy'
+    'bm92ZXJCYXNpcxInCg9hdm9pZGFuY2VfbGltaXQYBiABKANSDmF2b2lkYW5jZUxpbWl0EicKD2'
+    'F2b2lkYW5jZV9iYXNpcxgHIAEoAVIOYXZvaWRhbmNlQmFzaXM=');
 
 @$core.Deprecated('Use futuresLpPricingDescriptor instead')
 const FuturesLpPricing$json = {
@@ -157,34 +182,35 @@ const FuturesLpStatus$json = {
     {'1': 'multiplier', '3': 8, '4': 1, '5': 1, '10': 'multiplier'},
     {'1': 'ask_basis', '3': 10, '4': 1, '5': 1, '10': 'askBasis'},
     {'1': 'bid_basis', '3': 11, '4': 1, '5': 1, '10': 'bidBasis'},
-    {'1': 'bid_adjustment', '3': 12, '4': 1, '5': 1, '9': 0, '10': 'bidAdjustment', '17': true},
-    {'1': 'ask_adjustment', '3': 13, '4': 1, '5': 1, '9': 1, '10': 'askAdjustment', '17': true},
     {'1': 'bid_quantity', '3': 19, '4': 1, '5': 3, '10': 'bidQuantity'},
     {'1': 'ask_quantity', '3': 20, '4': 1, '5': 3, '10': 'askQuantity'},
-    {'1': 'offset', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '10': 'offset'},
-    {'1': 'quantity_limit', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 2, '10': 'quantityLimit', '17': true},
+    {'1': 'basis_adjustment', '3': 30, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FutureLpBasisAdjustment', '10': 'basisAdjustment'},
+    {'1': 'quantity_limit', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 0, '10': 'quantityLimit', '17': true},
     {'1': 'depth', '3': 23, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'etf_pricing', '3': 24, '4': 1, '5': 9, '10': 'etfPricing'},
-    {'1': 'bid_enabled', '3': 26, '4': 1, '5': 8, '9': 3, '10': 'bidEnabled', '17': true},
-    {'1': 'ask_enabled', '3': 27, '4': 1, '5': 8, '9': 4, '10': 'askEnabled', '17': true},
+    {'1': 'bid_enabled', '3': 26, '4': 1, '5': 8, '9': 1, '10': 'bidEnabled', '17': true},
+    {'1': 'ask_enabled', '3': 27, '4': 1, '5': 8, '9': 2, '10': 'askEnabled', '17': true},
+    {'1': 'bid_offset', '3': 28, '4': 1, '5': 1, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 29, '4': 1, '5': 1, '10': 'askOffset'},
   ],
   '8': [
-    {'1': '_bid_adjustment'},
-    {'1': '_ask_adjustment'},
     {'1': '_quantity_limit'},
     {'1': '_bid_enabled'},
     {'1': '_ask_enabled'},
   ],
   '9': [
     {'1': 9, '2': 10},
+    {'1': 12, '2': 13},
+    {'1': 13, '2': 14},
     {'1': 14, '2': 15},
     {'1': 15, '2': 16},
     {'1': 16, '2': 17},
     {'1': 17, '2': 18},
     {'1': 18, '2': 19},
+    {'1': 21, '2': 22},
     {'1': 25, '2': 26},
   ],
-  '10': ['carry', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity', 'momentum_bid_adjustment', 'momentum_ask_adjustment'],
+  '10': ['carry', 'offset', 'bid_adjustment', 'ask_adjustment', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity', 'momentum_bid_adjustment', 'momentum_ask_adjustment'],
 };
 
 /// Descriptor for `FuturesLpStatus`. Decode as a `google.protobuf.DescriptorProto`.
@@ -197,19 +223,20 @@ final $typed_data.Uint8List futuresLpStatusDescriptor = $convert.base64Decode(
     'ljaW5nElMKD2ZpbGxfc3RhdGlzdGljcxgGIAEoCzIqLmtkby52MS5mdXR1cmVzX2xwLkZ1dHVy'
     'ZXNMcEZpbGxTdGF0aXN0aWNzUg5maWxsU3RhdGlzdGljcxIdCgpldGZfc3ltYm9sGAcgASgJUg'
     'lldGZTeW1ib2wSHgoKbXVsdGlwbGllchgIIAEoAVIKbXVsdGlwbGllchIbCglhc2tfYmFzaXMY'
-    'CiABKAFSCGFza0Jhc2lzEhsKCWJpZF9iYXNpcxgLIAEoAVIIYmlkQmFzaXMSKgoOYmlkX2Fkan'
-    'VzdG1lbnQYDCABKAFIAFINYmlkQWRqdXN0bWVudIgBARIqCg5hc2tfYWRqdXN0bWVudBgNIAEo'
-    'AUgBUg1hc2tBZGp1c3RtZW50iAEBEiEKDGJpZF9xdWFudGl0eRgTIAEoA1ILYmlkUXVhbnRpdH'
-    'kSIQoMYXNrX3F1YW50aXR5GBQgASgDUgthc2tRdWFudGl0eRIuCgZvZmZzZXQYFSABKAsyFi5r'
-    'ZG8udjEubHAuRXRmTHBPZmZzZXRSBm9mZnNldBJVCg5xdWFudGl0eV9saW1pdBgWIAEoCzIpLm'
-    'tkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRIAlINcXVhbnRpdHlMaW1p'
-    'dIgBARIUCgVkZXB0aBgXIAEoDVIFZGVwdGgSHwoLZXRmX3ByaWNpbmcYGCABKAlSCmV0ZlByaW'
-    'NpbmcSJAoLYmlkX2VuYWJsZWQYGiABKAhIA1IKYmlkRW5hYmxlZIgBARIkCgthc2tfZW5hYmxl'
-    'ZBgbIAEoCEgEUgphc2tFbmFibGVkiAEBQhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2Fkan'
-    'VzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0Qg4KDF9iaWRfZW5hYmxlZEIOCgxfYXNrX2VuYWJs'
-    'ZWRKBAgJEApKBAgOEA9KBAgPEBBKBAgQEBFKBAgREBJKBAgSEBNKBAgZEBpSBWNhcnJ5UhBtb2'
-    '1lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudHVtX3NlbnNpdGl2aXR5Uhdt'
-    'b21lbnR1bV9iaWRfYWRqdXN0bWVudFIXbW9tZW50dW1fYXNrX2FkanVzdG1lbnQ=');
+    'CiABKAFSCGFza0Jhc2lzEhsKCWJpZF9iYXNpcxgLIAEoAVIIYmlkQmFzaXMSIQoMYmlkX3F1YW'
+    '50aXR5GBMgASgDUgtiaWRRdWFudGl0eRIhCgxhc2tfcXVhbnRpdHkYFCABKANSC2Fza1F1YW50'
+    'aXR5ElUKEGJhc2lzX2FkanVzdG1lbnQYHiABKAsyKi5rZG8udjEuZnV0dXJlc19scC5GdXR1cm'
+    'VMcEJhc2lzQWRqdXN0bWVudFIPYmFzaXNBZGp1c3RtZW50ElUKDnF1YW50aXR5X2xpbWl0GBYg'
+    'ASgLMikua2RvLnYxLmZ1dHVyZXNfbHAuRnV0dXJlc0xwUXVhbnRpdHlMaW1pdEgAUg1xdWFudG'
+    'l0eUxpbWl0iAEBEhQKBWRlcHRoGBcgASgNUgVkZXB0aBIfCgtldGZfcHJpY2luZxgYIAEoCVIK'
+    'ZXRmUHJpY2luZxIkCgtiaWRfZW5hYmxlZBgaIAEoCEgBUgpiaWRFbmFibGVkiAEBEiQKC2Fza1'
+    '9lbmFibGVkGBsgASgISAJSCmFza0VuYWJsZWSIAQESHQoKYmlkX29mZnNldBgcIAEoAVIJYmlk'
+    'T2Zmc2V0Eh0KCmFza19vZmZzZXQYHSABKAFSCWFza09mZnNldEIRCg9fcXVhbnRpdHlfbGltaX'
+    'RCDgoMX2JpZF9lbmFibGVkQg4KDF9hc2tfZW5hYmxlZEoECAkQCkoECAwQDUoECA0QDkoECA4Q'
+    'D0oECA8QEEoECBAQEUoECBEQEkoECBIQE0oECBUQFkoECBkQGlIFY2FycnlSBm9mZnNldFIOYm'
+    'lkX2FkanVzdG1lbnRSDmFza19hZGp1c3RtZW50UhBtb21lbnR1bV9lbmFibGVkUg9tb21lbnR1'
+    'bV93aW5kb3dSFG1vbWVudHVtX3NlbnNpdGl2aXR5Uhdtb21lbnR1bV9iaWRfYWRqdXN0bWVudF'
+    'IXbW9tZW50dW1fYXNrX2FkanVzdG1lbnQ=');
 
 @$core.Deprecated('Use futuresLpStatusUpdateDescriptor instead')
 const FuturesLpStatusUpdate$json = {
@@ -222,16 +249,16 @@ const FuturesLpStatusUpdate$json = {
     {'1': 'fill_statistics', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpFillStatistics', '9': 2, '10': 'fillStatistics', '17': true},
     {'1': 'ask_basis', '3': 7, '4': 1, '5': 1, '9': 3, '10': 'askBasis', '17': true},
     {'1': 'bid_basis', '3': 8, '4': 1, '5': 1, '9': 4, '10': 'bidBasis', '17': true},
-    {'1': 'bid_adjustment', '3': 9, '4': 1, '5': 1, '9': 5, '10': 'bidAdjustment', '17': true},
-    {'1': 'ask_adjustment', '3': 10, '4': 1, '5': 1, '9': 6, '10': 'askAdjustment', '17': true},
-    {'1': 'bid_quantity', '3': 11, '4': 1, '5': 3, '9': 7, '10': 'bidQuantity', '17': true},
-    {'1': 'ask_quantity', '3': 12, '4': 1, '5': 3, '9': 8, '10': 'askQuantity', '17': true},
-    {'1': 'offset', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 9, '10': 'offset', '17': true},
-    {'1': 'quantity_limit', '3': 19, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 10, '10': 'quantityLimit', '17': true},
-    {'1': 'depth', '3': 20, '4': 1, '5': 13, '9': 11, '10': 'depth', '17': true},
-    {'1': 'etf_pricing', '3': 21, '4': 1, '5': 9, '9': 12, '10': 'etfPricing', '17': true},
-    {'1': 'bid_enabled', '3': 22, '4': 1, '5': 8, '9': 13, '10': 'bidEnabled', '17': true},
-    {'1': 'ask_enabled', '3': 23, '4': 1, '5': 8, '9': 14, '10': 'askEnabled', '17': true},
+    {'1': 'bid_quantity', '3': 11, '4': 1, '5': 3, '9': 5, '10': 'bidQuantity', '17': true},
+    {'1': 'ask_quantity', '3': 12, '4': 1, '5': 3, '9': 6, '10': 'askQuantity', '17': true},
+    {'1': 'basis_adjustment', '3': 26, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FutureLpBasisAdjustment', '9': 7, '10': 'basisAdjustment', '17': true},
+    {'1': 'quantity_limit', '3': 19, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 8, '10': 'quantityLimit', '17': true},
+    {'1': 'depth', '3': 20, '4': 1, '5': 13, '9': 9, '10': 'depth', '17': true},
+    {'1': 'etf_pricing', '3': 21, '4': 1, '5': 9, '9': 10, '10': 'etfPricing', '17': true},
+    {'1': 'bid_enabled', '3': 22, '4': 1, '5': 8, '9': 11, '10': 'bidEnabled', '17': true},
+    {'1': 'ask_enabled', '3': 23, '4': 1, '5': 8, '9': 12, '10': 'askEnabled', '17': true},
+    {'1': 'bid_offset', '3': 24, '4': 1, '5': 1, '9': 13, '10': 'bidOffset', '17': true},
+    {'1': 'ask_offset', '3': 25, '4': 1, '5': 1, '9': 14, '10': 'askOffset', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -239,26 +266,29 @@ const FuturesLpStatusUpdate$json = {
     {'1': '_fill_statistics'},
     {'1': '_ask_basis'},
     {'1': '_bid_basis'},
-    {'1': '_bid_adjustment'},
-    {'1': '_ask_adjustment'},
     {'1': '_bid_quantity'},
     {'1': '_ask_quantity'},
-    {'1': '_offset'},
+    {'1': '_basis_adjustment'},
     {'1': '_quantity_limit'},
     {'1': '_depth'},
     {'1': '_etf_pricing'},
     {'1': '_bid_enabled'},
     {'1': '_ask_enabled'},
+    {'1': '_bid_offset'},
+    {'1': '_ask_offset'},
   ],
   '9': [
     {'1': 6, '2': 7},
+    {'1': 9, '2': 10},
+    {'1': 10, '2': 11},
+    {'1': 13, '2': 14},
     {'1': 14, '2': 15},
     {'1': 15, '2': 16},
     {'1': 16, '2': 17},
     {'1': 17, '2': 18},
     {'1': 18, '2': 19},
   ],
-  '10': ['carry', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity', 'momentum_bid_adjustment', 'momentum_ask_adjustment'],
+  '10': ['carry', 'offset', 'bid_adjustment', 'ask_adjustment', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity', 'momentum_bid_adjustment', 'momentum_ask_adjustment'],
 };
 
 /// Descriptor for `FuturesLpStatusUpdate`. Decode as a `google.protobuf.DescriptorProto`.
@@ -269,22 +299,24 @@ final $typed_data.Uint8List futuresLpStatusUpdateDescriptor = $convert.base64Dec
     'gLMiMua2RvLnYxLmZ1dHVyZXNfbHAuRnV0dXJlc0xwUHJpY2luZ0gBUgdwcmljaW5niAEBElgK'
     'D2ZpbGxfc3RhdGlzdGljcxgFIAEoCzIqLmtkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcEZpbG'
     'xTdGF0aXN0aWNzSAJSDmZpbGxTdGF0aXN0aWNziAEBEiAKCWFza19iYXNpcxgHIAEoAUgDUghh'
-    'c2tCYXNpc4gBARIgCgliaWRfYmFzaXMYCCABKAFIBFIIYmlkQmFzaXOIAQESKgoOYmlkX2Fkan'
-    'VzdG1lbnQYCSABKAFIBVINYmlkQWRqdXN0bWVudIgBARIqCg5hc2tfYWRqdXN0bWVudBgKIAEo'
-    'AUgGUg1hc2tBZGp1c3RtZW50iAEBEiYKDGJpZF9xdWFudGl0eRgLIAEoA0gHUgtiaWRRdWFudG'
-    'l0eYgBARImCgxhc2tfcXVhbnRpdHkYDCABKANICFILYXNrUXVhbnRpdHmIAQESMwoGb2Zmc2V0'
-    'GA0gASgLMhYua2RvLnYxLmxwLkV0ZkxwT2Zmc2V0SAlSBm9mZnNldIgBARJVCg5xdWFudGl0eV'
-    '9saW1pdBgTIAEoCzIpLmtkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRI'
-    'ClINcXVhbnRpdHlMaW1pdIgBARIZCgVkZXB0aBgUIAEoDUgLUgVkZXB0aIgBARIkCgtldGZfcH'
-    'JpY2luZxgVIAEoCUgMUgpldGZQcmljaW5niAEBEiQKC2JpZF9lbmFibGVkGBYgASgISA1SCmJp'
-    'ZEVuYWJsZWSIAQESJAoLYXNrX2VuYWJsZWQYFyABKAhIDlIKYXNrRW5hYmxlZIgBAUIICgZfc3'
-    'RhdGVCCgoIX3ByaWNpbmdCEgoQX2ZpbGxfc3RhdGlzdGljc0IMCgpfYXNrX2Jhc2lzQgwKCl9i'
-    'aWRfYmFzaXNCEQoPX2JpZF9hZGp1c3RtZW50QhEKD19hc2tfYWRqdXN0bWVudEIPCg1fYmlkX3'
-    'F1YW50aXR5Qg8KDV9hc2tfcXVhbnRpdHlCCQoHX29mZnNldEIRCg9fcXVhbnRpdHlfbGltaXRC'
-    'CAoGX2RlcHRoQg4KDF9ldGZfcHJpY2luZ0IOCgxfYmlkX2VuYWJsZWRCDgoMX2Fza19lbmFibG'
-    'VkSgQIBhAHSgQIDhAPSgQIDxAQSgQIEBARSgQIERASSgQIEhATUgVjYXJyeVIQbW9tZW50dW1f'
-    'ZW5hYmxlZFIPbW9tZW50dW1fd2luZG93UhRtb21lbnR1bV9zZW5zaXRpdml0eVIXbW9tZW50dW'
-    '1fYmlkX2FkanVzdG1lbnRSF21vbWVudHVtX2Fza19hZGp1c3RtZW50');
+    'c2tCYXNpc4gBARIgCgliaWRfYmFzaXMYCCABKAFIBFIIYmlkQmFzaXOIAQESJgoMYmlkX3F1YW'
+    '50aXR5GAsgASgDSAVSC2JpZFF1YW50aXR5iAEBEiYKDGFza19xdWFudGl0eRgMIAEoA0gGUgth'
+    'c2tRdWFudGl0eYgBARJaChBiYXNpc19hZGp1c3RtZW50GBogASgLMioua2RvLnYxLmZ1dHVyZX'
+    'NfbHAuRnV0dXJlTHBCYXNpc0FkanVzdG1lbnRIB1IPYmFzaXNBZGp1c3RtZW50iAEBElUKDnF1'
+    'YW50aXR5X2xpbWl0GBMgASgLMikua2RvLnYxLmZ1dHVyZXNfbHAuRnV0dXJlc0xwUXVhbnRpdH'
+    'lMaW1pdEgIUg1xdWFudGl0eUxpbWl0iAEBEhkKBWRlcHRoGBQgASgNSAlSBWRlcHRoiAEBEiQK'
+    'C2V0Zl9wcmljaW5nGBUgASgJSApSCmV0ZlByaWNpbmeIAQESJAoLYmlkX2VuYWJsZWQYFiABKA'
+    'hIC1IKYmlkRW5hYmxlZIgBARIkCgthc2tfZW5hYmxlZBgXIAEoCEgMUgphc2tFbmFibGVkiAEB'
+    'EiIKCmJpZF9vZmZzZXQYGCABKAFIDVIJYmlkT2Zmc2V0iAEBEiIKCmFza19vZmZzZXQYGSABKA'
+    'FIDlIJYXNrT2Zmc2V0iAEBQggKBl9zdGF0ZUIKCghfcHJpY2luZ0ISChBfZmlsbF9zdGF0aXN0'
+    'aWNzQgwKCl9hc2tfYmFzaXNCDAoKX2JpZF9iYXNpc0IPCg1fYmlkX3F1YW50aXR5Qg8KDV9hc2'
+    'tfcXVhbnRpdHlCEwoRX2Jhc2lzX2FkanVzdG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0QggKBl9k'
+    'ZXB0aEIOCgxfZXRmX3ByaWNpbmdCDgoMX2JpZF9lbmFibGVkQg4KDF9hc2tfZW5hYmxlZEINCg'
+    'tfYmlkX29mZnNldEINCgtfYXNrX29mZnNldEoECAYQB0oECAkQCkoECAoQC0oECA0QDkoECA4Q'
+    'D0oECA8QEEoECBAQEUoECBEQEkoECBIQE1IFY2FycnlSBm9mZnNldFIOYmlkX2FkanVzdG1lbn'
+    'RSDmFza19hZGp1c3RtZW50UhBtb21lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1v'
+    'bWVudHVtX3NlbnNpdGl2aXR5Uhdtb21lbnR1bV9iaWRfYWRqdXN0bWVudFIXbW9tZW50dW1fYX'
+    'NrX2FkanVzdG1lbnQ=');
 
 @$core.Deprecated('Use futuresLpFillStatisticsDescriptor instead')
 const FuturesLpFillStatistics$json = {
@@ -412,30 +444,28 @@ const UpdateFuturesLpRequest$json = {
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
     {'1': 'bid_quantity', '3': 4, '4': 1, '5': 3, '9': 0, '10': 'bidQuantity', '17': true},
     {'1': 'ask_quantity', '3': 5, '4': 1, '5': 3, '9': 1, '10': 'askQuantity', '17': true},
-    {'1': 'bid_adjustment', '3': 6, '4': 1, '5': 1, '9': 2, '10': 'bidAdjustment', '17': true},
-    {'1': 'ask_adjustment', '3': 7, '4': 1, '5': 1, '9': 3, '10': 'askAdjustment', '17': true},
-    {'1': 'bid_basis', '3': 8, '4': 1, '5': 1, '9': 4, '10': 'bidBasis', '17': true},
-    {'1': 'ask_basis', '3': 9, '4': 1, '5': 1, '9': 5, '10': 'askBasis', '17': true},
-    {'1': 'depth', '3': 10, '4': 1, '5': 13, '9': 6, '10': 'depth', '17': true},
-    {'1': 'offset', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.lp.EtfLpOffset', '9': 7, '10': 'offset', '17': true},
-    {'1': 'quantity_limit', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 8, '10': 'quantityLimit', '17': true},
-    {'1': 'etf_pricing', '3': 16, '4': 1, '5': 9, '9': 9, '10': 'etfPricing', '17': true},
-    {'1': 'bid_enabled', '3': 17, '4': 1, '5': 8, '9': 10, '10': 'bidEnabled', '17': true},
-    {'1': 'ask_enabled', '3': 18, '4': 1, '5': 8, '9': 11, '10': 'askEnabled', '17': true},
-    {'1': 'imbalance_cancel_threshold_ratio', '3': 19, '4': 1, '5': 1, '9': 12, '10': 'imbalanceCancelThresholdRatio', '17': true},
-    {'1': 'imbalance_cancel_enabled', '3': 20, '4': 1, '5': 8, '9': 13, '10': 'imbalanceCancelEnabled', '17': true},
-    {'1': 'thin_book_quantity_threshold', '3': 21, '4': 1, '5': 3, '9': 14, '10': 'thinBookQuantityThreshold', '17': true},
-    {'1': 'thin_book_window_ticks', '3': 22, '4': 1, '5': 3, '9': 15, '10': 'thinBookWindowTicks', '17': true},
+    {'1': 'bid_basis', '3': 8, '4': 1, '5': 1, '9': 2, '10': 'bidBasis', '17': true},
+    {'1': 'ask_basis', '3': 9, '4': 1, '5': 1, '9': 3, '10': 'askBasis', '17': true},
+    {'1': 'depth', '3': 10, '4': 1, '5': 13, '9': 4, '10': 'depth', '17': true},
+    {'1': 'basis_adjustment', '3': 25, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FutureLpBasisAdjustment', '9': 5, '10': 'basisAdjustment', '17': true},
+    {'1': 'quantity_limit', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.futures_lp.FuturesLpQuantityLimit', '9': 6, '10': 'quantityLimit', '17': true},
+    {'1': 'etf_pricing', '3': 16, '4': 1, '5': 9, '9': 7, '10': 'etfPricing', '17': true},
+    {'1': 'bid_enabled', '3': 17, '4': 1, '5': 8, '9': 8, '10': 'bidEnabled', '17': true},
+    {'1': 'ask_enabled', '3': 18, '4': 1, '5': 8, '9': 9, '10': 'askEnabled', '17': true},
+    {'1': 'imbalance_cancel_threshold_ratio', '3': 19, '4': 1, '5': 1, '9': 10, '10': 'imbalanceCancelThresholdRatio', '17': true},
+    {'1': 'imbalance_cancel_enabled', '3': 20, '4': 1, '5': 8, '9': 11, '10': 'imbalanceCancelEnabled', '17': true},
+    {'1': 'thin_book_quantity_threshold', '3': 21, '4': 1, '5': 3, '9': 12, '10': 'thinBookQuantityThreshold', '17': true},
+    {'1': 'thin_book_window_ticks', '3': 22, '4': 1, '5': 3, '9': 13, '10': 'thinBookWindowTicks', '17': true},
+    {'1': 'bid_offset', '3': 23, '4': 1, '5': 1, '9': 14, '10': 'bidOffset', '17': true},
+    {'1': 'ask_offset', '3': 24, '4': 1, '5': 1, '9': 15, '10': 'askOffset', '17': true},
   ],
   '8': [
     {'1': '_bid_quantity'},
     {'1': '_ask_quantity'},
-    {'1': '_bid_adjustment'},
-    {'1': '_ask_adjustment'},
     {'1': '_bid_basis'},
     {'1': '_ask_basis'},
     {'1': '_depth'},
-    {'1': '_offset'},
+    {'1': '_basis_adjustment'},
     {'1': '_quantity_limit'},
     {'1': '_etf_pricing'},
     {'1': '_bid_enabled'},
@@ -444,14 +474,19 @@ const UpdateFuturesLpRequest$json = {
     {'1': '_imbalance_cancel_enabled'},
     {'1': '_thin_book_quantity_threshold'},
     {'1': '_thin_book_window_ticks'},
+    {'1': '_bid_offset'},
+    {'1': '_ask_offset'},
   ],
   '9': [
     {'1': 3, '2': 4},
+    {'1': 6, '2': 7},
+    {'1': 7, '2': 8},
+    {'1': 11, '2': 12},
     {'1': 12, '2': 13},
     {'1': 13, '2': 14},
     {'1': 14, '2': 15},
   ],
-  '10': ['carry', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity'],
+  '10': ['carry', 'offset', 'bid_adjustment', 'ask_adjustment', 'momentum_enabled', 'momentum_window', 'momentum_sensitivity'],
 };
 
 /// Descriptor for `UpdateFuturesLpRequest`. Decode as a `google.protobuf.DescriptorProto`.
@@ -459,27 +494,28 @@ final $typed_data.Uint8List updateFuturesLpRequestDescriptor = $convert.base64De
     'ChZVcGRhdGVGdXR1cmVzTHBSZXF1ZXN0EikKDWZ1dHVyZV9zeW1ib2wYASABKAlCBOJBAQJSDG'
     'Z1dHVyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEiYKDGJpZF9x'
     'dWFudGl0eRgEIAEoA0gAUgtiaWRRdWFudGl0eYgBARImCgxhc2tfcXVhbnRpdHkYBSABKANIAV'
-    'ILYXNrUXVhbnRpdHmIAQESKgoOYmlkX2FkanVzdG1lbnQYBiABKAFIAlINYmlkQWRqdXN0bWVu'
-    'dIgBARIqCg5hc2tfYWRqdXN0bWVudBgHIAEoAUgDUg1hc2tBZGp1c3RtZW50iAEBEiAKCWJpZF'
-    '9iYXNpcxgIIAEoAUgEUghiaWRCYXNpc4gBARIgCglhc2tfYmFzaXMYCSABKAFIBVIIYXNrQmFz'
-    'aXOIAQESGQoFZGVwdGgYCiABKA1IBlIFZGVwdGiIAQESMwoGb2Zmc2V0GAsgASgLMhYua2RvLn'
-    'YxLmxwLkV0ZkxwT2Zmc2V0SAdSBm9mZnNldIgBARJVCg5xdWFudGl0eV9saW1pdBgPIAEoCzIp'
-    'Lmtkby52MS5mdXR1cmVzX2xwLkZ1dHVyZXNMcFF1YW50aXR5TGltaXRICFINcXVhbnRpdHlMaW'
-    '1pdIgBARIkCgtldGZfcHJpY2luZxgQIAEoCUgJUgpldGZQcmljaW5niAEBEiQKC2JpZF9lbmFi'
-    'bGVkGBEgASgISApSCmJpZEVuYWJsZWSIAQESJAoLYXNrX2VuYWJsZWQYEiABKAhIC1IKYXNrRW'
-    '5hYmxlZIgBARJMCiBpbWJhbGFuY2VfY2FuY2VsX3RocmVzaG9sZF9yYXRpbxgTIAEoAUgMUh1p'
-    'bWJhbGFuY2VDYW5jZWxUaHJlc2hvbGRSYXRpb4gBARI9ChhpbWJhbGFuY2VfY2FuY2VsX2VuYW'
-    'JsZWQYFCABKAhIDVIWaW1iYWxhbmNlQ2FuY2VsRW5hYmxlZIgBARJEChx0aGluX2Jvb2tfcXVh'
-    'bnRpdHlfdGhyZXNob2xkGBUgASgDSA5SGXRoaW5Cb29rUXVhbnRpdHlUaHJlc2hvbGSIAQESOA'
-    'oWdGhpbl9ib29rX3dpbmRvd190aWNrcxgWIAEoA0gPUhN0aGluQm9va1dpbmRvd1RpY2tziAEB'
-    'Qg8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIRCg9fYmlkX2FkanVzdG1lbnRCEQ'
-    'oPX2Fza19hZGp1c3RtZW50QgwKCl9iaWRfYmFzaXNCDAoKX2Fza19iYXNpc0IICgZfZGVwdGhC'
-    'CQoHX29mZnNldEIRCg9fcXVhbnRpdHlfbGltaXRCDgoMX2V0Zl9wcmljaW5nQg4KDF9iaWRfZW'
-    '5hYmxlZEIOCgxfYXNrX2VuYWJsZWRCIwohX2ltYmFsYW5jZV9jYW5jZWxfdGhyZXNob2xkX3Jh'
-    'dGlvQhsKGV9pbWJhbGFuY2VfY2FuY2VsX2VuYWJsZWRCHwodX3RoaW5fYm9va19xdWFudGl0eV'
-    '90aHJlc2hvbGRCGQoXX3RoaW5fYm9va193aW5kb3dfdGlja3NKBAgDEARKBAgMEA1KBAgNEA5K'
-    'BAgOEA9SBWNhcnJ5UhBtb21lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3dSFG1vbWVudH'
-    'VtX3NlbnNpdGl2aXR5');
+    'ILYXNrUXVhbnRpdHmIAQESIAoJYmlkX2Jhc2lzGAggASgBSAJSCGJpZEJhc2lziAEBEiAKCWFz'
+    'a19iYXNpcxgJIAEoAUgDUghhc2tCYXNpc4gBARIZCgVkZXB0aBgKIAEoDUgEUgVkZXB0aIgBAR'
+    'JaChBiYXNpc19hZGp1c3RtZW50GBkgASgLMioua2RvLnYxLmZ1dHVyZXNfbHAuRnV0dXJlTHBC'
+    'YXNpc0FkanVzdG1lbnRIBVIPYmFzaXNBZGp1c3RtZW50iAEBElUKDnF1YW50aXR5X2xpbWl0GA'
+    '8gASgLMikua2RvLnYxLmZ1dHVyZXNfbHAuRnV0dXJlc0xwUXVhbnRpdHlMaW1pdEgGUg1xdWFu'
+    'dGl0eUxpbWl0iAEBEiQKC2V0Zl9wcmljaW5nGBAgASgJSAdSCmV0ZlByaWNpbmeIAQESJAoLYm'
+    'lkX2VuYWJsZWQYESABKAhICFIKYmlkRW5hYmxlZIgBARIkCgthc2tfZW5hYmxlZBgSIAEoCEgJ'
+    'Ugphc2tFbmFibGVkiAEBEkwKIGltYmFsYW5jZV9jYW5jZWxfdGhyZXNob2xkX3JhdGlvGBMgAS'
+    'gBSApSHWltYmFsYW5jZUNhbmNlbFRocmVzaG9sZFJhdGlviAEBEj0KGGltYmFsYW5jZV9jYW5j'
+    'ZWxfZW5hYmxlZBgUIAEoCEgLUhZpbWJhbGFuY2VDYW5jZWxFbmFibGVkiAEBEkQKHHRoaW5fYm'
+    '9va19xdWFudGl0eV90aHJlc2hvbGQYFSABKANIDFIZdGhpbkJvb2tRdWFudGl0eVRocmVzaG9s'
+    'ZIgBARI4ChZ0aGluX2Jvb2tfd2luZG93X3RpY2tzGBYgASgDSA1SE3RoaW5Cb29rV2luZG93VG'
+    'lja3OIAQESIgoKYmlkX29mZnNldBgXIAEoAUgOUgliaWRPZmZzZXSIAQESIgoKYXNrX29mZnNl'
+    'dBgYIAEoAUgPUglhc2tPZmZzZXSIAQFCDwoNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW50aX'
+    'R5QgwKCl9iaWRfYmFzaXNCDAoKX2Fza19iYXNpc0IICgZfZGVwdGhCEwoRX2Jhc2lzX2FkanVz'
+    'dG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0Qg4KDF9ldGZfcHJpY2luZ0IOCgxfYmlkX2VuYWJsZW'
+    'RCDgoMX2Fza19lbmFibGVkQiMKIV9pbWJhbGFuY2VfY2FuY2VsX3RocmVzaG9sZF9yYXRpb0Ib'
+    'ChlfaW1iYWxhbmNlX2NhbmNlbF9lbmFibGVkQh8KHV90aGluX2Jvb2tfcXVhbnRpdHlfdGhyZX'
+    'Nob2xkQhkKF190aGluX2Jvb2tfd2luZG93X3RpY2tzQg0KC19iaWRfb2Zmc2V0Qg0KC19hc2tf'
+    'b2Zmc2V0SgQIAxAESgQIBhAHSgQIBxAISgQICxAMSgQIDBANSgQIDRAOSgQIDhAPUgVjYXJyeV'
+    'IGb2Zmc2V0Ug5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSEG1vbWVudHVtX2VuYWJs'
+    'ZWRSD21vbWVudHVtX3dpbmRvd1IUbW9tZW50dW1fc2Vuc2l0aXZpdHk=');
 
 @$core.Deprecated('Use getFuturesLpStatusRequestDescriptor instead')
 const GetFuturesLpStatusRequest$json = {

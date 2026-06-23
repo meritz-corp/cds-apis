@@ -37,18 +37,12 @@ pub struct FuturesLp {
     /// 선물 tick 크기
     #[prost(double, tag="11")]
     pub tick_size: f64,
-    /// 자동 offset 조정 설정 (ETF LP의 EtfLpOffset 재사용)
-    #[prost(message, optional, tag="12")]
-    pub offset: ::core::option::Option<super::lp::EtfLpOffset>,
+    /// 순포지션 기반 basis 청산/회피 조정 (산출 delta + 설정)
+    #[prost(message, optional, tag="31")]
+    pub basis_adjustment: ::core::option::Option<FutureLpBasisAdjustment>,
     /// LP 활성화 여부
     #[prost(bool, tag="13")]
     pub enabled: bool,
-    /// 매수 호가 조정값
-    #[prost(double, optional, tag="14")]
-    pub bid_adjustment: ::core::option::Option<f64>,
-    /// 매도 호가 조정값
-    #[prost(double, optional, tag="15")]
-    pub ask_adjustment: ::core::option::Option<f64>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="19")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
@@ -84,6 +78,11 @@ pub struct FuturesLp {
     /// 기본 5. effective_reference_price 가 best 에서 (N-1) 틱 깊이까지를 윈도우로 본다.
     #[prost(int64, tag="28")]
     pub thin_book_window_ticks: i64,
+    /// 이론가(NAV) 기준 1호가를 띄우는 offset (틱 수). bid=아래로, ask=위로.
+    #[prost(double, tag="29")]
+    pub bid_offset: f64,
+    #[prost(double, tag="30")]
+    pub ask_offset: f64,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -105,6 +104,33 @@ pub struct FuturesLpQuantityLimit {
     /// 미설정(None) 시 순포지션 기반 차단 비활성
     #[prost(int64, optional, tag="4")]
     pub max_net_quantity: ::core::option::Option<i64>,
+}
+/// 선물 LP 호가 조정 설정. ETF LP의 EtfLpOffset 을 선물 전용으로 대체.
+/// 시간기반 조정 / NAV밴드(min/max) / offset 포지션조정은 제거하고,
+/// 순포지션(net) 기반 basis 청산(turnover)+회피(avoidance) 조정만 둔다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FutureLpBasisAdjustment {
+    /// 순포지션 기반 자동 산출 delta (basis 에 가산되는 값, 런타임).
+    /// 설정이 아니라 net 으로부터 산출됨 — Update 인입 시 무시, Status 노출용.
+    #[prost(double, tag="1")]
+    pub bid_adjustment: f64,
+    #[prost(double, tag="2")]
+    pub ask_adjustment: f64,
+    /// 순포지션 기반 basis 자동조정 on/off (청산+회피 동시, All 고정).
+    /// net = 당일 LP 누적 체결(매수-매도). delta = floor(|net|/한도) × Basis (무한 계단).
+    #[prost(bool, tag="3")]
+    pub basis_pos_adj_enabled: bool,
+    /// 청산 한도(계약) / 청산 Basis — 포지션 줄이는 쪽 호가 공격적
+    #[prost(int64, tag="4")]
+    pub turnover_limit: i64,
+    #[prost(double, tag="5")]
+    pub turnover_basis: f64,
+    /// 회피 한도(계약) / 회피 Basis — 포지션 늘리는 쪽 호가 보수적
+    #[prost(int64, tag="6")]
+    pub avoidance_limit: i64,
+    #[prost(double, tag="7")]
+    pub avoidance_basis: f64,
 }
 /// 선물 LP Pricing 정보 (호가 + ETF reference)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -164,21 +190,15 @@ pub struct FuturesLpStatus {
     /// LP 마진 — bid spread
     #[prost(double, tag="11")]
     pub bid_basis: f64,
-    /// 매수 호가 조정값
-    #[prost(double, optional, tag="12")]
-    pub bid_adjustment: ::core::option::Option<f64>,
-    /// 매도 호가 조정값
-    #[prost(double, optional, tag="13")]
-    pub ask_adjustment: ::core::option::Option<f64>,
     /// 매수 주문 수량 (계약 수)
     #[prost(int64, tag="19")]
     pub bid_quantity: i64,
     /// 매도 주문 수량 (계약 수)
     #[prost(int64, tag="20")]
     pub ask_quantity: i64,
-    /// 자동 offset 조정 설정 (런타임 상태 포함)
-    #[prost(message, optional, tag="21")]
-    pub offset: ::core::option::Option<super::lp::EtfLpOffset>,
+    /// 순포지션 기반 basis 청산/회피 조정 (delta + 설정, 런타임 포함)
+    #[prost(message, optional, tag="30")]
+    pub basis_adjustment: ::core::option::Option<FutureLpBasisAdjustment>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="22")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
@@ -194,6 +214,11 @@ pub struct FuturesLpStatus {
     /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
     #[prost(bool, optional, tag="27")]
     pub ask_enabled: ::core::option::Option<bool>,
+    /// 이론가(NAV) 기준 1호가를 띄우는 offset (틱 수). bid=아래로, ask=위로.
+    #[prost(double, tag="28")]
+    pub bid_offset: f64,
+    #[prost(double, tag="29")]
+    pub ask_offset: f64,
 }
 /// 선물 LP 상태 업데이트 (변경된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -220,21 +245,15 @@ pub struct FuturesLpStatusUpdate {
     /// LP 마진 — bid spread (변경 시에만 Some)
     #[prost(double, optional, tag="8")]
     pub bid_basis: ::core::option::Option<f64>,
-    /// 매수 호가 조정값 (변경 시에만 Some)
-    #[prost(double, optional, tag="9")]
-    pub bid_adjustment: ::core::option::Option<f64>,
-    /// 매도 호가 조정값 (변경 시에만 Some)
-    #[prost(double, optional, tag="10")]
-    pub ask_adjustment: ::core::option::Option<f64>,
     /// 매수 주문 수량 (변경 시에만 Some)
     #[prost(int64, optional, tag="11")]
     pub bid_quantity: ::core::option::Option<i64>,
     /// 매도 주문 수량 (변경 시에만 Some)
     #[prost(int64, optional, tag="12")]
     pub ask_quantity: ::core::option::Option<i64>,
-    /// 자동 offset 조정 설정 (변경 시에만 Some)
-    #[prost(message, optional, tag="13")]
-    pub offset: ::core::option::Option<super::lp::EtfLpOffset>,
+    /// 호가 조정 설정 (변경 시에만 Some)
+    #[prost(message, optional, tag="26")]
+    pub basis_adjustment: ::core::option::Option<FutureLpBasisAdjustment>,
     /// 매수/매도 수량 한도 (변경 시에만 Some)
     #[prost(message, optional, tag="19")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
@@ -250,6 +269,11 @@ pub struct FuturesLpStatusUpdate {
     /// 매도 호가 활성화 여부 (변경 시에만 Some)
     #[prost(bool, optional, tag="23")]
     pub ask_enabled: ::core::option::Option<bool>,
+    /// 이론가(NAV) 기준 1호가를 띄우는 offset (틱 수, 변경 시에만 Some). bid=아래로, ask=위로.
+    #[prost(double, optional, tag="24")]
+    pub bid_offset: ::core::option::Option<f64>,
+    #[prost(double, optional, tag="25")]
+    pub ask_offset: ::core::option::Option<f64>,
 }
 /// 선물 LP 체결 통계 (매수/매도 체결량 및 총금액)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -378,12 +402,6 @@ pub struct UpdateFuturesLpRequest {
     /// 매도 주문 수량
     #[prost(int64, optional, tag="5")]
     pub ask_quantity: ::core::option::Option<i64>,
-    /// 매수 호가 조정값
-    #[prost(double, optional, tag="6")]
-    pub bid_adjustment: ::core::option::Option<f64>,
-    /// 매도 호가 조정값
-    #[prost(double, optional, tag="7")]
-    pub ask_adjustment: ::core::option::Option<f64>,
     /// LP 마진 — bid spread
     #[prost(double, optional, tag="8")]
     pub bid_basis: ::core::option::Option<f64>,
@@ -393,9 +411,9 @@ pub struct UpdateFuturesLpRequest {
     /// 호가 깊이
     #[prost(uint32, optional, tag="10")]
     pub depth: ::core::option::Option<u32>,
-    /// 자동 offset 조정 설정
-    #[prost(message, optional, tag="11")]
-    pub offset: ::core::option::Option<super::lp::EtfLpOffset>,
+    /// 순포지션 기반 basis 청산/회피 조정 설정
+    #[prost(message, optional, tag="25")]
+    pub basis_adjustment: ::core::option::Option<FutureLpBasisAdjustment>,
     /// 매수/매도 수량 한도
     #[prost(message, optional, tag="15")]
     pub quantity_limit: ::core::option::Option<FuturesLpQuantityLimit>,
@@ -423,6 +441,11 @@ pub struct UpdateFuturesLpRequest {
     /// thin-book 보정 윈도우 틱 개수 (PATCH 시에만 명시). best 호가 기준 틱 개수. 기본 5.
     #[prost(int64, optional, tag="22")]
     pub thin_book_window_ticks: ::core::option::Option<i64>,
+    /// 이론가(NAV) 기준 1호가를 띄우는 offset (틱 수, PATCH 시에만 명시). bid=아래로, ask=위로.
+    #[prost(double, optional, tag="23")]
+    pub bid_offset: ::core::option::Option<f64>,
+    #[prost(double, optional, tag="24")]
+    pub ask_offset: ::core::option::Option<f64>,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
