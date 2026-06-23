@@ -1,0 +1,119 @@
+name: Codegen and Release
+
+# proto(packages/**) 변경을 푸시하면 CI가 Docker 안에서 buf generate를 돌려
+# 모든 언어(Rust/Go/Dart/OpenAPI) stub을 재생성하고, 버전 bump 후 커밋·퍼블리시한다.
+# 로컬에 Docker/make/buf가 없어도 proto만 고쳐 푸시하면 나머지를 CI가 처리한다.
+#
+# [실행 조건] 커밋 메시지에 반드시 [codegen] 키워드가 있어야 이 워크플로우가 돈다.
+#   예) git commit -m "feat(kdo): add xxx field [codegen]"
+#   - 키워드가 없으면 codegen 잡은 통째로 skip 된다 (아래 job 의 if 참고).
+#   - 동료가 로컬 컴파일로 push하는 커밋에는 키워드를 넣지 않는다 -> publish는 deploy-rust-crate.yaml 담당.
+#   - 여러 커밋을 한 번에 push할 땐 '마지막(최상단) 커밋' 메시지에 [codegen] 이 있어야 한다.
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'packages/**'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# 같은 브랜치에서 연속 푸시 시 이전 실행 취소
+concurrency:
+  group: codegen-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  codegen:
+    runs-on: ubuntu-latest
+    # 커밋 메시지에 [codegen] 가 있을 때만 실행한다.
+    # 동료가 로컬 컴파일로 push하는 커밋(키워드 없음)에서는 이 잡 전체가 skip되고,
+    # publish는 deploy-rust-crate.yaml가 담당한다.
+    # 수동 실행(workflow_dispatch)은 키워드와 무관하게 항상 허용.
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.head_commit.message, '[codegen]')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # make build 의 'docker compose run --rm grpc' 와 동일.
+      # Dockerfile(spacebarapis-buildenv)에 go/dart/openapi 플러그인이 모두 포함되어 있어
+      # Rust/Go/Dart/OpenAPI stub이 한 번에 생성된다.
+      - name: Generate stubs (all languages)
+        run: docker compose run --rm grpc
+
+      # make descriptor 와 동일
+      - name: Build descriptor
+        run: docker compose run --rm buf-lint buf build -o rust/descriptor.bin
+
+      # 멱등 가드: 생성 결과로 바뀐 파일이 있을 때만 이후 단계(bump/commit/publish)를 수행한다.
+      # 동료가 macOS에서 로컬 'make build'로 이미 stub을 생성·bump·커밋해 푸시한 경우,
+      # CI가 재생성해도 diff가 없으므로 여기서 멈춘다 -> 중복 bump/퍼블리시 방지.
+      # (그 경우 퍼블리시는 rust/** 변경을 받는 deploy-rust-crate.yaml가 담당)
+      - name: Detect changes
+        id: detect
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Generation produced changes -> will bump & publish"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes from generation (already generated locally) -> skip"
+          fi
+
+      # make bump 과 동일: rust/Cargo.toml patch 버전 +1
+      - name: Bump version
+        id: bump
+        if: steps.detect.outputs.changed == 'true'
+        working-directory: ./rust
+        run: |
+          OLD=$(grep '^version' Cargo.toml | head -1 | sed 's/.*"\(.*\)"/\1/')
+          MAJOR=$(echo "$OLD" | cut -d. -f1)
+          MINOR=$(echo "$OLD" | cut -d. -f2)
+          PATCH=$(echo "$OLD" | cut -d. -f3)
+          NEW="$MAJOR.$MINOR.$((PATCH + 1))"
+          sed -i "s/^version = \"$OLD\"/version = \"$NEW\"/" Cargo.toml
+          echo "Bumped $OLD -> $NEW"
+          echo "version=$NEW" >> "$GITHUB_OUTPUT"
+
+      - name: Install Rust
+        if: steps.detect.outputs.changed == 'true'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build and test
+        if: steps.detect.outputs.changed == 'true'
+        working-directory: ./rust
+        run: |
+          cargo build --release
+          cargo test
+
+      - name: Commit generated stubs
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --cached --quiet || git commit -m "feat: regenerate stubs (ids-apis ${{ steps.bump.outputs.version }})"
+          git push
+
+      - name: Publish to crates.io
+        if: steps.detect.outputs.changed == 'true'
+        working-directory: ./rust
+        run: cargo publish --token ${{ secrets.CARGO_TOKEN }}
+
+      - name: Tag and release
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          git tag "v${{ steps.bump.outputs.version }}"
+          git push origin --tags
+
+      - name: Create GitHub Release
+        if: steps.detect.outputs.changed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v${{ steps.bump.outputs.version }}"
+          name: "v${{ steps.bump.outputs.version }}"
+          body: "Auto-generated release (codegen from proto change)"
