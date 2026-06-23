@@ -356,13 +356,19 @@ const TargetNavQuantityImbalanceTrigger$json = {
   '2': [
     {'1': 'threshold_ratio', '3': 1, '4': 1, '5': 1, '10': 'thresholdRatio'},
     {'1': 'cooldown_ms', '3': 2, '4': 1, '5': 4, '10': 'cooldownMs'},
+    {'1': 'imbalance_symbol', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'imbalanceSymbol', '17': true},
+  ],
+  '8': [
+    {'1': '_imbalance_symbol'},
   ],
 };
 
 /// Descriptor for `TargetNavQuantityImbalanceTrigger`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List targetNavQuantityImbalanceTriggerDescriptor = $convert.base64Decode(
     'CiFUYXJnZXROYXZRdWFudGl0eUltYmFsYW5jZVRyaWdnZXISJwoPdGhyZXNob2xkX3JhdGlvGA'
-    'EgASgBUg50aHJlc2hvbGRSYXRpbxIfCgtjb29sZG93bl9tcxgCIAEoBFIKY29vbGRvd25Ncw==');
+    'EgASgBUg50aHJlc2hvbGRSYXRpbxIfCgtjb29sZG93bl9tcxgCIAEoBFIKY29vbGRvd25NcxIu'
+    'ChBpbWJhbGFuY2Vfc3ltYm9sGAMgASgJSABSD2ltYmFsYW5jZVN5bWJvbIgBAUITChFfaW1iYW'
+    'xhbmNlX3N5bWJvbA==');
 
 @$core.Deprecated('Use orderExecutionDescriptor instead')
 const OrderExecution$json = {

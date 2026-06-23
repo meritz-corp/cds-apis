@@ -408,6 +408,9 @@ message TargetNavQuantityImbalanceTrigger {
   double threshold_ratio = 1;
   // 트리거 후 재트리거까지 대기시간 (ms)
   uint64 cooldown_ms = 2;
+  // qty imbalance 판정 전용 심볼 (미지정=base.symbol 동일, 기존 동작).
+  // 지정 시 해당 호가(예: 현물)의 deficit_side 로 qty_gate 평가. price_gate(NAV 비교)와 주문 발주는 base 유지.
+  optional string imbalance_symbol = 3;
 }
 
 // ============================================================================

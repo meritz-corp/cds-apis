@@ -938,10 +938,12 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
   factory TargetNavQuantityImbalanceTrigger({
     $core.double? thresholdRatio,
     $fixnum.Int64? cooldownMs,
+    $core.String? imbalanceSymbol,
   }) {
     final result = create();
     if (thresholdRatio != null) result.thresholdRatio = thresholdRatio;
     if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    if (imbalanceSymbol != null) result.imbalanceSymbol = imbalanceSymbol;
     return result;
   }
 
@@ -953,6 +955,7 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TargetNavQuantityImbalanceTrigger', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'thresholdRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(3, _omitFieldNames ? '' : 'imbalanceSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -992,6 +995,17 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
   $core.bool hasCooldownMs() => $_has(1);
   @$pb.TagNumber(2)
   void clearCooldownMs() => $_clearField(2);
+
+  /// qty imbalance 판정 전용 심볼 (미지정=base.symbol 동일, 기존 동작).
+  /// 지정 시 해당 호가(예: 현물)의 deficit_side 로 qty_gate 평가. price_gate(NAV 비교)와 주문 발주는 base 유지.
+  @$pb.TagNumber(3)
+  $core.String get imbalanceSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set imbalanceSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasImbalanceSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearImbalanceSymbol() => $_clearField(3);
 }
 
 enum OrderExecution_Kind {

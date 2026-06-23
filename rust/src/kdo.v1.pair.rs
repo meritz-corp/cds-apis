@@ -167,7 +167,7 @@ pub struct Nav {
 
 /// 트리거 — 언제 발사할지. 실행(OrderExecution)과 독립적으로 조합한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TriggerCondition {
     #[prost(oneof="trigger_condition::Kind", tags="1, 2, 3")]
     pub kind: ::core::option::Option<trigger_condition::Kind>,
@@ -175,7 +175,7 @@ pub struct TriggerCondition {
 /// Nested message and enum types in `TriggerCondition`.
 pub mod trigger_condition {
     #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
         /// 양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
         #[prost(message, tag="1")]
@@ -214,7 +214,7 @@ pub struct BestMakeQuantityImbalanceTrigger {
 /// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
 /// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetNavQuantityImbalanceTrigger {
     /// 수량 불균형 임계 (BestMakeQuantityImbalanceTrigger 와 동일 판정식)
     #[prost(double, tag="1")]
@@ -222,6 +222,10 @@ pub struct TargetNavQuantityImbalanceTrigger {
     /// 트리거 후 재트리거까지 대기시간 (ms)
     #[prost(uint64, tag="2")]
     pub cooldown_ms: u64,
+    /// qty imbalance 판정 전용 심볼 (미지정=base.symbol 동일, 기존 동작).
+    /// 지정 시 해당 호가(예: 현물)의 deficit_side 로 qty_gate 평가. price_gate(NAV 비교)와 주문 발주는 base 유지.
+    #[prost(string, optional, tag="3")]
+    pub imbalance_symbol: ::core::option::Option<::prost::alloc::string::String>,
 }
 // ============================================================================
 // OrderExecution — 실행 축
