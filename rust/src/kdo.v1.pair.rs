@@ -545,6 +545,14 @@ pub struct StreamPairStatusRequest {
     #[prost(string, tag="1")]
     pub pair: ::prost::alloc::string::String,
 }
+/// StreamPairConfig 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamPairConfigRequest {
+    /// 리소스 이름 (pairs/{id})
+    #[prost(string, tag="1")]
+    pub pair: ::prost::alloc::string::String,
+}
 /// 페어 단일 슬롯 실시간 상태 스냅샷
 /// (태그 번호는 클라이언트 UI 계약으로 보존됨)
 #[allow(clippy::derive_partial_eq_without_eq)]

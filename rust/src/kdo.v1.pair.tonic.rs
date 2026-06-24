@@ -293,6 +293,31 @@ pub mod pair_service_client {
                 .insert(GrpcMethod::new("kdo.v1.pair.PairService", "StreamPairStatus"));
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn stream_pair_config(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamPairConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::Pair>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.pair.PairService/StreamPairConfig",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.pair.PairService", "StreamPairConfig"));
+            self.inner.server_streaming(req, path, codec).await
+        }
         pub async fn get_pair_statistics(
             &mut self,
             request: impl tonic::IntoRequest<super::GetPairStatisticsRequest>,
@@ -373,6 +398,19 @@ pub mod pair_service_server {
             request: tonic::Request<super::StreamPairStatusRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamPairStatusStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamPairConfig method.
+        type StreamPairConfigStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::Pair, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_pair_config(
+            &self,
+            request: tonic::Request<super::StreamPairConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamPairConfigStream>,
             tonic::Status,
         >;
         async fn get_pair_statistics(
@@ -853,6 +891,54 @@ pub mod pair_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StreamPairStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.pair.PairService/StreamPairConfig" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamPairConfigSvc<T: PairService>(pub Arc<T>);
+                    impl<
+                        T: PairService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamPairConfigRequest,
+                    > for StreamPairConfigSvc<T> {
+                        type Response = super::Pair;
+                        type ResponseStream = T::StreamPairConfigStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamPairConfigRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PairService>::stream_pair_config(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamPairConfigSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

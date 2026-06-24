@@ -172,6 +172,24 @@ extension type PairServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// Pair 설정 변경 실시간 스트리밍 (설정 변경 시마다 최신 Pair 전체를 push)
+  Stream<kdov1pair.Pair> streamPairConfig(
+    kdov1pair.StreamPairConfigRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PairService.streamPairConfig,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
   Future<kdov1pair.PairStatistics> getPairStatistics(
     kdov1pair.GetPairStatisticsRequest input, {

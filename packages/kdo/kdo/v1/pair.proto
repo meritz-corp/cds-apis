@@ -90,6 +90,14 @@ service PairService {
     option (google.api.method_signature) = "pair";
   }
 
+  // Pair 설정 변경 실시간 스트리밍 (설정 변경 시마다 최신 Pair 전체를 push)
+  rpc StreamPairConfig(StreamPairConfigRequest) returns (stream Pair) {
+    option (google.api.http) = {
+      get: "/v1/{pair=pairs/*}:streamConfig"
+    };
+    option (google.api.method_signature) = "pair";
+  }
+
   // Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
   rpc GetPairStatistics(GetPairStatisticsRequest) returns (PairStatistics) {
     option (google.api.http) = {
@@ -742,6 +750,16 @@ message ListPairExecutionLogsResponse {
 
 // StreamPairStatus 요청
 message StreamPairStatusRequest {
+  // 리소스 이름 (pairs/{id})
+  string pair = 1 [
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Pair"
+    }
+  ];
+}
+
+// StreamPairConfig 요청
+message StreamPairConfigRequest {
   // 리소스 이름 (pairs/{id})
   string pair = 1 [
     (google.api.resource_reference) = {

@@ -41,6 +41,8 @@ type PairServiceClient interface {
 	ListPairExecutionLogs(ctx context.Context, in *ListPairExecutionLogsRequest, opts ...grpc.CallOption) (*ListPairExecutionLogsResponse, error)
 	// Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)
 	StreamPairStatus(ctx context.Context, in *StreamPairStatusRequest, opts ...grpc.CallOption) (PairService_StreamPairStatusClient, error)
+	// Pair 설정 변경 실시간 스트리밍 (설정 변경 시마다 최신 Pair 전체를 push)
+	StreamPairConfig(ctx context.Context, in *StreamPairConfigRequest, opts ...grpc.CallOption) (PairService_StreamPairConfigClient, error)
 	// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
 	GetPairStatistics(ctx context.Context, in *GetPairStatisticsRequest, opts ...grpc.CallOption) (*PairStatistics, error)
 }
@@ -157,6 +159,38 @@ func (x *pairServiceStreamPairStatusClient) Recv() (*PairStatusUpdate, error) {
 	return m, nil
 }
 
+func (c *pairServiceClient) StreamPairConfig(ctx context.Context, in *StreamPairConfigRequest, opts ...grpc.CallOption) (PairService_StreamPairConfigClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PairService_ServiceDesc.Streams[1], "/kdo.v1.pair.PairService/StreamPairConfig", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &pairServiceStreamPairConfigClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PairService_StreamPairConfigClient interface {
+	Recv() (*Pair, error)
+	grpc.ClientStream
+}
+
+type pairServiceStreamPairConfigClient struct {
+	grpc.ClientStream
+}
+
+func (x *pairServiceStreamPairConfigClient) Recv() (*Pair, error) {
+	m := new(Pair)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *pairServiceClient) GetPairStatistics(ctx context.Context, in *GetPairStatisticsRequest, opts ...grpc.CallOption) (*PairStatistics, error) {
 	out := new(PairStatistics)
 	err := c.cc.Invoke(ctx, "/kdo.v1.pair.PairService/GetPairStatistics", in, out, opts...)
@@ -188,6 +222,8 @@ type PairServiceServer interface {
 	ListPairExecutionLogs(context.Context, *ListPairExecutionLogsRequest) (*ListPairExecutionLogsResponse, error)
 	// Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)
 	StreamPairStatus(*StreamPairStatusRequest, PairService_StreamPairStatusServer) error
+	// Pair 설정 변경 실시간 스트리밍 (설정 변경 시마다 최신 Pair 전체를 push)
+	StreamPairConfig(*StreamPairConfigRequest, PairService_StreamPairConfigServer) error
 	// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
 	GetPairStatistics(context.Context, *GetPairStatisticsRequest) (*PairStatistics, error)
 	mustEmbedUnimplementedPairServiceServer()
@@ -223,6 +259,9 @@ func (UnimplementedPairServiceServer) ListPairExecutionLogs(context.Context, *Li
 }
 func (UnimplementedPairServiceServer) StreamPairStatus(*StreamPairStatusRequest, PairService_StreamPairStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamPairStatus not implemented")
+}
+func (UnimplementedPairServiceServer) StreamPairConfig(*StreamPairConfigRequest, PairService_StreamPairConfigServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamPairConfig not implemented")
 }
 func (UnimplementedPairServiceServer) GetPairStatistics(context.Context, *GetPairStatisticsRequest) (*PairStatistics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPairStatistics not implemented")
@@ -405,6 +444,27 @@ func (x *pairServiceStreamPairStatusServer) Send(m *PairStatusUpdate) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _PairService_StreamPairConfig_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamPairConfigRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PairServiceServer).StreamPairConfig(m, &pairServiceStreamPairConfigServer{stream})
+}
+
+type PairService_StreamPairConfigServer interface {
+	Send(*Pair) error
+	grpc.ServerStream
+}
+
+type pairServiceStreamPairConfigServer struct {
+	grpc.ServerStream
+}
+
+func (x *pairServiceStreamPairConfigServer) Send(m *Pair) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _PairService_GetPairStatistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPairStatisticsRequest)
 	if err := dec(in); err != nil {
@@ -471,6 +531,11 @@ var PairService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamPairStatus",
 			Handler:       _PairService_StreamPairStatus_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamPairConfig",
+			Handler:       _PairService_StreamPairConfig_Handler,
 			ServerStreams: true,
 		},
 	},

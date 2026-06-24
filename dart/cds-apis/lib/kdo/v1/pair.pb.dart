@@ -2408,6 +2408,54 @@ class StreamPairStatusRequest extends $pb.GeneratedMessage {
   void clearPair() => $_clearField(1);
 }
 
+/// StreamPairConfig 요청
+class StreamPairConfigRequest extends $pb.GeneratedMessage {
+  factory StreamPairConfigRequest({
+    $core.String? pair,
+  }) {
+    final result = create();
+    if (pair != null) result.pair = pair;
+    return result;
+  }
+
+  StreamPairConfigRequest._();
+
+  factory StreamPairConfigRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamPairConfigRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamPairConfigRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pair')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamPairConfigRequest clone() => StreamPairConfigRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamPairConfigRequest copyWith(void Function(StreamPairConfigRequest) updates) => super.copyWith((message) => updates(message as StreamPairConfigRequest)) as StreamPairConfigRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamPairConfigRequest create() => StreamPairConfigRequest._();
+  @$core.override
+  StreamPairConfigRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamPairConfigRequest> createRepeated() => $pb.PbList<StreamPairConfigRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamPairConfigRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamPairConfigRequest>(create);
+  static StreamPairConfigRequest? _defaultInstance;
+
+  /// 리소스 이름 (pairs/{id})
+  @$pb.TagNumber(1)
+  $core.String get pair => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pair($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPair() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPair() => $_clearField(1);
+}
+
 /// 페어 단일 슬롯 실시간 상태 스냅샷
 /// (태그 번호는 클라이언트 UI 계약으로 보존됨)
 class FillStatus extends $pb.GeneratedMessage {

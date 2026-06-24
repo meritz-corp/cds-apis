@@ -461,6 +461,48 @@
         ]
       }
     },
+    "/v1/{pair}:streamConfig": {
+      "get": {
+        "summary": "Pair 설정 변경 실시간 스트리밍 (설정 변경 시마다 최신 Pair 전체를 push)",
+        "operationId": "PairService_StreamPairConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/pairPair"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of pairPair"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pair",
+            "description": "리소스 이름 (pairs/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairs/[^/]+"
+          }
+        ],
+        "tags": [
+          "PairService"
+        ]
+      }
+    },
     "/v1/{pair}:streamStatus": {
       "get": {
         "summary": "Pair 실시간 슬롯 상태 스트리밍 (카운터 변경 시마다 emit)",

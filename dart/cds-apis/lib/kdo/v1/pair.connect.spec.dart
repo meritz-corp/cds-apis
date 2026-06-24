@@ -84,6 +84,14 @@ abstract final class PairService {
     kdov1pair.PairStatusUpdate.new,
   );
 
+  /// Pair 설정 변경 실시간 스트리밍 (설정 변경 시마다 최신 Pair 전체를 push)
+  static const streamPairConfig = connect.Spec(
+    '/$name/StreamPairConfig',
+    connect.StreamType.server,
+    kdov1pair.StreamPairConfigRequest.new,
+    kdov1pair.Pair.new,
+  );
+
   /// Pair 누적 통계 스냅샷 조회 (인메모리 카운터 기반)
   static const getPairStatistics = connect.Spec(
     '/$name/GetPairStatistics',

@@ -716,6 +716,19 @@ final $typed_data.Uint8List streamPairStatusRequestDescriptor = $convert.base64D
     'ChdTdHJlYW1QYWlyU3RhdHVzUmVxdWVzdBItCgRwYWlyGAEgASgJQhn6QRYKFGtkby5jZHNhcG'
     'lzLnh5ei9QYWlyUgRwYWly');
 
+@$core.Deprecated('Use streamPairConfigRequestDescriptor instead')
+const StreamPairConfigRequest$json = {
+  '1': 'StreamPairConfigRequest',
+  '2': [
+    {'1': 'pair', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pair'},
+  ],
+};
+
+/// Descriptor for `StreamPairConfigRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamPairConfigRequestDescriptor = $convert.base64Decode(
+    'ChdTdHJlYW1QYWlyQ29uZmlnUmVxdWVzdBItCgRwYWlyGAEgASgJQhn6QRYKFGtkby5jZHNhcG'
+    'lzLnh5ei9QYWlyUgRwYWly');
+
 @$core.Deprecated('Use fillStatusDescriptor instead')
 const FillStatus$json = {
   '1': 'FillStatus',
