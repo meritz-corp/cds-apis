@@ -49,7 +49,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     $core.double? bidOffset,
     $core.double? askOffset,
     FutureLpBasisAdjustment? basisAdjustment,
-    $core.bool? hedgeEnabled,
+    $core.String? hedgeFundCode,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -76,7 +76,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
     if (basisAdjustment != null) result.basisAdjustment = basisAdjustment;
-    if (hedgeEnabled != null) result.hedgeEnabled = hedgeEnabled;
+    if (hedgeFundCode != null) result.hedgeFundCode = hedgeFundCode;
     return result;
   }
 
@@ -110,7 +110,7 @@ class FuturesLp extends $pb.GeneratedMessage {
     ..a<$core.double>(29, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
     ..a<$core.double>(30, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
     ..aOM<FutureLpBasisAdjustment>(31, _omitFieldNames ? '' : 'basisAdjustment', subBuilder: FutureLpBasisAdjustment.create)
-    ..aOB(32, _omitFieldNames ? '' : 'hedgeEnabled')
+    ..aOS(33, _omitFieldNames ? '' : 'hedgeFundCode')
     ..hasRequiredFields = false
   ;
 
@@ -382,16 +382,15 @@ class FuturesLp extends $pb.GeneratedMessage {
   @$pb.TagNumber(31)
   FutureLpBasisAdjustment ensureBasisAdjustment() => $_ensure(23);
 
-  /// 체결 즉시 ETF 헷지(내재화) 활성화. true 면 이 LP 의 선물 체결마다 reference ETF(etf_symbol)로
-  /// 즉시 헷지 주문을 낸다. false(기본)면 헷지 미발주.
-  @$pb.TagNumber(32)
-  $core.bool get hedgeEnabled => $_getBF(24);
-  @$pb.TagNumber(32)
-  set hedgeEnabled($core.bool value) => $_setBool(24, value);
-  @$pb.TagNumber(32)
-  $core.bool hasHedgeEnabled() => $_has(24);
-  @$pb.TagNumber(32)
-  void clearHedgeEnabled() => $_clearField(32);
+  /// 헷지 주문이 나갈 펀드 코드. 빈 문자열이면 헷지 미발주.
+  @$pb.TagNumber(33)
+  $core.String get hedgeFundCode => $_getSZ(24);
+  @$pb.TagNumber(33)
+  set hedgeFundCode($core.String value) => $_setString(24, value);
+  @$pb.TagNumber(33)
+  $core.bool hasHedgeFundCode() => $_has(24);
+  @$pb.TagNumber(33)
+  void clearHedgeFundCode() => $_clearField(33);
 }
 
 /// 매수/매도 수량 한도
@@ -1805,7 +1804,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.double? bidOffset,
     $core.double? askOffset,
     FutureLpBasisAdjustment? basisAdjustment,
-    $core.bool? hedgeEnabled,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1826,7 +1824,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
     if (basisAdjustment != null) result.basisAdjustment = basisAdjustment;
-    if (hedgeEnabled != null) result.hedgeEnabled = hedgeEnabled;
     return result;
   }
 
@@ -1854,7 +1851,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(23, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
     ..a<$core.double>(24, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
     ..aOM<FutureLpBasisAdjustment>(25, _omitFieldNames ? '' : 'basisAdjustment', subBuilder: FutureLpBasisAdjustment.create)
-    ..aOB(26, _omitFieldNames ? '' : 'hedgeEnabled')
     ..hasRequiredFields = false
   ;
 
@@ -2060,16 +2056,6 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   void clearBasisAdjustment() => $_clearField(25);
   @$pb.TagNumber(25)
   FutureLpBasisAdjustment ensureBasisAdjustment() => $_ensure(17);
-
-  /// 체결 즉시 ETF 헷지(내재화) 활성화 (PATCH 시에만 명시). true = 헷지 주문 활성. false = 미발주.
-  @$pb.TagNumber(26)
-  $core.bool get hedgeEnabled => $_getBF(18);
-  @$pb.TagNumber(26)
-  set hedgeEnabled($core.bool value) => $_setBool(18, value);
-  @$pb.TagNumber(26)
-  $core.bool hasHedgeEnabled() => $_has(18);
-  @$pb.TagNumber(26)
-  void clearHedgeEnabled() => $_clearField(26);
 }
 
 /// GetFuturesLpStatus

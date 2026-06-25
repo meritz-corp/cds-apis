@@ -98,8 +98,8 @@ service FuturesLpService {
 
 // 선물 LP 설정
 message FuturesLp {
-  reserved 5, 12, 14, 15, 16, 17, 18;
-  reserved "carry", "offset", "bid_adjustment", "ask_adjustment", "momentum_enabled", "momentum_window", "momentum_sensitivity";
+  reserved 5, 12, 14, 15, 16, 17, 18, 32;
+  reserved "carry", "offset", "bid_adjustment", "ask_adjustment", "momentum_enabled", "momentum_window", "momentum_sensitivity", "hedge_enabled";
 
   // 선물 종목 심볼
   string future_symbol = 1;
@@ -177,9 +177,8 @@ message FuturesLp {
   double bid_offset = 29;
   double ask_offset = 30;
 
-  // 체결 즉시 ETF 헷지(내재화) 활성화. true 면 이 LP 의 선물 체결마다 reference ETF(etf_symbol)로
-  // 즉시 헷지 주문을 낸다. false(기본)면 헷지 미발주.
-  bool hedge_enabled = 32;
+  // 헷지 주문이 나갈 펀드 코드. 빈 문자열이면 헷지 미발주.
+  string hedge_fund_code = 33;
 }
 
 // 매수/매도 수량 한도
@@ -474,8 +473,8 @@ message ListFuturesLpsResponse {
 
 // UpdateFuturesLp
 message UpdateFuturesLpRequest {
-  reserved 3, 6, 7, 11, 12, 13, 14;
-  reserved "carry", "offset", "bid_adjustment", "ask_adjustment", "momentum_enabled", "momentum_window", "momentum_sensitivity";
+  reserved 3, 6, 7, 11, 12, 13, 14, 26;
+  reserved "carry", "offset", "bid_adjustment", "ask_adjustment", "momentum_enabled", "momentum_window", "momentum_sensitivity", "hedge_enabled";
 
   // 선물 종목 심볼
   string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
@@ -533,9 +532,6 @@ message UpdateFuturesLpRequest {
   // 이론가(NAV) 기준 1호가를 띄우는 offset (틱 수, PATCH 시에만 명시). bid=아래로, ask=위로.
   optional double bid_offset = 23;
   optional double ask_offset = 24;
-
-  // 체결 즉시 ETF 헷지(내재화) 활성화 (PATCH 시에만 명시). true = 헷지 주문 활성. false = 미발주.
-  optional bool hedge_enabled = 26;
 }
 
 // GetFuturesLpStatus

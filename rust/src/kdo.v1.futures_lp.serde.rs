@@ -384,7 +384,7 @@ impl serde::Serialize for FuturesLp {
             struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
         }
         if true {
-            struct_ser.serialize_field("hedge_enabled", &self.hedge_enabled)?;
+            struct_ser.serialize_field("hedge_fund_code", &self.hedge_fund_code)?;
         }
         struct_ser.end()
     }
@@ -441,8 +441,8 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             "bidOffset",
             "ask_offset",
             "askOffset",
-            "hedge_enabled",
-            "hedgeEnabled",
+            "hedge_fund_code",
+            "hedgeFundCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -471,7 +471,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
             ThinBookWindowTicks,
             BidOffset,
             AskOffset,
-            HedgeEnabled,
+            HedgeFundCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -518,7 +518,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                             "thinBookWindowTicks" | "thin_book_window_ticks" => Ok(GeneratedField::ThinBookWindowTicks),
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
-                            "hedgeEnabled" | "hedge_enabled" => Ok(GeneratedField::HedgeEnabled),
+                            "hedgeFundCode" | "hedge_fund_code" => Ok(GeneratedField::HedgeFundCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -562,7 +562,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                 let mut thin_book_window_ticks__ = None;
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
-                let mut hedge_enabled__ = None;
+                let mut hedge_fund_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -735,11 +735,11 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::HedgeEnabled => {
-                            if hedge_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeEnabled"));
+                        GeneratedField::HedgeFundCode => {
+                            if hedge_fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeFundCode"));
                             }
-                            hedge_enabled__ = Some(map_.next_value()?);
+                            hedge_fund_code__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -771,7 +771,7 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
                     thin_book_window_ticks: thin_book_window_ticks__.unwrap_or_default(),
                     bid_offset: bid_offset__.unwrap_or_default(),
                     ask_offset: ask_offset__.unwrap_or_default(),
-                    hedge_enabled: hedge_enabled__.unwrap_or_default(),
+                    hedge_fund_code: hedge_fund_code__.unwrap_or_default(),
                 })
             }
         }
@@ -4227,9 +4227,6 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -4293,9 +4290,6 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.ask_offset.as_ref() {
             struct_ser.serialize_field("ask_offset", v)?;
         }
-        if let Some(v) = self.hedge_enabled.as_ref() {
-            struct_ser.serialize_field("hedge_enabled", v)?;
-        }
         struct_ser.end()
     }
 }
@@ -4341,8 +4335,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "bidOffset",
             "ask_offset",
             "askOffset",
-            "hedge_enabled",
-            "hedgeEnabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4365,7 +4357,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             ThinBookWindowTicks,
             BidOffset,
             AskOffset,
-            HedgeEnabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4406,7 +4397,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "thinBookWindowTicks" | "thin_book_window_ticks" => Ok(GeneratedField::ThinBookWindowTicks),
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
-                            "hedgeEnabled" | "hedge_enabled" => Ok(GeneratedField::HedgeEnabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4444,7 +4434,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut thin_book_window_ticks__ = None;
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
-                let mut hedge_enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -4575,12 +4564,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
-                        GeneratedField::HedgeEnabled => {
-                            if hedge_enabled__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeEnabled"));
-                            }
-                            hedge_enabled__ = map_.next_value()?;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4605,7 +4588,6 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     thin_book_window_ticks: thin_book_window_ticks__,
                     bid_offset: bid_offset__,
                     ask_offset: ask_offset__,
-                    hedge_enabled: hedge_enabled__,
                 })
             }
         }
