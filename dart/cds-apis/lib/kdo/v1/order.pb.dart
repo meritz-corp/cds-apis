@@ -293,21 +293,11 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? originalOrderId,
     $core.String? symbol,
     $core.String? price,
-    $2.OrderSide? side,
-    $core.bool? isLp,
-    QuoteType? quoteType,
-    $core.String? fundCode,
-    $2.OrderConditionType? orderCondition,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
     if (symbol != null) result.symbol = symbol;
     if (price != null) result.price = price;
-    if (side != null) result.side = side;
-    if (isLp != null) result.isLp = isLp;
-    if (quoteType != null) result.quoteType = quoteType;
-    if (fundCode != null) result.fundCode = fundCode;
-    if (orderCondition != null) result.orderCondition = orderCondition;
     return result;
   }
 
@@ -320,11 +310,6 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
     ..aOS(5, _omitFieldNames ? '' : 'price')
-    ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
-    ..aOB(7, _omitFieldNames ? '' : 'isLp')
-    ..e<QuoteType>(8, _omitFieldNames ? '' : 'quoteType', $pb.PbFieldType.OE, defaultOrMaker: QuoteType.QUOTE_TYPE_UNSPECIFIED, valueOf: QuoteType.valueOf, enumValues: QuoteType.values)
-    ..aOS(9, _omitFieldNames ? '' : 'fundCode')
-    ..e<$2.OrderConditionType>(10, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $2.OrderConditionType.valueOf, enumValues: $2.OrderConditionType.values)
     ..hasRequiredFields = false
   ;
 
@@ -374,56 +359,6 @@ class AmendOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasPrice() => $_has(2);
   @$pb.TagNumber(5)
   void clearPrice() => $_clearField(5);
-
-  /// 매수/매도
-  @$pb.TagNumber(6)
-  $2.OrderSide get side => $_getN(3);
-  @$pb.TagNumber(6)
-  set side($2.OrderSide value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasSide() => $_has(3);
-  @$pb.TagNumber(6)
-  void clearSide() => $_clearField(6);
-
-  /// 유동성 공급자 여부
-  @$pb.TagNumber(7)
-  $core.bool get isLp => $_getBF(4);
-  @$pb.TagNumber(7)
-  set isLp($core.bool value) => $_setBool(4, value);
-  @$pb.TagNumber(7)
-  $core.bool hasIsLp() => $_has(4);
-  @$pb.TagNumber(7)
-  void clearIsLp() => $_clearField(7);
-
-  /// 주문 유형 (기본: LIMIT)
-  @$pb.TagNumber(8)
-  QuoteType get quoteType => $_getN(5);
-  @$pb.TagNumber(8)
-  set quoteType(QuoteType value) => $_setField(8, value);
-  @$pb.TagNumber(8)
-  $core.bool hasQuoteType() => $_has(5);
-  @$pb.TagNumber(8)
-  void clearQuoteType() => $_clearField(8);
-
-  /// 펀드 코드 (필수)
-  @$pb.TagNumber(9)
-  $core.String get fundCode => $_getSZ(6);
-  @$pb.TagNumber(9)
-  set fundCode($core.String value) => $_setString(6, value);
-  @$pb.TagNumber(9)
-  $core.bool hasFundCode() => $_has(6);
-  @$pb.TagNumber(9)
-  void clearFundCode() => $_clearField(9);
-
-  /// 호가조건 (미지정 시 FAS, 일반 지정가)
-  @$pb.TagNumber(10)
-  $2.OrderConditionType get orderCondition => $_getN(7);
-  @$pb.TagNumber(10)
-  set orderCondition($2.OrderConditionType value) => $_setField(10, value);
-  @$pb.TagNumber(10)
-  $core.bool hasOrderCondition() => $_has(7);
-  @$pb.TagNumber(10)
-  void clearOrderCondition() => $_clearField(10);
 }
 
 class AmendOrderResponse extends $pb.GeneratedMessage {
@@ -516,14 +451,10 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   factory CancelOrderRequest({
     $fixnum.Int64? originalOrderId,
     $core.String? symbol,
-    $core.String? fundCode,
-    $2.OrderSide? side,
   }) {
     final result = create();
     if (originalOrderId != null) result.originalOrderId = originalOrderId;
     if (symbol != null) result.symbol = symbol;
-    if (fundCode != null) result.fundCode = fundCode;
-    if (side != null) result.side = side;
     return result;
   }
 
@@ -535,8 +466,6 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(3, _omitFieldNames ? '' : 'symbol')
-    ..aOS(4, _omitFieldNames ? '' : 'fundCode')
-    ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -576,26 +505,6 @@ class CancelOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(1);
   @$pb.TagNumber(3)
   void clearSymbol() => $_clearField(3);
-
-  /// 펀드 코드 (필수)
-  @$pb.TagNumber(4)
-  $core.String get fundCode => $_getSZ(2);
-  @$pb.TagNumber(4)
-  set fundCode($core.String value) => $_setString(2, value);
-  @$pb.TagNumber(4)
-  $core.bool hasFundCode() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearFundCode() => $_clearField(4);
-
-  /// 매수/매도
-  @$pb.TagNumber(6)
-  $2.OrderSide get side => $_getN(3);
-  @$pb.TagNumber(6)
-  set side($2.OrderSide value) => $_setField(6, value);
-  @$pb.TagNumber(6)
-  $core.bool hasSide() => $_has(3);
-  @$pb.TagNumber(6)
-  void clearSide() => $_clearField(6);
 }
 
 class CancelOrderResponse extends $pb.GeneratedMessage {

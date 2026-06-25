@@ -156,32 +156,26 @@ const AmendOrderRequest$json = {
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'price', '3': 5, '4': 1, '5': 9, '8': {}, '10': 'price'},
-    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
-    {'1': 'is_lp', '3': 7, '4': 1, '5': 8, '8': {}, '10': 'isLp'},
-    {'1': 'quote_type', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.order.QuoteType', '8': {}, '10': 'quoteType'},
-    {'1': 'fund_code', '3': 9, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-    {'1': 'order_condition', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderConditionType', '9': 0, '10': 'orderCondition', '17': true},
-  ],
-  '8': [
-    {'1': '_order_condition'},
   ],
   '9': [
     {'1': 2, '2': 3},
     {'1': 4, '2': 5},
+    {'1': 6, '2': 7},
+    {'1': 7, '2': 8},
+    {'1': 8, '2': 9},
+    {'1': 9, '2': 10},
+    {'1': 10, '2': 11},
   ],
-  '10': ['quantity'],
+  '10': ['quantity', 'side', 'is_lp', 'quote_type', 'fund_code', 'order_condition'],
 };
 
 /// Descriptor for `AmendOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List amendOrderRequestDescriptor = $convert.base64Decode(
     'ChFBbWVuZE9yZGVyUmVxdWVzdBIwChFvcmlnaW5hbF9vcmRlcl9pZBgBIAEoBEIE4kEBAlIPb3'
     'JpZ2luYWxPcmRlcklkEhwKBnN5bWJvbBgDIAEoCUIE4kEBAlIGc3ltYm9sEhoKBXByaWNlGAUg'
-    'ASgJQgTiQQECUgVwcmljZRIyCgRzaWRlGAYgASgOMhgua2RvLnYxLmNvbW1vbi5PcmRlclNpZG'
-    'VCBOJBAQJSBHNpZGUSGQoFaXNfbHAYByABKAhCBOJBAQJSBGlzTHASPAoKcXVvdGVfdHlwZRgI'
-    'IAEoDjIXLmtkby52MS5vcmRlci5RdW90ZVR5cGVCBOJBAQJSCXF1b3RlVHlwZRIhCglmdW5kX2'
-    'NvZGUYCSABKAlCBOJBAQJSCGZ1bmRDb2RlEk8KD29yZGVyX2NvbmRpdGlvbhgKIAEoDjIhLmtk'
-    'by52MS5jb21tb24uT3JkZXJDb25kaXRpb25UeXBlSABSDm9yZGVyQ29uZGl0aW9uiAEBQhIKEF'
-    '9vcmRlcl9jb25kaXRpb25KBAgCEANKBAgEEAVSCHF1YW50aXR5');
+    'ASgJQgTiQQECUgVwcmljZUoECAIQA0oECAQQBUoECAYQB0oECAcQCEoECAgQCUoECAkQCkoECA'
+    'oQC1IIcXVhbnRpdHlSBHNpZGVSBWlzX2xwUgpxdW90ZV90eXBlUglmdW5kX2NvZGVSD29yZGVy'
+    'X2NvbmRpdGlvbg==');
 
 @$core.Deprecated('Use amendOrderResponseDescriptor instead')
 const AmendOrderResponse$json = {
@@ -207,20 +201,20 @@ const CancelOrderRequest$json = {
   '2': [
     {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '8': {}, '10': 'originalOrderId'},
     {'1': 'symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
-    {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-    {'1': 'side', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
   ],
   '9': [
     {'1': 2, '2': 3},
+    {'1': 4, '2': 5},
+    {'1': 6, '2': 7},
   ],
+  '10': ['fund_code', 'side'],
 };
 
 /// Descriptor for `CancelOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cancelOrderRequestDescriptor = $convert.base64Decode(
     'ChJDYW5jZWxPcmRlclJlcXVlc3QSMAoRb3JpZ2luYWxfb3JkZXJfaWQYASABKARCBOJBAQJSD2'
-    '9yaWdpbmFsT3JkZXJJZBIcCgZzeW1ib2wYAyABKAlCBOJBAQJSBnN5bWJvbBIhCglmdW5kX2Nv'
-    'ZGUYBCABKAlCBOJBAQJSCGZ1bmRDb2RlEjIKBHNpZGUYBiABKA4yGC5rZG8udjEuY29tbW9uLk'
-    '9yZGVyU2lkZUIE4kEBAlIEc2lkZUoECAIQAw==');
+    '9yaWdpbmFsT3JkZXJJZBIcCgZzeW1ib2wYAyABKAlCBOJBAQJSBnN5bWJvbEoECAIQA0oECAQQ'
+    'BUoECAYQB1IJZnVuZF9jb2RlUgRzaWRl');
 
 @$core.Deprecated('Use cancelOrderResponseDescriptor instead')
 const CancelOrderResponse$json = {

@@ -90,35 +90,11 @@
                 "price": {
                   "type": "string",
                   "title": "정정 가격"
-                },
-                "side": {
-                  "$ref": "#/definitions/commonOrderSide",
-                  "title": "매수/매도"
-                },
-                "isLp": {
-                  "type": "boolean",
-                  "title": "유동성 공급자 여부"
-                },
-                "quoteType": {
-                  "$ref": "#/definitions/orderQuoteType",
-                  "title": "주문 유형 (기본: LIMIT)"
-                },
-                "fundCode": {
-                  "type": "string",
-                  "title": "펀드 코드 (필수)"
-                },
-                "orderCondition": {
-                  "$ref": "#/definitions/commonOrderConditionType",
-                  "title": "호가조건 (미지정 시 FAS, 일반 지정가)"
                 }
               },
               "required": [
                 "symbol",
-                "price",
-                "side",
-                "isLp",
-                "quoteType",
-                "fundCode"
+                "price"
               ]
             }
           }
@@ -165,20 +141,10 @@
                 "symbol": {
                   "type": "string",
                   "title": "종목 코드"
-                },
-                "fundCode": {
-                  "type": "string",
-                  "title": "펀드 코드 (필수)"
-                },
-                "side": {
-                  "$ref": "#/definitions/commonOrderSide",
-                  "title": "매수/매도"
                 }
               },
               "required": [
-                "symbol",
-                "fundCode",
-                "side"
+                "symbol"
               ]
             }
           }

@@ -159,20 +159,9 @@ message AmendOrderRequest {
   // 정정 가격
   string price = 5 [(google.api.field_behavior) = REQUIRED];
 
-  // 매수/매도
-  kdo.v1.common.OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
-
-  // 유동성 공급자 여부
-  bool is_lp = 7  [(google.api.field_behavior) = REQUIRED];
-
-  // 주문 유형 (기본: LIMIT)
-  QuoteType quote_type = 8 [(google.api.field_behavior) = REQUIRED];
-
-  // 펀드 코드 (필수)
-  string fund_code = 9 [(google.api.field_behavior) = REQUIRED];
-
-  // 호가조건 (미지정 시 FAS, 일반 지정가)
-  optional kdo.v1.common.OrderConditionType order_condition = 10;
+  // 6,7,8,9,10: 서버가 원주문(OrderBook)에서 직접 도출하므로 클라 입력 불필요 — 삭제됨, 재사용 금지
+  reserved 6, 7, 8, 9, 10;
+  reserved "side", "is_lp", "quote_type", "fund_code", "order_condition";
 }
 
 message AmendOrderResponse {
@@ -201,11 +190,9 @@ message CancelOrderRequest {
   // 종목 코드
   string symbol = 3 [(google.api.field_behavior) = REQUIRED];
 
-  // 펀드 코드 (필수)
-  string fund_code = 4 [(google.api.field_behavior) = REQUIRED];
-
-  // 매수/매도
-  kdo.v1.common.OrderSide side = 6 [(google.api.field_behavior) = REQUIRED];
+  // 4,6: 서버가 원주문(OrderBook)에서 직접 도출하므로 클라 입력 불필요 — 삭제됨, 재사용 금지
+  reserved 4, 6;
+  reserved "fund_code", "side";
 }
 
 message CancelOrderResponse {
