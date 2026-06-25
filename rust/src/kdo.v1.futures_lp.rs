@@ -83,6 +83,10 @@ pub struct FuturesLp {
     pub bid_offset: f64,
     #[prost(double, tag="30")]
     pub ask_offset: f64,
+    /// 체결 즉시 ETF 헷지(내재화) 활성화. true 면 이 LP 의 선물 체결마다 reference ETF(etf_symbol)로
+    /// 즉시 헷지 주문을 낸다. false(기본)면 헷지 미발주.
+    #[prost(bool, tag="32")]
+    pub hedge_enabled: bool,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -446,6 +450,9 @@ pub struct UpdateFuturesLpRequest {
     pub bid_offset: ::core::option::Option<f64>,
     #[prost(double, optional, tag="24")]
     pub ask_offset: ::core::option::Option<f64>,
+    /// 체결 즉시 ETF 헷지(내재화) 활성화 (PATCH 시에만 명시). true = 헷지 주문 활성. false = 미발주.
+    #[prost(bool, optional, tag="26")]
+    pub hedge_enabled: ::core::option::Option<bool>,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -176,6 +176,10 @@ message FuturesLp {
   // 이론가(NAV) 기준 1호가를 띄우는 offset (틱 수). bid=아래로, ask=위로.
   double bid_offset = 29;
   double ask_offset = 30;
+
+  // 체결 즉시 ETF 헷지(내재화) 활성화. true 면 이 LP 의 선물 체결마다 reference ETF(etf_symbol)로
+  // 즉시 헷지 주문을 낸다. false(기본)면 헷지 미발주.
+  bool hedge_enabled = 32;
 }
 
 // 매수/매도 수량 한도
@@ -529,6 +533,9 @@ message UpdateFuturesLpRequest {
   // 이론가(NAV) 기준 1호가를 띄우는 offset (틱 수, PATCH 시에만 명시). bid=아래로, ask=위로.
   optional double bid_offset = 23;
   optional double ask_offset = 24;
+
+  // 체결 즉시 ETF 헷지(내재화) 활성화 (PATCH 시에만 명시). true = 헷지 주문 활성. false = 미발주.
+  optional bool hedge_enabled = 26;
 }
 
 // GetFuturesLpStatus
