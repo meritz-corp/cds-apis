@@ -4605,6 +4605,9 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.UpdateFuturesLpRequest", len)?;
         if true {
             struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
@@ -4668,6 +4671,9 @@ impl serde::Serialize for UpdateFuturesLpRequest {
         if let Some(v) = self.ask_offset.as_ref() {
             struct_ser.serialize_field("ask_offset", v)?;
         }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
         struct_ser.end()
     }
 }
@@ -4713,6 +4719,8 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             "bidOffset",
             "ask_offset",
             "askOffset",
+            "etf_symbol",
+            "etfSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4735,6 +4743,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
             ThinBookWindowTicks,
             BidOffset,
             AskOffset,
+            EtfSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4775,6 +4784,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                             "thinBookWindowTicks" | "thin_book_window_ticks" => Ok(GeneratedField::ThinBookWindowTicks),
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4812,6 +4822,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                 let mut thin_book_window_ticks__ = None;
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
+                let mut etf_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FutureSymbol => {
@@ -4942,6 +4953,12 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4966,6 +4983,7 @@ impl<'de> serde::Deserialize<'de> for UpdateFuturesLpRequest {
                     thin_book_window_ticks: thin_book_window_ticks__,
                     bid_offset: bid_offset__,
                     ask_offset: ask_offset__,
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
                 })
             }
         }

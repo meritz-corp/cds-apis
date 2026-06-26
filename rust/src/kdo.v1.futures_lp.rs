@@ -449,6 +449,9 @@ pub struct UpdateFuturesLpRequest {
     pub bid_offset: ::core::option::Option<f64>,
     #[prost(double, optional, tag="24")]
     pub ask_offset: ::core::option::Option<f64>,
+    /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+    #[prost(string, tag="27")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 /// GetFuturesLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

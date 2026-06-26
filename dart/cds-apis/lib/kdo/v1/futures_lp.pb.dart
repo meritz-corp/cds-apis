@@ -1804,6 +1804,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     $core.double? bidOffset,
     $core.double? askOffset,
     FutureLpBasisAdjustment? basisAdjustment,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (futureSymbol != null) result.futureSymbol = futureSymbol;
@@ -1824,6 +1825,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
     if (basisAdjustment != null) result.basisAdjustment = basisAdjustment;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -1851,6 +1853,7 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
     ..a<$core.double>(23, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
     ..a<$core.double>(24, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
     ..aOM<FutureLpBasisAdjustment>(25, _omitFieldNames ? '' : 'basisAdjustment', subBuilder: FutureLpBasisAdjustment.create)
+    ..aOS(27, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -2056,6 +2059,16 @@ class UpdateFuturesLpRequest extends $pb.GeneratedMessage {
   void clearBasisAdjustment() => $_clearField(25);
   @$pb.TagNumber(25)
   FutureLpBasisAdjustment ensureBasisAdjustment() => $_ensure(17);
+
+  /// ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
+  @$pb.TagNumber(27)
+  $core.String get etfSymbol => $_getSZ(18);
+  @$pb.TagNumber(27)
+  set etfSymbol($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(27)
+  $core.bool hasEtfSymbol() => $_has(18);
+  @$pb.TagNumber(27)
+  void clearEtfSymbol() => $_clearField(27);
 }
 
 /// GetFuturesLpStatus

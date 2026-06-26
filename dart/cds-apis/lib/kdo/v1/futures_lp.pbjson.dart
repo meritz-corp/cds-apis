@@ -461,6 +461,7 @@ const UpdateFuturesLpRequest$json = {
     {'1': 'thin_book_window_ticks', '3': 22, '4': 1, '5': 3, '9': 13, '10': 'thinBookWindowTicks', '17': true},
     {'1': 'bid_offset', '3': 23, '4': 1, '5': 1, '9': 14, '10': 'bidOffset', '17': true},
     {'1': 'ask_offset', '3': 24, '4': 1, '5': 1, '9': 15, '10': 'askOffset', '17': true},
+    {'1': 'etf_symbol', '3': 27, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
   '8': [
     {'1': '_bid_quantity'},
@@ -511,16 +512,16 @@ final $typed_data.Uint8List updateFuturesLpRequestDescriptor = $convert.base64De
     '9va19xdWFudGl0eV90aHJlc2hvbGQYFSABKANIDFIZdGhpbkJvb2tRdWFudGl0eVRocmVzaG9s'
     'ZIgBARI4ChZ0aGluX2Jvb2tfd2luZG93X3RpY2tzGBYgASgDSA1SE3RoaW5Cb29rV2luZG93VG'
     'lja3OIAQESIgoKYmlkX29mZnNldBgXIAEoAUgOUgliaWRPZmZzZXSIAQESIgoKYXNrX29mZnNl'
-    'dBgYIAEoAUgPUglhc2tPZmZzZXSIAQFCDwoNX2JpZF9xdWFudGl0eUIPCg1fYXNrX3F1YW50aX'
-    'R5QgwKCl9iaWRfYmFzaXNCDAoKX2Fza19iYXNpc0IICgZfZGVwdGhCEwoRX2Jhc2lzX2FkanVz'
-    'dG1lbnRCEQoPX3F1YW50aXR5X2xpbWl0Qg4KDF9ldGZfcHJpY2luZ0IOCgxfYmlkX2VuYWJsZW'
-    'RCDgoMX2Fza19lbmFibGVkQiMKIV9pbWJhbGFuY2VfY2FuY2VsX3RocmVzaG9sZF9yYXRpb0Ib'
-    'ChlfaW1iYWxhbmNlX2NhbmNlbF9lbmFibGVkQh8KHV90aGluX2Jvb2tfcXVhbnRpdHlfdGhyZX'
-    'Nob2xkQhkKF190aGluX2Jvb2tfd2luZG93X3RpY2tzQg0KC19iaWRfb2Zmc2V0Qg0KC19hc2tf'
-    'b2Zmc2V0SgQIAxAESgQIBhAHSgQIBxAISgQICxAMSgQIDBANSgQIDRAOSgQIDhAPSgQIGhAbUg'
-    'VjYXJyeVIGb2Zmc2V0Ug5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSEG1vbWVudHVt'
-    'X2VuYWJsZWRSD21vbWVudHVtX3dpbmRvd1IUbW9tZW50dW1fc2Vuc2l0aXZpdHlSDWhlZGdlX2'
-    'VuYWJsZWQ=');
+    'dBgYIAEoAUgPUglhc2tPZmZzZXSIAQESHQoKZXRmX3N5bWJvbBgbIAEoCVIJZXRmU3ltYm9sQg'
+    '8KDV9iaWRfcXVhbnRpdHlCDwoNX2Fza19xdWFudGl0eUIMCgpfYmlkX2Jhc2lzQgwKCl9hc2tf'
+    'YmFzaXNCCAoGX2RlcHRoQhMKEV9iYXNpc19hZGp1c3RtZW50QhEKD19xdWFudGl0eV9saW1pdE'
+    'IOCgxfZXRmX3ByaWNpbmdCDgoMX2JpZF9lbmFibGVkQg4KDF9hc2tfZW5hYmxlZEIjCiFfaW1i'
+    'YWxhbmNlX2NhbmNlbF90aHJlc2hvbGRfcmF0aW9CGwoZX2ltYmFsYW5jZV9jYW5jZWxfZW5hYm'
+    'xlZEIfCh1fdGhpbl9ib29rX3F1YW50aXR5X3RocmVzaG9sZEIZChdfdGhpbl9ib29rX3dpbmRv'
+    'd190aWNrc0INCgtfYmlkX29mZnNldEINCgtfYXNrX29mZnNldEoECAMQBEoECAYQB0oECAcQCE'
+    'oECAsQDEoECAwQDUoECA0QDkoECA4QD0oECBoQG1IFY2FycnlSBm9mZnNldFIOYmlkX2FkanVz'
+    'dG1lbnRSDmFza19hZGp1c3RtZW50UhBtb21lbnR1bV9lbmFibGVkUg9tb21lbnR1bV93aW5kb3'
+    'dSFG1vbWVudHVtX3NlbnNpdGl2aXR5Ug1oZWRnZV9lbmFibGVk');
 
 @$core.Deprecated('Use getFuturesLpStatusRequestDescriptor instead')
 const GetFuturesLpStatusRequest$json = {
