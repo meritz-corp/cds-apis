@@ -90,4 +90,12 @@ abstract final class FuturesLpService {
     kdov1futures_lp.GetFuturesOrderBookRequest.new,
     kdov1futures_lp.FuturesOrderBook.new,
   );
+
+  /// 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
+  static const streamFuturesLpFills = connect.Spec(
+    '/$name/StreamFuturesLpFills',
+    connect.StreamType.server,
+    kdov1futures_lp.StreamFuturesLpFillsRequest.new,
+    kdov1futures_lp.FuturesLpFillEvent.new,
+  );
 }

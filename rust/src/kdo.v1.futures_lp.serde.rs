@@ -778,6 +778,363 @@ impl<'de> serde::Deserialize<'de> for FuturesLp {
         deserializer.deserialize_struct("kdo.v1.futures_lp.FuturesLp", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for FuturesLpFillEvent {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.FuturesLpFillEvent", len)?;
+        if true {
+            let v = FuturesLpFillLeg::try_from(self.leg)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.leg)))?;
+            struct_ser.serialize_field("leg", &v)?;
+        }
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            let v = super::common::OrderSide::try_from(self.side)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
+            struct_ser.serialize_field("side", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("price", &self.price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("fill_time_unix_millis", ToString::to_string(&self.fill_time_unix_millis).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cum_buy_quantity", ToString::to_string(&self.cum_buy_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cum_sell_quantity", ToString::to_string(&self.cum_sell_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity", ToString::to_string(&self.net_quantity).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FuturesLpFillEvent {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "leg",
+            "symbol",
+            "side",
+            "quantity",
+            "price",
+            "order_id",
+            "orderId",
+            "fill_time_unix_millis",
+            "fillTimeUnixMillis",
+            "cum_buy_quantity",
+            "cumBuyQuantity",
+            "cum_sell_quantity",
+            "cumSellQuantity",
+            "net_quantity",
+            "netQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Leg,
+            Symbol,
+            Side,
+            Quantity,
+            Price,
+            OrderId,
+            FillTimeUnixMillis,
+            CumBuyQuantity,
+            CumSellQuantity,
+            NetQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "leg" => Ok(GeneratedField::Leg),
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "side" => Ok(GeneratedField::Side),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "price" => Ok(GeneratedField::Price),
+                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
+                            "fillTimeUnixMillis" | "fill_time_unix_millis" => Ok(GeneratedField::FillTimeUnixMillis),
+                            "cumBuyQuantity" | "cum_buy_quantity" => Ok(GeneratedField::CumBuyQuantity),
+                            "cumSellQuantity" | "cum_sell_quantity" => Ok(GeneratedField::CumSellQuantity),
+                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FuturesLpFillEvent;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.futures_lp.FuturesLpFillEvent")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FuturesLpFillEvent, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut leg__ = None;
+                let mut symbol__ = None;
+                let mut side__ = None;
+                let mut quantity__ = None;
+                let mut price__ = None;
+                let mut order_id__ = None;
+                let mut fill_time_unix_millis__ = None;
+                let mut cum_buy_quantity__ = None;
+                let mut cum_sell_quantity__ = None;
+                let mut net_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Leg => {
+                            if leg__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("leg"));
+                            }
+                            leg__ = Some(map_.next_value::<FuturesLpFillLeg>()? as i32);
+                        }
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Side => {
+                            if side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("side"));
+                            }
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Price => {
+                            if price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("price"));
+                            }
+                            price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::OrderId => {
+                            if order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderId"));
+                            }
+                            order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FillTimeUnixMillis => {
+                            if fill_time_unix_millis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fillTimeUnixMillis"));
+                            }
+                            fill_time_unix_millis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CumBuyQuantity => {
+                            if cum_buy_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cumBuyQuantity"));
+                            }
+                            cum_buy_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CumSellQuantity => {
+                            if cum_sell_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cumSellQuantity"));
+                            }
+                            cum_sell_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantity => {
+                            if net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantity"));
+                            }
+                            net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FuturesLpFillEvent {
+                    leg: leg__.unwrap_or_default(),
+                    symbol: symbol__.unwrap_or_default(),
+                    side: side__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    price: price__.unwrap_or_default(),
+                    order_id: order_id__.unwrap_or_default(),
+                    fill_time_unix_millis: fill_time_unix_millis__.unwrap_or_default(),
+                    cum_buy_quantity: cum_buy_quantity__.unwrap_or_default(),
+                    cum_sell_quantity: cum_sell_quantity__.unwrap_or_default(),
+                    net_quantity: net_quantity__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.futures_lp.FuturesLpFillEvent", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for FuturesLpFillLeg {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "FUTURES_LP_FILL_LEG_UNSPECIFIED",
+            Self::Futures => "FUTURES_LP_FILL_LEG_FUTURES",
+            Self::Etf => "FUTURES_LP_FILL_LEG_ETF",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for FuturesLpFillLeg {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "FUTURES_LP_FILL_LEG_UNSPECIFIED",
+            "FUTURES_LP_FILL_LEG_FUTURES",
+            "FUTURES_LP_FILL_LEG_ETF",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FuturesLpFillLeg;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "FUTURES_LP_FILL_LEG_UNSPECIFIED" => Ok(FuturesLpFillLeg::Unspecified),
+                    "FUTURES_LP_FILL_LEG_FUTURES" => Ok(FuturesLpFillLeg::Futures),
+                    "FUTURES_LP_FILL_LEG_ETF" => Ok(FuturesLpFillLeg::Etf),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FuturesLpFillStatistics {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4031,6 +4388,138 @@ impl<'de> serde::Deserialize<'de> for StopFuturesLpResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.futures_lp.StopFuturesLpResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for StreamFuturesLpFillsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.futures_lp.StreamFuturesLpFillsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("future_symbol", &self.future_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for StreamFuturesLpFillsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "future_symbol",
+            "futureSymbol",
+            "fund_code",
+            "fundCode",
+            "etf_symbol",
+            "etfSymbol",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            FutureSymbol,
+            FundCode,
+            EtfSymbol,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "futureSymbol" | "future_symbol" => Ok(GeneratedField::FutureSymbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamFuturesLpFillsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.futures_lp.StreamFuturesLpFillsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamFuturesLpFillsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut future_symbol__ = None;
+                let mut fund_code__ = None;
+                let mut etf_symbol__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::FutureSymbol => {
+                            if future_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("futureSymbol"));
+                            }
+                            future_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(StreamFuturesLpFillsRequest {
+                    future_symbol: future_symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.futures_lp.StreamFuturesLpFillsRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StreamFuturesLpStatusUpdateRequest {

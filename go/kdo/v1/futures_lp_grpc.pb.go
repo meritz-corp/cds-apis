@@ -42,6 +42,8 @@ type FuturesLpServiceClient interface {
 	GetFuturesOrderBook(ctx context.Context, in *GetFuturesOrderBookRequest, opts ...grpc.CallOption) (*FuturesOrderBook, error)
 	// 선물 LP 주문장 스트리밍
 	StreamFuturesOrderBook(ctx context.Context, in *GetFuturesOrderBookRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesOrderBookClient, error)
+	// 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
+	StreamFuturesLpFills(ctx context.Context, in *StreamFuturesLpFillsRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesLpFillsClient, error)
 }
 
 type futuresLpServiceClient struct {
@@ -188,6 +190,38 @@ func (x *futuresLpServiceStreamFuturesOrderBookClient) Recv() (*FuturesOrderBook
 	return m, nil
 }
 
+func (c *futuresLpServiceClient) StreamFuturesLpFills(ctx context.Context, in *StreamFuturesLpFillsRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesLpFillsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &FuturesLpService_ServiceDesc.Streams[2], "/kdo.v1.futures_lp.FuturesLpService/StreamFuturesLpFills", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &futuresLpServiceStreamFuturesLpFillsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type FuturesLpService_StreamFuturesLpFillsClient interface {
+	Recv() (*FuturesLpFillEvent, error)
+	grpc.ClientStream
+}
+
+type futuresLpServiceStreamFuturesLpFillsClient struct {
+	grpc.ClientStream
+}
+
+func (x *futuresLpServiceStreamFuturesLpFillsClient) Recv() (*FuturesLpFillEvent, error) {
+	m := new(FuturesLpFillEvent)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // FuturesLpServiceServer is the server API for FuturesLpService service.
 // All implementations must embed UnimplementedFuturesLpServiceServer
 // for forward compatibility
@@ -212,6 +246,8 @@ type FuturesLpServiceServer interface {
 	GetFuturesOrderBook(context.Context, *GetFuturesOrderBookRequest) (*FuturesOrderBook, error)
 	// 선물 LP 주문장 스트리밍
 	StreamFuturesOrderBook(*GetFuturesOrderBookRequest, FuturesLpService_StreamFuturesOrderBookServer) error
+	// 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
+	StreamFuturesLpFills(*StreamFuturesLpFillsRequest, FuturesLpService_StreamFuturesLpFillsServer) error
 	mustEmbedUnimplementedFuturesLpServiceServer()
 }
 
@@ -248,6 +284,9 @@ func (UnimplementedFuturesLpServiceServer) GetFuturesOrderBook(context.Context, 
 }
 func (UnimplementedFuturesLpServiceServer) StreamFuturesOrderBook(*GetFuturesOrderBookRequest, FuturesLpService_StreamFuturesOrderBookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamFuturesOrderBook not implemented")
+}
+func (UnimplementedFuturesLpServiceServer) StreamFuturesLpFills(*StreamFuturesLpFillsRequest, FuturesLpService_StreamFuturesLpFillsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamFuturesLpFills not implemented")
 }
 func (UnimplementedFuturesLpServiceServer) mustEmbedUnimplementedFuturesLpServiceServer() {}
 
@@ -448,6 +487,27 @@ func (x *futuresLpServiceStreamFuturesOrderBookServer) Send(m *FuturesOrderBook)
 	return x.ServerStream.SendMsg(m)
 }
 
+func _FuturesLpService_StreamFuturesLpFills_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamFuturesLpFillsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FuturesLpServiceServer).StreamFuturesLpFills(m, &futuresLpServiceStreamFuturesLpFillsServer{stream})
+}
+
+type FuturesLpService_StreamFuturesLpFillsServer interface {
+	Send(*FuturesLpFillEvent) error
+	grpc.ServerStream
+}
+
+type futuresLpServiceStreamFuturesLpFillsServer struct {
+	grpc.ServerStream
+}
+
+func (x *futuresLpServiceStreamFuturesLpFillsServer) Send(m *FuturesLpFillEvent) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // FuturesLpService_ServiceDesc is the grpc.ServiceDesc for FuturesLpService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -497,6 +557,11 @@ var FuturesLpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamFuturesOrderBook",
 			Handler:       _FuturesLpService_StreamFuturesOrderBook_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamFuturesLpFills",
+			Handler:       _FuturesLpService_StreamFuturesLpFills_Handler,
 			ServerStreams: true,
 		},
 	},

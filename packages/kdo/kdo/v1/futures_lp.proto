@@ -92,6 +92,14 @@ service FuturesLpService {
     };
     option (google.api.method_signature) = "future_symbol,fund_code";
   }
+
+  // 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
+  rpc StreamFuturesLpFills(StreamFuturesLpFillsRequest) returns (stream FuturesLpFillEvent) {
+    option (google.api.http) = {
+      get: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}/fills:stream"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code,etf_symbol";
+  }
 }
 
 // ========== Core Entity ==========
@@ -652,4 +660,56 @@ message GetFuturesOrderBookRequest {
 
   // ETF 심볼 — PK의 세 번째 키. 빈 문자열이면 (future, fund) 단일 매치 시 자동 resolve.
   string etf_symbol = 3;
+}
+
+// StreamFuturesLpFills
+message StreamFuturesLpFillsRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — (future, fund) 당 다중 ETF row 구분용 (필수)
+  string etf_symbol = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 체결 이벤트 leg 구분 (선물 또는 ETF 헷지)
+enum FuturesLpFillLeg {
+  FUTURES_LP_FILL_LEG_UNSPECIFIED = 0;
+  FUTURES_LP_FILL_LEG_FUTURES = 1;  // 선물 체결
+  FUTURES_LP_FILL_LEG_ETF = 2;      // ETF 헷지 체결
+}
+
+// 선물 LP 체결 이벤트 (선물 또는 내재화 ETF 헷지 체결 1건)
+message FuturesLpFillEvent {
+  // 체결 leg 구분
+  FuturesLpFillLeg leg = 1;
+
+  // 체결 종목 (선물 또는 ETF 심볼)
+  string symbol = 2;
+
+  // 체결 방향
+  kdo.v1.common.OrderSide side = 3;
+
+  // 체결 수량
+  int64 quantity = 4;
+
+  // 체결 가격
+  double price = 5;
+
+  // 체결 주문 id
+  int64 order_id = 6;
+
+  // 서버 수신 wall-clock epoch millis
+  int64 fill_time_unix_millis = 7;
+
+  // 해당 leg 기준 당일 누적 매수 수량
+  int64 cum_buy_quantity = 8;
+
+  // 해당 leg 기준 당일 누적 매도 수량
+  int64 cum_sell_quantity = 9;
+
+  // cum_buy_quantity - cum_sell_quantity
+  int64 net_quantity = 10;
 }

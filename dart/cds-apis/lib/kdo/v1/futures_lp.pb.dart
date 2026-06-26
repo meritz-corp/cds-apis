@@ -2704,6 +2704,245 @@ class GetFuturesOrderBookRequest extends $pb.GeneratedMessage {
   void clearEtfSymbol() => $_clearField(3);
 }
 
+/// StreamFuturesLpFills
+class StreamFuturesLpFillsRequest extends $pb.GeneratedMessage {
+  factory StreamFuturesLpFillsRequest({
+    $core.String? futureSymbol,
+    $core.String? fundCode,
+    $core.String? etfSymbol,
+  }) {
+    final result = create();
+    if (futureSymbol != null) result.futureSymbol = futureSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    return result;
+  }
+
+  StreamFuturesLpFillsRequest._();
+
+  factory StreamFuturesLpFillsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamFuturesLpFillsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFuturesLpFillsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFuturesLpFillsRequest clone() => StreamFuturesLpFillsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFuturesLpFillsRequest copyWith(void Function(StreamFuturesLpFillsRequest) updates) => super.copyWith((message) => updates(message as StreamFuturesLpFillsRequest)) as StreamFuturesLpFillsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamFuturesLpFillsRequest create() => StreamFuturesLpFillsRequest._();
+  @$core.override
+  StreamFuturesLpFillsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamFuturesLpFillsRequest> createRepeated() => $pb.PbList<StreamFuturesLpFillsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamFuturesLpFillsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamFuturesLpFillsRequest>(create);
+  static StreamFuturesLpFillsRequest? _defaultInstance;
+
+  /// 선물 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get futureSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set futureSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFutureSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFutureSymbol() => $_clearField(1);
+
+  /// 펀드 코드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// ETF 심볼 — (future, fund) 당 다중 ETF row 구분용 (필수)
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
+}
+
+/// 선물 LP 체결 이벤트 (선물 또는 내재화 ETF 헷지 체결 1건)
+class FuturesLpFillEvent extends $pb.GeneratedMessage {
+  factory FuturesLpFillEvent({
+    FuturesLpFillLeg? leg,
+    $core.String? symbol,
+    $1.OrderSide? side,
+    $fixnum.Int64? quantity,
+    $core.double? price,
+    $fixnum.Int64? orderId,
+    $fixnum.Int64? fillTimeUnixMillis,
+    $fixnum.Int64? cumBuyQuantity,
+    $fixnum.Int64? cumSellQuantity,
+    $fixnum.Int64? netQuantity,
+  }) {
+    final result = create();
+    if (leg != null) result.leg = leg;
+    if (symbol != null) result.symbol = symbol;
+    if (side != null) result.side = side;
+    if (quantity != null) result.quantity = quantity;
+    if (price != null) result.price = price;
+    if (orderId != null) result.orderId = orderId;
+    if (fillTimeUnixMillis != null) result.fillTimeUnixMillis = fillTimeUnixMillis;
+    if (cumBuyQuantity != null) result.cumBuyQuantity = cumBuyQuantity;
+    if (cumSellQuantity != null) result.cumSellQuantity = cumSellQuantity;
+    if (netQuantity != null) result.netQuantity = netQuantity;
+    return result;
+  }
+
+  FuturesLpFillEvent._();
+
+  factory FuturesLpFillEvent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FuturesLpFillEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesLpFillEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
+    ..e<FuturesLpFillLeg>(1, _omitFieldNames ? '' : 'leg', $pb.PbFieldType.OE, defaultOrMaker: FuturesLpFillLeg.FUTURES_LP_FILL_LEG_UNSPECIFIED, valueOf: FuturesLpFillLeg.valueOf, enumValues: FuturesLpFillLeg.values)
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..e<$1.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
+    ..aInt64(4, _omitFieldNames ? '' : 'quantity')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'price', $pb.PbFieldType.OD)
+    ..aInt64(6, _omitFieldNames ? '' : 'orderId')
+    ..aInt64(7, _omitFieldNames ? '' : 'fillTimeUnixMillis')
+    ..aInt64(8, _omitFieldNames ? '' : 'cumBuyQuantity')
+    ..aInt64(9, _omitFieldNames ? '' : 'cumSellQuantity')
+    ..aInt64(10, _omitFieldNames ? '' : 'netQuantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FuturesLpFillEvent clone() => FuturesLpFillEvent()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FuturesLpFillEvent copyWith(void Function(FuturesLpFillEvent) updates) => super.copyWith((message) => updates(message as FuturesLpFillEvent)) as FuturesLpFillEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FuturesLpFillEvent create() => FuturesLpFillEvent._();
+  @$core.override
+  FuturesLpFillEvent createEmptyInstance() => create();
+  static $pb.PbList<FuturesLpFillEvent> createRepeated() => $pb.PbList<FuturesLpFillEvent>();
+  @$core.pragma('dart2js:noInline')
+  static FuturesLpFillEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FuturesLpFillEvent>(create);
+  static FuturesLpFillEvent? _defaultInstance;
+
+  /// 체결 leg 구분
+  @$pb.TagNumber(1)
+  FuturesLpFillLeg get leg => $_getN(0);
+  @$pb.TagNumber(1)
+  set leg(FuturesLpFillLeg value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLeg() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLeg() => $_clearField(1);
+
+  /// 체결 종목 (선물 또는 ETF 심볼)
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 체결 방향
+  @$pb.TagNumber(3)
+  $1.OrderSide get side => $_getN(2);
+  @$pb.TagNumber(3)
+  set side($1.OrderSide value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSide() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSide() => $_clearField(3);
+
+  /// 체결 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get quantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set quantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQuantity() => $_clearField(4);
+
+  /// 체결 가격
+  @$pb.TagNumber(5)
+  $core.double get price => $_getN(4);
+  @$pb.TagNumber(5)
+  set price($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPrice() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPrice() => $_clearField(5);
+
+  /// 체결 주문 id
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get orderId => $_getI64(5);
+  @$pb.TagNumber(6)
+  set orderId($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasOrderId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearOrderId() => $_clearField(6);
+
+  /// 서버 수신 wall-clock epoch millis
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get fillTimeUnixMillis => $_getI64(6);
+  @$pb.TagNumber(7)
+  set fillTimeUnixMillis($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasFillTimeUnixMillis() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearFillTimeUnixMillis() => $_clearField(7);
+
+  /// 해당 leg 기준 당일 누적 매수 수량
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get cumBuyQuantity => $_getI64(7);
+  @$pb.TagNumber(8)
+  set cumBuyQuantity($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCumBuyQuantity() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCumBuyQuantity() => $_clearField(8);
+
+  /// 해당 leg 기준 당일 누적 매도 수량
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get cumSellQuantity => $_getI64(8);
+  @$pb.TagNumber(9)
+  set cumSellQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasCumSellQuantity() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCumSellQuantity() => $_clearField(9);
+
+  /// cum_buy_quantity - cum_sell_quantity
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get netQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set netQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasNetQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearNetQuantity() => $_clearField(10);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

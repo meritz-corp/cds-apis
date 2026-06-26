@@ -588,6 +588,55 @@ pub struct GetFuturesOrderBookRequest {
     #[prost(string, tag="3")]
     pub etf_symbol: ::prost::alloc::string::String,
 }
+/// StreamFuturesLpFills
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamFuturesLpFillsRequest {
+    /// 선물 종목 심볼
+    #[prost(string, tag="1")]
+    pub future_symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — (future, fund) 당 다중 ETF row 구분용 (필수)
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
+}
+/// 선물 LP 체결 이벤트 (선물 또는 내재화 ETF 헷지 체결 1건)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FuturesLpFillEvent {
+    /// 체결 leg 구분
+    #[prost(enumeration="FuturesLpFillLeg", tag="1")]
+    pub leg: i32,
+    /// 체결 종목 (선물 또는 ETF 심볼)
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 체결 방향
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
+    pub side: i32,
+    /// 체결 수량
+    #[prost(int64, tag="4")]
+    pub quantity: i64,
+    /// 체결 가격
+    #[prost(double, tag="5")]
+    pub price: f64,
+    /// 체결 주문 id
+    #[prost(int64, tag="6")]
+    pub order_id: i64,
+    /// 서버 수신 wall-clock epoch millis
+    #[prost(int64, tag="7")]
+    pub fill_time_unix_millis: i64,
+    /// 해당 leg 기준 당일 누적 매수 수량
+    #[prost(int64, tag="8")]
+    pub cum_buy_quantity: i64,
+    /// 해당 leg 기준 당일 누적 매도 수량
+    #[prost(int64, tag="9")]
+    pub cum_sell_quantity: i64,
+    /// cum_buy_quantity - cum_sell_quantity
+    #[prost(int64, tag="10")]
+    pub net_quantity: i64,
+}
 // ========== Status Messages ==========
 
 /// 선물 LP 상태 enum
@@ -622,6 +671,38 @@ impl FuturesLpState {
             "FUTURES_LP_STATE_RUNNING" => Some(Self::Running),
             "FUTURES_LP_STATE_STOPPING" => Some(Self::Stopping),
             "FUTURES_LP_STATE_ERROR" => Some(Self::Error),
+            _ => None,
+        }
+    }
+}
+/// 체결 이벤트 leg 구분 (선물 또는 ETF 헷지)
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum FuturesLpFillLeg {
+    Unspecified = 0,
+    /// 선물 체결
+    Futures = 1,
+    /// ETF 헷지 체결
+    Etf = 2,
+}
+impl FuturesLpFillLeg {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FuturesLpFillLeg::Unspecified => "FUTURES_LP_FILL_LEG_UNSPECIFIED",
+            FuturesLpFillLeg::Futures => "FUTURES_LP_FILL_LEG_FUTURES",
+            FuturesLpFillLeg::Etf => "FUTURES_LP_FILL_LEG_ETF",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "FUTURES_LP_FILL_LEG_UNSPECIFIED" => Some(Self::Unspecified),
+            "FUTURES_LP_FILL_LEG_FUTURES" => Some(Self::Futures),
+            "FUTURES_LP_FILL_LEG_ETF" => Some(Self::Etf),
             _ => None,
         }
     }
