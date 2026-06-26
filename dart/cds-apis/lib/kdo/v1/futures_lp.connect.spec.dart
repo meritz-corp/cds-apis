@@ -98,4 +98,12 @@ abstract final class FuturesLpService {
     kdov1futures_lp.StreamFuturesLpFillsRequest.new,
     kdov1futures_lp.FuturesLpFillSummary.new,
   );
+
+  /// 선물–ETF 헷지 체결 쌍 실시간 스트리밍 (완성된 쌍마다 1건). 당일 누적 요약은 StreamFuturesLpFills.
+  static const streamFuturesLpFillPairs = connect.Spec(
+    '/$name/StreamFuturesLpFillPairs',
+    connect.StreamType.server,
+    kdov1futures_lp.StreamFuturesLpFillPairsRequest.new,
+    kdov1futures_lp.FuturesLpFillPair.new,
+  );
 }

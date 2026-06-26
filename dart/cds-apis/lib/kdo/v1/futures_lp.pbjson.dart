@@ -709,3 +709,42 @@ final $typed_data.Uint8List futuresLpFillSummaryDescriptor = $convert.base64Deco
     'D2V0ZlNlbGxRdWFudGl0eRIrChJldGZfc2VsbF9hdmdfcHJpY2UYCCABKAFSD2V0ZlNlbGxBdm'
     'dQcmljZQ==');
 
+@$core.Deprecated('Use streamFuturesLpFillPairsRequestDescriptor instead')
+const StreamFuturesLpFillPairsRequest$json = {
+  '1': 'StreamFuturesLpFillPairsRequest',
+  '2': [
+    {'1': 'future_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'futureSymbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'etfSymbol'},
+  ],
+};
+
+/// Descriptor for `StreamFuturesLpFillPairsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamFuturesLpFillPairsRequestDescriptor = $convert.base64Decode(
+    'Ch9TdHJlYW1GdXR1cmVzTHBGaWxsUGFpcnNSZXF1ZXN0EikKDWZ1dHVyZV9zeW1ib2wYASABKA'
+    'lCBOJBAQJSDGZ1dHVyZVN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2Rl'
+    'EiMKCmV0Zl9zeW1ib2wYAyABKAlCBOJBAQJSCWV0ZlN5bWJvbA==');
+
+@$core.Deprecated('Use futuresLpFillPairDescriptor instead')
+const FuturesLpFillPair$json = {
+  '1': 'FuturesLpFillPair',
+  '2': [
+    {'1': 'future_side', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'futureSide'},
+    {'1': 'future_quantity', '3': 2, '4': 1, '5': 3, '10': 'futureQuantity'},
+    {'1': 'future_price', '3': 3, '4': 1, '5': 1, '10': 'futurePrice'},
+    {'1': 'etf_side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'etfSide'},
+    {'1': 'etf_quantity', '3': 5, '4': 1, '5': 3, '10': 'etfQuantity'},
+    {'1': 'etf_avg_price', '3': 6, '4': 1, '5': 1, '10': 'etfAvgPrice'},
+    {'1': 'filled_at_unix_ms', '3': 7, '4': 1, '5': 3, '10': 'filledAtUnixMs'},
+  ],
+};
+
+/// Descriptor for `FuturesLpFillPair`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List futuresLpFillPairDescriptor = $convert.base64Decode(
+    'ChFGdXR1cmVzTHBGaWxsUGFpchI5CgtmdXR1cmVfc2lkZRgBIAEoDjIYLmtkby52MS5jb21tb2'
+    '4uT3JkZXJTaWRlUgpmdXR1cmVTaWRlEicKD2Z1dHVyZV9xdWFudGl0eRgCIAEoA1IOZnV0dXJl'
+    'UXVhbnRpdHkSIQoMZnV0dXJlX3ByaWNlGAMgASgBUgtmdXR1cmVQcmljZRIzCghldGZfc2lkZR'
+    'gEIAEoDjIYLmtkby52MS5jb21tb24uT3JkZXJTaWRlUgdldGZTaWRlEiEKDGV0Zl9xdWFudGl0'
+    'eRgFIAEoA1ILZXRmUXVhbnRpdHkSIgoNZXRmX2F2Z19wcmljZRgGIAEoAVILZXRmQXZnUHJpY2'
+    'USKQoRZmlsbGVkX2F0X3VuaXhfbXMYByABKANSDmZpbGxlZEF0VW5peE1z');
+

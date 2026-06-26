@@ -802,6 +802,61 @@ func request_FuturesLpService_StreamFuturesLpFills_0(ctx context.Context, marsha
 
 }
 
+var (
+	filter_FuturesLpService_StreamFuturesLpFillPairs_0 = &utilities.DoubleArray{Encoding: map[string]int{"future_symbol": 0, "futureSymbol": 1, "fund_code": 2, "fundCode": 3}, Base: []int{1, 1, 2, 3, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 1, 1, 2, 3, 4, 5}}
+)
+
+func request_FuturesLpService_StreamFuturesLpFillPairs_0(ctx context.Context, marshaler runtime.Marshaler, client FuturesLpServiceClient, req *http.Request, pathParams map[string]string) (FuturesLpService_StreamFuturesLpFillPairsClient, runtime.ServerMetadata, error) {
+	var protoReq StreamFuturesLpFillPairsRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["future_symbol"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "future_symbol")
+	}
+
+	protoReq.FutureSymbol, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "future_symbol", err)
+	}
+
+	val, ok = pathParams["fund_code"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fund_code")
+	}
+
+	protoReq.FundCode, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fund_code", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_FuturesLpService_StreamFuturesLpFillPairs_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.StreamFuturesLpFillPairs(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterFuturesLpServiceHandlerServer registers the http handlers for service FuturesLpService to "mux".
 // UnaryRPC     :call FuturesLpServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -1023,6 +1078,13 @@ func RegisterFuturesLpServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 	})
 
 	mux.Handle("GET", pattern_FuturesLpService_StreamFuturesLpFills_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_FuturesLpService_StreamFuturesLpFillPairs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1312,6 +1374,28 @@ func RegisterFuturesLpServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 
 	})
 
+	mux.Handle("GET", pattern_FuturesLpService_StreamFuturesLpFillPairs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.futures_lp.FuturesLpService/StreamFuturesLpFillPairs", runtime.WithHTTPPathPattern("/v1/futures/{future_symbol=*}/lp/{fund_code=*}/fillPairs:stream"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_FuturesLpService_StreamFuturesLpFillPairs_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_FuturesLpService_StreamFuturesLpFillPairs_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -1337,6 +1421,8 @@ var (
 	pattern_FuturesLpService_StreamFuturesOrderBook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "futures", "future_symbol", "lp", "fund_code", "orderbook"}, "stream"))
 
 	pattern_FuturesLpService_StreamFuturesLpFills_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "futures", "future_symbol", "lp", "fund_code", "fills"}, "stream"))
+
+	pattern_FuturesLpService_StreamFuturesLpFillPairs_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "futures", "future_symbol", "lp", "fund_code", "fillPairs"}, "stream"))
 )
 
 var (
@@ -1361,4 +1447,6 @@ var (
 	forward_FuturesLpService_StreamFuturesOrderBook_0 = runtime.ForwardResponseStream
 
 	forward_FuturesLpService_StreamFuturesLpFills_0 = runtime.ForwardResponseStream
+
+	forward_FuturesLpService_StreamFuturesLpFillPairs_0 = runtime.ForwardResponseStream
 )

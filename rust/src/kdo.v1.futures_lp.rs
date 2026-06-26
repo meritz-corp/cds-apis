@@ -628,6 +628,42 @@ pub struct FuturesLpFillSummary {
     #[prost(double, tag="8")]
     pub etf_sell_avg_price: f64,
 }
+/// StreamFuturesLpFillPairs
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamFuturesLpFillPairsRequest {
+    /// 선물 종목 심볼
+    #[prost(string, tag="1")]
+    pub future_symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// ETF 심볼 — (future, fund) 당 다중 ETF row 구분용 (필수)
+    #[prost(string, tag="3")]
+    pub etf_symbol: ::prost::alloc::string::String,
+}
+/// 선물 체결 1건 + 그에 대응하는 ETF 헷지 주문 체결(합산)의 쌍.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct FuturesLpFillPair {
+    /// 선물 leg (1건 체결)
+    #[prost(enumeration="super::common::OrderSide", tag="1")]
+    pub future_side: i32,
+    #[prost(int64, tag="2")]
+    pub future_quantity: i64,
+    #[prost(double, tag="3")]
+    pub future_price: f64,
+    /// ETF 헷지 leg (해당 주문 체결 합산)
+    #[prost(enumeration="super::common::OrderSide", tag="4")]
+    pub etf_side: i32,
+    #[prost(int64, tag="5")]
+    pub etf_quantity: i64,
+    #[prost(double, tag="6")]
+    pub etf_avg_price: f64,
+    /// 쌍 완성 시각 (unix epoch milliseconds)
+    #[prost(int64, tag="7")]
+    pub filled_at_unix_ms: i64,
+}
 // ========== Status Messages ==========
 
 /// 선물 LP 상태 enum

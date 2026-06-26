@@ -44,6 +44,8 @@ type FuturesLpServiceClient interface {
 	StreamFuturesOrderBook(ctx context.Context, in *GetFuturesOrderBookRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesOrderBookClient, error)
 	// 선물 LP 체결 요약 스트리밍 (선물 + ETF 헷지 당일 누적 요약)
 	StreamFuturesLpFills(ctx context.Context, in *StreamFuturesLpFillsRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesLpFillsClient, error)
+	// 선물–ETF 헷지 체결 쌍 실시간 스트리밍 (완성된 쌍마다 1건). 당일 누적 요약은 StreamFuturesLpFills.
+	StreamFuturesLpFillPairs(ctx context.Context, in *StreamFuturesLpFillPairsRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesLpFillPairsClient, error)
 }
 
 type futuresLpServiceClient struct {
@@ -222,6 +224,38 @@ func (x *futuresLpServiceStreamFuturesLpFillsClient) Recv() (*FuturesLpFillSumma
 	return m, nil
 }
 
+func (c *futuresLpServiceClient) StreamFuturesLpFillPairs(ctx context.Context, in *StreamFuturesLpFillPairsRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesLpFillPairsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &FuturesLpService_ServiceDesc.Streams[3], "/kdo.v1.futures_lp.FuturesLpService/StreamFuturesLpFillPairs", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &futuresLpServiceStreamFuturesLpFillPairsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type FuturesLpService_StreamFuturesLpFillPairsClient interface {
+	Recv() (*FuturesLpFillPair, error)
+	grpc.ClientStream
+}
+
+type futuresLpServiceStreamFuturesLpFillPairsClient struct {
+	grpc.ClientStream
+}
+
+func (x *futuresLpServiceStreamFuturesLpFillPairsClient) Recv() (*FuturesLpFillPair, error) {
+	m := new(FuturesLpFillPair)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // FuturesLpServiceServer is the server API for FuturesLpService service.
 // All implementations must embed UnimplementedFuturesLpServiceServer
 // for forward compatibility
@@ -248,6 +282,8 @@ type FuturesLpServiceServer interface {
 	StreamFuturesOrderBook(*GetFuturesOrderBookRequest, FuturesLpService_StreamFuturesOrderBookServer) error
 	// 선물 LP 체결 요약 스트리밍 (선물 + ETF 헷지 당일 누적 요약)
 	StreamFuturesLpFills(*StreamFuturesLpFillsRequest, FuturesLpService_StreamFuturesLpFillsServer) error
+	// 선물–ETF 헷지 체결 쌍 실시간 스트리밍 (완성된 쌍마다 1건). 당일 누적 요약은 StreamFuturesLpFills.
+	StreamFuturesLpFillPairs(*StreamFuturesLpFillPairsRequest, FuturesLpService_StreamFuturesLpFillPairsServer) error
 	mustEmbedUnimplementedFuturesLpServiceServer()
 }
 
@@ -287,6 +323,9 @@ func (UnimplementedFuturesLpServiceServer) StreamFuturesOrderBook(*GetFuturesOrd
 }
 func (UnimplementedFuturesLpServiceServer) StreamFuturesLpFills(*StreamFuturesLpFillsRequest, FuturesLpService_StreamFuturesLpFillsServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamFuturesLpFills not implemented")
+}
+func (UnimplementedFuturesLpServiceServer) StreamFuturesLpFillPairs(*StreamFuturesLpFillPairsRequest, FuturesLpService_StreamFuturesLpFillPairsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamFuturesLpFillPairs not implemented")
 }
 func (UnimplementedFuturesLpServiceServer) mustEmbedUnimplementedFuturesLpServiceServer() {}
 
@@ -508,6 +547,27 @@ func (x *futuresLpServiceStreamFuturesLpFillsServer) Send(m *FuturesLpFillSummar
 	return x.ServerStream.SendMsg(m)
 }
 
+func _FuturesLpService_StreamFuturesLpFillPairs_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamFuturesLpFillPairsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FuturesLpServiceServer).StreamFuturesLpFillPairs(m, &futuresLpServiceStreamFuturesLpFillPairsServer{stream})
+}
+
+type FuturesLpService_StreamFuturesLpFillPairsServer interface {
+	Send(*FuturesLpFillPair) error
+	grpc.ServerStream
+}
+
+type futuresLpServiceStreamFuturesLpFillPairsServer struct {
+	grpc.ServerStream
+}
+
+func (x *futuresLpServiceStreamFuturesLpFillPairsServer) Send(m *FuturesLpFillPair) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // FuturesLpService_ServiceDesc is the grpc.ServiceDesc for FuturesLpService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -562,6 +622,11 @@ var FuturesLpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamFuturesLpFills",
 			Handler:       _FuturesLpService_StreamFuturesLpFills_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamFuturesLpFillPairs",
+			Handler:       _FuturesLpService_StreamFuturesLpFillPairs_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -405,6 +405,36 @@ pub mod futures_lp_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn stream_futures_lp_fill_pairs(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamFuturesLpFillPairsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::FuturesLpFillPair>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.futures_lp.FuturesLpService/StreamFuturesLpFillPairs",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.futures_lp.FuturesLpService",
+                        "StreamFuturesLpFillPairs",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -498,6 +528,19 @@ pub mod futures_lp_service_server {
             request: tonic::Request<super::StreamFuturesLpFillsRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamFuturesLpFillsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamFuturesLpFillPairs method.
+        type StreamFuturesLpFillPairsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::FuturesLpFillPair, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_futures_lp_fill_pairs(
+            &self,
+            request: tonic::Request<super::StreamFuturesLpFillPairsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamFuturesLpFillPairsStream>,
             tonic::Status,
         >;
     }
@@ -1096,6 +1139,59 @@ pub mod futures_lp_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StreamFuturesLpFillsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.futures_lp.FuturesLpService/StreamFuturesLpFillPairs" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamFuturesLpFillPairsSvc<T: FuturesLpService>(pub Arc<T>);
+                    impl<
+                        T: FuturesLpService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamFuturesLpFillPairsRequest,
+                    > for StreamFuturesLpFillPairsSvc<T> {
+                        type Response = super::FuturesLpFillPair;
+                        type ResponseStream = T::StreamFuturesLpFillPairsStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::StreamFuturesLpFillPairsRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as FuturesLpService>::stream_futures_lp_fill_pairs(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamFuturesLpFillPairsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

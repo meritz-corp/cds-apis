@@ -100,6 +100,14 @@ service FuturesLpService {
     };
     option (google.api.method_signature) = "future_symbol,fund_code,etf_symbol";
   }
+
+  // 선물–ETF 헷지 체결 쌍 실시간 스트리밍 (완성된 쌍마다 1건). 당일 누적 요약은 StreamFuturesLpFills.
+  rpc StreamFuturesLpFillPairs(StreamFuturesLpFillPairsRequest) returns (stream FuturesLpFillPair) {
+    option (google.api.http) = {
+      get: "/v1/futures/{future_symbol=*}/lp/{fund_code=*}/fillPairs:stream"
+    };
+    option (google.api.method_signature) = "future_symbol,fund_code,etf_symbol";
+  }
 }
 
 // ========== Core Entity ==========
@@ -689,4 +697,30 @@ message FuturesLpFillSummary {
   double etf_buy_avg_price = 6;
   int64  etf_sell_quantity = 7;
   double etf_sell_avg_price = 8;
+}
+
+// StreamFuturesLpFillPairs
+message StreamFuturesLpFillPairsRequest {
+  // 선물 종목 심볼
+  string future_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // ETF 심볼 — (future, fund) 당 다중 ETF row 구분용 (필수)
+  string etf_symbol = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 선물 체결 1건 + 그에 대응하는 ETF 헷지 주문 체결(합산)의 쌍.
+message FuturesLpFillPair {
+  // 선물 leg (1건 체결)
+  kdo.v1.common.OrderSide future_side = 1;
+  int64  future_quantity = 2;
+  double future_price    = 3;
+  // ETF 헷지 leg (해당 주문 체결 합산)
+  kdo.v1.common.OrderSide etf_side = 4;
+  int64  etf_quantity    = 5;
+  double etf_avg_price   = 6;
+  // 쌍 완성 시각 (unix epoch milliseconds)
+  int64  filled_at_unix_ms = 7;
 }

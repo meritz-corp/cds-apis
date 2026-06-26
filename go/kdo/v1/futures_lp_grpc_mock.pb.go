@@ -738,6 +738,248 @@ func (mr *MockFuturesLpService_StreamFuturesLpFillsServerMockRecorder) SetTraile
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillsServer)(nil).SetTrailer), arg0)
 }
 
+// MockFuturesLpService_StreamFuturesLpFillPairsClient is a mock of FuturesLpService_StreamFuturesLpFillPairsClient interface.
+type MockFuturesLpService_StreamFuturesLpFillPairsClient struct {
+	ctrl     *gomock.Controller
+	recorder *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder
+}
+
+// MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder is the mock recorder for MockFuturesLpService_StreamFuturesLpFillPairsClient.
+type MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder struct {
+	mock *MockFuturesLpService_StreamFuturesLpFillPairsClient
+}
+
+// NewMockFuturesLpService_StreamFuturesLpFillPairsClient creates a new mock instance.
+func NewMockFuturesLpService_StreamFuturesLpFillPairsClient(ctrl *gomock.Controller) *MockFuturesLpService_StreamFuturesLpFillPairsClient {
+	mock := &MockFuturesLpService_StreamFuturesLpFillPairsClient{ctrl: ctrl}
+	mock.recorder = &MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) EXPECT() *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder {
+	return m.recorder
+}
+
+// CloseSend mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) CloseSend() error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CloseSend")
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CloseSend indicates an expected call of CloseSend.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder) CloseSend() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsClient)(nil).CloseSend))
+}
+
+// Context mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsClient)(nil).Context))
+}
+
+// Header mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) Header() (metadata.MD, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Header")
+	ret0, _ := ret[0].(metadata.MD)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Header indicates an expected call of Header.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder) Header() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsClient)(nil).Header))
+}
+
+// Recv mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) Recv() (*FuturesLpFillPair, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Recv")
+	ret0, _ := ret[0].(*FuturesLpFillPair)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Recv indicates an expected call of Recv.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder) Recv() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsClient)(nil).Recv))
+}
+
+// RecvMsg mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsClient)(nil).RecvMsg), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsClient)(nil).SendMsg), arg0)
+}
+
+// Trailer mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsClient) Trailer() metadata.MD {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Trailer")
+	ret0, _ := ret[0].(metadata.MD)
+	return ret0
+}
+
+// Trailer indicates an expected call of Trailer.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsClientMockRecorder) Trailer() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsClient)(nil).Trailer))
+}
+
+// MockFuturesLpService_StreamFuturesLpFillPairsServer is a mock of FuturesLpService_StreamFuturesLpFillPairsServer interface.
+type MockFuturesLpService_StreamFuturesLpFillPairsServer struct {
+	ctrl     *gomock.Controller
+	recorder *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder
+}
+
+// MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder is the mock recorder for MockFuturesLpService_StreamFuturesLpFillPairsServer.
+type MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder struct {
+	mock *MockFuturesLpService_StreamFuturesLpFillPairsServer
+}
+
+// NewMockFuturesLpService_StreamFuturesLpFillPairsServer creates a new mock instance.
+func NewMockFuturesLpService_StreamFuturesLpFillPairsServer(ctrl *gomock.Controller) *MockFuturesLpService_StreamFuturesLpFillPairsServer {
+	mock := &MockFuturesLpService_StreamFuturesLpFillPairsServer{ctrl: ctrl}
+	mock.recorder = &MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) EXPECT() *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder {
+	return m.recorder
+}
+
+// Context mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) Context() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Context")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Context indicates an expected call of Context.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder) Context() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsServer)(nil).Context))
+}
+
+// RecvMsg mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) RecvMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RecvMsg indicates an expected call of RecvMsg.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsServer)(nil).RecvMsg), arg0)
+}
+
+// Send mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) Send(arg0 *FuturesLpFillPair) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Send", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Send indicates an expected call of Send.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder) Send(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsServer)(nil).Send), arg0)
+}
+
+// SendHeader mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) SendHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendHeader indicates an expected call of SendHeader.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder) SendHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendHeader", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsServer)(nil).SendHeader), arg0)
+}
+
+// SendMsg mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) SendMsg(arg0 interface{}) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendMsg", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendMsg indicates an expected call of SendMsg.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsServer)(nil).SendMsg), arg0)
+}
+
+// SetHeader mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) SetHeader(arg0 metadata.MD) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetHeader", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SetHeader indicates an expected call of SetHeader.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder) SetHeader(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetHeader", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsServer)(nil).SetHeader), arg0)
+}
+
+// SetTrailer mocks base method.
+func (m *MockFuturesLpService_StreamFuturesLpFillPairsServer) SetTrailer(arg0 metadata.MD) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTrailer", arg0)
+}
+
+// SetTrailer indicates an expected call of SetTrailer.
+func (mr *MockFuturesLpService_StreamFuturesLpFillPairsServerMockRecorder) SetTrailer(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTrailer", reflect.TypeOf((*MockFuturesLpService_StreamFuturesLpFillPairsServer)(nil).SetTrailer), arg0)
+}
+
 // MockFuturesLpServiceClient is a mock of FuturesLpServiceClient interface.
 type MockFuturesLpServiceClient struct {
 	ctrl     *gomock.Controller
@@ -899,6 +1141,26 @@ func (mr *MockFuturesLpServiceClientMockRecorder) StopFuturesLp(ctx, in interfac
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopFuturesLp", reflect.TypeOf((*MockFuturesLpServiceClient)(nil).StopFuturesLp), varargs...)
+}
+
+// StreamFuturesLpFillPairs mocks base method.
+func (m *MockFuturesLpServiceClient) StreamFuturesLpFillPairs(ctx context.Context, in *StreamFuturesLpFillPairsRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesLpFillPairsClient, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StreamFuturesLpFillPairs", varargs...)
+	ret0, _ := ret[0].(FuturesLpService_StreamFuturesLpFillPairsClient)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StreamFuturesLpFillPairs indicates an expected call of StreamFuturesLpFillPairs.
+func (mr *MockFuturesLpServiceClientMockRecorder) StreamFuturesLpFillPairs(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFuturesLpFillPairs", reflect.TypeOf((*MockFuturesLpServiceClient)(nil).StreamFuturesLpFillPairs), varargs...)
 }
 
 // StreamFuturesLpFills mocks base method.
@@ -1107,6 +1369,20 @@ func (m *MockFuturesLpServiceServer) StopFuturesLp(ctx context.Context, in *Stop
 func (mr *MockFuturesLpServiceServerMockRecorder) StopFuturesLp(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopFuturesLp", reflect.TypeOf((*MockFuturesLpServiceServer)(nil).StopFuturesLp), ctx, in)
+}
+
+// StreamFuturesLpFillPairs mocks base method.
+func (m *MockFuturesLpServiceServer) StreamFuturesLpFillPairs(blob *StreamFuturesLpFillPairsRequest, server FuturesLpService_StreamFuturesLpFillPairsServer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StreamFuturesLpFillPairs", blob, server)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// StreamFuturesLpFillPairs indicates an expected call of StreamFuturesLpFillPairs.
+func (mr *MockFuturesLpServiceServerMockRecorder) StreamFuturesLpFillPairs(blob, server interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamFuturesLpFillPairs", reflect.TypeOf((*MockFuturesLpServiceServer)(nil).StreamFuturesLpFillPairs), blob, server)
 }
 
 // StreamFuturesLpFills mocks base method.

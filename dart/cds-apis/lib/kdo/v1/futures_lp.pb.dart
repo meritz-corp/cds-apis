@@ -2924,6 +2924,202 @@ class FuturesLpFillSummary extends $pb.GeneratedMessage {
   void clearEtfSellAvgPrice() => $_clearField(8);
 }
 
+/// StreamFuturesLpFillPairs
+class StreamFuturesLpFillPairsRequest extends $pb.GeneratedMessage {
+  factory StreamFuturesLpFillPairsRequest({
+    $core.String? futureSymbol,
+    $core.String? fundCode,
+    $core.String? etfSymbol,
+  }) {
+    final result = create();
+    if (futureSymbol != null) result.futureSymbol = futureSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    return result;
+  }
+
+  StreamFuturesLpFillPairsRequest._();
+
+  factory StreamFuturesLpFillPairsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamFuturesLpFillPairsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamFuturesLpFillPairsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'futureSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'etfSymbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFuturesLpFillPairsRequest clone() => StreamFuturesLpFillPairsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamFuturesLpFillPairsRequest copyWith(void Function(StreamFuturesLpFillPairsRequest) updates) => super.copyWith((message) => updates(message as StreamFuturesLpFillPairsRequest)) as StreamFuturesLpFillPairsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamFuturesLpFillPairsRequest create() => StreamFuturesLpFillPairsRequest._();
+  @$core.override
+  StreamFuturesLpFillPairsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamFuturesLpFillPairsRequest> createRepeated() => $pb.PbList<StreamFuturesLpFillPairsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamFuturesLpFillPairsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamFuturesLpFillPairsRequest>(create);
+  static StreamFuturesLpFillPairsRequest? _defaultInstance;
+
+  /// 선물 종목 심볼
+  @$pb.TagNumber(1)
+  $core.String get futureSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set futureSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFutureSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFutureSymbol() => $_clearField(1);
+
+  /// 펀드 코드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// ETF 심볼 — (future, fund) 당 다중 ETF row 구분용 (필수)
+  @$pb.TagNumber(3)
+  $core.String get etfSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set etfSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEtfSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEtfSymbol() => $_clearField(3);
+}
+
+/// 선물 체결 1건 + 그에 대응하는 ETF 헷지 주문 체결(합산)의 쌍.
+class FuturesLpFillPair extends $pb.GeneratedMessage {
+  factory FuturesLpFillPair({
+    $1.OrderSide? futureSide,
+    $fixnum.Int64? futureQuantity,
+    $core.double? futurePrice,
+    $1.OrderSide? etfSide,
+    $fixnum.Int64? etfQuantity,
+    $core.double? etfAvgPrice,
+    $fixnum.Int64? filledAtUnixMs,
+  }) {
+    final result = create();
+    if (futureSide != null) result.futureSide = futureSide;
+    if (futureQuantity != null) result.futureQuantity = futureQuantity;
+    if (futurePrice != null) result.futurePrice = futurePrice;
+    if (etfSide != null) result.etfSide = etfSide;
+    if (etfQuantity != null) result.etfQuantity = etfQuantity;
+    if (etfAvgPrice != null) result.etfAvgPrice = etfAvgPrice;
+    if (filledAtUnixMs != null) result.filledAtUnixMs = filledAtUnixMs;
+    return result;
+  }
+
+  FuturesLpFillPair._();
+
+  factory FuturesLpFillPair.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FuturesLpFillPair.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FuturesLpFillPair', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.futures_lp'), createEmptyInstance: create)
+    ..e<$1.OrderSide>(1, _omitFieldNames ? '' : 'futureSide', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
+    ..aInt64(2, _omitFieldNames ? '' : 'futureQuantity')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'futurePrice', $pb.PbFieldType.OD)
+    ..e<$1.OrderSide>(4, _omitFieldNames ? '' : 'etfSide', $pb.PbFieldType.OE, defaultOrMaker: $1.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $1.OrderSide.valueOf, enumValues: $1.OrderSide.values)
+    ..aInt64(5, _omitFieldNames ? '' : 'etfQuantity')
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'etfAvgPrice', $pb.PbFieldType.OD)
+    ..aInt64(7, _omitFieldNames ? '' : 'filledAtUnixMs')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FuturesLpFillPair clone() => FuturesLpFillPair()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FuturesLpFillPair copyWith(void Function(FuturesLpFillPair) updates) => super.copyWith((message) => updates(message as FuturesLpFillPair)) as FuturesLpFillPair;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FuturesLpFillPair create() => FuturesLpFillPair._();
+  @$core.override
+  FuturesLpFillPair createEmptyInstance() => create();
+  static $pb.PbList<FuturesLpFillPair> createRepeated() => $pb.PbList<FuturesLpFillPair>();
+  @$core.pragma('dart2js:noInline')
+  static FuturesLpFillPair getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FuturesLpFillPair>(create);
+  static FuturesLpFillPair? _defaultInstance;
+
+  /// 선물 leg (1건 체결)
+  @$pb.TagNumber(1)
+  $1.OrderSide get futureSide => $_getN(0);
+  @$pb.TagNumber(1)
+  set futureSide($1.OrderSide value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFutureSide() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFutureSide() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get futureQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set futureQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFutureQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFutureQuantity() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get futurePrice => $_getN(2);
+  @$pb.TagNumber(3)
+  set futurePrice($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFuturePrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFuturePrice() => $_clearField(3);
+
+  /// ETF 헷지 leg (해당 주문 체결 합산)
+  @$pb.TagNumber(4)
+  $1.OrderSide get etfSide => $_getN(3);
+  @$pb.TagNumber(4)
+  set etfSide($1.OrderSide value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEtfSide() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEtfSide() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get etfQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set etfQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasEtfQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearEtfQuantity() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get etfAvgPrice => $_getN(5);
+  @$pb.TagNumber(6)
+  set etfAvgPrice($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasEtfAvgPrice() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEtfAvgPrice() => $_clearField(6);
+
+  /// 쌍 완성 시각 (unix epoch milliseconds)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get filledAtUnixMs => $_getI64(6);
+  @$pb.TagNumber(7)
+  set filledAtUnixMs($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasFilledAtUnixMs() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearFilledAtUnixMs() => $_clearField(7);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
