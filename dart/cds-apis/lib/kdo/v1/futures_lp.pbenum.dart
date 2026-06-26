@@ -36,23 +36,5 @@ class FuturesLpState extends $pb.ProtobufEnum {
   const FuturesLpState._(super.value, super.name);
 }
 
-/// 체결 이벤트 leg 구분 (선물 또는 ETF 헷지)
-class FuturesLpFillLeg extends $pb.ProtobufEnum {
-  static const FuturesLpFillLeg FUTURES_LP_FILL_LEG_UNSPECIFIED = FuturesLpFillLeg._(0, _omitEnumNames ? '' : 'FUTURES_LP_FILL_LEG_UNSPECIFIED');
-  static const FuturesLpFillLeg FUTURES_LP_FILL_LEG_FUTURES = FuturesLpFillLeg._(1, _omitEnumNames ? '' : 'FUTURES_LP_FILL_LEG_FUTURES');
-  static const FuturesLpFillLeg FUTURES_LP_FILL_LEG_ETF = FuturesLpFillLeg._(2, _omitEnumNames ? '' : 'FUTURES_LP_FILL_LEG_ETF');
-
-  static const $core.List<FuturesLpFillLeg> values = <FuturesLpFillLeg> [
-    FUTURES_LP_FILL_LEG_UNSPECIFIED,
-    FUTURES_LP_FILL_LEG_FUTURES,
-    FUTURES_LP_FILL_LEG_ETF,
-  ];
-
-  static final $core.List<FuturesLpFillLeg?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static FuturesLpFillLeg? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const FuturesLpFillLeg._(super.value, super.name);
-}
-
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

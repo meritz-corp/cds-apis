@@ -33,22 +33,6 @@ final $typed_data.Uint8List futuresLpStateDescriptor = $convert.base64Decode(
     'RlVUVVJFU19MUF9TVEFURV9TVE9QUElORxADEhoKFkZVVFVSRVNfTFBfU1RBVEVfRVJST1IQBA'
     '==');
 
-@$core.Deprecated('Use futuresLpFillLegDescriptor instead')
-const FuturesLpFillLeg$json = {
-  '1': 'FuturesLpFillLeg',
-  '2': [
-    {'1': 'FUTURES_LP_FILL_LEG_UNSPECIFIED', '2': 0},
-    {'1': 'FUTURES_LP_FILL_LEG_FUTURES', '2': 1},
-    {'1': 'FUTURES_LP_FILL_LEG_ETF', '2': 2},
-  ],
-};
-
-/// Descriptor for `FuturesLpFillLeg`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List futuresLpFillLegDescriptor = $convert.base64Decode(
-    'ChBGdXR1cmVzTHBGaWxsTGVnEiMKH0ZVVFVSRVNfTFBfRklMTF9MRUdfVU5TUEVDSUZJRUQQAB'
-    'IfChtGVVRVUkVTX0xQX0ZJTExfTEVHX0ZVVFVSRVMQARIbChdGVVRVUkVTX0xQX0ZJTExfTEVH'
-    'X0VURhAC');
-
 @$core.Deprecated('Use futuresLpDescriptor instead')
 const FuturesLp$json = {
   '1': 'FuturesLp',
@@ -698,31 +682,29 @@ final $typed_data.Uint8List streamFuturesLpFillsRequestDescriptor = $convert.bas
     'EBAlIMZnV0dXJlU3ltYm9sEiEKCWZ1bmRfY29kZRgCIAEoCUIE4kEBAlIIZnVuZENvZGUSIwoK'
     'ZXRmX3N5bWJvbBgDIAEoCUIE4kEBAlIJZXRmU3ltYm9s');
 
-@$core.Deprecated('Use futuresLpFillEventDescriptor instead')
-const FuturesLpFillEvent$json = {
-  '1': 'FuturesLpFillEvent',
+@$core.Deprecated('Use futuresLpFillSummaryDescriptor instead')
+const FuturesLpFillSummary$json = {
+  '1': 'FuturesLpFillSummary',
   '2': [
-    {'1': 'leg', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.futures_lp.FuturesLpFillLeg', '10': 'leg'},
-    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
-    {'1': 'quantity', '3': 4, '4': 1, '5': 3, '10': 'quantity'},
-    {'1': 'price', '3': 5, '4': 1, '5': 1, '10': 'price'},
-    {'1': 'order_id', '3': 6, '4': 1, '5': 3, '10': 'orderId'},
-    {'1': 'fill_time_unix_millis', '3': 7, '4': 1, '5': 3, '10': 'fillTimeUnixMillis'},
-    {'1': 'cum_buy_quantity', '3': 8, '4': 1, '5': 3, '10': 'cumBuyQuantity'},
-    {'1': 'cum_sell_quantity', '3': 9, '4': 1, '5': 3, '10': 'cumSellQuantity'},
-    {'1': 'net_quantity', '3': 10, '4': 1, '5': 3, '10': 'netQuantity'},
+    {'1': 'future_buy_quantity', '3': 1, '4': 1, '5': 3, '10': 'futureBuyQuantity'},
+    {'1': 'future_buy_avg_price', '3': 2, '4': 1, '5': 1, '10': 'futureBuyAvgPrice'},
+    {'1': 'future_sell_quantity', '3': 3, '4': 1, '5': 3, '10': 'futureSellQuantity'},
+    {'1': 'future_sell_avg_price', '3': 4, '4': 1, '5': 1, '10': 'futureSellAvgPrice'},
+    {'1': 'etf_buy_quantity', '3': 5, '4': 1, '5': 3, '10': 'etfBuyQuantity'},
+    {'1': 'etf_buy_avg_price', '3': 6, '4': 1, '5': 1, '10': 'etfBuyAvgPrice'},
+    {'1': 'etf_sell_quantity', '3': 7, '4': 1, '5': 3, '10': 'etfSellQuantity'},
+    {'1': 'etf_sell_avg_price', '3': 8, '4': 1, '5': 1, '10': 'etfSellAvgPrice'},
   ],
 };
 
-/// Descriptor for `FuturesLpFillEvent`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List futuresLpFillEventDescriptor = $convert.base64Decode(
-    'ChJGdXR1cmVzTHBGaWxsRXZlbnQSNQoDbGVnGAEgASgOMiMua2RvLnYxLmZ1dHVyZXNfbHAuRn'
-    'V0dXJlc0xwRmlsbExlZ1IDbGVnEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEiwKBHNpZGUYAyAB'
-    'KA4yGC5rZG8udjEuY29tbW9uLk9yZGVyU2lkZVIEc2lkZRIaCghxdWFudGl0eRgEIAEoA1IIcX'
-    'VhbnRpdHkSFAoFcHJpY2UYBSABKAFSBXByaWNlEhkKCG9yZGVyX2lkGAYgASgDUgdvcmRlcklk'
-    'EjEKFWZpbGxfdGltZV91bml4X21pbGxpcxgHIAEoA1ISZmlsbFRpbWVVbml4TWlsbGlzEigKEG'
-    'N1bV9idXlfcXVhbnRpdHkYCCABKANSDmN1bUJ1eVF1YW50aXR5EioKEWN1bV9zZWxsX3F1YW50'
-    'aXR5GAkgASgDUg9jdW1TZWxsUXVhbnRpdHkSIQoMbmV0X3F1YW50aXR5GAogASgDUgtuZXRRdW'
-    'FudGl0eQ==');
+/// Descriptor for `FuturesLpFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List futuresLpFillSummaryDescriptor = $convert.base64Decode(
+    'ChRGdXR1cmVzTHBGaWxsU3VtbWFyeRIuChNmdXR1cmVfYnV5X3F1YW50aXR5GAEgASgDUhFmdX'
+    'R1cmVCdXlRdWFudGl0eRIvChRmdXR1cmVfYnV5X2F2Z19wcmljZRgCIAEoAVIRZnV0dXJlQnV5'
+    'QXZnUHJpY2USMAoUZnV0dXJlX3NlbGxfcXVhbnRpdHkYAyABKANSEmZ1dHVyZVNlbGxRdWFudG'
+    'l0eRIxChVmdXR1cmVfc2VsbF9hdmdfcHJpY2UYBCABKAFSEmZ1dHVyZVNlbGxBdmdQcmljZRIo'
+    'ChBldGZfYnV5X3F1YW50aXR5GAUgASgDUg5ldGZCdXlRdWFudGl0eRIpChFldGZfYnV5X2F2Z1'
+    '9wcmljZRgGIAEoAVIOZXRmQnV5QXZnUHJpY2USKgoRZXRmX3NlbGxfcXVhbnRpdHkYByABKANS'
+    'D2V0ZlNlbGxRdWFudGl0eRIrChJldGZfc2VsbF9hdmdfcHJpY2UYCCABKAFSD2V0ZlNlbGxBdm'
+    'dQcmljZQ==');
 

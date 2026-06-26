@@ -189,8 +189,8 @@ extension type FuturesLpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
-  Stream<kdov1futures_lp.FuturesLpFillEvent> streamFuturesLpFills(
+  /// 선물 LP 체결 요약 스트리밍 (선물 + ETF 헷지 당일 누적 요약)
+  Stream<kdov1futures_lp.FuturesLpFillSummary> streamFuturesLpFills(
     kdov1futures_lp.StreamFuturesLpFillsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,

@@ -290,7 +290,7 @@
     },
     "/v1/futures/{futureSymbol}/lp/{fundCode}/fills:stream": {
       "get": {
-        "summary": "선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)",
+        "summary": "선물 LP 체결 요약 스트리밍 (선물 + ETF 헷지 당일 누적 요약)",
         "operationId": "FuturesLpService_StreamFuturesLpFills",
         "responses": {
           "200": {
@@ -299,13 +299,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/futures_lpFuturesLpFillEvent"
+                  "$ref": "#/definitions/futures_lpFuturesLpFillSummary"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of futures_lpFuturesLpFillEvent"
+              "title": "Stream result of futures_lpFuturesLpFillSummary"
             }
           },
           "default": {
@@ -722,17 +722,6 @@
       },
       "title": "레버리지 선물 가격 산출"
     },
-    "commonOrderSide": {
-      "type": "string",
-      "enum": [
-        "ORDER_SIDE_UNSPECIFIED",
-        "ORDER_SIDE_BID",
-        "ORDER_SIDE_ASK"
-      ],
-      "default": "ORDER_SIDE_UNSPECIFIED",
-      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
-      "title": "주문 방향"
-    },
     "commonPdfDecomposeHedgePricing": {
       "type": "object",
       "description": "PDF 재귀 분해 헷지 가격 산출 (파라미터 없음)\nNAV 계산은 Etf.decomposed_constituents를 PdfNavHedge와 동일 공식으로 적용."
@@ -896,70 +885,6 @@
       },
       "title": "선물 LP 설정"
     },
-    "futures_lpFuturesLpFillEvent": {
-      "type": "object",
-      "properties": {
-        "leg": {
-          "$ref": "#/definitions/futures_lpFuturesLpFillLeg",
-          "title": "체결 leg 구분"
-        },
-        "symbol": {
-          "type": "string",
-          "title": "체결 종목 (선물 또는 ETF 심볼)"
-        },
-        "side": {
-          "$ref": "#/definitions/commonOrderSide",
-          "title": "체결 방향"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "체결 수량"
-        },
-        "price": {
-          "type": "number",
-          "format": "double",
-          "title": "체결 가격"
-        },
-        "orderId": {
-          "type": "string",
-          "format": "int64",
-          "title": "체결 주문 id"
-        },
-        "fillTimeUnixMillis": {
-          "type": "string",
-          "format": "int64",
-          "title": "서버 수신 wall-clock epoch millis"
-        },
-        "cumBuyQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "해당 leg 기준 당일 누적 매수 수량"
-        },
-        "cumSellQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "해당 leg 기준 당일 누적 매도 수량"
-        },
-        "netQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "cum_buy_quantity - cum_sell_quantity"
-        }
-      },
-      "title": "선물 LP 체결 이벤트 (선물 또는 내재화 ETF 헷지 체결 1건)"
-    },
-    "futures_lpFuturesLpFillLeg": {
-      "type": "string",
-      "enum": [
-        "FUTURES_LP_FILL_LEG_UNSPECIFIED",
-        "FUTURES_LP_FILL_LEG_FUTURES",
-        "FUTURES_LP_FILL_LEG_ETF"
-      ],
-      "default": "FUTURES_LP_FILL_LEG_UNSPECIFIED",
-      "description": "- FUTURES_LP_FILL_LEG_FUTURES: 선물 체결\n - FUTURES_LP_FILL_LEG_ETF: ETF 헷지 체결",
-      "title": "체결 이벤트 leg 구분 (선물 또는 ETF 헷지)"
-    },
     "futures_lpFuturesLpFillStatistics": {
       "type": "object",
       "properties": {
@@ -983,6 +908,46 @@
         }
       },
       "title": "선물 LP 체결 통계 (매수/매도 체결량 및 총금액)"
+    },
+    "futures_lpFuturesLpFillSummary": {
+      "type": "object",
+      "properties": {
+        "futureBuyQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "선물 leg (당일 누적)"
+        },
+        "futureBuyAvgPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "futureSellQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "futureSellAvgPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "etfBuyQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "ETF 헷지 leg (당일 누적)"
+        },
+        "etfBuyAvgPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "etfSellQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "etfSellAvgPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "선물 LP 체결 요약 (선물 leg + ETF 헷지 leg 당일 누적)"
     },
     "futures_lpFuturesLpOrderLimitStatus": {
       "type": "object",

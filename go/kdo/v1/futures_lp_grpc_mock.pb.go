@@ -563,10 +563,10 @@ func (mr *MockFuturesLpService_StreamFuturesLpFillsClientMockRecorder) Header() 
 }
 
 // Recv mocks base method.
-func (m *MockFuturesLpService_StreamFuturesLpFillsClient) Recv() (*FuturesLpFillEvent, error) {
+func (m *MockFuturesLpService_StreamFuturesLpFillsClient) Recv() (*FuturesLpFillSummary, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Recv")
-	ret0, _ := ret[0].(*FuturesLpFillEvent)
+	ret0, _ := ret[0].(*FuturesLpFillSummary)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -671,7 +671,7 @@ func (mr *MockFuturesLpService_StreamFuturesLpFillsServerMockRecorder) RecvMsg(a
 }
 
 // Send mocks base method.
-func (m *MockFuturesLpService_StreamFuturesLpFillsServer) Send(arg0 *FuturesLpFillEvent) error {
+func (m *MockFuturesLpService_StreamFuturesLpFillsServer) Send(arg0 *FuturesLpFillSummary) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Send", arg0)
 	ret0, _ := ret[0].(error)

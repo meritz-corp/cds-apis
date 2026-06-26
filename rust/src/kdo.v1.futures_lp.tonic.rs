@@ -379,7 +379,7 @@ pub mod futures_lp_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::StreamFuturesLpFillsRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::FuturesLpFillEvent>>,
+            tonic::Response<tonic::codec::Streaming<super::FuturesLpFillSummary>>,
             tonic::Status,
         > {
             self.inner
@@ -489,7 +489,7 @@ pub mod futures_lp_service_server {
         >;
         /// Server streaming response type for the StreamFuturesLpFills method.
         type StreamFuturesLpFillsStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::FuturesLpFillEvent, tonic::Status>,
+                Item = std::result::Result<super::FuturesLpFillSummary, tonic::Status>,
             >
             + Send
             + 'static;
@@ -1068,7 +1068,7 @@ pub mod futures_lp_service_server {
                     > tonic::server::ServerStreamingService<
                         super::StreamFuturesLpFillsRequest,
                     > for StreamFuturesLpFillsSvc<T> {
-                        type Response = super::FuturesLpFillEvent;
+                        type Response = super::FuturesLpFillSummary;
                         type ResponseStream = T::StreamFuturesLpFillsStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,

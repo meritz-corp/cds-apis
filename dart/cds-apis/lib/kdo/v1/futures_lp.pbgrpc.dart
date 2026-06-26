@@ -83,8 +83,8 @@ class FuturesLpServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamFuturesOrderBook, $async.Stream.fromIterable([request]), options: options);
   }
 
-  /// 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
-  $grpc.ResponseStream<$0.FuturesLpFillEvent> streamFuturesLpFills($0.StreamFuturesLpFillsRequest request, {$grpc.CallOptions? options,}) {
+  /// 선물 LP 체결 요약 스트리밍 (선물 + ETF 헷지 당일 누적 요약)
+  $grpc.ResponseStream<$0.FuturesLpFillSummary> streamFuturesLpFills($0.StreamFuturesLpFillsRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamFuturesLpFills, $async.Stream.fromIterable([request]), options: options);
   }
 
@@ -130,10 +130,10 @@ class FuturesLpServiceClient extends $grpc.Client {
       '/kdo.v1.futures_lp.FuturesLpService/StreamFuturesOrderBook',
       ($0.GetFuturesOrderBookRequest value) => value.writeToBuffer(),
       $0.FuturesOrderBook.fromBuffer);
-  static final _$streamFuturesLpFills = $grpc.ClientMethod<$0.StreamFuturesLpFillsRequest, $0.FuturesLpFillEvent>(
+  static final _$streamFuturesLpFills = $grpc.ClientMethod<$0.StreamFuturesLpFillsRequest, $0.FuturesLpFillSummary>(
       '/kdo.v1.futures_lp.FuturesLpService/StreamFuturesLpFills',
       ($0.StreamFuturesLpFillsRequest value) => value.writeToBuffer(),
-      $0.FuturesLpFillEvent.fromBuffer);
+      $0.FuturesLpFillSummary.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.futures_lp.FuturesLpService')
@@ -211,13 +211,13 @@ abstract class FuturesLpServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.GetFuturesOrderBookRequest.fromBuffer(value),
         ($0.FuturesOrderBook value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.StreamFuturesLpFillsRequest, $0.FuturesLpFillEvent>(
+    $addMethod($grpc.ServiceMethod<$0.StreamFuturesLpFillsRequest, $0.FuturesLpFillSummary>(
         'StreamFuturesLpFills',
         streamFuturesLpFills_Pre,
         false,
         true,
         ($core.List<$core.int> value) => $0.StreamFuturesLpFillsRequest.fromBuffer(value),
-        ($0.FuturesLpFillEvent value) => value.writeToBuffer()));
+        ($0.FuturesLpFillSummary value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.FuturesLp> getFuturesLp_Pre($grpc.ServiceCall $call, $async.Future<$0.GetFuturesLpRequest> $request) async {
@@ -280,10 +280,10 @@ abstract class FuturesLpServiceBase extends $grpc.Service {
 
   $async.Stream<$0.FuturesOrderBook> streamFuturesOrderBook($grpc.ServiceCall call, $0.GetFuturesOrderBookRequest request);
 
-  $async.Stream<$0.FuturesLpFillEvent> streamFuturesLpFills_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamFuturesLpFillsRequest> $request) async* {
+  $async.Stream<$0.FuturesLpFillSummary> streamFuturesLpFills_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamFuturesLpFillsRequest> $request) async* {
     yield* streamFuturesLpFills($call, await $request);
   }
 
-  $async.Stream<$0.FuturesLpFillEvent> streamFuturesLpFills($grpc.ServiceCall call, $0.StreamFuturesLpFillsRequest request);
+  $async.Stream<$0.FuturesLpFillSummary> streamFuturesLpFills($grpc.ServiceCall call, $0.StreamFuturesLpFillsRequest request);
 
 }

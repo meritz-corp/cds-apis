@@ -42,7 +42,7 @@ type FuturesLpServiceClient interface {
 	GetFuturesOrderBook(ctx context.Context, in *GetFuturesOrderBookRequest, opts ...grpc.CallOption) (*FuturesOrderBook, error)
 	// 선물 LP 주문장 스트리밍
 	StreamFuturesOrderBook(ctx context.Context, in *GetFuturesOrderBookRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesOrderBookClient, error)
-	// 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
+	// 선물 LP 체결 요약 스트리밍 (선물 + ETF 헷지 당일 누적 요약)
 	StreamFuturesLpFills(ctx context.Context, in *StreamFuturesLpFillsRequest, opts ...grpc.CallOption) (FuturesLpService_StreamFuturesLpFillsClient, error)
 }
 
@@ -206,7 +206,7 @@ func (c *futuresLpServiceClient) StreamFuturesLpFills(ctx context.Context, in *S
 }
 
 type FuturesLpService_StreamFuturesLpFillsClient interface {
-	Recv() (*FuturesLpFillEvent, error)
+	Recv() (*FuturesLpFillSummary, error)
 	grpc.ClientStream
 }
 
@@ -214,8 +214,8 @@ type futuresLpServiceStreamFuturesLpFillsClient struct {
 	grpc.ClientStream
 }
 
-func (x *futuresLpServiceStreamFuturesLpFillsClient) Recv() (*FuturesLpFillEvent, error) {
-	m := new(FuturesLpFillEvent)
+func (x *futuresLpServiceStreamFuturesLpFillsClient) Recv() (*FuturesLpFillSummary, error) {
+	m := new(FuturesLpFillSummary)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -246,7 +246,7 @@ type FuturesLpServiceServer interface {
 	GetFuturesOrderBook(context.Context, *GetFuturesOrderBookRequest) (*FuturesOrderBook, error)
 	// 선물 LP 주문장 스트리밍
 	StreamFuturesOrderBook(*GetFuturesOrderBookRequest, FuturesLpService_StreamFuturesOrderBookServer) error
-	// 선물 LP 체결 실시간 스트리밍 (선물 체결 + 내재화 ETF 헷지 체결)
+	// 선물 LP 체결 요약 스트리밍 (선물 + ETF 헷지 당일 누적 요약)
 	StreamFuturesLpFills(*StreamFuturesLpFillsRequest, FuturesLpService_StreamFuturesLpFillsServer) error
 	mustEmbedUnimplementedFuturesLpServiceServer()
 }
@@ -496,7 +496,7 @@ func _FuturesLpService_StreamFuturesLpFills_Handler(srv interface{}, stream grpc
 }
 
 type FuturesLpService_StreamFuturesLpFillsServer interface {
-	Send(*FuturesLpFillEvent) error
+	Send(*FuturesLpFillSummary) error
 	grpc.ServerStream
 }
 
@@ -504,7 +504,7 @@ type futuresLpServiceStreamFuturesLpFillsServer struct {
 	grpc.ServerStream
 }
 
-func (x *futuresLpServiceStreamFuturesLpFillsServer) Send(m *FuturesLpFillEvent) error {
+func (x *futuresLpServiceStreamFuturesLpFillsServer) Send(m *FuturesLpFillSummary) error {
 	return x.ServerStream.SendMsg(m)
 }
 
