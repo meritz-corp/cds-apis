@@ -232,6 +232,28 @@ pub struct LookupHedgeRequest {
     #[prost(int32, tag="3")]
     pub portfolio_id: i32,
 }
+/// LookupHedge 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LookupHedgeResponse {
+    /// 조회된 Hedge 목록
+    #[prost(message, repeated, tag="1")]
+    pub hedges: ::prost::alloc::vec::Vec<Hedge>,
+}
+/// FindValidHedge 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindValidHedgeRequest {
+    /// 소스(원주문) 펀드 코드
+    #[prost(string, tag="1")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 소스 종목 심볼
+    #[prost(string, tag="2")]
+    pub source_symbol: ::prost::alloc::string::String,
+    /// 헷지 대상 종목 심볼
+    #[prost(string, tag="3")]
+    pub hedge_symbol: ::prost::alloc::string::String,
+}
 /// ListHedges 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

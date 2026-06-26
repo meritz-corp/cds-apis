@@ -87,8 +87,8 @@ extension type HedgeServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// fund_code + source_symbol로 Hedge 조회
-  Future<kdov1hedge.Hedge> lookupHedge(
+  /// fund_code + source_symbol로 Hedge 목록 조회
+  Future<kdov1hedge.LookupHedgeResponse> lookupHedge(
     kdov1hedge.LookupHedgeRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
@@ -97,6 +97,24 @@ extension type HedgeServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.HedgeService.lookupHedge,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// fund_code + source_symbol + hedge_symbol 3-키로 유효한(is_valid) 단일 Hedge 조회
+  Future<kdov1hedge.Hedge> findValidHedge(
+    kdov1hedge.FindValidHedgeRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.HedgeService.findValidHedge,
       input,
       signal: signal,
       headers: headers,

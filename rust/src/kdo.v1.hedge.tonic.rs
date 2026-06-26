@@ -198,7 +198,10 @@ pub mod hedge_service_client {
         pub async fn lookup_hedge(
             &mut self,
             request: impl tonic::IntoRequest<super::LookupHedgeRequest>,
-        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<super::LookupHedgeResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -215,6 +218,28 @@ pub mod hedge_service_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("kdo.v1.hedge.HedgeService", "LookupHedge"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn find_valid_hedge(
+            &mut self,
+            request: impl tonic::IntoRequest<super::FindValidHedgeRequest>,
+        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.hedge.HedgeService/FindValidHedge",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.hedge.HedgeService", "FindValidHedge"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn list_hedges(
@@ -470,6 +495,13 @@ pub mod hedge_service_server {
         async fn lookup_hedge(
             &self,
             request: tonic::Request<super::LookupHedgeRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::LookupHedgeResponse>,
+            tonic::Status,
+        >;
+        async fn find_valid_hedge(
+            &self,
+            request: tonic::Request<super::FindValidHedgeRequest>,
         ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
         async fn list_hedges(
             &self,
@@ -798,7 +830,7 @@ pub mod hedge_service_server {
                         T: HedgeService,
                     > tonic::server::UnaryService<super::LookupHedgeRequest>
                     for LookupHedgeSvc<T> {
-                        type Response = super::Hedge;
+                        type Response = super::LookupHedgeResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -821,6 +853,51 @@ pub mod hedge_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = LookupHedgeSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.hedge.HedgeService/FindValidHedge" => {
+                    #[allow(non_camel_case_types)]
+                    struct FindValidHedgeSvc<T: HedgeService>(pub Arc<T>);
+                    impl<
+                        T: HedgeService,
+                    > tonic::server::UnaryService<super::FindValidHedgeRequest>
+                    for FindValidHedgeSvc<T> {
+                        type Response = super::Hedge;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::FindValidHedgeRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as HedgeService>::find_valid_hedge(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = FindValidHedgeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

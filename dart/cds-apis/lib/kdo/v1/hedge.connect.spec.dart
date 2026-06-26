@@ -49,11 +49,19 @@ abstract final class HedgeService {
     kdov1hedge.Hedge.new,
   );
 
-  /// fund_code + source_symbol로 Hedge 조회
+  /// fund_code + source_symbol로 Hedge 목록 조회
   static const lookupHedge = connect.Spec(
     '/$name/LookupHedge',
     connect.StreamType.unary,
     kdov1hedge.LookupHedgeRequest.new,
+    kdov1hedge.LookupHedgeResponse.new,
+  );
+
+  /// fund_code + source_symbol + hedge_symbol 3-키로 유효한(is_valid) 단일 Hedge 조회
+  static const findValidHedge = connect.Spec(
+    '/$name/FindValidHedge',
+    connect.StreamType.unary,
+    kdov1hedge.FindValidHedgeRequest.new,
     kdov1hedge.Hedge.new,
   );
 

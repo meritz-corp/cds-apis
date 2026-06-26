@@ -328,6 +328,35 @@ final $typed_data.Uint8List lookupHedgeRequestDescriptor = $convert.base64Decode
     'IpCg1zb3VyY2Vfc3ltYm9sGAIgASgJQgTiQQECUgxzb3VyY2VTeW1ib2wSIQoMcG9ydGZvbGlv'
     'X2lkGAMgASgFUgtwb3J0Zm9saW9JZA==');
 
+@$core.Deprecated('Use lookupHedgeResponseDescriptor instead')
+const LookupHedgeResponse$json = {
+  '1': 'LookupHedgeResponse',
+  '2': [
+    {'1': 'hedges', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.hedge.Hedge', '10': 'hedges'},
+  ],
+};
+
+/// Descriptor for `LookupHedgeResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lookupHedgeResponseDescriptor = $convert.base64Decode(
+    'ChNMb29rdXBIZWRnZVJlc3BvbnNlEisKBmhlZGdlcxgBIAMoCzITLmtkby52MS5oZWRnZS5IZW'
+    'RnZVIGaGVkZ2Vz');
+
+@$core.Deprecated('Use findValidHedgeRequestDescriptor instead')
+const FindValidHedgeRequest$json = {
+  '1': 'FindValidHedgeRequest',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'source_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'sourceSymbol'},
+    {'1': 'hedge_symbol', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'hedgeSymbol'},
+  ],
+};
+
+/// Descriptor for `FindValidHedgeRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List findValidHedgeRequestDescriptor = $convert.base64Decode(
+    'ChVGaW5kVmFsaWRIZWRnZVJlcXVlc3QSIQoJZnVuZF9jb2RlGAEgASgJQgTiQQECUghmdW5kQ2'
+    '9kZRIpCg1zb3VyY2Vfc3ltYm9sGAIgASgJQgTiQQECUgxzb3VyY2VTeW1ib2wSJwoMaGVkZ2Vf'
+    'c3ltYm9sGAMgASgJQgTiQQECUgtoZWRnZVN5bWJvbA==');
+
 @$core.Deprecated('Use listHedgesRequestDescriptor instead')
 const ListHedgesRequest$json = {
   '1': 'ListHedgesRequest',

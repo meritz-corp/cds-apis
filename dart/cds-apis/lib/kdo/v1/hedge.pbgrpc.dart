@@ -59,9 +59,14 @@ class HedgeServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getHedge, request, options: options);
   }
 
-  /// fund_code + source_symbol로 Hedge 조회
-  $grpc.ResponseFuture<$0.Hedge> lookupHedge($0.LookupHedgeRequest request, {$grpc.CallOptions? options,}) {
+  /// fund_code + source_symbol로 Hedge 목록 조회
+  $grpc.ResponseFuture<$0.LookupHedgeResponse> lookupHedge($0.LookupHedgeRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$lookupHedge, request, options: options);
+  }
+
+  /// fund_code + source_symbol + hedge_symbol 3-키로 유효한(is_valid) 단일 Hedge 조회
+  $grpc.ResponseFuture<$0.Hedge> findValidHedge($0.FindValidHedgeRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$findValidHedge, request, options: options);
   }
 
   /// Hedge 목록 조회
@@ -127,9 +132,13 @@ class HedgeServiceClient extends $grpc.Client {
       '/kdo.v1.hedge.HedgeService/GetHedge',
       ($0.GetHedgeRequest value) => value.writeToBuffer(),
       $0.Hedge.fromBuffer);
-  static final _$lookupHedge = $grpc.ClientMethod<$0.LookupHedgeRequest, $0.Hedge>(
+  static final _$lookupHedge = $grpc.ClientMethod<$0.LookupHedgeRequest, $0.LookupHedgeResponse>(
       '/kdo.v1.hedge.HedgeService/LookupHedge',
       ($0.LookupHedgeRequest value) => value.writeToBuffer(),
+      $0.LookupHedgeResponse.fromBuffer);
+  static final _$findValidHedge = $grpc.ClientMethod<$0.FindValidHedgeRequest, $0.Hedge>(
+      '/kdo.v1.hedge.HedgeService/FindValidHedge',
+      ($0.FindValidHedgeRequest value) => value.writeToBuffer(),
       $0.Hedge.fromBuffer);
   static final _$listHedges = $grpc.ClientMethod<$0.ListHedgesRequest, $0.ListHedgesResponse>(
       '/kdo.v1.hedge.HedgeService/ListHedges',
@@ -202,12 +211,19 @@ abstract class HedgeServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetHedgeRequest.fromBuffer(value),
         ($0.Hedge value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.LookupHedgeRequest, $0.Hedge>(
+    $addMethod($grpc.ServiceMethod<$0.LookupHedgeRequest, $0.LookupHedgeResponse>(
         'LookupHedge',
         lookupHedge_Pre,
         false,
         false,
         ($core.List<$core.int> value) => $0.LookupHedgeRequest.fromBuffer(value),
+        ($0.LookupHedgeResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.FindValidHedgeRequest, $0.Hedge>(
+        'FindValidHedge',
+        findValidHedge_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.FindValidHedgeRequest.fromBuffer(value),
         ($0.Hedge value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ListHedgesRequest, $0.ListHedgesResponse>(
         'ListHedges',
@@ -298,11 +314,17 @@ abstract class HedgeServiceBase extends $grpc.Service {
 
   $async.Future<$0.Hedge> getHedge($grpc.ServiceCall call, $0.GetHedgeRequest request);
 
-  $async.Future<$0.Hedge> lookupHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.LookupHedgeRequest> $request) async {
+  $async.Future<$0.LookupHedgeResponse> lookupHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.LookupHedgeRequest> $request) async {
     return lookupHedge($call, await $request);
   }
 
-  $async.Future<$0.Hedge> lookupHedge($grpc.ServiceCall call, $0.LookupHedgeRequest request);
+  $async.Future<$0.LookupHedgeResponse> lookupHedge($grpc.ServiceCall call, $0.LookupHedgeRequest request);
+
+  $async.Future<$0.Hedge> findValidHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.FindValidHedgeRequest> $request) async {
+    return findValidHedge($call, await $request);
+  }
+
+  $async.Future<$0.Hedge> findValidHedge($grpc.ServiceCall call, $0.FindValidHedgeRequest request);
 
   $async.Future<$0.ListHedgesResponse> listHedges_Pre($grpc.ServiceCall $call, $async.Future<$0.ListHedgesRequest> $request) async {
     return listHedges($call, await $request);

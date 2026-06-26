@@ -358,6 +358,26 @@ func (mr *MockHedgeServiceClientMockRecorder) DeleteHedgeGroup(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteHedgeGroup", reflect.TypeOf((*MockHedgeServiceClient)(nil).DeleteHedgeGroup), varargs...)
 }
 
+// FindValidHedge mocks base method.
+func (m *MockHedgeServiceClient) FindValidHedge(ctx context.Context, in *FindValidHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "FindValidHedge", varargs...)
+	ret0, _ := ret[0].(*Hedge)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindValidHedge indicates an expected call of FindValidHedge.
+func (mr *MockHedgeServiceClientMockRecorder) FindValidHedge(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindValidHedge", reflect.TypeOf((*MockHedgeServiceClient)(nil).FindValidHedge), varargs...)
+}
+
 // GetHedge mocks base method.
 func (m *MockHedgeServiceClient) GetHedge(ctx context.Context, in *GetHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
 	m.ctrl.T.Helper()
@@ -459,14 +479,14 @@ func (mr *MockHedgeServiceClientMockRecorder) ListHedges(ctx, in interface{}, op
 }
 
 // LookupHedge mocks base method.
-func (m *MockHedgeServiceClient) LookupHedge(ctx context.Context, in *LookupHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
+func (m *MockHedgeServiceClient) LookupHedge(ctx context.Context, in *LookupHedgeRequest, opts ...grpc.CallOption) (*LookupHedgeResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "LookupHedge", varargs...)
-	ret0, _ := ret[0].(*Hedge)
+	ret0, _ := ret[0].(*LookupHedgeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -641,6 +661,21 @@ func (mr *MockHedgeServiceServerMockRecorder) DeleteHedgeGroup(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteHedgeGroup", reflect.TypeOf((*MockHedgeServiceServer)(nil).DeleteHedgeGroup), ctx, in)
 }
 
+// FindValidHedge mocks base method.
+func (m *MockHedgeServiceServer) FindValidHedge(ctx context.Context, in *FindValidHedgeRequest) (*Hedge, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindValidHedge", ctx, in)
+	ret0, _ := ret[0].(*Hedge)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindValidHedge indicates an expected call of FindValidHedge.
+func (mr *MockHedgeServiceServerMockRecorder) FindValidHedge(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindValidHedge", reflect.TypeOf((*MockHedgeServiceServer)(nil).FindValidHedge), ctx, in)
+}
+
 // GetHedge mocks base method.
 func (m *MockHedgeServiceServer) GetHedge(ctx context.Context, in *GetHedgeRequest) (*Hedge, error) {
 	m.ctrl.T.Helper()
@@ -717,10 +752,10 @@ func (mr *MockHedgeServiceServerMockRecorder) ListHedges(ctx, in interface{}) *g
 }
 
 // LookupHedge mocks base method.
-func (m *MockHedgeServiceServer) LookupHedge(ctx context.Context, in *LookupHedgeRequest) (*Hedge, error) {
+func (m *MockHedgeServiceServer) LookupHedge(ctx context.Context, in *LookupHedgeRequest) (*LookupHedgeResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "LookupHedge", ctx, in)
-	ret0, _ := ret[0].(*Hedge)
+	ret0, _ := ret[0].(*LookupHedgeResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

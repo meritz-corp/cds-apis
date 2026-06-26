@@ -1069,6 +1069,122 @@ class LookupHedgeRequest extends $pb.GeneratedMessage {
   void clearPortfolioId() => $_clearField(3);
 }
 
+/// LookupHedge 응답
+class LookupHedgeResponse extends $pb.GeneratedMessage {
+  factory LookupHedgeResponse({
+    $core.Iterable<Hedge>? hedges,
+  }) {
+    final result = create();
+    if (hedges != null) result.hedges.addAll(hedges);
+    return result;
+  }
+
+  LookupHedgeResponse._();
+
+  factory LookupHedgeResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LookupHedgeResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LookupHedgeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..pc<Hedge>(1, _omitFieldNames ? '' : 'hedges', $pb.PbFieldType.PM, subBuilder: Hedge.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LookupHedgeResponse clone() => LookupHedgeResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LookupHedgeResponse copyWith(void Function(LookupHedgeResponse) updates) => super.copyWith((message) => updates(message as LookupHedgeResponse)) as LookupHedgeResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LookupHedgeResponse create() => LookupHedgeResponse._();
+  @$core.override
+  LookupHedgeResponse createEmptyInstance() => create();
+  static $pb.PbList<LookupHedgeResponse> createRepeated() => $pb.PbList<LookupHedgeResponse>();
+  @$core.pragma('dart2js:noInline')
+  static LookupHedgeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LookupHedgeResponse>(create);
+  static LookupHedgeResponse? _defaultInstance;
+
+  /// 조회된 Hedge 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<Hedge> get hedges => $_getList(0);
+}
+
+/// FindValidHedge 요청
+class FindValidHedgeRequest extends $pb.GeneratedMessage {
+  factory FindValidHedgeRequest({
+    $core.String? fundCode,
+    $core.String? sourceSymbol,
+    $core.String? hedgeSymbol,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
+    if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
+    return result;
+  }
+
+  FindValidHedgeRequest._();
+
+  factory FindValidHedgeRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FindValidHedgeRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FindValidHedgeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'sourceSymbol')
+    ..aOS(3, _omitFieldNames ? '' : 'hedgeSymbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FindValidHedgeRequest clone() => FindValidHedgeRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FindValidHedgeRequest copyWith(void Function(FindValidHedgeRequest) updates) => super.copyWith((message) => updates(message as FindValidHedgeRequest)) as FindValidHedgeRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FindValidHedgeRequest create() => FindValidHedgeRequest._();
+  @$core.override
+  FindValidHedgeRequest createEmptyInstance() => create();
+  static $pb.PbList<FindValidHedgeRequest> createRepeated() => $pb.PbList<FindValidHedgeRequest>();
+  @$core.pragma('dart2js:noInline')
+  static FindValidHedgeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FindValidHedgeRequest>(create);
+  static FindValidHedgeRequest? _defaultInstance;
+
+  /// 소스(원주문) 펀드 코드
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  /// 소스 종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get sourceSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set sourceSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSourceSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSourceSymbol() => $_clearField(2);
+
+  /// 헷지 대상 종목 심볼
+  @$pb.TagNumber(3)
+  $core.String get hedgeSymbol => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set hedgeSymbol($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHedgeSymbol() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHedgeSymbol() => $_clearField(3);
+}
+
 /// ListHedges 요청
 class ListHedgesRequest extends $pb.GeneratedMessage {
   factory ListHedgesRequest({
