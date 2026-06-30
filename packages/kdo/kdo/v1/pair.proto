@@ -407,8 +407,9 @@ message BestMakeQuantityImbalanceTrigger {
   double threshold_ratio = 1;
   // 트리거 후 재트리거까지 대기시간 (ms)
   uint64 cooldown_ms = 2;
-  // Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
-  int64 max_self_qty = 3;
+  // 삭제된 max_self_qty 필드 (field 3) — 재사용 금지
+  reserved 3;
+  reserved "max_self_qty";
   // base 의 bid·ask 1호가 수량이 모두 이 값을 초과해야 트리거 발사. 0 = 미설정.
   int64 min_base_qty = 4;
 }
@@ -423,8 +424,9 @@ message TargetNavQuantityImbalanceTrigger {
   // qty imbalance 판정 전용 심볼 (미지정=base.symbol 동일, 기존 동작).
   // 지정 시 해당 호가(예: 현물)의 deficit_side 로 qty_gate 평가. price_gate(NAV 비교)와 주문 발주는 base 유지.
   optional string imbalance_symbol = 3;
-  // Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
-  int64 max_self_qty = 4;
+  // 삭제된 max_self_qty 필드 (field 4) — 재사용 금지
+  reserved 4;
+  reserved "max_self_qty";
   // base 의 bid·ask 1호가 수량이 모두 이 값을 초과해야 트리거 발사. 0 = 미설정.
   int64 min_base_qty = 5;
 }

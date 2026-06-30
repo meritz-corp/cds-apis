@@ -620,11 +620,6 @@
           "format": "uint64",
           "title": "트리거 후 재트리거까지 대기시간 (ms)"
         },
-        "maxSelfQty": {
-          "type": "string",
-          "format": "int64",
-          "description": "Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음."
-        },
         "minBaseQty": {
           "type": "string",
           "format": "int64",
@@ -1170,11 +1165,6 @@
         "imbalanceSymbol": {
           "type": "string",
           "description": "qty imbalance 판정 전용 심볼 (미지정=base.symbol 동일, 기존 동작).\n지정 시 해당 호가(예: 현물)의 deficit_side 로 qty_gate 평가. price_gate(NAV 비교)와 주문 발주는 base 유지."
-        },
-        "maxSelfQty": {
-          "type": "string",
-          "format": "int64",
-          "description": "Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음."
         },
         "minBaseQty": {
           "type": "string",

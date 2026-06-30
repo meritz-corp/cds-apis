@@ -210,9 +210,6 @@ pub struct BestMakeQuantityImbalanceTrigger {
     /// 트리거 후 재트리거까지 대기시간 (ms)
     #[prost(uint64, tag="2")]
     pub cooldown_ms: u64,
-    /// Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
-    #[prost(int64, tag="3")]
-    pub max_self_qty: i64,
     /// base 의 bid·ask 1호가 수량이 모두 이 값을 초과해야 트리거 발사. 0 = 미설정.
     #[prost(int64, tag="4")]
     pub min_base_qty: i64,
@@ -232,9 +229,6 @@ pub struct TargetNavQuantityImbalanceTrigger {
     /// 지정 시 해당 호가(예: 현물)의 deficit_side 로 qty_gate 평가. price_gate(NAV 비교)와 주문 발주는 base 유지.
     #[prost(string, optional, tag="3")]
     pub imbalance_symbol: ::core::option::Option<::prost::alloc::string::String>,
-    /// Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
-    #[prost(int64, tag="4")]
-    pub max_self_qty: i64,
     /// base 의 bid·ask 1호가 수량이 모두 이 값을 초과해야 트리거 발사. 0 = 미설정.
     #[prost(int64, tag="5")]
     pub min_base_qty: i64,

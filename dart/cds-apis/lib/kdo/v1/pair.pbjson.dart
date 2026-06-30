@@ -342,17 +342,19 @@ const BestMakeQuantityImbalanceTrigger$json = {
   '2': [
     {'1': 'threshold_ratio', '3': 1, '4': 1, '5': 1, '10': 'thresholdRatio'},
     {'1': 'cooldown_ms', '3': 2, '4': 1, '5': 4, '10': 'cooldownMs'},
-    {'1': 'max_self_qty', '3': 3, '4': 1, '5': 3, '10': 'maxSelfQty'},
     {'1': 'min_base_qty', '3': 4, '4': 1, '5': 3, '10': 'minBaseQty'},
   ],
+  '9': [
+    {'1': 3, '2': 4},
+  ],
+  '10': ['max_self_qty'],
 };
 
 /// Descriptor for `BestMakeQuantityImbalanceTrigger`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List bestMakeQuantityImbalanceTriggerDescriptor = $convert.base64Decode(
     'CiBCZXN0TWFrZVF1YW50aXR5SW1iYWxhbmNlVHJpZ2dlchInCg90aHJlc2hvbGRfcmF0aW8YAS'
     'ABKAFSDnRocmVzaG9sZFJhdGlvEh8KC2Nvb2xkb3duX21zGAIgASgEUgpjb29sZG93bk1zEiAK'
-    'DG1heF9zZWxmX3F0eRgDIAEoA1IKbWF4U2VsZlF0eRIgCgxtaW5fYmFzZV9xdHkYBCABKANSCm'
-    '1pbkJhc2VRdHk=');
+    'DG1pbl9iYXNlX3F0eRgEIAEoA1IKbWluQmFzZVF0eUoECAMQBFIMbWF4X3NlbGZfcXR5');
 
 @$core.Deprecated('Use targetNavQuantityImbalanceTriggerDescriptor instead')
 const TargetNavQuantityImbalanceTrigger$json = {
@@ -361,21 +363,24 @@ const TargetNavQuantityImbalanceTrigger$json = {
     {'1': 'threshold_ratio', '3': 1, '4': 1, '5': 1, '10': 'thresholdRatio'},
     {'1': 'cooldown_ms', '3': 2, '4': 1, '5': 4, '10': 'cooldownMs'},
     {'1': 'imbalance_symbol', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'imbalanceSymbol', '17': true},
-    {'1': 'max_self_qty', '3': 4, '4': 1, '5': 3, '10': 'maxSelfQty'},
     {'1': 'min_base_qty', '3': 5, '4': 1, '5': 3, '10': 'minBaseQty'},
   ],
   '8': [
     {'1': '_imbalance_symbol'},
   ],
+  '9': [
+    {'1': 4, '2': 5},
+  ],
+  '10': ['max_self_qty'],
 };
 
 /// Descriptor for `TargetNavQuantityImbalanceTrigger`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List targetNavQuantityImbalanceTriggerDescriptor = $convert.base64Decode(
     'CiFUYXJnZXROYXZRdWFudGl0eUltYmFsYW5jZVRyaWdnZXISJwoPdGhyZXNob2xkX3JhdGlvGA'
     'EgASgBUg50aHJlc2hvbGRSYXRpbxIfCgtjb29sZG93bl9tcxgCIAEoBFIKY29vbGRvd25NcxIu'
-    'ChBpbWJhbGFuY2Vfc3ltYm9sGAMgASgJSABSD2ltYmFsYW5jZVN5bWJvbIgBARIgCgxtYXhfc2'
-    'VsZl9xdHkYBCABKANSCm1heFNlbGZRdHkSIAoMbWluX2Jhc2VfcXR5GAUgASgDUgptaW5CYXNl'
-    'UXR5QhMKEV9pbWJhbGFuY2Vfc3ltYm9s');
+    'ChBpbWJhbGFuY2Vfc3ltYm9sGAMgASgJSABSD2ltYmFsYW5jZVN5bWJvbIgBARIgCgxtaW5fYm'
+    'FzZV9xdHkYBSABKANSCm1pbkJhc2VRdHlCEwoRX2ltYmFsYW5jZV9zeW1ib2xKBAgEEAVSDG1h'
+    'eF9zZWxmX3F0eQ==');
 
 @$core.Deprecated('Use orderExecutionDescriptor instead')
 const OrderExecution$json = {
