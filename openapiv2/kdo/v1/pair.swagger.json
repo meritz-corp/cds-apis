@@ -623,7 +623,12 @@
         "maxSelfQty": {
           "type": "string",
           "format": "int64",
-          "description": "자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음."
+          "description": "Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음."
+        },
+        "minBaseQty": {
+          "type": "string",
+          "format": "int64",
+          "description": "base 의 bid·ask 1호가 수량이 모두 이 값을 초과해야 트리거 발사. 0 = 미설정."
         }
       },
       "description": "base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향."
@@ -1169,7 +1174,12 @@
         "maxSelfQty": {
           "type": "string",
           "format": "int64",
-          "description": "자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음."
+          "description": "Deprecated: 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음."
+        },
+        "minBaseQty": {
+          "type": "string",
+          "format": "int64",
+          "description": "base 의 bid·ask 1호가 수량이 모두 이 값을 초과해야 트리거 발사. 0 = 미설정."
         }
       },
       "description": "counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가\n목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용."
