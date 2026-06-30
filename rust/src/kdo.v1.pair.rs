@@ -210,6 +210,9 @@ pub struct BestMakeQuantityImbalanceTrigger {
     /// 트리거 후 재트리거까지 대기시간 (ms)
     #[prost(uint64, tag="2")]
     pub cooldown_ms: u64,
+    /// 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
+    #[prost(int64, tag="3")]
+    pub max_self_qty: i64,
 }
 /// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
 /// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
@@ -226,6 +229,9 @@ pub struct TargetNavQuantityImbalanceTrigger {
     /// 지정 시 해당 호가(예: 현물)의 deficit_side 로 qty_gate 평가. price_gate(NAV 비교)와 주문 발주는 base 유지.
     #[prost(string, optional, tag="3")]
     pub imbalance_symbol: ::core::option::Option<::prost::alloc::string::String>,
+    /// 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
+    #[prost(int64, tag="4")]
+    pub max_self_qty: i64,
 }
 // ============================================================================
 // OrderExecution — 실행 축

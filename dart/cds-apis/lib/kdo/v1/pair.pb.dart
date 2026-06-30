@@ -876,10 +876,12 @@ class BestMakeQuantityImbalanceTrigger extends $pb.GeneratedMessage {
   factory BestMakeQuantityImbalanceTrigger({
     $core.double? thresholdRatio,
     $fixnum.Int64? cooldownMs,
+    $fixnum.Int64? maxSelfQty,
   }) {
     final result = create();
     if (thresholdRatio != null) result.thresholdRatio = thresholdRatio;
     if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    if (maxSelfQty != null) result.maxSelfQty = maxSelfQty;
     return result;
   }
 
@@ -891,6 +893,7 @@ class BestMakeQuantityImbalanceTrigger extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BestMakeQuantityImbalanceTrigger', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..a<$core.double>(1, _omitFieldNames ? '' : 'thresholdRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(3, _omitFieldNames ? '' : 'maxSelfQty')
     ..hasRequiredFields = false
   ;
 
@@ -930,6 +933,16 @@ class BestMakeQuantityImbalanceTrigger extends $pb.GeneratedMessage {
   $core.bool hasCooldownMs() => $_has(1);
   @$pb.TagNumber(2)
   void clearCooldownMs() => $_clearField(2);
+
+  /// 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get maxSelfQty => $_getI64(2);
+  @$pb.TagNumber(3)
+  set maxSelfQty($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMaxSelfQty() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMaxSelfQty() => $_clearField(3);
 }
 
 /// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
@@ -939,11 +952,13 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
     $core.double? thresholdRatio,
     $fixnum.Int64? cooldownMs,
     $core.String? imbalanceSymbol,
+    $fixnum.Int64? maxSelfQty,
   }) {
     final result = create();
     if (thresholdRatio != null) result.thresholdRatio = thresholdRatio;
     if (cooldownMs != null) result.cooldownMs = cooldownMs;
     if (imbalanceSymbol != null) result.imbalanceSymbol = imbalanceSymbol;
+    if (maxSelfQty != null) result.maxSelfQty = maxSelfQty;
     return result;
   }
 
@@ -956,6 +971,7 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
     ..a<$core.double>(1, _omitFieldNames ? '' : 'thresholdRatio', $pb.PbFieldType.OD)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(3, _omitFieldNames ? '' : 'imbalanceSymbol')
+    ..aInt64(4, _omitFieldNames ? '' : 'maxSelfQty')
     ..hasRequiredFields = false
   ;
 
@@ -1006,6 +1022,16 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
   $core.bool hasImbalanceSymbol() => $_has(2);
   @$pb.TagNumber(3)
   void clearImbalanceSymbol() => $_clearField(3);
+
+  /// 자기측 1호가 수량 상한. 현재 내 호가 수량이 이 값보다 작을 때만 트리거 발사. 0 = 상한 없음.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get maxSelfQty => $_getI64(3);
+  @$pb.TagNumber(4)
+  set maxSelfQty($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMaxSelfQty() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMaxSelfQty() => $_clearField(4);
 }
 
 enum OrderExecution_Kind {

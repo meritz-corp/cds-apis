@@ -404,6 +404,9 @@ impl serde::Serialize for BestMakeQuantityImbalanceTrigger {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.BestMakeQuantityImbalanceTrigger", len)?;
         if true {
             struct_ser.serialize_field("threshold_ratio", &self.threshold_ratio)?;
@@ -412,6 +415,11 @@ impl serde::Serialize for BestMakeQuantityImbalanceTrigger {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_self_qty", ToString::to_string(&self.max_self_qty).as_str())?;
         }
         struct_ser.end()
     }
@@ -427,12 +435,15 @@ impl<'de> serde::Deserialize<'de> for BestMakeQuantityImbalanceTrigger {
             "thresholdRatio",
             "cooldown_ms",
             "cooldownMs",
+            "max_self_qty",
+            "maxSelfQty",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             ThresholdRatio,
             CooldownMs,
+            MaxSelfQty,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -457,6 +468,7 @@ impl<'de> serde::Deserialize<'de> for BestMakeQuantityImbalanceTrigger {
                         match value {
                             "thresholdRatio" | "threshold_ratio" => Ok(GeneratedField::ThresholdRatio),
                             "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            "maxSelfQty" | "max_self_qty" => Ok(GeneratedField::MaxSelfQty),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -478,6 +490,7 @@ impl<'de> serde::Deserialize<'de> for BestMakeQuantityImbalanceTrigger {
             {
                 let mut threshold_ratio__ = None;
                 let mut cooldown_ms__ = None;
+                let mut max_self_qty__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ThresholdRatio => {
@@ -496,6 +509,14 @@ impl<'de> serde::Deserialize<'de> for BestMakeQuantityImbalanceTrigger {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::MaxSelfQty => {
+                            if max_self_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxSelfQty"));
+                            }
+                            max_self_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -504,6 +525,7 @@ impl<'de> serde::Deserialize<'de> for BestMakeQuantityImbalanceTrigger {
                 Ok(BestMakeQuantityImbalanceTrigger {
                     threshold_ratio: threshold_ratio__.unwrap_or_default(),
                     cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                    max_self_qty: max_self_qty__.unwrap_or_default(),
                 })
             }
         }
@@ -4961,6 +4983,9 @@ impl serde::Serialize for TargetNavQuantityImbalanceTrigger {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.TargetNavQuantityImbalanceTrigger", len)?;
         if true {
             struct_ser.serialize_field("threshold_ratio", &self.threshold_ratio)?;
@@ -4972,6 +4997,11 @@ impl serde::Serialize for TargetNavQuantityImbalanceTrigger {
         }
         if let Some(v) = self.imbalance_symbol.as_ref() {
             struct_ser.serialize_field("imbalance_symbol", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_self_qty", ToString::to_string(&self.max_self_qty).as_str())?;
         }
         struct_ser.end()
     }
@@ -4989,6 +5019,8 @@ impl<'de> serde::Deserialize<'de> for TargetNavQuantityImbalanceTrigger {
             "cooldownMs",
             "imbalance_symbol",
             "imbalanceSymbol",
+            "max_self_qty",
+            "maxSelfQty",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4996,6 +5028,7 @@ impl<'de> serde::Deserialize<'de> for TargetNavQuantityImbalanceTrigger {
             ThresholdRatio,
             CooldownMs,
             ImbalanceSymbol,
+            MaxSelfQty,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5021,6 +5054,7 @@ impl<'de> serde::Deserialize<'de> for TargetNavQuantityImbalanceTrigger {
                             "thresholdRatio" | "threshold_ratio" => Ok(GeneratedField::ThresholdRatio),
                             "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
                             "imbalanceSymbol" | "imbalance_symbol" => Ok(GeneratedField::ImbalanceSymbol),
+                            "maxSelfQty" | "max_self_qty" => Ok(GeneratedField::MaxSelfQty),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5043,6 +5077,7 @@ impl<'de> serde::Deserialize<'de> for TargetNavQuantityImbalanceTrigger {
                 let mut threshold_ratio__ = None;
                 let mut cooldown_ms__ = None;
                 let mut imbalance_symbol__ = None;
+                let mut max_self_qty__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ThresholdRatio => {
@@ -5067,6 +5102,14 @@ impl<'de> serde::Deserialize<'de> for TargetNavQuantityImbalanceTrigger {
                             }
                             imbalance_symbol__ = map_.next_value()?;
                         }
+                        GeneratedField::MaxSelfQty => {
+                            if max_self_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxSelfQty"));
+                            }
+                            max_self_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5076,6 +5119,7 @@ impl<'de> serde::Deserialize<'de> for TargetNavQuantityImbalanceTrigger {
                     threshold_ratio: threshold_ratio__.unwrap_or_default(),
                     cooldown_ms: cooldown_ms__.unwrap_or_default(),
                     imbalance_symbol: imbalance_symbol__,
+                    max_self_qty: max_self_qty__.unwrap_or_default(),
                 })
             }
         }
