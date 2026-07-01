@@ -636,6 +636,7 @@ const PairExecutionLog$json = {
     {'1': 'exit_order_id', '3': 19, '4': 1, '5': 4, '9': 5, '10': 'exitOrderId', '17': true},
     {'1': 'base_slippage', '3': 20, '4': 1, '5': 3, '10': 'baseSlippage'},
     {'1': 'counter_slippage', '3': 21, '4': 1, '5': 3, '10': 'counterSlippage'},
+    {'1': 'cycle_id', '3': 22, '4': 1, '5': 13, '9': 6, '10': 'cycleId', '17': true},
   ],
   '8': [
     {'1': '_base_order_id'},
@@ -644,6 +645,7 @@ const PairExecutionLog$json = {
     {'1': '_exit_qty'},
     {'1': '_exit_fill_price'},
     {'1': '_exit_order_id'},
+    {'1': '_cycle_id'},
   ],
   '9': [
     {'1': 8, '2': 9},
@@ -668,9 +670,10 @@ final $typed_data.Uint8List pairExecutionLogDescriptor = $convert.base64Decode(
     'KANIA1IHZXhpdFF0eYgBARIrCg9leGl0X2ZpbGxfcHJpY2UYEiABKANIBFINZXhpdEZpbGxQcm'
     'ljZYgBARInCg1leGl0X29yZGVyX2lkGBMgASgESAVSC2V4aXRPcmRlcklkiAEBEiMKDWJhc2Vf'
     'c2xpcHBhZ2UYFCABKANSDGJhc2VTbGlwcGFnZRIpChBjb3VudGVyX3NsaXBwYWdlGBUgASgDUg'
-    '9jb3VudGVyU2xpcHBhZ2VCEAoOX2Jhc2Vfb3JkZXJfaWRCEwoRX2NvdW50ZXJfb3JkZXJfaWRC'
-    'CQoHX2RldGFpbEILCglfZXhpdF9xdHlCEgoQX2V4aXRfZmlsbF9wcmljZUIQCg5fZXhpdF9vcm'
-    'Rlcl9pZEoECAgQCVIGc3ByZWFk');
+    '9jb3VudGVyU2xpcHBhZ2USHgoIY3ljbGVfaWQYFiABKA1IBlIHY3ljbGVJZIgBAUIQCg5fYmFz'
+    'ZV9vcmRlcl9pZEITChFfY291bnRlcl9vcmRlcl9pZEIJCgdfZGV0YWlsQgsKCV9leGl0X3F0eU'
+    'ISChBfZXhpdF9maWxsX3ByaWNlQhAKDl9leGl0X29yZGVyX2lkQgsKCV9jeWNsZV9pZEoECAgQ'
+    'CVIGc3ByZWFk');
 
 @$core.Deprecated('Use listPairExecutionLogsRequestDescriptor instead')
 const ListPairExecutionLogsRequest$json = {

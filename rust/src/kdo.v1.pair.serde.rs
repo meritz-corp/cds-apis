@@ -2965,6 +2965,9 @@ impl serde::Serialize for PairExecutionLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairExecutionLog", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -3058,6 +3061,9 @@ impl serde::Serialize for PairExecutionLog {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("counter_slippage", ToString::to_string(&self.counter_slippage).as_str())?;
         }
+        if let Some(v) = self.cycle_id.as_ref() {
+            struct_ser.serialize_field("cycle_id", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -3105,6 +3111,8 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             "baseSlippage",
             "counter_slippage",
             "counterSlippage",
+            "cycle_id",
+            "cycleId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3129,6 +3137,7 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
             ExitOrderId,
             BaseSlippage,
             CounterSlippage,
+            CycleId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3171,6 +3180,7 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                             "exitOrderId" | "exit_order_id" => Ok(GeneratedField::ExitOrderId),
                             "baseSlippage" | "base_slippage" => Ok(GeneratedField::BaseSlippage),
                             "counterSlippage" | "counter_slippage" => Ok(GeneratedField::CounterSlippage),
+                            "cycleId" | "cycle_id" => Ok(GeneratedField::CycleId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3210,6 +3220,7 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                 let mut exit_order_id__ = None;
                 let mut base_slippage__ = None;
                 let mut counter_slippage__ = None;
+                let mut cycle_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairId => {
@@ -3364,6 +3375,14 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::CycleId => {
+                            if cycle_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cycleId"));
+                            }
+                            cycle_id__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3390,6 +3409,7 @@ impl<'de> serde::Deserialize<'de> for PairExecutionLog {
                     exit_order_id: exit_order_id__,
                     base_slippage: base_slippage__.unwrap_or_default(),
                     counter_slippage: counter_slippage__.unwrap_or_default(),
+                    cycle_id: cycle_id__,
                 })
             }
         }

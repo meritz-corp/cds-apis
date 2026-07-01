@@ -503,6 +503,10 @@ pub struct PairExecutionLog {
     /// (매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0.
     #[prost(int64, tag="21")]
     pub counter_slippage: i64,
+    /// 실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.
+    /// DualSubmit(fire-and-forget)·사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
+    #[prost(uint32, optional, tag="22")]
+    pub cycle_id: ::core::option::Option<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -990,6 +990,11 @@
           "type": "string",
           "format": "int64",
           "description": "발주가 대비 체결 평균가 슬리피지(원). side 반영해 불리하게 체결될수록 양수\n(매수=체결−발주, 매도=발주−체결). base 무발주 execution(CounterIocTpSl)에선 base_slippage=0."
+        },
+        "cycleId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.\nDualSubmit(fire-and-forget)·사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null)."
         }
       },
       "title": "페어 실행 로그 레코드"

@@ -1929,6 +1929,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? exitOrderId,
     $fixnum.Int64? baseSlippage,
     $fixnum.Int64? counterSlippage,
+    $core.int? cycleId,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1951,6 +1952,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     if (exitOrderId != null) result.exitOrderId = exitOrderId;
     if (baseSlippage != null) result.baseSlippage = baseSlippage;
     if (counterSlippage != null) result.counterSlippage = counterSlippage;
+    if (cycleId != null) result.cycleId = cycleId;
     return result;
   }
 
@@ -1980,6 +1982,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(19, _omitFieldNames ? '' : 'exitOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(20, _omitFieldNames ? '' : 'baseSlippage')
     ..aInt64(21, _omitFieldNames ? '' : 'counterSlippage')
+    ..a<$core.int>(22, _omitFieldNames ? '' : 'cycleId', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -2205,6 +2208,17 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   $core.bool hasCounterSlippage() => $_has(19);
   @$pb.TagNumber(21)
   void clearCounterSlippage() => $_clearField(21);
+
+  /// 실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.
+  /// DualSubmit(fire-and-forget)·사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
+  @$pb.TagNumber(22)
+  $core.int get cycleId => $_getIZ(20);
+  @$pb.TagNumber(22)
+  set cycleId($core.int value) => $_setUnsignedInt32(20, value);
+  @$pb.TagNumber(22)
+  $core.bool hasCycleId() => $_has(20);
+  @$pb.TagNumber(22)
+  void clearCycleId() => $_clearField(22);
 }
 
 class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
