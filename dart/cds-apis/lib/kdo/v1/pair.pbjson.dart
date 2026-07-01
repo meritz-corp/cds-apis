@@ -685,6 +685,8 @@ const ListPairExecutionLogsRequest$json = {
     {'1': 'order_by', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'orderBy'},
     {'1': 'outcome', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.pair.PairExecutionOutcome', '10': 'outcome'},
     {'1': 'date', '3': 6, '4': 1, '5': 9, '10': 'date'},
+    {'1': 'start_time', '3': 7, '4': 1, '5': 9, '10': 'startTime'},
+    {'1': 'end_time', '3': 8, '4': 1, '5': 9, '10': 'endTime'},
   ],
   '8': [
     {'1': '_page_size'},
@@ -698,8 +700,9 @@ final $typed_data.Uint8List listPairExecutionLogsRequestDescriptor = $convert.ba
     'tkby5jZHNhcGlzLnh5ei9QYWlyUgRwYWlyEiAKCXBhZ2Vfc2l6ZRgCIAEoBUgAUghwYWdlU2l6'
     'ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBARIfCghvcmRlcl9ieRgEIA'
     'EoCUIE4kEBAVIHb3JkZXJCeRI7CgdvdXRjb21lGAUgASgOMiEua2RvLnYxLnBhaXIuUGFpckV4'
-    'ZWN1dGlvbk91dGNvbWVSB291dGNvbWUSEgoEZGF0ZRgGIAEoCVIEZGF0ZUIMCgpfcGFnZV9zaX'
-    'plQg0KC19wYWdlX3Rva2Vu');
+    'ZWN1dGlvbk91dGNvbWVSB291dGNvbWUSEgoEZGF0ZRgGIAEoCVIEZGF0ZRIdCgpzdGFydF90aW'
+    '1lGAcgASgJUglzdGFydFRpbWUSGQoIZW5kX3RpbWUYCCABKAlSB2VuZFRpbWVCDAoKX3BhZ2Vf'
+    'c2l6ZUINCgtfcGFnZV90b2tlbg==');
 
 @$core.Deprecated('Use listPairExecutionLogsResponseDescriptor instead')
 const ListPairExecutionLogsResponse$json = {

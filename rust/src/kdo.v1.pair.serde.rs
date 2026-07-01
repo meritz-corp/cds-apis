@@ -1462,6 +1462,12 @@ impl serde::Serialize for ListPairExecutionLogsRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.ListPairExecutionLogsRequest", len)?;
         if true {
             struct_ser.serialize_field("pair", &self.pair)?;
@@ -1483,6 +1489,12 @@ impl serde::Serialize for ListPairExecutionLogsRequest {
         if true {
             struct_ser.serialize_field("date", &self.date)?;
         }
+        if true {
+            struct_ser.serialize_field("start_time", &self.start_time)?;
+        }
+        if true {
+            struct_ser.serialize_field("end_time", &self.end_time)?;
+        }
         struct_ser.end()
     }
 }
@@ -1502,6 +1514,10 @@ impl<'de> serde::Deserialize<'de> for ListPairExecutionLogsRequest {
             "orderBy",
             "outcome",
             "date",
+            "start_time",
+            "startTime",
+            "end_time",
+            "endTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1512,6 +1528,8 @@ impl<'de> serde::Deserialize<'de> for ListPairExecutionLogsRequest {
             OrderBy,
             Outcome,
             Date,
+            StartTime,
+            EndTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1540,6 +1558,8 @@ impl<'de> serde::Deserialize<'de> for ListPairExecutionLogsRequest {
                             "orderBy" | "order_by" => Ok(GeneratedField::OrderBy),
                             "outcome" => Ok(GeneratedField::Outcome),
                             "date" => Ok(GeneratedField::Date),
+                            "startTime" | "start_time" => Ok(GeneratedField::StartTime),
+                            "endTime" | "end_time" => Ok(GeneratedField::EndTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1565,6 +1585,8 @@ impl<'de> serde::Deserialize<'de> for ListPairExecutionLogsRequest {
                 let mut order_by__ = None;
                 let mut outcome__ = None;
                 let mut date__ = None;
+                let mut start_time__ = None;
+                let mut end_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pair => {
@@ -1605,6 +1627,18 @@ impl<'de> serde::Deserialize<'de> for ListPairExecutionLogsRequest {
                             }
                             date__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::StartTime => {
+                            if start_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("startTime"));
+                            }
+                            start_time__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EndTime => {
+                            if end_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("endTime"));
+                            }
+                            end_time__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1617,6 +1651,8 @@ impl<'de> serde::Deserialize<'de> for ListPairExecutionLogsRequest {
                     order_by: order_by__.unwrap_or_default(),
                     outcome: outcome__.unwrap_or_default(),
                     date: date__.unwrap_or_default(),
+                    start_time: start_time__.unwrap_or_default(),
+                    end_time: end_time__.unwrap_or_default(),
                 })
             }
         }

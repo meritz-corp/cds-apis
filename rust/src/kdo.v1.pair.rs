@@ -529,6 +529,12 @@ pub struct ListPairExecutionLogsRequest {
     /// 날짜 필터 (YYYY-MM-DD, KST 기준 해당 일자만 조회. 빈 문자열이면 전체)
     #[prost(string, tag="6")]
     pub date: ::prost::alloc::string::String,
+    /// 시작 시각 필터 (HH:MM, KST. date와 함께 사용. 빈 문자열이면 해당 일자 00:00부터)
+    #[prost(string, tag="7")]
+    pub start_time: ::prost::alloc::string::String,
+    /// 종료 시각 필터 (HH:MM, KST. date와 함께 사용. 빈 문자열이면 해당 일자 끝까지. 지정 시 해당 분까지 포함)
+    #[prost(string, tag="8")]
+    pub end_time: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

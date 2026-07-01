@@ -339,6 +339,20 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "startTime",
+            "description": "시작 시각 필터 (HH:MM, KST. date와 함께 사용. 빈 문자열이면 해당 일자 00:00부터)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "description": "종료 시각 필터 (HH:MM, KST. date와 함께 사용. 빈 문자열이면 해당 일자 끝까지. 지정 시 해당 분까지 포함)",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [

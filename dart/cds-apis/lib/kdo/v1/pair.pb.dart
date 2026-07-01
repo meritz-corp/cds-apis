@@ -2229,6 +2229,8 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     $core.String? orderBy,
     PairExecutionOutcome? outcome,
     $core.String? date,
+    $core.String? startTime,
+    $core.String? endTime,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
@@ -2237,6 +2239,8 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     if (orderBy != null) result.orderBy = orderBy;
     if (outcome != null) result.outcome = outcome;
     if (date != null) result.date = date;
+    if (startTime != null) result.startTime = startTime;
+    if (endTime != null) result.endTime = endTime;
     return result;
   }
 
@@ -2252,6 +2256,8 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'orderBy')
     ..e<PairExecutionOutcome>(5, _omitFieldNames ? '' : 'outcome', $pb.PbFieldType.OE, defaultOrMaker: PairExecutionOutcome.PAIR_EXECUTION_OUTCOME_UNSPECIFIED, valueOf: PairExecutionOutcome.valueOf, enumValues: PairExecutionOutcome.values)
     ..aOS(6, _omitFieldNames ? '' : 'date')
+    ..aOS(7, _omitFieldNames ? '' : 'startTime')
+    ..aOS(8, _omitFieldNames ? '' : 'endTime')
     ..hasRequiredFields = false
   ;
 
@@ -2331,6 +2337,26 @@ class ListPairExecutionLogsRequest extends $pb.GeneratedMessage {
   $core.bool hasDate() => $_has(5);
   @$pb.TagNumber(6)
   void clearDate() => $_clearField(6);
+
+  /// 시작 시각 필터 (HH:MM, KST. date와 함께 사용. 빈 문자열이면 해당 일자 00:00부터)
+  @$pb.TagNumber(7)
+  $core.String get startTime => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set startTime($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasStartTime() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStartTime() => $_clearField(7);
+
+  /// 종료 시각 필터 (HH:MM, KST. date와 함께 사용. 빈 문자열이면 해당 일자 끝까지. 지정 시 해당 분까지 포함)
+  @$pb.TagNumber(8)
+  $core.String get endTime => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set endTime($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasEndTime() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearEndTime() => $_clearField(8);
 }
 
 class ListPairExecutionLogsResponse extends $pb.GeneratedMessage {
