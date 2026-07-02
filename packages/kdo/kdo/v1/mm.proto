@@ -286,20 +286,23 @@ message MarketMakingMarketBias {
 
 // 통합 포지션 관리 설정 (soft rebalance + hard limit)
 message MarketMakingExposureBalancer {
+  reserved 2, 3, 4;
+  reserved "trigger_multiple", "price_skew_ticks", "limit_multiple";
+
   // 활성화 여부
   bool enabled = 1;
 
-  // soft zone: 이 배수부터 soft rebalance 발동
-  int32 trigger_multiple = 2;
-
-  // 단계당 가격 중심 이동 틱 수
-  int32 price_skew_ticks = 3;
-
-  // hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
-  int32 limit_multiple = 4;
-
   // opportunistic close 기능 활성화 여부
   bool opportunistic_enabled = 5;
+
+  // soft zone 기준 수량 (절대 수량). 가격 shift 기울기의 분모 + 수량 축소 발동 임계 (mm_dan skewTriggerAmt 대응)
+  int64 trigger_quantity = 6;
+
+  // trigger_quantity 당 가격 이동 기울기 (원, 소수 허용). shift = -(net/trigger_quantity) × 이 값 — 연속 비례, 틱 배수 아니어도 됨. 엔진 마지막 normalize 가 정렬 (mm_dan skewUnit 대응)
+  double price_skew_unit = 7;
+
+  // hard zone (절대 수량). 이 수량에서 같은 방향 수량 0 + shift 상한 ((limit_quantity/trigger_quantity) × price_skew_unit)
+  int64 limit_quantity = 8;
 }
 
 // 순포지션 수량 한도 설정 (방향별 호가 차단)
@@ -494,17 +497,20 @@ message MarketBiasState {
 
 // 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 message ExposureBalancerState {
+  reserved 2;
+  reserved "price_shift_ticks";
+
   // 현재 순노출 수량
   int64 net_exposure = 1;
-
-  // 현재 가격 중심 이동 틱 수
-  int32 price_shift_ticks = 2;
 
   // 현재 bid 수량 스케일 (0.0 ~ 1.0)
   double bid_scale = 3;
 
   // 현재 ask 수량 스케일 (0.0 ~ 1.0)
   double ask_scale = 4;
+
+  // 현재 가격 중심 이동량 (원, 소수 가능). -(net/trigger_quantity) × price_skew_unit — limit 에서 saturate
+  double price_shift = 5;
 }
 
 // MM 엔진 런타임 상태 델타 메시지.
