@@ -201,18 +201,18 @@ pub struct MarketMakingExposureBalancer {
     /// 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
-    /// soft zone: 이 배수부터 soft rebalance 발동
-    #[prost(int32, tag="2")]
-    pub trigger_multiple: i32,
-    /// 단계당 가격 중심 이동 틱 수
-    #[prost(int32, tag="3")]
-    pub price_skew_ticks: i32,
-    /// hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
-    #[prost(int32, tag="4")]
-    pub limit_multiple: i32,
     /// opportunistic close 기능 활성화 여부
     #[prost(bool, tag="5")]
     pub opportunistic_enabled: bool,
+    /// soft zone 기준 수량 (절대 수량). 가격 shift 기울기의 분모 + 수량 축소 발동 임계 (mm_dan skewTriggerAmt 대응)
+    #[prost(int64, tag="6")]
+    pub trigger_quantity: i64,
+    /// trigger_quantity 당 가격 이동 기울기 (원, 소수 허용). shift = -(net/trigger_quantity) × 이 값 — 연속 비례, 틱 배수 아니어도 됨. 엔진 마지막 normalize 가 정렬 (mm_dan skewUnit 대응)
+    #[prost(double, tag="7")]
+    pub price_skew_unit: f64,
+    /// hard zone (절대 수량). 이 수량에서 같은 방향 수량 0 + shift 상한 ((limit_quantity/trigger_quantity) × price_skew_unit)
+    #[prost(int64, tag="8")]
+    pub limit_quantity: i64,
 }
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -449,15 +449,15 @@ pub struct ExposureBalancerState {
     /// 현재 순노출 수량
     #[prost(int64, tag="1")]
     pub net_exposure: i64,
-    /// 현재 가격 중심 이동 틱 수
-    #[prost(int32, tag="2")]
-    pub price_shift_ticks: i32,
     /// 현재 bid 수량 스케일 (0.0 ~ 1.0)
     #[prost(double, tag="3")]
     pub bid_scale: f64,
     /// 현재 ask 수량 스케일 (0.0 ~ 1.0)
     #[prost(double, tag="4")]
     pub ask_scale: f64,
+    /// 현재 가격 중심 이동량 (원, 소수 가능). -(net/trigger_quantity) × price_skew_unit — limit 에서 saturate
+    #[prost(double, tag="5")]
+    pub price_shift: f64,
 }
 /// MM 엔진 런타임 상태 델타 메시지.
 /// 스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.

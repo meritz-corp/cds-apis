@@ -216,13 +216,13 @@ impl serde::Serialize for ExposureBalancerState {
             struct_ser.serialize_field("net_exposure", ToString::to_string(&self.net_exposure).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("price_shift_ticks", &self.price_shift_ticks)?;
-        }
-        if true {
             struct_ser.serialize_field("bid_scale", &self.bid_scale)?;
         }
         if true {
             struct_ser.serialize_field("ask_scale", &self.ask_scale)?;
+        }
+        if true {
+            struct_ser.serialize_field("price_shift", &self.price_shift)?;
         }
         struct_ser.end()
     }
@@ -236,20 +236,20 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
         const FIELDS: &[&str] = &[
             "net_exposure",
             "netExposure",
-            "price_shift_ticks",
-            "priceShiftTicks",
             "bid_scale",
             "bidScale",
             "ask_scale",
             "askScale",
+            "price_shift",
+            "priceShift",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             NetExposure,
-            PriceShiftTicks,
             BidScale,
             AskScale,
+            PriceShift,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -273,9 +273,9 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                     {
                         match value {
                             "netExposure" | "net_exposure" => Ok(GeneratedField::NetExposure),
-                            "priceShiftTicks" | "price_shift_ticks" => Ok(GeneratedField::PriceShiftTicks),
                             "bidScale" | "bid_scale" => Ok(GeneratedField::BidScale),
                             "askScale" | "ask_scale" => Ok(GeneratedField::AskScale),
+                            "priceShift" | "price_shift" => Ok(GeneratedField::PriceShift),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -296,9 +296,9 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut net_exposure__ = None;
-                let mut price_shift_ticks__ = None;
                 let mut bid_scale__ = None;
                 let mut ask_scale__ = None;
+                let mut price_shift__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::NetExposure => {
@@ -306,14 +306,6 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                                 return Err(serde::de::Error::duplicate_field("netExposure"));
                             }
                             net_exposure__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::PriceShiftTicks => {
-                            if price_shift_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("priceShiftTicks"));
-                            }
-                            price_shift_ticks__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -333,6 +325,14 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PriceShift => {
+                            if price_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priceShift"));
+                            }
+                            price_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -340,9 +340,9 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                 }
                 Ok(ExposureBalancerState {
                     net_exposure: net_exposure__.unwrap_or_default(),
-                    price_shift_ticks: price_shift_ticks__.unwrap_or_default(),
                     bid_scale: bid_scale__.unwrap_or_default(),
                     ask_scale: ask_scale__.unwrap_or_default(),
+                    price_shift: price_shift__.unwrap_or_default(),
                 })
             }
         }
@@ -1846,16 +1846,20 @@ impl serde::Serialize for MarketMakingExposureBalancer {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
         if true {
-            struct_ser.serialize_field("trigger_multiple", &self.trigger_multiple)?;
-        }
-        if true {
-            struct_ser.serialize_field("price_skew_ticks", &self.price_skew_ticks)?;
-        }
-        if true {
-            struct_ser.serialize_field("limit_multiple", &self.limit_multiple)?;
-        }
-        if true {
             struct_ser.serialize_field("opportunistic_enabled", &self.opportunistic_enabled)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("trigger_quantity", ToString::to_string(&self.trigger_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("price_skew_unit", &self.price_skew_unit)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("limit_quantity", ToString::to_string(&self.limit_quantity).as_str())?;
         }
         struct_ser.end()
     }
@@ -1868,23 +1872,23 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
     {
         const FIELDS: &[&str] = &[
             "enabled",
-            "trigger_multiple",
-            "triggerMultiple",
-            "price_skew_ticks",
-            "priceSkewTicks",
-            "limit_multiple",
-            "limitMultiple",
             "opportunistic_enabled",
             "opportunisticEnabled",
+            "trigger_quantity",
+            "triggerQuantity",
+            "price_skew_unit",
+            "priceSkewUnit",
+            "limit_quantity",
+            "limitQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Enabled,
-            TriggerMultiple,
-            PriceSkewTicks,
-            LimitMultiple,
             OpportunisticEnabled,
+            TriggerQuantity,
+            PriceSkewUnit,
+            LimitQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1908,10 +1912,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                     {
                         match value {
                             "enabled" => Ok(GeneratedField::Enabled),
-                            "triggerMultiple" | "trigger_multiple" => Ok(GeneratedField::TriggerMultiple),
-                            "priceSkewTicks" | "price_skew_ticks" => Ok(GeneratedField::PriceSkewTicks),
-                            "limitMultiple" | "limit_multiple" => Ok(GeneratedField::LimitMultiple),
                             "opportunisticEnabled" | "opportunistic_enabled" => Ok(GeneratedField::OpportunisticEnabled),
+                            "triggerQuantity" | "trigger_quantity" => Ok(GeneratedField::TriggerQuantity),
+                            "priceSkewUnit" | "price_skew_unit" => Ok(GeneratedField::PriceSkewUnit),
+                            "limitQuantity" | "limit_quantity" => Ok(GeneratedField::LimitQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1932,10 +1936,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut enabled__ = None;
-                let mut trigger_multiple__ = None;
-                let mut price_skew_ticks__ = None;
-                let mut limit_multiple__ = None;
                 let mut opportunistic_enabled__ = None;
+                let mut trigger_quantity__ = None;
+                let mut price_skew_unit__ = None;
+                let mut limit_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -1944,35 +1948,35 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                             }
                             enabled__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::TriggerMultiple => {
-                            if trigger_multiple__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("triggerMultiple"));
-                            }
-                            trigger_multiple__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::PriceSkewTicks => {
-                            if price_skew_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("priceSkewTicks"));
-                            }
-                            price_skew_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::LimitMultiple => {
-                            if limit_multiple__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("limitMultiple"));
-                            }
-                            limit_multiple__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::OpportunisticEnabled => {
                             if opportunistic_enabled__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("opportunisticEnabled"));
                             }
                             opportunistic_enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TriggerQuantity => {
+                            if trigger_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerQuantity"));
+                            }
+                            trigger_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::PriceSkewUnit => {
+                            if price_skew_unit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priceSkewUnit"));
+                            }
+                            price_skew_unit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LimitQuantity => {
+                            if limit_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitQuantity"));
+                            }
+                            limit_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1981,10 +1985,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                 }
                 Ok(MarketMakingExposureBalancer {
                     enabled: enabled__.unwrap_or_default(),
-                    trigger_multiple: trigger_multiple__.unwrap_or_default(),
-                    price_skew_ticks: price_skew_ticks__.unwrap_or_default(),
-                    limit_multiple: limit_multiple__.unwrap_or_default(),
                     opportunistic_enabled: opportunistic_enabled__.unwrap_or_default(),
+                    trigger_quantity: trigger_quantity__.unwrap_or_default(),
+                    price_skew_unit: price_skew_unit__.unwrap_or_default(),
+                    limit_quantity: limit_quantity__.unwrap_or_default(),
                 })
             }
         }

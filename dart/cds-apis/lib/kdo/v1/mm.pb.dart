@@ -970,17 +970,17 @@ class MarketMakingMarketBias extends $pb.GeneratedMessage {
 class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   factory MarketMakingExposureBalancer({
     $core.bool? enabled,
-    $core.int? triggerMultiple,
-    $core.int? priceSkewTicks,
-    $core.int? limitMultiple,
     $core.bool? opportunisticEnabled,
+    $fixnum.Int64? triggerQuantity,
+    $core.double? priceSkewUnit,
+    $fixnum.Int64? limitQuantity,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
-    if (triggerMultiple != null) result.triggerMultiple = triggerMultiple;
-    if (priceSkewTicks != null) result.priceSkewTicks = priceSkewTicks;
-    if (limitMultiple != null) result.limitMultiple = limitMultiple;
     if (opportunisticEnabled != null) result.opportunisticEnabled = opportunisticEnabled;
+    if (triggerQuantity != null) result.triggerQuantity = triggerQuantity;
+    if (priceSkewUnit != null) result.priceSkewUnit = priceSkewUnit;
+    if (limitQuantity != null) result.limitQuantity = limitQuantity;
     return result;
   }
 
@@ -991,10 +991,10 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingExposureBalancer', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'triggerMultiple', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'priceSkewTicks', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'limitMultiple', $pb.PbFieldType.O3)
     ..aOB(5, _omitFieldNames ? '' : 'opportunisticEnabled')
+    ..aInt64(6, _omitFieldNames ? '' : 'triggerQuantity')
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'priceSkewUnit', $pb.PbFieldType.OD)
+    ..aInt64(8, _omitFieldNames ? '' : 'limitQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -1025,45 +1025,45 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEnabled() => $_clearField(1);
 
-  /// soft zone: 이 배수부터 soft rebalance 발동
-  @$pb.TagNumber(2)
-  $core.int get triggerMultiple => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set triggerMultiple($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasTriggerMultiple() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTriggerMultiple() => $_clearField(2);
-
-  /// 단계당 가격 중심 이동 틱 수
-  @$pb.TagNumber(3)
-  $core.int get priceSkewTicks => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set priceSkewTicks($core.int value) => $_setSignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasPriceSkewTicks() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearPriceSkewTicks() => $_clearField(3);
-
-  /// hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)
-  @$pb.TagNumber(4)
-  $core.int get limitMultiple => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set limitMultiple($core.int value) => $_setSignedInt32(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasLimitMultiple() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearLimitMultiple() => $_clearField(4);
-
   /// opportunistic close 기능 활성화 여부
   @$pb.TagNumber(5)
-  $core.bool get opportunisticEnabled => $_getBF(4);
+  $core.bool get opportunisticEnabled => $_getBF(1);
   @$pb.TagNumber(5)
-  set opportunisticEnabled($core.bool value) => $_setBool(4, value);
+  set opportunisticEnabled($core.bool value) => $_setBool(1, value);
   @$pb.TagNumber(5)
-  $core.bool hasOpportunisticEnabled() => $_has(4);
+  $core.bool hasOpportunisticEnabled() => $_has(1);
   @$pb.TagNumber(5)
   void clearOpportunisticEnabled() => $_clearField(5);
+
+  /// soft zone 기준 수량 (절대 수량). 가격 shift 기울기의 분모 + 수량 축소 발동 임계 (mm_dan skewTriggerAmt 대응)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get triggerQuantity => $_getI64(2);
+  @$pb.TagNumber(6)
+  set triggerQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(6)
+  $core.bool hasTriggerQuantity() => $_has(2);
+  @$pb.TagNumber(6)
+  void clearTriggerQuantity() => $_clearField(6);
+
+  /// trigger_quantity 당 가격 이동 기울기 (원, 소수 허용). shift = -(net/trigger_quantity) × 이 값 — 연속 비례, 틱 배수 아니어도 됨. 엔진 마지막 normalize 가 정렬 (mm_dan skewUnit 대응)
+  @$pb.TagNumber(7)
+  $core.double get priceSkewUnit => $_getN(3);
+  @$pb.TagNumber(7)
+  set priceSkewUnit($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(7)
+  $core.bool hasPriceSkewUnit() => $_has(3);
+  @$pb.TagNumber(7)
+  void clearPriceSkewUnit() => $_clearField(7);
+
+  /// hard zone (절대 수량). 이 수량에서 같은 방향 수량 0 + shift 상한 ((limit_quantity/trigger_quantity) × price_skew_unit)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get limitQuantity => $_getI64(4);
+  @$pb.TagNumber(8)
+  set limitQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(8)
+  $core.bool hasLimitQuantity() => $_has(4);
+  @$pb.TagNumber(8)
+  void clearLimitQuantity() => $_clearField(8);
 }
 
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)
@@ -2256,15 +2256,15 @@ class MarketBiasState extends $pb.GeneratedMessage {
 class ExposureBalancerState extends $pb.GeneratedMessage {
   factory ExposureBalancerState({
     $fixnum.Int64? netExposure,
-    $core.int? priceShiftTicks,
     $core.double? bidScale,
     $core.double? askScale,
+    $core.double? priceShift,
   }) {
     final result = create();
     if (netExposure != null) result.netExposure = netExposure;
-    if (priceShiftTicks != null) result.priceShiftTicks = priceShiftTicks;
     if (bidScale != null) result.bidScale = bidScale;
     if (askScale != null) result.askScale = askScale;
+    if (priceShift != null) result.priceShift = priceShift;
     return result;
   }
 
@@ -2275,9 +2275,9 @@ class ExposureBalancerState extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ExposureBalancerState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'netExposure')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'priceShiftTicks', $pb.PbFieldType.O3)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'bidScale', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'askScale', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'priceShift', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2308,35 +2308,35 @@ class ExposureBalancerState extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearNetExposure() => $_clearField(1);
 
-  /// 현재 가격 중심 이동 틱 수
-  @$pb.TagNumber(2)
-  $core.int get priceShiftTicks => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set priceShiftTicks($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasPriceShiftTicks() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearPriceShiftTicks() => $_clearField(2);
-
   /// 현재 bid 수량 스케일 (0.0 ~ 1.0)
   @$pb.TagNumber(3)
-  $core.double get bidScale => $_getN(2);
+  $core.double get bidScale => $_getN(1);
   @$pb.TagNumber(3)
-  set bidScale($core.double value) => $_setDouble(2, value);
+  set bidScale($core.double value) => $_setDouble(1, value);
   @$pb.TagNumber(3)
-  $core.bool hasBidScale() => $_has(2);
+  $core.bool hasBidScale() => $_has(1);
   @$pb.TagNumber(3)
   void clearBidScale() => $_clearField(3);
 
   /// 현재 ask 수량 스케일 (0.0 ~ 1.0)
   @$pb.TagNumber(4)
-  $core.double get askScale => $_getN(3);
+  $core.double get askScale => $_getN(2);
   @$pb.TagNumber(4)
-  set askScale($core.double value) => $_setDouble(3, value);
+  set askScale($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(4)
-  $core.bool hasAskScale() => $_has(3);
+  $core.bool hasAskScale() => $_has(2);
   @$pb.TagNumber(4)
   void clearAskScale() => $_clearField(4);
+
+  /// 현재 가격 중심 이동량 (원, 소수 가능). -(net/trigger_quantity) × price_skew_unit — limit 에서 saturate
+  @$pb.TagNumber(5)
+  $core.double get priceShift => $_getN(3);
+  @$pb.TagNumber(5)
+  set priceShift($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPriceShift() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearPriceShift() => $_clearField(5);
 }
 
 /// MM 엔진 런타임 상태 델타 메시지.

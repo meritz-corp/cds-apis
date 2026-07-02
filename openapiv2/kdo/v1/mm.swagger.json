@@ -560,11 +560,6 @@
           "format": "int64",
           "title": "현재 순노출 수량"
         },
-        "priceShiftTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "현재 가격 중심 이동 틱 수"
-        },
         "bidScale": {
           "type": "number",
           "format": "double",
@@ -574,6 +569,11 @@
           "type": "number",
           "format": "double",
           "title": "현재 ask 수량 스케일 (0.0 ~ 1.0)"
+        },
+        "priceShift": {
+          "type": "number",
+          "format": "double",
+          "title": "현재 가격 중심 이동량 (원, 소수 가능). -(net/trigger_quantity) × price_skew_unit — limit 에서 saturate"
         }
       },
       "title": "순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)"
@@ -738,24 +738,24 @@
           "type": "boolean",
           "title": "활성화 여부"
         },
-        "triggerMultiple": {
-          "type": "integer",
-          "format": "int32",
-          "title": "soft zone: 이 배수부터 soft rebalance 발동"
-        },
-        "priceSkewTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "단계당 가격 중심 이동 틱 수"
-        },
-        "limitMultiple": {
-          "type": "integer",
-          "format": "int32",
-          "title": "hard zone: 이 배수에서 같은 방향 수량 0 (구 hard_limit_max 대체)"
-        },
         "opportunisticEnabled": {
           "type": "boolean",
           "title": "opportunistic close 기능 활성화 여부"
+        },
+        "triggerQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "soft zone 기준 수량 (절대 수량). 가격 shift 기울기의 분모 + 수량 축소 발동 임계 (mm_dan skewTriggerAmt 대응)"
+        },
+        "priceSkewUnit": {
+          "type": "number",
+          "format": "double",
+          "title": "trigger_quantity 당 가격 이동 기울기 (원, 소수 허용). shift = -(net/trigger_quantity) × 이 값 — 연속 비례, 틱 배수 아니어도 됨. 엔진 마지막 normalize 가 정렬 (mm_dan skewUnit 대응)"
+        },
+        "limitQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "hard zone (절대 수량). 이 수량에서 같은 방향 수량 0 + shift 상한 ((limit_quantity/trigger_quantity) × price_skew_unit)"
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"

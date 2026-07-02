@@ -230,20 +230,27 @@ const MarketMakingExposureBalancer$json = {
   '1': 'MarketMakingExposureBalancer',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
-    {'1': 'trigger_multiple', '3': 2, '4': 1, '5': 5, '10': 'triggerMultiple'},
-    {'1': 'price_skew_ticks', '3': 3, '4': 1, '5': 5, '10': 'priceSkewTicks'},
-    {'1': 'limit_multiple', '3': 4, '4': 1, '5': 5, '10': 'limitMultiple'},
     {'1': 'opportunistic_enabled', '3': 5, '4': 1, '5': 8, '10': 'opportunisticEnabled'},
+    {'1': 'trigger_quantity', '3': 6, '4': 1, '5': 3, '10': 'triggerQuantity'},
+    {'1': 'price_skew_unit', '3': 7, '4': 1, '5': 1, '10': 'priceSkewUnit'},
+    {'1': 'limit_quantity', '3': 8, '4': 1, '5': 3, '10': 'limitQuantity'},
   ],
+  '9': [
+    {'1': 2, '2': 3},
+    {'1': 3, '2': 4},
+    {'1': 4, '2': 5},
+  ],
+  '10': ['trigger_multiple', 'price_skew_ticks', 'limit_multiple'],
 };
 
 /// Descriptor for `MarketMakingExposureBalancer`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.base64Decode(
     'ChxNYXJrZXRNYWtpbmdFeHBvc3VyZUJhbGFuY2VyEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZW'
-    'QSKQoQdHJpZ2dlcl9tdWx0aXBsZRgCIAEoBVIPdHJpZ2dlck11bHRpcGxlEigKEHByaWNlX3Nr'
-    'ZXdfdGlja3MYAyABKAVSDnByaWNlU2tld1RpY2tzEiUKDmxpbWl0X211bHRpcGxlGAQgASgFUg'
-    '1saW1pdE11bHRpcGxlEjMKFW9wcG9ydHVuaXN0aWNfZW5hYmxlZBgFIAEoCFIUb3Bwb3J0dW5p'
-    'c3RpY0VuYWJsZWQ=');
+    'QSMwoVb3Bwb3J0dW5pc3RpY19lbmFibGVkGAUgASgIUhRvcHBvcnR1bmlzdGljRW5hYmxlZBIp'
+    'ChB0cmlnZ2VyX3F1YW50aXR5GAYgASgDUg90cmlnZ2VyUXVhbnRpdHkSJgoPcHJpY2Vfc2tld1'
+    '91bml0GAcgASgBUg1wcmljZVNrZXdVbml0EiUKDmxpbWl0X3F1YW50aXR5GAggASgDUg1saW1p'
+    'dFF1YW50aXR5SgQIAhADSgQIAxAESgQIBBAFUhB0cmlnZ2VyX211bHRpcGxlUhBwcmljZV9za2'
+    'V3X3RpY2tzUg5saW1pdF9tdWx0aXBsZQ==');
 
 @$core.Deprecated('Use marketMakingQuantityLimitDescriptor instead')
 const MarketMakingQuantityLimit$json = {
@@ -537,17 +544,22 @@ const ExposureBalancerState$json = {
   '1': 'ExposureBalancerState',
   '2': [
     {'1': 'net_exposure', '3': 1, '4': 1, '5': 3, '10': 'netExposure'},
-    {'1': 'price_shift_ticks', '3': 2, '4': 1, '5': 5, '10': 'priceShiftTicks'},
     {'1': 'bid_scale', '3': 3, '4': 1, '5': 1, '10': 'bidScale'},
     {'1': 'ask_scale', '3': 4, '4': 1, '5': 1, '10': 'askScale'},
+    {'1': 'price_shift', '3': 5, '4': 1, '5': 1, '10': 'priceShift'},
   ],
+  '9': [
+    {'1': 2, '2': 3},
+  ],
+  '10': ['price_shift_ticks'],
 };
 
 /// Descriptor for `ExposureBalancerState`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List exposureBalancerStateDescriptor = $convert.base64Decode(
     'ChVFeHBvc3VyZUJhbGFuY2VyU3RhdGUSIQoMbmV0X2V4cG9zdXJlGAEgASgDUgtuZXRFeHBvc3'
-    'VyZRIqChFwcmljZV9zaGlmdF90aWNrcxgCIAEoBVIPcHJpY2VTaGlmdFRpY2tzEhsKCWJpZF9z'
-    'Y2FsZRgDIAEoAVIIYmlkU2NhbGUSGwoJYXNrX3NjYWxlGAQgASgBUghhc2tTY2FsZQ==');
+    'VyZRIbCgliaWRfc2NhbGUYAyABKAFSCGJpZFNjYWxlEhsKCWFza19zY2FsZRgEIAEoAVIIYXNr'
+    'U2NhbGUSHwoLcHJpY2Vfc2hpZnQYBSABKAFSCnByaWNlU2hpZnRKBAgCEANSEXByaWNlX3NoaW'
+    'Z0X3RpY2tz');
 
 @$core.Deprecated('Use mmStateUpdateDescriptor instead')
 const MmStateUpdate$json = {
