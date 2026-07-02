@@ -43,6 +43,12 @@ class SystemServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getVersionInfo, request, options: options);
   }
 
+  /// StopAllTrading gracefully stops all trading services
+  /// (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
+  $grpc.ResponseFuture<$0.StopAllTradingResponse> stopAllTrading($0.StopAllTradingRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$stopAllTrading, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getConnectionInfo = $grpc.ClientMethod<$0.GetConnectionInfoRequest, $0.GetConnectionInfoResponse>(
@@ -53,6 +59,10 @@ class SystemServiceClient extends $grpc.Client {
       '/kdo.v1.system.SystemService/GetVersionInfo',
       ($0.GetVersionInfoRequest value) => value.writeToBuffer(),
       $0.GetVersionInfoResponse.fromBuffer);
+  static final _$stopAllTrading = $grpc.ClientMethod<$0.StopAllTradingRequest, $0.StopAllTradingResponse>(
+      '/kdo.v1.system.SystemService/StopAllTrading',
+      ($0.StopAllTradingRequest value) => value.writeToBuffer(),
+      $0.StopAllTradingResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.system.SystemService')
@@ -74,6 +84,13 @@ abstract class SystemServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetVersionInfoRequest.fromBuffer(value),
         ($0.GetVersionInfoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StopAllTradingRequest, $0.StopAllTradingResponse>(
+        'StopAllTrading',
+        stopAllTrading_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.StopAllTradingRequest.fromBuffer(value),
+        ($0.StopAllTradingResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetConnectionInfoResponse> getConnectionInfo_Pre($grpc.ServiceCall $call, $async.Future<$0.GetConnectionInfoRequest> $request) async {
@@ -87,5 +104,11 @@ abstract class SystemServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetVersionInfoResponse> getVersionInfo($grpc.ServiceCall call, $0.GetVersionInfoRequest request);
+
+  $async.Future<$0.StopAllTradingResponse> stopAllTrading_Pre($grpc.ServiceCall $call, $async.Future<$0.StopAllTradingRequest> $request) async {
+    return stopAllTrading($call, await $request);
+  }
+
+  $async.Future<$0.StopAllTradingResponse> stopAllTrading($grpc.ServiceCall call, $0.StopAllTradingRequest request);
 
 }

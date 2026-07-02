@@ -26,6 +26,9 @@ type SystemServiceClient interface {
 	GetConnectionInfo(ctx context.Context, in *GetConnectionInfoRequest, opts ...grpc.CallOption) (*GetConnectionInfoResponse, error)
 	// GetVersionInfo returns build-time version information of the running KDO instance.
 	GetVersionInfo(ctx context.Context, in *GetVersionInfoRequest, opts ...grpc.CallOption) (*GetVersionInfoResponse, error)
+	// StopAllTrading gracefully stops all trading services
+	// (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
+	StopAllTrading(ctx context.Context, in *StopAllTradingRequest, opts ...grpc.CallOption) (*StopAllTradingResponse, error)
 }
 
 type systemServiceClient struct {
@@ -54,6 +57,15 @@ func (c *systemServiceClient) GetVersionInfo(ctx context.Context, in *GetVersion
 	return out, nil
 }
 
+func (c *systemServiceClient) StopAllTrading(ctx context.Context, in *StopAllTradingRequest, opts ...grpc.CallOption) (*StopAllTradingResponse, error) {
+	out := new(StopAllTradingResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.system.SystemService/StopAllTrading", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServiceServer is the server API for SystemService service.
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility
@@ -62,6 +74,9 @@ type SystemServiceServer interface {
 	GetConnectionInfo(context.Context, *GetConnectionInfoRequest) (*GetConnectionInfoResponse, error)
 	// GetVersionInfo returns build-time version information of the running KDO instance.
 	GetVersionInfo(context.Context, *GetVersionInfoRequest) (*GetVersionInfoResponse, error)
+	// StopAllTrading gracefully stops all trading services
+	// (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
+	StopAllTrading(context.Context, *StopAllTradingRequest) (*StopAllTradingResponse, error)
 	mustEmbedUnimplementedSystemServiceServer()
 }
 
@@ -74,6 +89,9 @@ func (UnimplementedSystemServiceServer) GetConnectionInfo(context.Context, *GetC
 }
 func (UnimplementedSystemServiceServer) GetVersionInfo(context.Context, *GetVersionInfoRequest) (*GetVersionInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVersionInfo not implemented")
+}
+func (UnimplementedSystemServiceServer) StopAllTrading(context.Context, *StopAllTradingRequest) (*StopAllTradingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopAllTrading not implemented")
 }
 func (UnimplementedSystemServiceServer) mustEmbedUnimplementedSystemServiceServer() {}
 
@@ -124,6 +142,24 @@ func _SystemService_GetVersionInfo_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SystemService_StopAllTrading_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopAllTradingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).StopAllTrading(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.system.SystemService/StopAllTrading",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).StopAllTrading(ctx, req.(*StopAllTradingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SystemService_ServiceDesc is the grpc.ServiceDesc for SystemService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -138,6 +174,10 @@ var SystemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetVersionInfo",
 			Handler:    _SystemService_GetVersionInfo_Handler,
+		},
+		{
+			MethodName: "StopAllTrading",
+			Handler:    _SystemService_StopAllTrading_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

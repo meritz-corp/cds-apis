@@ -139,6 +139,9 @@
         }
       },
       "title": "Market feed implementation info"
+    },
+    "systemStopAllTradingResponse": {
+      "type": "object"
     }
   }
 }

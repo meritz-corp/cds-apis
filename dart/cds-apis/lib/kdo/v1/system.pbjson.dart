@@ -14,6 +14,24 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use stopAllTradingRequestDescriptor instead')
+const StopAllTradingRequest$json = {
+  '1': 'StopAllTradingRequest',
+};
+
+/// Descriptor for `StopAllTradingRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopAllTradingRequestDescriptor = $convert.base64Decode(
+    'ChVTdG9wQWxsVHJhZGluZ1JlcXVlc3Q=');
+
+@$core.Deprecated('Use stopAllTradingResponseDescriptor instead')
+const StopAllTradingResponse$json = {
+  '1': 'StopAllTradingResponse',
+};
+
+/// Descriptor for `StopAllTradingResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopAllTradingResponseDescriptor = $convert.base64Decode(
+    'ChZTdG9wQWxsVHJhZGluZ1Jlc3BvbnNl');
+
 @$core.Deprecated('Use getConnectionInfoRequestDescriptor instead')
 const GetConnectionInfoRequest$json = {
   '1': 'GetConnectionInfoRequest',

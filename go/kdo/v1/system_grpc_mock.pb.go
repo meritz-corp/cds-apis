@@ -74,6 +74,26 @@ func (mr *MockSystemServiceClientMockRecorder) GetVersionInfo(ctx, in interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVersionInfo", reflect.TypeOf((*MockSystemServiceClient)(nil).GetVersionInfo), varargs...)
 }
 
+// StopAllTrading mocks base method.
+func (m *MockSystemServiceClient) StopAllTrading(ctx context.Context, in *StopAllTradingRequest, opts ...grpc.CallOption) (*StopAllTradingResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StopAllTrading", varargs...)
+	ret0, _ := ret[0].(*StopAllTradingResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopAllTrading indicates an expected call of StopAllTrading.
+func (mr *MockSystemServiceClientMockRecorder) StopAllTrading(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopAllTrading", reflect.TypeOf((*MockSystemServiceClient)(nil).StopAllTrading), varargs...)
+}
+
 // MockSystemServiceServer is a mock of SystemServiceServer interface.
 type MockSystemServiceServer struct {
 	ctrl     *gomock.Controller
@@ -125,4 +145,19 @@ func (m *MockSystemServiceServer) GetVersionInfo(ctx context.Context, in *GetVer
 func (mr *MockSystemServiceServerMockRecorder) GetVersionInfo(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVersionInfo", reflect.TypeOf((*MockSystemServiceServer)(nil).GetVersionInfo), ctx, in)
+}
+
+// StopAllTrading mocks base method.
+func (m *MockSystemServiceServer) StopAllTrading(ctx context.Context, in *StopAllTradingRequest) (*StopAllTradingResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StopAllTrading", ctx, in)
+	ret0, _ := ret[0].(*StopAllTradingResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopAllTrading indicates an expected call of StopAllTrading.
+func (mr *MockSystemServiceServerMockRecorder) StopAllTrading(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopAllTrading", reflect.TypeOf((*MockSystemServiceServer)(nil).StopAllTrading), ctx, in)
 }

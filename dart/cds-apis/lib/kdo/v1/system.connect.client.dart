@@ -44,4 +44,23 @@ extension type SystemServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// StopAllTrading gracefully stops all trading services
+  /// (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
+  Future<kdov1system.StopAllTradingResponse> stopAllTrading(
+    kdov1system.StopAllTradingRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.SystemService.stopAllTrading,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

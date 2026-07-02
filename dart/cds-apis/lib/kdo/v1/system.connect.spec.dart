@@ -26,4 +26,13 @@ abstract final class SystemService {
     kdov1system.GetVersionInfoRequest.new,
     kdov1system.GetVersionInfoResponse.new,
   );
+
+  /// StopAllTrading gracefully stops all trading services
+  /// (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
+  static const stopAllTrading = connect.Spec(
+    '/$name/StopAllTrading',
+    connect.StreamType.unary,
+    kdov1system.StopAllTradingRequest.new,
+    kdov1system.StopAllTradingResponse.new,
+  );
 }

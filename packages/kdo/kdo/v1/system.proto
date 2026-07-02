@@ -11,7 +11,15 @@ service SystemService {
 
   // GetVersionInfo returns build-time version information of the running KDO instance.
   rpc GetVersionInfo(GetVersionInfoRequest) returns (GetVersionInfoResponse) {}
+
+  // StopAllTrading gracefully stops all trading services
+  // (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
+  rpc StopAllTrading(StopAllTradingRequest) returns (StopAllTradingResponse) {}
 }
+
+message StopAllTradingRequest {}
+
+message StopAllTradingResponse {}
 
 message GetConnectionInfoRequest {}
 

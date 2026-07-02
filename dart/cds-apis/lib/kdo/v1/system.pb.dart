@@ -16,6 +16,66 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
+class StopAllTradingRequest extends $pb.GeneratedMessage {
+  factory StopAllTradingRequest() => create();
+
+  StopAllTradingRequest._();
+
+  factory StopAllTradingRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopAllTradingRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopAllTradingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopAllTradingRequest clone() => StopAllTradingRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopAllTradingRequest copyWith(void Function(StopAllTradingRequest) updates) => super.copyWith((message) => updates(message as StopAllTradingRequest)) as StopAllTradingRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopAllTradingRequest create() => StopAllTradingRequest._();
+  @$core.override
+  StopAllTradingRequest createEmptyInstance() => create();
+  static $pb.PbList<StopAllTradingRequest> createRepeated() => $pb.PbList<StopAllTradingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StopAllTradingRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopAllTradingRequest>(create);
+  static StopAllTradingRequest? _defaultInstance;
+}
+
+class StopAllTradingResponse extends $pb.GeneratedMessage {
+  factory StopAllTradingResponse() => create();
+
+  StopAllTradingResponse._();
+
+  factory StopAllTradingResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopAllTradingResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopAllTradingResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopAllTradingResponse clone() => StopAllTradingResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopAllTradingResponse copyWith(void Function(StopAllTradingResponse) updates) => super.copyWith((message) => updates(message as StopAllTradingResponse)) as StopAllTradingResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopAllTradingResponse create() => StopAllTradingResponse._();
+  @$core.override
+  StopAllTradingResponse createEmptyInstance() => create();
+  static $pb.PbList<StopAllTradingResponse> createRepeated() => $pb.PbList<StopAllTradingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static StopAllTradingResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopAllTradingResponse>(create);
+  static StopAllTradingResponse? _defaultInstance;
+}
+
 class GetConnectionInfoRequest extends $pb.GeneratedMessage {
   factory GetConnectionInfoRequest() => create();
 
