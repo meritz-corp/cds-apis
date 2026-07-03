@@ -40,6 +40,10 @@ type MarketMakingServiceClient interface {
 	StreamMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingOrderbookClient, error)
 	// MM 엔진 런타임 상태 실시간 스트리밍
 	StreamMmStateUpdate(ctx context.Context, in *StreamMmStateUpdateRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmStateUpdateClient, error)
+	// MM 체결 요약 실시간 스트리밍 (당일 누적). 구독 즉시 현재 누적 스냅샷을 1회 내려주고,
+	// 이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의
+	// 타 전략(선물LP 헷지·페어 등) 체결은 제외된다.
+	StreamMmFills(ctx context.Context, in *StreamMmFillsRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmFillsClient, error)
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error)
 	// Clear Fit to Market: F2M skew 해제 (0으로 리셋)
@@ -181,6 +185,38 @@ func (x *marketMakingServiceStreamMmStateUpdateClient) Recv() (*MmStateUpdate, e
 	return m, nil
 }
 
+func (c *marketMakingServiceClient) StreamMmFills(ctx context.Context, in *StreamMmFillsRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmFillsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &MarketMakingService_ServiceDesc.Streams[2], "/kdo.v1.mm.MarketMakingService/StreamMmFills", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &marketMakingServiceStreamMmFillsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type MarketMakingService_StreamMmFillsClient interface {
+	Recv() (*MmFillSummary, error)
+	grpc.ClientStream
+}
+
+type marketMakingServiceStreamMmFillsClient struct {
+	grpc.ClientStream
+}
+
+func (x *marketMakingServiceStreamMmFillsClient) Recv() (*MmFillSummary, error) {
+	m := new(MmFillSummary)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *marketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error) {
 	out := new(FitToMarketResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/FitToMarket", in, out, opts...)
@@ -221,6 +257,10 @@ type MarketMakingServiceServer interface {
 	StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error
 	// MM 엔진 런타임 상태 실시간 스트리밍
 	StreamMmStateUpdate(*StreamMmStateUpdateRequest, MarketMakingService_StreamMmStateUpdateServer) error
+	// MM 체결 요약 실시간 스트리밍 (당일 누적). 구독 즉시 현재 누적 스냅샷을 1회 내려주고,
+	// 이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의
+	// 타 전략(선물LP 헷지·페어 등) 체결은 제외된다.
+	StreamMmFills(*StreamMmFillsRequest, MarketMakingService_StreamMmFillsServer) error
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error)
 	// Clear Fit to Market: F2M skew 해제 (0으로 리셋)
@@ -258,6 +298,9 @@ func (UnimplementedMarketMakingServiceServer) StreamMarketMakingOrderbook(*GetMa
 }
 func (UnimplementedMarketMakingServiceServer) StreamMmStateUpdate(*StreamMmStateUpdateRequest, MarketMakingService_StreamMmStateUpdateServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMmStateUpdate not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) StreamMmFills(*StreamMmFillsRequest, MarketMakingService_StreamMmFillsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamMmFills not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FitToMarket not implemented")
@@ -446,6 +489,27 @@ func (x *marketMakingServiceStreamMmStateUpdateServer) Send(m *MmStateUpdate) er
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MarketMakingService_StreamMmFills_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamMmFillsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MarketMakingServiceServer).StreamMmFills(m, &marketMakingServiceStreamMmFillsServer{stream})
+}
+
+type MarketMakingService_StreamMmFillsServer interface {
+	Send(*MmFillSummary) error
+	grpc.ServerStream
+}
+
+type marketMakingServiceStreamMmFillsServer struct {
+	grpc.ServerStream
+}
+
+func (x *marketMakingServiceStreamMmFillsServer) Send(m *MmFillSummary) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _MarketMakingService_FitToMarket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FitToMarketRequest)
 	if err := dec(in); err != nil {
@@ -535,6 +599,11 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamMmStateUpdate",
 			Handler:       _MarketMakingService_StreamMmStateUpdate_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamMmFills",
+			Handler:       _MarketMakingService_StreamMmFills_Handler,
 			ServerStreams: true,
 		},
 	},

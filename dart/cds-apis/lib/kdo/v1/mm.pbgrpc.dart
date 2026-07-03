@@ -78,6 +78,13 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamMmStateUpdate, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// MM 체결 요약 실시간 스트리밍 (당일 누적). 구독 즉시 현재 누적 스냅샷을 1회 내려주고,
+  /// 이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의
+  /// 타 전략(선물LP 헷지·페어 등) 체결은 제외된다.
+  $grpc.ResponseStream<$0.MmFillSummary> streamMmFills($0.StreamMmFillsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamMmFills, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   $grpc.ResponseFuture<$0.FitToMarketResponse> fitToMarket($0.FitToMarketRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$fitToMarket, request, options: options);
@@ -126,6 +133,10 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/StreamMmStateUpdate',
       ($0.StreamMmStateUpdateRequest value) => value.writeToBuffer(),
       $0.MmStateUpdate.fromBuffer);
+  static final _$streamMmFills = $grpc.ClientMethod<$0.StreamMmFillsRequest, $0.MmFillSummary>(
+      '/kdo.v1.mm.MarketMakingService/StreamMmFills',
+      ($0.StreamMmFillsRequest value) => value.writeToBuffer(),
+      $0.MmFillSummary.fromBuffer);
   static final _$fitToMarket = $grpc.ClientMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
       '/kdo.v1.mm.MarketMakingService/FitToMarket',
       ($0.FitToMarketRequest value) => value.writeToBuffer(),
@@ -204,6 +215,13 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamMmStateUpdateRequest.fromBuffer(value),
         ($0.MmStateUpdate value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamMmFillsRequest, $0.MmFillSummary>(
+        'StreamMmFills',
+        streamMmFills_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamMmFillsRequest.fromBuffer(value),
+        ($0.MmFillSummary value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
         'FitToMarket',
         fitToMarket_Pre,
@@ -273,6 +291,12 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.MmStateUpdate> streamMmStateUpdate($grpc.ServiceCall call, $0.StreamMmStateUpdateRequest request);
+
+  $async.Stream<$0.MmFillSummary> streamMmFills_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamMmFillsRequest> $request) async* {
+    yield* streamMmFills($call, await $request);
+  }
+
+  $async.Stream<$0.MmFillSummary> streamMmFills($grpc.ServiceCall call, $0.StreamMmFillsRequest request);
 
   $async.Future<$0.FitToMarketResponse> fitToMarket_Pre($grpc.ServiceCall $call, $async.Future<$0.FitToMarketRequest> $request) async {
     return fitToMarket($call, await $request);

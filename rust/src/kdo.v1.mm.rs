@@ -502,6 +502,38 @@ pub struct MmStateUpdate {
     #[prost(string, optional, tag="12")]
     pub f2m_shift: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// StreamMmFills
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamMmFillsRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+    /// 지정 시 해당 (symbol, fund) MM 컨텍스트와 불일치하면 NOT_FOUND.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+}
+/// MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MmFillSummary {
+    /// 매수 (당일 누적)
+    #[prost(int64, tag="1")]
+    pub buy_quantity: i64,
+    #[prost(double, tag="2")]
+    pub buy_avg_price: f64,
+    /// 매도 (당일 누적)
+    #[prost(int64, tag="3")]
+    pub sell_quantity: i64,
+    #[prost(double, tag="4")]
+    pub sell_avg_price: f64,
+    /// 체결 건수 (체결 이벤트 단위 — 부분체결 각각 1건)
+    #[prost(int64, tag="5")]
+    pub buy_fill_count: i64,
+    #[prost(int64, tag="6")]
+    pub sell_fill_count: i64,
+}
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

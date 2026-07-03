@@ -171,6 +171,26 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// MM 체결 요약 실시간 스트리밍 (당일 누적). 구독 즉시 현재 누적 스냅샷을 1회 내려주고,
+  /// 이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의
+  /// 타 전략(선물LP 헷지·페어 등) 체결은 제외된다.
+  Stream<kdov1mm.MmFillSummary> streamMmFills(
+    kdov1mm.StreamMmFillsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.MarketMakingService.streamMmFills,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   Future<kdov1mm.FitToMarketResponse> fitToMarket(
     kdov1mm.FitToMarketRequest input, {

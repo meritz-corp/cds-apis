@@ -3154,6 +3154,212 @@ impl<'de> serde::Deserialize<'de> for MeanBidAsk {
         deserializer.deserialize_struct("kdo.v1.mm.MeanBidAsk", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for MmFillSummary {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmFillSummary", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("buy_quantity", ToString::to_string(&self.buy_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("buy_avg_price", &self.buy_avg_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sell_quantity", ToString::to_string(&self.sell_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("sell_avg_price", &self.sell_avg_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("buy_fill_count", ToString::to_string(&self.buy_fill_count).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sell_fill_count", ToString::to_string(&self.sell_fill_count).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmFillSummary {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "buy_quantity",
+            "buyQuantity",
+            "buy_avg_price",
+            "buyAvgPrice",
+            "sell_quantity",
+            "sellQuantity",
+            "sell_avg_price",
+            "sellAvgPrice",
+            "buy_fill_count",
+            "buyFillCount",
+            "sell_fill_count",
+            "sellFillCount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            BuyQuantity,
+            BuyAvgPrice,
+            SellQuantity,
+            SellAvgPrice,
+            BuyFillCount,
+            SellFillCount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "buyQuantity" | "buy_quantity" => Ok(GeneratedField::BuyQuantity),
+                            "buyAvgPrice" | "buy_avg_price" => Ok(GeneratedField::BuyAvgPrice),
+                            "sellQuantity" | "sell_quantity" => Ok(GeneratedField::SellQuantity),
+                            "sellAvgPrice" | "sell_avg_price" => Ok(GeneratedField::SellAvgPrice),
+                            "buyFillCount" | "buy_fill_count" => Ok(GeneratedField::BuyFillCount),
+                            "sellFillCount" | "sell_fill_count" => Ok(GeneratedField::SellFillCount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmFillSummary;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MmFillSummary")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmFillSummary, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut buy_quantity__ = None;
+                let mut buy_avg_price__ = None;
+                let mut sell_quantity__ = None;
+                let mut sell_avg_price__ = None;
+                let mut buy_fill_count__ = None;
+                let mut sell_fill_count__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::BuyQuantity => {
+                            if buy_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyQuantity"));
+                            }
+                            buy_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BuyAvgPrice => {
+                            if buy_avg_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyAvgPrice"));
+                            }
+                            buy_avg_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellQuantity => {
+                            if sell_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellQuantity"));
+                            }
+                            sell_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellAvgPrice => {
+                            if sell_avg_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellAvgPrice"));
+                            }
+                            sell_avg_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BuyFillCount => {
+                            if buy_fill_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyFillCount"));
+                            }
+                            buy_fill_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellFillCount => {
+                            if sell_fill_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellFillCount"));
+                            }
+                            sell_fill_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmFillSummary {
+                    buy_quantity: buy_quantity__.unwrap_or_default(),
+                    buy_avg_price: buy_avg_price__.unwrap_or_default(),
+                    sell_quantity: sell_quantity__.unwrap_or_default(),
+                    sell_avg_price: sell_avg_price__.unwrap_or_default(),
+                    buy_fill_count: buy_fill_count__.unwrap_or_default(),
+                    sell_fill_count: sell_fill_count__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MmFillSummary", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for MmStateUpdate {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4724,6 +4930,119 @@ impl<'de> serde::Deserialize<'de> for StreamMarketMakingStatusRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.StreamMarketMakingStatusRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for StreamMmFillsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StreamMmFillsRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for StreamMmFillsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund_code",
+            "fundCode",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            FundCode,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = StreamMmFillsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.StreamMmFillsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<StreamMmFillsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(StreamMmFillsRequest {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.StreamMmFillsRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StreamMmStateUpdateRequest {

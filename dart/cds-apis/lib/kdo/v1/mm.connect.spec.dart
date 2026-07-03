@@ -83,6 +83,16 @@ abstract final class MarketMakingService {
     kdov1mm.MmStateUpdate.new,
   );
 
+  /// MM 체결 요약 실시간 스트리밍 (당일 누적). 구독 즉시 현재 누적 스냅샷을 1회 내려주고,
+  /// 이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의
+  /// 타 전략(선물LP 헷지·페어 등) 체결은 제외된다.
+  static const streamMmFills = connect.Spec(
+    '/$name/StreamMmFills',
+    connect.StreamType.server,
+    kdov1mm.StreamMmFillsRequest.new,
+    kdov1mm.MmFillSummary.new,
+  );
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   static const fitToMarket = connect.Spec(
     '/$name/FitToMarket',

@@ -336,6 +336,33 @@ pub mod market_making_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn stream_mm_fills(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamMmFillsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::MmFillSummary>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/StreamMmFills",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "StreamMmFills"),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         pub async fn fit_to_market(
             &mut self,
             request: impl tonic::IntoRequest<super::FitToMarketRequest>,
@@ -467,6 +494,19 @@ pub mod market_making_service_server {
             request: tonic::Request<super::StreamMmStateUpdateRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamMmStateUpdateStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamMmFills method.
+        type StreamMmFillsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::MmFillSummary, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_mm_fills(
+            &self,
+            request: tonic::Request<super::StreamMmFillsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamMmFillsStream>,
             tonic::Status,
         >;
         async fn fit_to_market(
@@ -1002,6 +1042,53 @@ pub mod market_making_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StreamMmStateUpdateSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/StreamMmFills" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamMmFillsSvc<T: MarketMakingService>(pub Arc<T>);
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::ServerStreamingService<super::StreamMmFillsRequest>
+                    for StreamMmFillsSvc<T> {
+                        type Response = super::MmFillSummary;
+                        type ResponseStream = T::StreamMmFillsStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamMmFillsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::stream_mm_fills(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamMmFillsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

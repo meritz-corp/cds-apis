@@ -2542,6 +2542,178 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   void clearF2mShift() => $_clearField(12);
 }
 
+/// StreamMmFills
+class StreamMmFillsRequest extends $pb.GeneratedMessage {
+  factory StreamMmFillsRequest({
+    $core.String? symbol,
+    $core.String? fundCode,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    return result;
+  }
+
+  StreamMmFillsRequest._();
+
+  factory StreamMmFillsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamMmFillsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmFillsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamMmFillsRequest clone() => StreamMmFillsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamMmFillsRequest copyWith(void Function(StreamMmFillsRequest) updates) => super.copyWith((message) => updates(message as StreamMmFillsRequest)) as StreamMmFillsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamMmFillsRequest create() => StreamMmFillsRequest._();
+  @$core.override
+  StreamMmFillsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamMmFillsRequest> createRepeated() => $pb.PbList<StreamMmFillsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamMmFillsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamMmFillsRequest>(create);
+  static StreamMmFillsRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+  /// 지정 시 해당 (symbol, fund) MM 컨텍스트와 불일치하면 NOT_FOUND.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+}
+
+/// MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)
+class MmFillSummary extends $pb.GeneratedMessage {
+  factory MmFillSummary({
+    $fixnum.Int64? buyQuantity,
+    $core.double? buyAvgPrice,
+    $fixnum.Int64? sellQuantity,
+    $core.double? sellAvgPrice,
+    $fixnum.Int64? buyFillCount,
+    $fixnum.Int64? sellFillCount,
+  }) {
+    final result = create();
+    if (buyQuantity != null) result.buyQuantity = buyQuantity;
+    if (buyAvgPrice != null) result.buyAvgPrice = buyAvgPrice;
+    if (sellQuantity != null) result.sellQuantity = sellQuantity;
+    if (sellAvgPrice != null) result.sellAvgPrice = sellAvgPrice;
+    if (buyFillCount != null) result.buyFillCount = buyFillCount;
+    if (sellFillCount != null) result.sellFillCount = sellFillCount;
+    return result;
+  }
+
+  MmFillSummary._();
+
+  factory MmFillSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmFillSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmFillSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'buyQuantity')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'buyAvgPrice', $pb.PbFieldType.OD)
+    ..aInt64(3, _omitFieldNames ? '' : 'sellQuantity')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'sellAvgPrice', $pb.PbFieldType.OD)
+    ..aInt64(5, _omitFieldNames ? '' : 'buyFillCount')
+    ..aInt64(6, _omitFieldNames ? '' : 'sellFillCount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmFillSummary clone() => MmFillSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmFillSummary copyWith(void Function(MmFillSummary) updates) => super.copyWith((message) => updates(message as MmFillSummary)) as MmFillSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmFillSummary create() => MmFillSummary._();
+  @$core.override
+  MmFillSummary createEmptyInstance() => create();
+  static $pb.PbList<MmFillSummary> createRepeated() => $pb.PbList<MmFillSummary>();
+  @$core.pragma('dart2js:noInline')
+  static MmFillSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmFillSummary>(create);
+  static MmFillSummary? _defaultInstance;
+
+  /// 매수 (당일 누적)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get buyQuantity => $_getI64(0);
+  @$pb.TagNumber(1)
+  set buyQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBuyQuantity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBuyQuantity() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get buyAvgPrice => $_getN(1);
+  @$pb.TagNumber(2)
+  set buyAvgPrice($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBuyAvgPrice() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBuyAvgPrice() => $_clearField(2);
+
+  /// 매도 (당일 누적)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get sellQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set sellQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSellQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSellQuantity() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get sellAvgPrice => $_getN(3);
+  @$pb.TagNumber(4)
+  set sellAvgPrice($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSellAvgPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSellAvgPrice() => $_clearField(4);
+
+  /// 체결 건수 (체결 이벤트 단위 — 부분체결 각각 1건)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get buyFillCount => $_getI64(4);
+  @$pb.TagNumber(5)
+  set buyFillCount($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBuyFillCount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBuyFillCount() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get sellFillCount => $_getI64(5);
+  @$pb.TagNumber(6)
+  set sellFillCount($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSellFillCount() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSellFillCount() => $_clearField(6);
+}
+
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
 class SpreadDecomposition extends $pb.GeneratedMessage {
   factory SpreadDecomposition({

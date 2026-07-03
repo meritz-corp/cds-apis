@@ -611,6 +611,41 @@ final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
     'RlQgwKCl9iaWRfcXVvdGVCDQoLX2JpZF9vZmZzZXRCDQoLX2Fza19vZmZzZXRCEAoOX2RlY29t'
     'cG9zaXRpb25CDAoKX2YybV9zaGlmdA==');
 
+@$core.Deprecated('Use streamMmFillsRequestDescriptor instead')
+const StreamMmFillsRequest$json = {
+  '1': 'StreamMmFillsRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+  ],
+};
+
+/// Descriptor for `StreamMmFillsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamMmFillsRequestDescriptor = $convert.base64Decode(
+    'ChRTdHJlYW1NbUZpbGxzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbBIhCg'
+    'lmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2Rl');
+
+@$core.Deprecated('Use mmFillSummaryDescriptor instead')
+const MmFillSummary$json = {
+  '1': 'MmFillSummary',
+  '2': [
+    {'1': 'buy_quantity', '3': 1, '4': 1, '5': 3, '10': 'buyQuantity'},
+    {'1': 'buy_avg_price', '3': 2, '4': 1, '5': 1, '10': 'buyAvgPrice'},
+    {'1': 'sell_quantity', '3': 3, '4': 1, '5': 3, '10': 'sellQuantity'},
+    {'1': 'sell_avg_price', '3': 4, '4': 1, '5': 1, '10': 'sellAvgPrice'},
+    {'1': 'buy_fill_count', '3': 5, '4': 1, '5': 3, '10': 'buyFillCount'},
+    {'1': 'sell_fill_count', '3': 6, '4': 1, '5': 3, '10': 'sellFillCount'},
+  ],
+};
+
+/// Descriptor for `MmFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmFillSummaryDescriptor = $convert.base64Decode(
+    'Cg1NbUZpbGxTdW1tYXJ5EiEKDGJ1eV9xdWFudGl0eRgBIAEoA1ILYnV5UXVhbnRpdHkSIgoNYn'
+    'V5X2F2Z19wcmljZRgCIAEoAVILYnV5QXZnUHJpY2USIwoNc2VsbF9xdWFudGl0eRgDIAEoA1IM'
+    'c2VsbFF1YW50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAQgASgBUgxzZWxsQXZnUHJpY2USJAoOYn'
+    'V5X2ZpbGxfY291bnQYBSABKANSDGJ1eUZpbGxDb3VudBImCg9zZWxsX2ZpbGxfY291bnQYBiAB'
+    'KANSDXNlbGxGaWxsQ291bnQ=');
+
 @$core.Deprecated('Use spreadDecompositionDescriptor instead')
 const SpreadDecomposition$json = {
   '1': 'SpreadDecomposition',
