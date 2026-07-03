@@ -213,6 +213,18 @@ message OrderLogFillStatistics {
 
   // 매도 체결 건수
   int64 sell_count = 5;
+
+  // 매수 체결 수량 합
+  int64 buy_quantity = 6;
+
+  // 매도 체결 수량 합
+  int64 sell_quantity = 7;
+
+  // 매수 체결 금액 합 (평균 체결단가 = buy_amount / buy_quantity)
+  int64 buy_amount = 8;
+
+  // 매도 체결 금액 합 (평균 체결단가 = sell_amount / sell_quantity)
+  int64 sell_amount = 9;
 }
 
 // ========== Request/Response Messages ==========
@@ -276,12 +288,16 @@ message GetOrderLogStatisticsRequest {
   // * exchange_time
   //   * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `>`, `>=`, `<`, `<=` 지원.
   //   * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.
+  // * order_context
+  //   * `equal`. 주문 전략 태그(user_area) 필터. 값: QuoteContext, MmContext, PairContext,
+  //     HedgeContext, FutureLpContext, FutureLpHedgeContext, OrderServiceContext
   //
   // Examples
   // * filter=fund_code="0159"
   // * filter=symbol:"7526"
   // * filter=exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
   // * filter=fund_code="0159" AND exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
+  // * filter=symbol:"7526" AND order_context="MmContext"
   string filter = 1;
 }
 
