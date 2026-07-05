@@ -2611,16 +2611,12 @@ class MmFillSummary extends $pb.GeneratedMessage {
     $core.double? buyAvgPrice,
     $fixnum.Int64? sellQuantity,
     $core.double? sellAvgPrice,
-    $fixnum.Int64? buyFillCount,
-    $fixnum.Int64? sellFillCount,
   }) {
     final result = create();
     if (buyQuantity != null) result.buyQuantity = buyQuantity;
     if (buyAvgPrice != null) result.buyAvgPrice = buyAvgPrice;
     if (sellQuantity != null) result.sellQuantity = sellQuantity;
     if (sellAvgPrice != null) result.sellAvgPrice = sellAvgPrice;
-    if (buyFillCount != null) result.buyFillCount = buyFillCount;
-    if (sellFillCount != null) result.sellFillCount = sellFillCount;
     return result;
   }
 
@@ -2634,8 +2630,6 @@ class MmFillSummary extends $pb.GeneratedMessage {
     ..a<$core.double>(2, _omitFieldNames ? '' : 'buyAvgPrice', $pb.PbFieldType.OD)
     ..aInt64(3, _omitFieldNames ? '' : 'sellQuantity')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'sellAvgPrice', $pb.PbFieldType.OD)
-    ..aInt64(5, _omitFieldNames ? '' : 'buyFillCount')
-    ..aInt64(6, _omitFieldNames ? '' : 'sellFillCount')
     ..hasRequiredFields = false
   ;
 
@@ -2693,25 +2687,6 @@ class MmFillSummary extends $pb.GeneratedMessage {
   $core.bool hasSellAvgPrice() => $_has(3);
   @$pb.TagNumber(4)
   void clearSellAvgPrice() => $_clearField(4);
-
-  /// 체결 건수 (체결 이벤트 단위 — 부분체결 각각 1건)
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get buyFillCount => $_getI64(4);
-  @$pb.TagNumber(5)
-  set buyFillCount($fixnum.Int64 value) => $_setInt64(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasBuyFillCount() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearBuyFillCount() => $_clearField(5);
-
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get sellFillCount => $_getI64(5);
-  @$pb.TagNumber(6)
-  set sellFillCount($fixnum.Int64 value) => $_setInt64(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasSellFillCount() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearSellFillCount() => $_clearField(6);
 }
 
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.

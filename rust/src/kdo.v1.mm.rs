@@ -528,11 +528,6 @@ pub struct MmFillSummary {
     pub sell_quantity: i64,
     #[prost(double, tag="4")]
     pub sell_avg_price: f64,
-    /// 체결 건수 (체결 이벤트 단위 — 부분체결 각각 1건)
-    #[prost(int64, tag="5")]
-    pub buy_fill_count: i64,
-    #[prost(int64, tag="6")]
-    pub sell_fill_count: i64,
 }
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
 #[allow(clippy::derive_partial_eq_without_eq)]

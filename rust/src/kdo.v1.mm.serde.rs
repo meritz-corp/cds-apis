@@ -3174,12 +3174,6 @@ impl serde::Serialize for MmFillSummary {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmFillSummary", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -3196,16 +3190,6 @@ impl serde::Serialize for MmFillSummary {
         }
         if true {
             struct_ser.serialize_field("sell_avg_price", &self.sell_avg_price)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("buy_fill_count", ToString::to_string(&self.buy_fill_count).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("sell_fill_count", ToString::to_string(&self.sell_fill_count).as_str())?;
         }
         struct_ser.end()
     }
@@ -3225,10 +3209,6 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             "sellQuantity",
             "sell_avg_price",
             "sellAvgPrice",
-            "buy_fill_count",
-            "buyFillCount",
-            "sell_fill_count",
-            "sellFillCount",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3237,8 +3217,6 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             BuyAvgPrice,
             SellQuantity,
             SellAvgPrice,
-            BuyFillCount,
-            SellFillCount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3265,8 +3243,6 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                             "buyAvgPrice" | "buy_avg_price" => Ok(GeneratedField::BuyAvgPrice),
                             "sellQuantity" | "sell_quantity" => Ok(GeneratedField::SellQuantity),
                             "sellAvgPrice" | "sell_avg_price" => Ok(GeneratedField::SellAvgPrice),
-                            "buyFillCount" | "buy_fill_count" => Ok(GeneratedField::BuyFillCount),
-                            "sellFillCount" | "sell_fill_count" => Ok(GeneratedField::SellFillCount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3290,8 +3266,6 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                 let mut buy_avg_price__ = None;
                 let mut sell_quantity__ = None;
                 let mut sell_avg_price__ = None;
-                let mut buy_fill_count__ = None;
-                let mut sell_fill_count__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BuyQuantity => {
@@ -3326,22 +3300,6 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::BuyFillCount => {
-                            if buy_fill_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("buyFillCount"));
-                            }
-                            buy_fill_count__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::SellFillCount => {
-                            if sell_fill_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sellFillCount"));
-                            }
-                            sell_fill_count__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3352,8 +3310,6 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                     buy_avg_price: buy_avg_price__.unwrap_or_default(),
                     sell_quantity: sell_quantity__.unwrap_or_default(),
                     sell_avg_price: sell_avg_price__.unwrap_or_default(),
-                    buy_fill_count: buy_fill_count__.unwrap_or_default(),
-                    sell_fill_count: sell_fill_count__.unwrap_or_default(),
                 })
             }
         }
