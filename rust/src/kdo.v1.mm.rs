@@ -534,9 +534,50 @@ pub struct MmFillSummary {
     /// 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
     #[prost(int64, tag="8")]
     pub unrealized_pnl: i64,
-    /// 미실현손익 평가에 사용한 가격 (현재 mid)
-    #[prost(double, tag="9")]
-    pub valuation_price: f64,
+}
+/// ListMmPnlHistory
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmPnlHistoryRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 미지정 시 전 펀드
+    #[prost(string, optional, tag="2")]
+    pub fund_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// 조회 구간 시작 (unix epoch seconds, inclusive)
+    #[prost(int64, tag="3")]
+    pub start_time: i64,
+    /// 조회 구간 끝 (unix epoch seconds, exclusive)
+    #[prost(int64, tag="4")]
+    pub end_time: i64,
+    /// 버킷 간격 (초). 0/미지정 = 1초
+    #[prost(uint32, tag="5")]
+    pub bucket_seconds: u32,
+}
+/// 손익 시계열 포인트 (버킷 마지막 값)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MmPnlPoint {
+    /// 버킷 시작 시각 (unix epoch seconds)
+    #[prost(int64, tag="1")]
+    pub time: i64,
+    /// 당일 실현손익 (원, 평균단가법)
+    #[prost(int64, tag="2")]
+    pub realized_pnl: i64,
+    /// 미실현손익 (원)
+    #[prost(int64, tag="3")]
+    pub unrealized_pnl: i64,
+    /// 전체 손익 = 실현 + 미실현 (원)
+    #[prost(int64, tag="4")]
+    pub total_pnl: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmPnlHistoryResponse {
+    /// 손익 시계열 포인트 목록
+    #[prost(message, repeated, tag="1")]
+    pub points: ::prost::alloc::vec::Vec<MmPnlPoint>,
 }
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -191,6 +191,24 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
+  Future<kdov1mm.ListMmPnlHistoryResponse> listMmPnlHistory(
+    kdov1mm.ListMmPnlHistoryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.listMmPnlHistory,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   Future<kdov1mm.FitToMarketResponse> fitToMarket(
     kdov1mm.FitToMarketRequest input, {

@@ -2613,7 +2613,6 @@ class MmFillSummary extends $pb.GeneratedMessage {
     $core.double? sellAvgPrice,
     $fixnum.Int64? realizedPnl,
     $fixnum.Int64? unrealizedPnl,
-    $core.double? valuationPrice,
   }) {
     final result = create();
     if (buyQuantity != null) result.buyQuantity = buyQuantity;
@@ -2622,7 +2621,6 @@ class MmFillSummary extends $pb.GeneratedMessage {
     if (sellAvgPrice != null) result.sellAvgPrice = sellAvgPrice;
     if (realizedPnl != null) result.realizedPnl = realizedPnl;
     if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
-    if (valuationPrice != null) result.valuationPrice = valuationPrice;
     return result;
   }
 
@@ -2638,7 +2636,6 @@ class MmFillSummary extends $pb.GeneratedMessage {
     ..a<$core.double>(4, _omitFieldNames ? '' : 'sellAvgPrice', $pb.PbFieldType.OD)
     ..aInt64(7, _omitFieldNames ? '' : 'realizedPnl')
     ..aInt64(8, _omitFieldNames ? '' : 'unrealizedPnl')
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'valuationPrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2716,16 +2713,234 @@ class MmFillSummary extends $pb.GeneratedMessage {
   $core.bool hasUnrealizedPnl() => $_has(5);
   @$pb.TagNumber(8)
   void clearUnrealizedPnl() => $_clearField(8);
+}
 
-  /// 미실현손익 평가에 사용한 가격 (현재 mid)
-  @$pb.TagNumber(9)
-  $core.double get valuationPrice => $_getN(6);
-  @$pb.TagNumber(9)
-  set valuationPrice($core.double value) => $_setDouble(6, value);
-  @$pb.TagNumber(9)
-  $core.bool hasValuationPrice() => $_has(6);
-  @$pb.TagNumber(9)
-  void clearValuationPrice() => $_clearField(9);
+/// ListMmPnlHistory
+class ListMmPnlHistoryRequest extends $pb.GeneratedMessage {
+  factory ListMmPnlHistoryRequest({
+    $core.String? symbol,
+    $core.String? fundCode,
+    $fixnum.Int64? startTime,
+    $fixnum.Int64? endTime,
+    $core.int? bucketSeconds,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (startTime != null) result.startTime = startTime;
+    if (endTime != null) result.endTime = endTime;
+    if (bucketSeconds != null) result.bucketSeconds = bucketSeconds;
+    return result;
+  }
+
+  ListMmPnlHistoryRequest._();
+
+  factory ListMmPnlHistoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmPnlHistoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmPnlHistoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aInt64(3, _omitFieldNames ? '' : 'startTime')
+    ..aInt64(4, _omitFieldNames ? '' : 'endTime')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'bucketSeconds', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPnlHistoryRequest clone() => ListMmPnlHistoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPnlHistoryRequest copyWith(void Function(ListMmPnlHistoryRequest) updates) => super.copyWith((message) => updates(message as ListMmPnlHistoryRequest)) as ListMmPnlHistoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmPnlHistoryRequest create() => ListMmPnlHistoryRequest._();
+  @$core.override
+  ListMmPnlHistoryRequest createEmptyInstance() => create();
+  static $pb.PbList<ListMmPnlHistoryRequest> createRepeated() => $pb.PbList<ListMmPnlHistoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmPnlHistoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmPnlHistoryRequest>(create);
+  static ListMmPnlHistoryRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 미지정 시 전 펀드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 조회 구간 시작 (unix epoch seconds, inclusive)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get startTime => $_getI64(2);
+  @$pb.TagNumber(3)
+  set startTime($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStartTime() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStartTime() => $_clearField(3);
+
+  /// 조회 구간 끝 (unix epoch seconds, exclusive)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get endTime => $_getI64(3);
+  @$pb.TagNumber(4)
+  set endTime($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEndTime() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEndTime() => $_clearField(4);
+
+  /// 버킷 간격 (초). 0/미지정 = 1초
+  @$pb.TagNumber(5)
+  $core.int get bucketSeconds => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set bucketSeconds($core.int value) => $_setUnsignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBucketSeconds() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBucketSeconds() => $_clearField(5);
+}
+
+/// 손익 시계열 포인트 (버킷 마지막 값)
+class MmPnlPoint extends $pb.GeneratedMessage {
+  factory MmPnlPoint({
+    $fixnum.Int64? time,
+    $fixnum.Int64? realizedPnl,
+    $fixnum.Int64? unrealizedPnl,
+    $fixnum.Int64? totalPnl,
+  }) {
+    final result = create();
+    if (time != null) result.time = time;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
+    if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
+    if (totalPnl != null) result.totalPnl = totalPnl;
+    return result;
+  }
+
+  MmPnlPoint._();
+
+  factory MmPnlPoint.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmPnlPoint.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmPnlPoint', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'time')
+    ..aInt64(2, _omitFieldNames ? '' : 'realizedPnl')
+    ..aInt64(3, _omitFieldNames ? '' : 'unrealizedPnl')
+    ..aInt64(4, _omitFieldNames ? '' : 'totalPnl')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmPnlPoint clone() => MmPnlPoint()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmPnlPoint copyWith(void Function(MmPnlPoint) updates) => super.copyWith((message) => updates(message as MmPnlPoint)) as MmPnlPoint;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmPnlPoint create() => MmPnlPoint._();
+  @$core.override
+  MmPnlPoint createEmptyInstance() => create();
+  static $pb.PbList<MmPnlPoint> createRepeated() => $pb.PbList<MmPnlPoint>();
+  @$core.pragma('dart2js:noInline')
+  static MmPnlPoint getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmPnlPoint>(create);
+  static MmPnlPoint? _defaultInstance;
+
+  /// 버킷 시작 시각 (unix epoch seconds)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get time => $_getI64(0);
+  @$pb.TagNumber(1)
+  set time($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTime() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTime() => $_clearField(1);
+
+  /// 당일 실현손익 (원, 평균단가법)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get realizedPnl => $_getI64(1);
+  @$pb.TagNumber(2)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRealizedPnl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRealizedPnl() => $_clearField(2);
+
+  /// 미실현손익 (원)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get unrealizedPnl => $_getI64(2);
+  @$pb.TagNumber(3)
+  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUnrealizedPnl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUnrealizedPnl() => $_clearField(3);
+
+  /// 전체 손익 = 실현 + 미실현 (원)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get totalPnl => $_getI64(3);
+  @$pb.TagNumber(4)
+  set totalPnl($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTotalPnl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTotalPnl() => $_clearField(4);
+}
+
+class ListMmPnlHistoryResponse extends $pb.GeneratedMessage {
+  factory ListMmPnlHistoryResponse({
+    $core.Iterable<MmPnlPoint>? points,
+  }) {
+    final result = create();
+    if (points != null) result.points.addAll(points);
+    return result;
+  }
+
+  ListMmPnlHistoryResponse._();
+
+  factory ListMmPnlHistoryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmPnlHistoryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmPnlHistoryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..pc<MmPnlPoint>(1, _omitFieldNames ? '' : 'points', $pb.PbFieldType.PM, subBuilder: MmPnlPoint.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPnlHistoryResponse clone() => ListMmPnlHistoryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPnlHistoryResponse copyWith(void Function(ListMmPnlHistoryResponse) updates) => super.copyWith((message) => updates(message as ListMmPnlHistoryResponse)) as ListMmPnlHistoryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmPnlHistoryResponse create() => ListMmPnlHistoryResponse._();
+  @$core.override
+  ListMmPnlHistoryResponse createEmptyInstance() => create();
+  static $pb.PbList<ListMmPnlHistoryResponse> createRepeated() => $pb.PbList<ListMmPnlHistoryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmPnlHistoryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmPnlHistoryResponse>(create);
+  static ListMmPnlHistoryResponse? _defaultInstance;
+
+  /// 손익 시계열 포인트 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<MmPnlPoint> get points => $_getList(0);
 }
 
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.

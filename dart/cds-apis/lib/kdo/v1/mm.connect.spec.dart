@@ -93,6 +93,14 @@ abstract final class MarketMakingService {
     kdov1mm.MmFillSummary.new,
   );
 
+  /// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
+  static const listMmPnlHistory = connect.Spec(
+    '/$name/ListMmPnlHistory',
+    connect.StreamType.unary,
+    kdov1mm.ListMmPnlHistoryRequest.new,
+    kdov1mm.ListMmPnlHistoryResponse.new,
+  );
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   static const fitToMarket = connect.Spec(
     '/$name/FitToMarket',

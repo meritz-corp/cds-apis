@@ -96,6 +96,14 @@ service MarketMakingService {
     option (google.api.method_signature) = "symbol";
   }
 
+  // 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
+  rpc ListMmPnlHistory(ListMmPnlHistoryRequest) returns (ListMmPnlHistoryResponse) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/pnl-history"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
   // Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   rpc FitToMarket(FitToMarketRequest) returns (FitToMarketResponse) {
     option (google.api.http) = {
@@ -576,8 +584,8 @@ message StreamMmFillsRequest {
 
 // MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)
 message MmFillSummary {
-  reserved 5, 6;
-  reserved "buy_fill_count", "sell_fill_count";
+  reserved 5, 6, 9;
+  reserved "buy_fill_count", "sell_fill_count", "valuation_price";
 
   // 매수 (당일 누적)
   int64  buy_quantity = 1;
@@ -590,8 +598,44 @@ message MmFillSummary {
   int64 realized_pnl = 7;
   // 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
   int64 unrealized_pnl = 8;
-  // 미실현손익 평가에 사용한 가격 (현재 mid)
-  double valuation_price = 9;
+}
+
+// ListMmPnlHistory
+message ListMmPnlHistoryRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 미지정 시 전 펀드
+  optional string fund_code = 2;
+
+  // 조회 구간 시작 (unix epoch seconds, inclusive)
+  int64 start_time = 3;
+
+  // 조회 구간 끝 (unix epoch seconds, exclusive)
+  int64 end_time = 4;
+
+  // 버킷 간격 (초). 0/미지정 = 1초
+  uint32 bucket_seconds = 5;
+}
+
+// 손익 시계열 포인트 (버킷 마지막 값)
+message MmPnlPoint {
+  // 버킷 시작 시각 (unix epoch seconds)
+  int64 time = 1;
+
+  // 당일 실현손익 (원, 평균단가법)
+  int64 realized_pnl = 2;
+
+  // 미실현손익 (원)
+  int64 unrealized_pnl = 3;
+
+  // 전체 손익 = 실현 + 미실현 (원)
+  int64 total_pnl = 4;
+}
+
+message ListMmPnlHistoryResponse {
+  // 손익 시계열 포인트 목록
+  repeated MmPnlPoint points = 1;
 }
 
 // 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.

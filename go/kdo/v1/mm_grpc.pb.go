@@ -44,6 +44,8 @@ type MarketMakingServiceClient interface {
 	// 이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의
 	// 타 전략(선물LP 헷지·페어 등) 체결은 제외된다.
 	StreamMmFills(ctx context.Context, in *StreamMmFillsRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmFillsClient, error)
+	// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
+	ListMmPnlHistory(ctx context.Context, in *ListMmPnlHistoryRequest, opts ...grpc.CallOption) (*ListMmPnlHistoryResponse, error)
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error)
 	// Clear Fit to Market: F2M skew 해제 (0으로 리셋)
@@ -217,6 +219,15 @@ func (x *marketMakingServiceStreamMmFillsClient) Recv() (*MmFillSummary, error) 
 	return m, nil
 }
 
+func (c *marketMakingServiceClient) ListMmPnlHistory(ctx context.Context, in *ListMmPnlHistoryRequest, opts ...grpc.CallOption) (*ListMmPnlHistoryResponse, error) {
+	out := new(ListMmPnlHistoryResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ListMmPnlHistory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *marketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error) {
 	out := new(FitToMarketResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/FitToMarket", in, out, opts...)
@@ -261,6 +272,8 @@ type MarketMakingServiceServer interface {
 	// 이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의
 	// 타 전략(선물LP 헷지·페어 등) 체결은 제외된다.
 	StreamMmFills(*StreamMmFillsRequest, MarketMakingService_StreamMmFillsServer) error
+	// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
+	ListMmPnlHistory(context.Context, *ListMmPnlHistoryRequest) (*ListMmPnlHistoryResponse, error)
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error)
 	// Clear Fit to Market: F2M skew 해제 (0으로 리셋)
@@ -301,6 +314,9 @@ func (UnimplementedMarketMakingServiceServer) StreamMmStateUpdate(*StreamMmState
 }
 func (UnimplementedMarketMakingServiceServer) StreamMmFills(*StreamMmFillsRequest, MarketMakingService_StreamMmFillsServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMmFills not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) ListMmPnlHistory(context.Context, *ListMmPnlHistoryRequest) (*ListMmPnlHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMmPnlHistory not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FitToMarket not implemented")
@@ -510,6 +526,24 @@ func (x *marketMakingServiceStreamMmFillsServer) Send(m *MmFillSummary) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _MarketMakingService_ListMmPnlHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMmPnlHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).ListMmPnlHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ListMmPnlHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).ListMmPnlHistory(ctx, req.(*ListMmPnlHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MarketMakingService_FitToMarket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FitToMarketRequest)
 	if err := dec(in); err != nil {
@@ -580,6 +614,10 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMarketMakingOrderbook",
 			Handler:    _MarketMakingService_GetMarketMakingOrderbook_Handler,
+		},
+		{
+			MethodName: "ListMmPnlHistory",
+			Handler:    _MarketMakingService_ListMmPnlHistory_Handler,
 		},
 		{
 			MethodName: "FitToMarket",

@@ -363,6 +363,33 @@ pub mod market_making_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn list_mm_pnl_history(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListMmPnlHistoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListMmPnlHistoryResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.mm.MarketMakingService/ListMmPnlHistory",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.mm.MarketMakingService", "ListMmPnlHistory"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn fit_to_market(
             &mut self,
             request: impl tonic::IntoRequest<super::FitToMarketRequest>,
@@ -507,6 +534,13 @@ pub mod market_making_service_server {
             request: tonic::Request<super::StreamMmFillsRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamMmFillsStream>,
+            tonic::Status,
+        >;
+        async fn list_mm_pnl_history(
+            &self,
+            request: tonic::Request<super::ListMmPnlHistoryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListMmPnlHistoryResponse>,
             tonic::Status,
         >;
         async fn fit_to_market(
@@ -1100,6 +1134,55 @@ pub mod market_making_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.mm.MarketMakingService/ListMmPnlHistory" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListMmPnlHistorySvc<T: MarketMakingService>(pub Arc<T>);
+                    impl<
+                        T: MarketMakingService,
+                    > tonic::server::UnaryService<super::ListMmPnlHistoryRequest>
+                    for ListMmPnlHistorySvc<T> {
+                        type Response = super::ListMmPnlHistoryResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListMmPnlHistoryRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketMakingService>::list_mm_pnl_history(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListMmPnlHistorySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

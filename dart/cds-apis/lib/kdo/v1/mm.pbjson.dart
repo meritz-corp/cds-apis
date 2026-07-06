@@ -635,13 +635,13 @@ const MmFillSummary$json = {
     {'1': 'sell_avg_price', '3': 4, '4': 1, '5': 1, '10': 'sellAvgPrice'},
     {'1': 'realized_pnl', '3': 7, '4': 1, '5': 3, '10': 'realizedPnl'},
     {'1': 'unrealized_pnl', '3': 8, '4': 1, '5': 3, '10': 'unrealizedPnl'},
-    {'1': 'valuation_price', '3': 9, '4': 1, '5': 1, '10': 'valuationPrice'},
   ],
   '9': [
     {'1': 5, '2': 6},
     {'1': 6, '2': 7},
+    {'1': 9, '2': 10},
   ],
-  '10': ['buy_fill_count', 'sell_fill_count'],
+  '10': ['buy_fill_count', 'sell_fill_count', 'valuation_price'],
 };
 
 /// Descriptor for `MmFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
@@ -650,8 +650,60 @@ final $typed_data.Uint8List mmFillSummaryDescriptor = $convert.base64Decode(
     'V5X2F2Z19wcmljZRgCIAEoAVILYnV5QXZnUHJpY2USIwoNc2VsbF9xdWFudGl0eRgDIAEoA1IM'
     'c2VsbFF1YW50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAQgASgBUgxzZWxsQXZnUHJpY2USIQoMcm'
     'VhbGl6ZWRfcG5sGAcgASgDUgtyZWFsaXplZFBubBIlCg51bnJlYWxpemVkX3BubBgIIAEoA1IN'
-    'dW5yZWFsaXplZFBubBInCg92YWx1YXRpb25fcHJpY2UYCSABKAFSDnZhbHVhdGlvblByaWNlSg'
-    'QIBRAGSgQIBhAHUg5idXlfZmlsbF9jb3VudFIPc2VsbF9maWxsX2NvdW50');
+    'dW5yZWFsaXplZFBubEoECAUQBkoECAYQB0oECAkQClIOYnV5X2ZpbGxfY291bnRSD3NlbGxfZm'
+    'lsbF9jb3VudFIPdmFsdWF0aW9uX3ByaWNl');
+
+@$core.Deprecated('Use listMmPnlHistoryRequestDescriptor instead')
+const ListMmPnlHistoryRequest$json = {
+  '1': 'ListMmPnlHistoryRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'fundCode', '17': true},
+    {'1': 'start_time', '3': 3, '4': 1, '5': 3, '10': 'startTime'},
+    {'1': 'end_time', '3': 4, '4': 1, '5': 3, '10': 'endTime'},
+    {'1': 'bucket_seconds', '3': 5, '4': 1, '5': 13, '10': 'bucketSeconds'},
+  ],
+  '8': [
+    {'1': '_fund_code'},
+  ],
+};
+
+/// Descriptor for `ListMmPnlHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmPnlHistoryRequestDescriptor = $convert.base64Decode(
+    'ChdMaXN0TW1QbmxIaXN0b3J5UmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbB'
+    'IgCglmdW5kX2NvZGUYAiABKAlIAFIIZnVuZENvZGWIAQESHQoKc3RhcnRfdGltZRgDIAEoA1IJ'
+    'c3RhcnRUaW1lEhkKCGVuZF90aW1lGAQgASgDUgdlbmRUaW1lEiUKDmJ1Y2tldF9zZWNvbmRzGA'
+    'UgASgNUg1idWNrZXRTZWNvbmRzQgwKCl9mdW5kX2NvZGU=');
+
+@$core.Deprecated('Use mmPnlPointDescriptor instead')
+const MmPnlPoint$json = {
+  '1': 'MmPnlPoint',
+  '2': [
+    {'1': 'time', '3': 1, '4': 1, '5': 3, '10': 'time'},
+    {'1': 'realized_pnl', '3': 2, '4': 1, '5': 3, '10': 'realizedPnl'},
+    {'1': 'unrealized_pnl', '3': 3, '4': 1, '5': 3, '10': 'unrealizedPnl'},
+    {'1': 'total_pnl', '3': 4, '4': 1, '5': 3, '10': 'totalPnl'},
+  ],
+};
+
+/// Descriptor for `MmPnlPoint`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmPnlPointDescriptor = $convert.base64Decode(
+    'CgpNbVBubFBvaW50EhIKBHRpbWUYASABKANSBHRpbWUSIQoMcmVhbGl6ZWRfcG5sGAIgASgDUg'
+    'tyZWFsaXplZFBubBIlCg51bnJlYWxpemVkX3BubBgDIAEoA1INdW5yZWFsaXplZFBubBIbCgl0'
+    'b3RhbF9wbmwYBCABKANSCHRvdGFsUG5s');
+
+@$core.Deprecated('Use listMmPnlHistoryResponseDescriptor instead')
+const ListMmPnlHistoryResponse$json = {
+  '1': 'ListMmPnlHistoryResponse',
+  '2': [
+    {'1': 'points', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.mm.MmPnlPoint', '10': 'points'},
+  ],
+};
+
+/// Descriptor for `ListMmPnlHistoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmPnlHistoryResponseDescriptor = $convert.base64Decode(
+    'ChhMaXN0TW1QbmxIaXN0b3J5UmVzcG9uc2USLQoGcG9pbnRzGAEgAygLMhUua2RvLnYxLm1tLk'
+    '1tUG5sUG9pbnRSBnBvaW50cw==');
 
 @$core.Deprecated('Use spreadDecompositionDescriptor instead')
 const SpreadDecomposition$json = {
