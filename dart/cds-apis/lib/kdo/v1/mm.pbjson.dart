@@ -633,6 +633,9 @@ const MmFillSummary$json = {
     {'1': 'buy_avg_price', '3': 2, '4': 1, '5': 1, '10': 'buyAvgPrice'},
     {'1': 'sell_quantity', '3': 3, '4': 1, '5': 3, '10': 'sellQuantity'},
     {'1': 'sell_avg_price', '3': 4, '4': 1, '5': 1, '10': 'sellAvgPrice'},
+    {'1': 'realized_pnl', '3': 7, '4': 1, '5': 3, '10': 'realizedPnl'},
+    {'1': 'unrealized_pnl', '3': 8, '4': 1, '5': 3, '10': 'unrealizedPnl'},
+    {'1': 'valuation_price', '3': 9, '4': 1, '5': 1, '10': 'valuationPrice'},
   ],
   '9': [
     {'1': 5, '2': 6},
@@ -645,8 +648,10 @@ const MmFillSummary$json = {
 final $typed_data.Uint8List mmFillSummaryDescriptor = $convert.base64Decode(
     'Cg1NbUZpbGxTdW1tYXJ5EiEKDGJ1eV9xdWFudGl0eRgBIAEoA1ILYnV5UXVhbnRpdHkSIgoNYn'
     'V5X2F2Z19wcmljZRgCIAEoAVILYnV5QXZnUHJpY2USIwoNc2VsbF9xdWFudGl0eRgDIAEoA1IM'
-    'c2VsbFF1YW50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAQgASgBUgxzZWxsQXZnUHJpY2VKBAgFEA'
-    'ZKBAgGEAdSDmJ1eV9maWxsX2NvdW50Ug9zZWxsX2ZpbGxfY291bnQ=');
+    'c2VsbFF1YW50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAQgASgBUgxzZWxsQXZnUHJpY2USIQoMcm'
+    'VhbGl6ZWRfcG5sGAcgASgDUgtyZWFsaXplZFBubBIlCg51bnJlYWxpemVkX3BubBgIIAEoA1IN'
+    'dW5yZWFsaXplZFBubBInCg92YWx1YXRpb25fcHJpY2UYCSABKAFSDnZhbHVhdGlvblByaWNlSg'
+    'QIBRAGSgQIBhAHUg5idXlfZmlsbF9jb3VudFIPc2VsbF9maWxsX2NvdW50');
 
 @$core.Deprecated('Use spreadDecompositionDescriptor instead')
 const SpreadDecomposition$json = {

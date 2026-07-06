@@ -528,6 +528,15 @@ pub struct MmFillSummary {
     pub sell_quantity: i64,
     #[prost(double, tag="4")]
     pub sell_avg_price: f64,
+    /// 당일 실현손익 (원 단위, 평균단가법)
+    #[prost(int64, tag="7")]
+    pub realized_pnl: i64,
+    /// 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
+    #[prost(int64, tag="8")]
+    pub unrealized_pnl: i64,
+    /// 미실현손익 평가에 사용한 가격 (현재 mid)
+    #[prost(double, tag="9")]
+    pub valuation_price: f64,
 }
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
 #[allow(clippy::derive_partial_eq_without_eq)]

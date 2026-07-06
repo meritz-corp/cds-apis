@@ -3174,6 +3174,15 @@ impl serde::Serialize for MmFillSummary {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmFillSummary", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -3190,6 +3199,19 @@ impl serde::Serialize for MmFillSummary {
         }
         if true {
             struct_ser.serialize_field("sell_avg_price", &self.sell_avg_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("realized_pnl", ToString::to_string(&self.realized_pnl).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("unrealized_pnl", ToString::to_string(&self.unrealized_pnl).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("valuation_price", &self.valuation_price)?;
         }
         struct_ser.end()
     }
@@ -3209,6 +3231,12 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             "sellQuantity",
             "sell_avg_price",
             "sellAvgPrice",
+            "realized_pnl",
+            "realizedPnl",
+            "unrealized_pnl",
+            "unrealizedPnl",
+            "valuation_price",
+            "valuationPrice",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3217,6 +3245,9 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             BuyAvgPrice,
             SellQuantity,
             SellAvgPrice,
+            RealizedPnl,
+            UnrealizedPnl,
+            ValuationPrice,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3243,6 +3274,9 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                             "buyAvgPrice" | "buy_avg_price" => Ok(GeneratedField::BuyAvgPrice),
                             "sellQuantity" | "sell_quantity" => Ok(GeneratedField::SellQuantity),
                             "sellAvgPrice" | "sell_avg_price" => Ok(GeneratedField::SellAvgPrice),
+                            "realizedPnl" | "realized_pnl" => Ok(GeneratedField::RealizedPnl),
+                            "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
+                            "valuationPrice" | "valuation_price" => Ok(GeneratedField::ValuationPrice),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3266,6 +3300,9 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                 let mut buy_avg_price__ = None;
                 let mut sell_quantity__ = None;
                 let mut sell_avg_price__ = None;
+                let mut realized_pnl__ = None;
+                let mut unrealized_pnl__ = None;
+                let mut valuation_price__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BuyQuantity => {
@@ -3300,6 +3337,30 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::RealizedPnl => {
+                            if realized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("realizedPnl"));
+                            }
+                            realized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::UnrealizedPnl => {
+                            if unrealized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unrealizedPnl"));
+                            }
+                            unrealized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ValuationPrice => {
+                            if valuation_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("valuationPrice"));
+                            }
+                            valuation_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3310,6 +3371,9 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                     buy_avg_price: buy_avg_price__.unwrap_or_default(),
                     sell_quantity: sell_quantity__.unwrap_or_default(),
                     sell_avg_price: sell_avg_price__.unwrap_or_default(),
+                    realized_pnl: realized_pnl__.unwrap_or_default(),
+                    unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
+                    valuation_price: valuation_price__.unwrap_or_default(),
                 })
             }
         }

@@ -2611,12 +2611,18 @@ class MmFillSummary extends $pb.GeneratedMessage {
     $core.double? buyAvgPrice,
     $fixnum.Int64? sellQuantity,
     $core.double? sellAvgPrice,
+    $fixnum.Int64? realizedPnl,
+    $fixnum.Int64? unrealizedPnl,
+    $core.double? valuationPrice,
   }) {
     final result = create();
     if (buyQuantity != null) result.buyQuantity = buyQuantity;
     if (buyAvgPrice != null) result.buyAvgPrice = buyAvgPrice;
     if (sellQuantity != null) result.sellQuantity = sellQuantity;
     if (sellAvgPrice != null) result.sellAvgPrice = sellAvgPrice;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
+    if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
+    if (valuationPrice != null) result.valuationPrice = valuationPrice;
     return result;
   }
 
@@ -2630,6 +2636,9 @@ class MmFillSummary extends $pb.GeneratedMessage {
     ..a<$core.double>(2, _omitFieldNames ? '' : 'buyAvgPrice', $pb.PbFieldType.OD)
     ..aInt64(3, _omitFieldNames ? '' : 'sellQuantity')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'sellAvgPrice', $pb.PbFieldType.OD)
+    ..aInt64(7, _omitFieldNames ? '' : 'realizedPnl')
+    ..aInt64(8, _omitFieldNames ? '' : 'unrealizedPnl')
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'valuationPrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2687,6 +2696,36 @@ class MmFillSummary extends $pb.GeneratedMessage {
   $core.bool hasSellAvgPrice() => $_has(3);
   @$pb.TagNumber(4)
   void clearSellAvgPrice() => $_clearField(4);
+
+  /// 당일 실현손익 (원 단위, 평균단가법)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get realizedPnl => $_getI64(4);
+  @$pb.TagNumber(7)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(7)
+  $core.bool hasRealizedPnl() => $_has(4);
+  @$pb.TagNumber(7)
+  void clearRealizedPnl() => $_clearField(7);
+
+  /// 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get unrealizedPnl => $_getI64(5);
+  @$pb.TagNumber(8)
+  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(8)
+  $core.bool hasUnrealizedPnl() => $_has(5);
+  @$pb.TagNumber(8)
+  void clearUnrealizedPnl() => $_clearField(8);
+
+  /// 미실현손익 평가에 사용한 가격 (현재 mid)
+  @$pb.TagNumber(9)
+  $core.double get valuationPrice => $_getN(6);
+  @$pb.TagNumber(9)
+  set valuationPrice($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(9)
+  $core.bool hasValuationPrice() => $_has(6);
+  @$pb.TagNumber(9)
+  void clearValuationPrice() => $_clearField(9);
 }
 
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.

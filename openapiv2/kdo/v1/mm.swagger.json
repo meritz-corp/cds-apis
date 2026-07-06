@@ -1022,6 +1022,21 @@
         "sellAvgPrice": {
           "type": "number",
           "format": "double"
+        },
+        "realizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "당일 실현손익 (원 단위, 평균단가법)"
+        },
+        "unrealizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "미실현손익 (원 단위, 순포지션 × (평가가 − 평단))"
+        },
+        "valuationPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "미실현손익 평가에 사용한 가격 (현재 mid)"
         }
       },
       "title": "MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)"
