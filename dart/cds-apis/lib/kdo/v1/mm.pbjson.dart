@@ -66,6 +66,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'basis', '3': 15, '4': 1, '5': 3, '9': 0, '10': 'basis', '17': true},
     {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 5, '10': 'baseHalfTicks'},
     {'1': 'quantity_limit', '3': 17, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQuantityLimit', '10': 'quantityLimit'},
+    {'1': 'ma_cross', '3': 18, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMaCross', '10': 'maCross'},
   ],
   '8': [
     {'1': '_basis'},
@@ -93,8 +94,9 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'Zmc2V0Eh0KCmFza19vZmZzZXQYDiABKANSCWFza09mZnNldBIZCgViYXNpcxgPIAEoA0gAUgVi'
     'YXNpc4gBARImCg9iYXNlX2hhbGZfdGlja3MYECABKAVSDWJhc2VIYWxmVGlja3MSSwoOcXVhbn'
     'RpdHlfbGltaXQYESABKAsyJC5rZG8udjEubW0uTWFya2V0TWFraW5nUXVhbnRpdHlMaW1pdFIN'
-    'cXVhbnRpdHlMaW1pdEIICgZfYmFzaXNKBAgHEAhKBAgIEAlKBAgLEAxKBAgMEA1SDmJpZF9hZG'
-    'p1c3RtZW50Ug5hc2tfYWRqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXM=');
+    'cXVhbnRpdHlMaW1pdBI5CghtYV9jcm9zcxgSIAEoCzIeLmtkby52MS5tbS5NYXJrZXRNYWtpbm'
+    'dNYUNyb3NzUgdtYUNyb3NzQggKBl9iYXNpc0oECAcQCEoECAgQCUoECAsQDEoECAwQDVIOYmlk'
+    'X2FkanVzdG1lbnRSDmFza19hZGp1c3RtZW50UgliaWRfYmFzaXNSCWFza19iYXNpcw==');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -224,6 +226,23 @@ final $typed_data.Uint8List marketMakingMarketBiasDescriptor = $convert.base64De
     'aG9sZBgDIAEoAVIOcmF0aW9UaHJlc2hvbGQSLQoSc3RyZW5ndGhfdGhyZXNob2xkGAQgASgBUh'
     'FzdHJlbmd0aFRocmVzaG9sZBIfCgtiaWFzX2h1ZGRsZRgFIAEoBVIKYmlhc0h1ZGRsZRIbCgli'
     'aWFzX3VuaXQYBiABKANSCGJpYXNVbml0EhkKCG1heF9iaWFzGAcgASgDUgdtYXhCaWFz');
+
+@$core.Deprecated('Use marketMakingMaCrossDescriptor instead')
+const MarketMakingMaCross$json = {
+  '1': 'MarketMakingMaCross',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'short_window_secs', '3': 2, '4': 1, '5': 4, '10': 'shortWindowSecs'},
+    {'1': 'long_window_secs', '3': 3, '4': 1, '5': 4, '10': 'longWindowSecs'},
+    {'1': 'skew_unit', '3': 4, '4': 1, '5': 3, '10': 'skewUnit'},
+  ],
+};
+
+/// Descriptor for `MarketMakingMaCross`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingMaCrossDescriptor = $convert.base64Decode(
+    'ChNNYXJrZXRNYWtpbmdNYUNyb3NzEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSKgoRc2hvcn'
+    'Rfd2luZG93X3NlY3MYAiABKARSD3Nob3J0V2luZG93U2VjcxIoChBsb25nX3dpbmRvd19zZWNz'
+    'GAMgASgEUg5sb25nV2luZG93U2VjcxIbCglza2V3X3VuaXQYBCABKANSCHNrZXdVbml0');
 
 @$core.Deprecated('Use marketMakingExposureBalancerDescriptor instead')
 const MarketMakingExposureBalancer$json = {
@@ -539,6 +558,26 @@ final $typed_data.Uint8List marketBiasStateDescriptor = $convert.base64Decode(
     'RCaWFzEh0KCmxhc3Rfc2NvcmUYAiABKAVSCWxhc3RTY29yZRIdCgpldmFsX2NvdW50GAMgASgD'
     'UglldmFsQ291bnQ=');
 
+@$core.Deprecated('Use maCrossStateDescriptor instead')
+const MaCrossState$json = {
+  '1': 'MaCrossState',
+  '2': [
+    {'1': 'short_ma', '3': 1, '4': 1, '5': 1, '10': 'shortMa'},
+    {'1': 'long_ma', '3': 2, '4': 1, '5': 1, '10': 'longMa'},
+    {'1': 'trend', '3': 3, '4': 1, '5': 9, '10': 'trend'},
+    {'1': 'skew', '3': 4, '4': 1, '5': 3, '10': 'skew'},
+    {'1': 'samples', '3': 5, '4': 1, '5': 4, '10': 'samples'},
+    {'1': 'transitions', '3': 6, '4': 1, '5': 4, '10': 'transitions'},
+  ],
+};
+
+/// Descriptor for `MaCrossState`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List maCrossStateDescriptor = $convert.base64Decode(
+    'CgxNYUNyb3NzU3RhdGUSGQoIc2hvcnRfbWEYASABKAFSB3Nob3J0TWESFwoHbG9uZ19tYRgCIA'
+    'EoAVIGbG9uZ01hEhQKBXRyZW5kGAMgASgJUgV0cmVuZBISCgRza2V3GAQgASgDUgRza2V3EhgK'
+    'B3NhbXBsZXMYBSABKARSB3NhbXBsZXMSIAoLdHJhbnNpdGlvbnMYBiABKARSC3RyYW5zaXRpb2'
+    '5z');
+
 @$core.Deprecated('Use exposureBalancerStateDescriptor instead')
 const ExposureBalancerState$json = {
   '1': 'ExposureBalancerState',
@@ -577,6 +616,7 @@ const MmStateUpdate$json = {
     {'1': 'ask_offset', '3': 10, '4': 1, '5': 9, '9': 8, '10': 'askOffset', '17': true},
     {'1': 'decomposition', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.mm.SpreadDecomposition', '9': 9, '10': 'decomposition', '17': true},
     {'1': 'f2m_shift', '3': 12, '4': 1, '5': 9, '9': 10, '10': 'f2mShift', '17': true},
+    {'1': 'ma_cross', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.mm.MaCrossState', '9': 11, '10': 'maCross', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -590,6 +630,7 @@ const MmStateUpdate$json = {
     {'1': '_ask_offset'},
     {'1': '_decomposition'},
     {'1': '_f2m_shift'},
+    {'1': '_ma_cross'},
   ],
 };
 
@@ -606,10 +647,11 @@ final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
     'ZYgBARIiCgpiaWRfb2Zmc2V0GAkgASgJSAdSCWJpZE9mZnNldIgBARIiCgphc2tfb2Zmc2V0GA'
     'ogASgJSAhSCWFza09mZnNldIgBARJJCg1kZWNvbXBvc2l0aW9uGAsgASgLMh4ua2RvLnYxLm1t'
     'LlNwcmVhZERlY29tcG9zaXRpb25ICVINZGVjb21wb3NpdGlvbogBARIgCglmMm1fc2hpZnQYDC'
-    'ABKAlIClIIZjJtU2hpZnSIAQFCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5h'
-    'bHl6ZXJCFAoSX2V4cG9zdXJlX2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3F1b3'
-    'RlQgwKCl9iaWRfcXVvdGVCDQoLX2JpZF9vZmZzZXRCDQoLX2Fza19vZmZzZXRCEAoOX2RlY29t'
-    'cG9zaXRpb25CDAoKX2YybV9zaGlmdA==');
+    'ABKAlIClIIZjJtU2hpZnSIAQESNwoIbWFfY3Jvc3MYDSABKAsyFy5rZG8udjEubW0uTWFDcm9z'
+    'c1N0YXRlSAtSB21hQ3Jvc3OIAQFCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW'
+    '5hbHl6ZXJCFAoSX2V4cG9zdXJlX2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3F1'
+    'b3RlQgwKCl9iaWRfcXVvdGVCDQoLX2JpZF9vZmZzZXRCDQoLX2Fza19vZmZzZXRCEAoOX2RlY2'
+    '9tcG9zaXRpb25CDAoKX2YybV9zaGlmdEILCglfbWFfY3Jvc3M=');
 
 @$core.Deprecated('Use streamMmFillsRequestDescriptor instead')
 const StreamMmFillsRequest$json = {
@@ -716,6 +758,7 @@ const SpreadDecomposition$json = {
     {'1': 'market_bias_shift', '3': 5, '4': 1, '5': 3, '10': 'marketBiasShift'},
     {'1': 'final_bid', '3': 6, '4': 1, '5': 3, '10': 'finalBid'},
     {'1': 'final_ask', '3': 7, '4': 1, '5': 3, '10': 'finalAsk'},
+    {'1': 'ma_cross_shift', '3': 8, '4': 1, '5': 3, '10': 'maCrossShift'},
   ],
 };
 
@@ -725,7 +768,8 @@ final $typed_data.Uint8List spreadDecompositionDescriptor = $convert.base64Decod
     'VfYXNrGAIgASgDUgdiYXNlQXNrEiUKDm1vbWVudHVtX3NoaWZ0GAMgASgDUg1tb21lbnR1bVNo'
     'aWZ0EiUKDmV4cG9zdXJlX3NoaWZ0GAQgASgDUg1leHBvc3VyZVNoaWZ0EioKEW1hcmtldF9iaW'
     'FzX3NoaWZ0GAUgASgDUg9tYXJrZXRCaWFzU2hpZnQSGwoJZmluYWxfYmlkGAYgASgDUghmaW5h'
-    'bEJpZBIbCglmaW5hbF9hc2sYByABKANSCGZpbmFsQXNr');
+    'bEJpZBIbCglmaW5hbF9hc2sYByABKANSCGZpbmFsQXNrEiQKDm1hX2Nyb3NzX3NoaWZ0GAggAS'
+    'gDUgxtYUNyb3NzU2hpZnQ=');
 
 @$core.Deprecated('Use streamMmStateUpdateRequestDescriptor instead')
 const StreamMmStateUpdateRequest$json = {

@@ -744,6 +744,40 @@
         }
       }
     },
+    "mmMaCrossState": {
+      "type": "object",
+      "properties": {
+        "shortMa": {
+          "type": "number",
+          "format": "double",
+          "title": "단기/장기 이동평균 (원)"
+        },
+        "longMa": {
+          "type": "number",
+          "format": "double"
+        },
+        "trend": {
+          "type": "string",
+          "title": "\"golden\" | \"dead\" | \"neutral\""
+        },
+        "skew": {
+          "type": "string",
+          "format": "int64",
+          "title": "현재 적용 중인 skew (원, 부호 포함)"
+        },
+        "samples": {
+          "type": "string",
+          "format": "uint64",
+          "title": "수집된 샘플 수 (워밍업 판단용, long_window 도달 시 활성)"
+        },
+        "transitions": {
+          "type": "string",
+          "format": "uint64",
+          "title": "상태 전환 누적 횟수"
+        }
+      },
+      "title": "MA 크로스 런타임 상태"
+    },
     "mmMarketBiasState": {
       "type": "object",
       "properties": {
@@ -852,6 +886,10 @@
         "quantityLimit": {
           "$ref": "#/definitions/mmMarketMakingQuantityLimit",
           "title": "순포지션 수량 한도 (방향별 호가 차단)"
+        },
+        "maCross": {
+          "$ref": "#/definitions/mmMarketMakingMaCross",
+          "title": "MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -884,6 +922,30 @@
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"
+    },
+    "mmMarketMakingMaCross": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "shortWindowSecs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "단기 MA 윈도우 (초, 기본 180 = 3분)"
+        },
+        "longWindowSecs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "장기 MA 윈도우 (초, 기본 600 = 10분)"
+        },
+        "skewUnit": {
+          "type": "string",
+          "format": "int64",
+          "title": "골든/데드 시 호가 평행이동량 (원)"
+        }
+      },
+      "description": "MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라\n호가 중심을 평행이동. 골든(단기\u003e장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0."
     },
     "mmMarketMakingMarketBias": {
       "type": "object",
@@ -1188,6 +1250,10 @@
         "f2mShift": {
           "type": "string",
           "title": "현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제"
+        },
+        "maCross": {
+          "$ref": "#/definitions/mmMaCrossState",
+          "title": "MA 크로스 상태 (변경 시에만 포함)"
         }
       },
       "description": "MM 엔진 런타임 상태 델타 메시지.\n스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.\nsymbol은 항상 포함된다."
@@ -1258,9 +1324,14 @@
           "type": "string",
           "format": "int64",
           "title": "정렬 후 최종 ask (Price internal representation)"
+        },
+        "maCrossShift": {
+          "type": "string",
+          "format": "int64",
+          "title": "MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)"
         }
       },
-      "description": "호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias."
+      "description": "호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift."
     },
     "mmStartMarketMakingResponse": {
       "type": "object",

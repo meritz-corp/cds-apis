@@ -198,6 +198,9 @@ message MarketMakingConfiguration {
 
   // 순포지션 수량 한도 (방향별 호가 차단)
   MarketMakingQuantityLimit quantity_limit = 17;
+
+  // MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)
+  MarketMakingMaCross ma_cross = 18;
 }
 
 // NAV pricing 상세 설정
@@ -300,6 +303,18 @@ message MarketMakingMarketBias {
 
   // 누적 상한 절댓값 (가격 단위, Price internal representation)
   int64 max_bias = 7;
+}
+
+// MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라
+// 호가 중심을 평행이동. 골든(단기>장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0.
+message MarketMakingMaCross {
+  bool enabled = 1;
+  // 단기 MA 윈도우 (초, 기본 180 = 3분)
+  uint64 short_window_secs = 2;
+  // 장기 MA 윈도우 (초, 기본 600 = 10분)
+  uint64 long_window_secs = 3;
+  // 골든/데드 시 호가 평행이동량 (원)
+  int64 skew_unit = 4;
 }
 
 // 통합 포지션 관리 설정 (soft rebalance + hard limit)
@@ -513,6 +528,21 @@ message MarketBiasState {
   int64 eval_count = 3;
 }
 
+// MA 크로스 런타임 상태
+message MaCrossState {
+  // 단기/장기 이동평균 (원)
+  double short_ma = 1;
+  double long_ma = 2;
+  // "golden" | "dead" | "neutral"
+  string trend = 3;
+  // 현재 적용 중인 skew (원, 부호 포함)
+  int64 skew = 4;
+  // 수집된 샘플 수 (워밍업 판단용, long_window 도달 시 활성)
+  uint64 samples = 5;
+  // 상태 전환 누적 횟수
+  uint64 transitions = 6;
+}
+
 // 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 message ExposureBalancerState {
   reserved 2;
@@ -570,6 +600,9 @@ message MmStateUpdate {
 
   // 현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
   optional string f2m_shift = 12;
+
+  // MA 크로스 상태 (변경 시에만 포함)
+  optional MaCrossState ma_cross = 13;
 }
 
 // StreamMmFills
@@ -638,7 +671,7 @@ message ListMmPnlHistoryResponse {
   repeated MmPnlPoint points = 1;
 }
 
-// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
+// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 message SpreadDecomposition {
   // Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)
   int64 base_bid = 1;
@@ -660,6 +693,9 @@ message SpreadDecomposition {
 
   // 정렬 후 최종 ask (Price internal representation)
   int64 final_ask = 7;
+
+  // MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  int64 ma_cross_shift = 8;
 }
 
 // ============================================================================

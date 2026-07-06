@@ -67,6 +67,9 @@ pub struct MarketMakingConfiguration {
     /// 순포지션 수량 한도 (방향별 호가 차단)
     #[prost(message, optional, tag="17")]
     pub quantity_limit: ::core::option::Option<MarketMakingQuantityLimit>,
+    /// MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)
+    #[prost(message, optional, tag="18")]
+    pub ma_cross: ::core::option::Option<MarketMakingMaCross>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -193,6 +196,23 @@ pub struct MarketMakingMarketBias {
     /// 누적 상한 절댓값 (가격 단위, Price internal representation)
     #[prost(int64, tag="7")]
     pub max_bias: i64,
+}
+/// MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라
+/// 호가 중심을 평행이동. 골든(단기>장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingMaCross {
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 단기 MA 윈도우 (초, 기본 180 = 3분)
+    #[prost(uint64, tag="2")]
+    pub short_window_secs: u64,
+    /// 장기 MA 윈도우 (초, 기본 600 = 10분)
+    #[prost(uint64, tag="3")]
+    pub long_window_secs: u64,
+    /// 골든/데드 시 호가 평행이동량 (원)
+    #[prost(int64, tag="4")]
+    pub skew_unit: i64,
 }
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -442,6 +462,28 @@ pub struct MarketBiasState {
     #[prost(int64, tag="3")]
     pub eval_count: i64,
 }
+/// MA 크로스 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MaCrossState {
+    /// 단기/장기 이동평균 (원)
+    #[prost(double, tag="1")]
+    pub short_ma: f64,
+    #[prost(double, tag="2")]
+    pub long_ma: f64,
+    /// "golden" | "dead" | "neutral"
+    #[prost(string, tag="3")]
+    pub trend: ::prost::alloc::string::String,
+    /// 현재 적용 중인 skew (원, 부호 포함)
+    #[prost(int64, tag="4")]
+    pub skew: i64,
+    /// 수집된 샘플 수 (워밍업 판단용, long_window 도달 시 활성)
+    #[prost(uint64, tag="5")]
+    pub samples: u64,
+    /// 상태 전환 누적 횟수
+    #[prost(uint64, tag="6")]
+    pub transitions: u64,
+}
 /// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -501,6 +543,9 @@ pub struct MmStateUpdate {
     /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
     #[prost(string, optional, tag="12")]
     pub f2m_shift: ::core::option::Option<::prost::alloc::string::String>,
+    /// MA 크로스 상태 (변경 시에만 포함)
+    #[prost(message, optional, tag="13")]
+    pub ma_cross: ::core::option::Option<MaCrossState>,
 }
 /// StreamMmFills
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -579,7 +624,7 @@ pub struct ListMmPnlHistoryResponse {
     #[prost(message, repeated, tag="1")]
     pub points: ::prost::alloc::vec::Vec<MmPnlPoint>,
 }
-/// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
+/// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpreadDecomposition {
@@ -604,6 +649,9 @@ pub struct SpreadDecomposition {
     /// 정렬 후 최종 ask (Price internal representation)
     #[prost(int64, tag="7")]
     pub final_ask: i64,
+    /// MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+    #[prost(int64, tag="8")]
+    pub ma_cross_shift: i64,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

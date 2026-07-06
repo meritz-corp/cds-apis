@@ -140,6 +140,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? basis,
     $core.int? baseHalfTicks,
     MarketMakingQuantityLimit? quantityLimit,
+    MarketMakingMaCross? maCross,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -155,6 +156,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (basis != null) result.basis = basis;
     if (baseHalfTicks != null) result.baseHalfTicks = baseHalfTicks;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
+    if (maCross != null) result.maCross = maCross;
     return result;
   }
 
@@ -177,6 +179,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aInt64(15, _omitFieldNames ? '' : 'basis')
     ..a<$core.int>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.O3)
     ..aOM<MarketMakingQuantityLimit>(17, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MarketMakingQuantityLimit.create)
+    ..aOM<MarketMakingMaCross>(18, _omitFieldNames ? '' : 'maCross', subBuilder: MarketMakingMaCross.create)
     ..hasRequiredFields = false
   ;
 
@@ -338,6 +341,18 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearQuantityLimit() => $_clearField(17);
   @$pb.TagNumber(17)
   MarketMakingQuantityLimit ensureQuantityLimit() => $_ensure(12);
+
+  /// MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)
+  @$pb.TagNumber(18)
+  MarketMakingMaCross get maCross => $_getN(13);
+  @$pb.TagNumber(18)
+  set maCross(MarketMakingMaCross value) => $_setField(18, value);
+  @$pb.TagNumber(18)
+  $core.bool hasMaCross() => $_has(13);
+  @$pb.TagNumber(18)
+  void clearMaCross() => $_clearField(18);
+  @$pb.TagNumber(18)
+  MarketMakingMaCross ensureMaCross() => $_ensure(13);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -964,6 +979,93 @@ class MarketMakingMarketBias extends $pb.GeneratedMessage {
   $core.bool hasMaxBias() => $_has(6);
   @$pb.TagNumber(7)
   void clearMaxBias() => $_clearField(7);
+}
+
+/// MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라
+/// 호가 중심을 평행이동. 골든(단기>장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0.
+class MarketMakingMaCross extends $pb.GeneratedMessage {
+  factory MarketMakingMaCross({
+    $core.bool? enabled,
+    $fixnum.Int64? shortWindowSecs,
+    $fixnum.Int64? longWindowSecs,
+    $fixnum.Int64? skewUnit,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (shortWindowSecs != null) result.shortWindowSecs = shortWindowSecs;
+    if (longWindowSecs != null) result.longWindowSecs = longWindowSecs;
+    if (skewUnit != null) result.skewUnit = skewUnit;
+    return result;
+  }
+
+  MarketMakingMaCross._();
+
+  factory MarketMakingMaCross.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingMaCross.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingMaCross', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'shortWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'longWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(4, _omitFieldNames ? '' : 'skewUnit')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingMaCross clone() => MarketMakingMaCross()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingMaCross copyWith(void Function(MarketMakingMaCross) updates) => super.copyWith((message) => updates(message as MarketMakingMaCross)) as MarketMakingMaCross;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingMaCross create() => MarketMakingMaCross._();
+  @$core.override
+  MarketMakingMaCross createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingMaCross> createRepeated() => $pb.PbList<MarketMakingMaCross>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingMaCross getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingMaCross>(create);
+  static MarketMakingMaCross? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 단기 MA 윈도우 (초, 기본 180 = 3분)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get shortWindowSecs => $_getI64(1);
+  @$pb.TagNumber(2)
+  set shortWindowSecs($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasShortWindowSecs() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearShortWindowSecs() => $_clearField(2);
+
+  /// 장기 MA 윈도우 (초, 기본 600 = 10분)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get longWindowSecs => $_getI64(2);
+  @$pb.TagNumber(3)
+  set longWindowSecs($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLongWindowSecs() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLongWindowSecs() => $_clearField(3);
+
+  /// 골든/데드 시 호가 평행이동량 (원)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get skewUnit => $_getI64(3);
+  @$pb.TagNumber(4)
+  set skewUnit($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSkewUnit() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSkewUnit() => $_clearField(4);
 }
 
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
@@ -2252,6 +2354,118 @@ class MarketBiasState extends $pb.GeneratedMessage {
   void clearEvalCount() => $_clearField(3);
 }
 
+/// MA 크로스 런타임 상태
+class MaCrossState extends $pb.GeneratedMessage {
+  factory MaCrossState({
+    $core.double? shortMa,
+    $core.double? longMa,
+    $core.String? trend,
+    $fixnum.Int64? skew,
+    $fixnum.Int64? samples,
+    $fixnum.Int64? transitions,
+  }) {
+    final result = create();
+    if (shortMa != null) result.shortMa = shortMa;
+    if (longMa != null) result.longMa = longMa;
+    if (trend != null) result.trend = trend;
+    if (skew != null) result.skew = skew;
+    if (samples != null) result.samples = samples;
+    if (transitions != null) result.transitions = transitions;
+    return result;
+  }
+
+  MaCrossState._();
+
+  factory MaCrossState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MaCrossState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MaCrossState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'shortMa', $pb.PbFieldType.OD)
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'longMa', $pb.PbFieldType.OD)
+    ..aOS(3, _omitFieldNames ? '' : 'trend')
+    ..aInt64(4, _omitFieldNames ? '' : 'skew')
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'samples', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'transitions', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MaCrossState clone() => MaCrossState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MaCrossState copyWith(void Function(MaCrossState) updates) => super.copyWith((message) => updates(message as MaCrossState)) as MaCrossState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MaCrossState create() => MaCrossState._();
+  @$core.override
+  MaCrossState createEmptyInstance() => create();
+  static $pb.PbList<MaCrossState> createRepeated() => $pb.PbList<MaCrossState>();
+  @$core.pragma('dart2js:noInline')
+  static MaCrossState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MaCrossState>(create);
+  static MaCrossState? _defaultInstance;
+
+  /// 단기/장기 이동평균 (원)
+  @$pb.TagNumber(1)
+  $core.double get shortMa => $_getN(0);
+  @$pb.TagNumber(1)
+  set shortMa($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasShortMa() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearShortMa() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.double get longMa => $_getN(1);
+  @$pb.TagNumber(2)
+  set longMa($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLongMa() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLongMa() => $_clearField(2);
+
+  /// "golden" | "dead" | "neutral"
+  @$pb.TagNumber(3)
+  $core.String get trend => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set trend($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasTrend() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTrend() => $_clearField(3);
+
+  /// 현재 적용 중인 skew (원, 부호 포함)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get skew => $_getI64(3);
+  @$pb.TagNumber(4)
+  set skew($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSkew() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSkew() => $_clearField(4);
+
+  /// 수집된 샘플 수 (워밍업 판단용, long_window 도달 시 활성)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get samples => $_getI64(4);
+  @$pb.TagNumber(5)
+  set samples($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSamples() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSamples() => $_clearField(5);
+
+  /// 상태 전환 누적 횟수
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get transitions => $_getI64(5);
+  @$pb.TagNumber(6)
+  set transitions($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasTransitions() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearTransitions() => $_clearField(6);
+}
+
 /// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 class ExposureBalancerState extends $pb.GeneratedMessage {
   factory ExposureBalancerState({
@@ -2356,6 +2570,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     $core.String? askOffset,
     SpreadDecomposition? decomposition,
     $core.String? f2mShift,
+    MaCrossState? maCross,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2370,6 +2585,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (askOffset != null) result.askOffset = askOffset;
     if (decomposition != null) result.decomposition = decomposition;
     if (f2mShift != null) result.f2mShift = f2mShift;
+    if (maCross != null) result.maCross = maCross;
     return result;
   }
 
@@ -2391,6 +2607,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOS(10, _omitFieldNames ? '' : 'askOffset')
     ..aOM<SpreadDecomposition>(11, _omitFieldNames ? '' : 'decomposition', subBuilder: SpreadDecomposition.create)
     ..aOS(12, _omitFieldNames ? '' : 'f2mShift')
+    ..aOM<MaCrossState>(13, _omitFieldNames ? '' : 'maCross', subBuilder: MaCrossState.create)
     ..hasRequiredFields = false
   ;
 
@@ -2540,6 +2757,18 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   $core.bool hasF2mShift() => $_has(11);
   @$pb.TagNumber(12)
   void clearF2mShift() => $_clearField(12);
+
+  /// MA 크로스 상태 (변경 시에만 포함)
+  @$pb.TagNumber(13)
+  MaCrossState get maCross => $_getN(12);
+  @$pb.TagNumber(13)
+  set maCross(MaCrossState value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasMaCross() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearMaCross() => $_clearField(13);
+  @$pb.TagNumber(13)
+  MaCrossState ensureMaCross() => $_ensure(12);
 }
 
 /// StreamMmFills
@@ -2943,7 +3172,7 @@ class ListMmPnlHistoryResponse extends $pb.GeneratedMessage {
   $pb.PbList<MmPnlPoint> get points => $_getList(0);
 }
 
-/// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias.
+/// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 class SpreadDecomposition extends $pb.GeneratedMessage {
   factory SpreadDecomposition({
     $fixnum.Int64? baseBid,
@@ -2953,6 +3182,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     $fixnum.Int64? marketBiasShift,
     $fixnum.Int64? finalBid,
     $fixnum.Int64? finalAsk,
+    $fixnum.Int64? maCrossShift,
   }) {
     final result = create();
     if (baseBid != null) result.baseBid = baseBid;
@@ -2962,6 +3192,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     if (marketBiasShift != null) result.marketBiasShift = marketBiasShift;
     if (finalBid != null) result.finalBid = finalBid;
     if (finalAsk != null) result.finalAsk = finalAsk;
+    if (maCrossShift != null) result.maCrossShift = maCrossShift;
     return result;
   }
 
@@ -2978,6 +3209,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     ..aInt64(5, _omitFieldNames ? '' : 'marketBiasShift')
     ..aInt64(6, _omitFieldNames ? '' : 'finalBid')
     ..aInt64(7, _omitFieldNames ? '' : 'finalAsk')
+    ..aInt64(8, _omitFieldNames ? '' : 'maCrossShift')
     ..hasRequiredFields = false
   ;
 
@@ -3067,6 +3299,16 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   $core.bool hasFinalAsk() => $_has(6);
   @$pb.TagNumber(7)
   void clearFinalAsk() => $_clearField(7);
+
+  /// MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get maCrossShift => $_getI64(7);
+  @$pb.TagNumber(8)
+  set maCrossShift($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasMaCrossShift() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearMaCrossShift() => $_clearField(8);
 }
 
 /// StreamMmStateUpdate
