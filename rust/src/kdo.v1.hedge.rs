@@ -295,14 +295,6 @@ pub struct ListHedgesResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-/// CreateHedge 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CreateHedgeRequest {
-    /// 생성할 헷지 정보
-    #[prost(message, optional, tag="1")]
-    pub hedge: ::core::option::Option<Hedge>,
-}
 /// UpdateHedge 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -1340,56 +1340,6 @@ class ListHedgesResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
-/// CreateHedge 요청
-class CreateHedgeRequest extends $pb.GeneratedMessage {
-  factory CreateHedgeRequest({
-    Hedge? hedge,
-  }) {
-    final result = create();
-    if (hedge != null) result.hedge = hedge;
-    return result;
-  }
-
-  CreateHedgeRequest._();
-
-  factory CreateHedgeRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory CreateHedgeRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateHedgeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
-    ..aOM<Hedge>(1, _omitFieldNames ? '' : 'hedge', subBuilder: Hedge.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateHedgeRequest clone() => CreateHedgeRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CreateHedgeRequest copyWith(void Function(CreateHedgeRequest) updates) => super.copyWith((message) => updates(message as CreateHedgeRequest)) as CreateHedgeRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static CreateHedgeRequest create() => CreateHedgeRequest._();
-  @$core.override
-  CreateHedgeRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateHedgeRequest> createRepeated() => $pb.PbList<CreateHedgeRequest>();
-  @$core.pragma('dart2js:noInline')
-  static CreateHedgeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateHedgeRequest>(create);
-  static CreateHedgeRequest? _defaultInstance;
-
-  /// 생성할 헷지 정보
-  @$pb.TagNumber(1)
-  Hedge get hedge => $_getN(0);
-  @$pb.TagNumber(1)
-  set hedge(Hedge value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasHedge() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearHedge() => $_clearField(1);
-  @$pb.TagNumber(1)
-  Hedge ensureHedge() => $_ensure(0);
-}
-
 /// UpdateHedge 요청
 class UpdateHedgeRequest extends $pb.GeneratedMessage {
   factory UpdateHedgeRequest({

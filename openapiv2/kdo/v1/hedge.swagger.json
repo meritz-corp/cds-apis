@@ -249,41 +249,6 @@
         "tags": [
           "HedgeService"
         ]
-      },
-      "post": {
-        "summary": "Hedge 생성",
-        "operationId": "HedgeService_CreateHedge",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/hedgeHedge"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "hedge",
-            "description": "생성할 헷지 정보",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/hedgeHedge",
-              "required": [
-                "hedge"
-              ]
-            }
-          }
-        ],
-        "tags": [
-          "HedgeService"
-        ]
       }
     },
     "/v1/hedges:findValid": {

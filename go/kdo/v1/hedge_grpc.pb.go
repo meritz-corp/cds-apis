@@ -40,8 +40,6 @@ type HedgeServiceClient interface {
 	FindValidHedge(ctx context.Context, in *FindValidHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// Hedge 목록 조회
 	ListHedges(ctx context.Context, in *ListHedgesRequest, opts ...grpc.CallOption) (*ListHedgesResponse, error)
-	// Hedge 생성
-	CreateHedge(ctx context.Context, in *CreateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// Hedge 수정
 	UpdateHedge(ctx context.Context, in *UpdateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// Hedge 삭제
@@ -152,15 +150,6 @@ func (c *hedgeServiceClient) ListHedges(ctx context.Context, in *ListHedgesReque
 	return out, nil
 }
 
-func (c *hedgeServiceClient) CreateHedge(ctx context.Context, in *CreateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
-	out := new(Hedge)
-	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/CreateHedge", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *hedgeServiceClient) UpdateHedge(ctx context.Context, in *UpdateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
 	out := new(Hedge)
 	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/UpdateHedge", in, out, opts...)
@@ -245,8 +234,6 @@ type HedgeServiceServer interface {
 	FindValidHedge(context.Context, *FindValidHedgeRequest) (*Hedge, error)
 	// Hedge 목록 조회
 	ListHedges(context.Context, *ListHedgesRequest) (*ListHedgesResponse, error)
-	// Hedge 생성
-	CreateHedge(context.Context, *CreateHedgeRequest) (*Hedge, error)
 	// Hedge 수정
 	UpdateHedge(context.Context, *UpdateHedgeRequest) (*Hedge, error)
 	// Hedge 삭제
@@ -288,9 +275,6 @@ func (UnimplementedHedgeServiceServer) FindValidHedge(context.Context, *FindVali
 }
 func (UnimplementedHedgeServiceServer) ListHedges(context.Context, *ListHedgesRequest) (*ListHedgesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListHedges not implemented")
-}
-func (UnimplementedHedgeServiceServer) CreateHedge(context.Context, *CreateHedgeRequest) (*Hedge, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateHedge not implemented")
 }
 func (UnimplementedHedgeServiceServer) UpdateHedge(context.Context, *UpdateHedgeRequest) (*Hedge, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHedge not implemented")
@@ -455,24 +439,6 @@ func _HedgeService_ListHedges_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HedgeService_CreateHedge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateHedgeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HedgeServiceServer).CreateHedge(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.hedge.HedgeService/CreateHedge",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HedgeServiceServer).CreateHedge(ctx, req.(*CreateHedgeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _HedgeService_UpdateHedge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateHedgeRequest)
 	if err := dec(in); err != nil {
@@ -629,10 +595,6 @@ var HedgeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListHedges",
 			Handler:    _HedgeService_ListHedges_Handler,
-		},
-		{
-			MethodName: "CreateHedge",
-			Handler:    _HedgeService_CreateHedge_Handler,
 		},
 		{
 			MethodName: "UpdateHedge",

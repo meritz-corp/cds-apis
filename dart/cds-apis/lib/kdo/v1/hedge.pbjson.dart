@@ -393,19 +393,6 @@ final $typed_data.Uint8List listHedgesResponseDescriptor = $convert.base64Decode
     'ChJMaXN0SGVkZ2VzUmVzcG9uc2USKwoGaGVkZ2VzGAEgAygLMhMua2RvLnYxLmhlZGdlLkhlZG'
     'dlUgZoZWRnZXMSJgoPbmV4dF9wYWdlX3Rva2VuGAIgASgJUg1uZXh0UGFnZVRva2Vu');
 
-@$core.Deprecated('Use createHedgeRequestDescriptor instead')
-const CreateHedgeRequest$json = {
-  '1': 'CreateHedgeRequest',
-  '2': [
-    {'1': 'hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.hedge.Hedge', '8': {}, '10': 'hedge'},
-  ],
-};
-
-/// Descriptor for `CreateHedgeRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createHedgeRequestDescriptor = $convert.base64Decode(
-    'ChJDcmVhdGVIZWRnZVJlcXVlc3QSLwoFaGVkZ2UYASABKAsyEy5rZG8udjEuaGVkZ2UuSGVkZ2'
-    'VCBOJBAQJSBWhlZGdl');
-
 @$core.Deprecated('Use updateHedgeRequestDescriptor instead')
 const UpdateHedgeRequest$json = {
   '1': 'UpdateHedgeRequest',

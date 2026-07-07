@@ -76,15 +76,6 @@ service HedgeService {
     option (google.api.method_signature) = "";
   }
 
-  // Hedge 생성
-  rpc CreateHedge(CreateHedgeRequest) returns (Hedge) {
-    option (google.api.http) = {
-      post: "/v1/hedges"
-      body: "hedge"
-    };
-    option (google.api.method_signature) = "hedge";
-  }
-
   // Hedge 수정
   rpc UpdateHedge(UpdateHedgeRequest) returns (Hedge) {
     option (google.api.http) = {
@@ -459,12 +450,6 @@ message ListHedgesResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
-}
-
-// CreateHedge 요청
-message CreateHedgeRequest {
-  // 생성할 헷지 정보
-  Hedge hedge = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 // UpdateHedge 요청

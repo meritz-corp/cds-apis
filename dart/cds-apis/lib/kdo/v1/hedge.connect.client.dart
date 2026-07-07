@@ -141,24 +141,6 @@ extension type HedgeServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Hedge 생성
-  Future<kdov1hedge.Hedge> createHedge(
-    kdov1hedge.CreateHedgeRequest input, {
-    connect.Headers? headers,
-    connect.AbortSignal? signal,
-    Function(connect.Headers)? onHeader,
-    Function(connect.Headers)? onTrailer,
-  }) {
-    return connect.Client(_transport).unary(
-      specs.HedgeService.createHedge,
-      input,
-      signal: signal,
-      headers: headers,
-      onHeader: onHeader,
-      onTrailer: onTrailer,
-    );
-  }
-
   /// Hedge 수정
   Future<kdov1hedge.Hedge> updateHedge(
     kdov1hedge.UpdateHedgeRequest input, {

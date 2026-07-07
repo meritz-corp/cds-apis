@@ -74,11 +74,6 @@ class HedgeServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listHedges, request, options: options);
   }
 
-  /// Hedge 생성
-  $grpc.ResponseFuture<$0.Hedge> createHedge($0.CreateHedgeRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$createHedge, request, options: options);
-  }
-
   /// Hedge 수정
   $grpc.ResponseFuture<$0.Hedge> updateHedge($0.UpdateHedgeRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$updateHedge, request, options: options);
@@ -144,10 +139,6 @@ class HedgeServiceClient extends $grpc.Client {
       '/kdo.v1.hedge.HedgeService/ListHedges',
       ($0.ListHedgesRequest value) => value.writeToBuffer(),
       $0.ListHedgesResponse.fromBuffer);
-  static final _$createHedge = $grpc.ClientMethod<$0.CreateHedgeRequest, $0.Hedge>(
-      '/kdo.v1.hedge.HedgeService/CreateHedge',
-      ($0.CreateHedgeRequest value) => value.writeToBuffer(),
-      $0.Hedge.fromBuffer);
   static final _$updateHedge = $grpc.ClientMethod<$0.UpdateHedgeRequest, $0.Hedge>(
       '/kdo.v1.hedge.HedgeService/UpdateHedge',
       ($0.UpdateHedgeRequest value) => value.writeToBuffer(),
@@ -232,13 +223,6 @@ abstract class HedgeServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListHedgesRequest.fromBuffer(value),
         ($0.ListHedgesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.CreateHedgeRequest, $0.Hedge>(
-        'CreateHedge',
-        createHedge_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.CreateHedgeRequest.fromBuffer(value),
-        ($0.Hedge value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UpdateHedgeRequest, $0.Hedge>(
         'UpdateHedge',
         updateHedge_Pre,
@@ -331,12 +315,6 @@ abstract class HedgeServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListHedgesResponse> listHedges($grpc.ServiceCall call, $0.ListHedgesRequest request);
-
-  $async.Future<$0.Hedge> createHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateHedgeRequest> $request) async {
-    return createHedge($call, await $request);
-  }
-
-  $async.Future<$0.Hedge> createHedge($grpc.ServiceCall call, $0.CreateHedgeRequest request);
 
   $async.Future<$0.Hedge> updateHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateHedgeRequest> $request) async {
     return updateHedge($call, await $request);

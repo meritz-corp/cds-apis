@@ -73,14 +73,6 @@ abstract final class HedgeService {
     kdov1hedge.ListHedgesResponse.new,
   );
 
-  /// Hedge 생성
-  static const createHedge = connect.Spec(
-    '/$name/CreateHedge',
-    connect.StreamType.unary,
-    kdov1hedge.CreateHedgeRequest.new,
-    kdov1hedge.Hedge.new,
-  );
-
   /// Hedge 수정
   static const updateHedge = connect.Spec(
     '/$name/UpdateHedge',

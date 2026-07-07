@@ -278,26 +278,6 @@ func (m *MockHedgeServiceClient) EXPECT() *MockHedgeServiceClientMockRecorder {
 	return m.recorder
 }
 
-// CreateHedge mocks base method.
-func (m *MockHedgeServiceClient) CreateHedge(ctx context.Context, in *CreateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateHedge", varargs...)
-	ret0, _ := ret[0].(*Hedge)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateHedge indicates an expected call of CreateHedge.
-func (mr *MockHedgeServiceClientMockRecorder) CreateHedge(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateHedge", reflect.TypeOf((*MockHedgeServiceClient)(nil).CreateHedge), varargs...)
-}
-
 // CreateHedgeGroup mocks base method.
 func (m *MockHedgeServiceClient) CreateHedgeGroup(ctx context.Context, in *CreateHedgeGroupRequest, opts ...grpc.CallOption) (*HedgeGroup, error) {
 	m.ctrl.T.Helper()
@@ -599,21 +579,6 @@ func NewMockHedgeServiceServer(ctrl *gomock.Controller) *MockHedgeServiceServer 
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockHedgeServiceServer) EXPECT() *MockHedgeServiceServerMockRecorder {
 	return m.recorder
-}
-
-// CreateHedge mocks base method.
-func (m *MockHedgeServiceServer) CreateHedge(ctx context.Context, in *CreateHedgeRequest) (*Hedge, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateHedge", ctx, in)
-	ret0, _ := ret[0].(*Hedge)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// CreateHedge indicates an expected call of CreateHedge.
-func (mr *MockHedgeServiceServerMockRecorder) CreateHedge(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateHedge", reflect.TypeOf((*MockHedgeServiceServer)(nil).CreateHedge), ctx, in)
 }
 
 // CreateHedgeGroup mocks base method.
