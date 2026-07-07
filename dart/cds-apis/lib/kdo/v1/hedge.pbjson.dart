@@ -89,6 +89,7 @@ const Hedge$json = {
     {'1': 'tick_offset', '3': 14, '4': 1, '5': 5, '10': 'tickOffset'},
     {'1': 'tp_code', '3': 15, '4': 1, '5': 14, '6': '.kdo.v1.hedge.OrderTpCode', '10': 'tpCode'},
     {'1': 'initial_wait_ms', '3': 16, '4': 1, '5': 4, '10': 'initialWaitMs'},
+    {'1': 'is_valid', '3': 17, '4': 1, '5': 8, '10': 'isValid'},
   ],
   '3': [Hedge_QuantityPerHedgeEntry$json],
   '7': {},
@@ -120,9 +121,10 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'VudHJ5QgTiQQEDUhBxdWFudGl0eVBlckhlZGdlEiwKD2hlZGdlX2Z1bmRfY29kZRgNIAEoCUIE'
     '4kEBAlINaGVkZ2VGdW5kQ29kZRIfCgt0aWNrX29mZnNldBgOIAEoBVIKdGlja09mZnNldBIyCg'
     'd0cF9jb2RlGA8gASgOMhkua2RvLnYxLmhlZGdlLk9yZGVyVHBDb2RlUgZ0cENvZGUSJgoPaW5p'
-    'dGlhbF93YWl0X21zGBAgASgEUg1pbml0aWFsV2FpdE1zGkMKFVF1YW50aXR5UGVySGVkZ2VFbn'
-    'RyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBOirqQScKFWtk'
-    'by5jZHNhcGlzLnh5ei9IZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
+    'dGlhbF93YWl0X21zGBAgASgEUg1pbml0aWFsV2FpdE1zEhkKCGlzX3ZhbGlkGBEgASgIUgdpc1'
+    'ZhbGlkGkMKFVF1YW50aXR5UGVySGVkZ2VFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1'
+    'ZRgCIAEoCVIFdmFsdWU6AjgBOirqQScKFWtkby5jZHNhcGlzLnh5ei9IZWRnZRIOaGVkZ2VzL3'
+    'toZWRnZX0=');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {

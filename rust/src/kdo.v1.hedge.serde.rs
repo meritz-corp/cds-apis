@@ -1322,6 +1322,9 @@ impl serde::Serialize for Hedge {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.Hedge", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1379,6 +1382,9 @@ impl serde::Serialize for Hedge {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("initial_wait_ms", ToString::to_string(&self.initial_wait_ms).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("is_valid", &self.is_valid)?;
+        }
         struct_ser.end()
     }
 }
@@ -1419,6 +1425,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "tpCode",
             "initial_wait_ms",
             "initialWaitMs",
+            "is_valid",
+            "isValid",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1439,6 +1447,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             TickOffset,
             TpCode,
             InitialWaitMs,
+            IsValid,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1477,6 +1486,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "tickOffset" | "tick_offset" => Ok(GeneratedField::TickOffset),
                             "tpCode" | "tp_code" => Ok(GeneratedField::TpCode),
                             "initialWaitMs" | "initial_wait_ms" => Ok(GeneratedField::InitialWaitMs),
+                            "isValid" | "is_valid" => Ok(GeneratedField::IsValid),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1512,6 +1522,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut tick_offset__ = None;
                 let mut tp_code__ = None;
                 let mut initial_wait_ms__ = None;
+                let mut is_valid__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1618,6 +1629,12 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::IsValid => {
+                            if is_valid__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("isValid"));
+                            }
+                            is_valid__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1640,6 +1657,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     tick_offset: tick_offset__.unwrap_or_default(),
                     tp_code: tp_code__.unwrap_or_default(),
                     initial_wait_ms: initial_wait_ms__.unwrap_or_default(),
+                    is_valid: is_valid__.unwrap_or_default(),
                 })
             }
         }

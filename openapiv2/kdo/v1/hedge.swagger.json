@@ -485,6 +485,10 @@
                   "type": "string",
                   "format": "uint64",
                   "description": "자동정정 시작 전 초기 대기 시간 (ms). auto_amend=true 일 때 유효, 등록 후 이 시간 동안 정정 보류 (0 = 즉시 정정 시작)."
+                },
+                "isValid": {
+                  "type": "boolean",
+                  "description": "유효한 모델 여부 — 실행 라우팅 게이트.\nstandalone hedge 는 is_active \u0026\u0026 is_valid 일 때만 사용.\n선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시)."
                 }
               },
               "title": "수정할 헷지 정보",
@@ -913,6 +917,10 @@
           "type": "string",
           "format": "uint64",
           "description": "자동정정 시작 전 초기 대기 시간 (ms). auto_amend=true 일 때 유효, 등록 후 이 시간 동안 정정 보류 (0 = 즉시 정정 시작)."
+        },
+        "isValid": {
+          "type": "boolean",
+          "description": "유효한 모델 여부 — 실행 라우팅 게이트.\nstandalone hedge 는 is_active \u0026\u0026 is_valid 일 때만 사용.\n선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시)."
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",

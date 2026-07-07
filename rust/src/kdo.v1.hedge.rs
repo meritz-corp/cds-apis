@@ -62,6 +62,11 @@ pub struct Hedge {
     /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend=true 일 때 유효, 등록 후 이 시간 동안 정정 보류 (0 = 즉시 정정 시작).
     #[prost(uint64, tag="16")]
     pub initial_wait_ms: u64,
+    /// 유효한 모델 여부 — 실행 라우팅 게이트.
+    /// standalone hedge 는 is_active && is_valid 일 때만 사용.
+    /// 선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시).
+    #[prost(bool, tag="17")]
+    pub is_valid: bool,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]

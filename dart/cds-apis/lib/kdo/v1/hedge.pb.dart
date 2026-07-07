@@ -43,6 +43,7 @@ class Hedge extends $pb.GeneratedMessage {
     $core.int? tickOffset,
     OrderTpCode? tpCode,
     $fixnum.Int64? initialWaitMs,
+    $core.bool? isValid,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -61,6 +62,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (tickOffset != null) result.tickOffset = tickOffset;
     if (tpCode != null) result.tpCode = tpCode;
     if (initialWaitMs != null) result.initialWaitMs = initialWaitMs;
+    if (isValid != null) result.isValid = isValid;
     return result;
   }
 
@@ -86,6 +88,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..a<$core.int>(14, _omitFieldNames ? '' : 'tickOffset', $pb.PbFieldType.O3)
     ..e<OrderTpCode>(15, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: OrderTpCode.valueOf, enumValues: OrderTpCode.values)
     ..a<$fixnum.Int64>(16, _omitFieldNames ? '' : 'initialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(17, _omitFieldNames ? '' : 'isValid')
     ..hasRequiredFields = false
   ;
 
@@ -272,6 +275,18 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasInitialWaitMs() => $_has(15);
   @$pb.TagNumber(16)
   void clearInitialWaitMs() => $_clearField(16);
+
+  /// 유효한 모델 여부 — 실행 라우팅 게이트.
+  /// standalone hedge 는 is_active && is_valid 일 때만 사용.
+  /// 선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시).
+  @$pb.TagNumber(17)
+  $core.bool get isValid => $_getBF(16);
+  @$pb.TagNumber(17)
+  set isValid($core.bool value) => $_setBool(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasIsValid() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearIsValid() => $_clearField(17);
 }
 
 enum HedgeMethod_Method {
