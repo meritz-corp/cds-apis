@@ -37,6 +37,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $2.OrderConditionType? orderCondition,
     $core.bool? needHedge,
     $fixnum.Int64? autoAmendInitialWaitMs,
+    QuickOrderOrigin? quickOrderOrigin,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -51,6 +52,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (orderCondition != null) result.orderCondition = orderCondition;
     if (needHedge != null) result.needHedge = needHedge;
     if (autoAmendInitialWaitMs != null) result.autoAmendInitialWaitMs = autoAmendInitialWaitMs;
+    if (quickOrderOrigin != null) result.quickOrderOrigin = quickOrderOrigin;
     return result;
   }
 
@@ -72,6 +74,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..e<$2.OrderConditionType>(10, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $2.OrderConditionType.valueOf, enumValues: $2.OrderConditionType.values)
     ..aOB(11, _omitFieldNames ? '' : 'needHedge')
     ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'autoAmendInitialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..e<QuickOrderOrigin>(13, _omitFieldNames ? '' : 'quickOrderOrigin', $pb.PbFieldType.OE, defaultOrMaker: QuickOrderOrigin.QUICK_ORDER_ORIGIN_UNSPECIFIED, valueOf: QuickOrderOrigin.valueOf, enumValues: QuickOrderOrigin.values)
     ..hasRequiredFields = false
   ;
 
@@ -213,6 +216,17 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasAutoAmendInitialWaitMs() => $_has(11);
   @$pb.TagNumber(12)
   void clearAutoAmendInitialWaitMs() => $_clearField(12);
+
+  /// 퀵주문 출처 (미지정 시 UNSPECIFIED). MM 퀵화면에서 낸 주문은 MM 으로 설정하면
+  /// 그 체결이 MM 서비스 체결통계에 반영된다.
+  @$pb.TagNumber(13)
+  QuickOrderOrigin get quickOrderOrigin => $_getN(12);
+  @$pb.TagNumber(13)
+  set quickOrderOrigin(QuickOrderOrigin value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasQuickOrderOrigin() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearQuickOrderOrigin() => $_clearField(13);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {

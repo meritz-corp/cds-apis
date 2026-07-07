@@ -63,6 +63,22 @@ class LimitPriceType extends $pb.ProtobufEnum {
   const LimitPriceType._(super.value, super.name);
 }
 
+/// 퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.
+class QuickOrderOrigin extends $pb.ProtobufEnum {
+  static const QuickOrderOrigin QUICK_ORDER_ORIGIN_UNSPECIFIED = QuickOrderOrigin._(0, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_UNSPECIFIED');
+  static const QuickOrderOrigin QUICK_ORDER_ORIGIN_MM = QuickOrderOrigin._(1, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_MM');
+
+  static const $core.List<QuickOrderOrigin> values = <QuickOrderOrigin> [
+    QUICK_ORDER_ORIGIN_UNSPECIFIED,
+    QUICK_ORDER_ORIGIN_MM,
+  ];
+
+  static final $core.List<QuickOrderOrigin?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static QuickOrderOrigin? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const QuickOrderOrigin._(super.value, super.name);
+}
+
 class OrderStatus extends $pb.ProtobufEnum {
   static const OrderStatus ORDER_STATUS_UNSPECIFIED = OrderStatus._(0, _omitEnumNames ? '' : 'ORDER_STATUS_UNSPECIFIED');
   static const OrderStatus ORDER_STATUS_SUBMITTED = OrderStatus._(1, _omitEnumNames ? '' : 'ORDER_STATUS_SUBMITTED');

@@ -426,6 +426,15 @@
       "default": "ORDER_STATUS_UNSPECIFIED",
       "title": "- ORDER_STATUS_SUBMITTED: 주문 제출됨\n - ORDER_STATUS_REJECTED: 거부됨 (validation 실패)"
     },
+    "orderQuickOrderOrigin": {
+      "type": "string",
+      "enum": [
+        "QUICK_ORDER_ORIGIN_UNSPECIFIED",
+        "QUICK_ORDER_ORIGIN_MM"
+      ],
+      "default": "QUICK_ORDER_ORIGIN_UNSPECIFIED",
+      "description": "퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.\n\n - QUICK_ORDER_ORIGIN_UNSPECIFIED: 일반 퀵주문 (출처 미지정)\n - QUICK_ORDER_ORIGIN_MM: MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨"
+    },
     "orderQuoteType": {
       "type": "string",
       "enum": [
@@ -490,6 +499,10 @@
           "type": "string",
           "format": "uint64",
           "description": "자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0 (즉시 정정 시작)."
+        },
+        "quickOrderOrigin": {
+          "$ref": "#/definitions/orderQuickOrderOrigin",
+          "description": "퀵주문 출처 (미지정 시 UNSPECIFIED). MM 퀵화면에서 낸 주문은 MM 으로 설정하면\n그 체결이 MM 서비스 체결통계에 반영된다."
         }
       },
       "required": [

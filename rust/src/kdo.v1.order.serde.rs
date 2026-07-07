@@ -2291,6 +2291,77 @@ impl<'de> serde::Deserialize<'de> for OrderStatus {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for QuickOrderOrigin {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "QUICK_ORDER_ORIGIN_UNSPECIFIED",
+            Self::Mm => "QUICK_ORDER_ORIGIN_MM",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for QuickOrderOrigin {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "QUICK_ORDER_ORIGIN_UNSPECIFIED",
+            "QUICK_ORDER_ORIGIN_MM",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = QuickOrderOrigin;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "QUICK_ORDER_ORIGIN_UNSPECIFIED" => Ok(QuickOrderOrigin::Unspecified),
+                    "QUICK_ORDER_ORIGIN_MM" => Ok(QuickOrderOrigin::Mm),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for QuoteType {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2742,6 +2813,9 @@ impl serde::Serialize for SubmitOrderRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.SubmitOrderRequest", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -2793,6 +2867,11 @@ impl serde::Serialize for SubmitOrderRequest {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("auto_amend_initial_wait_ms", ToString::to_string(&v).as_str())?;
         }
+        if let Some(v) = self.quick_order_origin.as_ref() {
+            let v = QuickOrderOrigin::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("quick_order_origin", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2823,6 +2902,8 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             "needHedge",
             "auto_amend_initial_wait_ms",
             "autoAmendInitialWaitMs",
+            "quick_order_origin",
+            "quickOrderOrigin",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2839,6 +2920,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             OrderCondition,
             NeedHedge,
             AutoAmendInitialWaitMs,
+            QuickOrderOrigin,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2873,6 +2955,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             "orderCondition" | "order_condition" => Ok(GeneratedField::OrderCondition),
                             "needHedge" | "need_hedge" => Ok(GeneratedField::NeedHedge),
                             "autoAmendInitialWaitMs" | "auto_amend_initial_wait_ms" => Ok(GeneratedField::AutoAmendInitialWaitMs),
+                            "quickOrderOrigin" | "quick_order_origin" => Ok(GeneratedField::QuickOrderOrigin),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2904,6 +2987,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                 let mut order_condition__ = None;
                 let mut need_hedge__ = None;
                 let mut auto_amend_initial_wait_ms__ = None;
+                let mut quick_order_origin__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -2982,6 +3066,12 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::QuickOrderOrigin => {
+                            if quick_order_origin__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quickOrderOrigin"));
+                            }
+                            quick_order_origin__ = map_.next_value::<::std::option::Option<QuickOrderOrigin>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3000,6 +3090,7 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                     order_condition: order_condition__,
                     need_hedge: need_hedge__,
                     auto_amend_initial_wait_ms: auto_amend_initial_wait_ms__,
+                    quick_order_origin: quick_order_origin__,
                 })
             }
         }

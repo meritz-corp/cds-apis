@@ -73,6 +73,12 @@ enum LimitPriceType {
   LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_3 = 7;    // 자기호가 -3틱 (덜 공격적)
 }
 
+// 퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.
+enum QuickOrderOrigin {
+  QUICK_ORDER_ORIGIN_UNSPECIFIED = 0;  // 일반 퀵주문 (출처 미지정)
+  QUICK_ORDER_ORIGIN_MM = 1;           // MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨
+}
+
 enum OrderStatus {
   ORDER_STATUS_UNSPECIFIED = 0;
   ORDER_STATUS_SUBMITTED = 1;   // 주문 제출됨
@@ -127,6 +133,10 @@ message SubmitOrderRequest {
 
   // 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0 (즉시 정정 시작).
   optional uint64 auto_amend_initial_wait_ms = 12;
+
+  // 퀵주문 출처 (미지정 시 UNSPECIFIED). MM 퀵화면에서 낸 주문은 MM 으로 설정하면
+  // 그 체결이 MM 서비스 체결통계에 반영된다.
+  optional QuickOrderOrigin quick_order_origin = 13;
 }
 
 message SubmitOrderResponse {

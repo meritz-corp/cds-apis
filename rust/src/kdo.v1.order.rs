@@ -43,6 +43,10 @@ pub struct SubmitOrderRequest {
     /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0 (즉시 정정 시작).
     #[prost(uint64, optional, tag="12")]
     pub auto_amend_initial_wait_ms: ::core::option::Option<u64>,
+    /// 퀵주문 출처 (미지정 시 UNSPECIFIED). MM 퀵화면에서 낸 주문은 MM 으로 설정하면
+    /// 그 체결이 MM 서비스 체결통계에 반영된다.
+    #[prost(enumeration="QuickOrderOrigin", optional, tag="13")]
+    pub quick_order_origin: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -402,6 +406,35 @@ impl LimitPriceType {
             "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_1" => Some(Self::BestMakeMinus1),
             "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_2" => Some(Self::BestMakeMinus2),
             "LIMIT_PRICE_TYPE_BEST_MAKE_MINUS_3" => Some(Self::BestMakeMinus3),
+            _ => None,
+        }
+    }
+}
+/// 퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum QuickOrderOrigin {
+    /// 일반 퀵주문 (출처 미지정)
+    Unspecified = 0,
+    /// MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨
+    Mm = 1,
+}
+impl QuickOrderOrigin {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            QuickOrderOrigin::Unspecified => "QUICK_ORDER_ORIGIN_UNSPECIFIED",
+            QuickOrderOrigin::Mm => "QUICK_ORDER_ORIGIN_MM",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "QUICK_ORDER_ORIGIN_UNSPECIFIED" => Some(Self::Unspecified),
+            "QUICK_ORDER_ORIGIN_MM" => Some(Self::Mm),
             _ => None,
         }
     }
