@@ -150,44 +150,21 @@ class OrderConditionType extends $pb.ProtobufEnum {
 
 /// 자동정정 전략 유형
 class AmendMethodType extends $pb.ProtobufEnum {
-  /// 미지정 (기본값: TIMED_MARKET으로 처리)
+  /// 미지정 (기본값: AGGRESSIVE로 처리)
   static const AmendMethodType AMEND_METHOD_TYPE_UNSPECIFIED = AmendMethodType._(0, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_UNSPECIFIED');
   /// 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
   static const AmendMethodType AMEND_METHOD_TYPE_AGGRESSIVE = AmendMethodType._(1, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_AGGRESSIVE');
-  /// 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지
-  static const AmendMethodType AMEND_METHOD_TYPE_EVASIVE = AmendMethodType._(2, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_EVASIVE');
-  /// 최우선 호가: 상대방 최우선 호가로 정정
-  static const AmendMethodType AMEND_METHOD_TYPE_BEST_PRICE = AmendMethodType._(3, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_BEST_PRICE');
   /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
   static const AmendMethodType AMEND_METHOD_TYPE_STOP_LOSS = AmendMethodType._(4, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_STOP_LOSS');
-  /// 시간 제한 시장가: timeout 후 시장가로 전환
-  static const AmendMethodType AMEND_METHOD_TYPE_TIMED_MARKET = AmendMethodType._(5, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TIMED_MARKET');
-  /// 시간 기반 전진 정정 (100ms 간격): 상대호가 방향으로 1tick씩 전진
-  static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_100MS = AmendMethodType._(6, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_100MS');
-  /// 시간 기반 전진 정정 (500ms 간격): 상대호가 방향으로 1tick씩 전진
-  static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_500MS = AmendMethodType._(7, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_500MS');
-  /// 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
-  static const AmendMethodType AMEND_METHOD_TYPE_TICK_ADVANCE_1S = AmendMethodType._(8, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_TICK_ADVANCE_1S');
-  /// 스프레드 갭 추격 + 잔량 감소 추격
-  /// 1단계: 내 가격과 상대호가 사이 빈 tick 존재 시 상대호가 ±1tick으로 점프
-  /// 2단계: 스프레드 1tick 상태에서 상대 1호가 잔량이 임계 비율 미만 시 1tick 추격
-  static const AmendMethodType AMEND_METHOD_TYPE_SPREAD_FOLLOW = AmendMethodType._(9, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_SPREAD_FOLLOW');
 
   static const $core.List<AmendMethodType> values = <AmendMethodType> [
     AMEND_METHOD_TYPE_UNSPECIFIED,
     AMEND_METHOD_TYPE_AGGRESSIVE,
-    AMEND_METHOD_TYPE_EVASIVE,
-    AMEND_METHOD_TYPE_BEST_PRICE,
     AMEND_METHOD_TYPE_STOP_LOSS,
-    AMEND_METHOD_TYPE_TIMED_MARKET,
-    AMEND_METHOD_TYPE_TICK_ADVANCE_100MS,
-    AMEND_METHOD_TYPE_TICK_ADVANCE_500MS,
-    AMEND_METHOD_TYPE_TICK_ADVANCE_1S,
-    AMEND_METHOD_TYPE_SPREAD_FOLLOW,
   ];
 
-  static final $core.List<AmendMethodType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 9);
-  static AmendMethodType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.Map<$core.int, AmendMethodType> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static AmendMethodType? valueOf($core.int value) => _byValue[value];
 
   const AmendMethodType._(super.value, super.name);
 }

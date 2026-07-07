@@ -295,28 +295,12 @@ impl OrderConditionType {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AmendMethodType {
-    /// 미지정 (기본값: TIMED_MARKET으로 처리)
+    /// 미지정 (기본값: AGGRESSIVE로 처리)
     Unspecified = 0,
     /// 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
     Aggressive = 1,
-    /// 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지
-    Evasive = 2,
-    /// 최우선 호가: 상대방 최우선 호가로 정정
-    BestPrice = 3,
     /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
     StopLoss = 4,
-    /// 시간 제한 시장가: timeout 후 시장가로 전환
-    TimedMarket = 5,
-    /// 시간 기반 전진 정정 (100ms 간격): 상대호가 방향으로 1tick씩 전진
-    TickAdvance100ms = 6,
-    /// 시간 기반 전진 정정 (500ms 간격): 상대호가 방향으로 1tick씩 전진
-    TickAdvance500ms = 7,
-    /// 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
-    TickAdvance1s = 8,
-    /// 스프레드 갭 추격 + 잔량 감소 추격
-    /// 1단계: 내 가격과 상대호가 사이 빈 tick 존재 시 상대호가 ±1tick으로 점프
-    /// 2단계: 스프레드 1tick 상태에서 상대 1호가 잔량이 임계 비율 미만 시 1tick 추격
-    SpreadFollow = 9,
 }
 impl AmendMethodType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -327,14 +311,7 @@ impl AmendMethodType {
         match self {
             AmendMethodType::Unspecified => "AMEND_METHOD_TYPE_UNSPECIFIED",
             AmendMethodType::Aggressive => "AMEND_METHOD_TYPE_AGGRESSIVE",
-            AmendMethodType::Evasive => "AMEND_METHOD_TYPE_EVASIVE",
-            AmendMethodType::BestPrice => "AMEND_METHOD_TYPE_BEST_PRICE",
             AmendMethodType::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
-            AmendMethodType::TimedMarket => "AMEND_METHOD_TYPE_TIMED_MARKET",
-            AmendMethodType::TickAdvance100ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
-            AmendMethodType::TickAdvance500ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
-            AmendMethodType::TickAdvance1s => "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
-            AmendMethodType::SpreadFollow => "AMEND_METHOD_TYPE_SPREAD_FOLLOW",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -342,14 +319,7 @@ impl AmendMethodType {
         match value {
             "AMEND_METHOD_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "AMEND_METHOD_TYPE_AGGRESSIVE" => Some(Self::Aggressive),
-            "AMEND_METHOD_TYPE_EVASIVE" => Some(Self::Evasive),
-            "AMEND_METHOD_TYPE_BEST_PRICE" => Some(Self::BestPrice),
             "AMEND_METHOD_TYPE_STOP_LOSS" => Some(Self::StopLoss),
-            "AMEND_METHOD_TYPE_TIMED_MARKET" => Some(Self::TimedMarket),
-            "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS" => Some(Self::TickAdvance100ms),
-            "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS" => Some(Self::TickAdvance500ms),
-            "AMEND_METHOD_TYPE_TICK_ADVANCE_1S" => Some(Self::TickAdvance1s),
-            "AMEND_METHOD_TYPE_SPREAD_FOLLOW" => Some(Self::SpreadFollow),
             _ => None,
         }
     }

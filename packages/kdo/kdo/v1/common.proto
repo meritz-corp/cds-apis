@@ -112,35 +112,18 @@ message PdfDecomposeHedgePricing {
 
 // 자동정정 전략 유형
 enum AmendMethodType {
-  // 미지정 (기본값: TIMED_MARKET으로 처리)
+  reserved 2, 3, 5, 6, 7, 8, 9;
+  reserved "AMEND_METHOD_TYPE_EVASIVE", "AMEND_METHOD_TYPE_BEST_PRICE",
+           "AMEND_METHOD_TYPE_TIMED_MARKET", "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
+           "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS", "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
+           "AMEND_METHOD_TYPE_SPREAD_FOLLOW";
+
+  // 미지정 (기본값: AGGRESSIVE로 처리)
   AMEND_METHOD_TYPE_UNSPECIFIED = 0;
 
   // 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
   AMEND_METHOD_TYPE_AGGRESSIVE = 1;
 
-  // 회피적 정정: tick_offset 만큼 가격을 조정하여 미체결 유지
-  AMEND_METHOD_TYPE_EVASIVE = 2;
-
-  // 최우선 호가: 상대방 최우선 호가로 정정
-  AMEND_METHOD_TYPE_BEST_PRICE = 3;
-
   // 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
   AMEND_METHOD_TYPE_STOP_LOSS = 4;
-
-  // 시간 제한 시장가: timeout 후 시장가로 전환
-  AMEND_METHOD_TYPE_TIMED_MARKET = 5;
-
-  // 시간 기반 전진 정정 (100ms 간격): 상대호가 방향으로 1tick씩 전진
-  AMEND_METHOD_TYPE_TICK_ADVANCE_100MS = 6;
-
-  // 시간 기반 전진 정정 (500ms 간격): 상대호가 방향으로 1tick씩 전진
-  AMEND_METHOD_TYPE_TICK_ADVANCE_500MS = 7;
-
-  // 시간 기반 전진 정정 (1s 간격): 상대호가 방향으로 1tick씩 전진
-  AMEND_METHOD_TYPE_TICK_ADVANCE_1S = 8;
-
-  // 스프레드 갭 추격 + 잔량 감소 추격
-  // 1단계: 내 가격과 상대호가 사이 빈 tick 존재 시 상대호가 ±1tick으로 점프
-  // 2단계: 스프레드 1tick 상태에서 상대 1호가 잔량이 임계 비율 미만 시 1tick 추격
-  AMEND_METHOD_TYPE_SPREAD_FOLLOW = 9;
 }

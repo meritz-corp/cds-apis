@@ -8,14 +8,7 @@ impl serde::Serialize for AmendMethodType {
         let variant = match self {
             Self::Unspecified => "AMEND_METHOD_TYPE_UNSPECIFIED",
             Self::Aggressive => "AMEND_METHOD_TYPE_AGGRESSIVE",
-            Self::Evasive => "AMEND_METHOD_TYPE_EVASIVE",
-            Self::BestPrice => "AMEND_METHOD_TYPE_BEST_PRICE",
             Self::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
-            Self::TimedMarket => "AMEND_METHOD_TYPE_TIMED_MARKET",
-            Self::TickAdvance100ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
-            Self::TickAdvance500ms => "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
-            Self::TickAdvance1s => "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
-            Self::SpreadFollow => "AMEND_METHOD_TYPE_SPREAD_FOLLOW",
         };
         serializer.serialize_str(variant)
     }
@@ -29,14 +22,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
         const FIELDS: &[&str] = &[
             "AMEND_METHOD_TYPE_UNSPECIFIED",
             "AMEND_METHOD_TYPE_AGGRESSIVE",
-            "AMEND_METHOD_TYPE_EVASIVE",
-            "AMEND_METHOD_TYPE_BEST_PRICE",
             "AMEND_METHOD_TYPE_STOP_LOSS",
-            "AMEND_METHOD_TYPE_TIMED_MARKET",
-            "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS",
-            "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS",
-            "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
-            "AMEND_METHOD_TYPE_SPREAD_FOLLOW",
         ];
 
         struct GeneratedVisitor;
@@ -79,14 +65,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
                 match value {
                     "AMEND_METHOD_TYPE_UNSPECIFIED" => Ok(AmendMethodType::Unspecified),
                     "AMEND_METHOD_TYPE_AGGRESSIVE" => Ok(AmendMethodType::Aggressive),
-                    "AMEND_METHOD_TYPE_EVASIVE" => Ok(AmendMethodType::Evasive),
-                    "AMEND_METHOD_TYPE_BEST_PRICE" => Ok(AmendMethodType::BestPrice),
                     "AMEND_METHOD_TYPE_STOP_LOSS" => Ok(AmendMethodType::StopLoss),
-                    "AMEND_METHOD_TYPE_TIMED_MARKET" => Ok(AmendMethodType::TimedMarket),
-                    "AMEND_METHOD_TYPE_TICK_ADVANCE_100MS" => Ok(AmendMethodType::TickAdvance100ms),
-                    "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS" => Ok(AmendMethodType::TickAdvance500ms),
-                    "AMEND_METHOD_TYPE_TICK_ADVANCE_1S" => Ok(AmendMethodType::TickAdvance1s),
-                    "AMEND_METHOD_TYPE_SPREAD_FOLLOW" => Ok(AmendMethodType::SpreadFollow),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
