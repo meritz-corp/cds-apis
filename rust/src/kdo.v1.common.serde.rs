@@ -7,7 +7,7 @@ impl serde::Serialize for AmendMethodType {
     {
         let variant = match self {
             Self::Unspecified => "AMEND_METHOD_TYPE_UNSPECIFIED",
-            Self::Aggressive => "AMEND_METHOD_TYPE_AGGRESSIVE",
+            Self::SelfQuote => "AMEND_METHOD_TYPE_SELF_QUOTE",
             Self::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
         };
         serializer.serialize_str(variant)
@@ -21,7 +21,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
     {
         const FIELDS: &[&str] = &[
             "AMEND_METHOD_TYPE_UNSPECIFIED",
-            "AMEND_METHOD_TYPE_AGGRESSIVE",
+            "AMEND_METHOD_TYPE_SELF_QUOTE",
             "AMEND_METHOD_TYPE_STOP_LOSS",
         ];
 
@@ -64,7 +64,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
             {
                 match value {
                     "AMEND_METHOD_TYPE_UNSPECIFIED" => Ok(AmendMethodType::Unspecified),
-                    "AMEND_METHOD_TYPE_AGGRESSIVE" => Ok(AmendMethodType::Aggressive),
+                    "AMEND_METHOD_TYPE_SELF_QUOTE" => Ok(AmendMethodType::SelfQuote),
                     "AMEND_METHOD_TYPE_STOP_LOSS" => Ok(AmendMethodType::StopLoss),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }

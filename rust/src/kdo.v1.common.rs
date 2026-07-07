@@ -295,10 +295,10 @@ impl OrderConditionType {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AmendMethodType {
-    /// 미지정 (기본값: AGGRESSIVE로 처리)
+    /// 미지정 (기본값: SELF_QUOTE로 처리)
     Unspecified = 0,
-    /// 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
-    Aggressive = 1,
+    /// 셀프쿼팅 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
+    SelfQuote = 1,
     /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
     StopLoss = 4,
 }
@@ -310,7 +310,7 @@ impl AmendMethodType {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             AmendMethodType::Unspecified => "AMEND_METHOD_TYPE_UNSPECIFIED",
-            AmendMethodType::Aggressive => "AMEND_METHOD_TYPE_AGGRESSIVE",
+            AmendMethodType::SelfQuote => "AMEND_METHOD_TYPE_SELF_QUOTE",
             AmendMethodType::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
         }
     }
@@ -318,7 +318,7 @@ impl AmendMethodType {
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "AMEND_METHOD_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "AMEND_METHOD_TYPE_AGGRESSIVE" => Some(Self::Aggressive),
+            "AMEND_METHOD_TYPE_SELF_QUOTE" => Some(Self::SelfQuote),
             "AMEND_METHOD_TYPE_STOP_LOSS" => Some(Self::StopLoss),
             _ => None,
         }

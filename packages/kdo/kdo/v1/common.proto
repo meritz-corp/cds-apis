@@ -118,11 +118,11 @@ enum AmendMethodType {
            "AMEND_METHOD_TYPE_TICK_ADVANCE_500MS", "AMEND_METHOD_TYPE_TICK_ADVANCE_1S",
            "AMEND_METHOD_TYPE_SPREAD_FOLLOW";
 
-  // 미지정 (기본값: AGGRESSIVE로 처리)
+  // 미지정 (기본값: SELF_QUOTE로 처리)
   AMEND_METHOD_TYPE_UNSPECIFIED = 0;
 
-  // 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
-  AMEND_METHOD_TYPE_AGGRESSIVE = 1;
+  // 셀프쿼팅 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
+  AMEND_METHOD_TYPE_SELF_QUOTE = 1;
 
   // 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
   AMEND_METHOD_TYPE_STOP_LOSS = 4;

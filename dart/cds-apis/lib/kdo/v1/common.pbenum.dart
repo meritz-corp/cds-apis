@@ -150,16 +150,16 @@ class OrderConditionType extends $pb.ProtobufEnum {
 
 /// 자동정정 전략 유형
 class AmendMethodType extends $pb.ProtobufEnum {
-  /// 미지정 (기본값: AGGRESSIVE로 처리)
+  /// 미지정 (기본값: SELF_QUOTE로 처리)
   static const AmendMethodType AMEND_METHOD_TYPE_UNSPECIFIED = AmendMethodType._(0, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_UNSPECIFIED');
-  /// 적극적 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
-  static const AmendMethodType AMEND_METHOD_TYPE_AGGRESSIVE = AmendMethodType._(1, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_AGGRESSIVE');
+  /// 셀프쿼팅 정정: 반대편 잔량 비율이 임계값 이상이면 즉시 체결 시도
+  static const AmendMethodType AMEND_METHOD_TYPE_SELF_QUOTE = AmendMethodType._(1, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_SELF_QUOTE');
   /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
   static const AmendMethodType AMEND_METHOD_TYPE_STOP_LOSS = AmendMethodType._(4, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_STOP_LOSS');
 
   static const $core.List<AmendMethodType> values = <AmendMethodType> [
     AMEND_METHOD_TYPE_UNSPECIFIED,
-    AMEND_METHOD_TYPE_AGGRESSIVE,
+    AMEND_METHOD_TYPE_SELF_QUOTE,
     AMEND_METHOD_TYPE_STOP_LOSS,
   ];
 
