@@ -189,6 +189,181 @@ impl<'de> serde::Deserialize<'de> for ClearFitToMarketResponse {
         deserializer.deserialize_struct("kdo.v1.mm.ClearFitToMarketResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ConstituentFlowState {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ConstituentFlowState", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("tracked", &self.tracked)?;
+        }
+        if true {
+            struct_ser.serialize_field("agg_ratio", &self.agg_ratio)?;
+        }
+        if true {
+            struct_ser.serialize_field("agg_strength", &self.agg_strength)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("shift", ToString::to_string(&self.shift).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ConstituentFlowState {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "tracked",
+            "agg_ratio",
+            "aggRatio",
+            "agg_strength",
+            "aggStrength",
+            "shift",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            Tracked,
+            AggRatio,
+            AggStrength,
+            Shift,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "tracked" => Ok(GeneratedField::Tracked),
+                            "aggRatio" | "agg_ratio" => Ok(GeneratedField::AggRatio),
+                            "aggStrength" | "agg_strength" => Ok(GeneratedField::AggStrength),
+                            "shift" => Ok(GeneratedField::Shift),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ConstituentFlowState;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.ConstituentFlowState")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ConstituentFlowState, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut tracked__ = None;
+                let mut agg_ratio__ = None;
+                let mut agg_strength__ = None;
+                let mut shift__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Tracked => {
+                            if tracked__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tracked"));
+                            }
+                            tracked__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AggRatio => {
+                            if agg_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("aggRatio"));
+                            }
+                            agg_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AggStrength => {
+                            if agg_strength__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("aggStrength"));
+                            }
+                            agg_strength__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Shift => {
+                            if shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shift"));
+                            }
+                            shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ConstituentFlowState {
+                    enabled: enabled__.unwrap_or_default(),
+                    tracked: tracked__.unwrap_or_default(),
+                    agg_ratio: agg_ratio__.unwrap_or_default(),
+                    agg_strength: agg_strength__.unwrap_or_default(),
+                    shift: shift__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.ConstituentFlowState", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ExposureBalancerState {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2008,6 +2183,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -2061,6 +2239,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.ma_cross.as_ref() {
             struct_ser.serialize_field("ma_cross", v)?;
         }
+        if let Some(v) = self.constituent_flow.as_ref() {
+            struct_ser.serialize_field("constituent_flow", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2095,6 +2276,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "quantityLimit",
             "ma_cross",
             "maCross",
+            "constituent_flow",
+            "constituentFlow",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2113,6 +2296,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             BaseHalfTicks,
             QuantityLimit,
             MaCross,
+            ConstituentFlow,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2149,6 +2333,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "baseHalfTicks" | "base_half_ticks" => Ok(GeneratedField::BaseHalfTicks),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "maCross" | "ma_cross" => Ok(GeneratedField::MaCross),
+                            "constituentFlow" | "constituent_flow" => Ok(GeneratedField::ConstituentFlow),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2182,6 +2367,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut base_half_ticks__ = None;
                 let mut quantity_limit__ = None;
                 let mut ma_cross__ = None;
+                let mut constituent_flow__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -2280,6 +2466,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             ma_cross__ = map_.next_value()?;
                         }
+                        GeneratedField::ConstituentFlow => {
+                            if constituent_flow__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituentFlow"));
+                            }
+                            constituent_flow__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2300,10 +2492,160 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     base_half_ticks: base_half_ticks__.unwrap_or_default(),
                     quantity_limit: quantity_limit__,
                     ma_cross: ma_cross__,
+                    constituent_flow: constituent_flow__,
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingConfiguration", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingConstituentFlow {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConstituentFlow", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("top_n", &self.top_n)?;
+        }
+        if let Some(v) = self.analyzer.as_ref() {
+            struct_ser.serialize_field("analyzer", v)?;
+        }
+        if let Some(v) = self.shift.as_ref() {
+            struct_ser.serialize_field("shift", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingConstituentFlow {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "top_n",
+            "topN",
+            "analyzer",
+            "shift",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            TopN,
+            Analyzer,
+            Shift,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "topN" | "top_n" => Ok(GeneratedField::TopN),
+                            "analyzer" => Ok(GeneratedField::Analyzer),
+                            "shift" => Ok(GeneratedField::Shift),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingConstituentFlow;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingConstituentFlow")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingConstituentFlow, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut top_n__ = None;
+                let mut analyzer__ = None;
+                let mut shift__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TopN => {
+                            if top_n__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("topN"));
+                            }
+                            top_n__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Analyzer => {
+                            if analyzer__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("analyzer"));
+                            }
+                            analyzer__ = map_.next_value()?;
+                        }
+                        GeneratedField::Shift => {
+                            if shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shift"));
+                            }
+                            shift__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingConstituentFlow {
+                    enabled: enabled__.unwrap_or_default(),
+                    top_n: top_n__.unwrap_or_default(),
+                    analyzer: analyzer__,
+                    shift: shift__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingConstituentFlow", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingExposureBalancer {
@@ -4221,6 +4563,9 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -4263,6 +4608,9 @@ impl serde::Serialize for MmStateUpdate {
         if let Some(v) = self.ma_cross.as_ref() {
             struct_ser.serialize_field("ma_cross", v)?;
         }
+        if let Some(v) = self.constituent_flow.as_ref() {
+            struct_ser.serialize_field("constituent_flow", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4295,6 +4643,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "f2mShift",
             "ma_cross",
             "maCross",
+            "constituent_flow",
+            "constituentFlow",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4312,6 +4662,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             Decomposition,
             F2mShift,
             MaCross,
+            ConstituentFlow,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4347,6 +4698,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "decomposition" => Ok(GeneratedField::Decomposition),
                             "f2mShift" | "f2m_shift" => Ok(GeneratedField::F2mShift),
                             "maCross" | "ma_cross" => Ok(GeneratedField::MaCross),
+                            "constituentFlow" | "constituent_flow" => Ok(GeneratedField::ConstituentFlow),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4379,6 +4731,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut decomposition__ = None;
                 let mut f2m_shift__ = None;
                 let mut ma_cross__ = None;
+                let mut constituent_flow__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -4459,6 +4812,12 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             ma_cross__ = map_.next_value()?;
                         }
+                        GeneratedField::ConstituentFlow => {
+                            if constituent_flow__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituentFlow"));
+                            }
+                            constituent_flow__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4478,6 +4837,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     decomposition: decomposition__,
                     f2m_shift: f2m_shift__,
                     ma_cross: ma_cross__,
+                    constituent_flow: constituent_flow__,
                 })
             }
         }
@@ -5053,6 +5413,9 @@ impl serde::Serialize for SpreadDecomposition {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.SpreadDecomposition", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -5094,6 +5457,11 @@ impl serde::Serialize for SpreadDecomposition {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ma_cross_shift", ToString::to_string(&self.ma_cross_shift).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("constituent_shift", ToString::to_string(&self.constituent_shift).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -5120,6 +5488,8 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             "finalAsk",
             "ma_cross_shift",
             "maCrossShift",
+            "constituent_shift",
+            "constituentShift",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5132,6 +5502,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             FinalBid,
             FinalAsk,
             MaCrossShift,
+            ConstituentShift,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5162,6 +5533,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                             "finalBid" | "final_bid" => Ok(GeneratedField::FinalBid),
                             "finalAsk" | "final_ask" => Ok(GeneratedField::FinalAsk),
                             "maCrossShift" | "ma_cross_shift" => Ok(GeneratedField::MaCrossShift),
+                            "constituentShift" | "constituent_shift" => Ok(GeneratedField::ConstituentShift),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5189,6 +5561,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                 let mut final_bid__ = None;
                 let mut final_ask__ = None;
                 let mut ma_cross_shift__ = None;
+                let mut constituent_shift__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BaseBid => {
@@ -5255,6 +5628,14 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ConstituentShift => {
+                            if constituent_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("constituentShift"));
+                            }
+                            constituent_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5269,6 +5650,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                     final_bid: final_bid__.unwrap_or_default(),
                     final_ask: final_ask__.unwrap_or_default(),
                     ma_cross_shift: ma_cross_shift__.unwrap_or_default(),
+                    constituent_shift: constituent_shift__.unwrap_or_default(),
                 })
             }
         }

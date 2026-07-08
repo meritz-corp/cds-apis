@@ -141,6 +141,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $core.int? baseHalfTicks,
     MarketMakingQuantityLimit? quantityLimit,
     MarketMakingMaCross? maCross,
+    MarketMakingConstituentFlow? constituentFlow,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -157,6 +158,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (baseHalfTicks != null) result.baseHalfTicks = baseHalfTicks;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (maCross != null) result.maCross = maCross;
+    if (constituentFlow != null) result.constituentFlow = constituentFlow;
     return result;
   }
 
@@ -180,6 +182,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$core.int>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.O3)
     ..aOM<MarketMakingQuantityLimit>(17, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MarketMakingQuantityLimit.create)
     ..aOM<MarketMakingMaCross>(18, _omitFieldNames ? '' : 'maCross', subBuilder: MarketMakingMaCross.create)
+    ..aOM<MarketMakingConstituentFlow>(19, _omitFieldNames ? '' : 'constituentFlow', subBuilder: MarketMakingConstituentFlow.create)
     ..hasRequiredFields = false
   ;
 
@@ -353,6 +356,18 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearMaCross() => $_clearField(18);
   @$pb.TagNumber(18)
   MarketMakingMaCross ensureMaCross() => $_ensure(13);
+
+  /// 상위 구성종목 체결강도 skew 설정
+  @$pb.TagNumber(19)
+  MarketMakingConstituentFlow get constituentFlow => $_getN(14);
+  @$pb.TagNumber(19)
+  set constituentFlow(MarketMakingConstituentFlow value) => $_setField(19, value);
+  @$pb.TagNumber(19)
+  $core.bool hasConstituentFlow() => $_has(14);
+  @$pb.TagNumber(19)
+  void clearConstituentFlow() => $_clearField(19);
+  @$pb.TagNumber(19)
+  MarketMakingConstituentFlow ensureConstituentFlow() => $_ensure(14);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -1066,6 +1081,97 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
   $core.bool hasSkewUnit() => $_has(3);
   @$pb.TagNumber(4)
   void clearSkewUnit() => $_clearField(4);
+}
+
+/// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
+class MarketMakingConstituentFlow extends $pb.GeneratedMessage {
+  factory MarketMakingConstituentFlow({
+    $core.bool? enabled,
+    $core.int? topN,
+    MarketMakingTradeAnalyzer? analyzer,
+    MarketMakingMomentum? shift,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (topN != null) result.topN = topN;
+    if (analyzer != null) result.analyzer = analyzer;
+    if (shift != null) result.shift = shift;
+    return result;
+  }
+
+  MarketMakingConstituentFlow._();
+
+  factory MarketMakingConstituentFlow.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingConstituentFlow.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingConstituentFlow', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'topN', $pb.PbFieldType.OU3)
+    ..aOM<MarketMakingTradeAnalyzer>(3, _omitFieldNames ? '' : 'analyzer', subBuilder: MarketMakingTradeAnalyzer.create)
+    ..aOM<MarketMakingMomentum>(4, _omitFieldNames ? '' : 'shift', subBuilder: MarketMakingMomentum.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingConstituentFlow clone() => MarketMakingConstituentFlow()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingConstituentFlow copyWith(void Function(MarketMakingConstituentFlow) updates) => super.copyWith((message) => updates(message as MarketMakingConstituentFlow)) as MarketMakingConstituentFlow;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingConstituentFlow create() => MarketMakingConstituentFlow._();
+  @$core.override
+  MarketMakingConstituentFlow createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingConstituentFlow> createRepeated() => $pb.PbList<MarketMakingConstituentFlow>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingConstituentFlow getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingConstituentFlow>(create);
+  static MarketMakingConstituentFlow? _defaultInstance;
+
+  /// 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 체결강도를 반영할 상위 구성종목 개수 (notional 비중 상위 N)
+  @$pb.TagNumber(2)
+  $core.int get topN => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set topN($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTopN() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTopN() => $_clearField(2);
+
+  /// 구성종목별 체결 분석기 설정 (종목마다 이 파라미터로 복제)
+  @$pb.TagNumber(3)
+  MarketMakingTradeAnalyzer get analyzer => $_getN(2);
+  @$pb.TagNumber(3)
+  set analyzer(MarketMakingTradeAnalyzer value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAnalyzer() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAnalyzer() => $_clearField(3);
+  @$pb.TagNumber(3)
+  MarketMakingTradeAnalyzer ensureAnalyzer() => $_ensure(2);
+
+  /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
+  @$pb.TagNumber(4)
+  MarketMakingMomentum get shift => $_getN(3);
+  @$pb.TagNumber(4)
+  set shift(MarketMakingMomentum value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasShift() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearShift() => $_clearField(4);
+  @$pb.TagNumber(4)
+  MarketMakingMomentum ensureShift() => $_ensure(3);
 }
 
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
@@ -2466,6 +2572,106 @@ class MaCrossState extends $pb.GeneratedMessage {
   void clearTransitions() => $_clearField(6);
 }
 
+/// ConstituentFlow 런타임 상태
+class ConstituentFlowState extends $pb.GeneratedMessage {
+  factory ConstituentFlowState({
+    $core.bool? enabled,
+    $core.int? tracked,
+    $core.double? aggRatio,
+    $core.double? aggStrength,
+    $fixnum.Int64? shift,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (tracked != null) result.tracked = tracked;
+    if (aggRatio != null) result.aggRatio = aggRatio;
+    if (aggStrength != null) result.aggStrength = aggStrength;
+    if (shift != null) result.shift = shift;
+    return result;
+  }
+
+  ConstituentFlowState._();
+
+  factory ConstituentFlowState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ConstituentFlowState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstituentFlowState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'tracked', $pb.PbFieldType.OU3)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'aggRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'aggStrength', $pb.PbFieldType.OD)
+    ..aInt64(5, _omitFieldNames ? '' : 'shift')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ConstituentFlowState clone() => ConstituentFlowState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ConstituentFlowState copyWith(void Function(ConstituentFlowState) updates) => super.copyWith((message) => updates(message as ConstituentFlowState)) as ConstituentFlowState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ConstituentFlowState create() => ConstituentFlowState._();
+  @$core.override
+  ConstituentFlowState createEmptyInstance() => create();
+  static $pb.PbList<ConstituentFlowState> createRepeated() => $pb.PbList<ConstituentFlowState>();
+  @$core.pragma('dart2js:noInline')
+  static ConstituentFlowState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConstituentFlowState>(create);
+  static ConstituentFlowState? _defaultInstance;
+
+  /// 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 현재 추적 중인 구성종목 수
+  @$pb.TagNumber(2)
+  $core.int get tracked => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set tracked($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTracked() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTracked() => $_clearField(2);
+
+  /// 비중 가중평균 집계 ratio ∈ [-1, +1]
+  @$pb.TagNumber(3)
+  $core.double get aggRatio => $_getN(2);
+  @$pb.TagNumber(3)
+  set aggRatio($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAggRatio() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAggRatio() => $_clearField(3);
+
+  /// 비중 가중평균 집계 strength ∈ [0, 1]
+  @$pb.TagNumber(4)
+  $core.double get aggStrength => $_getN(3);
+  @$pb.TagNumber(4)
+  set aggStrength($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAggStrength() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAggStrength() => $_clearField(4);
+
+  /// 이번 tick 호가에 가산되는 평행 shift (원, 부호 포함, Price internal representation)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get shift => $_getI64(4);
+  @$pb.TagNumber(5)
+  set shift($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasShift() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearShift() => $_clearField(5);
+}
+
 /// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 class ExposureBalancerState extends $pb.GeneratedMessage {
   factory ExposureBalancerState({
@@ -2571,6 +2777,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     SpreadDecomposition? decomposition,
     $core.String? f2mShift,
     MaCrossState? maCross,
+    ConstituentFlowState? constituentFlow,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2586,6 +2793,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (decomposition != null) result.decomposition = decomposition;
     if (f2mShift != null) result.f2mShift = f2mShift;
     if (maCross != null) result.maCross = maCross;
+    if (constituentFlow != null) result.constituentFlow = constituentFlow;
     return result;
   }
 
@@ -2608,6 +2816,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOM<SpreadDecomposition>(11, _omitFieldNames ? '' : 'decomposition', subBuilder: SpreadDecomposition.create)
     ..aOS(12, _omitFieldNames ? '' : 'f2mShift')
     ..aOM<MaCrossState>(13, _omitFieldNames ? '' : 'maCross', subBuilder: MaCrossState.create)
+    ..aOM<ConstituentFlowState>(14, _omitFieldNames ? '' : 'constituentFlow', subBuilder: ConstituentFlowState.create)
     ..hasRequiredFields = false
   ;
 
@@ -2769,6 +2978,18 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   void clearMaCross() => $_clearField(13);
   @$pb.TagNumber(13)
   MaCrossState ensureMaCross() => $_ensure(12);
+
+  /// 상위 구성종목 체결강도 상태 (변경 시에만 포함)
+  @$pb.TagNumber(14)
+  ConstituentFlowState get constituentFlow => $_getN(13);
+  @$pb.TagNumber(14)
+  set constituentFlow(ConstituentFlowState value) => $_setField(14, value);
+  @$pb.TagNumber(14)
+  $core.bool hasConstituentFlow() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearConstituentFlow() => $_clearField(14);
+  @$pb.TagNumber(14)
+  ConstituentFlowState ensureConstituentFlow() => $_ensure(13);
 }
 
 /// StreamMmFills
@@ -3183,6 +3404,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     $fixnum.Int64? finalBid,
     $fixnum.Int64? finalAsk,
     $fixnum.Int64? maCrossShift,
+    $fixnum.Int64? constituentShift,
   }) {
     final result = create();
     if (baseBid != null) result.baseBid = baseBid;
@@ -3193,6 +3415,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     if (finalBid != null) result.finalBid = finalBid;
     if (finalAsk != null) result.finalAsk = finalAsk;
     if (maCrossShift != null) result.maCrossShift = maCrossShift;
+    if (constituentShift != null) result.constituentShift = constituentShift;
     return result;
   }
 
@@ -3210,6 +3433,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'finalBid')
     ..aInt64(7, _omitFieldNames ? '' : 'finalAsk')
     ..aInt64(8, _omitFieldNames ? '' : 'maCrossShift')
+    ..aInt64(9, _omitFieldNames ? '' : 'constituentShift')
     ..hasRequiredFields = false
   ;
 
@@ -3309,6 +3533,16 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   $core.bool hasMaCrossShift() => $_has(7);
   @$pb.TagNumber(8)
   void clearMaCrossShift() => $_clearField(8);
+
+  /// ConstituentFlow(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get constituentShift => $_getI64(8);
+  @$pb.TagNumber(9)
+  set constituentShift($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasConstituentShift() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearConstituentShift() => $_clearField(9);
 }
 
 /// StreamMmStateUpdate

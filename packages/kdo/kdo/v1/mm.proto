@@ -201,6 +201,9 @@ message MarketMakingConfiguration {
 
   // MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)
   MarketMakingMaCross ma_cross = 18;
+
+  // 상위 구성종목 체결강도 skew 설정
+  MarketMakingConstituentFlow constituent_flow = 19;
 }
 
 // NAV pricing 상세 설정
@@ -315,6 +318,18 @@ message MarketMakingMaCross {
   uint64 long_window_secs = 3;
   // 골든/데드 시 호가 평행이동량 (원)
   int64 skew_unit = 4;
+}
+
+// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
+message MarketMakingConstituentFlow {
+  // 활성화 여부
+  bool enabled = 1;
+  // 체결강도를 반영할 상위 구성종목 개수 (notional 비중 상위 N)
+  uint32 top_n = 2;
+  // 구성종목별 체결 분석기 설정 (종목마다 이 파라미터로 복제)
+  MarketMakingTradeAnalyzer analyzer = 3;
+  // 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
+  MarketMakingMomentum shift = 4;
 }
 
 // 통합 포지션 관리 설정 (soft rebalance + hard limit)
@@ -543,6 +558,20 @@ message MaCrossState {
   uint64 transitions = 6;
 }
 
+// ConstituentFlow 런타임 상태
+message ConstituentFlowState {
+  // 활성화 여부
+  bool enabled = 1;
+  // 현재 추적 중인 구성종목 수
+  uint32 tracked = 2;
+  // 비중 가중평균 집계 ratio ∈ [-1, +1]
+  double agg_ratio = 3;
+  // 비중 가중평균 집계 strength ∈ [0, 1]
+  double agg_strength = 4;
+  // 이번 tick 호가에 가산되는 평행 shift (원, 부호 포함, Price internal representation)
+  int64 shift = 5;
+}
+
 // 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 message ExposureBalancerState {
   reserved 2;
@@ -603,6 +632,9 @@ message MmStateUpdate {
 
   // MA 크로스 상태 (변경 시에만 포함)
   optional MaCrossState ma_cross = 13;
+
+  // 상위 구성종목 체결강도 상태 (변경 시에만 포함)
+  optional ConstituentFlowState constituent_flow = 14;
 }
 
 // StreamMmFills
@@ -696,6 +728,9 @@ message SpreadDecomposition {
 
   // MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
   int64 ma_cross_shift = 8;
+
+  // ConstituentFlow(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  int64 constituent_shift = 9;
 }
 
 // ============================================================================

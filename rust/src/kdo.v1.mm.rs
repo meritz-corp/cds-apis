@@ -70,6 +70,9 @@ pub struct MarketMakingConfiguration {
     /// MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)
     #[prost(message, optional, tag="18")]
     pub ma_cross: ::core::option::Option<MarketMakingMaCross>,
+    /// 상위 구성종목 체결강도 skew 설정
+    #[prost(message, optional, tag="19")]
+    pub constituent_flow: ::core::option::Option<MarketMakingConstituentFlow>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -213,6 +216,23 @@ pub struct MarketMakingMaCross {
     /// 골든/데드 시 호가 평행이동량 (원)
     #[prost(int64, tag="4")]
     pub skew_unit: i64,
+}
+/// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingConstituentFlow {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 체결강도를 반영할 상위 구성종목 개수 (notional 비중 상위 N)
+    #[prost(uint32, tag="2")]
+    pub top_n: u32,
+    /// 구성종목별 체결 분석기 설정 (종목마다 이 파라미터로 복제)
+    #[prost(message, optional, tag="3")]
+    pub analyzer: ::core::option::Option<MarketMakingTradeAnalyzer>,
+    /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
+    #[prost(message, optional, tag="4")]
+    pub shift: ::core::option::Option<MarketMakingMomentum>,
 }
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -484,6 +504,26 @@ pub struct MaCrossState {
     #[prost(uint64, tag="6")]
     pub transitions: u64,
 }
+/// ConstituentFlow 런타임 상태
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ConstituentFlowState {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 현재 추적 중인 구성종목 수
+    #[prost(uint32, tag="2")]
+    pub tracked: u32,
+    /// 비중 가중평균 집계 ratio ∈ \[-1, +1\]
+    #[prost(double, tag="3")]
+    pub agg_ratio: f64,
+    /// 비중 가중평균 집계 strength ∈ \[0, 1\]
+    #[prost(double, tag="4")]
+    pub agg_strength: f64,
+    /// 이번 tick 호가에 가산되는 평행 shift (원, 부호 포함, Price internal representation)
+    #[prost(int64, tag="5")]
+    pub shift: i64,
+}
 /// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -546,6 +586,9 @@ pub struct MmStateUpdate {
     /// MA 크로스 상태 (변경 시에만 포함)
     #[prost(message, optional, tag="13")]
     pub ma_cross: ::core::option::Option<MaCrossState>,
+    /// 상위 구성종목 체결강도 상태 (변경 시에만 포함)
+    #[prost(message, optional, tag="14")]
+    pub constituent_flow: ::core::option::Option<ConstituentFlowState>,
 }
 /// StreamMmFills
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -652,6 +695,9 @@ pub struct SpreadDecomposition {
     /// MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
     #[prost(int64, tag="8")]
     pub ma_cross_shift: i64,
+    /// ConstituentFlow(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+    #[prost(int64, tag="9")]
+    pub constituent_shift: i64,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

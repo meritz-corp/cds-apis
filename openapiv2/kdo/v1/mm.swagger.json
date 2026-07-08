@@ -665,6 +665,36 @@
         }
       }
     },
+    "mmConstituentFlowState": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "tracked": {
+          "type": "integer",
+          "format": "int64",
+          "title": "현재 추적 중인 구성종목 수"
+        },
+        "aggRatio": {
+          "type": "number",
+          "format": "double",
+          "title": "비중 가중평균 집계 ratio ∈ [-1, +1]"
+        },
+        "aggStrength": {
+          "type": "number",
+          "format": "double",
+          "title": "비중 가중평균 집계 strength ∈ [0, 1]"
+        },
+        "shift": {
+          "type": "string",
+          "format": "int64",
+          "title": "이번 tick 호가에 가산되는 평행 shift (원, 부호 포함, Price internal representation)"
+        }
+      },
+      "title": "ConstituentFlow 런타임 상태"
+    },
     "mmExposureBalancerState": {
       "type": "object",
       "properties": {
@@ -890,9 +920,36 @@
         "maCross": {
           "$ref": "#/definitions/mmMarketMakingMaCross",
           "title": "MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)"
+        },
+        "constituentFlow": {
+          "$ref": "#/definitions/mmMarketMakingConstituentFlow",
+          "title": "상위 구성종목 체결강도 skew 설정"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
+    },
+    "mmMarketMakingConstituentFlow": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "topN": {
+          "type": "integer",
+          "format": "int64",
+          "title": "체결강도를 반영할 상위 구성종목 개수 (notional 비중 상위 N)"
+        },
+        "analyzer": {
+          "$ref": "#/definitions/mmMarketMakingTradeAnalyzer",
+          "title": "구성종목별 체결 분석기 설정 (종목마다 이 파라미터로 복제)"
+        },
+        "shift": {
+          "$ref": "#/definitions/mmMarketMakingMomentum",
+          "title": "집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)"
+        }
+      },
+      "title": "상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)"
     },
     "mmMarketMakingExposureBalancer": {
       "type": "object",
@@ -1254,6 +1311,10 @@
         "maCross": {
           "$ref": "#/definitions/mmMaCrossState",
           "title": "MA 크로스 상태 (변경 시에만 포함)"
+        },
+        "constituentFlow": {
+          "$ref": "#/definitions/mmConstituentFlowState",
+          "title": "상위 구성종목 체결강도 상태 (변경 시에만 포함)"
         }
       },
       "description": "MM 엔진 런타임 상태 델타 메시지.\n스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.\nsymbol은 항상 포함된다."
@@ -1329,6 +1390,11 @@
           "type": "string",
           "format": "int64",
           "title": "MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)"
+        },
+        "constituentShift": {
+          "type": "string",
+          "format": "int64",
+          "title": "ConstituentFlow(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)"
         }
       },
       "description": "호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift."
