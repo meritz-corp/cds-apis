@@ -1019,12 +1019,16 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
     $fixnum.Int64? shortWindowSecs,
     $fixnum.Int64? longWindowSecs,
     $fixnum.Int64? skewUnit,
+    $core.bool? slopeGated,
+    $fixnum.Int64? slopeLookbackSecs,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (shortWindowSecs != null) result.shortWindowSecs = shortWindowSecs;
     if (longWindowSecs != null) result.longWindowSecs = longWindowSecs;
     if (skewUnit != null) result.skewUnit = skewUnit;
+    if (slopeGated != null) result.slopeGated = slopeGated;
+    if (slopeLookbackSecs != null) result.slopeLookbackSecs = slopeLookbackSecs;
     return result;
   }
 
@@ -1038,6 +1042,8 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'shortWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'longWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aInt64(4, _omitFieldNames ? '' : 'skewUnit')
+    ..aOB(5, _omitFieldNames ? '' : 'slopeGated')
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'slopeLookbackSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -1096,6 +1102,28 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
   $core.bool hasSkewUnit() => $_has(3);
   @$pb.TagNumber(4)
   void clearSkewUnit() => $_clearField(4);
+
+  /// 기울기 게이트: 켜면 골든 상태에서 단기 MA 기울기 상승(+)일 때만,
+  /// 데드 상태에서 하락(−)일 때만 skew 적용
+  @$pb.TagNumber(5)
+  $core.bool get slopeGated => $_getBF(4);
+  @$pb.TagNumber(5)
+  set slopeGated($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSlopeGated() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSlopeGated() => $_clearField(5);
+
+  /// 단기 MA 기울기 측정 lookback(초). 단기 MA를 이 초 전 값과 비교해 부호 판정.
+  /// 0이면 코드에서 1로 clamp
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get slopeLookbackSecs => $_getI64(5);
+  @$pb.TagNumber(6)
+  set slopeLookbackSecs($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSlopeLookbackSecs() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSlopeLookbackSecs() => $_clearField(6);
 }
 
 /// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)

@@ -241,6 +241,8 @@ const MarketMakingMaCross$json = {
     {'1': 'short_window_secs', '3': 2, '4': 1, '5': 4, '10': 'shortWindowSecs'},
     {'1': 'long_window_secs', '3': 3, '4': 1, '5': 4, '10': 'longWindowSecs'},
     {'1': 'skew_unit', '3': 4, '4': 1, '5': 3, '10': 'skewUnit'},
+    {'1': 'slope_gated', '3': 5, '4': 1, '5': 8, '10': 'slopeGated'},
+    {'1': 'slope_lookback_secs', '3': 6, '4': 1, '5': 4, '10': 'slopeLookbackSecs'},
   ],
 };
 
@@ -248,7 +250,9 @@ const MarketMakingMaCross$json = {
 final $typed_data.Uint8List marketMakingMaCrossDescriptor = $convert.base64Decode(
     'ChNNYXJrZXRNYWtpbmdNYUNyb3NzEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSKgoRc2hvcn'
     'Rfd2luZG93X3NlY3MYAiABKARSD3Nob3J0V2luZG93U2VjcxIoChBsb25nX3dpbmRvd19zZWNz'
-    'GAMgASgEUg5sb25nV2luZG93U2VjcxIbCglza2V3X3VuaXQYBCABKANSCHNrZXdVbml0');
+    'GAMgASgEUg5sb25nV2luZG93U2VjcxIbCglza2V3X3VuaXQYBCABKANSCHNrZXdVbml0Eh8KC3'
+    'Nsb3BlX2dhdGVkGAUgASgIUgpzbG9wZUdhdGVkEi4KE3Nsb3BlX2xvb2tiYWNrX3NlY3MYBiAB'
+    'KARSEXNsb3BlTG9va2JhY2tTZWNz');
 
 @$core.Deprecated('Use marketMakingConstituentMomentumDescriptor instead')
 const MarketMakingConstituentMomentum$json = {

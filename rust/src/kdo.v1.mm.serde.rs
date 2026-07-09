@@ -3040,6 +3040,12 @@ impl serde::Serialize for MarketMakingMaCross {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingMaCross", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -3059,6 +3065,14 @@ impl serde::Serialize for MarketMakingMaCross {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("skew_unit", ToString::to_string(&self.skew_unit).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("slope_gated", &self.slope_gated)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("slope_lookback_secs", ToString::to_string(&self.slope_lookback_secs).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -3076,6 +3090,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
             "longWindowSecs",
             "skew_unit",
             "skewUnit",
+            "slope_gated",
+            "slopeGated",
+            "slope_lookback_secs",
+            "slopeLookbackSecs",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3084,6 +3102,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
             ShortWindowSecs,
             LongWindowSecs,
             SkewUnit,
+            SlopeGated,
+            SlopeLookbackSecs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3110,6 +3130,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                             "shortWindowSecs" | "short_window_secs" => Ok(GeneratedField::ShortWindowSecs),
                             "longWindowSecs" | "long_window_secs" => Ok(GeneratedField::LongWindowSecs),
                             "skewUnit" | "skew_unit" => Ok(GeneratedField::SkewUnit),
+                            "slopeGated" | "slope_gated" => Ok(GeneratedField::SlopeGated),
+                            "slopeLookbackSecs" | "slope_lookback_secs" => Ok(GeneratedField::SlopeLookbackSecs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3133,6 +3155,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                 let mut short_window_secs__ = None;
                 let mut long_window_secs__ = None;
                 let mut skew_unit__ = None;
+                let mut slope_gated__ = None;
+                let mut slope_lookback_secs__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3165,6 +3189,20 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::SlopeGated => {
+                            if slope_gated__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slopeGated"));
+                            }
+                            slope_gated__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SlopeLookbackSecs => {
+                            if slope_lookback_secs__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slopeLookbackSecs"));
+                            }
+                            slope_lookback_secs__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3175,6 +3213,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                     short_window_secs: short_window_secs__.unwrap_or_default(),
                     long_window_secs: long_window_secs__.unwrap_or_default(),
                     skew_unit: skew_unit__.unwrap_or_default(),
+                    slope_gated: slope_gated__.unwrap_or_default(),
+                    slope_lookback_secs: slope_lookback_secs__.unwrap_or_default(),
                 })
             }
         }

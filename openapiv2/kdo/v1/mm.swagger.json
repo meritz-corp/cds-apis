@@ -1034,6 +1034,15 @@
           "type": "string",
           "format": "int64",
           "title": "골든/데드 시 호가 평행이동량 (원)"
+        },
+        "slopeGated": {
+          "type": "boolean",
+          "title": "기울기 게이트: 켜면 골든 상태에서 단기 MA 기울기 상승(+)일 때만,\n데드 상태에서 하락(−)일 때만 skew 적용"
+        },
+        "slopeLookbackSecs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "단기 MA 기울기 측정 lookback(초). 단기 MA를 이 초 전 값과 비교해 부호 판정.\n0이면 코드에서 1로 clamp"
         }
       },
       "description": "MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라\n호가 중심을 평행이동. 골든(단기\u003e장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0."

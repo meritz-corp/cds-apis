@@ -219,6 +219,14 @@ pub struct MarketMakingMaCross {
     /// 골든/데드 시 호가 평행이동량 (원)
     #[prost(int64, tag="4")]
     pub skew_unit: i64,
+    /// 기울기 게이트: 켜면 골든 상태에서 단기 MA 기울기 상승(+)일 때만,
+    /// 데드 상태에서 하락(−)일 때만 skew 적용
+    #[prost(bool, tag="5")]
+    pub slope_gated: bool,
+    /// 단기 MA 기울기 측정 lookback(초). 단기 MA를 이 초 전 값과 비교해 부호 판정.
+    /// 0이면 코드에서 1로 clamp
+    #[prost(uint64, tag="6")]
+    pub slope_lookback_secs: u64,
 }
 /// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
 #[allow(clippy::derive_partial_eq_without_eq)]
