@@ -141,7 +141,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $core.int? baseHalfTicks,
     MarketMakingQuantityLimit? quantityLimit,
     MarketMakingMaCross? maCross,
-    MarketMakingConstituentFlow? constituentFlow,
+    MarketMakingConstituentMomentum? constituentMomentum,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -158,7 +158,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (baseHalfTicks != null) result.baseHalfTicks = baseHalfTicks;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (maCross != null) result.maCross = maCross;
-    if (constituentFlow != null) result.constituentFlow = constituentFlow;
+    if (constituentMomentum != null) result.constituentMomentum = constituentMomentum;
     return result;
   }
 
@@ -182,7 +182,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$core.int>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.O3)
     ..aOM<MarketMakingQuantityLimit>(17, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MarketMakingQuantityLimit.create)
     ..aOM<MarketMakingMaCross>(18, _omitFieldNames ? '' : 'maCross', subBuilder: MarketMakingMaCross.create)
-    ..aOM<MarketMakingConstituentFlow>(19, _omitFieldNames ? '' : 'constituentFlow', subBuilder: MarketMakingConstituentFlow.create)
+    ..aOM<MarketMakingConstituentMomentum>(19, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: MarketMakingConstituentMomentum.create)
     ..hasRequiredFields = false
   ;
 
@@ -359,15 +359,15 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
 
   /// 상위 구성종목 체결강도 skew 설정
   @$pb.TagNumber(19)
-  MarketMakingConstituentFlow get constituentFlow => $_getN(14);
+  MarketMakingConstituentMomentum get constituentMomentum => $_getN(14);
   @$pb.TagNumber(19)
-  set constituentFlow(MarketMakingConstituentFlow value) => $_setField(19, value);
+  set constituentMomentum(MarketMakingConstituentMomentum value) => $_setField(19, value);
   @$pb.TagNumber(19)
-  $core.bool hasConstituentFlow() => $_has(14);
+  $core.bool hasConstituentMomentum() => $_has(14);
   @$pb.TagNumber(19)
-  void clearConstituentFlow() => $_clearField(19);
+  void clearConstituentMomentum() => $_clearField(19);
   @$pb.TagNumber(19)
-  MarketMakingConstituentFlow ensureConstituentFlow() => $_ensure(14);
+  MarketMakingConstituentMomentum ensureConstituentMomentum() => $_ensure(14);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -1084,8 +1084,8 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
 }
 
 /// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
-class MarketMakingConstituentFlow extends $pb.GeneratedMessage {
-  factory MarketMakingConstituentFlow({
+class MarketMakingConstituentMomentum extends $pb.GeneratedMessage {
+  factory MarketMakingConstituentMomentum({
     $core.bool? enabled,
     $core.int? topN,
     MarketMakingTradeAnalyzer? analyzer,
@@ -1099,12 +1099,12 @@ class MarketMakingConstituentFlow extends $pb.GeneratedMessage {
     return result;
   }
 
-  MarketMakingConstituentFlow._();
+  MarketMakingConstituentMomentum._();
 
-  factory MarketMakingConstituentFlow.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory MarketMakingConstituentFlow.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory MarketMakingConstituentMomentum.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingConstituentMomentum.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingConstituentFlow', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingConstituentMomentum', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'topN', $pb.PbFieldType.OU3)
     ..aOM<MarketMakingTradeAnalyzer>(3, _omitFieldNames ? '' : 'analyzer', subBuilder: MarketMakingTradeAnalyzer.create)
@@ -1113,21 +1113,21 @@ class MarketMakingConstituentFlow extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingConstituentFlow clone() => MarketMakingConstituentFlow()..mergeFromMessage(this);
+  MarketMakingConstituentMomentum clone() => MarketMakingConstituentMomentum()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MarketMakingConstituentFlow copyWith(void Function(MarketMakingConstituentFlow) updates) => super.copyWith((message) => updates(message as MarketMakingConstituentFlow)) as MarketMakingConstituentFlow;
+  MarketMakingConstituentMomentum copyWith(void Function(MarketMakingConstituentMomentum) updates) => super.copyWith((message) => updates(message as MarketMakingConstituentMomentum)) as MarketMakingConstituentMomentum;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MarketMakingConstituentFlow create() => MarketMakingConstituentFlow._();
+  static MarketMakingConstituentMomentum create() => MarketMakingConstituentMomentum._();
   @$core.override
-  MarketMakingConstituentFlow createEmptyInstance() => create();
-  static $pb.PbList<MarketMakingConstituentFlow> createRepeated() => $pb.PbList<MarketMakingConstituentFlow>();
+  MarketMakingConstituentMomentum createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingConstituentMomentum> createRepeated() => $pb.PbList<MarketMakingConstituentMomentum>();
   @$core.pragma('dart2js:noInline')
-  static MarketMakingConstituentFlow getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingConstituentFlow>(create);
-  static MarketMakingConstituentFlow? _defaultInstance;
+  static MarketMakingConstituentMomentum getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingConstituentMomentum>(create);
+  static MarketMakingConstituentMomentum? _defaultInstance;
 
   /// 활성화 여부
   @$pb.TagNumber(1)
@@ -2572,9 +2572,9 @@ class MaCrossState extends $pb.GeneratedMessage {
   void clearTransitions() => $_clearField(6);
 }
 
-/// ConstituentFlow 런타임 상태
-class ConstituentFlowState extends $pb.GeneratedMessage {
-  factory ConstituentFlowState({
+/// ConstituentMomentum 런타임 상태
+class ConstituentMomentumState extends $pb.GeneratedMessage {
+  factory ConstituentMomentumState({
     $core.bool? enabled,
     $core.int? tracked,
     $core.double? aggRatio,
@@ -2590,12 +2590,12 @@ class ConstituentFlowState extends $pb.GeneratedMessage {
     return result;
   }
 
-  ConstituentFlowState._();
+  ConstituentMomentumState._();
 
-  factory ConstituentFlowState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory ConstituentFlowState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory ConstituentMomentumState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ConstituentMomentumState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstituentFlowState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstituentMomentumState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'tracked', $pb.PbFieldType.OU3)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'aggRatio', $pb.PbFieldType.OD)
@@ -2605,21 +2605,21 @@ class ConstituentFlowState extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ConstituentFlowState clone() => ConstituentFlowState()..mergeFromMessage(this);
+  ConstituentMomentumState clone() => ConstituentMomentumState()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ConstituentFlowState copyWith(void Function(ConstituentFlowState) updates) => super.copyWith((message) => updates(message as ConstituentFlowState)) as ConstituentFlowState;
+  ConstituentMomentumState copyWith(void Function(ConstituentMomentumState) updates) => super.copyWith((message) => updates(message as ConstituentMomentumState)) as ConstituentMomentumState;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ConstituentFlowState create() => ConstituentFlowState._();
+  static ConstituentMomentumState create() => ConstituentMomentumState._();
   @$core.override
-  ConstituentFlowState createEmptyInstance() => create();
-  static $pb.PbList<ConstituentFlowState> createRepeated() => $pb.PbList<ConstituentFlowState>();
+  ConstituentMomentumState createEmptyInstance() => create();
+  static $pb.PbList<ConstituentMomentumState> createRepeated() => $pb.PbList<ConstituentMomentumState>();
   @$core.pragma('dart2js:noInline')
-  static ConstituentFlowState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConstituentFlowState>(create);
-  static ConstituentFlowState? _defaultInstance;
+  static ConstituentMomentumState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConstituentMomentumState>(create);
+  static ConstituentMomentumState? _defaultInstance;
 
   /// 활성화 여부
   @$pb.TagNumber(1)
@@ -2777,7 +2777,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     SpreadDecomposition? decomposition,
     $core.String? f2mShift,
     MaCrossState? maCross,
-    ConstituentFlowState? constituentFlow,
+    ConstituentMomentumState? constituentMomentum,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2793,7 +2793,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (decomposition != null) result.decomposition = decomposition;
     if (f2mShift != null) result.f2mShift = f2mShift;
     if (maCross != null) result.maCross = maCross;
-    if (constituentFlow != null) result.constituentFlow = constituentFlow;
+    if (constituentMomentum != null) result.constituentMomentum = constituentMomentum;
     return result;
   }
 
@@ -2816,7 +2816,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOM<SpreadDecomposition>(11, _omitFieldNames ? '' : 'decomposition', subBuilder: SpreadDecomposition.create)
     ..aOS(12, _omitFieldNames ? '' : 'f2mShift')
     ..aOM<MaCrossState>(13, _omitFieldNames ? '' : 'maCross', subBuilder: MaCrossState.create)
-    ..aOM<ConstituentFlowState>(14, _omitFieldNames ? '' : 'constituentFlow', subBuilder: ConstituentFlowState.create)
+    ..aOM<ConstituentMomentumState>(14, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: ConstituentMomentumState.create)
     ..hasRequiredFields = false
   ;
 
@@ -2981,15 +2981,15 @@ class MmStateUpdate extends $pb.GeneratedMessage {
 
   /// 상위 구성종목 체결강도 상태 (변경 시에만 포함)
   @$pb.TagNumber(14)
-  ConstituentFlowState get constituentFlow => $_getN(13);
+  ConstituentMomentumState get constituentMomentum => $_getN(13);
   @$pb.TagNumber(14)
-  set constituentFlow(ConstituentFlowState value) => $_setField(14, value);
+  set constituentMomentum(ConstituentMomentumState value) => $_setField(14, value);
   @$pb.TagNumber(14)
-  $core.bool hasConstituentFlow() => $_has(13);
+  $core.bool hasConstituentMomentum() => $_has(13);
   @$pb.TagNumber(14)
-  void clearConstituentFlow() => $_clearField(14);
+  void clearConstituentMomentum() => $_clearField(14);
   @$pb.TagNumber(14)
-  ConstituentFlowState ensureConstituentFlow() => $_ensure(13);
+  ConstituentMomentumState ensureConstituentMomentum() => $_ensure(13);
 }
 
 /// StreamMmFills
@@ -3404,7 +3404,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     $fixnum.Int64? finalBid,
     $fixnum.Int64? finalAsk,
     $fixnum.Int64? maCrossShift,
-    $fixnum.Int64? constituentShift,
+    $fixnum.Int64? constituentMomentumShift,
   }) {
     final result = create();
     if (baseBid != null) result.baseBid = baseBid;
@@ -3415,7 +3415,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     if (finalBid != null) result.finalBid = finalBid;
     if (finalAsk != null) result.finalAsk = finalAsk;
     if (maCrossShift != null) result.maCrossShift = maCrossShift;
-    if (constituentShift != null) result.constituentShift = constituentShift;
+    if (constituentMomentumShift != null) result.constituentMomentumShift = constituentMomentumShift;
     return result;
   }
 
@@ -3433,7 +3433,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'finalBid')
     ..aInt64(7, _omitFieldNames ? '' : 'finalAsk')
     ..aInt64(8, _omitFieldNames ? '' : 'maCrossShift')
-    ..aInt64(9, _omitFieldNames ? '' : 'constituentShift')
+    ..aInt64(9, _omitFieldNames ? '' : 'constituentMomentumShift')
     ..hasRequiredFields = false
   ;
 
@@ -3534,15 +3534,15 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearMaCrossShift() => $_clearField(8);
 
-  /// ConstituentFlow(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  /// ConstituentMomentum(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
   @$pb.TagNumber(9)
-  $fixnum.Int64 get constituentShift => $_getI64(8);
+  $fixnum.Int64 get constituentMomentumShift => $_getI64(8);
   @$pb.TagNumber(9)
-  set constituentShift($fixnum.Int64 value) => $_setInt64(8, value);
+  set constituentMomentumShift($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(9)
-  $core.bool hasConstituentShift() => $_has(8);
+  $core.bool hasConstituentMomentumShift() => $_has(8);
   @$pb.TagNumber(9)
-  void clearConstituentShift() => $_clearField(9);
+  void clearConstituentMomentumShift() => $_clearField(9);
 }
 
 /// StreamMmStateUpdate

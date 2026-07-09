@@ -665,7 +665,7 @@
         }
       }
     },
-    "mmConstituentFlowState": {
+    "mmConstituentMomentumState": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -693,7 +693,7 @@
           "title": "이번 tick 호가에 가산되는 평행 shift (원, 부호 포함, Price internal representation)"
         }
       },
-      "title": "ConstituentFlow 런타임 상태"
+      "title": "ConstituentMomentum 런타임 상태"
     },
     "mmExposureBalancerState": {
       "type": "object",
@@ -921,14 +921,14 @@
           "$ref": "#/definitions/mmMarketMakingMaCross",
           "title": "MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)"
         },
-        "constituentFlow": {
-          "$ref": "#/definitions/mmMarketMakingConstituentFlow",
+        "constituentMomentum": {
+          "$ref": "#/definitions/mmMarketMakingConstituentMomentum",
           "title": "상위 구성종목 체결강도 skew 설정"
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
     },
-    "mmMarketMakingConstituentFlow": {
+    "mmMarketMakingConstituentMomentum": {
       "type": "object",
       "properties": {
         "enabled": {
@@ -1312,8 +1312,8 @@
           "$ref": "#/definitions/mmMaCrossState",
           "title": "MA 크로스 상태 (변경 시에만 포함)"
         },
-        "constituentFlow": {
-          "$ref": "#/definitions/mmConstituentFlowState",
+        "constituentMomentum": {
+          "$ref": "#/definitions/mmConstituentMomentumState",
           "title": "상위 구성종목 체결강도 상태 (변경 시에만 포함)"
         }
       },
@@ -1391,10 +1391,10 @@
           "format": "int64",
           "title": "MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)"
         },
-        "constituentShift": {
+        "constituentMomentumShift": {
           "type": "string",
           "format": "int64",
-          "title": "ConstituentFlow(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)"
+          "title": "ConstituentMomentum(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)"
         }
       },
       "description": "호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift."

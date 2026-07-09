@@ -203,7 +203,7 @@ message MarketMakingConfiguration {
   MarketMakingMaCross ma_cross = 18;
 
   // 상위 구성종목 체결강도 skew 설정
-  MarketMakingConstituentFlow constituent_flow = 19;
+  MarketMakingConstituentMomentum constituent_momentum = 19;
 }
 
 // NAV pricing 상세 설정
@@ -321,7 +321,7 @@ message MarketMakingMaCross {
 }
 
 // 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
-message MarketMakingConstituentFlow {
+message MarketMakingConstituentMomentum {
   // 활성화 여부
   bool enabled = 1;
   // 체결강도를 반영할 상위 구성종목 개수 (notional 비중 상위 N)
@@ -558,8 +558,8 @@ message MaCrossState {
   uint64 transitions = 6;
 }
 
-// ConstituentFlow 런타임 상태
-message ConstituentFlowState {
+// ConstituentMomentum 런타임 상태
+message ConstituentMomentumState {
   // 활성화 여부
   bool enabled = 1;
   // 현재 추적 중인 구성종목 수
@@ -634,7 +634,7 @@ message MmStateUpdate {
   optional MaCrossState ma_cross = 13;
 
   // 상위 구성종목 체결강도 상태 (변경 시에만 포함)
-  optional ConstituentFlowState constituent_flow = 14;
+  optional ConstituentMomentumState constituent_momentum = 14;
 }
 
 // StreamMmFills
@@ -729,8 +729,8 @@ message SpreadDecomposition {
   // MA 크로스 skew 가산량 (부호 포함, bid·ask 동일, Price internal representation)
   int64 ma_cross_shift = 8;
 
-  // ConstituentFlow(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
-  int64 constituent_shift = 9;
+  // ConstituentMomentum(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  int64 constituent_momentum_shift = 9;
 }
 
 // ============================================================================
