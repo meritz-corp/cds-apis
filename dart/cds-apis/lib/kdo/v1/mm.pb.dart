@@ -775,14 +775,14 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   factory MarketMakingMomentum({
     $core.bool? enabled,
     $core.bool? isOpposite,
-    $core.double? maxTick,
+    $core.double? maxSkew,
     $core.double? ratioThreshold,
     $core.double? strengthThreshold,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (isOpposite != null) result.isOpposite = isOpposite;
-    if (maxTick != null) result.maxTick = maxTick;
+    if (maxSkew != null) result.maxSkew = maxSkew;
     if (ratioThreshold != null) result.ratioThreshold = ratioThreshold;
     if (strengthThreshold != null) result.strengthThreshold = strengthThreshold;
     return result;
@@ -796,7 +796,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingMomentum', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..aOB(2, _omitFieldNames ? '' : 'isOpposite')
-    ..a<$core.double>(3, _omitFieldNames ? '' : 'maxTick', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'maxSkew', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'ratioThreshold', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'strengthThreshold', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
@@ -839,15 +839,15 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearIsOpposite() => $_clearField(2);
 
-  /// 최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)
+  /// 최대 shift (원/KRW 단위). 최대 모멘텀일 때 이만큼 평행 이동. 다른 skew 컴포넌트(exposure price_skew_unit, market_bias bias_unit, ma_cross skew_unit)와 단위 통일.
   @$pb.TagNumber(3)
-  $core.double get maxTick => $_getN(2);
+  $core.double get maxSkew => $_getN(2);
   @$pb.TagNumber(3)
-  set maxTick($core.double value) => $_setDouble(2, value);
+  set maxSkew($core.double value) => $_setDouble(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasMaxTick() => $_has(2);
+  $core.bool hasMaxSkew() => $_has(2);
   @$pb.TagNumber(3)
-  void clearMaxTick() => $_clearField(3);
+  void clearMaxSkew() => $_clearField(3);
 
   /// ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
   @$pb.TagNumber(4)

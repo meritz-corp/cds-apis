@@ -1055,10 +1055,10 @@
           "type": "boolean",
           "title": "인버스 ETF: ratio 부호 반전"
         },
-        "maxTick": {
+        "maxSkew": {
           "type": "number",
           "format": "double",
-          "title": "최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)"
+          "description": "최대 shift (원/KRW 단위). 최대 모멘텀일 때 이만큼 평행 이동. 다른 skew 컴포넌트(exposure price_skew_unit, market_bias bias_unit, ma_cross skew_unit)와 단위 통일."
         },
         "ratioThreshold": {
           "type": "number",

@@ -195,7 +195,7 @@ const MarketMakingMomentum$json = {
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'is_opposite', '3': 2, '4': 1, '5': 8, '10': 'isOpposite'},
-    {'1': 'max_tick', '3': 3, '4': 1, '5': 1, '10': 'maxTick'},
+    {'1': 'max_skew', '3': 3, '4': 1, '5': 1, '10': 'maxSkew'},
     {'1': 'ratio_threshold', '3': 4, '4': 1, '5': 1, '10': 'ratioThreshold'},
     {'1': 'strength_threshold', '3': 5, '4': 1, '5': 1, '10': 'strengthThreshold'},
   ],
@@ -204,7 +204,7 @@ const MarketMakingMomentum$json = {
 /// Descriptor for `MarketMakingMomentum`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingMomentumDescriptor = $convert.base64Decode(
     'ChRNYXJrZXRNYWtpbmdNb21lbnR1bRIYCgdlbmFibGVkGAEgASgIUgdlbmFibGVkEh8KC2lzX2'
-    '9wcG9zaXRlGAIgASgIUgppc09wcG9zaXRlEhkKCG1heF90aWNrGAMgASgBUgdtYXhUaWNrEicK'
+    '9wcG9zaXRlGAIgASgIUgppc09wcG9zaXRlEhkKCG1heF9za2V3GAMgASgBUgdtYXhTa2V3EicK'
     'D3JhdGlvX3RocmVzaG9sZBgEIAEoAVIOcmF0aW9UaHJlc2hvbGQSLQoSc3RyZW5ndGhfdGhyZX'
     'Nob2xkGAUgASgBUhFzdHJlbmd0aFRocmVzaG9sZA==');
 

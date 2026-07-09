@@ -3238,7 +3238,7 @@ impl serde::Serialize for MarketMakingMomentum {
             struct_ser.serialize_field("is_opposite", &self.is_opposite)?;
         }
         if true {
-            struct_ser.serialize_field("max_tick", &self.max_tick)?;
+            struct_ser.serialize_field("max_skew", &self.max_skew)?;
         }
         if true {
             struct_ser.serialize_field("ratio_threshold", &self.ratio_threshold)?;
@@ -3259,8 +3259,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
             "enabled",
             "is_opposite",
             "isOpposite",
-            "max_tick",
-            "maxTick",
+            "max_skew",
+            "maxSkew",
             "ratio_threshold",
             "ratioThreshold",
             "strength_threshold",
@@ -3271,7 +3271,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
         enum GeneratedField {
             Enabled,
             IsOpposite,
-            MaxTick,
+            MaxSkew,
             RatioThreshold,
             StrengthThreshold,
             __SkipField__,
@@ -3298,7 +3298,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
                         match value {
                             "enabled" => Ok(GeneratedField::Enabled),
                             "isOpposite" | "is_opposite" => Ok(GeneratedField::IsOpposite),
-                            "maxTick" | "max_tick" => Ok(GeneratedField::MaxTick),
+                            "maxSkew" | "max_skew" => Ok(GeneratedField::MaxSkew),
                             "ratioThreshold" | "ratio_threshold" => Ok(GeneratedField::RatioThreshold),
                             "strengthThreshold" | "strength_threshold" => Ok(GeneratedField::StrengthThreshold),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -3322,7 +3322,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
             {
                 let mut enabled__ = None;
                 let mut is_opposite__ = None;
-                let mut max_tick__ = None;
+                let mut max_skew__ = None;
                 let mut ratio_threshold__ = None;
                 let mut strength_threshold__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -3339,11 +3339,11 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
                             }
                             is_opposite__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::MaxTick => {
-                            if max_tick__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("maxTick"));
+                        GeneratedField::MaxSkew => {
+                            if max_skew__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxSkew"));
                             }
-                            max_tick__ = 
+                            max_skew__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -3371,7 +3371,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMomentum {
                 Ok(MarketMakingMomentum {
                     enabled: enabled__.unwrap_or_default(),
                     is_opposite: is_opposite__.unwrap_or_default(),
-                    max_tick: max_tick__.unwrap_or_default(),
+                    max_skew: max_skew__.unwrap_or_default(),
                     ratio_threshold: ratio_threshold__.unwrap_or_default(),
                     strength_threshold: strength_threshold__.unwrap_or_default(),
                 })

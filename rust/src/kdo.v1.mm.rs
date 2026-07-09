@@ -164,9 +164,9 @@ pub struct MarketMakingMomentum {
     /// 인버스 ETF: ratio 부호 반전
     #[prost(bool, tag="2")]
     pub is_opposite: bool,
-    /// 최대 shift (tick 단위, 갤럭티코 pInfo.p1/100 등가)
+    /// 최대 shift (원/KRW 단위). 최대 모멘텀일 때 이만큼 평행 이동. 다른 skew 컴포넌트(exposure price_skew_unit, market_bias bias_unit, ma_cross skew_unit)와 단위 통일.
     #[prost(double, tag="3")]
-    pub max_tick: f64,
+    pub max_skew: f64,
     /// ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
     #[prost(double, tag="4")]
     pub ratio_threshold: f64,
