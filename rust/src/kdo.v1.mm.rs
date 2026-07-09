@@ -73,6 +73,9 @@ pub struct MarketMakingConfiguration {
     /// 상위 구성종목 체결강도 skew 설정
     #[prost(message, optional, tag="19")]
     pub constituent_momentum: ::core::option::Option<MarketMakingConstituentMomentum>,
+    /// 역선택 방어 설정
+    #[prost(message, optional, tag="20")]
+    pub adverse_selection: ::core::option::Option<MarketMakingAdverseSelection>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -233,6 +236,27 @@ pub struct MarketMakingConstituentMomentum {
     /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
     #[prost(message, optional, tag="4")]
     pub shift: ::core::option::Option<MarketMakingMomentum>,
+}
+/// 역선택 방어: 자기 체결의 markout(체결 후 공정가 역행)을 시간감쇠 누적,
+/// 임계 초과 시 양방향 호가를 cooldown 동안 정지.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingAdverseSelection {
+    /// 활성화
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 체결 후 markout 평가까지 대기(ms)
+    #[prost(uint32, tag="2")]
+    pub eval_delay_ms: u32,
+    /// 누적 markout 시간감쇠 반감기(ms)
+    #[prost(uint32, tag="3")]
+    pub half_life_ms: u32,
+    /// 트립 후 양방향 정지 유지(ms)
+    #[prost(uint32, tag="4")]
+    pub cooldown_ms: u32,
+    /// 누적 adverse markout(원) 임계
+    #[prost(int64, tag="5")]
+    pub loss_threshold_won: i64,
 }
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
 #[allow(clippy::derive_partial_eq_without_eq)]

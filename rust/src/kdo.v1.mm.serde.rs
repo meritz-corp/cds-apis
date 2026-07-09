@@ -2133,6 +2133,183 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
         deserializer.deserialize_struct("kdo.v1.mm.MarketMaking", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for MarketMakingAdverseSelection {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingAdverseSelection", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("eval_delay_ms", &self.eval_delay_ms)?;
+        }
+        if true {
+            struct_ser.serialize_field("half_life_ms", &self.half_life_ms)?;
+        }
+        if true {
+            struct_ser.serialize_field("cooldown_ms", &self.cooldown_ms)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("loss_threshold_won", ToString::to_string(&self.loss_threshold_won).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingAdverseSelection {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "eval_delay_ms",
+            "evalDelayMs",
+            "half_life_ms",
+            "halfLifeMs",
+            "cooldown_ms",
+            "cooldownMs",
+            "loss_threshold_won",
+            "lossThresholdWon",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            EvalDelayMs,
+            HalfLifeMs,
+            CooldownMs,
+            LossThresholdWon,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "evalDelayMs" | "eval_delay_ms" => Ok(GeneratedField::EvalDelayMs),
+                            "halfLifeMs" | "half_life_ms" => Ok(GeneratedField::HalfLifeMs),
+                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            "lossThresholdWon" | "loss_threshold_won" => Ok(GeneratedField::LossThresholdWon),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingAdverseSelection;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingAdverseSelection")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingAdverseSelection, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut eval_delay_ms__ = None;
+                let mut half_life_ms__ = None;
+                let mut cooldown_ms__ = None;
+                let mut loss_threshold_won__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EvalDelayMs => {
+                            if eval_delay_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("evalDelayMs"));
+                            }
+                            eval_delay_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::HalfLifeMs => {
+                            if half_life_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("halfLifeMs"));
+                            }
+                            half_life_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CooldownMs => {
+                            if cooldown_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
+                            }
+                            cooldown_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LossThresholdWon => {
+                            if loss_threshold_won__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lossThresholdWon"));
+                            }
+                            loss_threshold_won__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingAdverseSelection {
+                    enabled: enabled__.unwrap_or_default(),
+                    eval_delay_ms: eval_delay_ms__.unwrap_or_default(),
+                    half_life_ms: half_life_ms__.unwrap_or_default(),
+                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                    loss_threshold_won: loss_threshold_won__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingAdverseSelection", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for MarketMakingConfiguration {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2141,6 +2318,9 @@ impl serde::Serialize for MarketMakingConfiguration {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -2242,6 +2422,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.constituent_momentum.as_ref() {
             struct_ser.serialize_field("constituent_momentum", v)?;
         }
+        if let Some(v) = self.adverse_selection.as_ref() {
+            struct_ser.serialize_field("adverse_selection", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2278,6 +2461,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "maCross",
             "constituent_momentum",
             "constituentMomentum",
+            "adverse_selection",
+            "adverseSelection",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2297,6 +2482,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             QuantityLimit,
             MaCross,
             ConstituentMomentum,
+            AdverseSelection,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2334,6 +2520,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
                             "maCross" | "ma_cross" => Ok(GeneratedField::MaCross),
                             "constituentMomentum" | "constituent_momentum" => Ok(GeneratedField::ConstituentMomentum),
+                            "adverseSelection" | "adverse_selection" => Ok(GeneratedField::AdverseSelection),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2368,6 +2555,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut quantity_limit__ = None;
                 let mut ma_cross__ = None;
                 let mut constituent_momentum__ = None;
+                let mut adverse_selection__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -2472,6 +2660,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             constituent_momentum__ = map_.next_value()?;
                         }
+                        GeneratedField::AdverseSelection => {
+                            if adverse_selection__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("adverseSelection"));
+                            }
+                            adverse_selection__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2493,6 +2687,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     quantity_limit: quantity_limit__,
                     ma_cross: ma_cross__,
                     constituent_momentum: constituent_momentum__,
+                    adverse_selection: adverse_selection__,
                 })
             }
         }

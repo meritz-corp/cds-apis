@@ -204,6 +204,9 @@ message MarketMakingConfiguration {
 
   // 상위 구성종목 체결강도 skew 설정
   MarketMakingConstituentMomentum constituent_momentum = 19;
+
+  // 역선택 방어 설정
+  MarketMakingAdverseSelection adverse_selection = 20;
 }
 
 // NAV pricing 상세 설정
@@ -330,6 +333,25 @@ message MarketMakingConstituentMomentum {
   MarketMakingTradeAnalyzer analyzer = 3;
   // 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
   MarketMakingMomentum shift = 4;
+}
+
+// 역선택 방어: 자기 체결의 markout(체결 후 공정가 역행)을 시간감쇠 누적,
+// 임계 초과 시 양방향 호가를 cooldown 동안 정지.
+message MarketMakingAdverseSelection {
+  // 활성화
+  bool enabled = 1;
+
+  // 체결 후 markout 평가까지 대기(ms)
+  uint32 eval_delay_ms = 2;
+
+  // 누적 markout 시간감쇠 반감기(ms)
+  uint32 half_life_ms = 3;
+
+  // 트립 후 양방향 정지 유지(ms)
+  uint32 cooldown_ms = 4;
+
+  // 누적 adverse markout(원) 임계
+  int64 loss_threshold_won = 5;
 }
 
 // 통합 포지션 관리 설정 (soft rebalance + hard limit)

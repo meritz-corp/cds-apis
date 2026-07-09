@@ -142,6 +142,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingQuantityLimit? quantityLimit,
     MarketMakingMaCross? maCross,
     MarketMakingConstituentMomentum? constituentMomentum,
+    MarketMakingAdverseSelection? adverseSelection,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -159,6 +160,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
     if (maCross != null) result.maCross = maCross;
     if (constituentMomentum != null) result.constituentMomentum = constituentMomentum;
+    if (adverseSelection != null) result.adverseSelection = adverseSelection;
     return result;
   }
 
@@ -183,6 +185,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingQuantityLimit>(17, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MarketMakingQuantityLimit.create)
     ..aOM<MarketMakingMaCross>(18, _omitFieldNames ? '' : 'maCross', subBuilder: MarketMakingMaCross.create)
     ..aOM<MarketMakingConstituentMomentum>(19, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: MarketMakingConstituentMomentum.create)
+    ..aOM<MarketMakingAdverseSelection>(20, _omitFieldNames ? '' : 'adverseSelection', subBuilder: MarketMakingAdverseSelection.create)
     ..hasRequiredFields = false
   ;
 
@@ -368,6 +371,18 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearConstituentMomentum() => $_clearField(19);
   @$pb.TagNumber(19)
   MarketMakingConstituentMomentum ensureConstituentMomentum() => $_ensure(14);
+
+  /// 역선택 방어 설정
+  @$pb.TagNumber(20)
+  MarketMakingAdverseSelection get adverseSelection => $_getN(15);
+  @$pb.TagNumber(20)
+  set adverseSelection(MarketMakingAdverseSelection value) => $_setField(20, value);
+  @$pb.TagNumber(20)
+  $core.bool hasAdverseSelection() => $_has(15);
+  @$pb.TagNumber(20)
+  void clearAdverseSelection() => $_clearField(20);
+  @$pb.TagNumber(20)
+  MarketMakingAdverseSelection ensureAdverseSelection() => $_ensure(15);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -1172,6 +1187,107 @@ class MarketMakingConstituentMomentum extends $pb.GeneratedMessage {
   void clearShift() => $_clearField(4);
   @$pb.TagNumber(4)
   MarketMakingMomentum ensureShift() => $_ensure(3);
+}
+
+/// 역선택 방어: 자기 체결의 markout(체결 후 공정가 역행)을 시간감쇠 누적,
+/// 임계 초과 시 양방향 호가를 cooldown 동안 정지.
+class MarketMakingAdverseSelection extends $pb.GeneratedMessage {
+  factory MarketMakingAdverseSelection({
+    $core.bool? enabled,
+    $core.int? evalDelayMs,
+    $core.int? halfLifeMs,
+    $core.int? cooldownMs,
+    $fixnum.Int64? lossThresholdWon,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (evalDelayMs != null) result.evalDelayMs = evalDelayMs;
+    if (halfLifeMs != null) result.halfLifeMs = halfLifeMs;
+    if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    if (lossThresholdWon != null) result.lossThresholdWon = lossThresholdWon;
+    return result;
+  }
+
+  MarketMakingAdverseSelection._();
+
+  factory MarketMakingAdverseSelection.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingAdverseSelection.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingAdverseSelection', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'evalDelayMs', $pb.PbFieldType.OU3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'halfLifeMs', $pb.PbFieldType.OU3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU3)
+    ..aInt64(5, _omitFieldNames ? '' : 'lossThresholdWon')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingAdverseSelection clone() => MarketMakingAdverseSelection()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingAdverseSelection copyWith(void Function(MarketMakingAdverseSelection) updates) => super.copyWith((message) => updates(message as MarketMakingAdverseSelection)) as MarketMakingAdverseSelection;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingAdverseSelection create() => MarketMakingAdverseSelection._();
+  @$core.override
+  MarketMakingAdverseSelection createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingAdverseSelection> createRepeated() => $pb.PbList<MarketMakingAdverseSelection>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingAdverseSelection getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingAdverseSelection>(create);
+  static MarketMakingAdverseSelection? _defaultInstance;
+
+  /// 활성화
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 체결 후 markout 평가까지 대기(ms)
+  @$pb.TagNumber(2)
+  $core.int get evalDelayMs => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set evalDelayMs($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasEvalDelayMs() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEvalDelayMs() => $_clearField(2);
+
+  /// 누적 markout 시간감쇠 반감기(ms)
+  @$pb.TagNumber(3)
+  $core.int get halfLifeMs => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set halfLifeMs($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasHalfLifeMs() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearHalfLifeMs() => $_clearField(3);
+
+  /// 트립 후 양방향 정지 유지(ms)
+  @$pb.TagNumber(4)
+  $core.int get cooldownMs => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set cooldownMs($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCooldownMs() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCooldownMs() => $_clearField(4);
+
+  /// 누적 adverse markout(원) 임계
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get lossThresholdWon => $_getI64(4);
+  @$pb.TagNumber(5)
+  set lossThresholdWon($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasLossThresholdWon() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLossThresholdWon() => $_clearField(5);
 }
 
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
