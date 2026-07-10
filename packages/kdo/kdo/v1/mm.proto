@@ -104,21 +104,6 @@ service MarketMakingService {
     option (google.api.method_signature) = "symbol";
   }
 
-  // Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
-  rpc FitToMarket(FitToMarketRequest) returns (FitToMarketResponse) {
-    option (google.api.http) = {
-      post: "/v1/mm/{symbol=*}:fitToMarket"
-      body: "*"
-    };
-  }
-
-  // Clear Fit to Market: F2M skew 해제 (0으로 리셋)
-  rpc ClearFitToMarket(ClearFitToMarketRequest) returns (ClearFitToMarketResponse) {
-    option (google.api.http) = {
-      post: "/v1/mm/{symbol=*}:clearFitToMarket"
-      body: "*"
-    };
-  }
 }
 
 // ============================================================================
@@ -769,26 +754,4 @@ message SpreadDecomposition {
 message StreamMmStateUpdateRequest {
   // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
   string symbol = 1;
-}
-
-// FitToMarket
-message FitToMarketRequest {
-  // ISIN 심볼
-  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-message FitToMarketResponse {
-  // 메시지
-  string message = 1;
-}
-
-// ClearFitToMarket
-message ClearFitToMarketRequest {
-  // ISIN 심볼
-  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-message ClearFitToMarketResponse {
-  // 메시지
-  string message = 1;
 }

@@ -419,90 +419,6 @@
         ]
       }
     },
-    "/v1/mm/{symbol}:clearFitToMarket": {
-      "post": {
-        "summary": "Clear Fit to Market: F2M skew 해제 (0으로 리셋)",
-        "operationId": "MarketMakingService_ClearFitToMarket",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/mmClearFitToMarketResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "symbol",
-            "description": "ISIN 심볼",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "title": "ClearFitToMarket"
-            }
-          }
-        ],
-        "tags": [
-          "MarketMakingService"
-        ]
-      }
-    },
-    "/v1/mm/{symbol}:fitToMarket": {
-      "post": {
-        "summary": "Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정",
-        "operationId": "MarketMakingService_FitToMarket",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/mmFitToMarketResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "symbol",
-            "description": "ISIN 심볼",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "title": "FitToMarket"
-            }
-          }
-        ],
-        "tags": [
-          "MarketMakingService"
-        ]
-      }
-    },
     "/v1/mm/{symbol}:start": {
       "post": {
         "summary": "MM 시작 (심볼 등록)",
@@ -656,15 +572,6 @@
       "type": "object",
       "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
     },
-    "mmClearFitToMarketResponse": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      }
-    },
     "mmConstituentMomentumState": {
       "type": "object",
       "properties": {
@@ -720,15 +627,6 @@
         }
       },
       "title": "순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)"
-    },
-    "mmFitToMarketResponse": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "title": "메시지"
-        }
-      }
     },
     "mmKrxNav": {
       "type": "object",
