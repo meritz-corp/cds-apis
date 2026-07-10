@@ -100,4 +100,12 @@ abstract final class MarketMakingService {
     kdov1mm.ListMmPnlHistoryRequest.new,
     kdov1mm.ListMmPnlHistoryResponse.new,
   );
+
+  /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+  static const fitToMarket = connect.Spec(
+    '/$name/FitToMarket',
+    connect.StreamType.unary,
+    kdov1mm.FitToMarketRequest.new,
+    kdov1mm.FitToMarketResponse.new,
+  );
 }

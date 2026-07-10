@@ -761,6 +761,26 @@ func (m *MockMarketMakingServiceClient) EXPECT() *MockMarketMakingServiceClientM
 	return m.recorder
 }
 
+// FitToMarket mocks base method.
+func (m *MockMarketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "FitToMarket", varargs...)
+	ret0, _ := ret[0].(*FitToMarketResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FitToMarket indicates an expected call of FitToMarket.
+func (mr *MockMarketMakingServiceClientMockRecorder) FitToMarket(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FitToMarket", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).FitToMarket), varargs...)
+}
+
 // GetMarketMaking mocks base method.
 func (m *MockMarketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
@@ -1002,6 +1022,21 @@ func NewMockMarketMakingServiceServer(ctrl *gomock.Controller) *MockMarketMaking
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockMarketMakingServiceServer) EXPECT() *MockMarketMakingServiceServerMockRecorder {
 	return m.recorder
+}
+
+// FitToMarket mocks base method.
+func (m *MockMarketMakingServiceServer) FitToMarket(ctx context.Context, in *FitToMarketRequest) (*FitToMarketResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FitToMarket", ctx, in)
+	ret0, _ := ret[0].(*FitToMarketResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FitToMarket indicates an expected call of FitToMarket.
+func (mr *MockMarketMakingServiceServerMockRecorder) FitToMarket(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FitToMarket", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).FitToMarket), ctx, in)
 }
 
 // GetMarketMaking mocks base method.

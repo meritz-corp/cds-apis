@@ -743,6 +743,21 @@ pub struct StreamMmStateUpdateRequest {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
 }
+/// FitToMarket
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FitToMarketRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FitToMarketResponse {
+    /// 메시지
+    #[prost(string, tag="1")]
+    pub message: ::prost::alloc::string::String,
+}
 // ============================================================================
 // Enums
 // ============================================================================

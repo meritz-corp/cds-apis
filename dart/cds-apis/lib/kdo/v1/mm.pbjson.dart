@@ -854,3 +854,27 @@ const StreamMmStateUpdateRequest$json = {
 final $typed_data.Uint8List streamMmStateUpdateRequestDescriptor = $convert.base64Decode(
     'ChpTdHJlYW1NbVN0YXRlVXBkYXRlUmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbA==');
 
+@$core.Deprecated('Use fitToMarketRequestDescriptor instead')
+const FitToMarketRequest$json = {
+  '1': 'FitToMarketRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `FitToMarketRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fitToMarketRequestDescriptor = $convert.base64Decode(
+    'ChJGaXRUb01hcmtldFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2w=');
+
+@$core.Deprecated('Use fitToMarketResponseDescriptor instead')
+const FitToMarketResponse$json = {
+  '1': 'FitToMarketResponse',
+  '2': [
+    {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `FitToMarketResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fitToMarketResponseDescriptor = $convert.base64Decode(
+    'ChNGaXRUb01hcmtldFJlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
+

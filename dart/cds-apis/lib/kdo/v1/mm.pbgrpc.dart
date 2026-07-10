@@ -90,6 +90,11 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listMmPnlHistory, request, options: options);
   }
 
+  /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+  $grpc.ResponseFuture<$0.FitToMarketResponse> fitToMarket($0.FitToMarketRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$fitToMarket, request, options: options);
+  }
+
     // method descriptors
 
   static final _$listMarketMaking = $grpc.ClientMethod<$0.ListMarketMakingRequest, $0.ListMarketMakingResponse>(
@@ -136,6 +141,10 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/ListMmPnlHistory',
       ($0.ListMmPnlHistoryRequest value) => value.writeToBuffer(),
       $0.ListMmPnlHistoryResponse.fromBuffer);
+  static final _$fitToMarket = $grpc.ClientMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
+      '/kdo.v1.mm.MarketMakingService/FitToMarket',
+      ($0.FitToMarketRequest value) => value.writeToBuffer(),
+      $0.FitToMarketResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
@@ -220,6 +229,13 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListMmPnlHistoryRequest.fromBuffer(value),
         ($0.ListMmPnlHistoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
+        'FitToMarket',
+        fitToMarket_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.FitToMarketRequest.fromBuffer(value),
+        ($0.FitToMarketResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMarketMakingResponse> listMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketMakingRequest> $request) async {
@@ -287,5 +303,11 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListMmPnlHistoryResponse> listMmPnlHistory($grpc.ServiceCall call, $0.ListMmPnlHistoryRequest request);
+
+  $async.Future<$0.FitToMarketResponse> fitToMarket_Pre($grpc.ServiceCall $call, $async.Future<$0.FitToMarketRequest> $request) async {
+    return fitToMarket($call, await $request);
+  }
+
+  $async.Future<$0.FitToMarketResponse> fitToMarket($grpc.ServiceCall call, $0.FitToMarketRequest request);
 
 }

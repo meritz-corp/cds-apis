@@ -3737,6 +3737,101 @@ class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
   void clearSymbol() => $_clearField(1);
 }
 
+/// FitToMarket
+class FitToMarketRequest extends $pb.GeneratedMessage {
+  factory FitToMarketRequest({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  FitToMarketRequest._();
+
+  factory FitToMarketRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FitToMarketRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FitToMarketRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FitToMarketRequest clone() => FitToMarketRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FitToMarketRequest copyWith(void Function(FitToMarketRequest) updates) => super.copyWith((message) => updates(message as FitToMarketRequest)) as FitToMarketRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FitToMarketRequest create() => FitToMarketRequest._();
+  @$core.override
+  FitToMarketRequest createEmptyInstance() => create();
+  static $pb.PbList<FitToMarketRequest> createRepeated() => $pb.PbList<FitToMarketRequest>();
+  @$core.pragma('dart2js:noInline')
+  static FitToMarketRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FitToMarketRequest>(create);
+  static FitToMarketRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
+class FitToMarketResponse extends $pb.GeneratedMessage {
+  factory FitToMarketResponse({
+    $core.String? message,
+  }) {
+    final result = create();
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  FitToMarketResponse._();
+
+  factory FitToMarketResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FitToMarketResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FitToMarketResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FitToMarketResponse clone() => FitToMarketResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FitToMarketResponse copyWith(void Function(FitToMarketResponse) updates) => super.copyWith((message) => updates(message as FitToMarketResponse)) as FitToMarketResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FitToMarketResponse create() => FitToMarketResponse._();
+  @$core.override
+  FitToMarketResponse createEmptyInstance() => create();
+  static $pb.PbList<FitToMarketResponse> createRepeated() => $pb.PbList<FitToMarketResponse>();
+  @$core.pragma('dart2js:noInline')
+  static FitToMarketResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FitToMarketResponse>(create);
+  static FitToMarketResponse? _defaultInstance;
+
+  /// 메시지
+  @$pb.TagNumber(1)
+  $core.String get message => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set message($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMessage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMessage() => $_clearField(1);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

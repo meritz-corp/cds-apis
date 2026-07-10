@@ -46,6 +46,8 @@ type MarketMakingServiceClient interface {
 	StreamMmFills(ctx context.Context, in *StreamMmFillsRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmFillsClient, error)
 	// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
 	ListMmPnlHistory(ctx context.Context, in *ListMmPnlHistoryRequest, opts ...grpc.CallOption) (*ListMmPnlHistoryResponse, error)
+	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+	FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error)
 }
 
 type marketMakingServiceClient struct {
@@ -224,6 +226,15 @@ func (c *marketMakingServiceClient) ListMmPnlHistory(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *marketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error) {
+	out := new(FitToMarketResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/FitToMarket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MarketMakingServiceServer is the server API for MarketMakingService service.
 // All implementations must embed UnimplementedMarketMakingServiceServer
 // for forward compatibility
@@ -252,6 +263,8 @@ type MarketMakingServiceServer interface {
 	StreamMmFills(*StreamMmFillsRequest, MarketMakingService_StreamMmFillsServer) error
 	// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
 	ListMmPnlHistory(context.Context, *ListMmPnlHistoryRequest) (*ListMmPnlHistoryResponse, error)
+	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+	FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error)
 	mustEmbedUnimplementedMarketMakingServiceServer()
 }
 
@@ -291,6 +304,9 @@ func (UnimplementedMarketMakingServiceServer) StreamMmFills(*StreamMmFillsReques
 }
 func (UnimplementedMarketMakingServiceServer) ListMmPnlHistory(context.Context, *ListMmPnlHistoryRequest) (*ListMmPnlHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMmPnlHistory not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FitToMarket not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) mustEmbedUnimplementedMarketMakingServiceServer() {}
 
@@ -512,6 +528,24 @@ func _MarketMakingService_ListMmPnlHistory_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MarketMakingService_FitToMarket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FitToMarketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).FitToMarket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/FitToMarket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).FitToMarket(ctx, req.(*FitToMarketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MarketMakingService_ServiceDesc is the grpc.ServiceDesc for MarketMakingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -550,6 +584,10 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMmPnlHistory",
 			Handler:    _MarketMakingService_ListMmPnlHistory_Handler,
+		},
+		{
+			MethodName: "FitToMarket",
+			Handler:    _MarketMakingService_FitToMarket_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
