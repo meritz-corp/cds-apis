@@ -516,6 +516,10 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   ///   * `equal`
   /// * order_type
   ///   * `equal`
+  /// * user_area
+  ///   * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,
+  ///     QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.
+  ///     여러 번 지정 시 OR (예: user_area=MmContext AND user_area=HedgeContext)
   ///
   /// Examples
   /// * filter=fund_code="0159"
@@ -524,6 +528,8 @@ class ListOrderLogsRequest extends $pb.GeneratedMessage {
   /// * filter=side=BUY
   /// * filter=order_type=AMEND
   /// * filter=market_type=KOSPI
+  /// * filter=user_area=MmContext
+  /// * filter=user_area=MmContext AND user_area=HedgeContext
   @$pb.TagNumber(3)
   $core.String get filter => $_getSZ(2);
   @$pb.TagNumber(3)
@@ -651,12 +657,17 @@ class GetOrderLogStatisticsRequest extends $pb.GeneratedMessage {
   /// * exchange_time
   ///   * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `>`, `>=`, `<`, `<=` 지원.
   ///   * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.
+  /// * user_area
+  ///   * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,
+  ///     QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.
+  ///     여러 번 지정 시 OR.
   ///
   /// Examples
   /// * filter=fund_code="0159"
   /// * filter=symbol:"7526"
   /// * filter=exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
   /// * filter=fund_code="0159" AND exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
+  /// * filter=user_area=MmContext
   @$pb.TagNumber(1)
   $core.String get filter => $_getSZ(0);
   @$pb.TagNumber(1)

@@ -52,7 +52,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND\n* filter=market_type=KOSPI",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n* user_area\n  * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,\n    QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.\n    여러 번 지정 시 OR (예: user_area=MmContext AND user_area=HedgeContext)\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND\n* filter=market_type=KOSPI\n* filter=user_area=MmContext\n* filter=user_area=MmContext AND user_area=HedgeContext",
             "in": "query",
             "required": false,
             "type": "string"
@@ -91,7 +91,7 @@
         "parameters": [
           {
             "name": "filter",
-            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"",
+            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.\n* user_area\n  * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,\n    QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.\n    여러 번 지정 시 OR.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=user_area=MmContext",
             "in": "query",
             "required": false,
             "type": "string"
@@ -132,7 +132,7 @@
         "parameters": [
           {
             "name": "filter",
-            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"",
+            "description": "AIP 스타일 문자열 필터. GetOrderLogStatistics 및 StreamOrderLogStatistics 공용.\n\nAvailable Fields and Operators\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains`\n* exchange_time\n  * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `\u003e`, `\u003e=`, `\u003c`, `\u003c=` 지원.\n  * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.\n* user_area\n  * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,\n    QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.\n    여러 번 지정 시 OR.\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=fund_code=\"0159\" AND exchange_time\u003e=\"2026-06-02T00:00:00Z\" AND exchange_time\u003c\"2026-06-03T00:00:00Z\"\n* filter=user_area=MmContext",
             "in": "query",
             "required": false,
             "type": "string"
@@ -359,7 +359,7 @@
           },
           {
             "name": "filter",
-            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND\n* filter=market_type=KOSPI",
+            "description": "Available Sequence and Operator\n* fund_code\n  * `equal`, `contains`\n* symbol\n  * `equal`, `contains\n* log_type\n  * `equal`\n* side\n  * `equal`\n* order_type\n  * `equal`\n* user_area\n  * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,\n    QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.\n    여러 번 지정 시 OR (예: user_area=MmContext AND user_area=HedgeContext)\n\nExamples\n* filter=fund_code=\"0159\"\n* filter=symbol:\"7526\"\n* filter=log_type=FILLED\n* filter=side=BUY\n* filter=order_type=AMEND\n* filter=market_type=KOSPI\n* filter=user_area=MmContext\n* filter=user_area=MmContext AND user_area=HedgeContext",
             "in": "query",
             "required": false,
             "type": "string"

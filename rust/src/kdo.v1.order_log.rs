@@ -117,6 +117,10 @@ pub struct ListOrderLogsRequest {
     ///    * `equal`
     /// * order_type
     ///    * `equal`
+    /// * user_area
+    ///    * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,
+    ///      QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.
+    ///      여러 번 지정 시 OR (예: user_area=MmContext AND user_area=HedgeContext)
     ///
     /// Examples
     /// * filter=fund_code="0159"
@@ -125,6 +129,8 @@ pub struct ListOrderLogsRequest {
     /// * filter=side=BUY
     /// * filter=order_type=AMEND
     /// * filter=market_type=KOSPI
+    /// * filter=user_area=MmContext
+    /// * filter=user_area=MmContext AND user_area=HedgeContext
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
     /// 오더링 조건. (optional, AIP-132)
@@ -161,12 +167,17 @@ pub struct GetOrderLogStatisticsRequest {
     /// * exchange_time
     ///    * 날짜/시각 범위 필터. ISO 8601 (RFC3339) 값, 연산자 `>`, `>=`, `<`, `<=` 지원.
     ///    * 미지정(날짜 범위 생략) 시 서버가 당일(KST 00:00~)로 자동 필터한다.
+    /// * user_area
+    ///    * `equal`. OrderContext 종류 필터. 허용 값: MmContext, HedgeContext,
+    ///      QuoteContext, PairContext, FutureLpContext, FutureLpHedgeContext.
+    ///      여러 번 지정 시 OR.
     ///
     /// Examples
     /// * filter=fund_code="0159"
     /// * filter=symbol:"7526"
     /// * filter=exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
     /// * filter=fund_code="0159" AND exchange_time>="2026-06-02T00:00:00Z" AND exchange_time<"2026-06-03T00:00:00Z"
+    /// * filter=user_area=MmContext
     #[prost(string, tag="1")]
     pub filter: ::prost::alloc::string::String,
 }
