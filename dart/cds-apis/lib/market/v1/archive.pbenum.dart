@@ -74,6 +74,9 @@ class Interval extends $pb.ProtobufEnum {
   static const Interval INTERVAL_1H = Interval._(9, _omitEnumNames ? '' : 'INTERVAL_1H');
   static const Interval INTERVAL_4H = Interval._(10, _omitEnumNames ? '' : 'INTERVAL_4H');
   static const Interval INTERVAL_1D = Interval._(11, _omitEnumNames ? '' : 'INTERVAL_1D');
+  static const Interval INTERVAL_10MS = Interval._(12, _omitEnumNames ? '' : 'INTERVAL_10MS');
+  static const Interval INTERVAL_100MS = Interval._(13, _omitEnumNames ? '' : 'INTERVAL_100MS');
+  static const Interval INTERVAL_500MS = Interval._(14, _omitEnumNames ? '' : 'INTERVAL_500MS');
 
   static const $core.List<Interval> values = <Interval> [
     INTERVAL_UNKNOWN,
@@ -88,9 +91,12 @@ class Interval extends $pb.ProtobufEnum {
     INTERVAL_1H,
     INTERVAL_4H,
     INTERVAL_1D,
+    INTERVAL_10MS,
+    INTERVAL_100MS,
+    INTERVAL_500MS,
   ];
 
-  static final $core.List<Interval?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 11);
+  static final $core.List<Interval?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 14);
   static Interval? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const Interval._(super.value, super.name);

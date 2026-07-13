@@ -66,6 +66,9 @@ const Interval$json = {
     {'1': 'INTERVAL_1H', '2': 9},
     {'1': 'INTERVAL_4H', '2': 10},
     {'1': 'INTERVAL_1D', '2': 11},
+    {'1': 'INTERVAL_10MS', '2': 12},
+    {'1': 'INTERVAL_100MS', '2': 13},
+    {'1': 'INTERVAL_500MS', '2': 14},
   ],
 };
 
@@ -75,7 +78,8 @@ final $typed_data.Uint8List intervalDescriptor = $convert.base64Decode(
     'RFUlZBTF81UxACEhAKDElOVEVSVkFMXzEwUxADEhAKDElOVEVSVkFMXzMwUxAEEg8KC0lOVEVS'
     'VkFMXzFNEAUSDwoLSU5URVJWQUxfNU0QBhIQCgxJTlRFUlZBTF8xNU0QBxIQCgxJTlRFUlZBTF'
     '8zME0QCBIPCgtJTlRFUlZBTF8xSBAJEg8KC0lOVEVSVkFMXzRIEAoSDwoLSU5URVJWQUxfMUQQ'
-    'Cw==');
+    'CxIRCg1JTlRFUlZBTF8xME1TEAwSEgoOSU5URVJWQUxfMTAwTVMQDRISCg5JTlRFUlZBTF81MD'
+    'BNUxAO');
 
 @$core.Deprecated('Use marketTypeDescriptor instead')
 const MarketType$json = {

@@ -267,10 +267,13 @@
         "INTERVAL_30M",
         "INTERVAL_1H",
         "INTERVAL_4H",
-        "INTERVAL_1D"
+        "INTERVAL_1D",
+        "INTERVAL_10MS",
+        "INTERVAL_100MS",
+        "INTERVAL_500MS"
       ],
       "default": "INTERVAL_UNKNOWN",
-      "description": "- INTERVAL_1S: 1초\n - INTERVAL_5S: 5초\n - INTERVAL_10S: 10초\n - INTERVAL_30S: 30초\n - INTERVAL_1M: 1분\n - INTERVAL_5M: 5분\n - INTERVAL_15M: 15분\n - INTERVAL_30M: 30분\n - INTERVAL_1H: 1시간\n - INTERVAL_4H: 4시간\n - INTERVAL_1D: 1일",
+      "description": "- INTERVAL_1S: 1초\n - INTERVAL_5S: 5초\n - INTERVAL_10S: 10초\n - INTERVAL_30S: 30초\n - INTERVAL_1M: 1분\n - INTERVAL_5M: 5분\n - INTERVAL_15M: 15분\n - INTERVAL_30M: 30분\n - INTERVAL_1H: 1시간\n - INTERVAL_4H: 4시간\n - INTERVAL_1D: 1일\n - INTERVAL_10MS: 10밀리초\n - INTERVAL_100MS: 100밀리초\n - INTERVAL_500MS: 500밀리초",
       "title": "OHLC 간격"
     },
     "archiveListSymbolsResponse": {

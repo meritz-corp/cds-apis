@@ -2505,6 +2505,9 @@ impl serde::Serialize for Interval {
             Self::Interval1h => "INTERVAL_1H",
             Self::Interval4h => "INTERVAL_4H",
             Self::Interval1d => "INTERVAL_1D",
+            Self::Interval10ms => "INTERVAL_10MS",
+            Self::Interval100ms => "INTERVAL_100MS",
+            Self::Interval500ms => "INTERVAL_500MS",
         };
         serializer.serialize_str(variant)
     }
@@ -2528,6 +2531,9 @@ impl<'de> serde::Deserialize<'de> for Interval {
             "INTERVAL_1H",
             "INTERVAL_4H",
             "INTERVAL_1D",
+            "INTERVAL_10MS",
+            "INTERVAL_100MS",
+            "INTERVAL_500MS",
         ];
 
         struct GeneratedVisitor;
@@ -2580,6 +2586,9 @@ impl<'de> serde::Deserialize<'de> for Interval {
                     "INTERVAL_1H" => Ok(Interval::Interval1h),
                     "INTERVAL_4H" => Ok(Interval::Interval4h),
                     "INTERVAL_1D" => Ok(Interval::Interval1d),
+                    "INTERVAL_10MS" => Ok(Interval::Interval10ms),
+                    "INTERVAL_100MS" => Ok(Interval::Interval100ms),
+                    "INTERVAL_500MS" => Ok(Interval::Interval500ms),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

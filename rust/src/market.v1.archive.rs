@@ -472,6 +472,12 @@ pub enum Interval {
     Interval4h = 10,
     /// 1일
     Interval1d = 11,
+    /// 10밀리초
+    Interval10ms = 12,
+    /// 100밀리초
+    Interval100ms = 13,
+    /// 500밀리초
+    Interval500ms = 14,
 }
 impl Interval {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -492,6 +498,9 @@ impl Interval {
             Interval::Interval1h => "INTERVAL_1H",
             Interval::Interval4h => "INTERVAL_4H",
             Interval::Interval1d => "INTERVAL_1D",
+            Interval::Interval10ms => "INTERVAL_10MS",
+            Interval::Interval100ms => "INTERVAL_100MS",
+            Interval::Interval500ms => "INTERVAL_500MS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -509,6 +518,9 @@ impl Interval {
             "INTERVAL_1H" => Some(Self::Interval1h),
             "INTERVAL_4H" => Some(Self::Interval4h),
             "INTERVAL_1D" => Some(Self::Interval1d),
+            "INTERVAL_10MS" => Some(Self::Interval10ms),
+            "INTERVAL_100MS" => Some(Self::Interval100ms),
+            "INTERVAL_500MS" => Some(Self::Interval500ms),
             _ => None,
         }
     }
