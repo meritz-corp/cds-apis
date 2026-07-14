@@ -746,6 +746,83 @@ impl<'de> serde::Deserialize<'de> for HedgePairDetail {
         deserializer.deserialize_struct("kdo.v1.order_log.HedgePairDetail", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for LastAskBidTpCode {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "LAST_ASK_BID_TP_CODE_UNSPECIFIED",
+            Self::Take => "TAKE",
+            Self::Make => "MAKE",
+            Self::SinglePrice => "SINGLE_PRICE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for LastAskBidTpCode {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "LAST_ASK_BID_TP_CODE_UNSPECIFIED",
+            "TAKE",
+            "MAKE",
+            "SINGLE_PRICE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LastAskBidTpCode;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "LAST_ASK_BID_TP_CODE_UNSPECIFIED" => Ok(LastAskBidTpCode::Unspecified),
+                    "TAKE" => Ok(LastAskBidTpCode::Take),
+                    "MAKE" => Ok(LastAskBidTpCode::Make),
+                    "SINGLE_PRICE" => Ok(LastAskBidTpCode::SinglePrice),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for LegFillSummary {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1572,6 +1649,12 @@ impl serde::Serialize for OrderLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLog", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1654,6 +1737,16 @@ impl serde::Serialize for OrderLog {
         if let Some(v) = self.user_area.as_ref() {
             struct_ser.serialize_field("user_area", v)?;
         }
+        if let Some(v) = self.last_ask_bid_tp_code.as_ref() {
+            let v = LastAskBidTpCode::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("last_ask_bid_tp_code", &v)?;
+        }
+        if true {
+            let v = super::hedge::OrderTpCode::try_from(self.tp_code)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.tp_code)))?;
+            struct_ser.serialize_field("tp_code", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1700,6 +1793,10 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "date",
             "user_area",
             "userArea",
+            "last_ask_bid_tp_code",
+            "lastAskBidTpCode",
+            "tp_code",
+            "tpCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1725,6 +1822,8 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             MarketType,
             Date,
             UserArea,
+            LastAskBidTpCode,
+            TpCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1768,6 +1867,8 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "marketType" | "market_type" => Ok(GeneratedField::MarketType),
                             "date" => Ok(GeneratedField::Date),
                             "userArea" | "user_area" => Ok(GeneratedField::UserArea),
+                            "lastAskBidTpCode" | "last_ask_bid_tp_code" => Ok(GeneratedField::LastAskBidTpCode),
+                            "tpCode" | "tp_code" => Ok(GeneratedField::TpCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1808,6 +1909,8 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut market_type__ = None;
                 let mut date__ = None;
                 let mut user_area__ = None;
+                let mut last_ask_bid_tp_code__ = None;
+                let mut tp_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -1948,6 +2051,18 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             user_area__ = map_.next_value()?;
                         }
+                        GeneratedField::LastAskBidTpCode => {
+                            if last_ask_bid_tp_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastAskBidTpCode"));
+                            }
+                            last_ask_bid_tp_code__ = map_.next_value::<::std::option::Option<LastAskBidTpCode>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::TpCode => {
+                            if tp_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tpCode"));
+                            }
+                            tp_code__ = Some(map_.next_value::<super::hedge::OrderTpCode>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1975,6 +2090,8 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     market_type: market_type__.unwrap_or_default(),
                     date: date__.unwrap_or_default(),
                     user_area: user_area__,
+                    last_ask_bid_tp_code: last_ask_bid_tp_code__,
+                    tp_code: tp_code__.unwrap_or_default(),
                 })
             }
         }

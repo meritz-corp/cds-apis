@@ -74,6 +74,12 @@ pub struct OrderLog {
     /// 사용자 영역 (JSON: QuoteContext 또는 HedgeContext)
     #[prost(string, optional, tag="21")]
     pub user_area: ::core::option::Option<::prost::alloc::string::String>,
+    /// 매수도체결구분 (Take/Make/단일가). Filled 로그가 아닌 경우 없을 수 있음
+    #[prost(enumeration="LastAskBidTpCode", optional, tag="23")]
+    pub last_ask_bid_tp_code: ::core::option::Option<i32>,
+    /// LP 구분
+    #[prost(enumeration="super::hedge::OrderTpCode", tag="24")]
+    pub tp_code: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -456,6 +462,40 @@ impl OrderType {
             "NEW" => Some(Self::New),
             "AMEND" => Some(Self::Amend),
             "CANCEL" => Some(Self::Cancel),
+            _ => None,
+        }
+    }
+}
+/// 매수도체결구분 (make/take)
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum LastAskBidTpCode {
+    Unspecified = 0,
+    Take = 1,
+    Make = 2,
+    /// 단일가(동시호가/시가·종가/VI/시간외) 체결
+    SinglePrice = 3,
+}
+impl LastAskBidTpCode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            LastAskBidTpCode::Unspecified => "LAST_ASK_BID_TP_CODE_UNSPECIFIED",
+            LastAskBidTpCode::Take => "TAKE",
+            LastAskBidTpCode::Make => "MAKE",
+            LastAskBidTpCode::SinglePrice => "SINGLE_PRICE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "LAST_ASK_BID_TP_CODE_UNSPECIFIED" => Some(Self::Unspecified),
+            "TAKE" => Some(Self::Take),
+            "MAKE" => Some(Self::Make),
+            "SINGLE_PRICE" => Some(Self::SinglePrice),
             _ => None,
         }
     }

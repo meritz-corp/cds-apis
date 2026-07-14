@@ -10,6 +10,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "kdo/v1/common.proto";
+import "kdo/v1/hedge.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -162,6 +163,12 @@ message OrderLog {
   optional string user_area = 21;
 
   reserved 22;
+
+  // 매수도체결구분 (Take/Make/단일가). Filled 로그가 아닌 경우 없을 수 있음
+  optional LastAskBidTpCode last_ask_bid_tp_code = 23;
+
+  // LP 구분
+  kdo.v1.hedge.OrderTpCode tp_code = 24;
 }
 
 // 주문 로그 타입
@@ -195,6 +202,14 @@ enum OrderType {
   NEW = 1; // 신규
   AMEND = 2; // 정정
   CANCEL = 3; // 취소
+}
+
+// 매수도체결구분 (make/take)
+enum LastAskBidTpCode {
+  LAST_ASK_BID_TP_CODE_UNSPECIFIED = 0;
+  TAKE = 1;
+  MAKE = 2;
+  SINGLE_PRICE = 3; // 단일가(동시호가/시가·종가/VI/시간외) 체결
 }
 
 

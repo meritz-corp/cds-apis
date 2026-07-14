@@ -17,6 +17,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $1;
 import 'common.pbenum.dart' as $2;
+import 'hedge.pbenum.dart' as $3;
 import 'order_log.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -47,6 +48,8 @@ class OrderLog extends $pb.GeneratedMessage {
     $2.MarketType? marketType,
     $core.int? date,
     $core.String? userArea,
+    LastAskBidTpCode? lastAskBidTpCode,
+    $3.OrderTpCode? tpCode,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -70,6 +73,8 @@ class OrderLog extends $pb.GeneratedMessage {
     if (marketType != null) result.marketType = marketType;
     if (date != null) result.date = date;
     if (userArea != null) result.userArea = userArea;
+    if (lastAskBidTpCode != null) result.lastAskBidTpCode = lastAskBidTpCode;
+    if (tpCode != null) result.tpCode = tpCode;
     return result;
   }
 
@@ -100,6 +105,8 @@ class OrderLog extends $pb.GeneratedMessage {
     ..e<$2.MarketType>(19, _omitFieldNames ? '' : 'marketType', $pb.PbFieldType.OE, defaultOrMaker: $2.MarketType.MARKET_TYPE_UNSPECIFIED, valueOf: $2.MarketType.valueOf, enumValues: $2.MarketType.values)
     ..a<$core.int>(20, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
     ..aOS(21, _omitFieldNames ? '' : 'userArea')
+    ..e<LastAskBidTpCode>(23, _omitFieldNames ? '' : 'lastAskBidTpCode', $pb.PbFieldType.OE, defaultOrMaker: LastAskBidTpCode.LAST_ASK_BID_TP_CODE_UNSPECIFIED, valueOf: LastAskBidTpCode.valueOf, enumValues: LastAskBidTpCode.values)
+    ..e<$3.OrderTpCode>(24, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: $3.OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: $3.OrderTpCode.valueOf, enumValues: $3.OrderTpCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -338,6 +345,26 @@ class OrderLog extends $pb.GeneratedMessage {
   $core.bool hasUserArea() => $_has(20);
   @$pb.TagNumber(21)
   void clearUserArea() => $_clearField(21);
+
+  /// 매수도체결구분 (Take/Make/단일가). Filled 로그가 아닌 경우 없을 수 있음
+  @$pb.TagNumber(23)
+  LastAskBidTpCode get lastAskBidTpCode => $_getN(21);
+  @$pb.TagNumber(23)
+  set lastAskBidTpCode(LastAskBidTpCode value) => $_setField(23, value);
+  @$pb.TagNumber(23)
+  $core.bool hasLastAskBidTpCode() => $_has(21);
+  @$pb.TagNumber(23)
+  void clearLastAskBidTpCode() => $_clearField(23);
+
+  /// LP 구분
+  @$pb.TagNumber(24)
+  $3.OrderTpCode get tpCode => $_getN(22);
+  @$pb.TagNumber(24)
+  set tpCode($3.OrderTpCode value) => $_setField(24, value);
+  @$pb.TagNumber(24)
+  $core.bool hasTpCode() => $_has(22);
+  @$pb.TagNumber(24)
+  void clearTpCode() => $_clearField(24);
 }
 
 class OrderLogFillStatistics extends $pb.GeneratedMessage {

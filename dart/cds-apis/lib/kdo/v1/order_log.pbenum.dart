@@ -65,5 +65,25 @@ class OrderType extends $pb.ProtobufEnum {
   const OrderType._(super.value, super.name);
 }
 
+/// 매수도체결구분 (make/take)
+class LastAskBidTpCode extends $pb.ProtobufEnum {
+  static const LastAskBidTpCode LAST_ASK_BID_TP_CODE_UNSPECIFIED = LastAskBidTpCode._(0, _omitEnumNames ? '' : 'LAST_ASK_BID_TP_CODE_UNSPECIFIED');
+  static const LastAskBidTpCode TAKE = LastAskBidTpCode._(1, _omitEnumNames ? '' : 'TAKE');
+  static const LastAskBidTpCode MAKE = LastAskBidTpCode._(2, _omitEnumNames ? '' : 'MAKE');
+  static const LastAskBidTpCode SINGLE_PRICE = LastAskBidTpCode._(3, _omitEnumNames ? '' : 'SINGLE_PRICE');
+
+  static const $core.List<LastAskBidTpCode> values = <LastAskBidTpCode> [
+    LAST_ASK_BID_TP_CODE_UNSPECIFIED,
+    TAKE,
+    MAKE,
+    SINGLE_PRICE,
+  ];
+
+  static final $core.List<LastAskBidTpCode?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static LastAskBidTpCode? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const LastAskBidTpCode._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

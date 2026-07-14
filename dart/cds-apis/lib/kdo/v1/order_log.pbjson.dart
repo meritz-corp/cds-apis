@@ -49,6 +49,22 @@ final $typed_data.Uint8List orderTypeDescriptor = $convert.base64Decode(
     'CglPcmRlclR5cGUSGgoWT1JERVJfVFlQRV9VTlNQRUNJRklFRBAAEgcKA05FVxABEgkKBUFNRU'
     '5EEAISCgoGQ0FOQ0VMEAM=');
 
+@$core.Deprecated('Use lastAskBidTpCodeDescriptor instead')
+const LastAskBidTpCode$json = {
+  '1': 'LastAskBidTpCode',
+  '2': [
+    {'1': 'LAST_ASK_BID_TP_CODE_UNSPECIFIED', '2': 0},
+    {'1': 'TAKE', '2': 1},
+    {'1': 'MAKE', '2': 2},
+    {'1': 'SINGLE_PRICE', '2': 3},
+  ],
+};
+
+/// Descriptor for `LastAskBidTpCode`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List lastAskBidTpCodeDescriptor = $convert.base64Decode(
+    'ChBMYXN0QXNrQmlkVHBDb2RlEiQKIExBU1RfQVNLX0JJRF9UUF9DT0RFX1VOU1BFQ0lGSUVEEA'
+    'ASCAoEVEFLRRABEggKBE1BS0UQAhIQCgxTSU5HTEVfUFJJQ0UQAw==');
+
 @$core.Deprecated('Use orderLogDescriptor instead')
 const OrderLog$json = {
   '1': 'OrderLog',
@@ -74,6 +90,8 @@ const OrderLog$json = {
     {'1': 'market_type', '3': 19, '4': 1, '5': 14, '6': '.kdo.v1.common.MarketType', '10': 'marketType'},
     {'1': 'date', '3': 20, '4': 1, '5': 13, '10': 'date'},
     {'1': 'user_area', '3': 21, '4': 1, '5': 9, '9': 6, '10': 'userArea', '17': true},
+    {'1': 'last_ask_bid_tp_code', '3': 23, '4': 1, '5': 14, '6': '.kdo.v1.order_log.LastAskBidTpCode', '9': 7, '10': 'lastAskBidTpCode', '17': true},
+    {'1': 'tp_code', '3': 24, '4': 1, '5': 14, '6': '.kdo.v1.hedge.OrderTpCode', '10': 'tpCode'},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -83,6 +101,7 @@ const OrderLog$json = {
     {'1': '_rejection_code'},
     {'1': '_error_message'},
     {'1': '_user_area'},
+    {'1': '_last_ask_bid_tp_code'},
   ],
   '9': [
     {'1': 22, '2': 23},
@@ -105,10 +124,13 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'hjaGFuZ2VUaW1lEiEKDHJlY2VpdmVfdGltZRgRIAEoBFILcmVjZWl2ZVRpbWUSOQoKY3JlYXRl'
     'ZF9hdBgSIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWNyZWF0ZWRBdBI6CgttYX'
     'JrZXRfdHlwZRgTIAEoDjIZLmtkby52MS5jb21tb24uTWFya2V0VHlwZVIKbWFya2V0VHlwZRIS'
-    'CgRkYXRlGBQgASgNUgRkYXRlEiAKCXVzZXJfYXJlYRgVIAEoCUgGUgh1c2VyQXJlYYgBAUIUCh'
-    'Jfb3JpZ2luYWxfb3JkZXJfaWRCDwoNX2ZpbGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5'
-    'QhAKDl9maWxsZWRfYW1vdW50QhEKD19yZWplY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZU'
-    'IMCgpfdXNlcl9hcmVhSgQIFhAX');
+    'CgRkYXRlGBQgASgNUgRkYXRlEiAKCXVzZXJfYXJlYRgVIAEoCUgGUgh1c2VyQXJlYYgBARJXCh'
+    'RsYXN0X2Fza19iaWRfdHBfY29kZRgXIAEoDjIiLmtkby52MS5vcmRlcl9sb2cuTGFzdEFza0Jp'
+    'ZFRwQ29kZUgHUhBsYXN0QXNrQmlkVHBDb2RliAEBEjIKB3RwX2NvZGUYGCABKA4yGS5rZG8udj'
+    'EuaGVkZ2UuT3JkZXJUcENvZGVSBnRwQ29kZUIUChJfb3JpZ2luYWxfb3JkZXJfaWRCDwoNX2Zp'
+    'bGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5QhAKDl9maWxsZWRfYW1vdW50QhEKD19yZW'
+    'plY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZUIMCgpfdXNlcl9hcmVhQhcKFV9sYXN0X2Fz'
+    'a19iaWRfdHBfY29kZUoECBYQFw==');
 
 @$core.Deprecated('Use orderLogFillStatisticsDescriptor instead')
 const OrderLogFillStatistics$json = {

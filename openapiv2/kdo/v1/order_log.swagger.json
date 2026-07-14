@@ -548,6 +548,17 @@
       "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
       "title": "주문 방향"
     },
+    "hedgeOrderTpCode": {
+      "type": "string",
+      "enum": [
+        "ORDER_TP_CODE_UNSPECIFIED",
+        "ORDER_TP_CODE_NONE",
+        "ORDER_TP_CODE_LP"
+      ],
+      "default": "ORDER_TP_CODE_UNSPECIFIED",
+      "description": "- ORDER_TP_CODE_UNSPECIFIED: 미지정 (도메인에서 None으로 매핑)\n - ORDER_TP_CODE_NONE: 일반 주문\n - ORDER_TP_CODE_LP: LP 주문",
+      "title": "헷지 주문 TP 코드 (호가 구분)"
+    },
     "order_logGetOrderChainResponse": {
       "type": "object",
       "properties": {
@@ -620,6 +631,18 @@
         }
       },
       "title": "헷지 쌍 상세 정보"
+    },
+    "order_logLastAskBidTpCode": {
+      "type": "string",
+      "enum": [
+        "LAST_ASK_BID_TP_CODE_UNSPECIFIED",
+        "TAKE",
+        "MAKE",
+        "SINGLE_PRICE"
+      ],
+      "default": "LAST_ASK_BID_TP_CODE_UNSPECIFIED",
+      "description": "- SINGLE_PRICE: 단일가(동시호가/시가·종가/VI/시간외) 체결",
+      "title": "매수도체결구분 (make/take)"
     },
     "order_logLegFillSummary": {
       "type": "object",
@@ -766,6 +789,14 @@
         "userArea": {
           "type": "string",
           "title": "사용자 영역 (JSON: QuoteContext 또는 HedgeContext)"
+        },
+        "lastAskBidTpCode": {
+          "$ref": "#/definitions/order_logLastAskBidTpCode",
+          "title": "매수도체결구분 (Take/Make/단일가). Filled 로그가 아닌 경우 없을 수 있음"
+        },
+        "tpCode": {
+          "$ref": "#/definitions/hedgeOrderTpCode",
+          "title": "LP 구분"
         }
       },
       "title": "주문 로그"
