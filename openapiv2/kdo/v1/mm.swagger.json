@@ -419,6 +419,180 @@
         ]
       }
     },
+    "/v1/mm/{symbol}/presets": {
+      "get": {
+        "summary": "심볼의 저장된 프리셋 목록 조회",
+        "operationId": "MarketMakingService_ListMmPresets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmListMmPresetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}/presets/{name}": {
+      "delete": {
+        "summary": "저장된 프리셋 삭제",
+        "operationId": "MarketMakingService_DeleteMmPreset",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmDeleteMmPresetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "name",
+            "description": "삭제할 프리셋 이름",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}/presets/{name}:apply": {
+      "post": {
+        "summary": "저장된 프리셋을 심볼의 라이브 설정으로 불러와 적용. 적용된 라이브 설정을 반환.",
+        "operationId": "MarketMakingService_ApplyMmPreset",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMarketMaking"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "name",
+            "description": "적용할 프리셋 이름",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "ApplyMmPreset — 프리셋을 심볼 라이브 설정으로 적용"
+            }
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
+    "/v1/mm/{symbol}/presets/{name}:save": {
+      "post": {
+        "summary": "현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.",
+        "operationId": "MarketMakingService_SaveMmPreset",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmMmPreset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "name",
+            "description": "프리셋 이름",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장"
+            }
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
     "/v1/mm/{symbol}:fitToMarket": {
       "post": {
         "summary": "Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정",
@@ -644,6 +818,15 @@
       },
       "title": "ConstituentMomentum 런타임 상태"
     },
+    "mmDeleteMmPresetResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "메시지"
+        }
+      }
+    },
     "mmExposureBalancerState": {
       "type": "object",
       "properties": {
@@ -720,6 +903,18 @@
             "$ref": "#/definitions/mmMmPnlPoint"
           },
           "title": "손익 시계열 포인트 목록"
+        }
+      }
+    },
+    "mmListMmPresetsResponse": {
+      "type": "object",
+      "properties": {
+        "presets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mmMmPreset"
+          },
+          "title": "저장된 프리셋 목록"
         }
       }
     },
@@ -1248,6 +1443,29 @@
         }
       },
       "title": "손익 시계열 포인트 (버킷 마지막 값)"
+    },
+    "mmMmPreset": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "name": {
+          "type": "string",
+          "title": "프리셋 이름"
+        },
+        "config": {
+          "$ref": "#/definitions/mmMarketMakingConfiguration",
+          "title": "저장된 MM 설정"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "마지막 저장 시각 (unix epoch seconds)"
+        }
+      },
+      "title": "심볼별 이름있는 MM 설정 프리셋 (튜닝된 설정 스냅샷)"
     },
     "mmMmStateUpdate": {
       "type": "object",

@@ -759,6 +759,82 @@ pub struct FitToMarketResponse {
     pub message: ::prost::alloc::string::String,
 }
 // ============================================================================
+// MM 설정 프리셋 (심볼별 이름있는 설정 스냅샷)
+// ============================================================================
+
+/// 심볼별 이름있는 MM 설정 프리셋 (튜닝된 설정 스냅샷)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MmPreset {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 프리셋 이름
+    #[prost(string, tag="2")]
+    pub name: ::prost::alloc::string::String,
+    /// 저장된 MM 설정
+    #[prost(message, optional, tag="3")]
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
+    /// 마지막 저장 시각 (unix epoch seconds)
+    #[prost(int64, tag="4")]
+    pub update_time: i64,
+}
+/// SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SaveMmPresetRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 프리셋 이름
+    #[prost(string, tag="2")]
+    pub name: ::prost::alloc::string::String,
+}
+/// ListMmPresets — 심볼의 저장된 프리셋 목록
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmPresetsRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmPresetsResponse {
+    /// 저장된 프리셋 목록
+    #[prost(message, repeated, tag="1")]
+    pub presets: ::prost::alloc::vec::Vec<MmPreset>,
+}
+/// ApplyMmPreset — 프리셋을 심볼 라이브 설정으로 적용
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ApplyMmPresetRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 적용할 프리셋 이름
+    #[prost(string, tag="2")]
+    pub name: ::prost::alloc::string::String,
+}
+/// DeleteMmPreset — 프리셋 삭제
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteMmPresetRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 삭제할 프리셋 이름
+    #[prost(string, tag="2")]
+    pub name: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteMmPresetResponse {
+    /// 메시지
+    #[prost(string, tag="1")]
+    pub message: ::prost::alloc::string::String,
+}
+// ============================================================================
 // Enums
 // ============================================================================
 

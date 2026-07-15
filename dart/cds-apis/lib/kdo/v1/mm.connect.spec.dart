@@ -108,4 +108,36 @@ abstract final class MarketMakingService {
     kdov1mm.FitToMarketRequest.new,
     kdov1mm.FitToMarketResponse.new,
   );
+
+  /// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
+  static const saveMmPreset = connect.Spec(
+    '/$name/SaveMmPreset',
+    connect.StreamType.unary,
+    kdov1mm.SaveMmPresetRequest.new,
+    kdov1mm.MmPreset.new,
+  );
+
+  /// 심볼의 저장된 프리셋 목록 조회
+  static const listMmPresets = connect.Spec(
+    '/$name/ListMmPresets',
+    connect.StreamType.unary,
+    kdov1mm.ListMmPresetsRequest.new,
+    kdov1mm.ListMmPresetsResponse.new,
+  );
+
+  /// 저장된 프리셋을 심볼의 라이브 설정으로 불러와 적용. 적용된 라이브 설정을 반환.
+  static const applyMmPreset = connect.Spec(
+    '/$name/ApplyMmPreset',
+    connect.StreamType.unary,
+    kdov1mm.ApplyMmPresetRequest.new,
+    kdov1mm.MarketMaking.new,
+  );
+
+  /// 저장된 프리셋 삭제
+  static const deleteMmPreset = connect.Spec(
+    '/$name/DeleteMmPreset',
+    connect.StreamType.unary,
+    kdov1mm.DeleteMmPresetRequest.new,
+    kdov1mm.DeleteMmPresetResponse.new,
+  );
 }

@@ -112,6 +112,39 @@ service MarketMakingService {
     };
   }
 
+  // ===== 설정 프리셋 (심볼별 이름있는 설정 스냅샷) =====
+
+  // 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
+  rpc SaveMmPreset(SaveMmPresetRequest) returns (MmPreset) {
+    option (google.api.http) = {
+      post: "/v1/mm/{symbol=*}/presets/{name=*}:save"
+      body: "*"
+    };
+  }
+
+  // 심볼의 저장된 프리셋 목록 조회
+  rpc ListMmPresets(ListMmPresetsRequest) returns (ListMmPresetsResponse) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/presets"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
+  // 저장된 프리셋을 심볼의 라이브 설정으로 불러와 적용. 적용된 라이브 설정을 반환.
+  rpc ApplyMmPreset(ApplyMmPresetRequest) returns (MarketMaking) {
+    option (google.api.http) = {
+      post: "/v1/mm/{symbol=*}/presets/{name=*}:apply"
+      body: "*"
+    };
+  }
+
+  // 저장된 프리셋 삭제
+  rpc DeleteMmPreset(DeleteMmPresetRequest) returns (DeleteMmPresetResponse) {
+    option (google.api.http) = {
+      delete: "/v1/mm/{symbol=*}/presets/{name=*}"
+    };
+  }
+
 }
 
 // ============================================================================
@@ -771,6 +804,68 @@ message FitToMarketRequest {
 }
 
 message FitToMarketResponse {
+  // 메시지
+  string message = 1;
+}
+
+// ============================================================================
+// MM 설정 프리셋 (심볼별 이름있는 설정 스냅샷)
+// ============================================================================
+
+// 심볼별 이름있는 MM 설정 프리셋 (튜닝된 설정 스냅샷)
+message MmPreset {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // 프리셋 이름
+  string name = 2;
+
+  // 저장된 MM 설정
+  MarketMakingConfiguration config = 3;
+
+  // 마지막 저장 시각 (unix epoch seconds)
+  int64 update_time = 4;
+}
+
+// SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
+message SaveMmPresetRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 프리셋 이름
+  string name = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// ListMmPresets — 심볼의 저장된 프리셋 목록
+message ListMmPresetsRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ListMmPresetsResponse {
+  // 저장된 프리셋 목록
+  repeated MmPreset presets = 1;
+}
+
+// ApplyMmPreset — 프리셋을 심볼 라이브 설정으로 적용
+message ApplyMmPresetRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 적용할 프리셋 이름
+  string name = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// DeleteMmPreset — 프리셋 삭제
+message DeleteMmPresetRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 삭제할 프리셋 이름
+  string name = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message DeleteMmPresetResponse {
   // 메시지
   string message = 1;
 }

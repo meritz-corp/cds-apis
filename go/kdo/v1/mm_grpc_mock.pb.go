@@ -761,6 +761,46 @@ func (m *MockMarketMakingServiceClient) EXPECT() *MockMarketMakingServiceClientM
 	return m.recorder
 }
 
+// ApplyMmPreset mocks base method.
+func (m *MockMarketMakingServiceClient) ApplyMmPreset(ctx context.Context, in *ApplyMmPresetRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ApplyMmPreset", varargs...)
+	ret0, _ := ret[0].(*MarketMaking)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ApplyMmPreset indicates an expected call of ApplyMmPreset.
+func (mr *MockMarketMakingServiceClientMockRecorder) ApplyMmPreset(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ApplyMmPreset", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ApplyMmPreset), varargs...)
+}
+
+// DeleteMmPreset mocks base method.
+func (m *MockMarketMakingServiceClient) DeleteMmPreset(ctx context.Context, in *DeleteMmPresetRequest, opts ...grpc.CallOption) (*DeleteMmPresetResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "DeleteMmPreset", varargs...)
+	ret0, _ := ret[0].(*DeleteMmPresetResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteMmPreset indicates an expected call of DeleteMmPreset.
+func (mr *MockMarketMakingServiceClientMockRecorder) DeleteMmPreset(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteMmPreset", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).DeleteMmPreset), varargs...)
+}
+
 // FitToMarket mocks base method.
 func (m *MockMarketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error) {
 	m.ctrl.T.Helper()
@@ -859,6 +899,46 @@ func (mr *MockMarketMakingServiceClientMockRecorder) ListMmPnlHistory(ctx, in in
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmPnlHistory", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ListMmPnlHistory), varargs...)
+}
+
+// ListMmPresets mocks base method.
+func (m *MockMarketMakingServiceClient) ListMmPresets(ctx context.Context, in *ListMmPresetsRequest, opts ...grpc.CallOption) (*ListMmPresetsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListMmPresets", varargs...)
+	ret0, _ := ret[0].(*ListMmPresetsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListMmPresets indicates an expected call of ListMmPresets.
+func (mr *MockMarketMakingServiceClientMockRecorder) ListMmPresets(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmPresets", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ListMmPresets), varargs...)
+}
+
+// SaveMmPreset mocks base method.
+func (m *MockMarketMakingServiceClient) SaveMmPreset(ctx context.Context, in *SaveMmPresetRequest, opts ...grpc.CallOption) (*MmPreset, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SaveMmPreset", varargs...)
+	ret0, _ := ret[0].(*MmPreset)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveMmPreset indicates an expected call of SaveMmPreset.
+func (mr *MockMarketMakingServiceClientMockRecorder) SaveMmPreset(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveMmPreset", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).SaveMmPreset), varargs...)
 }
 
 // StartMarketMaking mocks base method.
@@ -1024,6 +1104,36 @@ func (m *MockMarketMakingServiceServer) EXPECT() *MockMarketMakingServiceServerM
 	return m.recorder
 }
 
+// ApplyMmPreset mocks base method.
+func (m *MockMarketMakingServiceServer) ApplyMmPreset(ctx context.Context, in *ApplyMmPresetRequest) (*MarketMaking, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ApplyMmPreset", ctx, in)
+	ret0, _ := ret[0].(*MarketMaking)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ApplyMmPreset indicates an expected call of ApplyMmPreset.
+func (mr *MockMarketMakingServiceServerMockRecorder) ApplyMmPreset(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ApplyMmPreset", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ApplyMmPreset), ctx, in)
+}
+
+// DeleteMmPreset mocks base method.
+func (m *MockMarketMakingServiceServer) DeleteMmPreset(ctx context.Context, in *DeleteMmPresetRequest) (*DeleteMmPresetResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteMmPreset", ctx, in)
+	ret0, _ := ret[0].(*DeleteMmPresetResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteMmPreset indicates an expected call of DeleteMmPreset.
+func (mr *MockMarketMakingServiceServerMockRecorder) DeleteMmPreset(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteMmPreset", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).DeleteMmPreset), ctx, in)
+}
+
 // FitToMarket mocks base method.
 func (m *MockMarketMakingServiceServer) FitToMarket(ctx context.Context, in *FitToMarketRequest) (*FitToMarketResponse, error) {
 	m.ctrl.T.Helper()
@@ -1097,6 +1207,36 @@ func (m *MockMarketMakingServiceServer) ListMmPnlHistory(ctx context.Context, in
 func (mr *MockMarketMakingServiceServerMockRecorder) ListMmPnlHistory(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmPnlHistory", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ListMmPnlHistory), ctx, in)
+}
+
+// ListMmPresets mocks base method.
+func (m *MockMarketMakingServiceServer) ListMmPresets(ctx context.Context, in *ListMmPresetsRequest) (*ListMmPresetsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListMmPresets", ctx, in)
+	ret0, _ := ret[0].(*ListMmPresetsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListMmPresets indicates an expected call of ListMmPresets.
+func (mr *MockMarketMakingServiceServerMockRecorder) ListMmPresets(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmPresets", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ListMmPresets), ctx, in)
+}
+
+// SaveMmPreset mocks base method.
+func (m *MockMarketMakingServiceServer) SaveMmPreset(ctx context.Context, in *SaveMmPresetRequest) (*MmPreset, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveMmPreset", ctx, in)
+	ret0, _ := ret[0].(*MmPreset)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SaveMmPreset indicates an expected call of SaveMmPreset.
+func (mr *MockMarketMakingServiceServerMockRecorder) SaveMmPreset(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveMmPreset", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).SaveMmPreset), ctx, in)
 }
 
 // StartMarketMaking mocks base method.

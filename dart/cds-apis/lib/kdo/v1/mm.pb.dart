@@ -3832,6 +3832,414 @@ class FitToMarketResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(1);
 }
 
+/// 심볼별 이름있는 MM 설정 프리셋 (튜닝된 설정 스냅샷)
+class MmPreset extends $pb.GeneratedMessage {
+  factory MmPreset({
+    $core.String? symbol,
+    $core.String? name,
+    MarketMakingConfiguration? config,
+    $fixnum.Int64? updateTime,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (name != null) result.name = name;
+    if (config != null) result.config = config;
+    if (updateTime != null) result.updateTime = updateTime;
+    return result;
+  }
+
+  MmPreset._();
+
+  factory MmPreset.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmPreset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmPreset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOM<MarketMakingConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
+    ..aInt64(4, _omitFieldNames ? '' : 'updateTime')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmPreset clone() => MmPreset()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmPreset copyWith(void Function(MmPreset) updates) => super.copyWith((message) => updates(message as MmPreset)) as MmPreset;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmPreset create() => MmPreset._();
+  @$core.override
+  MmPreset createEmptyInstance() => create();
+  static $pb.PbList<MmPreset> createRepeated() => $pb.PbList<MmPreset>();
+  @$core.pragma('dart2js:noInline')
+  static MmPreset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmPreset>(create);
+  static MmPreset? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 프리셋 이름
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+
+  /// 저장된 MM 설정
+  @$pb.TagNumber(3)
+  MarketMakingConfiguration get config => $_getN(2);
+  @$pb.TagNumber(3)
+  set config(MarketMakingConfiguration value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasConfig() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearConfig() => $_clearField(3);
+  @$pb.TagNumber(3)
+  MarketMakingConfiguration ensureConfig() => $_ensure(2);
+
+  /// 마지막 저장 시각 (unix epoch seconds)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get updateTime => $_getI64(3);
+  @$pb.TagNumber(4)
+  set updateTime($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasUpdateTime() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUpdateTime() => $_clearField(4);
+}
+
+/// SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
+class SaveMmPresetRequest extends $pb.GeneratedMessage {
+  factory SaveMmPresetRequest({
+    $core.String? symbol,
+    $core.String? name,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  SaveMmPresetRequest._();
+
+  factory SaveMmPresetRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SaveMmPresetRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SaveMmPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SaveMmPresetRequest clone() => SaveMmPresetRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SaveMmPresetRequest copyWith(void Function(SaveMmPresetRequest) updates) => super.copyWith((message) => updates(message as SaveMmPresetRequest)) as SaveMmPresetRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SaveMmPresetRequest create() => SaveMmPresetRequest._();
+  @$core.override
+  SaveMmPresetRequest createEmptyInstance() => create();
+  static $pb.PbList<SaveMmPresetRequest> createRepeated() => $pb.PbList<SaveMmPresetRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SaveMmPresetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SaveMmPresetRequest>(create);
+  static SaveMmPresetRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 프리셋 이름
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+}
+
+/// ListMmPresets — 심볼의 저장된 프리셋 목록
+class ListMmPresetsRequest extends $pb.GeneratedMessage {
+  factory ListMmPresetsRequest({
+    $core.String? symbol,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    return result;
+  }
+
+  ListMmPresetsRequest._();
+
+  factory ListMmPresetsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmPresetsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmPresetsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPresetsRequest clone() => ListMmPresetsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPresetsRequest copyWith(void Function(ListMmPresetsRequest) updates) => super.copyWith((message) => updates(message as ListMmPresetsRequest)) as ListMmPresetsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmPresetsRequest create() => ListMmPresetsRequest._();
+  @$core.override
+  ListMmPresetsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListMmPresetsRequest> createRepeated() => $pb.PbList<ListMmPresetsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmPresetsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmPresetsRequest>(create);
+  static ListMmPresetsRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+}
+
+class ListMmPresetsResponse extends $pb.GeneratedMessage {
+  factory ListMmPresetsResponse({
+    $core.Iterable<MmPreset>? presets,
+  }) {
+    final result = create();
+    if (presets != null) result.presets.addAll(presets);
+    return result;
+  }
+
+  ListMmPresetsResponse._();
+
+  factory ListMmPresetsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmPresetsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmPresetsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..pc<MmPreset>(1, _omitFieldNames ? '' : 'presets', $pb.PbFieldType.PM, subBuilder: MmPreset.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPresetsResponse clone() => ListMmPresetsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmPresetsResponse copyWith(void Function(ListMmPresetsResponse) updates) => super.copyWith((message) => updates(message as ListMmPresetsResponse)) as ListMmPresetsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmPresetsResponse create() => ListMmPresetsResponse._();
+  @$core.override
+  ListMmPresetsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListMmPresetsResponse> createRepeated() => $pb.PbList<ListMmPresetsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmPresetsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmPresetsResponse>(create);
+  static ListMmPresetsResponse? _defaultInstance;
+
+  /// 저장된 프리셋 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<MmPreset> get presets => $_getList(0);
+}
+
+/// ApplyMmPreset — 프리셋을 심볼 라이브 설정으로 적용
+class ApplyMmPresetRequest extends $pb.GeneratedMessage {
+  factory ApplyMmPresetRequest({
+    $core.String? symbol,
+    $core.String? name,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  ApplyMmPresetRequest._();
+
+  factory ApplyMmPresetRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ApplyMmPresetRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ApplyMmPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyMmPresetRequest clone() => ApplyMmPresetRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ApplyMmPresetRequest copyWith(void Function(ApplyMmPresetRequest) updates) => super.copyWith((message) => updates(message as ApplyMmPresetRequest)) as ApplyMmPresetRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ApplyMmPresetRequest create() => ApplyMmPresetRequest._();
+  @$core.override
+  ApplyMmPresetRequest createEmptyInstance() => create();
+  static $pb.PbList<ApplyMmPresetRequest> createRepeated() => $pb.PbList<ApplyMmPresetRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ApplyMmPresetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ApplyMmPresetRequest>(create);
+  static ApplyMmPresetRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 적용할 프리셋 이름
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+}
+
+/// DeleteMmPreset — 프리셋 삭제
+class DeleteMmPresetRequest extends $pb.GeneratedMessage {
+  factory DeleteMmPresetRequest({
+    $core.String? symbol,
+    $core.String? name,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (name != null) result.name = name;
+    return result;
+  }
+
+  DeleteMmPresetRequest._();
+
+  factory DeleteMmPresetRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory DeleteMmPresetRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteMmPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMmPresetRequest clone() => DeleteMmPresetRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMmPresetRequest copyWith(void Function(DeleteMmPresetRequest) updates) => super.copyWith((message) => updates(message as DeleteMmPresetRequest)) as DeleteMmPresetRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteMmPresetRequest create() => DeleteMmPresetRequest._();
+  @$core.override
+  DeleteMmPresetRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteMmPresetRequest> createRepeated() => $pb.PbList<DeleteMmPresetRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteMmPresetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteMmPresetRequest>(create);
+  static DeleteMmPresetRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 삭제할 프리셋 이름
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+}
+
+class DeleteMmPresetResponse extends $pb.GeneratedMessage {
+  factory DeleteMmPresetResponse({
+    $core.String? message,
+  }) {
+    final result = create();
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  DeleteMmPresetResponse._();
+
+  factory DeleteMmPresetResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory DeleteMmPresetResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteMmPresetResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMmPresetResponse clone() => DeleteMmPresetResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  DeleteMmPresetResponse copyWith(void Function(DeleteMmPresetResponse) updates) => super.copyWith((message) => updates(message as DeleteMmPresetResponse)) as DeleteMmPresetResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteMmPresetResponse create() => DeleteMmPresetResponse._();
+  @$core.override
+  DeleteMmPresetResponse createEmptyInstance() => create();
+  static $pb.PbList<DeleteMmPresetResponse> createRepeated() => $pb.PbList<DeleteMmPresetResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteMmPresetResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteMmPresetResponse>(create);
+  static DeleteMmPresetResponse? _defaultInstance;
+
+  /// 메시지
+  @$pb.TagNumber(1)
+  $core.String get message => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set message($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMessage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMessage() => $_clearField(1);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

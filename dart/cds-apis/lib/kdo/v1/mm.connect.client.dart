@@ -226,4 +226,76 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
+  Future<kdov1mm.MmPreset> saveMmPreset(
+    kdov1mm.SaveMmPresetRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.saveMmPreset,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 심볼의 저장된 프리셋 목록 조회
+  Future<kdov1mm.ListMmPresetsResponse> listMmPresets(
+    kdov1mm.ListMmPresetsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.listMmPresets,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 저장된 프리셋을 심볼의 라이브 설정으로 불러와 적용. 적용된 라이브 설정을 반환.
+  Future<kdov1mm.MarketMaking> applyMmPreset(
+    kdov1mm.ApplyMmPresetRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.applyMmPreset,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 저장된 프리셋 삭제
+  Future<kdov1mm.DeleteMmPresetResponse> deleteMmPreset(
+    kdov1mm.DeleteMmPresetRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.deleteMmPreset,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

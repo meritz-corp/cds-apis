@@ -48,6 +48,14 @@ type MarketMakingServiceClient interface {
 	ListMmPnlHistory(ctx context.Context, in *ListMmPnlHistoryRequest, opts ...grpc.CallOption) (*ListMmPnlHistoryResponse, error)
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error)
+	// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
+	SaveMmPreset(ctx context.Context, in *SaveMmPresetRequest, opts ...grpc.CallOption) (*MmPreset, error)
+	// 심볼의 저장된 프리셋 목록 조회
+	ListMmPresets(ctx context.Context, in *ListMmPresetsRequest, opts ...grpc.CallOption) (*ListMmPresetsResponse, error)
+	// 저장된 프리셋을 심볼의 라이브 설정으로 불러와 적용. 적용된 라이브 설정을 반환.
+	ApplyMmPreset(ctx context.Context, in *ApplyMmPresetRequest, opts ...grpc.CallOption) (*MarketMaking, error)
+	// 저장된 프리셋 삭제
+	DeleteMmPreset(ctx context.Context, in *DeleteMmPresetRequest, opts ...grpc.CallOption) (*DeleteMmPresetResponse, error)
 }
 
 type marketMakingServiceClient struct {
@@ -235,6 +243,42 @@ func (c *marketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMa
 	return out, nil
 }
 
+func (c *marketMakingServiceClient) SaveMmPreset(ctx context.Context, in *SaveMmPresetRequest, opts ...grpc.CallOption) (*MmPreset, error) {
+	out := new(MmPreset)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/SaveMmPreset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *marketMakingServiceClient) ListMmPresets(ctx context.Context, in *ListMmPresetsRequest, opts ...grpc.CallOption) (*ListMmPresetsResponse, error) {
+	out := new(ListMmPresetsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ListMmPresets", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *marketMakingServiceClient) ApplyMmPreset(ctx context.Context, in *ApplyMmPresetRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
+	out := new(MarketMaking)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ApplyMmPreset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *marketMakingServiceClient) DeleteMmPreset(ctx context.Context, in *DeleteMmPresetRequest, opts ...grpc.CallOption) (*DeleteMmPresetResponse, error) {
+	out := new(DeleteMmPresetResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/DeleteMmPreset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MarketMakingServiceServer is the server API for MarketMakingService service.
 // All implementations must embed UnimplementedMarketMakingServiceServer
 // for forward compatibility
@@ -265,6 +309,14 @@ type MarketMakingServiceServer interface {
 	ListMmPnlHistory(context.Context, *ListMmPnlHistoryRequest) (*ListMmPnlHistoryResponse, error)
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error)
+	// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
+	SaveMmPreset(context.Context, *SaveMmPresetRequest) (*MmPreset, error)
+	// 심볼의 저장된 프리셋 목록 조회
+	ListMmPresets(context.Context, *ListMmPresetsRequest) (*ListMmPresetsResponse, error)
+	// 저장된 프리셋을 심볼의 라이브 설정으로 불러와 적용. 적용된 라이브 설정을 반환.
+	ApplyMmPreset(context.Context, *ApplyMmPresetRequest) (*MarketMaking, error)
+	// 저장된 프리셋 삭제
+	DeleteMmPreset(context.Context, *DeleteMmPresetRequest) (*DeleteMmPresetResponse, error)
 	mustEmbedUnimplementedMarketMakingServiceServer()
 }
 
@@ -307,6 +359,18 @@ func (UnimplementedMarketMakingServiceServer) ListMmPnlHistory(context.Context, 
 }
 func (UnimplementedMarketMakingServiceServer) FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FitToMarket not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) SaveMmPreset(context.Context, *SaveMmPresetRequest) (*MmPreset, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveMmPreset not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) ListMmPresets(context.Context, *ListMmPresetsRequest) (*ListMmPresetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMmPresets not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) ApplyMmPreset(context.Context, *ApplyMmPresetRequest) (*MarketMaking, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApplyMmPreset not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) DeleteMmPreset(context.Context, *DeleteMmPresetRequest) (*DeleteMmPresetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMmPreset not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) mustEmbedUnimplementedMarketMakingServiceServer() {}
 
@@ -546,6 +610,78 @@ func _MarketMakingService_FitToMarket_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MarketMakingService_SaveMmPreset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveMmPresetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).SaveMmPreset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/SaveMmPreset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).SaveMmPreset(ctx, req.(*SaveMmPresetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MarketMakingService_ListMmPresets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMmPresetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).ListMmPresets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ListMmPresets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).ListMmPresets(ctx, req.(*ListMmPresetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MarketMakingService_ApplyMmPreset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplyMmPresetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).ApplyMmPreset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ApplyMmPreset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).ApplyMmPreset(ctx, req.(*ApplyMmPresetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MarketMakingService_DeleteMmPreset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMmPresetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).DeleteMmPreset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/DeleteMmPreset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).DeleteMmPreset(ctx, req.(*DeleteMmPresetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MarketMakingService_ServiceDesc is the grpc.ServiceDesc for MarketMakingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -588,6 +724,22 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FitToMarket",
 			Handler:    _MarketMakingService_FitToMarket_Handler,
+		},
+		{
+			MethodName: "SaveMmPreset",
+			Handler:    _MarketMakingService_SaveMmPreset_Handler,
+		},
+		{
+			MethodName: "ListMmPresets",
+			Handler:    _MarketMakingService_ListMmPresets_Handler,
+		},
+		{
+			MethodName: "ApplyMmPreset",
+			Handler:    _MarketMakingService_ApplyMmPreset_Handler,
+		},
+		{
+			MethodName: "DeleteMmPreset",
+			Handler:    _MarketMakingService_DeleteMmPreset_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

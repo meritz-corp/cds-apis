@@ -878,3 +878,99 @@ const FitToMarketResponse$json = {
 final $typed_data.Uint8List fitToMarketResponseDescriptor = $convert.base64Decode(
     'ChNGaXRUb01hcmtldFJlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
 
+@$core.Deprecated('Use mmPresetDescriptor instead')
+const MmPreset$json = {
+  '1': 'MmPreset',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
+    {'1': 'update_time', '3': 4, '4': 1, '5': 3, '10': 'updateTime'},
+  ],
+};
+
+/// Descriptor for `MmPreset`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmPresetDescriptor = $convert.base64Decode(
+    'CghNbVByZXNldBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBISCgRuYW1lGAIgASgJUgRuYW1lEj'
+    'wKBmNvbmZpZxgDIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZj'
+    'b25maWcSHwoLdXBkYXRlX3RpbWUYBCABKANSCnVwZGF0ZVRpbWU=');
+
+@$core.Deprecated('Use saveMmPresetRequestDescriptor instead')
+const SaveMmPresetRequest$json = {
+  '1': 'SaveMmPresetRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `SaveMmPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List saveMmPresetRequestDescriptor = $convert.base64Decode(
+    'ChNTYXZlTW1QcmVzZXRSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEhgKBG'
+    '5hbWUYAiABKAlCBOJBAQJSBG5hbWU=');
+
+@$core.Deprecated('Use listMmPresetsRequestDescriptor instead')
+const ListMmPresetsRequest$json = {
+  '1': 'ListMmPresetsRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+  ],
+};
+
+/// Descriptor for `ListMmPresetsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmPresetsRequestDescriptor = $convert.base64Decode(
+    'ChRMaXN0TW1QcmVzZXRzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbA==');
+
+@$core.Deprecated('Use listMmPresetsResponseDescriptor instead')
+const ListMmPresetsResponse$json = {
+  '1': 'ListMmPresetsResponse',
+  '2': [
+    {'1': 'presets', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.mm.MmPreset', '10': 'presets'},
+  ],
+};
+
+/// Descriptor for `ListMmPresetsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmPresetsResponseDescriptor = $convert.base64Decode(
+    'ChVMaXN0TW1QcmVzZXRzUmVzcG9uc2USLQoHcHJlc2V0cxgBIAMoCzITLmtkby52MS5tbS5NbV'
+    'ByZXNldFIHcHJlc2V0cw==');
+
+@$core.Deprecated('Use applyMmPresetRequestDescriptor instead')
+const ApplyMmPresetRequest$json = {
+  '1': 'ApplyMmPresetRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `ApplyMmPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List applyMmPresetRequestDescriptor = $convert.base64Decode(
+    'ChRBcHBseU1tUHJlc2V0UmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbBIYCg'
+    'RuYW1lGAIgASgJQgTiQQECUgRuYW1l');
+
+@$core.Deprecated('Use deleteMmPresetRequestDescriptor instead')
+const DeleteMmPresetRequest$json = {
+  '1': 'DeleteMmPresetRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `DeleteMmPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteMmPresetRequestDescriptor = $convert.base64Decode(
+    'ChVEZWxldGVNbVByZXNldFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSGA'
+    'oEbmFtZRgCIAEoCUIE4kEBAlIEbmFtZQ==');
+
+@$core.Deprecated('Use deleteMmPresetResponseDescriptor instead')
+const DeleteMmPresetResponse$json = {
+  '1': 'DeleteMmPresetResponse',
+  '2': [
+    {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `DeleteMmPresetResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteMmPresetResponseDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVNbVByZXNldFJlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
+

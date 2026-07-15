@@ -95,6 +95,26 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$fitToMarket, request, options: options);
   }
 
+  /// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
+  $grpc.ResponseFuture<$0.MmPreset> saveMmPreset($0.SaveMmPresetRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$saveMmPreset, request, options: options);
+  }
+
+  /// 심볼의 저장된 프리셋 목록 조회
+  $grpc.ResponseFuture<$0.ListMmPresetsResponse> listMmPresets($0.ListMmPresetsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listMmPresets, request, options: options);
+  }
+
+  /// 저장된 프리셋을 심볼의 라이브 설정으로 불러와 적용. 적용된 라이브 설정을 반환.
+  $grpc.ResponseFuture<$0.MarketMaking> applyMmPreset($0.ApplyMmPresetRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$applyMmPreset, request, options: options);
+  }
+
+  /// 저장된 프리셋 삭제
+  $grpc.ResponseFuture<$0.DeleteMmPresetResponse> deleteMmPreset($0.DeleteMmPresetRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$deleteMmPreset, request, options: options);
+  }
+
     // method descriptors
 
   static final _$listMarketMaking = $grpc.ClientMethod<$0.ListMarketMakingRequest, $0.ListMarketMakingResponse>(
@@ -145,6 +165,22 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/FitToMarket',
       ($0.FitToMarketRequest value) => value.writeToBuffer(),
       $0.FitToMarketResponse.fromBuffer);
+  static final _$saveMmPreset = $grpc.ClientMethod<$0.SaveMmPresetRequest, $0.MmPreset>(
+      '/kdo.v1.mm.MarketMakingService/SaveMmPreset',
+      ($0.SaveMmPresetRequest value) => value.writeToBuffer(),
+      $0.MmPreset.fromBuffer);
+  static final _$listMmPresets = $grpc.ClientMethod<$0.ListMmPresetsRequest, $0.ListMmPresetsResponse>(
+      '/kdo.v1.mm.MarketMakingService/ListMmPresets',
+      ($0.ListMmPresetsRequest value) => value.writeToBuffer(),
+      $0.ListMmPresetsResponse.fromBuffer);
+  static final _$applyMmPreset = $grpc.ClientMethod<$0.ApplyMmPresetRequest, $0.MarketMaking>(
+      '/kdo.v1.mm.MarketMakingService/ApplyMmPreset',
+      ($0.ApplyMmPresetRequest value) => value.writeToBuffer(),
+      $0.MarketMaking.fromBuffer);
+  static final _$deleteMmPreset = $grpc.ClientMethod<$0.DeleteMmPresetRequest, $0.DeleteMmPresetResponse>(
+      '/kdo.v1.mm.MarketMakingService/DeleteMmPreset',
+      ($0.DeleteMmPresetRequest value) => value.writeToBuffer(),
+      $0.DeleteMmPresetResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
@@ -236,6 +272,34 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.FitToMarketRequest.fromBuffer(value),
         ($0.FitToMarketResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SaveMmPresetRequest, $0.MmPreset>(
+        'SaveMmPreset',
+        saveMmPreset_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SaveMmPresetRequest.fromBuffer(value),
+        ($0.MmPreset value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListMmPresetsRequest, $0.ListMmPresetsResponse>(
+        'ListMmPresets',
+        listMmPresets_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListMmPresetsRequest.fromBuffer(value),
+        ($0.ListMmPresetsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ApplyMmPresetRequest, $0.MarketMaking>(
+        'ApplyMmPreset',
+        applyMmPreset_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ApplyMmPresetRequest.fromBuffer(value),
+        ($0.MarketMaking value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.DeleteMmPresetRequest, $0.DeleteMmPresetResponse>(
+        'DeleteMmPreset',
+        deleteMmPreset_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.DeleteMmPresetRequest.fromBuffer(value),
+        ($0.DeleteMmPresetResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMarketMakingResponse> listMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketMakingRequest> $request) async {
@@ -309,5 +373,29 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.FitToMarketResponse> fitToMarket($grpc.ServiceCall call, $0.FitToMarketRequest request);
+
+  $async.Future<$0.MmPreset> saveMmPreset_Pre($grpc.ServiceCall $call, $async.Future<$0.SaveMmPresetRequest> $request) async {
+    return saveMmPreset($call, await $request);
+  }
+
+  $async.Future<$0.MmPreset> saveMmPreset($grpc.ServiceCall call, $0.SaveMmPresetRequest request);
+
+  $async.Future<$0.ListMmPresetsResponse> listMmPresets_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmPresetsRequest> $request) async {
+    return listMmPresets($call, await $request);
+  }
+
+  $async.Future<$0.ListMmPresetsResponse> listMmPresets($grpc.ServiceCall call, $0.ListMmPresetsRequest request);
+
+  $async.Future<$0.MarketMaking> applyMmPreset_Pre($grpc.ServiceCall $call, $async.Future<$0.ApplyMmPresetRequest> $request) async {
+    return applyMmPreset($call, await $request);
+  }
+
+  $async.Future<$0.MarketMaking> applyMmPreset($grpc.ServiceCall call, $0.ApplyMmPresetRequest request);
+
+  $async.Future<$0.DeleteMmPresetResponse> deleteMmPreset_Pre($grpc.ServiceCall $call, $async.Future<$0.DeleteMmPresetRequest> $request) async {
+    return deleteMmPreset($call, await $request);
+  }
+
+  $async.Future<$0.DeleteMmPresetResponse> deleteMmPreset($grpc.ServiceCall call, $0.DeleteMmPresetRequest request);
 
 }
