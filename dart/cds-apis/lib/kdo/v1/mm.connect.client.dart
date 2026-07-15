@@ -298,4 +298,22 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 심볼의 MM 시작 시점 설정 스냅샷 히스토리 조회 (최신순)
+  Future<kdov1mm.ListMmConfigHistoryResponse> listMmConfigHistory(
+    kdov1mm.ListMmConfigHistoryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.listMmConfigHistory,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

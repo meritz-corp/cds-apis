@@ -140,4 +140,12 @@ abstract final class MarketMakingService {
     kdov1mm.DeleteMmPresetRequest.new,
     kdov1mm.DeleteMmPresetResponse.new,
   );
+
+  /// 심볼의 MM 시작 시점 설정 스냅샷 히스토리 조회 (최신순)
+  static const listMmConfigHistory = connect.Spec(
+    '/$name/ListMmConfigHistory',
+    connect.StreamType.unary,
+    kdov1mm.ListMmConfigHistoryRequest.new,
+    kdov1mm.ListMmConfigHistoryResponse.new,
+  );
 }

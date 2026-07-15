@@ -189,6 +189,47 @@
         ]
       }
     },
+    "/v1/mm/{symbol}/config-history": {
+      "get": {
+        "summary": "심볼의 MM 시작 시점 설정 스냅샷 히스토리 조회 (최신순)",
+        "operationId": "MarketMakingService_ListMmConfigHistory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmListMmConfigHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "limit",
+            "description": "최신순 조회 개수 (미지정 시 서버 기본값, 예 100)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
     "/v1/mm/{symbol}/engine-state:stream": {
       "get": {
         "summary": "MM 엔진 런타임 상태 실시간 스트리밍",
@@ -894,6 +935,18 @@
         }
       }
     },
+    "mmListMmConfigHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "snapshots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mmMmConfigSnapshot"
+          },
+          "title": "설정 스냅샷 목록 (최신 start_time 내림차순)"
+        }
+      }
+    },
     "mmListMmPnlHistoryResponse": {
       "type": "object",
       "properties": {
@@ -1383,6 +1436,25 @@
     "mmMeanBidAsk": {
       "type": "object",
       "title": "EtfPricing::IndexTrackingHedge"
+    },
+    "mmMmConfigSnapshot": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ISIN 심볼"
+        },
+        "config": {
+          "$ref": "#/definitions/mmMarketMakingConfiguration",
+          "title": "시작 시점의 MM 설정"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "int64",
+          "title": "시작 시각 (unix epoch seconds)"
+        }
+      },
+      "title": "MM 시작 시점에 저장된 설정 스냅샷"
     },
     "mmMmFillSummary": {
       "type": "object",

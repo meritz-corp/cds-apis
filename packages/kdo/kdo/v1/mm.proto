@@ -145,6 +145,16 @@ service MarketMakingService {
     };
   }
 
+  // ===== 설정 스냅샷 히스토리 (MM 시작 시마다 자동 누적, 프리셋과 별개) =====
+
+  // 심볼의 MM 시작 시점 설정 스냅샷 히스토리 조회 (최신순)
+  rpc ListMmConfigHistory(ListMmConfigHistoryRequest) returns (ListMmConfigHistoryResponse) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/config-history"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
 }
 
 // ============================================================================
@@ -868,4 +878,34 @@ message DeleteMmPresetRequest {
 message DeleteMmPresetResponse {
   // 메시지
   string message = 1;
+}
+
+// ============================================================================
+// MM 설정 스냅샷 히스토리 (MM 시작 시마다 자동 누적, 프리셋과 별개)
+// ============================================================================
+
+// MM 시작 시점에 저장된 설정 스냅샷
+message MmConfigSnapshot {
+  // ISIN 심볼
+  string symbol = 1;
+
+  // 시작 시점의 MM 설정
+  MarketMakingConfiguration config = 2;
+
+  // 시작 시각 (unix epoch seconds)
+  int64 start_time = 3;
+}
+
+// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
+message ListMmConfigHistoryRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 최신순 조회 개수 (미지정 시 서버 기본값, 예 100)
+  optional int32 limit = 2;
+}
+
+message ListMmConfigHistoryResponse {
+  // 설정 스냅샷 목록 (최신 start_time 내림차순)
+  repeated MmConfigSnapshot snapshots = 1;
 }

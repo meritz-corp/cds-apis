@@ -835,6 +835,42 @@ pub struct DeleteMmPresetResponse {
     pub message: ::prost::alloc::string::String,
 }
 // ============================================================================
+// MM 설정 스냅샷 히스토리 (MM 시작 시마다 자동 누적, 프리셋과 별개)
+// ============================================================================
+
+/// MM 시작 시점에 저장된 설정 스냅샷
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MmConfigSnapshot {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 시작 시점의 MM 설정
+    #[prost(message, optional, tag="2")]
+    pub config: ::core::option::Option<MarketMakingConfiguration>,
+    /// 시작 시각 (unix epoch seconds)
+    #[prost(int64, tag="3")]
+    pub start_time: i64,
+}
+/// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmConfigHistoryRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 최신순 조회 개수 (미지정 시 서버 기본값, 예 100)
+    #[prost(int32, optional, tag="2")]
+    pub limit: ::core::option::Option<i32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmConfigHistoryResponse {
+    /// 설정 스냅샷 목록 (최신 start_time 내림차순)
+    #[prost(message, repeated, tag="1")]
+    pub snapshots: ::prost::alloc::vec::Vec<MmConfigSnapshot>,
+}
+// ============================================================================
 // Enums
 // ============================================================================
 

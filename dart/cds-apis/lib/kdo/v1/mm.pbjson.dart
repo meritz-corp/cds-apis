@@ -974,3 +974,49 @@ const DeleteMmPresetResponse$json = {
 final $typed_data.Uint8List deleteMmPresetResponseDescriptor = $convert.base64Decode(
     'ChZEZWxldGVNbVByZXNldFJlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');
 
+@$core.Deprecated('Use mmConfigSnapshotDescriptor instead')
+const MmConfigSnapshot$json = {
+  '1': 'MmConfigSnapshot',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
+    {'1': 'start_time', '3': 3, '4': 1, '5': 3, '10': 'startTime'},
+  ],
+};
+
+/// Descriptor for `MmConfigSnapshot`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmConfigSnapshotDescriptor = $convert.base64Decode(
+    'ChBNbUNvbmZpZ1NuYXBzaG90EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEjwKBmNvbmZpZxgCIA'
+    'EoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSHQoKc3Rh'
+    'cnRfdGltZRgDIAEoA1IJc3RhcnRUaW1l');
+
+@$core.Deprecated('Use listMmConfigHistoryRequestDescriptor instead')
+const ListMmConfigHistoryRequest$json = {
+  '1': 'ListMmConfigHistoryRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'limit', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'limit', '17': true},
+  ],
+  '8': [
+    {'1': '_limit'},
+  ],
+};
+
+/// Descriptor for `ListMmConfigHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmConfigHistoryRequestDescriptor = $convert.base64Decode(
+    'ChpMaXN0TW1Db25maWdIaXN0b3J5UmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bW'
+    'JvbBIZCgVsaW1pdBgCIAEoBUgAUgVsaW1pdIgBAUIICgZfbGltaXQ=');
+
+@$core.Deprecated('Use listMmConfigHistoryResponseDescriptor instead')
+const ListMmConfigHistoryResponse$json = {
+  '1': 'ListMmConfigHistoryResponse',
+  '2': [
+    {'1': 'snapshots', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.mm.MmConfigSnapshot', '10': 'snapshots'},
+  ],
+};
+
+/// Descriptor for `ListMmConfigHistoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmConfigHistoryResponseDescriptor = $convert.base64Decode(
+    'ChtMaXN0TW1Db25maWdIaXN0b3J5UmVzcG9uc2USOQoJc25hcHNob3RzGAEgAygLMhsua2RvLn'
+    'YxLm1tLk1tQ29uZmlnU25hcHNob3RSCXNuYXBzaG90cw==');
+

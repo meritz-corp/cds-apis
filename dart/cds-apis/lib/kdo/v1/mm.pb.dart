@@ -4240,6 +4240,184 @@ class DeleteMmPresetResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(1);
 }
 
+/// MM 시작 시점에 저장된 설정 스냅샷
+class MmConfigSnapshot extends $pb.GeneratedMessage {
+  factory MmConfigSnapshot({
+    $core.String? symbol,
+    MarketMakingConfiguration? config,
+    $fixnum.Int64? startTime,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (config != null) result.config = config;
+    if (startTime != null) result.startTime = startTime;
+    return result;
+  }
+
+  MmConfigSnapshot._();
+
+  factory MmConfigSnapshot.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmConfigSnapshot.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmConfigSnapshot', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
+    ..aInt64(3, _omitFieldNames ? '' : 'startTime')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmConfigSnapshot clone() => MmConfigSnapshot()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmConfigSnapshot copyWith(void Function(MmConfigSnapshot) updates) => super.copyWith((message) => updates(message as MmConfigSnapshot)) as MmConfigSnapshot;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmConfigSnapshot create() => MmConfigSnapshot._();
+  @$core.override
+  MmConfigSnapshot createEmptyInstance() => create();
+  static $pb.PbList<MmConfigSnapshot> createRepeated() => $pb.PbList<MmConfigSnapshot>();
+  @$core.pragma('dart2js:noInline')
+  static MmConfigSnapshot getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmConfigSnapshot>(create);
+  static MmConfigSnapshot? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 시작 시점의 MM 설정
+  @$pb.TagNumber(2)
+  MarketMakingConfiguration get config => $_getN(1);
+  @$pb.TagNumber(2)
+  set config(MarketMakingConfiguration value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasConfig() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConfig() => $_clearField(2);
+  @$pb.TagNumber(2)
+  MarketMakingConfiguration ensureConfig() => $_ensure(1);
+
+  /// 시작 시각 (unix epoch seconds)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get startTime => $_getI64(2);
+  @$pb.TagNumber(3)
+  set startTime($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStartTime() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStartTime() => $_clearField(3);
+}
+
+/// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
+class ListMmConfigHistoryRequest extends $pb.GeneratedMessage {
+  factory ListMmConfigHistoryRequest({
+    $core.String? symbol,
+    $core.int? limit,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (limit != null) result.limit = limit;
+    return result;
+  }
+
+  ListMmConfigHistoryRequest._();
+
+  factory ListMmConfigHistoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmConfigHistoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmConfigHistoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmConfigHistoryRequest clone() => ListMmConfigHistoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmConfigHistoryRequest copyWith(void Function(ListMmConfigHistoryRequest) updates) => super.copyWith((message) => updates(message as ListMmConfigHistoryRequest)) as ListMmConfigHistoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmConfigHistoryRequest create() => ListMmConfigHistoryRequest._();
+  @$core.override
+  ListMmConfigHistoryRequest createEmptyInstance() => create();
+  static $pb.PbList<ListMmConfigHistoryRequest> createRepeated() => $pb.PbList<ListMmConfigHistoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmConfigHistoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmConfigHistoryRequest>(create);
+  static ListMmConfigHistoryRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 최신순 조회 개수 (미지정 시 서버 기본값, 예 100)
+  @$pb.TagNumber(2)
+  $core.int get limit => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set limit($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLimit() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLimit() => $_clearField(2);
+}
+
+class ListMmConfigHistoryResponse extends $pb.GeneratedMessage {
+  factory ListMmConfigHistoryResponse({
+    $core.Iterable<MmConfigSnapshot>? snapshots,
+  }) {
+    final result = create();
+    if (snapshots != null) result.snapshots.addAll(snapshots);
+    return result;
+  }
+
+  ListMmConfigHistoryResponse._();
+
+  factory ListMmConfigHistoryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmConfigHistoryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmConfigHistoryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..pc<MmConfigSnapshot>(1, _omitFieldNames ? '' : 'snapshots', $pb.PbFieldType.PM, subBuilder: MmConfigSnapshot.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmConfigHistoryResponse clone() => ListMmConfigHistoryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmConfigHistoryResponse copyWith(void Function(ListMmConfigHistoryResponse) updates) => super.copyWith((message) => updates(message as ListMmConfigHistoryResponse)) as ListMmConfigHistoryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmConfigHistoryResponse create() => ListMmConfigHistoryResponse._();
+  @$core.override
+  ListMmConfigHistoryResponse createEmptyInstance() => create();
+  static $pb.PbList<ListMmConfigHistoryResponse> createRepeated() => $pb.PbList<ListMmConfigHistoryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmConfigHistoryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmConfigHistoryResponse>(create);
+  static ListMmConfigHistoryResponse? _defaultInstance;
+
+  /// 설정 스냅샷 목록 (최신 start_time 내림차순)
+  @$pb.TagNumber(1)
+  $pb.PbList<MmConfigSnapshot> get snapshots => $_getList(0);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

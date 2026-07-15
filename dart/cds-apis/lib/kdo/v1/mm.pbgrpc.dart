@@ -115,6 +115,11 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$deleteMmPreset, request, options: options);
   }
 
+  /// 심볼의 MM 시작 시점 설정 스냅샷 히스토리 조회 (최신순)
+  $grpc.ResponseFuture<$0.ListMmConfigHistoryResponse> listMmConfigHistory($0.ListMmConfigHistoryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listMmConfigHistory, request, options: options);
+  }
+
     // method descriptors
 
   static final _$listMarketMaking = $grpc.ClientMethod<$0.ListMarketMakingRequest, $0.ListMarketMakingResponse>(
@@ -181,6 +186,10 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/DeleteMmPreset',
       ($0.DeleteMmPresetRequest value) => value.writeToBuffer(),
       $0.DeleteMmPresetResponse.fromBuffer);
+  static final _$listMmConfigHistory = $grpc.ClientMethod<$0.ListMmConfigHistoryRequest, $0.ListMmConfigHistoryResponse>(
+      '/kdo.v1.mm.MarketMakingService/ListMmConfigHistory',
+      ($0.ListMmConfigHistoryRequest value) => value.writeToBuffer(),
+      $0.ListMmConfigHistoryResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.mm.MarketMakingService')
@@ -300,6 +309,13 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.DeleteMmPresetRequest.fromBuffer(value),
         ($0.DeleteMmPresetResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListMmConfigHistoryRequest, $0.ListMmConfigHistoryResponse>(
+        'ListMmConfigHistory',
+        listMmConfigHistory_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListMmConfigHistoryRequest.fromBuffer(value),
+        ($0.ListMmConfigHistoryResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListMarketMakingResponse> listMarketMaking_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMarketMakingRequest> $request) async {
@@ -397,5 +413,11 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.DeleteMmPresetResponse> deleteMmPreset($grpc.ServiceCall call, $0.DeleteMmPresetRequest request);
+
+  $async.Future<$0.ListMmConfigHistoryResponse> listMmConfigHistory_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmConfigHistoryRequest> $request) async {
+    return listMmConfigHistory($call, await $request);
+  }
+
+  $async.Future<$0.ListMmConfigHistoryResponse> listMmConfigHistory($grpc.ServiceCall call, $0.ListMmConfigHistoryRequest request);
 
 }

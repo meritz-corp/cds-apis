@@ -56,6 +56,8 @@ type MarketMakingServiceClient interface {
 	ApplyMmPreset(ctx context.Context, in *ApplyMmPresetRequest, opts ...grpc.CallOption) (*MarketMaking, error)
 	// 저장된 프리셋 삭제
 	DeleteMmPreset(ctx context.Context, in *DeleteMmPresetRequest, opts ...grpc.CallOption) (*DeleteMmPresetResponse, error)
+	// 심볼의 MM 시작 시점 설정 스냅샷 히스토리 조회 (최신순)
+	ListMmConfigHistory(ctx context.Context, in *ListMmConfigHistoryRequest, opts ...grpc.CallOption) (*ListMmConfigHistoryResponse, error)
 }
 
 type marketMakingServiceClient struct {
@@ -279,6 +281,15 @@ func (c *marketMakingServiceClient) DeleteMmPreset(ctx context.Context, in *Dele
 	return out, nil
 }
 
+func (c *marketMakingServiceClient) ListMmConfigHistory(ctx context.Context, in *ListMmConfigHistoryRequest, opts ...grpc.CallOption) (*ListMmConfigHistoryResponse, error) {
+	out := new(ListMmConfigHistoryResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ListMmConfigHistory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MarketMakingServiceServer is the server API for MarketMakingService service.
 // All implementations must embed UnimplementedMarketMakingServiceServer
 // for forward compatibility
@@ -317,6 +328,8 @@ type MarketMakingServiceServer interface {
 	ApplyMmPreset(context.Context, *ApplyMmPresetRequest) (*MarketMaking, error)
 	// 저장된 프리셋 삭제
 	DeleteMmPreset(context.Context, *DeleteMmPresetRequest) (*DeleteMmPresetResponse, error)
+	// 심볼의 MM 시작 시점 설정 스냅샷 히스토리 조회 (최신순)
+	ListMmConfigHistory(context.Context, *ListMmConfigHistoryRequest) (*ListMmConfigHistoryResponse, error)
 	mustEmbedUnimplementedMarketMakingServiceServer()
 }
 
@@ -371,6 +384,9 @@ func (UnimplementedMarketMakingServiceServer) ApplyMmPreset(context.Context, *Ap
 }
 func (UnimplementedMarketMakingServiceServer) DeleteMmPreset(context.Context, *DeleteMmPresetRequest) (*DeleteMmPresetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMmPreset not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) ListMmConfigHistory(context.Context, *ListMmConfigHistoryRequest) (*ListMmConfigHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMmConfigHistory not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) mustEmbedUnimplementedMarketMakingServiceServer() {}
 
@@ -682,6 +698,24 @@ func _MarketMakingService_DeleteMmPreset_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MarketMakingService_ListMmConfigHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMmConfigHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).ListMmConfigHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ListMmConfigHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).ListMmConfigHistory(ctx, req.(*ListMmConfigHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MarketMakingService_ServiceDesc is the grpc.ServiceDesc for MarketMakingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -740,6 +774,10 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteMmPreset",
 			Handler:    _MarketMakingService_DeleteMmPreset_Handler,
+		},
+		{
+			MethodName: "ListMmConfigHistory",
+			Handler:    _MarketMakingService_ListMmConfigHistory_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
