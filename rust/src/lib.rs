@@ -137,19 +137,8 @@ pub mod master_sync {
 }
 
 pub mod mmm {
-    pub mod v1 {
-        pub mod basket {
-            include!("mmm.v1.basket.rs");
-        }
-
-        pub mod notification {
-            include!("mmm.v1.notification.rs");
-        }
-
-        pub mod etf {
-            include!("mmm.v1.etf.rs");
-        }
-
+    pub mod mmm {
+        include!("mmm.mmm.rs");
     }
 }
 

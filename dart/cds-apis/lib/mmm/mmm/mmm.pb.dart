@@ -1,0 +1,3369 @@
+// This is a generated file - do not edit.
+//
+// Generated from mmm/mmm/mmm.proto.
+
+// @dart = 3.3
+
+// ignore_for_file: annotate_overrides, camel_case_types, comment_references
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names
+
+import 'dart:core' as $core;
+
+import 'package:fixnum/fixnum.dart' as $fixnum;
+import 'package:protobuf/protobuf.dart' as $pb;
+
+export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
+
+class CodeRequest extends $pb.GeneratedMessage {
+  factory CodeRequest({
+    $core.String? code,
+  }) {
+    final result = create();
+    if (code != null) result.code = code;
+    return result;
+  }
+
+  CodeRequest._();
+
+  factory CodeRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CodeRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CodeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'code')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CodeRequest clone() => CodeRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CodeRequest copyWith(void Function(CodeRequest) updates) => super.copyWith((message) => updates(message as CodeRequest)) as CodeRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CodeRequest create() => CodeRequest._();
+  @$core.override
+  CodeRequest createEmptyInstance() => create();
+  static $pb.PbList<CodeRequest> createRepeated() => $pb.PbList<CodeRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CodeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CodeRequest>(create);
+  static CodeRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get code => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set code($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCode() => $_clearField(1);
+}
+
+class ETFManagerDetail extends $pb.GeneratedMessage {
+  factory ETFManagerDetail({
+    $core.bool? active,
+    $core.String? code,
+    $core.String? name,
+    $core.String? refPriceType,
+    $fixnum.Int64? askTick,
+    $fixnum.Int64? bidTick,
+    $fixnum.Int64? askCount,
+    $fixnum.Int64? bidCount,
+    $fixnum.Int64? askQuantity,
+    $fixnum.Int64? bidQuantity,
+    $fixnum.Int64? askLimit,
+    $fixnum.Int64? bidLimit,
+    $core.double? hedgeUnitDelta,
+    $core.double? etfUnitDelta,
+    $core.String? refCode,
+    $core.String? fundcode,
+    $core.String? startAt,
+    $core.String? stopAt,
+    $core.String? group,
+    $core.bool? auto,
+    $core.double? etfsPerHedge,
+    $core.bool? referEma,
+    $core.bool? creatable,
+    $core.String? hedgeGroup,
+    $core.String? hedgeProductCode,
+    $core.String? hedgeProductName,
+    $core.String? hedgeFundcode,
+    $fixnum.Int64? mmLimit,
+    $fixnum.Int64? mmQuantity,
+    $core.double? askOffset,
+    $core.double? bidOffset,
+    $core.bool? lpTagged,
+    $core.bool? nakedShortAllowed,
+    $core.String? creationSettlementDate,
+    $core.String? redemptionSettlementDate,
+    $core.String? groupName,
+    $core.double? refillFloor,
+    $core.String? hedgePriceType,
+    $core.double? refillInterval,
+    $core.double? hedgeDominanceThreshold,
+    $core.bool? hedgeAuto,
+    $core.double? askBasis,
+    $core.double? bidBasis,
+    $core.bool? passive,
+    $core.bool? mm,
+    $core.double? mmSpread,
+    $fixnum.Int64? basisEmaPeriod,
+    $core.bool? preventQuoteTurnaround,
+    $core.String? startAmendmentAt,
+    $core.double? expectedPrice,
+    $core.bool? activeAmendment,
+    $core.bool? projectTrades,
+    $core.double? navNav,
+    $core.double? fxAskBasis,
+    $core.double? fxBidBasis,
+    $fixnum.Int64? graceAmount,
+    $core.double? dominanceThreshold,
+    $core.bool? advancedTick,
+    $core.double? advancedTickThreshold,
+    $fixnum.Int64? askNotifyingQuantity,
+    $fixnum.Int64? bidNotifyingQuantity,
+    $core.String? positionType,
+    $core.double? askOffsetAdjust,
+    $core.double? bidOffsetAdjust,
+    $core.double? askBasisAdjust,
+    $core.double? bidBasisAdjust,
+    $fixnum.Int64? askLimitAdjust,
+    $fixnum.Int64? bidLimitAdjust,
+    $fixnum.Int64? askTotalLimit,
+    $fixnum.Int64? bidTotalLimit,
+    $core.bool? askAdjustOn,
+    $core.bool? bidAdjustOn,
+    $core.double? openingRefFutureAskPrice,
+    $core.double? openingRefFutureBidPrice,
+    $core.double? openingAskPrice,
+    $core.double? openingBidPrice,
+    $core.double? openingAskOffset,
+    $core.double? openingBidOffset,
+    $core.double? openingAskBasis,
+    $core.double? openingBidBasis,
+    $fixnum.Int64? openingAskCount,
+    $fixnum.Int64? openingBidCount,
+    $fixnum.Int64? openingAskQuantity,
+    $fixnum.Int64? openingBidQuantity,
+    $core.String? startCancellingAt,
+    $core.bool? openingActive,
+    $fixnum.Int64? askCancelTicks,
+    $fixnum.Int64? bidCancelTicks,
+    $core.bool? escape,
+    $core.String? openingHedgeProductCode,
+    $core.String? openingHedgeProductName,
+    $core.String? openingHedgePriceType,
+    $core.double? openingHedgeDominanceThreshold,
+    $core.bool? openingHedgeAuto,
+    $fixnum.Int64? etfFilledToHedgeTriggerQuantity,
+    $fixnum.Int64? hedgeEtfQuantitiesPerTrigger,
+    $core.String? lpMode,
+    $core.String? lpProductCode,
+    $core.double? etfHedgeQuantityPerFutureFilled,
+    $core.double? lpRealNavEtfToFutureScale,
+    $fixnum.Int64? askLpOrdersPerPrice,
+    $fixnum.Int64? bidLpOrdersPerPrice,
+    $fixnum.Int64? askOpeningOrdersPerPrice,
+    $fixnum.Int64? bidOpeningOrdersPerPrice,
+  }) {
+    final result = create();
+    if (active != null) result.active = active;
+    if (code != null) result.code = code;
+    if (name != null) result.name = name;
+    if (refPriceType != null) result.refPriceType = refPriceType;
+    if (askTick != null) result.askTick = askTick;
+    if (bidTick != null) result.bidTick = bidTick;
+    if (askCount != null) result.askCount = askCount;
+    if (bidCount != null) result.bidCount = bidCount;
+    if (askQuantity != null) result.askQuantity = askQuantity;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
+    if (askLimit != null) result.askLimit = askLimit;
+    if (bidLimit != null) result.bidLimit = bidLimit;
+    if (hedgeUnitDelta != null) result.hedgeUnitDelta = hedgeUnitDelta;
+    if (etfUnitDelta != null) result.etfUnitDelta = etfUnitDelta;
+    if (refCode != null) result.refCode = refCode;
+    if (fundcode != null) result.fundcode = fundcode;
+    if (startAt != null) result.startAt = startAt;
+    if (stopAt != null) result.stopAt = stopAt;
+    if (group != null) result.group = group;
+    if (auto != null) result.auto = auto;
+    if (etfsPerHedge != null) result.etfsPerHedge = etfsPerHedge;
+    if (referEma != null) result.referEma = referEma;
+    if (creatable != null) result.creatable = creatable;
+    if (hedgeGroup != null) result.hedgeGroup = hedgeGroup;
+    if (hedgeProductCode != null) result.hedgeProductCode = hedgeProductCode;
+    if (hedgeProductName != null) result.hedgeProductName = hedgeProductName;
+    if (hedgeFundcode != null) result.hedgeFundcode = hedgeFundcode;
+    if (mmLimit != null) result.mmLimit = mmLimit;
+    if (mmQuantity != null) result.mmQuantity = mmQuantity;
+    if (askOffset != null) result.askOffset = askOffset;
+    if (bidOffset != null) result.bidOffset = bidOffset;
+    if (lpTagged != null) result.lpTagged = lpTagged;
+    if (nakedShortAllowed != null) result.nakedShortAllowed = nakedShortAllowed;
+    if (creationSettlementDate != null) result.creationSettlementDate = creationSettlementDate;
+    if (redemptionSettlementDate != null) result.redemptionSettlementDate = redemptionSettlementDate;
+    if (groupName != null) result.groupName = groupName;
+    if (refillFloor != null) result.refillFloor = refillFloor;
+    if (hedgePriceType != null) result.hedgePriceType = hedgePriceType;
+    if (refillInterval != null) result.refillInterval = refillInterval;
+    if (hedgeDominanceThreshold != null) result.hedgeDominanceThreshold = hedgeDominanceThreshold;
+    if (hedgeAuto != null) result.hedgeAuto = hedgeAuto;
+    if (askBasis != null) result.askBasis = askBasis;
+    if (bidBasis != null) result.bidBasis = bidBasis;
+    if (passive != null) result.passive = passive;
+    if (mm != null) result.mm = mm;
+    if (mmSpread != null) result.mmSpread = mmSpread;
+    if (basisEmaPeriod != null) result.basisEmaPeriod = basisEmaPeriod;
+    if (preventQuoteTurnaround != null) result.preventQuoteTurnaround = preventQuoteTurnaround;
+    if (startAmendmentAt != null) result.startAmendmentAt = startAmendmentAt;
+    if (expectedPrice != null) result.expectedPrice = expectedPrice;
+    if (activeAmendment != null) result.activeAmendment = activeAmendment;
+    if (projectTrades != null) result.projectTrades = projectTrades;
+    if (navNav != null) result.navNav = navNav;
+    if (fxAskBasis != null) result.fxAskBasis = fxAskBasis;
+    if (fxBidBasis != null) result.fxBidBasis = fxBidBasis;
+    if (graceAmount != null) result.graceAmount = graceAmount;
+    if (dominanceThreshold != null) result.dominanceThreshold = dominanceThreshold;
+    if (advancedTick != null) result.advancedTick = advancedTick;
+    if (advancedTickThreshold != null) result.advancedTickThreshold = advancedTickThreshold;
+    if (askNotifyingQuantity != null) result.askNotifyingQuantity = askNotifyingQuantity;
+    if (bidNotifyingQuantity != null) result.bidNotifyingQuantity = bidNotifyingQuantity;
+    if (positionType != null) result.positionType = positionType;
+    if (askOffsetAdjust != null) result.askOffsetAdjust = askOffsetAdjust;
+    if (bidOffsetAdjust != null) result.bidOffsetAdjust = bidOffsetAdjust;
+    if (askBasisAdjust != null) result.askBasisAdjust = askBasisAdjust;
+    if (bidBasisAdjust != null) result.bidBasisAdjust = bidBasisAdjust;
+    if (askLimitAdjust != null) result.askLimitAdjust = askLimitAdjust;
+    if (bidLimitAdjust != null) result.bidLimitAdjust = bidLimitAdjust;
+    if (askTotalLimit != null) result.askTotalLimit = askTotalLimit;
+    if (bidTotalLimit != null) result.bidTotalLimit = bidTotalLimit;
+    if (askAdjustOn != null) result.askAdjustOn = askAdjustOn;
+    if (bidAdjustOn != null) result.bidAdjustOn = bidAdjustOn;
+    if (openingRefFutureAskPrice != null) result.openingRefFutureAskPrice = openingRefFutureAskPrice;
+    if (openingRefFutureBidPrice != null) result.openingRefFutureBidPrice = openingRefFutureBidPrice;
+    if (openingAskPrice != null) result.openingAskPrice = openingAskPrice;
+    if (openingBidPrice != null) result.openingBidPrice = openingBidPrice;
+    if (openingAskOffset != null) result.openingAskOffset = openingAskOffset;
+    if (openingBidOffset != null) result.openingBidOffset = openingBidOffset;
+    if (openingAskBasis != null) result.openingAskBasis = openingAskBasis;
+    if (openingBidBasis != null) result.openingBidBasis = openingBidBasis;
+    if (openingAskCount != null) result.openingAskCount = openingAskCount;
+    if (openingBidCount != null) result.openingBidCount = openingBidCount;
+    if (openingAskQuantity != null) result.openingAskQuantity = openingAskQuantity;
+    if (openingBidQuantity != null) result.openingBidQuantity = openingBidQuantity;
+    if (startCancellingAt != null) result.startCancellingAt = startCancellingAt;
+    if (openingActive != null) result.openingActive = openingActive;
+    if (askCancelTicks != null) result.askCancelTicks = askCancelTicks;
+    if (bidCancelTicks != null) result.bidCancelTicks = bidCancelTicks;
+    if (escape != null) result.escape = escape;
+    if (openingHedgeProductCode != null) result.openingHedgeProductCode = openingHedgeProductCode;
+    if (openingHedgeProductName != null) result.openingHedgeProductName = openingHedgeProductName;
+    if (openingHedgePriceType != null) result.openingHedgePriceType = openingHedgePriceType;
+    if (openingHedgeDominanceThreshold != null) result.openingHedgeDominanceThreshold = openingHedgeDominanceThreshold;
+    if (openingHedgeAuto != null) result.openingHedgeAuto = openingHedgeAuto;
+    if (etfFilledToHedgeTriggerQuantity != null) result.etfFilledToHedgeTriggerQuantity = etfFilledToHedgeTriggerQuantity;
+    if (hedgeEtfQuantitiesPerTrigger != null) result.hedgeEtfQuantitiesPerTrigger = hedgeEtfQuantitiesPerTrigger;
+    if (lpMode != null) result.lpMode = lpMode;
+    if (lpProductCode != null) result.lpProductCode = lpProductCode;
+    if (etfHedgeQuantityPerFutureFilled != null) result.etfHedgeQuantityPerFutureFilled = etfHedgeQuantityPerFutureFilled;
+    if (lpRealNavEtfToFutureScale != null) result.lpRealNavEtfToFutureScale = lpRealNavEtfToFutureScale;
+    if (askLpOrdersPerPrice != null) result.askLpOrdersPerPrice = askLpOrdersPerPrice;
+    if (bidLpOrdersPerPrice != null) result.bidLpOrdersPerPrice = bidLpOrdersPerPrice;
+    if (askOpeningOrdersPerPrice != null) result.askOpeningOrdersPerPrice = askOpeningOrdersPerPrice;
+    if (bidOpeningOrdersPerPrice != null) result.bidOpeningOrdersPerPrice = bidOpeningOrdersPerPrice;
+    return result;
+  }
+
+  ETFManagerDetail._();
+
+  factory ETFManagerDetail.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ETFManagerDetail.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ETFManagerDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'active')
+    ..aOS(2, _omitFieldNames ? '' : 'code')
+    ..aOS(3, _omitFieldNames ? '' : 'name')
+    ..aOS(4, _omitFieldNames ? '' : 'refPriceType')
+    ..aInt64(5, _omitFieldNames ? '' : 'askTick')
+    ..aInt64(6, _omitFieldNames ? '' : 'bidTick')
+    ..aInt64(7, _omitFieldNames ? '' : 'askCount')
+    ..aInt64(8, _omitFieldNames ? '' : 'bidCount')
+    ..aInt64(9, _omitFieldNames ? '' : 'askQuantity')
+    ..aInt64(10, _omitFieldNames ? '' : 'bidQuantity')
+    ..aInt64(11, _omitFieldNames ? '' : 'askLimit')
+    ..aInt64(12, _omitFieldNames ? '' : 'bidLimit')
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'hedgeUnitDelta', $pb.PbFieldType.OD)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'etfUnitDelta', $pb.PbFieldType.OD)
+    ..aOS(15, _omitFieldNames ? '' : 'refCode')
+    ..aOS(16, _omitFieldNames ? '' : 'fundcode')
+    ..aOS(17, _omitFieldNames ? '' : 'startAt')
+    ..aOS(18, _omitFieldNames ? '' : 'stopAt')
+    ..aOS(19, _omitFieldNames ? '' : 'group')
+    ..aOB(20, _omitFieldNames ? '' : 'auto')
+    ..a<$core.double>(21, _omitFieldNames ? '' : 'etfsPerHedge', $pb.PbFieldType.OD)
+    ..aOB(22, _omitFieldNames ? '' : 'referEma')
+    ..aOB(23, _omitFieldNames ? '' : 'creatable')
+    ..aOS(24, _omitFieldNames ? '' : 'hedgeGroup')
+    ..aOS(25, _omitFieldNames ? '' : 'hedgeProductCode')
+    ..aOS(26, _omitFieldNames ? '' : 'hedgeProductName')
+    ..aOS(27, _omitFieldNames ? '' : 'hedgeFundcode')
+    ..aInt64(28, _omitFieldNames ? '' : 'mmLimit')
+    ..aInt64(29, _omitFieldNames ? '' : 'mmQuantity')
+    ..a<$core.double>(30, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(31, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
+    ..aOB(32, _omitFieldNames ? '' : 'lpTagged')
+    ..aOB(33, _omitFieldNames ? '' : 'nakedShortAllowed')
+    ..aOS(34, _omitFieldNames ? '' : 'creationSettlementDate')
+    ..aOS(35, _omitFieldNames ? '' : 'redemptionSettlementDate')
+    ..aOS(36, _omitFieldNames ? '' : 'groupName')
+    ..a<$core.double>(37, _omitFieldNames ? '' : 'refillFloor', $pb.PbFieldType.OD)
+    ..aOS(38, _omitFieldNames ? '' : 'hedgePriceType')
+    ..a<$core.double>(39, _omitFieldNames ? '' : 'refillInterval', $pb.PbFieldType.OD)
+    ..a<$core.double>(40, _omitFieldNames ? '' : 'hedgeDominanceThreshold', $pb.PbFieldType.OD)
+    ..aOB(41, _omitFieldNames ? '' : 'hedgeAuto')
+    ..a<$core.double>(42, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
+    ..a<$core.double>(43, _omitFieldNames ? '' : 'bidBasis', $pb.PbFieldType.OD)
+    ..aOB(44, _omitFieldNames ? '' : 'passive')
+    ..aOB(45, _omitFieldNames ? '' : 'mm')
+    ..a<$core.double>(46, _omitFieldNames ? '' : 'mmSpread', $pb.PbFieldType.OD)
+    ..a<$fixnum.Int64>(47, _omitFieldNames ? '' : 'basisEmaPeriod', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(48, _omitFieldNames ? '' : 'preventQuoteTurnaround')
+    ..aOS(49, _omitFieldNames ? '' : 'startAmendmentAt')
+    ..a<$core.double>(50, _omitFieldNames ? '' : 'expectedPrice', $pb.PbFieldType.OD)
+    ..aOB(51, _omitFieldNames ? '' : 'activeAmendment')
+    ..aOB(53, _omitFieldNames ? '' : 'projectTrades')
+    ..a<$core.double>(54, _omitFieldNames ? '' : 'navNav', $pb.PbFieldType.OD)
+    ..a<$core.double>(55, _omitFieldNames ? '' : 'fxAskBasis', $pb.PbFieldType.OD)
+    ..a<$core.double>(56, _omitFieldNames ? '' : 'fxBidBasis', $pb.PbFieldType.OD)
+    ..aInt64(57, _omitFieldNames ? '' : 'graceAmount')
+    ..a<$core.double>(58, _omitFieldNames ? '' : 'dominanceThreshold', $pb.PbFieldType.OD)
+    ..aOB(59, _omitFieldNames ? '' : 'advancedTick')
+    ..a<$core.double>(60, _omitFieldNames ? '' : 'advancedTickThreshold', $pb.PbFieldType.OD)
+    ..aInt64(62, _omitFieldNames ? '' : 'askNotifyingQuantity')
+    ..aInt64(63, _omitFieldNames ? '' : 'bidNotifyingQuantity')
+    ..aOS(64, _omitFieldNames ? '' : 'positionType')
+    ..a<$core.double>(65, _omitFieldNames ? '' : 'askOffsetAdjust', $pb.PbFieldType.OD)
+    ..a<$core.double>(66, _omitFieldNames ? '' : 'bidOffsetAdjust', $pb.PbFieldType.OD)
+    ..a<$core.double>(67, _omitFieldNames ? '' : 'askBasisAdjust', $pb.PbFieldType.OD)
+    ..a<$core.double>(68, _omitFieldNames ? '' : 'bidBasisAdjust', $pb.PbFieldType.OD)
+    ..aInt64(69, _omitFieldNames ? '' : 'askLimitAdjust')
+    ..aInt64(70, _omitFieldNames ? '' : 'bidLimitAdjust')
+    ..aInt64(71, _omitFieldNames ? '' : 'askTotalLimit')
+    ..aInt64(72, _omitFieldNames ? '' : 'bidTotalLimit')
+    ..aOB(73, _omitFieldNames ? '' : 'askAdjustOn')
+    ..aOB(74, _omitFieldNames ? '' : 'bidAdjustOn')
+    ..a<$core.double>(75, _omitFieldNames ? '' : 'openingRefFutureAskPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(76, _omitFieldNames ? '' : 'openingRefFutureBidPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(77, _omitFieldNames ? '' : 'openingAskPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(78, _omitFieldNames ? '' : 'openingBidPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(79, _omitFieldNames ? '' : 'openingAskOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(80, _omitFieldNames ? '' : 'openingBidOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(81, _omitFieldNames ? '' : 'openingAskBasis', $pb.PbFieldType.OD)
+    ..a<$core.double>(82, _omitFieldNames ? '' : 'openingBidBasis', $pb.PbFieldType.OD)
+    ..aInt64(83, _omitFieldNames ? '' : 'openingAskCount')
+    ..aInt64(84, _omitFieldNames ? '' : 'openingBidCount')
+    ..aInt64(85, _omitFieldNames ? '' : 'openingAskQuantity')
+    ..aInt64(86, _omitFieldNames ? '' : 'openingBidQuantity')
+    ..aOS(87, _omitFieldNames ? '' : 'startCancellingAt')
+    ..aOB(88, _omitFieldNames ? '' : 'openingActive')
+    ..aInt64(89, _omitFieldNames ? '' : 'askCancelTicks')
+    ..aInt64(90, _omitFieldNames ? '' : 'bidCancelTicks')
+    ..aOB(91, _omitFieldNames ? '' : 'escape')
+    ..aOS(92, _omitFieldNames ? '' : 'openingHedgeProductCode')
+    ..aOS(93, _omitFieldNames ? '' : 'openingHedgeProductName')
+    ..aOS(94, _omitFieldNames ? '' : 'openingHedgePriceType')
+    ..a<$core.double>(95, _omitFieldNames ? '' : 'openingHedgeDominanceThreshold', $pb.PbFieldType.OD)
+    ..aOB(96, _omitFieldNames ? '' : 'openingHedgeAuto')
+    ..aInt64(97, _omitFieldNames ? '' : 'etfFilledToHedgeTriggerQuantity')
+    ..aInt64(98, _omitFieldNames ? '' : 'hedgeEtfQuantitiesPerTrigger')
+    ..aOS(99, _omitFieldNames ? '' : 'lpMode')
+    ..aOS(100, _omitFieldNames ? '' : 'lpProductCode')
+    ..a<$core.double>(102, _omitFieldNames ? '' : 'etfHedgeQuantityPerFutureFilled', $pb.PbFieldType.OD)
+    ..a<$core.double>(103, _omitFieldNames ? '' : 'lpRealNavEtfToFutureScale', $pb.PbFieldType.OD)
+    ..aInt64(105, _omitFieldNames ? '' : 'askLpOrdersPerPrice')
+    ..aInt64(106, _omitFieldNames ? '' : 'bidLpOrdersPerPrice')
+    ..aInt64(107, _omitFieldNames ? '' : 'askOpeningOrdersPerPrice')
+    ..aInt64(108, _omitFieldNames ? '' : 'bidOpeningOrdersPerPrice')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ETFManagerDetail clone() => ETFManagerDetail()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ETFManagerDetail copyWith(void Function(ETFManagerDetail) updates) => super.copyWith((message) => updates(message as ETFManagerDetail)) as ETFManagerDetail;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ETFManagerDetail create() => ETFManagerDetail._();
+  @$core.override
+  ETFManagerDetail createEmptyInstance() => create();
+  static $pb.PbList<ETFManagerDetail> createRepeated() => $pb.PbList<ETFManagerDetail>();
+  @$core.pragma('dart2js:noInline')
+  static ETFManagerDetail getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ETFManagerDetail>(create);
+  static ETFManagerDetail? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get active => $_getBF(0);
+  @$pb.TagNumber(1)
+  set active($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasActive() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearActive() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get code => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set code($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCode() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get name => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set name($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearName() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get refPriceType => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set refPriceType($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasRefPriceType() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRefPriceType() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get askTick => $_getI64(4);
+  @$pb.TagNumber(5)
+  set askTick($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasAskTick() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAskTick() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get bidTick => $_getI64(5);
+  @$pb.TagNumber(6)
+  set bidTick($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBidTick() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBidTick() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get askCount => $_getI64(6);
+  @$pb.TagNumber(7)
+  set askCount($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasAskCount() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearAskCount() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get bidCount => $_getI64(7);
+  @$pb.TagNumber(8)
+  set bidCount($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasBidCount() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBidCount() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get askQuantity => $_getI64(8);
+  @$pb.TagNumber(9)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasAskQuantity() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearAskQuantity() => $_clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get bidQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasBidQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearBidQuantity() => $_clearField(10);
+
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get askLimit => $_getI64(10);
+  @$pb.TagNumber(11)
+  set askLimit($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasAskLimit() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearAskLimit() => $_clearField(11);
+
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get bidLimit => $_getI64(11);
+  @$pb.TagNumber(12)
+  set bidLimit($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasBidLimit() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearBidLimit() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.double get hedgeUnitDelta => $_getN(12);
+  @$pb.TagNumber(13)
+  set hedgeUnitDelta($core.double value) => $_setDouble(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasHedgeUnitDelta() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearHedgeUnitDelta() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.double get etfUnitDelta => $_getN(13);
+  @$pb.TagNumber(14)
+  set etfUnitDelta($core.double value) => $_setDouble(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasEtfUnitDelta() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearEtfUnitDelta() => $_clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.String get refCode => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set refCode($core.String value) => $_setString(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasRefCode() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearRefCode() => $_clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.String get fundcode => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set fundcode($core.String value) => $_setString(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasFundcode() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearFundcode() => $_clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.String get startAt => $_getSZ(16);
+  @$pb.TagNumber(17)
+  set startAt($core.String value) => $_setString(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasStartAt() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearStartAt() => $_clearField(17);
+
+  @$pb.TagNumber(18)
+  $core.String get stopAt => $_getSZ(17);
+  @$pb.TagNumber(18)
+  set stopAt($core.String value) => $_setString(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasStopAt() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearStopAt() => $_clearField(18);
+
+  @$pb.TagNumber(19)
+  $core.String get group => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set group($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasGroup() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearGroup() => $_clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.bool get auto => $_getBF(19);
+  @$pb.TagNumber(20)
+  set auto($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasAuto() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearAuto() => $_clearField(20);
+
+  @$pb.TagNumber(21)
+  $core.double get etfsPerHedge => $_getN(20);
+  @$pb.TagNumber(21)
+  set etfsPerHedge($core.double value) => $_setDouble(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasEtfsPerHedge() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearEtfsPerHedge() => $_clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.bool get referEma => $_getBF(21);
+  @$pb.TagNumber(22)
+  set referEma($core.bool value) => $_setBool(21, value);
+  @$pb.TagNumber(22)
+  $core.bool hasReferEma() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearReferEma() => $_clearField(22);
+
+  @$pb.TagNumber(23)
+  $core.bool get creatable => $_getBF(22);
+  @$pb.TagNumber(23)
+  set creatable($core.bool value) => $_setBool(22, value);
+  @$pb.TagNumber(23)
+  $core.bool hasCreatable() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearCreatable() => $_clearField(23);
+
+  @$pb.TagNumber(24)
+  $core.String get hedgeGroup => $_getSZ(23);
+  @$pb.TagNumber(24)
+  set hedgeGroup($core.String value) => $_setString(23, value);
+  @$pb.TagNumber(24)
+  $core.bool hasHedgeGroup() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearHedgeGroup() => $_clearField(24);
+
+  @$pb.TagNumber(25)
+  $core.String get hedgeProductCode => $_getSZ(24);
+  @$pb.TagNumber(25)
+  set hedgeProductCode($core.String value) => $_setString(24, value);
+  @$pb.TagNumber(25)
+  $core.bool hasHedgeProductCode() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearHedgeProductCode() => $_clearField(25);
+
+  @$pb.TagNumber(26)
+  $core.String get hedgeProductName => $_getSZ(25);
+  @$pb.TagNumber(26)
+  set hedgeProductName($core.String value) => $_setString(25, value);
+  @$pb.TagNumber(26)
+  $core.bool hasHedgeProductName() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearHedgeProductName() => $_clearField(26);
+
+  @$pb.TagNumber(27)
+  $core.String get hedgeFundcode => $_getSZ(26);
+  @$pb.TagNumber(27)
+  set hedgeFundcode($core.String value) => $_setString(26, value);
+  @$pb.TagNumber(27)
+  $core.bool hasHedgeFundcode() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearHedgeFundcode() => $_clearField(27);
+
+  @$pb.TagNumber(28)
+  $fixnum.Int64 get mmLimit => $_getI64(27);
+  @$pb.TagNumber(28)
+  set mmLimit($fixnum.Int64 value) => $_setInt64(27, value);
+  @$pb.TagNumber(28)
+  $core.bool hasMmLimit() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearMmLimit() => $_clearField(28);
+
+  @$pb.TagNumber(29)
+  $fixnum.Int64 get mmQuantity => $_getI64(28);
+  @$pb.TagNumber(29)
+  set mmQuantity($fixnum.Int64 value) => $_setInt64(28, value);
+  @$pb.TagNumber(29)
+  $core.bool hasMmQuantity() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearMmQuantity() => $_clearField(29);
+
+  @$pb.TagNumber(30)
+  $core.double get askOffset => $_getN(29);
+  @$pb.TagNumber(30)
+  set askOffset($core.double value) => $_setDouble(29, value);
+  @$pb.TagNumber(30)
+  $core.bool hasAskOffset() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearAskOffset() => $_clearField(30);
+
+  @$pb.TagNumber(31)
+  $core.double get bidOffset => $_getN(30);
+  @$pb.TagNumber(31)
+  set bidOffset($core.double value) => $_setDouble(30, value);
+  @$pb.TagNumber(31)
+  $core.bool hasBidOffset() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearBidOffset() => $_clearField(31);
+
+  @$pb.TagNumber(32)
+  $core.bool get lpTagged => $_getBF(31);
+  @$pb.TagNumber(32)
+  set lpTagged($core.bool value) => $_setBool(31, value);
+  @$pb.TagNumber(32)
+  $core.bool hasLpTagged() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearLpTagged() => $_clearField(32);
+
+  @$pb.TagNumber(33)
+  $core.bool get nakedShortAllowed => $_getBF(32);
+  @$pb.TagNumber(33)
+  set nakedShortAllowed($core.bool value) => $_setBool(32, value);
+  @$pb.TagNumber(33)
+  $core.bool hasNakedShortAllowed() => $_has(32);
+  @$pb.TagNumber(33)
+  void clearNakedShortAllowed() => $_clearField(33);
+
+  @$pb.TagNumber(34)
+  $core.String get creationSettlementDate => $_getSZ(33);
+  @$pb.TagNumber(34)
+  set creationSettlementDate($core.String value) => $_setString(33, value);
+  @$pb.TagNumber(34)
+  $core.bool hasCreationSettlementDate() => $_has(33);
+  @$pb.TagNumber(34)
+  void clearCreationSettlementDate() => $_clearField(34);
+
+  @$pb.TagNumber(35)
+  $core.String get redemptionSettlementDate => $_getSZ(34);
+  @$pb.TagNumber(35)
+  set redemptionSettlementDate($core.String value) => $_setString(34, value);
+  @$pb.TagNumber(35)
+  $core.bool hasRedemptionSettlementDate() => $_has(34);
+  @$pb.TagNumber(35)
+  void clearRedemptionSettlementDate() => $_clearField(35);
+
+  @$pb.TagNumber(36)
+  $core.String get groupName => $_getSZ(35);
+  @$pb.TagNumber(36)
+  set groupName($core.String value) => $_setString(35, value);
+  @$pb.TagNumber(36)
+  $core.bool hasGroupName() => $_has(35);
+  @$pb.TagNumber(36)
+  void clearGroupName() => $_clearField(36);
+
+  @$pb.TagNumber(37)
+  $core.double get refillFloor => $_getN(36);
+  @$pb.TagNumber(37)
+  set refillFloor($core.double value) => $_setDouble(36, value);
+  @$pb.TagNumber(37)
+  $core.bool hasRefillFloor() => $_has(36);
+  @$pb.TagNumber(37)
+  void clearRefillFloor() => $_clearField(37);
+
+  @$pb.TagNumber(38)
+  $core.String get hedgePriceType => $_getSZ(37);
+  @$pb.TagNumber(38)
+  set hedgePriceType($core.String value) => $_setString(37, value);
+  @$pb.TagNumber(38)
+  $core.bool hasHedgePriceType() => $_has(37);
+  @$pb.TagNumber(38)
+  void clearHedgePriceType() => $_clearField(38);
+
+  @$pb.TagNumber(39)
+  $core.double get refillInterval => $_getN(38);
+  @$pb.TagNumber(39)
+  set refillInterval($core.double value) => $_setDouble(38, value);
+  @$pb.TagNumber(39)
+  $core.bool hasRefillInterval() => $_has(38);
+  @$pb.TagNumber(39)
+  void clearRefillInterval() => $_clearField(39);
+
+  @$pb.TagNumber(40)
+  $core.double get hedgeDominanceThreshold => $_getN(39);
+  @$pb.TagNumber(40)
+  set hedgeDominanceThreshold($core.double value) => $_setDouble(39, value);
+  @$pb.TagNumber(40)
+  $core.bool hasHedgeDominanceThreshold() => $_has(39);
+  @$pb.TagNumber(40)
+  void clearHedgeDominanceThreshold() => $_clearField(40);
+
+  @$pb.TagNumber(41)
+  $core.bool get hedgeAuto => $_getBF(40);
+  @$pb.TagNumber(41)
+  set hedgeAuto($core.bool value) => $_setBool(40, value);
+  @$pb.TagNumber(41)
+  $core.bool hasHedgeAuto() => $_has(40);
+  @$pb.TagNumber(41)
+  void clearHedgeAuto() => $_clearField(41);
+
+  @$pb.TagNumber(42)
+  $core.double get askBasis => $_getN(41);
+  @$pb.TagNumber(42)
+  set askBasis($core.double value) => $_setDouble(41, value);
+  @$pb.TagNumber(42)
+  $core.bool hasAskBasis() => $_has(41);
+  @$pb.TagNumber(42)
+  void clearAskBasis() => $_clearField(42);
+
+  @$pb.TagNumber(43)
+  $core.double get bidBasis => $_getN(42);
+  @$pb.TagNumber(43)
+  set bidBasis($core.double value) => $_setDouble(42, value);
+  @$pb.TagNumber(43)
+  $core.bool hasBidBasis() => $_has(42);
+  @$pb.TagNumber(43)
+  void clearBidBasis() => $_clearField(43);
+
+  @$pb.TagNumber(44)
+  $core.bool get passive => $_getBF(43);
+  @$pb.TagNumber(44)
+  set passive($core.bool value) => $_setBool(43, value);
+  @$pb.TagNumber(44)
+  $core.bool hasPassive() => $_has(43);
+  @$pb.TagNumber(44)
+  void clearPassive() => $_clearField(44);
+
+  @$pb.TagNumber(45)
+  $core.bool get mm => $_getBF(44);
+  @$pb.TagNumber(45)
+  set mm($core.bool value) => $_setBool(44, value);
+  @$pb.TagNumber(45)
+  $core.bool hasMm() => $_has(44);
+  @$pb.TagNumber(45)
+  void clearMm() => $_clearField(45);
+
+  @$pb.TagNumber(46)
+  $core.double get mmSpread => $_getN(45);
+  @$pb.TagNumber(46)
+  set mmSpread($core.double value) => $_setDouble(45, value);
+  @$pb.TagNumber(46)
+  $core.bool hasMmSpread() => $_has(45);
+  @$pb.TagNumber(46)
+  void clearMmSpread() => $_clearField(46);
+
+  @$pb.TagNumber(47)
+  $fixnum.Int64 get basisEmaPeriod => $_getI64(46);
+  @$pb.TagNumber(47)
+  set basisEmaPeriod($fixnum.Int64 value) => $_setInt64(46, value);
+  @$pb.TagNumber(47)
+  $core.bool hasBasisEmaPeriod() => $_has(46);
+  @$pb.TagNumber(47)
+  void clearBasisEmaPeriod() => $_clearField(47);
+
+  @$pb.TagNumber(48)
+  $core.bool get preventQuoteTurnaround => $_getBF(47);
+  @$pb.TagNumber(48)
+  set preventQuoteTurnaround($core.bool value) => $_setBool(47, value);
+  @$pb.TagNumber(48)
+  $core.bool hasPreventQuoteTurnaround() => $_has(47);
+  @$pb.TagNumber(48)
+  void clearPreventQuoteTurnaround() => $_clearField(48);
+
+  @$pb.TagNumber(49)
+  $core.String get startAmendmentAt => $_getSZ(48);
+  @$pb.TagNumber(49)
+  set startAmendmentAt($core.String value) => $_setString(48, value);
+  @$pb.TagNumber(49)
+  $core.bool hasStartAmendmentAt() => $_has(48);
+  @$pb.TagNumber(49)
+  void clearStartAmendmentAt() => $_clearField(49);
+
+  @$pb.TagNumber(50)
+  $core.double get expectedPrice => $_getN(49);
+  @$pb.TagNumber(50)
+  set expectedPrice($core.double value) => $_setDouble(49, value);
+  @$pb.TagNumber(50)
+  $core.bool hasExpectedPrice() => $_has(49);
+  @$pb.TagNumber(50)
+  void clearExpectedPrice() => $_clearField(50);
+
+  @$pb.TagNumber(51)
+  $core.bool get activeAmendment => $_getBF(50);
+  @$pb.TagNumber(51)
+  set activeAmendment($core.bool value) => $_setBool(50, value);
+  @$pb.TagNumber(51)
+  $core.bool hasActiveAmendment() => $_has(50);
+  @$pb.TagNumber(51)
+  void clearActiveAmendment() => $_clearField(51);
+
+  @$pb.TagNumber(53)
+  $core.bool get projectTrades => $_getBF(51);
+  @$pb.TagNumber(53)
+  set projectTrades($core.bool value) => $_setBool(51, value);
+  @$pb.TagNumber(53)
+  $core.bool hasProjectTrades() => $_has(51);
+  @$pb.TagNumber(53)
+  void clearProjectTrades() => $_clearField(53);
+
+  @$pb.TagNumber(54)
+  $core.double get navNav => $_getN(52);
+  @$pb.TagNumber(54)
+  set navNav($core.double value) => $_setDouble(52, value);
+  @$pb.TagNumber(54)
+  $core.bool hasNavNav() => $_has(52);
+  @$pb.TagNumber(54)
+  void clearNavNav() => $_clearField(54);
+
+  @$pb.TagNumber(55)
+  $core.double get fxAskBasis => $_getN(53);
+  @$pb.TagNumber(55)
+  set fxAskBasis($core.double value) => $_setDouble(53, value);
+  @$pb.TagNumber(55)
+  $core.bool hasFxAskBasis() => $_has(53);
+  @$pb.TagNumber(55)
+  void clearFxAskBasis() => $_clearField(55);
+
+  @$pb.TagNumber(56)
+  $core.double get fxBidBasis => $_getN(54);
+  @$pb.TagNumber(56)
+  set fxBidBasis($core.double value) => $_setDouble(54, value);
+  @$pb.TagNumber(56)
+  $core.bool hasFxBidBasis() => $_has(54);
+  @$pb.TagNumber(56)
+  void clearFxBidBasis() => $_clearField(56);
+
+  @$pb.TagNumber(57)
+  $fixnum.Int64 get graceAmount => $_getI64(55);
+  @$pb.TagNumber(57)
+  set graceAmount($fixnum.Int64 value) => $_setInt64(55, value);
+  @$pb.TagNumber(57)
+  $core.bool hasGraceAmount() => $_has(55);
+  @$pb.TagNumber(57)
+  void clearGraceAmount() => $_clearField(57);
+
+  @$pb.TagNumber(58)
+  $core.double get dominanceThreshold => $_getN(56);
+  @$pb.TagNumber(58)
+  set dominanceThreshold($core.double value) => $_setDouble(56, value);
+  @$pb.TagNumber(58)
+  $core.bool hasDominanceThreshold() => $_has(56);
+  @$pb.TagNumber(58)
+  void clearDominanceThreshold() => $_clearField(58);
+
+  @$pb.TagNumber(59)
+  $core.bool get advancedTick => $_getBF(57);
+  @$pb.TagNumber(59)
+  set advancedTick($core.bool value) => $_setBool(57, value);
+  @$pb.TagNumber(59)
+  $core.bool hasAdvancedTick() => $_has(57);
+  @$pb.TagNumber(59)
+  void clearAdvancedTick() => $_clearField(59);
+
+  @$pb.TagNumber(60)
+  $core.double get advancedTickThreshold => $_getN(58);
+  @$pb.TagNumber(60)
+  set advancedTickThreshold($core.double value) => $_setDouble(58, value);
+  @$pb.TagNumber(60)
+  $core.bool hasAdvancedTickThreshold() => $_has(58);
+  @$pb.TagNumber(60)
+  void clearAdvancedTickThreshold() => $_clearField(60);
+
+  @$pb.TagNumber(62)
+  $fixnum.Int64 get askNotifyingQuantity => $_getI64(59);
+  @$pb.TagNumber(62)
+  set askNotifyingQuantity($fixnum.Int64 value) => $_setInt64(59, value);
+  @$pb.TagNumber(62)
+  $core.bool hasAskNotifyingQuantity() => $_has(59);
+  @$pb.TagNumber(62)
+  void clearAskNotifyingQuantity() => $_clearField(62);
+
+  @$pb.TagNumber(63)
+  $fixnum.Int64 get bidNotifyingQuantity => $_getI64(60);
+  @$pb.TagNumber(63)
+  set bidNotifyingQuantity($fixnum.Int64 value) => $_setInt64(60, value);
+  @$pb.TagNumber(63)
+  $core.bool hasBidNotifyingQuantity() => $_has(60);
+  @$pb.TagNumber(63)
+  void clearBidNotifyingQuantity() => $_clearField(63);
+
+  @$pb.TagNumber(64)
+  $core.String get positionType => $_getSZ(61);
+  @$pb.TagNumber(64)
+  set positionType($core.String value) => $_setString(61, value);
+  @$pb.TagNumber(64)
+  $core.bool hasPositionType() => $_has(61);
+  @$pb.TagNumber(64)
+  void clearPositionType() => $_clearField(64);
+
+  @$pb.TagNumber(65)
+  $core.double get askOffsetAdjust => $_getN(62);
+  @$pb.TagNumber(65)
+  set askOffsetAdjust($core.double value) => $_setDouble(62, value);
+  @$pb.TagNumber(65)
+  $core.bool hasAskOffsetAdjust() => $_has(62);
+  @$pb.TagNumber(65)
+  void clearAskOffsetAdjust() => $_clearField(65);
+
+  @$pb.TagNumber(66)
+  $core.double get bidOffsetAdjust => $_getN(63);
+  @$pb.TagNumber(66)
+  set bidOffsetAdjust($core.double value) => $_setDouble(63, value);
+  @$pb.TagNumber(66)
+  $core.bool hasBidOffsetAdjust() => $_has(63);
+  @$pb.TagNumber(66)
+  void clearBidOffsetAdjust() => $_clearField(66);
+
+  @$pb.TagNumber(67)
+  $core.double get askBasisAdjust => $_getN(64);
+  @$pb.TagNumber(67)
+  set askBasisAdjust($core.double value) => $_setDouble(64, value);
+  @$pb.TagNumber(67)
+  $core.bool hasAskBasisAdjust() => $_has(64);
+  @$pb.TagNumber(67)
+  void clearAskBasisAdjust() => $_clearField(67);
+
+  @$pb.TagNumber(68)
+  $core.double get bidBasisAdjust => $_getN(65);
+  @$pb.TagNumber(68)
+  set bidBasisAdjust($core.double value) => $_setDouble(65, value);
+  @$pb.TagNumber(68)
+  $core.bool hasBidBasisAdjust() => $_has(65);
+  @$pb.TagNumber(68)
+  void clearBidBasisAdjust() => $_clearField(68);
+
+  @$pb.TagNumber(69)
+  $fixnum.Int64 get askLimitAdjust => $_getI64(66);
+  @$pb.TagNumber(69)
+  set askLimitAdjust($fixnum.Int64 value) => $_setInt64(66, value);
+  @$pb.TagNumber(69)
+  $core.bool hasAskLimitAdjust() => $_has(66);
+  @$pb.TagNumber(69)
+  void clearAskLimitAdjust() => $_clearField(69);
+
+  @$pb.TagNumber(70)
+  $fixnum.Int64 get bidLimitAdjust => $_getI64(67);
+  @$pb.TagNumber(70)
+  set bidLimitAdjust($fixnum.Int64 value) => $_setInt64(67, value);
+  @$pb.TagNumber(70)
+  $core.bool hasBidLimitAdjust() => $_has(67);
+  @$pb.TagNumber(70)
+  void clearBidLimitAdjust() => $_clearField(70);
+
+  @$pb.TagNumber(71)
+  $fixnum.Int64 get askTotalLimit => $_getI64(68);
+  @$pb.TagNumber(71)
+  set askTotalLimit($fixnum.Int64 value) => $_setInt64(68, value);
+  @$pb.TagNumber(71)
+  $core.bool hasAskTotalLimit() => $_has(68);
+  @$pb.TagNumber(71)
+  void clearAskTotalLimit() => $_clearField(71);
+
+  @$pb.TagNumber(72)
+  $fixnum.Int64 get bidTotalLimit => $_getI64(69);
+  @$pb.TagNumber(72)
+  set bidTotalLimit($fixnum.Int64 value) => $_setInt64(69, value);
+  @$pb.TagNumber(72)
+  $core.bool hasBidTotalLimit() => $_has(69);
+  @$pb.TagNumber(72)
+  void clearBidTotalLimit() => $_clearField(72);
+
+  @$pb.TagNumber(73)
+  $core.bool get askAdjustOn => $_getBF(70);
+  @$pb.TagNumber(73)
+  set askAdjustOn($core.bool value) => $_setBool(70, value);
+  @$pb.TagNumber(73)
+  $core.bool hasAskAdjustOn() => $_has(70);
+  @$pb.TagNumber(73)
+  void clearAskAdjustOn() => $_clearField(73);
+
+  @$pb.TagNumber(74)
+  $core.bool get bidAdjustOn => $_getBF(71);
+  @$pb.TagNumber(74)
+  set bidAdjustOn($core.bool value) => $_setBool(71, value);
+  @$pb.TagNumber(74)
+  $core.bool hasBidAdjustOn() => $_has(71);
+  @$pb.TagNumber(74)
+  void clearBidAdjustOn() => $_clearField(74);
+
+  @$pb.TagNumber(75)
+  $core.double get openingRefFutureAskPrice => $_getN(72);
+  @$pb.TagNumber(75)
+  set openingRefFutureAskPrice($core.double value) => $_setDouble(72, value);
+  @$pb.TagNumber(75)
+  $core.bool hasOpeningRefFutureAskPrice() => $_has(72);
+  @$pb.TagNumber(75)
+  void clearOpeningRefFutureAskPrice() => $_clearField(75);
+
+  @$pb.TagNumber(76)
+  $core.double get openingRefFutureBidPrice => $_getN(73);
+  @$pb.TagNumber(76)
+  set openingRefFutureBidPrice($core.double value) => $_setDouble(73, value);
+  @$pb.TagNumber(76)
+  $core.bool hasOpeningRefFutureBidPrice() => $_has(73);
+  @$pb.TagNumber(76)
+  void clearOpeningRefFutureBidPrice() => $_clearField(76);
+
+  @$pb.TagNumber(77)
+  $core.double get openingAskPrice => $_getN(74);
+  @$pb.TagNumber(77)
+  set openingAskPrice($core.double value) => $_setDouble(74, value);
+  @$pb.TagNumber(77)
+  $core.bool hasOpeningAskPrice() => $_has(74);
+  @$pb.TagNumber(77)
+  void clearOpeningAskPrice() => $_clearField(77);
+
+  @$pb.TagNumber(78)
+  $core.double get openingBidPrice => $_getN(75);
+  @$pb.TagNumber(78)
+  set openingBidPrice($core.double value) => $_setDouble(75, value);
+  @$pb.TagNumber(78)
+  $core.bool hasOpeningBidPrice() => $_has(75);
+  @$pb.TagNumber(78)
+  void clearOpeningBidPrice() => $_clearField(78);
+
+  @$pb.TagNumber(79)
+  $core.double get openingAskOffset => $_getN(76);
+  @$pb.TagNumber(79)
+  set openingAskOffset($core.double value) => $_setDouble(76, value);
+  @$pb.TagNumber(79)
+  $core.bool hasOpeningAskOffset() => $_has(76);
+  @$pb.TagNumber(79)
+  void clearOpeningAskOffset() => $_clearField(79);
+
+  @$pb.TagNumber(80)
+  $core.double get openingBidOffset => $_getN(77);
+  @$pb.TagNumber(80)
+  set openingBidOffset($core.double value) => $_setDouble(77, value);
+  @$pb.TagNumber(80)
+  $core.bool hasOpeningBidOffset() => $_has(77);
+  @$pb.TagNumber(80)
+  void clearOpeningBidOffset() => $_clearField(80);
+
+  @$pb.TagNumber(81)
+  $core.double get openingAskBasis => $_getN(78);
+  @$pb.TagNumber(81)
+  set openingAskBasis($core.double value) => $_setDouble(78, value);
+  @$pb.TagNumber(81)
+  $core.bool hasOpeningAskBasis() => $_has(78);
+  @$pb.TagNumber(81)
+  void clearOpeningAskBasis() => $_clearField(81);
+
+  @$pb.TagNumber(82)
+  $core.double get openingBidBasis => $_getN(79);
+  @$pb.TagNumber(82)
+  set openingBidBasis($core.double value) => $_setDouble(79, value);
+  @$pb.TagNumber(82)
+  $core.bool hasOpeningBidBasis() => $_has(79);
+  @$pb.TagNumber(82)
+  void clearOpeningBidBasis() => $_clearField(82);
+
+  @$pb.TagNumber(83)
+  $fixnum.Int64 get openingAskCount => $_getI64(80);
+  @$pb.TagNumber(83)
+  set openingAskCount($fixnum.Int64 value) => $_setInt64(80, value);
+  @$pb.TagNumber(83)
+  $core.bool hasOpeningAskCount() => $_has(80);
+  @$pb.TagNumber(83)
+  void clearOpeningAskCount() => $_clearField(83);
+
+  @$pb.TagNumber(84)
+  $fixnum.Int64 get openingBidCount => $_getI64(81);
+  @$pb.TagNumber(84)
+  set openingBidCount($fixnum.Int64 value) => $_setInt64(81, value);
+  @$pb.TagNumber(84)
+  $core.bool hasOpeningBidCount() => $_has(81);
+  @$pb.TagNumber(84)
+  void clearOpeningBidCount() => $_clearField(84);
+
+  @$pb.TagNumber(85)
+  $fixnum.Int64 get openingAskQuantity => $_getI64(82);
+  @$pb.TagNumber(85)
+  set openingAskQuantity($fixnum.Int64 value) => $_setInt64(82, value);
+  @$pb.TagNumber(85)
+  $core.bool hasOpeningAskQuantity() => $_has(82);
+  @$pb.TagNumber(85)
+  void clearOpeningAskQuantity() => $_clearField(85);
+
+  @$pb.TagNumber(86)
+  $fixnum.Int64 get openingBidQuantity => $_getI64(83);
+  @$pb.TagNumber(86)
+  set openingBidQuantity($fixnum.Int64 value) => $_setInt64(83, value);
+  @$pb.TagNumber(86)
+  $core.bool hasOpeningBidQuantity() => $_has(83);
+  @$pb.TagNumber(86)
+  void clearOpeningBidQuantity() => $_clearField(86);
+
+  @$pb.TagNumber(87)
+  $core.String get startCancellingAt => $_getSZ(84);
+  @$pb.TagNumber(87)
+  set startCancellingAt($core.String value) => $_setString(84, value);
+  @$pb.TagNumber(87)
+  $core.bool hasStartCancellingAt() => $_has(84);
+  @$pb.TagNumber(87)
+  void clearStartCancellingAt() => $_clearField(87);
+
+  @$pb.TagNumber(88)
+  $core.bool get openingActive => $_getBF(85);
+  @$pb.TagNumber(88)
+  set openingActive($core.bool value) => $_setBool(85, value);
+  @$pb.TagNumber(88)
+  $core.bool hasOpeningActive() => $_has(85);
+  @$pb.TagNumber(88)
+  void clearOpeningActive() => $_clearField(88);
+
+  @$pb.TagNumber(89)
+  $fixnum.Int64 get askCancelTicks => $_getI64(86);
+  @$pb.TagNumber(89)
+  set askCancelTicks($fixnum.Int64 value) => $_setInt64(86, value);
+  @$pb.TagNumber(89)
+  $core.bool hasAskCancelTicks() => $_has(86);
+  @$pb.TagNumber(89)
+  void clearAskCancelTicks() => $_clearField(89);
+
+  @$pb.TagNumber(90)
+  $fixnum.Int64 get bidCancelTicks => $_getI64(87);
+  @$pb.TagNumber(90)
+  set bidCancelTicks($fixnum.Int64 value) => $_setInt64(87, value);
+  @$pb.TagNumber(90)
+  $core.bool hasBidCancelTicks() => $_has(87);
+  @$pb.TagNumber(90)
+  void clearBidCancelTicks() => $_clearField(90);
+
+  @$pb.TagNumber(91)
+  $core.bool get escape => $_getBF(88);
+  @$pb.TagNumber(91)
+  set escape($core.bool value) => $_setBool(88, value);
+  @$pb.TagNumber(91)
+  $core.bool hasEscape() => $_has(88);
+  @$pb.TagNumber(91)
+  void clearEscape() => $_clearField(91);
+
+  @$pb.TagNumber(92)
+  $core.String get openingHedgeProductCode => $_getSZ(89);
+  @$pb.TagNumber(92)
+  set openingHedgeProductCode($core.String value) => $_setString(89, value);
+  @$pb.TagNumber(92)
+  $core.bool hasOpeningHedgeProductCode() => $_has(89);
+  @$pb.TagNumber(92)
+  void clearOpeningHedgeProductCode() => $_clearField(92);
+
+  @$pb.TagNumber(93)
+  $core.String get openingHedgeProductName => $_getSZ(90);
+  @$pb.TagNumber(93)
+  set openingHedgeProductName($core.String value) => $_setString(90, value);
+  @$pb.TagNumber(93)
+  $core.bool hasOpeningHedgeProductName() => $_has(90);
+  @$pb.TagNumber(93)
+  void clearOpeningHedgeProductName() => $_clearField(93);
+
+  @$pb.TagNumber(94)
+  $core.String get openingHedgePriceType => $_getSZ(91);
+  @$pb.TagNumber(94)
+  set openingHedgePriceType($core.String value) => $_setString(91, value);
+  @$pb.TagNumber(94)
+  $core.bool hasOpeningHedgePriceType() => $_has(91);
+  @$pb.TagNumber(94)
+  void clearOpeningHedgePriceType() => $_clearField(94);
+
+  @$pb.TagNumber(95)
+  $core.double get openingHedgeDominanceThreshold => $_getN(92);
+  @$pb.TagNumber(95)
+  set openingHedgeDominanceThreshold($core.double value) => $_setDouble(92, value);
+  @$pb.TagNumber(95)
+  $core.bool hasOpeningHedgeDominanceThreshold() => $_has(92);
+  @$pb.TagNumber(95)
+  void clearOpeningHedgeDominanceThreshold() => $_clearField(95);
+
+  @$pb.TagNumber(96)
+  $core.bool get openingHedgeAuto => $_getBF(93);
+  @$pb.TagNumber(96)
+  set openingHedgeAuto($core.bool value) => $_setBool(93, value);
+  @$pb.TagNumber(96)
+  $core.bool hasOpeningHedgeAuto() => $_has(93);
+  @$pb.TagNumber(96)
+  void clearOpeningHedgeAuto() => $_clearField(96);
+
+  @$pb.TagNumber(97)
+  $fixnum.Int64 get etfFilledToHedgeTriggerQuantity => $_getI64(94);
+  @$pb.TagNumber(97)
+  set etfFilledToHedgeTriggerQuantity($fixnum.Int64 value) => $_setInt64(94, value);
+  @$pb.TagNumber(97)
+  $core.bool hasEtfFilledToHedgeTriggerQuantity() => $_has(94);
+  @$pb.TagNumber(97)
+  void clearEtfFilledToHedgeTriggerQuantity() => $_clearField(97);
+
+  @$pb.TagNumber(98)
+  $fixnum.Int64 get hedgeEtfQuantitiesPerTrigger => $_getI64(95);
+  @$pb.TagNumber(98)
+  set hedgeEtfQuantitiesPerTrigger($fixnum.Int64 value) => $_setInt64(95, value);
+  @$pb.TagNumber(98)
+  $core.bool hasHedgeEtfQuantitiesPerTrigger() => $_has(95);
+  @$pb.TagNumber(98)
+  void clearHedgeEtfQuantitiesPerTrigger() => $_clearField(98);
+
+  /// LP 방향 모드. "EtfLpFutureHedge" (기존) / "FutureLpEtfHedge" (신규).
+  @$pb.TagNumber(99)
+  $core.String get lpMode => $_getSZ(96);
+  @$pb.TagNumber(99)
+  set lpMode($core.String value) => $_setString(96, value);
+  @$pb.TagNumber(99)
+  $core.bool hasLpMode() => $_has(96);
+  @$pb.TagNumber(99)
+  void clearLpMode() => $_clearField(99);
+
+  /// LP 발주 상품 코드. EtfLpFutureHedge=ETF 코드, FutureLpEtfHedge=선물 코드.
+  @$pb.TagNumber(100)
+  $core.String get lpProductCode => $_getSZ(97);
+  @$pb.TagNumber(100)
+  set lpProductCode($core.String value) => $_setString(97, value);
+  @$pb.TagNumber(100)
+  $core.bool hasLpProductCode() => $_has(97);
+  @$pb.TagNumber(100)
+  void clearLpProductCode() => $_clearField(100);
+
+  /// FutureLpEtfHedge 모드에서 선물 1계약 체결 시 발주할 ETF 주수.
+  /// PDF 기반 자동 계산 (refresh_offset_base). EtfLpFutureHedge 모드에서는 0.
+  @$pb.TagNumber(102)
+  $core.double get etfHedgeQuantityPerFutureFilled => $_getN(98);
+  @$pb.TagNumber(102)
+  set etfHedgeQuantityPerFutureFilled($core.double value) => $_setDouble(98, value);
+  @$pb.TagNumber(102)
+  $core.bool hasEtfHedgeQuantityPerFutureFilled() => $_has(98);
+  @$pb.TagNumber(102)
+  void clearEtfHedgeQuantityPerFutureFilled() => $_clearField(102);
+
+  /// FutureLpEtfHedge + RealNav 가격역산 scale.
+  /// CU / Σ(future.multiple × PDF future quantity) — ΔETF 1won 당 ΔF won 계수.
+  /// EtfLpFutureHedge 모드에서는 0.
+  @$pb.TagNumber(103)
+  $core.double get lpRealNavEtfToFutureScale => $_getN(99);
+  @$pb.TagNumber(103)
+  set lpRealNavEtfToFutureScale($core.double value) => $_setDouble(99, value);
+  @$pb.TagNumber(103)
+  $core.bool hasLpRealNavEtfToFutureScale() => $_has(99);
+  @$pb.TagNumber(103)
+  void clearLpRealNavEtfToFutureScale() => $_clearField(103);
+
+  /// FutureLpEtfHedge 전용: 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  @$pb.TagNumber(105)
+  $fixnum.Int64 get askLpOrdersPerPrice => $_getI64(100);
+  @$pb.TagNumber(105)
+  set askLpOrdersPerPrice($fixnum.Int64 value) => $_setInt64(100, value);
+  @$pb.TagNumber(105)
+  $core.bool hasAskLpOrdersPerPrice() => $_has(100);
+  @$pb.TagNumber(105)
+  void clearAskLpOrdersPerPrice() => $_clearField(105);
+
+  @$pb.TagNumber(106)
+  $fixnum.Int64 get bidLpOrdersPerPrice => $_getI64(101);
+  @$pb.TagNumber(106)
+  set bidLpOrdersPerPrice($fixnum.Int64 value) => $_setInt64(101, value);
+  @$pb.TagNumber(106)
+  $core.bool hasBidLpOrdersPerPrice() => $_has(101);
+  @$pb.TagNumber(106)
+  void clearBidLpOrdersPerPrice() => $_clearField(106);
+
+  /// FutureLpEtfHedge 전용: 장전동시호가 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  @$pb.TagNumber(107)
+  $fixnum.Int64 get askOpeningOrdersPerPrice => $_getI64(102);
+  @$pb.TagNumber(107)
+  set askOpeningOrdersPerPrice($fixnum.Int64 value) => $_setInt64(102, value);
+  @$pb.TagNumber(107)
+  $core.bool hasAskOpeningOrdersPerPrice() => $_has(102);
+  @$pb.TagNumber(107)
+  void clearAskOpeningOrdersPerPrice() => $_clearField(107);
+
+  @$pb.TagNumber(108)
+  $fixnum.Int64 get bidOpeningOrdersPerPrice => $_getI64(103);
+  @$pb.TagNumber(108)
+  set bidOpeningOrdersPerPrice($fixnum.Int64 value) => $_setInt64(103, value);
+  @$pb.TagNumber(108)
+  $core.bool hasBidOpeningOrdersPerPrice() => $_has(103);
+  @$pb.TagNumber(108)
+  void clearBidOpeningOrdersPerPrice() => $_clearField(108);
+}
+
+class AddBasketPresetRequest extends $pb.GeneratedMessage {
+  factory AddBasketPresetRequest({
+    $core.String? prefix,
+    $core.String? startAt,
+    $core.String? stopAt,
+    $core.String? indexCode,
+    $core.String? stockFundcode,
+    $core.String? derivFundcode,
+    $core.String? basisType,
+    $core.String? stockProgramType,
+    $core.String? derivProgramType,
+    $core.String? etfProgramType,
+    $core.String? stockPriceType,
+    $core.String? derivPriceType,
+    $core.String? etfPriceType,
+    $core.double? stockDominanceThreshold,
+    $core.double? derivDominanceThreshold,
+    $core.double? etfDominanceThreshold,
+    $core.double? cu,
+    $fixnum.Int64? totalRounds,
+    $fixnum.Int64? remainingTurns,
+    $core.double? triggerBasis,
+    $core.bool? isLong,
+    $core.double? minimumFilledRatio,
+    $core.double? minimumInterval,
+    $core.bool? checkAllSellable,
+    $core.bool? shortSellable,
+    $core.bool? applySlippage,
+    $core.double? etfUnfilledLimit,
+    $fixnum.Int64? stockFuture,
+    $core.String? stockCode,
+    $fixnum.Int64? stockTotalQuantity,
+    $core.bool? stockAuto,
+    $fixnum.Int64? futureTotalQuantity,
+    $core.bool? futureAuto,
+  }) {
+    final result = create();
+    if (prefix != null) result.prefix = prefix;
+    if (startAt != null) result.startAt = startAt;
+    if (stopAt != null) result.stopAt = stopAt;
+    if (indexCode != null) result.indexCode = indexCode;
+    if (stockFundcode != null) result.stockFundcode = stockFundcode;
+    if (derivFundcode != null) result.derivFundcode = derivFundcode;
+    if (basisType != null) result.basisType = basisType;
+    if (stockProgramType != null) result.stockProgramType = stockProgramType;
+    if (derivProgramType != null) result.derivProgramType = derivProgramType;
+    if (etfProgramType != null) result.etfProgramType = etfProgramType;
+    if (stockPriceType != null) result.stockPriceType = stockPriceType;
+    if (derivPriceType != null) result.derivPriceType = derivPriceType;
+    if (etfPriceType != null) result.etfPriceType = etfPriceType;
+    if (stockDominanceThreshold != null) result.stockDominanceThreshold = stockDominanceThreshold;
+    if (derivDominanceThreshold != null) result.derivDominanceThreshold = derivDominanceThreshold;
+    if (etfDominanceThreshold != null) result.etfDominanceThreshold = etfDominanceThreshold;
+    if (cu != null) result.cu = cu;
+    if (totalRounds != null) result.totalRounds = totalRounds;
+    if (remainingTurns != null) result.remainingTurns = remainingTurns;
+    if (triggerBasis != null) result.triggerBasis = triggerBasis;
+    if (isLong != null) result.isLong = isLong;
+    if (minimumFilledRatio != null) result.minimumFilledRatio = minimumFilledRatio;
+    if (minimumInterval != null) result.minimumInterval = minimumInterval;
+    if (checkAllSellable != null) result.checkAllSellable = checkAllSellable;
+    if (shortSellable != null) result.shortSellable = shortSellable;
+    if (applySlippage != null) result.applySlippage = applySlippage;
+    if (etfUnfilledLimit != null) result.etfUnfilledLimit = etfUnfilledLimit;
+    if (stockFuture != null) result.stockFuture = stockFuture;
+    if (stockCode != null) result.stockCode = stockCode;
+    if (stockTotalQuantity != null) result.stockTotalQuantity = stockTotalQuantity;
+    if (stockAuto != null) result.stockAuto = stockAuto;
+    if (futureTotalQuantity != null) result.futureTotalQuantity = futureTotalQuantity;
+    if (futureAuto != null) result.futureAuto = futureAuto;
+    return result;
+  }
+
+  AddBasketPresetRequest._();
+
+  factory AddBasketPresetRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AddBasketPresetRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddBasketPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'prefix')
+    ..aOS(2, _omitFieldNames ? '' : 'startAt')
+    ..aOS(3, _omitFieldNames ? '' : 'stopAt')
+    ..aOS(4, _omitFieldNames ? '' : 'indexCode')
+    ..aOS(5, _omitFieldNames ? '' : 'stockFundcode')
+    ..aOS(6, _omitFieldNames ? '' : 'derivFundcode')
+    ..aOS(7, _omitFieldNames ? '' : 'basisType')
+    ..aOS(8, _omitFieldNames ? '' : 'stockProgramType')
+    ..aOS(9, _omitFieldNames ? '' : 'derivProgramType')
+    ..aOS(10, _omitFieldNames ? '' : 'etfProgramType')
+    ..aOS(11, _omitFieldNames ? '' : 'stockPriceType')
+    ..aOS(12, _omitFieldNames ? '' : 'derivPriceType')
+    ..aOS(13, _omitFieldNames ? '' : 'etfPriceType')
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'stockDominanceThreshold', $pb.PbFieldType.OD)
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'derivDominanceThreshold', $pb.PbFieldType.OD)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'etfDominanceThreshold', $pb.PbFieldType.OD)
+    ..a<$core.double>(17, _omitFieldNames ? '' : 'cu', $pb.PbFieldType.OD)
+    ..aInt64(18, _omitFieldNames ? '' : 'totalRounds')
+    ..aInt64(19, _omitFieldNames ? '' : 'remainingTurns')
+    ..a<$core.double>(20, _omitFieldNames ? '' : 'triggerBasis', $pb.PbFieldType.OD)
+    ..aOB(21, _omitFieldNames ? '' : 'isLong')
+    ..a<$core.double>(22, _omitFieldNames ? '' : 'minimumFilledRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(23, _omitFieldNames ? '' : 'minimumInterval', $pb.PbFieldType.OD)
+    ..aOB(24, _omitFieldNames ? '' : 'checkAllSellable')
+    ..aOB(25, _omitFieldNames ? '' : 'shortSellable')
+    ..aOB(26, _omitFieldNames ? '' : 'applySlippage')
+    ..a<$core.double>(27, _omitFieldNames ? '' : 'etfUnfilledLimit', $pb.PbFieldType.OD)
+    ..aInt64(28, _omitFieldNames ? '' : 'stockFuture')
+    ..aOS(29, _omitFieldNames ? '' : 'stockCode')
+    ..aInt64(30, _omitFieldNames ? '' : 'stockTotalQuantity')
+    ..aOB(31, _omitFieldNames ? '' : 'stockAuto')
+    ..aInt64(32, _omitFieldNames ? '' : 'futureTotalQuantity')
+    ..aOB(33, _omitFieldNames ? '' : 'futureAuto')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddBasketPresetRequest clone() => AddBasketPresetRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AddBasketPresetRequest copyWith(void Function(AddBasketPresetRequest) updates) => super.copyWith((message) => updates(message as AddBasketPresetRequest)) as AddBasketPresetRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddBasketPresetRequest create() => AddBasketPresetRequest._();
+  @$core.override
+  AddBasketPresetRequest createEmptyInstance() => create();
+  static $pb.PbList<AddBasketPresetRequest> createRepeated() => $pb.PbList<AddBasketPresetRequest>();
+  @$core.pragma('dart2js:noInline')
+  static AddBasketPresetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddBasketPresetRequest>(create);
+  static AddBasketPresetRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get prefix => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set prefix($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPrefix() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPrefix() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get startAt => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set startAt($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasStartAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStartAt() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get stopAt => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set stopAt($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStopAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStopAt() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get indexCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set indexCode($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasIndexCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIndexCode() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get stockFundcode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set stockFundcode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasStockFundcode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearStockFundcode() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get derivFundcode => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set derivFundcode($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasDerivFundcode() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDerivFundcode() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get basisType => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set basisType($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasBasisType() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearBasisType() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get stockProgramType => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set stockProgramType($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasStockProgramType() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearStockProgramType() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get derivProgramType => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set derivProgramType($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasDerivProgramType() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearDerivProgramType() => $_clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get etfProgramType => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set etfProgramType($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasEtfProgramType() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearEtfProgramType() => $_clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.String get stockPriceType => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set stockPriceType($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasStockPriceType() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearStockPriceType() => $_clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get derivPriceType => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set derivPriceType($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasDerivPriceType() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearDerivPriceType() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get etfPriceType => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set etfPriceType($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasEtfPriceType() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearEtfPriceType() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.double get stockDominanceThreshold => $_getN(13);
+  @$pb.TagNumber(14)
+  set stockDominanceThreshold($core.double value) => $_setDouble(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasStockDominanceThreshold() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearStockDominanceThreshold() => $_clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.double get derivDominanceThreshold => $_getN(14);
+  @$pb.TagNumber(15)
+  set derivDominanceThreshold($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasDerivDominanceThreshold() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearDerivDominanceThreshold() => $_clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.double get etfDominanceThreshold => $_getN(15);
+  @$pb.TagNumber(16)
+  set etfDominanceThreshold($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasEtfDominanceThreshold() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearEtfDominanceThreshold() => $_clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.double get cu => $_getN(16);
+  @$pb.TagNumber(17)
+  set cu($core.double value) => $_setDouble(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasCu() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearCu() => $_clearField(17);
+
+  @$pb.TagNumber(18)
+  $fixnum.Int64 get totalRounds => $_getI64(17);
+  @$pb.TagNumber(18)
+  set totalRounds($fixnum.Int64 value) => $_setInt64(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasTotalRounds() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearTotalRounds() => $_clearField(18);
+
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get remainingTurns => $_getI64(18);
+  @$pb.TagNumber(19)
+  set remainingTurns($fixnum.Int64 value) => $_setInt64(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasRemainingTurns() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearRemainingTurns() => $_clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.double get triggerBasis => $_getN(19);
+  @$pb.TagNumber(20)
+  set triggerBasis($core.double value) => $_setDouble(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasTriggerBasis() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearTriggerBasis() => $_clearField(20);
+
+  @$pb.TagNumber(21)
+  $core.bool get isLong => $_getBF(20);
+  @$pb.TagNumber(21)
+  set isLong($core.bool value) => $_setBool(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasIsLong() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearIsLong() => $_clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.double get minimumFilledRatio => $_getN(21);
+  @$pb.TagNumber(22)
+  set minimumFilledRatio($core.double value) => $_setDouble(21, value);
+  @$pb.TagNumber(22)
+  $core.bool hasMinimumFilledRatio() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearMinimumFilledRatio() => $_clearField(22);
+
+  @$pb.TagNumber(23)
+  $core.double get minimumInterval => $_getN(22);
+  @$pb.TagNumber(23)
+  set minimumInterval($core.double value) => $_setDouble(22, value);
+  @$pb.TagNumber(23)
+  $core.bool hasMinimumInterval() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearMinimumInterval() => $_clearField(23);
+
+  @$pb.TagNumber(24)
+  $core.bool get checkAllSellable => $_getBF(23);
+  @$pb.TagNumber(24)
+  set checkAllSellable($core.bool value) => $_setBool(23, value);
+  @$pb.TagNumber(24)
+  $core.bool hasCheckAllSellable() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearCheckAllSellable() => $_clearField(24);
+
+  @$pb.TagNumber(25)
+  $core.bool get shortSellable => $_getBF(24);
+  @$pb.TagNumber(25)
+  set shortSellable($core.bool value) => $_setBool(24, value);
+  @$pb.TagNumber(25)
+  $core.bool hasShortSellable() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearShortSellable() => $_clearField(25);
+
+  @$pb.TagNumber(26)
+  $core.bool get applySlippage => $_getBF(25);
+  @$pb.TagNumber(26)
+  set applySlippage($core.bool value) => $_setBool(25, value);
+  @$pb.TagNumber(26)
+  $core.bool hasApplySlippage() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearApplySlippage() => $_clearField(26);
+
+  @$pb.TagNumber(27)
+  $core.double get etfUnfilledLimit => $_getN(26);
+  @$pb.TagNumber(27)
+  set etfUnfilledLimit($core.double value) => $_setDouble(26, value);
+  @$pb.TagNumber(27)
+  $core.bool hasEtfUnfilledLimit() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearEtfUnfilledLimit() => $_clearField(27);
+
+  @$pb.TagNumber(28)
+  $fixnum.Int64 get stockFuture => $_getI64(27);
+  @$pb.TagNumber(28)
+  set stockFuture($fixnum.Int64 value) => $_setInt64(27, value);
+  @$pb.TagNumber(28)
+  $core.bool hasStockFuture() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearStockFuture() => $_clearField(28);
+
+  /// 주선차익(Price) 전용
+  @$pb.TagNumber(29)
+  $core.String get stockCode => $_getSZ(28);
+  @$pb.TagNumber(29)
+  set stockCode($core.String value) => $_setString(28, value);
+  @$pb.TagNumber(29)
+  $core.bool hasStockCode() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearStockCode() => $_clearField(29);
+
+  @$pb.TagNumber(30)
+  $fixnum.Int64 get stockTotalQuantity => $_getI64(29);
+  @$pb.TagNumber(30)
+  set stockTotalQuantity($fixnum.Int64 value) => $_setInt64(29, value);
+  @$pb.TagNumber(30)
+  $core.bool hasStockTotalQuantity() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearStockTotalQuantity() => $_clearField(30);
+
+  @$pb.TagNumber(31)
+  $core.bool get stockAuto => $_getBF(30);
+  @$pb.TagNumber(31)
+  set stockAuto($core.bool value) => $_setBool(30, value);
+  @$pb.TagNumber(31)
+  $core.bool hasStockAuto() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearStockAuto() => $_clearField(31);
+
+  @$pb.TagNumber(32)
+  $fixnum.Int64 get futureTotalQuantity => $_getI64(31);
+  @$pb.TagNumber(32)
+  set futureTotalQuantity($fixnum.Int64 value) => $_setInt64(31, value);
+  @$pb.TagNumber(32)
+  $core.bool hasFutureTotalQuantity() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearFutureTotalQuantity() => $_clearField(32);
+
+  @$pb.TagNumber(33)
+  $core.bool get futureAuto => $_getBF(32);
+  @$pb.TagNumber(33)
+  set futureAuto($core.bool value) => $_setBool(32, value);
+  @$pb.TagNumber(33)
+  $core.bool hasFutureAuto() => $_has(32);
+  @$pb.TagNumber(33)
+  void clearFutureAuto() => $_clearField(33);
+}
+
+class BasketPresetDetail extends $pb.GeneratedMessage {
+  factory BasketPresetDetail({
+    $core.String? prefix,
+    $core.String? startAt,
+    $core.String? stopAt,
+    $core.String? indexCode,
+    $core.String? stockFundcode,
+    $core.String? derivFundcode,
+    $core.String? basisType,
+    $core.String? stockProgramType,
+    $core.String? derivProgramType,
+    $core.String? etfProgramType,
+    $core.String? stockPriceType,
+    $core.String? derivPriceType,
+    $core.String? etfPriceType,
+    $core.double? stockDominanceThreshold,
+    $core.double? derivDominanceThreshold,
+    $core.double? etfDominanceThreshold,
+    $core.double? cu,
+    $fixnum.Int64? totalRounds,
+    $fixnum.Int64? remainingTurns,
+    $core.double? triggerBasis,
+    $core.bool? isLong,
+    $core.String? code,
+    $core.String? userCode,
+    $core.bool? checkAllSellable,
+    $core.bool? shortSellable,
+    $core.bool? applySlippage,
+    $core.double? minimumFilledRatio,
+    $core.double? minimumInterval,
+    $core.double? etfUnfilledLimit,
+    $fixnum.Int64? stockFuture,
+    $core.String? stockCode,
+    $fixnum.Int64? stockTotalQuantity,
+    $core.bool? stockAuto,
+    $fixnum.Int64? futureTotalQuantity,
+    $core.bool? futureAuto,
+  }) {
+    final result = create();
+    if (prefix != null) result.prefix = prefix;
+    if (startAt != null) result.startAt = startAt;
+    if (stopAt != null) result.stopAt = stopAt;
+    if (indexCode != null) result.indexCode = indexCode;
+    if (stockFundcode != null) result.stockFundcode = stockFundcode;
+    if (derivFundcode != null) result.derivFundcode = derivFundcode;
+    if (basisType != null) result.basisType = basisType;
+    if (stockProgramType != null) result.stockProgramType = stockProgramType;
+    if (derivProgramType != null) result.derivProgramType = derivProgramType;
+    if (etfProgramType != null) result.etfProgramType = etfProgramType;
+    if (stockPriceType != null) result.stockPriceType = stockPriceType;
+    if (derivPriceType != null) result.derivPriceType = derivPriceType;
+    if (etfPriceType != null) result.etfPriceType = etfPriceType;
+    if (stockDominanceThreshold != null) result.stockDominanceThreshold = stockDominanceThreshold;
+    if (derivDominanceThreshold != null) result.derivDominanceThreshold = derivDominanceThreshold;
+    if (etfDominanceThreshold != null) result.etfDominanceThreshold = etfDominanceThreshold;
+    if (cu != null) result.cu = cu;
+    if (totalRounds != null) result.totalRounds = totalRounds;
+    if (remainingTurns != null) result.remainingTurns = remainingTurns;
+    if (triggerBasis != null) result.triggerBasis = triggerBasis;
+    if (isLong != null) result.isLong = isLong;
+    if (code != null) result.code = code;
+    if (userCode != null) result.userCode = userCode;
+    if (checkAllSellable != null) result.checkAllSellable = checkAllSellable;
+    if (shortSellable != null) result.shortSellable = shortSellable;
+    if (applySlippage != null) result.applySlippage = applySlippage;
+    if (minimumFilledRatio != null) result.minimumFilledRatio = minimumFilledRatio;
+    if (minimumInterval != null) result.minimumInterval = minimumInterval;
+    if (etfUnfilledLimit != null) result.etfUnfilledLimit = etfUnfilledLimit;
+    if (stockFuture != null) result.stockFuture = stockFuture;
+    if (stockCode != null) result.stockCode = stockCode;
+    if (stockTotalQuantity != null) result.stockTotalQuantity = stockTotalQuantity;
+    if (stockAuto != null) result.stockAuto = stockAuto;
+    if (futureTotalQuantity != null) result.futureTotalQuantity = futureTotalQuantity;
+    if (futureAuto != null) result.futureAuto = futureAuto;
+    return result;
+  }
+
+  BasketPresetDetail._();
+
+  factory BasketPresetDetail.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BasketPresetDetail.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketPresetDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'prefix')
+    ..aOS(2, _omitFieldNames ? '' : 'startAt')
+    ..aOS(3, _omitFieldNames ? '' : 'stopAt')
+    ..aOS(4, _omitFieldNames ? '' : 'indexCode')
+    ..aOS(5, _omitFieldNames ? '' : 'stockFundcode')
+    ..aOS(6, _omitFieldNames ? '' : 'derivFundcode')
+    ..aOS(7, _omitFieldNames ? '' : 'basisType')
+    ..aOS(8, _omitFieldNames ? '' : 'stockProgramType')
+    ..aOS(9, _omitFieldNames ? '' : 'derivProgramType')
+    ..aOS(10, _omitFieldNames ? '' : 'etfProgramType')
+    ..aOS(11, _omitFieldNames ? '' : 'stockPriceType')
+    ..aOS(12, _omitFieldNames ? '' : 'derivPriceType')
+    ..aOS(13, _omitFieldNames ? '' : 'etfPriceType')
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'stockDominanceThreshold', $pb.PbFieldType.OD)
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'derivDominanceThreshold', $pb.PbFieldType.OD)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'etfDominanceThreshold', $pb.PbFieldType.OD)
+    ..a<$core.double>(17, _omitFieldNames ? '' : 'cu', $pb.PbFieldType.OD)
+    ..aInt64(18, _omitFieldNames ? '' : 'totalRounds')
+    ..aInt64(19, _omitFieldNames ? '' : 'remainingTurns')
+    ..a<$core.double>(20, _omitFieldNames ? '' : 'triggerBasis', $pb.PbFieldType.OD)
+    ..aOB(21, _omitFieldNames ? '' : 'isLong')
+    ..aOS(22, _omitFieldNames ? '' : 'code')
+    ..aOS(23, _omitFieldNames ? '' : 'userCode')
+    ..aOB(24, _omitFieldNames ? '' : 'checkAllSellable')
+    ..aOB(25, _omitFieldNames ? '' : 'shortSellable')
+    ..aOB(26, _omitFieldNames ? '' : 'applySlippage')
+    ..a<$core.double>(27, _omitFieldNames ? '' : 'minimumFilledRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(28, _omitFieldNames ? '' : 'minimumInterval', $pb.PbFieldType.OD)
+    ..a<$core.double>(29, _omitFieldNames ? '' : 'etfUnfilledLimit', $pb.PbFieldType.OD)
+    ..aInt64(30, _omitFieldNames ? '' : 'stockFuture')
+    ..aOS(31, _omitFieldNames ? '' : 'stockCode')
+    ..aInt64(32, _omitFieldNames ? '' : 'stockTotalQuantity')
+    ..aOB(33, _omitFieldNames ? '' : 'stockAuto')
+    ..aInt64(34, _omitFieldNames ? '' : 'futureTotalQuantity')
+    ..aOB(35, _omitFieldNames ? '' : 'futureAuto')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketPresetDetail clone() => BasketPresetDetail()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketPresetDetail copyWith(void Function(BasketPresetDetail) updates) => super.copyWith((message) => updates(message as BasketPresetDetail)) as BasketPresetDetail;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BasketPresetDetail create() => BasketPresetDetail._();
+  @$core.override
+  BasketPresetDetail createEmptyInstance() => create();
+  static $pb.PbList<BasketPresetDetail> createRepeated() => $pb.PbList<BasketPresetDetail>();
+  @$core.pragma('dart2js:noInline')
+  static BasketPresetDetail getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasketPresetDetail>(create);
+  static BasketPresetDetail? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get prefix => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set prefix($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPrefix() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPrefix() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get startAt => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set startAt($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasStartAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearStartAt() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get stopAt => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set stopAt($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStopAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStopAt() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get indexCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set indexCode($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasIndexCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIndexCode() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get stockFundcode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set stockFundcode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasStockFundcode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearStockFundcode() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get derivFundcode => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set derivFundcode($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasDerivFundcode() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearDerivFundcode() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get basisType => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set basisType($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasBasisType() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearBasisType() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get stockProgramType => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set stockProgramType($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasStockProgramType() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearStockProgramType() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get derivProgramType => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set derivProgramType($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasDerivProgramType() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearDerivProgramType() => $_clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.String get etfProgramType => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set etfProgramType($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasEtfProgramType() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearEtfProgramType() => $_clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.String get stockPriceType => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set stockPriceType($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasStockPriceType() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearStockPriceType() => $_clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get derivPriceType => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set derivPriceType($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasDerivPriceType() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearDerivPriceType() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get etfPriceType => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set etfPriceType($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasEtfPriceType() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearEtfPriceType() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.double get stockDominanceThreshold => $_getN(13);
+  @$pb.TagNumber(14)
+  set stockDominanceThreshold($core.double value) => $_setDouble(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasStockDominanceThreshold() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearStockDominanceThreshold() => $_clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.double get derivDominanceThreshold => $_getN(14);
+  @$pb.TagNumber(15)
+  set derivDominanceThreshold($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasDerivDominanceThreshold() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearDerivDominanceThreshold() => $_clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.double get etfDominanceThreshold => $_getN(15);
+  @$pb.TagNumber(16)
+  set etfDominanceThreshold($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasEtfDominanceThreshold() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearEtfDominanceThreshold() => $_clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.double get cu => $_getN(16);
+  @$pb.TagNumber(17)
+  set cu($core.double value) => $_setDouble(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasCu() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearCu() => $_clearField(17);
+
+  @$pb.TagNumber(18)
+  $fixnum.Int64 get totalRounds => $_getI64(17);
+  @$pb.TagNumber(18)
+  set totalRounds($fixnum.Int64 value) => $_setInt64(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasTotalRounds() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearTotalRounds() => $_clearField(18);
+
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get remainingTurns => $_getI64(18);
+  @$pb.TagNumber(19)
+  set remainingTurns($fixnum.Int64 value) => $_setInt64(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasRemainingTurns() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearRemainingTurns() => $_clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.double get triggerBasis => $_getN(19);
+  @$pb.TagNumber(20)
+  set triggerBasis($core.double value) => $_setDouble(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasTriggerBasis() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearTriggerBasis() => $_clearField(20);
+
+  @$pb.TagNumber(21)
+  $core.bool get isLong => $_getBF(20);
+  @$pb.TagNumber(21)
+  set isLong($core.bool value) => $_setBool(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasIsLong() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearIsLong() => $_clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.String get code => $_getSZ(21);
+  @$pb.TagNumber(22)
+  set code($core.String value) => $_setString(21, value);
+  @$pb.TagNumber(22)
+  $core.bool hasCode() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearCode() => $_clearField(22);
+
+  @$pb.TagNumber(23)
+  $core.String get userCode => $_getSZ(22);
+  @$pb.TagNumber(23)
+  set userCode($core.String value) => $_setString(22, value);
+  @$pb.TagNumber(23)
+  $core.bool hasUserCode() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearUserCode() => $_clearField(23);
+
+  @$pb.TagNumber(24)
+  $core.bool get checkAllSellable => $_getBF(23);
+  @$pb.TagNumber(24)
+  set checkAllSellable($core.bool value) => $_setBool(23, value);
+  @$pb.TagNumber(24)
+  $core.bool hasCheckAllSellable() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearCheckAllSellable() => $_clearField(24);
+
+  @$pb.TagNumber(25)
+  $core.bool get shortSellable => $_getBF(24);
+  @$pb.TagNumber(25)
+  set shortSellable($core.bool value) => $_setBool(24, value);
+  @$pb.TagNumber(25)
+  $core.bool hasShortSellable() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearShortSellable() => $_clearField(25);
+
+  @$pb.TagNumber(26)
+  $core.bool get applySlippage => $_getBF(25);
+  @$pb.TagNumber(26)
+  set applySlippage($core.bool value) => $_setBool(25, value);
+  @$pb.TagNumber(26)
+  $core.bool hasApplySlippage() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearApplySlippage() => $_clearField(26);
+
+  @$pb.TagNumber(27)
+  $core.double get minimumFilledRatio => $_getN(26);
+  @$pb.TagNumber(27)
+  set minimumFilledRatio($core.double value) => $_setDouble(26, value);
+  @$pb.TagNumber(27)
+  $core.bool hasMinimumFilledRatio() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearMinimumFilledRatio() => $_clearField(27);
+
+  @$pb.TagNumber(28)
+  $core.double get minimumInterval => $_getN(27);
+  @$pb.TagNumber(28)
+  set minimumInterval($core.double value) => $_setDouble(27, value);
+  @$pb.TagNumber(28)
+  $core.bool hasMinimumInterval() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearMinimumInterval() => $_clearField(28);
+
+  @$pb.TagNumber(29)
+  $core.double get etfUnfilledLimit => $_getN(28);
+  @$pb.TagNumber(29)
+  set etfUnfilledLimit($core.double value) => $_setDouble(28, value);
+  @$pb.TagNumber(29)
+  $core.bool hasEtfUnfilledLimit() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearEtfUnfilledLimit() => $_clearField(29);
+
+  @$pb.TagNumber(30)
+  $fixnum.Int64 get stockFuture => $_getI64(29);
+  @$pb.TagNumber(30)
+  set stockFuture($fixnum.Int64 value) => $_setInt64(29, value);
+  @$pb.TagNumber(30)
+  $core.bool hasStockFuture() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearStockFuture() => $_clearField(30);
+
+  /// 주선차익(Price) 전용
+  @$pb.TagNumber(31)
+  $core.String get stockCode => $_getSZ(30);
+  @$pb.TagNumber(31)
+  set stockCode($core.String value) => $_setString(30, value);
+  @$pb.TagNumber(31)
+  $core.bool hasStockCode() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearStockCode() => $_clearField(31);
+
+  @$pb.TagNumber(32)
+  $fixnum.Int64 get stockTotalQuantity => $_getI64(31);
+  @$pb.TagNumber(32)
+  set stockTotalQuantity($fixnum.Int64 value) => $_setInt64(31, value);
+  @$pb.TagNumber(32)
+  $core.bool hasStockTotalQuantity() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearStockTotalQuantity() => $_clearField(32);
+
+  @$pb.TagNumber(33)
+  $core.bool get stockAuto => $_getBF(32);
+  @$pb.TagNumber(33)
+  set stockAuto($core.bool value) => $_setBool(32, value);
+  @$pb.TagNumber(33)
+  $core.bool hasStockAuto() => $_has(32);
+  @$pb.TagNumber(33)
+  void clearStockAuto() => $_clearField(33);
+
+  @$pb.TagNumber(34)
+  $fixnum.Int64 get futureTotalQuantity => $_getI64(33);
+  @$pb.TagNumber(34)
+  set futureTotalQuantity($fixnum.Int64 value) => $_setInt64(33, value);
+  @$pb.TagNumber(34)
+  $core.bool hasFutureTotalQuantity() => $_has(33);
+  @$pb.TagNumber(34)
+  void clearFutureTotalQuantity() => $_clearField(34);
+
+  @$pb.TagNumber(35)
+  $core.bool get futureAuto => $_getBF(34);
+  @$pb.TagNumber(35)
+  set futureAuto($core.bool value) => $_setBool(34, value);
+  @$pb.TagNumber(35)
+  $core.bool hasFutureAuto() => $_has(34);
+  @$pb.TagNumber(35)
+  void clearFutureAuto() => $_clearField(35);
+}
+
+class ControlManagerRequest extends $pb.GeneratedMessage {
+  factory ControlManagerRequest({
+    $core.String? code,
+    $core.String? action,
+    $core.String? value,
+  }) {
+    final result = create();
+    if (code != null) result.code = code;
+    if (action != null) result.action = action;
+    if (value != null) result.value = value;
+    return result;
+  }
+
+  ControlManagerRequest._();
+
+  factory ControlManagerRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ControlManagerRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ControlManagerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'code')
+    ..aOS(2, _omitFieldNames ? '' : 'action')
+    ..aOS(3, _omitFieldNames ? '' : 'value')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ControlManagerRequest clone() => ControlManagerRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ControlManagerRequest copyWith(void Function(ControlManagerRequest) updates) => super.copyWith((message) => updates(message as ControlManagerRequest)) as ControlManagerRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ControlManagerRequest create() => ControlManagerRequest._();
+  @$core.override
+  ControlManagerRequest createEmptyInstance() => create();
+  static $pb.PbList<ControlManagerRequest> createRepeated() => $pb.PbList<ControlManagerRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ControlManagerRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ControlManagerRequest>(create);
+  static ControlManagerRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get code => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set code($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCode() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get action => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set action($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasAction() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAction() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get value => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set value($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasValue() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearValue() => $_clearField(3);
+}
+
+class BasketManagerDetail extends $pb.GeneratedMessage {
+  factory BasketManagerDetail({
+    $core.String? code,
+    $core.String? name,
+    $core.String? startAt,
+    $core.String? stopAt,
+    $core.bool? isLong,
+    $core.bool? active,
+    $fixnum.Int64? currentRound,
+    $fixnum.Int64? totalRounds,
+    $fixnum.Int64? doneRounds,
+    $core.double? minimumFilledRatio,
+    $core.double? minimumInterval,
+    $core.double? triggerBasis,
+    $core.String? indexCode,
+    $core.String? indexName,
+    $core.String? basisCondition,
+    $core.String? basisType,
+    $core.String? basisPriceType,
+    $core.Iterable<BasketManagerDetailItem>? items,
+    $core.String? userCode,
+    $core.bool? public,
+    $fixnum.Int64? remainingTurns,
+    $core.String? uiGroup,
+    $core.bool? checkAllSellable,
+    $core.String? longProductType,
+    $core.String? shortProductType,
+    $fixnum.Int64? shortQuantity,
+    $fixnum.Int64? longQuantity,
+    $fixnum.Int64? shortProducts,
+    $fixnum.Int64? longProducts,
+    $core.bool? shortSellable,
+    $core.bool? applySlippage,
+    $fixnum.Int64? pauseRound,
+    $core.String? createdAt,
+    $core.String? fundcode,
+    $core.double? etfUnfilledLimit,
+    $core.double? graceTheMoney,
+    $core.bool? regardSmpAsTraded,
+    $core.double? executionThreshold,
+    $fixnum.Int64? starterLimitRounds,
+    $core.String? idNumber,
+    $core.bool? checkAllConnected,
+    $core.String? futureMaturityNo,
+    $core.bool? autoLaunch,
+    $core.String? launchAt,
+    $core.String? startAmendAt,
+    $core.double? launchPricePercent,
+    $core.double? participationLimitPercent,
+    $core.bool? launched,
+    $core.String? customProductCode,
+    $core.double? customProductRatio,
+    $core.String? exchange,
+  }) {
+    final result = create();
+    if (code != null) result.code = code;
+    if (name != null) result.name = name;
+    if (startAt != null) result.startAt = startAt;
+    if (stopAt != null) result.stopAt = stopAt;
+    if (isLong != null) result.isLong = isLong;
+    if (active != null) result.active = active;
+    if (currentRound != null) result.currentRound = currentRound;
+    if (totalRounds != null) result.totalRounds = totalRounds;
+    if (doneRounds != null) result.doneRounds = doneRounds;
+    if (minimumFilledRatio != null) result.minimumFilledRatio = minimumFilledRatio;
+    if (minimumInterval != null) result.minimumInterval = minimumInterval;
+    if (triggerBasis != null) result.triggerBasis = triggerBasis;
+    if (indexCode != null) result.indexCode = indexCode;
+    if (indexName != null) result.indexName = indexName;
+    if (basisCondition != null) result.basisCondition = basisCondition;
+    if (basisType != null) result.basisType = basisType;
+    if (basisPriceType != null) result.basisPriceType = basisPriceType;
+    if (items != null) result.items.addAll(items);
+    if (userCode != null) result.userCode = userCode;
+    if (public != null) result.public = public;
+    if (remainingTurns != null) result.remainingTurns = remainingTurns;
+    if (uiGroup != null) result.uiGroup = uiGroup;
+    if (checkAllSellable != null) result.checkAllSellable = checkAllSellable;
+    if (longProductType != null) result.longProductType = longProductType;
+    if (shortProductType != null) result.shortProductType = shortProductType;
+    if (shortQuantity != null) result.shortQuantity = shortQuantity;
+    if (longQuantity != null) result.longQuantity = longQuantity;
+    if (shortProducts != null) result.shortProducts = shortProducts;
+    if (longProducts != null) result.longProducts = longProducts;
+    if (shortSellable != null) result.shortSellable = shortSellable;
+    if (applySlippage != null) result.applySlippage = applySlippage;
+    if (pauseRound != null) result.pauseRound = pauseRound;
+    if (createdAt != null) result.createdAt = createdAt;
+    if (fundcode != null) result.fundcode = fundcode;
+    if (etfUnfilledLimit != null) result.etfUnfilledLimit = etfUnfilledLimit;
+    if (graceTheMoney != null) result.graceTheMoney = graceTheMoney;
+    if (regardSmpAsTraded != null) result.regardSmpAsTraded = regardSmpAsTraded;
+    if (executionThreshold != null) result.executionThreshold = executionThreshold;
+    if (starterLimitRounds != null) result.starterLimitRounds = starterLimitRounds;
+    if (idNumber != null) result.idNumber = idNumber;
+    if (checkAllConnected != null) result.checkAllConnected = checkAllConnected;
+    if (futureMaturityNo != null) result.futureMaturityNo = futureMaturityNo;
+    if (autoLaunch != null) result.autoLaunch = autoLaunch;
+    if (launchAt != null) result.launchAt = launchAt;
+    if (startAmendAt != null) result.startAmendAt = startAmendAt;
+    if (launchPricePercent != null) result.launchPricePercent = launchPricePercent;
+    if (participationLimitPercent != null) result.participationLimitPercent = participationLimitPercent;
+    if (launched != null) result.launched = launched;
+    if (customProductCode != null) result.customProductCode = customProductCode;
+    if (customProductRatio != null) result.customProductRatio = customProductRatio;
+    if (exchange != null) result.exchange = exchange;
+    return result;
+  }
+
+  BasketManagerDetail._();
+
+  factory BasketManagerDetail.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BasketManagerDetail.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketManagerDetail', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'code')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'startAt')
+    ..aOS(4, _omitFieldNames ? '' : 'stopAt')
+    ..aOB(5, _omitFieldNames ? '' : 'isLong')
+    ..aOB(6, _omitFieldNames ? '' : 'active')
+    ..aInt64(7, _omitFieldNames ? '' : 'currentRound')
+    ..aInt64(8, _omitFieldNames ? '' : 'totalRounds')
+    ..aInt64(9, _omitFieldNames ? '' : 'doneRounds')
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'minimumFilledRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'minimumInterval', $pb.PbFieldType.OD)
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'triggerBasis', $pb.PbFieldType.OD)
+    ..aOS(13, _omitFieldNames ? '' : 'indexCode')
+    ..aOS(14, _omitFieldNames ? '' : 'indexName')
+    ..aOS(15, _omitFieldNames ? '' : 'basisCondition')
+    ..aOS(16, _omitFieldNames ? '' : 'basisType')
+    ..aOS(17, _omitFieldNames ? '' : 'basisPriceType')
+    ..pc<BasketManagerDetailItem>(18, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: BasketManagerDetailItem.create)
+    ..aOS(19, _omitFieldNames ? '' : 'userCode')
+    ..aOB(20, _omitFieldNames ? '' : 'public')
+    ..aInt64(21, _omitFieldNames ? '' : 'remainingTurns')
+    ..aOS(22, _omitFieldNames ? '' : 'uiGroup')
+    ..aOB(23, _omitFieldNames ? '' : 'checkAllSellable')
+    ..aOS(24, _omitFieldNames ? '' : 'longProductType')
+    ..aOS(25, _omitFieldNames ? '' : 'shortProductType')
+    ..aInt64(26, _omitFieldNames ? '' : 'shortQuantity')
+    ..aInt64(27, _omitFieldNames ? '' : 'longQuantity')
+    ..aInt64(28, _omitFieldNames ? '' : 'shortProducts')
+    ..aInt64(29, _omitFieldNames ? '' : 'longProducts')
+    ..aOB(30, _omitFieldNames ? '' : 'shortSellable')
+    ..aOB(31, _omitFieldNames ? '' : 'applySlippage')
+    ..aInt64(32, _omitFieldNames ? '' : 'pauseRound')
+    ..aOS(33, _omitFieldNames ? '' : 'createdAt')
+    ..aOS(34, _omitFieldNames ? '' : 'fundcode')
+    ..a<$core.double>(35, _omitFieldNames ? '' : 'etfUnfilledLimit', $pb.PbFieldType.OD)
+    ..a<$core.double>(36, _omitFieldNames ? '' : 'graceTheMoney', $pb.PbFieldType.OD)
+    ..aOB(37, _omitFieldNames ? '' : 'regardSmpAsTraded')
+    ..a<$core.double>(38, _omitFieldNames ? '' : 'executionThreshold', $pb.PbFieldType.OD)
+    ..aInt64(39, _omitFieldNames ? '' : 'starterLimitRounds')
+    ..aOS(40, _omitFieldNames ? '' : 'idNumber')
+    ..aOB(41, _omitFieldNames ? '' : 'checkAllConnected')
+    ..aOS(42, _omitFieldNames ? '' : 'futureMaturityNo')
+    ..aOB(43, _omitFieldNames ? '' : 'autoLaunch')
+    ..aOS(44, _omitFieldNames ? '' : 'launchAt')
+    ..aOS(45, _omitFieldNames ? '' : 'startAmendAt')
+    ..a<$core.double>(46, _omitFieldNames ? '' : 'launchPricePercent', $pb.PbFieldType.OD)
+    ..a<$core.double>(47, _omitFieldNames ? '' : 'participationLimitPercent', $pb.PbFieldType.OD)
+    ..aOB(48, _omitFieldNames ? '' : 'launched')
+    ..aOS(49, _omitFieldNames ? '' : 'customProductCode')
+    ..a<$core.double>(50, _omitFieldNames ? '' : 'customProductRatio', $pb.PbFieldType.OD)
+    ..aOS(51, _omitFieldNames ? '' : 'exchange')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketManagerDetail clone() => BasketManagerDetail()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketManagerDetail copyWith(void Function(BasketManagerDetail) updates) => super.copyWith((message) => updates(message as BasketManagerDetail)) as BasketManagerDetail;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BasketManagerDetail create() => BasketManagerDetail._();
+  @$core.override
+  BasketManagerDetail createEmptyInstance() => create();
+  static $pb.PbList<BasketManagerDetail> createRepeated() => $pb.PbList<BasketManagerDetail>();
+  @$core.pragma('dart2js:noInline')
+  static BasketManagerDetail getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasketManagerDetail>(create);
+  static BasketManagerDetail? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get code => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set code($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCode() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get startAt => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set startAt($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStartAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStartAt() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get stopAt => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set stopAt($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasStopAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStopAt() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.bool get isLong => $_getBF(4);
+  @$pb.TagNumber(5)
+  set isLong($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasIsLong() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearIsLong() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get active => $_getBF(5);
+  @$pb.TagNumber(6)
+  set active($core.bool value) => $_setBool(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasActive() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearActive() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get currentRound => $_getI64(6);
+  @$pb.TagNumber(7)
+  set currentRound($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCurrentRound() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCurrentRound() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get totalRounds => $_getI64(7);
+  @$pb.TagNumber(8)
+  set totalRounds($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasTotalRounds() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearTotalRounds() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get doneRounds => $_getI64(8);
+  @$pb.TagNumber(9)
+  set doneRounds($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasDoneRounds() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearDoneRounds() => $_clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.double get minimumFilledRatio => $_getN(9);
+  @$pb.TagNumber(10)
+  set minimumFilledRatio($core.double value) => $_setDouble(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasMinimumFilledRatio() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearMinimumFilledRatio() => $_clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.double get minimumInterval => $_getN(10);
+  @$pb.TagNumber(11)
+  set minimumInterval($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasMinimumInterval() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearMinimumInterval() => $_clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.double get triggerBasis => $_getN(11);
+  @$pb.TagNumber(12)
+  set triggerBasis($core.double value) => $_setDouble(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasTriggerBasis() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearTriggerBasis() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get indexCode => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set indexCode($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasIndexCode() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearIndexCode() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get indexName => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set indexName($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasIndexName() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearIndexName() => $_clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.String get basisCondition => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set basisCondition($core.String value) => $_setString(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasBasisCondition() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearBasisCondition() => $_clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.String get basisType => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set basisType($core.String value) => $_setString(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasBasisType() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearBasisType() => $_clearField(16);
+
+  @$pb.TagNumber(17)
+  $core.String get basisPriceType => $_getSZ(16);
+  @$pb.TagNumber(17)
+  set basisPriceType($core.String value) => $_setString(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasBasisPriceType() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearBasisPriceType() => $_clearField(17);
+
+  @$pb.TagNumber(18)
+  $pb.PbList<BasketManagerDetailItem> get items => $_getList(17);
+
+  @$pb.TagNumber(19)
+  $core.String get userCode => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set userCode($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasUserCode() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearUserCode() => $_clearField(19);
+
+  @$pb.TagNumber(20)
+  $core.bool get public => $_getBF(19);
+  @$pb.TagNumber(20)
+  set public($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasPublic() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearPublic() => $_clearField(20);
+
+  @$pb.TagNumber(21)
+  $fixnum.Int64 get remainingTurns => $_getI64(20);
+  @$pb.TagNumber(21)
+  set remainingTurns($fixnum.Int64 value) => $_setInt64(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasRemainingTurns() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearRemainingTurns() => $_clearField(21);
+
+  @$pb.TagNumber(22)
+  $core.String get uiGroup => $_getSZ(21);
+  @$pb.TagNumber(22)
+  set uiGroup($core.String value) => $_setString(21, value);
+  @$pb.TagNumber(22)
+  $core.bool hasUiGroup() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearUiGroup() => $_clearField(22);
+
+  @$pb.TagNumber(23)
+  $core.bool get checkAllSellable => $_getBF(22);
+  @$pb.TagNumber(23)
+  set checkAllSellable($core.bool value) => $_setBool(22, value);
+  @$pb.TagNumber(23)
+  $core.bool hasCheckAllSellable() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearCheckAllSellable() => $_clearField(23);
+
+  @$pb.TagNumber(24)
+  $core.String get longProductType => $_getSZ(23);
+  @$pb.TagNumber(24)
+  set longProductType($core.String value) => $_setString(23, value);
+  @$pb.TagNumber(24)
+  $core.bool hasLongProductType() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearLongProductType() => $_clearField(24);
+
+  @$pb.TagNumber(25)
+  $core.String get shortProductType => $_getSZ(24);
+  @$pb.TagNumber(25)
+  set shortProductType($core.String value) => $_setString(24, value);
+  @$pb.TagNumber(25)
+  $core.bool hasShortProductType() => $_has(24);
+  @$pb.TagNumber(25)
+  void clearShortProductType() => $_clearField(25);
+
+  @$pb.TagNumber(26)
+  $fixnum.Int64 get shortQuantity => $_getI64(25);
+  @$pb.TagNumber(26)
+  set shortQuantity($fixnum.Int64 value) => $_setInt64(25, value);
+  @$pb.TagNumber(26)
+  $core.bool hasShortQuantity() => $_has(25);
+  @$pb.TagNumber(26)
+  void clearShortQuantity() => $_clearField(26);
+
+  @$pb.TagNumber(27)
+  $fixnum.Int64 get longQuantity => $_getI64(26);
+  @$pb.TagNumber(27)
+  set longQuantity($fixnum.Int64 value) => $_setInt64(26, value);
+  @$pb.TagNumber(27)
+  $core.bool hasLongQuantity() => $_has(26);
+  @$pb.TagNumber(27)
+  void clearLongQuantity() => $_clearField(27);
+
+  @$pb.TagNumber(28)
+  $fixnum.Int64 get shortProducts => $_getI64(27);
+  @$pb.TagNumber(28)
+  set shortProducts($fixnum.Int64 value) => $_setInt64(27, value);
+  @$pb.TagNumber(28)
+  $core.bool hasShortProducts() => $_has(27);
+  @$pb.TagNumber(28)
+  void clearShortProducts() => $_clearField(28);
+
+  @$pb.TagNumber(29)
+  $fixnum.Int64 get longProducts => $_getI64(28);
+  @$pb.TagNumber(29)
+  set longProducts($fixnum.Int64 value) => $_setInt64(28, value);
+  @$pb.TagNumber(29)
+  $core.bool hasLongProducts() => $_has(28);
+  @$pb.TagNumber(29)
+  void clearLongProducts() => $_clearField(29);
+
+  @$pb.TagNumber(30)
+  $core.bool get shortSellable => $_getBF(29);
+  @$pb.TagNumber(30)
+  set shortSellable($core.bool value) => $_setBool(29, value);
+  @$pb.TagNumber(30)
+  $core.bool hasShortSellable() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearShortSellable() => $_clearField(30);
+
+  @$pb.TagNumber(31)
+  $core.bool get applySlippage => $_getBF(30);
+  @$pb.TagNumber(31)
+  set applySlippage($core.bool value) => $_setBool(30, value);
+  @$pb.TagNumber(31)
+  $core.bool hasApplySlippage() => $_has(30);
+  @$pb.TagNumber(31)
+  void clearApplySlippage() => $_clearField(31);
+
+  @$pb.TagNumber(32)
+  $fixnum.Int64 get pauseRound => $_getI64(31);
+  @$pb.TagNumber(32)
+  set pauseRound($fixnum.Int64 value) => $_setInt64(31, value);
+  @$pb.TagNumber(32)
+  $core.bool hasPauseRound() => $_has(31);
+  @$pb.TagNumber(32)
+  void clearPauseRound() => $_clearField(32);
+
+  @$pb.TagNumber(33)
+  $core.String get createdAt => $_getSZ(32);
+  @$pb.TagNumber(33)
+  set createdAt($core.String value) => $_setString(32, value);
+  @$pb.TagNumber(33)
+  $core.bool hasCreatedAt() => $_has(32);
+  @$pb.TagNumber(33)
+  void clearCreatedAt() => $_clearField(33);
+
+  @$pb.TagNumber(34)
+  $core.String get fundcode => $_getSZ(33);
+  @$pb.TagNumber(34)
+  set fundcode($core.String value) => $_setString(33, value);
+  @$pb.TagNumber(34)
+  $core.bool hasFundcode() => $_has(33);
+  @$pb.TagNumber(34)
+  void clearFundcode() => $_clearField(34);
+
+  @$pb.TagNumber(35)
+  $core.double get etfUnfilledLimit => $_getN(34);
+  @$pb.TagNumber(35)
+  set etfUnfilledLimit($core.double value) => $_setDouble(34, value);
+  @$pb.TagNumber(35)
+  $core.bool hasEtfUnfilledLimit() => $_has(34);
+  @$pb.TagNumber(35)
+  void clearEtfUnfilledLimit() => $_clearField(35);
+
+  @$pb.TagNumber(36)
+  $core.double get graceTheMoney => $_getN(35);
+  @$pb.TagNumber(36)
+  set graceTheMoney($core.double value) => $_setDouble(35, value);
+  @$pb.TagNumber(36)
+  $core.bool hasGraceTheMoney() => $_has(35);
+  @$pb.TagNumber(36)
+  void clearGraceTheMoney() => $_clearField(36);
+
+  @$pb.TagNumber(37)
+  $core.bool get regardSmpAsTraded => $_getBF(36);
+  @$pb.TagNumber(37)
+  set regardSmpAsTraded($core.bool value) => $_setBool(36, value);
+  @$pb.TagNumber(37)
+  $core.bool hasRegardSmpAsTraded() => $_has(36);
+  @$pb.TagNumber(37)
+  void clearRegardSmpAsTraded() => $_clearField(37);
+
+  @$pb.TagNumber(38)
+  $core.double get executionThreshold => $_getN(37);
+  @$pb.TagNumber(38)
+  set executionThreshold($core.double value) => $_setDouble(37, value);
+  @$pb.TagNumber(38)
+  $core.bool hasExecutionThreshold() => $_has(37);
+  @$pb.TagNumber(38)
+  void clearExecutionThreshold() => $_clearField(38);
+
+  @$pb.TagNumber(39)
+  $fixnum.Int64 get starterLimitRounds => $_getI64(38);
+  @$pb.TagNumber(39)
+  set starterLimitRounds($fixnum.Int64 value) => $_setInt64(38, value);
+  @$pb.TagNumber(39)
+  $core.bool hasStarterLimitRounds() => $_has(38);
+  @$pb.TagNumber(39)
+  void clearStarterLimitRounds() => $_clearField(39);
+
+  @$pb.TagNumber(40)
+  $core.String get idNumber => $_getSZ(39);
+  @$pb.TagNumber(40)
+  set idNumber($core.String value) => $_setString(39, value);
+  @$pb.TagNumber(40)
+  $core.bool hasIdNumber() => $_has(39);
+  @$pb.TagNumber(40)
+  void clearIdNumber() => $_clearField(40);
+
+  @$pb.TagNumber(41)
+  $core.bool get checkAllConnected => $_getBF(40);
+  @$pb.TagNumber(41)
+  set checkAllConnected($core.bool value) => $_setBool(40, value);
+  @$pb.TagNumber(41)
+  $core.bool hasCheckAllConnected() => $_has(40);
+  @$pb.TagNumber(41)
+  void clearCheckAllConnected() => $_clearField(41);
+
+  @$pb.TagNumber(42)
+  $core.String get futureMaturityNo => $_getSZ(41);
+  @$pb.TagNumber(42)
+  set futureMaturityNo($core.String value) => $_setString(41, value);
+  @$pb.TagNumber(42)
+  $core.bool hasFutureMaturityNo() => $_has(41);
+  @$pb.TagNumber(42)
+  void clearFutureMaturityNo() => $_clearField(42);
+
+  @$pb.TagNumber(43)
+  $core.bool get autoLaunch => $_getBF(42);
+  @$pb.TagNumber(43)
+  set autoLaunch($core.bool value) => $_setBool(42, value);
+  @$pb.TagNumber(43)
+  $core.bool hasAutoLaunch() => $_has(42);
+  @$pb.TagNumber(43)
+  void clearAutoLaunch() => $_clearField(43);
+
+  @$pb.TagNumber(44)
+  $core.String get launchAt => $_getSZ(43);
+  @$pb.TagNumber(44)
+  set launchAt($core.String value) => $_setString(43, value);
+  @$pb.TagNumber(44)
+  $core.bool hasLaunchAt() => $_has(43);
+  @$pb.TagNumber(44)
+  void clearLaunchAt() => $_clearField(44);
+
+  @$pb.TagNumber(45)
+  $core.String get startAmendAt => $_getSZ(44);
+  @$pb.TagNumber(45)
+  set startAmendAt($core.String value) => $_setString(44, value);
+  @$pb.TagNumber(45)
+  $core.bool hasStartAmendAt() => $_has(44);
+  @$pb.TagNumber(45)
+  void clearStartAmendAt() => $_clearField(45);
+
+  @$pb.TagNumber(46)
+  $core.double get launchPricePercent => $_getN(45);
+  @$pb.TagNumber(46)
+  set launchPricePercent($core.double value) => $_setDouble(45, value);
+  @$pb.TagNumber(46)
+  $core.bool hasLaunchPricePercent() => $_has(45);
+  @$pb.TagNumber(46)
+  void clearLaunchPricePercent() => $_clearField(46);
+
+  @$pb.TagNumber(47)
+  $core.double get participationLimitPercent => $_getN(46);
+  @$pb.TagNumber(47)
+  set participationLimitPercent($core.double value) => $_setDouble(46, value);
+  @$pb.TagNumber(47)
+  $core.bool hasParticipationLimitPercent() => $_has(46);
+  @$pb.TagNumber(47)
+  void clearParticipationLimitPercent() => $_clearField(47);
+
+  @$pb.TagNumber(48)
+  $core.bool get launched => $_getBF(47);
+  @$pb.TagNumber(48)
+  set launched($core.bool value) => $_setBool(47, value);
+  @$pb.TagNumber(48)
+  $core.bool hasLaunched() => $_has(47);
+  @$pb.TagNumber(48)
+  void clearLaunched() => $_clearField(48);
+
+  @$pb.TagNumber(49)
+  $core.String get customProductCode => $_getSZ(48);
+  @$pb.TagNumber(49)
+  set customProductCode($core.String value) => $_setString(48, value);
+  @$pb.TagNumber(49)
+  $core.bool hasCustomProductCode() => $_has(48);
+  @$pb.TagNumber(49)
+  void clearCustomProductCode() => $_clearField(49);
+
+  @$pb.TagNumber(50)
+  $core.double get customProductRatio => $_getN(49);
+  @$pb.TagNumber(50)
+  set customProductRatio($core.double value) => $_setDouble(49, value);
+  @$pb.TagNumber(50)
+  $core.bool hasCustomProductRatio() => $_has(49);
+  @$pb.TagNumber(50)
+  void clearCustomProductRatio() => $_clearField(50);
+
+  @$pb.TagNumber(51)
+  $core.String get exchange => $_getSZ(50);
+  @$pb.TagNumber(51)
+  set exchange($core.String value) => $_setString(50, value);
+  @$pb.TagNumber(51)
+  $core.bool hasExchange() => $_has(50);
+  @$pb.TagNumber(51)
+  void clearExchange() => $_clearField(51);
+}
+
+class BasketManagerDetailItem extends $pb.GeneratedMessage {
+  factory BasketManagerDetailItem({
+    $core.String? code,
+    $core.String? name,
+    $core.String? fundcode,
+    $core.String? side,
+    $core.double? dominanceThreshold,
+    $core.String? programType,
+    $core.String? priceType,
+    $fixnum.Int64? totalQuantity,
+    $core.bool? starter,
+    $fixnum.Int64? no,
+    $core.bool? pending,
+    $core.bool? auto,
+    $core.bool? lp,
+    $core.String? id,
+    $core.double? orderPrice,
+    $core.double? percent,
+    $fixnum.Int64? ticks,
+    $core.String? positionType,
+    $core.String? exchange,
+  }) {
+    final result = create();
+    if (code != null) result.code = code;
+    if (name != null) result.name = name;
+    if (fundcode != null) result.fundcode = fundcode;
+    if (side != null) result.side = side;
+    if (dominanceThreshold != null) result.dominanceThreshold = dominanceThreshold;
+    if (programType != null) result.programType = programType;
+    if (priceType != null) result.priceType = priceType;
+    if (totalQuantity != null) result.totalQuantity = totalQuantity;
+    if (starter != null) result.starter = starter;
+    if (no != null) result.no = no;
+    if (pending != null) result.pending = pending;
+    if (auto != null) result.auto = auto;
+    if (lp != null) result.lp = lp;
+    if (id != null) result.id = id;
+    if (orderPrice != null) result.orderPrice = orderPrice;
+    if (percent != null) result.percent = percent;
+    if (ticks != null) result.ticks = ticks;
+    if (positionType != null) result.positionType = positionType;
+    if (exchange != null) result.exchange = exchange;
+    return result;
+  }
+
+  BasketManagerDetailItem._();
+
+  factory BasketManagerDetailItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BasketManagerDetailItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketManagerDetailItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'code')
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'fundcode')
+    ..aOS(4, _omitFieldNames ? '' : 'side')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'dominanceThreshold', $pb.PbFieldType.OD)
+    ..aOS(6, _omitFieldNames ? '' : 'programType')
+    ..aOS(7, _omitFieldNames ? '' : 'priceType')
+    ..aInt64(8, _omitFieldNames ? '' : 'totalQuantity')
+    ..aOB(9, _omitFieldNames ? '' : 'starter')
+    ..aInt64(10, _omitFieldNames ? '' : 'no')
+    ..aOB(11, _omitFieldNames ? '' : 'pending')
+    ..aOB(12, _omitFieldNames ? '' : 'auto')
+    ..aOB(13, _omitFieldNames ? '' : 'lp')
+    ..aOS(14, _omitFieldNames ? '' : 'id')
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'orderPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'percent', $pb.PbFieldType.OD)
+    ..aInt64(17, _omitFieldNames ? '' : 'ticks')
+    ..aOS(18, _omitFieldNames ? '' : 'positionType')
+    ..aOS(19, _omitFieldNames ? '' : 'exchange')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketManagerDetailItem clone() => BasketManagerDetailItem()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketManagerDetailItem copyWith(void Function(BasketManagerDetailItem) updates) => super.copyWith((message) => updates(message as BasketManagerDetailItem)) as BasketManagerDetailItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BasketManagerDetailItem create() => BasketManagerDetailItem._();
+  @$core.override
+  BasketManagerDetailItem createEmptyInstance() => create();
+  static $pb.PbList<BasketManagerDetailItem> createRepeated() => $pb.PbList<BasketManagerDetailItem>();
+  @$core.pragma('dart2js:noInline')
+  static BasketManagerDetailItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasketManagerDetailItem>(create);
+  static BasketManagerDetailItem? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get code => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set code($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCode() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get fundcode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundcode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundcode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundcode() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get side => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set side($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSide() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSide() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get dominanceThreshold => $_getN(4);
+  @$pb.TagNumber(5)
+  set dominanceThreshold($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasDominanceThreshold() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDominanceThreshold() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get programType => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set programType($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasProgramType() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearProgramType() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get priceType => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set priceType($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasPriceType() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPriceType() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get totalQuantity => $_getI64(7);
+  @$pb.TagNumber(8)
+  set totalQuantity($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasTotalQuantity() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearTotalQuantity() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.bool get starter => $_getBF(8);
+  @$pb.TagNumber(9)
+  set starter($core.bool value) => $_setBool(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasStarter() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearStarter() => $_clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get no => $_getI64(9);
+  @$pb.TagNumber(10)
+  set no($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasNo() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearNo() => $_clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.bool get pending => $_getBF(10);
+  @$pb.TagNumber(11)
+  set pending($core.bool value) => $_setBool(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasPending() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearPending() => $_clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.bool get auto => $_getBF(11);
+  @$pb.TagNumber(12)
+  set auto($core.bool value) => $_setBool(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasAuto() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearAuto() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.bool get lp => $_getBF(12);
+  @$pb.TagNumber(13)
+  set lp($core.bool value) => $_setBool(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasLp() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearLp() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get id => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set id($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasId() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearId() => $_clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.double get orderPrice => $_getN(14);
+  @$pb.TagNumber(15)
+  set orderPrice($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasOrderPrice() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearOrderPrice() => $_clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.double get percent => $_getN(15);
+  @$pb.TagNumber(16)
+  set percent($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasPercent() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearPercent() => $_clearField(16);
+
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get ticks => $_getI64(16);
+  @$pb.TagNumber(17)
+  set ticks($fixnum.Int64 value) => $_setInt64(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasTicks() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearTicks() => $_clearField(17);
+
+  @$pb.TagNumber(18)
+  $core.String get positionType => $_getSZ(17);
+  @$pb.TagNumber(18)
+  set positionType($core.String value) => $_setString(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasPositionType() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearPositionType() => $_clearField(18);
+
+  @$pb.TagNumber(19)
+  $core.String get exchange => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set exchange($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasExchange() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearExchange() => $_clearField(19);
+}
+
+class CreateNotificationRequest extends $pb.GeneratedMessage {
+  factory CreateNotificationRequest({
+    $core.String? user,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (user != null) result.user = user;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  CreateNotificationRequest._();
+
+  factory CreateNotificationRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CreateNotificationRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateNotificationRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'user')
+    ..aOS(2, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateNotificationRequest clone() => CreateNotificationRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CreateNotificationRequest copyWith(void Function(CreateNotificationRequest) updates) => super.copyWith((message) => updates(message as CreateNotificationRequest)) as CreateNotificationRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationRequest create() => CreateNotificationRequest._();
+  @$core.override
+  CreateNotificationRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateNotificationRequest> createRepeated() => $pb.PbList<CreateNotificationRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateNotificationRequest>(create);
+  static CreateNotificationRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get user => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set user($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasUser() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUser() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => $_clearField(2);
+}
+
+class Notification extends $pb.GeneratedMessage {
+  factory Notification({
+    $core.String? id,
+    $core.String? user,
+    $core.String? message,
+    $fixnum.Int64? tsMs,
+    $core.String? source,
+  }) {
+    final result = create();
+    if (id != null) result.id = id;
+    if (user != null) result.user = user;
+    if (message != null) result.message = message;
+    if (tsMs != null) result.tsMs = tsMs;
+    if (source != null) result.source = source;
+    return result;
+  }
+
+  Notification._();
+
+  factory Notification.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory Notification.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Notification', package: const $pb.PackageName(_omitMessageNames ? '' : 'mmm.mmm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'user')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..aInt64(4, _omitFieldNames ? '' : 'tsMs')
+    ..aOS(5, _omitFieldNames ? '' : 'source')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Notification clone() => Notification()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Notification copyWith(void Function(Notification) updates) => super.copyWith((message) => updates(message as Notification)) as Notification;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Notification create() => Notification._();
+  @$core.override
+  Notification createEmptyInstance() => create();
+  static $pb.PbList<Notification> createRepeated() => $pb.PbList<Notification>();
+  @$core.pragma('dart2js:noInline')
+  static Notification getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Notification>(create);
+  static Notification? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get user => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set user($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUser() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUser() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get tsMs => $_getI64(3);
+  @$pb.TagNumber(4)
+  set tsMs($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTsMs() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTsMs() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get source => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set source($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSource() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSource() => $_clearField(5);
+}
+
+
+const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
+const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

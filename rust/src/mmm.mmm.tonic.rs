@@ -1,14 +1,14 @@
 // @generated
 /// Generated client implementations.
-pub mod basket_service_client {
+pub mod mmm_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct BasketServiceClient<T> {
+    pub struct MmmServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl BasketServiceClient<tonic::transport::Channel> {
+    impl MmmServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -19,7 +19,7 @@ pub mod basket_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> BasketServiceClient<T>
+    impl<T> MmmServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -37,7 +37,7 @@ pub mod basket_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> BasketServiceClient<InterceptedService<T, F>>
+        ) -> MmmServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -51,7 +51,7 @@ pub mod basket_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            BasketServiceClient::new(InterceptedService::new(inner, interceptor))
+            MmmServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -84,6 +84,31 @@ pub mod basket_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
+        pub async fn get_etf_manager(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CodeRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::EtfManagerDetail>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mmm.mmm.MmmService/GetETFManager",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("mmm.mmm.MmmService", "GetETFManager"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn add_basket_preset(
             &mut self,
             request: impl tonic::IntoRequest<super::AddBasketPresetRequest>,
@@ -102,13 +127,11 @@ pub mod basket_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mmm.v1.basket.BasketService/AddBasketPreset",
+                "/mmm.mmm.MmmService/AddBasketPreset",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("mmm.v1.basket.BasketService", "AddBasketPreset"),
-                );
+                .insert(GrpcMethod::new("mmm.mmm.MmmService", "AddBasketPreset"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn create_basket_manager_from_preset(
@@ -129,27 +152,56 @@ pub mod basket_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset",
+                "/mmm.mmm.MmmService/CreateBasketManagerFromPreset",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "mmm.v1.basket.BasketService",
+                        "mmm.mmm.MmmService",
                         "CreateBasketManagerFromPreset",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn create_notification(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateNotificationRequest>,
+        ) -> std::result::Result<tonic::Response<super::Notification>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mmm.mmm.MmmService/CreateNotification",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("mmm.mmm.MmmService", "CreateNotification"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
-pub mod basket_service_server {
+pub mod mmm_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with BasketServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with MmmServiceServer.
     #[async_trait]
-    pub trait BasketService: Send + Sync + 'static {
+    pub trait MmmService: Send + Sync + 'static {
+        async fn get_etf_manager(
+            &self,
+            request: tonic::Request<super::CodeRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::EtfManagerDetail>,
+            tonic::Status,
+        >;
         async fn add_basket_preset(
             &self,
             request: tonic::Request<super::AddBasketPresetRequest>,
@@ -164,16 +216,20 @@ pub mod basket_service_server {
             tonic::Response<super::BasketManagerDetail>,
             tonic::Status,
         >;
+        async fn create_notification(
+            &self,
+            request: tonic::Request<super::CreateNotificationRequest>,
+        ) -> std::result::Result<tonic::Response<super::Notification>, tonic::Status>;
     }
     #[derive(Debug)]
-    pub struct BasketServiceServer<T: BasketService> {
+    pub struct MmmServiceServer<T: MmmService> {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T: BasketService> BasketServiceServer<T> {
+    impl<T: MmmService> MmmServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -224,9 +280,9 @@ pub mod basket_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for BasketServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for MmmServiceServer<T>
     where
-        T: BasketService,
+        T: MmmService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -241,11 +297,54 @@ pub mod basket_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/mmm.v1.basket.BasketService/AddBasketPreset" => {
+                "/mmm.mmm.MmmService/GetETFManager" => {
                     #[allow(non_camel_case_types)]
-                    struct AddBasketPresetSvc<T: BasketService>(pub Arc<T>);
+                    struct GetETFManagerSvc<T: MmmService>(pub Arc<T>);
+                    impl<T: MmmService> tonic::server::UnaryService<super::CodeRequest>
+                    for GetETFManagerSvc<T> {
+                        type Response = super::EtfManagerDetail;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CodeRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MmmService>::get_etf_manager(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetETFManagerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mmm.mmm.MmmService/AddBasketPreset" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddBasketPresetSvc<T: MmmService>(pub Arc<T>);
                     impl<
-                        T: BasketService,
+                        T: MmmService,
                     > tonic::server::UnaryService<super::AddBasketPresetRequest>
                     for AddBasketPresetSvc<T> {
                         type Response = super::BasketPresetDetail;
@@ -259,8 +358,7 @@ pub mod basket_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as BasketService>::add_basket_preset(&inner, request)
-                                    .await
+                                <T as MmmService>::add_basket_preset(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -287,13 +385,11 @@ pub mod basket_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mmm.v1.basket.BasketService/CreateBasketManagerFromPreset" => {
+                "/mmm.mmm.MmmService/CreateBasketManagerFromPreset" => {
                     #[allow(non_camel_case_types)]
-                    struct CreateBasketManagerFromPresetSvc<T: BasketService>(
-                        pub Arc<T>,
-                    );
+                    struct CreateBasketManagerFromPresetSvc<T: MmmService>(pub Arc<T>);
                     impl<
-                        T: BasketService,
+                        T: MmmService,
                     > tonic::server::UnaryService<super::ControlManagerRequest>
                     for CreateBasketManagerFromPresetSvc<T> {
                         type Response = super::BasketManagerDetail;
@@ -307,7 +403,7 @@ pub mod basket_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as BasketService>::create_basket_manager_from_preset(
+                                <T as MmmService>::create_basket_manager_from_preset(
                                         &inner,
                                         request,
                                     )
@@ -323,6 +419,52 @@ pub mod basket_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = CreateBasketManagerFromPresetSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mmm.mmm.MmmService/CreateNotification" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateNotificationSvc<T: MmmService>(pub Arc<T>);
+                    impl<
+                        T: MmmService,
+                    > tonic::server::UnaryService<super::CreateNotificationRequest>
+                    for CreateNotificationSvc<T> {
+                        type Response = super::Notification;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CreateNotificationRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MmmService>::create_notification(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CreateNotificationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -356,7 +498,7 @@ pub mod basket_service_server {
             }
         }
     }
-    impl<T: BasketService> Clone for BasketServiceServer<T> {
+    impl<T: MmmService> Clone for MmmServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -368,7 +510,7 @@ pub mod basket_service_server {
             }
         }
     }
-    impl<T: BasketService> tonic::server::NamedService for BasketServiceServer<T> {
-        const NAME: &'static str = "mmm.v1.basket.BasketService";
+    impl<T: MmmService> tonic::server::NamedService for MmmServiceServer<T> {
+        const NAME: &'static str = "mmm.mmm.MmmService";
     }
 }

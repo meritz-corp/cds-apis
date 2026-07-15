@@ -1,0 +1,327 @@
+syntax = "proto3";
+
+package mmm.mmm;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/mmm/mmm;mmm";
+
+// MmmService - 차익거래 관리 서비스
+service MmmService {
+
+  // EtfService
+  rpc GetETFManager (CodeRequest) returns (ETFManagerDetail);
+
+  // BasketService
+  rpc AddBasketPreset (AddBasketPresetRequest) returns (BasketPresetDetail);
+
+  rpc CreateBasketManagerFromPreset (ControlManagerRequest) returns (BasketManagerDetail);
+
+  // NotificationService
+  rpc CreateNotification (CreateNotificationRequest) returns (Notification);
+
+}
+
+
+message CodeRequest {
+  string code = 1;
+}
+
+message ETFManagerDetail {
+  bool active = 1;
+  bool auto = 20;
+  string code = 2;
+  string name = 3;
+  string start_at = 17;
+  string stop_at = 18;
+  string ref_price_type = 4;
+  string ref_code = 15;
+  string fundcode = 16;
+  string group_name = 36;
+  string group = 19;
+  int64 ask_tick = 5;
+  int64 bid_tick = 6;
+  int64 ask_count = 7;
+  int64 bid_count = 8;
+  int64 ask_quantity = 9;
+  int64 bid_quantity = 10;
+  int64 ask_limit = 11;
+  int64 bid_limit = 12;
+  double ask_offset = 30;
+  double bid_offset = 31;
+  double ask_basis = 42;
+  double bid_basis = 43;
+  bool lp_tagged = 32;
+  bool naked_short_allowed = 33;
+  string creation_settlement_date = 34;
+  string redemption_settlement_date = 35;
+  double refill_interval = 39;
+  double refill_floor = 37;
+  string hedge_group = 24;
+  string hedge_product_code = 25;
+  string hedge_product_name = 26;
+  string hedge_fundcode = 27;
+  string hedge_price_type = 38;
+  double hedge_dominance_threshold = 40;
+  bool hedge_auto = 41;
+  bool passive = 44;
+  bool mm = 45;
+  bool prevent_quote_turnaround = 48;
+  int64 mm_limit = 28;
+  int64 mm_quantity = 29;
+  double mm_spread = 46;
+  uint64 basis_ema_period = 47;
+  double hedge_unit_delta = 13;
+  double etf_unit_delta = 14;
+  double etfs_per_hedge = 21;
+  bool refer_ema = 22;
+  bool creatable = 23;
+  string start_amendment_at = 49;
+  double expected_price = 50;
+  bool active_amendment = 51;
+  bool project_trades = 53;
+  double nav_nav = 54;
+  double fx_ask_basis = 55;
+  double fx_bid_basis = 56;
+  int64 grace_amount = 57;
+  double dominance_threshold = 58;
+  bool advanced_tick = 59;
+  double advanced_tick_threshold = 60;
+  int64 ask_notifying_quantity = 62;
+  int64 bid_notifying_quantity = 63;
+  string position_type = 64;
+  double ask_offset_adjust = 65;
+  double bid_offset_adjust = 66;
+  double ask_basis_adjust = 67;
+  double bid_basis_adjust = 68;
+  int64 ask_limit_adjust = 69;
+  int64 bid_limit_adjust = 70;
+  int64 ask_total_limit = 71;
+  int64 bid_total_limit = 72;
+  bool ask_adjust_on = 73;
+  bool bid_adjust_on = 74;
+  double opening_ref_future_ask_price = 75;
+  double opening_ref_future_bid_price = 76;
+  double opening_ask_price = 77;
+  double opening_bid_price = 78;
+  double opening_ask_offset = 79;
+  double opening_bid_offset = 80;
+  double opening_ask_basis = 81;
+  double opening_bid_basis = 82;
+  int64 opening_ask_count = 83;
+  int64 opening_bid_count = 84;
+  int64 opening_ask_quantity = 85;
+  int64 opening_bid_quantity = 86;
+  string start_cancelling_at = 87;
+  bool opening_active = 88;
+  int64 ask_cancel_ticks = 89;
+  int64 bid_cancel_ticks = 90;
+  bool escape = 91;
+  string opening_hedge_product_code = 92;
+  string opening_hedge_product_name = 93;
+  string opening_hedge_price_type = 94;
+  double opening_hedge_dominance_threshold = 95;
+  bool opening_hedge_auto = 96;
+  int64 etf_filled_to_hedge_trigger_quantity = 97;
+  int64 hedge_etf_quantities_per_trigger = 98;
+  // LP 방향 모드. "EtfLpFutureHedge" (기존) / "FutureLpEtfHedge" (신규).
+  string lp_mode = 99;
+  // LP 발주 상품 코드. EtfLpFutureHedge=ETF 코드, FutureLpEtfHedge=선물 코드.
+  string lp_product_code = 100;
+  // FutureLpEtfHedge 모드에서 선물 1계약 체결 시 발주할 ETF 주수.
+  // PDF 기반 자동 계산 (refresh_offset_base). EtfLpFutureHedge 모드에서는 0.
+  double etf_hedge_quantity_per_future_filled = 102;
+  // FutureLpEtfHedge + RealNav 가격역산 scale.
+  // CU / Σ(future.multiple × PDF future quantity) — ΔETF 1won 당 ΔF won 계수.
+  // EtfLpFutureHedge 모드에서는 0.
+  double lp_real_nav_etf_to_future_scale = 103;
+  // (구) lp_orders_per_price=101 / opening_orders_per_price=104 — ask/bid 사이드 분리로 폐기.
+  reserved 101, 104;
+  // FutureLpEtfHedge 전용: 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  int64 ask_lp_orders_per_price = 105;
+  int64 bid_lp_orders_per_price = 106;
+  // FutureLpEtfHedge 전용: 장전동시호가 1호가에 분할 발주할 주문 건수 (N), ask/bid 사이드별. 0/1 → 단일 발주.
+  int64 ask_opening_orders_per_price = 107;
+  int64 bid_opening_orders_per_price = 108;
+}
+
+
+message AddBasketPresetRequest {
+  string prefix = 1;
+  string start_at = 2;
+  string stop_at = 3;
+  string index_code = 4;
+  string stock_fundcode = 5;
+  string deriv_fundcode = 6;
+  string basis_type = 7;
+  string stock_program_type = 8;
+  string deriv_program_type = 9;
+  string etf_program_type = 10;
+  string stock_price_type = 11;
+  string deriv_price_type = 12;
+  string etf_price_type = 13;
+  double stock_dominance_threshold = 14;
+  double deriv_dominance_threshold = 15;
+  double etf_dominance_threshold = 16;
+  double cu = 17;
+  int64 total_rounds = 18;
+  int64 remaining_turns = 19;
+  double trigger_basis = 20;
+  bool is_long = 21;
+  double minimum_filled_ratio = 22;
+  double minimum_interval = 23;
+  bool check_all_sellable = 24;
+  bool short_sellable = 25;
+  bool apply_slippage = 26;
+  double etf_unfilled_limit = 27;
+  int64 stock_future = 28;
+  // 주선차익(Price) 전용
+  string stock_code = 29;
+  int64 stock_total_quantity = 30;
+  bool stock_auto = 31;
+  int64 future_total_quantity = 32;
+  bool future_auto = 33;
+}
+
+
+message BasketPresetDetail {
+  string code = 22;
+  string prefix = 1;
+  string start_at = 2;
+  string stop_at = 3;
+  string index_code = 4;
+  string stock_fundcode = 5;
+  string deriv_fundcode = 6;
+  string basis_type = 7;
+  string stock_program_type = 8;
+  string deriv_program_type = 9;
+  string etf_program_type = 10;
+  string stock_price_type = 11;
+  string deriv_price_type = 12;
+  string etf_price_type = 13;
+  double stock_dominance_threshold = 14;
+  double deriv_dominance_threshold = 15;
+  double etf_dominance_threshold = 16;
+  double cu = 17;
+  int64 total_rounds = 18;
+  int64 remaining_turns = 19;
+  double trigger_basis = 20;
+  bool is_long = 21;
+  string user_code = 23;
+  bool check_all_sellable = 24;
+  bool short_sellable = 25;
+  bool apply_slippage = 26;
+  double minimum_filled_ratio = 27;
+  double minimum_interval = 28;
+  double etf_unfilled_limit = 29;
+  int64 stock_future = 30;
+  // 주선차익(Price) 전용
+  string stock_code = 31;
+  int64 stock_total_quantity = 32;
+  bool stock_auto = 33;
+  int64 future_total_quantity = 34;
+  bool future_auto = 35;
+}
+
+message ControlManagerRequest {
+  string code = 1;
+  string action = 2;
+  string value = 3;
+}
+
+message BasketManagerDetail {
+  string code = 1;
+  string name = 2;
+  string start_at = 3;
+  string stop_at = 4;
+  bool is_long = 5;
+  bool active = 6;
+  int64 current_round = 7;
+  int64 total_rounds = 8;
+  int64 done_rounds = 9;
+  double minimum_filled_ratio = 10;
+  double minimum_interval = 11;
+  double trigger_basis = 12;
+  string index_code = 13;
+  string index_name = 14;
+  string basis_condition = 15;
+  string basis_type = 16;
+  string basis_price_type = 17;
+  repeated BasketManagerDetailItem items = 18;
+  string user_code = 19;
+  bool public = 20;
+  int64 remaining_turns = 21;
+  string ui_group = 22;
+  bool check_all_sellable = 23;
+  string long_product_type = 24;
+  string short_product_type = 25;
+  int64 short_quantity = 26;
+  int64 long_quantity = 27;
+  int64 short_products = 28;
+  int64 long_products = 29;
+  bool short_sellable = 30;
+  bool apply_slippage = 31;
+  int64 pause_round = 32;
+  string created_at = 33;
+  string fundcode = 34;
+  double etf_unfilled_limit = 35;
+  double grace_the_money = 36;
+  bool regard_smp_as_traded = 37;
+  double execution_threshold = 38;
+  int64 starter_limit_rounds = 39;
+  string id_number = 40;
+  bool check_all_connected = 41;
+  string future_maturity_no = 42;
+  bool auto_launch = 43; // 종가자동발주
+  string launch_at = 44; // 종가자동발주시간
+  string start_amend_at = 45; // 종가관여조정시작시각
+  double launch_price_percent = 46; // 종가자동발주가격%
+  double participation_limit_percent = 47; // 종가관여최대%
+  bool launched = 48; // 종가발주완료
+  string custom_product_code = 49;
+  double custom_product_ratio = 50;
+  string exchange = 51;
+}
+
+
+message BasketManagerDetailItem {
+  int64 no = 10;
+  string id = 14;
+  string code = 1;
+  string name = 2;
+  string fundcode = 3;
+  string side = 4;
+  double dominance_threshold = 5;
+  string program_type = 6;
+  string price_type = 7;
+  int64 total_quantity = 8;
+  bool starter = 9;
+  bool pending = 11;
+  bool auto = 12;
+  bool lp = 13;
+  double order_price = 15;
+  double percent = 16;
+  int64 ticks = 17;
+  string position_type = 18;
+  string exchange = 19;
+}
+
+
+message CreateNotificationRequest {
+  string user = 1;     // 대상 사용자(또는 그룹/채널 키) //ex) "172.17.220.118"
+  string message = 2;  // 노티 본문
+}
+
+message Notification {
+  string id = 1;       // 서버가 생성 (uuid 등)
+  string user = 2;     // 요청값 그대로
+  string message = 3;  // 요청값 그대로
+  int64  ts_ms = 4;    // 서버 생성 시각(ms)
+  string source = 5;   // 서버가 기록한 발신자(IP or 서비스명)
+}
