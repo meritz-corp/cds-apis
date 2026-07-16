@@ -232,7 +232,6 @@ class Pair extends $pb.GeneratedMessage {
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
 ///
 /// execution 종류별 필드 사용:
-/// - DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
 /// - BaseMakeCounterIocAndBalanceExecution (IOC imbalance):
 ///   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 ///   - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
@@ -354,286 +353,6 @@ class PairEntry extends $pb.GeneratedMessage {
   void clearTpCode() => $_clearField(7);
 }
 
-enum PairCondition_Kind {
-  spreadAmount, 
-  spreadBps, 
-  priceRatio, 
-  notSet
-}
-
-/// 페어 가격 비교 조건 (세 가지 variant 중 하나)
-class PairCondition extends $pb.GeneratedMessage {
-  factory PairCondition({
-    SpreadAmountCondition? spreadAmount,
-    SpreadBpsCondition? spreadBps,
-    PriceRatioCondition? priceRatio,
-  }) {
-    final result = create();
-    if (spreadAmount != null) result.spreadAmount = spreadAmount;
-    if (spreadBps != null) result.spreadBps = spreadBps;
-    if (priceRatio != null) result.priceRatio = priceRatio;
-    return result;
-  }
-
-  PairCondition._();
-
-  factory PairCondition.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PairCondition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static const $core.Map<$core.int, PairCondition_Kind> _PairCondition_KindByTag = {
-    1 : PairCondition_Kind.spreadAmount,
-    2 : PairCondition_Kind.spreadBps,
-    3 : PairCondition_Kind.priceRatio,
-    0 : PairCondition_Kind.notSet
-  };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairCondition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
-    ..aOM<SpreadAmountCondition>(1, _omitFieldNames ? '' : 'spreadAmount', subBuilder: SpreadAmountCondition.create)
-    ..aOM<SpreadBpsCondition>(2, _omitFieldNames ? '' : 'spreadBps', subBuilder: SpreadBpsCondition.create)
-    ..aOM<PriceRatioCondition>(3, _omitFieldNames ? '' : 'priceRatio', subBuilder: PriceRatioCondition.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PairCondition clone() => PairCondition()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PairCondition copyWith(void Function(PairCondition) updates) => super.copyWith((message) => updates(message as PairCondition)) as PairCondition;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PairCondition create() => PairCondition._();
-  @$core.override
-  PairCondition createEmptyInstance() => create();
-  static $pb.PbList<PairCondition> createRepeated() => $pb.PbList<PairCondition>();
-  @$core.pragma('dart2js:noInline')
-  static PairCondition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairCondition>(create);
-  static PairCondition? _defaultInstance;
-
-  PairCondition_Kind whichKind() => _PairCondition_KindByTag[$_whichOneof(0)]!;
-  void clearKind() => $_clearField($_whichOneof(0));
-
-  /// 절대 스프레드 금액 기준
-  @$pb.TagNumber(1)
-  SpreadAmountCondition get spreadAmount => $_getN(0);
-  @$pb.TagNumber(1)
-  set spreadAmount(SpreadAmountCondition value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSpreadAmount() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSpreadAmount() => $_clearField(1);
-  @$pb.TagNumber(1)
-  SpreadAmountCondition ensureSpreadAmount() => $_ensure(0);
-
-  /// 상대 스프레드 (bps) 기준
-  @$pb.TagNumber(2)
-  SpreadBpsCondition get spreadBps => $_getN(1);
-  @$pb.TagNumber(2)
-  set spreadBps(SpreadBpsCondition value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasSpreadBps() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSpreadBps() => $_clearField(2);
-  @$pb.TagNumber(2)
-  SpreadBpsCondition ensureSpreadBps() => $_ensure(1);
-
-  /// 가격 비율 기준
-  @$pb.TagNumber(3)
-  PriceRatioCondition get priceRatio => $_getN(2);
-  @$pb.TagNumber(3)
-  set priceRatio(PriceRatioCondition value) => $_setField(3, value);
-  @$pb.TagNumber(3)
-  $core.bool hasPriceRatio() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearPriceRatio() => $_clearField(3);
-  @$pb.TagNumber(3)
-  PriceRatioCondition ensurePriceRatio() => $_ensure(2);
-}
-
-/// 절대 스프레드 금액 조건 (|base - counter| >= threshold)
-class SpreadAmountCondition extends $pb.GeneratedMessage {
-  factory SpreadAmountCondition({
-    $fixnum.Int64? threshold,
-    SpreadDirection? direction,
-  }) {
-    final result = create();
-    if (threshold != null) result.threshold = threshold;
-    if (direction != null) result.direction = direction;
-    return result;
-  }
-
-  SpreadAmountCondition._();
-
-  factory SpreadAmountCondition.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SpreadAmountCondition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpreadAmountCondition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'threshold')
-    ..e<SpreadDirection>(2, _omitFieldNames ? '' : 'direction', $pb.PbFieldType.OE, defaultOrMaker: SpreadDirection.SPREAD_DIRECTION_UNSPECIFIED, valueOf: SpreadDirection.valueOf, enumValues: SpreadDirection.values)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SpreadAmountCondition clone() => SpreadAmountCondition()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SpreadAmountCondition copyWith(void Function(SpreadAmountCondition) updates) => super.copyWith((message) => updates(message as SpreadAmountCondition)) as SpreadAmountCondition;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SpreadAmountCondition create() => SpreadAmountCondition._();
-  @$core.override
-  SpreadAmountCondition createEmptyInstance() => create();
-  static $pb.PbList<SpreadAmountCondition> createRepeated() => $pb.PbList<SpreadAmountCondition>();
-  @$core.pragma('dart2js:noInline')
-  static SpreadAmountCondition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SpreadAmountCondition>(create);
-  static SpreadAmountCondition? _defaultInstance;
-
-  /// 스프레드 임계값 (원, 1 이상)
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get threshold => $_getI64(0);
-  @$pb.TagNumber(1)
-  set threshold($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasThreshold() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearThreshold() => $_clearField(1);
-
-  /// 트리거 방향
-  @$pb.TagNumber(2)
-  SpreadDirection get direction => $_getN(1);
-  @$pb.TagNumber(2)
-  set direction(SpreadDirection value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasDirection() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDirection() => $_clearField(2);
-}
-
-/// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps, base 기준)
-class SpreadBpsCondition extends $pb.GeneratedMessage {
-  factory SpreadBpsCondition({
-    $core.double? thresholdBps,
-    SpreadDirection? direction,
-  }) {
-    final result = create();
-    if (thresholdBps != null) result.thresholdBps = thresholdBps;
-    if (direction != null) result.direction = direction;
-    return result;
-  }
-
-  SpreadBpsCondition._();
-
-  factory SpreadBpsCondition.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SpreadBpsCondition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpreadBpsCondition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'thresholdBps', $pb.PbFieldType.OD)
-    ..e<SpreadDirection>(2, _omitFieldNames ? '' : 'direction', $pb.PbFieldType.OE, defaultOrMaker: SpreadDirection.SPREAD_DIRECTION_UNSPECIFIED, valueOf: SpreadDirection.valueOf, enumValues: SpreadDirection.values)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SpreadBpsCondition clone() => SpreadBpsCondition()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SpreadBpsCondition copyWith(void Function(SpreadBpsCondition) updates) => super.copyWith((message) => updates(message as SpreadBpsCondition)) as SpreadBpsCondition;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SpreadBpsCondition create() => SpreadBpsCondition._();
-  @$core.override
-  SpreadBpsCondition createEmptyInstance() => create();
-  static $pb.PbList<SpreadBpsCondition> createRepeated() => $pb.PbList<SpreadBpsCondition>();
-  @$core.pragma('dart2js:noInline')
-  static SpreadBpsCondition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SpreadBpsCondition>(create);
-  static SpreadBpsCondition? _defaultInstance;
-
-  /// 스프레드 임계값 (bps, 1bp = 0.01%)
-  @$pb.TagNumber(1)
-  $core.double get thresholdBps => $_getN(0);
-  @$pb.TagNumber(1)
-  set thresholdBps($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasThresholdBps() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearThresholdBps() => $_clearField(1);
-
-  /// 트리거 방향
-  @$pb.TagNumber(2)
-  SpreadDirection get direction => $_getN(1);
-  @$pb.TagNumber(2)
-  set direction(SpreadDirection value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasDirection() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearDirection() => $_clearField(2);
-}
-
-/// 가격 비율 조건 (base / counter)
-class PriceRatioCondition extends $pb.GeneratedMessage {
-  factory PriceRatioCondition({
-    $core.double? minRatio,
-    $core.double? maxRatio,
-  }) {
-    final result = create();
-    if (minRatio != null) result.minRatio = minRatio;
-    if (maxRatio != null) result.maxRatio = maxRatio;
-    return result;
-  }
-
-  PriceRatioCondition._();
-
-  factory PriceRatioCondition.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PriceRatioCondition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PriceRatioCondition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'minRatio', $pb.PbFieldType.OD)
-    ..a<$core.double>(2, _omitFieldNames ? '' : 'maxRatio', $pb.PbFieldType.OD)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PriceRatioCondition clone() => PriceRatioCondition()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PriceRatioCondition copyWith(void Function(PriceRatioCondition) updates) => super.copyWith((message) => updates(message as PriceRatioCondition)) as PriceRatioCondition;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PriceRatioCondition create() => PriceRatioCondition._();
-  @$core.override
-  PriceRatioCondition createEmptyInstance() => create();
-  static $pb.PbList<PriceRatioCondition> createRepeated() => $pb.PbList<PriceRatioCondition>();
-  @$core.pragma('dart2js:noInline')
-  static PriceRatioCondition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PriceRatioCondition>(create);
-  static PriceRatioCondition? _defaultInstance;
-
-  /// 최소 비율 (이 값 미만이면 CounterHigh 트리거)
-  @$pb.TagNumber(1)
-  $core.double get minRatio => $_getN(0);
-  @$pb.TagNumber(1)
-  set minRatio($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMinRatio() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMinRatio() => $_clearField(1);
-
-  /// 최대 비율 (이 값 초과 시 BaseHigh 트리거)
-  @$pb.TagNumber(2)
-  $core.double get maxRatio => $_getN(1);
-  @$pb.TagNumber(2)
-  set maxRatio($core.double value) => $_setDouble(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasMaxRatio() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMaxRatio() => $_clearField(2);
-}
-
 /// ETF↔Future 페어의 NAV 환산 설정 — 트리거(TargetNav)와 실행(counter BEP)이 공유.
 /// base/counter 중 한쪽이 ETF, 다른쪽이 Future 여야 한다 (방향 무관).
 class Nav extends $pb.GeneratedMessage {
@@ -711,7 +430,6 @@ class Nav extends $pb.GeneratedMessage {
 }
 
 enum TriggerCondition_Kind {
-  priceSpread, 
   bestMakeQuantityImbalance, 
   targetNavQuantityImbalance, 
   notSet
@@ -720,12 +438,10 @@ enum TriggerCondition_Kind {
 /// 트리거 — 언제 발사할지. 실행(OrderExecution)과 독립적으로 조합한다.
 class TriggerCondition extends $pb.GeneratedMessage {
   factory TriggerCondition({
-    PriceSpreadTrigger? priceSpread,
     BestMakeQuantityImbalanceTrigger? bestMakeQuantityImbalance,
     TargetNavQuantityImbalanceTrigger? targetNavQuantityImbalance,
   }) {
     final result = create();
-    if (priceSpread != null) result.priceSpread = priceSpread;
     if (bestMakeQuantityImbalance != null) result.bestMakeQuantityImbalance = bestMakeQuantityImbalance;
     if (targetNavQuantityImbalance != null) result.targetNavQuantityImbalance = targetNavQuantityImbalance;
     return result;
@@ -737,14 +453,12 @@ class TriggerCondition extends $pb.GeneratedMessage {
   factory TriggerCondition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, TriggerCondition_Kind> _TriggerCondition_KindByTag = {
-    1 : TriggerCondition_Kind.priceSpread,
     2 : TriggerCondition_Kind.bestMakeQuantityImbalance,
     3 : TriggerCondition_Kind.targetNavQuantityImbalance,
     0 : TriggerCondition_Kind.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TriggerCondition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
-    ..aOM<PriceSpreadTrigger>(1, _omitFieldNames ? '' : 'priceSpread', subBuilder: PriceSpreadTrigger.create)
+    ..oo(0, [2, 3])
     ..aOM<BestMakeQuantityImbalanceTrigger>(2, _omitFieldNames ? '' : 'bestMakeQuantityImbalance', subBuilder: BestMakeQuantityImbalanceTrigger.create)
     ..aOM<TargetNavQuantityImbalanceTrigger>(3, _omitFieldNames ? '' : 'targetNavQuantityImbalance', subBuilder: TargetNavQuantityImbalanceTrigger.create)
     ..hasRequiredFields = false
@@ -770,105 +484,30 @@ class TriggerCondition extends $pb.GeneratedMessage {
   TriggerCondition_Kind whichKind() => _TriggerCondition_KindByTag[$_whichOneof(0)]!;
   void clearKind() => $_clearField($_whichOneof(0));
 
-  /// 양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
-  @$pb.TagNumber(1)
-  PriceSpreadTrigger get priceSpread => $_getN(0);
-  @$pb.TagNumber(1)
-  set priceSpread(PriceSpreadTrigger value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasPriceSpread() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPriceSpread() => $_clearField(1);
-  @$pb.TagNumber(1)
-  PriceSpreadTrigger ensurePriceSpread() => $_ensure(0);
-
   /// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
   @$pb.TagNumber(2)
-  BestMakeQuantityImbalanceTrigger get bestMakeQuantityImbalance => $_getN(1);
+  BestMakeQuantityImbalanceTrigger get bestMakeQuantityImbalance => $_getN(0);
   @$pb.TagNumber(2)
   set bestMakeQuantityImbalance(BestMakeQuantityImbalanceTrigger value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasBestMakeQuantityImbalance() => $_has(1);
+  $core.bool hasBestMakeQuantityImbalance() => $_has(0);
   @$pb.TagNumber(2)
   void clearBestMakeQuantityImbalance() => $_clearField(2);
   @$pb.TagNumber(2)
-  BestMakeQuantityImbalanceTrigger ensureBestMakeQuantityImbalance() => $_ensure(1);
+  BestMakeQuantityImbalanceTrigger ensureBestMakeQuantityImbalance() => $_ensure(0);
 
   /// counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
   /// 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
   @$pb.TagNumber(3)
-  TargetNavQuantityImbalanceTrigger get targetNavQuantityImbalance => $_getN(2);
+  TargetNavQuantityImbalanceTrigger get targetNavQuantityImbalance => $_getN(1);
   @$pb.TagNumber(3)
   set targetNavQuantityImbalance(TargetNavQuantityImbalanceTrigger value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasTargetNavQuantityImbalance() => $_has(2);
+  $core.bool hasTargetNavQuantityImbalance() => $_has(1);
   @$pb.TagNumber(3)
   void clearTargetNavQuantityImbalance() => $_clearField(3);
   @$pb.TagNumber(3)
-  TargetNavQuantityImbalanceTrigger ensureTargetNavQuantityImbalance() => $_ensure(2);
-}
-
-/// 양 슬롯 참조가격 비교 트리거
-class PriceSpreadTrigger extends $pb.GeneratedMessage {
-  factory PriceSpreadTrigger({
-    PairCondition? condition,
-    $fixnum.Int64? cooldownMs,
-  }) {
-    final result = create();
-    if (condition != null) result.condition = condition;
-    if (cooldownMs != null) result.cooldownMs = cooldownMs;
-    return result;
-  }
-
-  PriceSpreadTrigger._();
-
-  factory PriceSpreadTrigger.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PriceSpreadTrigger.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PriceSpreadTrigger', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..aOM<PairCondition>(1, _omitFieldNames ? '' : 'condition', subBuilder: PairCondition.create)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PriceSpreadTrigger clone() => PriceSpreadTrigger()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PriceSpreadTrigger copyWith(void Function(PriceSpreadTrigger) updates) => super.copyWith((message) => updates(message as PriceSpreadTrigger)) as PriceSpreadTrigger;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PriceSpreadTrigger create() => PriceSpreadTrigger._();
-  @$core.override
-  PriceSpreadTrigger createEmptyInstance() => create();
-  static $pb.PbList<PriceSpreadTrigger> createRepeated() => $pb.PbList<PriceSpreadTrigger>();
-  @$core.pragma('dart2js:noInline')
-  static PriceSpreadTrigger getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PriceSpreadTrigger>(create);
-  static PriceSpreadTrigger? _defaultInstance;
-
-  /// 가격 비교 조건
-  @$pb.TagNumber(1)
-  PairCondition get condition => $_getN(0);
-  @$pb.TagNumber(1)
-  set condition(PairCondition value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasCondition() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCondition() => $_clearField(1);
-  @$pb.TagNumber(1)
-  PairCondition ensureCondition() => $_ensure(0);
-
-  /// 트리거 후 재트리거까지 대기시간 (ms)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get cooldownMs => $_getI64(1);
-  @$pb.TagNumber(2)
-  set cooldownMs($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasCooldownMs() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCooldownMs() => $_clearField(2);
+  TargetNavQuantityImbalanceTrigger ensureTargetNavQuantityImbalance() => $_ensure(1);
 }
 
 /// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
@@ -1035,7 +674,6 @@ class TargetNavQuantityImbalanceTrigger extends $pb.GeneratedMessage {
 }
 
 enum OrderExecution_Kind {
-  dualSubmit, 
   baseMakeCounterIocAndBalance, 
   counterIocTpSl, 
   baseMakeCounterTakeAndBalance, 
@@ -1045,13 +683,11 @@ enum OrderExecution_Kind {
 /// 실행 — 발사 시 무엇을 할지. 트리거와 독립적으로 조합한다.
 class OrderExecution extends $pb.GeneratedMessage {
   factory OrderExecution({
-    DualSubmitExecution? dualSubmit,
     BaseMakeCounterIocAndBalanceExecution? baseMakeCounterIocAndBalance,
     CounterIocTpSlExecution? counterIocTpSl,
     BaseMakeCounterTakeAndBalanceExecution? baseMakeCounterTakeAndBalance,
   }) {
     final result = create();
-    if (dualSubmit != null) result.dualSubmit = dualSubmit;
     if (baseMakeCounterIocAndBalance != null) result.baseMakeCounterIocAndBalance = baseMakeCounterIocAndBalance;
     if (counterIocTpSl != null) result.counterIocTpSl = counterIocTpSl;
     if (baseMakeCounterTakeAndBalance != null) result.baseMakeCounterTakeAndBalance = baseMakeCounterTakeAndBalance;
@@ -1064,15 +700,13 @@ class OrderExecution extends $pb.GeneratedMessage {
   factory OrderExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static const $core.Map<$core.int, OrderExecution_Kind> _OrderExecution_KindByTag = {
-    1 : OrderExecution_Kind.dualSubmit,
     2 : OrderExecution_Kind.baseMakeCounterIocAndBalance,
     3 : OrderExecution_Kind.counterIocTpSl,
     4 : OrderExecution_Kind.baseMakeCounterTakeAndBalance,
     0 : OrderExecution_Kind.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4])
-    ..aOM<DualSubmitExecution>(1, _omitFieldNames ? '' : 'dualSubmit', subBuilder: DualSubmitExecution.create)
+    ..oo(0, [2, 3, 4])
     ..aOM<BaseMakeCounterIocAndBalanceExecution>(2, _omitFieldNames ? '' : 'baseMakeCounterIocAndBalance', subBuilder: BaseMakeCounterIocAndBalanceExecution.create)
     ..aOM<CounterIocTpSlExecution>(3, _omitFieldNames ? '' : 'counterIocTpSl', subBuilder: CounterIocTpSlExecution.create)
     ..aOM<BaseMakeCounterTakeAndBalanceExecution>(4, _omitFieldNames ? '' : 'baseMakeCounterTakeAndBalance', subBuilder: BaseMakeCounterTakeAndBalanceExecution.create)
@@ -1099,101 +733,41 @@ class OrderExecution extends $pb.GeneratedMessage {
   OrderExecution_Kind whichKind() => _OrderExecution_KindByTag[$_whichOneof(0)]!;
   void clearKind() => $_clearField($_whichOneof(0));
 
-  /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
-  @$pb.TagNumber(1)
-  DualSubmitExecution get dualSubmit => $_getN(0);
-  @$pb.TagNumber(1)
-  set dualSubmit(DualSubmitExecution value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasDualSubmit() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearDualSubmit() => $_clearField(1);
-  @$pb.TagNumber(1)
-  DualSubmitExecution ensureDualSubmit() => $_ensure(0);
-
   /// base Limit + counter IOC + settle/recovery/balance
   @$pb.TagNumber(2)
-  BaseMakeCounterIocAndBalanceExecution get baseMakeCounterIocAndBalance => $_getN(1);
+  BaseMakeCounterIocAndBalanceExecution get baseMakeCounterIocAndBalance => $_getN(0);
   @$pb.TagNumber(2)
   set baseMakeCounterIocAndBalance(BaseMakeCounterIocAndBalanceExecution value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasBaseMakeCounterIocAndBalance() => $_has(1);
+  $core.bool hasBaseMakeCounterIocAndBalance() => $_has(0);
   @$pb.TagNumber(2)
   void clearBaseMakeCounterIocAndBalance() => $_clearField(2);
   @$pb.TagNumber(2)
-  BaseMakeCounterIocAndBalanceExecution ensureBaseMakeCounterIocAndBalance() => $_ensure(1);
+  BaseMakeCounterIocAndBalanceExecution ensureBaseMakeCounterIocAndBalance() => $_ensure(0);
 
   /// base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입 + TP/SL 청산
   @$pb.TagNumber(3)
-  CounterIocTpSlExecution get counterIocTpSl => $_getN(2);
+  CounterIocTpSlExecution get counterIocTpSl => $_getN(1);
   @$pb.TagNumber(3)
   set counterIocTpSl(CounterIocTpSlExecution value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasCounterIocTpSl() => $_has(2);
+  $core.bool hasCounterIocTpSl() => $_has(1);
   @$pb.TagNumber(3)
   void clearCounterIocTpSl() => $_clearField(3);
   @$pb.TagNumber(3)
-  CounterIocTpSlExecution ensureCounterIocTpSl() => $_ensure(2);
+  CounterIocTpSlExecution ensureCounterIocTpSl() => $_ensure(1);
 
   /// base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
   @$pb.TagNumber(4)
-  BaseMakeCounterTakeAndBalanceExecution get baseMakeCounterTakeAndBalance => $_getN(3);
+  BaseMakeCounterTakeAndBalanceExecution get baseMakeCounterTakeAndBalance => $_getN(2);
   @$pb.TagNumber(4)
   set baseMakeCounterTakeAndBalance(BaseMakeCounterTakeAndBalanceExecution value) => $_setField(4, value);
   @$pb.TagNumber(4)
-  $core.bool hasBaseMakeCounterTakeAndBalance() => $_has(3);
+  $core.bool hasBaseMakeCounterTakeAndBalance() => $_has(2);
   @$pb.TagNumber(4)
   void clearBaseMakeCounterTakeAndBalance() => $_clearField(4);
   @$pb.TagNumber(4)
-  BaseMakeCounterTakeAndBalanceExecution ensureBaseMakeCounterTakeAndBalance() => $_ensure(3);
-}
-
-/// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
-class DualSubmitExecution extends $pb.GeneratedMessage {
-  factory DualSubmitExecution({
-    PairOrderType? orderType,
-  }) {
-    final result = create();
-    if (orderType != null) result.orderType = orderType;
-    return result;
-  }
-
-  DualSubmitExecution._();
-
-  factory DualSubmitExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory DualSubmitExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DualSubmitExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..e<PairOrderType>(1, _omitFieldNames ? '' : 'orderType', $pb.PbFieldType.OE, defaultOrMaker: PairOrderType.PAIR_ORDER_TYPE_UNSPECIFIED, valueOf: PairOrderType.valueOf, enumValues: PairOrderType.values)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DualSubmitExecution clone() => DualSubmitExecution()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DualSubmitExecution copyWith(void Function(DualSubmitExecution) updates) => super.copyWith((message) => updates(message as DualSubmitExecution)) as DualSubmitExecution;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static DualSubmitExecution create() => DualSubmitExecution._();
-  @$core.override
-  DualSubmitExecution createEmptyInstance() => create();
-  static $pb.PbList<DualSubmitExecution> createRepeated() => $pb.PbList<DualSubmitExecution>();
-  @$core.pragma('dart2js:noInline')
-  static DualSubmitExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DualSubmitExecution>(create);
-  static DualSubmitExecution? _defaultInstance;
-
-  /// 주문 유형
-  @$pb.TagNumber(1)
-  PairOrderType get orderType => $_getN(0);
-  @$pb.TagNumber(1)
-  set orderType(PairOrderType value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasOrderType() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearOrderType() => $_clearField(1);
+  BaseMakeCounterTakeAndBalanceExecution ensureBaseMakeCounterTakeAndBalance() => $_ensure(2);
 }
 
 /// base Limit + counter IOC + settle/recovery/balance
@@ -2210,7 +1784,7 @@ class PairExecutionLog extends $pb.GeneratedMessage {
   void clearCounterSlippage() => $_clearField(21);
 
   /// 실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.
-  /// DualSubmit(fire-and-forget)·사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
+  /// 사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
   @$pb.TagNumber(22)
   $core.int get cycleId => $_getIZ(20);
   @$pb.TagNumber(22)
@@ -2706,7 +2280,7 @@ class PairStatusUpdate extends $pb.GeneratedMessage {
   $2.Timestamp ensureUpdatedAt() => $_ensure(3);
 
   /// exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.
-  /// base+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+  /// base+counter 실행(BaseMakeCounterIoc 등)은 0으로 채워짐.
   @$pb.TagNumber(5)
   FillStatus get exit => $_getN(4);
   @$pb.TagNumber(5)

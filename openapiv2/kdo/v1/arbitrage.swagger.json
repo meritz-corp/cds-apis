@@ -1084,6 +1084,28 @@
       },
       "title": "라운드 시작 이벤트"
     },
+    "arbitrageSpreadAmountCondition": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "string",
+          "format": "int64",
+          "title": "스프레드 임계값 (원)"
+        }
+      },
+      "title": "절대 스프레드 조건"
+    },
+    "arbitrageSpreadBpsCondition": {
+      "type": "object",
+      "properties": {
+        "thresholdBps": {
+          "type": "number",
+          "format": "double",
+          "title": "스프레드 임계값 (bps, 1bp = 0.01%)"
+        }
+      },
+      "title": "상대 스프레드 조건"
+    },
     "arbitrageStateChangedEvent": {
       "type": "object",
       "properties": {
@@ -1319,37 +1341,15 @@
         }
       }
     },
-    "v1arbitrageSpreadAmountCondition": {
-      "type": "object",
-      "properties": {
-        "threshold": {
-          "type": "string",
-          "format": "int64",
-          "title": "스프레드 임계값 (원)"
-        }
-      },
-      "title": "절대 스프레드 조건"
-    },
-    "v1arbitrageSpreadBpsCondition": {
-      "type": "object",
-      "properties": {
-        "thresholdBps": {
-          "type": "number",
-          "format": "double",
-          "title": "스프레드 임계값 (bps, 1bp = 0.01%)"
-        }
-      },
-      "title": "상대 스프레드 조건"
-    },
     "v1arbitrageTriggerCondition": {
       "type": "object",
       "properties": {
         "spreadAmount": {
-          "$ref": "#/definitions/v1arbitrageSpreadAmountCondition",
+          "$ref": "#/definitions/arbitrageSpreadAmountCondition",
           "title": "절대 스프레드 (금액)"
         },
         "spreadBps": {
-          "$ref": "#/definitions/v1arbitrageSpreadBpsCondition",
+          "$ref": "#/definitions/arbitrageSpreadBpsCondition",
           "title": "상대 스프레드 (bps)"
         }
       },

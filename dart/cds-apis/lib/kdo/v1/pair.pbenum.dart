@@ -54,52 +54,6 @@ class PriceSource extends $pb.ProtobufEnum {
   const PriceSource._(super.value, super.name);
 }
 
-/// 스프레드 방향 (어느 쪽이 비쌀 때 트리거할지)
-class SpreadDirection extends $pb.ProtobufEnum {
-  static const SpreadDirection SPREAD_DIRECTION_UNSPECIFIED = SpreadDirection._(0, _omitEnumNames ? '' : 'SPREAD_DIRECTION_UNSPECIFIED');
-  /// Base가 비쌀 때만 트리거
-  static const SpreadDirection SPREAD_DIRECTION_BASE_HIGH = SpreadDirection._(1, _omitEnumNames ? '' : 'SPREAD_DIRECTION_BASE_HIGH');
-  /// Counter가 비쌀 때만 트리거
-  static const SpreadDirection SPREAD_DIRECTION_COUNTER_HIGH = SpreadDirection._(2, _omitEnumNames ? '' : 'SPREAD_DIRECTION_COUNTER_HIGH');
-  /// 양방향
-  static const SpreadDirection SPREAD_DIRECTION_BOTH = SpreadDirection._(3, _omitEnumNames ? '' : 'SPREAD_DIRECTION_BOTH');
-
-  static const $core.List<SpreadDirection> values = <SpreadDirection> [
-    SPREAD_DIRECTION_UNSPECIFIED,
-    SPREAD_DIRECTION_BASE_HIGH,
-    SPREAD_DIRECTION_COUNTER_HIGH,
-    SPREAD_DIRECTION_BOTH,
-  ];
-
-  static final $core.List<SpreadDirection?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
-  static SpreadDirection? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const SpreadDirection._(super.value, super.name);
-}
-
-/// 페어 주문 유형
-class PairOrderType extends $pb.ProtobufEnum {
-  static const PairOrderType PAIR_ORDER_TYPE_UNSPECIFIED = PairOrderType._(0, _omitEnumNames ? '' : 'PAIR_ORDER_TYPE_UNSPECIFIED');
-  /// 지정가
-  static const PairOrderType PAIR_ORDER_TYPE_LIMIT = PairOrderType._(1, _omitEnumNames ? '' : 'PAIR_ORDER_TYPE_LIMIT');
-  /// 시장가
-  static const PairOrderType PAIR_ORDER_TYPE_MARKET = PairOrderType._(2, _omitEnumNames ? '' : 'PAIR_ORDER_TYPE_MARKET');
-  /// 공격적 지정가 (상대 최우선 호가 기반)
-  static const PairOrderType PAIR_ORDER_TYPE_AGGRESSIVE = PairOrderType._(3, _omitEnumNames ? '' : 'PAIR_ORDER_TYPE_AGGRESSIVE');
-
-  static const $core.List<PairOrderType> values = <PairOrderType> [
-    PAIR_ORDER_TYPE_UNSPECIFIED,
-    PAIR_ORDER_TYPE_LIMIT,
-    PAIR_ORDER_TYPE_MARKET,
-    PAIR_ORDER_TYPE_AGGRESSIVE,
-  ];
-
-  static final $core.List<PairOrderType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
-  static PairOrderType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const PairOrderType._(super.value, super.name);
-}
-
 /// Pair 상태
 class PairStatus extends $pb.ProtobufEnum {
   static const PairStatus PAIR_STATUS_UNSPECIFIED = PairStatus._(0, _omitEnumNames ? '' : 'PAIR_STATUS_UNSPECIFIED');

@@ -53,7 +53,6 @@ pub struct Pair {
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
 ///
 /// execution 종류별 필드 사용:
-/// - DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
 /// - BaseMakeCounterIocAndBalanceExecution (IOC imbalance):
 ///    - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 ///    - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
@@ -85,66 +84,6 @@ pub struct PairEntry {
     #[prost(enumeration="super::hedge::OrderTpCode", tag="7")]
     pub tp_code: i32,
 }
-// ============================================================================
-// Pair Condition (oneof wrapper)
-// ============================================================================
-
-/// 페어 가격 비교 조건 (세 가지 variant 중 하나)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PairCondition {
-    #[prost(oneof="pair_condition::Kind", tags="1, 2, 3")]
-    pub kind: ::core::option::Option<pair_condition::Kind>,
-}
-/// Nested message and enum types in `PairCondition`.
-pub mod pair_condition {
-    #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
-    pub enum Kind {
-        /// 절대 스프레드 금액 기준
-        #[prost(message, tag="1")]
-        SpreadAmount(super::SpreadAmountCondition),
-        /// 상대 스프레드 (bps) 기준
-        #[prost(message, tag="2")]
-        SpreadBps(super::SpreadBpsCondition),
-        /// 가격 비율 기준
-        #[prost(message, tag="3")]
-        PriceRatio(super::PriceRatioCondition),
-    }
-}
-/// 절대 스프레드 금액 조건 (|base - counter| >= threshold)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct SpreadAmountCondition {
-    /// 스프레드 임계값 (원, 1 이상)
-    #[prost(int64, tag="1")]
-    pub threshold: i64,
-    /// 트리거 방향
-    #[prost(enumeration="SpreadDirection", tag="2")]
-    pub direction: i32,
-}
-/// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps, base 기준)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct SpreadBpsCondition {
-    /// 스프레드 임계값 (bps, 1bp = 0.01%)
-    #[prost(double, tag="1")]
-    pub threshold_bps: f64,
-    /// 트리거 방향
-    #[prost(enumeration="SpreadDirection", tag="2")]
-    pub direction: i32,
-}
-/// 가격 비율 조건 (base / counter)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PriceRatioCondition {
-    /// 최소 비율 (이 값 미만이면 CounterHigh 트리거)
-    #[prost(double, tag="1")]
-    pub min_ratio: f64,
-    /// 최대 비율 (이 값 초과 시 BaseHigh 트리거)
-    #[prost(double, tag="2")]
-    pub max_ratio: f64,
-}
 /// ETF↔Future 페어의 NAV 환산 설정 — 트리거(TargetNav)와 실행(counter BEP)이 공유.
 /// base/counter 중 한쪽이 ETF, 다른쪽이 Future 여야 한다 (방향 무관).
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -169,7 +108,7 @@ pub struct Nav {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TriggerCondition {
-    #[prost(oneof="trigger_condition::Kind", tags="1, 2, 3")]
+    #[prost(oneof="trigger_condition::Kind", tags="2, 3")]
     pub kind: ::core::option::Option<trigger_condition::Kind>,
 }
 /// Nested message and enum types in `TriggerCondition`.
@@ -177,9 +116,6 @@ pub mod trigger_condition {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
-        /// 양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
-        #[prost(message, tag="1")]
-        PriceSpread(super::PriceSpreadTrigger),
         /// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
         #[prost(message, tag="2")]
         BestMakeQuantityImbalance(super::BestMakeQuantityImbalanceTrigger),
@@ -188,17 +124,6 @@ pub mod trigger_condition {
         #[prost(message, tag="3")]
         TargetNavQuantityImbalance(super::TargetNavQuantityImbalanceTrigger),
     }
-}
-/// 양 슬롯 참조가격 비교 트리거
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PriceSpreadTrigger {
-    /// 가격 비교 조건
-    #[prost(message, optional, tag="1")]
-    pub condition: ::core::option::Option<PairCondition>,
-    /// 트리거 후 재트리거까지 대기시간 (ms)
-    #[prost(uint64, tag="2")]
-    pub cooldown_ms: u64,
 }
 /// base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -241,7 +166,7 @@ pub struct TargetNavQuantityImbalanceTrigger {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OrderExecution {
-    #[prost(oneof="order_execution::Kind", tags="1, 2, 3, 4")]
+    #[prost(oneof="order_execution::Kind", tags="2, 3, 4")]
     pub kind: ::core::option::Option<order_execution::Kind>,
 }
 /// Nested message and enum types in `OrderExecution`.
@@ -249,9 +174,6 @@ pub mod order_execution {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Kind {
-        /// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
-        #[prost(message, tag="1")]
-        DualSubmit(super::DualSubmitExecution),
         /// base Limit + counter IOC + settle/recovery/balance
         #[prost(message, tag="2")]
         BaseMakeCounterIocAndBalance(super::BaseMakeCounterIocAndBalanceExecution),
@@ -262,14 +184,6 @@ pub mod order_execution {
         #[prost(message, tag="4")]
         BaseMakeCounterTakeAndBalance(super::BaseMakeCounterTakeAndBalanceExecution),
     }
-}
-/// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct DualSubmitExecution {
-    /// 주문 유형
-    #[prost(enumeration="PairOrderType", tag="1")]
-    pub order_type: i32,
 }
 /// base Limit + counter IOC + settle/recovery/balance
 ///
@@ -504,7 +418,7 @@ pub struct PairExecutionLog {
     #[prost(int64, tag="21")]
     pub counter_slippage: i64,
     /// 실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.
-    /// DualSubmit(fire-and-forget)·사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
+    /// 사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
     #[prost(uint32, optional, tag="22")]
     pub cycle_id: ::core::option::Option<u32>,
 }
@@ -604,7 +518,7 @@ pub struct PairStatusUpdate {
     #[prost(message, optional, tag="4")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.
-    /// base+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+    /// base+counter 실행(BaseMakeCounterIoc 등)은 0으로 채워짐.
     #[prost(message, optional, tag="5")]
     pub exit: ::core::option::Option<FillStatus>,
 }
@@ -700,78 +614,6 @@ impl PriceSource {
             "PRICE_SOURCE_UNSPECIFIED" => Some(Self::Unspecified),
             "PRICE_SOURCE_BEST_MAKE" => Some(Self::BestMake),
             "PRICE_SOURCE_BEST_TAKE" => Some(Self::BestTake),
-            _ => None,
-        }
-    }
-}
-/// 스프레드 방향 (어느 쪽이 비쌀 때 트리거할지)
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum SpreadDirection {
-    Unspecified = 0,
-    /// Base가 비쌀 때만 트리거
-    BaseHigh = 1,
-    /// Counter가 비쌀 때만 트리거
-    CounterHigh = 2,
-    /// 양방향
-    Both = 3,
-}
-impl SpreadDirection {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            SpreadDirection::Unspecified => "SPREAD_DIRECTION_UNSPECIFIED",
-            SpreadDirection::BaseHigh => "SPREAD_DIRECTION_BASE_HIGH",
-            SpreadDirection::CounterHigh => "SPREAD_DIRECTION_COUNTER_HIGH",
-            SpreadDirection::Both => "SPREAD_DIRECTION_BOTH",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "SPREAD_DIRECTION_UNSPECIFIED" => Some(Self::Unspecified),
-            "SPREAD_DIRECTION_BASE_HIGH" => Some(Self::BaseHigh),
-            "SPREAD_DIRECTION_COUNTER_HIGH" => Some(Self::CounterHigh),
-            "SPREAD_DIRECTION_BOTH" => Some(Self::Both),
-            _ => None,
-        }
-    }
-}
-/// 페어 주문 유형
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum PairOrderType {
-    Unspecified = 0,
-    /// 지정가
-    Limit = 1,
-    /// 시장가
-    Market = 2,
-    /// 공격적 지정가 (상대 최우선 호가 기반)
-    Aggressive = 3,
-}
-impl PairOrderType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            PairOrderType::Unspecified => "PAIR_ORDER_TYPE_UNSPECIFIED",
-            PairOrderType::Limit => "PAIR_ORDER_TYPE_LIMIT",
-            PairOrderType::Market => "PAIR_ORDER_TYPE_MARKET",
-            PairOrderType::Aggressive => "PAIR_ORDER_TYPE_AGGRESSIVE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "PAIR_ORDER_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "PAIR_ORDER_TYPE_LIMIT" => Some(Self::Limit),
-            "PAIR_ORDER_TYPE_MARKET" => Some(Self::Market),
-            "PAIR_ORDER_TYPE_AGGRESSIVE" => Some(Self::Aggressive),
             _ => None,
         }
     }

@@ -673,16 +673,6 @@
       },
       "description": "base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입,\n마지막 진입 체결가 기준 take_profit_ticks/stop_loss_ticks 틱 익절/손절(TP/SL),\nexit_delay_ms 경과 후 판정. 진입은 상대 1호가에서 entry_aggressive_ticks 만큼\n공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC). 청산은 체결될 때까지 호가 추적(amend)."
     },
-    "pairDualSubmitExecution": {
-      "type": "object",
-      "properties": {
-        "orderType": {
-          "$ref": "#/definitions/pairPairOrderType",
-          "title": "주문 유형"
-        }
-      },
-      "title": "양측 동시 발주 (구 SimultaneousCompare 의 실행부)"
-    },
     "pairEtfNavKind": {
       "type": "string",
       "enum": [
@@ -762,10 +752,6 @@
     "pairOrderExecution": {
       "type": "object",
       "properties": {
-        "dualSubmit": {
-          "$ref": "#/definitions/pairDualSubmitExecution",
-          "title": "양측 동시 발주 (구 SimultaneousCompare 의 실행부)"
-        },
         "baseMakeCounterIocAndBalance": {
           "$ref": "#/definitions/pairBaseMakeCounterIocAndBalanceExecution",
           "title": "base Limit + counter IOC + settle/recovery/balance"
@@ -849,24 +835,6 @@
         "counter"
       ]
     },
-    "pairPairCondition": {
-      "type": "object",
-      "properties": {
-        "spreadAmount": {
-          "$ref": "#/definitions/v1pairSpreadAmountCondition",
-          "title": "절대 스프레드 금액 기준"
-        },
-        "spreadBps": {
-          "$ref": "#/definitions/v1pairSpreadBpsCondition",
-          "title": "상대 스프레드 (bps) 기준"
-        },
-        "priceRatio": {
-          "$ref": "#/definitions/pairPriceRatioCondition",
-          "title": "가격 비율 기준"
-        }
-      },
-      "title": "페어 가격 비교 조건 (세 가지 variant 중 하나)"
-    },
     "pairPairEntry": {
       "type": "object",
       "properties": {
@@ -896,7 +864,7 @@
           "description": "주문 tp_code (NONE=일반, LP=유동성공급자). 이 레그의 신규 주문에 적용. 미지정 시 NONE."
         }
       },
-      "description": "execution 종류별 필드 사용:\n- DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).\n- BaseMakeCounterIocAndBalanceExecution (IOC imbalance):\n  - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).\n  - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).\n  - price_source (양 슬롯): 무시. base 가격 = base.side 1호가(=BestMake) 고정,\n    counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.\n- CounterIocTpSlExecution: counter 엔트리만 사용.",
+      "description": "execution 종류별 필드 사용:\n- BaseMakeCounterIocAndBalanceExecution (IOC imbalance):\n  - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).\n  - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).\n  - counter.quantity: 무시 (런타임 = base.quantity × hedge_ratio).\n  - price_source (양 슬롯): 무시. base 가격 = base.side 1호가(=BestMake) 고정,\n    counter 가격 = NAV 기반 BEP 고정. 사용자가 지정해도 서버에서 UNSPECIFIED 로 정규화.\n- CounterIocTpSlExecution: counter 엔트리만 사용.",
       "title": "페어의 한쪽 엔트리 (단일 심볼 주문 스펙)",
       "required": [
         "symbol",
@@ -1008,7 +976,7 @@
         "cycleId": {
           "type": "integer",
           "format": "int64",
-          "description": "실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.\nDualSubmit(fire-and-forget)·사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null)."
+          "description": "실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.\n사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null)."
         }
       },
       "title": "페어 실행 로그 레코드"
@@ -1028,18 +996,6 @@
       "default": "PAIR_EXECUTION_OUTCOME_UNSPECIFIED",
       "description": "- PAIR_EXECUTION_OUTCOME_SUBMITTED: 발주 성공\n - PAIR_EXECUTION_OUTCOME_SKIPPED_PRE_VALIDATION: 사전 검증 실패로 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_COOLDOWN: 쿨다운 중 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED: 사전 계산 없음으로 스킵\n - PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE: 한쪽만 발주 성공 (부분 실패)\n - PAIR_EXECUTION_OUTCOME_FAILED: 전체 실패\n - PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED: 체결 수량 없음으로 스킵 (filled qty = 0)",
       "title": "페어 실행 결과"
-    },
-    "pairPairOrderType": {
-      "type": "string",
-      "enum": [
-        "PAIR_ORDER_TYPE_UNSPECIFIED",
-        "PAIR_ORDER_TYPE_LIMIT",
-        "PAIR_ORDER_TYPE_MARKET",
-        "PAIR_ORDER_TYPE_AGGRESSIVE"
-      ],
-      "default": "PAIR_ORDER_TYPE_UNSPECIFIED",
-      "description": "- PAIR_ORDER_TYPE_LIMIT: 지정가\n - PAIR_ORDER_TYPE_MARKET: 시장가\n - PAIR_ORDER_TYPE_AGGRESSIVE: 공격적 지정가 (상대 최우선 호가 기반)",
-      "title": "페어 주문 유형"
     },
     "pairPairSide": {
       "type": "string",
@@ -1116,57 +1072,10 @@
         },
         "exit": {
           "$ref": "#/definitions/pairFillStatus",
-          "description": "exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.\nbase+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐."
+          "description": "exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.\nbase+counter 실행(BaseMakeCounterIoc 등)은 0으로 채워짐."
         }
       },
       "title": "StreamPairStatus 스트리밍 응답 — 페어 상태 스냅샷"
-    },
-    "pairPriceRatioCondition": {
-      "type": "object",
-      "properties": {
-        "minRatio": {
-          "type": "number",
-          "format": "double",
-          "title": "최소 비율 (이 값 미만이면 CounterHigh 트리거)"
-        },
-        "maxRatio": {
-          "type": "number",
-          "format": "double",
-          "title": "최대 비율 (이 값 초과 시 BaseHigh 트리거)"
-        }
-      },
-      "title": "가격 비율 조건 (base / counter)",
-      "required": [
-        "minRatio",
-        "maxRatio"
-      ]
-    },
-    "pairPriceSpreadTrigger": {
-      "type": "object",
-      "properties": {
-        "condition": {
-          "$ref": "#/definitions/pairPairCondition",
-          "title": "가격 비교 조건"
-        },
-        "cooldownMs": {
-          "type": "string",
-          "format": "uint64",
-          "title": "트리거 후 재트리거까지 대기시간 (ms)"
-        }
-      },
-      "title": "양 슬롯 참조가격 비교 트리거"
-    },
-    "pairSpreadDirection": {
-      "type": "string",
-      "enum": [
-        "SPREAD_DIRECTION_UNSPECIFIED",
-        "SPREAD_DIRECTION_BASE_HIGH",
-        "SPREAD_DIRECTION_COUNTER_HIGH",
-        "SPREAD_DIRECTION_BOTH"
-      ],
-      "default": "SPREAD_DIRECTION_UNSPECIFIED",
-      "description": "- SPREAD_DIRECTION_BASE_HIGH: Base가 비쌀 때만 트리거\n - SPREAD_DIRECTION_COUNTER_HIGH: Counter가 비쌀 때만 트리거\n - SPREAD_DIRECTION_BOTH: 양방향",
-      "title": "스프레드 방향 (어느 쪽이 비쌀 때 트리거할지)"
     },
     "pairTargetNavQuantityImbalanceTrigger": {
       "type": "object",
@@ -1248,51 +1157,9 @@
       "default": "PRICE_SOURCE_UNSPECIFIED",
       "description": "참조 가격 소스 (entry.side 기준 자기/상대 호가).\n\n - PRICE_SOURCE_BEST_MAKE: 자기호가 (entry.side 와 같은 방향의 1호가). Bid 주문 → bid1, Ask 주문 → ask1.\n - PRICE_SOURCE_BEST_TAKE: 상대호가 (entry.side 반대 방향의 1호가). Bid 주문 → ask1, Ask 주문 → bid1."
     },
-    "v1pairSpreadAmountCondition": {
-      "type": "object",
-      "properties": {
-        "threshold": {
-          "type": "string",
-          "format": "int64",
-          "title": "스프레드 임계값 (원, 1 이상)"
-        },
-        "direction": {
-          "$ref": "#/definitions/pairSpreadDirection",
-          "title": "트리거 방향"
-        }
-      },
-      "title": "절대 스프레드 금액 조건 (|base - counter| \u003e= threshold)",
-      "required": [
-        "threshold",
-        "direction"
-      ]
-    },
-    "v1pairSpreadBpsCondition": {
-      "type": "object",
-      "properties": {
-        "thresholdBps": {
-          "type": "number",
-          "format": "double",
-          "title": "스프레드 임계값 (bps, 1bp = 0.01%)"
-        },
-        "direction": {
-          "$ref": "#/definitions/pairSpreadDirection",
-          "title": "트리거 방향"
-        }
-      },
-      "title": "상대 스프레드 (bps) 조건 (|spread| / mid * 10000 \u003e= threshold_bps, base 기준)",
-      "required": [
-        "thresholdBps",
-        "direction"
-      ]
-    },
     "v1pairTriggerCondition": {
       "type": "object",
       "properties": {
-        "priceSpread": {
-          "$ref": "#/definitions/pairPriceSpreadTrigger",
-          "title": "양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)"
-        },
         "bestMakeQuantityImbalance": {
           "$ref": "#/definitions/pairBestMakeQuantityImbalanceTrigger",
           "description": "base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향."

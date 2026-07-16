@@ -189,7 +189,6 @@ message Pair {
 // 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
 //
 // execution 종류별 필드 사용:
-// - DualSubmitExecution: side/quantity/price_source 사용 (지정가 = price_source 추출 가격).
 // - BaseMakeCounterIocAndBalanceExecution (IOC imbalance):
 //   - base.side / base.quantity: 사용 (deficit 트리거 방향 / 사이클 base 주문 수량).
 //   - counter.side: 사용자가 직접 지정 (정방향 ETF → base.side 반대, 역방향 ETF → base.side 와 동일).
@@ -253,83 +252,6 @@ enum PriceSource {
 }
 
 // ============================================================================
-// Pair Condition (oneof wrapper)
-// ============================================================================
-
-// 페어 가격 비교 조건 (세 가지 variant 중 하나)
-message PairCondition {
-  oneof kind {
-    // 절대 스프레드 금액 기준
-    SpreadAmountCondition spread_amount = 1;
-    // 상대 스프레드 (bps) 기준
-    SpreadBpsCondition spread_bps = 2;
-    // 가격 비율 기준
-    PriceRatioCondition price_ratio = 3;
-  }
-}
-
-// 절대 스프레드 금액 조건 (|base - counter| >= threshold)
-message SpreadAmountCondition {
-  // 스프레드 임계값 (원, 1 이상)
-  int64 threshold = 1 [
-    (google.api.field_behavior) = REQUIRED
-  ];
-
-  // 트리거 방향
-  SpreadDirection direction = 2 [
-    (google.api.field_behavior) = REQUIRED
-  ];
-}
-
-// 상대 스프레드 (bps) 조건 (|spread| / mid * 10000 >= threshold_bps, base 기준)
-message SpreadBpsCondition {
-  // 스프레드 임계값 (bps, 1bp = 0.01%)
-  double threshold_bps = 1 [
-    (google.api.field_behavior) = REQUIRED
-  ];
-
-  // 트리거 방향
-  SpreadDirection direction = 2 [
-    (google.api.field_behavior) = REQUIRED
-  ];
-}
-
-// 가격 비율 조건 (base / counter)
-message PriceRatioCondition {
-  // 최소 비율 (이 값 미만이면 CounterHigh 트리거)
-  double min_ratio = 1 [
-    (google.api.field_behavior) = REQUIRED
-  ];
-
-  // 최대 비율 (이 값 초과 시 BaseHigh 트리거)
-  double max_ratio = 2 [
-    (google.api.field_behavior) = REQUIRED
-  ];
-}
-
-// 스프레드 방향 (어느 쪽이 비쌀 때 트리거할지)
-enum SpreadDirection {
-  SPREAD_DIRECTION_UNSPECIFIED = 0;
-  // Base가 비쌀 때만 트리거
-  SPREAD_DIRECTION_BASE_HIGH = 1;
-  // Counter가 비쌀 때만 트리거
-  SPREAD_DIRECTION_COUNTER_HIGH = 2;
-  // 양방향
-  SPREAD_DIRECTION_BOTH = 3;
-}
-
-// 페어 주문 유형
-enum PairOrderType {
-  PAIR_ORDER_TYPE_UNSPECIFIED = 0;
-  // 지정가
-  PAIR_ORDER_TYPE_LIMIT = 1;
-  // 시장가
-  PAIR_ORDER_TYPE_MARKET = 2;
-  // 공격적 지정가 (상대 최우선 호가 기반)
-  PAIR_ORDER_TYPE_AGGRESSIVE = 3;
-}
-
-// ============================================================================
 // Pair Status
 // ============================================================================
 
@@ -383,22 +305,14 @@ message Nav {
 // 트리거 — 언제 발사할지. 실행(OrderExecution)과 독립적으로 조합한다.
 message TriggerCondition {
   oneof kind {
-    // 양 슬롯 참조가격 비교 트리거 (구 SimultaneousCompare 의 트리거부)
-    PriceSpreadTrigger price_spread = 1;
     // base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
     BestMakeQuantityImbalanceTrigger best_make_quantity_imbalance = 2;
     // counter 시세로 base 의 NAV 목표가를 환산해, base 자기측(BestMake) 1호가가
     // 목표가와 정확히 일치하면서 수량 불균형일 때 발사. nav 파라미터는 Pair.nav 공유 설정 사용.
     TargetNavQuantityImbalanceTrigger target_nav_quantity_imbalance = 3;
   }
-}
-
-// 양 슬롯 참조가격 비교 트리거
-message PriceSpreadTrigger {
-  // 가격 비교 조건
-  PairCondition condition = 1;
-  // 트리거 후 재트리거까지 대기시간 (ms)
-  uint64 cooldown_ms = 2;
+  reserved 1;
+  reserved "price_spread";
 }
 
 // base 자기측(BestMake) 1호가 수량 불균형 트리거. base.side 가 담당 deficit 방향.
@@ -438,8 +352,6 @@ message TargetNavQuantityImbalanceTrigger {
 // 실행 — 발사 시 무엇을 할지. 트리거와 독립적으로 조합한다.
 message OrderExecution {
   oneof kind {
-    // 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
-    DualSubmitExecution dual_submit = 1;
     // base Limit + counter IOC + settle/recovery/balance
     BaseMakeCounterIocAndBalanceExecution base_make_counter_ioc_and_balance = 2;
     // base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입 + TP/SL 청산
@@ -447,12 +359,8 @@ message OrderExecution {
     // base Limit + counter 잔류지정가(상대호가±틱, IOC 아님) + settle/recovery/balance
     BaseMakeCounterTakeAndBalanceExecution base_make_counter_take_and_balance = 4;
   }
-}
-
-// 양측 동시 발주 (구 SimultaneousCompare 의 실행부)
-message DualSubmitExecution {
-  // 주문 유형
-  PairOrderType order_type = 1;
+  reserved 1;
+  reserved "dual_submit";
 }
 
 // base Limit + counter IOC + settle/recovery/balance
@@ -697,7 +605,7 @@ message PairExecutionLog {
   int64 counter_slippage = 21;
 
   // 실행 사이클 상관 id — IOC 엔진의 exchange_time 기반.
-  // DualSubmit(fire-and-forget)·사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
+  // 사이클 시작 전 스킵 경로는 사이클이 없어 미설정(null).
   optional uint32 cycle_id = 22;
 }
 
@@ -812,7 +720,7 @@ message PairStatusUpdate {
   // 스냅샷 시각
   google.protobuf.Timestamp updated_at = 4;
   // exit(청산) 슬롯 상태 — CounterIocTpSl round-trip 전용.
-  // base+counter 실행(DualSubmit/BaseMakeCounterIoc 등)은 0으로 채워짐.
+  // base+counter 실행(BaseMakeCounterIoc 등)은 0으로 채워짐.
   FillStatus exit = 5;
 }
 
