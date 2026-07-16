@@ -2251,6 +2251,9 @@ impl serde::Serialize for Pair {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.Pair", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -2290,6 +2293,9 @@ impl serde::Serialize for Pair {
         if let Some(v) = self.nav.as_ref() {
             struct_ser.serialize_field("nav", v)?;
         }
+        if let Some(v) = self.base_quantity_limit.as_ref() {
+            struct_ser.serialize_field("base_quantity_limit", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2316,6 +2322,8 @@ impl<'de> serde::Deserialize<'de> for Pair {
             "trigger",
             "execution",
             "nav",
+            "base_quantity_limit",
+            "baseQuantityLimit",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2332,6 +2340,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
             Trigger,
             Execution,
             Nav,
+            BaseQuantityLimit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2366,6 +2375,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
                             "trigger" => Ok(GeneratedField::Trigger),
                             "execution" => Ok(GeneratedField::Execution),
                             "nav" => Ok(GeneratedField::Nav),
+                            "baseQuantityLimit" | "base_quantity_limit" => Ok(GeneratedField::BaseQuantityLimit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2397,6 +2407,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
                 let mut trigger__ = None;
                 let mut execution__ = None;
                 let mut nav__ = None;
+                let mut base_quantity_limit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -2475,6 +2486,12 @@ impl<'de> serde::Deserialize<'de> for Pair {
                             }
                             nav__ = map_.next_value()?;
                         }
+                        GeneratedField::BaseQuantityLimit => {
+                            if base_quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseQuantityLimit"));
+                            }
+                            base_quantity_limit__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2493,6 +2510,7 @@ impl<'de> serde::Deserialize<'de> for Pair {
                     trigger: trigger__,
                     execution: execution__,
                     nav: nav__,
+                    base_quantity_limit: base_quantity_limit__,
                 })
             }
         }
@@ -3298,6 +3316,172 @@ impl<'de> serde::Deserialize<'de> for PairExecutionOutcome {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PairQuantityLimit {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.PairQuantityLimit", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_bid_quantity", ToString::to_string(&self.max_bid_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_ask_quantity", ToString::to_string(&self.max_ask_quantity).as_str())?;
+        }
+        if let Some(v) = self.net_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.max_net_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_net_quantity", ToString::to_string(&v).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairQuantityLimit {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "max_bid_quantity",
+            "maxBidQuantity",
+            "max_ask_quantity",
+            "maxAskQuantity",
+            "net_quantity",
+            "netQuantity",
+            "max_net_quantity",
+            "maxNetQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            MaxBidQuantity,
+            MaxAskQuantity,
+            NetQuantity,
+            MaxNetQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "maxBidQuantity" | "max_bid_quantity" => Ok(GeneratedField::MaxBidQuantity),
+                            "maxAskQuantity" | "max_ask_quantity" => Ok(GeneratedField::MaxAskQuantity),
+                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
+                            "maxNetQuantity" | "max_net_quantity" => Ok(GeneratedField::MaxNetQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairQuantityLimit;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair.PairQuantityLimit")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairQuantityLimit, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut max_bid_quantity__ = None;
+                let mut max_ask_quantity__ = None;
+                let mut net_quantity__ = None;
+                let mut max_net_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::MaxBidQuantity => {
+                            if max_bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxBidQuantity"));
+                            }
+                            max_bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxAskQuantity => {
+                            if max_ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxAskQuantity"));
+                            }
+                            max_ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantity => {
+                            if net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantity"));
+                            }
+                            net_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::MaxNetQuantity => {
+                            if max_net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxNetQuantity"));
+                            }
+                            max_net_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PairQuantityLimit {
+                    max_bid_quantity: max_bid_quantity__.unwrap_or_default(),
+                    max_ask_quantity: max_ask_quantity__.unwrap_or_default(),
+                    net_quantity: net_quantity__,
+                    max_net_quantity: max_net_quantity__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair.PairQuantityLimit", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairSide {
@@ -4443,9 +4627,15 @@ impl serde::Serialize for UpdatePairRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair.UpdatePairRequest", len)?;
         if let Some(v) = self.pair.as_ref() {
             struct_ser.serialize_field("pair", v)?;
+        }
+        if let Some(v) = self.base_quantity_limit.as_ref() {
+            struct_ser.serialize_field("base_quantity_limit", v)?;
         }
         struct_ser.end()
     }
@@ -4458,11 +4648,14 @@ impl<'de> serde::Deserialize<'de> for UpdatePairRequest {
     {
         const FIELDS: &[&str] = &[
             "pair",
+            "base_quantity_limit",
+            "baseQuantityLimit",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Pair,
+            BaseQuantityLimit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4486,6 +4679,7 @@ impl<'de> serde::Deserialize<'de> for UpdatePairRequest {
                     {
                         match value {
                             "pair" => Ok(GeneratedField::Pair),
+                            "baseQuantityLimit" | "base_quantity_limit" => Ok(GeneratedField::BaseQuantityLimit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4506,6 +4700,7 @@ impl<'de> serde::Deserialize<'de> for UpdatePairRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut pair__ = None;
+                let mut base_quantity_limit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Pair => {
@@ -4514,6 +4709,12 @@ impl<'de> serde::Deserialize<'de> for UpdatePairRequest {
                             }
                             pair__ = map_.next_value()?;
                         }
+                        GeneratedField::BaseQuantityLimit => {
+                            if base_quantity_limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseQuantityLimit"));
+                            }
+                            base_quantity_limit__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4521,6 +4722,7 @@ impl<'de> serde::Deserialize<'de> for UpdatePairRequest {
                 }
                 Ok(UpdatePairRequest {
                     pair: pair__,
+                    base_quantity_limit: base_quantity_limit__,
                 })
             }
         }

@@ -130,6 +130,7 @@ const Pair$json = {
     {'1': 'trigger', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.pair.TriggerCondition', '10': 'trigger'},
     {'1': 'execution', '3': 14, '4': 1, '5': 11, '6': '.kdo.v1.pair.OrderExecution', '10': 'execution'},
     {'1': 'nav', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.pair.Nav', '10': 'nav'},
+    {'1': 'base_quantity_limit', '3': 16, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairQuantityLimit', '10': 'baseQuantityLimit'},
   ],
   '7': {},
   '9': [
@@ -152,8 +153,10 @@ final $typed_data.Uint8List pairDescriptor = $convert.base64Decode(
     '5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWUSNwoHdHJpZ2dlchgNIAEoCzId'
     'Lmtkby52MS5wYWlyLlRyaWdnZXJDb25kaXRpb25SB3RyaWdnZXISOQoJZXhlY3V0aW9uGA4gAS'
     'gLMhsua2RvLnYxLnBhaXIuT3JkZXJFeGVjdXRpb25SCWV4ZWN1dGlvbhIiCgNuYXYYDyABKAsy'
-    'EC5rZG8udjEucGFpci5OYXZSA25hdjon6kEkChRrZG8uY2RzYXBpcy54eXovUGFpchIMcGFpcn'
-    'Mve3BhaXJ9SgQIBxAISgQICBAJSgQIChALUgljb25kaXRpb25SC2V4ZWNfY29uZmlnUgRtb2Rl');
+    'EC5rZG8udjEucGFpci5OYXZSA25hdhJOChNiYXNlX3F1YW50aXR5X2xpbWl0GBAgASgLMh4ua2'
+    'RvLnYxLnBhaXIuUGFpclF1YW50aXR5TGltaXRSEWJhc2VRdWFudGl0eUxpbWl0OifqQSQKFGtk'
+    'by5jZHNhcGlzLnh5ei9QYWlyEgxwYWlycy97cGFpcn1KBAgHEAhKBAgIEAlKBAgKEAtSCWNvbm'
+    'RpdGlvblILZXhlY19jb25maWdSBG1vZGU=');
 
 @$core.Deprecated('Use pairEntryDescriptor instead')
 const PairEntry$json = {
@@ -200,6 +203,29 @@ final $typed_data.Uint8List navDescriptor = $convert.base64Decode(
     'CgNOYXYSMgoIbmF2X2tpbmQYASABKA4yFy5rZG8udjEucGFpci5FdGZOYXZLaW5kUgduYXZLaW'
     '5kEhQKBWJhc2lzGAIgASgDUgViYXNpcxI2ChdiYXNpc19zdWJzY3JpYmVfZW5hYmxlZBgEIAEo'
     'CFIVYmFzaXNTdWJzY3JpYmVFbmFibGVkSgQIAxAEUglhc2tfYmFzaXM=');
+
+@$core.Deprecated('Use pairQuantityLimitDescriptor instead')
+const PairQuantityLimit$json = {
+  '1': 'PairQuantityLimit',
+  '2': [
+    {'1': 'max_bid_quantity', '3': 1, '4': 1, '5': 3, '10': 'maxBidQuantity'},
+    {'1': 'max_ask_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxAskQuantity'},
+    {'1': 'net_quantity', '3': 3, '4': 1, '5': 3, '9': 0, '10': 'netQuantity', '17': true},
+    {'1': 'max_net_quantity', '3': 4, '4': 1, '5': 3, '9': 1, '10': 'maxNetQuantity', '17': true},
+  ],
+  '8': [
+    {'1': '_net_quantity'},
+    {'1': '_max_net_quantity'},
+  ],
+};
+
+/// Descriptor for `PairQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairQuantityLimitDescriptor = $convert.base64Decode(
+    'ChFQYWlyUXVhbnRpdHlMaW1pdBIoChBtYXhfYmlkX3F1YW50aXR5GAEgASgDUg5tYXhCaWRRdW'
+    'FudGl0eRIoChBtYXhfYXNrX3F1YW50aXR5GAIgASgDUg5tYXhBc2tRdWFudGl0eRImCgxuZXRf'
+    'cXVhbnRpdHkYAyABKANIAFILbmV0UXVhbnRpdHmIAQESLQoQbWF4X25ldF9xdWFudGl0eRgEIA'
+    'EoA0gBUg5tYXhOZXRRdWFudGl0eYgBAUIPCg1fbmV0X3F1YW50aXR5QhMKEV9tYXhfbmV0X3F1'
+    'YW50aXR5');
 
 @$core.Deprecated('Use triggerConditionDescriptor instead')
 const TriggerCondition$json = {
@@ -444,13 +470,19 @@ const UpdatePairRequest$json = {
   '1': 'UpdatePairRequest',
   '2': [
     {'1': 'pair', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair.Pair', '8': {}, '10': 'pair'},
+    {'1': 'base_quantity_limit', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair.PairQuantityLimit', '9': 0, '10': 'baseQuantityLimit', '17': true},
+  ],
+  '8': [
+    {'1': '_base_quantity_limit'},
   ],
 };
 
 /// Descriptor for `UpdatePairRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updatePairRequestDescriptor = $convert.base64Decode(
     'ChFVcGRhdGVQYWlyUmVxdWVzdBIrCgRwYWlyGAEgASgLMhEua2RvLnYxLnBhaXIuUGFpckIE4k'
-    'EBAlIEcGFpcg==');
+    'EBAlIEcGFpchJTChNiYXNlX3F1YW50aXR5X2xpbWl0GAIgASgLMh4ua2RvLnYxLnBhaXIuUGFp'
+    'clF1YW50aXR5TGltaXRIAFIRYmFzZVF1YW50aXR5TGltaXSIAQFCFgoUX2Jhc2VfcXVhbnRpdH'
+    'lfbGltaXQ=');
 
 @$core.Deprecated('Use deletePairRequestDescriptor instead')
 const DeletePairRequest$json = {

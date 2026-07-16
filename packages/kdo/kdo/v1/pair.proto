@@ -180,6 +180,9 @@ message Pair {
   // ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·BaseMakeCounterIocAndBalance/CounterIocTpSlExecution
   // execution 이 공유. NAV 미사용 페어는 미설정.
   Nav nav = 15;
+
+  // base leg 누적 체결 수량 한도
+  PairQuantityLimit base_quantity_limit = 16;
 }
 
 // ============================================================================
@@ -296,6 +299,25 @@ message Nav {
   // 선물-ETF basis 동기화 버스 구독 여부.
   // true 이면 pair가 버스 이벤트를 수신해 Nav.basis를 자동 갱신한다. 기본 false.
   bool basis_subscribe_enabled = 4;
+}
+
+// base leg 누적 체결 수량 한도
+message PairQuantityLimit {
+  // 매수 수량 상한 (gross 누적 매수 체결 기준)
+  int64 max_bid_quantity = 1;
+
+  // 매도 수량 상한 (gross 누적 매도 체결 기준)
+  int64 max_ask_quantity = 2;
+
+  // 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
+  // 상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조
+  optional int64 net_quantity = 3;
+
+  // 순포지션 한도 설정값 (한도 검증에 사용)
+  // net_quantity > 0 && net_quantity >= max_net_quantity → 매수 차단
+  // net_quantity < 0 && |net_quantity| >= max_net_quantity → 매도 차단
+  // 미설정(None) 시 순포지션 기반 차단 비활성
+  optional int64 max_net_quantity = 4;
 }
 
 // ============================================================================
@@ -494,6 +516,9 @@ message UpdatePairRequest {
   Pair pair = 1 [
     (google.api.field_behavior) = REQUIRED
   ];
+
+  // base leg 누적 체결 수량 한도 (수정용)
+  optional PairQuantityLimit base_quantity_limit = 2;
 }
 
 message DeletePairRequest {
