@@ -38,7 +38,7 @@ class Pair extends $pb.GeneratedMessage {
     TriggerCondition? trigger,
     OrderExecution? execution,
     Nav? nav,
-    PairQuantityLimit? baseQuantityLimit,
+    $fixnum.Int64? maxBaseQuantity,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -53,7 +53,7 @@ class Pair extends $pb.GeneratedMessage {
     if (trigger != null) result.trigger = trigger;
     if (execution != null) result.execution = execution;
     if (nav != null) result.nav = nav;
-    if (baseQuantityLimit != null) result.baseQuantityLimit = baseQuantityLimit;
+    if (maxBaseQuantity != null) result.maxBaseQuantity = maxBaseQuantity;
     return result;
   }
 
@@ -75,7 +75,7 @@ class Pair extends $pb.GeneratedMessage {
     ..aOM<TriggerCondition>(13, _omitFieldNames ? '' : 'trigger', subBuilder: TriggerCondition.create)
     ..aOM<OrderExecution>(14, _omitFieldNames ? '' : 'execution', subBuilder: OrderExecution.create)
     ..aOM<Nav>(15, _omitFieldNames ? '' : 'nav', subBuilder: Nav.create)
-    ..aOM<PairQuantityLimit>(16, _omitFieldNames ? '' : 'baseQuantityLimit', subBuilder: PairQuantityLimit.create)
+    ..aInt64(17, _omitFieldNames ? '' : 'maxBaseQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -231,17 +231,16 @@ class Pair extends $pb.GeneratedMessage {
   @$pb.TagNumber(15)
   Nav ensureNav() => $_ensure(11);
 
-  /// base leg 누적 체결 수량 한도
-  @$pb.TagNumber(16)
-  PairQuantityLimit get baseQuantityLimit => $_getN(12);
-  @$pb.TagNumber(16)
-  set baseQuantityLimit(PairQuantityLimit value) => $_setField(16, value);
-  @$pb.TagNumber(16)
-  $core.bool hasBaseQuantityLimit() => $_has(12);
-  @$pb.TagNumber(16)
-  void clearBaseQuantityLimit() => $_clearField(16);
-  @$pb.TagNumber(16)
-  PairQuantityLimit ensureBaseQuantityLimit() => $_ensure(12);
+  /// base leg 누적 체결(gross) 상한. base.side 방향으로 판정. 도달 시 pair 정지.
+  /// (기본 1000000 = 사실상 무제한)
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get maxBaseQuantity => $_getI64(12);
+  @$pb.TagNumber(17)
+  set maxBaseQuantity($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(17)
+  $core.bool hasMaxBaseQuantity() => $_has(12);
+  @$pb.TagNumber(17)
+  void clearMaxBaseQuantity() => $_clearField(17);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙)
@@ -442,97 +441,6 @@ class Nav extends $pb.GeneratedMessage {
   $core.bool hasBasisSubscribeEnabled() => $_has(2);
   @$pb.TagNumber(4)
   void clearBasisSubscribeEnabled() => $_clearField(4);
-}
-
-/// base leg 누적 체결 수량 한도
-class PairQuantityLimit extends $pb.GeneratedMessage {
-  factory PairQuantityLimit({
-    $fixnum.Int64? maxBidQuantity,
-    $fixnum.Int64? maxAskQuantity,
-    $fixnum.Int64? netQuantity,
-    $fixnum.Int64? maxNetQuantity,
-  }) {
-    final result = create();
-    if (maxBidQuantity != null) result.maxBidQuantity = maxBidQuantity;
-    if (maxAskQuantity != null) result.maxAskQuantity = maxAskQuantity;
-    if (netQuantity != null) result.netQuantity = netQuantity;
-    if (maxNetQuantity != null) result.maxNetQuantity = maxNetQuantity;
-    return result;
-  }
-
-  PairQuantityLimit._();
-
-  factory PairQuantityLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory PairQuantityLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'maxBidQuantity')
-    ..aInt64(2, _omitFieldNames ? '' : 'maxAskQuantity')
-    ..aInt64(3, _omitFieldNames ? '' : 'netQuantity')
-    ..aInt64(4, _omitFieldNames ? '' : 'maxNetQuantity')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PairQuantityLimit clone() => PairQuantityLimit()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PairQuantityLimit copyWith(void Function(PairQuantityLimit) updates) => super.copyWith((message) => updates(message as PairQuantityLimit)) as PairQuantityLimit;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PairQuantityLimit create() => PairQuantityLimit._();
-  @$core.override
-  PairQuantityLimit createEmptyInstance() => create();
-  static $pb.PbList<PairQuantityLimit> createRepeated() => $pb.PbList<PairQuantityLimit>();
-  @$core.pragma('dart2js:noInline')
-  static PairQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairQuantityLimit>(create);
-  static PairQuantityLimit? _defaultInstance;
-
-  /// 매수 수량 상한 (gross 누적 매수 체결 기준)
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get maxBidQuantity => $_getI64(0);
-  @$pb.TagNumber(1)
-  set maxBidQuantity($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMaxBidQuantity() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMaxBidQuantity() => $_clearField(1);
-
-  /// 매도 수량 상한 (gross 누적 매도 체결 기준)
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get maxAskQuantity => $_getI64(1);
-  @$pb.TagNumber(2)
-  set maxAskQuantity($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasMaxAskQuantity() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMaxAskQuantity() => $_clearField(2);
-
-  /// 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
-  /// 상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get netQuantity => $_getI64(2);
-  @$pb.TagNumber(3)
-  set netQuantity($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasNetQuantity() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearNetQuantity() => $_clearField(3);
-
-  /// 순포지션 한도 설정값 (한도 검증에 사용)
-  /// net_quantity > 0 && net_quantity >= max_net_quantity → 매수 차단
-  /// net_quantity < 0 && |net_quantity| >= max_net_quantity → 매도 차단
-  /// 미설정(None) 시 순포지션 기반 차단 비활성
-  @$pb.TagNumber(4)
-  $fixnum.Int64 get maxNetQuantity => $_getI64(3);
-  @$pb.TagNumber(4)
-  set maxNetQuantity($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasMaxNetQuantity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearMaxNetQuantity() => $_clearField(4);
 }
 
 enum TriggerCondition_Kind {
@@ -1399,11 +1307,9 @@ class CreatePairRequest extends $pb.GeneratedMessage {
 class UpdatePairRequest extends $pb.GeneratedMessage {
   factory UpdatePairRequest({
     Pair? pair,
-    PairQuantityLimit? baseQuantityLimit,
   }) {
     final result = create();
     if (pair != null) result.pair = pair;
-    if (baseQuantityLimit != null) result.baseQuantityLimit = baseQuantityLimit;
     return result;
   }
 
@@ -1414,7 +1320,6 @@ class UpdatePairRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePairRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair'), createEmptyInstance: create)
     ..aOM<Pair>(1, _omitFieldNames ? '' : 'pair', subBuilder: Pair.create)
-    ..aOM<PairQuantityLimit>(2, _omitFieldNames ? '' : 'baseQuantityLimit', subBuilder: PairQuantityLimit.create)
     ..hasRequiredFields = false
   ;
 
@@ -1446,18 +1351,6 @@ class UpdatePairRequest extends $pb.GeneratedMessage {
   void clearPair() => $_clearField(1);
   @$pb.TagNumber(1)
   Pair ensurePair() => $_ensure(0);
-
-  /// base leg 누적 체결 수량 한도 (수정용)
-  @$pb.TagNumber(2)
-  PairQuantityLimit get baseQuantityLimit => $_getN(1);
-  @$pb.TagNumber(2)
-  set baseQuantityLimit(PairQuantityLimit value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBaseQuantityLimit() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBaseQuantityLimit() => $_clearField(2);
-  @$pb.TagNumber(2)
-  PairQuantityLimit ensureBaseQuantityLimit() => $_ensure(1);
 }
 
 class DeletePairRequest extends $pb.GeneratedMessage {

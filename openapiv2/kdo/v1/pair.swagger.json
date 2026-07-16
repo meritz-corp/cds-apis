@@ -185,9 +185,10 @@
                   "$ref": "#/definitions/v1pairNav",
                   "description": "ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·BaseMakeCounterIocAndBalance/CounterIocTpSlExecution\nexecution 이 공유. NAV 미사용 페어는 미설정."
                 },
-                "baseQuantityLimit": {
-                  "$ref": "#/definitions/pairPairQuantityLimit",
-                  "title": "base leg 누적 체결 수량 한도"
+                "maxBaseQuantity": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "base leg 누적 체결(gross) 상한. base.side 방향으로 판정. 도달 시 pair 정지.\n(기본 1000000 = 사실상 무제한)"
                 }
               },
               "title": "수정할 Pair",
@@ -198,38 +199,6 @@
                 "counter"
               ]
             }
-          },
-          {
-            "name": "baseQuantityLimit.maxBidQuantity",
-            "description": "매수 수량 상한 (gross 누적 매수 체결 기준)",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "baseQuantityLimit.maxAskQuantity",
-            "description": "매도 수량 상한 (gross 누적 매도 체결 기준)",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "baseQuantityLimit.netQuantity",
-            "description": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "baseQuantityLimit.maxNetQuantity",
-            "description": "순포지션 한도 설정값 (한도 검증에 사용)\nnet_quantity \u003e 0 \u0026\u0026 net_quantity \u003e= max_net_quantity → 매수 차단\nnet_quantity \u003c 0 \u0026\u0026 |net_quantity| \u003e= max_net_quantity → 매도 차단\n미설정(None) 시 순포지션 기반 차단 비활성",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
           }
         ],
         "tags": [
@@ -862,9 +831,10 @@
           "$ref": "#/definitions/v1pairNav",
           "description": "ETF↔Future NAV 환산 설정 — TargetNavQuantityImbalance 트리거·BaseMakeCounterIocAndBalance/CounterIocTpSlExecution\nexecution 이 공유. NAV 미사용 페어는 미설정."
         },
-        "baseQuantityLimit": {
-          "$ref": "#/definitions/pairPairQuantityLimit",
-          "title": "base leg 누적 체결 수량 한도"
+        "maxBaseQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "base leg 누적 체결(gross) 상한. base.side 방향으로 판정. 도달 시 pair 정지.\n(기본 1000000 = 사실상 무제한)"
         }
       },
       "title": "Pair 전략 — 두 심볼의 가격 조건에 따른 동시 주문 설정",
@@ -1036,32 +1006,6 @@
       "default": "PAIR_EXECUTION_OUTCOME_UNSPECIFIED",
       "description": "- PAIR_EXECUTION_OUTCOME_SUBMITTED: 발주 성공\n - PAIR_EXECUTION_OUTCOME_SKIPPED_PRE_VALIDATION: 사전 검증 실패로 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_COOLDOWN: 쿨다운 중 스킵\n - PAIR_EXECUTION_OUTCOME_SKIPPED_NO_PRECOMPUTED: 사전 계산 없음으로 스킵\n - PAIR_EXECUTION_OUTCOME_PARTIAL_FAILURE: 한쪽만 발주 성공 (부분 실패)\n - PAIR_EXECUTION_OUTCOME_FAILED: 전체 실패\n - PAIR_EXECUTION_OUTCOME_SKIPPED_NO_FILLED: 체결 수량 없음으로 스킵 (filled qty = 0)",
       "title": "페어 실행 결과"
-    },
-    "pairPairQuantityLimit": {
-      "type": "object",
-      "properties": {
-        "maxBidQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매수 수량 상한 (gross 누적 매수 체결 기준)"
-        },
-        "maxAskQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "매도 수량 상한 (gross 누적 매도 체결 기준)"
-        },
-        "netQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask\n상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조"
-        },
-        "maxNetQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "순포지션 한도 설정값 (한도 검증에 사용)\nnet_quantity \u003e 0 \u0026\u0026 net_quantity \u003e= max_net_quantity → 매수 차단\nnet_quantity \u003c 0 \u0026\u0026 |net_quantity| \u003e= max_net_quantity → 매도 차단\n미설정(None) 시 순포지션 기반 차단 비활성"
-        }
-      },
-      "title": "base leg 누적 체결 수량 한도"
     },
     "pairPairSide": {
       "type": "string",

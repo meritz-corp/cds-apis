@@ -45,9 +45,10 @@ pub struct Pair {
     /// execution 이 공유. NAV 미사용 페어는 미설정.
     #[prost(message, optional, tag="15")]
     pub nav: ::core::option::Option<Nav>,
-    /// base leg 누적 체결 수량 한도
-    #[prost(message, optional, tag="16")]
-    pub base_quantity_limit: ::core::option::Option<PairQuantityLimit>,
+    /// base leg 누적 체결(gross) 상한. base.side 방향으로 판정. 도달 시 pair 정지.
+    /// (기본 1000000 = 사실상 무제한)
+    #[prost(int64, tag="17")]
+    pub max_base_quantity: i64,
 }
 // ============================================================================
 // Pair Entry
@@ -102,27 +103,6 @@ pub struct Nav {
     /// true 이면 pair가 버스 이벤트를 수신해 Nav.basis를 자동 갱신한다. 기본 false.
     #[prost(bool, tag="4")]
     pub basis_subscribe_enabled: bool,
-}
-/// base leg 누적 체결 수량 한도
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct PairQuantityLimit {
-    /// 매수 수량 상한 (gross 누적 매수 체결 기준)
-    #[prost(int64, tag="1")]
-    pub max_bid_quantity: i64,
-    /// 매도 수량 상한 (gross 누적 매도 체결 기준)
-    #[prost(int64, tag="2")]
-    pub max_ask_quantity: i64,
-    /// 순포지션 (+ = 순매수, - = 순매도): gross_bid - gross_ask
-    /// 상태 조회 시 런타임 계산값으로 노출; 한도 검증에는 max_net_quantity 참조
-    #[prost(int64, optional, tag="3")]
-    pub net_quantity: ::core::option::Option<i64>,
-    /// 순포지션 한도 설정값 (한도 검증에 사용)
-    /// net_quantity > 0 && net_quantity >= max_net_quantity → 매수 차단
-    /// net_quantity < 0 && |net_quantity| >= max_net_quantity → 매도 차단
-    /// 미설정(None) 시 순포지션 기반 차단 비활성
-    #[prost(int64, optional, tag="4")]
-    pub max_net_quantity: ::core::option::Option<i64>,
 }
 // ============================================================================
 // TriggerCondition — 트리거 축
@@ -343,9 +323,6 @@ pub struct UpdatePairRequest {
     /// 수정할 Pair
     #[prost(message, optional, tag="1")]
     pub pair: ::core::option::Option<Pair>,
-    /// base leg 누적 체결 수량 한도 (수정용)
-    #[prost(message, optional, tag="2")]
-    pub base_quantity_limit: ::core::option::Option<PairQuantityLimit>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
