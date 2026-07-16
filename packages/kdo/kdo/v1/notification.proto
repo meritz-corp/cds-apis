@@ -184,6 +184,8 @@ message NavigateAction {
     FutureLpPageTarget future_lp_page = 2;
     // Navigate to MM page
     MmPageTarget mm_page = 3;
+    // Navigate to Pair page
+    PairPageTarget pair_page = 4;
   }
 }
 
@@ -215,6 +217,12 @@ message MmPageTarget {
 
   // 펀드 코드
   string fund_code = 2;
+}
+
+// Pair page navigation target
+message PairPageTarget {
+  // Pair ID
+  int32 pair_id = 1;
 }
 
 // Notification resource

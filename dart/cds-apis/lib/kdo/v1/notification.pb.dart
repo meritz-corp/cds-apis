@@ -413,6 +413,7 @@ enum NavigateAction_Target {
   lpPage, 
   futureLpPage, 
   mmPage, 
+  pairPage, 
   notSet
 }
 
@@ -422,11 +423,13 @@ class NavigateAction extends $pb.GeneratedMessage {
     LpPageTarget? lpPage,
     FutureLpPageTarget? futureLpPage,
     MmPageTarget? mmPage,
+    PairPageTarget? pairPage,
   }) {
     final result = create();
     if (lpPage != null) result.lpPage = lpPage;
     if (futureLpPage != null) result.futureLpPage = futureLpPage;
     if (mmPage != null) result.mmPage = mmPage;
+    if (pairPage != null) result.pairPage = pairPage;
     return result;
   }
 
@@ -439,13 +442,15 @@ class NavigateAction extends $pb.GeneratedMessage {
     1 : NavigateAction_Target.lpPage,
     2 : NavigateAction_Target.futureLpPage,
     3 : NavigateAction_Target.mmPage,
+    4 : NavigateAction_Target.pairPage,
     0 : NavigateAction_Target.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NavigateAction', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
+    ..oo(0, [1, 2, 3, 4])
     ..aOM<LpPageTarget>(1, _omitFieldNames ? '' : 'lpPage', subBuilder: LpPageTarget.create)
     ..aOM<FutureLpPageTarget>(2, _omitFieldNames ? '' : 'futureLpPage', subBuilder: FutureLpPageTarget.create)
     ..aOM<MmPageTarget>(3, _omitFieldNames ? '' : 'mmPage', subBuilder: MmPageTarget.create)
+    ..aOM<PairPageTarget>(4, _omitFieldNames ? '' : 'pairPage', subBuilder: PairPageTarget.create)
     ..hasRequiredFields = false
   ;
 
@@ -504,6 +509,18 @@ class NavigateAction extends $pb.GeneratedMessage {
   void clearMmPage() => $_clearField(3);
   @$pb.TagNumber(3)
   MmPageTarget ensureMmPage() => $_ensure(2);
+
+  /// Navigate to Pair page
+  @$pb.TagNumber(4)
+  PairPageTarget get pairPage => $_getN(3);
+  @$pb.TagNumber(4)
+  set pairPage(PairPageTarget value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPairPage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPairPage() => $_clearField(4);
+  @$pb.TagNumber(4)
+  PairPageTarget ensurePairPage() => $_ensure(3);
 }
 
 /// LP page navigation target (ETF LP)
@@ -700,6 +717,54 @@ class MmPageTarget extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+}
+
+/// Pair page navigation target
+class PairPageTarget extends $pb.GeneratedMessage {
+  factory PairPageTarget({
+    $core.int? pairId,
+  }) {
+    final result = create();
+    if (pairId != null) result.pairId = pairId;
+    return result;
+  }
+
+  PairPageTarget._();
+
+  factory PairPageTarget.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairPageTarget.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairPageTarget', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'pairId', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairPageTarget clone() => PairPageTarget()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairPageTarget copyWith(void Function(PairPageTarget) updates) => super.copyWith((message) => updates(message as PairPageTarget)) as PairPageTarget;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairPageTarget create() => PairPageTarget._();
+  @$core.override
+  PairPageTarget createEmptyInstance() => create();
+  static $pb.PbList<PairPageTarget> createRepeated() => $pb.PbList<PairPageTarget>();
+  @$core.pragma('dart2js:noInline')
+  static PairPageTarget getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairPageTarget>(create);
+  static PairPageTarget? _defaultInstance;
+
+  /// Pair ID
+  @$pb.TagNumber(1)
+  $core.int get pairId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set pairId($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairId() => $_clearField(1);
 }
 
 /// Notification resource

@@ -238,6 +238,10 @@
         "mmPage": {
           "$ref": "#/definitions/notificationMmPageTarget",
           "title": "Navigate to MM page"
+        },
+        "pairPage": {
+          "$ref": "#/definitions/notificationPairPageTarget",
+          "title": "Navigate to Pair page"
         }
       },
       "title": "Navigation action"
@@ -370,6 +374,17 @@
       "default": "TYPE_UNSPECIFIED",
       "description": "- INFO: Informational notification\n - ERROR: Error notification\n - WARNING: Warning notification",
       "title": "Type of the notification"
+    },
+    "notificationPairPageTarget": {
+      "type": "object",
+      "properties": {
+        "pairId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Pair ID"
+        }
+      },
+      "title": "Pair page navigation target"
     },
     "protobufAny": {
       "type": "object",

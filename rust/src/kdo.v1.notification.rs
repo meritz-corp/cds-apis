@@ -104,7 +104,7 @@ pub struct NoOp {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NavigateAction {
     /// Navigation target
-    #[prost(oneof="navigate_action::Target", tags="1, 2, 3")]
+    #[prost(oneof="navigate_action::Target", tags="1, 2, 3, 4")]
     pub target: ::core::option::Option<navigate_action::Target>,
 }
 /// Nested message and enum types in `NavigateAction`.
@@ -122,6 +122,9 @@ pub mod navigate_action {
         /// Navigate to MM page
         #[prost(message, tag="3")]
         MmPage(super::MmPageTarget),
+        /// Navigate to Pair page
+        #[prost(message, tag="4")]
+        PairPage(super::PairPageTarget),
     }
 }
 /// LP page navigation target (ETF LP)
@@ -159,6 +162,14 @@ pub struct MmPageTarget {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+}
+/// Pair page navigation target
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PairPageTarget {
+    /// Pair ID
+    #[prost(int32, tag="1")]
+    pub pair_id: i32,
 }
 /// Notification resource
 #[allow(clippy::derive_partial_eq_without_eq)]
