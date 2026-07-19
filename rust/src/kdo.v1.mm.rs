@@ -76,6 +76,9 @@ pub struct MarketMakingConfiguration {
     /// 역선택 방어 설정
     #[prost(message, optional, tag="20")]
     pub adverse_selection: ::core::option::Option<MarketMakingAdverseSelection>,
+    /// 운영자 지정 제3종목 체결강도 skew
+    #[prost(message, optional, tag="21")]
+    pub proxy_momentum: ::core::option::Option<MarketMakingProxyMomentum>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -242,6 +245,24 @@ pub struct MarketMakingConstituentMomentum {
     #[prost(message, optional, tag="3")]
     pub analyzer: ::core::option::Option<MarketMakingTradeAnalyzer>,
     /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
+    #[prost(message, optional, tag="4")]
+    pub shift: ::core::option::Option<MarketMakingMomentum>,
+}
+/// 운영자가 지정한 제3(참조) 종목 체결강도 → 즉각 호가 평행 shift
+/// (자기 ETF momentum / 구성종목 momentum 의 "임의 지정 종목" 확장. PDF 무관)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MarketMakingProxyMomentum {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 참조(proxy) 종목 코드. 현재 단일 사용을 상정하나 복수 확장 대비 repeated. 균등 가중
+    #[prost(string, repeated, tag="2")]
+    pub symbols: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 종목별 체결 분석기 설정 (종목마다 이 파라미터로 복제)
+    #[prost(message, optional, tag="3")]
+    pub analyzer: ::core::option::Option<MarketMakingTradeAnalyzer>,
+    /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (역상관 참조는 shift.is_opposite)
     #[prost(message, optional, tag="4")]
     pub shift: ::core::option::Option<MarketMakingMomentum>,
 }
@@ -556,6 +577,25 @@ pub struct ConstituentMomentumState {
     #[prost(int64, tag="5")]
     pub shift: i64,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ProxyMomentumState {
+    /// 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 현재 추적 중인 참조 종목 수
+    #[prost(uint32, tag="2")]
+    pub tracked: u32,
+    /// 균등 가중평균 집계 ratio ∈ \[-1, +1\]
+    #[prost(double, tag="3")]
+    pub agg_ratio: f64,
+    /// 균등 가중평균 집계 strength ∈ \[0, 1\]
+    #[prost(double, tag="4")]
+    pub agg_strength: f64,
+    /// 이번 tick 호가에 가산되는 평행 shift (원, 부호 포함, Price internal representation)
+    #[prost(int64, tag="5")]
+    pub shift: i64,
+}
 /// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -621,6 +661,9 @@ pub struct MmStateUpdate {
     /// 상위 구성종목 체결강도 상태 (변경 시에만 포함)
     #[prost(message, optional, tag="14")]
     pub constituent_momentum: ::core::option::Option<ConstituentMomentumState>,
+    /// 제3종목 체결강도 skew 런타임 상태
+    #[prost(message, optional, tag="15")]
+    pub proxy_momentum: ::core::option::Option<ProxyMomentumState>,
 }
 /// StreamMmFills
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -730,6 +773,9 @@ pub struct SpreadDecomposition {
     /// ConstituentMomentum(상위 구성종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
     #[prost(int64, tag="9")]
     pub constituent_momentum_shift: i64,
+    /// ProxyMomentum(제3종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+    #[prost(int64, tag="10")]
+    pub proxy_momentum_shift: i64,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

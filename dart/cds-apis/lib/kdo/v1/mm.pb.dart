@@ -143,6 +143,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingMaCross? maCross,
     MarketMakingConstituentMomentum? constituentMomentum,
     MarketMakingAdverseSelection? adverseSelection,
+    MarketMakingProxyMomentum? proxyMomentum,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -161,6 +162,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (maCross != null) result.maCross = maCross;
     if (constituentMomentum != null) result.constituentMomentum = constituentMomentum;
     if (adverseSelection != null) result.adverseSelection = adverseSelection;
+    if (proxyMomentum != null) result.proxyMomentum = proxyMomentum;
     return result;
   }
 
@@ -186,6 +188,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingMaCross>(18, _omitFieldNames ? '' : 'maCross', subBuilder: MarketMakingMaCross.create)
     ..aOM<MarketMakingConstituentMomentum>(19, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: MarketMakingConstituentMomentum.create)
     ..aOM<MarketMakingAdverseSelection>(20, _omitFieldNames ? '' : 'adverseSelection', subBuilder: MarketMakingAdverseSelection.create)
+    ..aOM<MarketMakingProxyMomentum>(21, _omitFieldNames ? '' : 'proxyMomentum', subBuilder: MarketMakingProxyMomentum.create)
     ..hasRequiredFields = false
   ;
 
@@ -383,6 +386,18 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearAdverseSelection() => $_clearField(20);
   @$pb.TagNumber(20)
   MarketMakingAdverseSelection ensureAdverseSelection() => $_ensure(15);
+
+  /// 운영자 지정 제3종목 체결강도 skew
+  @$pb.TagNumber(21)
+  MarketMakingProxyMomentum get proxyMomentum => $_getN(16);
+  @$pb.TagNumber(21)
+  set proxyMomentum(MarketMakingProxyMomentum value) => $_setField(21, value);
+  @$pb.TagNumber(21)
+  $core.bool hasProxyMomentum() => $_has(16);
+  @$pb.TagNumber(21)
+  void clearProxyMomentum() => $_clearField(21);
+  @$pb.TagNumber(21)
+  MarketMakingProxyMomentum ensureProxyMomentum() => $_ensure(16);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -1205,6 +1220,92 @@ class MarketMakingConstituentMomentum extends $pb.GeneratedMessage {
   MarketMakingTradeAnalyzer ensureAnalyzer() => $_ensure(2);
 
   /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
+  @$pb.TagNumber(4)
+  MarketMakingMomentum get shift => $_getN(3);
+  @$pb.TagNumber(4)
+  set shift(MarketMakingMomentum value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasShift() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearShift() => $_clearField(4);
+  @$pb.TagNumber(4)
+  MarketMakingMomentum ensureShift() => $_ensure(3);
+}
+
+/// 운영자가 지정한 제3(참조) 종목 체결강도 → 즉각 호가 평행 shift
+/// (자기 ETF momentum / 구성종목 momentum 의 "임의 지정 종목" 확장. PDF 무관)
+class MarketMakingProxyMomentum extends $pb.GeneratedMessage {
+  factory MarketMakingProxyMomentum({
+    $core.bool? enabled,
+    $core.Iterable<$core.String>? symbols,
+    MarketMakingTradeAnalyzer? analyzer,
+    MarketMakingMomentum? shift,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (symbols != null) result.symbols.addAll(symbols);
+    if (analyzer != null) result.analyzer = analyzer;
+    if (shift != null) result.shift = shift;
+    return result;
+  }
+
+  MarketMakingProxyMomentum._();
+
+  factory MarketMakingProxyMomentum.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingProxyMomentum.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingProxyMomentum', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..pPS(2, _omitFieldNames ? '' : 'symbols')
+    ..aOM<MarketMakingTradeAnalyzer>(3, _omitFieldNames ? '' : 'analyzer', subBuilder: MarketMakingTradeAnalyzer.create)
+    ..aOM<MarketMakingMomentum>(4, _omitFieldNames ? '' : 'shift', subBuilder: MarketMakingMomentum.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingProxyMomentum clone() => MarketMakingProxyMomentum()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingProxyMomentum copyWith(void Function(MarketMakingProxyMomentum) updates) => super.copyWith((message) => updates(message as MarketMakingProxyMomentum)) as MarketMakingProxyMomentum;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingProxyMomentum create() => MarketMakingProxyMomentum._();
+  @$core.override
+  MarketMakingProxyMomentum createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingProxyMomentum> createRepeated() => $pb.PbList<MarketMakingProxyMomentum>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingProxyMomentum getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingProxyMomentum>(create);
+  static MarketMakingProxyMomentum? _defaultInstance;
+
+  /// 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 참조(proxy) 종목 코드. 현재 단일 사용을 상정하나 복수 확장 대비 repeated. 균등 가중
+  @$pb.TagNumber(2)
+  $pb.PbList<$core.String> get symbols => $_getList(1);
+
+  /// 종목별 체결 분석기 설정 (종목마다 이 파라미터로 복제)
+  @$pb.TagNumber(3)
+  MarketMakingTradeAnalyzer get analyzer => $_getN(2);
+  @$pb.TagNumber(3)
+  set analyzer(MarketMakingTradeAnalyzer value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAnalyzer() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAnalyzer() => $_clearField(3);
+  @$pb.TagNumber(3)
+  MarketMakingTradeAnalyzer ensureAnalyzer() => $_ensure(2);
+
+  /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (역상관 참조는 shift.is_opposite)
   @$pb.TagNumber(4)
   MarketMakingMomentum get shift => $_getN(3);
   @$pb.TagNumber(4)
@@ -2816,6 +2917,105 @@ class ConstituentMomentumState extends $pb.GeneratedMessage {
   void clearShift() => $_clearField(5);
 }
 
+class ProxyMomentumState extends $pb.GeneratedMessage {
+  factory ProxyMomentumState({
+    $core.bool? enabled,
+    $core.int? tracked,
+    $core.double? aggRatio,
+    $core.double? aggStrength,
+    $fixnum.Int64? shift,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (tracked != null) result.tracked = tracked;
+    if (aggRatio != null) result.aggRatio = aggRatio;
+    if (aggStrength != null) result.aggStrength = aggStrength;
+    if (shift != null) result.shift = shift;
+    return result;
+  }
+
+  ProxyMomentumState._();
+
+  factory ProxyMomentumState.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ProxyMomentumState.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ProxyMomentumState', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'tracked', $pb.PbFieldType.OU3)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'aggRatio', $pb.PbFieldType.OD)
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'aggStrength', $pb.PbFieldType.OD)
+    ..aInt64(5, _omitFieldNames ? '' : 'shift')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ProxyMomentumState clone() => ProxyMomentumState()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ProxyMomentumState copyWith(void Function(ProxyMomentumState) updates) => super.copyWith((message) => updates(message as ProxyMomentumState)) as ProxyMomentumState;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ProxyMomentumState create() => ProxyMomentumState._();
+  @$core.override
+  ProxyMomentumState createEmptyInstance() => create();
+  static $pb.PbList<ProxyMomentumState> createRepeated() => $pb.PbList<ProxyMomentumState>();
+  @$core.pragma('dart2js:noInline')
+  static ProxyMomentumState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ProxyMomentumState>(create);
+  static ProxyMomentumState? _defaultInstance;
+
+  /// 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 현재 추적 중인 참조 종목 수
+  @$pb.TagNumber(2)
+  $core.int get tracked => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set tracked($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTracked() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTracked() => $_clearField(2);
+
+  /// 균등 가중평균 집계 ratio ∈ [-1, +1]
+  @$pb.TagNumber(3)
+  $core.double get aggRatio => $_getN(2);
+  @$pb.TagNumber(3)
+  set aggRatio($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAggRatio() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAggRatio() => $_clearField(3);
+
+  /// 균등 가중평균 집계 strength ∈ [0, 1]
+  @$pb.TagNumber(4)
+  $core.double get aggStrength => $_getN(3);
+  @$pb.TagNumber(4)
+  set aggStrength($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAggStrength() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAggStrength() => $_clearField(4);
+
+  /// 이번 tick 호가에 가산되는 평행 shift (원, 부호 포함, Price internal representation)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get shift => $_getI64(4);
+  @$pb.TagNumber(5)
+  set shift($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasShift() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearShift() => $_clearField(5);
+}
+
 /// 순노출 및 재고 균형 런타임 상태 (ExposureGuard + InventoryBalancer 통합)
 class ExposureBalancerState extends $pb.GeneratedMessage {
   factory ExposureBalancerState({
@@ -2922,6 +3122,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     $core.String? f2mShift,
     MaCrossState? maCross,
     ConstituentMomentumState? constituentMomentum,
+    ProxyMomentumState? proxyMomentum,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2938,6 +3139,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (f2mShift != null) result.f2mShift = f2mShift;
     if (maCross != null) result.maCross = maCross;
     if (constituentMomentum != null) result.constituentMomentum = constituentMomentum;
+    if (proxyMomentum != null) result.proxyMomentum = proxyMomentum;
     return result;
   }
 
@@ -2961,6 +3163,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOS(12, _omitFieldNames ? '' : 'f2mShift')
     ..aOM<MaCrossState>(13, _omitFieldNames ? '' : 'maCross', subBuilder: MaCrossState.create)
     ..aOM<ConstituentMomentumState>(14, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: ConstituentMomentumState.create)
+    ..aOM<ProxyMomentumState>(15, _omitFieldNames ? '' : 'proxyMomentum', subBuilder: ProxyMomentumState.create)
     ..hasRequiredFields = false
   ;
 
@@ -3134,6 +3337,18 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   void clearConstituentMomentum() => $_clearField(14);
   @$pb.TagNumber(14)
   ConstituentMomentumState ensureConstituentMomentum() => $_ensure(13);
+
+  /// 제3종목 체결강도 skew 런타임 상태
+  @$pb.TagNumber(15)
+  ProxyMomentumState get proxyMomentum => $_getN(14);
+  @$pb.TagNumber(15)
+  set proxyMomentum(ProxyMomentumState value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasProxyMomentum() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearProxyMomentum() => $_clearField(15);
+  @$pb.TagNumber(15)
+  ProxyMomentumState ensureProxyMomentum() => $_ensure(14);
 }
 
 /// StreamMmFills
@@ -3549,6 +3764,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     $fixnum.Int64? finalAsk,
     $fixnum.Int64? maCrossShift,
     $fixnum.Int64? constituentMomentumShift,
+    $fixnum.Int64? proxyMomentumShift,
   }) {
     final result = create();
     if (baseBid != null) result.baseBid = baseBid;
@@ -3560,6 +3776,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     if (finalAsk != null) result.finalAsk = finalAsk;
     if (maCrossShift != null) result.maCrossShift = maCrossShift;
     if (constituentMomentumShift != null) result.constituentMomentumShift = constituentMomentumShift;
+    if (proxyMomentumShift != null) result.proxyMomentumShift = proxyMomentumShift;
     return result;
   }
 
@@ -3578,6 +3795,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     ..aInt64(7, _omitFieldNames ? '' : 'finalAsk')
     ..aInt64(8, _omitFieldNames ? '' : 'maCrossShift')
     ..aInt64(9, _omitFieldNames ? '' : 'constituentMomentumShift')
+    ..aInt64(10, _omitFieldNames ? '' : 'proxyMomentumShift')
     ..hasRequiredFields = false
   ;
 
@@ -3687,6 +3905,16 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   $core.bool hasConstituentMomentumShift() => $_has(8);
   @$pb.TagNumber(9)
   void clearConstituentMomentumShift() => $_clearField(9);
+
+  /// ProxyMomentum(제3종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get proxyMomentumShift => $_getI64(9);
+  @$pb.TagNumber(10)
+  set proxyMomentumShift($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasProxyMomentumShift() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearProxyMomentumShift() => $_clearField(10);
 }
 
 /// StreamMmStateUpdate

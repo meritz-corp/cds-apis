@@ -2894,6 +2894,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -2953,6 +2956,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.adverse_selection.as_ref() {
             struct_ser.serialize_field("adverse_selection", v)?;
         }
+        if let Some(v) = self.proxy_momentum.as_ref() {
+            struct_ser.serialize_field("proxy_momentum", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2991,6 +2997,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "constituentMomentum",
             "adverse_selection",
             "adverseSelection",
+            "proxy_momentum",
+            "proxyMomentum",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3011,6 +3019,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             MaCross,
             ConstituentMomentum,
             AdverseSelection,
+            ProxyMomentum,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3049,6 +3058,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "maCross" | "ma_cross" => Ok(GeneratedField::MaCross),
                             "constituentMomentum" | "constituent_momentum" => Ok(GeneratedField::ConstituentMomentum),
                             "adverseSelection" | "adverse_selection" => Ok(GeneratedField::AdverseSelection),
+                            "proxyMomentum" | "proxy_momentum" => Ok(GeneratedField::ProxyMomentum),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3084,6 +3094,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut ma_cross__ = None;
                 let mut constituent_momentum__ = None;
                 let mut adverse_selection__ = None;
+                let mut proxy_momentum__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3194,6 +3205,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             adverse_selection__ = map_.next_value()?;
                         }
+                        GeneratedField::ProxyMomentum => {
+                            if proxy_momentum__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("proxyMomentum"));
+                            }
+                            proxy_momentum__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3216,6 +3233,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     ma_cross: ma_cross__,
                     constituent_momentum: constituent_momentum__,
                     adverse_selection: adverse_selection__,
+                    proxy_momentum: proxy_momentum__,
                 })
             }
         }
@@ -4441,6 +4459,152 @@ impl<'de> serde::Deserialize<'de> for MarketMakingPricing {
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingPricing", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for MarketMakingProxyMomentum {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingProxyMomentum", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("symbols", &self.symbols)?;
+        }
+        if let Some(v) = self.analyzer.as_ref() {
+            struct_ser.serialize_field("analyzer", v)?;
+        }
+        if let Some(v) = self.shift.as_ref() {
+            struct_ser.serialize_field("shift", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "symbols",
+            "analyzer",
+            "shift",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            Symbols,
+            Analyzer,
+            Shift,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "symbols" => Ok(GeneratedField::Symbols),
+                            "analyzer" => Ok(GeneratedField::Analyzer),
+                            "shift" => Ok(GeneratedField::Shift),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingProxyMomentum;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingProxyMomentum")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingProxyMomentum, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut symbols__ = None;
+                let mut analyzer__ = None;
+                let mut shift__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Symbols => {
+                            if symbols__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbols"));
+                            }
+                            symbols__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Analyzer => {
+                            if analyzer__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("analyzer"));
+                            }
+                            analyzer__ = map_.next_value()?;
+                        }
+                        GeneratedField::Shift => {
+                            if shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shift"));
+                            }
+                            shift__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingProxyMomentum {
+                    enabled: enabled__.unwrap_or_default(),
+                    symbols: symbols__.unwrap_or_default(),
+                    analyzer: analyzer__,
+                    shift: shift__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingProxyMomentum", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for MarketMakingQuantityLimit {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -5614,6 +5778,9 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -5659,6 +5826,9 @@ impl serde::Serialize for MmStateUpdate {
         if let Some(v) = self.constituent_momentum.as_ref() {
             struct_ser.serialize_field("constituent_momentum", v)?;
         }
+        if let Some(v) = self.proxy_momentum.as_ref() {
+            struct_ser.serialize_field("proxy_momentum", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -5693,6 +5863,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "maCross",
             "constituent_momentum",
             "constituentMomentum",
+            "proxy_momentum",
+            "proxyMomentum",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5711,6 +5883,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             F2mShift,
             MaCross,
             ConstituentMomentum,
+            ProxyMomentum,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5747,6 +5920,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "f2mShift" | "f2m_shift" => Ok(GeneratedField::F2mShift),
                             "maCross" | "ma_cross" => Ok(GeneratedField::MaCross),
                             "constituentMomentum" | "constituent_momentum" => Ok(GeneratedField::ConstituentMomentum),
+                            "proxyMomentum" | "proxy_momentum" => Ok(GeneratedField::ProxyMomentum),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5780,6 +5954,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut f2m_shift__ = None;
                 let mut ma_cross__ = None;
                 let mut constituent_momentum__ = None;
+                let mut proxy_momentum__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -5866,6 +6041,12 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             constituent_momentum__ = map_.next_value()?;
                         }
+                        GeneratedField::ProxyMomentum => {
+                            if proxy_momentum__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("proxyMomentum"));
+                            }
+                            proxy_momentum__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5886,6 +6067,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     f2m_shift: f2m_shift__,
                     ma_cross: ma_cross__,
                     constituent_momentum: constituent_momentum__,
+                    proxy_momentum: proxy_momentum__,
                 })
             }
         }
@@ -6217,6 +6399,181 @@ impl<'de> serde::Deserialize<'de> for PlainFollow {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.PlainFollow", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ProxyMomentumState {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ProxyMomentumState", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("tracked", &self.tracked)?;
+        }
+        if true {
+            struct_ser.serialize_field("agg_ratio", &self.agg_ratio)?;
+        }
+        if true {
+            struct_ser.serialize_field("agg_strength", &self.agg_strength)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("shift", ToString::to_string(&self.shift).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ProxyMomentumState {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "tracked",
+            "agg_ratio",
+            "aggRatio",
+            "agg_strength",
+            "aggStrength",
+            "shift",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            Tracked,
+            AggRatio,
+            AggStrength,
+            Shift,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "tracked" => Ok(GeneratedField::Tracked),
+                            "aggRatio" | "agg_ratio" => Ok(GeneratedField::AggRatio),
+                            "aggStrength" | "agg_strength" => Ok(GeneratedField::AggStrength),
+                            "shift" => Ok(GeneratedField::Shift),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ProxyMomentumState;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.ProxyMomentumState")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ProxyMomentumState, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut tracked__ = None;
+                let mut agg_ratio__ = None;
+                let mut agg_strength__ = None;
+                let mut shift__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Tracked => {
+                            if tracked__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tracked"));
+                            }
+                            tracked__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AggRatio => {
+                            if agg_ratio__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("aggRatio"));
+                            }
+                            agg_ratio__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AggStrength => {
+                            if agg_strength__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("aggStrength"));
+                            }
+                            agg_strength__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Shift => {
+                            if shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shift"));
+                            }
+                            shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ProxyMomentumState {
+                    enabled: enabled__.unwrap_or_default(),
+                    tracked: tracked__.unwrap_or_default(),
+                    agg_ratio: agg_ratio__.unwrap_or_default(),
+                    agg_strength: agg_strength__.unwrap_or_default(),
+                    shift: shift__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.ProxyMomentumState", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ResetMarketMakingRequest {
@@ -6576,6 +6933,9 @@ impl serde::Serialize for SpreadDecomposition {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.SpreadDecomposition", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -6622,6 +6982,11 @@ impl serde::Serialize for SpreadDecomposition {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("constituent_momentum_shift", ToString::to_string(&self.constituent_momentum_shift).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("proxy_momentum_shift", ToString::to_string(&self.proxy_momentum_shift).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -6650,6 +7015,8 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             "maCrossShift",
             "constituent_momentum_shift",
             "constituentMomentumShift",
+            "proxy_momentum_shift",
+            "proxyMomentumShift",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6663,6 +7030,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             FinalAsk,
             MaCrossShift,
             ConstituentMomentumShift,
+            ProxyMomentumShift,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6694,6 +7062,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                             "finalAsk" | "final_ask" => Ok(GeneratedField::FinalAsk),
                             "maCrossShift" | "ma_cross_shift" => Ok(GeneratedField::MaCrossShift),
                             "constituentMomentumShift" | "constituent_momentum_shift" => Ok(GeneratedField::ConstituentMomentumShift),
+                            "proxyMomentumShift" | "proxy_momentum_shift" => Ok(GeneratedField::ProxyMomentumShift),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6722,6 +7091,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                 let mut final_ask__ = None;
                 let mut ma_cross_shift__ = None;
                 let mut constituent_momentum_shift__ = None;
+                let mut proxy_momentum_shift__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BaseBid => {
@@ -6796,6 +7166,14 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ProxyMomentumShift => {
+                            if proxy_momentum_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("proxyMomentumShift"));
+                            }
+                            proxy_momentum_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6811,6 +7189,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                     final_ask: final_ask__.unwrap_or_default(),
                     ma_cross_shift: ma_cross_shift__.unwrap_or_default(),
                     constituent_momentum_shift: constituent_momentum_shift__.unwrap_or_default(),
+                    proxy_momentum_shift: proxy_momentum_shift__.unwrap_or_default(),
                 })
             }
         }
