@@ -210,21 +210,15 @@ message MarketMakingConfiguration {
   // 통합 포지션 관리 설정
   MarketMakingExposureBalancer exposure_balancer = 6;
 
-  // 필드 7, 8, 11, 12 제거 (bid_adjustment, ask_adjustment, bid_basis, ask_basis — deprecated)
-  reserved 7, 8, 11, 12;
-  reserved "bid_adjustment", "ask_adjustment", "bid_basis", "ask_basis";
+  // 필드 7, 8, 11, 12, 13, 14 제거 (bid_adjustment, ask_adjustment, bid_basis, ask_basis, bid_offset, ask_offset — deprecated)
+  reserved 7, 8, 11, 12, 13, 14;
+  reserved "bid_adjustment", "ask_adjustment", "bid_basis", "ask_basis", "bid_offset", "ask_offset";
 
   // 레벨당 매수 수량
   int64 bid_quantity = 9;
 
   // 레벨당 매도 수량
   int64 ask_quantity = 10;
-
-  // NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
-  int64 bid_offset = 13;
-
-  // NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
-  int64 ask_offset = 14;
 
   // 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
   optional int64 basis = 15;
@@ -711,11 +705,9 @@ message MmStateUpdate {
   // 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
   optional string bid_quote = 8;
 
-  // 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
-  optional string bid_offset = 9;
-
-  // 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
-  optional string ask_offset = 10;
+  // 필드 9, 10 제거 (bid_offset, ask_offset — deprecated)
+  reserved 9, 10;
+  reserved "bid_offset", "ask_offset";
 
   // 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
   optional SpreadDecomposition decomposition = 11;

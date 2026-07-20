@@ -61,8 +61,6 @@ const MarketMakingConfiguration$json = {
     {'1': 'exposure_balancer', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingExposureBalancer', '10': 'exposureBalancer'},
     {'1': 'bid_quantity', '3': 9, '4': 1, '5': 3, '10': 'bidQuantity'},
     {'1': 'ask_quantity', '3': 10, '4': 1, '5': 3, '10': 'askQuantity'},
-    {'1': 'bid_offset', '3': 13, '4': 1, '5': 3, '10': 'bidOffset'},
-    {'1': 'ask_offset', '3': 14, '4': 1, '5': 3, '10': 'askOffset'},
     {'1': 'basis', '3': 15, '4': 1, '5': 3, '9': 0, '10': 'basis', '17': true},
     {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 5, '10': 'baseHalfTicks'},
     {'1': 'quantity_limit', '3': 17, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQuantityLimit', '10': 'quantityLimit'},
@@ -79,8 +77,10 @@ const MarketMakingConfiguration$json = {
     {'1': 8, '2': 9},
     {'1': 11, '2': 12},
     {'1': 12, '2': 13},
+    {'1': 13, '2': 14},
+    {'1': 14, '2': 15},
   ],
-  '10': ['bid_adjustment', 'ask_adjustment', 'bid_basis', 'ask_basis'],
+  '10': ['bid_adjustment', 'ask_adjustment', 'bid_basis', 'ask_basis', 'bid_offset', 'ask_offset'],
 };
 
 /// Descriptor for `MarketMakingConfiguration`. Decode as a `google.protobuf.DescriptorProto`.
@@ -93,18 +93,18 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'tkby52MS5tbS5NYXJrZXRNYWtpbmdNb21lbnR1bVIIbW9tZW50dW0SVAoRZXhwb3N1cmVfYmFs'
     'YW5jZXIYBiABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5nRXhwb3N1cmVCYWxhbmNlclIQZX'
     'hwb3N1cmVCYWxhbmNlchIhCgxiaWRfcXVhbnRpdHkYCSABKANSC2JpZFF1YW50aXR5EiEKDGFz'
-    'a19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSHQoKYmlkX29mZnNldBgNIAEoA1IJYmlkT2'
-    'Zmc2V0Eh0KCmFza19vZmZzZXQYDiABKANSCWFza09mZnNldBIZCgViYXNpcxgPIAEoA0gAUgVi'
-    'YXNpc4gBARImCg9iYXNlX2hhbGZfdGlja3MYECABKAVSDWJhc2VIYWxmVGlja3MSSwoOcXVhbn'
-    'RpdHlfbGltaXQYESABKAsyJC5rZG8udjEubW0uTWFya2V0TWFraW5nUXVhbnRpdHlMaW1pdFIN'
-    'cXVhbnRpdHlMaW1pdBI5CghtYV9jcm9zcxgSIAEoCzIeLmtkby52MS5tbS5NYXJrZXRNYWtpbm'
-    'dNYUNyb3NzUgdtYUNyb3NzEl0KFGNvbnN0aXR1ZW50X21vbWVudHVtGBMgASgLMioua2RvLnYx'
-    'Lm1tLk1hcmtldE1ha2luZ0NvbnN0aXR1ZW50TW9tZW50dW1SE2NvbnN0aXR1ZW50TW9tZW50dW'
-    '0SVAoRYWR2ZXJzZV9zZWxlY3Rpb24YFCABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5nQWR2'
-    'ZXJzZVNlbGVjdGlvblIQYWR2ZXJzZVNlbGVjdGlvbhJLCg5wcm94eV9tb21lbnR1bRgVIAEoCz'
-    'IkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdQcm94eU1vbWVudHVtUg1wcm94eU1vbWVudHVtQggK'
-    'Bl9iYXNpc0oECAcQCEoECAgQCUoECAsQDEoECAwQDVIOYmlkX2FkanVzdG1lbnRSDmFza19hZG'
-    'p1c3RtZW50UgliaWRfYmFzaXNSCWFza19iYXNpcw==');
+    'a19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSGQoFYmFzaXMYDyABKANIAFIFYmFzaXOIAQ'
+    'ESJgoPYmFzZV9oYWxmX3RpY2tzGBAgASgFUg1iYXNlSGFsZlRpY2tzEksKDnF1YW50aXR5X2xp'
+    'bWl0GBEgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ1F1YW50aXR5TGltaXRSDXF1YW50aX'
+    'R5TGltaXQSOQoIbWFfY3Jvc3MYEiABKAsyHi5rZG8udjEubW0uTWFya2V0TWFraW5nTWFDcm9z'
+    'c1IHbWFDcm9zcxJdChRjb25zdGl0dWVudF9tb21lbnR1bRgTIAEoCzIqLmtkby52MS5tbS5NYX'
+    'JrZXRNYWtpbmdDb25zdGl0dWVudE1vbWVudHVtUhNjb25zdGl0dWVudE1vbWVudHVtElQKEWFk'
+    'dmVyc2Vfc2VsZWN0aW9uGBQgASgLMicua2RvLnYxLm1tLk1hcmtldE1ha2luZ0FkdmVyc2VTZW'
+    'xlY3Rpb25SEGFkdmVyc2VTZWxlY3Rpb24SSwoOcHJveHlfbW9tZW50dW0YFSABKAsyJC5rZG8u'
+    'djEubW0uTWFya2V0TWFraW5nUHJveHlNb21lbnR1bVINcHJveHlNb21lbnR1bUIICgZfYmFzaX'
+    'NKBAgHEAhKBAgIEAlKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9hZGp1c3RtZW50Ug5h'
+    'c2tfYWRqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZmZzZXRSCmFza19vZm'
+    'ZzZXQ=');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -715,13 +715,11 @@ const MmStateUpdate$json = {
     {'1': 'market_bias', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketBiasState', '9': 4, '10': 'marketBias', '17': true},
     {'1': 'ask_quote', '3': 7, '4': 1, '5': 9, '9': 5, '10': 'askQuote', '17': true},
     {'1': 'bid_quote', '3': 8, '4': 1, '5': 9, '9': 6, '10': 'bidQuote', '17': true},
-    {'1': 'bid_offset', '3': 9, '4': 1, '5': 9, '9': 7, '10': 'bidOffset', '17': true},
-    {'1': 'ask_offset', '3': 10, '4': 1, '5': 9, '9': 8, '10': 'askOffset', '17': true},
-    {'1': 'decomposition', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.mm.SpreadDecomposition', '9': 9, '10': 'decomposition', '17': true},
-    {'1': 'f2m_shift', '3': 12, '4': 1, '5': 9, '9': 10, '10': 'f2mShift', '17': true},
-    {'1': 'ma_cross', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.mm.MaCrossState', '9': 11, '10': 'maCross', '17': true},
-    {'1': 'constituent_momentum', '3': 14, '4': 1, '5': 11, '6': '.kdo.v1.mm.ConstituentMomentumState', '9': 12, '10': 'constituentMomentum', '17': true},
-    {'1': 'proxy_momentum', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.mm.ProxyMomentumState', '9': 13, '10': 'proxyMomentum', '17': true},
+    {'1': 'decomposition', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.mm.SpreadDecomposition', '9': 7, '10': 'decomposition', '17': true},
+    {'1': 'f2m_shift', '3': 12, '4': 1, '5': 9, '9': 8, '10': 'f2mShift', '17': true},
+    {'1': 'ma_cross', '3': 13, '4': 1, '5': 11, '6': '.kdo.v1.mm.MaCrossState', '9': 9, '10': 'maCross', '17': true},
+    {'1': 'constituent_momentum', '3': 14, '4': 1, '5': 11, '6': '.kdo.v1.mm.ConstituentMomentumState', '9': 10, '10': 'constituentMomentum', '17': true},
+    {'1': 'proxy_momentum', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.mm.ProxyMomentumState', '9': 11, '10': 'proxyMomentum', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -731,14 +729,17 @@ const MmStateUpdate$json = {
     {'1': '_market_bias'},
     {'1': '_ask_quote'},
     {'1': '_bid_quote'},
-    {'1': '_bid_offset'},
-    {'1': '_ask_offset'},
     {'1': '_decomposition'},
     {'1': '_f2m_shift'},
     {'1': '_ma_cross'},
     {'1': '_constituent_momentum'},
     {'1': '_proxy_momentum'},
   ],
+  '9': [
+    {'1': 9, '2': 10},
+    {'1': 10, '2': 11},
+  ],
+  '10': ['bid_offset', 'ask_offset'],
 };
 
 /// Descriptor for `MmStateUpdate`. Decode as a `google.protobuf.DescriptorProto`.
@@ -751,18 +752,17 @@ final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
     'VCYWxhbmNlclN0YXRlSANSEGV4cG9zdXJlQmFsYW5jZXKIAQESQAoLbWFya2V0X2JpYXMYBiAB'
     'KAsyGi5rZG8udjEubW0uTWFya2V0Qmlhc1N0YXRlSARSCm1hcmtldEJpYXOIAQESIAoJYXNrX3'
     'F1b3RlGAcgASgJSAVSCGFza1F1b3RliAEBEiAKCWJpZF9xdW90ZRgIIAEoCUgGUghiaWRRdW90'
-    'ZYgBARIiCgpiaWRfb2Zmc2V0GAkgASgJSAdSCWJpZE9mZnNldIgBARIiCgphc2tfb2Zmc2V0GA'
-    'ogASgJSAhSCWFza09mZnNldIgBARJJCg1kZWNvbXBvc2l0aW9uGAsgASgLMh4ua2RvLnYxLm1t'
-    'LlNwcmVhZERlY29tcG9zaXRpb25ICVINZGVjb21wb3NpdGlvbogBARIgCglmMm1fc2hpZnQYDC'
-    'ABKAlIClIIZjJtU2hpZnSIAQESNwoIbWFfY3Jvc3MYDSABKAsyFy5rZG8udjEubW0uTWFDcm9z'
-    'c1N0YXRlSAtSB21hQ3Jvc3OIAQESWwoUY29uc3RpdHVlbnRfbW9tZW50dW0YDiABKAsyIy5rZG'
-    '8udjEubW0uQ29uc3RpdHVlbnRNb21lbnR1bVN0YXRlSAxSE2NvbnN0aXR1ZW50TW9tZW50dW2I'
-    'AQESSQoOcHJveHlfbW9tZW50dW0YDyABKAsyHS5rZG8udjEubW0uUHJveHlNb21lbnR1bVN0YX'
-    'RlSA1SDXByb3h5TW9tZW50dW2IAQFCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVf'
-    'YW5hbHl6ZXJCFAoSX2V4cG9zdXJlX2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3'
-    'F1b3RlQgwKCl9iaWRfcXVvdGVCDQoLX2JpZF9vZmZzZXRCDQoLX2Fza19vZmZzZXRCEAoOX2Rl'
-    'Y29tcG9zaXRpb25CDAoKX2YybV9zaGlmdEILCglfbWFfY3Jvc3NCFwoVX2NvbnN0aXR1ZW50X2'
-    '1vbWVudHVtQhEKD19wcm94eV9tb21lbnR1bQ==');
+    'ZYgBARJJCg1kZWNvbXBvc2l0aW9uGAsgASgLMh4ua2RvLnYxLm1tLlNwcmVhZERlY29tcG9zaX'
+    'Rpb25IB1INZGVjb21wb3NpdGlvbogBARIgCglmMm1fc2hpZnQYDCABKAlICFIIZjJtU2hpZnSI'
+    'AQESNwoIbWFfY3Jvc3MYDSABKAsyFy5rZG8udjEubW0uTWFDcm9zc1N0YXRlSAlSB21hQ3Jvc3'
+    'OIAQESWwoUY29uc3RpdHVlbnRfbW9tZW50dW0YDiABKAsyIy5rZG8udjEubW0uQ29uc3RpdHVl'
+    'bnRNb21lbnR1bVN0YXRlSApSE2NvbnN0aXR1ZW50TW9tZW50dW2IAQESSQoOcHJveHlfbW9tZW'
+    '50dW0YDyABKAsyHS5rZG8udjEubW0uUHJveHlNb21lbnR1bVN0YXRlSAtSDXByb3h5TW9tZW50'
+    'dW2IAQFCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5hbHl6ZXJCFAoSX2V4cG'
+    '9zdXJlX2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3F1b3RlQgwKCl9iaWRfcXVv'
+    'dGVCEAoOX2RlY29tcG9zaXRpb25CDAoKX2YybV9zaGlmdEILCglfbWFfY3Jvc3NCFwoVX2Nvbn'
+    'N0aXR1ZW50X21vbWVudHVtQhEKD19wcm94eV9tb21lbnR1bUoECAkQCkoECAoQC1IKYmlkX29m'
+    'ZnNldFIKYXNrX29mZnNldA==');
 
 @$core.Deprecated('Use streamMmFillsRequestDescriptor instead')
 const StreamMmFillsRequest$json = {

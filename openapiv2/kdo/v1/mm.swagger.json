@@ -1120,16 +1120,6 @@
           "format": "int64",
           "title": "레벨당 매도 수량"
         },
-        "bidOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)"
-        },
-        "askOffset": {
-          "type": "string",
-          "format": "int64",
-          "title": "NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)"
-        },
         "basis": {
           "type": "string",
           "format": "int64",
@@ -1602,14 +1592,6 @@
         "bidQuote": {
           "type": "string",
           "title": "현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)"
-        },
-        "bidOffset": {
-          "type": "string",
-          "title": "현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)"
-        },
-        "askOffset": {
-          "type": "string",
-          "title": "현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)"
         },
         "decomposition": {
           "$ref": "#/definitions/mmSpreadDecomposition",

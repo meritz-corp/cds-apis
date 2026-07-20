@@ -135,8 +135,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingExposureBalancer? exposureBalancer,
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
-    $fixnum.Int64? bidOffset,
-    $fixnum.Int64? askOffset,
     $fixnum.Int64? basis,
     $core.int? baseHalfTicks,
     MarketMakingQuantityLimit? quantityLimit,
@@ -154,8 +152,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (exposureBalancer != null) result.exposureBalancer = exposureBalancer;
     if (bidQuantity != null) result.bidQuantity = bidQuantity;
     if (askQuantity != null) result.askQuantity = askQuantity;
-    if (bidOffset != null) result.bidOffset = bidOffset;
-    if (askOffset != null) result.askOffset = askOffset;
     if (basis != null) result.basis = basis;
     if (baseHalfTicks != null) result.baseHalfTicks = baseHalfTicks;
     if (quantityLimit != null) result.quantityLimit = quantityLimit;
@@ -180,8 +176,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingExposureBalancer>(6, _omitFieldNames ? '' : 'exposureBalancer', subBuilder: MarketMakingExposureBalancer.create)
     ..aInt64(9, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(10, _omitFieldNames ? '' : 'askQuantity')
-    ..aInt64(13, _omitFieldNames ? '' : 'bidOffset')
-    ..aInt64(14, _omitFieldNames ? '' : 'askOffset')
     ..aInt64(15, _omitFieldNames ? '' : 'basis')
     ..a<$core.int>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.O3)
     ..aOM<MarketMakingQuantityLimit>(17, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MarketMakingQuantityLimit.create)
@@ -299,105 +293,85 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearAskQuantity() => $_clearField(10);
 
-  /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
-  @$pb.TagNumber(13)
-  $fixnum.Int64 get bidOffset => $_getI64(8);
-  @$pb.TagNumber(13)
-  set bidOffset($fixnum.Int64 value) => $_setInt64(8, value);
-  @$pb.TagNumber(13)
-  $core.bool hasBidOffset() => $_has(8);
-  @$pb.TagNumber(13)
-  void clearBidOffset() => $_clearField(13);
-
-  /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
-  @$pb.TagNumber(14)
-  $fixnum.Int64 get askOffset => $_getI64(9);
-  @$pb.TagNumber(14)
-  set askOffset($fixnum.Int64 value) => $_setInt64(9, value);
-  @$pb.TagNumber(14)
-  $core.bool hasAskOffset() => $_has(9);
-  @$pb.TagNumber(14)
-  void clearAskOffset() => $_clearField(14);
-
   /// 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
   @$pb.TagNumber(15)
-  $fixnum.Int64 get basis => $_getI64(10);
+  $fixnum.Int64 get basis => $_getI64(8);
   @$pb.TagNumber(15)
-  set basis($fixnum.Int64 value) => $_setInt64(10, value);
+  set basis($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(15)
-  $core.bool hasBasis() => $_has(10);
+  $core.bool hasBasis() => $_has(8);
   @$pb.TagNumber(15)
   void clearBasis() => $_clearField(15);
 
   /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
   @$pb.TagNumber(16)
-  $core.int get baseHalfTicks => $_getIZ(11);
+  $core.int get baseHalfTicks => $_getIZ(9);
   @$pb.TagNumber(16)
-  set baseHalfTicks($core.int value) => $_setSignedInt32(11, value);
+  set baseHalfTicks($core.int value) => $_setSignedInt32(9, value);
   @$pb.TagNumber(16)
-  $core.bool hasBaseHalfTicks() => $_has(11);
+  $core.bool hasBaseHalfTicks() => $_has(9);
   @$pb.TagNumber(16)
   void clearBaseHalfTicks() => $_clearField(16);
 
   /// 순포지션 수량 한도 (방향별 호가 차단)
   @$pb.TagNumber(17)
-  MarketMakingQuantityLimit get quantityLimit => $_getN(12);
+  MarketMakingQuantityLimit get quantityLimit => $_getN(10);
   @$pb.TagNumber(17)
   set quantityLimit(MarketMakingQuantityLimit value) => $_setField(17, value);
   @$pb.TagNumber(17)
-  $core.bool hasQuantityLimit() => $_has(12);
+  $core.bool hasQuantityLimit() => $_has(10);
   @$pb.TagNumber(17)
   void clearQuantityLimit() => $_clearField(17);
   @$pb.TagNumber(17)
-  MarketMakingQuantityLimit ensureQuantityLimit() => $_ensure(12);
+  MarketMakingQuantityLimit ensureQuantityLimit() => $_ensure(10);
 
   /// MA 크로스 skew 설정 (골든/데드 크로스 기반 호가 평행이동)
   @$pb.TagNumber(18)
-  MarketMakingMaCross get maCross => $_getN(13);
+  MarketMakingMaCross get maCross => $_getN(11);
   @$pb.TagNumber(18)
   set maCross(MarketMakingMaCross value) => $_setField(18, value);
   @$pb.TagNumber(18)
-  $core.bool hasMaCross() => $_has(13);
+  $core.bool hasMaCross() => $_has(11);
   @$pb.TagNumber(18)
   void clearMaCross() => $_clearField(18);
   @$pb.TagNumber(18)
-  MarketMakingMaCross ensureMaCross() => $_ensure(13);
+  MarketMakingMaCross ensureMaCross() => $_ensure(11);
 
   /// 상위 구성종목 체결강도 skew 설정
   @$pb.TagNumber(19)
-  MarketMakingConstituentMomentum get constituentMomentum => $_getN(14);
+  MarketMakingConstituentMomentum get constituentMomentum => $_getN(12);
   @$pb.TagNumber(19)
   set constituentMomentum(MarketMakingConstituentMomentum value) => $_setField(19, value);
   @$pb.TagNumber(19)
-  $core.bool hasConstituentMomentum() => $_has(14);
+  $core.bool hasConstituentMomentum() => $_has(12);
   @$pb.TagNumber(19)
   void clearConstituentMomentum() => $_clearField(19);
   @$pb.TagNumber(19)
-  MarketMakingConstituentMomentum ensureConstituentMomentum() => $_ensure(14);
+  MarketMakingConstituentMomentum ensureConstituentMomentum() => $_ensure(12);
 
   /// 역선택 방어 설정
   @$pb.TagNumber(20)
-  MarketMakingAdverseSelection get adverseSelection => $_getN(15);
+  MarketMakingAdverseSelection get adverseSelection => $_getN(13);
   @$pb.TagNumber(20)
   set adverseSelection(MarketMakingAdverseSelection value) => $_setField(20, value);
   @$pb.TagNumber(20)
-  $core.bool hasAdverseSelection() => $_has(15);
+  $core.bool hasAdverseSelection() => $_has(13);
   @$pb.TagNumber(20)
   void clearAdverseSelection() => $_clearField(20);
   @$pb.TagNumber(20)
-  MarketMakingAdverseSelection ensureAdverseSelection() => $_ensure(15);
+  MarketMakingAdverseSelection ensureAdverseSelection() => $_ensure(13);
 
   /// 운영자 지정 제3종목 체결강도 skew
   @$pb.TagNumber(21)
-  MarketMakingProxyMomentum get proxyMomentum => $_getN(16);
+  MarketMakingProxyMomentum get proxyMomentum => $_getN(14);
   @$pb.TagNumber(21)
   set proxyMomentum(MarketMakingProxyMomentum value) => $_setField(21, value);
   @$pb.TagNumber(21)
-  $core.bool hasProxyMomentum() => $_has(16);
+  $core.bool hasProxyMomentum() => $_has(14);
   @$pb.TagNumber(21)
   void clearProxyMomentum() => $_clearField(21);
   @$pb.TagNumber(21)
-  MarketMakingProxyMomentum ensureProxyMomentum() => $_ensure(16);
+  MarketMakingProxyMomentum ensureProxyMomentum() => $_ensure(14);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -3116,8 +3090,6 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     MarketBiasState? marketBias,
     $core.String? askQuote,
     $core.String? bidQuote,
-    $core.String? bidOffset,
-    $core.String? askOffset,
     SpreadDecomposition? decomposition,
     $core.String? f2mShift,
     MaCrossState? maCross,
@@ -3133,8 +3105,6 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (marketBias != null) result.marketBias = marketBias;
     if (askQuote != null) result.askQuote = askQuote;
     if (bidQuote != null) result.bidQuote = bidQuote;
-    if (bidOffset != null) result.bidOffset = bidOffset;
-    if (askOffset != null) result.askOffset = askOffset;
     if (decomposition != null) result.decomposition = decomposition;
     if (f2mShift != null) result.f2mShift = f2mShift;
     if (maCross != null) result.maCross = maCross;
@@ -3157,8 +3127,6 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOM<MarketBiasState>(6, _omitFieldNames ? '' : 'marketBias', subBuilder: MarketBiasState.create)
     ..aOS(7, _omitFieldNames ? '' : 'askQuote')
     ..aOS(8, _omitFieldNames ? '' : 'bidQuote')
-    ..aOS(9, _omitFieldNames ? '' : 'bidOffset')
-    ..aOS(10, _omitFieldNames ? '' : 'askOffset')
     ..aOM<SpreadDecomposition>(11, _omitFieldNames ? '' : 'decomposition', subBuilder: SpreadDecomposition.create)
     ..aOS(12, _omitFieldNames ? '' : 'f2mShift')
     ..aOM<MaCrossState>(13, _omitFieldNames ? '' : 'maCross', subBuilder: MaCrossState.create)
@@ -3272,83 +3240,63 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearBidQuote() => $_clearField(8);
 
-  /// 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
-  @$pb.TagNumber(9)
-  $core.String get bidOffset => $_getSZ(8);
-  @$pb.TagNumber(9)
-  set bidOffset($core.String value) => $_setString(8, value);
-  @$pb.TagNumber(9)
-  $core.bool hasBidOffset() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearBidOffset() => $_clearField(9);
-
-  /// 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
-  @$pb.TagNumber(10)
-  $core.String get askOffset => $_getSZ(9);
-  @$pb.TagNumber(10)
-  set askOffset($core.String value) => $_setString(9, value);
-  @$pb.TagNumber(10)
-  $core.bool hasAskOffset() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearAskOffset() => $_clearField(10);
-
   /// 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
   @$pb.TagNumber(11)
-  SpreadDecomposition get decomposition => $_getN(10);
+  SpreadDecomposition get decomposition => $_getN(8);
   @$pb.TagNumber(11)
   set decomposition(SpreadDecomposition value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasDecomposition() => $_has(10);
+  $core.bool hasDecomposition() => $_has(8);
   @$pb.TagNumber(11)
   void clearDecomposition() => $_clearField(11);
   @$pb.TagNumber(11)
-  SpreadDecomposition ensureDecomposition() => $_ensure(10);
+  SpreadDecomposition ensureDecomposition() => $_ensure(8);
 
   /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
   @$pb.TagNumber(12)
-  $core.String get f2mShift => $_getSZ(11);
+  $core.String get f2mShift => $_getSZ(9);
   @$pb.TagNumber(12)
-  set f2mShift($core.String value) => $_setString(11, value);
+  set f2mShift($core.String value) => $_setString(9, value);
   @$pb.TagNumber(12)
-  $core.bool hasF2mShift() => $_has(11);
+  $core.bool hasF2mShift() => $_has(9);
   @$pb.TagNumber(12)
   void clearF2mShift() => $_clearField(12);
 
   /// MA 크로스 상태 (변경 시에만 포함)
   @$pb.TagNumber(13)
-  MaCrossState get maCross => $_getN(12);
+  MaCrossState get maCross => $_getN(10);
   @$pb.TagNumber(13)
   set maCross(MaCrossState value) => $_setField(13, value);
   @$pb.TagNumber(13)
-  $core.bool hasMaCross() => $_has(12);
+  $core.bool hasMaCross() => $_has(10);
   @$pb.TagNumber(13)
   void clearMaCross() => $_clearField(13);
   @$pb.TagNumber(13)
-  MaCrossState ensureMaCross() => $_ensure(12);
+  MaCrossState ensureMaCross() => $_ensure(10);
 
   /// 상위 구성종목 체결강도 상태 (변경 시에만 포함)
   @$pb.TagNumber(14)
-  ConstituentMomentumState get constituentMomentum => $_getN(13);
+  ConstituentMomentumState get constituentMomentum => $_getN(11);
   @$pb.TagNumber(14)
   set constituentMomentum(ConstituentMomentumState value) => $_setField(14, value);
   @$pb.TagNumber(14)
-  $core.bool hasConstituentMomentum() => $_has(13);
+  $core.bool hasConstituentMomentum() => $_has(11);
   @$pb.TagNumber(14)
   void clearConstituentMomentum() => $_clearField(14);
   @$pb.TagNumber(14)
-  ConstituentMomentumState ensureConstituentMomentum() => $_ensure(13);
+  ConstituentMomentumState ensureConstituentMomentum() => $_ensure(11);
 
   /// 제3종목 체결강도 skew 런타임 상태
   @$pb.TagNumber(15)
-  ProxyMomentumState get proxyMomentum => $_getN(14);
+  ProxyMomentumState get proxyMomentum => $_getN(12);
   @$pb.TagNumber(15)
   set proxyMomentum(ProxyMomentumState value) => $_setField(15, value);
   @$pb.TagNumber(15)
-  $core.bool hasProxyMomentum() => $_has(14);
+  $core.bool hasProxyMomentum() => $_has(12);
   @$pb.TagNumber(15)
   void clearProxyMomentum() => $_clearField(15);
   @$pb.TagNumber(15)
-  ProxyMomentumState ensureProxyMomentum() => $_ensure(14);
+  ProxyMomentumState ensureProxyMomentum() => $_ensure(12);
 }
 
 /// StreamMmFills

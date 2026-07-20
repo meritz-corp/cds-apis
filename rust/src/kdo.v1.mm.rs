@@ -52,12 +52,6 @@ pub struct MarketMakingConfiguration {
     /// 레벨당 매도 수량
     #[prost(int64, tag="10")]
     pub ask_quantity: i64,
-    /// NAV+adj 기준가 대비 bid 추가 gap (Price internal representation)
-    #[prost(int64, tag="13")]
-    pub bid_offset: i64,
-    /// NAV+adj 기준가 대비 ask 추가 gap (Price internal representation)
-    #[prost(int64, tag="14")]
-    pub ask_offset: i64,
     /// 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
     #[prost(int64, optional, tag="15")]
     pub basis: ::core::option::Option<i64>,
@@ -643,12 +637,6 @@ pub struct MmStateUpdate {
     /// 현재 MM 매수 호가 (변경 시에만 포함, None이면 생략)
     #[prost(string, optional, tag="8")]
     pub bid_quote: ::core::option::Option<::prost::alloc::string::String>,
-    /// 현재 적용 중인 bid offset (변경 시에만 포함, None이면 생략)
-    #[prost(string, optional, tag="9")]
-    pub bid_offset: ::core::option::Option<::prost::alloc::string::String>,
-    /// 현재 적용 중인 ask offset (변경 시에만 포함, None이면 생략)
-    #[prost(string, optional, tag="10")]
-    pub ask_offset: ::core::option::Option<::prost::alloc::string::String>,
     /// 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
     #[prost(message, optional, tag="11")]
     pub decomposition: ::core::option::Option<SpreadDecomposition>,

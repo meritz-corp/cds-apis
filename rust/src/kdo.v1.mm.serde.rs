@@ -2891,12 +2891,6 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -2925,16 +2919,6 @@ impl serde::Serialize for MarketMakingConfiguration {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("bid_offset", ToString::to_string(&self.bid_offset).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ask_offset", ToString::to_string(&self.ask_offset).as_str())?;
         }
         if let Some(v) = self.basis.as_ref() {
             #[allow(clippy::needless_borrow)]
@@ -2982,10 +2966,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "bidQuantity",
             "ask_quantity",
             "askQuantity",
-            "bid_offset",
-            "bidOffset",
-            "ask_offset",
-            "askOffset",
             "basis",
             "base_half_ticks",
             "baseHalfTicks",
@@ -3011,8 +2991,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             ExposureBalancer,
             BidQuantity,
             AskQuantity,
-            BidOffset,
-            AskOffset,
             Basis,
             BaseHalfTicks,
             QuantityLimit,
@@ -3050,8 +3028,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "exposureBalancer" | "exposure_balancer" => Ok(GeneratedField::ExposureBalancer),
                             "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
-                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
-                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "basis" => Ok(GeneratedField::Basis),
                             "baseHalfTicks" | "base_half_ticks" => Ok(GeneratedField::BaseHalfTicks),
                             "quantityLimit" | "quantity_limit" => Ok(GeneratedField::QuantityLimit),
@@ -3086,8 +3062,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut exposure_balancer__ = None;
                 let mut bid_quantity__ = None;
                 let mut ask_quantity__ = None;
-                let mut bid_offset__ = None;
-                let mut ask_offset__ = None;
                 let mut basis__ = None;
                 let mut base_half_ticks__ = None;
                 let mut quantity_limit__ = None;
@@ -3146,22 +3120,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 return Err(serde::de::Error::duplicate_field("askQuantity"));
                             }
                             ask_quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::BidOffset => {
-                            if bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffset"));
-                            }
-                            bid_offset__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::AskOffset => {
-                            if ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffset"));
-                            }
-                            ask_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -3225,8 +3183,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     exposure_balancer: exposure_balancer__,
                     bid_quantity: bid_quantity__.unwrap_or_default(),
                     ask_quantity: ask_quantity__.unwrap_or_default(),
-                    bid_offset: bid_offset__.unwrap_or_default(),
-                    ask_offset: ask_offset__.unwrap_or_default(),
                     basis: basis__,
                     base_half_ticks: base_half_ticks__.unwrap_or_default(),
                     quantity_limit: quantity_limit__,
@@ -5775,12 +5731,6 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -5807,12 +5757,6 @@ impl serde::Serialize for MmStateUpdate {
         }
         if let Some(v) = self.bid_quote.as_ref() {
             struct_ser.serialize_field("bid_quote", v)?;
-        }
-        if let Some(v) = self.bid_offset.as_ref() {
-            struct_ser.serialize_field("bid_offset", v)?;
-        }
-        if let Some(v) = self.ask_offset.as_ref() {
-            struct_ser.serialize_field("ask_offset", v)?;
         }
         if let Some(v) = self.decomposition.as_ref() {
             struct_ser.serialize_field("decomposition", v)?;
@@ -5852,10 +5796,6 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "askQuote",
             "bid_quote",
             "bidQuote",
-            "bid_offset",
-            "bidOffset",
-            "ask_offset",
-            "askOffset",
             "decomposition",
             "f2m_shift",
             "f2mShift",
@@ -5877,8 +5817,6 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             MarketBias,
             AskQuote,
             BidQuote,
-            BidOffset,
-            AskOffset,
             Decomposition,
             F2mShift,
             MaCross,
@@ -5914,8 +5852,6 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "marketBias" | "market_bias" => Ok(GeneratedField::MarketBias),
                             "askQuote" | "ask_quote" => Ok(GeneratedField::AskQuote),
                             "bidQuote" | "bid_quote" => Ok(GeneratedField::BidQuote),
-                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
-                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "decomposition" => Ok(GeneratedField::Decomposition),
                             "f2mShift" | "f2m_shift" => Ok(GeneratedField::F2mShift),
                             "maCross" | "ma_cross" => Ok(GeneratedField::MaCross),
@@ -5948,8 +5884,6 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut market_bias__ = None;
                 let mut ask_quote__ = None;
                 let mut bid_quote__ = None;
-                let mut bid_offset__ = None;
-                let mut ask_offset__ = None;
                 let mut decomposition__ = None;
                 let mut f2m_shift__ = None;
                 let mut ma_cross__ = None;
@@ -6005,18 +5939,6 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             bid_quote__ = map_.next_value()?;
                         }
-                        GeneratedField::BidOffset => {
-                            if bid_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffset"));
-                            }
-                            bid_offset__ = map_.next_value()?;
-                        }
-                        GeneratedField::AskOffset => {
-                            if ask_offset__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffset"));
-                            }
-                            ask_offset__ = map_.next_value()?;
-                        }
                         GeneratedField::Decomposition => {
                             if decomposition__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("decomposition"));
@@ -6061,8 +5983,6 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     market_bias: market_bias__,
                     ask_quote: ask_quote__,
                     bid_quote: bid_quote__,
-                    bid_offset: bid_offset__,
-                    ask_offset: ask_offset__,
                     decomposition: decomposition__,
                     f2m_shift: f2m_shift__,
                     ma_cross: ma_cross__,
