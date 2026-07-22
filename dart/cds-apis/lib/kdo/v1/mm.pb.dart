@@ -1496,12 +1496,16 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)
 class MarketMakingQuantityLimit extends $pb.GeneratedMessage {
   factory MarketMakingQuantityLimit({
+  @$core.Deprecated('This field is deprecated.')
     $fixnum.Int64? maxBidQuantity,
+  @$core.Deprecated('This field is deprecated.')
     $fixnum.Int64? maxAskQuantity,
+    $fixnum.Int64? maxQuantity,
   }) {
     final result = create();
     if (maxBidQuantity != null) result.maxBidQuantity = maxBidQuantity;
     if (maxAskQuantity != null) result.maxAskQuantity = maxAskQuantity;
+    if (maxQuantity != null) result.maxQuantity = maxQuantity;
     return result;
   }
 
@@ -1513,6 +1517,7 @@ class MarketMakingQuantityLimit extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingQuantityLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'maxBidQuantity')
     ..aInt64(2, _omitFieldNames ? '' : 'maxAskQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'maxQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -1533,25 +1538,45 @@ class MarketMakingQuantityLimit extends $pb.GeneratedMessage {
   static MarketMakingQuantityLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingQuantityLimit>(create);
   static MarketMakingQuantityLimit? _defaultInstance;
 
-  /// 순매수(롱) 상한. net(매수체결-매도체결) >= 이 값이면 매수 호가 차단. 0=비활성
+  /// [deprecated] 순매수(롱) 상한. max_quantity 로 대체.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   $fixnum.Int64 get maxBidQuantity => $_getI64(0);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   set maxBidQuantity($fixnum.Int64 value) => $_setInt64(0, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   $core.bool hasMaxBidQuantity() => $_has(0);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   void clearMaxBidQuantity() => $_clearField(1);
 
-  /// 순매도(숏) 상한. net <= -이 값이면 매도 호가 차단. 0=비활성
+  /// [deprecated] 순매도(숏) 상한. max_quantity 로 대체.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(2)
   $fixnum.Int64 get maxAskQuantity => $_getI64(1);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(2)
   set maxAskQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(2)
   $core.bool hasMaxAskQuantity() => $_has(1);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(2)
   void clearMaxAskQuantity() => $_clearField(2);
+
+  /// 매수/매도 공통 누적 체결 상한. 0=비활성.
+  /// 서버가 매수(gross_buy)·매도(gross_sell) 양쪽에 동일 임계로 적용해,
+  /// 친 쪽만 호가 차단하고 양쪽 다 도달하면 전체 차단한다.
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get maxQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set maxQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMaxQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMaxQuantity() => $_clearField(3);
 }
 
 /// ListMarketMaking

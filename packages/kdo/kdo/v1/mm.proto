@@ -429,11 +429,16 @@ message MarketMakingExposureBalancer {
 
 // 순포지션 수량 한도 설정 (방향별 호가 차단)
 message MarketMakingQuantityLimit {
-  // 순매수(롱) 상한. net(매수체결-매도체결) >= 이 값이면 매수 호가 차단. 0=비활성
-  int64 max_bid_quantity = 1;
+  // [deprecated] 순매수(롱) 상한. max_quantity 로 대체.
+  int64 max_bid_quantity = 1 [deprecated = true];
 
-  // 순매도(숏) 상한. net <= -이 값이면 매도 호가 차단. 0=비활성
-  int64 max_ask_quantity = 2;
+  // [deprecated] 순매도(숏) 상한. max_quantity 로 대체.
+  int64 max_ask_quantity = 2 [deprecated = true];
+
+  // 매수/매도 공통 누적 체결 상한. 0=비활성.
+  // 서버가 매수(gross_buy)·매도(gross_sell) 양쪽에 동일 임계로 적용해,
+  // 친 쪽만 호가 차단하고 양쪽 다 도달하면 전체 차단한다.
+  int64 max_quantity = 3;
 }
 
 // ============================================================================

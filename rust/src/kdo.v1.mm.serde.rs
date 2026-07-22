@@ -4575,6 +4575,9 @@ impl serde::Serialize for MarketMakingQuantityLimit {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingQuantityLimit", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -4585,6 +4588,11 @@ impl serde::Serialize for MarketMakingQuantityLimit {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("max_ask_quantity", ToString::to_string(&self.max_ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_quantity", ToString::to_string(&self.max_quantity).as_str())?;
         }
         struct_ser.end()
     }
@@ -4600,12 +4608,15 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQuantityLimit {
             "maxBidQuantity",
             "max_ask_quantity",
             "maxAskQuantity",
+            "max_quantity",
+            "maxQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             MaxBidQuantity,
             MaxAskQuantity,
+            MaxQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4630,6 +4641,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQuantityLimit {
                         match value {
                             "maxBidQuantity" | "max_bid_quantity" => Ok(GeneratedField::MaxBidQuantity),
                             "maxAskQuantity" | "max_ask_quantity" => Ok(GeneratedField::MaxAskQuantity),
+                            "maxQuantity" | "max_quantity" => Ok(GeneratedField::MaxQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4651,6 +4663,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQuantityLimit {
             {
                 let mut max_bid_quantity__ = None;
                 let mut max_ask_quantity__ = None;
+                let mut max_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::MaxBidQuantity => {
@@ -4669,6 +4682,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQuantityLimit {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::MaxQuantity => {
+                            if max_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxQuantity"));
+                            }
+                            max_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4677,6 +4698,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQuantityLimit {
                 Ok(MarketMakingQuantityLimit {
                     max_bid_quantity: max_bid_quantity__.unwrap_or_default(),
                     max_ask_quantity: max_ask_quantity__.unwrap_or_default(),
+                    max_quantity: max_quantity__.unwrap_or_default(),
                 })
             }
         }

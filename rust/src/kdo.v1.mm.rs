@@ -305,12 +305,19 @@ pub struct MarketMakingExposureBalancer {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MarketMakingQuantityLimit {
-    /// 순매수(롱) 상한. net(매수체결-매도체결) >= 이 값이면 매수 호가 차단. 0=비활성
+    /// \[deprecated\] 순매수(롱) 상한. max_quantity 로 대체.
+    #[deprecated]
     #[prost(int64, tag="1")]
     pub max_bid_quantity: i64,
-    /// 순매도(숏) 상한. net <= -이 값이면 매도 호가 차단. 0=비활성
+    /// \[deprecated\] 순매도(숏) 상한. max_quantity 로 대체.
+    #[deprecated]
     #[prost(int64, tag="2")]
     pub max_ask_quantity: i64,
+    /// 매수/매도 공통 누적 체결 상한. 0=비활성.
+    /// 서버가 매수(gross_buy)·매도(gross_sell) 양쪽에 동일 임계로 적용해,
+    /// 친 쪽만 호가 차단하고 양쪽 다 도달하면 전체 차단한다.
+    #[prost(int64, tag="3")]
+    pub max_quantity: i64,
 }
 // ============================================================================
 // Request/Response Messages

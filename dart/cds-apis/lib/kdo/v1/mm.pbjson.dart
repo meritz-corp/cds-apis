@@ -342,15 +342,31 @@ final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.ba
 const MarketMakingQuantityLimit$json = {
   '1': 'MarketMakingQuantityLimit',
   '2': [
-    {'1': 'max_bid_quantity', '3': 1, '4': 1, '5': 3, '10': 'maxBidQuantity'},
-    {'1': 'max_ask_quantity', '3': 2, '4': 1, '5': 3, '10': 'maxAskQuantity'},
+    {
+      '1': 'max_bid_quantity',
+      '3': 1,
+      '4': 1,
+      '5': 3,
+      '8': {'3': true},
+      '10': 'maxBidQuantity',
+    },
+    {
+      '1': 'max_ask_quantity',
+      '3': 2,
+      '4': 1,
+      '5': 3,
+      '8': {'3': true},
+      '10': 'maxAskQuantity',
+    },
+    {'1': 'max_quantity', '3': 3, '4': 1, '5': 3, '10': 'maxQuantity'},
   ],
 };
 
 /// Descriptor for `MarketMakingQuantityLimit`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingQuantityLimitDescriptor = $convert.base64Decode(
-    'ChlNYXJrZXRNYWtpbmdRdWFudGl0eUxpbWl0EigKEG1heF9iaWRfcXVhbnRpdHkYASABKANSDm'
-    '1heEJpZFF1YW50aXR5EigKEG1heF9hc2tfcXVhbnRpdHkYAiABKANSDm1heEFza1F1YW50aXR5');
+    'ChlNYXJrZXRNYWtpbmdRdWFudGl0eUxpbWl0EiwKEG1heF9iaWRfcXVhbnRpdHkYASABKANCAh'
+    'gBUg5tYXhCaWRRdWFudGl0eRIsChBtYXhfYXNrX3F1YW50aXR5GAIgASgDQgIYAVIObWF4QXNr'
+    'UXVhbnRpdHkSIQoMbWF4X3F1YW50aXR5GAMgASgDUgttYXhRdWFudGl0eQ==');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {
