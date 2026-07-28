@@ -875,23 +875,22 @@ pub struct DeleteMmPresetResponse {
     #[prost(string, tag="1")]
     pub message: ::prost::alloc::string::String,
 }
-// ============================================================================
-// MM 설정 스냅샷 히스토리 (MM 시작 시마다 자동 누적, 프리셋과 별개)
-// ============================================================================
-
-/// MM 시작 시점에 저장된 설정 스냅샷
+/// MM 시작/설정변경 시점에 저장된 설정 스냅샷
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MmConfigSnapshot {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
-    /// 시작 시점의 MM 설정
+    /// 해당 시점의 MM 설정
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<MarketMakingConfiguration>,
-    /// 시작 시각 (unix epoch seconds)
+    /// 시각 (unix epoch seconds)
     #[prost(int64, tag="3")]
     pub start_time: i64,
+    /// 스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
+    #[prost(enumeration="MmConfigEventType", tag="4")]
+    pub event_type: i32,
 }
 /// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -943,6 +942,42 @@ impl MarketMakingState {
             "MARKET_MAKING_STATE_UNSPECIFIED" => Some(Self::Unspecified),
             "MARKET_MAKING_STATE_IDLE" => Some(Self::Idle),
             "MARKET_MAKING_STATE_RUNNING" => Some(Self::Running),
+            _ => None,
+        }
+    }
+}
+// ============================================================================
+// MM 설정 스냅샷 히스토리 (MM 시작 시마다 자동 누적, 프리셋과 별개)
+// ============================================================================
+
+/// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" 과 "설정변경" 으로 구분
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum MmConfigEventType {
+    Unspecified = 0,
+    /// MM 시작(start_mm)
+    Start = 1,
+    /// 실행 중 설정 변경(update_config)
+    ConfigUpdate = 2,
+}
+impl MmConfigEventType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            MmConfigEventType::Unspecified => "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
+            MmConfigEventType::Start => "MM_CONFIG_EVENT_TYPE_START",
+            MmConfigEventType::ConfigUpdate => "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MM_CONFIG_EVENT_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "MM_CONFIG_EVENT_TYPE_START" => Some(Self::Start),
+            "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE" => Some(Self::ConfigUpdate),
             _ => None,
         }
     }

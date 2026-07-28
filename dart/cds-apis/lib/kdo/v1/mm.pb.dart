@@ -4441,17 +4441,19 @@ class DeleteMmPresetResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(1);
 }
 
-/// MM 시작 시점에 저장된 설정 스냅샷
+/// MM 시작/설정변경 시점에 저장된 설정 스냅샷
 class MmConfigSnapshot extends $pb.GeneratedMessage {
   factory MmConfigSnapshot({
     $core.String? symbol,
     MarketMakingConfiguration? config,
     $fixnum.Int64? startTime,
+    MmConfigEventType? eventType,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
     if (startTime != null) result.startTime = startTime;
+    if (eventType != null) result.eventType = eventType;
     return result;
   }
 
@@ -4464,6 +4466,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aInt64(3, _omitFieldNames ? '' : 'startTime')
+    ..e<MmConfigEventType>(4, _omitFieldNames ? '' : 'eventType', $pb.PbFieldType.OE, defaultOrMaker: MmConfigEventType.MM_CONFIG_EVENT_TYPE_UNSPECIFIED, valueOf: MmConfigEventType.valueOf, enumValues: MmConfigEventType.values)
     ..hasRequiredFields = false
   ;
 
@@ -4494,7 +4497,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
 
-  /// 시작 시점의 MM 설정
+  /// 해당 시점의 MM 설정
   @$pb.TagNumber(2)
   MarketMakingConfiguration get config => $_getN(1);
   @$pb.TagNumber(2)
@@ -4506,7 +4509,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   MarketMakingConfiguration ensureConfig() => $_ensure(1);
 
-  /// 시작 시각 (unix epoch seconds)
+  /// 시각 (unix epoch seconds)
   @$pb.TagNumber(3)
   $fixnum.Int64 get startTime => $_getI64(2);
   @$pb.TagNumber(3)
@@ -4515,6 +4518,16 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
   $core.bool hasStartTime() => $_has(2);
   @$pb.TagNumber(3)
   void clearStartTime() => $_clearField(3);
+
+  /// 스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
+  @$pb.TagNumber(4)
+  MmConfigEventType get eventType => $_getN(3);
+  @$pb.TagNumber(4)
+  set eventType(MmConfigEventType value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEventType() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEventType() => $_clearField(4);
 }
 
 /// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회

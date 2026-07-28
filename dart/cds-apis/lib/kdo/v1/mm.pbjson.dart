@@ -30,6 +30,22 @@ final $typed_data.Uint8List marketMakingStateDescriptor = $convert.base64Decode(
     'ASHAoYTUFSS0VUX01BS0lOR19TVEFURV9JRExFEAESHwobTUFSS0VUX01BS0lOR19TVEFURV9S'
     'VU5OSU5HEAI=');
 
+@$core.Deprecated('Use mmConfigEventTypeDescriptor instead')
+const MmConfigEventType$json = {
+  '1': 'MmConfigEventType',
+  '2': [
+    {'1': 'MM_CONFIG_EVENT_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'MM_CONFIG_EVENT_TYPE_START', '2': 1},
+    {'1': 'MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE', '2': 2},
+  ],
+};
+
+/// Descriptor for `MmConfigEventType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List mmConfigEventTypeDescriptor = $convert.base64Decode(
+    'ChFNbUNvbmZpZ0V2ZW50VHlwZRIkCiBNTV9DT05GSUdfRVZFTlRfVFlQRV9VTlNQRUNJRklFRB'
+    'AAEh4KGk1NX0NPTkZJR19FVkVOVF9UWVBFX1NUQVJUEAESJgoiTU1fQ09ORklHX0VWRU5UX1RZ'
+    'UEVfQ09ORklHX1VQREFURRAC');
+
 @$core.Deprecated('Use marketMakingDescriptor instead')
 const MarketMaking$json = {
   '1': 'MarketMaking',
@@ -1041,6 +1057,7 @@ const MmConfigSnapshot$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'start_time', '3': 3, '4': 1, '5': 3, '10': 'startTime'},
+    {'1': 'event_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.mm.MmConfigEventType', '10': 'eventType'},
   ],
 };
 
@@ -1048,7 +1065,8 @@ const MmConfigSnapshot$json = {
 final $typed_data.Uint8List mmConfigSnapshotDescriptor = $convert.base64Decode(
     'ChBNbUNvbmZpZ1NuYXBzaG90EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEjwKBmNvbmZpZxgCIA'
     'EoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSHQoKc3Rh'
-    'cnRfdGltZRgDIAEoA1IJc3RhcnRUaW1l');
+    'cnRfdGltZRgDIAEoA1IJc3RhcnRUaW1lEjsKCmV2ZW50X3R5cGUYBCABKA4yHC5rZG8udjEubW'
+    '0uTW1Db25maWdFdmVudFR5cGVSCWV2ZW50VHlwZQ==');
 
 @$core.Deprecated('Use listMmConfigHistoryRequestDescriptor instead')
 const ListMmConfigHistoryRequest$json = {

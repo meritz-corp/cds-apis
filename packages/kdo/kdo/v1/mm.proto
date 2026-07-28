@@ -916,16 +916,26 @@ message DeleteMmPresetResponse {
 // MM 설정 스냅샷 히스토리 (MM 시작 시마다 자동 누적, 프리셋과 별개)
 // ============================================================================
 
-// MM 시작 시점에 저장된 설정 스냅샷
+// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" 과 "설정변경" 으로 구분
+enum MmConfigEventType {
+  MM_CONFIG_EVENT_TYPE_UNSPECIFIED = 0;
+  MM_CONFIG_EVENT_TYPE_START = 1;          // MM 시작(start_mm)
+  MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE = 2;  // 실행 중 설정 변경(update_config)
+}
+
+// MM 시작/설정변경 시점에 저장된 설정 스냅샷
 message MmConfigSnapshot {
   // ISIN 심볼
   string symbol = 1;
 
-  // 시작 시점의 MM 설정
+  // 해당 시점의 MM 설정
   MarketMakingConfiguration config = 2;
 
-  // 시작 시각 (unix epoch seconds)
+  // 시각 (unix epoch seconds)
   int64 start_time = 3;
+
+  // 스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
+  MmConfigEventType event_type = 4;
 }
 
 // ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회

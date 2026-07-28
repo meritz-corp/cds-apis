@@ -1461,6 +1461,17 @@
       "type": "object",
       "title": "EtfPricing::IndexTrackingHedge"
     },
+    "mmMmConfigEventType": {
+      "type": "string",
+      "enum": [
+        "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
+        "MM_CONFIG_EVENT_TYPE_START",
+        "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE"
+      ],
+      "default": "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
+      "description": "- MM_CONFIG_EVENT_TYPE_START: MM 시작(start_mm)\n - MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE: 실행 중 설정 변경(update_config)",
+      "title": "스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 \"시작\" 과 \"설정변경\" 으로 구분"
+    },
     "mmMmConfigSnapshot": {
       "type": "object",
       "properties": {
@@ -1470,15 +1481,19 @@
         },
         "config": {
           "$ref": "#/definitions/mmMarketMakingConfiguration",
-          "title": "시작 시점의 MM 설정"
+          "title": "해당 시점의 MM 설정"
         },
         "startTime": {
           "type": "string",
           "format": "int64",
-          "title": "시작 시각 (unix epoch seconds)"
+          "title": "시각 (unix epoch seconds)"
+        },
+        "eventType": {
+          "$ref": "#/definitions/mmMmConfigEventType",
+          "title": "스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주"
         }
       },
-      "title": "MM 시작 시점에 저장된 설정 스냅샷"
+      "title": "MM 시작/설정변경 시점에 저장된 설정 스냅샷"
     },
     "mmMmFillSummary": {
       "type": "object",

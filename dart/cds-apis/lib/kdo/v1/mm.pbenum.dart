@@ -32,5 +32,23 @@ class MarketMakingState extends $pb.ProtobufEnum {
   const MarketMakingState._(super.value, super.name);
 }
 
+/// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" 과 "설정변경" 으로 구분
+class MmConfigEventType extends $pb.ProtobufEnum {
+  static const MmConfigEventType MM_CONFIG_EVENT_TYPE_UNSPECIFIED = MmConfigEventType._(0, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_UNSPECIFIED');
+  static const MmConfigEventType MM_CONFIG_EVENT_TYPE_START = MmConfigEventType._(1, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_START');
+  static const MmConfigEventType MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE = MmConfigEventType._(2, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE');
+
+  static const $core.List<MmConfigEventType> values = <MmConfigEventType> [
+    MM_CONFIG_EVENT_TYPE_UNSPECIFIED,
+    MM_CONFIG_EVENT_TYPE_START,
+    MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE,
+  ];
+
+  static final $core.List<MmConfigEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static MmConfigEventType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const MmConfigEventType._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

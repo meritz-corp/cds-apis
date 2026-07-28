@@ -5050,6 +5050,80 @@ impl<'de> serde::Deserialize<'de> for MeanBidAsk {
         deserializer.deserialize_struct("kdo.v1.mm.MeanBidAsk", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for MmConfigEventType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
+            Self::Start => "MM_CONFIG_EVENT_TYPE_START",
+            Self::ConfigUpdate => "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmConfigEventType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
+            "MM_CONFIG_EVENT_TYPE_START",
+            "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmConfigEventType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "MM_CONFIG_EVENT_TYPE_UNSPECIFIED" => Ok(MmConfigEventType::Unspecified),
+                    "MM_CONFIG_EVENT_TYPE_START" => Ok(MmConfigEventType::Start),
+                    "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE" => Ok(MmConfigEventType::ConfigUpdate),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for MmConfigSnapshot {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -5058,6 +5132,9 @@ impl serde::Serialize for MmConfigSnapshot {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -5079,6 +5156,11 @@ impl serde::Serialize for MmConfigSnapshot {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("start_time", ToString::to_string(&self.start_time).as_str())?;
         }
+        if true {
+            let v = MmConfigEventType::try_from(self.event_type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.event_type)))?;
+            struct_ser.serialize_field("event_type", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -5093,6 +5175,8 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
             "config",
             "start_time",
             "startTime",
+            "event_type",
+            "eventType",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5100,6 +5184,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
             Symbol,
             Config,
             StartTime,
+            EventType,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5125,6 +5210,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "config" => Ok(GeneratedField::Config),
                             "startTime" | "start_time" => Ok(GeneratedField::StartTime),
+                            "eventType" | "event_type" => Ok(GeneratedField::EventType),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5147,6 +5233,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                 let mut symbol__ = None;
                 let mut config__ = None;
                 let mut start_time__ = None;
+                let mut event_type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -5169,6 +5256,12 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::EventType => {
+                            if event_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("eventType"));
+                            }
+                            event_type__ = Some(map_.next_value::<MmConfigEventType>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5178,6 +5271,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                     symbol: symbol__.unwrap_or_default(),
                     config: config__,
                     start_time: start_time__.unwrap_or_default(),
+                    event_type: event_type__.unwrap_or_default(),
                 })
             }
         }
