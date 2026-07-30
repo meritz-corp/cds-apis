@@ -36,6 +36,13 @@ service UserService {
       get: "/v1/users"
     };
   }
+
+  rpc GetUserByCode(GetUserRequest) returns (User) {
+    option (google.api.http) = {
+      get: "/v1/{user=users/*}/code"
+    };
+    option (google.api.method_signature) = "user";
+  }
 }
 
 message GetUserRequest {

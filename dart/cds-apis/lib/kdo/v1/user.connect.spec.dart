@@ -35,4 +35,11 @@ abstract final class UserService {
     kdov1user.ListUsersRequest.new,
     kdov1user.ListUsersResponse.new,
   );
+
+  static const getUserByCode = connect.Spec(
+    '/$name/GetUserByCode',
+    connect.StreamType.unary,
+    kdov1user.GetUserRequest.new,
+    kdov1user.User.new,
+  );
 }
