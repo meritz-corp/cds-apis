@@ -197,7 +197,7 @@
           },
           {
             "name": "orderBy",
-            "description": "오더링 조건 (optional, AIP-132)\n\n형식: \"\u003cfield\u003e [asc|desc]\" (방향 생략 시 asc)\n\n지원 필드:\n* symbol           - 종목코드\n* book_quantity    - 장부수량\n* selling          - 매도예약수량 (원장은 예약을 추적하지 않아 항상 0)\n* sellable         - 가용수량\n* borrow_quantity  - 차입수량\n* borrow_selling   - 차입매도예약수량 (원장은 예약을 추적하지 않아 항상 0)\n* borrow_sellable  - 차입가용수량\n* book_amount      - 장부금액\n\n예시:\n* order_by = \"book_amount desc\"\n* order_by = \"sellable asc\"",
+            "description": "오더링 조건 (optional, AIP-132)\n\n형식: \"\u003cfield\u003e [asc|desc]\" (방향 생략 시 asc)\n\n지원 필드:\n* symbol           - 종목코드\n* book_quantity    - 장부수량\n* selling          - 매도예약수량 (서버 런타임 재고 기준 병합값)\n* sellable         - 가용수량\n* borrow_quantity  - 차입수량\n* borrow_selling   - 차입매도예약수량 (서버 런타임 재고 기준 병합값)\n* borrow_sellable  - 차입가용수량\n* book_amount      - 장부금액\n\n예시:\n* order_by = \"book_amount desc\"\n* order_by = \"sellable asc\"",
             "in": "query",
             "required": false,
             "type": "string"

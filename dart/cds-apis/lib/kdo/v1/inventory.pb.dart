@@ -1540,10 +1540,10 @@ class ListLedgerInventoriesRequest extends $pb.GeneratedMessage {
   /// 지원 필드:
   /// * symbol           - 종목코드
   /// * book_quantity    - 장부수량
-  /// * selling          - 매도예약수량 (원장은 예약을 추적하지 않아 항상 0)
+  /// * selling          - 매도예약수량 (서버 런타임 재고 기준 병합값)
   /// * sellable         - 가용수량
   /// * borrow_quantity  - 차입수량
-  /// * borrow_selling   - 차입매도예약수량 (원장은 예약을 추적하지 않아 항상 0)
+  /// * borrow_selling   - 차입매도예약수량 (서버 런타임 재고 기준 병합값)
   /// * borrow_sellable  - 차입가용수량
   /// * book_amount      - 장부금액
   ///
