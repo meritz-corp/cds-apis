@@ -118,38 +118,6 @@
           "UserService"
         ]
       }
-    },
-    "/v1/{user}/code": {
-      "get": {
-        "operationId": "UserService_GetUserByCode",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/userUser"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "user",
-            "description": "The name of the user to retrieve.\nFormat: users/{id}\nAlias \"users/me\" is supported.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "users/[^/]+"
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
     }
   },
   "definitions": {

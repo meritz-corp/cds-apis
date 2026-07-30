@@ -75,26 +75,6 @@ func (mr *MockUserServiceClientMockRecorder) GetUser(ctx, in interface{}, opts .
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUser", reflect.TypeOf((*MockUserServiceClient)(nil).GetUser), varargs...)
 }
 
-// GetUserByCode mocks base method.
-func (m *MockUserServiceClient) GetUserByCode(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetUserByCode", varargs...)
-	ret0, _ := ret[0].(*User)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetUserByCode indicates an expected call of GetUserByCode.
-func (mr *MockUserServiceClientMockRecorder) GetUserByCode(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserByCode", reflect.TypeOf((*MockUserServiceClient)(nil).GetUserByCode), varargs...)
-}
-
 // ListUsers mocks base method.
 func (m *MockUserServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
 	m.ctrl.T.Helper()
@@ -166,21 +146,6 @@ func (m *MockUserServiceServer) GetUser(ctx context.Context, in *GetUserRequest)
 func (mr *MockUserServiceServerMockRecorder) GetUser(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUser", reflect.TypeOf((*MockUserServiceServer)(nil).GetUser), ctx, in)
-}
-
-// GetUserByCode mocks base method.
-func (m *MockUserServiceServer) GetUserByCode(ctx context.Context, in *GetUserRequest) (*User, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetUserByCode", ctx, in)
-	ret0, _ := ret[0].(*User)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetUserByCode indicates an expected call of GetUserByCode.
-func (mr *MockUserServiceServerMockRecorder) GetUserByCode(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserByCode", reflect.TypeOf((*MockUserServiceServer)(nil).GetUserByCode), ctx, in)
 }
 
 // ListUsers mocks base method.

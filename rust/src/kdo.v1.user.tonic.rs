@@ -153,28 +153,6 @@ pub mod user_service_client {
                 .insert(GrpcMethod::new("kdo.v1.user.UserService", "ListUsers"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn get_user_by_code(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetUserRequest>,
-        ) -> std::result::Result<tonic::Response<super::User>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.user.UserService/GetUserByCode",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("kdo.v1.user.UserService", "GetUserByCode"));
-            self.inner.unary(req, path, codec).await
-        }
     }
 }
 /// Generated server implementations.
@@ -199,10 +177,6 @@ pub mod user_service_server {
             tonic::Response<super::ListUsersResponse>,
             tonic::Status,
         >;
-        async fn get_user_by_code(
-            &self,
-            request: tonic::Request<super::GetUserRequest>,
-        ) -> std::result::Result<tonic::Response<super::User>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct UserServiceServer<T: UserService> {
@@ -395,51 +369,6 @@ pub mod user_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = ListUsersSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.user.UserService/GetUserByCode" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetUserByCodeSvc<T: UserService>(pub Arc<T>);
-                    impl<
-                        T: UserService,
-                    > tonic::server::UnaryService<super::GetUserRequest>
-                    for GetUserByCodeSvc<T> {
-                        type Response = super::User;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetUserRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as UserService>::get_user_by_code(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = GetUserByCodeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

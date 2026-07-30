@@ -49,10 +49,6 @@ class UserServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listUsers, request, options: options);
   }
 
-  $grpc.ResponseFuture<$1.User> getUserByCode($1.GetUserRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getUserByCode, request, options: options);
-  }
-
     // method descriptors
 
   static final _$getMe = $grpc.ClientMethod<$0.Empty, $1.User>(
@@ -67,10 +63,6 @@ class UserServiceClient extends $grpc.Client {
       '/kdo.v1.user.UserService/ListUsers',
       ($1.ListUsersRequest value) => value.writeToBuffer(),
       $1.ListUsersResponse.fromBuffer);
-  static final _$getUserByCode = $grpc.ClientMethod<$1.GetUserRequest, $1.User>(
-      '/kdo.v1.user.UserService/GetUserByCode',
-      ($1.GetUserRequest value) => value.writeToBuffer(),
-      $1.User.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.user.UserService')
@@ -99,13 +91,6 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.ListUsersRequest.fromBuffer(value),
         ($1.ListUsersResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.GetUserRequest, $1.User>(
-        'GetUserByCode',
-        getUserByCode_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $1.GetUserRequest.fromBuffer(value),
-        ($1.User value) => value.writeToBuffer()));
   }
 
   $async.Future<$1.User> getMe_Pre($grpc.ServiceCall $call, $async.Future<$0.Empty> $request) async {
@@ -125,11 +110,5 @@ abstract class UserServiceBase extends $grpc.Service {
   }
 
   $async.Future<$1.ListUsersResponse> listUsers($grpc.ServiceCall call, $1.ListUsersRequest request);
-
-  $async.Future<$1.User> getUserByCode_Pre($grpc.ServiceCall $call, $async.Future<$1.GetUserRequest> $request) async {
-    return getUserByCode($call, await $request);
-  }
-
-  $async.Future<$1.User> getUserByCode($grpc.ServiceCall call, $1.GetUserRequest request);
 
 }
