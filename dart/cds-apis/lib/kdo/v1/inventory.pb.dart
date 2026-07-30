@@ -280,6 +280,8 @@ class LedgerStockData extends $pb.GeneratedMessage {
     $fixnum.Int64? prevBorrowBookQuantity,
     $fixnum.Int64? settlementBalance,
     $fixnum.Int64? settlementBorrowBalance,
+    $fixnum.Int64? selling,
+    $fixnum.Int64? borrowSelling,
   }) {
     final result = create();
     if (bookQuantity != null) result.bookQuantity = bookQuantity;
@@ -300,6 +302,8 @@ class LedgerStockData extends $pb.GeneratedMessage {
     if (prevBorrowBookQuantity != null) result.prevBorrowBookQuantity = prevBorrowBookQuantity;
     if (settlementBalance != null) result.settlementBalance = settlementBalance;
     if (settlementBorrowBalance != null) result.settlementBorrowBalance = settlementBorrowBalance;
+    if (selling != null) result.selling = selling;
+    if (borrowSelling != null) result.borrowSelling = borrowSelling;
     return result;
   }
 
@@ -327,6 +331,8 @@ class LedgerStockData extends $pb.GeneratedMessage {
     ..aInt64(16, _omitFieldNames ? '' : 'prevBorrowBookQuantity')
     ..aInt64(17, _omitFieldNames ? '' : 'settlementBalance')
     ..aInt64(18, _omitFieldNames ? '' : 'settlementBorrowBalance')
+    ..aInt64(19, _omitFieldNames ? '' : 'selling')
+    ..aInt64(20, _omitFieldNames ? '' : 'borrowSelling')
     ..hasRequiredFields = false
   ;
 
@@ -526,6 +532,26 @@ class LedgerStockData extends $pb.GeneratedMessage {
   $core.bool hasSettlementBorrowBalance() => $_has(17);
   @$pb.TagNumber(18)
   void clearSettlementBorrowBalance() => $_clearField(18);
+
+  /// 매도예약수량 (서버 런타임 재고 기준. 원장 자체엔 없으며 KDO 트레이딩 재고의 현재 예약값)
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get selling => $_getI64(18);
+  @$pb.TagNumber(19)
+  set selling($fixnum.Int64 value) => $_setInt64(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasSelling() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearSelling() => $_clearField(19);
+
+  /// 차입매도예약수량 (서버 런타임 재고 기준. 원장 자체엔 없으며 KDO 트레이딩 재고의 현재 예약값)
+  @$pb.TagNumber(20)
+  $fixnum.Int64 get borrowSelling => $_getI64(19);
+  @$pb.TagNumber(20)
+  set borrowSelling($fixnum.Int64 value) => $_setInt64(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasBorrowSelling() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearBorrowSelling() => $_clearField(20);
 }
 
 /// 파생상품 원장 재고 데이터

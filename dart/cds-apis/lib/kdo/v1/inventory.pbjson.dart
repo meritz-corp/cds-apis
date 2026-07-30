@@ -168,6 +168,8 @@ const LedgerStockData$json = {
     {'1': 'prev_borrow_book_quantity', '3': 16, '4': 1, '5': 3, '10': 'prevBorrowBookQuantity'},
     {'1': 'settlement_balance', '3': 17, '4': 1, '5': 3, '10': 'settlementBalance'},
     {'1': 'settlement_borrow_balance', '3': 18, '4': 1, '5': 3, '10': 'settlementBorrowBalance'},
+    {'1': 'selling', '3': 19, '4': 1, '5': 3, '10': 'selling'},
+    {'1': 'borrow_selling', '3': 20, '4': 1, '5': 3, '10': 'borrowSelling'},
   ],
 };
 
@@ -189,7 +191,8 @@ final $typed_data.Uint8List ledgerStockDataDescriptor = $convert.base64Decode(
     'ByZXZCb29rUXVhbnRpdHkSOQoZcHJldl9ib3Jyb3dfYm9va19xdWFudGl0eRgQIAEoA1IWcHJl'
     'dkJvcnJvd0Jvb2tRdWFudGl0eRItChJzZXR0bGVtZW50X2JhbGFuY2UYESABKANSEXNldHRsZW'
     '1lbnRCYWxhbmNlEjoKGXNldHRsZW1lbnRfYm9ycm93X2JhbGFuY2UYEiABKANSF3NldHRsZW1l'
-    'bnRCb3Jyb3dCYWxhbmNl');
+    'bnRCb3Jyb3dCYWxhbmNlEhgKB3NlbGxpbmcYEyABKANSB3NlbGxpbmcSJQoOYm9ycm93X3NlbG'
+    'xpbmcYFCABKANSDWJvcnJvd1NlbGxpbmc=');
 
 @$core.Deprecated('Use ledgerDerivDataDescriptor instead')
 const LedgerDerivData$json = {

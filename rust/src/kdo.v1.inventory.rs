@@ -120,6 +120,12 @@ pub struct LedgerStockData {
     /// 결제매도잔고
     #[prost(int64, tag="18")]
     pub settlement_borrow_balance: i64,
+    /// 매도예약수량 (서버 런타임 재고 기준. 원장 자체엔 없으며 KDO 트레이딩 재고의 현재 예약값)
+    #[prost(int64, tag="19")]
+    pub selling: i64,
+    /// 차입매도예약수량 (서버 런타임 재고 기준. 원장 자체엔 없으며 KDO 트레이딩 재고의 현재 예약값)
+    #[prost(int64, tag="20")]
+    pub borrow_selling: i64,
 }
 /// 파생상품 원장 재고 데이터
 #[allow(clippy::derive_partial_eq_without_eq)]
