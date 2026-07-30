@@ -1216,14 +1216,21 @@ class ListInventoriesRequest extends $pb.GeneratedMessage {
 
   /// 오더링 조건 (optional, AIP-132)
   ///
-  /// Supported Fields:
-  /// * "symbol", "inventory_type"
-  /// * "stock.sellable", "stock.book_quantity", "stock.book_amount"
-  /// * "deriv.quantity", "deriv.book_amount"
+  /// 형식: "<field> [asc|desc]" (방향 생략 시 asc)
   ///
-  /// Examples:
-  /// * order_by=stock.book_amount desc
-  /// * order_by=deriv.quantity asc
+  /// 지원 필드:
+  /// * symbol           - 종목코드
+  /// * book_quantity    - 장부수량
+  /// * selling          - 매도예약수량
+  /// * sellable         - 가용수량
+  /// * borrow_quantity  - 차입수량
+  /// * borrow_selling   - 차입매도예약수량
+  /// * borrow_sellable  - 차입가용수량
+  /// * book_amount      - 장부금액
+  ///
+  /// 예시:
+  /// * order_by = "book_amount desc"
+  /// * order_by = "sellable asc"
   @$pb.TagNumber(5)
   $core.String get orderBy => $_getSZ(4);
   @$pb.TagNumber(5)
@@ -1411,12 +1418,14 @@ class ListLedgerInventoriesRequest extends $pb.GeneratedMessage {
     $core.int? pageSize,
     $core.String? pageToken,
     $core.String? filter,
+    $core.String? orderBy,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (pageSize != null) result.pageSize = pageSize;
     if (pageToken != null) result.pageToken = pageToken;
     if (filter != null) result.filter = filter;
+    if (orderBy != null) result.orderBy = orderBy;
     return result;
   }
 
@@ -1430,6 +1439,7 @@ class ListLedgerInventoriesRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
     ..aOS(3, _omitFieldNames ? '' : 'pageToken')
     ..aOS(4, _omitFieldNames ? '' : 'filter')
+    ..aOS(5, _omitFieldNames ? '' : 'orderBy')
     ..hasRequiredFields = false
   ;
 
@@ -1496,6 +1506,32 @@ class ListLedgerInventoriesRequest extends $pb.GeneratedMessage {
   $core.bool hasFilter() => $_has(3);
   @$pb.TagNumber(4)
   void clearFilter() => $_clearField(4);
+
+  /// 오더링 조건 (optional, AIP-132)
+  ///
+  /// 형식: "<field> [asc|desc]" (방향 생략 시 asc)
+  ///
+  /// 지원 필드:
+  /// * symbol           - 종목코드
+  /// * book_quantity    - 장부수량
+  /// * selling          - 매도예약수량 (원장은 예약을 추적하지 않아 항상 0)
+  /// * sellable         - 가용수량
+  /// * borrow_quantity  - 차입수량
+  /// * borrow_selling   - 차입매도예약수량 (원장은 예약을 추적하지 않아 항상 0)
+  /// * borrow_sellable  - 차입가용수량
+  /// * book_amount      - 장부금액
+  ///
+  /// 예시:
+  /// * order_by = "book_amount desc"
+  /// * order_by = "sellable asc"
+  @$pb.TagNumber(5)
+  $core.String get orderBy => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set orderBy($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOrderBy() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOrderBy() => $_clearField(5);
 }
 
 /// ListLedgerInventories 응답

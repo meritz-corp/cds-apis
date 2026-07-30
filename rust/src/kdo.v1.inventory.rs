@@ -278,14 +278,21 @@ pub struct ListInventoriesRequest {
     pub filter: ::prost::alloc::string::String,
     /// 오더링 조건 (optional, AIP-132)
     ///
-    /// Supported Fields:
-    /// * "symbol", "inventory_type"
-    /// * "stock.sellable", "stock.book_quantity", "stock.book_amount"
-    /// * "deriv.quantity", "deriv.book_amount"
+    /// 형식: "<field> \[asc|desc\]" (방향 생략 시 asc)
     ///
-    /// Examples:
-    /// * order_by=stock.book_amount desc
-    /// * order_by=deriv.quantity asc
+    /// 지원 필드:
+    /// * symbol           - 종목코드
+    /// * book_quantity    - 장부수량
+    /// * selling          - 매도예약수량
+    /// * sellable         - 가용수량
+    /// * borrow_quantity  - 차입수량
+    /// * borrow_selling   - 차입매도예약수량
+    /// * borrow_sellable  - 차입가용수량
+    /// * book_amount      - 장부금액
+    ///
+    /// 예시:
+    /// * order_by = "book_amount desc"
+    /// * order_by = "sellable asc"
     #[prost(string, tag="5")]
     pub order_by: ::prost::alloc::string::String,
 }
@@ -344,6 +351,25 @@ pub struct ListLedgerInventoriesRequest {
     /// * inventory_type=INVENTORY_TYPE_STOCK
     #[prost(string, tag="4")]
     pub filter: ::prost::alloc::string::String,
+    /// 오더링 조건 (optional, AIP-132)
+    ///
+    /// 형식: "<field> \[asc|desc\]" (방향 생략 시 asc)
+    ///
+    /// 지원 필드:
+    /// * symbol           - 종목코드
+    /// * book_quantity    - 장부수량
+    /// * selling          - 매도예약수량 (원장은 예약을 추적하지 않아 항상 0)
+    /// * sellable         - 가용수량
+    /// * borrow_quantity  - 차입수량
+    /// * borrow_selling   - 차입매도예약수량 (원장은 예약을 추적하지 않아 항상 0)
+    /// * borrow_sellable  - 차입가용수량
+    /// * book_amount      - 장부금액
+    ///
+    /// 예시:
+    /// * order_by = "book_amount desc"
+    /// * order_by = "sellable asc"
+    #[prost(string, tag="5")]
+    pub order_by: ::prost::alloc::string::String,
 }
 /// ListLedgerInventories 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

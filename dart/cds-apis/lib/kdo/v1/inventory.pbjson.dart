@@ -366,6 +366,7 @@ const ListLedgerInventoriesRequest$json = {
     {'1': 'page_size', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
     {'1': 'filter', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'filter'},
+    {'1': 'order_by', '3': 5, '4': 1, '5': 9, '10': 'orderBy'},
   ],
   '8': [
     {'1': '_page_size'},
@@ -378,7 +379,8 @@ final $typed_data.Uint8List listLedgerInventoriesRequestDescriptor = $convert.ba
     'ChxMaXN0TGVkZ2VySW52ZW50b3JpZXNSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QRYKFG'
     'tkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEiAKCXBhZ2Vfc2l6ZRgCIAEoDUgAUghwYWdlU2l6'
     'ZYgBARIiCgpwYWdlX3Rva2VuGAMgASgJSAFSCXBhZ2VUb2tlbogBARIcCgZmaWx0ZXIYBCABKA'
-    'lCBOJBAQFSBmZpbHRlckIMCgpfcGFnZV9zaXplQg0KC19wYWdlX3Rva2Vu');
+    'lCBOJBAQFSBmZpbHRlchIZCghvcmRlcl9ieRgFIAEoCVIHb3JkZXJCeUIMCgpfcGFnZV9zaXpl'
+    'Qg0KC19wYWdlX3Rva2Vu');
 
 @$core.Deprecated('Use listLedgerInventoriesResponseDescriptor instead')
 const ListLedgerInventoriesResponse$json = {

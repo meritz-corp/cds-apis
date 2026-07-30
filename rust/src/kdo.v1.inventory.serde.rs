@@ -3468,6 +3468,9 @@ impl serde::Serialize for ListLedgerInventoriesRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.ListLedgerInventoriesRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
@@ -3480,6 +3483,9 @@ impl serde::Serialize for ListLedgerInventoriesRequest {
         }
         if true {
             struct_ser.serialize_field("filter", &self.filter)?;
+        }
+        if true {
+            struct_ser.serialize_field("order_by", &self.order_by)?;
         }
         struct_ser.end()
     }
@@ -3497,6 +3503,8 @@ impl<'de> serde::Deserialize<'de> for ListLedgerInventoriesRequest {
             "page_token",
             "pageToken",
             "filter",
+            "order_by",
+            "orderBy",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3505,6 +3513,7 @@ impl<'de> serde::Deserialize<'de> for ListLedgerInventoriesRequest {
             PageSize,
             PageToken,
             Filter,
+            OrderBy,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3531,6 +3540,7 @@ impl<'de> serde::Deserialize<'de> for ListLedgerInventoriesRequest {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "filter" => Ok(GeneratedField::Filter),
+                            "orderBy" | "order_by" => Ok(GeneratedField::OrderBy),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3554,6 +3564,7 @@ impl<'de> serde::Deserialize<'de> for ListLedgerInventoriesRequest {
                 let mut page_size__ = None;
                 let mut page_token__ = None;
                 let mut filter__ = None;
+                let mut order_by__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -3582,6 +3593,12 @@ impl<'de> serde::Deserialize<'de> for ListLedgerInventoriesRequest {
                             }
                             filter__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::OrderBy => {
+                            if order_by__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderBy"));
+                            }
+                            order_by__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3592,6 +3609,7 @@ impl<'de> serde::Deserialize<'de> for ListLedgerInventoriesRequest {
                     page_size: page_size__,
                     page_token: page_token__,
                     filter: filter__.unwrap_or_default(),
+                    order_by: order_by__.unwrap_or_default(),
                 })
             }
         }

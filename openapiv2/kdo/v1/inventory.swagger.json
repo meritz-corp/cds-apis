@@ -136,7 +136,7 @@
           },
           {
             "name": "orderBy",
-            "description": "오더링 조건 (optional, AIP-132)\n\nSupported Fields:\n* \"symbol\", \"inventory_type\"\n* \"stock.sellable\", \"stock.book_quantity\", \"stock.book_amount\"\n* \"deriv.quantity\", \"deriv.book_amount\"\n\nExamples:\n* order_by=stock.book_amount desc\n* order_by=deriv.quantity asc",
+            "description": "오더링 조건 (optional, AIP-132)\n\n형식: \"\u003cfield\u003e [asc|desc]\" (방향 생략 시 asc)\n\n지원 필드:\n* symbol           - 종목코드\n* book_quantity    - 장부수량\n* selling          - 매도예약수량\n* sellable         - 가용수량\n* borrow_quantity  - 차입수량\n* borrow_selling   - 차입매도예약수량\n* borrow_sellable  - 차입가용수량\n* book_amount      - 장부금액\n\n예시:\n* order_by = \"book_amount desc\"\n* order_by = \"sellable asc\"",
             "in": "query",
             "required": false,
             "type": "string"
@@ -191,6 +191,13 @@
           {
             "name": "filter",
             "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* symbol - 종목 코드\n* inventory_type - 재고 유형 (INVENTORY_TYPE_STOCK, INVENTORY_TYPE_DERIV)\n\nExamples:\n* symbol:\"005930\"\n* inventory_type=INVENTORY_TYPE_STOCK",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "오더링 조건 (optional, AIP-132)\n\n형식: \"\u003cfield\u003e [asc|desc]\" (방향 생략 시 asc)\n\n지원 필드:\n* symbol           - 종목코드\n* book_quantity    - 장부수량\n* selling          - 매도예약수량 (원장은 예약을 추적하지 않아 항상 0)\n* sellable         - 가용수량\n* borrow_quantity  - 차입수량\n* borrow_selling   - 차입매도예약수량 (원장은 예약을 추적하지 않아 항상 0)\n* borrow_sellable  - 차입가용수량\n* book_amount      - 장부금액\n\n예시:\n* order_by = \"book_amount desc\"\n* order_by = \"sellable asc\"",
             "in": "query",
             "required": false,
             "type": "string"
@@ -974,7 +981,7 @@
           },
           {
             "name": "orderBy",
-            "description": "오더링 조건 (optional, AIP-132)\n\nSupported Fields:\n* \"symbol\", \"inventory_type\"\n* \"stock.sellable\", \"stock.book_quantity\", \"stock.book_amount\"\n* \"deriv.quantity\", \"deriv.book_amount\"\n\nExamples:\n* order_by=stock.book_amount desc\n* order_by=deriv.quantity asc",
+            "description": "오더링 조건 (optional, AIP-132)\n\n형식: \"\u003cfield\u003e [asc|desc]\" (방향 생략 시 asc)\n\n지원 필드:\n* symbol           - 종목코드\n* book_quantity    - 장부수량\n* selling          - 매도예약수량\n* sellable         - 가용수량\n* borrow_quantity  - 차입수량\n* borrow_selling   - 차입매도예약수량\n* borrow_sellable  - 차입가용수량\n* book_amount      - 장부금액\n\n예시:\n* order_by = \"book_amount desc\"\n* order_by = \"sellable asc\"",
             "in": "query",
             "required": false,
             "type": "string"
