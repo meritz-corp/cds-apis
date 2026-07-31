@@ -344,6 +344,57 @@
         ]
       }
     },
+    "/v1/{name}:setIgnoreUntrustedPrice": {
+      "post": {
+        "summary": "손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)\n기본값: enabled=true (미신뢰가 무시)",
+        "operationId": "PortfolioService_SetPortfolioIgnoreUntrustedPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/portfolioSetPortfolioIgnoreUntrustedPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "포트폴리오 리소스 이름 (예: portfolios/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "title": "미신뢰가 무시 여부 (true=무시, false=반영)"
+                }
+              },
+              "title": "SetPortfolioIgnoreUntrustedPrice 요청",
+              "required": [
+                "enabled"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      }
+    },
     "/v1/{name}:streamChanges": {
       "get": {
         "summary": "스냅샷 이후 포지션 변화 스트림 (실시간 업데이트)",
@@ -1313,6 +1364,16 @@
         }
       },
       "title": "스냅샷 이후 심볼별 포지션 변화"
+    },
+    "portfolioSetPortfolioIgnoreUntrustedPriceResponse": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "적용된 미신뢰가 무시 여부"
+        }
+      },
+      "title": "SetPortfolioIgnoreUntrustedPrice 응답"
     },
     "portfolioSnapshotFundSymbolPosition": {
       "type": "object",

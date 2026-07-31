@@ -283,4 +283,23 @@ extension type PortfolioServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
+  /// 기본값: enabled=true (미신뢰가 무시)
+  Future<kdov1portfolio.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice(
+    kdov1portfolio.SetPortfolioIgnoreUntrustedPriceRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PortfolioService.setPortfolioIgnoreUntrustedPrice,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

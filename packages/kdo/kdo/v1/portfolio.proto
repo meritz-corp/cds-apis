@@ -156,6 +156,16 @@ service PortfolioService {
     };
     option (google.api.method_signature) = "name";
   }
+
+  // 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
+  // 기본값: enabled=true (미신뢰가 무시)
+  rpc SetPortfolioIgnoreUntrustedPrice(SetPortfolioIgnoreUntrustedPriceRequest) returns (SetPortfolioIgnoreUntrustedPriceResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=portfolios/*}:setIgnoreUntrustedPrice"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name,enabled";
+  }
 }
 
 // ========== Resource Messages ==========
@@ -816,4 +826,24 @@ message GetExposureChangesRequest {
 message DeleteExposureSnapshotRequest {
   // 삭제할 스냅샷 리소스 이름 (예: portfolios/1/exposure_snapshots/snap-uuid)
   string name = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// SetPortfolioIgnoreUntrustedPrice 요청
+message SetPortfolioIgnoreUntrustedPriceRequest {
+  // 포트폴리오 리소스 이름 (예: portfolios/1)
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
+    }
+  ];
+
+  // 미신뢰가 무시 여부 (true=무시, false=반영)
+  bool enabled = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// SetPortfolioIgnoreUntrustedPrice 응답
+message SetPortfolioIgnoreUntrustedPriceResponse {
+  // 적용된 미신뢰가 무시 여부
+  bool enabled = 1;
 }

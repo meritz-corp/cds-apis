@@ -519,6 +519,38 @@ pub mod portfolio_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn set_portfolio_ignore_untrusted_price(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::SetPortfolioIgnoreUntrustedPriceRequest,
+            >,
+        ) -> std::result::Result<
+            tonic::Response<super::SetPortfolioIgnoreUntrustedPriceResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.portfolio.PortfolioService",
+                        "SetPortfolioIgnoreUntrustedPrice",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -636,6 +668,13 @@ pub mod portfolio_service_server {
             &self,
             request: tonic::Request<super::DeleteExposureSnapshotRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
+        async fn set_portfolio_ignore_untrusted_price(
+            &self,
+            request: tonic::Request<super::SetPortfolioIgnoreUntrustedPriceRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SetPortfolioIgnoreUntrustedPriceResponse>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct PortfolioServiceServer<T: PortfolioService> {
@@ -1429,6 +1468,60 @@ pub mod portfolio_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = DeleteExposureSnapshotSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetPortfolioIgnoreUntrustedPriceSvc<T: PortfolioService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PortfolioService,
+                    > tonic::server::UnaryService<
+                        super::SetPortfolioIgnoreUntrustedPriceRequest,
+                    > for SetPortfolioIgnoreUntrustedPriceSvc<T> {
+                        type Response = super::SetPortfolioIgnoreUntrustedPriceResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::SetPortfolioIgnoreUntrustedPriceRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PortfolioService>::set_portfolio_ignore_untrusted_price(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SetPortfolioIgnoreUntrustedPriceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

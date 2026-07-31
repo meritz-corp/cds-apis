@@ -673,6 +673,25 @@ pub struct DeleteExposureSnapshotRequest {
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
+/// SetPortfolioIgnoreUntrustedPrice 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetPortfolioIgnoreUntrustedPriceRequest {
+    /// 포트폴리오 리소스 이름 (예: portfolios/1)
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
+    /// 미신뢰가 무시 여부 (true=무시, false=반영)
+    #[prost(bool, tag="2")]
+    pub enabled: bool,
+}
+/// SetPortfolioIgnoreUntrustedPrice 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SetPortfolioIgnoreUntrustedPriceResponse {
+    /// 적용된 미신뢰가 무시 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+}
 include!("kdo.v1.portfolio.tonic.rs");
 include!("kdo.v1.portfolio.serde.rs");
 // @@protoc_insertion_point(module)

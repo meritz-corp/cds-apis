@@ -113,6 +113,12 @@ class PortfolioServiceClient extends $grpc.Client {
     return $createUnaryCall(_$deleteExposureSnapshot, request, options: options);
   }
 
+  /// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
+  /// 기본값: enabled=true (미신뢰가 무시)
+  $grpc.ResponseFuture<$0.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice($0.SetPortfolioIgnoreUntrustedPriceRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$setPortfolioIgnoreUntrustedPrice, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getPortfolio = $grpc.ClientMethod<$0.GetPortfolioRequest, $0.Portfolio>(
@@ -175,6 +181,10 @@ class PortfolioServiceClient extends $grpc.Client {
       '/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot',
       ($0.DeleteExposureSnapshotRequest value) => value.writeToBuffer(),
       $1.Empty.fromBuffer);
+  static final _$setPortfolioIgnoreUntrustedPrice = $grpc.ClientMethod<$0.SetPortfolioIgnoreUntrustedPriceRequest, $0.SetPortfolioIgnoreUntrustedPriceResponse>(
+      '/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice',
+      ($0.SetPortfolioIgnoreUntrustedPriceRequest value) => value.writeToBuffer(),
+      $0.SetPortfolioIgnoreUntrustedPriceResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.portfolio.PortfolioService')
@@ -287,6 +297,13 @@ abstract class PortfolioServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.DeleteExposureSnapshotRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SetPortfolioIgnoreUntrustedPriceRequest, $0.SetPortfolioIgnoreUntrustedPriceResponse>(
+        'SetPortfolioIgnoreUntrustedPrice',
+        setPortfolioIgnoreUntrustedPrice_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SetPortfolioIgnoreUntrustedPriceRequest.fromBuffer(value),
+        ($0.SetPortfolioIgnoreUntrustedPriceResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Portfolio> getPortfolio_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPortfolioRequest> $request) async {
@@ -378,5 +395,11 @@ abstract class PortfolioServiceBase extends $grpc.Service {
   }
 
   $async.Future<$1.Empty> deleteExposureSnapshot($grpc.ServiceCall call, $0.DeleteExposureSnapshotRequest request);
+
+  $async.Future<$0.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice_Pre($grpc.ServiceCall $call, $async.Future<$0.SetPortfolioIgnoreUntrustedPriceRequest> $request) async {
+    return setPortfolioIgnoreUntrustedPrice($call, await $request);
+  }
+
+  $async.Future<$0.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice($grpc.ServiceCall call, $0.SetPortfolioIgnoreUntrustedPriceRequest request);
 
 }

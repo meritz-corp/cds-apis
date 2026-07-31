@@ -135,4 +135,13 @@ abstract final class PortfolioService {
     kdov1portfolio.DeleteExposureSnapshotRequest.new,
     googleprotobufempty.Empty.new,
   );
+
+  /// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
+  /// 기본값: enabled=true (미신뢰가 무시)
+  static const setPortfolioIgnoreUntrustedPrice = connect.Spec(
+    '/$name/SetPortfolioIgnoreUntrustedPrice',
+    connect.StreamType.unary,
+    kdov1portfolio.SetPortfolioIgnoreUntrustedPriceRequest.new,
+    kdov1portfolio.SetPortfolioIgnoreUntrustedPriceResponse.new,
+  );
 }

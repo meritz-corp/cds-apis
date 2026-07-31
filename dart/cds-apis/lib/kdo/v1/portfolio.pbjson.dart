@@ -705,3 +705,31 @@ final $typed_data.Uint8List deleteExposureSnapshotRequestDescriptor = $convert.b
     'Ch1EZWxldGVFeHBvc3VyZVNuYXBzaG90UmVxdWVzdBIYCgRuYW1lGAEgASgJQgTiQQECUgRuYW'
     '1l');
 
+@$core.Deprecated('Use setPortfolioIgnoreUntrustedPriceRequestDescriptor instead')
+const SetPortfolioIgnoreUntrustedPriceRequest$json = {
+  '1': 'SetPortfolioIgnoreUntrustedPriceRequest',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
+    {'1': 'enabled', '3': 2, '4': 1, '5': 8, '8': {}, '10': 'enabled'},
+  ],
+};
+
+/// Descriptor for `SetPortfolioIgnoreUntrustedPriceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setPortfolioIgnoreUntrustedPriceRequestDescriptor = $convert.base64Decode(
+    'CidTZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlcXVlc3QSNgoEbmFtZRgBIAEoCU'
+    'Ii4kEBAvpBGwoZa2RvLmNkc2FwaXMueHl6L1BvcnRmb2xpb1IEbmFtZRIeCgdlbmFibGVkGAIg'
+    'ASgIQgTiQQECUgdlbmFibGVk');
+
+@$core.Deprecated('Use setPortfolioIgnoreUntrustedPriceResponseDescriptor instead')
+const SetPortfolioIgnoreUntrustedPriceResponse$json = {
+  '1': 'SetPortfolioIgnoreUntrustedPriceResponse',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+  ],
+};
+
+/// Descriptor for `SetPortfolioIgnoreUntrustedPriceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setPortfolioIgnoreUntrustedPriceResponseDescriptor = $convert.base64Decode(
+    'CihTZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlc3BvbnNlEhgKB2VuYWJsZWQYAS'
+    'ABKAhSB2VuYWJsZWQ=');
+

@@ -55,6 +55,9 @@ type PortfolioServiceClient interface {
 	StreamExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (PortfolioService_StreamExposureChangesClient, error)
 	// Exposure 스냅샷 삭제
 	DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
+	// 기본값: enabled=true (미신뢰가 무시)
+	SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*SetPortfolioIgnoreUntrustedPriceResponse, error)
 }
 
 type portfolioServiceClient struct {
@@ -269,6 +272,15 @@ func (c *portfolioServiceClient) DeleteExposureSnapshot(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *portfolioServiceClient) SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
+	out := new(SetPortfolioIgnoreUntrustedPriceResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PortfolioServiceServer is the server API for PortfolioService service.
 // All implementations must embed UnimplementedPortfolioServiceServer
 // for forward compatibility
@@ -305,6 +317,9 @@ type PortfolioServiceServer interface {
 	StreamExposureChanges(*GetExposureChangesRequest, PortfolioService_StreamExposureChangesServer) error
 	// Exposure 스냅샷 삭제
 	DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error)
+	// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
+	// 기본값: enabled=true (미신뢰가 무시)
+	SetPortfolioIgnoreUntrustedPrice(context.Context, *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error)
 	mustEmbedUnimplementedPortfolioServiceServer()
 }
 
@@ -356,6 +371,9 @@ func (UnimplementedPortfolioServiceServer) StreamExposureChanges(*GetExposureCha
 }
 func (UnimplementedPortfolioServiceServer) DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteExposureSnapshot not implemented")
+}
+func (UnimplementedPortfolioServiceServer) SetPortfolioIgnoreUntrustedPrice(context.Context, *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetPortfolioIgnoreUntrustedPrice not implemented")
 }
 func (UnimplementedPortfolioServiceServer) mustEmbedUnimplementedPortfolioServiceServer() {}
 
@@ -649,6 +667,24 @@ func _PortfolioService_DeleteExposureSnapshot_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PortfolioService_SetPortfolioIgnoreUntrustedPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPortfolioIgnoreUntrustedPriceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).SetPortfolioIgnoreUntrustedPrice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).SetPortfolioIgnoreUntrustedPrice(ctx, req.(*SetPortfolioIgnoreUntrustedPriceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PortfolioService_ServiceDesc is the grpc.ServiceDesc for PortfolioService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -703,6 +739,10 @@ var PortfolioService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteExposureSnapshot",
 			Handler:    _PortfolioService_DeleteExposureSnapshot_Handler,
+		},
+		{
+			MethodName: "SetPortfolioIgnoreUntrustedPrice",
+			Handler:    _PortfolioService_SetPortfolioIgnoreUntrustedPrice_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

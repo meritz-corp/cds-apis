@@ -982,6 +982,26 @@ func (mr *MockPortfolioServiceClientMockRecorder) ListPortfolios(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPortfolios", reflect.TypeOf((*MockPortfolioServiceClient)(nil).ListPortfolios), varargs...)
 }
 
+// SetPortfolioIgnoreUntrustedPrice mocks base method.
+func (m *MockPortfolioServiceClient) SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SetPortfolioIgnoreUntrustedPrice", varargs...)
+	ret0, _ := ret[0].(*SetPortfolioIgnoreUntrustedPriceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetPortfolioIgnoreUntrustedPrice indicates an expected call of SetPortfolioIgnoreUntrustedPrice.
+func (mr *MockPortfolioServiceClientMockRecorder) SetPortfolioIgnoreUntrustedPrice(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetPortfolioIgnoreUntrustedPrice", reflect.TypeOf((*MockPortfolioServiceClient)(nil).SetPortfolioIgnoreUntrustedPrice), varargs...)
+}
+
 // StreamExposureChanges mocks base method.
 func (m *MockPortfolioServiceClient) StreamExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (PortfolioService_StreamExposureChangesClient, error) {
 	m.ctrl.T.Helper()
@@ -1248,6 +1268,21 @@ func (m *MockPortfolioServiceServer) ListPortfolios(ctx context.Context, in *Lis
 func (mr *MockPortfolioServiceServerMockRecorder) ListPortfolios(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPortfolios", reflect.TypeOf((*MockPortfolioServiceServer)(nil).ListPortfolios), ctx, in)
+}
+
+// SetPortfolioIgnoreUntrustedPrice mocks base method.
+func (m *MockPortfolioServiceServer) SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetPortfolioIgnoreUntrustedPrice", ctx, in)
+	ret0, _ := ret[0].(*SetPortfolioIgnoreUntrustedPriceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetPortfolioIgnoreUntrustedPrice indicates an expected call of SetPortfolioIgnoreUntrustedPrice.
+func (mr *MockPortfolioServiceServerMockRecorder) SetPortfolioIgnoreUntrustedPrice(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetPortfolioIgnoreUntrustedPrice", reflect.TypeOf((*MockPortfolioServiceServer)(nil).SetPortfolioIgnoreUntrustedPrice), ctx, in)
 }
 
 // StreamExposureChanges mocks base method.
