@@ -692,6 +692,22 @@ pub struct SetPortfolioIgnoreUntrustedPriceResponse {
     #[prost(bool, tag="1")]
     pub enabled: bool,
 }
+/// GetPortfolioIgnoreUntrustedPrice 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPortfolioIgnoreUntrustedPriceRequest {
+    /// 포트폴리오 리소스 이름 (예: portfolios/1)
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
+}
+/// GetPortfolioIgnoreUntrustedPrice 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetPortfolioIgnoreUntrustedPriceResponse {
+    /// 현재 미신뢰가 무시 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+}
 include!("kdo.v1.portfolio.tonic.rs");
 include!("kdo.v1.portfolio.serde.rs");
 // @@protoc_insertion_point(module)

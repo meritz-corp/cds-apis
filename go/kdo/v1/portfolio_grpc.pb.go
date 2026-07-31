@@ -58,6 +58,8 @@ type PortfolioServiceClient interface {
 	// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
 	// 기본값: enabled=true (미신뢰가 무시)
 	SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*SetPortfolioIgnoreUntrustedPriceResponse, error)
+	// 손실한도 미신뢰가 무시 여부 조회
+	GetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *GetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*GetPortfolioIgnoreUntrustedPriceResponse, error)
 }
 
 type portfolioServiceClient struct {
@@ -281,6 +283,15 @@ func (c *portfolioServiceClient) SetPortfolioIgnoreUntrustedPrice(ctx context.Co
 	return out, nil
 }
 
+func (c *portfolioServiceClient) GetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *GetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*GetPortfolioIgnoreUntrustedPriceResponse, error) {
+	out := new(GetPortfolioIgnoreUntrustedPriceResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PortfolioServiceServer is the server API for PortfolioService service.
 // All implementations must embed UnimplementedPortfolioServiceServer
 // for forward compatibility
@@ -320,6 +331,8 @@ type PortfolioServiceServer interface {
 	// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
 	// 기본값: enabled=true (미신뢰가 무시)
 	SetPortfolioIgnoreUntrustedPrice(context.Context, *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error)
+	// 손실한도 미신뢰가 무시 여부 조회
+	GetPortfolioIgnoreUntrustedPrice(context.Context, *GetPortfolioIgnoreUntrustedPriceRequest) (*GetPortfolioIgnoreUntrustedPriceResponse, error)
 	mustEmbedUnimplementedPortfolioServiceServer()
 }
 
@@ -374,6 +387,9 @@ func (UnimplementedPortfolioServiceServer) DeleteExposureSnapshot(context.Contex
 }
 func (UnimplementedPortfolioServiceServer) SetPortfolioIgnoreUntrustedPrice(context.Context, *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetPortfolioIgnoreUntrustedPrice not implemented")
+}
+func (UnimplementedPortfolioServiceServer) GetPortfolioIgnoreUntrustedPrice(context.Context, *GetPortfolioIgnoreUntrustedPriceRequest) (*GetPortfolioIgnoreUntrustedPriceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolioIgnoreUntrustedPrice not implemented")
 }
 func (UnimplementedPortfolioServiceServer) mustEmbedUnimplementedPortfolioServiceServer() {}
 
@@ -685,6 +701,24 @@ func _PortfolioService_SetPortfolioIgnoreUntrustedPrice_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PortfolioService_GetPortfolioIgnoreUntrustedPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPortfolioIgnoreUntrustedPriceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).GetPortfolioIgnoreUntrustedPrice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).GetPortfolioIgnoreUntrustedPrice(ctx, req.(*GetPortfolioIgnoreUntrustedPriceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PortfolioService_ServiceDesc is the grpc.ServiceDesc for PortfolioService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -743,6 +777,10 @@ var PortfolioService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetPortfolioIgnoreUntrustedPrice",
 			Handler:    _PortfolioService_SetPortfolioIgnoreUntrustedPrice_Handler,
+		},
+		{
+			MethodName: "GetPortfolioIgnoreUntrustedPrice",
+			Handler:    _PortfolioService_GetPortfolioIgnoreUntrustedPrice_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

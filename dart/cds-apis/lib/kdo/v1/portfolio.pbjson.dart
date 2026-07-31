@@ -733,3 +733,29 @@ final $typed_data.Uint8List setPortfolioIgnoreUntrustedPriceResponseDescriptor =
     'CihTZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlc3BvbnNlEhgKB2VuYWJsZWQYAS'
     'ABKAhSB2VuYWJsZWQ=');
 
+@$core.Deprecated('Use getPortfolioIgnoreUntrustedPriceRequestDescriptor instead')
+const GetPortfolioIgnoreUntrustedPriceRequest$json = {
+  '1': 'GetPortfolioIgnoreUntrustedPriceRequest',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `GetPortfolioIgnoreUntrustedPriceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPortfolioIgnoreUntrustedPriceRequestDescriptor = $convert.base64Decode(
+    'CidHZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlcXVlc3QSNgoEbmFtZRgBIAEoCU'
+    'Ii4kEBAvpBGwoZa2RvLmNkc2FwaXMueHl6L1BvcnRmb2xpb1IEbmFtZQ==');
+
+@$core.Deprecated('Use getPortfolioIgnoreUntrustedPriceResponseDescriptor instead')
+const GetPortfolioIgnoreUntrustedPriceResponse$json = {
+  '1': 'GetPortfolioIgnoreUntrustedPriceResponse',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+  ],
+};
+
+/// Descriptor for `GetPortfolioIgnoreUntrustedPriceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPortfolioIgnoreUntrustedPriceResponseDescriptor = $convert.base64Decode(
+    'CihHZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlc3BvbnNlEhgKB2VuYWJsZWQYAS'
+    'ABKAhSB2VuYWJsZWQ=');
+

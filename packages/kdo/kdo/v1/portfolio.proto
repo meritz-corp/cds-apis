@@ -166,6 +166,14 @@ service PortfolioService {
     };
     option (google.api.method_signature) = "name,enabled";
   }
+
+  // 손실한도 미신뢰가 무시 여부 조회
+  rpc GetPortfolioIgnoreUntrustedPrice(GetPortfolioIgnoreUntrustedPriceRequest) returns (GetPortfolioIgnoreUntrustedPriceResponse) {
+    option (google.api.http) = {
+      get: "/v1/{name=portfolios/*}:getIgnoreUntrustedPrice"
+    };
+    option (google.api.method_signature) = "name";
+  }
 }
 
 // ========== Resource Messages ==========
@@ -845,5 +853,22 @@ message SetPortfolioIgnoreUntrustedPriceRequest {
 // SetPortfolioIgnoreUntrustedPrice 응답
 message SetPortfolioIgnoreUntrustedPriceResponse {
   // 적용된 미신뢰가 무시 여부
+  bool enabled = 1;
+}
+
+// GetPortfolioIgnoreUntrustedPrice 요청
+message GetPortfolioIgnoreUntrustedPriceRequest {
+  // 포트폴리오 리소스 이름 (예: portfolios/1)
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Portfolio"
+    }
+  ];
+}
+
+// GetPortfolioIgnoreUntrustedPrice 응답
+message GetPortfolioIgnoreUntrustedPriceResponse {
+  // 현재 미신뢰가 무시 여부
   bool enabled = 1;
 }

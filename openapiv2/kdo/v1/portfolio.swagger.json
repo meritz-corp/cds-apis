@@ -344,6 +344,39 @@
         ]
       }
     },
+    "/v1/{name}:getIgnoreUntrustedPrice": {
+      "get": {
+        "summary": "손실한도 미신뢰가 무시 여부 조회",
+        "operationId": "PortfolioService_GetPortfolioIgnoreUntrustedPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/portfolioGetPortfolioIgnoreUntrustedPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "포트폴리오 리소스 이름 (예: portfolios/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "portfolios/[^/]+"
+          }
+        ],
+        "tags": [
+          "PortfolioService"
+        ]
+      }
+    },
     "/v1/{name}:setIgnoreUntrustedPrice": {
       "post": {
         "summary": "손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)\n기본값: enabled=true (미신뢰가 무시)",
@@ -952,6 +985,16 @@
         }
       },
       "title": "Fund별 심볼 포지션 (상세)"
+    },
+    "portfolioGetPortfolioIgnoreUntrustedPriceResponse": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "현재 미신뢰가 무시 여부"
+        }
+      },
+      "title": "GetPortfolioIgnoreUntrustedPrice 응답"
     },
     "portfolioHedgeGroupSummary": {
       "type": "object",

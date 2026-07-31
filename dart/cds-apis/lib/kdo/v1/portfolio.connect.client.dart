@@ -302,4 +302,22 @@ extension type PortfolioServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 손실한도 미신뢰가 무시 여부 조회
+  Future<kdov1portfolio.GetPortfolioIgnoreUntrustedPriceResponse> getPortfolioIgnoreUntrustedPrice(
+    kdov1portfolio.GetPortfolioIgnoreUntrustedPriceRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PortfolioService.getPortfolioIgnoreUntrustedPrice,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

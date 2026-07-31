@@ -144,4 +144,12 @@ abstract final class PortfolioService {
     kdov1portfolio.SetPortfolioIgnoreUntrustedPriceRequest.new,
     kdov1portfolio.SetPortfolioIgnoreUntrustedPriceResponse.new,
   );
+
+  /// 손실한도 미신뢰가 무시 여부 조회
+  static const getPortfolioIgnoreUntrustedPrice = connect.Spec(
+    '/$name/GetPortfolioIgnoreUntrustedPrice',
+    connect.StreamType.unary,
+    kdov1portfolio.GetPortfolioIgnoreUntrustedPriceRequest.new,
+    kdov1portfolio.GetPortfolioIgnoreUntrustedPriceResponse.new,
+  );
 }
