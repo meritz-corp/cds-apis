@@ -3168,8 +3168,8 @@ class StreamEtfLpFillsRequest extends $pb.GeneratedMessage {
 
 /// 한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.
 /// avg_price 는 서버에서 total_amount/qty 로 산출된 값.
-class LegFillStat extends $pb.GeneratedMessage {
-  factory LegFillStat({
+class FillStat extends $pb.GeneratedMessage {
+  factory FillStat({
     $core.String? symbol,
     $fixnum.Int64? buyFilledQuantity,
     $core.double? buyAvgPrice,
@@ -3185,12 +3185,12 @@ class LegFillStat extends $pb.GeneratedMessage {
     return result;
   }
 
-  LegFillStat._();
+  FillStat._();
 
-  factory LegFillStat.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory LegFillStat.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory FillStat.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory FillStat.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LegFillStat', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FillStat', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aInt64(2, _omitFieldNames ? '' : 'buyFilledQuantity')
     ..a<$core.double>(3, _omitFieldNames ? '' : 'buyAvgPrice', $pb.PbFieldType.OD)
@@ -3200,21 +3200,21 @@ class LegFillStat extends $pb.GeneratedMessage {
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LegFillStat clone() => LegFillStat()..mergeFromMessage(this);
+  FillStat clone() => FillStat()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  LegFillStat copyWith(void Function(LegFillStat) updates) => super.copyWith((message) => updates(message as LegFillStat)) as LegFillStat;
+  FillStat copyWith(void Function(FillStat) updates) => super.copyWith((message) => updates(message as FillStat)) as FillStat;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static LegFillStat create() => LegFillStat._();
+  static FillStat create() => FillStat._();
   @$core.override
-  LegFillStat createEmptyInstance() => create();
-  static $pb.PbList<LegFillStat> createRepeated() => $pb.PbList<LegFillStat>();
+  FillStat createEmptyInstance() => create();
+  static $pb.PbList<FillStat> createRepeated() => $pb.PbList<FillStat>();
   @$core.pragma('dart2js:noInline')
-  static LegFillStat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LegFillStat>(create);
-  static LegFillStat? _defaultInstance;
+  static FillStat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FillStat>(create);
+  static FillStat? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get symbol => $_getSZ(0);
@@ -3265,8 +3265,8 @@ class LegFillStat extends $pb.GeneratedMessage {
 /// ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약.
 class EtfLpFillSummary extends $pb.GeneratedMessage {
   factory EtfLpFillSummary({
-    LegFillStat? etf,
-    $core.Iterable<LegFillStat>? hedgeLegs,
+    FillStat? etf,
+    $core.Iterable<FillStat>? hedgeLegs,
     $core.int? date,
   }) {
     final result = create();
@@ -3282,8 +3282,8 @@ class EtfLpFillSummary extends $pb.GeneratedMessage {
   factory EtfLpFillSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpFillSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
-    ..aOM<LegFillStat>(1, _omitFieldNames ? '' : 'etf', subBuilder: LegFillStat.create)
-    ..pc<LegFillStat>(2, _omitFieldNames ? '' : 'hedgeLegs', $pb.PbFieldType.PM, subBuilder: LegFillStat.create)
+    ..aOM<FillStat>(1, _omitFieldNames ? '' : 'etf', subBuilder: FillStat.create)
+    ..pc<FillStat>(2, _omitFieldNames ? '' : 'hedgeLegs', $pb.PbFieldType.PM, subBuilder: FillStat.create)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
@@ -3307,19 +3307,19 @@ class EtfLpFillSummary extends $pb.GeneratedMessage {
 
   /// ETF leg (LP 자기 호가 체결)
   @$pb.TagNumber(1)
-  LegFillStat get etf => $_getN(0);
+  FillStat get etf => $_getN(0);
   @$pb.TagNumber(1)
-  set etf(LegFillStat value) => $_setField(1, value);
+  set etf(FillStat value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasEtf() => $_has(0);
   @$pb.TagNumber(1)
   void clearEtf() => $_clearField(1);
   @$pb.TagNumber(1)
-  LegFillStat ensureEtf() => $_ensure(0);
+  FillStat ensureEtf() => $_ensure(0);
 
   /// 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
   @$pb.TagNumber(2)
-  $pb.PbList<LegFillStat> get hedgeLegs => $_getList(1);
+  $pb.PbList<FillStat> get hedgeLegs => $_getList(1);
 
   /// 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
   @$pb.TagNumber(3)

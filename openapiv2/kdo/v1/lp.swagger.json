@@ -859,13 +859,13 @@
       "type": "object",
       "properties": {
         "etf": {
-          "$ref": "#/definitions/lpLegFillStat",
+          "$ref": "#/definitions/lpFillStat",
           "title": "ETF leg (LP 자기 호가 체결)"
         },
         "hedgeLegs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/lpLegFillStat"
+            "$ref": "#/definitions/lpFillStat"
           },
           "title": "헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개"
         },
@@ -1190,7 +1190,7 @@
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
     },
-    "lpLegFillStat": {
+    "lpFillStat": {
       "type": "object",
       "properties": {
         "symbol": {

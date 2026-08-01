@@ -669,7 +669,7 @@ pub struct StreamEtfLpFillsRequest {
 /// avg_price 는 서버에서 total_amount/qty 로 산출된 값.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LegFillStat {
+pub struct FillStat {
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     #[prost(int64, tag="2")]
@@ -687,10 +687,10 @@ pub struct LegFillStat {
 pub struct EtfLpFillSummary {
     /// ETF leg (LP 자기 호가 체결)
     #[prost(message, optional, tag="1")]
-    pub etf: ::core::option::Option<LegFillStat>,
+    pub etf: ::core::option::Option<FillStat>,
     /// 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
     #[prost(message, repeated, tag="2")]
-    pub hedge_legs: ::prost::alloc::vec::Vec<LegFillStat>,
+    pub hedge_legs: ::prost::alloc::vec::Vec<FillStat>,
     /// 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
     #[prost(uint32, tag="3")]
     pub date: u32,

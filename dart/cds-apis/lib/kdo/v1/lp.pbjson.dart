@@ -840,9 +840,9 @@ final $typed_data.Uint8List streamEtfLpFillsRequestDescriptor = $convert.base64D
     'ChdTdHJlYW1FdGZMcEZpbGxzUmVxdWVzdBIjCgpldGZfc3ltYm9sGAEgASgJQgTiQQECUglldG'
     'ZTeW1ib2wSIQoJZnVuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZQ==');
 
-@$core.Deprecated('Use legFillStatDescriptor instead')
-const LegFillStat$json = {
-  '1': 'LegFillStat',
+@$core.Deprecated('Use fillStatDescriptor instead')
+const FillStat$json = {
+  '1': 'FillStat',
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'buy_filled_quantity', '3': 2, '4': 1, '5': 3, '10': 'buyFilledQuantity'},
@@ -852,26 +852,26 @@ const LegFillStat$json = {
   ],
 };
 
-/// Descriptor for `LegFillStat`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List legFillStatDescriptor = $convert.base64Decode(
-    'CgtMZWdGaWxsU3RhdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIuChNidXlfZmlsbGVkX3F1YW'
-    '50aXR5GAIgASgDUhFidXlGaWxsZWRRdWFudGl0eRIiCg1idXlfYXZnX3ByaWNlGAMgASgBUgti'
-    'dXlBdmdQcmljZRIwChRzZWxsX2ZpbGxlZF9xdWFudGl0eRgEIAEoA1ISc2VsbEZpbGxlZFF1YW'
-    '50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAUgASgBUgxzZWxsQXZnUHJpY2U=');
+/// Descriptor for `FillStat`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fillStatDescriptor = $convert.base64Decode(
+    'CghGaWxsU3RhdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIuChNidXlfZmlsbGVkX3F1YW50aX'
+    'R5GAIgASgDUhFidXlGaWxsZWRRdWFudGl0eRIiCg1idXlfYXZnX3ByaWNlGAMgASgBUgtidXlB'
+    'dmdQcmljZRIwChRzZWxsX2ZpbGxlZF9xdWFudGl0eRgEIAEoA1ISc2VsbEZpbGxlZFF1YW50aX'
+    'R5EiQKDnNlbGxfYXZnX3ByaWNlGAUgASgBUgxzZWxsQXZnUHJpY2U=');
 
 @$core.Deprecated('Use etfLpFillSummaryDescriptor instead')
 const EtfLpFillSummary$json = {
   '1': 'EtfLpFillSummary',
   '2': [
-    {'1': 'etf', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.LegFillStat', '10': 'etf'},
-    {'1': 'hedge_legs', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lp.LegFillStat', '10': 'hedgeLegs'},
+    {'1': 'etf', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStat', '10': 'etf'},
+    {'1': 'hedge_legs', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lp.FillStat', '10': 'hedgeLegs'},
     {'1': 'date', '3': 3, '4': 1, '5': 13, '10': 'date'},
   ],
 };
 
 /// Descriptor for `EtfLpFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpFillSummaryDescriptor = $convert.base64Decode(
-    'ChBFdGZMcEZpbGxTdW1tYXJ5EigKA2V0ZhgBIAEoCzIWLmtkby52MS5scC5MZWdGaWxsU3RhdF'
-    'IDZXRmEjUKCmhlZGdlX2xlZ3MYAiADKAsyFi5rZG8udjEubHAuTGVnRmlsbFN0YXRSCWhlZGdl'
-    'TGVncxISCgRkYXRlGAMgASgNUgRkYXRl');
+    'ChBFdGZMcEZpbGxTdW1tYXJ5EiUKA2V0ZhgBIAEoCzITLmtkby52MS5scC5GaWxsU3RhdFIDZX'
+    'RmEjIKCmhlZGdlX2xlZ3MYAiADKAsyEy5rZG8udjEubHAuRmlsbFN0YXRSCWhlZGdlTGVncxIS'
+    'CgRkYXRlGAMgASgNUgRkYXRl');
 
