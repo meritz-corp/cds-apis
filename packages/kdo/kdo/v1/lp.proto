@@ -881,12 +881,12 @@ message FillStat {
   double sell_avg_price = 5;
 }
 
-// ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약.
+// ETF LP 의 자기 호가(ETF) + 그로 인한 헷지 주문(선물/바스켓) 체결 요약.
 message EtfLpFillSummary {
-  // ETF leg (LP 자기 호가 체결)
+  // ETF (LP 자기 호가 체결)
   FillStat etf = 1;
-  // 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
-  repeated FillStat hedge_legs = 2;
+  // 헷지 — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
+  repeated FillStat hedges = 2;
   // 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
   uint32 date = 3;
 }

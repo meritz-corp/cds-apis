@@ -864,7 +864,7 @@ const EtfLpFillSummary$json = {
   '1': 'EtfLpFillSummary',
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.FillStat', '10': 'etf'},
-    {'1': 'hedge_legs', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lp.FillStat', '10': 'hedgeLegs'},
+    {'1': 'hedges', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lp.FillStat', '10': 'hedges'},
     {'1': 'date', '3': 3, '4': 1, '5': 13, '10': 'date'},
   ],
 };
@@ -872,6 +872,6 @@ const EtfLpFillSummary$json = {
 /// Descriptor for `EtfLpFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List etfLpFillSummaryDescriptor = $convert.base64Decode(
     'ChBFdGZMcEZpbGxTdW1tYXJ5EiUKA2V0ZhgBIAEoCzITLmtkby52MS5scC5GaWxsU3RhdFIDZX'
-    'RmEjIKCmhlZGdlX2xlZ3MYAiADKAsyEy5rZG8udjEubHAuRmlsbFN0YXRSCWhlZGdlTGVncxIS'
-    'CgRkYXRlGAMgASgNUgRkYXRl');
+    'RmEisKBmhlZGdlcxgCIAMoCzITLmtkby52MS5scC5GaWxsU3RhdFIGaGVkZ2VzEhIKBGRhdGUY'
+    'AyABKA1SBGRhdGU=');
 

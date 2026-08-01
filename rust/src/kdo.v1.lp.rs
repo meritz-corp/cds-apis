@@ -681,16 +681,16 @@ pub struct FillStat {
     #[prost(double, tag="5")]
     pub sell_avg_price: f64,
 }
-/// ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약.
+/// ETF LP 의 자기 호가(ETF) + 그로 인한 헷지 주문(선물/바스켓) 체결 요약.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfLpFillSummary {
-    /// ETF leg (LP 자기 호가 체결)
+    /// ETF (LP 자기 호가 체결)
     #[prost(message, optional, tag="1")]
     pub etf: ::core::option::Option<FillStat>,
-    /// 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
+    /// 헷지 — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
     #[prost(message, repeated, tag="2")]
-    pub hedge_legs: ::prost::alloc::vec::Vec<FillStat>,
+    pub hedges: ::prost::alloc::vec::Vec<FillStat>,
     /// 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
     #[prost(uint32, tag="3")]
     pub date: u32,

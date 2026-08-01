@@ -861,7 +861,7 @@ impl serde::Serialize for EtfLpFillSummary {
             struct_ser.serialize_field("etf", v)?;
         }
         if true {
-            struct_ser.serialize_field("hedge_legs", &self.hedge_legs)?;
+            struct_ser.serialize_field("hedges", &self.hedges)?;
         }
         if true {
             struct_ser.serialize_field("date", &self.date)?;
@@ -877,15 +877,14 @@ impl<'de> serde::Deserialize<'de> for EtfLpFillSummary {
     {
         const FIELDS: &[&str] = &[
             "etf",
-            "hedge_legs",
-            "hedgeLegs",
+            "hedges",
             "date",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Etf,
-            HedgeLegs,
+            Hedges,
             Date,
             __SkipField__,
         }
@@ -910,7 +909,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpFillSummary {
                     {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
-                            "hedgeLegs" | "hedge_legs" => Ok(GeneratedField::HedgeLegs),
+                            "hedges" => Ok(GeneratedField::Hedges),
                             "date" => Ok(GeneratedField::Date),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -932,7 +931,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpFillSummary {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut etf__ = None;
-                let mut hedge_legs__ = None;
+                let mut hedges__ = None;
                 let mut date__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -942,11 +941,11 @@ impl<'de> serde::Deserialize<'de> for EtfLpFillSummary {
                             }
                             etf__ = map_.next_value()?;
                         }
-                        GeneratedField::HedgeLegs => {
-                            if hedge_legs__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeLegs"));
+                        GeneratedField::Hedges => {
+                            if hedges__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedges"));
                             }
-                            hedge_legs__ = Some(map_.next_value()?);
+                            hedges__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Date => {
                             if date__.is_some() {
@@ -963,7 +962,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpFillSummary {
                 }
                 Ok(EtfLpFillSummary {
                     etf: etf__,
-                    hedge_legs: hedge_legs__.unwrap_or_default(),
+                    hedges: hedges__.unwrap_or_default(),
                     date: date__.unwrap_or_default(),
                 })
             }

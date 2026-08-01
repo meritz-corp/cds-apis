@@ -3262,16 +3262,16 @@ class FillStat extends $pb.GeneratedMessage {
   void clearSellAvgPrice() => $_clearField(5);
 }
 
-/// ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약.
+/// ETF LP 의 자기 호가(ETF) + 그로 인한 헷지 주문(선물/바스켓) 체결 요약.
 class EtfLpFillSummary extends $pb.GeneratedMessage {
   factory EtfLpFillSummary({
     FillStat? etf,
-    $core.Iterable<FillStat>? hedgeLegs,
+    $core.Iterable<FillStat>? hedges,
     $core.int? date,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
-    if (hedgeLegs != null) result.hedgeLegs.addAll(hedgeLegs);
+    if (hedges != null) result.hedges.addAll(hedges);
     if (date != null) result.date = date;
     return result;
   }
@@ -3283,7 +3283,7 @@ class EtfLpFillSummary extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpFillSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOM<FillStat>(1, _omitFieldNames ? '' : 'etf', subBuilder: FillStat.create)
-    ..pc<FillStat>(2, _omitFieldNames ? '' : 'hedgeLegs', $pb.PbFieldType.PM, subBuilder: FillStat.create)
+    ..pc<FillStat>(2, _omitFieldNames ? '' : 'hedges', $pb.PbFieldType.PM, subBuilder: FillStat.create)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
@@ -3305,7 +3305,7 @@ class EtfLpFillSummary extends $pb.GeneratedMessage {
   static EtfLpFillSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpFillSummary>(create);
   static EtfLpFillSummary? _defaultInstance;
 
-  /// ETF leg (LP 자기 호가 체결)
+  /// ETF (LP 자기 호가 체결)
   @$pb.TagNumber(1)
   FillStat get etf => $_getN(0);
   @$pb.TagNumber(1)
@@ -3317,9 +3317,9 @@ class EtfLpFillSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   FillStat ensureEtf() => $_ensure(0);
 
-  /// 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
+  /// 헷지 — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
   @$pb.TagNumber(2)
-  $pb.PbList<FillStat> get hedgeLegs => $_getList(1);
+  $pb.PbList<FillStat> get hedges => $_getList(1);
 
   /// 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
   @$pb.TagNumber(3)

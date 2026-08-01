@@ -860,14 +860,14 @@
       "properties": {
         "etf": {
           "$ref": "#/definitions/lpFillStat",
-          "title": "ETF leg (LP 자기 호가 체결)"
+          "title": "ETF (LP 자기 호가 체결)"
         },
-        "hedgeLegs": {
+        "hedges": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/lpFillStat"
           },
-          "title": "헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개"
+          "title": "헷지 — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개"
         },
         "date": {
           "type": "integer",
@@ -875,7 +875,7 @@
           "title": "통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약"
         }
       },
-      "description": "ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약."
+      "description": "ETF LP 의 자기 호가(ETF) + 그로 인한 헷지 주문(선물/바스켓) 체결 요약."
     },
     "lpEtfLpOffset": {
       "type": "object",
