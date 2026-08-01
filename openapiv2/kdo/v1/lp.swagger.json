@@ -116,6 +116,93 @@
         ]
       }
     },
+    "/v1/lps/etfs/{etfSymbol}/funds/{fundCode}/fill_summary": {
+      "get": {
+        "summary": "ETF LP 체결 요약 조회 (unary)",
+        "operationId": "LpService_GetEtfLpFillSummary",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpEtfLpFillSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etfSymbol",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/lps/etfs/{etfSymbol}/funds/{fundCode}/fill_summary:stream": {
+      "get": {
+        "summary": "ETF LP 체결 요약 스트리밍 (실시간 업데이트)",
+        "operationId": "LpService_StreamEtfLpFills",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/lpEtfLpFillSummary"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of lpEtfLpFillSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etfSymbol",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
     "/v1/lps/etfs/{symbol}/funds/{fundCode}": {
       "patch": {
         "summary": "ETF LP 업데이트",
@@ -768,6 +855,28 @@
       },
       "title": "ETF LP 설정"
     },
+    "lpEtfLpFillSummary": {
+      "type": "object",
+      "properties": {
+        "etf": {
+          "$ref": "#/definitions/lpLegFillStat",
+          "title": "ETF leg (LP 자기 호가 체결)"
+        },
+        "hedgeLegs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpLegFillStat"
+          },
+          "title": "헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개"
+        },
+        "date": {
+          "type": "integer",
+          "format": "int64",
+          "title": "통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약"
+        }
+      },
+      "description": "ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약."
+    },
     "lpEtfLpOffset": {
       "type": "object",
       "properties": {
@@ -1080,6 +1189,31 @@
         }
       },
       "title": "ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)"
+    },
+    "lpLegFillStat": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "buyFilledQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "buyAvgPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellFilledQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "sellAvgPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "description": "한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.\navg_price 는 서버에서 total_amount/qty 로 산출된 값."
     },
     "lpListEtfLpStatusesResponse": {
       "type": "object",

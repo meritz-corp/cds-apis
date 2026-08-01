@@ -65,6 +65,22 @@ service LpService {
   }
 
 
+  // ETF LP 체결 요약 조회 (unary)
+  rpc GetEtfLpFillSummary(GetEtfLpFillSummaryRequest) returns (EtfLpFillSummary) {
+    option (google.api.http) = {
+      get: "/v1/lps/etfs/{etf_symbol=*}/funds/{fund_code=*}/fill_summary"
+    };
+    option (google.api.method_signature) = "etf_symbol,fund_code";
+  }
+
+  // ETF LP 체결 요약 스트리밍 (실시간 업데이트)
+  rpc StreamEtfLpFills(StreamEtfLpFillsRequest) returns (stream EtfLpFillSummary) {
+    option (google.api.http) = {
+      get: "/v1/lps/etfs/{etf_symbol=*}/funds/{fund_code=*}/fill_summary:stream"
+    };
+    option (google.api.method_signature) = "etf_symbol,fund_code";
+  }
+
   // ETF LP 상태 스트리밍 (실시간 업데이트)
   rpc StreamEtfLpStatusUpdate(StreamEtfLpStatusUpdateRequest) returns (stream EtfLpStatusUpdate) {
     option (google.api.http) = {
@@ -839,4 +855,38 @@ message ClearUserOrderBookResponse {
 
   // 비워진 주문 갯수 (bids + asks)
   int32 cleared_count = 3;
+}
+
+// ========== Fill Summary Messages ==========
+
+// GetEtfLpFillSummary 요청
+message GetEtfLpFillSummaryRequest {
+  string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  string fund_code  = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// StreamEtfLpFills 요청
+message StreamEtfLpFillsRequest {
+  string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  string fund_code  = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// 한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.
+// avg_price 는 서버에서 total_amount/qty 로 산출된 값.
+message LegFillStat {
+  string symbol = 1;
+  int64  buy_filled_quantity = 2;
+  double buy_avg_price = 3;
+  int64  sell_filled_quantity = 4;
+  double sell_avg_price = 5;
+}
+
+// ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약.
+message EtfLpFillSummary {
+  // ETF leg (LP 자기 호가 체결)
+  LegFillStat etf = 1;
+  // 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
+  repeated LegFillStat hedge_legs = 2;
+  // 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
+  uint32 date = 3;
 }

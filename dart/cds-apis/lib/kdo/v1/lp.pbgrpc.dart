@@ -58,6 +58,16 @@ class LpServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listEtfLpStatuses, request, options: options);
   }
 
+  /// ETF LP 체결 요약 조회 (unary)
+  $grpc.ResponseFuture<$0.EtfLpFillSummary> getEtfLpFillSummary($0.GetEtfLpFillSummaryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getEtfLpFillSummary, request, options: options);
+  }
+
+  /// ETF LP 체결 요약 스트리밍 (실시간 업데이트)
+  $grpc.ResponseStream<$0.EtfLpFillSummary> streamEtfLpFills($0.StreamEtfLpFillsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamEtfLpFills, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
   $grpc.ResponseStream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate($0.StreamEtfLpStatusUpdateRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamEtfLpStatusUpdate, $async.Stream.fromIterable([request]), options: options);
@@ -113,6 +123,14 @@ class LpServiceClient extends $grpc.Client {
       '/kdo.v1.lp.LpService/ListEtfLpStatuses',
       ($0.ListEtfLpStatusesRequest value) => value.writeToBuffer(),
       $0.ListEtfLpStatusesResponse.fromBuffer);
+  static final _$getEtfLpFillSummary = $grpc.ClientMethod<$0.GetEtfLpFillSummaryRequest, $0.EtfLpFillSummary>(
+      '/kdo.v1.lp.LpService/GetEtfLpFillSummary',
+      ($0.GetEtfLpFillSummaryRequest value) => value.writeToBuffer(),
+      $0.EtfLpFillSummary.fromBuffer);
+  static final _$streamEtfLpFills = $grpc.ClientMethod<$0.StreamEtfLpFillsRequest, $0.EtfLpFillSummary>(
+      '/kdo.v1.lp.LpService/StreamEtfLpFills',
+      ($0.StreamEtfLpFillsRequest value) => value.writeToBuffer(),
+      $0.EtfLpFillSummary.fromBuffer);
   static final _$streamEtfLpStatusUpdate = $grpc.ClientMethod<$0.StreamEtfLpStatusUpdateRequest, $0.EtfLpStatusUpdate>(
       '/kdo.v1.lp.LpService/StreamEtfLpStatusUpdate',
       ($0.StreamEtfLpStatusUpdateRequest value) => value.writeToBuffer(),
@@ -179,6 +197,20 @@ abstract class LpServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListEtfLpStatusesRequest.fromBuffer(value),
         ($0.ListEtfLpStatusesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetEtfLpFillSummaryRequest, $0.EtfLpFillSummary>(
+        'GetEtfLpFillSummary',
+        getEtfLpFillSummary_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetEtfLpFillSummaryRequest.fromBuffer(value),
+        ($0.EtfLpFillSummary value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamEtfLpFillsRequest, $0.EtfLpFillSummary>(
+        'StreamEtfLpFills',
+        streamEtfLpFills_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamEtfLpFillsRequest.fromBuffer(value),
+        ($0.EtfLpFillSummary value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StreamEtfLpStatusUpdateRequest, $0.EtfLpStatusUpdate>(
         'StreamEtfLpStatusUpdate',
         streamEtfLpStatusUpdate_Pre,
@@ -252,6 +284,18 @@ abstract class LpServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListEtfLpStatusesResponse> listEtfLpStatuses($grpc.ServiceCall call, $0.ListEtfLpStatusesRequest request);
+
+  $async.Future<$0.EtfLpFillSummary> getEtfLpFillSummary_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfLpFillSummaryRequest> $request) async {
+    return getEtfLpFillSummary($call, await $request);
+  }
+
+  $async.Future<$0.EtfLpFillSummary> getEtfLpFillSummary($grpc.ServiceCall call, $0.GetEtfLpFillSummaryRequest request);
+
+  $async.Stream<$0.EtfLpFillSummary> streamEtfLpFills_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfLpFillsRequest> $request) async* {
+    yield* streamEtfLpFills($call, await $request);
+  }
+
+  $async.Stream<$0.EtfLpFillSummary> streamEtfLpFills($grpc.ServiceCall call, $0.StreamEtfLpFillsRequest request);
 
   $async.Stream<$0.EtfLpStatusUpdate> streamEtfLpStatusUpdate_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfLpStatusUpdateRequest> $request) async* {
     yield* streamEtfLpStatusUpdate($call, await $request);

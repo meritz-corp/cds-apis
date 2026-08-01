@@ -645,6 +645,56 @@ pub struct ClearUserOrderBookResponse {
     #[prost(int32, tag="3")]
     pub cleared_count: i32,
 }
+// ========== Fill Summary Messages ==========
+
+/// GetEtfLpFillSummary 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEtfLpFillSummaryRequest {
+    #[prost(string, tag="1")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+}
+/// StreamEtfLpFills 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamEtfLpFillsRequest {
+    #[prost(string, tag="1")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+}
+/// 한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.
+/// avg_price 는 서버에서 total_amount/qty 로 산출된 값.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LegFillStat {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(int64, tag="2")]
+    pub buy_filled_quantity: i64,
+    #[prost(double, tag="3")]
+    pub buy_avg_price: f64,
+    #[prost(int64, tag="4")]
+    pub sell_filled_quantity: i64,
+    #[prost(double, tag="5")]
+    pub sell_avg_price: f64,
+}
+/// ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfLpFillSummary {
+    /// ETF leg (LP 자기 호가 체결)
+    #[prost(message, optional, tag="1")]
+    pub etf: ::core::option::Option<LegFillStat>,
+    /// 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
+    #[prost(message, repeated, tag="2")]
+    pub hedge_legs: ::prost::alloc::vec::Vec<LegFillStat>,
+    /// 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
+    #[prost(uint32, tag="3")]
+    pub date: u32,
+}
 /// pricing source 선물 1호가 잔량 imbalance guard 상태
 /// NORMAL: 매수/매도 1호가 잔량 균형 상태
 /// BID_THIN: source 선물 매수 1호가 잔량이 매도 1호가 잔량의 30% 이하 (매수 side 얇음)

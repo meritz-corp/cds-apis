@@ -107,6 +107,42 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// ETF LP 체결 요약 조회 (unary)
+  Future<kdov1lp.EtfLpFillSummary> getEtfLpFillSummary(
+    kdov1lp.GetEtfLpFillSummaryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.LpService.getEtfLpFillSummary,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// ETF LP 체결 요약 스트리밍 (실시간 업데이트)
+  Stream<kdov1lp.EtfLpFillSummary> streamEtfLpFills(
+    kdov1lp.StreamEtfLpFillsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.LpService.streamEtfLpFills,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
   Stream<kdov1lp.EtfLpStatusUpdate> streamEtfLpStatusUpdate(
     kdov1lp.StreamEtfLpStatusUpdateRequest input, {

@@ -59,6 +59,22 @@ abstract final class LpService {
     kdov1lp.ListEtfLpStatusesResponse.new,
   );
 
+  /// ETF LP 체결 요약 조회 (unary)
+  static const getEtfLpFillSummary = connect.Spec(
+    '/$name/GetEtfLpFillSummary',
+    connect.StreamType.unary,
+    kdov1lp.GetEtfLpFillSummaryRequest.new,
+    kdov1lp.EtfLpFillSummary.new,
+  );
+
+  /// ETF LP 체결 요약 스트리밍 (실시간 업데이트)
+  static const streamEtfLpFills = connect.Spec(
+    '/$name/StreamEtfLpFills',
+    connect.StreamType.server,
+    kdov1lp.StreamEtfLpFillsRequest.new,
+    kdov1lp.EtfLpFillSummary.new,
+  );
+
   /// ETF LP 상태 스트리밍 (실시간 업데이트)
   static const streamEtfLpStatusUpdate = connect.Spec(
     '/$name/StreamEtfLpStatusUpdate',

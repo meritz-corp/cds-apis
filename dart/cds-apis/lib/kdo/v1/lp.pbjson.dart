@@ -812,3 +812,66 @@ final $typed_data.Uint8List clearUserOrderBookResponseDescriptor = $convert.base
     'AuRXRmTHBTdGF0dXNSBnN0YXR1cxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdlEiMKDWNsZWFy'
     'ZWRfY291bnQYAyABKAVSDGNsZWFyZWRDb3VudA==');
 
+@$core.Deprecated('Use getEtfLpFillSummaryRequestDescriptor instead')
+const GetEtfLpFillSummaryRequest$json = {
+  '1': 'GetEtfLpFillSummaryRequest',
+  '2': [
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etfSymbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+  ],
+};
+
+/// Descriptor for `GetEtfLpFillSummaryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getEtfLpFillSummaryRequestDescriptor = $convert.base64Decode(
+    'ChpHZXRFdGZMcEZpbGxTdW1tYXJ5UmVxdWVzdBIjCgpldGZfc3ltYm9sGAEgASgJQgTiQQECUg'
+    'lldGZTeW1ib2wSIQoJZnVuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZQ==');
+
+@$core.Deprecated('Use streamEtfLpFillsRequestDescriptor instead')
+const StreamEtfLpFillsRequest$json = {
+  '1': 'StreamEtfLpFillsRequest',
+  '2': [
+    {'1': 'etf_symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etfSymbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+  ],
+};
+
+/// Descriptor for `StreamEtfLpFillsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamEtfLpFillsRequestDescriptor = $convert.base64Decode(
+    'ChdTdHJlYW1FdGZMcEZpbGxzUmVxdWVzdBIjCgpldGZfc3ltYm9sGAEgASgJQgTiQQECUglldG'
+    'ZTeW1ib2wSIQoJZnVuZF9jb2RlGAIgASgJQgTiQQECUghmdW5kQ29kZQ==');
+
+@$core.Deprecated('Use legFillStatDescriptor instead')
+const LegFillStat$json = {
+  '1': 'LegFillStat',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'buy_filled_quantity', '3': 2, '4': 1, '5': 3, '10': 'buyFilledQuantity'},
+    {'1': 'buy_avg_price', '3': 3, '4': 1, '5': 1, '10': 'buyAvgPrice'},
+    {'1': 'sell_filled_quantity', '3': 4, '4': 1, '5': 3, '10': 'sellFilledQuantity'},
+    {'1': 'sell_avg_price', '3': 5, '4': 1, '5': 1, '10': 'sellAvgPrice'},
+  ],
+};
+
+/// Descriptor for `LegFillStat`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List legFillStatDescriptor = $convert.base64Decode(
+    'CgtMZWdGaWxsU3RhdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIuChNidXlfZmlsbGVkX3F1YW'
+    '50aXR5GAIgASgDUhFidXlGaWxsZWRRdWFudGl0eRIiCg1idXlfYXZnX3ByaWNlGAMgASgBUgti'
+    'dXlBdmdQcmljZRIwChRzZWxsX2ZpbGxlZF9xdWFudGl0eRgEIAEoA1ISc2VsbEZpbGxlZFF1YW'
+    '50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAUgASgBUgxzZWxsQXZnUHJpY2U=');
+
+@$core.Deprecated('Use etfLpFillSummaryDescriptor instead')
+const EtfLpFillSummary$json = {
+  '1': 'EtfLpFillSummary',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.lp.LegFillStat', '10': 'etf'},
+    {'1': 'hedge_legs', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.lp.LegFillStat', '10': 'hedgeLegs'},
+    {'1': 'date', '3': 3, '4': 1, '5': 13, '10': 'date'},
+  ],
+};
+
+/// Descriptor for `EtfLpFillSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfLpFillSummaryDescriptor = $convert.base64Decode(
+    'ChBFdGZMcEZpbGxTdW1tYXJ5EigKA2V0ZhgBIAEoCzIWLmtkby52MS5scC5MZWdGaWxsU3RhdF'
+    'IDZXRmEjUKCmhlZGdlX2xlZ3MYAiADKAsyFi5rZG8udjEubHAuTGVnRmlsbFN0YXRSCWhlZGdl'
+    'TGVncxISCgRkYXRlGAMgASgNUgRkYXRl');
+

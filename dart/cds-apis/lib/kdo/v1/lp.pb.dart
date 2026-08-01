@@ -3048,6 +3048,290 @@ class ClearUserOrderBookResponse extends $pb.GeneratedMessage {
   void clearClearedCount() => $_clearField(3);
 }
 
+/// GetEtfLpFillSummary 요청
+class GetEtfLpFillSummaryRequest extends $pb.GeneratedMessage {
+  factory GetEtfLpFillSummaryRequest({
+    $core.String? etfSymbol,
+    $core.String? fundCode,
+  }) {
+    final result = create();
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    return result;
+  }
+
+  GetEtfLpFillSummaryRequest._();
+
+  factory GetEtfLpFillSummaryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetEtfLpFillSummaryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetEtfLpFillSummaryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLpFillSummaryRequest clone() => GetEtfLpFillSummaryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetEtfLpFillSummaryRequest copyWith(void Function(GetEtfLpFillSummaryRequest) updates) => super.copyWith((message) => updates(message as GetEtfLpFillSummaryRequest)) as GetEtfLpFillSummaryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLpFillSummaryRequest create() => GetEtfLpFillSummaryRequest._();
+  @$core.override
+  GetEtfLpFillSummaryRequest createEmptyInstance() => create();
+  static $pb.PbList<GetEtfLpFillSummaryRequest> createRepeated() => $pb.PbList<GetEtfLpFillSummaryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetEtfLpFillSummaryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetEtfLpFillSummaryRequest>(create);
+  static GetEtfLpFillSummaryRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etfSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etfSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtfSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtfSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+}
+
+/// StreamEtfLpFills 요청
+class StreamEtfLpFillsRequest extends $pb.GeneratedMessage {
+  factory StreamEtfLpFillsRequest({
+    $core.String? etfSymbol,
+    $core.String? fundCode,
+  }) {
+    final result = create();
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    return result;
+  }
+
+  StreamEtfLpFillsRequest._();
+
+  factory StreamEtfLpFillsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamEtfLpFillsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamEtfLpFillsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfLpFillsRequest clone() => StreamEtfLpFillsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamEtfLpFillsRequest copyWith(void Function(StreamEtfLpFillsRequest) updates) => super.copyWith((message) => updates(message as StreamEtfLpFillsRequest)) as StreamEtfLpFillsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfLpFillsRequest create() => StreamEtfLpFillsRequest._();
+  @$core.override
+  StreamEtfLpFillsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamEtfLpFillsRequest> createRepeated() => $pb.PbList<StreamEtfLpFillsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamEtfLpFillsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamEtfLpFillsRequest>(create);
+  static StreamEtfLpFillsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etfSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etfSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtfSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtfSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+}
+
+/// 한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.
+/// avg_price 는 서버에서 total_amount/qty 로 산출된 값.
+class LegFillStat extends $pb.GeneratedMessage {
+  factory LegFillStat({
+    $core.String? symbol,
+    $fixnum.Int64? buyFilledQuantity,
+    $core.double? buyAvgPrice,
+    $fixnum.Int64? sellFilledQuantity,
+    $core.double? sellAvgPrice,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (buyFilledQuantity != null) result.buyFilledQuantity = buyFilledQuantity;
+    if (buyAvgPrice != null) result.buyAvgPrice = buyAvgPrice;
+    if (sellFilledQuantity != null) result.sellFilledQuantity = sellFilledQuantity;
+    if (sellAvgPrice != null) result.sellAvgPrice = sellAvgPrice;
+    return result;
+  }
+
+  LegFillStat._();
+
+  factory LegFillStat.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LegFillStat.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LegFillStat', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(2, _omitFieldNames ? '' : 'buyFilledQuantity')
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'buyAvgPrice', $pb.PbFieldType.OD)
+    ..aInt64(4, _omitFieldNames ? '' : 'sellFilledQuantity')
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'sellAvgPrice', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LegFillStat clone() => LegFillStat()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LegFillStat copyWith(void Function(LegFillStat) updates) => super.copyWith((message) => updates(message as LegFillStat)) as LegFillStat;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LegFillStat create() => LegFillStat._();
+  @$core.override
+  LegFillStat createEmptyInstance() => create();
+  static $pb.PbList<LegFillStat> createRepeated() => $pb.PbList<LegFillStat>();
+  @$core.pragma('dart2js:noInline')
+  static LegFillStat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LegFillStat>(create);
+  static LegFillStat? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get buyFilledQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set buyFilledQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBuyFilledQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBuyFilledQuantity() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get buyAvgPrice => $_getN(2);
+  @$pb.TagNumber(3)
+  set buyAvgPrice($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBuyAvgPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBuyAvgPrice() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get sellFilledQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set sellFilledQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSellFilledQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSellFilledQuantity() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get sellAvgPrice => $_getN(4);
+  @$pb.TagNumber(5)
+  set sellAvgPrice($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSellAvgPrice() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSellAvgPrice() => $_clearField(5);
+}
+
+/// ETF LP 의 자기 호가(ETF leg) + 그로 인한 헷지 주문(선물/바스켓 leg) 체결 요약.
+class EtfLpFillSummary extends $pb.GeneratedMessage {
+  factory EtfLpFillSummary({
+    LegFillStat? etf,
+    $core.Iterable<LegFillStat>? hedgeLegs,
+    $core.int? date,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (hedgeLegs != null) result.hedgeLegs.addAll(hedgeLegs);
+    if (date != null) result.date = date;
+    return result;
+  }
+
+  EtfLpFillSummary._();
+
+  factory EtfLpFillSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfLpFillSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfLpFillSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOM<LegFillStat>(1, _omitFieldNames ? '' : 'etf', subBuilder: LegFillStat.create)
+    ..pc<LegFillStat>(2, _omitFieldNames ? '' : 'hedgeLegs', $pb.PbFieldType.PM, subBuilder: LegFillStat.create)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpFillSummary clone() => EtfLpFillSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfLpFillSummary copyWith(void Function(EtfLpFillSummary) updates) => super.copyWith((message) => updates(message as EtfLpFillSummary)) as EtfLpFillSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfLpFillSummary create() => EtfLpFillSummary._();
+  @$core.override
+  EtfLpFillSummary createEmptyInstance() => create();
+  static $pb.PbList<EtfLpFillSummary> createRepeated() => $pb.PbList<EtfLpFillSummary>();
+  @$core.pragma('dart2js:noInline')
+  static EtfLpFillSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfLpFillSummary>(create);
+  static EtfLpFillSummary? _defaultInstance;
+
+  /// ETF leg (LP 자기 호가 체결)
+  @$pb.TagNumber(1)
+  LegFillStat get etf => $_getN(0);
+  @$pb.TagNumber(1)
+  set etf(LegFillStat value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+  @$pb.TagNumber(1)
+  LegFillStat ensureEtf() => $_ensure(0);
+
+  /// 헷지 leg — Direct 선물이면 원소 1개, EtfDecomposition 바스켓이면 N개
+  @$pb.TagNumber(2)
+  $pb.PbList<LegFillStat> get hedgeLegs => $_getList(1);
+
+  /// 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
+  @$pb.TagNumber(3)
+  $core.int get date => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set date($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasDate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDate() => $_clearField(3);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
