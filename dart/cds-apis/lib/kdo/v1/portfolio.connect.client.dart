@@ -284,17 +284,18 @@ extension type PortfolioServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
-  /// 기본값: enabled=true (미신뢰가 무시)
-  Future<kdov1portfolio.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice(
-    kdov1portfolio.SetPortfolioIgnoreUntrustedPriceRequest input, {
+  /// 포트폴리오 한도 감시 전역 활성화 토글
+  /// enabled=true: 전 portfolio 손실/익스포저 한도 감시 활성 (기본값)
+  /// enabled=false: 전 portfolio 한도 감시 비활성
+  Future<kdov1portfolio.SetPortfolioConstraintEnabledResponse> setPortfolioConstraintEnabled(
+    kdov1portfolio.SetPortfolioConstraintEnabledRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.PortfolioService.setPortfolioIgnoreUntrustedPrice,
+      specs.PortfolioService.setPortfolioConstraintEnabled,
       input,
       signal: signal,
       headers: headers,
@@ -303,16 +304,16 @@ extension type PortfolioServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 손실한도 미신뢰가 무시 여부 조회
-  Future<kdov1portfolio.GetPortfolioIgnoreUntrustedPriceResponse> getPortfolioIgnoreUntrustedPrice(
-    kdov1portfolio.GetPortfolioIgnoreUntrustedPriceRequest input, {
+  /// 포트폴리오 한도 감시 전역 활성화 여부 조회
+  Future<kdov1portfolio.GetPortfolioConstraintEnabledResponse> getPortfolioConstraintEnabled(
+    kdov1portfolio.GetPortfolioConstraintEnabledRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.PortfolioService.getPortfolioIgnoreUntrustedPrice,
+      specs.PortfolioService.getPortfolioConstraintEnabled,
       input,
       signal: signal,
       headers: headers,

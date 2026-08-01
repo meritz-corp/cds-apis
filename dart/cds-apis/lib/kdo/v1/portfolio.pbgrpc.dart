@@ -113,15 +113,16 @@ class PortfolioServiceClient extends $grpc.Client {
     return $createUnaryCall(_$deleteExposureSnapshot, request, options: options);
   }
 
-  /// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
-  /// 기본값: enabled=true (미신뢰가 무시)
-  $grpc.ResponseFuture<$0.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice($0.SetPortfolioIgnoreUntrustedPriceRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$setPortfolioIgnoreUntrustedPrice, request, options: options);
+  /// 포트폴리오 한도 감시 전역 활성화 토글
+  /// enabled=true: 전 portfolio 손실/익스포저 한도 감시 활성 (기본값)
+  /// enabled=false: 전 portfolio 한도 감시 비활성
+  $grpc.ResponseFuture<$0.SetPortfolioConstraintEnabledResponse> setPortfolioConstraintEnabled($0.SetPortfolioConstraintEnabledRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$setPortfolioConstraintEnabled, request, options: options);
   }
 
-  /// 손실한도 미신뢰가 무시 여부 조회
-  $grpc.ResponseFuture<$0.GetPortfolioIgnoreUntrustedPriceResponse> getPortfolioIgnoreUntrustedPrice($0.GetPortfolioIgnoreUntrustedPriceRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$getPortfolioIgnoreUntrustedPrice, request, options: options);
+  /// 포트폴리오 한도 감시 전역 활성화 여부 조회
+  $grpc.ResponseFuture<$0.GetPortfolioConstraintEnabledResponse> getPortfolioConstraintEnabled($0.GetPortfolioConstraintEnabledRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getPortfolioConstraintEnabled, request, options: options);
   }
 
     // method descriptors
@@ -186,14 +187,14 @@ class PortfolioServiceClient extends $grpc.Client {
       '/kdo.v1.portfolio.PortfolioService/DeleteExposureSnapshot',
       ($0.DeleteExposureSnapshotRequest value) => value.writeToBuffer(),
       $1.Empty.fromBuffer);
-  static final _$setPortfolioIgnoreUntrustedPrice = $grpc.ClientMethod<$0.SetPortfolioIgnoreUntrustedPriceRequest, $0.SetPortfolioIgnoreUntrustedPriceResponse>(
-      '/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice',
-      ($0.SetPortfolioIgnoreUntrustedPriceRequest value) => value.writeToBuffer(),
-      $0.SetPortfolioIgnoreUntrustedPriceResponse.fromBuffer);
-  static final _$getPortfolioIgnoreUntrustedPrice = $grpc.ClientMethod<$0.GetPortfolioIgnoreUntrustedPriceRequest, $0.GetPortfolioIgnoreUntrustedPriceResponse>(
-      '/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice',
-      ($0.GetPortfolioIgnoreUntrustedPriceRequest value) => value.writeToBuffer(),
-      $0.GetPortfolioIgnoreUntrustedPriceResponse.fromBuffer);
+  static final _$setPortfolioConstraintEnabled = $grpc.ClientMethod<$0.SetPortfolioConstraintEnabledRequest, $0.SetPortfolioConstraintEnabledResponse>(
+      '/kdo.v1.portfolio.PortfolioService/SetPortfolioConstraintEnabled',
+      ($0.SetPortfolioConstraintEnabledRequest value) => value.writeToBuffer(),
+      $0.SetPortfolioConstraintEnabledResponse.fromBuffer);
+  static final _$getPortfolioConstraintEnabled = $grpc.ClientMethod<$0.GetPortfolioConstraintEnabledRequest, $0.GetPortfolioConstraintEnabledResponse>(
+      '/kdo.v1.portfolio.PortfolioService/GetPortfolioConstraintEnabled',
+      ($0.GetPortfolioConstraintEnabledRequest value) => value.writeToBuffer(),
+      $0.GetPortfolioConstraintEnabledResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.portfolio.PortfolioService')
@@ -306,20 +307,20 @@ abstract class PortfolioServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.DeleteExposureSnapshotRequest.fromBuffer(value),
         ($1.Empty value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.SetPortfolioIgnoreUntrustedPriceRequest, $0.SetPortfolioIgnoreUntrustedPriceResponse>(
-        'SetPortfolioIgnoreUntrustedPrice',
-        setPortfolioIgnoreUntrustedPrice_Pre,
+    $addMethod($grpc.ServiceMethod<$0.SetPortfolioConstraintEnabledRequest, $0.SetPortfolioConstraintEnabledResponse>(
+        'SetPortfolioConstraintEnabled',
+        setPortfolioConstraintEnabled_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.SetPortfolioIgnoreUntrustedPriceRequest.fromBuffer(value),
-        ($0.SetPortfolioIgnoreUntrustedPriceResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetPortfolioIgnoreUntrustedPriceRequest, $0.GetPortfolioIgnoreUntrustedPriceResponse>(
-        'GetPortfolioIgnoreUntrustedPrice',
-        getPortfolioIgnoreUntrustedPrice_Pre,
+        ($core.List<$core.int> value) => $0.SetPortfolioConstraintEnabledRequest.fromBuffer(value),
+        ($0.SetPortfolioConstraintEnabledResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetPortfolioConstraintEnabledRequest, $0.GetPortfolioConstraintEnabledResponse>(
+        'GetPortfolioConstraintEnabled',
+        getPortfolioConstraintEnabled_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetPortfolioIgnoreUntrustedPriceRequest.fromBuffer(value),
-        ($0.GetPortfolioIgnoreUntrustedPriceResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.GetPortfolioConstraintEnabledRequest.fromBuffer(value),
+        ($0.GetPortfolioConstraintEnabledResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Portfolio> getPortfolio_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPortfolioRequest> $request) async {
@@ -412,16 +413,16 @@ abstract class PortfolioServiceBase extends $grpc.Service {
 
   $async.Future<$1.Empty> deleteExposureSnapshot($grpc.ServiceCall call, $0.DeleteExposureSnapshotRequest request);
 
-  $async.Future<$0.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice_Pre($grpc.ServiceCall $call, $async.Future<$0.SetPortfolioIgnoreUntrustedPriceRequest> $request) async {
-    return setPortfolioIgnoreUntrustedPrice($call, await $request);
+  $async.Future<$0.SetPortfolioConstraintEnabledResponse> setPortfolioConstraintEnabled_Pre($grpc.ServiceCall $call, $async.Future<$0.SetPortfolioConstraintEnabledRequest> $request) async {
+    return setPortfolioConstraintEnabled($call, await $request);
   }
 
-  $async.Future<$0.SetPortfolioIgnoreUntrustedPriceResponse> setPortfolioIgnoreUntrustedPrice($grpc.ServiceCall call, $0.SetPortfolioIgnoreUntrustedPriceRequest request);
+  $async.Future<$0.SetPortfolioConstraintEnabledResponse> setPortfolioConstraintEnabled($grpc.ServiceCall call, $0.SetPortfolioConstraintEnabledRequest request);
 
-  $async.Future<$0.GetPortfolioIgnoreUntrustedPriceResponse> getPortfolioIgnoreUntrustedPrice_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPortfolioIgnoreUntrustedPriceRequest> $request) async {
-    return getPortfolioIgnoreUntrustedPrice($call, await $request);
+  $async.Future<$0.GetPortfolioConstraintEnabledResponse> getPortfolioConstraintEnabled_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPortfolioConstraintEnabledRequest> $request) async {
+    return getPortfolioConstraintEnabled($call, await $request);
   }
 
-  $async.Future<$0.GetPortfolioIgnoreUntrustedPriceResponse> getPortfolioIgnoreUntrustedPrice($grpc.ServiceCall call, $0.GetPortfolioIgnoreUntrustedPriceRequest request);
+  $async.Future<$0.GetPortfolioConstraintEnabledResponse> getPortfolioConstraintEnabled($grpc.ServiceCall call, $0.GetPortfolioConstraintEnabledRequest request);
 
 }

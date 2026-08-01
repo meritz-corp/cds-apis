@@ -55,11 +55,12 @@ type PortfolioServiceClient interface {
 	StreamExposureChanges(ctx context.Context, in *GetExposureChangesRequest, opts ...grpc.CallOption) (PortfolioService_StreamExposureChangesClient, error)
 	// Exposure 스냅샷 삭제
 	DeleteExposureSnapshot(ctx context.Context, in *DeleteExposureSnapshotRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
-	// 기본값: enabled=true (미신뢰가 무시)
-	SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*SetPortfolioIgnoreUntrustedPriceResponse, error)
-	// 손실한도 미신뢰가 무시 여부 조회
-	GetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *GetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*GetPortfolioIgnoreUntrustedPriceResponse, error)
+	// 포트폴리오 한도 감시 전역 활성화 토글
+	// enabled=true: 전 portfolio 손실/익스포저 한도 감시 활성 (기본값)
+	// enabled=false: 전 portfolio 한도 감시 비활성
+	SetPortfolioConstraintEnabled(ctx context.Context, in *SetPortfolioConstraintEnabledRequest, opts ...grpc.CallOption) (*SetPortfolioConstraintEnabledResponse, error)
+	// 포트폴리오 한도 감시 전역 활성화 여부 조회
+	GetPortfolioConstraintEnabled(ctx context.Context, in *GetPortfolioConstraintEnabledRequest, opts ...grpc.CallOption) (*GetPortfolioConstraintEnabledResponse, error)
 }
 
 type portfolioServiceClient struct {
@@ -274,18 +275,18 @@ func (c *portfolioServiceClient) DeleteExposureSnapshot(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *portfolioServiceClient) SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
-	out := new(SetPortfolioIgnoreUntrustedPriceResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice", in, out, opts...)
+func (c *portfolioServiceClient) SetPortfolioConstraintEnabled(ctx context.Context, in *SetPortfolioConstraintEnabledRequest, opts ...grpc.CallOption) (*SetPortfolioConstraintEnabledResponse, error) {
+	out := new(SetPortfolioConstraintEnabledResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/SetPortfolioConstraintEnabled", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *portfolioServiceClient) GetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *GetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*GetPortfolioIgnoreUntrustedPriceResponse, error) {
-	out := new(GetPortfolioIgnoreUntrustedPriceResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice", in, out, opts...)
+func (c *portfolioServiceClient) GetPortfolioConstraintEnabled(ctx context.Context, in *GetPortfolioConstraintEnabledRequest, opts ...grpc.CallOption) (*GetPortfolioConstraintEnabledResponse, error) {
+	out := new(GetPortfolioConstraintEnabledResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.portfolio.PortfolioService/GetPortfolioConstraintEnabled", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -328,11 +329,12 @@ type PortfolioServiceServer interface {
 	StreamExposureChanges(*GetExposureChangesRequest, PortfolioService_StreamExposureChangesServer) error
 	// Exposure 스냅샷 삭제
 	DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error)
-	// 손실한도 미신뢰가 토글 (VI/비연속 선물 세션 미신뢰가 무시 여부)
-	// 기본값: enabled=true (미신뢰가 무시)
-	SetPortfolioIgnoreUntrustedPrice(context.Context, *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error)
-	// 손실한도 미신뢰가 무시 여부 조회
-	GetPortfolioIgnoreUntrustedPrice(context.Context, *GetPortfolioIgnoreUntrustedPriceRequest) (*GetPortfolioIgnoreUntrustedPriceResponse, error)
+	// 포트폴리오 한도 감시 전역 활성화 토글
+	// enabled=true: 전 portfolio 손실/익스포저 한도 감시 활성 (기본값)
+	// enabled=false: 전 portfolio 한도 감시 비활성
+	SetPortfolioConstraintEnabled(context.Context, *SetPortfolioConstraintEnabledRequest) (*SetPortfolioConstraintEnabledResponse, error)
+	// 포트폴리오 한도 감시 전역 활성화 여부 조회
+	GetPortfolioConstraintEnabled(context.Context, *GetPortfolioConstraintEnabledRequest) (*GetPortfolioConstraintEnabledResponse, error)
 	mustEmbedUnimplementedPortfolioServiceServer()
 }
 
@@ -385,11 +387,11 @@ func (UnimplementedPortfolioServiceServer) StreamExposureChanges(*GetExposureCha
 func (UnimplementedPortfolioServiceServer) DeleteExposureSnapshot(context.Context, *DeleteExposureSnapshotRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteExposureSnapshot not implemented")
 }
-func (UnimplementedPortfolioServiceServer) SetPortfolioIgnoreUntrustedPrice(context.Context, *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetPortfolioIgnoreUntrustedPrice not implemented")
+func (UnimplementedPortfolioServiceServer) SetPortfolioConstraintEnabled(context.Context, *SetPortfolioConstraintEnabledRequest) (*SetPortfolioConstraintEnabledResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetPortfolioConstraintEnabled not implemented")
 }
-func (UnimplementedPortfolioServiceServer) GetPortfolioIgnoreUntrustedPrice(context.Context, *GetPortfolioIgnoreUntrustedPriceRequest) (*GetPortfolioIgnoreUntrustedPriceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolioIgnoreUntrustedPrice not implemented")
+func (UnimplementedPortfolioServiceServer) GetPortfolioConstraintEnabled(context.Context, *GetPortfolioConstraintEnabledRequest) (*GetPortfolioConstraintEnabledResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPortfolioConstraintEnabled not implemented")
 }
 func (UnimplementedPortfolioServiceServer) mustEmbedUnimplementedPortfolioServiceServer() {}
 
@@ -683,38 +685,38 @@ func _PortfolioService_DeleteExposureSnapshot_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PortfolioService_SetPortfolioIgnoreUntrustedPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetPortfolioIgnoreUntrustedPriceRequest)
+func _PortfolioService_SetPortfolioConstraintEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPortfolioConstraintEnabledRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PortfolioServiceServer).SetPortfolioIgnoreUntrustedPrice(ctx, in)
+		return srv.(PortfolioServiceServer).SetPortfolioConstraintEnabled(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice",
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/SetPortfolioConstraintEnabled",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PortfolioServiceServer).SetPortfolioIgnoreUntrustedPrice(ctx, req.(*SetPortfolioIgnoreUntrustedPriceRequest))
+		return srv.(PortfolioServiceServer).SetPortfolioConstraintEnabled(ctx, req.(*SetPortfolioConstraintEnabledRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PortfolioService_GetPortfolioIgnoreUntrustedPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPortfolioIgnoreUntrustedPriceRequest)
+func _PortfolioService_GetPortfolioConstraintEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPortfolioConstraintEnabledRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PortfolioServiceServer).GetPortfolioIgnoreUntrustedPrice(ctx, in)
+		return srv.(PortfolioServiceServer).GetPortfolioConstraintEnabled(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice",
+		FullMethod: "/kdo.v1.portfolio.PortfolioService/GetPortfolioConstraintEnabled",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PortfolioServiceServer).GetPortfolioIgnoreUntrustedPrice(ctx, req.(*GetPortfolioIgnoreUntrustedPriceRequest))
+		return srv.(PortfolioServiceServer).GetPortfolioConstraintEnabled(ctx, req.(*GetPortfolioConstraintEnabledRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -775,12 +777,12 @@ var PortfolioService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PortfolioService_DeleteExposureSnapshot_Handler,
 		},
 		{
-			MethodName: "SetPortfolioIgnoreUntrustedPrice",
-			Handler:    _PortfolioService_SetPortfolioIgnoreUntrustedPrice_Handler,
+			MethodName: "SetPortfolioConstraintEnabled",
+			Handler:    _PortfolioService_SetPortfolioConstraintEnabled_Handler,
 		},
 		{
-			MethodName: "GetPortfolioIgnoreUntrustedPrice",
-			Handler:    _PortfolioService_GetPortfolioIgnoreUntrustedPrice_Handler,
+			MethodName: "GetPortfolioConstraintEnabled",
+			Handler:    _PortfolioService_GetPortfolioConstraintEnabled_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

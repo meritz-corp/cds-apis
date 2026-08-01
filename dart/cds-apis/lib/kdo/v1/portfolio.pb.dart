@@ -3279,70 +3279,9 @@ class DeleteExposureSnapshotRequest extends $pb.GeneratedMessage {
   void clearName() => $_clearField(1);
 }
 
-/// SetPortfolioIgnoreUntrustedPrice 요청
-class SetPortfolioIgnoreUntrustedPriceRequest extends $pb.GeneratedMessage {
-  factory SetPortfolioIgnoreUntrustedPriceRequest({
-    $core.String? name,
-    $core.bool? enabled,
-  }) {
-    final result = create();
-    if (name != null) result.name = name;
-    if (enabled != null) result.enabled = enabled;
-    return result;
-  }
-
-  SetPortfolioIgnoreUntrustedPriceRequest._();
-
-  factory SetPortfolioIgnoreUntrustedPriceRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SetPortfolioIgnoreUntrustedPriceRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPortfolioIgnoreUntrustedPriceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aOB(2, _omitFieldNames ? '' : 'enabled')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetPortfolioIgnoreUntrustedPriceRequest clone() => SetPortfolioIgnoreUntrustedPriceRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetPortfolioIgnoreUntrustedPriceRequest copyWith(void Function(SetPortfolioIgnoreUntrustedPriceRequest) updates) => super.copyWith((message) => updates(message as SetPortfolioIgnoreUntrustedPriceRequest)) as SetPortfolioIgnoreUntrustedPriceRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static SetPortfolioIgnoreUntrustedPriceRequest create() => SetPortfolioIgnoreUntrustedPriceRequest._();
-  @$core.override
-  SetPortfolioIgnoreUntrustedPriceRequest createEmptyInstance() => create();
-  static $pb.PbList<SetPortfolioIgnoreUntrustedPriceRequest> createRepeated() => $pb.PbList<SetPortfolioIgnoreUntrustedPriceRequest>();
-  @$core.pragma('dart2js:noInline')
-  static SetPortfolioIgnoreUntrustedPriceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetPortfolioIgnoreUntrustedPriceRequest>(create);
-  static SetPortfolioIgnoreUntrustedPriceRequest? _defaultInstance;
-
-  /// 포트폴리오 리소스 이름 (예: portfolios/1)
-  @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set name($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearName() => $_clearField(1);
-
-  /// 미신뢰가 무시 여부 (true=무시, false=반영)
-  @$pb.TagNumber(2)
-  $core.bool get enabled => $_getBF(1);
-  @$pb.TagNumber(2)
-  set enabled($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasEnabled() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearEnabled() => $_clearField(2);
-}
-
-/// SetPortfolioIgnoreUntrustedPrice 응답
-class SetPortfolioIgnoreUntrustedPriceResponse extends $pb.GeneratedMessage {
-  factory SetPortfolioIgnoreUntrustedPriceResponse({
+/// SetPortfolioConstraintEnabled 요청
+class SetPortfolioConstraintEnabledRequest extends $pb.GeneratedMessage {
+  factory SetPortfolioConstraintEnabledRequest({
     $core.bool? enabled,
   }) {
     final result = create();
@@ -3350,34 +3289,34 @@ class SetPortfolioIgnoreUntrustedPriceResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  SetPortfolioIgnoreUntrustedPriceResponse._();
+  SetPortfolioConstraintEnabledRequest._();
 
-  factory SetPortfolioIgnoreUntrustedPriceResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory SetPortfolioIgnoreUntrustedPriceResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory SetPortfolioConstraintEnabledRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SetPortfolioConstraintEnabledRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPortfolioIgnoreUntrustedPriceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPortfolioConstraintEnabledRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetPortfolioIgnoreUntrustedPriceResponse clone() => SetPortfolioIgnoreUntrustedPriceResponse()..mergeFromMessage(this);
+  SetPortfolioConstraintEnabledRequest clone() => SetPortfolioConstraintEnabledRequest()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SetPortfolioIgnoreUntrustedPriceResponse copyWith(void Function(SetPortfolioIgnoreUntrustedPriceResponse) updates) => super.copyWith((message) => updates(message as SetPortfolioIgnoreUntrustedPriceResponse)) as SetPortfolioIgnoreUntrustedPriceResponse;
+  SetPortfolioConstraintEnabledRequest copyWith(void Function(SetPortfolioConstraintEnabledRequest) updates) => super.copyWith((message) => updates(message as SetPortfolioConstraintEnabledRequest)) as SetPortfolioConstraintEnabledRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static SetPortfolioIgnoreUntrustedPriceResponse create() => SetPortfolioIgnoreUntrustedPriceResponse._();
+  static SetPortfolioConstraintEnabledRequest create() => SetPortfolioConstraintEnabledRequest._();
   @$core.override
-  SetPortfolioIgnoreUntrustedPriceResponse createEmptyInstance() => create();
-  static $pb.PbList<SetPortfolioIgnoreUntrustedPriceResponse> createRepeated() => $pb.PbList<SetPortfolioIgnoreUntrustedPriceResponse>();
+  SetPortfolioConstraintEnabledRequest createEmptyInstance() => create();
+  static $pb.PbList<SetPortfolioConstraintEnabledRequest> createRepeated() => $pb.PbList<SetPortfolioConstraintEnabledRequest>();
   @$core.pragma('dart2js:noInline')
-  static SetPortfolioIgnoreUntrustedPriceResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetPortfolioIgnoreUntrustedPriceResponse>(create);
-  static SetPortfolioIgnoreUntrustedPriceResponse? _defaultInstance;
+  static SetPortfolioConstraintEnabledRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetPortfolioConstraintEnabledRequest>(create);
+  static SetPortfolioConstraintEnabledRequest? _defaultInstance;
 
-  /// 적용된 미신뢰가 무시 여부
+  /// 포트폴리오 한도 감시 활성화 여부 (true=활성, false=비활성)
   @$pb.TagNumber(1)
   $core.bool get enabled => $_getBF(0);
   @$pb.TagNumber(1)
@@ -3388,57 +3327,9 @@ class SetPortfolioIgnoreUntrustedPriceResponse extends $pb.GeneratedMessage {
   void clearEnabled() => $_clearField(1);
 }
 
-/// GetPortfolioIgnoreUntrustedPrice 요청
-class GetPortfolioIgnoreUntrustedPriceRequest extends $pb.GeneratedMessage {
-  factory GetPortfolioIgnoreUntrustedPriceRequest({
-    $core.String? name,
-  }) {
-    final result = create();
-    if (name != null) result.name = name;
-    return result;
-  }
-
-  GetPortfolioIgnoreUntrustedPriceRequest._();
-
-  factory GetPortfolioIgnoreUntrustedPriceRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory GetPortfolioIgnoreUntrustedPriceRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPortfolioIgnoreUntrustedPriceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetPortfolioIgnoreUntrustedPriceRequest clone() => GetPortfolioIgnoreUntrustedPriceRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetPortfolioIgnoreUntrustedPriceRequest copyWith(void Function(GetPortfolioIgnoreUntrustedPriceRequest) updates) => super.copyWith((message) => updates(message as GetPortfolioIgnoreUntrustedPriceRequest)) as GetPortfolioIgnoreUntrustedPriceRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static GetPortfolioIgnoreUntrustedPriceRequest create() => GetPortfolioIgnoreUntrustedPriceRequest._();
-  @$core.override
-  GetPortfolioIgnoreUntrustedPriceRequest createEmptyInstance() => create();
-  static $pb.PbList<GetPortfolioIgnoreUntrustedPriceRequest> createRepeated() => $pb.PbList<GetPortfolioIgnoreUntrustedPriceRequest>();
-  @$core.pragma('dart2js:noInline')
-  static GetPortfolioIgnoreUntrustedPriceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPortfolioIgnoreUntrustedPriceRequest>(create);
-  static GetPortfolioIgnoreUntrustedPriceRequest? _defaultInstance;
-
-  /// 포트폴리오 리소스 이름 (예: portfolios/1)
-  @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set name($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearName() => $_clearField(1);
-}
-
-/// GetPortfolioIgnoreUntrustedPrice 응답
-class GetPortfolioIgnoreUntrustedPriceResponse extends $pb.GeneratedMessage {
-  factory GetPortfolioIgnoreUntrustedPriceResponse({
+/// SetPortfolioConstraintEnabled 응답
+class SetPortfolioConstraintEnabledResponse extends $pb.GeneratedMessage {
+  factory SetPortfolioConstraintEnabledResponse({
     $core.bool? enabled,
   }) {
     final result = create();
@@ -3446,34 +3337,113 @@ class GetPortfolioIgnoreUntrustedPriceResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  GetPortfolioIgnoreUntrustedPriceResponse._();
+  SetPortfolioConstraintEnabledResponse._();
 
-  factory GetPortfolioIgnoreUntrustedPriceResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory GetPortfolioIgnoreUntrustedPriceResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+  factory SetPortfolioConstraintEnabledResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SetPortfolioConstraintEnabledResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPortfolioIgnoreUntrustedPriceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SetPortfolioConstraintEnabledResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..hasRequiredFields = false
   ;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetPortfolioIgnoreUntrustedPriceResponse clone() => GetPortfolioIgnoreUntrustedPriceResponse()..mergeFromMessage(this);
+  SetPortfolioConstraintEnabledResponse clone() => SetPortfolioConstraintEnabledResponse()..mergeFromMessage(this);
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetPortfolioIgnoreUntrustedPriceResponse copyWith(void Function(GetPortfolioIgnoreUntrustedPriceResponse) updates) => super.copyWith((message) => updates(message as GetPortfolioIgnoreUntrustedPriceResponse)) as GetPortfolioIgnoreUntrustedPriceResponse;
+  SetPortfolioConstraintEnabledResponse copyWith(void Function(SetPortfolioConstraintEnabledResponse) updates) => super.copyWith((message) => updates(message as SetPortfolioConstraintEnabledResponse)) as SetPortfolioConstraintEnabledResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetPortfolioIgnoreUntrustedPriceResponse create() => GetPortfolioIgnoreUntrustedPriceResponse._();
+  static SetPortfolioConstraintEnabledResponse create() => SetPortfolioConstraintEnabledResponse._();
   @$core.override
-  GetPortfolioIgnoreUntrustedPriceResponse createEmptyInstance() => create();
-  static $pb.PbList<GetPortfolioIgnoreUntrustedPriceResponse> createRepeated() => $pb.PbList<GetPortfolioIgnoreUntrustedPriceResponse>();
+  SetPortfolioConstraintEnabledResponse createEmptyInstance() => create();
+  static $pb.PbList<SetPortfolioConstraintEnabledResponse> createRepeated() => $pb.PbList<SetPortfolioConstraintEnabledResponse>();
   @$core.pragma('dart2js:noInline')
-  static GetPortfolioIgnoreUntrustedPriceResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPortfolioIgnoreUntrustedPriceResponse>(create);
-  static GetPortfolioIgnoreUntrustedPriceResponse? _defaultInstance;
+  static SetPortfolioConstraintEnabledResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SetPortfolioConstraintEnabledResponse>(create);
+  static SetPortfolioConstraintEnabledResponse? _defaultInstance;
 
-  /// 현재 미신뢰가 무시 여부
+  /// 적용된 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+}
+
+/// GetPortfolioConstraintEnabled 요청
+class GetPortfolioConstraintEnabledRequest extends $pb.GeneratedMessage {
+  factory GetPortfolioConstraintEnabledRequest() => create();
+
+  GetPortfolioConstraintEnabledRequest._();
+
+  factory GetPortfolioConstraintEnabledRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetPortfolioConstraintEnabledRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPortfolioConstraintEnabledRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPortfolioConstraintEnabledRequest clone() => GetPortfolioConstraintEnabledRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPortfolioConstraintEnabledRequest copyWith(void Function(GetPortfolioConstraintEnabledRequest) updates) => super.copyWith((message) => updates(message as GetPortfolioConstraintEnabledRequest)) as GetPortfolioConstraintEnabledRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPortfolioConstraintEnabledRequest create() => GetPortfolioConstraintEnabledRequest._();
+  @$core.override
+  GetPortfolioConstraintEnabledRequest createEmptyInstance() => create();
+  static $pb.PbList<GetPortfolioConstraintEnabledRequest> createRepeated() => $pb.PbList<GetPortfolioConstraintEnabledRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetPortfolioConstraintEnabledRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPortfolioConstraintEnabledRequest>(create);
+  static GetPortfolioConstraintEnabledRequest? _defaultInstance;
+}
+
+/// GetPortfolioConstraintEnabled 응답
+class GetPortfolioConstraintEnabledResponse extends $pb.GeneratedMessage {
+  factory GetPortfolioConstraintEnabledResponse({
+    $core.bool? enabled,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    return result;
+  }
+
+  GetPortfolioConstraintEnabledResponse._();
+
+  factory GetPortfolioConstraintEnabledResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetPortfolioConstraintEnabledResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPortfolioConstraintEnabledResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.portfolio'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPortfolioConstraintEnabledResponse clone() => GetPortfolioConstraintEnabledResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPortfolioConstraintEnabledResponse copyWith(void Function(GetPortfolioConstraintEnabledResponse) updates) => super.copyWith((message) => updates(message as GetPortfolioConstraintEnabledResponse)) as GetPortfolioConstraintEnabledResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPortfolioConstraintEnabledResponse create() => GetPortfolioConstraintEnabledResponse._();
+  @$core.override
+  GetPortfolioConstraintEnabledResponse createEmptyInstance() => create();
+  static $pb.PbList<GetPortfolioConstraintEnabledResponse> createRepeated() => $pb.PbList<GetPortfolioConstraintEnabledResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetPortfolioConstraintEnabledResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPortfolioConstraintEnabledResponse>(create);
+  static GetPortfolioConstraintEnabledResponse? _defaultInstance;
+
+  /// 현재 활성화 여부
   @$pb.TagNumber(1)
   $core.bool get enabled => $_getBF(0);
   @$pb.TagNumber(1)

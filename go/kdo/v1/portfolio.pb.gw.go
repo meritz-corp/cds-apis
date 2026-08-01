@@ -859,8 +859,8 @@ func local_request_PortfolioService_DeleteExposureSnapshot_0(ctx context.Context
 
 }
 
-func request_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(ctx context.Context, marshaler runtime.Marshaler, client PortfolioServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SetPortfolioIgnoreUntrustedPriceRequest
+func request_PortfolioService_SetPortfolioConstraintEnabled_0(ctx context.Context, marshaler runtime.Marshaler, client PortfolioServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SetPortfolioConstraintEnabledRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -871,30 +871,13 @@ func request_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(ctx context.Con
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["name"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
-	}
-
-	protoReq.Name, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
-	}
-
-	msg, err := client.SetPortfolioIgnoreUntrustedPrice(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.SetPortfolioConstraintEnabled(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(ctx context.Context, marshaler runtime.Marshaler, server PortfolioServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq SetPortfolioIgnoreUntrustedPriceRequest
+func local_request_PortfolioService_SetPortfolioConstraintEnabled_0(ctx context.Context, marshaler runtime.Marshaler, server PortfolioServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SetPortfolioConstraintEnabledRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -905,76 +888,25 @@ func local_request_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(ctx conte
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["name"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
-	}
-
-	protoReq.Name, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
-	}
-
-	msg, err := server.SetPortfolioIgnoreUntrustedPrice(ctx, &protoReq)
+	msg, err := server.SetPortfolioConstraintEnabled(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0(ctx context.Context, marshaler runtime.Marshaler, client PortfolioServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPortfolioIgnoreUntrustedPriceRequest
+func request_PortfolioService_GetPortfolioConstraintEnabled_0(ctx context.Context, marshaler runtime.Marshaler, client PortfolioServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetPortfolioConstraintEnabledRequest
 	var metadata runtime.ServerMetadata
 
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["name"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
-	}
-
-	protoReq.Name, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
-	}
-
-	msg, err := client.GetPortfolioIgnoreUntrustedPrice(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetPortfolioConstraintEnabled(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0(ctx context.Context, marshaler runtime.Marshaler, server PortfolioServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPortfolioIgnoreUntrustedPriceRequest
+func local_request_PortfolioService_GetPortfolioConstraintEnabled_0(ctx context.Context, marshaler runtime.Marshaler, server PortfolioServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetPortfolioConstraintEnabledRequest
 	var metadata runtime.ServerMetadata
 
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["name"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
-	}
-
-	protoReq.Name, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
-	}
-
-	msg, err := server.GetPortfolioIgnoreUntrustedPrice(ctx, &protoReq)
+	msg, err := server.GetPortfolioConstraintEnabled(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -1306,7 +1238,7 @@ func RegisterPortfolioServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("POST", pattern_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_PortfolioService_SetPortfolioConstraintEnabled_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -1314,12 +1246,12 @@ func RegisterPortfolioServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice", runtime.WithHTTPPathPattern("/v1/{name=portfolios/*}:setIgnoreUntrustedPrice"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/SetPortfolioConstraintEnabled", runtime.WithHTTPPathPattern("/v1/portfolioConstraint:setEnabled"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_PortfolioService_SetPortfolioConstraintEnabled_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -1327,11 +1259,11 @@ func RegisterPortfolioServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 			return
 		}
 
-		forward_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_PortfolioService_SetPortfolioConstraintEnabled_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_PortfolioService_GetPortfolioConstraintEnabled_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -1339,12 +1271,12 @@ func RegisterPortfolioServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice", runtime.WithHTTPPathPattern("/v1/{name=portfolios/*}:getIgnoreUntrustedPrice"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/GetPortfolioConstraintEnabled", runtime.WithHTTPPathPattern("/v1/portfolioConstraint:enabled"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_PortfolioService_GetPortfolioConstraintEnabled_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -1352,7 +1284,7 @@ func RegisterPortfolioServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 			return
 		}
 
-		forward_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_PortfolioService_GetPortfolioConstraintEnabled_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1727,47 +1659,47 @@ func RegisterPortfolioServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 
 	})
 
-	mux.Handle("POST", pattern_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_PortfolioService_SetPortfolioConstraintEnabled_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice", runtime.WithHTTPPathPattern("/v1/{name=portfolios/*}:setIgnoreUntrustedPrice"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/SetPortfolioConstraintEnabled", runtime.WithHTTPPathPattern("/v1/portfolioConstraint:setEnabled"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_PortfolioService_SetPortfolioConstraintEnabled_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_PortfolioService_SetPortfolioConstraintEnabled_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_PortfolioService_GetPortfolioConstraintEnabled_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice", runtime.WithHTTPPathPattern("/v1/{name=portfolios/*}:getIgnoreUntrustedPrice"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.portfolio.PortfolioService/GetPortfolioConstraintEnabled", runtime.WithHTTPPathPattern("/v1/portfolioConstraint:enabled"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_PortfolioService_GetPortfolioConstraintEnabled_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_PortfolioService_GetPortfolioConstraintEnabled_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1805,9 +1737,9 @@ var (
 
 	pattern_PortfolioService_DeleteExposureSnapshot_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 4, 4, 5, 3}, []string{"v1", "portfolios", "exposure_snapshots", "name"}, ""))
 
-	pattern_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "portfolios", "name"}, "setIgnoreUntrustedPrice"))
+	pattern_PortfolioService_SetPortfolioConstraintEnabled_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "portfolioConstraint"}, "setEnabled"))
 
-	pattern_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "portfolios", "name"}, "getIgnoreUntrustedPrice"))
+	pattern_PortfolioService_GetPortfolioConstraintEnabled_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "portfolioConstraint"}, "enabled"))
 )
 
 var (
@@ -1841,7 +1773,7 @@ var (
 
 	forward_PortfolioService_DeleteExposureSnapshot_0 = runtime.ForwardResponseMessage
 
-	forward_PortfolioService_SetPortfolioIgnoreUntrustedPrice_0 = runtime.ForwardResponseMessage
+	forward_PortfolioService_SetPortfolioConstraintEnabled_0 = runtime.ForwardResponseMessage
 
-	forward_PortfolioService_GetPortfolioIgnoreUntrustedPrice_0 = runtime.ForwardResponseMessage
+	forward_PortfolioService_GetPortfolioConstraintEnabled_0 = runtime.ForwardResponseMessage
 )

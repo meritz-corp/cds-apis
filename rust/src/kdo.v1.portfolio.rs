@@ -673,38 +673,32 @@ pub struct DeleteExposureSnapshotRequest {
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
 }
-/// SetPortfolioIgnoreUntrustedPrice 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SetPortfolioIgnoreUntrustedPriceRequest {
-    /// 포트폴리오 리소스 이름 (예: portfolios/1)
-    #[prost(string, tag="1")]
-    pub name: ::prost::alloc::string::String,
-    /// 미신뢰가 무시 여부 (true=무시, false=반영)
-    #[prost(bool, tag="2")]
-    pub enabled: bool,
-}
-/// SetPortfolioIgnoreUntrustedPrice 응답
+/// SetPortfolioConstraintEnabled 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct SetPortfolioIgnoreUntrustedPriceResponse {
-    /// 적용된 미신뢰가 무시 여부
+pub struct SetPortfolioConstraintEnabledRequest {
+    /// 포트폴리오 한도 감시 활성화 여부 (true=활성, false=비활성)
     #[prost(bool, tag="1")]
     pub enabled: bool,
 }
-/// GetPortfolioIgnoreUntrustedPrice 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetPortfolioIgnoreUntrustedPriceRequest {
-    /// 포트폴리오 리소스 이름 (예: portfolios/1)
-    #[prost(string, tag="1")]
-    pub name: ::prost::alloc::string::String,
-}
-/// GetPortfolioIgnoreUntrustedPrice 응답
+/// SetPortfolioConstraintEnabled 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct GetPortfolioIgnoreUntrustedPriceResponse {
-    /// 현재 미신뢰가 무시 여부
+pub struct SetPortfolioConstraintEnabledResponse {
+    /// 적용된 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+}
+/// GetPortfolioConstraintEnabled 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetPortfolioConstraintEnabledRequest {
+}
+/// GetPortfolioConstraintEnabled 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetPortfolioConstraintEnabledResponse {
+    /// 현재 활성화 여부
     #[prost(bool, tag="1")]
     pub enabled: bool,
 }

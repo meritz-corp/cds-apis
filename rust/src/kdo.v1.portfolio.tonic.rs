@@ -519,13 +519,11 @@ pub mod portfolio_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn set_portfolio_ignore_untrusted_price(
+        pub async fn set_portfolio_constraint_enabled(
             &mut self,
-            request: impl tonic::IntoRequest<
-                super::SetPortfolioIgnoreUntrustedPriceRequest,
-            >,
+            request: impl tonic::IntoRequest<super::SetPortfolioConstraintEnabledRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::SetPortfolioIgnoreUntrustedPriceResponse>,
+            tonic::Response<super::SetPortfolioConstraintEnabledResponse>,
             tonic::Status,
         > {
             self.inner
@@ -539,25 +537,23 @@ pub mod portfolio_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice",
+                "/kdo.v1.portfolio.PortfolioService/SetPortfolioConstraintEnabled",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "kdo.v1.portfolio.PortfolioService",
-                        "SetPortfolioIgnoreUntrustedPrice",
+                        "SetPortfolioConstraintEnabled",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn get_portfolio_ignore_untrusted_price(
+        pub async fn get_portfolio_constraint_enabled(
             &mut self,
-            request: impl tonic::IntoRequest<
-                super::GetPortfolioIgnoreUntrustedPriceRequest,
-            >,
+            request: impl tonic::IntoRequest<super::GetPortfolioConstraintEnabledRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetPortfolioIgnoreUntrustedPriceResponse>,
+            tonic::Response<super::GetPortfolioConstraintEnabledResponse>,
             tonic::Status,
         > {
             self.inner
@@ -571,14 +567,14 @@ pub mod portfolio_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice",
+                "/kdo.v1.portfolio.PortfolioService/GetPortfolioConstraintEnabled",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "kdo.v1.portfolio.PortfolioService",
-                        "GetPortfolioIgnoreUntrustedPrice",
+                        "GetPortfolioConstraintEnabled",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -700,18 +696,18 @@ pub mod portfolio_service_server {
             &self,
             request: tonic::Request<super::DeleteExposureSnapshotRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
-        async fn set_portfolio_ignore_untrusted_price(
+        async fn set_portfolio_constraint_enabled(
             &self,
-            request: tonic::Request<super::SetPortfolioIgnoreUntrustedPriceRequest>,
+            request: tonic::Request<super::SetPortfolioConstraintEnabledRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::SetPortfolioIgnoreUntrustedPriceResponse>,
+            tonic::Response<super::SetPortfolioConstraintEnabledResponse>,
             tonic::Status,
         >;
-        async fn get_portfolio_ignore_untrusted_price(
+        async fn get_portfolio_constraint_enabled(
             &self,
-            request: tonic::Request<super::GetPortfolioIgnoreUntrustedPriceRequest>,
+            request: tonic::Request<super::GetPortfolioConstraintEnabledRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetPortfolioIgnoreUntrustedPriceResponse>,
+            tonic::Response<super::GetPortfolioConstraintEnabledResponse>,
             tonic::Status,
         >;
     }
@@ -1522,17 +1518,17 @@ pub mod portfolio_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.portfolio.PortfolioService/SetPortfolioIgnoreUntrustedPrice" => {
+                "/kdo.v1.portfolio.PortfolioService/SetPortfolioConstraintEnabled" => {
                     #[allow(non_camel_case_types)]
-                    struct SetPortfolioIgnoreUntrustedPriceSvc<T: PortfolioService>(
+                    struct SetPortfolioConstraintEnabledSvc<T: PortfolioService>(
                         pub Arc<T>,
                     );
                     impl<
                         T: PortfolioService,
                     > tonic::server::UnaryService<
-                        super::SetPortfolioIgnoreUntrustedPriceRequest,
-                    > for SetPortfolioIgnoreUntrustedPriceSvc<T> {
-                        type Response = super::SetPortfolioIgnoreUntrustedPriceResponse;
+                        super::SetPortfolioConstraintEnabledRequest,
+                    > for SetPortfolioConstraintEnabledSvc<T> {
+                        type Response = super::SetPortfolioConstraintEnabledResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -1540,12 +1536,12 @@ pub mod portfolio_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::SetPortfolioIgnoreUntrustedPriceRequest,
+                                super::SetPortfolioConstraintEnabledRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as PortfolioService>::set_portfolio_ignore_untrusted_price(
+                                <T as PortfolioService>::set_portfolio_constraint_enabled(
                                         &inner,
                                         request,
                                     )
@@ -1560,7 +1556,7 @@ pub mod portfolio_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = SetPortfolioIgnoreUntrustedPriceSvc(inner);
+                        let method = SetPortfolioConstraintEnabledSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -1576,17 +1572,17 @@ pub mod portfolio_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.portfolio.PortfolioService/GetPortfolioIgnoreUntrustedPrice" => {
+                "/kdo.v1.portfolio.PortfolioService/GetPortfolioConstraintEnabled" => {
                     #[allow(non_camel_case_types)]
-                    struct GetPortfolioIgnoreUntrustedPriceSvc<T: PortfolioService>(
+                    struct GetPortfolioConstraintEnabledSvc<T: PortfolioService>(
                         pub Arc<T>,
                     );
                     impl<
                         T: PortfolioService,
                     > tonic::server::UnaryService<
-                        super::GetPortfolioIgnoreUntrustedPriceRequest,
-                    > for GetPortfolioIgnoreUntrustedPriceSvc<T> {
-                        type Response = super::GetPortfolioIgnoreUntrustedPriceResponse;
+                        super::GetPortfolioConstraintEnabledRequest,
+                    > for GetPortfolioConstraintEnabledSvc<T> {
+                        type Response = super::GetPortfolioConstraintEnabledResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -1594,12 +1590,12 @@ pub mod portfolio_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::GetPortfolioIgnoreUntrustedPriceRequest,
+                                super::GetPortfolioConstraintEnabledRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as PortfolioService>::get_portfolio_ignore_untrusted_price(
+                                <T as PortfolioService>::get_portfolio_constraint_enabled(
                                         &inner,
                                         request,
                                     )
@@ -1614,7 +1610,7 @@ pub mod portfolio_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetPortfolioIgnoreUntrustedPriceSvc(inner);
+                        let method = GetPortfolioConstraintEnabledSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

@@ -705,57 +705,51 @@ final $typed_data.Uint8List deleteExposureSnapshotRequestDescriptor = $convert.b
     'Ch1EZWxldGVFeHBvc3VyZVNuYXBzaG90UmVxdWVzdBIYCgRuYW1lGAEgASgJQgTiQQECUgRuYW'
     '1l');
 
-@$core.Deprecated('Use setPortfolioIgnoreUntrustedPriceRequestDescriptor instead')
-const SetPortfolioIgnoreUntrustedPriceRequest$json = {
-  '1': 'SetPortfolioIgnoreUntrustedPriceRequest',
+@$core.Deprecated('Use setPortfolioConstraintEnabledRequestDescriptor instead')
+const SetPortfolioConstraintEnabledRequest$json = {
+  '1': 'SetPortfolioConstraintEnabledRequest',
   '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
-    {'1': 'enabled', '3': 2, '4': 1, '5': 8, '8': {}, '10': 'enabled'},
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '8': {}, '10': 'enabled'},
   ],
 };
 
-/// Descriptor for `SetPortfolioIgnoreUntrustedPriceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setPortfolioIgnoreUntrustedPriceRequestDescriptor = $convert.base64Decode(
-    'CidTZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlcXVlc3QSNgoEbmFtZRgBIAEoCU'
-    'Ii4kEBAvpBGwoZa2RvLmNkc2FwaXMueHl6L1BvcnRmb2xpb1IEbmFtZRIeCgdlbmFibGVkGAIg'
-    'ASgIQgTiQQECUgdlbmFibGVk');
+/// Descriptor for `SetPortfolioConstraintEnabledRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setPortfolioConstraintEnabledRequestDescriptor = $convert.base64Decode(
+    'CiRTZXRQb3J0Zm9saW9Db25zdHJhaW50RW5hYmxlZFJlcXVlc3QSHgoHZW5hYmxlZBgBIAEoCE'
+    'IE4kEBAlIHZW5hYmxlZA==');
 
-@$core.Deprecated('Use setPortfolioIgnoreUntrustedPriceResponseDescriptor instead')
-const SetPortfolioIgnoreUntrustedPriceResponse$json = {
-  '1': 'SetPortfolioIgnoreUntrustedPriceResponse',
+@$core.Deprecated('Use setPortfolioConstraintEnabledResponseDescriptor instead')
+const SetPortfolioConstraintEnabledResponse$json = {
+  '1': 'SetPortfolioConstraintEnabledResponse',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
   ],
 };
 
-/// Descriptor for `SetPortfolioIgnoreUntrustedPriceResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setPortfolioIgnoreUntrustedPriceResponseDescriptor = $convert.base64Decode(
-    'CihTZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlc3BvbnNlEhgKB2VuYWJsZWQYAS'
-    'ABKAhSB2VuYWJsZWQ=');
+/// Descriptor for `SetPortfolioConstraintEnabledResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List setPortfolioConstraintEnabledResponseDescriptor = $convert.base64Decode(
+    'CiVTZXRQb3J0Zm9saW9Db25zdHJhaW50RW5hYmxlZFJlc3BvbnNlEhgKB2VuYWJsZWQYASABKA'
+    'hSB2VuYWJsZWQ=');
 
-@$core.Deprecated('Use getPortfolioIgnoreUntrustedPriceRequestDescriptor instead')
-const GetPortfolioIgnoreUntrustedPriceRequest$json = {
-  '1': 'GetPortfolioIgnoreUntrustedPriceRequest',
-  '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
-  ],
+@$core.Deprecated('Use getPortfolioConstraintEnabledRequestDescriptor instead')
+const GetPortfolioConstraintEnabledRequest$json = {
+  '1': 'GetPortfolioConstraintEnabledRequest',
 };
 
-/// Descriptor for `GetPortfolioIgnoreUntrustedPriceRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getPortfolioIgnoreUntrustedPriceRequestDescriptor = $convert.base64Decode(
-    'CidHZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlcXVlc3QSNgoEbmFtZRgBIAEoCU'
-    'Ii4kEBAvpBGwoZa2RvLmNkc2FwaXMueHl6L1BvcnRmb2xpb1IEbmFtZQ==');
+/// Descriptor for `GetPortfolioConstraintEnabledRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPortfolioConstraintEnabledRequestDescriptor = $convert.base64Decode(
+    'CiRHZXRQb3J0Zm9saW9Db25zdHJhaW50RW5hYmxlZFJlcXVlc3Q=');
 
-@$core.Deprecated('Use getPortfolioIgnoreUntrustedPriceResponseDescriptor instead')
-const GetPortfolioIgnoreUntrustedPriceResponse$json = {
-  '1': 'GetPortfolioIgnoreUntrustedPriceResponse',
+@$core.Deprecated('Use getPortfolioConstraintEnabledResponseDescriptor instead')
+const GetPortfolioConstraintEnabledResponse$json = {
+  '1': 'GetPortfolioConstraintEnabledResponse',
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
   ],
 };
 
-/// Descriptor for `GetPortfolioIgnoreUntrustedPriceResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getPortfolioIgnoreUntrustedPriceResponseDescriptor = $convert.base64Decode(
-    'CihHZXRQb3J0Zm9saW9JZ25vcmVVbnRydXN0ZWRQcmljZVJlc3BvbnNlEhgKB2VuYWJsZWQYAS'
-    'ABKAhSB2VuYWJsZWQ=');
+/// Descriptor for `GetPortfolioConstraintEnabledResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPortfolioConstraintEnabledResponseDescriptor = $convert.base64Decode(
+    'CiVHZXRQb3J0Zm9saW9Db25zdHJhaW50RW5hYmxlZFJlc3BvbnNlEhgKB2VuYWJsZWQYASABKA'
+    'hSB2VuYWJsZWQ=');
 

@@ -862,6 +862,26 @@ func (mr *MockPortfolioServiceClientMockRecorder) GetPortfolio(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolio", reflect.TypeOf((*MockPortfolioServiceClient)(nil).GetPortfolio), varargs...)
 }
 
+// GetPortfolioConstraintEnabled mocks base method.
+func (m *MockPortfolioServiceClient) GetPortfolioConstraintEnabled(ctx context.Context, in *GetPortfolioConstraintEnabledRequest, opts ...grpc.CallOption) (*GetPortfolioConstraintEnabledResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetPortfolioConstraintEnabled", varargs...)
+	ret0, _ := ret[0].(*GetPortfolioConstraintEnabledResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPortfolioConstraintEnabled indicates an expected call of GetPortfolioConstraintEnabled.
+func (mr *MockPortfolioServiceClientMockRecorder) GetPortfolioConstraintEnabled(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioConstraintEnabled", reflect.TypeOf((*MockPortfolioServiceClient)(nil).GetPortfolioConstraintEnabled), varargs...)
+}
+
 // GetPortfolioExposure mocks base method.
 func (m *MockPortfolioServiceClient) GetPortfolioExposure(ctx context.Context, in *GetPortfolioExposureRequest, opts ...grpc.CallOption) (*PortfolioExposure, error) {
 	m.ctrl.T.Helper()
@@ -880,26 +900,6 @@ func (mr *MockPortfolioServiceClientMockRecorder) GetPortfolioExposure(ctx, in i
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioExposure", reflect.TypeOf((*MockPortfolioServiceClient)(nil).GetPortfolioExposure), varargs...)
-}
-
-// GetPortfolioIgnoreUntrustedPrice mocks base method.
-func (m *MockPortfolioServiceClient) GetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *GetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*GetPortfolioIgnoreUntrustedPriceResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetPortfolioIgnoreUntrustedPrice", varargs...)
-	ret0, _ := ret[0].(*GetPortfolioIgnoreUntrustedPriceResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetPortfolioIgnoreUntrustedPrice indicates an expected call of GetPortfolioIgnoreUntrustedPrice.
-func (mr *MockPortfolioServiceClientMockRecorder) GetPortfolioIgnoreUntrustedPrice(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioIgnoreUntrustedPrice", reflect.TypeOf((*MockPortfolioServiceClient)(nil).GetPortfolioIgnoreUntrustedPrice), varargs...)
 }
 
 // GetPortfolioPnL mocks base method.
@@ -1002,24 +1002,24 @@ func (mr *MockPortfolioServiceClientMockRecorder) ListPortfolios(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPortfolios", reflect.TypeOf((*MockPortfolioServiceClient)(nil).ListPortfolios), varargs...)
 }
 
-// SetPortfolioIgnoreUntrustedPrice mocks base method.
-func (m *MockPortfolioServiceClient) SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest, opts ...grpc.CallOption) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
+// SetPortfolioConstraintEnabled mocks base method.
+func (m *MockPortfolioServiceClient) SetPortfolioConstraintEnabled(ctx context.Context, in *SetPortfolioConstraintEnabledRequest, opts ...grpc.CallOption) (*SetPortfolioConstraintEnabledResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{ctx, in}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "SetPortfolioIgnoreUntrustedPrice", varargs...)
-	ret0, _ := ret[0].(*SetPortfolioIgnoreUntrustedPriceResponse)
+	ret := m.ctrl.Call(m, "SetPortfolioConstraintEnabled", varargs...)
+	ret0, _ := ret[0].(*SetPortfolioConstraintEnabledResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// SetPortfolioIgnoreUntrustedPrice indicates an expected call of SetPortfolioIgnoreUntrustedPrice.
-func (mr *MockPortfolioServiceClientMockRecorder) SetPortfolioIgnoreUntrustedPrice(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+// SetPortfolioConstraintEnabled indicates an expected call of SetPortfolioConstraintEnabled.
+func (mr *MockPortfolioServiceClientMockRecorder) SetPortfolioConstraintEnabled(ctx, in interface{}, opts ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetPortfolioIgnoreUntrustedPrice", reflect.TypeOf((*MockPortfolioServiceClient)(nil).SetPortfolioIgnoreUntrustedPrice), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetPortfolioConstraintEnabled", reflect.TypeOf((*MockPortfolioServiceClient)(nil).SetPortfolioConstraintEnabled), varargs...)
 }
 
 // StreamExposureChanges mocks base method.
@@ -1200,6 +1200,21 @@ func (mr *MockPortfolioServiceServerMockRecorder) GetPortfolio(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolio", reflect.TypeOf((*MockPortfolioServiceServer)(nil).GetPortfolio), ctx, in)
 }
 
+// GetPortfolioConstraintEnabled mocks base method.
+func (m *MockPortfolioServiceServer) GetPortfolioConstraintEnabled(ctx context.Context, in *GetPortfolioConstraintEnabledRequest) (*GetPortfolioConstraintEnabledResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetPortfolioConstraintEnabled", ctx, in)
+	ret0, _ := ret[0].(*GetPortfolioConstraintEnabledResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPortfolioConstraintEnabled indicates an expected call of GetPortfolioConstraintEnabled.
+func (mr *MockPortfolioServiceServerMockRecorder) GetPortfolioConstraintEnabled(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioConstraintEnabled", reflect.TypeOf((*MockPortfolioServiceServer)(nil).GetPortfolioConstraintEnabled), ctx, in)
+}
+
 // GetPortfolioExposure mocks base method.
 func (m *MockPortfolioServiceServer) GetPortfolioExposure(ctx context.Context, in *GetPortfolioExposureRequest) (*PortfolioExposure, error) {
 	m.ctrl.T.Helper()
@@ -1213,21 +1228,6 @@ func (m *MockPortfolioServiceServer) GetPortfolioExposure(ctx context.Context, i
 func (mr *MockPortfolioServiceServerMockRecorder) GetPortfolioExposure(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioExposure", reflect.TypeOf((*MockPortfolioServiceServer)(nil).GetPortfolioExposure), ctx, in)
-}
-
-// GetPortfolioIgnoreUntrustedPrice mocks base method.
-func (m *MockPortfolioServiceServer) GetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *GetPortfolioIgnoreUntrustedPriceRequest) (*GetPortfolioIgnoreUntrustedPriceResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetPortfolioIgnoreUntrustedPrice", ctx, in)
-	ret0, _ := ret[0].(*GetPortfolioIgnoreUntrustedPriceResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetPortfolioIgnoreUntrustedPrice indicates an expected call of GetPortfolioIgnoreUntrustedPrice.
-func (mr *MockPortfolioServiceServerMockRecorder) GetPortfolioIgnoreUntrustedPrice(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPortfolioIgnoreUntrustedPrice", reflect.TypeOf((*MockPortfolioServiceServer)(nil).GetPortfolioIgnoreUntrustedPrice), ctx, in)
 }
 
 // GetPortfolioPnL mocks base method.
@@ -1305,19 +1305,19 @@ func (mr *MockPortfolioServiceServerMockRecorder) ListPortfolios(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPortfolios", reflect.TypeOf((*MockPortfolioServiceServer)(nil).ListPortfolios), ctx, in)
 }
 
-// SetPortfolioIgnoreUntrustedPrice mocks base method.
-func (m *MockPortfolioServiceServer) SetPortfolioIgnoreUntrustedPrice(ctx context.Context, in *SetPortfolioIgnoreUntrustedPriceRequest) (*SetPortfolioIgnoreUntrustedPriceResponse, error) {
+// SetPortfolioConstraintEnabled mocks base method.
+func (m *MockPortfolioServiceServer) SetPortfolioConstraintEnabled(ctx context.Context, in *SetPortfolioConstraintEnabledRequest) (*SetPortfolioConstraintEnabledResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetPortfolioIgnoreUntrustedPrice", ctx, in)
-	ret0, _ := ret[0].(*SetPortfolioIgnoreUntrustedPriceResponse)
+	ret := m.ctrl.Call(m, "SetPortfolioConstraintEnabled", ctx, in)
+	ret0, _ := ret[0].(*SetPortfolioConstraintEnabledResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// SetPortfolioIgnoreUntrustedPrice indicates an expected call of SetPortfolioIgnoreUntrustedPrice.
-func (mr *MockPortfolioServiceServerMockRecorder) SetPortfolioIgnoreUntrustedPrice(ctx, in interface{}) *gomock.Call {
+// SetPortfolioConstraintEnabled indicates an expected call of SetPortfolioConstraintEnabled.
+func (mr *MockPortfolioServiceServerMockRecorder) SetPortfolioConstraintEnabled(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetPortfolioIgnoreUntrustedPrice", reflect.TypeOf((*MockPortfolioServiceServer)(nil).SetPortfolioIgnoreUntrustedPrice), ctx, in)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetPortfolioConstraintEnabled", reflect.TypeOf((*MockPortfolioServiceServer)(nil).SetPortfolioConstraintEnabled), ctx, in)
 }
 
 // StreamExposureChanges mocks base method.
