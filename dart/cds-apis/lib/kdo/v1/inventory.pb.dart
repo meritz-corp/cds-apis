@@ -282,6 +282,7 @@ class LedgerStockData extends $pb.GeneratedMessage {
     $fixnum.Int64? settlementBorrowBalance,
     $fixnum.Int64? selling,
     $fixnum.Int64? borrowSelling,
+    $fixnum.Int64? borrowSellable,
   }) {
     final result = create();
     if (bookQuantity != null) result.bookQuantity = bookQuantity;
@@ -304,6 +305,7 @@ class LedgerStockData extends $pb.GeneratedMessage {
     if (settlementBorrowBalance != null) result.settlementBorrowBalance = settlementBorrowBalance;
     if (selling != null) result.selling = selling;
     if (borrowSelling != null) result.borrowSelling = borrowSelling;
+    if (borrowSellable != null) result.borrowSellable = borrowSellable;
     return result;
   }
 
@@ -333,6 +335,7 @@ class LedgerStockData extends $pb.GeneratedMessage {
     ..aInt64(18, _omitFieldNames ? '' : 'settlementBorrowBalance')
     ..aInt64(19, _omitFieldNames ? '' : 'selling')
     ..aInt64(20, _omitFieldNames ? '' : 'borrowSelling')
+    ..aInt64(21, _omitFieldNames ? '' : 'borrowSellable')
     ..hasRequiredFields = false
   ;
 
@@ -552,6 +555,16 @@ class LedgerStockData extends $pb.GeneratedMessage {
   $core.bool hasBorrowSelling() => $_has(19);
   @$pb.TagNumber(20)
   void clearBorrowSelling() => $_clearField(20);
+
+  /// 차입가용수량
+  @$pb.TagNumber(21)
+  $fixnum.Int64 get borrowSellable => $_getI64(20);
+  @$pb.TagNumber(21)
+  set borrowSellable($fixnum.Int64 value) => $_setInt64(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasBorrowSellable() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearBorrowSellable() => $_clearField(21);
 }
 
 /// 파생상품 원장 재고 데이터

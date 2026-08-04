@@ -2033,6 +2033,9 @@ impl serde::Serialize for LedgerStockData {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.LedgerStockData", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2134,6 +2137,11 @@ impl serde::Serialize for LedgerStockData {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("borrow_selling", ToString::to_string(&self.borrow_selling).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("borrow_sellable", ToString::to_string(&self.borrow_sellable).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -2183,6 +2191,8 @@ impl<'de> serde::Deserialize<'de> for LedgerStockData {
             "selling",
             "borrow_selling",
             "borrowSelling",
+            "borrow_sellable",
+            "borrowSellable",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2207,6 +2217,7 @@ impl<'de> serde::Deserialize<'de> for LedgerStockData {
             SettlementBorrowBalance,
             Selling,
             BorrowSelling,
+            BorrowSellable,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2249,6 +2260,7 @@ impl<'de> serde::Deserialize<'de> for LedgerStockData {
                             "settlementBorrowBalance" | "settlement_borrow_balance" => Ok(GeneratedField::SettlementBorrowBalance),
                             "selling" => Ok(GeneratedField::Selling),
                             "borrowSelling" | "borrow_selling" => Ok(GeneratedField::BorrowSelling),
+                            "borrowSellable" | "borrow_sellable" => Ok(GeneratedField::BorrowSellable),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2288,6 +2300,7 @@ impl<'de> serde::Deserialize<'de> for LedgerStockData {
                 let mut settlement_borrow_balance__ = None;
                 let mut selling__ = None;
                 let mut borrow_selling__ = None;
+                let mut borrow_sellable__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BookQuantity => {
@@ -2450,6 +2463,14 @@ impl<'de> serde::Deserialize<'de> for LedgerStockData {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BorrowSellable => {
+                            if borrow_sellable__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("borrowSellable"));
+                            }
+                            borrow_sellable__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2476,6 +2497,7 @@ impl<'de> serde::Deserialize<'de> for LedgerStockData {
                     settlement_borrow_balance: settlement_borrow_balance__.unwrap_or_default(),
                     selling: selling__.unwrap_or_default(),
                     borrow_selling: borrow_selling__.unwrap_or_default(),
+                    borrow_sellable: borrow_sellable__.unwrap_or_default(),
                 })
             }
         }

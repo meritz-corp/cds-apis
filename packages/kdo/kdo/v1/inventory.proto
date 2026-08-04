@@ -299,6 +299,8 @@ message LedgerStockData {
   int64 selling = 19;
   // 차입매도예약수량 (서버 런타임 재고 기준. 원장 자체엔 없으며 KDO 트레이딩 재고의 현재 예약값)
   int64 borrow_selling = 20;
+  // 차입가용수량
+  int64 borrow_sellable = 21;
 }
 
 // 파생상품 원장 재고 데이터

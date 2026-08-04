@@ -170,6 +170,7 @@ const LedgerStockData$json = {
     {'1': 'settlement_borrow_balance', '3': 18, '4': 1, '5': 3, '10': 'settlementBorrowBalance'},
     {'1': 'selling', '3': 19, '4': 1, '5': 3, '10': 'selling'},
     {'1': 'borrow_selling', '3': 20, '4': 1, '5': 3, '10': 'borrowSelling'},
+    {'1': 'borrow_sellable', '3': 21, '4': 1, '5': 3, '10': 'borrowSellable'},
   ],
 };
 
@@ -192,7 +193,8 @@ final $typed_data.Uint8List ledgerStockDataDescriptor = $convert.base64Decode(
     'dkJvcnJvd0Jvb2tRdWFudGl0eRItChJzZXR0bGVtZW50X2JhbGFuY2UYESABKANSEXNldHRsZW'
     '1lbnRCYWxhbmNlEjoKGXNldHRsZW1lbnRfYm9ycm93X2JhbGFuY2UYEiABKANSF3NldHRsZW1l'
     'bnRCb3Jyb3dCYWxhbmNlEhgKB3NlbGxpbmcYEyABKANSB3NlbGxpbmcSJQoOYm9ycm93X3NlbG'
-    'xpbmcYFCABKANSDWJvcnJvd1NlbGxpbmc=');
+    'xpbmcYFCABKANSDWJvcnJvd1NlbGxpbmcSJwoPYm9ycm93X3NlbGxhYmxlGBUgASgDUg5ib3Jy'
+    'b3dTZWxsYWJsZQ==');
 
 @$core.Deprecated('Use ledgerDerivDataDescriptor instead')
 const LedgerDerivData$json = {
