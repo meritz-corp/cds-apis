@@ -22,6 +22,7 @@ const Settings$json = {
     {'1': 'consecutive_checks', '3': 2, '4': 1, '5': 13, '10': 'consecutiveChecks'},
     {'1': 'interval_secs', '3': 3, '4': 1, '5': 4, '10': 'intervalSecs'},
     {'1': 'funds', '3': 4, '4': 3, '5': 9, '10': 'funds'},
+    {'1': 'enabled', '3': 5, '4': 1, '5': 8, '10': 'enabled'},
   ],
 };
 
@@ -29,7 +30,8 @@ const Settings$json = {
 final $typed_data.Uint8List settingsDescriptor = $convert.base64Decode(
     'CghTZXR0aW5ncxIpChB0aHJlc2hvbGRfc2hhcmVzGAEgASgDUg90aHJlc2hvbGRTaGFyZXMSLQ'
     'oSY29uc2VjdXRpdmVfY2hlY2tzGAIgASgNUhFjb25zZWN1dGl2ZUNoZWNrcxIjCg1pbnRlcnZh'
-    'bF9zZWNzGAMgASgEUgxpbnRlcnZhbFNlY3MSFAoFZnVuZHMYBCADKAlSBWZ1bmRz');
+    'bF9zZWNzGAMgASgEUgxpbnRlcnZhbFNlY3MSFAoFZnVuZHMYBCADKAlSBWZ1bmRzEhgKB2VuYW'
+    'JsZWQYBSABKAhSB2VuYWJsZWQ=');
 
 @$core.Deprecated('Use getSettingsRequestDescriptor instead')
 const GetSettingsRequest$json = {
@@ -44,14 +46,20 @@ final $typed_data.Uint8List getSettingsRequestDescriptor = $convert.base64Decode
 const UpdateSettingsRequest$json = {
   '1': 'UpdateSettingsRequest',
   '2': [
-    {'1': 'threshold_shares', '3': 1, '4': 1, '5': 3, '10': 'thresholdShares'},
+    {'1': 'threshold_shares', '3': 1, '4': 1, '5': 3, '9': 0, '10': 'thresholdShares', '17': true},
+    {'1': 'enabled', '3': 2, '4': 1, '5': 8, '9': 1, '10': 'enabled', '17': true},
+  ],
+  '8': [
+    {'1': '_threshold_shares'},
+    {'1': '_enabled'},
   ],
 };
 
 /// Descriptor for `UpdateSettingsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSettingsRequestDescriptor = $convert.base64Decode(
-    'ChVVcGRhdGVTZXR0aW5nc1JlcXVlc3QSKQoQdGhyZXNob2xkX3NoYXJlcxgBIAEoA1IPdGhyZX'
-    'Nob2xkU2hhcmVz');
+    'ChVVcGRhdGVTZXR0aW5nc1JlcXVlc3QSLgoQdGhyZXNob2xkX3NoYXJlcxgBIAEoA0gAUg90aH'
+    'Jlc2hvbGRTaGFyZXOIAQESHQoHZW5hYmxlZBgCIAEoCEgBUgdlbmFibGVkiAEBQhMKEV90aHJl'
+    'c2hvbGRfc2hhcmVzQgoKCF9lbmFibGVk');
 
 @$core.Deprecated('Use listStopEventsRequestDescriptor instead')
 const ListStopEventsRequest$json = {

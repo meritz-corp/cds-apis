@@ -15,6 +15,9 @@ pub struct Settings {
     /// 감시 중인 펀드
     #[prost(string, repeated, tag="4")]
     pub funds: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// false 면 대사는 계속하되 StopSymbolFund 를 보내지 않는다
+    #[prost(bool, tag="5")]
+    pub enabled: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -23,9 +26,12 @@ pub struct GetSettingsRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UpdateSettingsRequest {
-    /// 1 이상이어야 한다.
-    #[prost(int64, tag="1")]
-    pub threshold_shares: i64,
+    /// 지정하면 임계값 변경. 1 이상이어야 한다.
+    #[prost(int64, optional, tag="1")]
+    pub threshold_shares: ::core::option::Option<i64>,
+    /// 지정하면 자동 정지 on/off 변경
+    #[prost(bool, optional, tag="2")]
+    pub enabled: ::core::option::Option<bool>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

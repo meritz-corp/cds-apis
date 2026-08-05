@@ -26,13 +26,17 @@ message Settings {
   uint64 interval_secs = 3;
   // 감시 중인 펀드
   repeated string funds = 4;
+  // false 면 대사는 계속하되 StopSymbolFund 를 보내지 않는다
+  bool enabled = 5;
 }
 
 message GetSettingsRequest {}
 
 message UpdateSettingsRequest {
-  // 1 이상이어야 한다.
-  int64 threshold_shares = 1;
+  // 지정하면 임계값 변경. 1 이상이어야 한다.
+  optional int64 threshold_shares = 1;
+  // 지정하면 자동 정지 on/off 변경
+  optional bool enabled = 2;
 }
 
 message ListStopEventsRequest {

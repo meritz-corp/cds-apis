@@ -23,12 +23,14 @@ class Settings extends $pb.GeneratedMessage {
     $core.int? consecutiveChecks,
     $fixnum.Int64? intervalSecs,
     $core.Iterable<$core.String>? funds,
+    $core.bool? enabled,
   }) {
     final result = create();
     if (thresholdShares != null) result.thresholdShares = thresholdShares;
     if (consecutiveChecks != null) result.consecutiveChecks = consecutiveChecks;
     if (intervalSecs != null) result.intervalSecs = intervalSecs;
     if (funds != null) result.funds.addAll(funds);
+    if (enabled != null) result.enabled = enabled;
     return result;
   }
 
@@ -42,6 +44,7 @@ class Settings extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'consecutiveChecks', $pb.PbFieldType.OU3)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'intervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pPS(4, _omitFieldNames ? '' : 'funds')
+    ..aOB(5, _omitFieldNames ? '' : 'enabled')
     ..hasRequiredFields = false
   ;
 
@@ -95,6 +98,16 @@ class Settings extends $pb.GeneratedMessage {
   /// 감시 중인 펀드
   @$pb.TagNumber(4)
   $pb.PbList<$core.String> get funds => $_getList(3);
+
+  /// false 면 대사는 계속하되 StopSymbolFund 를 보내지 않는다
+  @$pb.TagNumber(5)
+  $core.bool get enabled => $_getBF(4);
+  @$pb.TagNumber(5)
+  set enabled($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasEnabled() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearEnabled() => $_clearField(5);
 }
 
 class GetSettingsRequest extends $pb.GeneratedMessage {
@@ -130,9 +143,11 @@ class GetSettingsRequest extends $pb.GeneratedMessage {
 class UpdateSettingsRequest extends $pb.GeneratedMessage {
   factory UpdateSettingsRequest({
     $fixnum.Int64? thresholdShares,
+    $core.bool? enabled,
   }) {
     final result = create();
     if (thresholdShares != null) result.thresholdShares = thresholdShares;
+    if (enabled != null) result.enabled = enabled;
     return result;
   }
 
@@ -143,6 +158,7 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'thresholdShares')
+    ..aOB(2, _omitFieldNames ? '' : 'enabled')
     ..hasRequiredFields = false
   ;
 
@@ -163,7 +179,7 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   static UpdateSettingsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSettingsRequest>(create);
   static UpdateSettingsRequest? _defaultInstance;
 
-  /// 1 이상이어야 한다.
+  /// 지정하면 임계값 변경. 1 이상이어야 한다.
   @$pb.TagNumber(1)
   $fixnum.Int64 get thresholdShares => $_getI64(0);
   @$pb.TagNumber(1)
@@ -172,6 +188,16 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   $core.bool hasThresholdShares() => $_has(0);
   @$pb.TagNumber(1)
   void clearThresholdShares() => $_clearField(1);
+
+  /// 지정하면 자동 정지 on/off 변경
+  @$pb.TagNumber(2)
+  $core.bool get enabled => $_getBF(1);
+  @$pb.TagNumber(2)
+  set enabled($core.bool value) => $_setBool(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasEnabled() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEnabled() => $_clearField(2);
 }
 
 class ListStopEventsRequest extends $pb.GeneratedMessage {

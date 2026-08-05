@@ -52,6 +52,10 @@
             "type": "string"
           },
           "title": "감시 중인 펀드"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "false 면 대사는 계속하되 StopSymbolFund 를 보내지 않는다"
         }
       }
     },

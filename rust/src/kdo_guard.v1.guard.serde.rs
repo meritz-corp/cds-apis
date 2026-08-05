@@ -283,6 +283,9 @@ impl serde::Serialize for Settings {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.Settings", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -299,6 +302,9 @@ impl serde::Serialize for Settings {
         }
         if true {
             struct_ser.serialize_field("funds", &self.funds)?;
+        }
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
         }
         struct_ser.end()
     }
@@ -317,6 +323,7 @@ impl<'de> serde::Deserialize<'de> for Settings {
             "interval_secs",
             "intervalSecs",
             "funds",
+            "enabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -325,6 +332,7 @@ impl<'de> serde::Deserialize<'de> for Settings {
             ConsecutiveChecks,
             IntervalSecs,
             Funds,
+            Enabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -351,6 +359,7 @@ impl<'de> serde::Deserialize<'de> for Settings {
                             "consecutiveChecks" | "consecutive_checks" => Ok(GeneratedField::ConsecutiveChecks),
                             "intervalSecs" | "interval_secs" => Ok(GeneratedField::IntervalSecs),
                             "funds" => Ok(GeneratedField::Funds),
+                            "enabled" => Ok(GeneratedField::Enabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -374,6 +383,7 @@ impl<'de> serde::Deserialize<'de> for Settings {
                 let mut consecutive_checks__ = None;
                 let mut interval_secs__ = None;
                 let mut funds__ = None;
+                let mut enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ThresholdShares => {
@@ -406,6 +416,12 @@ impl<'de> serde::Deserialize<'de> for Settings {
                             }
                             funds__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -416,6 +432,7 @@ impl<'de> serde::Deserialize<'de> for Settings {
                     consecutive_checks: consecutive_checks__.unwrap_or_default(),
                     interval_secs: interval_secs__.unwrap_or_default(),
                     funds: funds__.unwrap_or_default(),
+                    enabled: enabled__.unwrap_or_default(),
                 })
             }
         }
@@ -710,11 +727,17 @@ impl serde::Serialize for UpdateSettingsRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.UpdateSettingsRequest", len)?;
         if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.UpdateSettingsRequest", len)?;
+        if let Some(v) = self.threshold_shares.as_ref() {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("threshold_shares", ToString::to_string(&self.threshold_shares).as_str())?;
+            struct_ser.serialize_field("threshold_shares", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.enabled.as_ref() {
+            struct_ser.serialize_field("enabled", v)?;
         }
         struct_ser.end()
     }
@@ -728,11 +751,13 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
         const FIELDS: &[&str] = &[
             "threshold_shares",
             "thresholdShares",
+            "enabled",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             ThresholdShares,
+            Enabled,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -756,6 +781,7 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                     {
                         match value {
                             "thresholdShares" | "threshold_shares" => Ok(GeneratedField::ThresholdShares),
+                            "enabled" => Ok(GeneratedField::Enabled),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -776,6 +802,7 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut threshold_shares__ = None;
+                let mut enabled__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ThresholdShares => {
@@ -783,8 +810,14 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                                 return Err(serde::de::Error::duplicate_field("thresholdShares"));
                             }
                             threshold_shares__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
+                        }
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -792,7 +825,8 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                     }
                 }
                 Ok(UpdateSettingsRequest {
-                    threshold_shares: threshold_shares__.unwrap_or_default(),
+                    threshold_shares: threshold_shares__,
+                    enabled: enabled__,
                 })
             }
         }
