@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "inventory_guard/v1/guard.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "GuardService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "guardListStopEventsResponse": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/guardStopEvent"
+          }
+        }
+      }
+    },
+    "guardSettings": {
+      "type": "object",
+      "properties": {
+        "thresholdShares": {
+          "type": "string",
+          "format": "int64",
+          "title": "가용수량이 이 수량(주) 이상 어긋나면 위반"
+        },
+        "consecutiveChecks": {
+          "type": "integer",
+          "format": "int64",
+          "title": "연속 몇 회 위반해야 정지시키는지"
+        },
+        "intervalSecs": {
+          "type": "string",
+          "format": "uint64",
+          "title": "감시 주기 (초)"
+        },
+        "funds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "감시 중인 펀드"
+        }
+      }
+    },
+    "guardStopEvent": {
+      "type": "object",
+      "properties": {
+        "instance": {
+          "type": "string",
+          "title": "KDO 인스턴스 이름 (PROD, PROD2 …)"
+        },
+        "fund": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "종목 ISIN"
+        },
+        "name": {
+          "type": "string"
+        },
+        "kdoSellable": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ledgerSellable": {
+          "type": "string",
+          "format": "int64"
+        },
+        "cause": {
+          "type": "string",
+          "title": "StopSymbolFund 에 실어 보낸 사유"
+        },
+        "occurredAt": {
+          "type": "string",
+          "title": "RFC3339 (KST)"
+        },
+        "succeeded": {
+          "type": "boolean",
+          "title": "StopSymbolFund 호출 성공 여부"
+        },
+        "error": {
+          "type": "string",
+          "title": "실패 시 사유"
+        },
+        "stoppedServices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "정지된 서비스 목록 (\"mm(005930/0716)\" …)"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

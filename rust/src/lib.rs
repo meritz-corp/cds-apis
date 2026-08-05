@@ -142,6 +142,14 @@ pub mod mmm {
     }
 }
 
+pub mod inventory_guard {
+    pub mod v1 {
+        pub mod guard {
+            include!("inventory_guard.v1.guard.rs");
+        }
+    }
+}
+
 pub mod system_ops {
     pub mod v1 {
         pub mod holiday {

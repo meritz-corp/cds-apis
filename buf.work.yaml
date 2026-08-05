@@ -1,6 +1,7 @@
 version: v1
 directories:
   - packages/log_sync
+  - packages/inventory_guard
   - packages/kdo
   - packages/market
   - packages/master_sync

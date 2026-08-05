@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package inventory_guard.v1.guard;
+
+option go_package = "github.com/meritz-corp/cds-apis/go/inventory_guard/v1;inventory_guard";
+
+// inventory-guard 운영용 API.
+// inv_diff (재고 비교 앱) 가 임계값을 바꾸고 정지 이력을 조회하는 데 쓴다.
+service GuardService {
+  // 현재 감시 설정 조회
+  rpc GetSettings(GetSettingsRequest) returns (Settings) {}
+
+  // 임계값 변경. 다음 회차부터 적용된다.
+  rpc UpdateSettings(UpdateSettingsRequest) returns (Settings) {}
+
+  // 최근 정지 이력 (최신순)
+  rpc ListStopEvents(ListStopEventsRequest) returns (ListStopEventsResponse) {}
+}
+
+message Settings {
+  // 가용수량이 이 수량(주) 이상 어긋나면 위반
+  int64 threshold_shares = 1;
+  // 연속 몇 회 위반해야 정지시키는지
+  uint32 consecutive_checks = 2;
+  // 감시 주기 (초)
+  uint64 interval_secs = 3;
+  // 감시 중인 펀드
+  repeated string funds = 4;
+}
+
+message GetSettingsRequest {}
+
+message UpdateSettingsRequest {
+  // 1 이상이어야 한다.
+  int64 threshold_shares = 1;
+}
+
+message ListStopEventsRequest {
+  // 기본 50, 최대 200
+  uint32 limit = 1;
+}
+
+message ListStopEventsResponse {
+  repeated StopEvent events = 1;
+}
+
+message StopEvent {
+  // KDO 인스턴스 이름 (PROD, PROD2 …)
+  string instance = 1;
+  string fund = 2;
+  // 종목 ISIN
+  string symbol = 3;
+  string name = 4;
+  int64 kdo_sellable = 5;
+  int64 ledger_sellable = 6;
+  // StopSymbolFund 에 실어 보낸 사유
+  string cause = 7;
+  // RFC3339 (KST)
+  string occurred_at = 8;
+  // StopSymbolFund 호출 성공 여부
+  bool succeeded = 9;
+  // 실패 시 사유
+  string error = 10;
+  // 정지된 서비스 목록 ("mm(005930/0716)" …)
+  repeated string stopped_services = 11;
+}
