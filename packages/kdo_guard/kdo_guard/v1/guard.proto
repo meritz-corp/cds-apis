@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package inventory_guard.v1.guard;
+package kdo_guard.v1.guard;
 
-option go_package = "github.com/meritz-corp/cds-apis/go/inventory_guard/v1;inventory_guard";
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo_guard/v1;kdo_guard";
 
-// inventory-guard 운영용 API.
+// kdo-guard 운영용 API.
 // inv_diff (재고 비교 앱) 가 임계값을 바꾸고 정지 이력을 조회하는 데 쓴다.
 service GuardService {
   // 현재 감시 설정 조회

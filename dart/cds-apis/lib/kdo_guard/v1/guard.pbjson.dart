@@ -1,6 +1,6 @@
 // This is a generated file - do not edit.
 //
-// Generated from inventory_guard/v1/guard.proto.
+// Generated from kdo_guard/v1/guard.proto.
 
 // @dart = 3.3
 
@@ -69,14 +69,14 @@ final $typed_data.Uint8List listStopEventsRequestDescriptor = $convert.base64Dec
 const ListStopEventsResponse$json = {
   '1': 'ListStopEventsResponse',
   '2': [
-    {'1': 'events', '3': 1, '4': 3, '5': 11, '6': '.inventory_guard.v1.guard.StopEvent', '10': 'events'},
+    {'1': 'events', '3': 1, '4': 3, '5': 11, '6': '.kdo_guard.v1.guard.StopEvent', '10': 'events'},
   ],
 };
 
 /// Descriptor for `ListStopEventsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listStopEventsResponseDescriptor = $convert.base64Decode(
-    'ChZMaXN0U3RvcEV2ZW50c1Jlc3BvbnNlEjsKBmV2ZW50cxgBIAMoCzIjLmludmVudG9yeV9ndW'
-    'FyZC52MS5ndWFyZC5TdG9wRXZlbnRSBmV2ZW50cw==');
+    'ChZMaXN0U3RvcEV2ZW50c1Jlc3BvbnNlEjUKBmV2ZW50cxgBIAMoCzIdLmtkb19ndWFyZC52MS'
+    '5ndWFyZC5TdG9wRXZlbnRSBmV2ZW50cw==');
 
 @$core.Deprecated('Use stopEventDescriptor instead')
 const StopEvent$json = {

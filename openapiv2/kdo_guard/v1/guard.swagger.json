@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "inventory_guard/v1/guard.proto",
+    "title": "kdo_guard/v1/guard.proto",
     "version": "version not set"
   },
   "tags": [

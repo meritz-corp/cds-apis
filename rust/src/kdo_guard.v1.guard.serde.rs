@@ -7,7 +7,7 @@ impl serde::Serialize for GetSettingsRequest {
     {
         use serde::ser::SerializeStruct;
         let len = 0;
-        let struct_ser = serializer.serialize_struct("inventory_guard.v1.guard.GetSettingsRequest", len)?;
+        let struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.GetSettingsRequest", len)?;
         struct_ser.end()
     }
 }
@@ -54,7 +54,7 @@ impl<'de> serde::Deserialize<'de> for GetSettingsRequest {
             type Value = GetSettingsRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct inventory_guard.v1.guard.GetSettingsRequest")
+                formatter.write_str("struct kdo_guard.v1.guard.GetSettingsRequest")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetSettingsRequest, V::Error>
@@ -68,7 +68,7 @@ impl<'de> serde::Deserialize<'de> for GetSettingsRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("inventory_guard.v1.guard.GetSettingsRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo_guard.v1.guard.GetSettingsRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListStopEventsRequest {
@@ -82,7 +82,7 @@ impl serde::Serialize for ListStopEventsRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("inventory_guard.v1.guard.ListStopEventsRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.ListStopEventsRequest", len)?;
         if true {
             struct_ser.serialize_field("limit", &self.limit)?;
         }
@@ -137,7 +137,7 @@ impl<'de> serde::Deserialize<'de> for ListStopEventsRequest {
             type Value = ListStopEventsRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct inventory_guard.v1.guard.ListStopEventsRequest")
+                formatter.write_str("struct kdo_guard.v1.guard.ListStopEventsRequest")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListStopEventsRequest, V::Error>
@@ -165,7 +165,7 @@ impl<'de> serde::Deserialize<'de> for ListStopEventsRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("inventory_guard.v1.guard.ListStopEventsRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo_guard.v1.guard.ListStopEventsRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListStopEventsResponse {
@@ -179,7 +179,7 @@ impl serde::Serialize for ListStopEventsResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("inventory_guard.v1.guard.ListStopEventsResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.ListStopEventsResponse", len)?;
         if true {
             struct_ser.serialize_field("events", &self.events)?;
         }
@@ -234,7 +234,7 @@ impl<'de> serde::Deserialize<'de> for ListStopEventsResponse {
             type Value = ListStopEventsResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct inventory_guard.v1.guard.ListStopEventsResponse")
+                formatter.write_str("struct kdo_guard.v1.guard.ListStopEventsResponse")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListStopEventsResponse, V::Error>
@@ -260,7 +260,7 @@ impl<'de> serde::Deserialize<'de> for ListStopEventsResponse {
                 })
             }
         }
-        deserializer.deserialize_struct("inventory_guard.v1.guard.ListStopEventsResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo_guard.v1.guard.ListStopEventsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Settings {
@@ -283,7 +283,7 @@ impl serde::Serialize for Settings {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("inventory_guard.v1.guard.Settings", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.Settings", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -363,7 +363,7 @@ impl<'de> serde::Deserialize<'de> for Settings {
             type Value = Settings;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct inventory_guard.v1.guard.Settings")
+                formatter.write_str("struct kdo_guard.v1.guard.Settings")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<Settings, V::Error>
@@ -419,7 +419,7 @@ impl<'de> serde::Deserialize<'de> for Settings {
                 })
             }
         }
-        deserializer.deserialize_struct("inventory_guard.v1.guard.Settings", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo_guard.v1.guard.Settings", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StopEvent {
@@ -463,7 +463,7 @@ impl serde::Serialize for StopEvent {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("inventory_guard.v1.guard.StopEvent", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.StopEvent", len)?;
         if true {
             struct_ser.serialize_field("instance", &self.instance)?;
         }
@@ -586,7 +586,7 @@ impl<'de> serde::Deserialize<'de> for StopEvent {
             type Value = StopEvent;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct inventory_guard.v1.guard.StopEvent")
+                formatter.write_str("struct kdo_guard.v1.guard.StopEvent")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<StopEvent, V::Error>
@@ -696,7 +696,7 @@ impl<'de> serde::Deserialize<'de> for StopEvent {
                 })
             }
         }
-        deserializer.deserialize_struct("inventory_guard.v1.guard.StopEvent", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo_guard.v1.guard.StopEvent", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for UpdateSettingsRequest {
@@ -710,7 +710,7 @@ impl serde::Serialize for UpdateSettingsRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("inventory_guard.v1.guard.UpdateSettingsRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.UpdateSettingsRequest", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -768,7 +768,7 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
             type Value = UpdateSettingsRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct inventory_guard.v1.guard.UpdateSettingsRequest")
+                formatter.write_str("struct kdo_guard.v1.guard.UpdateSettingsRequest")
             }
 
             fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateSettingsRequest, V::Error>
@@ -796,6 +796,6 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("inventory_guard.v1.guard.UpdateSettingsRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo_guard.v1.guard.UpdateSettingsRequest", FIELDS, GeneratedVisitor)
     }
 }

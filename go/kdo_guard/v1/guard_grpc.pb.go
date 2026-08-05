@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             (unknown)
-// source: inventory_guard/v1/guard.proto
+// source: kdo_guard/v1/guard.proto
 
-package inventory_guard
+package kdo_guard
 
 import (
 	context "context"
@@ -40,7 +40,7 @@ func NewGuardServiceClient(cc grpc.ClientConnInterface) GuardServiceClient {
 
 func (c *guardServiceClient) GetSettings(ctx context.Context, in *GetSettingsRequest, opts ...grpc.CallOption) (*Settings, error) {
 	out := new(Settings)
-	err := c.cc.Invoke(ctx, "/inventory_guard.v1.guard.GuardService/GetSettings", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/kdo_guard.v1.guard.GuardService/GetSettings", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func (c *guardServiceClient) GetSettings(ctx context.Context, in *GetSettingsReq
 
 func (c *guardServiceClient) UpdateSettings(ctx context.Context, in *UpdateSettingsRequest, opts ...grpc.CallOption) (*Settings, error) {
 	out := new(Settings)
-	err := c.cc.Invoke(ctx, "/inventory_guard.v1.guard.GuardService/UpdateSettings", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/kdo_guard.v1.guard.GuardService/UpdateSettings", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (c *guardServiceClient) UpdateSettings(ctx context.Context, in *UpdateSetti
 
 func (c *guardServiceClient) ListStopEvents(ctx context.Context, in *ListStopEventsRequest, opts ...grpc.CallOption) (*ListStopEventsResponse, error) {
 	out := new(ListStopEventsResponse)
-	err := c.cc.Invoke(ctx, "/inventory_guard.v1.guard.GuardService/ListStopEvents", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/kdo_guard.v1.guard.GuardService/ListStopEvents", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ func _GuardService_GetSettings_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/inventory_guard.v1.guard.GuardService/GetSettings",
+		FullMethod: "/kdo_guard.v1.guard.GuardService/GetSettings",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuardServiceServer).GetSettings(ctx, req.(*GetSettingsRequest))
@@ -132,7 +132,7 @@ func _GuardService_UpdateSettings_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/inventory_guard.v1.guard.GuardService/UpdateSettings",
+		FullMethod: "/kdo_guard.v1.guard.GuardService/UpdateSettings",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuardServiceServer).UpdateSettings(ctx, req.(*UpdateSettingsRequest))
@@ -150,7 +150,7 @@ func _GuardService_ListStopEvents_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/inventory_guard.v1.guard.GuardService/ListStopEvents",
+		FullMethod: "/kdo_guard.v1.guard.GuardService/ListStopEvents",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuardServiceServer).ListStopEvents(ctx, req.(*ListStopEventsRequest))
@@ -162,7 +162,7 @@ func _GuardService_ListStopEvents_Handler(srv interface{}, ctx context.Context, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GuardService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "inventory_guard.v1.guard.GuardService",
+	ServiceName: "kdo_guard.v1.guard.GuardService",
 	HandlerType: (*GuardServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -179,5 +179,5 @@ var GuardService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "inventory_guard/v1/guard.proto",
+	Metadata: "kdo_guard/v1/guard.proto",
 }

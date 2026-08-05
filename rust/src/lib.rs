@@ -142,10 +142,10 @@ pub mod mmm {
     }
 }
 
-pub mod inventory_guard {
+pub mod kdo_guard {
     pub mod v1 {
         pub mod guard {
-            include!("inventory_guard.v1.guard.rs");
+            include!("kdo_guard.v1.guard.rs");
         }
     }
 }

@@ -73,6 +73,6 @@ pub struct StopEvent {
     #[prost(string, repeated, tag="11")]
     pub stopped_services: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-include!("inventory_guard.v1.guard.tonic.rs");
-include!("inventory_guard.v1.guard.serde.rs");
+include!("kdo_guard.v1.guard.tonic.rs");
+include!("kdo_guard.v1.guard.serde.rs");
 // @@protoc_insertion_point(module)

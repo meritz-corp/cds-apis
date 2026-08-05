@@ -99,15 +99,12 @@ pub mod guard_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/inventory_guard.v1.guard.GuardService/GetSettings",
+                "/kdo_guard.v1.guard.GuardService/GetSettings",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new(
-                        "inventory_guard.v1.guard.GuardService",
-                        "GetSettings",
-                    ),
+                    GrpcMethod::new("kdo_guard.v1.guard.GuardService", "GetSettings"),
                 );
             self.inner.unary(req, path, codec).await
         }
@@ -126,15 +123,12 @@ pub mod guard_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/inventory_guard.v1.guard.GuardService/UpdateSettings",
+                "/kdo_guard.v1.guard.GuardService/UpdateSettings",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new(
-                        "inventory_guard.v1.guard.GuardService",
-                        "UpdateSettings",
-                    ),
+                    GrpcMethod::new("kdo_guard.v1.guard.GuardService", "UpdateSettings"),
                 );
             self.inner.unary(req, path, codec).await
         }
@@ -156,15 +150,12 @@ pub mod guard_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/inventory_guard.v1.guard.GuardService/ListStopEvents",
+                "/kdo_guard.v1.guard.GuardService/ListStopEvents",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new(
-                        "inventory_guard.v1.guard.GuardService",
-                        "ListStopEvents",
-                    ),
+                    GrpcMethod::new("kdo_guard.v1.guard.GuardService", "ListStopEvents"),
                 );
             self.inner.unary(req, path, codec).await
         }
@@ -269,7 +260,7 @@ pub mod guard_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/inventory_guard.v1.guard.GuardService/GetSettings" => {
+                "/kdo_guard.v1.guard.GuardService/GetSettings" => {
                     #[allow(non_camel_case_types)]
                     struct GetSettingsSvc<T: GuardService>(pub Arc<T>);
                     impl<
@@ -314,7 +305,7 @@ pub mod guard_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/inventory_guard.v1.guard.GuardService/UpdateSettings" => {
+                "/kdo_guard.v1.guard.GuardService/UpdateSettings" => {
                     #[allow(non_camel_case_types)]
                     struct UpdateSettingsSvc<T: GuardService>(pub Arc<T>);
                     impl<
@@ -359,7 +350,7 @@ pub mod guard_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/inventory_guard.v1.guard.GuardService/ListStopEvents" => {
+                "/kdo_guard.v1.guard.GuardService/ListStopEvents" => {
                     #[allow(non_camel_case_types)]
                     struct ListStopEventsSvc<T: GuardService>(pub Arc<T>);
                     impl<
@@ -435,6 +426,6 @@ pub mod guard_service_server {
         }
     }
     impl<T: GuardService> tonic::server::NamedService for GuardServiceServer<T> {
-        const NAME: &'static str = "inventory_guard.v1.guard.GuardService";
+        const NAME: &'static str = "kdo_guard.v1.guard.GuardService";
     }
 }

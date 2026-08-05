@@ -1,6 +1,6 @@
 // This is a generated file - do not edit.
 //
-// Generated from inventory_guard/v1/guard.proto.
+// Generated from kdo_guard/v1/guard.proto.
 
 // @dart = 3.3
 
@@ -37,7 +37,7 @@ class Settings extends $pb.GeneratedMessage {
   factory Settings.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory Settings.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Settings', package: const $pb.PackageName(_omitMessageNames ? '' : 'inventory_guard.v1.guard'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Settings', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'thresholdShares')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'consecutiveChecks', $pb.PbFieldType.OU3)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'intervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
@@ -105,7 +105,7 @@ class GetSettingsRequest extends $pb.GeneratedMessage {
   factory GetSettingsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory GetSettingsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'inventory_guard.v1.guard'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -141,7 +141,7 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   factory UpdateSettingsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory UpdateSettingsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'inventory_guard.v1.guard'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'thresholdShares')
     ..hasRequiredFields = false
   ;
@@ -188,7 +188,7 @@ class ListStopEventsRequest extends $pb.GeneratedMessage {
   factory ListStopEventsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory ListStopEventsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStopEventsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'inventory_guard.v1.guard'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStopEventsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
@@ -235,7 +235,7 @@ class ListStopEventsResponse extends $pb.GeneratedMessage {
   factory ListStopEventsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory ListStopEventsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStopEventsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'inventory_guard.v1.guard'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListStopEventsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..pc<StopEvent>(1, _omitFieldNames ? '' : 'events', $pb.PbFieldType.PM, subBuilder: StopEvent.create)
     ..hasRequiredFields = false
   ;
@@ -295,7 +295,7 @@ class StopEvent extends $pb.GeneratedMessage {
   factory StopEvent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
   factory StopEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'inventory_guard.v1.guard'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'instance')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
     ..aOS(3, _omitFieldNames ? '' : 'symbol')

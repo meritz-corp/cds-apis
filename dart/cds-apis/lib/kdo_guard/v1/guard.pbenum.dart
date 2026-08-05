@@ -1,6 +1,6 @@
 // This is a generated file - do not edit.
 //
-// Generated from inventory_guard/v1/guard.proto.
+// Generated from kdo_guard/v1/guard.proto.
 
 // @dart = 3.3
 

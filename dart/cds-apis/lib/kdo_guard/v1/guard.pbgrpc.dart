@@ -1,6 +1,6 @@
 // This is a generated file - do not edit.
 //
-// Generated from inventory_guard/v1/guard.proto.
+// Generated from kdo_guard/v1/guard.proto.
 
 // @dart = 3.3
 
@@ -20,9 +20,9 @@ import 'guard.pb.dart' as $0;
 
 export 'guard.pb.dart';
 
-/// inventory-guard 운영용 API.
+/// kdo-guard 운영용 API.
 /// inv_diff (재고 비교 앱) 가 임계값을 바꾸고 정지 이력을 조회하는 데 쓴다.
-@$pb.GrpcServiceName('inventory_guard.v1.guard.GuardService')
+@$pb.GrpcServiceName('kdo_guard.v1.guard.GuardService')
 class GuardServiceClient extends $grpc.Client {
   /// The hostname for this service.
   static const $core.String defaultHost = '';
@@ -52,22 +52,22 @@ class GuardServiceClient extends $grpc.Client {
     // method descriptors
 
   static final _$getSettings = $grpc.ClientMethod<$0.GetSettingsRequest, $0.Settings>(
-      '/inventory_guard.v1.guard.GuardService/GetSettings',
+      '/kdo_guard.v1.guard.GuardService/GetSettings',
       ($0.GetSettingsRequest value) => value.writeToBuffer(),
       $0.Settings.fromBuffer);
   static final _$updateSettings = $grpc.ClientMethod<$0.UpdateSettingsRequest, $0.Settings>(
-      '/inventory_guard.v1.guard.GuardService/UpdateSettings',
+      '/kdo_guard.v1.guard.GuardService/UpdateSettings',
       ($0.UpdateSettingsRequest value) => value.writeToBuffer(),
       $0.Settings.fromBuffer);
   static final _$listStopEvents = $grpc.ClientMethod<$0.ListStopEventsRequest, $0.ListStopEventsResponse>(
-      '/inventory_guard.v1.guard.GuardService/ListStopEvents',
+      '/kdo_guard.v1.guard.GuardService/ListStopEvents',
       ($0.ListStopEventsRequest value) => value.writeToBuffer(),
       $0.ListStopEventsResponse.fromBuffer);
 }
 
-@$pb.GrpcServiceName('inventory_guard.v1.guard.GuardService')
+@$pb.GrpcServiceName('kdo_guard.v1.guard.GuardService')
 abstract class GuardServiceBase extends $grpc.Service {
-  $core.String get $name => 'inventory_guard.v1.guard.GuardService';
+  $core.String get $name => 'kdo_guard.v1.guard.GuardService';
 
   GuardServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.GetSettingsRequest, $0.Settings>(
