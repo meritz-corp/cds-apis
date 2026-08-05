@@ -63,4 +63,22 @@ extension type SystemServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
+  Future<kdov1system.StopSymbolFundResponse> stopSymbolFund(
+    kdov1system.StopSymbolFundRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.SystemService.stopSymbolFund,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

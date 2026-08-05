@@ -49,6 +49,11 @@ class SystemServiceClient extends $grpc.Client {
     return $createUnaryCall(_$stopAllTrading, request, options: options);
   }
 
+  /// StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
+  $grpc.ResponseFuture<$0.StopSymbolFundResponse> stopSymbolFund($0.StopSymbolFundRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$stopSymbolFund, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getConnectionInfo = $grpc.ClientMethod<$0.GetConnectionInfoRequest, $0.GetConnectionInfoResponse>(
@@ -63,6 +68,10 @@ class SystemServiceClient extends $grpc.Client {
       '/kdo.v1.system.SystemService/StopAllTrading',
       ($0.StopAllTradingRequest value) => value.writeToBuffer(),
       $0.StopAllTradingResponse.fromBuffer);
+  static final _$stopSymbolFund = $grpc.ClientMethod<$0.StopSymbolFundRequest, $0.StopSymbolFundResponse>(
+      '/kdo.v1.system.SystemService/StopSymbolFund',
+      ($0.StopSymbolFundRequest value) => value.writeToBuffer(),
+      $0.StopSymbolFundResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.system.SystemService')
@@ -91,6 +100,13 @@ abstract class SystemServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.StopAllTradingRequest.fromBuffer(value),
         ($0.StopAllTradingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StopSymbolFundRequest, $0.StopSymbolFundResponse>(
+        'StopSymbolFund',
+        stopSymbolFund_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.StopSymbolFundRequest.fromBuffer(value),
+        ($0.StopSymbolFundResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetConnectionInfoResponse> getConnectionInfo_Pre($grpc.ServiceCall $call, $async.Future<$0.GetConnectionInfoRequest> $request) async {
@@ -110,5 +126,11 @@ abstract class SystemServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.StopAllTradingResponse> stopAllTrading($grpc.ServiceCall call, $0.StopAllTradingRequest request);
+
+  $async.Future<$0.StopSymbolFundResponse> stopSymbolFund_Pre($grpc.ServiceCall $call, $async.Future<$0.StopSymbolFundRequest> $request) async {
+    return stopSymbolFund($call, await $request);
+  }
+
+  $async.Future<$0.StopSymbolFundResponse> stopSymbolFund($grpc.ServiceCall call, $0.StopSymbolFundRequest request);
 
 }

@@ -76,6 +76,186 @@ class StopAllTradingResponse extends $pb.GeneratedMessage {
   static StopAllTradingResponse? _defaultInstance;
 }
 
+class StopSymbolFundRequest extends $pb.GeneratedMessage {
+  factory StopSymbolFundRequest({
+    $core.String? symbol,
+    $core.String? fund,
+    $core.String? cause,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fund != null) result.fund = fund;
+    if (cause != null) result.cause = cause;
+    return result;
+  }
+
+  StopSymbolFundRequest._();
+
+  factory StopSymbolFundRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopSymbolFundRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopSymbolFundRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
+    ..aOS(3, _omitFieldNames ? '' : 'cause')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopSymbolFundRequest clone() => StopSymbolFundRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopSymbolFundRequest copyWith(void Function(StopSymbolFundRequest) updates) => super.copyWith((message) => updates(message as StopSymbolFundRequest)) as StopSymbolFundRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopSymbolFundRequest create() => StopSymbolFundRequest._();
+  @$core.override
+  StopSymbolFundRequest createEmptyInstance() => create();
+  static $pb.PbList<StopSymbolFundRequest> createRepeated() => $pb.PbList<StopSymbolFundRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StopSymbolFundRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopSymbolFundRequest>(create);
+  static StopSymbolFundRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fund => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fund($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFund() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFund() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get cause => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set cause($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCause() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCause() => $_clearField(3);
+}
+
+class StopSymbolFundResponse extends $pb.GeneratedMessage {
+  factory StopSymbolFundResponse({
+    $core.Iterable<StoppedService>? stopped,
+  }) {
+    final result = create();
+    if (stopped != null) result.stopped.addAll(stopped);
+    return result;
+  }
+
+  StopSymbolFundResponse._();
+
+  factory StopSymbolFundResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StopSymbolFundResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopSymbolFundResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..pc<StoppedService>(1, _omitFieldNames ? '' : 'stopped', $pb.PbFieldType.PM, subBuilder: StoppedService.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopSymbolFundResponse clone() => StopSymbolFundResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StopSymbolFundResponse copyWith(void Function(StopSymbolFundResponse) updates) => super.copyWith((message) => updates(message as StopSymbolFundResponse)) as StopSymbolFundResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StopSymbolFundResponse create() => StopSymbolFundResponse._();
+  @$core.override
+  StopSymbolFundResponse createEmptyInstance() => create();
+  static $pb.PbList<StopSymbolFundResponse> createRepeated() => $pb.PbList<StopSymbolFundResponse>();
+  @$core.pragma('dart2js:noInline')
+  static StopSymbolFundResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StopSymbolFundResponse>(create);
+  static StopSymbolFundResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<StoppedService> get stopped => $_getList(0);
+}
+
+class StoppedService extends $pb.GeneratedMessage {
+  factory StoppedService({
+    $core.String? service,
+    $core.String? identifier,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (service != null) result.service = service;
+    if (identifier != null) result.identifier = identifier;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  StoppedService._();
+
+  factory StoppedService.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StoppedService.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StoppedService', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'service')
+    ..aOS(2, _omitFieldNames ? '' : 'identifier')
+    ..aOS(3, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StoppedService clone() => StoppedService()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StoppedService copyWith(void Function(StoppedService) updates) => super.copyWith((message) => updates(message as StoppedService)) as StoppedService;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StoppedService create() => StoppedService._();
+  @$core.override
+  StoppedService createEmptyInstance() => create();
+  static $pb.PbList<StoppedService> createRepeated() => $pb.PbList<StoppedService>();
+  @$core.pragma('dart2js:noInline')
+  static StoppedService getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StoppedService>(create);
+  static StoppedService? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get service => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set service($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasService() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearService() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get identifier => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set identifier($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasIdentifier() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIdentifier() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => $_clearField(3);
+}
+
 class GetConnectionInfoRequest extends $pb.GeneratedMessage {
   factory GetConnectionInfoRequest() => create();
 

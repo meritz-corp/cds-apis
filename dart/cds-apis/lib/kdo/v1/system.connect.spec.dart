@@ -35,4 +35,12 @@ abstract final class SystemService {
     kdov1system.StopAllTradingRequest.new,
     kdov1system.StopAllTradingResponse.new,
   );
+
+  /// StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
+  static const stopSymbolFund = connect.Spec(
+    '/$name/StopSymbolFund',
+    connect.StreamType.unary,
+    kdov1system.StopSymbolFundRequest.new,
+    kdov1system.StopSymbolFundResponse.new,
+  );
 }

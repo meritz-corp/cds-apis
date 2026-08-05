@@ -94,6 +94,26 @@ func (mr *MockSystemServiceClientMockRecorder) StopAllTrading(ctx, in interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopAllTrading", reflect.TypeOf((*MockSystemServiceClient)(nil).StopAllTrading), varargs...)
 }
 
+// StopSymbolFund mocks base method.
+func (m *MockSystemServiceClient) StopSymbolFund(ctx context.Context, in *StopSymbolFundRequest, opts ...grpc.CallOption) (*StopSymbolFundResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StopSymbolFund", varargs...)
+	ret0, _ := ret[0].(*StopSymbolFundResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopSymbolFund indicates an expected call of StopSymbolFund.
+func (mr *MockSystemServiceClientMockRecorder) StopSymbolFund(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopSymbolFund", reflect.TypeOf((*MockSystemServiceClient)(nil).StopSymbolFund), varargs...)
+}
+
 // MockSystemServiceServer is a mock of SystemServiceServer interface.
 type MockSystemServiceServer struct {
 	ctrl     *gomock.Controller
@@ -160,4 +180,19 @@ func (m *MockSystemServiceServer) StopAllTrading(ctx context.Context, in *StopAl
 func (mr *MockSystemServiceServerMockRecorder) StopAllTrading(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopAllTrading", reflect.TypeOf((*MockSystemServiceServer)(nil).StopAllTrading), ctx, in)
+}
+
+// StopSymbolFund mocks base method.
+func (m *MockSystemServiceServer) StopSymbolFund(ctx context.Context, in *StopSymbolFundRequest) (*StopSymbolFundResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "StopSymbolFund", ctx, in)
+	ret0, _ := ret[0].(*StopSymbolFundResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StopSymbolFund indicates an expected call of StopSymbolFund.
+func (mr *MockSystemServiceServerMockRecorder) StopSymbolFund(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopSymbolFund", reflect.TypeOf((*MockSystemServiceServer)(nil).StopSymbolFund), ctx, in)
 }

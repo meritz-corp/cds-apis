@@ -15,11 +15,30 @@ service SystemService {
   // StopAllTrading gracefully stops all trading services
   // (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
   rpc StopAllTrading(StopAllTradingRequest) returns (StopAllTradingResponse) {}
+
+  // StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
+  rpc StopSymbolFund(StopSymbolFundRequest) returns (StopSymbolFundResponse) {}
 }
 
 message StopAllTradingRequest {}
 
 message StopAllTradingResponse {}
+
+message StopSymbolFundRequest {
+  string symbol = 1;
+  string fund = 2;
+  string cause = 3;
+}
+
+message StopSymbolFundResponse {
+  repeated StoppedService stopped = 1;
+}
+
+message StoppedService {
+  string service = 1;     // "quote" | "mm" | "mm_v2" | "futures_lp" | "pair"
+  string identifier = 2;  // "symbol/fund" 또는 pair_id
+  string message = 3;
+}
 
 message GetConnectionInfoRequest {}
 

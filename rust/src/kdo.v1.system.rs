@@ -9,6 +9,34 @@ pub struct StopAllTradingRequest {
 pub struct StopAllTradingResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopSymbolFundRequest {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub fund: ::prost::alloc::string::String,
+    #[prost(string, tag="3")]
+    pub cause: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StopSymbolFundResponse {
+    #[prost(message, repeated, tag="1")]
+    pub stopped: ::prost::alloc::vec::Vec<StoppedService>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StoppedService {
+    /// "quote" | "mm" | "mm_v2" | "futures_lp" | "pair"
+    #[prost(string, tag="1")]
+    pub service: ::prost::alloc::string::String,
+    /// "symbol/fund" 또는 pair_id
+    #[prost(string, tag="2")]
+    pub identifier: ::prost::alloc::string::String,
+    #[prost(string, tag="3")]
+    pub message: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetConnectionInfoRequest {
 }

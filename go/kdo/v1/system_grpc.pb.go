@@ -29,6 +29,8 @@ type SystemServiceClient interface {
 	// StopAllTrading gracefully stops all trading services
 	// (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
 	StopAllTrading(ctx context.Context, in *StopAllTradingRequest, opts ...grpc.CallOption) (*StopAllTradingResponse, error)
+	// StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
+	StopSymbolFund(ctx context.Context, in *StopSymbolFundRequest, opts ...grpc.CallOption) (*StopSymbolFundResponse, error)
 }
 
 type systemServiceClient struct {
@@ -66,6 +68,15 @@ func (c *systemServiceClient) StopAllTrading(ctx context.Context, in *StopAllTra
 	return out, nil
 }
 
+func (c *systemServiceClient) StopSymbolFund(ctx context.Context, in *StopSymbolFundRequest, opts ...grpc.CallOption) (*StopSymbolFundResponse, error) {
+	out := new(StopSymbolFundResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.system.SystemService/StopSymbolFund", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServiceServer is the server API for SystemService service.
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility
@@ -77,6 +88,8 @@ type SystemServiceServer interface {
 	// StopAllTrading gracefully stops all trading services
 	// (mm, mm_v2, quote/etf_lp, futures_lp, pair, arbitrage, market_sniping, lead_lag, lead_lag_v2).
 	StopAllTrading(context.Context, *StopAllTradingRequest) (*StopAllTradingResponse, error)
+	// StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
+	StopSymbolFund(context.Context, *StopSymbolFundRequest) (*StopSymbolFundResponse, error)
 	mustEmbedUnimplementedSystemServiceServer()
 }
 
@@ -92,6 +105,9 @@ func (UnimplementedSystemServiceServer) GetVersionInfo(context.Context, *GetVers
 }
 func (UnimplementedSystemServiceServer) StopAllTrading(context.Context, *StopAllTradingRequest) (*StopAllTradingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopAllTrading not implemented")
+}
+func (UnimplementedSystemServiceServer) StopSymbolFund(context.Context, *StopSymbolFundRequest) (*StopSymbolFundResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopSymbolFund not implemented")
 }
 func (UnimplementedSystemServiceServer) mustEmbedUnimplementedSystemServiceServer() {}
 
@@ -160,6 +176,24 @@ func _SystemService_StopAllTrading_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SystemService_StopSymbolFund_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopSymbolFundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).StopSymbolFund(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.system.SystemService/StopSymbolFund",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).StopSymbolFund(ctx, req.(*StopSymbolFundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SystemService_ServiceDesc is the grpc.ServiceDesc for SystemService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -178,6 +212,10 @@ var SystemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopAllTrading",
 			Handler:    _SystemService_StopAllTrading_Handler,
+		},
+		{
+			MethodName: "StopSymbolFund",
+			Handler:    _SystemService_StopSymbolFund_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

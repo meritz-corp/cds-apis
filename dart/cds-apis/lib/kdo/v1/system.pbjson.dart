@@ -32,6 +32,49 @@ const StopAllTradingResponse$json = {
 final $typed_data.Uint8List stopAllTradingResponseDescriptor = $convert.base64Decode(
     'ChZTdG9wQWxsVHJhZGluZ1Jlc3BvbnNl');
 
+@$core.Deprecated('Use stopSymbolFundRequestDescriptor instead')
+const StopSymbolFundRequest$json = {
+  '1': 'StopSymbolFundRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '10': 'fund'},
+    {'1': 'cause', '3': 3, '4': 1, '5': 9, '10': 'cause'},
+  ],
+};
+
+/// Descriptor for `StopSymbolFundRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopSymbolFundRequestDescriptor = $convert.base64Decode(
+    'ChVTdG9wU3ltYm9sRnVuZFJlcXVlc3QSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSEgoEZnVuZB'
+    'gCIAEoCVIEZnVuZBIUCgVjYXVzZRgDIAEoCVIFY2F1c2U=');
+
+@$core.Deprecated('Use stopSymbolFundResponseDescriptor instead')
+const StopSymbolFundResponse$json = {
+  '1': 'StopSymbolFundResponse',
+  '2': [
+    {'1': 'stopped', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.system.StoppedService', '10': 'stopped'},
+  ],
+};
+
+/// Descriptor for `StopSymbolFundResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stopSymbolFundResponseDescriptor = $convert.base64Decode(
+    'ChZTdG9wU3ltYm9sRnVuZFJlc3BvbnNlEjcKB3N0b3BwZWQYASADKAsyHS5rZG8udjEuc3lzdG'
+    'VtLlN0b3BwZWRTZXJ2aWNlUgdzdG9wcGVk');
+
+@$core.Deprecated('Use stoppedServiceDescriptor instead')
+const StoppedService$json = {
+  '1': 'StoppedService',
+  '2': [
+    {'1': 'service', '3': 1, '4': 1, '5': 9, '10': 'service'},
+    {'1': 'identifier', '3': 2, '4': 1, '5': 9, '10': 'identifier'},
+    {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `StoppedService`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List stoppedServiceDescriptor = $convert.base64Decode(
+    'Cg5TdG9wcGVkU2VydmljZRIYCgdzZXJ2aWNlGAEgASgJUgdzZXJ2aWNlEh4KCmlkZW50aWZpZX'
+    'IYAiABKAlSCmlkZW50aWZpZXISGAoHbWVzc2FnZRgDIAEoCVIHbWVzc2FnZQ==');
+
 @$core.Deprecated('Use getConnectionInfoRequestDescriptor instead')
 const GetConnectionInfoRequest$json = {
   '1': 'GetConnectionInfoRequest',

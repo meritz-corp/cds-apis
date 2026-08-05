@@ -142,6 +142,33 @@
     },
     "systemStopAllTradingResponse": {
       "type": "object"
+    },
+    "systemStopSymbolFundResponse": {
+      "type": "object",
+      "properties": {
+        "stopped": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/systemStoppedService"
+          }
+        }
+      }
+    },
+    "systemStoppedService": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "title": "\"quote\" | \"mm\" | \"mm_v2\" | \"futures_lp\" | \"pair\""
+        },
+        "identifier": {
+          "type": "string",
+          "title": "\"symbol/fund\" 또는 pair_id"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
     }
   }
 }
