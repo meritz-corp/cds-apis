@@ -18,13 +18,19 @@ pub struct Settings {
     /// false 면 대사는 계속하되 StopSymbolFund 를 보내지 않는다
     #[prost(bool, tag="5")]
     pub enabled: bool,
+    /// 감시 가능한 KDO 인스턴스 이름 (서버 설정에 등록된 것)
+    #[prost(string, repeated, tag="6")]
+    pub instances: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 지금 감시 중인 KDO 인스턴스. 이 한 곳에만 요청한다.
+    #[prost(string, tag="7")]
+    pub active_instance: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetSettingsRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSettingsRequest {
     /// 지정하면 임계값 변경. 1 이상이어야 한다.
     #[prost(int64, optional, tag="1")]
@@ -32,6 +38,9 @@ pub struct UpdateSettingsRequest {
     /// 지정하면 자동 정지 on/off 변경
     #[prost(bool, optional, tag="2")]
     pub enabled: ::core::option::Option<bool>,
+    /// 지정하면 감시 대상 인스턴스 변경. instances 에 있는 이름이어야 한다.
+    #[prost(string, optional, tag="3")]
+    pub active_instance: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

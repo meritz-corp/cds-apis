@@ -28,6 +28,10 @@ message Settings {
   repeated string funds = 4;
   // false 면 대사는 계속하되 StopSymbolFund 를 보내지 않는다
   bool enabled = 5;
+  // 감시 가능한 KDO 인스턴스 이름 (서버 설정에 등록된 것)
+  repeated string instances = 6;
+  // 지금 감시 중인 KDO 인스턴스. 이 한 곳에만 요청한다.
+  string active_instance = 7;
 }
 
 message GetSettingsRequest {}
@@ -37,6 +41,8 @@ message UpdateSettingsRequest {
   optional int64 threshold_shares = 1;
   // 지정하면 자동 정지 on/off 변경
   optional bool enabled = 2;
+  // 지정하면 감시 대상 인스턴스 변경. instances 에 있는 이름이어야 한다.
+  optional string active_instance = 3;
 }
 
 message ListStopEventsRequest {

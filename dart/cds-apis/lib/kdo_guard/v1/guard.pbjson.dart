@@ -23,6 +23,8 @@ const Settings$json = {
     {'1': 'interval_secs', '3': 3, '4': 1, '5': 4, '10': 'intervalSecs'},
     {'1': 'funds', '3': 4, '4': 3, '5': 9, '10': 'funds'},
     {'1': 'enabled', '3': 5, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'instances', '3': 6, '4': 3, '5': 9, '10': 'instances'},
+    {'1': 'active_instance', '3': 7, '4': 1, '5': 9, '10': 'activeInstance'},
   ],
 };
 
@@ -31,7 +33,8 @@ final $typed_data.Uint8List settingsDescriptor = $convert.base64Decode(
     'CghTZXR0aW5ncxIpChB0aHJlc2hvbGRfc2hhcmVzGAEgASgDUg90aHJlc2hvbGRTaGFyZXMSLQ'
     'oSY29uc2VjdXRpdmVfY2hlY2tzGAIgASgNUhFjb25zZWN1dGl2ZUNoZWNrcxIjCg1pbnRlcnZh'
     'bF9zZWNzGAMgASgEUgxpbnRlcnZhbFNlY3MSFAoFZnVuZHMYBCADKAlSBWZ1bmRzEhgKB2VuYW'
-    'JsZWQYBSABKAhSB2VuYWJsZWQ=');
+    'JsZWQYBSABKAhSB2VuYWJsZWQSHAoJaW5zdGFuY2VzGAYgAygJUglpbnN0YW5jZXMSJwoPYWN0'
+    'aXZlX2luc3RhbmNlGAcgASgJUg5hY3RpdmVJbnN0YW5jZQ==');
 
 @$core.Deprecated('Use getSettingsRequestDescriptor instead')
 const GetSettingsRequest$json = {
@@ -48,18 +51,21 @@ const UpdateSettingsRequest$json = {
   '2': [
     {'1': 'threshold_shares', '3': 1, '4': 1, '5': 3, '9': 0, '10': 'thresholdShares', '17': true},
     {'1': 'enabled', '3': 2, '4': 1, '5': 8, '9': 1, '10': 'enabled', '17': true},
+    {'1': 'active_instance', '3': 3, '4': 1, '5': 9, '9': 2, '10': 'activeInstance', '17': true},
   ],
   '8': [
     {'1': '_threshold_shares'},
     {'1': '_enabled'},
+    {'1': '_active_instance'},
   ],
 };
 
 /// Descriptor for `UpdateSettingsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateSettingsRequestDescriptor = $convert.base64Decode(
     'ChVVcGRhdGVTZXR0aW5nc1JlcXVlc3QSLgoQdGhyZXNob2xkX3NoYXJlcxgBIAEoA0gAUg90aH'
-    'Jlc2hvbGRTaGFyZXOIAQESHQoHZW5hYmxlZBgCIAEoCEgBUgdlbmFibGVkiAEBQhMKEV90aHJl'
-    'c2hvbGRfc2hhcmVzQgoKCF9lbmFibGVk');
+    'Jlc2hvbGRTaGFyZXOIAQESHQoHZW5hYmxlZBgCIAEoCEgBUgdlbmFibGVkiAEBEiwKD2FjdGl2'
+    'ZV9pbnN0YW5jZRgDIAEoCUgCUg5hY3RpdmVJbnN0YW5jZYgBAUITChFfdGhyZXNob2xkX3NoYX'
+    'Jlc0IKCghfZW5hYmxlZEISChBfYWN0aXZlX2luc3RhbmNl');
 
 @$core.Deprecated('Use listStopEventsRequestDescriptor instead')
 const ListStopEventsRequest$json = {

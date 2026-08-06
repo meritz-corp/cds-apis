@@ -56,6 +56,17 @@
         "enabled": {
           "type": "boolean",
           "title": "false 면 대사는 계속하되 StopSymbolFund 를 보내지 않는다"
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "감시 가능한 KDO 인스턴스 이름 (서버 설정에 등록된 것)"
+        },
+        "activeInstance": {
+          "type": "string",
+          "description": "지금 감시 중인 KDO 인스턴스. 이 한 곳에만 요청한다."
         }
       }
     },

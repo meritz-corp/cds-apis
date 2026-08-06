@@ -24,6 +24,8 @@ class Settings extends $pb.GeneratedMessage {
     $fixnum.Int64? intervalSecs,
     $core.Iterable<$core.String>? funds,
     $core.bool? enabled,
+    $core.Iterable<$core.String>? instances,
+    $core.String? activeInstance,
   }) {
     final result = create();
     if (thresholdShares != null) result.thresholdShares = thresholdShares;
@@ -31,6 +33,8 @@ class Settings extends $pb.GeneratedMessage {
     if (intervalSecs != null) result.intervalSecs = intervalSecs;
     if (funds != null) result.funds.addAll(funds);
     if (enabled != null) result.enabled = enabled;
+    if (instances != null) result.instances.addAll(instances);
+    if (activeInstance != null) result.activeInstance = activeInstance;
     return result;
   }
 
@@ -45,6 +49,8 @@ class Settings extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'intervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pPS(4, _omitFieldNames ? '' : 'funds')
     ..aOB(5, _omitFieldNames ? '' : 'enabled')
+    ..pPS(6, _omitFieldNames ? '' : 'instances')
+    ..aOS(7, _omitFieldNames ? '' : 'activeInstance')
     ..hasRequiredFields = false
   ;
 
@@ -108,6 +114,20 @@ class Settings extends $pb.GeneratedMessage {
   $core.bool hasEnabled() => $_has(4);
   @$pb.TagNumber(5)
   void clearEnabled() => $_clearField(5);
+
+  /// 감시 가능한 KDO 인스턴스 이름 (서버 설정에 등록된 것)
+  @$pb.TagNumber(6)
+  $pb.PbList<$core.String> get instances => $_getList(5);
+
+  /// 지금 감시 중인 KDO 인스턴스. 이 한 곳에만 요청한다.
+  @$pb.TagNumber(7)
+  $core.String get activeInstance => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set activeInstance($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasActiveInstance() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearActiveInstance() => $_clearField(7);
 }
 
 class GetSettingsRequest extends $pb.GeneratedMessage {
@@ -144,10 +164,12 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   factory UpdateSettingsRequest({
     $fixnum.Int64? thresholdShares,
     $core.bool? enabled,
+    $core.String? activeInstance,
   }) {
     final result = create();
     if (thresholdShares != null) result.thresholdShares = thresholdShares;
     if (enabled != null) result.enabled = enabled;
+    if (activeInstance != null) result.activeInstance = activeInstance;
     return result;
   }
 
@@ -159,6 +181,7 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateSettingsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'thresholdShares')
     ..aOB(2, _omitFieldNames ? '' : 'enabled')
+    ..aOS(3, _omitFieldNames ? '' : 'activeInstance')
     ..hasRequiredFields = false
   ;
 
@@ -198,6 +221,16 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   $core.bool hasEnabled() => $_has(1);
   @$pb.TagNumber(2)
   void clearEnabled() => $_clearField(2);
+
+  /// 지정하면 감시 대상 인스턴스 변경. instances 에 있는 이름이어야 한다.
+  @$pb.TagNumber(3)
+  $core.String get activeInstance => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set activeInstance($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasActiveInstance() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearActiveInstance() => $_clearField(3);
 }
 
 class ListStopEventsRequest extends $pb.GeneratedMessage {

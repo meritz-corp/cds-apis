@@ -286,6 +286,12 @@ impl serde::Serialize for Settings {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.Settings", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -306,6 +312,12 @@ impl serde::Serialize for Settings {
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
+        if true {
+            struct_ser.serialize_field("instances", &self.instances)?;
+        }
+        if true {
+            struct_ser.serialize_field("active_instance", &self.active_instance)?;
+        }
         struct_ser.end()
     }
 }
@@ -324,6 +336,9 @@ impl<'de> serde::Deserialize<'de> for Settings {
             "intervalSecs",
             "funds",
             "enabled",
+            "instances",
+            "active_instance",
+            "activeInstance",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -333,6 +348,8 @@ impl<'de> serde::Deserialize<'de> for Settings {
             IntervalSecs,
             Funds,
             Enabled,
+            Instances,
+            ActiveInstance,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -360,6 +377,8 @@ impl<'de> serde::Deserialize<'de> for Settings {
                             "intervalSecs" | "interval_secs" => Ok(GeneratedField::IntervalSecs),
                             "funds" => Ok(GeneratedField::Funds),
                             "enabled" => Ok(GeneratedField::Enabled),
+                            "instances" => Ok(GeneratedField::Instances),
+                            "activeInstance" | "active_instance" => Ok(GeneratedField::ActiveInstance),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -384,6 +403,8 @@ impl<'de> serde::Deserialize<'de> for Settings {
                 let mut interval_secs__ = None;
                 let mut funds__ = None;
                 let mut enabled__ = None;
+                let mut instances__ = None;
+                let mut active_instance__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ThresholdShares => {
@@ -422,6 +443,18 @@ impl<'de> serde::Deserialize<'de> for Settings {
                             }
                             enabled__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::Instances => {
+                            if instances__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("instances"));
+                            }
+                            instances__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ActiveInstance => {
+                            if active_instance__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("activeInstance"));
+                            }
+                            active_instance__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -433,6 +466,8 @@ impl<'de> serde::Deserialize<'de> for Settings {
                     interval_secs: interval_secs__.unwrap_or_default(),
                     funds: funds__.unwrap_or_default(),
                     enabled: enabled__.unwrap_or_default(),
+                    instances: instances__.unwrap_or_default(),
+                    active_instance: active_instance__.unwrap_or_default(),
                 })
             }
         }
@@ -730,6 +765,9 @@ impl serde::Serialize for UpdateSettingsRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo_guard.v1.guard.UpdateSettingsRequest", len)?;
         if let Some(v) = self.threshold_shares.as_ref() {
             #[allow(clippy::needless_borrow)]
@@ -738,6 +776,9 @@ impl serde::Serialize for UpdateSettingsRequest {
         }
         if let Some(v) = self.enabled.as_ref() {
             struct_ser.serialize_field("enabled", v)?;
+        }
+        if let Some(v) = self.active_instance.as_ref() {
+            struct_ser.serialize_field("active_instance", v)?;
         }
         struct_ser.end()
     }
@@ -752,12 +793,15 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
             "threshold_shares",
             "thresholdShares",
             "enabled",
+            "active_instance",
+            "activeInstance",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             ThresholdShares,
             Enabled,
+            ActiveInstance,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -782,6 +826,7 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                         match value {
                             "thresholdShares" | "threshold_shares" => Ok(GeneratedField::ThresholdShares),
                             "enabled" => Ok(GeneratedField::Enabled),
+                            "activeInstance" | "active_instance" => Ok(GeneratedField::ActiveInstance),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -803,6 +848,7 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
             {
                 let mut threshold_shares__ = None;
                 let mut enabled__ = None;
+                let mut active_instance__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ThresholdShares => {
@@ -819,6 +865,12 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                             }
                             enabled__ = map_.next_value()?;
                         }
+                        GeneratedField::ActiveInstance => {
+                            if active_instance__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("activeInstance"));
+                            }
+                            active_instance__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -827,6 +879,7 @@ impl<'de> serde::Deserialize<'de> for UpdateSettingsRequest {
                 Ok(UpdateSettingsRequest {
                     threshold_shares: threshold_shares__,
                     enabled: enabled__,
+                    active_instance: active_instance__,
                 })
             }
         }
