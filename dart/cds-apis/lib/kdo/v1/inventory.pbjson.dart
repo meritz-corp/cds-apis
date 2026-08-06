@@ -100,6 +100,22 @@ final $typed_data.Uint8List inventoryTypeDescriptor = $convert.base64Decode(
     'Cg1JbnZlbnRvcnlUeXBlEh4KGklOVkVOVE9SWV9UWVBFX1VOU1BFQ0lGSUVEEAASGAoUSU5WRU'
     '5UT1JZX1RZUEVfU1RPQ0sQARIYChRJTlZFTlRPUllfVFlQRV9ERVJJVhAC');
 
+@$core.Deprecated('Use orderFillFilterDescriptor instead')
+const OrderFillFilter$json = {
+  '1': 'OrderFillFilter',
+  '2': [
+    {'1': 'ORDER_FILL_FILTER_UNSPECIFIED', '2': 0},
+    {'1': 'ORDER_FILL_FILTER_FILLED', '2': 1},
+    {'1': 'ORDER_FILL_FILTER_UNFILLED', '2': 2},
+  ],
+};
+
+/// Descriptor for `OrderFillFilter`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List orderFillFilterDescriptor = $convert.base64Decode(
+    'Cg9PcmRlckZpbGxGaWx0ZXISIQodT1JERVJfRklMTF9GSUxURVJfVU5TUEVDSUZJRUQQABIcCh'
+    'hPUkRFUl9GSUxMX0ZJTFRFUl9GSUxMRUQQARIeChpPUkRFUl9GSUxMX0ZJTFRFUl9VTkZJTExF'
+    'RBAC');
+
 @$core.Deprecated('Use inventoryDescriptor instead')
 const Inventory$json = {
   '1': 'Inventory',
@@ -929,4 +945,80 @@ final $typed_data.Uint8List resizeSessionInventoryResponseDescriptor = $convert.
     'Ch5SZXNpemVTZXNzaW9uSW52ZW50b3J5UmVzcG9uc2USPAoHc2Vzc2lvbhgBIAEoCzIiLmtkby'
     '52MS5pbnZlbnRvcnkuU2Vzc2lvbkludmVudG9yeVIHc2Vzc2lvbhIUCgVkZWx0YRgCIAEoA1IF'
     'ZGVsdGE=');
+
+@$core.Deprecated('Use ledgerOrderFillStatusItemDescriptor instead')
+const LedgerOrderFillStatusItem$json = {
+  '1': 'LedgerOrderFillStatusItem',
+  '2': [
+    {'1': 'oder_no', '3': 1, '4': 1, '5': 3, '10': 'oderNo'},
+    {'1': 'iscd', '3': 2, '4': 1, '5': 9, '10': 'iscd'},
+    {'1': 'ui_isnm', '3': 3, '4': 1, '5': 9, '10': 'uiIsnm'},
+    {'1': 'fncd', '3': 4, '4': 1, '5': 9, '10': 'fncd'},
+    {'1': 'deal_cls_code', '3': 5, '4': 1, '5': 9, '10': 'dealClsCode'},
+    {'1': 'odqt', '3': 6, '4': 1, '5': 3, '10': 'odqt'},
+    {'1': 'oder_unpr', '3': 7, '4': 1, '5': 3, '10': 'oderUnpr'},
+    {'1': 'cntg_qty', '3': 8, '4': 1, '5': 3, '10': 'cntgQty'},
+    {'1': 'pros_brcd', '3': 9, '4': 1, '5': 9, '10': 'prosBrcd'},
+    {'1': 'oder_rfus_reas_name', '3': 10, '4': 1, '5': 9, '10': 'oderRfusReasName'},
+    {'1': 'oder_rfus_reas_code', '3': 11, '4': 1, '5': 9, '10': 'oderRfusReasCode'},
+    {'1': 'err_msg', '3': 12, '4': 1, '5': 9, '10': 'errMsg'},
+    {'1': 'oder_pros_sta_time', '3': 13, '4': 1, '5': 9, '10': 'oderProsStaTime'},
+    {'1': 'rctf_cncl_cls_code', '3': 14, '4': 1, '5': 9, '10': 'rctfCnclClsCode'},
+    {'1': 'orgl_oder_no', '3': 15, '4': 1, '5': 3, '10': 'orglOderNo'},
+    {'1': 'ncnt_qty', '3': 16, '4': 1, '5': 3, '10': 'ncntQty'},
+    {'1': 'bond_oder_unpr', '3': 17, '4': 1, '5': 1, '10': 'bondOderUnpr'},
+    {'1': 'cntg_pros_time', '3': 18, '4': 1, '5': 9, '10': 'cntgProsTime'},
+    {'1': 'ssts_id', '3': 19, '4': 1, '5': 9, '10': 'sstsId'},
+    {'1': 'cntg_cls_code', '3': 20, '4': 1, '5': 9, '10': 'cntgClsCode'},
+    {'1': 'exch_kind_code', '3': 21, '4': 1, '5': 9, '10': 'exchKindCode'},
+    {'1': 'ssts_yn', '3': 22, '4': 1, '5': 9, '10': 'sstsYn'},
+  ],
+};
+
+/// Descriptor for `LedgerOrderFillStatusItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List ledgerOrderFillStatusItemDescriptor = $convert.base64Decode(
+    'ChlMZWRnZXJPcmRlckZpbGxTdGF0dXNJdGVtEhcKB29kZXJfbm8YASABKANSBm9kZXJObxISCg'
+    'Rpc2NkGAIgASgJUgRpc2NkEhcKB3VpX2lzbm0YAyABKAlSBnVpSXNubRISCgRmbmNkGAQgASgJ'
+    'UgRmbmNkEiIKDWRlYWxfY2xzX2NvZGUYBSABKAlSC2RlYWxDbHNDb2RlEhIKBG9kcXQYBiABKA'
+    'NSBG9kcXQSGwoJb2Rlcl91bnByGAcgASgDUghvZGVyVW5wchIZCghjbnRnX3F0eRgIIAEoA1IH'
+    'Y250Z1F0eRIbCglwcm9zX2JyY2QYCSABKAlSCHByb3NCcmNkEi0KE29kZXJfcmZ1c19yZWFzX2'
+    '5hbWUYCiABKAlSEG9kZXJSZnVzUmVhc05hbWUSLQoTb2Rlcl9yZnVzX3JlYXNfY29kZRgLIAEo'
+    'CVIQb2RlclJmdXNSZWFzQ29kZRIXCgdlcnJfbXNnGAwgASgJUgZlcnJNc2cSKwoSb2Rlcl9wcm'
+    '9zX3N0YV90aW1lGA0gASgJUg9vZGVyUHJvc1N0YVRpbWUSKwoScmN0Zl9jbmNsX2Nsc19jb2Rl'
+    'GA4gASgJUg9yY3RmQ25jbENsc0NvZGUSIAoMb3JnbF9vZGVyX25vGA8gASgDUgpvcmdsT2Rlck'
+    '5vEhkKCG5jbnRfcXR5GBAgASgDUgduY250UXR5EiQKDmJvbmRfb2Rlcl91bnByGBEgASgBUgxi'
+    'b25kT2RlclVucHISJAoOY250Z19wcm9zX3RpbWUYEiABKAlSDGNudGdQcm9zVGltZRIXCgdzc3'
+    'RzX2lkGBMgASgJUgZzc3RzSWQSIgoNY250Z19jbHNfY29kZRgUIAEoCVILY250Z0Nsc0NvZGUS'
+    'JAoOZXhjaF9raW5kX2NvZGUYFSABKAlSDGV4Y2hLaW5kQ29kZRIXCgdzc3RzX3luGBYgASgJUg'
+    'Zzc3RzWW4=');
+
+@$core.Deprecated('Use listLedgerOrderFillStatusRequestDescriptor instead')
+const ListLedgerOrderFillStatusRequest$json = {
+  '1': 'ListLedgerOrderFillStatusRequest',
+  '2': [
+    {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'date', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'date'},
+    {'1': 'filter', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.inventory.OrderFillFilter', '10': 'filter'},
+  ],
+};
+
+/// Descriptor for `ListLedgerOrderFillStatusRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLedgerOrderFillStatusRequestDescriptor = $convert.base64Decode(
+    'CiBMaXN0TGVkZ2VyT3JkZXJGaWxsU3RhdHVzUmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+k'
+    'EWChRrZG8uY2RzYXBpcy54eXovRnVuZFIEZnVuZBIYCgRkYXRlGAIgASgJQgTiQQECUgRkYXRl'
+    'EjkKBmZpbHRlchgDIAEoDjIhLmtkby52MS5pbnZlbnRvcnkuT3JkZXJGaWxsRmlsdGVyUgZmaW'
+    'x0ZXI=');
+
+@$core.Deprecated('Use listLedgerOrderFillStatusResponseDescriptor instead')
+const ListLedgerOrderFillStatusResponse$json = {
+  '1': 'ListLedgerOrderFillStatusResponse',
+  '2': [
+    {'1': 'items', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.inventory.LedgerOrderFillStatusItem', '10': 'items'},
+  ],
+};
+
+/// Descriptor for `ListLedgerOrderFillStatusResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLedgerOrderFillStatusResponseDescriptor = $convert.base64Decode(
+    'CiFMaXN0TGVkZ2VyT3JkZXJGaWxsU3RhdHVzUmVzcG9uc2USQQoFaXRlbXMYASADKAsyKy5rZG'
+    '8udjEuaW52ZW50b3J5LkxlZGdlck9yZGVyRmlsbFN0YXR1c0l0ZW1SBWl0ZW1z');
 

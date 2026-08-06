@@ -907,6 +907,99 @@ pub struct ResizeSessionInventoryResponse {
     #[prost(int64, tag="2")]
     pub delta: i64,
 }
+/// 일자별상품주문체결현황 항목 (obtrs_oder_743r OutBlock1)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LedgerOrderFillStatusItem {
+    /// 주문번호
+    #[prost(int64, tag="1")]
+    pub oder_no: i64,
+    /// 종목코드
+    #[prost(string, tag="2")]
+    pub iscd: ::prost::alloc::string::String,
+    /// UI 종목명
+    #[prost(string, tag="3")]
+    pub ui_isnm: ::prost::alloc::string::String,
+    /// 펀드코드
+    #[prost(string, tag="4")]
+    pub fncd: ::prost::alloc::string::String,
+    /// 매매구분코드 (1=매도, 2=매수)
+    #[prost(string, tag="5")]
+    pub deal_cls_code: ::prost::alloc::string::String,
+    /// 주문수량
+    #[prost(int64, tag="6")]
+    pub odqt: i64,
+    /// 주문단가
+    #[prost(int64, tag="7")]
+    pub oder_unpr: i64,
+    /// 체결수량
+    #[prost(int64, tag="8")]
+    pub cntg_qty: i64,
+    /// 처리지점코드
+    #[prost(string, tag="9")]
+    pub pros_brcd: ::prost::alloc::string::String,
+    /// 주문거부사유명
+    #[prost(string, tag="10")]
+    pub oder_rfus_reas_name: ::prost::alloc::string::String,
+    /// 주문거부사유코드
+    #[prost(string, tag="11")]
+    pub oder_rfus_reas_code: ::prost::alloc::string::String,
+    /// 에러메시지
+    #[prost(string, tag="12")]
+    pub err_msg: ::prost::alloc::string::String,
+    /// 주문처리시작시각
+    #[prost(string, tag="13")]
+    pub oder_pros_sta_time: ::prost::alloc::string::String,
+    /// 정정취소구분코드 (1=정상, 2=정정, 3=취소)
+    #[prost(string, tag="14")]
+    pub rctf_cncl_cls_code: ::prost::alloc::string::String,
+    /// 원주문번호
+    #[prost(int64, tag="15")]
+    pub orgl_oder_no: i64,
+    /// 미체결수량
+    #[prost(int64, tag="16")]
+    pub ncnt_qty: i64,
+    /// 채권주문단가
+    #[prost(double, tag="17")]
+    pub bond_oder_unpr: f64,
+    /// 체결처리시각
+    #[prost(string, tag="18")]
+    pub cntg_pros_time: ::prost::alloc::string::String,
+    /// 공매도ID
+    #[prost(string, tag="19")]
+    pub ssts_id: ::prost::alloc::string::String,
+    /// 체결구분코드 (1=체결, 2=미체결)
+    #[prost(string, tag="20")]
+    pub cntg_cls_code: ::prost::alloc::string::String,
+    /// 거래소종류코드 (01=KRX, 02=NXT, 03=SOR)
+    #[prost(string, tag="21")]
+    pub exch_kind_code: ::prost::alloc::string::String,
+    /// 공매도여부 (Y/N)
+    #[prost(string, tag="22")]
+    pub ssts_yn: ::prost::alloc::string::String,
+}
+/// ListLedgerOrderFillStatus 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListLedgerOrderFillStatusRequest {
+    /// 펀드 리소스명 (예: "funds/1234")
+    #[prost(string, tag="1")]
+    pub fund: ::prost::alloc::string::String,
+    /// 주문일자 (YYYYMMDD)
+    #[prost(string, tag="2")]
+    pub date: ::prost::alloc::string::String,
+    /// 체결구분 필터 (UNSPECIFIED=전체, FILLED=체결, UNFILLED=미체결)
+    #[prost(enumeration="OrderFillFilter", tag="3")]
+    pub filter: i32,
+}
+/// ListLedgerOrderFillStatus 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListLedgerOrderFillStatusResponse {
+    /// 일자별상품주문체결현황 목록
+    #[prost(message, repeated, tag="1")]
+    pub items: ::prost::alloc::vec::Vec<LedgerOrderFillStatusItem>,
+}
 /// 상품포지션구분 (PROD_PSTN_CLS_CODE)
 /// 042c/052a InBlock2.PROD_PSTN_CLS_CODE: 1=상품, 2=매도
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1069,6 +1162,42 @@ impl InventoryType {
             "INVENTORY_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "INVENTORY_TYPE_STOCK" => Some(Self::Stock),
             "INVENTORY_TYPE_DERIV" => Some(Self::Deriv),
+            _ => None,
+        }
+    }
+}
+// ========== 일자별상품주문체결현황 (obtrs_oder_743r) ==========
+
+/// 체결구분 필터 (CNTG_CLS_CODE)
+/// 원장 값 매핑: UNSPECIFIED="0"(전체), FILLED="1"(체결), UNFILLED="2"(미체결)
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum OrderFillFilter {
+    /// 전체
+    Unspecified = 0,
+    /// 체결
+    Filled = 1,
+    /// 미체결
+    Unfilled = 2,
+}
+impl OrderFillFilter {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            OrderFillFilter::Unspecified => "ORDER_FILL_FILTER_UNSPECIFIED",
+            OrderFillFilter::Filled => "ORDER_FILL_FILTER_FILLED",
+            OrderFillFilter::Unfilled => "ORDER_FILL_FILTER_UNFILLED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ORDER_FILL_FILTER_UNSPECIFIED" => Some(Self::Unspecified),
+            "ORDER_FILL_FILTER_FILLED" => Some(Self::Filled),
+            "ORDER_FILL_FILTER_UNFILLED" => Some(Self::Unfilled),
             _ => None,
         }
     }

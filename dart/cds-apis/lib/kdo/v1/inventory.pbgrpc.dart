@@ -83,6 +83,11 @@ class InventoryServiceClient extends $grpc.Client {
     return $createUnaryCall(_$transferLoan, request, options: options);
   }
 
+  /// 일자별상품주문체결현황 조회 (obtrs_oder_743r)
+  $grpc.ResponseFuture<$0.ListLedgerOrderFillStatusResponse> listLedgerOrderFillStatus($0.ListLedgerOrderFillStatusRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listLedgerOrderFillStatus, request, options: options);
+  }
+
   /// 대차 인도내역 조회 (미처리 건 목록)
   $grpc.ResponseFuture<$0.ListLoanDeliveriesResponse> listLoanDeliveries($0.ListLoanDeliveriesRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listLoanDeliveries, request, options: options);
@@ -174,6 +179,10 @@ class InventoryServiceClient extends $grpc.Client {
       '/kdo.v1.inventory.InventoryService/TransferLoan',
       ($0.TransferLoanRequest value) => value.writeToBuffer(),
       $0.TransferLoanResponse.fromBuffer);
+  static final _$listLedgerOrderFillStatus = $grpc.ClientMethod<$0.ListLedgerOrderFillStatusRequest, $0.ListLedgerOrderFillStatusResponse>(
+      '/kdo.v1.inventory.InventoryService/ListLedgerOrderFillStatus',
+      ($0.ListLedgerOrderFillStatusRequest value) => value.writeToBuffer(),
+      $0.ListLedgerOrderFillStatusResponse.fromBuffer);
   static final _$listLoanDeliveries = $grpc.ClientMethod<$0.ListLoanDeliveriesRequest, $0.ListLoanDeliveriesResponse>(
       '/kdo.v1.inventory.InventoryService/ListLoanDeliveries',
       ($0.ListLoanDeliveriesRequest value) => value.writeToBuffer(),
@@ -283,6 +292,13 @@ abstract class InventoryServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.TransferLoanRequest.fromBuffer(value),
         ($0.TransferLoanResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListLedgerOrderFillStatusRequest, $0.ListLedgerOrderFillStatusResponse>(
+        'ListLedgerOrderFillStatus',
+        listLedgerOrderFillStatus_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListLedgerOrderFillStatusRequest.fromBuffer(value),
+        ($0.ListLedgerOrderFillStatusResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ListLoanDeliveriesRequest, $0.ListLoanDeliveriesResponse>(
         'ListLoanDeliveries',
         listLoanDeliveries_Pre,
@@ -400,6 +416,12 @@ abstract class InventoryServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.TransferLoanResponse> transferLoan($grpc.ServiceCall call, $0.TransferLoanRequest request);
+
+  $async.Future<$0.ListLedgerOrderFillStatusResponse> listLedgerOrderFillStatus_Pre($grpc.ServiceCall $call, $async.Future<$0.ListLedgerOrderFillStatusRequest> $request) async {
+    return listLedgerOrderFillStatus($call, await $request);
+  }
+
+  $async.Future<$0.ListLedgerOrderFillStatusResponse> listLedgerOrderFillStatus($grpc.ServiceCall call, $0.ListLedgerOrderFillStatusRequest request);
 
   $async.Future<$0.ListLoanDeliveriesResponse> listLoanDeliveries_Pre($grpc.ServiceCall $call, $async.Future<$0.ListLoanDeliveriesRequest> $request) async {
     return listLoanDeliveries($call, await $request);

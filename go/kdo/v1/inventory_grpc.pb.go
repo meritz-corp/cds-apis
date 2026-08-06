@@ -42,6 +42,8 @@ type InventoryServiceClient interface {
 	RepayLoan(ctx context.Context, in *RepayLoanRequest, opts ...grpc.CallOption) (*RepayLoanResponse, error)
 	// 펀드간 대차 이전 (내부대차)
 	TransferLoan(ctx context.Context, in *TransferLoanRequest, opts ...grpc.CallOption) (*TransferLoanResponse, error)
+	// 일자별상품주문체결현황 조회 (obtrs_oder_743r)
+	ListLedgerOrderFillStatus(ctx context.Context, in *ListLedgerOrderFillStatusRequest, opts ...grpc.CallOption) (*ListLedgerOrderFillStatusResponse, error)
 	// 대차 인도내역 조회 (미처리 건 목록)
 	ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest, opts ...grpc.CallOption) (*ListLoanDeliveriesResponse, error)
 	// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
@@ -213,6 +215,15 @@ func (c *inventoryServiceClient) TransferLoan(ctx context.Context, in *TransferL
 	return out, nil
 }
 
+func (c *inventoryServiceClient) ListLedgerOrderFillStatus(ctx context.Context, in *ListLedgerOrderFillStatusRequest, opts ...grpc.CallOption) (*ListLedgerOrderFillStatusResponse, error) {
+	out := new(ListLedgerOrderFillStatusResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/ListLedgerOrderFillStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *inventoryServiceClient) ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest, opts ...grpc.CallOption) (*ListLoanDeliveriesResponse, error) {
 	out := new(ListLoanDeliveriesResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.inventory.InventoryService/ListLoanDeliveries", in, out, opts...)
@@ -332,6 +343,8 @@ type InventoryServiceServer interface {
 	RepayLoan(context.Context, *RepayLoanRequest) (*RepayLoanResponse, error)
 	// 펀드간 대차 이전 (내부대차)
 	TransferLoan(context.Context, *TransferLoanRequest) (*TransferLoanResponse, error)
+	// 일자별상품주문체결현황 조회 (obtrs_oder_743r)
+	ListLedgerOrderFillStatus(context.Context, *ListLedgerOrderFillStatusRequest) (*ListLedgerOrderFillStatusResponse, error)
 	// 대차 인도내역 조회 (미처리 건 목록)
 	ListLoanDeliveries(context.Context, *ListLoanDeliveriesRequest) (*ListLoanDeliveriesResponse, error)
 	// 대차 인도내역 원장 반영 (선택 건 일괄 처리)
@@ -393,6 +406,9 @@ func (UnimplementedInventoryServiceServer) RepayLoan(context.Context, *RepayLoan
 }
 func (UnimplementedInventoryServiceServer) TransferLoan(context.Context, *TransferLoanRequest) (*TransferLoanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferLoan not implemented")
+}
+func (UnimplementedInventoryServiceServer) ListLedgerOrderFillStatus(context.Context, *ListLedgerOrderFillStatusRequest) (*ListLedgerOrderFillStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLedgerOrderFillStatus not implemented")
 }
 func (UnimplementedInventoryServiceServer) ListLoanDeliveries(context.Context, *ListLoanDeliveriesRequest) (*ListLoanDeliveriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLoanDeliveries not implemented")
@@ -617,6 +633,24 @@ func _InventoryService_TransferLoan_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InventoryService_ListLedgerOrderFillStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLedgerOrderFillStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InventoryServiceServer).ListLedgerOrderFillStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.inventory.InventoryService/ListLedgerOrderFillStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InventoryServiceServer).ListLedgerOrderFillStatus(ctx, req.(*ListLedgerOrderFillStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InventoryService_ListLoanDeliveries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListLoanDeliveriesRequest)
 	if err := dec(in); err != nil {
@@ -802,6 +836,10 @@ var InventoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TransferLoan",
 			Handler:    _InventoryService_TransferLoan_Handler,
+		},
+		{
+			MethodName: "ListLedgerOrderFillStatus",
+			Handler:    _InventoryService_ListLedgerOrderFillStatus_Handler,
 		},
 		{
 			MethodName: "ListLoanDeliveries",

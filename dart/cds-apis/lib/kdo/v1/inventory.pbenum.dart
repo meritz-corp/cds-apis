@@ -108,5 +108,24 @@ class InventoryType extends $pb.ProtobufEnum {
   const InventoryType._(super.value, super.name);
 }
 
+/// 체결구분 필터 (CNTG_CLS_CODE)
+/// 원장 값 매핑: UNSPECIFIED="0"(전체), FILLED="1"(체결), UNFILLED="2"(미체결)
+class OrderFillFilter extends $pb.ProtobufEnum {
+  static const OrderFillFilter ORDER_FILL_FILTER_UNSPECIFIED = OrderFillFilter._(0, _omitEnumNames ? '' : 'ORDER_FILL_FILTER_UNSPECIFIED');
+  static const OrderFillFilter ORDER_FILL_FILTER_FILLED = OrderFillFilter._(1, _omitEnumNames ? '' : 'ORDER_FILL_FILTER_FILLED');
+  static const OrderFillFilter ORDER_FILL_FILTER_UNFILLED = OrderFillFilter._(2, _omitEnumNames ? '' : 'ORDER_FILL_FILTER_UNFILLED');
+
+  static const $core.List<OrderFillFilter> values = <OrderFillFilter> [
+    ORDER_FILL_FILTER_UNSPECIFIED,
+    ORDER_FILL_FILTER_FILLED,
+    ORDER_FILL_FILTER_UNFILLED,
+  ];
+
+  static final $core.List<OrderFillFilter?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static OrderFillFilter? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const OrderFillFilter._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

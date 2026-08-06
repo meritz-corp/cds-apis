@@ -95,6 +95,14 @@ service InventoryService {
     option (google.api.method_signature) = "from_fund,to_fund,symbol,quantity";
   }
 
+  // 일자별상품주문체결현황 조회 (obtrs_oder_743r)
+  rpc ListLedgerOrderFillStatus(ListLedgerOrderFillStatusRequest) returns (ListLedgerOrderFillStatusResponse) {
+    option (google.api.http) = {
+      get: "/v1/inventories/{fund=funds/*}/orderFillStatus"
+    };
+    option (google.api.method_signature) = "fund,date";
+  }
+
   // 대차 인도내역 조회 (미처리 건 목록)
   rpc ListLoanDeliveries(ListLoanDeliveriesRequest) returns (ListLoanDeliveriesResponse) {
     option (google.api.http) = {
@@ -1042,4 +1050,85 @@ message ResizeSessionInventoryResponse {
 
   // 변경량 (양수=증가, 음수=감소)
   int64 delta = 2;
+}
+
+// ========== 일자별상품주문체결현황 (obtrs_oder_743r) ==========
+
+// 체결구분 필터 (CNTG_CLS_CODE)
+// 원장 값 매핑: UNSPECIFIED="0"(전체), FILLED="1"(체결), UNFILLED="2"(미체결)
+enum OrderFillFilter {
+  ORDER_FILL_FILTER_UNSPECIFIED = 0; // 전체
+  ORDER_FILL_FILTER_FILLED = 1;      // 체결
+  ORDER_FILL_FILTER_UNFILLED = 2;    // 미체결
+}
+
+// 일자별상품주문체결현황 항목 (obtrs_oder_743r OutBlock1)
+message LedgerOrderFillStatusItem {
+  // 주문번호
+  int64 oder_no = 1;
+  // 종목코드
+  string iscd = 2;
+  // UI 종목명
+  string ui_isnm = 3;
+  // 펀드코드
+  string fncd = 4;
+  // 매매구분코드 (1=매도, 2=매수)
+  string deal_cls_code = 5;
+  // 주문수량
+  int64 odqt = 6;
+  // 주문단가
+  int64 oder_unpr = 7;
+  // 체결수량
+  int64 cntg_qty = 8;
+  // 처리지점코드
+  string pros_brcd = 9;
+  // 주문거부사유명
+  string oder_rfus_reas_name = 10;
+  // 주문거부사유코드
+  string oder_rfus_reas_code = 11;
+  // 에러메시지
+  string err_msg = 12;
+  // 주문처리시작시각
+  string oder_pros_sta_time = 13;
+  // 정정취소구분코드 (1=정상, 2=정정, 3=취소)
+  string rctf_cncl_cls_code = 14;
+  // 원주문번호
+  int64 orgl_oder_no = 15;
+  // 미체결수량
+  int64 ncnt_qty = 16;
+  // 채권주문단가
+  double bond_oder_unpr = 17;
+  // 체결처리시각
+  string cntg_pros_time = 18;
+  // 공매도ID
+  string ssts_id = 19;
+  // 체결구분코드 (1=체결, 2=미체결)
+  string cntg_cls_code = 20;
+  // 거래소종류코드 (01=KRX, 02=NXT, 03=SOR)
+  string exch_kind_code = 21;
+  // 공매도여부 (Y/N)
+  string ssts_yn = 22;
+}
+
+// ListLedgerOrderFillStatus 요청
+message ListLedgerOrderFillStatusRequest {
+  // 펀드 리소스명 (예: "funds/1234")
+  string fund = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Fund"
+    }
+  ];
+
+  // 주문일자 (YYYYMMDD)
+  string date = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 체결구분 필터 (UNSPECIFIED=전체, FILLED=체결, UNFILLED=미체결)
+  OrderFillFilter filter = 3;
+}
+
+// ListLedgerOrderFillStatus 응답
+message ListLedgerOrderFillStatusResponse {
+  // 일자별상품주문체결현황 목록
+  repeated LedgerOrderFillStatusItem items = 1;
 }

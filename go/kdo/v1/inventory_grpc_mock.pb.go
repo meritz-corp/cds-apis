@@ -901,6 +901,26 @@ func (mr *MockInventoryServiceClientMockRecorder) ListLedgerInventories(ctx, in 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListLedgerInventories), varargs...)
 }
 
+// ListLedgerOrderFillStatus mocks base method.
+func (m *MockInventoryServiceClient) ListLedgerOrderFillStatus(ctx context.Context, in *ListLedgerOrderFillStatusRequest, opts ...grpc.CallOption) (*ListLedgerOrderFillStatusResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListLedgerOrderFillStatus", varargs...)
+	ret0, _ := ret[0].(*ListLedgerOrderFillStatusResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListLedgerOrderFillStatus indicates an expected call of ListLedgerOrderFillStatus.
+func (mr *MockInventoryServiceClientMockRecorder) ListLedgerOrderFillStatus(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerOrderFillStatus", reflect.TypeOf((*MockInventoryServiceClient)(nil).ListLedgerOrderFillStatus), varargs...)
+}
+
 // ListLoanDeliveries mocks base method.
 func (m *MockInventoryServiceClient) ListLoanDeliveries(ctx context.Context, in *ListLoanDeliveriesRequest, opts ...grpc.CallOption) (*ListLoanDeliveriesResponse, error) {
 	m.ctrl.T.Helper()
@@ -1247,6 +1267,21 @@ func (m *MockInventoryServiceServer) ListLedgerInventories(ctx context.Context, 
 func (mr *MockInventoryServiceServerMockRecorder) ListLedgerInventories(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerInventories", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListLedgerInventories), ctx, in)
+}
+
+// ListLedgerOrderFillStatus mocks base method.
+func (m *MockInventoryServiceServer) ListLedgerOrderFillStatus(ctx context.Context, in *ListLedgerOrderFillStatusRequest) (*ListLedgerOrderFillStatusResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListLedgerOrderFillStatus", ctx, in)
+	ret0, _ := ret[0].(*ListLedgerOrderFillStatusResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListLedgerOrderFillStatus indicates an expected call of ListLedgerOrderFillStatus.
+func (mr *MockInventoryServiceServerMockRecorder) ListLedgerOrderFillStatus(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListLedgerOrderFillStatus", reflect.TypeOf((*MockInventoryServiceServer)(nil).ListLedgerOrderFillStatus), ctx, in)
 }
 
 // ListLoanDeliveries mocks base method.

@@ -4126,6 +4126,443 @@ class ResizeSessionInventoryResponse extends $pb.GeneratedMessage {
   void clearDelta() => $_clearField(2);
 }
 
+/// 일자별상품주문체결현황 항목 (obtrs_oder_743r OutBlock1)
+class LedgerOrderFillStatusItem extends $pb.GeneratedMessage {
+  factory LedgerOrderFillStatusItem({
+    $fixnum.Int64? oderNo,
+    $core.String? iscd,
+    $core.String? uiIsnm,
+    $core.String? fncd,
+    $core.String? dealClsCode,
+    $fixnum.Int64? odqt,
+    $fixnum.Int64? oderUnpr,
+    $fixnum.Int64? cntgQty,
+    $core.String? prosBrcd,
+    $core.String? oderRfusReasName,
+    $core.String? oderRfusReasCode,
+    $core.String? errMsg,
+    $core.String? oderProsStaTime,
+    $core.String? rctfCnclClsCode,
+    $fixnum.Int64? orglOderNo,
+    $fixnum.Int64? ncntQty,
+    $core.double? bondOderUnpr,
+    $core.String? cntgProsTime,
+    $core.String? sstsId,
+    $core.String? cntgClsCode,
+    $core.String? exchKindCode,
+    $core.String? sstsYn,
+  }) {
+    final result = create();
+    if (oderNo != null) result.oderNo = oderNo;
+    if (iscd != null) result.iscd = iscd;
+    if (uiIsnm != null) result.uiIsnm = uiIsnm;
+    if (fncd != null) result.fncd = fncd;
+    if (dealClsCode != null) result.dealClsCode = dealClsCode;
+    if (odqt != null) result.odqt = odqt;
+    if (oderUnpr != null) result.oderUnpr = oderUnpr;
+    if (cntgQty != null) result.cntgQty = cntgQty;
+    if (prosBrcd != null) result.prosBrcd = prosBrcd;
+    if (oderRfusReasName != null) result.oderRfusReasName = oderRfusReasName;
+    if (oderRfusReasCode != null) result.oderRfusReasCode = oderRfusReasCode;
+    if (errMsg != null) result.errMsg = errMsg;
+    if (oderProsStaTime != null) result.oderProsStaTime = oderProsStaTime;
+    if (rctfCnclClsCode != null) result.rctfCnclClsCode = rctfCnclClsCode;
+    if (orglOderNo != null) result.orglOderNo = orglOderNo;
+    if (ncntQty != null) result.ncntQty = ncntQty;
+    if (bondOderUnpr != null) result.bondOderUnpr = bondOderUnpr;
+    if (cntgProsTime != null) result.cntgProsTime = cntgProsTime;
+    if (sstsId != null) result.sstsId = sstsId;
+    if (cntgClsCode != null) result.cntgClsCode = cntgClsCode;
+    if (exchKindCode != null) result.exchKindCode = exchKindCode;
+    if (sstsYn != null) result.sstsYn = sstsYn;
+    return result;
+  }
+
+  LedgerOrderFillStatusItem._();
+
+  factory LedgerOrderFillStatusItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LedgerOrderFillStatusItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LedgerOrderFillStatusItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'oderNo')
+    ..aOS(2, _omitFieldNames ? '' : 'iscd')
+    ..aOS(3, _omitFieldNames ? '' : 'uiIsnm')
+    ..aOS(4, _omitFieldNames ? '' : 'fncd')
+    ..aOS(5, _omitFieldNames ? '' : 'dealClsCode')
+    ..aInt64(6, _omitFieldNames ? '' : 'odqt')
+    ..aInt64(7, _omitFieldNames ? '' : 'oderUnpr')
+    ..aInt64(8, _omitFieldNames ? '' : 'cntgQty')
+    ..aOS(9, _omitFieldNames ? '' : 'prosBrcd')
+    ..aOS(10, _omitFieldNames ? '' : 'oderRfusReasName')
+    ..aOS(11, _omitFieldNames ? '' : 'oderRfusReasCode')
+    ..aOS(12, _omitFieldNames ? '' : 'errMsg')
+    ..aOS(13, _omitFieldNames ? '' : 'oderProsStaTime')
+    ..aOS(14, _omitFieldNames ? '' : 'rctfCnclClsCode')
+    ..aInt64(15, _omitFieldNames ? '' : 'orglOderNo')
+    ..aInt64(16, _omitFieldNames ? '' : 'ncntQty')
+    ..a<$core.double>(17, _omitFieldNames ? '' : 'bondOderUnpr', $pb.PbFieldType.OD)
+    ..aOS(18, _omitFieldNames ? '' : 'cntgProsTime')
+    ..aOS(19, _omitFieldNames ? '' : 'sstsId')
+    ..aOS(20, _omitFieldNames ? '' : 'cntgClsCode')
+    ..aOS(21, _omitFieldNames ? '' : 'exchKindCode')
+    ..aOS(22, _omitFieldNames ? '' : 'sstsYn')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LedgerOrderFillStatusItem clone() => LedgerOrderFillStatusItem()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LedgerOrderFillStatusItem copyWith(void Function(LedgerOrderFillStatusItem) updates) => super.copyWith((message) => updates(message as LedgerOrderFillStatusItem)) as LedgerOrderFillStatusItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LedgerOrderFillStatusItem create() => LedgerOrderFillStatusItem._();
+  @$core.override
+  LedgerOrderFillStatusItem createEmptyInstance() => create();
+  static $pb.PbList<LedgerOrderFillStatusItem> createRepeated() => $pb.PbList<LedgerOrderFillStatusItem>();
+  @$core.pragma('dart2js:noInline')
+  static LedgerOrderFillStatusItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LedgerOrderFillStatusItem>(create);
+  static LedgerOrderFillStatusItem? _defaultInstance;
+
+  /// 주문번호
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get oderNo => $_getI64(0);
+  @$pb.TagNumber(1)
+  set oderNo($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOderNo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOderNo() => $_clearField(1);
+
+  /// 종목코드
+  @$pb.TagNumber(2)
+  $core.String get iscd => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set iscd($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasIscd() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIscd() => $_clearField(2);
+
+  /// UI 종목명
+  @$pb.TagNumber(3)
+  $core.String get uiIsnm => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set uiIsnm($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUiIsnm() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUiIsnm() => $_clearField(3);
+
+  /// 펀드코드
+  @$pb.TagNumber(4)
+  $core.String get fncd => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set fncd($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFncd() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFncd() => $_clearField(4);
+
+  /// 매매구분코드 (1=매도, 2=매수)
+  @$pb.TagNumber(5)
+  $core.String get dealClsCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set dealClsCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasDealClsCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDealClsCode() => $_clearField(5);
+
+  /// 주문수량
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get odqt => $_getI64(5);
+  @$pb.TagNumber(6)
+  set odqt($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasOdqt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearOdqt() => $_clearField(6);
+
+  /// 주문단가
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get oderUnpr => $_getI64(6);
+  @$pb.TagNumber(7)
+  set oderUnpr($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasOderUnpr() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearOderUnpr() => $_clearField(7);
+
+  /// 체결수량
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get cntgQty => $_getI64(7);
+  @$pb.TagNumber(8)
+  set cntgQty($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCntgQty() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCntgQty() => $_clearField(8);
+
+  /// 처리지점코드
+  @$pb.TagNumber(9)
+  $core.String get prosBrcd => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set prosBrcd($core.String value) => $_setString(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasProsBrcd() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearProsBrcd() => $_clearField(9);
+
+  /// 주문거부사유명
+  @$pb.TagNumber(10)
+  $core.String get oderRfusReasName => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set oderRfusReasName($core.String value) => $_setString(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasOderRfusReasName() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearOderRfusReasName() => $_clearField(10);
+
+  /// 주문거부사유코드
+  @$pb.TagNumber(11)
+  $core.String get oderRfusReasCode => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set oderRfusReasCode($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasOderRfusReasCode() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearOderRfusReasCode() => $_clearField(11);
+
+  /// 에러메시지
+  @$pb.TagNumber(12)
+  $core.String get errMsg => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set errMsg($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasErrMsg() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearErrMsg() => $_clearField(12);
+
+  /// 주문처리시작시각
+  @$pb.TagNumber(13)
+  $core.String get oderProsStaTime => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set oderProsStaTime($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasOderProsStaTime() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearOderProsStaTime() => $_clearField(13);
+
+  /// 정정취소구분코드 (1=정상, 2=정정, 3=취소)
+  @$pb.TagNumber(14)
+  $core.String get rctfCnclClsCode => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set rctfCnclClsCode($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasRctfCnclClsCode() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearRctfCnclClsCode() => $_clearField(14);
+
+  /// 원주문번호
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get orglOderNo => $_getI64(14);
+  @$pb.TagNumber(15)
+  set orglOderNo($fixnum.Int64 value) => $_setInt64(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasOrglOderNo() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearOrglOderNo() => $_clearField(15);
+
+  /// 미체결수량
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get ncntQty => $_getI64(15);
+  @$pb.TagNumber(16)
+  set ncntQty($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasNcntQty() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearNcntQty() => $_clearField(16);
+
+  /// 채권주문단가
+  @$pb.TagNumber(17)
+  $core.double get bondOderUnpr => $_getN(16);
+  @$pb.TagNumber(17)
+  set bondOderUnpr($core.double value) => $_setDouble(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasBondOderUnpr() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearBondOderUnpr() => $_clearField(17);
+
+  /// 체결처리시각
+  @$pb.TagNumber(18)
+  $core.String get cntgProsTime => $_getSZ(17);
+  @$pb.TagNumber(18)
+  set cntgProsTime($core.String value) => $_setString(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasCntgProsTime() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearCntgProsTime() => $_clearField(18);
+
+  /// 공매도ID
+  @$pb.TagNumber(19)
+  $core.String get sstsId => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set sstsId($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasSstsId() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearSstsId() => $_clearField(19);
+
+  /// 체결구분코드 (1=체결, 2=미체결)
+  @$pb.TagNumber(20)
+  $core.String get cntgClsCode => $_getSZ(19);
+  @$pb.TagNumber(20)
+  set cntgClsCode($core.String value) => $_setString(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasCntgClsCode() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearCntgClsCode() => $_clearField(20);
+
+  /// 거래소종류코드 (01=KRX, 02=NXT, 03=SOR)
+  @$pb.TagNumber(21)
+  $core.String get exchKindCode => $_getSZ(20);
+  @$pb.TagNumber(21)
+  set exchKindCode($core.String value) => $_setString(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasExchKindCode() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearExchKindCode() => $_clearField(21);
+
+  /// 공매도여부 (Y/N)
+  @$pb.TagNumber(22)
+  $core.String get sstsYn => $_getSZ(21);
+  @$pb.TagNumber(22)
+  set sstsYn($core.String value) => $_setString(21, value);
+  @$pb.TagNumber(22)
+  $core.bool hasSstsYn() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearSstsYn() => $_clearField(22);
+}
+
+/// ListLedgerOrderFillStatus 요청
+class ListLedgerOrderFillStatusRequest extends $pb.GeneratedMessage {
+  factory ListLedgerOrderFillStatusRequest({
+    $core.String? fund,
+    $core.String? date,
+    OrderFillFilter? filter,
+  }) {
+    final result = create();
+    if (fund != null) result.fund = fund;
+    if (date != null) result.date = date;
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  ListLedgerOrderFillStatusRequest._();
+
+  factory ListLedgerOrderFillStatusRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListLedgerOrderFillStatusRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLedgerOrderFillStatusRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fund')
+    ..aOS(2, _omitFieldNames ? '' : 'date')
+    ..e<OrderFillFilter>(3, _omitFieldNames ? '' : 'filter', $pb.PbFieldType.OE, defaultOrMaker: OrderFillFilter.ORDER_FILL_FILTER_UNSPECIFIED, valueOf: OrderFillFilter.valueOf, enumValues: OrderFillFilter.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLedgerOrderFillStatusRequest clone() => ListLedgerOrderFillStatusRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLedgerOrderFillStatusRequest copyWith(void Function(ListLedgerOrderFillStatusRequest) updates) => super.copyWith((message) => updates(message as ListLedgerOrderFillStatusRequest)) as ListLedgerOrderFillStatusRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListLedgerOrderFillStatusRequest create() => ListLedgerOrderFillStatusRequest._();
+  @$core.override
+  ListLedgerOrderFillStatusRequest createEmptyInstance() => create();
+  static $pb.PbList<ListLedgerOrderFillStatusRequest> createRepeated() => $pb.PbList<ListLedgerOrderFillStatusRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListLedgerOrderFillStatusRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLedgerOrderFillStatusRequest>(create);
+  static ListLedgerOrderFillStatusRequest? _defaultInstance;
+
+  /// 펀드 리소스명 (예: "funds/1234")
+  @$pb.TagNumber(1)
+  $core.String get fund => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fund($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFund() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFund() => $_clearField(1);
+
+  /// 주문일자 (YYYYMMDD)
+  @$pb.TagNumber(2)
+  $core.String get date => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set date($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasDate() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDate() => $_clearField(2);
+
+  /// 체결구분 필터 (UNSPECIFIED=전체, FILLED=체결, UNFILLED=미체결)
+  @$pb.TagNumber(3)
+  OrderFillFilter get filter => $_getN(2);
+  @$pb.TagNumber(3)
+  set filter(OrderFillFilter value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilter() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilter() => $_clearField(3);
+}
+
+/// ListLedgerOrderFillStatus 응답
+class ListLedgerOrderFillStatusResponse extends $pb.GeneratedMessage {
+  factory ListLedgerOrderFillStatusResponse({
+    $core.Iterable<LedgerOrderFillStatusItem>? items,
+  }) {
+    final result = create();
+    if (items != null) result.items.addAll(items);
+    return result;
+  }
+
+  ListLedgerOrderFillStatusResponse._();
+
+  factory ListLedgerOrderFillStatusResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListLedgerOrderFillStatusResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListLedgerOrderFillStatusResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
+    ..pc<LedgerOrderFillStatusItem>(1, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: LedgerOrderFillStatusItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLedgerOrderFillStatusResponse clone() => ListLedgerOrderFillStatusResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListLedgerOrderFillStatusResponse copyWith(void Function(ListLedgerOrderFillStatusResponse) updates) => super.copyWith((message) => updates(message as ListLedgerOrderFillStatusResponse)) as ListLedgerOrderFillStatusResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListLedgerOrderFillStatusResponse create() => ListLedgerOrderFillStatusResponse._();
+  @$core.override
+  ListLedgerOrderFillStatusResponse createEmptyInstance() => create();
+  static $pb.PbList<ListLedgerOrderFillStatusResponse> createRepeated() => $pb.PbList<ListLedgerOrderFillStatusResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListLedgerOrderFillStatusResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLedgerOrderFillStatusResponse>(create);
+  static ListLedgerOrderFillStatusResponse? _defaultInstance;
+
+  /// 일자별상품주문체결현황 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<LedgerOrderFillStatusItem> get items => $_getList(0);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

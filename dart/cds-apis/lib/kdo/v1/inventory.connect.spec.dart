@@ -91,6 +91,14 @@ abstract final class InventoryService {
     kdov1inventory.TransferLoanResponse.new,
   );
 
+  /// 일자별상품주문체결현황 조회 (obtrs_oder_743r)
+  static const listLedgerOrderFillStatus = connect.Spec(
+    '/$name/ListLedgerOrderFillStatus',
+    connect.StreamType.unary,
+    kdov1inventory.ListLedgerOrderFillStatusRequest.new,
+    kdov1inventory.ListLedgerOrderFillStatusResponse.new,
+  );
+
   /// 대차 인도내역 조회 (미처리 건 목록)
   static const listLoanDeliveries = connect.Spec(
     '/$name/ListLoanDeliveries',

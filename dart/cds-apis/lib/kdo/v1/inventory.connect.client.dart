@@ -189,6 +189,24 @@ extension type InventoryServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 일자별상품주문체결현황 조회 (obtrs_oder_743r)
+  Future<kdov1inventory.ListLedgerOrderFillStatusResponse> listLedgerOrderFillStatus(
+    kdov1inventory.ListLedgerOrderFillStatusRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.InventoryService.listLedgerOrderFillStatus,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 대차 인도내역 조회 (미처리 건 목록)
   Future<kdov1inventory.ListLoanDeliveriesResponse> listLoanDeliveries(
     kdov1inventory.ListLoanDeliveriesRequest input, {
