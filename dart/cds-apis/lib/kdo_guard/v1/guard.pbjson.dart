@@ -52,6 +52,7 @@ const UpdateSettingsRequest$json = {
     {'1': 'threshold_shares', '3': 1, '4': 1, '5': 3, '9': 0, '10': 'thresholdShares', '17': true},
     {'1': 'enabled', '3': 2, '4': 1, '5': 8, '9': 1, '10': 'enabled', '17': true},
     {'1': 'active_instance', '3': 3, '4': 1, '5': 9, '9': 2, '10': 'activeInstance', '17': true},
+    {'1': 'funds', '3': 4, '4': 3, '5': 9, '10': 'funds'},
   ],
   '8': [
     {'1': '_threshold_shares'},
@@ -64,8 +65,9 @@ const UpdateSettingsRequest$json = {
 final $typed_data.Uint8List updateSettingsRequestDescriptor = $convert.base64Decode(
     'ChVVcGRhdGVTZXR0aW5nc1JlcXVlc3QSLgoQdGhyZXNob2xkX3NoYXJlcxgBIAEoA0gAUg90aH'
     'Jlc2hvbGRTaGFyZXOIAQESHQoHZW5hYmxlZBgCIAEoCEgBUgdlbmFibGVkiAEBEiwKD2FjdGl2'
-    'ZV9pbnN0YW5jZRgDIAEoCUgCUg5hY3RpdmVJbnN0YW5jZYgBAUITChFfdGhyZXNob2xkX3NoYX'
-    'Jlc0IKCghfZW5hYmxlZEISChBfYWN0aXZlX2luc3RhbmNl');
+    'ZV9pbnN0YW5jZRgDIAEoCUgCUg5hY3RpdmVJbnN0YW5jZYgBARIUCgVmdW5kcxgEIAMoCVIFZn'
+    'VuZHNCEwoRX3RocmVzaG9sZF9zaGFyZXNCCgoIX2VuYWJsZWRCEgoQX2FjdGl2ZV9pbnN0YW5j'
+    'ZQ==');
 
 @$core.Deprecated('Use listStopEventsRequestDescriptor instead')
 const ListStopEventsRequest$json = {

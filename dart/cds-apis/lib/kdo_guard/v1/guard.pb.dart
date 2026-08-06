@@ -165,11 +165,13 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? thresholdShares,
     $core.bool? enabled,
     $core.String? activeInstance,
+    $core.Iterable<$core.String>? funds,
   }) {
     final result = create();
     if (thresholdShares != null) result.thresholdShares = thresholdShares;
     if (enabled != null) result.enabled = enabled;
     if (activeInstance != null) result.activeInstance = activeInstance;
+    if (funds != null) result.funds.addAll(funds);
     return result;
   }
 
@@ -182,6 +184,7 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
     ..aInt64(1, _omitFieldNames ? '' : 'thresholdShares')
     ..aOB(2, _omitFieldNames ? '' : 'enabled')
     ..aOS(3, _omitFieldNames ? '' : 'activeInstance')
+    ..pPS(4, _omitFieldNames ? '' : 'funds')
     ..hasRequiredFields = false
   ;
 
@@ -231,6 +234,11 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   $core.bool hasActiveInstance() => $_has(2);
   @$pb.TagNumber(3)
   void clearActiveInstance() => $_clearField(3);
+
+  /// 비어 있지 않으면 감시 대상 펀드를 이 목록으로 교체한다.
+  /// 클라이언트가 지금 조회 중인 펀드만 정지 대상으로 두기 위한 것.
+  @$pb.TagNumber(4)
+  $pb.PbList<$core.String> get funds => $_getList(3);
 }
 
 class ListStopEventsRequest extends $pb.GeneratedMessage {

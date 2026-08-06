@@ -41,6 +41,10 @@ pub struct UpdateSettingsRequest {
     /// 지정하면 감시 대상 인스턴스 변경. instances 에 있는 이름이어야 한다.
     #[prost(string, optional, tag="3")]
     pub active_instance: ::core::option::Option<::prost::alloc::string::String>,
+    /// 비어 있지 않으면 감시 대상 펀드를 이 목록으로 교체한다.
+    /// 클라이언트가 지금 조회 중인 펀드만 정지 대상으로 두기 위한 것.
+    #[prost(string, repeated, tag="4")]
+    pub funds: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

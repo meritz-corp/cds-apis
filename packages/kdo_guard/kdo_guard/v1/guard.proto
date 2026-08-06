@@ -43,6 +43,9 @@ message UpdateSettingsRequest {
   optional bool enabled = 2;
   // 지정하면 감시 대상 인스턴스 변경. instances 에 있는 이름이어야 한다.
   optional string active_instance = 3;
+  // 비어 있지 않으면 감시 대상 펀드를 이 목록으로 교체한다.
+  // 클라이언트가 지금 조회 중인 펀드만 정지 대상으로 두기 위한 것.
+  repeated string funds = 4;
 }
 
 message ListStopEventsRequest {
