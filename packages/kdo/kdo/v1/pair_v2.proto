@@ -1,0 +1,541 @@
+syntax = "proto3";
+
+package kdo.v1.pair_v2;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/api/resource.proto";
+import "google/api/client.proto";
+import "kdo/v1/hedge.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// PairV2Service - 가격차(스프레드) 단일 트리거 페어 전략 관리 서비스 (V2)
+//
+// `kdo.v1.pair` 와 코드/스키마를 공유하지 않는 독립 패키지다 (lead_lag_v2/mm_v2 와 같은 포크 방식).
+// 운영 중인 v1 PairService 를 보호하기 위한 의도적 격리이며, v1 메시지를 참조하지 않는다.
+//
+// v2 전략: base·counter 두 다리의 지정 호가로 스프레드를 재고, 목표치(target_spread)를
+// 초과하면 그 가격 그대로 양다리를 동시에 발주한다. 미체결 잔량은 취소하지 않고
+// auto_amend SelfQuote 가 추적 정정해 체결시킨다. v1 의 trigger×execution 2축 조합,
+// 수량 불균형 트리거, settle/recovery/balance 사이클은 없다.
+service PairV2Service {
+  // 단일 PairV2 조회
+  rpc GetPairV2(GetPairV2Request) returns (PairV2) {
+    option (google.api.http) = {
+      get: "/v1/{pair_v2=pair_v2s/*}"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+
+  // PairV2 목록 조회 (페이징 + 필터)
+  rpc ListPairV2s(ListPairV2sRequest) returns (ListPairV2sResponse) {
+    option (google.api.http) = {
+      get: "/v1/pair_v2s"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // PairV2 생성
+  rpc CreatePairV2(CreatePairV2Request) returns (PairV2) {
+    option (google.api.http) = {
+      post: "/v1/pair_v2s"
+      body: "pair_v2"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+
+  // PairV2 수정
+  rpc UpdatePairV2(UpdatePairV2Request) returns (PairV2) {
+    option (google.api.http) = {
+      patch: "/v1/{pair_v2.name=pair_v2s/*}"
+      body: "pair_v2"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+
+  // PairV2 삭제
+  rpc DeletePairV2(DeletePairV2Request) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/{pair_v2=pair_v2s/*}"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+
+  // PairV2 활성화 (status → ACTIVE, hot loop 시작)
+  rpc ActivatePairV2(ActivatePairV2Request) returns (PairV2) {
+    option (google.api.http) = {
+      post: "/v1/{pair_v2=pair_v2s/*}:activate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+
+  // PairV2 일시 중지 (hot loop 중지, status → PAUSED)
+  rpc PausePairV2(PausePairV2Request) returns (PairV2) {
+    option (google.api.http) = {
+      post: "/v1/{pair_v2=pair_v2s/*}:pause"
+      body: "*"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+
+  // PairV2 실행 로그 목록 조회 (발사/스킵 시점 스냅샷, 페이징)
+  rpc ListPairV2ExecutionLogs(ListPairV2ExecutionLogsRequest) returns (ListPairV2ExecutionLogsResponse) {
+    option (google.api.http) = {
+      get: "/v1/{pair_v2=pair_v2s/*}/executionLogs"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+
+  // PairV2 실시간 운영 단계(phase) 스트리밍 (변경 시마다 emit)
+  rpc StreamPairV2Status(StreamPairV2StatusRequest) returns (stream PairV2StatusUpdate) {
+    option (google.api.http) = {
+      get: "/v1/{pair_v2=pair_v2s/*}:streamStatus"
+    };
+    option (google.api.method_signature) = "pair_v2";
+  }
+}
+
+// ============================================================================
+// PairV2 Entity
+// ============================================================================
+
+// PairV2 전략 — base·counter 지정 호가로 재는 스프레드가 target_spread 를 초과하면
+// 그 가격 그대로 양다리를 동시 발주한다.
+message PairV2 {
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/PairV2"
+    pattern: "pair_v2s/{pair_v2}"
+  };
+
+  // 리소스 이름 (pair_v2s/{id})
+  string name = 1;
+
+  // PairV2 ID
+  int32 id = 2 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 전략 이름 (고유)
+  string display_name = 3 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // Portfolio ID
+  int32 portfolio_id = 4 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // Base 다리. side 가 매수차(BID)/매도차(ASK) 를 결정하고, quantity 가 1회 발주량.
+  PairV2Entry base = 5 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // Counter 다리. quantity 는 무시(런타임 = base.quantity × hedge_ratio).
+  PairV2Entry counter = 6 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // counter 가격을 base 가격축으로 옮기는 방법.
+  PairV2SpreadType spread = 7 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 진입 최소 스프레드. 현재 스프레드가 이 값을 "초과"할 때 발사. 단위 = base 가격 단위.
+  // 캘린더 스프레드처럼 즉시 차익이 아닌 운용은 음수가 정상이다.
+  double target_spread = 8;
+
+  // 발사 후 재발사까지 대기 (ms)
+  uint64 cooldown_ms = 9;
+
+  // 미체결 잔량 추적 정정 임계 — auto_amend SelfQuote 의 opposite_qty_ratio_threshold.
+  // base/counter 공유. 0 이면 절대 정정하지 않아 미체결이 영구히 남으므로 양수 필수.
+  double amend_threshold = 10;
+
+  // spread 가 NAV 일 때 필수인 NAV 환산 설정.
+  PairV2Nav nav = 11;
+
+  // base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다.
+  int64 max_base_quantity = 12;
+
+  // 상태
+  PairV2Status status = 13 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 14 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 15 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
+
+// ============================================================================
+// Pair Entry
+// ============================================================================
+
+// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).
+//
+// v1 과 달리 base·counter 두 다리 모두 price_source 가 유효하다 — 스프레드를 그 가격으로
+// 재고 그 가격으로 발주한다(측정가 = 발주가 불변식).
+message PairV2Entry {
+  // 종목 심볼
+  string symbol = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 주문에 사용할 펀드 코드
+  string fund_code = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
+  PairV2Side side = 3 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 주문 수량. base 는 1회 발주량(필수), counter 는 무시(런타임 = base.quantity × hedge_ratio).
+  int64 quantity = 4 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값
+  // BEST_TAKE(상대호가, 즉시 체결 지향)로 처리된다.
+  PairV2PriceSource price_source = 5;
+
+  // 주문 tp_code (NONE=일반, LP=유동성공급자). 정정/취소는 거래소가 원주문 tp_code 를 따른다.
+  kdo.v1.hedge.OrderTpCode tp_code = 6;
+}
+
+// 주문 방향
+enum PairV2Side {
+  PAIR_V2_SIDE_UNSPECIFIED = 0;
+  // 매수
+  PAIR_V2_SIDE_BID = 1;
+  // 매도
+  PAIR_V2_SIDE_ASK = 2;
+}
+
+// 엔트리의 호가 위치 — entry.side 기준 자기/상대 호가.
+enum PairV2PriceSource {
+  PAIR_V2_PRICE_SOURCE_UNSPECIFIED = 0;
+  // 자기호가 (entry.side 와 같은 방향의 1호가). BID → bid1, ASK → ask1. maker 위치.
+  PAIR_V2_PRICE_SOURCE_BEST_MAKE = 1;
+  // 상대호가 (entry.side 반대 방향의 1호가). BID → ask1, ASK → bid1. taker 위치.
+  // 도메인 기본값.
+  PAIR_V2_PRICE_SOURCE_BEST_TAKE = 2;
+}
+
+// ============================================================================
+// Spread
+// ============================================================================
+
+// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위.
+message PairV2SpreadType {
+  oneof kind {
+    // counter 가격 × k 로 선형 환산. k=1 → 단순 가격차(원월−근월, KODEX200−TIGER200),
+    // k≠1 → 이종 가격축(KODEX200 − K200선물×ETF배수). 선형이라 역방향(인버스)은 표현 불가.
+    PairV2ScaledSpread scaled = 1;
+    // PairV2.nav (NavKind) 로 counter → base 이론가 환산. 인버스·PDF 분해 등 비선형은 이쪽.
+    PairV2NavSpread nav = 2;
+  }
+}
+
+// counter 가격 × k 선형 환산 스프레드
+message PairV2ScaledSpread {
+  // k 는 양수 필수. counter.side != base.side 여야 한다(역방향은 Nav 사용).
+  double k = 1;
+}
+
+// NAV 환산 스프레드 (PairV2.nav 설정 사용, 파라미터 없음)
+message PairV2NavSpread {
+}
+
+// ============================================================================
+// NAV
+// ============================================================================
+
+// NAV 환산 종류 (파라미터 없는 태그). 실제 EtfPricing/PricingContext 는 런타임에
+// 선물 + ETF 엔티티에서 조립한다.
+enum PairV2NavKind {
+  PAIR_V2_NAV_KIND_UNSPECIFIED = 0;
+  // 지수 추종 헷지 프라이싱
+  PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE = 1;
+  // 선물 베이시스 기반
+  PAIR_V2_NAV_KIND_FUTURE_BASIS = 2;
+  // 레버리지/인버스 ETF용 선물 기반
+  PAIR_V2_NAV_KIND_LEVERAGE_FUTURE = 3;
+  // PDF flatten(단일 선물 + Cash) 기반 선형 환산
+  PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE = 4;
+}
+
+// ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base
+// 목표가 산출에 사용한다.
+message PairV2Nav {
+  PairV2NavKind nav_kind = 1;
+  // NAV 베이시스 (선물 가격축 단일값, 원)
+  int64 basis = 2;
+  // basis 를 정적값으로 고정할지(false) vs 시장 동기화 소스로부터 동적 추종할지(true).
+  bool dynamic_basis = 3;
+}
+
+// ============================================================================
+// Pair Status
+// ============================================================================
+
+// PairV2 상태
+enum PairV2Status {
+  PAIR_V2_STATUS_UNSPECIFIED = 0;
+  // 운영 중 (hot loop 동작)
+  PAIR_V2_STATUS_ACTIVE = 1;
+  // 일시 중지
+  PAIR_V2_STATUS_PAUSED = 2;
+  // 보관 (더 이상 사용 안 함)
+  PAIR_V2_STATUS_ARCHIVED = 3;
+}
+
+// PairV2 운영 단계 — 외부(운영자/UI)에 노출되는 실시간 lifecycle.
+//
+// v2 는 사이클 상태머신이 없다. 미체결 잔량은 취소하지 않고 auto_amend SelfQuote 가
+// 추적하므로, 단계는 "발사 대기 / 추적 중 / 정지" 세 가지뿐이다.
+enum PairV2RuntimePhase {
+  PAIR_V2_RUNTIME_PHASE_UNSPECIFIED = 0;
+  // 시세 수신 + 스프레드 평가 중, 미체결 주문 없음.
+  PAIR_V2_RUNTIME_PHASE_IDLE = 1;
+  // 미체결 잔량이 남아 auto_amend 가 추적 정정 중.
+  PAIR_V2_RUNTIME_PHASE_TRACKING = 2;
+  // 일시 중지.
+  PAIR_V2_RUNTIME_PHASE_PAUSED = 3;
+}
+
+// ============================================================================
+// Request / Response Messages — CRUD
+// ============================================================================
+
+message GetPairV2Request {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/PairV2"
+    }
+  ];
+}
+
+message ListPairV2sRequest {
+  // 페이지 크기 (optional)
+  optional int32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 필터링 조건 (optional, AIP-160)
+  //
+  // Available Fields:
+  // * status - 상태 (ACTIVE / PAUSED / ARCHIVED)
+  // * portfolio_id - Portfolio ID
+  //
+  // Examples:
+  // * status=ACTIVE
+  // * portfolio_id=1
+  string filter = 3 [
+    (google.api.field_behavior) = OPTIONAL
+  ];
+}
+
+message ListPairV2sResponse {
+  // PairV2 목록
+  repeated PairV2 pair_v2s = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+message CreatePairV2Request {
+  // 생성할 PairV2
+  PairV2 pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+message UpdatePairV2Request {
+  // 수정할 PairV2
+  PairV2 pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+message DeletePairV2Request {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/PairV2"
+    }
+  ];
+}
+
+// ============================================================================
+// Request / Response Messages — Lifecycle
+// ============================================================================
+
+message ActivatePairV2Request {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/PairV2"
+    }
+  ];
+}
+
+message PausePairV2Request {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/PairV2"
+    }
+  ];
+}
+
+// ============================================================================
+// PairV2 Execution Log (발주 시점 스냅샷 전용)
+// ============================================================================
+
+// 페어 실행 로그 레코드 — 발주(또는 스킵) 시점 스냅샷.
+//
+// 체결·슬리피지 필드는 없다. v2 는 미체결을 취소하지 않고 auto_amend 가 추적하므로
+// 한 번의 발사가 여러 시점에 나눠 체결되고, 발사↔체결 1:1 매칭 자체가 성립하지 않는다.
+// 체결 내역은 전 서비스 공통 SoT 인 order_log 에서 order_id lineage 로 조인한다.
+message PairV2ExecutionLog {
+  // Pair ID
+  int32 pair_id = 1;
+
+  // 실행 결과
+  PairV2ExecutionOutcome outcome = 2;
+
+  // 발사 판정에 쓴 측정 스프레드 (base 가격 단위)
+  double spread = 3;
+
+  // 그 시점의 목표 스프레드 (설정 변경 이력 추적용)
+  double target_spread = 4;
+
+  // Base 측 주문 ID (발주 성공 시)
+  optional uint64 base_order_id = 5;
+
+  // Counter 측 주문 ID (발주 성공 시)
+  optional uint64 counter_order_id = 6;
+
+  // base 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
+  int64 base_price = 7;
+
+  // counter 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
+  int64 counter_price = 8;
+
+  // base 발주 수량
+  int64 base_qty = 9;
+
+  // counter 발주 수량
+  int64 counter_qty = 10;
+
+  // 트리거 시세 수신 시점부터 base 제출 직후까지 경과 (us). 미발주 0.
+  int64 trigger_to_base_submit_us = 11;
+
+  // 트리거 시세 수신 시점부터 counter 제출 직후까지 경과 (us). 미발주 0.
+  int64 trigger_to_counter_submit_us = 12;
+
+  // 발주 시각
+  google.protobuf.Timestamp dispatched_at = 13;
+
+  // 상세 내용 (오류 메시지 등, optional)
+  optional string detail = 14;
+}
+
+// 페어 실행 결과
+enum PairV2ExecutionOutcome {
+  PAIR_V2_EXECUTION_OUTCOME_UNSPECIFIED = 0;
+  // 양 다리 모두 제출 성공
+  PAIR_V2_EXECUTION_OUTCOME_SUBMITTED = 1;
+  // 쿨다운 미충족
+  PAIR_V2_EXECUTION_OUTCOME_SKIPPED_COOLDOWN = 2;
+  // base 누적(체결+미체결)이 max_base_quantity 도달
+  PAIR_V2_EXECUTION_OUTCOME_SKIPPED_MAX_QUANTITY = 3;
+  // 한쪽 호가 미형성 등으로 스프레드 산출 불가
+  PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE = 4;
+  // 한 다리만 제출 성공 — 반대 다리 없이 노출이 남는다
+  PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE = 5;
+  // 양 다리 모두 제출 실패
+  PAIR_V2_EXECUTION_OUTCOME_FAILED = 6;
+}
+
+message ListPairV2ExecutionLogsRequest {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/PairV2"
+    }
+  ];
+
+  // 페이지 크기 (기본: 50, 최대: 200)
+  optional int32 page_size = 2;
+
+  // 페이지 토큰 — 최신순(id DESC) 키셋 커서. 이전 응답의 next_page_token 을 그대로 전달.
+  // 최초 조회는 미지정.
+  optional string page_token = 3;
+
+  // outcome 필터 (UNSPECIFIED = 전체)
+  PairV2ExecutionOutcome outcome = 4;
+
+  // 발주 시각 범위 시작 (inclusive). 미지정 시 하한 없음.
+  optional google.protobuf.Timestamp dispatched_from = 5;
+
+  // 발주 시각 범위 끝 (exclusive). 미지정 시 상한 없음.
+  optional google.protobuf.Timestamp dispatched_to = 6;
+}
+
+message ListPairV2ExecutionLogsResponse {
+  // 실행 로그 목록
+  repeated PairV2ExecutionLog execution_logs = 1;
+
+  // 다음 페이지 토큰 (더 없으면 빈 문자열)
+  string next_page_token = 2;
+
+  // 필터 조건(outcome/dispatched_from/dispatched_to) 기준 전체 건수 (cursor 무관)
+  int32 total_count = 3;
+}
+
+// ============================================================================
+// Real-time Status Streaming
+// ============================================================================
+
+// StreamPairV2Status 요청
+message StreamPairV2StatusRequest {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/PairV2"
+    }
+  ];
+}
+
+// StreamPairV2Status 스트리밍 응답 — 운영 단계 변경 시마다 emit
+message PairV2StatusUpdate {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1;
+
+  // 현재 운영 단계
+  PairV2RuntimePhase phase = 2;
+
+  // 스냅샷 시각
+  google.protobuf.Timestamp updated_at = 3;
+}

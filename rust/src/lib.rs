@@ -104,6 +104,9 @@ pub mod kdo {
         pub mod pair {
             include!("kdo.v1.pair.rs");
         }
+        pub mod pair_v2 {
+            include!("kdo.v1.pair_v2.rs");
+        }
     }
 }
 pub mod market {
