@@ -4129,52 +4129,52 @@ class ResizeSessionInventoryResponse extends $pb.GeneratedMessage {
 /// 일자별상품주문체결현황 항목 (obtrs_oder_743r OutBlock1)
 class LedgerOrderFillStatusItem extends $pb.GeneratedMessage {
   factory LedgerOrderFillStatusItem({
-    $fixnum.Int64? oderNo,
-    $core.String? iscd,
-    $core.String? uiIsnm,
-    $core.String? fncd,
-    $core.String? dealClsCode,
-    $fixnum.Int64? odqt,
-    $fixnum.Int64? oderUnpr,
-    $fixnum.Int64? cntgQty,
-    $core.String? prosBrcd,
-    $core.String? oderRfusReasName,
-    $core.String? oderRfusReasCode,
-    $core.String? errMsg,
-    $core.String? oderProsStaTime,
-    $core.String? rctfCnclClsCode,
-    $fixnum.Int64? orglOderNo,
-    $fixnum.Int64? ncntQty,
-    $core.double? bondOderUnpr,
-    $core.String? cntgProsTime,
-    $core.String? sstsId,
-    $core.String? cntgClsCode,
-    $core.String? exchKindCode,
-    $core.String? sstsYn,
+    $fixnum.Int64? orderId,
+    $core.String? symbol,
+    $core.String? symbolName,
+    $core.String? fundCode,
+    $core.String? side,
+    $fixnum.Int64? quantity,
+    $fixnum.Int64? price,
+    $fixnum.Int64? filledQuantity,
+    $core.String? branchCode,
+    $core.String? rejectionReasonName,
+    $core.String? rejectionReasonCode,
+    $core.String? errorMessage,
+    $core.String? orderProcessStartTime,
+    $core.String? amendCancelType,
+    $fixnum.Int64? originalOrderId,
+    $fixnum.Int64? unfilledQuantity,
+    $core.double? bondPrice,
+    $core.String? fillProcessTime,
+    $core.String? shortSellId,
+    $core.String? fillType,
+    $core.String? exchangeType,
+    $core.String? shortSellYn,
   }) {
     final result = create();
-    if (oderNo != null) result.oderNo = oderNo;
-    if (iscd != null) result.iscd = iscd;
-    if (uiIsnm != null) result.uiIsnm = uiIsnm;
-    if (fncd != null) result.fncd = fncd;
-    if (dealClsCode != null) result.dealClsCode = dealClsCode;
-    if (odqt != null) result.odqt = odqt;
-    if (oderUnpr != null) result.oderUnpr = oderUnpr;
-    if (cntgQty != null) result.cntgQty = cntgQty;
-    if (prosBrcd != null) result.prosBrcd = prosBrcd;
-    if (oderRfusReasName != null) result.oderRfusReasName = oderRfusReasName;
-    if (oderRfusReasCode != null) result.oderRfusReasCode = oderRfusReasCode;
-    if (errMsg != null) result.errMsg = errMsg;
-    if (oderProsStaTime != null) result.oderProsStaTime = oderProsStaTime;
-    if (rctfCnclClsCode != null) result.rctfCnclClsCode = rctfCnclClsCode;
-    if (orglOderNo != null) result.orglOderNo = orglOderNo;
-    if (ncntQty != null) result.ncntQty = ncntQty;
-    if (bondOderUnpr != null) result.bondOderUnpr = bondOderUnpr;
-    if (cntgProsTime != null) result.cntgProsTime = cntgProsTime;
-    if (sstsId != null) result.sstsId = sstsId;
-    if (cntgClsCode != null) result.cntgClsCode = cntgClsCode;
-    if (exchKindCode != null) result.exchKindCode = exchKindCode;
-    if (sstsYn != null) result.sstsYn = sstsYn;
+    if (orderId != null) result.orderId = orderId;
+    if (symbol != null) result.symbol = symbol;
+    if (symbolName != null) result.symbolName = symbolName;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (side != null) result.side = side;
+    if (quantity != null) result.quantity = quantity;
+    if (price != null) result.price = price;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (branchCode != null) result.branchCode = branchCode;
+    if (rejectionReasonName != null) result.rejectionReasonName = rejectionReasonName;
+    if (rejectionReasonCode != null) result.rejectionReasonCode = rejectionReasonCode;
+    if (errorMessage != null) result.errorMessage = errorMessage;
+    if (orderProcessStartTime != null) result.orderProcessStartTime = orderProcessStartTime;
+    if (amendCancelType != null) result.amendCancelType = amendCancelType;
+    if (originalOrderId != null) result.originalOrderId = originalOrderId;
+    if (unfilledQuantity != null) result.unfilledQuantity = unfilledQuantity;
+    if (bondPrice != null) result.bondPrice = bondPrice;
+    if (fillProcessTime != null) result.fillProcessTime = fillProcessTime;
+    if (shortSellId != null) result.shortSellId = shortSellId;
+    if (fillType != null) result.fillType = fillType;
+    if (exchangeType != null) result.exchangeType = exchangeType;
+    if (shortSellYn != null) result.shortSellYn = shortSellYn;
     return result;
   }
 
@@ -4184,28 +4184,28 @@ class LedgerOrderFillStatusItem extends $pb.GeneratedMessage {
   factory LedgerOrderFillStatusItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LedgerOrderFillStatusItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.inventory'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'oderNo')
-    ..aOS(2, _omitFieldNames ? '' : 'iscd')
-    ..aOS(3, _omitFieldNames ? '' : 'uiIsnm')
-    ..aOS(4, _omitFieldNames ? '' : 'fncd')
-    ..aOS(5, _omitFieldNames ? '' : 'dealClsCode')
-    ..aInt64(6, _omitFieldNames ? '' : 'odqt')
-    ..aInt64(7, _omitFieldNames ? '' : 'oderUnpr')
-    ..aInt64(8, _omitFieldNames ? '' : 'cntgQty')
-    ..aOS(9, _omitFieldNames ? '' : 'prosBrcd')
-    ..aOS(10, _omitFieldNames ? '' : 'oderRfusReasName')
-    ..aOS(11, _omitFieldNames ? '' : 'oderRfusReasCode')
-    ..aOS(12, _omitFieldNames ? '' : 'errMsg')
-    ..aOS(13, _omitFieldNames ? '' : 'oderProsStaTime')
-    ..aOS(14, _omitFieldNames ? '' : 'rctfCnclClsCode')
-    ..aInt64(15, _omitFieldNames ? '' : 'orglOderNo')
-    ..aInt64(16, _omitFieldNames ? '' : 'ncntQty')
-    ..a<$core.double>(17, _omitFieldNames ? '' : 'bondOderUnpr', $pb.PbFieldType.OD)
-    ..aOS(18, _omitFieldNames ? '' : 'cntgProsTime')
-    ..aOS(19, _omitFieldNames ? '' : 'sstsId')
-    ..aOS(20, _omitFieldNames ? '' : 'cntgClsCode')
-    ..aOS(21, _omitFieldNames ? '' : 'exchKindCode')
-    ..aOS(22, _omitFieldNames ? '' : 'sstsYn')
+    ..aInt64(1, _omitFieldNames ? '' : 'orderId')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aOS(3, _omitFieldNames ? '' : 'symbolName')
+    ..aOS(4, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(5, _omitFieldNames ? '' : 'side')
+    ..aInt64(6, _omitFieldNames ? '' : 'quantity')
+    ..aInt64(7, _omitFieldNames ? '' : 'price')
+    ..aInt64(8, _omitFieldNames ? '' : 'filledQuantity')
+    ..aOS(9, _omitFieldNames ? '' : 'branchCode')
+    ..aOS(10, _omitFieldNames ? '' : 'rejectionReasonName')
+    ..aOS(11, _omitFieldNames ? '' : 'rejectionReasonCode')
+    ..aOS(12, _omitFieldNames ? '' : 'errorMessage')
+    ..aOS(13, _omitFieldNames ? '' : 'orderProcessStartTime')
+    ..aOS(14, _omitFieldNames ? '' : 'amendCancelType')
+    ..aInt64(15, _omitFieldNames ? '' : 'originalOrderId')
+    ..aInt64(16, _omitFieldNames ? '' : 'unfilledQuantity')
+    ..a<$core.double>(17, _omitFieldNames ? '' : 'bondPrice', $pb.PbFieldType.OD)
+    ..aOS(18, _omitFieldNames ? '' : 'fillProcessTime')
+    ..aOS(19, _omitFieldNames ? '' : 'shortSellId')
+    ..aOS(20, _omitFieldNames ? '' : 'fillType')
+    ..aOS(21, _omitFieldNames ? '' : 'exchangeType')
+    ..aOS(22, _omitFieldNames ? '' : 'shortSellYn')
     ..hasRequiredFields = false
   ;
 
@@ -4228,223 +4228,223 @@ class LedgerOrderFillStatusItem extends $pb.GeneratedMessage {
 
   /// 주문번호
   @$pb.TagNumber(1)
-  $fixnum.Int64 get oderNo => $_getI64(0);
+  $fixnum.Int64 get orderId => $_getI64(0);
   @$pb.TagNumber(1)
-  set oderNo($fixnum.Int64 value) => $_setInt64(0, value);
+  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasOderNo() => $_has(0);
+  $core.bool hasOrderId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearOderNo() => $_clearField(1);
+  void clearOrderId() => $_clearField(1);
 
   /// 종목코드
   @$pb.TagNumber(2)
-  $core.String get iscd => $_getSZ(1);
+  $core.String get symbol => $_getSZ(1);
   @$pb.TagNumber(2)
-  set iscd($core.String value) => $_setString(1, value);
+  set symbol($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasIscd() => $_has(1);
+  $core.bool hasSymbol() => $_has(1);
   @$pb.TagNumber(2)
-  void clearIscd() => $_clearField(2);
+  void clearSymbol() => $_clearField(2);
 
-  /// UI 종목명
+  /// 종목명
   @$pb.TagNumber(3)
-  $core.String get uiIsnm => $_getSZ(2);
+  $core.String get symbolName => $_getSZ(2);
   @$pb.TagNumber(3)
-  set uiIsnm($core.String value) => $_setString(2, value);
+  set symbolName($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasUiIsnm() => $_has(2);
+  $core.bool hasSymbolName() => $_has(2);
   @$pb.TagNumber(3)
-  void clearUiIsnm() => $_clearField(3);
+  void clearSymbolName() => $_clearField(3);
 
   /// 펀드코드
   @$pb.TagNumber(4)
-  $core.String get fncd => $_getSZ(3);
+  $core.String get fundCode => $_getSZ(3);
   @$pb.TagNumber(4)
-  set fncd($core.String value) => $_setString(3, value);
+  set fundCode($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasFncd() => $_has(3);
+  $core.bool hasFundCode() => $_has(3);
   @$pb.TagNumber(4)
-  void clearFncd() => $_clearField(4);
+  void clearFundCode() => $_clearField(4);
 
-  /// 매매구분코드 (1=매도, 2=매수)
+  /// 매매구분 (1=매도, 2=매수)
   @$pb.TagNumber(5)
-  $core.String get dealClsCode => $_getSZ(4);
+  $core.String get side => $_getSZ(4);
   @$pb.TagNumber(5)
-  set dealClsCode($core.String value) => $_setString(4, value);
+  set side($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasDealClsCode() => $_has(4);
+  $core.bool hasSide() => $_has(4);
   @$pb.TagNumber(5)
-  void clearDealClsCode() => $_clearField(5);
+  void clearSide() => $_clearField(5);
 
   /// 주문수량
   @$pb.TagNumber(6)
-  $fixnum.Int64 get odqt => $_getI64(5);
+  $fixnum.Int64 get quantity => $_getI64(5);
   @$pb.TagNumber(6)
-  set odqt($fixnum.Int64 value) => $_setInt64(5, value);
+  set quantity($fixnum.Int64 value) => $_setInt64(5, value);
   @$pb.TagNumber(6)
-  $core.bool hasOdqt() => $_has(5);
+  $core.bool hasQuantity() => $_has(5);
   @$pb.TagNumber(6)
-  void clearOdqt() => $_clearField(6);
+  void clearQuantity() => $_clearField(6);
 
   /// 주문단가
   @$pb.TagNumber(7)
-  $fixnum.Int64 get oderUnpr => $_getI64(6);
+  $fixnum.Int64 get price => $_getI64(6);
   @$pb.TagNumber(7)
-  set oderUnpr($fixnum.Int64 value) => $_setInt64(6, value);
+  set price($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(7)
-  $core.bool hasOderUnpr() => $_has(6);
+  $core.bool hasPrice() => $_has(6);
   @$pb.TagNumber(7)
-  void clearOderUnpr() => $_clearField(7);
+  void clearPrice() => $_clearField(7);
 
   /// 체결수량
   @$pb.TagNumber(8)
-  $fixnum.Int64 get cntgQty => $_getI64(7);
+  $fixnum.Int64 get filledQuantity => $_getI64(7);
   @$pb.TagNumber(8)
-  set cntgQty($fixnum.Int64 value) => $_setInt64(7, value);
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(8)
-  $core.bool hasCntgQty() => $_has(7);
+  $core.bool hasFilledQuantity() => $_has(7);
   @$pb.TagNumber(8)
-  void clearCntgQty() => $_clearField(8);
+  void clearFilledQuantity() => $_clearField(8);
 
   /// 처리지점코드
   @$pb.TagNumber(9)
-  $core.String get prosBrcd => $_getSZ(8);
+  $core.String get branchCode => $_getSZ(8);
   @$pb.TagNumber(9)
-  set prosBrcd($core.String value) => $_setString(8, value);
+  set branchCode($core.String value) => $_setString(8, value);
   @$pb.TagNumber(9)
-  $core.bool hasProsBrcd() => $_has(8);
+  $core.bool hasBranchCode() => $_has(8);
   @$pb.TagNumber(9)
-  void clearProsBrcd() => $_clearField(9);
+  void clearBranchCode() => $_clearField(9);
 
   /// 주문거부사유명
   @$pb.TagNumber(10)
-  $core.String get oderRfusReasName => $_getSZ(9);
+  $core.String get rejectionReasonName => $_getSZ(9);
   @$pb.TagNumber(10)
-  set oderRfusReasName($core.String value) => $_setString(9, value);
+  set rejectionReasonName($core.String value) => $_setString(9, value);
   @$pb.TagNumber(10)
-  $core.bool hasOderRfusReasName() => $_has(9);
+  $core.bool hasRejectionReasonName() => $_has(9);
   @$pb.TagNumber(10)
-  void clearOderRfusReasName() => $_clearField(10);
+  void clearRejectionReasonName() => $_clearField(10);
 
   /// 주문거부사유코드
   @$pb.TagNumber(11)
-  $core.String get oderRfusReasCode => $_getSZ(10);
+  $core.String get rejectionReasonCode => $_getSZ(10);
   @$pb.TagNumber(11)
-  set oderRfusReasCode($core.String value) => $_setString(10, value);
+  set rejectionReasonCode($core.String value) => $_setString(10, value);
   @$pb.TagNumber(11)
-  $core.bool hasOderRfusReasCode() => $_has(10);
+  $core.bool hasRejectionReasonCode() => $_has(10);
   @$pb.TagNumber(11)
-  void clearOderRfusReasCode() => $_clearField(11);
+  void clearRejectionReasonCode() => $_clearField(11);
 
   /// 에러메시지
   @$pb.TagNumber(12)
-  $core.String get errMsg => $_getSZ(11);
+  $core.String get errorMessage => $_getSZ(11);
   @$pb.TagNumber(12)
-  set errMsg($core.String value) => $_setString(11, value);
+  set errorMessage($core.String value) => $_setString(11, value);
   @$pb.TagNumber(12)
-  $core.bool hasErrMsg() => $_has(11);
+  $core.bool hasErrorMessage() => $_has(11);
   @$pb.TagNumber(12)
-  void clearErrMsg() => $_clearField(12);
+  void clearErrorMessage() => $_clearField(12);
 
   /// 주문처리시작시각
   @$pb.TagNumber(13)
-  $core.String get oderProsStaTime => $_getSZ(12);
+  $core.String get orderProcessStartTime => $_getSZ(12);
   @$pb.TagNumber(13)
-  set oderProsStaTime($core.String value) => $_setString(12, value);
+  set orderProcessStartTime($core.String value) => $_setString(12, value);
   @$pb.TagNumber(13)
-  $core.bool hasOderProsStaTime() => $_has(12);
+  $core.bool hasOrderProcessStartTime() => $_has(12);
   @$pb.TagNumber(13)
-  void clearOderProsStaTime() => $_clearField(13);
+  void clearOrderProcessStartTime() => $_clearField(13);
 
-  /// 정정취소구분코드 (1=정상, 2=정정, 3=취소)
+  /// 정정취소구분 (1=정상, 2=정정, 3=취소)
   @$pb.TagNumber(14)
-  $core.String get rctfCnclClsCode => $_getSZ(13);
+  $core.String get amendCancelType => $_getSZ(13);
   @$pb.TagNumber(14)
-  set rctfCnclClsCode($core.String value) => $_setString(13, value);
+  set amendCancelType($core.String value) => $_setString(13, value);
   @$pb.TagNumber(14)
-  $core.bool hasRctfCnclClsCode() => $_has(13);
+  $core.bool hasAmendCancelType() => $_has(13);
   @$pb.TagNumber(14)
-  void clearRctfCnclClsCode() => $_clearField(14);
+  void clearAmendCancelType() => $_clearField(14);
 
   /// 원주문번호
   @$pb.TagNumber(15)
-  $fixnum.Int64 get orglOderNo => $_getI64(14);
+  $fixnum.Int64 get originalOrderId => $_getI64(14);
   @$pb.TagNumber(15)
-  set orglOderNo($fixnum.Int64 value) => $_setInt64(14, value);
+  set originalOrderId($fixnum.Int64 value) => $_setInt64(14, value);
   @$pb.TagNumber(15)
-  $core.bool hasOrglOderNo() => $_has(14);
+  $core.bool hasOriginalOrderId() => $_has(14);
   @$pb.TagNumber(15)
-  void clearOrglOderNo() => $_clearField(15);
+  void clearOriginalOrderId() => $_clearField(15);
 
   /// 미체결수량
   @$pb.TagNumber(16)
-  $fixnum.Int64 get ncntQty => $_getI64(15);
+  $fixnum.Int64 get unfilledQuantity => $_getI64(15);
   @$pb.TagNumber(16)
-  set ncntQty($fixnum.Int64 value) => $_setInt64(15, value);
+  set unfilledQuantity($fixnum.Int64 value) => $_setInt64(15, value);
   @$pb.TagNumber(16)
-  $core.bool hasNcntQty() => $_has(15);
+  $core.bool hasUnfilledQuantity() => $_has(15);
   @$pb.TagNumber(16)
-  void clearNcntQty() => $_clearField(16);
+  void clearUnfilledQuantity() => $_clearField(16);
 
   /// 채권주문단가
   @$pb.TagNumber(17)
-  $core.double get bondOderUnpr => $_getN(16);
+  $core.double get bondPrice => $_getN(16);
   @$pb.TagNumber(17)
-  set bondOderUnpr($core.double value) => $_setDouble(16, value);
+  set bondPrice($core.double value) => $_setDouble(16, value);
   @$pb.TagNumber(17)
-  $core.bool hasBondOderUnpr() => $_has(16);
+  $core.bool hasBondPrice() => $_has(16);
   @$pb.TagNumber(17)
-  void clearBondOderUnpr() => $_clearField(17);
+  void clearBondPrice() => $_clearField(17);
 
   /// 체결처리시각
   @$pb.TagNumber(18)
-  $core.String get cntgProsTime => $_getSZ(17);
+  $core.String get fillProcessTime => $_getSZ(17);
   @$pb.TagNumber(18)
-  set cntgProsTime($core.String value) => $_setString(17, value);
+  set fillProcessTime($core.String value) => $_setString(17, value);
   @$pb.TagNumber(18)
-  $core.bool hasCntgProsTime() => $_has(17);
+  $core.bool hasFillProcessTime() => $_has(17);
   @$pb.TagNumber(18)
-  void clearCntgProsTime() => $_clearField(18);
+  void clearFillProcessTime() => $_clearField(18);
 
   /// 공매도ID
   @$pb.TagNumber(19)
-  $core.String get sstsId => $_getSZ(18);
+  $core.String get shortSellId => $_getSZ(18);
   @$pb.TagNumber(19)
-  set sstsId($core.String value) => $_setString(18, value);
+  set shortSellId($core.String value) => $_setString(18, value);
   @$pb.TagNumber(19)
-  $core.bool hasSstsId() => $_has(18);
+  $core.bool hasShortSellId() => $_has(18);
   @$pb.TagNumber(19)
-  void clearSstsId() => $_clearField(19);
+  void clearShortSellId() => $_clearField(19);
 
-  /// 체결구분코드 (1=체결, 2=미체결)
+  /// 체결구분 (1=체결, 2=미체결)
   @$pb.TagNumber(20)
-  $core.String get cntgClsCode => $_getSZ(19);
+  $core.String get fillType => $_getSZ(19);
   @$pb.TagNumber(20)
-  set cntgClsCode($core.String value) => $_setString(19, value);
+  set fillType($core.String value) => $_setString(19, value);
   @$pb.TagNumber(20)
-  $core.bool hasCntgClsCode() => $_has(19);
+  $core.bool hasFillType() => $_has(19);
   @$pb.TagNumber(20)
-  void clearCntgClsCode() => $_clearField(20);
+  void clearFillType() => $_clearField(20);
 
-  /// 거래소종류코드 (01=KRX, 02=NXT, 03=SOR)
+  /// 거래소종류 (01=KRX, 02=NXT, 03=SOR)
   @$pb.TagNumber(21)
-  $core.String get exchKindCode => $_getSZ(20);
+  $core.String get exchangeType => $_getSZ(20);
   @$pb.TagNumber(21)
-  set exchKindCode($core.String value) => $_setString(20, value);
+  set exchangeType($core.String value) => $_setString(20, value);
   @$pb.TagNumber(21)
-  $core.bool hasExchKindCode() => $_has(20);
+  $core.bool hasExchangeType() => $_has(20);
   @$pb.TagNumber(21)
-  void clearExchKindCode() => $_clearField(21);
+  void clearExchangeType() => $_clearField(21);
 
   /// 공매도여부 (Y/N)
   @$pb.TagNumber(22)
-  $core.String get sstsYn => $_getSZ(21);
+  $core.String get shortSellYn => $_getSZ(21);
   @$pb.TagNumber(22)
-  set sstsYn($core.String value) => $_setString(21, value);
+  set shortSellYn($core.String value) => $_setString(21, value);
   @$pb.TagNumber(22)
-  $core.bool hasSstsYn() => $_has(21);
+  $core.bool hasShortSellYn() => $_has(21);
   @$pb.TagNumber(22)
-  void clearSstsYn() => $_clearField(22);
+  void clearShortSellYn() => $_clearField(22);
 }
 
 /// ListLedgerOrderFillStatus 요청

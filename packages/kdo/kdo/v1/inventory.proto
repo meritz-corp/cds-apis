@@ -1065,49 +1065,49 @@ enum OrderFillFilter {
 // 일자별상품주문체결현황 항목 (obtrs_oder_743r OutBlock1)
 message LedgerOrderFillStatusItem {
   // 주문번호
-  int64 oder_no = 1;
+  int64 order_id = 1;
   // 종목코드
-  string iscd = 2;
-  // UI 종목명
-  string ui_isnm = 3;
+  string symbol = 2;
+  // 종목명
+  string symbol_name = 3;
   // 펀드코드
-  string fncd = 4;
-  // 매매구분코드 (1=매도, 2=매수)
-  string deal_cls_code = 5;
+  string fund_code = 4;
+  // 매매구분 (1=매도, 2=매수)
+  string side = 5;
   // 주문수량
-  int64 odqt = 6;
+  int64 quantity = 6;
   // 주문단가
-  int64 oder_unpr = 7;
+  int64 price = 7;
   // 체결수량
-  int64 cntg_qty = 8;
+  int64 filled_quantity = 8;
   // 처리지점코드
-  string pros_brcd = 9;
+  string branch_code = 9;
   // 주문거부사유명
-  string oder_rfus_reas_name = 10;
+  string rejection_reason_name = 10;
   // 주문거부사유코드
-  string oder_rfus_reas_code = 11;
+  string rejection_reason_code = 11;
   // 에러메시지
-  string err_msg = 12;
+  string error_message = 12;
   // 주문처리시작시각
-  string oder_pros_sta_time = 13;
-  // 정정취소구분코드 (1=정상, 2=정정, 3=취소)
-  string rctf_cncl_cls_code = 14;
+  string order_process_start_time = 13;
+  // 정정취소구분 (1=정상, 2=정정, 3=취소)
+  string amend_cancel_type = 14;
   // 원주문번호
-  int64 orgl_oder_no = 15;
+  int64 original_order_id = 15;
   // 미체결수량
-  int64 ncnt_qty = 16;
+  int64 unfilled_quantity = 16;
   // 채권주문단가
-  double bond_oder_unpr = 17;
+  double bond_price = 17;
   // 체결처리시각
-  string cntg_pros_time = 18;
+  string fill_process_time = 18;
   // 공매도ID
-  string ssts_id = 19;
-  // 체결구분코드 (1=체결, 2=미체결)
-  string cntg_cls_code = 20;
-  // 거래소종류코드 (01=KRX, 02=NXT, 03=SOR)
-  string exch_kind_code = 21;
+  string short_sell_id = 19;
+  // 체결구분 (1=체결, 2=미체결)
+  string fill_type = 20;
+  // 거래소종류 (01=KRX, 02=NXT, 03=SOR)
+  string exchange_type = 21;
   // 공매도여부 (Y/N)
-  string ssts_yn = 22;
+  string short_sell_yn = 22;
 }
 
 // ListLedgerOrderFillStatus 요청

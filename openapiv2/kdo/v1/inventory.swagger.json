@@ -1320,98 +1320,98 @@
     "inventoryLedgerOrderFillStatusItem": {
       "type": "object",
       "properties": {
-        "oderNo": {
+        "orderId": {
           "type": "string",
           "format": "int64",
           "title": "주문번호"
         },
-        "iscd": {
+        "symbol": {
           "type": "string",
           "title": "종목코드"
         },
-        "uiIsnm": {
+        "symbolName": {
           "type": "string",
-          "title": "UI 종목명"
+          "title": "종목명"
         },
-        "fncd": {
+        "fundCode": {
           "type": "string",
           "title": "펀드코드"
         },
-        "dealClsCode": {
+        "side": {
           "type": "string",
-          "title": "매매구분코드 (1=매도, 2=매수)"
+          "title": "매매구분 (1=매도, 2=매수)"
         },
-        "odqt": {
+        "quantity": {
           "type": "string",
           "format": "int64",
           "title": "주문수량"
         },
-        "oderUnpr": {
+        "price": {
           "type": "string",
           "format": "int64",
           "title": "주문단가"
         },
-        "cntgQty": {
+        "filledQuantity": {
           "type": "string",
           "format": "int64",
           "title": "체결수량"
         },
-        "prosBrcd": {
+        "branchCode": {
           "type": "string",
           "title": "처리지점코드"
         },
-        "oderRfusReasName": {
+        "rejectionReasonName": {
           "type": "string",
           "title": "주문거부사유명"
         },
-        "oderRfusReasCode": {
+        "rejectionReasonCode": {
           "type": "string",
           "title": "주문거부사유코드"
         },
-        "errMsg": {
+        "errorMessage": {
           "type": "string",
           "title": "에러메시지"
         },
-        "oderProsStaTime": {
+        "orderProcessStartTime": {
           "type": "string",
           "title": "주문처리시작시각"
         },
-        "rctfCnclClsCode": {
+        "amendCancelType": {
           "type": "string",
-          "title": "정정취소구분코드 (1=정상, 2=정정, 3=취소)"
+          "title": "정정취소구분 (1=정상, 2=정정, 3=취소)"
         },
-        "orglOderNo": {
+        "originalOrderId": {
           "type": "string",
           "format": "int64",
           "title": "원주문번호"
         },
-        "ncntQty": {
+        "unfilledQuantity": {
           "type": "string",
           "format": "int64",
           "title": "미체결수량"
         },
-        "bondOderUnpr": {
+        "bondPrice": {
           "type": "number",
           "format": "double",
           "title": "채권주문단가"
         },
-        "cntgProsTime": {
+        "fillProcessTime": {
           "type": "string",
           "title": "체결처리시각"
         },
-        "sstsId": {
+        "shortSellId": {
           "type": "string",
           "title": "공매도ID"
         },
-        "cntgClsCode": {
+        "fillType": {
           "type": "string",
-          "title": "체결구분코드 (1=체결, 2=미체결)"
+          "title": "체결구분 (1=체결, 2=미체결)"
         },
-        "exchKindCode": {
+        "exchangeType": {
           "type": "string",
-          "title": "거래소종류코드 (01=KRX, 02=NXT, 03=SOR)"
+          "title": "거래소종류 (01=KRX, 02=NXT, 03=SOR)"
         },
-        "sstsYn": {
+        "shortSellYn": {
           "type": "string",
           "title": "공매도여부 (Y/N)"
         }

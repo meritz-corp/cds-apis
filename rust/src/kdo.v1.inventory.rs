@@ -913,70 +913,70 @@ pub struct ResizeSessionInventoryResponse {
 pub struct LedgerOrderFillStatusItem {
     /// 주문번호
     #[prost(int64, tag="1")]
-    pub oder_no: i64,
+    pub order_id: i64,
     /// 종목코드
     #[prost(string, tag="2")]
-    pub iscd: ::prost::alloc::string::String,
-    /// UI 종목명
+    pub symbol: ::prost::alloc::string::String,
+    /// 종목명
     #[prost(string, tag="3")]
-    pub ui_isnm: ::prost::alloc::string::String,
+    pub symbol_name: ::prost::alloc::string::String,
     /// 펀드코드
     #[prost(string, tag="4")]
-    pub fncd: ::prost::alloc::string::String,
-    /// 매매구분코드 (1=매도, 2=매수)
+    pub fund_code: ::prost::alloc::string::String,
+    /// 매매구분 (1=매도, 2=매수)
     #[prost(string, tag="5")]
-    pub deal_cls_code: ::prost::alloc::string::String,
+    pub side: ::prost::alloc::string::String,
     /// 주문수량
     #[prost(int64, tag="6")]
-    pub odqt: i64,
+    pub quantity: i64,
     /// 주문단가
     #[prost(int64, tag="7")]
-    pub oder_unpr: i64,
+    pub price: i64,
     /// 체결수량
     #[prost(int64, tag="8")]
-    pub cntg_qty: i64,
+    pub filled_quantity: i64,
     /// 처리지점코드
     #[prost(string, tag="9")]
-    pub pros_brcd: ::prost::alloc::string::String,
+    pub branch_code: ::prost::alloc::string::String,
     /// 주문거부사유명
     #[prost(string, tag="10")]
-    pub oder_rfus_reas_name: ::prost::alloc::string::String,
+    pub rejection_reason_name: ::prost::alloc::string::String,
     /// 주문거부사유코드
     #[prost(string, tag="11")]
-    pub oder_rfus_reas_code: ::prost::alloc::string::String,
+    pub rejection_reason_code: ::prost::alloc::string::String,
     /// 에러메시지
     #[prost(string, tag="12")]
-    pub err_msg: ::prost::alloc::string::String,
+    pub error_message: ::prost::alloc::string::String,
     /// 주문처리시작시각
     #[prost(string, tag="13")]
-    pub oder_pros_sta_time: ::prost::alloc::string::String,
-    /// 정정취소구분코드 (1=정상, 2=정정, 3=취소)
+    pub order_process_start_time: ::prost::alloc::string::String,
+    /// 정정취소구분 (1=정상, 2=정정, 3=취소)
     #[prost(string, tag="14")]
-    pub rctf_cncl_cls_code: ::prost::alloc::string::String,
+    pub amend_cancel_type: ::prost::alloc::string::String,
     /// 원주문번호
     #[prost(int64, tag="15")]
-    pub orgl_oder_no: i64,
+    pub original_order_id: i64,
     /// 미체결수량
     #[prost(int64, tag="16")]
-    pub ncnt_qty: i64,
+    pub unfilled_quantity: i64,
     /// 채권주문단가
     #[prost(double, tag="17")]
-    pub bond_oder_unpr: f64,
+    pub bond_price: f64,
     /// 체결처리시각
     #[prost(string, tag="18")]
-    pub cntg_pros_time: ::prost::alloc::string::String,
+    pub fill_process_time: ::prost::alloc::string::String,
     /// 공매도ID
     #[prost(string, tag="19")]
-    pub ssts_id: ::prost::alloc::string::String,
-    /// 체결구분코드 (1=체결, 2=미체결)
+    pub short_sell_id: ::prost::alloc::string::String,
+    /// 체결구분 (1=체결, 2=미체결)
     #[prost(string, tag="20")]
-    pub cntg_cls_code: ::prost::alloc::string::String,
-    /// 거래소종류코드 (01=KRX, 02=NXT, 03=SOR)
+    pub fill_type: ::prost::alloc::string::String,
+    /// 거래소종류 (01=KRX, 02=NXT, 03=SOR)
     #[prost(string, tag="21")]
-    pub exch_kind_code: ::prost::alloc::string::String,
+    pub exchange_type: ::prost::alloc::string::String,
     /// 공매도여부 (Y/N)
     #[prost(string, tag="22")]
-    pub ssts_yn: ::prost::alloc::string::String,
+    pub short_sell_yn: ::prost::alloc::string::String,
 }
 /// ListLedgerOrderFillStatus 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -2043,80 +2043,80 @@ impl serde::Serialize for LedgerOrderFillStatusItem {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("oder_no", ToString::to_string(&self.oder_no).as_str())?;
+            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("iscd", &self.iscd)?;
+            struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
-            struct_ser.serialize_field("ui_isnm", &self.ui_isnm)?;
+            struct_ser.serialize_field("symbol_name", &self.symbol_name)?;
         }
         if true {
-            struct_ser.serialize_field("fncd", &self.fncd)?;
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if true {
-            struct_ser.serialize_field("deal_cls_code", &self.deal_cls_code)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("odqt", ToString::to_string(&self.odqt).as_str())?;
+            struct_ser.serialize_field("side", &self.side)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("oder_unpr", ToString::to_string(&self.oder_unpr).as_str())?;
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("cntg_qty", ToString::to_string(&self.cntg_qty).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("pros_brcd", &self.pros_brcd)?;
-        }
-        if true {
-            struct_ser.serialize_field("oder_rfus_reas_name", &self.oder_rfus_reas_name)?;
-        }
-        if true {
-            struct_ser.serialize_field("oder_rfus_reas_code", &self.oder_rfus_reas_code)?;
-        }
-        if true {
-            struct_ser.serialize_field("err_msg", &self.err_msg)?;
-        }
-        if true {
-            struct_ser.serialize_field("oder_pros_sta_time", &self.oder_pros_sta_time)?;
-        }
-        if true {
-            struct_ser.serialize_field("rctf_cncl_cls_code", &self.rctf_cncl_cls_code)?;
+            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("orgl_oder_no", ToString::to_string(&self.orgl_oder_no).as_str())?;
+            struct_ser.serialize_field("filled_quantity", ToString::to_string(&self.filled_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("branch_code", &self.branch_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("rejection_reason_name", &self.rejection_reason_name)?;
+        }
+        if true {
+            struct_ser.serialize_field("rejection_reason_code", &self.rejection_reason_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("error_message", &self.error_message)?;
+        }
+        if true {
+            struct_ser.serialize_field("order_process_start_time", &self.order_process_start_time)?;
+        }
+        if true {
+            struct_ser.serialize_field("amend_cancel_type", &self.amend_cancel_type)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("ncnt_qty", ToString::to_string(&self.ncnt_qty).as_str())?;
+            struct_ser.serialize_field("original_order_id", ToString::to_string(&self.original_order_id).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("bond_oder_unpr", &self.bond_oder_unpr)?;
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("unfilled_quantity", ToString::to_string(&self.unfilled_quantity).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("cntg_pros_time", &self.cntg_pros_time)?;
+            struct_ser.serialize_field("bond_price", &self.bond_price)?;
         }
         if true {
-            struct_ser.serialize_field("ssts_id", &self.ssts_id)?;
+            struct_ser.serialize_field("fill_process_time", &self.fill_process_time)?;
         }
         if true {
-            struct_ser.serialize_field("cntg_cls_code", &self.cntg_cls_code)?;
+            struct_ser.serialize_field("short_sell_id", &self.short_sell_id)?;
         }
         if true {
-            struct_ser.serialize_field("exch_kind_code", &self.exch_kind_code)?;
+            struct_ser.serialize_field("fill_type", &self.fill_type)?;
         }
         if true {
-            struct_ser.serialize_field("ssts_yn", &self.ssts_yn)?;
+            struct_ser.serialize_field("exchange_type", &self.exchange_type)?;
+        }
+        if true {
+            struct_ser.serialize_field("short_sell_yn", &self.short_sell_yn)?;
         }
         struct_ser.end()
     }
@@ -2128,73 +2128,72 @@ impl<'de> serde::Deserialize<'de> for LedgerOrderFillStatusItem {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "oder_no",
-            "oderNo",
-            "iscd",
-            "ui_isnm",
-            "uiIsnm",
-            "fncd",
-            "deal_cls_code",
-            "dealClsCode",
-            "odqt",
-            "oder_unpr",
-            "oderUnpr",
-            "cntg_qty",
-            "cntgQty",
-            "pros_brcd",
-            "prosBrcd",
-            "oder_rfus_reas_name",
-            "oderRfusReasName",
-            "oder_rfus_reas_code",
-            "oderRfusReasCode",
-            "err_msg",
-            "errMsg",
-            "oder_pros_sta_time",
-            "oderProsStaTime",
-            "rctf_cncl_cls_code",
-            "rctfCnclClsCode",
-            "orgl_oder_no",
-            "orglOderNo",
-            "ncnt_qty",
-            "ncntQty",
-            "bond_oder_unpr",
-            "bondOderUnpr",
-            "cntg_pros_time",
-            "cntgProsTime",
-            "ssts_id",
-            "sstsId",
-            "cntg_cls_code",
-            "cntgClsCode",
-            "exch_kind_code",
-            "exchKindCode",
-            "ssts_yn",
-            "sstsYn",
+            "order_id",
+            "orderId",
+            "symbol",
+            "symbol_name",
+            "symbolName",
+            "fund_code",
+            "fundCode",
+            "side",
+            "quantity",
+            "price",
+            "filled_quantity",
+            "filledQuantity",
+            "branch_code",
+            "branchCode",
+            "rejection_reason_name",
+            "rejectionReasonName",
+            "rejection_reason_code",
+            "rejectionReasonCode",
+            "error_message",
+            "errorMessage",
+            "order_process_start_time",
+            "orderProcessStartTime",
+            "amend_cancel_type",
+            "amendCancelType",
+            "original_order_id",
+            "originalOrderId",
+            "unfilled_quantity",
+            "unfilledQuantity",
+            "bond_price",
+            "bondPrice",
+            "fill_process_time",
+            "fillProcessTime",
+            "short_sell_id",
+            "shortSellId",
+            "fill_type",
+            "fillType",
+            "exchange_type",
+            "exchangeType",
+            "short_sell_yn",
+            "shortSellYn",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            OderNo,
-            Iscd,
-            UiIsnm,
-            Fncd,
-            DealClsCode,
-            Odqt,
-            OderUnpr,
-            CntgQty,
-            ProsBrcd,
-            OderRfusReasName,
-            OderRfusReasCode,
-            ErrMsg,
-            OderProsStaTime,
-            RctfCnclClsCode,
-            OrglOderNo,
-            NcntQty,
-            BondOderUnpr,
-            CntgProsTime,
-            SstsId,
-            CntgClsCode,
-            ExchKindCode,
-            SstsYn,
+            OrderId,
+            Symbol,
+            SymbolName,
+            FundCode,
+            Side,
+            Quantity,
+            Price,
+            FilledQuantity,
+            BranchCode,
+            RejectionReasonName,
+            RejectionReasonCode,
+            ErrorMessage,
+            OrderProcessStartTime,
+            AmendCancelType,
+            OriginalOrderId,
+            UnfilledQuantity,
+            BondPrice,
+            FillProcessTime,
+            ShortSellId,
+            FillType,
+            ExchangeType,
+            ShortSellYn,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2217,28 +2216,28 @@ impl<'de> serde::Deserialize<'de> for LedgerOrderFillStatusItem {
                         E: serde::de::Error,
                     {
                         match value {
-                            "oderNo" | "oder_no" => Ok(GeneratedField::OderNo),
-                            "iscd" => Ok(GeneratedField::Iscd),
-                            "uiIsnm" | "ui_isnm" => Ok(GeneratedField::UiIsnm),
-                            "fncd" => Ok(GeneratedField::Fncd),
-                            "dealClsCode" | "deal_cls_code" => Ok(GeneratedField::DealClsCode),
-                            "odqt" => Ok(GeneratedField::Odqt),
-                            "oderUnpr" | "oder_unpr" => Ok(GeneratedField::OderUnpr),
-                            "cntgQty" | "cntg_qty" => Ok(GeneratedField::CntgQty),
-                            "prosBrcd" | "pros_brcd" => Ok(GeneratedField::ProsBrcd),
-                            "oderRfusReasName" | "oder_rfus_reas_name" => Ok(GeneratedField::OderRfusReasName),
-                            "oderRfusReasCode" | "oder_rfus_reas_code" => Ok(GeneratedField::OderRfusReasCode),
-                            "errMsg" | "err_msg" => Ok(GeneratedField::ErrMsg),
-                            "oderProsStaTime" | "oder_pros_sta_time" => Ok(GeneratedField::OderProsStaTime),
-                            "rctfCnclClsCode" | "rctf_cncl_cls_code" => Ok(GeneratedField::RctfCnclClsCode),
-                            "orglOderNo" | "orgl_oder_no" => Ok(GeneratedField::OrglOderNo),
-                            "ncntQty" | "ncnt_qty" => Ok(GeneratedField::NcntQty),
-                            "bondOderUnpr" | "bond_oder_unpr" => Ok(GeneratedField::BondOderUnpr),
-                            "cntgProsTime" | "cntg_pros_time" => Ok(GeneratedField::CntgProsTime),
-                            "sstsId" | "ssts_id" => Ok(GeneratedField::SstsId),
-                            "cntgClsCode" | "cntg_cls_code" => Ok(GeneratedField::CntgClsCode),
-                            "exchKindCode" | "exch_kind_code" => Ok(GeneratedField::ExchKindCode),
-                            "sstsYn" | "ssts_yn" => Ok(GeneratedField::SstsYn),
+                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "symbolName" | "symbol_name" => Ok(GeneratedField::SymbolName),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "side" => Ok(GeneratedField::Side),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "price" => Ok(GeneratedField::Price),
+                            "filledQuantity" | "filled_quantity" => Ok(GeneratedField::FilledQuantity),
+                            "branchCode" | "branch_code" => Ok(GeneratedField::BranchCode),
+                            "rejectionReasonName" | "rejection_reason_name" => Ok(GeneratedField::RejectionReasonName),
+                            "rejectionReasonCode" | "rejection_reason_code" => Ok(GeneratedField::RejectionReasonCode),
+                            "errorMessage" | "error_message" => Ok(GeneratedField::ErrorMessage),
+                            "orderProcessStartTime" | "order_process_start_time" => Ok(GeneratedField::OrderProcessStartTime),
+                            "amendCancelType" | "amend_cancel_type" => Ok(GeneratedField::AmendCancelType),
+                            "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
+                            "unfilledQuantity" | "unfilled_quantity" => Ok(GeneratedField::UnfilledQuantity),
+                            "bondPrice" | "bond_price" => Ok(GeneratedField::BondPrice),
+                            "fillProcessTime" | "fill_process_time" => Ok(GeneratedField::FillProcessTime),
+                            "shortSellId" | "short_sell_id" => Ok(GeneratedField::ShortSellId),
+                            "fillType" | "fill_type" => Ok(GeneratedField::FillType),
+                            "exchangeType" | "exchange_type" => Ok(GeneratedField::ExchangeType),
+                            "shortSellYn" | "short_sell_yn" => Ok(GeneratedField::ShortSellYn),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2258,175 +2257,175 @@ impl<'de> serde::Deserialize<'de> for LedgerOrderFillStatusItem {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut oder_no__ = None;
-                let mut iscd__ = None;
-                let mut ui_isnm__ = None;
-                let mut fncd__ = None;
-                let mut deal_cls_code__ = None;
-                let mut odqt__ = None;
-                let mut oder_unpr__ = None;
-                let mut cntg_qty__ = None;
-                let mut pros_brcd__ = None;
-                let mut oder_rfus_reas_name__ = None;
-                let mut oder_rfus_reas_code__ = None;
-                let mut err_msg__ = None;
-                let mut oder_pros_sta_time__ = None;
-                let mut rctf_cncl_cls_code__ = None;
-                let mut orgl_oder_no__ = None;
-                let mut ncnt_qty__ = None;
-                let mut bond_oder_unpr__ = None;
-                let mut cntg_pros_time__ = None;
-                let mut ssts_id__ = None;
-                let mut cntg_cls_code__ = None;
-                let mut exch_kind_code__ = None;
-                let mut ssts_yn__ = None;
+                let mut order_id__ = None;
+                let mut symbol__ = None;
+                let mut symbol_name__ = None;
+                let mut fund_code__ = None;
+                let mut side__ = None;
+                let mut quantity__ = None;
+                let mut price__ = None;
+                let mut filled_quantity__ = None;
+                let mut branch_code__ = None;
+                let mut rejection_reason_name__ = None;
+                let mut rejection_reason_code__ = None;
+                let mut error_message__ = None;
+                let mut order_process_start_time__ = None;
+                let mut amend_cancel_type__ = None;
+                let mut original_order_id__ = None;
+                let mut unfilled_quantity__ = None;
+                let mut bond_price__ = None;
+                let mut fill_process_time__ = None;
+                let mut short_sell_id__ = None;
+                let mut fill_type__ = None;
+                let mut exchange_type__ = None;
+                let mut short_sell_yn__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::OderNo => {
-                            if oder_no__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("oderNo"));
+                        GeneratedField::OrderId => {
+                            if order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderId"));
                             }
-                            oder_no__ = 
+                            order_id__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Iscd => {
-                            if iscd__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("iscd"));
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
                             }
-                            iscd__ = Some(map_.next_value()?);
+                            symbol__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::UiIsnm => {
-                            if ui_isnm__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("uiIsnm"));
+                        GeneratedField::SymbolName => {
+                            if symbol_name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbolName"));
                             }
-                            ui_isnm__ = Some(map_.next_value()?);
+                            symbol_name__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Fncd => {
-                            if fncd__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fncd"));
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
                             }
-                            fncd__ = Some(map_.next_value()?);
+                            fund_code__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::DealClsCode => {
-                            if deal_cls_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("dealClsCode"));
+                        GeneratedField::Side => {
+                            if side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            deal_cls_code__ = Some(map_.next_value()?);
+                            side__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Odqt => {
-                            if odqt__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("odqt"));
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
                             }
-                            odqt__ = 
+                            quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::OderUnpr => {
-                            if oder_unpr__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("oderUnpr"));
+                        GeneratedField::Price => {
+                            if price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("price"));
                             }
-                            oder_unpr__ = 
+                            price__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::CntgQty => {
-                            if cntg_qty__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("cntgQty"));
+                        GeneratedField::FilledQuantity => {
+                            if filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledQuantity"));
                             }
-                            cntg_qty__ = 
+                            filled_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::ProsBrcd => {
-                            if pros_brcd__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("prosBrcd"));
+                        GeneratedField::BranchCode => {
+                            if branch_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("branchCode"));
                             }
-                            pros_brcd__ = Some(map_.next_value()?);
+                            branch_code__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::OderRfusReasName => {
-                            if oder_rfus_reas_name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("oderRfusReasName"));
+                        GeneratedField::RejectionReasonName => {
+                            if rejection_reason_name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("rejectionReasonName"));
                             }
-                            oder_rfus_reas_name__ = Some(map_.next_value()?);
+                            rejection_reason_name__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::OderRfusReasCode => {
-                            if oder_rfus_reas_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("oderRfusReasCode"));
+                        GeneratedField::RejectionReasonCode => {
+                            if rejection_reason_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("rejectionReasonCode"));
                             }
-                            oder_rfus_reas_code__ = Some(map_.next_value()?);
+                            rejection_reason_code__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::ErrMsg => {
-                            if err_msg__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("errMsg"));
+                        GeneratedField::ErrorMessage => {
+                            if error_message__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("errorMessage"));
                             }
-                            err_msg__ = Some(map_.next_value()?);
+                            error_message__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::OderProsStaTime => {
-                            if oder_pros_sta_time__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("oderProsStaTime"));
+                        GeneratedField::OrderProcessStartTime => {
+                            if order_process_start_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderProcessStartTime"));
                             }
-                            oder_pros_sta_time__ = Some(map_.next_value()?);
+                            order_process_start_time__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::RctfCnclClsCode => {
-                            if rctf_cncl_cls_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("rctfCnclClsCode"));
+                        GeneratedField::AmendCancelType => {
+                            if amend_cancel_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("amendCancelType"));
                             }
-                            rctf_cncl_cls_code__ = Some(map_.next_value()?);
+                            amend_cancel_type__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::OrglOderNo => {
-                            if orgl_oder_no__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orglOderNo"));
+                        GeneratedField::OriginalOrderId => {
+                            if original_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("originalOrderId"));
                             }
-                            orgl_oder_no__ = 
+                            original_order_id__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::NcntQty => {
-                            if ncnt_qty__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("ncntQty"));
+                        GeneratedField::UnfilledQuantity => {
+                            if unfilled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unfilledQuantity"));
                             }
-                            ncnt_qty__ = 
+                            unfilled_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::BondOderUnpr => {
-                            if bond_oder_unpr__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bondOderUnpr"));
+                        GeneratedField::BondPrice => {
+                            if bond_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bondPrice"));
                             }
-                            bond_oder_unpr__ = 
+                            bond_price__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::CntgProsTime => {
-                            if cntg_pros_time__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("cntgProsTime"));
+                        GeneratedField::FillProcessTime => {
+                            if fill_process_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fillProcessTime"));
                             }
-                            cntg_pros_time__ = Some(map_.next_value()?);
+                            fill_process_time__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::SstsId => {
-                            if ssts_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sstsId"));
+                        GeneratedField::ShortSellId => {
+                            if short_sell_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shortSellId"));
                             }
-                            ssts_id__ = Some(map_.next_value()?);
+                            short_sell_id__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::CntgClsCode => {
-                            if cntg_cls_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("cntgClsCode"));
+                        GeneratedField::FillType => {
+                            if fill_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fillType"));
                             }
-                            cntg_cls_code__ = Some(map_.next_value()?);
+                            fill_type__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::ExchKindCode => {
-                            if exch_kind_code__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("exchKindCode"));
+                        GeneratedField::ExchangeType => {
+                            if exchange_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exchangeType"));
                             }
-                            exch_kind_code__ = Some(map_.next_value()?);
+                            exchange_type__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::SstsYn => {
-                            if ssts_yn__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sstsYn"));
+                        GeneratedField::ShortSellYn => {
+                            if short_sell_yn__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("shortSellYn"));
                             }
-                            ssts_yn__ = Some(map_.next_value()?);
+                            short_sell_yn__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -2434,28 +2433,28 @@ impl<'de> serde::Deserialize<'de> for LedgerOrderFillStatusItem {
                     }
                 }
                 Ok(LedgerOrderFillStatusItem {
-                    oder_no: oder_no__.unwrap_or_default(),
-                    iscd: iscd__.unwrap_or_default(),
-                    ui_isnm: ui_isnm__.unwrap_or_default(),
-                    fncd: fncd__.unwrap_or_default(),
-                    deal_cls_code: deal_cls_code__.unwrap_or_default(),
-                    odqt: odqt__.unwrap_or_default(),
-                    oder_unpr: oder_unpr__.unwrap_or_default(),
-                    cntg_qty: cntg_qty__.unwrap_or_default(),
-                    pros_brcd: pros_brcd__.unwrap_or_default(),
-                    oder_rfus_reas_name: oder_rfus_reas_name__.unwrap_or_default(),
-                    oder_rfus_reas_code: oder_rfus_reas_code__.unwrap_or_default(),
-                    err_msg: err_msg__.unwrap_or_default(),
-                    oder_pros_sta_time: oder_pros_sta_time__.unwrap_or_default(),
-                    rctf_cncl_cls_code: rctf_cncl_cls_code__.unwrap_or_default(),
-                    orgl_oder_no: orgl_oder_no__.unwrap_or_default(),
-                    ncnt_qty: ncnt_qty__.unwrap_or_default(),
-                    bond_oder_unpr: bond_oder_unpr__.unwrap_or_default(),
-                    cntg_pros_time: cntg_pros_time__.unwrap_or_default(),
-                    ssts_id: ssts_id__.unwrap_or_default(),
-                    cntg_cls_code: cntg_cls_code__.unwrap_or_default(),
-                    exch_kind_code: exch_kind_code__.unwrap_or_default(),
-                    ssts_yn: ssts_yn__.unwrap_or_default(),
+                    order_id: order_id__.unwrap_or_default(),
+                    symbol: symbol__.unwrap_or_default(),
+                    symbol_name: symbol_name__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    side: side__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    price: price__.unwrap_or_default(),
+                    filled_quantity: filled_quantity__.unwrap_or_default(),
+                    branch_code: branch_code__.unwrap_or_default(),
+                    rejection_reason_name: rejection_reason_name__.unwrap_or_default(),
+                    rejection_reason_code: rejection_reason_code__.unwrap_or_default(),
+                    error_message: error_message__.unwrap_or_default(),
+                    order_process_start_time: order_process_start_time__.unwrap_or_default(),
+                    amend_cancel_type: amend_cancel_type__.unwrap_or_default(),
+                    original_order_id: original_order_id__.unwrap_or_default(),
+                    unfilled_quantity: unfilled_quantity__.unwrap_or_default(),
+                    bond_price: bond_price__.unwrap_or_default(),
+                    fill_process_time: fill_process_time__.unwrap_or_default(),
+                    short_sell_id: short_sell_id__.unwrap_or_default(),
+                    fill_type: fill_type__.unwrap_or_default(),
+                    exchange_type: exchange_type__.unwrap_or_default(),
+                    short_sell_yn: short_sell_yn__.unwrap_or_default(),
                 })
             }
         }

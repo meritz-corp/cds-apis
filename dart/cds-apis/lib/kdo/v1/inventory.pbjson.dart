@@ -950,47 +950,48 @@ final $typed_data.Uint8List resizeSessionInventoryResponseDescriptor = $convert.
 const LedgerOrderFillStatusItem$json = {
   '1': 'LedgerOrderFillStatusItem',
   '2': [
-    {'1': 'oder_no', '3': 1, '4': 1, '5': 3, '10': 'oderNo'},
-    {'1': 'iscd', '3': 2, '4': 1, '5': 9, '10': 'iscd'},
-    {'1': 'ui_isnm', '3': 3, '4': 1, '5': 9, '10': 'uiIsnm'},
-    {'1': 'fncd', '3': 4, '4': 1, '5': 9, '10': 'fncd'},
-    {'1': 'deal_cls_code', '3': 5, '4': 1, '5': 9, '10': 'dealClsCode'},
-    {'1': 'odqt', '3': 6, '4': 1, '5': 3, '10': 'odqt'},
-    {'1': 'oder_unpr', '3': 7, '4': 1, '5': 3, '10': 'oderUnpr'},
-    {'1': 'cntg_qty', '3': 8, '4': 1, '5': 3, '10': 'cntgQty'},
-    {'1': 'pros_brcd', '3': 9, '4': 1, '5': 9, '10': 'prosBrcd'},
-    {'1': 'oder_rfus_reas_name', '3': 10, '4': 1, '5': 9, '10': 'oderRfusReasName'},
-    {'1': 'oder_rfus_reas_code', '3': 11, '4': 1, '5': 9, '10': 'oderRfusReasCode'},
-    {'1': 'err_msg', '3': 12, '4': 1, '5': 9, '10': 'errMsg'},
-    {'1': 'oder_pros_sta_time', '3': 13, '4': 1, '5': 9, '10': 'oderProsStaTime'},
-    {'1': 'rctf_cncl_cls_code', '3': 14, '4': 1, '5': 9, '10': 'rctfCnclClsCode'},
-    {'1': 'orgl_oder_no', '3': 15, '4': 1, '5': 3, '10': 'orglOderNo'},
-    {'1': 'ncnt_qty', '3': 16, '4': 1, '5': 3, '10': 'ncntQty'},
-    {'1': 'bond_oder_unpr', '3': 17, '4': 1, '5': 1, '10': 'bondOderUnpr'},
-    {'1': 'cntg_pros_time', '3': 18, '4': 1, '5': 9, '10': 'cntgProsTime'},
-    {'1': 'ssts_id', '3': 19, '4': 1, '5': 9, '10': 'sstsId'},
-    {'1': 'cntg_cls_code', '3': 20, '4': 1, '5': 9, '10': 'cntgClsCode'},
-    {'1': 'exch_kind_code', '3': 21, '4': 1, '5': 9, '10': 'exchKindCode'},
-    {'1': 'ssts_yn', '3': 22, '4': 1, '5': 9, '10': 'sstsYn'},
+    {'1': 'order_id', '3': 1, '4': 1, '5': 3, '10': 'orderId'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'symbol_name', '3': 3, '4': 1, '5': 9, '10': 'symbolName'},
+    {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'side', '3': 5, '4': 1, '5': 9, '10': 'side'},
+    {'1': 'quantity', '3': 6, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'price', '3': 7, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'filled_quantity', '3': 8, '4': 1, '5': 3, '10': 'filledQuantity'},
+    {'1': 'branch_code', '3': 9, '4': 1, '5': 9, '10': 'branchCode'},
+    {'1': 'rejection_reason_name', '3': 10, '4': 1, '5': 9, '10': 'rejectionReasonName'},
+    {'1': 'rejection_reason_code', '3': 11, '4': 1, '5': 9, '10': 'rejectionReasonCode'},
+    {'1': 'error_message', '3': 12, '4': 1, '5': 9, '10': 'errorMessage'},
+    {'1': 'order_process_start_time', '3': 13, '4': 1, '5': 9, '10': 'orderProcessStartTime'},
+    {'1': 'amend_cancel_type', '3': 14, '4': 1, '5': 9, '10': 'amendCancelType'},
+    {'1': 'original_order_id', '3': 15, '4': 1, '5': 3, '10': 'originalOrderId'},
+    {'1': 'unfilled_quantity', '3': 16, '4': 1, '5': 3, '10': 'unfilledQuantity'},
+    {'1': 'bond_price', '3': 17, '4': 1, '5': 1, '10': 'bondPrice'},
+    {'1': 'fill_process_time', '3': 18, '4': 1, '5': 9, '10': 'fillProcessTime'},
+    {'1': 'short_sell_id', '3': 19, '4': 1, '5': 9, '10': 'shortSellId'},
+    {'1': 'fill_type', '3': 20, '4': 1, '5': 9, '10': 'fillType'},
+    {'1': 'exchange_type', '3': 21, '4': 1, '5': 9, '10': 'exchangeType'},
+    {'1': 'short_sell_yn', '3': 22, '4': 1, '5': 9, '10': 'shortSellYn'},
   ],
 };
 
 /// Descriptor for `LedgerOrderFillStatusItem`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List ledgerOrderFillStatusItemDescriptor = $convert.base64Decode(
-    'ChlMZWRnZXJPcmRlckZpbGxTdGF0dXNJdGVtEhcKB29kZXJfbm8YASABKANSBm9kZXJObxISCg'
-    'Rpc2NkGAIgASgJUgRpc2NkEhcKB3VpX2lzbm0YAyABKAlSBnVpSXNubRISCgRmbmNkGAQgASgJ'
-    'UgRmbmNkEiIKDWRlYWxfY2xzX2NvZGUYBSABKAlSC2RlYWxDbHNDb2RlEhIKBG9kcXQYBiABKA'
-    'NSBG9kcXQSGwoJb2Rlcl91bnByGAcgASgDUghvZGVyVW5wchIZCghjbnRnX3F0eRgIIAEoA1IH'
-    'Y250Z1F0eRIbCglwcm9zX2JyY2QYCSABKAlSCHByb3NCcmNkEi0KE29kZXJfcmZ1c19yZWFzX2'
-    '5hbWUYCiABKAlSEG9kZXJSZnVzUmVhc05hbWUSLQoTb2Rlcl9yZnVzX3JlYXNfY29kZRgLIAEo'
-    'CVIQb2RlclJmdXNSZWFzQ29kZRIXCgdlcnJfbXNnGAwgASgJUgZlcnJNc2cSKwoSb2Rlcl9wcm'
-    '9zX3N0YV90aW1lGA0gASgJUg9vZGVyUHJvc1N0YVRpbWUSKwoScmN0Zl9jbmNsX2Nsc19jb2Rl'
-    'GA4gASgJUg9yY3RmQ25jbENsc0NvZGUSIAoMb3JnbF9vZGVyX25vGA8gASgDUgpvcmdsT2Rlck'
-    '5vEhkKCG5jbnRfcXR5GBAgASgDUgduY250UXR5EiQKDmJvbmRfb2Rlcl91bnByGBEgASgBUgxi'
-    'b25kT2RlclVucHISJAoOY250Z19wcm9zX3RpbWUYEiABKAlSDGNudGdQcm9zVGltZRIXCgdzc3'
-    'RzX2lkGBMgASgJUgZzc3RzSWQSIgoNY250Z19jbHNfY29kZRgUIAEoCVILY250Z0Nsc0NvZGUS'
-    'JAoOZXhjaF9raW5kX2NvZGUYFSABKAlSDGV4Y2hLaW5kQ29kZRIXCgdzc3RzX3luGBYgASgJUg'
-    'Zzc3RzWW4=');
+    'ChlMZWRnZXJPcmRlckZpbGxTdGF0dXNJdGVtEhkKCG9yZGVyX2lkGAEgASgDUgdvcmRlcklkEh'
+    'YKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEh8KC3N5bWJvbF9uYW1lGAMgASgJUgpzeW1ib2xOYW1l'
+    'EhsKCWZ1bmRfY29kZRgEIAEoCVIIZnVuZENvZGUSEgoEc2lkZRgFIAEoCVIEc2lkZRIaCghxdW'
+    'FudGl0eRgGIAEoA1IIcXVhbnRpdHkSFAoFcHJpY2UYByABKANSBXByaWNlEicKD2ZpbGxlZF9x'
+    'dWFudGl0eRgIIAEoA1IOZmlsbGVkUXVhbnRpdHkSHwoLYnJhbmNoX2NvZGUYCSABKAlSCmJyYW'
+    '5jaENvZGUSMgoVcmVqZWN0aW9uX3JlYXNvbl9uYW1lGAogASgJUhNyZWplY3Rpb25SZWFzb25O'
+    'YW1lEjIKFXJlamVjdGlvbl9yZWFzb25fY29kZRgLIAEoCVITcmVqZWN0aW9uUmVhc29uQ29kZR'
+    'IjCg1lcnJvcl9tZXNzYWdlGAwgASgJUgxlcnJvck1lc3NhZ2USNwoYb3JkZXJfcHJvY2Vzc19z'
+    'dGFydF90aW1lGA0gASgJUhVvcmRlclByb2Nlc3NTdGFydFRpbWUSKgoRYW1lbmRfY2FuY2VsX3'
+    'R5cGUYDiABKAlSD2FtZW5kQ2FuY2VsVHlwZRIqChFvcmlnaW5hbF9vcmRlcl9pZBgPIAEoA1IP'
+    'b3JpZ2luYWxPcmRlcklkEisKEXVuZmlsbGVkX3F1YW50aXR5GBAgASgDUhB1bmZpbGxlZFF1YW'
+    '50aXR5Eh0KCmJvbmRfcHJpY2UYESABKAFSCWJvbmRQcmljZRIqChFmaWxsX3Byb2Nlc3NfdGlt'
+    'ZRgSIAEoCVIPZmlsbFByb2Nlc3NUaW1lEiIKDXNob3J0X3NlbGxfaWQYEyABKAlSC3Nob3J0U2'
+    'VsbElkEhsKCWZpbGxfdHlwZRgUIAEoCVIIZmlsbFR5cGUSIwoNZXhjaGFuZ2VfdHlwZRgVIAEo'
+    'CVIMZXhjaGFuZ2VUeXBlEiIKDXNob3J0X3NlbGxfeW4YFiABKAlSC3Nob3J0U2VsbFlu');
 
 @$core.Deprecated('Use listLedgerOrderFillStatusRequestDescriptor instead')
 const ListLedgerOrderFillStatusRequest$json = {
