@@ -20,21 +20,23 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 class Settings extends $pb.GeneratedMessage {
   factory Settings({
     $fixnum.Int64? thresholdShares,
-    $core.int? consecutiveChecks,
+    $core.int? stopAfterSecs,
     $fixnum.Int64? intervalSecs,
     $core.Iterable<$core.String>? funds,
     $core.bool? enabled,
     $core.Iterable<$core.String>? instances,
     $core.String? activeInstance,
+    $core.int? consecutiveChecks,
   }) {
     final result = create();
     if (thresholdShares != null) result.thresholdShares = thresholdShares;
-    if (consecutiveChecks != null) result.consecutiveChecks = consecutiveChecks;
+    if (stopAfterSecs != null) result.stopAfterSecs = stopAfterSecs;
     if (intervalSecs != null) result.intervalSecs = intervalSecs;
     if (funds != null) result.funds.addAll(funds);
     if (enabled != null) result.enabled = enabled;
     if (instances != null) result.instances.addAll(instances);
     if (activeInstance != null) result.activeInstance = activeInstance;
+    if (consecutiveChecks != null) result.consecutiveChecks = consecutiveChecks;
     return result;
   }
 
@@ -45,12 +47,13 @@ class Settings extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Settings', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo_guard.v1.guard'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'thresholdShares')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'consecutiveChecks', $pb.PbFieldType.OU3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'stopAfterSecs', $pb.PbFieldType.OU3)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'intervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..pPS(4, _omitFieldNames ? '' : 'funds')
     ..aOB(5, _omitFieldNames ? '' : 'enabled')
     ..pPS(6, _omitFieldNames ? '' : 'instances')
     ..aOS(7, _omitFieldNames ? '' : 'activeInstance')
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'consecutiveChecks', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -81,15 +84,15 @@ class Settings extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearThresholdShares() => $_clearField(1);
 
-  /// 연속 몇 회 위반해야 정지시키는지
+  /// 차이가 이 시간(초) 이상 유지되어야 정지시킨다
   @$pb.TagNumber(2)
-  $core.int get consecutiveChecks => $_getIZ(1);
+  $core.int get stopAfterSecs => $_getIZ(1);
   @$pb.TagNumber(2)
-  set consecutiveChecks($core.int value) => $_setUnsignedInt32(1, value);
+  set stopAfterSecs($core.int value) => $_setUnsignedInt32(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasConsecutiveChecks() => $_has(1);
+  $core.bool hasStopAfterSecs() => $_has(1);
   @$pb.TagNumber(2)
-  void clearConsecutiveChecks() => $_clearField(2);
+  void clearStopAfterSecs() => $_clearField(2);
 
   /// 감시 주기 (초)
   @$pb.TagNumber(3)
@@ -128,6 +131,16 @@ class Settings extends $pb.GeneratedMessage {
   $core.bool hasActiveInstance() => $_has(6);
   @$pb.TagNumber(7)
   void clearActiveInstance() => $_clearField(7);
+
+  /// stop_after_secs 를 감시 주기로 환산한 연속 확인 횟수 (서버가 계산한 값)
+  @$pb.TagNumber(8)
+  $core.int get consecutiveChecks => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set consecutiveChecks($core.int value) => $_setUnsignedInt32(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasConsecutiveChecks() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearConsecutiveChecks() => $_clearField(8);
 }
 
 class GetSettingsRequest extends $pb.GeneratedMessage {
@@ -166,12 +179,14 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
     $core.bool? enabled,
     $core.String? activeInstance,
     $core.Iterable<$core.String>? funds,
+    $core.int? stopAfterSecs,
   }) {
     final result = create();
     if (thresholdShares != null) result.thresholdShares = thresholdShares;
     if (enabled != null) result.enabled = enabled;
     if (activeInstance != null) result.activeInstance = activeInstance;
     if (funds != null) result.funds.addAll(funds);
+    if (stopAfterSecs != null) result.stopAfterSecs = stopAfterSecs;
     return result;
   }
 
@@ -185,6 +200,7 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
     ..aOB(2, _omitFieldNames ? '' : 'enabled')
     ..aOS(3, _omitFieldNames ? '' : 'activeInstance')
     ..pPS(4, _omitFieldNames ? '' : 'funds')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'stopAfterSecs', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -239,6 +255,16 @@ class UpdateSettingsRequest extends $pb.GeneratedMessage {
   /// 클라이언트가 지금 조회 중인 펀드만 정지 대상으로 두기 위한 것.
   @$pb.TagNumber(4)
   $pb.PbList<$core.String> get funds => $_getList(3);
+
+  /// 지정하면 정지까지 필요한 지속 시간(초) 변경. 1 이상이어야 한다.
+  @$pb.TagNumber(5)
+  $core.int get stopAfterSecs => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set stopAfterSecs($core.int value) => $_setUnsignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasStopAfterSecs() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearStopAfterSecs() => $_clearField(5);
 }
 
 class ListStopEventsRequest extends $pb.GeneratedMessage {

@@ -20,8 +20,8 @@ service GuardService {
 message Settings {
   // 가용수량이 이 수량(주) 이상 어긋나면 위반
   int64 threshold_shares = 1;
-  // 연속 몇 회 위반해야 정지시키는지
-  uint32 consecutive_checks = 2;
+  // 차이가 이 시간(초) 이상 유지되어야 정지시킨다
+  uint32 stop_after_secs = 2;
   // 감시 주기 (초)
   uint64 interval_secs = 3;
   // 감시 중인 펀드
@@ -32,6 +32,8 @@ message Settings {
   repeated string instances = 6;
   // 지금 감시 중인 KDO 인스턴스. 이 한 곳에만 요청한다.
   string active_instance = 7;
+  // stop_after_secs 를 감시 주기로 환산한 연속 확인 횟수 (서버가 계산한 값)
+  uint32 consecutive_checks = 8;
 }
 
 message GetSettingsRequest {}
@@ -46,6 +48,8 @@ message UpdateSettingsRequest {
   // 비어 있지 않으면 감시 대상 펀드를 이 목록으로 교체한다.
   // 클라이언트가 지금 조회 중인 펀드만 정지 대상으로 두기 위한 것.
   repeated string funds = 4;
+  // 지정하면 정지까지 필요한 지속 시간(초) 변경. 1 이상이어야 한다.
+  optional uint32 stop_after_secs = 5;
 }
 
 message ListStopEventsRequest {

@@ -36,10 +36,10 @@
           "format": "int64",
           "title": "가용수량이 이 수량(주) 이상 어긋나면 위반"
         },
-        "consecutiveChecks": {
+        "stopAfterSecs": {
           "type": "integer",
           "format": "int64",
-          "title": "연속 몇 회 위반해야 정지시키는지"
+          "title": "차이가 이 시간(초) 이상 유지되어야 정지시킨다"
         },
         "intervalSecs": {
           "type": "string",
@@ -67,6 +67,11 @@
         "activeInstance": {
           "type": "string",
           "description": "지금 감시 중인 KDO 인스턴스. 이 한 곳에만 요청한다."
+        },
+        "consecutiveChecks": {
+          "type": "integer",
+          "format": "int64",
+          "title": "stop_after_secs 를 감시 주기로 환산한 연속 확인 횟수 (서버가 계산한 값)"
         }
       }
     },

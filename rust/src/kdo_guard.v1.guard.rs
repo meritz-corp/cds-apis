@@ -6,9 +6,9 @@ pub struct Settings {
     /// 가용수량이 이 수량(주) 이상 어긋나면 위반
     #[prost(int64, tag="1")]
     pub threshold_shares: i64,
-    /// 연속 몇 회 위반해야 정지시키는지
+    /// 차이가 이 시간(초) 이상 유지되어야 정지시킨다
     #[prost(uint32, tag="2")]
-    pub consecutive_checks: u32,
+    pub stop_after_secs: u32,
     /// 감시 주기 (초)
     #[prost(uint64, tag="3")]
     pub interval_secs: u64,
@@ -24,6 +24,9 @@ pub struct Settings {
     /// 지금 감시 중인 KDO 인스턴스. 이 한 곳에만 요청한다.
     #[prost(string, tag="7")]
     pub active_instance: ::prost::alloc::string::String,
+    /// stop_after_secs 를 감시 주기로 환산한 연속 확인 횟수 (서버가 계산한 값)
+    #[prost(uint32, tag="8")]
+    pub consecutive_checks: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -45,6 +48,9 @@ pub struct UpdateSettingsRequest {
     /// 클라이언트가 지금 조회 중인 펀드만 정지 대상으로 두기 위한 것.
     #[prost(string, repeated, tag="4")]
     pub funds: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// 지정하면 정지까지 필요한 지속 시간(초) 변경. 1 이상이어야 한다.
+    #[prost(uint32, optional, tag="5")]
+    pub stop_after_secs: ::core::option::Option<u32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
