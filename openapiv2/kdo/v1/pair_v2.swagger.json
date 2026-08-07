@@ -490,6 +490,27 @@
     }
   },
   "definitions": {
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
+    "commonRelativePriceSource": {
+      "type": "string",
+      "enum": [
+        "RELATIVE_PRICE_SOURCE_UNSPECIFIED",
+        "RELATIVE_PRICE_SOURCE_BEST_MAKE",
+        "RELATIVE_PRICE_SOURCE_BEST_TAKE"
+      ],
+      "default": "RELATIVE_PRICE_SOURCE_UNSPECIFIED",
+      "description": "참조 가격 소스 — entry(주문) 의 side 기준 자기/상대 호가. 절대 위치(Bid1/Ask1/MidPrice 등)를\n나타내는 kdo.v1.basket.PriceSource 와 달리 side 에 상대적이므로 혼동 방지를 위해 이름을\nRelativePriceSource 로 구분한다. kdo.v1.pair.PriceSource 와 동일한 의미.\n\n - RELATIVE_PRICE_SOURCE_BEST_MAKE: 자기호가 (entry.side 와 같은 방향의 1호가). Bid 주문 → bid1, Ask 주문 → ask1.\n - RELATIVE_PRICE_SOURCE_BEST_TAKE: 상대호가 (entry.side 반대 방향의 1호가). Bid 주문 → ask1, Ask 주문 → bid1."
+    },
     "hedgeOrderTpCode": {
       "type": "string",
       "enum": [
@@ -635,7 +656,7 @@
           "title": "주문에 사용할 펀드 코드"
         },
         "side": {
-          "$ref": "#/definitions/pair_v2PairV2Side",
+          "$ref": "#/definitions/commonOrderSide",
           "title": "주문 방향 (base.side 가 스프레드 부호 규약의 기준)"
         },
         "quantity": {
@@ -644,7 +665,7 @@
           "description": "주문 수량. base 는 1회 발주량(필수), counter 는 무시(런타임 = base.quantity × hedge_ratio)."
         },
         "priceSource": {
-          "$ref": "#/definitions/pair_v2PairV2PriceSource",
+          "$ref": "#/definitions/commonRelativePriceSource",
           "description": "호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값\nBEST_TAKE(상대호가, 즉시 체결 지향)로 처리된다."
         },
         "tpCode": {
@@ -753,7 +774,7 @@
       "type": "object",
       "properties": {
         "navKind": {
-          "$ref": "#/definitions/pair_v2PairV2NavKind"
+          "$ref": "#/definitions/v1commonEtfNavKind"
         },
         "basis": {
           "type": "string",
@@ -765,33 +786,11 @@
           "description": "basis 를 정적값으로 고정할지(false) vs 시장 동기화 소스로부터 동적 추종할지(true)."
         }
       },
-      "description": "ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base\n목표가 산출에 사용한다."
-    },
-    "pair_v2PairV2NavKind": {
-      "type": "string",
-      "enum": [
-        "PAIR_V2_NAV_KIND_UNSPECIFIED",
-        "PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE",
-        "PAIR_V2_NAV_KIND_FUTURE_BASIS",
-        "PAIR_V2_NAV_KIND_LEVERAGE_FUTURE",
-        "PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE"
-      ],
-      "default": "PAIR_V2_NAV_KIND_UNSPECIFIED",
-      "description": "NAV 환산 종류 (파라미터 없는 태그). 실제 EtfPricing/PricingContext 는 런타임에\n선물 + ETF 엔티티에서 조립한다.\n\n - PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE: 지수 추종 헷지 프라이싱\n - PAIR_V2_NAV_KIND_FUTURE_BASIS: 선물 베이시스 기반\n - PAIR_V2_NAV_KIND_LEVERAGE_FUTURE: 레버리지/인버스 ETF용 선물 기반\n - PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE: PDF flatten(단일 선물 + Cash) 기반 선형 환산"
+      "description": "ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base\n목표가 산출에 사용한다. nav_kind 는 실제 EtfPricing/PricingContext 조립에 쓰는 파라미터\n없는 태그다 (실 조립은 런타임에 선물 + ETF 엔티티에서 수행)."
     },
     "pair_v2PairV2NavSpread": {
       "type": "object",
       "title": "NAV 환산 스프레드 (PairV2.nav 설정 사용, 파라미터 없음)"
-    },
-    "pair_v2PairV2PriceSource": {
-      "type": "string",
-      "enum": [
-        "PAIR_V2_PRICE_SOURCE_UNSPECIFIED",
-        "PAIR_V2_PRICE_SOURCE_BEST_MAKE",
-        "PAIR_V2_PRICE_SOURCE_BEST_TAKE"
-      ],
-      "default": "PAIR_V2_PRICE_SOURCE_UNSPECIFIED",
-      "description": "엔트리의 호가 위치 — entry.side 기준 자기/상대 호가.\n\n - PAIR_V2_PRICE_SOURCE_BEST_MAKE: 자기호가 (entry.side 와 같은 방향의 1호가). BID → bid1, ASK → ask1. maker 위치.\n - PAIR_V2_PRICE_SOURCE_BEST_TAKE: 상대호가 (entry.side 반대 방향의 1호가). BID → ask1, ASK → bid1. taker 위치.\n도메인 기본값."
     },
     "pair_v2PairV2RuntimePhase": {
       "type": "string",
@@ -814,17 +813,6 @@
         }
       },
       "title": "counter 가격 × k 선형 환산 스프레드"
-    },
-    "pair_v2PairV2Side": {
-      "type": "string",
-      "enum": [
-        "PAIR_V2_SIDE_UNSPECIFIED",
-        "PAIR_V2_SIDE_BID",
-        "PAIR_V2_SIDE_ASK"
-      ],
-      "default": "PAIR_V2_SIDE_UNSPECIFIED",
-      "description": "- PAIR_V2_SIDE_BID: 매수\n - PAIR_V2_SIDE_ASK: 매도",
-      "title": "주문 방향"
     },
     "pair_v2PairV2SpreadType": {
       "type": "object",
@@ -897,6 +885,18 @@
           }
         }
       }
+    },
+    "v1commonEtfNavKind": {
+      "type": "string",
+      "enum": [
+        "ETF_NAV_KIND_UNSPECIFIED",
+        "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
+        "ETF_NAV_KIND_FUTURE_BASIS",
+        "ETF_NAV_KIND_LEVERAGE_FUTURE",
+        "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE"
+      ],
+      "default": "ETF_NAV_KIND_UNSPECIFIED",
+      "description": "ETF NAV 계산 공식 종류. kdo.v1.pair.EtfNavKind 와 동일한 의미(패키지 간 결합을 피하기 위해\n별도 정의).\n\n - ETF_NAV_KIND_INDEX_TRACKING_HEDGE: 지수 추종 헷지 프라이싱\n - ETF_NAV_KIND_FUTURE_BASIS: 선물 베이시스 기반\n - ETF_NAV_KIND_LEVERAGE_FUTURE: 레버리지/인버스 ETF용 선물 기반\n - ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE: PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)"
     }
   }
 }

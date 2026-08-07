@@ -1346,7 +1346,7 @@ impl serde::Serialize for PairV2Entry {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
         if true {
-            let v = PairV2Side::try_from(self.side)
+            let v = super::common::OrderSide::try_from(self.side)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
             struct_ser.serialize_field("side", &v)?;
         }
@@ -1356,7 +1356,7 @@ impl serde::Serialize for PairV2Entry {
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
-            let v = PairV2PriceSource::try_from(self.price_source)
+            let v = super::common::RelativePriceSource::try_from(self.price_source)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.price_source)))?;
             struct_ser.serialize_field("price_source", &v)?;
         }
@@ -1465,7 +1465,7 @@ impl<'de> serde::Deserialize<'de> for PairV2Entry {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
                             }
-                            side__ = Some(map_.next_value::<PairV2Side>()? as i32);
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
                         }
                         GeneratedField::Quantity => {
                             if quantity__.is_some() {
@@ -1479,7 +1479,7 @@ impl<'de> serde::Deserialize<'de> for PairV2Entry {
                             if price_source__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("priceSource"));
                             }
-                            price_source__ = Some(map_.next_value::<PairV2PriceSource>()? as i32);
+                            price_source__ = Some(map_.next_value::<super::common::RelativePriceSource>()? as i32);
                         }
                         GeneratedField::TpCode => {
                             if tp_code__.is_some() {
@@ -1977,7 +1977,7 @@ impl serde::Serialize for PairV2Nav {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2Nav", len)?;
         if true {
-            let v = PairV2NavKind::try_from(self.nav_kind)
+            let v = super::common::EtfNavKind::try_from(self.nav_kind)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.nav_kind)))?;
             struct_ser.serialize_field("nav_kind", &v)?;
         }
@@ -2064,7 +2064,7 @@ impl<'de> serde::Deserialize<'de> for PairV2Nav {
                             if nav_kind__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("navKind"));
                             }
-                            nav_kind__ = Some(map_.next_value::<PairV2NavKind>()? as i32);
+                            nav_kind__ = Some(map_.next_value::<super::common::EtfNavKind>()? as i32);
                         }
                         GeneratedField::Basis => {
                             if basis__.is_some() {
@@ -2093,86 +2093,6 @@ impl<'de> serde::Deserialize<'de> for PairV2Nav {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2Nav", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PairV2NavKind {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "PAIR_V2_NAV_KIND_UNSPECIFIED",
-            Self::IndexTrackingHedge => "PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE",
-            Self::FutureBasis => "PAIR_V2_NAV_KIND_FUTURE_BASIS",
-            Self::LeverageFuture => "PAIR_V2_NAV_KIND_LEVERAGE_FUTURE",
-            Self::PdfDecomposeHedge => "PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for PairV2NavKind {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "PAIR_V2_NAV_KIND_UNSPECIFIED",
-            "PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE",
-            "PAIR_V2_NAV_KIND_FUTURE_BASIS",
-            "PAIR_V2_NAV_KIND_LEVERAGE_FUTURE",
-            "PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PairV2NavKind;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "PAIR_V2_NAV_KIND_UNSPECIFIED" => Ok(PairV2NavKind::Unspecified),
-                    "PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE" => Ok(PairV2NavKind::IndexTrackingHedge),
-                    "PAIR_V2_NAV_KIND_FUTURE_BASIS" => Ok(PairV2NavKind::FutureBasis),
-                    "PAIR_V2_NAV_KIND_LEVERAGE_FUTURE" => Ok(PairV2NavKind::LeverageFuture),
-                    "PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE" => Ok(PairV2NavKind::PdfDecomposeHedge),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairV2NavSpread {
@@ -2245,80 +2165,6 @@ impl<'de> serde::Deserialize<'de> for PairV2NavSpread {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2NavSpread", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PairV2PriceSource {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "PAIR_V2_PRICE_SOURCE_UNSPECIFIED",
-            Self::BestMake => "PAIR_V2_PRICE_SOURCE_BEST_MAKE",
-            Self::BestTake => "PAIR_V2_PRICE_SOURCE_BEST_TAKE",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for PairV2PriceSource {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "PAIR_V2_PRICE_SOURCE_UNSPECIFIED",
-            "PAIR_V2_PRICE_SOURCE_BEST_MAKE",
-            "PAIR_V2_PRICE_SOURCE_BEST_TAKE",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PairV2PriceSource;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "PAIR_V2_PRICE_SOURCE_UNSPECIFIED" => Ok(PairV2PriceSource::Unspecified),
-                    "PAIR_V2_PRICE_SOURCE_BEST_MAKE" => Ok(PairV2PriceSource::BestMake),
-                    "PAIR_V2_PRICE_SOURCE_BEST_TAKE" => Ok(PairV2PriceSource::BestTake),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairV2RuntimePhase {
@@ -2493,80 +2339,6 @@ impl<'de> serde::Deserialize<'de> for PairV2ScaledSpread {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2ScaledSpread", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for PairV2Side {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "PAIR_V2_SIDE_UNSPECIFIED",
-            Self::Bid => "PAIR_V2_SIDE_BID",
-            Self::Ask => "PAIR_V2_SIDE_ASK",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for PairV2Side {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "PAIR_V2_SIDE_UNSPECIFIED",
-            "PAIR_V2_SIDE_BID",
-            "PAIR_V2_SIDE_ASK",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = PairV2Side;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "PAIR_V2_SIDE_UNSPECIFIED" => Ok(PairV2Side::Unspecified),
-                    "PAIR_V2_SIDE_BID" => Ok(PairV2Side::Bid),
-                    "PAIR_V2_SIDE_ASK" => Ok(PairV2Side::Ask),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairV2SpreadType {

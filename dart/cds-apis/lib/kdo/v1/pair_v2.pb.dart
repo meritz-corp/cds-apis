@@ -16,7 +16,8 @@ import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../google/protobuf/timestamp.pb.dart' as $2;
-import 'hedge.pbenum.dart' as $3;
+import 'common.pbenum.dart' as $3;
+import 'hedge.pbenum.dart' as $4;
 import 'pair_v2.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -276,10 +277,10 @@ class PairV2Entry extends $pb.GeneratedMessage {
   factory PairV2Entry({
     $core.String? symbol,
     $core.String? fundCode,
-    PairV2Side? side,
+    $3.OrderSide? side,
     $fixnum.Int64? quantity,
-    PairV2PriceSource? priceSource,
-    $3.OrderTpCode? tpCode,
+    $3.RelativePriceSource? priceSource,
+    $4.OrderTpCode? tpCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -299,10 +300,10 @@ class PairV2Entry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2Entry', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
-    ..e<PairV2Side>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: PairV2Side.PAIR_V2_SIDE_UNSPECIFIED, valueOf: PairV2Side.valueOf, enumValues: PairV2Side.values)
+    ..e<$3.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $3.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $3.OrderSide.valueOf, enumValues: $3.OrderSide.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
-    ..e<PairV2PriceSource>(5, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: PairV2PriceSource.PAIR_V2_PRICE_SOURCE_UNSPECIFIED, valueOf: PairV2PriceSource.valueOf, enumValues: PairV2PriceSource.values)
-    ..e<$3.OrderTpCode>(6, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: $3.OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: $3.OrderTpCode.valueOf, enumValues: $3.OrderTpCode.values)
+    ..e<$3.RelativePriceSource>(5, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: $3.RelativePriceSource.RELATIVE_PRICE_SOURCE_UNSPECIFIED, valueOf: $3.RelativePriceSource.valueOf, enumValues: $3.RelativePriceSource.values)
+    ..e<$4.OrderTpCode>(6, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: $4.OrderTpCode.valueOf, enumValues: $4.OrderTpCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -345,9 +346,9 @@ class PairV2Entry extends $pb.GeneratedMessage {
 
   /// 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
   @$pb.TagNumber(3)
-  PairV2Side get side => $_getN(2);
+  $3.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side(PairV2Side value) => $_setField(3, value);
+  set side($3.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -366,9 +367,9 @@ class PairV2Entry extends $pb.GeneratedMessage {
   /// 호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값
   /// BEST_TAKE(상대호가, 즉시 체결 지향)로 처리된다.
   @$pb.TagNumber(5)
-  PairV2PriceSource get priceSource => $_getN(4);
+  $3.RelativePriceSource get priceSource => $_getN(4);
   @$pb.TagNumber(5)
-  set priceSource(PairV2PriceSource value) => $_setField(5, value);
+  set priceSource($3.RelativePriceSource value) => $_setField(5, value);
   @$pb.TagNumber(5)
   $core.bool hasPriceSource() => $_has(4);
   @$pb.TagNumber(5)
@@ -376,9 +377,9 @@ class PairV2Entry extends $pb.GeneratedMessage {
 
   /// 주문 tp_code (NONE=일반, LP=유동성공급자). 정정/취소는 거래소가 원주문 tp_code 를 따른다.
   @$pb.TagNumber(6)
-  $3.OrderTpCode get tpCode => $_getN(5);
+  $4.OrderTpCode get tpCode => $_getN(5);
   @$pb.TagNumber(6)
-  set tpCode($3.OrderTpCode value) => $_setField(6, value);
+  set tpCode($4.OrderTpCode value) => $_setField(6, value);
   @$pb.TagNumber(6)
   $core.bool hasTpCode() => $_has(5);
   @$pb.TagNumber(6)
@@ -546,10 +547,11 @@ class PairV2NavSpread extends $pb.GeneratedMessage {
 }
 
 /// ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base
-/// 목표가 산출에 사용한다.
+/// 목표가 산출에 사용한다. nav_kind 는 실제 EtfPricing/PricingContext 조립에 쓰는 파라미터
+/// 없는 태그다 (실 조립은 런타임에 선물 + ETF 엔티티에서 수행).
 class PairV2Nav extends $pb.GeneratedMessage {
   factory PairV2Nav({
-    PairV2NavKind? navKind,
+    $3.EtfNavKind? navKind,
     $fixnum.Int64? basis,
     $core.bool? dynamicBasis,
   }) {
@@ -566,7 +568,7 @@ class PairV2Nav extends $pb.GeneratedMessage {
   factory PairV2Nav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2Nav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
-    ..e<PairV2NavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: PairV2NavKind.PAIR_V2_NAV_KIND_UNSPECIFIED, valueOf: PairV2NavKind.valueOf, enumValues: PairV2NavKind.values)
+    ..e<$3.EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: $3.EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: $3.EtfNavKind.valueOf, enumValues: $3.EtfNavKind.values)
     ..aInt64(2, _omitFieldNames ? '' : 'basis')
     ..aOB(3, _omitFieldNames ? '' : 'dynamicBasis')
     ..hasRequiredFields = false
@@ -590,9 +592,9 @@ class PairV2Nav extends $pb.GeneratedMessage {
   static PairV2Nav? _defaultInstance;
 
   @$pb.TagNumber(1)
-  PairV2NavKind get navKind => $_getN(0);
+  $3.EtfNavKind get navKind => $_getN(0);
   @$pb.TagNumber(1)
-  set navKind(PairV2NavKind value) => $_setField(1, value);
+  set navKind($3.EtfNavKind value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasNavKind() => $_has(0);
   @$pb.TagNumber(1)

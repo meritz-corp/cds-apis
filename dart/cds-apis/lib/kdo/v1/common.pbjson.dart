@@ -114,6 +114,41 @@ final $typed_data.Uint8List orderConditionTypeDescriptor = $convert.base64Decode
     'QQABIcChhPUkRFUl9DT05ESVRJT05fVFlQRV9GQVMQARIcChhPUkRFUl9DT05ESVRJT05fVFlQ'
     'RV9GQUsQAhIcChhPUkRFUl9DT05ESVRJT05fVFlQRV9GT0sQAw==');
 
+@$core.Deprecated('Use relativePriceSourceDescriptor instead')
+const RelativePriceSource$json = {
+  '1': 'RelativePriceSource',
+  '2': [
+    {'1': 'RELATIVE_PRICE_SOURCE_UNSPECIFIED', '2': 0},
+    {'1': 'RELATIVE_PRICE_SOURCE_BEST_MAKE', '2': 1},
+    {'1': 'RELATIVE_PRICE_SOURCE_BEST_TAKE', '2': 2},
+  ],
+};
+
+/// Descriptor for `RelativePriceSource`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List relativePriceSourceDescriptor = $convert.base64Decode(
+    'ChNSZWxhdGl2ZVByaWNlU291cmNlEiUKIVJFTEFUSVZFX1BSSUNFX1NPVVJDRV9VTlNQRUNJRk'
+    'lFRBAAEiMKH1JFTEFUSVZFX1BSSUNFX1NPVVJDRV9CRVNUX01BS0UQARIjCh9SRUxBVElWRV9Q'
+    'UklDRV9TT1VSQ0VfQkVTVF9UQUtFEAI=');
+
+@$core.Deprecated('Use etfNavKindDescriptor instead')
+const EtfNavKind$json = {
+  '1': 'EtfNavKind',
+  '2': [
+    {'1': 'ETF_NAV_KIND_UNSPECIFIED', '2': 0},
+    {'1': 'ETF_NAV_KIND_INDEX_TRACKING_HEDGE', '2': 1},
+    {'1': 'ETF_NAV_KIND_FUTURE_BASIS', '2': 2},
+    {'1': 'ETF_NAV_KIND_LEVERAGE_FUTURE', '2': 3},
+    {'1': 'ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE', '2': 4},
+  ],
+};
+
+/// Descriptor for `EtfNavKind`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List etfNavKindDescriptor = $convert.base64Decode(
+    'CgpFdGZOYXZLaW5kEhwKGEVURl9OQVZfS0lORF9VTlNQRUNJRklFRBAAEiUKIUVURl9OQVZfS0'
+    'lORF9JTkRFWF9UUkFDS0lOR19IRURHRRABEh0KGUVURl9OQVZfS0lORF9GVVRVUkVfQkFTSVMQ'
+    'AhIgChxFVEZfTkFWX0tJTkRfTEVWRVJBR0VfRlVUVVJFEAMSJAogRVRGX05BVl9LSU5EX1BERl'
+    '9ERUNPTVBPU0VfSEVER0UQBA==');
+
 @$core.Deprecated('Use amendMethodTypeDescriptor instead')
 const AmendMethodType$json = {
   '1': 'AmendMethodType',

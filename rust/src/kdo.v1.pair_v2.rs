@@ -75,14 +75,14 @@ pub struct PairV2Entry {
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
     /// 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
-    #[prost(enumeration="PairV2Side", tag="3")]
+    #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
     /// 주문 수량. base 는 1회 발주량(필수), counter 는 무시(런타임 = base.quantity × hedge_ratio).
     #[prost(int64, tag="4")]
     pub quantity: i64,
     /// 호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값
     /// BEST_TAKE(상대호가, 즉시 체결 지향)로 처리된다.
-    #[prost(enumeration="PairV2PriceSource", tag="5")]
+    #[prost(enumeration="super::common::RelativePriceSource", tag="5")]
     pub price_source: i32,
     /// 주문 tp_code (NONE=일반, LP=유동성공급자). 정정/취소는 거래소가 원주문 tp_code 를 따른다.
     #[prost(enumeration="super::hedge::OrderTpCode", tag="6")]
@@ -126,12 +126,17 @@ pub struct PairV2ScaledSpread {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PairV2NavSpread {
 }
+// ============================================================================
+// NAV
+// ============================================================================
+
 /// ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base
-/// 목표가 산출에 사용한다.
+/// 목표가 산출에 사용한다. nav_kind 는 실제 EtfPricing/PricingContext 조립에 쓰는 파라미터
+/// 없는 태그다 (실 조립은 런타임에 선물 + ETF 엔티티에서 수행).
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PairV2Nav {
-    #[prost(enumeration="PairV2NavKind", tag="1")]
+    #[prost(enumeration="super::common::EtfNavKind", tag="1")]
     pub nav_kind: i32,
     /// NAV 베이시스 (선물 가격축 단일값, 원)
     #[prost(int64, tag="2")]
@@ -337,116 +342,6 @@ pub struct PairV2StatusUpdate {
     /// 스냅샷 시각
     #[prost(message, optional, tag="3")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-}
-/// 주문 방향
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum PairV2Side {
-    Unspecified = 0,
-    /// 매수
-    Bid = 1,
-    /// 매도
-    Ask = 2,
-}
-impl PairV2Side {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            PairV2Side::Unspecified => "PAIR_V2_SIDE_UNSPECIFIED",
-            PairV2Side::Bid => "PAIR_V2_SIDE_BID",
-            PairV2Side::Ask => "PAIR_V2_SIDE_ASK",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "PAIR_V2_SIDE_UNSPECIFIED" => Some(Self::Unspecified),
-            "PAIR_V2_SIDE_BID" => Some(Self::Bid),
-            "PAIR_V2_SIDE_ASK" => Some(Self::Ask),
-            _ => None,
-        }
-    }
-}
-/// 엔트리의 호가 위치 — entry.side 기준 자기/상대 호가.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum PairV2PriceSource {
-    Unspecified = 0,
-    /// 자기호가 (entry.side 와 같은 방향의 1호가). BID → bid1, ASK → ask1. maker 위치.
-    BestMake = 1,
-    /// 상대호가 (entry.side 반대 방향의 1호가). BID → ask1, ASK → bid1. taker 위치.
-    /// 도메인 기본값.
-    BestTake = 2,
-}
-impl PairV2PriceSource {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            PairV2PriceSource::Unspecified => "PAIR_V2_PRICE_SOURCE_UNSPECIFIED",
-            PairV2PriceSource::BestMake => "PAIR_V2_PRICE_SOURCE_BEST_MAKE",
-            PairV2PriceSource::BestTake => "PAIR_V2_PRICE_SOURCE_BEST_TAKE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "PAIR_V2_PRICE_SOURCE_UNSPECIFIED" => Some(Self::Unspecified),
-            "PAIR_V2_PRICE_SOURCE_BEST_MAKE" => Some(Self::BestMake),
-            "PAIR_V2_PRICE_SOURCE_BEST_TAKE" => Some(Self::BestTake),
-            _ => None,
-        }
-    }
-}
-// ============================================================================
-// NAV
-// ============================================================================
-
-/// NAV 환산 종류 (파라미터 없는 태그). 실제 EtfPricing/PricingContext 는 런타임에
-/// 선물 + ETF 엔티티에서 조립한다.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum PairV2NavKind {
-    Unspecified = 0,
-    /// 지수 추종 헷지 프라이싱
-    IndexTrackingHedge = 1,
-    /// 선물 베이시스 기반
-    FutureBasis = 2,
-    /// 레버리지/인버스 ETF용 선물 기반
-    LeverageFuture = 3,
-    /// PDF flatten(단일 선물 + Cash) 기반 선형 환산
-    PdfDecomposeHedge = 4,
-}
-impl PairV2NavKind {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            PairV2NavKind::Unspecified => "PAIR_V2_NAV_KIND_UNSPECIFIED",
-            PairV2NavKind::IndexTrackingHedge => "PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE",
-            PairV2NavKind::FutureBasis => "PAIR_V2_NAV_KIND_FUTURE_BASIS",
-            PairV2NavKind::LeverageFuture => "PAIR_V2_NAV_KIND_LEVERAGE_FUTURE",
-            PairV2NavKind::PdfDecomposeHedge => "PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "PAIR_V2_NAV_KIND_UNSPECIFIED" => Some(Self::Unspecified),
-            "PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE" => Some(Self::IndexTrackingHedge),
-            "PAIR_V2_NAV_KIND_FUTURE_BASIS" => Some(Self::FutureBasis),
-            "PAIR_V2_NAV_KIND_LEVERAGE_FUTURE" => Some(Self::LeverageFuture),
-            "PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE" => Some(Self::PdfDecomposeHedge),
-            _ => None,
-        }
-    }
 }
 // ============================================================================
 // Pair Status

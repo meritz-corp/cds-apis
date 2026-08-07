@@ -73,6 +73,86 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for EtfNavKind {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "ETF_NAV_KIND_UNSPECIFIED",
+            Self::IndexTrackingHedge => "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
+            Self::FutureBasis => "ETF_NAV_KIND_FUTURE_BASIS",
+            Self::LeverageFuture => "ETF_NAV_KIND_LEVERAGE_FUTURE",
+            Self::PdfDecomposeHedge => "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for EtfNavKind {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "ETF_NAV_KIND_UNSPECIFIED",
+            "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
+            "ETF_NAV_KIND_FUTURE_BASIS",
+            "ETF_NAV_KIND_LEVERAGE_FUTURE",
+            "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = EtfNavKind;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "ETF_NAV_KIND_UNSPECIFIED" => Ok(EtfNavKind::Unspecified),
+                    "ETF_NAV_KIND_INDEX_TRACKING_HEDGE" => Ok(EtfNavKind::IndexTrackingHedge),
+                    "ETF_NAV_KIND_FUTURE_BASIS" => Ok(EtfNavKind::FutureBasis),
+                    "ETF_NAV_KIND_LEVERAGE_FUTURE" => Ok(EtfNavKind::LeverageFuture),
+                    "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE" => Ok(EtfNavKind::PdfDecomposeHedge),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for EtfPricing {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -961,6 +1041,80 @@ impl<'de> serde::Deserialize<'de> for ProductType {
                     "PRODUCT_TYPE_FUTURES" => Ok(ProductType::Futures),
                     "PRODUCT_TYPE_ETF" => Ok(ProductType::Etf),
                     "PRODUCT_TYPE_CASH" => Ok(ProductType::Cash),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for RelativePriceSource {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "RELATIVE_PRICE_SOURCE_UNSPECIFIED",
+            Self::BestMake => "RELATIVE_PRICE_SOURCE_BEST_MAKE",
+            Self::BestTake => "RELATIVE_PRICE_SOURCE_BEST_TAKE",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for RelativePriceSource {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "RELATIVE_PRICE_SOURCE_UNSPECIFIED",
+            "RELATIVE_PRICE_SOURCE_BEST_MAKE",
+            "RELATIVE_PRICE_SOURCE_BEST_TAKE",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = RelativePriceSource;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "RELATIVE_PRICE_SOURCE_UNSPECIFIED" => Ok(RelativePriceSource::Unspecified),
+                    "RELATIVE_PRICE_SOURCE_BEST_MAKE" => Ok(RelativePriceSource::BestMake),
+                    "RELATIVE_PRICE_SOURCE_BEST_TAKE" => Ok(RelativePriceSource::BestTake),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

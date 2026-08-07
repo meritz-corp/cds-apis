@@ -9,6 +9,7 @@ import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
 import "kdo/v1/hedge.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -197,7 +198,7 @@ message PairV2Entry {
   ];
 
   // 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
-  PairV2Side side = 3 [
+  kdo.v1.common.OrderSide side = 3 [
     (google.api.field_behavior) = REQUIRED
   ];
 
@@ -208,29 +209,10 @@ message PairV2Entry {
 
   // 호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값
   // BEST_TAKE(상대호가, 즉시 체결 지향)로 처리된다.
-  PairV2PriceSource price_source = 5;
+  kdo.v1.common.RelativePriceSource price_source = 5;
 
   // 주문 tp_code (NONE=일반, LP=유동성공급자). 정정/취소는 거래소가 원주문 tp_code 를 따른다.
   kdo.v1.hedge.OrderTpCode tp_code = 6;
-}
-
-// 주문 방향
-enum PairV2Side {
-  PAIR_V2_SIDE_UNSPECIFIED = 0;
-  // 매수
-  PAIR_V2_SIDE_BID = 1;
-  // 매도
-  PAIR_V2_SIDE_ASK = 2;
-}
-
-// 엔트리의 호가 위치 — entry.side 기준 자기/상대 호가.
-enum PairV2PriceSource {
-  PAIR_V2_PRICE_SOURCE_UNSPECIFIED = 0;
-  // 자기호가 (entry.side 와 같은 방향의 1호가). BID → bid1, ASK → ask1. maker 위치.
-  PAIR_V2_PRICE_SOURCE_BEST_MAKE = 1;
-  // 상대호가 (entry.side 반대 방향의 1호가). BID → ask1, ASK → bid1. taker 위치.
-  // 도메인 기본값.
-  PAIR_V2_PRICE_SOURCE_BEST_TAKE = 2;
 }
 
 // ============================================================================
@@ -262,24 +244,11 @@ message PairV2NavSpread {
 // NAV
 // ============================================================================
 
-// NAV 환산 종류 (파라미터 없는 태그). 실제 EtfPricing/PricingContext 는 런타임에
-// 선물 + ETF 엔티티에서 조립한다.
-enum PairV2NavKind {
-  PAIR_V2_NAV_KIND_UNSPECIFIED = 0;
-  // 지수 추종 헷지 프라이싱
-  PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE = 1;
-  // 선물 베이시스 기반
-  PAIR_V2_NAV_KIND_FUTURE_BASIS = 2;
-  // 레버리지/인버스 ETF용 선물 기반
-  PAIR_V2_NAV_KIND_LEVERAGE_FUTURE = 3;
-  // PDF flatten(단일 선물 + Cash) 기반 선형 환산
-  PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE = 4;
-}
-
 // ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base
-// 목표가 산출에 사용한다.
+// 목표가 산출에 사용한다. nav_kind 는 실제 EtfPricing/PricingContext 조립에 쓰는 파라미터
+// 없는 태그다 (실 조립은 런타임에 선물 + ETF 엔티티에서 수행).
 message PairV2Nav {
-  PairV2NavKind nav_kind = 1;
+  kdo.v1.common.EtfNavKind nav_kind = 1;
   // NAV 베이시스 (선물 가격축 단일값, 원)
   int64 basis = 2;
   // basis 를 정적값으로 고정할지(false) vs 시장 동기화 소스로부터 동적 추종할지(true).

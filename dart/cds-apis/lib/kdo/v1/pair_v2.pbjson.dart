@@ -14,56 +14,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use pairV2SideDescriptor instead')
-const PairV2Side$json = {
-  '1': 'PairV2Side',
-  '2': [
-    {'1': 'PAIR_V2_SIDE_UNSPECIFIED', '2': 0},
-    {'1': 'PAIR_V2_SIDE_BID', '2': 1},
-    {'1': 'PAIR_V2_SIDE_ASK', '2': 2},
-  ],
-};
-
-/// Descriptor for `PairV2Side`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List pairV2SideDescriptor = $convert.base64Decode(
-    'CgpQYWlyVjJTaWRlEhwKGFBBSVJfVjJfU0lERV9VTlNQRUNJRklFRBAAEhQKEFBBSVJfVjJfU0'
-    'lERV9CSUQQARIUChBQQUlSX1YyX1NJREVfQVNLEAI=');
-
-@$core.Deprecated('Use pairV2PriceSourceDescriptor instead')
-const PairV2PriceSource$json = {
-  '1': 'PairV2PriceSource',
-  '2': [
-    {'1': 'PAIR_V2_PRICE_SOURCE_UNSPECIFIED', '2': 0},
-    {'1': 'PAIR_V2_PRICE_SOURCE_BEST_MAKE', '2': 1},
-    {'1': 'PAIR_V2_PRICE_SOURCE_BEST_TAKE', '2': 2},
-  ],
-};
-
-/// Descriptor for `PairV2PriceSource`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List pairV2PriceSourceDescriptor = $convert.base64Decode(
-    'ChFQYWlyVjJQcmljZVNvdXJjZRIkCiBQQUlSX1YyX1BSSUNFX1NPVVJDRV9VTlNQRUNJRklFRB'
-    'AAEiIKHlBBSVJfVjJfUFJJQ0VfU09VUkNFX0JFU1RfTUFLRRABEiIKHlBBSVJfVjJfUFJJQ0Vf'
-    'U09VUkNFX0JFU1RfVEFLRRAC');
-
-@$core.Deprecated('Use pairV2NavKindDescriptor instead')
-const PairV2NavKind$json = {
-  '1': 'PairV2NavKind',
-  '2': [
-    {'1': 'PAIR_V2_NAV_KIND_UNSPECIFIED', '2': 0},
-    {'1': 'PAIR_V2_NAV_KIND_INDEX_TRACKING_HEDGE', '2': 1},
-    {'1': 'PAIR_V2_NAV_KIND_FUTURE_BASIS', '2': 2},
-    {'1': 'PAIR_V2_NAV_KIND_LEVERAGE_FUTURE', '2': 3},
-    {'1': 'PAIR_V2_NAV_KIND_PDF_DECOMPOSE_HEDGE', '2': 4},
-  ],
-};
-
-/// Descriptor for `PairV2NavKind`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List pairV2NavKindDescriptor = $convert.base64Decode(
-    'Cg1QYWlyVjJOYXZLaW5kEiAKHFBBSVJfVjJfTkFWX0tJTkRfVU5TUEVDSUZJRUQQABIpCiVQQU'
-    'lSX1YyX05BVl9LSU5EX0lOREVYX1RSQUNLSU5HX0hFREdFEAESIQodUEFJUl9WMl9OQVZfS0lO'
-    'RF9GVVRVUkVfQkFTSVMQAhIkCiBQQUlSX1YyX05BVl9LSU5EX0xFVkVSQUdFX0ZVVFVSRRADEi'
-    'gKJFBBSVJfVjJfTkFWX0tJTkRfUERGX0RFQ09NUE9TRV9IRURHRRAE');
-
 @$core.Deprecated('Use pairV2StatusDescriptor instead')
 const PairV2Status$json = {
   '1': 'PairV2Status',
@@ -168,9 +118,9 @@ const PairV2Entry$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
-    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2Side', '8': {}, '10': 'side'},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
     {'1': 'quantity', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
-    {'1': 'price_source', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2PriceSource', '10': 'priceSource'},
+    {'1': 'price_source', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.common.RelativePriceSource', '10': 'priceSource'},
     {'1': 'tp_code', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.hedge.OrderTpCode', '10': 'tpCode'},
   ],
 };
@@ -178,11 +128,11 @@ const PairV2Entry$json = {
 /// Descriptor for `PairV2Entry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pairV2EntryDescriptor = $convert.base64Decode(
     'CgtQYWlyVjJFbnRyeRIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbBIhCglmdW5kX2NvZG'
-    'UYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEjQKBHNpZGUYAyABKA4yGi5rZG8udjEucGFpcl92Mi5Q'
-    'YWlyVjJTaWRlQgTiQQECUgRzaWRlEiAKCHF1YW50aXR5GAQgASgDQgTiQQECUghxdWFudGl0eR'
-    'JECgxwcmljZV9zb3VyY2UYBSABKA4yIS5rZG8udjEucGFpcl92Mi5QYWlyVjJQcmljZVNvdXJj'
-    'ZVILcHJpY2VTb3VyY2USMgoHdHBfY29kZRgGIAEoDjIZLmtkby52MS5oZWRnZS5PcmRlclRwQ2'
-    '9kZVIGdHBDb2Rl');
+    'UYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEjIKBHNpZGUYAyABKA4yGC5rZG8udjEuY29tbW9uLk9y'
+    'ZGVyU2lkZUIE4kEBAlIEc2lkZRIgCghxdWFudGl0eRgEIAEoA0IE4kEBAlIIcXVhbnRpdHkSRQ'
+    'oMcHJpY2Vfc291cmNlGAUgASgOMiIua2RvLnYxLmNvbW1vbi5SZWxhdGl2ZVByaWNlU291cmNl'
+    'UgtwcmljZVNvdXJjZRIyCgd0cF9jb2RlGAYgASgOMhkua2RvLnYxLmhlZGdlLk9yZGVyVHBDb2'
+    'RlUgZ0cENvZGU=');
 
 @$core.Deprecated('Use pairV2SpreadTypeDescriptor instead')
 const PairV2SpreadType$json = {
@@ -227,7 +177,7 @@ final $typed_data.Uint8List pairV2NavSpreadDescriptor = $convert.base64Decode(
 const PairV2Nav$json = {
   '1': 'PairV2Nav',
   '2': [
-    {'1': 'nav_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2NavKind', '10': 'navKind'},
+    {'1': 'nav_kind', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.EtfNavKind', '10': 'navKind'},
     {'1': 'basis', '3': 2, '4': 1, '5': 3, '10': 'basis'},
     {'1': 'dynamic_basis', '3': 3, '4': 1, '5': 8, '10': 'dynamicBasis'},
   ],
@@ -235,9 +185,9 @@ const PairV2Nav$json = {
 
 /// Descriptor for `PairV2Nav`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pairV2NavDescriptor = $convert.base64Decode(
-    'CglQYWlyVjJOYXYSOAoIbmF2X2tpbmQYASABKA4yHS5rZG8udjEucGFpcl92Mi5QYWlyVjJOYX'
-    'ZLaW5kUgduYXZLaW5kEhQKBWJhc2lzGAIgASgDUgViYXNpcxIjCg1keW5hbWljX2Jhc2lzGAMg'
-    'ASgIUgxkeW5hbWljQmFzaXM=');
+    'CglQYWlyVjJOYXYSNAoIbmF2X2tpbmQYASABKA4yGS5rZG8udjEuY29tbW9uLkV0Zk5hdktpbm'
+    'RSB25hdktpbmQSFAoFYmFzaXMYAiABKANSBWJhc2lzEiMKDWR5bmFtaWNfYmFzaXMYAyABKAhS'
+    'DGR5bmFtaWNCYXNpcw==');
 
 @$core.Deprecated('Use getPairV2RequestDescriptor instead')
 const GetPairV2Request$json = {

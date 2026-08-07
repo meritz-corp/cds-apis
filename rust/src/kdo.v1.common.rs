@@ -291,6 +291,81 @@ impl OrderConditionType {
         }
     }
 }
+/// 참조 가격 소스 — entry(주문) 의 side 기준 자기/상대 호가. 절대 위치(Bid1/Ask1/MidPrice 등)를
+/// 나타내는 kdo.v1.basket.PriceSource 와 달리 side 에 상대적이므로 혼동 방지를 위해 이름을
+/// RelativePriceSource 로 구분한다. kdo.v1.pair.PriceSource 와 동일한 의미.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum RelativePriceSource {
+    Unspecified = 0,
+    /// 자기호가 (entry.side 와 같은 방향의 1호가). Bid 주문 → bid1, Ask 주문 → ask1.
+    BestMake = 1,
+    /// 상대호가 (entry.side 반대 방향의 1호가). Bid 주문 → ask1, Ask 주문 → bid1.
+    BestTake = 2,
+}
+impl RelativePriceSource {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            RelativePriceSource::Unspecified => "RELATIVE_PRICE_SOURCE_UNSPECIFIED",
+            RelativePriceSource::BestMake => "RELATIVE_PRICE_SOURCE_BEST_MAKE",
+            RelativePriceSource::BestTake => "RELATIVE_PRICE_SOURCE_BEST_TAKE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "RELATIVE_PRICE_SOURCE_UNSPECIFIED" => Some(Self::Unspecified),
+            "RELATIVE_PRICE_SOURCE_BEST_MAKE" => Some(Self::BestMake),
+            "RELATIVE_PRICE_SOURCE_BEST_TAKE" => Some(Self::BestTake),
+            _ => None,
+        }
+    }
+}
+/// ETF NAV 계산 공식 종류. kdo.v1.pair.EtfNavKind 와 동일한 의미(패키지 간 결합을 피하기 위해
+/// 별도 정의).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum EtfNavKind {
+    Unspecified = 0,
+    /// 지수 추종 헷지 프라이싱
+    IndexTrackingHedge = 1,
+    /// 선물 베이시스 기반
+    FutureBasis = 2,
+    /// 레버리지/인버스 ETF용 선물 기반
+    LeverageFuture = 3,
+    /// PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)
+    PdfDecomposeHedge = 4,
+}
+impl EtfNavKind {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            EtfNavKind::Unspecified => "ETF_NAV_KIND_UNSPECIFIED",
+            EtfNavKind::IndexTrackingHedge => "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
+            EtfNavKind::FutureBasis => "ETF_NAV_KIND_FUTURE_BASIS",
+            EtfNavKind::LeverageFuture => "ETF_NAV_KIND_LEVERAGE_FUTURE",
+            EtfNavKind::PdfDecomposeHedge => "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ETF_NAV_KIND_UNSPECIFIED" => Some(Self::Unspecified),
+            "ETF_NAV_KIND_INDEX_TRACKING_HEDGE" => Some(Self::IndexTrackingHedge),
+            "ETF_NAV_KIND_FUTURE_BASIS" => Some(Self::FutureBasis),
+            "ETF_NAV_KIND_LEVERAGE_FUTURE" => Some(Self::LeverageFuture),
+            "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE" => Some(Self::PdfDecomposeHedge),
+            _ => None,
+        }
+    }
+}
 /// 자동정정 전략 유형
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

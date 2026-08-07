@@ -678,19 +678,6 @@
       },
       "description": "base 무발주 — counter(ETF) 상대호가±entry_aggressive_ticks pseudo-IOC 진입,\n마지막 진입 체결가 기준 take_profit_ticks/stop_loss_ticks 틱 익절/손절(TP/SL),\nexit_delay_ms 경과 후 판정. 진입은 상대 1호가에서 entry_aggressive_ticks 만큼\n공격적으로 제출 후 잔량 즉시 취소(pseudo-IOC). 청산은 체결될 때까지 호가 추적(amend)."
     },
-    "pairEtfNavKind": {
-      "type": "string",
-      "enum": [
-        "ETF_NAV_KIND_UNSPECIFIED",
-        "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
-        "ETF_NAV_KIND_FUTURE_BASIS",
-        "ETF_NAV_KIND_LEVERAGE_FUTURE",
-        "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE"
-      ],
-      "default": "ETF_NAV_KIND_UNSPECIFIED",
-      "description": "- ETF_NAV_KIND_INDEX_TRACKING_HEDGE: 지수 추종 헷지 프라이싱: (future + basis) * multiple + cash\n - ETF_NAV_KIND_FUTURE_BASIS: 선물 베이시스 기반: unit_delta * future / (prev_index + basis) + cash\n - ETF_NAV_KIND_LEVERAGE_FUTURE: 레버리지/인버스 ETF용 선물 기반\n - ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE: PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)",
-      "title": "ETF NAV 계산 공식 종류"
-    },
     "pairFillStatus": {
       "type": "object",
       "properties": {
@@ -1139,11 +1126,24 @@
         }
       }
     },
+    "v1pairEtfNavKind": {
+      "type": "string",
+      "enum": [
+        "ETF_NAV_KIND_UNSPECIFIED",
+        "ETF_NAV_KIND_INDEX_TRACKING_HEDGE",
+        "ETF_NAV_KIND_FUTURE_BASIS",
+        "ETF_NAV_KIND_LEVERAGE_FUTURE",
+        "ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE"
+      ],
+      "default": "ETF_NAV_KIND_UNSPECIFIED",
+      "description": "- ETF_NAV_KIND_INDEX_TRACKING_HEDGE: 지수 추종 헷지 프라이싱: (future + basis) * multiple + cash\n - ETF_NAV_KIND_FUTURE_BASIS: 선물 베이시스 기반: unit_delta * future / (prev_index + basis) + cash\n - ETF_NAV_KIND_LEVERAGE_FUTURE: 레버리지/인버스 ETF용 선물 기반\n - ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE: PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)",
+      "title": "ETF NAV 계산 공식 종류"
+    },
     "v1pairNav": {
       "type": "object",
       "properties": {
         "navKind": {
-          "$ref": "#/definitions/pairEtfNavKind"
+          "$ref": "#/definitions/v1pairEtfNavKind"
         },
         "basis": {
           "type": "string",

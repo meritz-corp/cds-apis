@@ -148,6 +148,55 @@ class OrderConditionType extends $pb.ProtobufEnum {
   const OrderConditionType._(super.value, super.name);
 }
 
+/// 참조 가격 소스 — entry(주문) 의 side 기준 자기/상대 호가. 절대 위치(Bid1/Ask1/MidPrice 등)를
+/// 나타내는 kdo.v1.basket.PriceSource 와 달리 side 에 상대적이므로 혼동 방지를 위해 이름을
+/// RelativePriceSource 로 구분한다. kdo.v1.pair.PriceSource 와 동일한 의미.
+class RelativePriceSource extends $pb.ProtobufEnum {
+  static const RelativePriceSource RELATIVE_PRICE_SOURCE_UNSPECIFIED = RelativePriceSource._(0, _omitEnumNames ? '' : 'RELATIVE_PRICE_SOURCE_UNSPECIFIED');
+  /// 자기호가 (entry.side 와 같은 방향의 1호가). Bid 주문 → bid1, Ask 주문 → ask1.
+  static const RelativePriceSource RELATIVE_PRICE_SOURCE_BEST_MAKE = RelativePriceSource._(1, _omitEnumNames ? '' : 'RELATIVE_PRICE_SOURCE_BEST_MAKE');
+  /// 상대호가 (entry.side 반대 방향의 1호가). Bid 주문 → ask1, Ask 주문 → bid1.
+  static const RelativePriceSource RELATIVE_PRICE_SOURCE_BEST_TAKE = RelativePriceSource._(2, _omitEnumNames ? '' : 'RELATIVE_PRICE_SOURCE_BEST_TAKE');
+
+  static const $core.List<RelativePriceSource> values = <RelativePriceSource> [
+    RELATIVE_PRICE_SOURCE_UNSPECIFIED,
+    RELATIVE_PRICE_SOURCE_BEST_MAKE,
+    RELATIVE_PRICE_SOURCE_BEST_TAKE,
+  ];
+
+  static final $core.List<RelativePriceSource?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static RelativePriceSource? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const RelativePriceSource._(super.value, super.name);
+}
+
+/// ETF NAV 계산 공식 종류. kdo.v1.pair.EtfNavKind 와 동일한 의미(패키지 간 결합을 피하기 위해
+/// 별도 정의).
+class EtfNavKind extends $pb.ProtobufEnum {
+  static const EtfNavKind ETF_NAV_KIND_UNSPECIFIED = EtfNavKind._(0, _omitEnumNames ? '' : 'ETF_NAV_KIND_UNSPECIFIED');
+  /// 지수 추종 헷지 프라이싱
+  static const EtfNavKind ETF_NAV_KIND_INDEX_TRACKING_HEDGE = EtfNavKind._(1, _omitEnumNames ? '' : 'ETF_NAV_KIND_INDEX_TRACKING_HEDGE');
+  /// 선물 베이시스 기반
+  static const EtfNavKind ETF_NAV_KIND_FUTURE_BASIS = EtfNavKind._(2, _omitEnumNames ? '' : 'ETF_NAV_KIND_FUTURE_BASIS');
+  /// 레버리지/인버스 ETF용 선물 기반
+  static const EtfNavKind ETF_NAV_KIND_LEVERAGE_FUTURE = EtfNavKind._(3, _omitEnumNames ? '' : 'ETF_NAV_KIND_LEVERAGE_FUTURE');
+  /// PDF 구성종목 기반 헷지 프라이싱 (단일 선물 구성종목 전제, flatten 필수)
+  static const EtfNavKind ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE = EtfNavKind._(4, _omitEnumNames ? '' : 'ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE');
+
+  static const $core.List<EtfNavKind> values = <EtfNavKind> [
+    ETF_NAV_KIND_UNSPECIFIED,
+    ETF_NAV_KIND_INDEX_TRACKING_HEDGE,
+    ETF_NAV_KIND_FUTURE_BASIS,
+    ETF_NAV_KIND_LEVERAGE_FUTURE,
+    ETF_NAV_KIND_PDF_DECOMPOSE_HEDGE,
+  ];
+
+  static final $core.List<EtfNavKind?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static EtfNavKind? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const EtfNavKind._(super.value, super.name);
+}
+
 /// 자동정정 전략 유형
 class AmendMethodType extends $pb.ProtobufEnum {
   /// 미지정 (기본값: SELF_QUOTE로 처리)
