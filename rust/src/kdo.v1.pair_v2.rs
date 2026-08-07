@@ -200,6 +200,9 @@ pub struct UpdatePairV2Request {
     /// 수정할 PairV2
     #[prost(message, optional, tag="1")]
     pub pair_v2: ::core::option::Option<PairV2>,
+    /// 수정할 필드 마스크. 비어 있으면(unset) 전체 교체 — 기존 동작과 동일(하위호환).
+    #[prost(message, optional, tag="2")]
+    pub update_mask: ::core::option::Option<super::super::super::google::protobuf::FieldMask>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

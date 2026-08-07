@@ -15,9 +15,10 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../google/protobuf/field_mask.pb.dart' as $3;
 import '../../google/protobuf/timestamp.pb.dart' as $2;
-import 'common.pbenum.dart' as $3;
-import 'hedge.pbenum.dart' as $4;
+import 'common.pbenum.dart' as $4;
+import 'hedge.pbenum.dart' as $5;
 import 'pair_v2.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -277,10 +278,10 @@ class PairV2Entry extends $pb.GeneratedMessage {
   factory PairV2Entry({
     $core.String? symbol,
     $core.String? fundCode,
-    $3.OrderSide? side,
+    $4.OrderSide? side,
     $fixnum.Int64? quantity,
-    $3.RelativePriceSource? priceSource,
-    $4.OrderTpCode? tpCode,
+    $4.RelativePriceSource? priceSource,
+    $5.OrderTpCode? tpCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -300,10 +301,10 @@ class PairV2Entry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2Entry', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
-    ..e<$3.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $3.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $3.OrderSide.valueOf, enumValues: $3.OrderSide.values)
+    ..e<$4.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $4.OrderSide.valueOf, enumValues: $4.OrderSide.values)
     ..aInt64(4, _omitFieldNames ? '' : 'quantity')
-    ..e<$3.RelativePriceSource>(5, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: $3.RelativePriceSource.RELATIVE_PRICE_SOURCE_UNSPECIFIED, valueOf: $3.RelativePriceSource.valueOf, enumValues: $3.RelativePriceSource.values)
-    ..e<$4.OrderTpCode>(6, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: $4.OrderTpCode.valueOf, enumValues: $4.OrderTpCode.values)
+    ..e<$4.RelativePriceSource>(5, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: $4.RelativePriceSource.RELATIVE_PRICE_SOURCE_UNSPECIFIED, valueOf: $4.RelativePriceSource.valueOf, enumValues: $4.RelativePriceSource.values)
+    ..e<$5.OrderTpCode>(6, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: $5.OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: $5.OrderTpCode.valueOf, enumValues: $5.OrderTpCode.values)
     ..hasRequiredFields = false
   ;
 
@@ -346,9 +347,9 @@ class PairV2Entry extends $pb.GeneratedMessage {
 
   /// 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
   @$pb.TagNumber(3)
-  $3.OrderSide get side => $_getN(2);
+  $4.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
-  set side($3.OrderSide value) => $_setField(3, value);
+  set side($4.OrderSide value) => $_setField(3, value);
   @$pb.TagNumber(3)
   $core.bool hasSide() => $_has(2);
   @$pb.TagNumber(3)
@@ -367,9 +368,9 @@ class PairV2Entry extends $pb.GeneratedMessage {
   /// 호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값
   /// BEST_TAKE(상대호가, 즉시 체결 지향)로 처리된다.
   @$pb.TagNumber(5)
-  $3.RelativePriceSource get priceSource => $_getN(4);
+  $4.RelativePriceSource get priceSource => $_getN(4);
   @$pb.TagNumber(5)
-  set priceSource($3.RelativePriceSource value) => $_setField(5, value);
+  set priceSource($4.RelativePriceSource value) => $_setField(5, value);
   @$pb.TagNumber(5)
   $core.bool hasPriceSource() => $_has(4);
   @$pb.TagNumber(5)
@@ -377,9 +378,9 @@ class PairV2Entry extends $pb.GeneratedMessage {
 
   /// 주문 tp_code (NONE=일반, LP=유동성공급자). 정정/취소는 거래소가 원주문 tp_code 를 따른다.
   @$pb.TagNumber(6)
-  $4.OrderTpCode get tpCode => $_getN(5);
+  $5.OrderTpCode get tpCode => $_getN(5);
   @$pb.TagNumber(6)
-  set tpCode($4.OrderTpCode value) => $_setField(6, value);
+  set tpCode($5.OrderTpCode value) => $_setField(6, value);
   @$pb.TagNumber(6)
   $core.bool hasTpCode() => $_has(5);
   @$pb.TagNumber(6)
@@ -551,7 +552,7 @@ class PairV2NavSpread extends $pb.GeneratedMessage {
 /// 없는 태그다 (실 조립은 런타임에 선물 + ETF 엔티티에서 수행).
 class PairV2Nav extends $pb.GeneratedMessage {
   factory PairV2Nav({
-    $3.EtfNavKind? navKind,
+    $4.EtfNavKind? navKind,
     $fixnum.Int64? basis,
     $core.bool? dynamicBasis,
   }) {
@@ -568,7 +569,7 @@ class PairV2Nav extends $pb.GeneratedMessage {
   factory PairV2Nav.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2Nav', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
-    ..e<$3.EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: $3.EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: $3.EtfNavKind.valueOf, enumValues: $3.EtfNavKind.values)
+    ..e<$4.EtfNavKind>(1, _omitFieldNames ? '' : 'navKind', $pb.PbFieldType.OE, defaultOrMaker: $4.EtfNavKind.ETF_NAV_KIND_UNSPECIFIED, valueOf: $4.EtfNavKind.valueOf, enumValues: $4.EtfNavKind.values)
     ..aInt64(2, _omitFieldNames ? '' : 'basis')
     ..aOB(3, _omitFieldNames ? '' : 'dynamicBasis')
     ..hasRequiredFields = false
@@ -592,9 +593,9 @@ class PairV2Nav extends $pb.GeneratedMessage {
   static PairV2Nav? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $3.EtfNavKind get navKind => $_getN(0);
+  $4.EtfNavKind get navKind => $_getN(0);
   @$pb.TagNumber(1)
-  set navKind($3.EtfNavKind value) => $_setField(1, value);
+  set navKind($4.EtfNavKind value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasNavKind() => $_has(0);
   @$pb.TagNumber(1)
@@ -855,9 +856,11 @@ class CreatePairV2Request extends $pb.GeneratedMessage {
 class UpdatePairV2Request extends $pb.GeneratedMessage {
   factory UpdatePairV2Request({
     PairV2? pairV2,
+    $3.FieldMask? updateMask,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
+    if (updateMask != null) result.updateMask = updateMask;
     return result;
   }
 
@@ -868,6 +871,7 @@ class UpdatePairV2Request extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdatePairV2Request', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
     ..aOM<PairV2>(1, _omitFieldNames ? '' : 'pairV2', subBuilder: PairV2.create)
+    ..aOM<$3.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
     ..hasRequiredFields = false
   ;
 
@@ -899,6 +903,18 @@ class UpdatePairV2Request extends $pb.GeneratedMessage {
   void clearPairV2() => $_clearField(1);
   @$pb.TagNumber(1)
   PairV2 ensurePairV2() => $_ensure(0);
+
+  /// 수정할 필드 마스크. 비어 있으면(unset) 전체 교체 — 기존 동작과 동일(하위호환).
+  @$pb.TagNumber(2)
+  $3.FieldMask get updateMask => $_getN(1);
+  @$pb.TagNumber(2)
+  set updateMask($3.FieldMask value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUpdateMask() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUpdateMask() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $3.FieldMask ensureUpdateMask() => $_ensure(1);
 }
 
 class DeletePairV2Request extends $pb.GeneratedMessage {

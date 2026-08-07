@@ -255,13 +255,15 @@ const UpdatePairV2Request$json = {
   '1': 'UpdatePairV2Request',
   '2': [
     {'1': 'pair_v2', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2', '8': {}, '10': 'pairV2'},
+    {'1': 'update_mask', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.FieldMask', '10': 'updateMask'},
   ],
 };
 
 /// Descriptor for `UpdatePairV2Request`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updatePairV2RequestDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVQYWlyVjJSZXF1ZXN0EjUKB3BhaXJfdjIYASABKAsyFi5rZG8udjEucGFpcl92Mi'
-    '5QYWlyVjJCBOJBAQJSBnBhaXJWMg==');
+    '5QYWlyVjJCBOJBAQJSBnBhaXJWMhI7Cgt1cGRhdGVfbWFzaxgCIAEoCzIaLmdvb2dsZS5wcm90'
+    'b2J1Zi5GaWVsZE1hc2tSCnVwZGF0ZU1hc2s=');
 
 @$core.Deprecated('Use deletePairV2RequestDescriptor instead')
 const DeletePairV2Request$json = {

@@ -5,6 +5,7 @@ package kdo.v1.pair_v2;
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
@@ -54,7 +55,7 @@ service PairV2Service {
       patch: "/v1/{pair_v2.name=pair_v2s/*}"
       body: "pair_v2"
     };
-    option (google.api.method_signature) = "pair_v2";
+    option (google.api.method_signature) = "pair_v2,update_mask";
   }
 
   // PairV2 삭제
@@ -339,6 +340,9 @@ message UpdatePairV2Request {
   PairV2 pair_v2 = 1 [
     (google.api.field_behavior) = REQUIRED
   ];
+
+  // 수정할 필드 마스크. 비어 있으면(unset) 전체 교체 — 기존 동작과 동일(하위호환).
+  google.protobuf.FieldMask update_mask = 2;
 }
 
 message DeletePairV2Request {
