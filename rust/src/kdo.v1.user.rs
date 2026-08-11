@@ -83,6 +83,9 @@ pub struct User {
     /// The trading role assigned to the user.
     #[prost(enumeration="Role", tag="6")]
     pub role: i32,
+    /// 관리자 여부 (시스템 알림 수신 대상).
+    #[prost(bool, tag="7")]
+    pub is_admin: bool,
 }
 /// Role represents the trading role assigned to a user.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

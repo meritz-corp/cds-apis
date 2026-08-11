@@ -202,6 +202,10 @@
         "role": {
           "$ref": "#/definitions/userRole",
           "description": "The trading role assigned to the user."
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "description": "관리자 여부 (시스템 알림 수신 대상)."
         }
       }
     }

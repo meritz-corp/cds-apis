@@ -658,7 +658,7 @@ func (*PairV2NavSpread) Descriptor() ([]byte, []int) {
 
 // ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base
 // 목표가 산출에 사용한다. nav_kind 는 실제 EtfPricing/PricingContext 조립에 쓰는 파라미터
-// 없는 태그다 (실 조립은 런타임에 선물 + ETF 엔티티에서 수행).
+// 없는 태그다 (실 조립은 런w타임에 선물 + ETF 엔티티에서 수행).
 type PairV2Nav struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

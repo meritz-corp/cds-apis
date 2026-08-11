@@ -146,5 +146,7 @@ message User {
   // The trading role assigned to the user.
   Role role = 6;
 
+  // 관리자 여부 (시스템 알림 수신 대상).
+  bool is_admin = 7;
 }
 

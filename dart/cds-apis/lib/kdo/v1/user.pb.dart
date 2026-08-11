@@ -235,6 +235,7 @@ class User extends $pb.GeneratedMessage {
     $core.String? employeeId,
     $core.String? ip,
     Role? role,
+    $core.bool? isAdmin,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -243,6 +244,7 @@ class User extends $pb.GeneratedMessage {
     if (employeeId != null) result.employeeId = employeeId;
     if (ip != null) result.ip = ip;
     if (role != null) result.role = role;
+    if (isAdmin != null) result.isAdmin = isAdmin;
     return result;
   }
 
@@ -258,6 +260,7 @@ class User extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'employeeId')
     ..aOS(5, _omitFieldNames ? '' : 'ip')
     ..e<Role>(6, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: Role.ROLE_UNSPECIFIED, valueOf: Role.valueOf, enumValues: Role.values)
+    ..aOB(7, _omitFieldNames ? '' : 'isAdmin')
     ..hasRequiredFields = false
   ;
 
@@ -336,6 +339,16 @@ class User extends $pb.GeneratedMessage {
   $core.bool hasRole() => $_has(5);
   @$pb.TagNumber(6)
   void clearRole() => $_clearField(6);
+
+  /// 관리자 여부 (시스템 알림 수신 대상).
+  @$pb.TagNumber(7)
+  $core.bool get isAdmin => $_getBF(6);
+  @$pb.TagNumber(7)
+  set isAdmin($core.bool value) => $_setBool(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasIsAdmin() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearIsAdmin() => $_clearField(7);
 }
 
 

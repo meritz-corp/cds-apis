@@ -83,6 +83,7 @@ const User$json = {
     {'1': 'employee_id', '3': 4, '4': 1, '5': 9, '10': 'employeeId'},
     {'1': 'ip', '3': 5, '4': 1, '5': 9, '10': 'ip'},
     {'1': 'role', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.user.Role', '10': 'role'},
+    {'1': 'is_admin', '3': 7, '4': 1, '5': 8, '10': 'isAdmin'},
   ],
   '7': {},
 };
@@ -92,5 +93,6 @@ final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
     'CgRVc2VyEhIKBG5hbWUYASABKAlSBG5hbWUSFAoCaWQYAiABKAlCBOJBAQNSAmlkEiEKDGRpc3'
     'BsYXlfbmFtZRgDIAEoCVILZGlzcGxheU5hbWUSHwoLZW1wbG95ZWVfaWQYBCABKAlSCmVtcGxv'
     'eWVlSWQSDgoCaXAYBSABKAlSAmlwEiUKBHJvbGUYBiABKA4yES5rZG8udjEudXNlci5Sb2xlUg'
-    'Ryb2xlOiXqQSIKFGtkby5jZHNhcGlzLnh5ei9Vc2VyEgp1c2Vycy97aWR9');
+    'Ryb2xlEhkKCGlzX2FkbWluGAcgASgIUgdpc0FkbWluOiXqQSIKFGtkby5jZHNhcGlzLnh5ei9V'
+    'c2VyEgp1c2Vycy97aWR9');
 
