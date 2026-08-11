@@ -77,6 +77,7 @@ enum LimitPriceType {
 enum QuickOrderOrigin {
   QUICK_ORDER_ORIGIN_UNSPECIFIED = 0;  // 일반 퀵주문 (출처 미지정)
   QUICK_ORDER_ORIGIN_MM = 1;           // MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨
+  QUICK_ORDER_ORIGIN_QUOTE = 2;        // Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨
 }
 
 enum OrderStatus {

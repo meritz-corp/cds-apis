@@ -2300,6 +2300,7 @@ impl serde::Serialize for QuickOrderOrigin {
         let variant = match self {
             Self::Unspecified => "QUICK_ORDER_ORIGIN_UNSPECIFIED",
             Self::Mm => "QUICK_ORDER_ORIGIN_MM",
+            Self::Quote => "QUICK_ORDER_ORIGIN_QUOTE",
         };
         serializer.serialize_str(variant)
     }
@@ -2313,6 +2314,7 @@ impl<'de> serde::Deserialize<'de> for QuickOrderOrigin {
         const FIELDS: &[&str] = &[
             "QUICK_ORDER_ORIGIN_UNSPECIFIED",
             "QUICK_ORDER_ORIGIN_MM",
+            "QUICK_ORDER_ORIGIN_QUOTE",
         ];
 
         struct GeneratedVisitor;
@@ -2355,6 +2357,7 @@ impl<'de> serde::Deserialize<'de> for QuickOrderOrigin {
                 match value {
                     "QUICK_ORDER_ORIGIN_UNSPECIFIED" => Ok(QuickOrderOrigin::Unspecified),
                     "QUICK_ORDER_ORIGIN_MM" => Ok(QuickOrderOrigin::Mm),
+                    "QUICK_ORDER_ORIGIN_QUOTE" => Ok(QuickOrderOrigin::Quote),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

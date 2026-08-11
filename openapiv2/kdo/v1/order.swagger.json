@@ -430,10 +430,11 @@
       "type": "string",
       "enum": [
         "QUICK_ORDER_ORIGIN_UNSPECIFIED",
-        "QUICK_ORDER_ORIGIN_MM"
+        "QUICK_ORDER_ORIGIN_MM",
+        "QUICK_ORDER_ORIGIN_QUOTE"
       ],
       "default": "QUICK_ORDER_ORIGIN_UNSPECIFIED",
-      "description": "퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.\n\n - QUICK_ORDER_ORIGIN_UNSPECIFIED: 일반 퀵주문 (출처 미지정)\n - QUICK_ORDER_ORIGIN_MM: MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨"
+      "description": "퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.\n\n - QUICK_ORDER_ORIGIN_UNSPECIFIED: 일반 퀵주문 (출처 미지정)\n - QUICK_ORDER_ORIGIN_MM: MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨\n - QUICK_ORDER_ORIGIN_QUOTE: Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨"
     },
     "orderQuoteType": {
       "type": "string",

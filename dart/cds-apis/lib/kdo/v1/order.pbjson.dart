@@ -62,13 +62,14 @@ const QuickOrderOrigin$json = {
   '2': [
     {'1': 'QUICK_ORDER_ORIGIN_UNSPECIFIED', '2': 0},
     {'1': 'QUICK_ORDER_ORIGIN_MM', '2': 1},
+    {'1': 'QUICK_ORDER_ORIGIN_QUOTE', '2': 2},
   ],
 };
 
 /// Descriptor for `QuickOrderOrigin`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List quickOrderOriginDescriptor = $convert.base64Decode(
     'ChBRdWlja09yZGVyT3JpZ2luEiIKHlFVSUNLX09SREVSX09SSUdJTl9VTlNQRUNJRklFRBAAEh'
-    'kKFVFVSUNLX09SREVSX09SSUdJTl9NTRAB');
+    'kKFVFVSUNLX09SREVSX09SSUdJTl9NTRABEhwKGFFVSUNLX09SREVSX09SSUdJTl9RVU9URRAC');
 
 @$core.Deprecated('Use orderStatusDescriptor instead')
 const OrderStatus$json = {

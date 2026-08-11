@@ -418,6 +418,8 @@ pub enum QuickOrderOrigin {
     Unspecified = 0,
     /// MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨
     Mm = 1,
+    /// Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨
+    Quote = 2,
 }
 impl QuickOrderOrigin {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -428,6 +430,7 @@ impl QuickOrderOrigin {
         match self {
             QuickOrderOrigin::Unspecified => "QUICK_ORDER_ORIGIN_UNSPECIFIED",
             QuickOrderOrigin::Mm => "QUICK_ORDER_ORIGIN_MM",
+            QuickOrderOrigin::Quote => "QUICK_ORDER_ORIGIN_QUOTE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -435,6 +438,7 @@ impl QuickOrderOrigin {
         match value {
             "QUICK_ORDER_ORIGIN_UNSPECIFIED" => Some(Self::Unspecified),
             "QUICK_ORDER_ORIGIN_MM" => Some(Self::Mm),
+            "QUICK_ORDER_ORIGIN_QUOTE" => Some(Self::Quote),
             _ => None,
         }
     }
