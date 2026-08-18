@@ -54,6 +54,12 @@ pub struct OrderLimiterStatus {
     /// 시간 프레임별 주문 건수 현황
     #[prost(message, repeated, tag="6")]
     pub time_frame_statuses: ::prost::alloc::vec::Vec<TimeFrameStatus>,
+    /// 대상 펀드코드 (4자리 문자열)
+    #[prost(string, tag="7")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 대상 심볼 (ETF 또는 선물)
+    #[prost(string, tag="8")]
+    pub etf_symbol: ::prost::alloc::string::String,
 }
 // ============================================================================
 // Request/Response Messages

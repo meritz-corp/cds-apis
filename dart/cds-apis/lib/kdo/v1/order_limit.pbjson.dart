@@ -75,6 +75,8 @@ const OrderLimiterStatus$json = {
   '2': [
     {'1': 'enabled', '3': 3, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'time_frame_statuses', '3': 6, '4': 3, '5': 11, '6': '.kdo.v1.order_limit.TimeFrameStatus', '10': 'timeFrameStatuses'},
+    {'1': 'fund_code', '3': 7, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'etf_symbol', '3': 8, '4': 1, '5': 9, '10': 'etfSymbol'},
   ],
   '9': [
     {'1': 1, '2': 2},
@@ -88,7 +90,8 @@ const OrderLimiterStatus$json = {
 final $typed_data.Uint8List orderLimiterStatusDescriptor = $convert.base64Decode(
     'ChJPcmRlckxpbWl0ZXJTdGF0dXMSGAoHZW5hYmxlZBgDIAEoCFIHZW5hYmxlZBJTChN0aW1lX2'
     'ZyYW1lX3N0YXR1c2VzGAYgAygLMiMua2RvLnYxLm9yZGVyX2xpbWl0LlRpbWVGcmFtZVN0YXR1'
-    'c1IRdGltZUZyYW1lU3RhdHVzZXNKBAgBEAJKBAgCEANKBAgEEAVKBAgFEAY=');
+    'c1IRdGltZUZyYW1lU3RhdHVzZXMSGwoJZnVuZF9jb2RlGAcgASgJUghmdW5kQ29kZRIdCgpldG'
+    'Zfc3ltYm9sGAggASgJUglldGZTeW1ib2xKBAgBEAJKBAgCEANKBAgEEAVKBAgFEAY=');
 
 @$core.Deprecated('Use updateOrderLimiterConfigRequestDescriptor instead')
 const UpdateOrderLimiterConfigRequest$json = {

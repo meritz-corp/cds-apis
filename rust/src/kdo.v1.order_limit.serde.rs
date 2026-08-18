@@ -148,12 +148,24 @@ impl serde::Serialize for OrderLimiterStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_limit.OrderLimiterStatus", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
         }
         if true {
             struct_ser.serialize_field("time_frame_statuses", &self.time_frame_statuses)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
         }
         struct_ser.end()
     }
@@ -168,12 +180,18 @@ impl<'de> serde::Deserialize<'de> for OrderLimiterStatus {
             "enabled",
             "time_frame_statuses",
             "timeFrameStatuses",
+            "fund_code",
+            "fundCode",
+            "etf_symbol",
+            "etfSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Enabled,
             TimeFrameStatuses,
+            FundCode,
+            EtfSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -198,6 +216,8 @@ impl<'de> serde::Deserialize<'de> for OrderLimiterStatus {
                         match value {
                             "enabled" => Ok(GeneratedField::Enabled),
                             "timeFrameStatuses" | "time_frame_statuses" => Ok(GeneratedField::TimeFrameStatuses),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -219,6 +239,8 @@ impl<'de> serde::Deserialize<'de> for OrderLimiterStatus {
             {
                 let mut enabled__ = None;
                 let mut time_frame_statuses__ = None;
+                let mut fund_code__ = None;
+                let mut etf_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -233,6 +255,18 @@ impl<'de> serde::Deserialize<'de> for OrderLimiterStatus {
                             }
                             time_frame_statuses__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -241,6 +275,8 @@ impl<'de> serde::Deserialize<'de> for OrderLimiterStatus {
                 Ok(OrderLimiterStatus {
                     enabled: enabled__.unwrap_or_default(),
                     time_frame_statuses: time_frame_statuses__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
                 })
             }
         }

@@ -118,6 +118,14 @@
             "$ref": "#/definitions/v1order_limitTimeFrameStatus"
           },
           "title": "시간 프레임별 주문 건수 현황"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "대상 펀드코드 (4자리 문자열)"
+        },
+        "etfSymbol": {
+          "type": "string",
+          "title": "대상 심볼 (ETF 또는 선물)"
         }
       },
       "title": "전역 OrderLimiter 현황"

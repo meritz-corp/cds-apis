@@ -75,6 +75,11 @@ message OrderLimiterStatus {
 
   // 시간 프레임별 주문 건수 현황
   repeated TimeFrameStatus time_frame_statuses = 6;
+
+  // 대상 펀드코드 (4자리 문자열)
+  string fund_code = 7;
+  // 대상 심볼 (ETF 또는 선물)
+  string etf_symbol = 8;
 }
 
 // ============================================================================

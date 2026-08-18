@@ -226,10 +226,14 @@ class OrderLimiterStatus extends $pb.GeneratedMessage {
   factory OrderLimiterStatus({
     $core.bool? enabled,
     $core.Iterable<TimeFrameStatus>? timeFrameStatuses,
+    $core.String? fundCode,
+    $core.String? etfSymbol,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (timeFrameStatuses != null) result.timeFrameStatuses.addAll(timeFrameStatuses);
+    if (fundCode != null) result.fundCode = fundCode;
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
     return result;
   }
 
@@ -241,6 +245,8 @@ class OrderLimiterStatus extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderLimiterStatus', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
     ..aOB(3, _omitFieldNames ? '' : 'enabled')
     ..pc<TimeFrameStatus>(6, _omitFieldNames ? '' : 'timeFrameStatuses', $pb.PbFieldType.PM, subBuilder: TimeFrameStatus.create)
+    ..aOS(7, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(8, _omitFieldNames ? '' : 'etfSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -274,6 +280,26 @@ class OrderLimiterStatus extends $pb.GeneratedMessage {
   /// 시간 프레임별 주문 건수 현황
   @$pb.TagNumber(6)
   $pb.PbList<TimeFrameStatus> get timeFrameStatuses => $_getList(1);
+
+  /// 대상 펀드코드 (4자리 문자열)
+  @$pb.TagNumber(7)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(7)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(7)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(7)
+  void clearFundCode() => $_clearField(7);
+
+  /// 대상 심볼 (ETF 또는 선물)
+  @$pb.TagNumber(8)
+  $core.String get etfSymbol => $_getSZ(3);
+  @$pb.TagNumber(8)
+  set etfSymbol($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(8)
+  $core.bool hasEtfSymbol() => $_has(3);
+  @$pb.TagNumber(8)
+  void clearEtfSymbol() => $_clearField(8);
 }
 
 /// UpdateOrderLimiterConfig
