@@ -30,6 +30,20 @@ final $typed_data.Uint8List marketMakingStateDescriptor = $convert.base64Decode(
     'ASHAoYTUFSS0VUX01BS0lOR19TVEFURV9JRExFEAESHwobTUFSS0VUX01BS0lOR19TVEFURV9S'
     'VU5OSU5HEAI=');
 
+@$core.Deprecated('Use marketMakingMomentumBlendDescriptor instead')
+const MarketMakingMomentumBlend$json = {
+  '1': 'MarketMakingMomentumBlend',
+  '2': [
+    {'1': 'MARKET_MAKING_MOMENTUM_BLEND_PRODUCT', '2': 0},
+    {'1': 'MARKET_MAKING_MOMENTUM_BLEND_AVERAGE', '2': 1},
+  ],
+};
+
+/// Descriptor for `MarketMakingMomentumBlend`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List marketMakingMomentumBlendDescriptor = $convert.base64Decode(
+    'ChlNYXJrZXRNYWtpbmdNb21lbnR1bUJsZW5kEigKJE1BUktFVF9NQUtJTkdfTU9NRU5UVU1fQk'
+    'xFTkRfUFJPRFVDVBAAEigKJE1BUktFVF9NQUtJTkdfTU9NRU5UVU1fQkxFTkRfQVZFUkFHRRAB');
+
 @$core.Deprecated('Use mmConfigEventTypeDescriptor instead')
 const MmConfigEventType$json = {
   '1': 'MmConfigEventType',
@@ -225,6 +239,7 @@ const MarketMakingMomentum$json = {
     {'1': 'max_skew', '3': 3, '4': 1, '5': 1, '10': 'maxSkew'},
     {'1': 'ratio_threshold', '3': 4, '4': 1, '5': 1, '10': 'ratioThreshold'},
     {'1': 'strength_threshold', '3': 5, '4': 1, '5': 1, '10': 'strengthThreshold'},
+    {'1': 'blend', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingMomentumBlend', '10': 'blend'},
   ],
 };
 
@@ -233,7 +248,8 @@ final $typed_data.Uint8List marketMakingMomentumDescriptor = $convert.base64Deco
     'ChRNYXJrZXRNYWtpbmdNb21lbnR1bRIYCgdlbmFibGVkGAEgASgIUgdlbmFibGVkEh8KC2lzX2'
     '9wcG9zaXRlGAIgASgIUgppc09wcG9zaXRlEhkKCG1heF9za2V3GAMgASgBUgdtYXhTa2V3EicK'
     'D3JhdGlvX3RocmVzaG9sZBgEIAEoAVIOcmF0aW9UaHJlc2hvbGQSLQoSc3RyZW5ndGhfdGhyZX'
-    'Nob2xkGAUgASgBUhFzdHJlbmd0aFRocmVzaG9sZA==');
+    'Nob2xkGAUgASgBUhFzdHJlbmd0aFRocmVzaG9sZBI6CgVibGVuZBgGIAEoDjIkLmtkby52MS5t'
+    'bS5NYXJrZXRNYWtpbmdNb21lbnR1bUJsZW5kUgVibGVuZA==');
 
 @$core.Deprecated('Use marketMakingMarketBiasDescriptor instead')
 const MarketMakingMarketBias$json = {

@@ -168,6 +168,14 @@ enum MarketMakingState {
   MARKET_MAKING_STATE_RUNNING = 2;     // 활성
 }
 
+// Momentum ratio·strength 결합 방식
+enum MarketMakingMomentumBlend {
+  // 곱(f×g). proto 기본값=0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)
+  MARKET_MAKING_MOMENTUM_BLEND_PRODUCT = 0;
+  // 평균((f+g)/2)
+  MARKET_MAKING_MOMENTUM_BLEND_AVERAGE = 1;
+}
+
 // ============================================================================
 // Messages
 // ============================================================================
@@ -326,6 +334,9 @@ message MarketMakingMomentum {
 
   // strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
   double strength_threshold = 5;
+
+  // ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작)
+  MarketMakingMomentumBlend blend = 6;
 }
 
 // MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)

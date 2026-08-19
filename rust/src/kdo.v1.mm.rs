@@ -181,6 +181,9 @@ pub struct MarketMakingMomentum {
     /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
     #[prost(double, tag="5")]
     pub strength_threshold: f64,
+    /// ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작)
+    #[prost(enumeration="MarketMakingMomentumBlend", tag="6")]
+    pub blend: i32,
 }
 /// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -950,6 +953,35 @@ impl MarketMakingState {
             "MARKET_MAKING_STATE_UNSPECIFIED" => Some(Self::Unspecified),
             "MARKET_MAKING_STATE_IDLE" => Some(Self::Idle),
             "MARKET_MAKING_STATE_RUNNING" => Some(Self::Running),
+            _ => None,
+        }
+    }
+}
+/// Momentum ratio·strength 결합 방식
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum MarketMakingMomentumBlend {
+    /// 곱(f×g). proto 기본값=0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)
+    Product = 0,
+    /// 평균((f+g)/2)
+    Average = 1,
+}
+impl MarketMakingMomentumBlend {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            MarketMakingMomentumBlend::Product => "MARKET_MAKING_MOMENTUM_BLEND_PRODUCT",
+            MarketMakingMomentumBlend::Average => "MARKET_MAKING_MOMENTUM_BLEND_AVERAGE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MARKET_MAKING_MOMENTUM_BLEND_PRODUCT" => Some(Self::Product),
+            "MARKET_MAKING_MOMENTUM_BLEND_AVERAGE" => Some(Self::Average),
             _ => None,
         }
     }

@@ -810,6 +810,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
     $core.double? maxSkew,
     $core.double? ratioThreshold,
     $core.double? strengthThreshold,
+    MarketMakingMomentumBlend? blend,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -817,6 +818,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
     if (maxSkew != null) result.maxSkew = maxSkew;
     if (ratioThreshold != null) result.ratioThreshold = ratioThreshold;
     if (strengthThreshold != null) result.strengthThreshold = strengthThreshold;
+    if (blend != null) result.blend = blend;
     return result;
   }
 
@@ -831,6 +833,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
     ..a<$core.double>(3, _omitFieldNames ? '' : 'maxSkew', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'ratioThreshold', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'strengthThreshold', $pb.PbFieldType.OD)
+    ..e<MarketMakingMomentumBlend>(6, _omitFieldNames ? '' : 'blend', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingMomentumBlend.MARKET_MAKING_MOMENTUM_BLEND_PRODUCT, valueOf: MarketMakingMomentumBlend.valueOf, enumValues: MarketMakingMomentumBlend.values)
     ..hasRequiredFields = false
   ;
 
@@ -900,6 +903,16 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   $core.bool hasStrengthThreshold() => $_has(4);
   @$pb.TagNumber(5)
   void clearStrengthThreshold() => $_clearField(5);
+
+  /// ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작)
+  @$pb.TagNumber(6)
+  MarketMakingMomentumBlend get blend => $_getN(5);
+  @$pb.TagNumber(6)
+  set blend(MarketMakingMomentumBlend value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBlend() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBlend() => $_clearField(6);
 }
 
 /// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)

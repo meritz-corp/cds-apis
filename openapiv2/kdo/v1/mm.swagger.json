@@ -1313,9 +1313,23 @@
           "type": "number",
           "format": "double",
           "title": "strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)"
+        },
+        "blend": {
+          "$ref": "#/definitions/mmMarketMakingMomentumBlend",
+          "title": "ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작)"
         }
       },
       "title": "Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)"
+    },
+    "mmMarketMakingMomentumBlend": {
+      "type": "string",
+      "enum": [
+        "MARKET_MAKING_MOMENTUM_BLEND_PRODUCT",
+        "MARKET_MAKING_MOMENTUM_BLEND_AVERAGE"
+      ],
+      "default": "MARKET_MAKING_MOMENTUM_BLEND_PRODUCT",
+      "description": "- MARKET_MAKING_MOMENTUM_BLEND_PRODUCT: 곱(f×g). proto 기본값=0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)\n - MARKET_MAKING_MOMENTUM_BLEND_AVERAGE: 평균((f+g)/2)",
+      "title": "Momentum ratio·strength 결합 방식"
     },
     "mmMarketMakingOrderbookData": {
       "type": "object",

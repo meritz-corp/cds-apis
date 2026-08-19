@@ -32,6 +32,24 @@ class MarketMakingState extends $pb.ProtobufEnum {
   const MarketMakingState._(super.value, super.name);
 }
 
+/// Momentum ratio·strength 결합 방식
+class MarketMakingMomentumBlend extends $pb.ProtobufEnum {
+  /// 곱(f×g). proto 기본값=0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)
+  static const MarketMakingMomentumBlend MARKET_MAKING_MOMENTUM_BLEND_PRODUCT = MarketMakingMomentumBlend._(0, _omitEnumNames ? '' : 'MARKET_MAKING_MOMENTUM_BLEND_PRODUCT');
+  /// 평균((f+g)/2)
+  static const MarketMakingMomentumBlend MARKET_MAKING_MOMENTUM_BLEND_AVERAGE = MarketMakingMomentumBlend._(1, _omitEnumNames ? '' : 'MARKET_MAKING_MOMENTUM_BLEND_AVERAGE');
+
+  static const $core.List<MarketMakingMomentumBlend> values = <MarketMakingMomentumBlend> [
+    MARKET_MAKING_MOMENTUM_BLEND_PRODUCT,
+    MARKET_MAKING_MOMENTUM_BLEND_AVERAGE,
+  ];
+
+  static final $core.List<MarketMakingMomentumBlend?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static MarketMakingMomentumBlend? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const MarketMakingMomentumBlend._(super.value, super.name);
+}
+
 /// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" 과 "설정변경" 으로 구분
 class MmConfigEventType extends $pb.ProtobufEnum {
   static const MmConfigEventType MM_CONFIG_EVENT_TYPE_UNSPECIFIED = MmConfigEventType._(0, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_UNSPECIFIED');
