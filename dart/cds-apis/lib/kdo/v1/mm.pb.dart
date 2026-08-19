@@ -142,6 +142,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingConstituentMomentum? constituentMomentum,
     MarketMakingAdverseSelection? adverseSelection,
     MarketMakingProxyMomentum? proxyMomentum,
+    $fixnum.Int64? f2mRefitIntervalSecs,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -159,6 +160,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (constituentMomentum != null) result.constituentMomentum = constituentMomentum;
     if (adverseSelection != null) result.adverseSelection = adverseSelection;
     if (proxyMomentum != null) result.proxyMomentum = proxyMomentum;
+    if (f2mRefitIntervalSecs != null) result.f2mRefitIntervalSecs = f2mRefitIntervalSecs;
     return result;
   }
 
@@ -183,6 +185,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingConstituentMomentum>(19, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: MarketMakingConstituentMomentum.create)
     ..aOM<MarketMakingAdverseSelection>(20, _omitFieldNames ? '' : 'adverseSelection', subBuilder: MarketMakingAdverseSelection.create)
     ..aOM<MarketMakingProxyMomentum>(21, _omitFieldNames ? '' : 'proxyMomentum', subBuilder: MarketMakingProxyMomentum.create)
+    ..a<$fixnum.Int64>(22, _omitFieldNames ? '' : 'f2mRefitIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -372,6 +375,17 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearProxyMomentum() => $_clearField(21);
   @$pb.TagNumber(21)
   MarketMakingProxyMomentum ensureProxyMomentum() => $_ensure(14);
+
+  /// F2M(Fit to Market) 주기적 시장추종 refit 간격 (초). 0 = 주기적 refit 비활성화
+  /// (수동 FitToMarket 은 계속 동작). optional: 미설정 시 기존값 유지, 명시적 0 = 비활성화. 기본 1초.
+  @$pb.TagNumber(22)
+  $fixnum.Int64 get f2mRefitIntervalSecs => $_getI64(15);
+  @$pb.TagNumber(22)
+  set f2mRefitIntervalSecs($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(22)
+  $core.bool hasF2mRefitIntervalSecs() => $_has(15);
+  @$pb.TagNumber(22)
+  void clearF2mRefitIntervalSecs() => $_clearField(22);
 }
 
 enum MarketMakingPricing_Pricing {

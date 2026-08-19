@@ -240,6 +240,10 @@ message MarketMakingConfiguration {
 
   // 운영자 지정 제3종목 체결강도 skew
   MarketMakingProxyMomentum proxy_momentum = 21;
+
+  // F2M(Fit to Market) 주기적 시장추종 refit 간격 (초). 0 = 주기적 refit 비활성화
+  // (수동 FitToMarket 은 계속 동작). optional: 미설정 시 기존값 유지, 명시적 0 = 비활성화. 기본 1초.
+  optional uint64 f2m_refit_interval_secs = 22;
 }
 
 // NAV pricing 상세 설정

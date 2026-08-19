@@ -2891,6 +2891,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -2943,6 +2946,11 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.proxy_momentum.as_ref() {
             struct_ser.serialize_field("proxy_momentum", v)?;
         }
+        if let Some(v) = self.f2m_refit_interval_secs.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("f2m_refit_interval_secs", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -2979,6 +2987,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "adverseSelection",
             "proxy_momentum",
             "proxyMomentum",
+            "f2m_refit_interval_secs",
+            "f2mRefitIntervalSecs",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2998,6 +3008,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             ConstituentMomentum,
             AdverseSelection,
             ProxyMomentum,
+            F2mRefitIntervalSecs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3035,6 +3046,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "constituentMomentum" | "constituent_momentum" => Ok(GeneratedField::ConstituentMomentum),
                             "adverseSelection" | "adverse_selection" => Ok(GeneratedField::AdverseSelection),
                             "proxyMomentum" | "proxy_momentum" => Ok(GeneratedField::ProxyMomentum),
+                            "f2mRefitIntervalSecs" | "f2m_refit_interval_secs" => Ok(GeneratedField::F2mRefitIntervalSecs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3069,6 +3081,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut constituent_momentum__ = None;
                 let mut adverse_selection__ = None;
                 let mut proxy_momentum__ = None;
+                let mut f2m_refit_interval_secs__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3169,6 +3182,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             proxy_momentum__ = map_.next_value()?;
                         }
+                        GeneratedField::F2mRefitIntervalSecs => {
+                            if f2m_refit_interval_secs__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("f2mRefitIntervalSecs"));
+                            }
+                            f2m_refit_interval_secs__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3190,6 +3211,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     constituent_momentum: constituent_momentum__,
                     adverse_selection: adverse_selection__,
                     proxy_momentum: proxy_momentum__,
+                    f2m_refit_interval_secs: f2m_refit_interval_secs__,
                 })
             }
         }

@@ -73,6 +73,10 @@ pub struct MarketMakingConfiguration {
     /// 운영자 지정 제3종목 체결강도 skew
     #[prost(message, optional, tag="21")]
     pub proxy_momentum: ::core::option::Option<MarketMakingProxyMomentum>,
+    /// F2M(Fit to Market) 주기적 시장추종 refit 간격 (초). 0 = 주기적 refit 비활성화
+    /// (수동 FitToMarket 은 계속 동작). optional: 미설정 시 기존값 유지, 명시적 0 = 비활성화. 기본 1초.
+    #[prost(uint64, optional, tag="22")]
+    pub f2m_refit_interval_secs: ::core::option::Option<u64>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
