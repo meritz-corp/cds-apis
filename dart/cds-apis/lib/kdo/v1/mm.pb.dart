@@ -143,6 +143,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingAdverseSelection? adverseSelection,
     MarketMakingProxyMomentum? proxyMomentum,
     $fixnum.Int64? f2mRefitIntervalSecs,
+    $fixnum.Int64? f2mMaWindowSecs,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -161,6 +162,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (adverseSelection != null) result.adverseSelection = adverseSelection;
     if (proxyMomentum != null) result.proxyMomentum = proxyMomentum;
     if (f2mRefitIntervalSecs != null) result.f2mRefitIntervalSecs = f2mRefitIntervalSecs;
+    if (f2mMaWindowSecs != null) result.f2mMaWindowSecs = f2mMaWindowSecs;
     return result;
   }
 
@@ -186,6 +188,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingAdverseSelection>(20, _omitFieldNames ? '' : 'adverseSelection', subBuilder: MarketMakingAdverseSelection.create)
     ..aOM<MarketMakingProxyMomentum>(21, _omitFieldNames ? '' : 'proxyMomentum', subBuilder: MarketMakingProxyMomentum.create)
     ..a<$fixnum.Int64>(22, _omitFieldNames ? '' : 'f2mRefitIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(23, _omitFieldNames ? '' : 'f2mMaWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -386,6 +389,17 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasF2mRefitIntervalSecs() => $_has(15);
   @$pb.TagNumber(22)
   void clearF2mRefitIntervalSecs() => $_clearField(22);
+
+  /// F2M(Fit to Market) 괴리 MA 시간창 (초). 시장가↔이론가 괴리를 이 시간창의 이동평균으로
+  /// 평활화한다. optional: 미설정 시 기존값 유지. 기본 10초. (0 은 무효값 — 서버가 거부)
+  @$pb.TagNumber(23)
+  $fixnum.Int64 get f2mMaWindowSecs => $_getI64(16);
+  @$pb.TagNumber(23)
+  set f2mMaWindowSecs($fixnum.Int64 value) => $_setInt64(16, value);
+  @$pb.TagNumber(23)
+  $core.bool hasF2mMaWindowSecs() => $_has(16);
+  @$pb.TagNumber(23)
+  void clearF2mMaWindowSecs() => $_clearField(23);
 }
 
 enum MarketMakingPricing_Pricing {

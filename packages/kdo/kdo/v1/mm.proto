@@ -244,6 +244,10 @@ message MarketMakingConfiguration {
   // F2M(Fit to Market) 주기적 시장추종 refit 간격 (초). 0 = 주기적 refit 비활성화
   // (수동 FitToMarket 은 계속 동작). optional: 미설정 시 기존값 유지, 명시적 0 = 비활성화. 기본 1초.
   optional uint64 f2m_refit_interval_secs = 22;
+
+  // F2M(Fit to Market) 괴리 MA 시간창 (초). 시장가↔이론가 괴리를 이 시간창의 이동평균으로
+  // 평활화한다. optional: 미설정 시 기존값 유지. 기본 10초. (0 은 무효값 — 서버가 거부)
+  optional uint64 f2m_ma_window_secs = 23;
 }
 
 // NAV pricing 상세 설정

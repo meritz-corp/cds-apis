@@ -77,6 +77,10 @@ pub struct MarketMakingConfiguration {
     /// (수동 FitToMarket 은 계속 동작). optional: 미설정 시 기존값 유지, 명시적 0 = 비활성화. 기본 1초.
     #[prost(uint64, optional, tag="22")]
     pub f2m_refit_interval_secs: ::core::option::Option<u64>,
+    /// F2M(Fit to Market) 괴리 MA 시간창 (초). 시장가↔이론가 괴리를 이 시간창의 이동평균으로
+    /// 평활화한다. optional: 미설정 시 기존값 유지. 기본 10초. (0 은 무효값 — 서버가 거부)
+    #[prost(uint64, optional, tag="23")]
+    pub f2m_ma_window_secs: ::core::option::Option<u64>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
