@@ -407,6 +407,7 @@ enum MarketMakingPricing_Pricing {
   meanBidAsk, 
   nav, 
   krxNav, 
+  lastFilled, 
   notSet
 }
 
@@ -417,12 +418,14 @@ class MarketMakingPricing extends $pb.GeneratedMessage {
     MeanBidAsk? meanBidAsk,
     Nav? nav,
     KrxNav? krxNav,
+    LastFilledPricing? lastFilled,
   }) {
     final result = create();
     if (plainFollow != null) result.plainFollow = plainFollow;
     if (meanBidAsk != null) result.meanBidAsk = meanBidAsk;
     if (nav != null) result.nav = nav;
     if (krxNav != null) result.krxNav = krxNav;
+    if (lastFilled != null) result.lastFilled = lastFilled;
     return result;
   }
 
@@ -436,14 +439,16 @@ class MarketMakingPricing extends $pb.GeneratedMessage {
     2 : MarketMakingPricing_Pricing.meanBidAsk,
     3 : MarketMakingPricing_Pricing.nav,
     4 : MarketMakingPricing_Pricing.krxNav,
+    5 : MarketMakingPricing_Pricing.lastFilled,
     0 : MarketMakingPricing_Pricing.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4])
+    ..oo(0, [1, 2, 3, 4, 5])
     ..aOM<PlainFollow>(1, _omitFieldNames ? '' : 'plainFollow', subBuilder: PlainFollow.create)
     ..aOM<MeanBidAsk>(2, _omitFieldNames ? '' : 'meanBidAsk', subBuilder: MeanBidAsk.create)
     ..aOM<Nav>(3, _omitFieldNames ? '' : 'nav', subBuilder: Nav.create)
     ..aOM<KrxNav>(4, _omitFieldNames ? '' : 'krxNav', subBuilder: KrxNav.create)
+    ..aOM<LastFilledPricing>(5, _omitFieldNames ? '' : 'lastFilled', subBuilder: LastFilledPricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -514,6 +519,18 @@ class MarketMakingPricing extends $pb.GeneratedMessage {
   void clearKrxNav() => $_clearField(4);
   @$pb.TagNumber(4)
   KrxNav ensureKrxNav() => $_ensure(3);
+
+  /// 자기 ETF 마지막 체결가를 mid 로 따라가는 프라이싱
+  @$pb.TagNumber(5)
+  LastFilledPricing get lastFilled => $_getN(4);
+  @$pb.TagNumber(5)
+  set lastFilled(LastFilledPricing value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasLastFilled() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLastFilled() => $_clearField(5);
+  @$pb.TagNumber(5)
+  LastFilledPricing ensureLastFilled() => $_ensure(4);
 }
 
 /// EtfPricing::PdfNavHedge
@@ -576,6 +593,37 @@ class MeanBidAsk extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static MeanBidAsk getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MeanBidAsk>(create);
   static MeanBidAsk? _defaultInstance;
+}
+
+/// EtfPricing::LastFilled — ETF 자기 마지막 체결가 추종 (추가 파라미터 없음)
+class LastFilledPricing extends $pb.GeneratedMessage {
+  factory LastFilledPricing() => create();
+
+  LastFilledPricing._();
+
+  factory LastFilledPricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LastFilledPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LastFilledPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LastFilledPricing clone() => LastFilledPricing()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LastFilledPricing copyWith(void Function(LastFilledPricing) updates) => super.copyWith((message) => updates(message as LastFilledPricing)) as LastFilledPricing;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LastFilledPricing create() => LastFilledPricing._();
+  @$core.override
+  LastFilledPricing createEmptyInstance() => create();
+  static $pb.PbList<LastFilledPricing> createRepeated() => $pb.PbList<LastFilledPricing>();
+  @$core.pragma('dart2js:noInline')
+  static LastFilledPricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LastFilledPricing>(create);
+  static LastFilledPricing? _defaultInstance;
 }
 
 /// EtfPricing::FutureBasis { prev_index }

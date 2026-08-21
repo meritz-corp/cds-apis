@@ -273,6 +273,9 @@ message MarketMakingPricing {
 
     // 레버리지 선물 기반 프라이싱
     KrxNav krx_nav = 4;
+
+    // 자기 ETF 마지막 체결가를 mid 로 따라가는 프라이싱
+    LastFilledPricing last_filled = 5;
   }
 }
 
@@ -281,6 +284,9 @@ message PlainFollow {}
 
 // EtfPricing::IndexTrackingHedge
 message MeanBidAsk {}
+
+// EtfPricing::LastFilled — ETF 자기 마지막 체결가 추종 (추가 파라미터 없음)
+message LastFilledPricing {}
 
 // EtfPricing::FutureBasis { prev_index }
 message Nav {

@@ -150,6 +150,7 @@ const MarketMakingPricing$json = {
     {'1': 'mean_bid_ask', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MeanBidAsk', '9': 0, '10': 'meanBidAsk'},
     {'1': 'nav', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.Nav', '9': 0, '10': 'nav'},
     {'1': 'krx_nav', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.KrxNav', '9': 0, '10': 'krxNav'},
+    {'1': 'last_filled', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.mm.LastFilledPricing', '9': 0, '10': 'lastFilled'},
   ],
   '8': [
     {'1': 'pricing'},
@@ -162,7 +163,8 @@ final $typed_data.Uint8List marketMakingPricingDescriptor = $convert.base64Decod
     '5QbGFpbkZvbGxvd0gAUgtwbGFpbkZvbGxvdxI5CgxtZWFuX2JpZF9hc2sYAiABKAsyFS5rZG8u'
     'djEubW0uTWVhbkJpZEFza0gAUgptZWFuQmlkQXNrEiIKA25hdhgDIAEoCzIOLmtkby52MS5tbS'
     '5OYXZIAFIDbmF2EiwKB2tyeF9uYXYYBCABKAsyES5rZG8udjEubW0uS3J4TmF2SABSBmtyeE5h'
-    'dkIJCgdwcmljaW5n');
+    'dhI/CgtsYXN0X2ZpbGxlZBgFIAEoCzIcLmtkby52MS5tbS5MYXN0RmlsbGVkUHJpY2luZ0gAUg'
+    'psYXN0RmlsbGVkQgkKB3ByaWNpbmc=');
 
 @$core.Deprecated('Use plainFollowDescriptor instead')
 const PlainFollow$json = {
@@ -181,6 +183,15 @@ const MeanBidAsk$json = {
 /// Descriptor for `MeanBidAsk`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List meanBidAskDescriptor = $convert.base64Decode(
     'CgpNZWFuQmlkQXNr');
+
+@$core.Deprecated('Use lastFilledPricingDescriptor instead')
+const LastFilledPricing$json = {
+  '1': 'LastFilledPricing',
+};
+
+/// Descriptor for `LastFilledPricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List lastFilledPricingDescriptor = $convert.base64Decode(
+    'ChFMYXN0RmlsbGVkUHJpY2luZw==');
 
 @$core.Deprecated('Use navDescriptor instead')
 const Nav$json = {

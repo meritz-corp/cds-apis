@@ -919,6 +919,10 @@
       },
       "title": "EtfPricing::LeverageFuture { prev_index, prev_future }"
     },
+    "mmLastFilledPricing": {
+      "type": "object",
+      "title": "EtfPricing::LastFilled — ETF 자기 마지막 체결가 추종 (추가 파라미터 없음)"
+    },
     "mmListMarketMakingResponse": {
       "type": "object",
       "properties": {
@@ -1385,6 +1389,10 @@
         "krxNav": {
           "$ref": "#/definitions/mmKrxNav",
           "title": "레버리지 선물 기반 프라이싱"
+        },
+        "lastFilled": {
+          "$ref": "#/definitions/mmLastFilledPricing",
+          "title": "자기 ETF 마지막 체결가를 mid 로 따라가는 프라이싱"
         }
       },
       "title": "NAV pricing 상세 설정"

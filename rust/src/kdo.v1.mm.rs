@@ -87,7 +87,7 @@ pub struct MarketMakingConfiguration {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MarketMakingPricing {
     /// EtfPricing 전략 (oneof)
-    #[prost(oneof="market_making_pricing::Pricing", tags="1, 2, 3, 4")]
+    #[prost(oneof="market_making_pricing::Pricing", tags="1, 2, 3, 4, 5")]
     pub pricing: ::core::option::Option<market_making_pricing::Pricing>,
 }
 /// Nested message and enum types in `MarketMakingPricing`.
@@ -108,6 +108,9 @@ pub mod market_making_pricing {
         /// 레버리지 선물 기반 프라이싱
         #[prost(message, tag="4")]
         KrxNav(super::KrxNav),
+        /// 자기 ETF 마지막 체결가를 mid 로 따라가는 프라이싱
+        #[prost(message, tag="5")]
+        LastFilled(super::LastFilledPricing),
     }
 }
 /// EtfPricing::PdfNavHedge
@@ -119,6 +122,11 @@ pub struct PlainFollow {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MeanBidAsk {
+}
+/// EtfPricing::LastFilled — ETF 자기 마지막 체결가 추종 (추가 파라미터 없음)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct LastFilledPricing {
 }
 /// EtfPricing::FutureBasis { prev_index }
 #[allow(clippy::derive_partial_eq_without_eq)]
