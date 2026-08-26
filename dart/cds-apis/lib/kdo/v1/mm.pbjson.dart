@@ -100,11 +100,13 @@ const MarketMakingConfiguration$json = {
     {'1': 'proxy_momentum', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingProxyMomentum', '10': 'proxyMomentum'},
     {'1': 'f2m_refit_interval_secs', '3': 22, '4': 1, '5': 4, '9': 1, '10': 'f2mRefitIntervalSecs', '17': true},
     {'1': 'f2m_ma_window_secs', '3': 23, '4': 1, '5': 4, '9': 2, '10': 'f2mMaWindowSecs', '17': true},
+    {'1': 'take_mode', '3': 24, '4': 1, '5': 8, '9': 3, '10': 'takeMode', '17': true},
   ],
   '8': [
     {'1': '_basis'},
     {'1': '_f2m_refit_interval_secs'},
     {'1': '_f2m_ma_window_secs'},
+    {'1': '_take_mode'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -137,10 +139,11 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'xlY3Rpb25SEGFkdmVyc2VTZWxlY3Rpb24SSwoOcHJveHlfbW9tZW50dW0YFSABKAsyJC5rZG8u'
     'djEubW0uTWFya2V0TWFraW5nUHJveHlNb21lbnR1bVINcHJveHlNb21lbnR1bRI6ChdmMm1fcm'
     'VmaXRfaW50ZXJ2YWxfc2VjcxgWIAEoBEgBUhRmMm1SZWZpdEludGVydmFsU2Vjc4gBARIwChJm'
-    'Mm1fbWFfd2luZG93X3NlY3MYFyABKARIAlIPZjJtTWFXaW5kb3dTZWNziAEBQggKBl9iYXNpc0'
-    'IaChhfZjJtX3JlZml0X2ludGVydmFsX3NlY3NCFQoTX2YybV9tYV93aW5kb3dfc2Vjc0oECAcQ'
-    'CEoECAgQCUoECAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza19hZG'
-    'p1c3RtZW50UgliaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNldA==');
+    'Mm1fbWFfd2luZG93X3NlY3MYFyABKARIAlIPZjJtTWFXaW5kb3dTZWNziAEBEiAKCXRha2VfbW'
+    '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBAUIICgZfYmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZh'
+    'bF9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3NCDAoKX3Rha2VfbW9kZUoECAcQCEoECAgQCU'
+    'oECAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza19hZGp1c3RtZW50'
+    'UgliaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNldA==');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

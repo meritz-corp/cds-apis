@@ -81,6 +81,11 @@ pub struct MarketMakingConfiguration {
     /// 평활화한다. optional: 미설정 시 기존값 유지. 기본 10초. (0 은 무효값 — 서버가 거부)
     #[prost(uint64, optional, tag="23")]
     pub f2m_ma_window_secs: ::core::option::Option<u64>,
+    /// Take 모드: 잔존 호가 없이, 계산 호가가 시장 상대호가와 교차하는 tick 에만
+    /// 비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).
+    /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
+    #[prost(bool, optional, tag="24")]
+    pub take_mode: ::core::option::Option<bool>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

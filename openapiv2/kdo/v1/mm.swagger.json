@@ -1163,6 +1163,10 @@
           "type": "string",
           "format": "uint64",
           "title": "F2M(Fit to Market) 괴리 MA 시간창 (초). 시장가↔이론가 괴리를 이 시간창의 이동평균으로\n평활화한다. optional: 미설정 시 기존값 유지. 기본 10초. (0 은 무효값 — 서버가 거부)"
+        },
+        "takeMode": {
+          "type": "boolean",
+          "description": "Take 모드: 잔존 호가 없이, 계산 호가가 시장 상대호가와 교차하는 tick 에만\n비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).\noptional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

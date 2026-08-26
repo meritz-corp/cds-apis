@@ -144,6 +144,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingProxyMomentum? proxyMomentum,
     $fixnum.Int64? f2mRefitIntervalSecs,
     $fixnum.Int64? f2mMaWindowSecs,
+    $core.bool? takeMode,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -163,6 +164,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (proxyMomentum != null) result.proxyMomentum = proxyMomentum;
     if (f2mRefitIntervalSecs != null) result.f2mRefitIntervalSecs = f2mRefitIntervalSecs;
     if (f2mMaWindowSecs != null) result.f2mMaWindowSecs = f2mMaWindowSecs;
+    if (takeMode != null) result.takeMode = takeMode;
     return result;
   }
 
@@ -189,6 +191,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingProxyMomentum>(21, _omitFieldNames ? '' : 'proxyMomentum', subBuilder: MarketMakingProxyMomentum.create)
     ..a<$fixnum.Int64>(22, _omitFieldNames ? '' : 'f2mRefitIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(23, _omitFieldNames ? '' : 'f2mMaWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(24, _omitFieldNames ? '' : 'takeMode')
     ..hasRequiredFields = false
   ;
 
@@ -400,6 +403,18 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasF2mMaWindowSecs() => $_has(16);
   @$pb.TagNumber(23)
   void clearF2mMaWindowSecs() => $_clearField(23);
+
+  /// Take 모드: 잔존 호가 없이, 계산 호가가 시장 상대호가와 교차하는 tick 에만
+  /// 비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).
+  /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
+  @$pb.TagNumber(24)
+  $core.bool get takeMode => $_getBF(17);
+  @$pb.TagNumber(24)
+  set takeMode($core.bool value) => $_setBool(17, value);
+  @$pb.TagNumber(24)
+  $core.bool hasTakeMode() => $_has(17);
+  @$pb.TagNumber(24)
+  void clearTakeMode() => $_clearField(24);
 }
 
 enum MarketMakingPricing_Pricing {
