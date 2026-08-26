@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/fx.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "FxService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/fx/etfs/{symbol}:setFxBeta": {
+      "post": {
+        "summary": "ETF별 환베타 설정 (master.etf.fx_beta)",
+        "operationId": "FxService_SetEtfFxBeta",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fxSetEtfFxBetaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ETF 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fxBeta": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "0 = 환보정 없음"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "FxService"
+        ]
+      }
+    },
+    "/v1/fx/rates/{currency}": {
+      "get": {
+        "summary": "환율 참조 설정 조회",
+        "operationId": "FxService_GetFxRate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fxFxRate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "currency",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "CURRENCY_UNSPECIFIED",
+              "CURRENCY_USD"
+            ]
+          }
+        ],
+        "tags": [
+          "FxService"
+        ]
+      },
+      "patch": {
+        "summary": "source_symbol/prev_close 를 presence 기반으로 부분 갱신 (없으면 생성)",
+        "operationId": "FxService_UpdateFxRate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fxFxRate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "currency",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "CURRENCY_UNSPECIFIED",
+              "CURRENCY_USD"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sourceSymbol": {
+                  "type": "string",
+                  "title": "presence 기반: 미지정 시 기존값 유지"
+                },
+                "prevClose": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "presence 기반: 미지정 시 기존값 유지"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "FxService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "fxCurrency": {
+      "type": "string",
+      "enum": [
+        "CURRENCY_UNSPECIFIED",
+        "CURRENCY_USD"
+      ],
+      "default": "CURRENCY_UNSPECIFIED",
+      "title": "환율 통화"
+    },
+    "fxFxRate": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "$ref": "#/definitions/fxCurrency",
+          "title": "PK"
+        },
+        "sourceSymbol": {
+          "type": "string",
+          "title": "환율 관찰 소스 종목 (예: KR4A75690003)"
+        },
+        "prevClose": {
+          "type": "number",
+          "format": "double",
+          "title": "전일 기준가 (daily 수동 입력)"
+        }
+      },
+      "description": "환율 참조 설정. 시세는 source_symbol 종목(현재 KRX 환선물)의 시장 시세에서 읽는다."
+    },
+    "fxSetEtfFxBetaResponse": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "fxBeta": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

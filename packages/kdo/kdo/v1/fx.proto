@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package kdo.v1.fx;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/client.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// FxService는 ETF 환율(FX) 보정 관련 설정을 제공합니다.
+service FxService {
+  // source_symbol/prev_close 를 presence 기반으로 부분 갱신 (없으면 생성)
+  rpc UpdateFxRate(UpdateFxRateRequest) returns (FxRate) {
+    option (google.api.http) = {
+      patch: "/v1/fx/rates/{currency}"
+      body: "*"
+    };
+    option (google.api.method_signature) = "currency";
+  }
+
+  // 환율 참조 설정 조회
+  rpc GetFxRate(GetFxRateRequest) returns (FxRate) {
+    option (google.api.http) = {
+      get: "/v1/fx/rates/{currency}"
+    };
+    option (google.api.method_signature) = "currency";
+  }
+
+  // ETF별 환베타 설정 (master.etf.fx_beta)
+  rpc SetEtfFxBeta(SetEtfFxBetaRequest) returns (SetEtfFxBetaResponse) {
+    option (google.api.http) = {
+      post: "/v1/fx/etfs/{symbol}:setFxBeta"
+      body: "*"
+    };
+    option (google.api.method_signature) = "symbol,fx_beta";
+  }
+}
+
+// ============================================================================
+// Messages
+// ============================================================================
+
+// 환율 통화
+enum Currency {
+  CURRENCY_UNSPECIFIED = 0;
+  CURRENCY_USD = 1;
+}
+
+// 환율 참조 설정. 시세는 source_symbol 종목(현재 KRX 환선물)의 시장 시세에서 읽는다.
+message FxRate {
+  // PK
+  Currency currency = 1;
+
+  // 환율 관찰 소스 종목 (예: KR4A75690003)
+  string source_symbol = 2;
+
+  // 전일 기준가 (daily 수동 입력)
+  double prev_close = 3;
+}
+
+message UpdateFxRateRequest {
+  Currency currency = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // presence 기반: 미지정 시 기존값 유지
+  optional string source_symbol = 2;
+
+  // presence 기반: 미지정 시 기존값 유지
+  optional double prev_close = 3;
+}
+
+message GetFxRateRequest {
+  Currency currency = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message SetEtfFxBetaRequest {
+  // ETF 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 0 = 환보정 없음
+  double fx_beta = 2;
+}
+
+message SetEtfFxBetaResponse {
+  string symbol = 1;
+  double fx_beta = 2;
+}
