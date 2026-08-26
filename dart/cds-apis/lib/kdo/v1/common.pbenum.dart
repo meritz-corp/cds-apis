@@ -62,6 +62,8 @@ class ProductType extends $pb.ProtobufEnum {
   static const ProductType PRODUCT_TYPE_FUTURES = ProductType._(2, _omitEnumNames ? '' : 'PRODUCT_TYPE_FUTURES');
   static const ProductType PRODUCT_TYPE_ETF = ProductType._(3, _omitEnumNames ? '' : 'PRODUCT_TYPE_ETF');
   static const ProductType PRODUCT_TYPE_CASH = ProductType._(4, _omitEnumNames ? '' : 'PRODUCT_TYPE_CASH');
+  /// 국내 마스터·시세가 없는 해외 보유분 (미국채/미국ETF/해외주식 등, 평가금액만 고정 반영)
+  static const ProductType PRODUCT_TYPE_FOREIGN = ProductType._(5, _omitEnumNames ? '' : 'PRODUCT_TYPE_FOREIGN');
 
   static const $core.List<ProductType> values = <ProductType> [
     PRODUCT_TYPE_UNSPECIFIED,
@@ -69,9 +71,10 @@ class ProductType extends $pb.ProtobufEnum {
     PRODUCT_TYPE_FUTURES,
     PRODUCT_TYPE_ETF,
     PRODUCT_TYPE_CASH,
+    PRODUCT_TYPE_FOREIGN,
   ];
 
-  static final $core.List<ProductType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static final $core.List<ProductType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
   static ProductType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const ProductType._(super.value, super.name);

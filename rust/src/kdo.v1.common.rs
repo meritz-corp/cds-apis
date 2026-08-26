@@ -138,6 +138,8 @@ pub enum ProductType {
     Futures = 2,
     Etf = 3,
     Cash = 4,
+    /// 국내 마스터·시세가 없는 해외 보유분 (미국채/미국ETF/해외주식 등, 평가금액만 고정 반영)
+    Foreign = 5,
 }
 impl ProductType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -151,6 +153,7 @@ impl ProductType {
             ProductType::Futures => "PRODUCT_TYPE_FUTURES",
             ProductType::Etf => "PRODUCT_TYPE_ETF",
             ProductType::Cash => "PRODUCT_TYPE_CASH",
+            ProductType::Foreign => "PRODUCT_TYPE_FOREIGN",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -161,6 +164,7 @@ impl ProductType {
             "PRODUCT_TYPE_FUTURES" => Some(Self::Futures),
             "PRODUCT_TYPE_ETF" => Some(Self::Etf),
             "PRODUCT_TYPE_CASH" => Some(Self::Cash),
+            "PRODUCT_TYPE_FOREIGN" => Some(Self::Foreign),
             _ => None,
         }
     }

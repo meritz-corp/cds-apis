@@ -980,6 +980,7 @@ impl serde::Serialize for ProductType {
             Self::Futures => "PRODUCT_TYPE_FUTURES",
             Self::Etf => "PRODUCT_TYPE_ETF",
             Self::Cash => "PRODUCT_TYPE_CASH",
+            Self::Foreign => "PRODUCT_TYPE_FOREIGN",
         };
         serializer.serialize_str(variant)
     }
@@ -996,6 +997,7 @@ impl<'de> serde::Deserialize<'de> for ProductType {
             "PRODUCT_TYPE_FUTURES",
             "PRODUCT_TYPE_ETF",
             "PRODUCT_TYPE_CASH",
+            "PRODUCT_TYPE_FOREIGN",
         ];
 
         struct GeneratedVisitor;
@@ -1041,6 +1043,7 @@ impl<'de> serde::Deserialize<'de> for ProductType {
                     "PRODUCT_TYPE_FUTURES" => Ok(ProductType::Futures),
                     "PRODUCT_TYPE_ETF" => Ok(ProductType::Etf),
                     "PRODUCT_TYPE_CASH" => Ok(ProductType::Cash),
+                    "PRODUCT_TYPE_FOREIGN" => Ok(ProductType::Foreign),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

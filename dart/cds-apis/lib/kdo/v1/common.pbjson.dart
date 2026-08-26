@@ -55,6 +55,7 @@ const ProductType$json = {
     {'1': 'PRODUCT_TYPE_FUTURES', '2': 2},
     {'1': 'PRODUCT_TYPE_ETF', '2': 3},
     {'1': 'PRODUCT_TYPE_CASH', '2': 4},
+    {'1': 'PRODUCT_TYPE_FOREIGN', '2': 5},
   ],
 };
 
@@ -62,7 +63,7 @@ const ProductType$json = {
 final $typed_data.Uint8List productTypeDescriptor = $convert.base64Decode(
     'CgtQcm9kdWN0VHlwZRIcChhQUk9EVUNUX1RZUEVfVU5TUEVDSUZJRUQQABIWChJQUk9EVUNUX1'
     'RZUEVfU1RPQ0sQARIYChRQUk9EVUNUX1RZUEVfRlVUVVJFUxACEhQKEFBST0RVQ1RfVFlQRV9F'
-    'VEYQAxIVChFQUk9EVUNUX1RZUEVfQ0FTSBAE');
+    'VEYQAxIVChFQUk9EVUNUX1RZUEVfQ0FTSBAEEhgKFFBST0RVQ1RfVFlQRV9GT1JFSUdOEAU=');
 
 @$core.Deprecated('Use sessionIdDescriptor instead')
 const SessionId$json = {

@@ -496,9 +496,11 @@
         "PRODUCT_TYPE_STOCK",
         "PRODUCT_TYPE_FUTURES",
         "PRODUCT_TYPE_ETF",
-        "PRODUCT_TYPE_CASH"
+        "PRODUCT_TYPE_CASH",
+        "PRODUCT_TYPE_FOREIGN"
       ],
       "default": "PRODUCT_TYPE_UNSPECIFIED",
+      "description": "- PRODUCT_TYPE_FOREIGN: 국내 마스터·시세가 없는 해외 보유분 (미국채/미국ETF/해외주식 등, 평가금액만 고정 반영)",
       "title": "상품 타입"
     },
     "etfCalcEtfUnitPriceResponse": {
