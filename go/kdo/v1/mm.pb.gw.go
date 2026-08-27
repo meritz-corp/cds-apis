@@ -67,6 +67,10 @@ func local_request_MarketMakingService_ListMarketMaking_0(ctx context.Context, m
 
 }
 
+var (
+	filter_MarketMakingService_GetMarketMaking_0 = &utilities.DoubleArray{Encoding: map[string]int{"symbol": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
+
 func request_MarketMakingService_GetMarketMaking_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetMarketMakingRequest
 	var metadata runtime.ServerMetadata
@@ -86,6 +90,13 @@ func request_MarketMakingService_GetMarketMaking_0(ctx context.Context, marshale
 	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_GetMarketMaking_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.GetMarketMaking(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -112,6 +123,13 @@ func local_request_MarketMakingService_GetMarketMaking_0(ctx context.Context, ma
 	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_GetMarketMaking_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.GetMarketMaking(ctx, &protoReq)
@@ -391,6 +409,10 @@ func local_request_MarketMakingService_UpdateMarketMakingConfig_0(ctx context.Co
 
 }
 
+var (
+	filter_MarketMakingService_GetMarketMakingOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"symbol": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
+
 func request_MarketMakingService_GetMarketMakingOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetMarketMakingOrderbookRequest
 	var metadata runtime.ServerMetadata
@@ -410,6 +432,13 @@ func request_MarketMakingService_GetMarketMakingOrderbook_0(ctx context.Context,
 	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_GetMarketMakingOrderbook_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.GetMarketMakingOrderbook(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -438,10 +467,21 @@ func local_request_MarketMakingService_GetMarketMakingOrderbook_0(ctx context.Co
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_GetMarketMakingOrderbook_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	msg, err := server.GetMarketMakingOrderbook(ctx, &protoReq)
 	return msg, metadata, err
 
 }
+
+var (
+	filter_MarketMakingService_StreamMarketMakingOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"symbol": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
 
 func request_MarketMakingService_StreamMarketMakingOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (MarketMakingService_StreamMarketMakingOrderbookClient, runtime.ServerMetadata, error) {
 	var protoReq GetMarketMakingOrderbookRequest
@@ -464,6 +504,13 @@ func request_MarketMakingService_StreamMarketMakingOrderbook_0(ctx context.Conte
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
 	}
 
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_StreamMarketMakingOrderbook_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	stream, err := client.StreamMarketMakingOrderbook(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -476,6 +523,10 @@ func request_MarketMakingService_StreamMarketMakingOrderbook_0(ctx context.Conte
 	return stream, metadata, nil
 
 }
+
+var (
+	filter_MarketMakingService_StreamMmStateUpdate_0 = &utilities.DoubleArray{Encoding: map[string]int{"symbol": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
 
 func request_MarketMakingService_StreamMmStateUpdate_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (MarketMakingService_StreamMmStateUpdateClient, runtime.ServerMetadata, error) {
 	var protoReq StreamMmStateUpdateRequest
@@ -496,6 +547,13 @@ func request_MarketMakingService_StreamMmStateUpdate_0(ctx context.Context, mars
 	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_StreamMmStateUpdate_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	stream, err := client.StreamMmStateUpdate(ctx, &protoReq)
@@ -782,6 +840,10 @@ func local_request_MarketMakingService_SaveMmPreset_0(ctx context.Context, marsh
 
 }
 
+var (
+	filter_MarketMakingService_ListMmPresets_0 = &utilities.DoubleArray{Encoding: map[string]int{"symbol": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+)
+
 func request_MarketMakingService_ListMmPresets_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListMmPresetsRequest
 	var metadata runtime.ServerMetadata
@@ -801,6 +863,13 @@ func request_MarketMakingService_ListMmPresets_0(ctx context.Context, marshaler 
 	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_ListMmPresets_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.ListMmPresets(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -827,6 +896,13 @@ func local_request_MarketMakingService_ListMmPresets_0(ctx context.Context, mars
 	protoReq.Symbol, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "symbol", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_ListMmPresets_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.ListMmPresets(ctx, &protoReq)
@@ -922,6 +998,10 @@ func local_request_MarketMakingService_ApplyMmPreset_0(ctx context.Context, mars
 
 }
 
+var (
+	filter_MarketMakingService_DeleteMmPreset_0 = &utilities.DoubleArray{Encoding: map[string]int{"symbol": 0, "name": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+)
+
 func request_MarketMakingService_DeleteMmPreset_0(ctx context.Context, marshaler runtime.Marshaler, client MarketMakingServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteMmPresetRequest
 	var metadata runtime.ServerMetadata
@@ -951,6 +1031,13 @@ func request_MarketMakingService_DeleteMmPreset_0(ctx context.Context, marshaler
 	protoReq.Name, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_DeleteMmPreset_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.DeleteMmPreset(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -987,6 +1074,13 @@ func local_request_MarketMakingService_DeleteMmPreset_0(ctx context.Context, mar
 	protoReq.Name, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_MarketMakingService_DeleteMmPreset_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.DeleteMmPreset(ctx, &protoReq)

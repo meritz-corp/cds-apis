@@ -82,6 +82,13 @@
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -124,6 +131,10 @@
                 "config": {
                   "$ref": "#/definitions/mmMarketMakingConfiguration",
                   "title": "업데이트할 MM 설정"
+                },
+                "fundCode": {
+                  "type": "string",
+                  "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
                 }
               },
               "title": "UpdateMarketMaking",
@@ -175,6 +186,10 @@
                 "config": {
                   "$ref": "#/definitions/mmMarketMakingConfiguration",
                   "description": "업데이트할 설정 (전체 교체)\npricing, fund_code, tick_size, depth 필드는 read-only이며 무시됩니다."
+                },
+                "fundCode": {
+                  "type": "string",
+                  "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
                 }
               },
               "description": "UpdateMarketMakingConfig\nNOTE: config 내 pricing, fund_code, tick_size, depth 필드는 이 요청으로 변경할 수 없습니다.\n해당 필드들은 서버에서 무시됩니다.",
@@ -223,6 +238,13 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -265,6 +287,13 @@
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 스트리밍.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -347,6 +376,13 @@
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -389,6 +425,13 @@
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -486,6 +529,13 @@
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 목록.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -527,6 +577,13 @@
             "required": true,
             "type": "string",
             "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -575,6 +632,12 @@
             "required": true,
             "schema": {
               "type": "object",
+              "properties": {
+                "fundCode": {
+                  "type": "string",
+                  "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                }
+              },
               "title": "ApplyMmPreset — 프리셋을 심볼 라이브 설정으로 적용"
             }
           }
@@ -625,6 +688,12 @@
             "required": true,
             "schema": {
               "type": "object",
+              "properties": {
+                "fundCode": {
+                  "type": "string",
+                  "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                }
+              },
               "title": "SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장"
             }
           }
@@ -667,6 +736,12 @@
             "required": true,
             "schema": {
               "type": "object",
+              "properties": {
+                "fundCode": {
+                  "type": "string",
+                  "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                }
+              },
               "title": "FitToMarket"
             }
           }
@@ -713,6 +788,10 @@
                 "config": {
                   "$ref": "#/definitions/mmMarketMakingConfiguration",
                   "title": "MM 설정 오버라이드 (optional, 없으면 기본 설정 사용)"
+                },
+                "fundCode": {
+                  "type": "string",
+                  "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
                 }
               },
               "title": "StartMarketMaking"
@@ -757,6 +836,12 @@
             "required": true,
             "schema": {
               "type": "object",
+              "properties": {
+                "fundCode": {
+                  "type": "string",
+                  "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                }
+              },
               "title": "StopMarketMaking"
             }
           }
@@ -1371,6 +1456,10 @@
             "format": "int64"
           },
           "title": "매도 수량 목록"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용."
         }
       },
       "title": "MM 전용 주문장 데이터"
@@ -1527,6 +1616,10 @@
         "eventType": {
           "$ref": "#/definitions/mmMmConfigEventType",
           "title": "스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용."
         }
       },
       "title": "MM 시작/설정변경 시점에 저장된 설정 스냅샷"
@@ -1561,6 +1654,10 @@
           "type": "string",
           "format": "int64",
           "title": "미실현손익 (원 단위, 순포지션 × (평가가 − 평단))"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용."
         }
       },
       "title": "MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)"
@@ -1610,6 +1707,10 @@
           "type": "string",
           "format": "int64",
           "title": "마지막 저장 시각 (unix epoch seconds)"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용."
         }
       },
       "title": "심볼별 이름있는 MM 설정 프리셋 (튜닝된 설정 스냅샷)"
@@ -1668,6 +1769,10 @@
         "proxyMomentum": {
           "$ref": "#/definitions/mmProxyMomentumState",
           "title": "제3종목 체결강도 skew 런타임 상태"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용. 항상 포함."
         }
       },
       "description": "MM 엔진 런타임 상태 델타 메시지.\n스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.\nsymbol은 항상 포함된다."

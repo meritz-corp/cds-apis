@@ -375,6 +375,9 @@ pub struct GetMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// GetMarketMakingStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -394,6 +397,9 @@ pub struct StartMarketMakingRequest {
     /// MM 설정 오버라이드 (optional, 없으면 기본 설정 사용)
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<MarketMakingConfiguration>,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -412,6 +418,9 @@ pub struct StopMarketMakingRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -451,6 +460,9 @@ pub struct UpdateMarketMakingConfigRequest {
     /// pricing, fund_code, tick_size, depth 필드는 read-only이며 무시됩니다.
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<MarketMakingConfiguration>,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// StreamMarketMakingStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -470,6 +482,9 @@ pub struct UpdateMarketMakingRequest {
     /// 업데이트할 MM 설정
     #[prost(message, optional, tag="2")]
     pub config: ::core::option::Option<MarketMakingConfiguration>,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// GetMarketMakingOrderbook / StreamMarketMakingOrderbook
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -478,6 +493,9 @@ pub struct GetMarketMakingOrderbookRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// MM 전용 주문장 데이터
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -495,6 +513,9 @@ pub struct MarketMakingOrderbookData {
     /// 매도 수량 목록
     #[prost(int64, repeated, tag="4")]
     pub ask_quantities: ::prost::alloc::vec::Vec<i64>,
+    /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
+    #[prost(string, tag="5")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 // ============================================================================
 // MM 엔진 런타임 상태
@@ -683,6 +704,9 @@ pub struct MmStateUpdate {
     /// 제3종목 체결강도 skew 런타임 상태
     #[prost(message, optional, tag="15")]
     pub proxy_momentum: ::core::option::Option<ProxyMomentumState>,
+    /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용. 항상 포함.
+    #[prost(string, tag="16")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// StreamMmFills
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -698,7 +722,7 @@ pub struct StreamMmFillsRequest {
 }
 /// MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MmFillSummary {
     /// 매수 (당일 누적)
     #[prost(int64, tag="1")]
@@ -716,6 +740,9 @@ pub struct MmFillSummary {
     /// 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
     #[prost(int64, tag="8")]
     pub unrealized_pnl: i64,
+    /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
+    #[prost(string, tag="10")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// ListMmPnlHistory
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -807,6 +834,9 @@ pub struct StreamMmStateUpdateRequest {
     /// ISIN 심볼 (빈 문자열이면 전체 스트리밍)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 스트리밍.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// FitToMarket
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -815,6 +845,9 @@ pub struct FitToMarketRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -843,6 +876,9 @@ pub struct MmPreset {
     /// 마지막 저장 시각 (unix epoch seconds)
     #[prost(int64, tag="4")]
     pub update_time: i64,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+    #[prost(string, tag="5")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -854,6 +890,9 @@ pub struct SaveMmPresetRequest {
     /// 프리셋 이름
     #[prost(string, tag="2")]
     pub name: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// ListMmPresets — 심볼의 저장된 프리셋 목록
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -862,6 +901,9 @@ pub struct ListMmPresetsRequest {
     /// ISIN 심볼
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 목록.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -880,6 +922,9 @@ pub struct ApplyMmPresetRequest {
     /// 적용할 프리셋 이름
     #[prost(string, tag="2")]
     pub name: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// DeleteMmPreset — 프리셋 삭제
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -891,6 +936,9 @@ pub struct DeleteMmPresetRequest {
     /// 삭제할 프리셋 이름
     #[prost(string, tag="2")]
     pub name: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -915,6 +963,9 @@ pub struct MmConfigSnapshot {
     /// 스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
     #[prost(enumeration="MmConfigEventType", tag="4")]
     pub event_type: i32,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+    #[prost(string, tag="5")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 /// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -926,6 +977,9 @@ pub struct ListMmConfigHistoryRequest {
     /// 최신순 조회 개수 (미지정 시 서버 기본값, 예 100)
     #[prost(int32, optional, tag="2")]
     pub limit: ::core::option::Option<i32>,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드.
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

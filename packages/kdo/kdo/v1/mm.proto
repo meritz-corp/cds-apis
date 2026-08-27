@@ -496,6 +496,9 @@ message ListMarketMakingResponse {
 message GetMarketMakingRequest {
   // ISIN 심볼
   string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 2;
 }
 
 // GetMarketMakingStatus
@@ -511,6 +514,9 @@ message StartMarketMakingRequest {
 
   // MM 설정 오버라이드 (optional, 없으면 기본 설정 사용)
   MarketMakingConfiguration config = 2;
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 3;
 }
 
 message StartMarketMakingResponse {
@@ -525,6 +531,9 @@ message StartMarketMakingResponse {
 message StopMarketMakingRequest {
   // ISIN 심볼
   string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 2;
 }
 
 message StopMarketMakingResponse {
@@ -556,6 +565,9 @@ message UpdateMarketMakingConfigRequest {
   // 업데이트할 설정 (전체 교체)
   // pricing, fund_code, tick_size, depth 필드는 read-only이며 무시됩니다.
   MarketMakingConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 3;
 }
 
 // StreamMarketMakingStatus
@@ -571,12 +583,18 @@ message UpdateMarketMakingRequest {
 
   // 업데이트할 MM 설정
   MarketMakingConfiguration config = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 3;
 }
 
 // GetMarketMakingOrderbook / StreamMarketMakingOrderbook
 message GetMarketMakingOrderbookRequest {
   // ISIN 심볼
   string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 2;
 }
 
 // MM 전용 주문장 데이터
@@ -592,6 +610,9 @@ message MarketMakingOrderbookData {
 
   // 매도 수량 목록
   repeated int64 ask_quantities = 4;
+
+  // 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
+  string fund_code = 5;
 }
 
 // ============================================================================
@@ -758,6 +779,9 @@ message MmStateUpdate {
 
   // 제3종목 체결강도 skew 런타임 상태
   optional ProxyMomentumState proxy_momentum = 15;
+
+  // 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용. 항상 포함.
+  string fund_code = 16;
 }
 
 // StreamMmFills
@@ -786,6 +810,9 @@ message MmFillSummary {
   int64 realized_pnl = 7;
   // 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
   int64 unrealized_pnl = 8;
+
+  // 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
+  string fund_code = 10;
 }
 
 // ListMmPnlHistory
@@ -867,12 +894,18 @@ message SpreadDecomposition {
 message StreamMmStateUpdateRequest {
   // ISIN 심볼 (빈 문자열이면 전체 스트리밍)
   string symbol = 1;
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 스트리밍.
+  string fund_code = 2;
 }
 
 // FitToMarket
 message FitToMarketRequest {
   // ISIN 심볼
   string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 2;
 }
 
 message FitToMarketResponse {
@@ -897,6 +930,9 @@ message MmPreset {
 
   // 마지막 저장 시각 (unix epoch seconds)
   int64 update_time = 4;
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+  string fund_code = 5;
 }
 
 // SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
@@ -906,12 +942,18 @@ message SaveMmPresetRequest {
 
   // 프리셋 이름
   string name = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 3;
 }
 
 // ListMmPresets — 심볼의 저장된 프리셋 목록
 message ListMmPresetsRequest {
   // ISIN 심볼
   string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 목록.
+  string fund_code = 2;
 }
 
 message ListMmPresetsResponse {
@@ -926,6 +968,9 @@ message ApplyMmPresetRequest {
 
   // 적용할 프리셋 이름
   string name = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 3;
 }
 
 // DeleteMmPreset — 프리셋 삭제
@@ -935,6 +980,9 @@ message DeleteMmPresetRequest {
 
   // 삭제할 프리셋 이름
   string name = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 3;
 }
 
 message DeleteMmPresetResponse {
@@ -966,6 +1014,9 @@ message MmConfigSnapshot {
 
   // 스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
   MmConfigEventType event_type = 4;
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+  string fund_code = 5;
 }
 
 // ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
@@ -975,6 +1026,9 @@ message ListMmConfigHistoryRequest {
 
   // 최신순 조회 개수 (미지정 시 서버 기본값, 예 100)
   optional int32 limit = 2;
+
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드.
+  string fund_code = 3;
 }
 
 message ListMmConfigHistoryResponse {

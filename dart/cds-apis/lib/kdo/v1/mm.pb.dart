@@ -1802,9 +1802,11 @@ class ListMarketMakingResponse extends $pb.GeneratedMessage {
 class GetMarketMakingRequest extends $pb.GeneratedMessage {
   factory GetMarketMakingRequest({
     $core.String? symbol,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -1815,6 +1817,7 @@ class GetMarketMakingRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -1844,6 +1847,16 @@ class GetMarketMakingRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 /// GetMarketMakingStatus
@@ -1899,10 +1912,12 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
   factory StartMarketMakingRequest({
     $core.String? symbol,
     MarketMakingConfiguration? config,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -1914,6 +1929,7 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
+    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -1955,6 +1971,16 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
   void clearConfig() => $_clearField(2);
   @$pb.TagNumber(2)
   MarketMakingConfiguration ensureConfig() => $_ensure(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(3)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundCode() => $_clearField(3);
 }
 
 class StartMarketMakingResponse extends $pb.GeneratedMessage {
@@ -2021,9 +2047,11 @@ class StartMarketMakingResponse extends $pb.GeneratedMessage {
 class StopMarketMakingRequest extends $pb.GeneratedMessage {
   factory StopMarketMakingRequest({
     $core.String? symbol,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -2034,6 +2062,7 @@ class StopMarketMakingRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -2063,6 +2092,16 @@ class StopMarketMakingRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 class StopMarketMakingResponse extends $pb.GeneratedMessage {
@@ -2227,10 +2266,12 @@ class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
   factory UpdateMarketMakingConfigRequest({
     $core.String? symbol,
     MarketMakingConfiguration? config,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -2242,6 +2283,7 @@ class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMarketMakingConfigRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
+    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -2284,6 +2326,16 @@ class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
   void clearConfig() => $_clearField(2);
   @$pb.TagNumber(2)
   MarketMakingConfiguration ensureConfig() => $_ensure(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(3)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundCode() => $_clearField(3);
 }
 
 /// StreamMarketMakingStatus
@@ -2339,10 +2391,12 @@ class UpdateMarketMakingRequest extends $pb.GeneratedMessage {
   factory UpdateMarketMakingRequest({
     $core.String? symbol,
     MarketMakingConfiguration? config,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -2354,6 +2408,7 @@ class UpdateMarketMakingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
+    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -2395,15 +2450,27 @@ class UpdateMarketMakingRequest extends $pb.GeneratedMessage {
   void clearConfig() => $_clearField(2);
   @$pb.TagNumber(2)
   MarketMakingConfiguration ensureConfig() => $_ensure(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(3)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundCode() => $_clearField(3);
 }
 
 /// GetMarketMakingOrderbook / StreamMarketMakingOrderbook
 class GetMarketMakingOrderbookRequest extends $pb.GeneratedMessage {
   factory GetMarketMakingOrderbookRequest({
     $core.String? symbol,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -2414,6 +2481,7 @@ class GetMarketMakingOrderbookRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMarketMakingOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -2443,6 +2511,16 @@ class GetMarketMakingOrderbookRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 /// MM 전용 주문장 데이터
@@ -2452,12 +2530,14 @@ class MarketMakingOrderbookData extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? askPrices,
     $core.Iterable<$fixnum.Int64>? bidQuantities,
     $core.Iterable<$fixnum.Int64>? askQuantities,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (bidPrices != null) result.bidPrices.addAll(bidPrices);
     if (askPrices != null) result.askPrices.addAll(askPrices);
     if (bidQuantities != null) result.bidQuantities.addAll(bidQuantities);
     if (askQuantities != null) result.askQuantities.addAll(askQuantities);
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -2471,6 +2551,7 @@ class MarketMakingOrderbookData extends $pb.GeneratedMessage {
     ..pPS(2, _omitFieldNames ? '' : 'askPrices')
     ..p<$fixnum.Int64>(3, _omitFieldNames ? '' : 'bidQuantities', $pb.PbFieldType.K6)
     ..p<$fixnum.Int64>(4, _omitFieldNames ? '' : 'askQuantities', $pb.PbFieldType.K6)
+    ..aOS(5, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -2506,6 +2587,16 @@ class MarketMakingOrderbookData extends $pb.GeneratedMessage {
   /// 매도 수량 목록
   @$pb.TagNumber(4)
   $pb.PbList<$fixnum.Int64> get askQuantities => $_getList(3);
+
+  /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
+  @$pb.TagNumber(5)
+  $core.String get fundCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set fundCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFundCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFundCode() => $_clearField(5);
 }
 
 /// Momentum 런타임 상태
@@ -3224,6 +3315,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     MaCrossState? maCross,
     ConstituentMomentumState? constituentMomentum,
     ProxyMomentumState? proxyMomentum,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -3239,6 +3331,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (maCross != null) result.maCross = maCross;
     if (constituentMomentum != null) result.constituentMomentum = constituentMomentum;
     if (proxyMomentum != null) result.proxyMomentum = proxyMomentum;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -3261,6 +3354,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOM<MaCrossState>(13, _omitFieldNames ? '' : 'maCross', subBuilder: MaCrossState.create)
     ..aOM<ConstituentMomentumState>(14, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: ConstituentMomentumState.create)
     ..aOM<ProxyMomentumState>(15, _omitFieldNames ? '' : 'proxyMomentum', subBuilder: ProxyMomentumState.create)
+    ..aOS(16, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -3426,6 +3520,16 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   void clearProxyMomentum() => $_clearField(15);
   @$pb.TagNumber(15)
   ProxyMomentumState ensureProxyMomentum() => $_ensure(12);
+
+  /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용. 항상 포함.
+  @$pb.TagNumber(16)
+  $core.String get fundCode => $_getSZ(13);
+  @$pb.TagNumber(16)
+  set fundCode($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(16)
+  $core.bool hasFundCode() => $_has(13);
+  @$pb.TagNumber(16)
+  void clearFundCode() => $_clearField(16);
 }
 
 /// StreamMmFills
@@ -3499,6 +3603,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
     $core.double? sellAvgPrice,
     $fixnum.Int64? realizedPnl,
     $fixnum.Int64? unrealizedPnl,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (buyQuantity != null) result.buyQuantity = buyQuantity;
@@ -3507,6 +3612,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
     if (sellAvgPrice != null) result.sellAvgPrice = sellAvgPrice;
     if (realizedPnl != null) result.realizedPnl = realizedPnl;
     if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -3522,6 +3628,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
     ..a<$core.double>(4, _omitFieldNames ? '' : 'sellAvgPrice', $pb.PbFieldType.OD)
     ..aInt64(7, _omitFieldNames ? '' : 'realizedPnl')
     ..aInt64(8, _omitFieldNames ? '' : 'unrealizedPnl')
+    ..aOS(10, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -3599,6 +3706,16 @@ class MmFillSummary extends $pb.GeneratedMessage {
   $core.bool hasUnrealizedPnl() => $_has(5);
   @$pb.TagNumber(8)
   void clearUnrealizedPnl() => $_clearField(8);
+
+  /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
+  @$pb.TagNumber(10)
+  $core.String get fundCode => $_getSZ(6);
+  @$pb.TagNumber(10)
+  set fundCode($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(10)
+  $core.bool hasFundCode() => $_has(6);
+  @$pb.TagNumber(10)
+  void clearFundCode() => $_clearField(10);
 }
 
 /// ListMmPnlHistory
@@ -3998,9 +4115,11 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
 class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
   factory StreamMmStateUpdateRequest({
     $core.String? symbol,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4011,6 +4130,7 @@ class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmStateUpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4040,15 +4160,27 @@ class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 스트리밍.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 /// FitToMarket
 class FitToMarketRequest extends $pb.GeneratedMessage {
   factory FitToMarketRequest({
     $core.String? symbol,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4059,6 +4191,7 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FitToMarketRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4088,6 +4221,16 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 class FitToMarketResponse extends $pb.GeneratedMessage {
@@ -4144,12 +4287,14 @@ class MmPreset extends $pb.GeneratedMessage {
     $core.String? name,
     MarketMakingConfiguration? config,
     $fixnum.Int64? updateTime,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
     if (config != null) result.config = config;
     if (updateTime != null) result.updateTime = updateTime;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4163,6 +4308,7 @@ class MmPreset extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOM<MarketMakingConfiguration>(3, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aInt64(4, _omitFieldNames ? '' : 'updateTime')
+    ..aOS(5, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4224,6 +4370,16 @@ class MmPreset extends $pb.GeneratedMessage {
   $core.bool hasUpdateTime() => $_has(3);
   @$pb.TagNumber(4)
   void clearUpdateTime() => $_clearField(4);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+  @$pb.TagNumber(5)
+  $core.String get fundCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set fundCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFundCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFundCode() => $_clearField(5);
 }
 
 /// SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
@@ -4231,10 +4387,12 @@ class SaveMmPresetRequest extends $pb.GeneratedMessage {
   factory SaveMmPresetRequest({
     $core.String? symbol,
     $core.String? name,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4246,6 +4404,7 @@ class SaveMmPresetRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SaveMmPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4285,15 +4444,27 @@ class SaveMmPresetRequest extends $pb.GeneratedMessage {
   $core.bool hasName() => $_has(1);
   @$pb.TagNumber(2)
   void clearName() => $_clearField(2);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(3)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundCode() => $_clearField(3);
 }
 
 /// ListMmPresets — 심볼의 저장된 프리셋 목록
 class ListMmPresetsRequest extends $pb.GeneratedMessage {
   factory ListMmPresetsRequest({
     $core.String? symbol,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4304,6 +4475,7 @@ class ListMmPresetsRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmPresetsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4333,6 +4505,16 @@ class ListMmPresetsRequest extends $pb.GeneratedMessage {
   $core.bool hasSymbol() => $_has(0);
   @$pb.TagNumber(1)
   void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 목록.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
 }
 
 class ListMmPresetsResponse extends $pb.GeneratedMessage {
@@ -4381,10 +4563,12 @@ class ApplyMmPresetRequest extends $pb.GeneratedMessage {
   factory ApplyMmPresetRequest({
     $core.String? symbol,
     $core.String? name,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4396,6 +4580,7 @@ class ApplyMmPresetRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ApplyMmPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4435,6 +4620,16 @@ class ApplyMmPresetRequest extends $pb.GeneratedMessage {
   $core.bool hasName() => $_has(1);
   @$pb.TagNumber(2)
   void clearName() => $_clearField(2);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(3)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundCode() => $_clearField(3);
 }
 
 /// DeleteMmPreset — 프리셋 삭제
@@ -4442,10 +4637,12 @@ class DeleteMmPresetRequest extends $pb.GeneratedMessage {
   factory DeleteMmPresetRequest({
     $core.String? symbol,
     $core.String? name,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4457,6 +4654,7 @@ class DeleteMmPresetRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteMmPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4496,6 +4694,16 @@ class DeleteMmPresetRequest extends $pb.GeneratedMessage {
   $core.bool hasName() => $_has(1);
   @$pb.TagNumber(2)
   void clearName() => $_clearField(2);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(3)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundCode() => $_clearField(3);
 }
 
 class DeleteMmPresetResponse extends $pb.GeneratedMessage {
@@ -4552,12 +4760,14 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
     MarketMakingConfiguration? config,
     $fixnum.Int64? startTime,
     MmConfigEventType? eventType,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
     if (startTime != null) result.startTime = startTime;
     if (eventType != null) result.eventType = eventType;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4571,6 +4781,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aInt64(3, _omitFieldNames ? '' : 'startTime')
     ..e<MmConfigEventType>(4, _omitFieldNames ? '' : 'eventType', $pb.PbFieldType.OE, defaultOrMaker: MmConfigEventType.MM_CONFIG_EVENT_TYPE_UNSPECIFIED, valueOf: MmConfigEventType.valueOf, enumValues: MmConfigEventType.values)
+    ..aOS(5, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4632,6 +4843,16 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
   $core.bool hasEventType() => $_has(3);
   @$pb.TagNumber(4)
   void clearEventType() => $_clearField(4);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
+  @$pb.TagNumber(5)
+  $core.String get fundCode => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set fundCode($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFundCode() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFundCode() => $_clearField(5);
 }
 
 /// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
@@ -4639,10 +4860,12 @@ class ListMmConfigHistoryRequest extends $pb.GeneratedMessage {
   factory ListMmConfigHistoryRequest({
     $core.String? symbol,
     $core.int? limit,
+    $core.String? fundCode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (limit != null) result.limit = limit;
+    if (fundCode != null) result.fundCode = fundCode;
     return result;
   }
 
@@ -4654,6 +4877,7 @@ class ListMmConfigHistoryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmConfigHistoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..hasRequiredFields = false
   ;
 
@@ -4693,6 +4917,16 @@ class ListMmConfigHistoryRequest extends $pb.GeneratedMessage {
   $core.bool hasLimit() => $_has(1);
   @$pb.TagNumber(2)
   void clearLimit() => $_clearField(2);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드.
+  @$pb.TagNumber(3)
+  $core.String get fundCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set fundCode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFundCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFundCode() => $_clearField(3);
 }
 
 class ListMmConfigHistoryResponse extends $pb.GeneratedMessage {
