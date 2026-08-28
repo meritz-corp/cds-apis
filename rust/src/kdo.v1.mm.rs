@@ -23,6 +23,9 @@ pub struct MarketMaking {
     /// ETF tick size (Price internal representation)
     #[prost(int64, tag="5")]
     pub tick_size: i64,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+    #[prost(string, tag="6")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// MM 엔진 설정 (MmConfig 대응)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -86,6 +89,9 @@ pub struct MarketMakingConfiguration {
     /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
     #[prost(bool, optional, tag="24")]
     pub take_mode: ::core::option::Option<bool>,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+    #[prost(string, tag="25")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -569,6 +575,9 @@ pub struct MarketMakingOrderbookData {
     /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
     #[prost(string, tag="5")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+    #[prost(string, tag="6")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 // ============================================================================
 // MM 엔진 런타임 상태
@@ -760,6 +769,9 @@ pub struct MmStateUpdate {
     /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용. 항상 포함.
     #[prost(string, tag="16")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+    #[prost(string, tag="17")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// StreamMmFills
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -799,6 +811,9 @@ pub struct MmFillSummary {
     /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
     #[prost(string, tag="10")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+    #[prost(string, tag="11")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// ListMmPnlHistory
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -941,6 +956,9 @@ pub struct MmPreset {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
     #[prost(string, tag="5")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+    #[prost(string, tag="6")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1040,6 +1058,9 @@ pub struct MmConfigSnapshot {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
     #[prost(string, tag="5")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+    #[prost(string, tag="6")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
 #[allow(clippy::derive_partial_eq_without_eq)]

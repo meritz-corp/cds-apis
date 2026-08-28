@@ -69,6 +69,7 @@ const MarketMaking$json = {
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'fund_code', '3': 4, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'tick_size', '3': 5, '4': 1, '5': 3, '10': 'tickSize'},
+    {'1': 'slot_id', '3': 6, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -77,7 +78,8 @@ final $typed_data.Uint8List marketMakingDescriptor = $convert.base64Decode(
     'CgxNYXJrZXRNYWtpbmcSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSMgoFc3RhdGUYAiABKA4yHC'
     '5rZG8udjEubW0uTWFya2V0TWFraW5nU3RhdGVSBXN0YXRlEjwKBmNvbmZpZxgDIAEoCzIkLmtk'
     'by52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSGwoJZnVuZF9jb2RlGA'
-    'QgASgJUghmdW5kQ29kZRIbCgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXpl');
+    'QgASgJUghmdW5kQ29kZRIbCgl0aWNrX3NpemUYBSABKANSCHRpY2tTaXplEhcKB3Nsb3RfaWQY'
+    'BiABKAlSBnNsb3RJZA==');
 
 @$core.Deprecated('Use marketMakingConfigurationDescriptor instead')
 const MarketMakingConfiguration$json = {
@@ -101,6 +103,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'f2m_refit_interval_secs', '3': 22, '4': 1, '5': 4, '9': 1, '10': 'f2mRefitIntervalSecs', '17': true},
     {'1': 'f2m_ma_window_secs', '3': 23, '4': 1, '5': 4, '9': 2, '10': 'f2mMaWindowSecs', '17': true},
     {'1': 'take_mode', '3': 24, '4': 1, '5': 8, '9': 3, '10': 'takeMode', '17': true},
+    {'1': 'slot_id', '3': 25, '4': 1, '5': 9, '10': 'slotId'},
   ],
   '8': [
     {'1': '_basis'},
@@ -140,10 +143,11 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'djEubW0uTWFya2V0TWFraW5nUHJveHlNb21lbnR1bVINcHJveHlNb21lbnR1bRI6ChdmMm1fcm'
     'VmaXRfaW50ZXJ2YWxfc2VjcxgWIAEoBEgBUhRmMm1SZWZpdEludGVydmFsU2Vjc4gBARIwChJm'
     'Mm1fbWFfd2luZG93X3NlY3MYFyABKARIAlIPZjJtTWFXaW5kb3dTZWNziAEBEiAKCXRha2VfbW'
-    '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBAUIICgZfYmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZh'
-    'bF9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3NCDAoKX3Rha2VfbW9kZUoECAcQCEoECAgQCU'
-    'oECAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza19hZGp1c3RtZW50'
-    'UgliaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNldA==');
+    '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBARIXCgdzbG90X2lkGBkgASgJUgZzbG90SWRCCAoGX2Jh'
+    'c2lzQhoKGF9mMm1fcmVmaXRfaW50ZXJ2YWxfc2Vjc0IVChNfZjJtX21hX3dpbmRvd19zZWNzQg'
+    'wKCl90YWtlX21vZGVKBAgHEAhKBAgIEAlKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9h'
+    'ZGp1c3RtZW50Ug5hc2tfYWRqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZm'
+    'ZzZXRSCmFza19vZmZzZXQ=');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -685,6 +689,7 @@ const MarketMakingOrderbookData$json = {
     {'1': 'bid_quantities', '3': 3, '4': 3, '5': 3, '10': 'bidQuantities'},
     {'1': 'ask_quantities', '3': 4, '4': 3, '5': 3, '10': 'askQuantities'},
     {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 6, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -693,7 +698,7 @@ final $typed_data.Uint8List marketMakingOrderbookDataDescriptor = $convert.base6
     'ChlNYXJrZXRNYWtpbmdPcmRlcmJvb2tEYXRhEh0KCmJpZF9wcmljZXMYASADKAlSCWJpZFByaW'
     'NlcxIdCgphc2tfcHJpY2VzGAIgAygJUglhc2tQcmljZXMSJQoOYmlkX3F1YW50aXRpZXMYAyAD'
     'KANSDWJpZFF1YW50aXRpZXMSJQoOYXNrX3F1YW50aXRpZXMYBCADKANSDWFza1F1YW50aXRpZX'
-    'MSGwoJZnVuZF9jb2RlGAUgASgJUghmdW5kQ29kZQ==');
+    'MSGwoJZnVuZF9jb2RlGAUgASgJUghmdW5kQ29kZRIXCgdzbG90X2lkGAYgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use momentumStateDescriptor instead')
 const MomentumState$json = {
@@ -851,6 +856,7 @@ const MmStateUpdate$json = {
     {'1': 'constituent_momentum', '3': 14, '4': 1, '5': 11, '6': '.kdo.v1.mm.ConstituentMomentumState', '9': 10, '10': 'constituentMomentum', '17': true},
     {'1': 'proxy_momentum', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.mm.ProxyMomentumState', '9': 11, '10': 'proxyMomentum', '17': true},
     {'1': 'fund_code', '3': 16, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 17, '4': 1, '5': 9, '10': 'slotId'},
   ],
   '8': [
     {'1': '_state'},
@@ -889,11 +895,12 @@ final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
     'OIAQESWwoUY29uc3RpdHVlbnRfbW9tZW50dW0YDiABKAsyIy5rZG8udjEubW0uQ29uc3RpdHVl'
     'bnRNb21lbnR1bVN0YXRlSApSE2NvbnN0aXR1ZW50TW9tZW50dW2IAQESSQoOcHJveHlfbW9tZW'
     '50dW0YDyABKAsyHS5rZG8udjEubW0uUHJveHlNb21lbnR1bVN0YXRlSAtSDXByb3h5TW9tZW50'
-    'dW2IAQESGwoJZnVuZF9jb2RlGBAgASgJUghmdW5kQ29kZUIICgZfc3RhdGVCCwoJX21vbWVudH'
-    'VtQhEKD190cmFkZV9hbmFseXplckIUChJfZXhwb3N1cmVfYmFsYW5jZXJCDgoMX21hcmtldF9i'
-    'aWFzQgwKCl9hc2tfcXVvdGVCDAoKX2JpZF9xdW90ZUIQCg5fZGVjb21wb3NpdGlvbkIMCgpfZj'
-    'JtX3NoaWZ0QgsKCV9tYV9jcm9zc0IXChVfY29uc3RpdHVlbnRfbW9tZW50dW1CEQoPX3Byb3h5'
-    'X21vbWVudHVtSgQICRAKSgQIChALUgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
+    'dW2IAQESGwoJZnVuZF9jb2RlGBAgASgJUghmdW5kQ29kZRIXCgdzbG90X2lkGBEgASgJUgZzbG'
+    '90SWRCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5hbHl6ZXJCFAoSX2V4cG9z'
+    'dXJlX2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3F1b3RlQgwKCl9iaWRfcXVvdG'
+    'VCEAoOX2RlY29tcG9zaXRpb25CDAoKX2YybV9zaGlmdEILCglfbWFfY3Jvc3NCFwoVX2NvbnN0'
+    'aXR1ZW50X21vbWVudHVtQhEKD19wcm94eV9tb21lbnR1bUoECAkQCkoECAoQC1IKYmlkX29mZn'
+    'NldFIKYXNrX29mZnNldA==');
 
 @$core.Deprecated('Use streamMmFillsRequestDescriptor instead')
 const StreamMmFillsRequest$json = {
@@ -922,6 +929,7 @@ const MmFillSummary$json = {
     {'1': 'realized_pnl', '3': 7, '4': 1, '5': 3, '10': 'realizedPnl'},
     {'1': 'unrealized_pnl', '3': 8, '4': 1, '5': 3, '10': 'unrealizedPnl'},
     {'1': 'fund_code', '3': 10, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 11, '4': 1, '5': 9, '10': 'slotId'},
   ],
   '9': [
     {'1': 5, '2': 6},
@@ -937,8 +945,9 @@ final $typed_data.Uint8List mmFillSummaryDescriptor = $convert.base64Decode(
     'V5X2F2Z19wcmljZRgCIAEoAVILYnV5QXZnUHJpY2USIwoNc2VsbF9xdWFudGl0eRgDIAEoA1IM'
     'c2VsbFF1YW50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAQgASgBUgxzZWxsQXZnUHJpY2USIQoMcm'
     'VhbGl6ZWRfcG5sGAcgASgDUgtyZWFsaXplZFBubBIlCg51bnJlYWxpemVkX3BubBgIIAEoA1IN'
-    'dW5yZWFsaXplZFBubBIbCglmdW5kX2NvZGUYCiABKAlSCGZ1bmRDb2RlSgQIBRAGSgQIBhAHSg'
-    'QICRAKUg5idXlfZmlsbF9jb3VudFIPc2VsbF9maWxsX2NvdW50Ug92YWx1YXRpb25fcHJpY2U=');
+    'dW5yZWFsaXplZFBubBIbCglmdW5kX2NvZGUYCiABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYCy'
+    'ABKAlSBnNsb3RJZEoECAUQBkoECAYQB0oECAkQClIOYnV5X2ZpbGxfY291bnRSD3NlbGxfZmls'
+    'bF9jb3VudFIPdmFsdWF0aW9uX3ByaWNl');
 
 @$core.Deprecated('Use listMmPnlHistoryRequestDescriptor instead')
 const ListMmPnlHistoryRequest$json = {
@@ -1071,6 +1080,7 @@ const MmPreset$json = {
     {'1': 'config', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'update_time', '3': 4, '4': 1, '5': 3, '10': 'updateTime'},
     {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 6, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -1079,7 +1089,7 @@ final $typed_data.Uint8List mmPresetDescriptor = $convert.base64Decode(
     'CghNbVByZXNldBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBISCgRuYW1lGAIgASgJUgRuYW1lEj'
     'wKBmNvbmZpZxgDIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZj'
     'b25maWcSHwoLdXBkYXRlX3RpbWUYBCABKANSCnVwZGF0ZVRpbWUSGwoJZnVuZF9jb2RlGAUgAS'
-    'gJUghmdW5kQ29kZQ==');
+    'gJUghmdW5kQ29kZRIXCgdzbG90X2lkGAYgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use saveMmPresetRequestDescriptor instead')
 const SaveMmPresetRequest$json = {
@@ -1181,6 +1191,7 @@ const MmConfigSnapshot$json = {
     {'1': 'start_time', '3': 3, '4': 1, '5': 3, '10': 'startTime'},
     {'1': 'event_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.mm.MmConfigEventType', '10': 'eventType'},
     {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 6, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -1190,7 +1201,7 @@ final $typed_data.Uint8List mmConfigSnapshotDescriptor = $convert.base64Decode(
     'EoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSHQoKc3Rh'
     'cnRfdGltZRgDIAEoA1IJc3RhcnRUaW1lEjsKCmV2ZW50X3R5cGUYBCABKA4yHC5rZG8udjEubW'
     '0uTW1Db25maWdFdmVudFR5cGVSCWV2ZW50VHlwZRIbCglmdW5kX2NvZGUYBSABKAlSCGZ1bmRD'
-    'b2Rl');
+    'b2RlEhcKB3Nsb3RfaWQYBiABKAlSBnNsb3RJZA==');
 
 @$core.Deprecated('Use listMmConfigHistoryRequestDescriptor instead')
 const ListMmConfigHistoryRequest$json = {

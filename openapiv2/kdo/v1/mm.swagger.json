@@ -1298,6 +1298,10 @@
           "type": "string",
           "format": "int64",
           "title": "ETF tick size (Price internal representation)"
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "title": "MM 심볼 정보"
@@ -1412,6 +1416,10 @@
         "takeMode": {
           "type": "boolean",
           "description": "Take 모드: 잔존 호가 없이, 계산 호가가 시장 상대호가와 교차하는 tick 에만\n비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).\noptional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화."
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -1620,6 +1628,10 @@
         "fundCode": {
           "type": "string",
           "description": "펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용."
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "title": "MM 전용 주문장 데이터"
@@ -1780,6 +1792,10 @@
         "fundCode": {
           "type": "string",
           "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용."
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "title": "MM 시작/설정변경 시점에 저장된 설정 스냅샷"
@@ -1818,6 +1834,10 @@
         "fundCode": {
           "type": "string",
           "description": "펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용."
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "title": "MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)"
@@ -1871,6 +1891,10 @@
         "fundCode": {
           "type": "string",
           "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용."
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "title": "심볼별 이름있는 MM 설정 프리셋 (튜닝된 설정 스냅샷)"
@@ -1933,6 +1957,10 @@
         "fundCode": {
           "type": "string",
           "description": "펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용. 항상 포함."
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "description": "MM 엔진 런타임 상태 델타 메시지.\n스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.\nsymbol은 항상 포함된다."

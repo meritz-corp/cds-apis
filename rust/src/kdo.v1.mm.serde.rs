@@ -3196,6 +3196,9 @@ impl serde::Serialize for MarketMaking {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMaking", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -3216,6 +3219,9 @@ impl serde::Serialize for MarketMaking {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("tick_size", ToString::to_string(&self.tick_size).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
         struct_ser.end()
     }
 }
@@ -3233,6 +3239,8 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
             "fundCode",
             "tick_size",
             "tickSize",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3242,6 +3250,7 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
             Config,
             FundCode,
             TickSize,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3269,6 +3278,7 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                             "config" => Ok(GeneratedField::Config),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3293,6 +3303,7 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                 let mut config__ = None;
                 let mut fund_code__ = None;
                 let mut tick_size__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -3327,6 +3338,12 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3338,6 +3355,7 @@ impl<'de> serde::Deserialize<'de> for MarketMaking {
                     config: config__,
                     fund_code: fund_code__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -3583,6 +3601,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -3648,6 +3669,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.take_mode.as_ref() {
             struct_ser.serialize_field("take_mode", v)?;
         }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
         struct_ser.end()
     }
 }
@@ -3690,6 +3714,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "f2mMaWindowSecs",
             "take_mode",
             "takeMode",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3712,6 +3738,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             F2mRefitIntervalSecs,
             F2mMaWindowSecs,
             TakeMode,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3752,6 +3779,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "f2mRefitIntervalSecs" | "f2m_refit_interval_secs" => Ok(GeneratedField::F2mRefitIntervalSecs),
                             "f2mMaWindowSecs" | "f2m_ma_window_secs" => Ok(GeneratedField::F2mMaWindowSecs),
                             "takeMode" | "take_mode" => Ok(GeneratedField::TakeMode),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3789,6 +3817,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut f2m_refit_interval_secs__ = None;
                 let mut f2m_ma_window_secs__ = None;
                 let mut take_mode__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3911,6 +3940,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             take_mode__ = map_.next_value()?;
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3935,6 +3970,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     f2m_refit_interval_secs: f2m_refit_interval_secs__,
                     f2m_ma_window_secs: f2m_ma_window_secs__,
                     take_mode: take_mode__,
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -4975,6 +5011,9 @@ impl serde::Serialize for MarketMakingOrderbookData {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingOrderbookData", len)?;
         if true {
             struct_ser.serialize_field("bid_prices", &self.bid_prices)?;
@@ -4990,6 +5029,9 @@ impl serde::Serialize for MarketMakingOrderbookData {
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
         }
         struct_ser.end()
     }
@@ -5011,6 +5053,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingOrderbookData {
             "askQuantities",
             "fund_code",
             "fundCode",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5020,6 +5064,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingOrderbookData {
             BidQuantities,
             AskQuantities,
             FundCode,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5047,6 +5092,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingOrderbookData {
                             "bidQuantities" | "bid_quantities" => Ok(GeneratedField::BidQuantities),
                             "askQuantities" | "ask_quantities" => Ok(GeneratedField::AskQuantities),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5071,6 +5117,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingOrderbookData {
                 let mut bid_quantities__ = None;
                 let mut ask_quantities__ = None;
                 let mut fund_code__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BidPrices => {
@@ -5109,6 +5156,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingOrderbookData {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5120,6 +5173,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingOrderbookData {
                     bid_quantities: bid_quantities__.unwrap_or_default(),
                     ask_quantities: ask_quantities__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -6014,6 +6068,9 @@ impl serde::Serialize for MmConfigSnapshot {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmConfigSnapshot", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -6034,6 +6091,9 @@ impl serde::Serialize for MmConfigSnapshot {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
         struct_ser.end()
     }
 }
@@ -6052,6 +6112,8 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
             "eventType",
             "fund_code",
             "fundCode",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6061,6 +6123,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
             StartTime,
             EventType,
             FundCode,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6088,6 +6151,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                             "startTime" | "start_time" => Ok(GeneratedField::StartTime),
                             "eventType" | "event_type" => Ok(GeneratedField::EventType),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6112,6 +6176,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                 let mut start_time__ = None;
                 let mut event_type__ = None;
                 let mut fund_code__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -6146,6 +6211,12 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6157,6 +6228,7 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
                     start_time: start_time__.unwrap_or_default(),
                     event_type: event_type__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -6171,6 +6243,9 @@ impl serde::Serialize for MmFillSummary {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -6222,6 +6297,9 @@ impl serde::Serialize for MmFillSummary {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
         struct_ser.end()
     }
 }
@@ -6246,6 +6324,8 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             "unrealizedPnl",
             "fund_code",
             "fundCode",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6257,6 +6337,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             RealizedPnl,
             UnrealizedPnl,
             FundCode,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6286,6 +6367,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                             "realizedPnl" | "realized_pnl" => Ok(GeneratedField::RealizedPnl),
                             "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6312,6 +6394,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                 let mut realized_pnl__ = None;
                 let mut unrealized_pnl__ = None;
                 let mut fund_code__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BuyQuantity => {
@@ -6368,6 +6451,12 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6381,6 +6470,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                     realized_pnl: realized_pnl__.unwrap_or_default(),
                     unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -6575,6 +6665,9 @@ impl serde::Serialize for MmPreset {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmPreset", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -6593,6 +6686,9 @@ impl serde::Serialize for MmPreset {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
         struct_ser.end()
     }
 }
@@ -6610,6 +6706,8 @@ impl<'de> serde::Deserialize<'de> for MmPreset {
             "updateTime",
             "fund_code",
             "fundCode",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6619,6 +6717,7 @@ impl<'de> serde::Deserialize<'de> for MmPreset {
             Config,
             UpdateTime,
             FundCode,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6646,6 +6745,7 @@ impl<'de> serde::Deserialize<'de> for MmPreset {
                             "config" => Ok(GeneratedField::Config),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6670,6 +6770,7 @@ impl<'de> serde::Deserialize<'de> for MmPreset {
                 let mut config__ = None;
                 let mut update_time__ = None;
                 let mut fund_code__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -6704,6 +6805,12 @@ impl<'de> serde::Deserialize<'de> for MmPreset {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6715,6 +6822,7 @@ impl<'de> serde::Deserialize<'de> for MmPreset {
                     config: config__,
                     update_time: update_time__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -6729,6 +6837,9 @@ impl serde::Serialize for MmStateUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -6816,6 +6927,9 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
         }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
         struct_ser.end()
     }
 }
@@ -6850,6 +6964,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "proxyMomentum",
             "fund_code",
             "fundCode",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6868,6 +6984,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             ConstituentMomentum,
             ProxyMomentum,
             FundCode,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6904,6 +7021,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "constituentMomentum" | "constituent_momentum" => Ok(GeneratedField::ConstituentMomentum),
                             "proxyMomentum" | "proxy_momentum" => Ok(GeneratedField::ProxyMomentum),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6937,6 +7055,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut constituent_momentum__ = None;
                 let mut proxy_momentum__ = None;
                 let mut fund_code__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -7023,6 +7142,12 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -7043,6 +7168,7 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     constituent_momentum: constituent_momentum__,
                     proxy_momentum: proxy_momentum__,
                     fund_code: fund_code__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }

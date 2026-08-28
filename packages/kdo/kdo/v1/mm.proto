@@ -205,6 +205,9 @@ message MarketMaking {
 
   // ETF tick size (Price internal representation)
   int64 tick_size = 5;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+  string slot_id = 6;
 }
 
 // MM 엔진 설정 (MmConfig 대응)
@@ -270,6 +273,9 @@ message MarketMakingConfiguration {
   // 비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).
   // optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
   optional bool take_mode = 24;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+  string slot_id = 25;
 }
 
 // NAV pricing 상세 설정
@@ -665,6 +671,9 @@ message MarketMakingOrderbookData {
 
   // 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
   string fund_code = 5;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+  string slot_id = 6;
 }
 
 // ============================================================================
@@ -834,6 +843,9 @@ message MmStateUpdate {
 
   // 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용. 항상 포함.
   string fund_code = 16;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+  string slot_id = 17;
 }
 
 // StreamMmFills
@@ -868,6 +880,9 @@ message MmFillSummary {
 
   // 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
   string fund_code = 10;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+  string slot_id = 11;
 }
 
 // ListMmPnlHistory
@@ -994,6 +1009,9 @@ message MmPreset {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
   string fund_code = 5;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+  string slot_id = 6;
 }
 
 // SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장
@@ -1090,6 +1108,9 @@ message MmConfigSnapshot {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
   string fund_code = 5;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
+  string slot_id = 6;
 }
 
 // ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
