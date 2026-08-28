@@ -499,6 +499,9 @@ message GetMarketMakingRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 2;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 3;
 }
 
 // GetMarketMakingStatus
@@ -517,6 +520,9 @@ message StartMarketMakingRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 3;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 4;
 }
 
 message StartMarketMakingResponse {
@@ -534,6 +540,9 @@ message StopMarketMakingRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 2;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 3;
 }
 
 message StopMarketMakingResponse {
@@ -568,6 +577,9 @@ message UpdateMarketMakingConfigRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 3;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 4;
 }
 
 // StreamMarketMakingStatus
@@ -586,6 +598,9 @@ message UpdateMarketMakingRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 3;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 4;
 }
 
 // GetMarketMakingOrderbook / StreamMarketMakingOrderbook
@@ -595,6 +610,9 @@ message GetMarketMakingOrderbookRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 2;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 3;
 }
 
 // MM 전용 주문장 데이터
@@ -792,6 +810,9 @@ message StreamMmFillsRequest {
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
   // 지정 시 해당 (symbol, fund) MM 컨텍스트와 불일치하면 NOT_FOUND.
   string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 3;
 }
 
 // MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)
@@ -897,6 +918,9 @@ message StreamMmStateUpdateRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 스트리밍.
   string fund_code = 2;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 3;
 }
 
 // FitToMarket
@@ -906,6 +930,9 @@ message FitToMarketRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 2;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 3;
 }
 
 message FitToMarketResponse {
@@ -945,6 +972,9 @@ message SaveMmPresetRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 3;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 4;
 }
 
 // ListMmPresets — 심볼의 저장된 프리셋 목록
@@ -954,6 +984,9 @@ message ListMmPresetsRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 목록.
   string fund_code = 2;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 3;
 }
 
 message ListMmPresetsResponse {
@@ -971,6 +1004,9 @@ message ApplyMmPresetRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 3;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 4;
 }
 
 // DeleteMmPreset — 프리셋 삭제
@@ -983,6 +1019,9 @@ message DeleteMmPresetRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 3;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 4;
 }
 
 message DeleteMmPresetResponse {
@@ -1029,6 +1068,9 @@ message ListMmConfigHistoryRequest {
 
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드.
   string fund_code = 3;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  string slot_id = 4;
 }
 
 message ListMmConfigHistoryResponse {

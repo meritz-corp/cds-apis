@@ -89,6 +89,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -135,6 +142,10 @@
                 "fundCode": {
                   "type": "string",
                   "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                },
+                "slotId": {
+                  "type": "string",
+                  "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯)."
                 }
               },
               "title": "UpdateMarketMaking",
@@ -190,6 +201,10 @@
                 "fundCode": {
                   "type": "string",
                   "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                },
+                "slotId": {
+                  "type": "string",
+                  "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯)."
                 }
               },
               "description": "UpdateMarketMakingConfig\nNOTE: config 내 pricing, fund_code, tick_size, depth 필드는 이 요청으로 변경할 수 없습니다.\n해당 필드들은 서버에서 무시됩니다.",
@@ -245,6 +260,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -291,6 +313,13 @@
           {
             "name": "fundCode",
             "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 스트리밍.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -343,6 +372,13 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -380,6 +416,13 @@
           {
             "name": "fundCode",
             "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -429,6 +472,13 @@
           {
             "name": "fundCode",
             "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -536,6 +586,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -581,6 +638,13 @@
           {
             "name": "fundCode",
             "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -636,6 +700,10 @@
                 "fundCode": {
                   "type": "string",
                   "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                },
+                "slotId": {
+                  "type": "string",
+                  "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯)."
                 }
               },
               "title": "ApplyMmPreset — 프리셋을 심볼 라이브 설정으로 적용"
@@ -692,6 +760,10 @@
                 "fundCode": {
                   "type": "string",
                   "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                },
+                "slotId": {
+                  "type": "string",
+                  "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯)."
                 }
               },
               "title": "SaveMmPreset — 현재 라이브 설정을 이름있는 프리셋으로 저장"
@@ -740,6 +812,10 @@
                 "fundCode": {
                   "type": "string",
                   "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                },
+                "slotId": {
+                  "type": "string",
+                  "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯)."
                 }
               },
               "title": "FitToMarket"
@@ -792,6 +868,10 @@
                 "fundCode": {
                   "type": "string",
                   "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                },
+                "slotId": {
+                  "type": "string",
+                  "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯)."
                 }
               },
               "title": "StartMarketMaking"
@@ -840,6 +920,10 @@
                 "fundCode": {
                   "type": "string",
                   "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택."
+                },
+                "slotId": {
+                  "type": "string",
+                  "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯)."
                 }
               },
               "title": "StopMarketMaking"

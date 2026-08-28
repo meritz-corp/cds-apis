@@ -378,6 +378,9 @@ pub struct GetMarketMakingRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// GetMarketMakingStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -400,6 +403,9 @@ pub struct StartMarketMakingRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -421,6 +427,9 @@ pub struct StopMarketMakingRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -463,6 +472,9 @@ pub struct UpdateMarketMakingConfigRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// StreamMarketMakingStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -485,6 +497,9 @@ pub struct UpdateMarketMakingRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// GetMarketMakingOrderbook / StreamMarketMakingOrderbook
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -496,6 +511,9 @@ pub struct GetMarketMakingOrderbookRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// MM 전용 주문장 데이터
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -719,6 +737,9 @@ pub struct StreamMmFillsRequest {
     /// 지정 시 해당 (symbol, fund) MM 컨텍스트와 불일치하면 NOT_FOUND.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -837,6 +858,9 @@ pub struct StreamMmStateUpdateRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 스트리밍.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// FitToMarket
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -848,6 +872,9 @@ pub struct FitToMarketRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -893,6 +920,9 @@ pub struct SaveMmPresetRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// ListMmPresets — 심볼의 저장된 프리셋 목록
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -904,6 +934,9 @@ pub struct ListMmPresetsRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드 목록.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -925,6 +958,9 @@ pub struct ApplyMmPresetRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// DeleteMmPreset — 프리셋 삭제
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -939,6 +975,9 @@ pub struct DeleteMmPresetRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -980,6 +1019,9 @@ pub struct ListMmConfigHistoryRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 전체 펀드.
     #[prost(string, tag="3")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

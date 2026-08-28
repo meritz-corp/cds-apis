@@ -1803,10 +1803,12 @@ class GetMarketMakingRequest extends $pb.GeneratedMessage {
   factory GetMarketMakingRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -1818,6 +1820,7 @@ class GetMarketMakingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -1857,6 +1860,16 @@ class GetMarketMakingRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 /// GetMarketMakingStatus
@@ -1913,11 +1926,13 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     MarketMakingConfiguration? config,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -1930,6 +1945,7 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -1981,6 +1997,16 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearFundCode() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 class StartMarketMakingResponse extends $pb.GeneratedMessage {
@@ -2048,10 +2074,12 @@ class StopMarketMakingRequest extends $pb.GeneratedMessage {
   factory StopMarketMakingRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -2063,6 +2091,7 @@ class StopMarketMakingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StopMarketMakingRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -2102,6 +2131,16 @@ class StopMarketMakingRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 class StopMarketMakingResponse extends $pb.GeneratedMessage {
@@ -2267,11 +2306,13 @@ class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     MarketMakingConfiguration? config,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -2284,6 +2325,7 @@ class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -2336,6 +2378,16 @@ class UpdateMarketMakingConfigRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearFundCode() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 /// StreamMarketMakingStatus
@@ -2392,11 +2444,13 @@ class UpdateMarketMakingRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     MarketMakingConfiguration? config,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -2409,6 +2463,7 @@ class UpdateMarketMakingRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -2460,6 +2515,16 @@ class UpdateMarketMakingRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearFundCode() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 /// GetMarketMakingOrderbook / StreamMarketMakingOrderbook
@@ -2467,10 +2532,12 @@ class GetMarketMakingOrderbookRequest extends $pb.GeneratedMessage {
   factory GetMarketMakingOrderbookRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -2482,6 +2549,7 @@ class GetMarketMakingOrderbookRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMarketMakingOrderbookRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -2521,6 +2589,16 @@ class GetMarketMakingOrderbookRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 /// MM 전용 주문장 데이터
@@ -3537,10 +3615,12 @@ class StreamMmFillsRequest extends $pb.GeneratedMessage {
   factory StreamMmFillsRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -3552,6 +3632,7 @@ class StreamMmFillsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmFillsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -3592,6 +3673,16 @@ class StreamMmFillsRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 /// MM 체결 요약 (MM 전략 자기 체결 당일 누적 — 같은 심볼의 타 전략(선물LP 헷지·페어 등) 체결 제외)
@@ -4116,10 +4207,12 @@ class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
   factory StreamMmStateUpdateRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4131,6 +4224,7 @@ class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamMmStateUpdateRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4170,6 +4264,16 @@ class StreamMmStateUpdateRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 /// FitToMarket
@@ -4177,10 +4281,12 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
   factory FitToMarketRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4192,6 +4298,7 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FitToMarketRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4231,6 +4338,16 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 class FitToMarketResponse extends $pb.GeneratedMessage {
@@ -4388,11 +4505,13 @@ class SaveMmPresetRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? name,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4405,6 +4524,7 @@ class SaveMmPresetRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4454,6 +4574,16 @@ class SaveMmPresetRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearFundCode() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 /// ListMmPresets — 심볼의 저장된 프리셋 목록
@@ -4461,10 +4591,12 @@ class ListMmPresetsRequest extends $pb.GeneratedMessage {
   factory ListMmPresetsRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4476,6 +4608,7 @@ class ListMmPresetsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmPresetsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4515,6 +4648,16 @@ class ListMmPresetsRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 class ListMmPresetsResponse extends $pb.GeneratedMessage {
@@ -4564,11 +4707,13 @@ class ApplyMmPresetRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? name,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4581,6 +4726,7 @@ class ApplyMmPresetRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4630,6 +4776,16 @@ class ApplyMmPresetRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearFundCode() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 /// DeleteMmPreset — 프리셋 삭제
@@ -4638,11 +4794,13 @@ class DeleteMmPresetRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? name,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (name != null) result.name = name;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4655,6 +4813,7 @@ class DeleteMmPresetRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4704,6 +4863,16 @@ class DeleteMmPresetRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearFundCode() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 class DeleteMmPresetResponse extends $pb.GeneratedMessage {
@@ -4861,11 +5030,13 @@ class ListMmConfigHistoryRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.int? limit,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (limit != null) result.limit = limit;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4878,6 +5049,7 @@ class ListMmConfigHistoryRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'limit', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4927,6 +5099,16 @@ class ListMmConfigHistoryRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(2);
   @$pb.TagNumber(3)
   void clearFundCode() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 class ListMmConfigHistoryResponse extends $pb.GeneratedMessage {

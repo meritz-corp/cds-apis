@@ -460,13 +460,14 @@ const GetMarketMakingRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `GetMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getMarketMakingRequestDescriptor = $convert.base64Decode(
     'ChZHZXRNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEh'
-    'sKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGU=');
+    'sKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGUSFwoHc2xvdF9pZBgDIAEoCVIGc2xvdElk');
 
 @$core.Deprecated('Use getMarketMakingStatusRequestDescriptor instead')
 const GetMarketMakingStatusRequest$json = {
@@ -488,6 +489,7 @@ const StartMarketMakingRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -495,7 +497,8 @@ const StartMarketMakingRequest$json = {
 final $typed_data.Uint8List startMarketMakingRequestDescriptor = $convert.base64Decode(
     'ChhTdGFydE1hcmtldE1ha2luZ1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2'
     'wSPAoGY29uZmlnGAIgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ0NvbmZpZ3VyYXRpb25S'
-    'BmNvbmZpZxIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2Rl');
+    'BmNvbmZpZxIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYBCABKAlSBn'
+    'Nsb3RJZA==');
 
 @$core.Deprecated('Use startMarketMakingResponseDescriptor instead')
 const StartMarketMakingResponse$json = {
@@ -517,13 +520,14 @@ const StopMarketMakingRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `StopMarketMakingRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List stopMarketMakingRequestDescriptor = $convert.base64Decode(
     'ChdTdG9wTWFya2V0TWFraW5nUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbB'
-    'IbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2Rl');
+    'IbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYAyABKAlSBnNsb3RJZA==');
 
 @$core.Deprecated('Use stopMarketMakingResponseDescriptor instead')
 const StopMarketMakingResponse$json = {
@@ -570,6 +574,7 @@ const UpdateMarketMakingConfigRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '8': {}, '10': 'config'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -577,7 +582,8 @@ const UpdateMarketMakingConfigRequest$json = {
 final $typed_data.Uint8List updateMarketMakingConfigRequestDescriptor = $convert.base64Decode(
     'Ch9VcGRhdGVNYXJrZXRNYWtpbmdDb25maWdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAl'
     'IGc3ltYm9sEkIKBmNvbmZpZxgCIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1'
-    'cmF0aW9uQgTiQQECUgZjb25maWcSGwoJZnVuZF9jb2RlGAMgASgJUghmdW5kQ29kZQ==');
+    'cmF0aW9uQgTiQQECUgZjb25maWcSGwoJZnVuZF9jb2RlGAMgASgJUghmdW5kQ29kZRIXCgdzbG'
+    '90X2lkGAQgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use streamMarketMakingStatusRequestDescriptor instead')
 const StreamMarketMakingStatusRequest$json = {
@@ -599,6 +605,7 @@ const UpdateMarketMakingRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '8': {}, '10': 'config'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -606,7 +613,8 @@ const UpdateMarketMakingRequest$json = {
 final $typed_data.Uint8List updateMarketMakingRequestDescriptor = $convert.base64Decode(
     'ChlVcGRhdGVNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm'
     '9sEkIKBmNvbmZpZxgCIAEoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9u'
-    'QgTiQQECUgZjb25maWcSGwoJZnVuZF9jb2RlGAMgASgJUghmdW5kQ29kZQ==');
+    'QgTiQQECUgZjb25maWcSGwoJZnVuZF9jb2RlGAMgASgJUghmdW5kQ29kZRIXCgdzbG90X2lkGA'
+    'QgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use getMarketMakingOrderbookRequestDescriptor instead')
 const GetMarketMakingOrderbookRequest$json = {
@@ -614,13 +622,15 @@ const GetMarketMakingOrderbookRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `GetMarketMakingOrderbookRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getMarketMakingOrderbookRequestDescriptor = $convert.base64Decode(
     'Ch9HZXRNYXJrZXRNYWtpbmdPcmRlcmJvb2tSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAl'
-    'IGc3ltYm9sEhsKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGU=');
+    'IGc3ltYm9sEhsKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGUSFwoHc2xvdF9pZBgDIAEoCVIG'
+    'c2xvdElk');
 
 @$core.Deprecated('Use marketMakingOrderbookDataDescriptor instead')
 const MarketMakingOrderbookData$json = {
@@ -847,13 +857,15 @@ const StreamMmFillsRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `StreamMmFillsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamMmFillsRequestDescriptor = $convert.base64Decode(
     'ChRTdHJlYW1NbUZpbGxzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbBIhCg'
-    'lmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2Rl');
+    'lmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYAyABKAlSBnNsb3RJ'
+    'ZA==');
 
 @$core.Deprecated('Use mmFillSummaryDescriptor instead')
 const MmFillSummary$json = {
@@ -970,13 +982,14 @@ const StreamMmStateUpdateRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `StreamMmStateUpdateRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List streamMmStateUpdateRequestDescriptor = $convert.base64Decode(
     'ChpTdHJlYW1NbVN0YXRlVXBkYXRlUmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCg'
-    'lmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2Rl');
+    'lmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYAyABKAlSBnNsb3RJZA==');
 
 @$core.Deprecated('Use fitToMarketRequestDescriptor instead')
 const FitToMarketRequest$json = {
@@ -984,13 +997,14 @@ const FitToMarketRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `FitToMarketRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fitToMarketRequestDescriptor = $convert.base64Decode(
     'ChJGaXRUb01hcmtldFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSGwoJZn'
-    'VuZF9jb2RlGAIgASgJUghmdW5kQ29kZQ==');
+    'VuZF9jb2RlGAIgASgJUghmdW5kQ29kZRIXCgdzbG90X2lkGAMgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use fitToMarketResponseDescriptor instead')
 const FitToMarketResponse$json = {
@@ -1030,13 +1044,15 @@ const SaveMmPresetRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `SaveMmPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List saveMmPresetRequestDescriptor = $convert.base64Decode(
     'ChNTYXZlTW1QcmVzZXRSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEhgKBG'
-    '5hbWUYAiABKAlCBOJBAQJSBG5hbWUSGwoJZnVuZF9jb2RlGAMgASgJUghmdW5kQ29kZQ==');
+    '5hbWUYAiABKAlCBOJBAQJSBG5hbWUSGwoJZnVuZF9jb2RlGAMgASgJUghmdW5kQ29kZRIXCgdz'
+    'bG90X2lkGAQgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use listMmPresetsRequestDescriptor instead')
 const ListMmPresetsRequest$json = {
@@ -1044,13 +1060,14 @@ const ListMmPresetsRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `ListMmPresetsRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listMmPresetsRequestDescriptor = $convert.base64Decode(
     'ChRMaXN0TW1QcmVzZXRzUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbBIbCg'
-    'lmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2Rl');
+    'lmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYAyABKAlSBnNsb3RJZA==');
 
 @$core.Deprecated('Use listMmPresetsResponseDescriptor instead')
 const ListMmPresetsResponse$json = {
@@ -1072,13 +1089,15 @@ const ApplyMmPresetRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `ApplyMmPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List applyMmPresetRequestDescriptor = $convert.base64Decode(
     'ChRBcHBseU1tUHJlc2V0UmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbBIYCg'
-    'RuYW1lGAIgASgJQgTiQQECUgRuYW1lEhsKCWZ1bmRfY29kZRgDIAEoCVIIZnVuZENvZGU=');
+    'RuYW1lGAIgASgJQgTiQQECUgRuYW1lEhsKCWZ1bmRfY29kZRgDIAEoCVIIZnVuZENvZGUSFwoH'
+    'c2xvdF9pZBgEIAEoCVIGc2xvdElk');
 
 @$core.Deprecated('Use deleteMmPresetRequestDescriptor instead')
 const DeleteMmPresetRequest$json = {
@@ -1087,13 +1106,15 @@ const DeleteMmPresetRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'name'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `DeleteMmPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List deleteMmPresetRequestDescriptor = $convert.base64Decode(
     'ChVEZWxldGVNbVByZXNldFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSGA'
-    'oEbmFtZRgCIAEoCUIE4kEBAlIEbmFtZRIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2Rl');
+    'oEbmFtZRgCIAEoCUIE4kEBAlIEbmFtZRIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2RlEhcK'
+    'B3Nsb3RfaWQYBCABKAlSBnNsb3RJZA==');
 
 @$core.Deprecated('Use deleteMmPresetResponseDescriptor instead')
 const DeleteMmPresetResponse$json = {
@@ -1134,6 +1155,7 @@ const ListMmConfigHistoryRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'limit', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'limit', '17': true},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
   '8': [
     {'1': '_limit'},
@@ -1144,7 +1166,7 @@ const ListMmConfigHistoryRequest$json = {
 final $typed_data.Uint8List listMmConfigHistoryRequestDescriptor = $convert.base64Decode(
     'ChpMaXN0TW1Db25maWdIaXN0b3J5UmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bW'
     'JvbBIZCgVsaW1pdBgCIAEoBUgAUgVsaW1pdIgBARIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRD'
-    'b2RlQggKBl9saW1pdA==');
+    'b2RlEhcKB3Nsb3RfaWQYBCABKAlSBnNsb3RJZEIICgZfbGltaXQ=');
 
 @$core.Deprecated('Use listMmConfigHistoryResponseDescriptor instead')
 const ListMmConfigHistoryResponse$json = {
