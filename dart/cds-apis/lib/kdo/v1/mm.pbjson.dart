@@ -469,6 +469,50 @@ final $typed_data.Uint8List getMarketMakingRequestDescriptor = $convert.base64De
     'ChZHZXRNYXJrZXRNYWtpbmdSZXF1ZXN0EhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEh'
     'sKCWZ1bmRfY29kZRgCIAEoCVIIZnVuZENvZGUSFwoHc2xvdF9pZBgDIAEoCVIGc2xvdElk');
 
+@$core.Deprecated('Use getConstituentMomentumRequestDescriptor instead')
+const GetConstituentMomentumRequest$json = {
+  '1': 'GetConstituentMomentumRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+  ],
+};
+
+/// Descriptor for `GetConstituentMomentumRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getConstituentMomentumRequestDescriptor = $convert.base64Decode(
+    'Ch1HZXRDb25zdGl0dWVudE1vbWVudHVtUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBn'
+    'N5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2Rl');
+
+@$core.Deprecated('Use constituentMomentumSelectedItemDescriptor instead')
+const ConstituentMomentumSelectedItem$json = {
+  '1': 'ConstituentMomentumSelectedItem',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'weight', '3': 2, '4': 1, '5': 1, '10': 'weight'},
+  ],
+};
+
+/// Descriptor for `ConstituentMomentumSelectedItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List constituentMomentumSelectedItemDescriptor = $convert.base64Decode(
+    'Ch9Db25zdGl0dWVudE1vbWVudHVtU2VsZWN0ZWRJdGVtEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm'
+    '9sEhYKBndlaWdodBgCIAEoAVIGd2VpZ2h0');
+
+@$core.Deprecated('Use getConstituentMomentumResponseDescriptor instead')
+const GetConstituentMomentumResponse$json = {
+  '1': 'GetConstituentMomentumResponse',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'top_n', '3': 2, '4': 1, '5': 13, '10': 'topN'},
+    {'1': 'selected', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.mm.ConstituentMomentumSelectedItem', '10': 'selected'},
+  ],
+};
+
+/// Descriptor for `GetConstituentMomentumResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getConstituentMomentumResponseDescriptor = $convert.base64Decode(
+    'Ch5HZXRDb25zdGl0dWVudE1vbWVudHVtUmVzcG9uc2USGAoHZW5hYmxlZBgBIAEoCFIHZW5hYm'
+    'xlZBITCgV0b3BfbhgCIAEoDVIEdG9wThJGCghzZWxlY3RlZBgDIAMoCzIqLmtkby52MS5tbS5D'
+    'b25zdGl0dWVudE1vbWVudHVtU2VsZWN0ZWRJdGVtUghzZWxlY3RlZA==');
+
 @$core.Deprecated('Use getMarketMakingStatusRequestDescriptor instead')
 const GetMarketMakingStatusRequest$json = {
   '1': 'GetMarketMakingStatusRequest',

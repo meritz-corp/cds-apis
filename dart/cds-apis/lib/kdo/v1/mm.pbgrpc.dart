@@ -68,6 +68,12 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getMarketMakingOrderbook, request, options: options);
   }
 
+  /// MM 현재 선정된 상위 구성종목(ConstituentMomentum PDF Top-N) 조회.
+  /// notional 비중 상위 top_n 개로 선정된 구성종목 심볼 + 정규화 비중을 반환한다.
+  $grpc.ResponseFuture<$0.GetConstituentMomentumResponse> getConstituentMomentum($0.GetConstituentMomentumRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getConstituentMomentum, request, options: options);
+  }
+
   /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
   $grpc.ResponseStream<$0.MarketMakingOrderbookData> streamMarketMakingOrderbook($0.GetMarketMakingOrderbookRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamMarketMakingOrderbook, $async.Stream.fromIterable([request]), options: options);
@@ -150,6 +156,10 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook',
       ($0.GetMarketMakingOrderbookRequest value) => value.writeToBuffer(),
       $0.MarketMakingOrderbookData.fromBuffer);
+  static final _$getConstituentMomentum = $grpc.ClientMethod<$0.GetConstituentMomentumRequest, $0.GetConstituentMomentumResponse>(
+      '/kdo.v1.mm.MarketMakingService/GetConstituentMomentum',
+      ($0.GetConstituentMomentumRequest value) => value.writeToBuffer(),
+      $0.GetConstituentMomentumResponse.fromBuffer);
   static final _$streamMarketMakingOrderbook = $grpc.ClientMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
       '/kdo.v1.mm.MarketMakingService/StreamMarketMakingOrderbook',
       ($0.GetMarketMakingOrderbookRequest value) => value.writeToBuffer(),
@@ -246,6 +256,13 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetMarketMakingOrderbookRequest.fromBuffer(value),
         ($0.MarketMakingOrderbookData value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetConstituentMomentumRequest, $0.GetConstituentMomentumResponse>(
+        'GetConstituentMomentum',
+        getConstituentMomentum_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetConstituentMomentumRequest.fromBuffer(value),
+        ($0.GetConstituentMomentumResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetMarketMakingOrderbookRequest, $0.MarketMakingOrderbookData>(
         'StreamMarketMakingOrderbook',
         streamMarketMakingOrderbook_Pre,
@@ -359,6 +376,12 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.MarketMakingOrderbookData> getMarketMakingOrderbook($grpc.ServiceCall call, $0.GetMarketMakingOrderbookRequest request);
+
+  $async.Future<$0.GetConstituentMomentumResponse> getConstituentMomentum_Pre($grpc.ServiceCall $call, $async.Future<$0.GetConstituentMomentumRequest> $request) async {
+    return getConstituentMomentum($call, await $request);
+  }
+
+  $async.Future<$0.GetConstituentMomentumResponse> getConstituentMomentum($grpc.ServiceCall call, $0.GetConstituentMomentumRequest request);
 
   $async.Stream<$0.MarketMakingOrderbookData> streamMarketMakingOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.GetMarketMakingOrderbookRequest> $request) async* {
     yield* streamMarketMakingOrderbook($call, await $request);

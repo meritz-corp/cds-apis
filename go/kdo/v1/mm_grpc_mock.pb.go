@@ -821,6 +821,26 @@ func (mr *MockMarketMakingServiceClientMockRecorder) FitToMarket(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FitToMarket", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).FitToMarket), varargs...)
 }
 
+// GetConstituentMomentum mocks base method.
+func (m *MockMarketMakingServiceClient) GetConstituentMomentum(ctx context.Context, in *GetConstituentMomentumRequest, opts ...grpc.CallOption) (*GetConstituentMomentumResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetConstituentMomentum", varargs...)
+	ret0, _ := ret[0].(*GetConstituentMomentumResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetConstituentMomentum indicates an expected call of GetConstituentMomentum.
+func (mr *MockMarketMakingServiceClientMockRecorder) GetConstituentMomentum(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetConstituentMomentum", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).GetConstituentMomentum), varargs...)
+}
+
 // GetMarketMaking mocks base method.
 func (m *MockMarketMakingServiceClient) GetMarketMaking(ctx context.Context, in *GetMarketMakingRequest, opts ...grpc.CallOption) (*MarketMaking, error) {
 	m.ctrl.T.Helper()
@@ -1167,6 +1187,21 @@ func (m *MockMarketMakingServiceServer) FitToMarket(ctx context.Context, in *Fit
 func (mr *MockMarketMakingServiceServerMockRecorder) FitToMarket(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FitToMarket", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).FitToMarket), ctx, in)
+}
+
+// GetConstituentMomentum mocks base method.
+func (m *MockMarketMakingServiceServer) GetConstituentMomentum(ctx context.Context, in *GetConstituentMomentumRequest) (*GetConstituentMomentumResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetConstituentMomentum", ctx, in)
+	ret0, _ := ret[0].(*GetConstituentMomentumResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetConstituentMomentum indicates an expected call of GetConstituentMomentum.
+func (mr *MockMarketMakingServiceServerMockRecorder) GetConstituentMomentum(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetConstituentMomentum", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).GetConstituentMomentum), ctx, in)
 }
 
 // GetMarketMaking mocks base method.

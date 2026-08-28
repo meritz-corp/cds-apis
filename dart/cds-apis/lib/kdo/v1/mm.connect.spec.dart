@@ -67,6 +67,15 @@ abstract final class MarketMakingService {
     kdov1mm.MarketMakingOrderbookData.new,
   );
 
+  /// MM 현재 선정된 상위 구성종목(ConstituentMomentum PDF Top-N) 조회.
+  /// notional 비중 상위 top_n 개로 선정된 구성종목 심볼 + 정규화 비중을 반환한다.
+  static const getConstituentMomentum = connect.Spec(
+    '/$name/GetConstituentMomentum',
+    connect.StreamType.unary,
+    kdov1mm.GetConstituentMomentumRequest.new,
+    kdov1mm.GetConstituentMomentumResponse.new,
+  );
+
   /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
   static const streamMarketMakingOrderbook = connect.Spec(
     '/$name/StreamMarketMakingOrderbook',

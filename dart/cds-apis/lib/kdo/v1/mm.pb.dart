@@ -1872,6 +1872,195 @@ class GetMarketMakingRequest extends $pb.GeneratedMessage {
   void clearSlotId() => $_clearField(3);
 }
 
+/// GetConstituentMomentum
+class GetConstituentMomentumRequest extends $pb.GeneratedMessage {
+  factory GetConstituentMomentumRequest({
+    $core.String? symbol,
+    $core.String? fundCode,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    return result;
+  }
+
+  GetConstituentMomentumRequest._();
+
+  factory GetConstituentMomentumRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetConstituentMomentumRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetConstituentMomentumRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetConstituentMomentumRequest clone() => GetConstituentMomentumRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetConstituentMomentumRequest copyWith(void Function(GetConstituentMomentumRequest) updates) => super.copyWith((message) => updates(message as GetConstituentMomentumRequest)) as GetConstituentMomentumRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetConstituentMomentumRequest create() => GetConstituentMomentumRequest._();
+  @$core.override
+  GetConstituentMomentumRequest createEmptyInstance() => create();
+  static $pb.PbList<GetConstituentMomentumRequest> createRepeated() => $pb.PbList<GetConstituentMomentumRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetConstituentMomentumRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetConstituentMomentumRequest>(create);
+  static GetConstituentMomentumRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+}
+
+/// 선정된 상위 구성종목 1개 (심볼 + 정규화 비중)
+class ConstituentMomentumSelectedItem extends $pb.GeneratedMessage {
+  factory ConstituentMomentumSelectedItem({
+    $core.String? symbol,
+    $core.double? weight,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (weight != null) result.weight = weight;
+    return result;
+  }
+
+  ConstituentMomentumSelectedItem._();
+
+  factory ConstituentMomentumSelectedItem.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ConstituentMomentumSelectedItem.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstituentMomentumSelectedItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'weight', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ConstituentMomentumSelectedItem clone() => ConstituentMomentumSelectedItem()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ConstituentMomentumSelectedItem copyWith(void Function(ConstituentMomentumSelectedItem) updates) => super.copyWith((message) => updates(message as ConstituentMomentumSelectedItem)) as ConstituentMomentumSelectedItem;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ConstituentMomentumSelectedItem create() => ConstituentMomentumSelectedItem._();
+  @$core.override
+  ConstituentMomentumSelectedItem createEmptyInstance() => create();
+  static $pb.PbList<ConstituentMomentumSelectedItem> createRepeated() => $pb.PbList<ConstituentMomentumSelectedItem>();
+  @$core.pragma('dart2js:noInline')
+  static ConstituentMomentumSelectedItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ConstituentMomentumSelectedItem>(create);
+  static ConstituentMomentumSelectedItem? _defaultInstance;
+
+  /// 구성종목 ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 정규화 비중 (선정된 top_n 종목끼리 합 = 1)
+  @$pb.TagNumber(2)
+  $core.double get weight => $_getN(1);
+  @$pb.TagNumber(2)
+  set weight($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasWeight() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearWeight() => $_clearField(2);
+}
+
+class GetConstituentMomentumResponse extends $pb.GeneratedMessage {
+  factory GetConstituentMomentumResponse({
+    $core.bool? enabled,
+    $core.int? topN,
+    $core.Iterable<ConstituentMomentumSelectedItem>? selected,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (topN != null) result.topN = topN;
+    if (selected != null) result.selected.addAll(selected);
+    return result;
+  }
+
+  GetConstituentMomentumResponse._();
+
+  factory GetConstituentMomentumResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetConstituentMomentumResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetConstituentMomentumResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'topN', $pb.PbFieldType.OU3)
+    ..pc<ConstituentMomentumSelectedItem>(3, _omitFieldNames ? '' : 'selected', $pb.PbFieldType.PM, subBuilder: ConstituentMomentumSelectedItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetConstituentMomentumResponse clone() => GetConstituentMomentumResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetConstituentMomentumResponse copyWith(void Function(GetConstituentMomentumResponse) updates) => super.copyWith((message) => updates(message as GetConstituentMomentumResponse)) as GetConstituentMomentumResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetConstituentMomentumResponse create() => GetConstituentMomentumResponse._();
+  @$core.override
+  GetConstituentMomentumResponse createEmptyInstance() => create();
+  static $pb.PbList<GetConstituentMomentumResponse> createRepeated() => $pb.PbList<GetConstituentMomentumResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetConstituentMomentumResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetConstituentMomentumResponse>(create);
+  static GetConstituentMomentumResponse? _defaultInstance;
+
+  /// ConstituentMomentum 활성화 여부
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 설정된 상위 구성종목 개수 (top_n)
+  @$pb.TagNumber(2)
+  $core.int get topN => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set topN($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTopN() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTopN() => $_clearField(2);
+
+  /// 현재 선정된 상위 구성종목 (비중 내림차순). 미가동/미seed 시 빈 목록.
+  @$pb.TagNumber(3)
+  $pb.PbList<ConstituentMomentumSelectedItem> get selected => $_getList(2);
+}
+
 /// GetMarketMakingStatus
 class GetMarketMakingStatusRequest extends $pb.GeneratedMessage {
   factory GetMarketMakingStatusRequest({

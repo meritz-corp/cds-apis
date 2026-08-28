@@ -36,6 +36,9 @@ type MarketMakingServiceClient interface {
 	UpdateMarketMakingConfig(ctx context.Context, in *UpdateMarketMakingConfigRequest, opts ...grpc.CallOption) (*MarketMakingConfiguration, error)
 	// MM 전용 주문장 조회
 	GetMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (*MarketMakingOrderbookData, error)
+	// MM 현재 선정된 상위 구성종목(ConstituentMomentum PDF Top-N) 조회.
+	// notional 비중 상위 top_n 개로 선정된 구성종목 심볼 + 정규화 비중을 반환한다.
+	GetConstituentMomentum(ctx context.Context, in *GetConstituentMomentumRequest, opts ...grpc.CallOption) (*GetConstituentMomentumResponse, error)
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
 	StreamMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMarketMakingOrderbookClient, error)
 	// MM 엔진 런타임 상태 실시간 스트리밍
@@ -125,6 +128,15 @@ func (c *marketMakingServiceClient) UpdateMarketMakingConfig(ctx context.Context
 func (c *marketMakingServiceClient) GetMarketMakingOrderbook(ctx context.Context, in *GetMarketMakingOrderbookRequest, opts ...grpc.CallOption) (*MarketMakingOrderbookData, error) {
 	out := new(MarketMakingOrderbookData)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetMarketMakingOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *marketMakingServiceClient) GetConstituentMomentum(ctx context.Context, in *GetConstituentMomentumRequest, opts ...grpc.CallOption) (*GetConstituentMomentumResponse, error) {
+	out := new(GetConstituentMomentumResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/GetConstituentMomentum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -308,6 +320,9 @@ type MarketMakingServiceServer interface {
 	UpdateMarketMakingConfig(context.Context, *UpdateMarketMakingConfigRequest) (*MarketMakingConfiguration, error)
 	// MM 전용 주문장 조회
 	GetMarketMakingOrderbook(context.Context, *GetMarketMakingOrderbookRequest) (*MarketMakingOrderbookData, error)
+	// MM 현재 선정된 상위 구성종목(ConstituentMomentum PDF Top-N) 조회.
+	// notional 비중 상위 top_n 개로 선정된 구성종목 심볼 + 정규화 비중을 반환한다.
+	GetConstituentMomentum(context.Context, *GetConstituentMomentumRequest) (*GetConstituentMomentumResponse, error)
 	// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
 	StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error
 	// MM 엔진 런타임 상태 실시간 스트리밍
@@ -357,6 +372,9 @@ func (UnimplementedMarketMakingServiceServer) UpdateMarketMakingConfig(context.C
 }
 func (UnimplementedMarketMakingServiceServer) GetMarketMakingOrderbook(context.Context, *GetMarketMakingOrderbookRequest) (*MarketMakingOrderbookData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketMakingOrderbook not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) GetConstituentMomentum(context.Context, *GetConstituentMomentumRequest) (*GetConstituentMomentumResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConstituentMomentum not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) StreamMarketMakingOrderbook(*GetMarketMakingOrderbookRequest, MarketMakingService_StreamMarketMakingOrderbookServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMarketMakingOrderbook not implemented")
@@ -523,6 +541,24 @@ func _MarketMakingService_GetMarketMakingOrderbook_Handler(srv interface{}, ctx 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MarketMakingServiceServer).GetMarketMakingOrderbook(ctx, req.(*GetMarketMakingOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MarketMakingService_GetConstituentMomentum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConstituentMomentumRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).GetConstituentMomentum(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/GetConstituentMomentum",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).GetConstituentMomentum(ctx, req.(*GetConstituentMomentumRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -750,6 +786,10 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMarketMakingOrderbook",
 			Handler:    _MarketMakingService_GetMarketMakingOrderbook_Handler,
+		},
+		{
+			MethodName: "GetConstituentMomentum",
+			Handler:    _MarketMakingService_GetConstituentMomentum_Handler,
 		},
 		{
 			MethodName: "ListMmPnlHistory",

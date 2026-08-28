@@ -147,6 +147,120 @@ impl<'de> serde::Deserialize<'de> for ApplyMmPresetRequest {
         deserializer.deserialize_struct("kdo.v1.mm.ApplyMmPresetRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ConstituentMomentumSelectedItem {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ConstituentMomentumSelectedItem", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("weight", &self.weight)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ConstituentMomentumSelectedItem {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "weight",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            Weight,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "weight" => Ok(GeneratedField::Weight),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ConstituentMomentumSelectedItem;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.ConstituentMomentumSelectedItem")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ConstituentMomentumSelectedItem, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut weight__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Weight => {
+                            if weight__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("weight"));
+                            }
+                            weight__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ConstituentMomentumSelectedItem {
+                    symbol: symbol__.unwrap_or_default(),
+                    weight: weight__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.ConstituentMomentumSelectedItem", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ConstituentMomentumState {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -949,6 +1063,251 @@ impl<'de> serde::Deserialize<'de> for FitToMarketResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.FitToMarketResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetConstituentMomentumRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetConstituentMomentumRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetConstituentMomentumRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund_code",
+            "fundCode",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            FundCode,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetConstituentMomentumRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.GetConstituentMomentumRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetConstituentMomentumRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetConstituentMomentumRequest {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.GetConstituentMomentumRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetConstituentMomentumResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetConstituentMomentumResponse", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("top_n", &self.top_n)?;
+        }
+        if true {
+            struct_ser.serialize_field("selected", &self.selected)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetConstituentMomentumResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "top_n",
+            "topN",
+            "selected",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            TopN,
+            Selected,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "topN" | "top_n" => Ok(GeneratedField::TopN),
+                            "selected" => Ok(GeneratedField::Selected),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetConstituentMomentumResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.GetConstituentMomentumResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetConstituentMomentumResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut top_n__ = None;
+                let mut selected__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TopN => {
+                            if top_n__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("topN"));
+                            }
+                            top_n__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Selected => {
+                            if selected__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("selected"));
+                            }
+                            selected__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetConstituentMomentumResponse {
+                    enabled: enabled__.unwrap_or_default(),
+                    top_n: top_n__.unwrap_or_default(),
+                    selected: selected__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.GetConstituentMomentumResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetMarketMakingOrderbookRequest {

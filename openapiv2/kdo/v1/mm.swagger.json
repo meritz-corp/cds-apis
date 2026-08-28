@@ -274,6 +274,46 @@
         ]
       }
     },
+    "/v1/mm/{symbol}/constituent-momentum": {
+      "get": {
+        "summary": "MM 현재 선정된 상위 구성종목(ConstituentMomentum PDF Top-N) 조회.\nnotional 비중 상위 top_n 개로 선정된 구성종목 심볼 + 정규화 비중을 반환한다.",
+        "operationId": "MarketMakingService_GetConstituentMomentum",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmGetConstituentMomentumResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
     "/v1/mm/{symbol}/engine-state:stream": {
       "get": {
         "summary": "MM 엔진 런타임 상태 실시간 스트리밍",
@@ -998,6 +1038,21 @@
       "type": "object",
       "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
     },
+    "mmConstituentMomentumSelectedItem": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "구성종목 ISIN 심볼"
+        },
+        "weight": {
+          "type": "number",
+          "format": "double",
+          "title": "정규화 비중 (선정된 top_n 종목끼리 합 = 1)"
+        }
+      },
+      "title": "선정된 상위 구성종목 1개 (심볼 + 정규화 비중)"
+    },
     "mmConstituentMomentumState": {
       "type": "object",
       "properties": {
@@ -1069,6 +1124,27 @@
         "message": {
           "type": "string",
           "title": "메시지"
+        }
+      }
+    },
+    "mmGetConstituentMomentumResponse": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "ConstituentMomentum 활성화 여부"
+        },
+        "topN": {
+          "type": "integer",
+          "format": "int64",
+          "title": "설정된 상위 구성종목 개수 (top_n)"
+        },
+        "selected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mmConstituentMomentumSelectedItem"
+          },
+          "description": "현재 선정된 상위 구성종목 (비중 내림차순). 미가동/미seed 시 빈 목록."
         }
       }
     },

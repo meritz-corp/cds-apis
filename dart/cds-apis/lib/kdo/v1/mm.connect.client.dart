@@ -135,6 +135,25 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// MM 현재 선정된 상위 구성종목(ConstituentMomentum PDF Top-N) 조회.
+  /// notional 비중 상위 top_n 개로 선정된 구성종목 심볼 + 정규화 비중을 반환한다.
+  Future<kdov1mm.GetConstituentMomentumResponse> getConstituentMomentum(
+    kdov1mm.GetConstituentMomentumRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketMakingService.getConstituentMomentum,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
   Stream<kdov1mm.MarketMakingOrderbookData> streamMarketMakingOrderbook(
     kdov1mm.GetMarketMakingOrderbookRequest input, {

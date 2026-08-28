@@ -382,6 +382,41 @@ pub struct GetMarketMakingRequest {
     #[prost(string, tag="3")]
     pub slot_id: ::prost::alloc::string::String,
 }
+/// GetConstituentMomentum
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetConstituentMomentumRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+}
+/// 선정된 상위 구성종목 1개 (심볼 + 정규화 비중)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ConstituentMomentumSelectedItem {
+    /// 구성종목 ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 정규화 비중 (선정된 top_n 종목끼리 합 = 1)
+    #[prost(double, tag="2")]
+    pub weight: f64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetConstituentMomentumResponse {
+    /// ConstituentMomentum 활성화 여부
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 설정된 상위 구성종목 개수 (top_n)
+    #[prost(uint32, tag="2")]
+    pub top_n: u32,
+    /// 현재 선정된 상위 구성종목 (비중 내림차순). 미가동/미seed 시 빈 목록.
+    #[prost(message, repeated, tag="3")]
+    pub selected: ::prost::alloc::vec::Vec<ConstituentMomentumSelectedItem>,
+}
 /// GetMarketMakingStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

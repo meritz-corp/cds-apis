@@ -70,6 +70,15 @@ service MarketMakingService {
     option (google.api.method_signature) = "symbol";
   }
 
+  // MM 현재 선정된 상위 구성종목(ConstituentMomentum PDF Top-N) 조회.
+  // notional 비중 상위 top_n 개로 선정된 구성종목 심볼 + 정규화 비중을 반환한다.
+  rpc GetConstituentMomentum(GetConstituentMomentumRequest) returns (GetConstituentMomentumResponse) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/constituent-momentum"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
   // MM 전용 주문장 실시간 스트리밍 (서버→클라이언트)
   rpc StreamMarketMakingOrderbook(GetMarketMakingOrderbookRequest) returns (stream MarketMakingOrderbookData) {
     option (google.api.http) = {
@@ -502,6 +511,31 @@ message GetMarketMakingRequest {
 
   // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
   string slot_id = 3;
+}
+
+// GetConstituentMomentum
+message GetConstituentMomentumRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
+  string fund_code = 2;
+}
+
+// 선정된 상위 구성종목 1개 (심볼 + 정규화 비중)
+message ConstituentMomentumSelectedItem {
+  // 구성종목 ISIN 심볼
+  string symbol = 1;
+  // 정규화 비중 (선정된 top_n 종목끼리 합 = 1)
+  double weight = 2;
+}
+
+message GetConstituentMomentumResponse {
+  // ConstituentMomentum 활성화 여부
+  bool enabled = 1;
+  // 설정된 상위 구성종목 개수 (top_n)
+  uint32 top_n = 2;
+  // 현재 선정된 상위 구성종목 (비중 내림차순). 미가동/미seed 시 빈 목록.
+  repeated ConstituentMomentumSelectedItem selected = 3;
 }
 
 // GetMarketMakingStatus
