@@ -307,6 +307,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 이 조회는 대상 슬롯 필수(kdo 가 빈 값 거부).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1416,10 +1423,6 @@
         "takeMode": {
           "type": "boolean",
           "description": "Take 모드: 잔존 호가 없이, 계산 호가가 시장 상대호가와 교차하는 tick 에만\n비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).\noptional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화."
-        },
-        "slotId": {
-          "type": "string",
-          "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

@@ -89,9 +89,6 @@ pub struct MarketMakingConfiguration {
     /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
     #[prost(bool, optional, tag="24")]
     pub take_mode: ::core::option::Option<bool>,
-    /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
-    #[prost(string, tag="25")]
-    pub slot_id: ::prost::alloc::string::String,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -398,6 +395,9 @@ pub struct GetConstituentMomentumRequest {
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 이 조회는 대상 슬롯 필수(kdo 가 빈 값 거부).
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// 선정된 상위 구성종목 1개 (심볼 + 정규화 비중)
 #[allow(clippy::derive_partial_eq_without_eq)]

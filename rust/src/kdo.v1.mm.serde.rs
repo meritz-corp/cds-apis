@@ -1079,12 +1079,18 @@ impl serde::Serialize for GetConstituentMomentumRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.GetConstituentMomentumRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
         }
         struct_ser.end()
     }
@@ -1099,12 +1105,15 @@ impl<'de> serde::Deserialize<'de> for GetConstituentMomentumRequest {
             "symbol",
             "fund_code",
             "fundCode",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
             FundCode,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1129,6 +1138,7 @@ impl<'de> serde::Deserialize<'de> for GetConstituentMomentumRequest {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1150,6 +1160,7 @@ impl<'de> serde::Deserialize<'de> for GetConstituentMomentumRequest {
             {
                 let mut symbol__ = None;
                 let mut fund_code__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -1164,6 +1175,12 @@ impl<'de> serde::Deserialize<'de> for GetConstituentMomentumRequest {
                             }
                             fund_code__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1172,6 +1189,7 @@ impl<'de> serde::Deserialize<'de> for GetConstituentMomentumRequest {
                 Ok(GetConstituentMomentumRequest {
                     symbol: symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -3601,9 +3619,6 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -3669,9 +3684,6 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.take_mode.as_ref() {
             struct_ser.serialize_field("take_mode", v)?;
         }
-        if true {
-            struct_ser.serialize_field("slot_id", &self.slot_id)?;
-        }
         struct_ser.end()
     }
 }
@@ -3714,8 +3726,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "f2mMaWindowSecs",
             "take_mode",
             "takeMode",
-            "slot_id",
-            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3738,7 +3748,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             F2mRefitIntervalSecs,
             F2mMaWindowSecs,
             TakeMode,
-            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3779,7 +3788,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "f2mRefitIntervalSecs" | "f2m_refit_interval_secs" => Ok(GeneratedField::F2mRefitIntervalSecs),
                             "f2mMaWindowSecs" | "f2m_ma_window_secs" => Ok(GeneratedField::F2mMaWindowSecs),
                             "takeMode" | "take_mode" => Ok(GeneratedField::TakeMode),
-                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3817,7 +3825,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut f2m_refit_interval_secs__ = None;
                 let mut f2m_ma_window_secs__ = None;
                 let mut take_mode__ = None;
-                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3940,12 +3947,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             take_mode__ = map_.next_value()?;
                         }
-                        GeneratedField::SlotId => {
-                            if slot_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("slotId"));
-                            }
-                            slot_id__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3970,7 +3971,6 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     f2m_refit_interval_secs: f2m_refit_interval_secs__,
                     f2m_ma_window_secs: f2m_ma_window_secs__,
                     take_mode: take_mode__,
-                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }

@@ -103,7 +103,6 @@ const MarketMakingConfiguration$json = {
     {'1': 'f2m_refit_interval_secs', '3': 22, '4': 1, '5': 4, '9': 1, '10': 'f2mRefitIntervalSecs', '17': true},
     {'1': 'f2m_ma_window_secs', '3': 23, '4': 1, '5': 4, '9': 2, '10': 'f2mMaWindowSecs', '17': true},
     {'1': 'take_mode', '3': 24, '4': 1, '5': 8, '9': 3, '10': 'takeMode', '17': true},
-    {'1': 'slot_id', '3': 25, '4': 1, '5': 9, '10': 'slotId'},
   ],
   '8': [
     {'1': '_basis'},
@@ -143,11 +142,10 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'djEubW0uTWFya2V0TWFraW5nUHJveHlNb21lbnR1bVINcHJveHlNb21lbnR1bRI6ChdmMm1fcm'
     'VmaXRfaW50ZXJ2YWxfc2VjcxgWIAEoBEgBUhRmMm1SZWZpdEludGVydmFsU2Vjc4gBARIwChJm'
     'Mm1fbWFfd2luZG93X3NlY3MYFyABKARIAlIPZjJtTWFXaW5kb3dTZWNziAEBEiAKCXRha2VfbW'
-    '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBARIXCgdzbG90X2lkGBkgASgJUgZzbG90SWRCCAoGX2Jh'
-    'c2lzQhoKGF9mMm1fcmVmaXRfaW50ZXJ2YWxfc2Vjc0IVChNfZjJtX21hX3dpbmRvd19zZWNzQg'
-    'wKCl90YWtlX21vZGVKBAgHEAhKBAgIEAlKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9h'
-    'ZGp1c3RtZW50Ug5hc2tfYWRqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZm'
-    'ZzZXRSCmFza19vZmZzZXQ=');
+    '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBAUIICgZfYmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZh'
+    'bF9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3NCDAoKX3Rha2VfbW9kZUoECAcQCEoECAgQCU'
+    'oECAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza19hZGp1c3RtZW50'
+    'UgliaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNldA==');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -479,13 +477,15 @@ const GetConstituentMomentumRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `GetConstituentMomentumRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getConstituentMomentumRequestDescriptor = $convert.base64Decode(
     'Ch1HZXRDb25zdGl0dWVudE1vbWVudHVtUmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBn'
-    'N5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2Rl');
+    'N5bWJvbBIbCglmdW5kX2NvZGUYAiABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYAyABKAlSBnNs'
+    'b3RJZA==');
 
 @$core.Deprecated('Use constituentMomentumSelectedItemDescriptor instead')
 const ConstituentMomentumSelectedItem$json = {

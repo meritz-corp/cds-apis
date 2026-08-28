@@ -158,7 +158,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? f2mRefitIntervalSecs,
     $fixnum.Int64? f2mMaWindowSecs,
     $core.bool? takeMode,
-    $core.String? slotId,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -179,7 +178,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (f2mRefitIntervalSecs != null) result.f2mRefitIntervalSecs = f2mRefitIntervalSecs;
     if (f2mMaWindowSecs != null) result.f2mMaWindowSecs = f2mMaWindowSecs;
     if (takeMode != null) result.takeMode = takeMode;
-    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -207,7 +205,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(22, _omitFieldNames ? '' : 'f2mRefitIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(23, _omitFieldNames ? '' : 'f2mMaWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOB(24, _omitFieldNames ? '' : 'takeMode')
-    ..aOS(25, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -431,16 +428,6 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasTakeMode() => $_has(17);
   @$pb.TagNumber(24)
   void clearTakeMode() => $_clearField(24);
-
-  /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
-  @$pb.TagNumber(25)
-  $core.String get slotId => $_getSZ(18);
-  @$pb.TagNumber(25)
-  set slotId($core.String value) => $_setString(18, value);
-  @$pb.TagNumber(25)
-  $core.bool hasSlotId() => $_has(18);
-  @$pb.TagNumber(25)
-  void clearSlotId() => $_clearField(25);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -1903,10 +1890,12 @@ class GetConstituentMomentumRequest extends $pb.GeneratedMessage {
   factory GetConstituentMomentumRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -1918,6 +1907,7 @@ class GetConstituentMomentumRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetConstituentMomentumRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -1957,6 +1947,16 @@ class GetConstituentMomentumRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 이 조회는 대상 슬롯 필수(kdo 가 빈 값 거부).
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 /// 선정된 상위 구성종목 1개 (심볼 + 정규화 비중)

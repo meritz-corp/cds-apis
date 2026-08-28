@@ -273,9 +273,6 @@ message MarketMakingConfiguration {
   // 비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).
   // optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
   optional bool take_mode = 24;
-
-  // 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
-  string slot_id = 25;
 }
 
 // NAV pricing 상세 설정
@@ -525,6 +522,8 @@ message GetConstituentMomentumRequest {
   string symbol = 1 [(google.api.field_behavior) = REQUIRED];
   // 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용. 빈 문자열 = 단일 인스턴스 자동선택.
   string fund_code = 2;
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 이 조회는 대상 슬롯 필수(kdo 가 빈 값 거부).
+  string slot_id = 3;
 }
 
 // 선정된 상위 구성종목 1개 (심볼 + 정규화 비중)
