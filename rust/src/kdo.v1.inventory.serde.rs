@@ -19,6 +19,9 @@ impl serde::Serialize for AllocateSessionInventoryRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.AllocateSessionInventoryRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
@@ -33,6 +36,9 @@ impl serde::Serialize for AllocateSessionInventoryRequest {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("balance_override", ToString::to_string(&self.balance_override).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
         }
         struct_ser.end()
     }
@@ -50,6 +56,8 @@ impl<'de> serde::Deserialize<'de> for AllocateSessionInventoryRequest {
             "serviceName",
             "balance_override",
             "balanceOverride",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -58,6 +66,7 @@ impl<'de> serde::Deserialize<'de> for AllocateSessionInventoryRequest {
             Symbol,
             ServiceName,
             BalanceOverride,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -84,6 +93,7 @@ impl<'de> serde::Deserialize<'de> for AllocateSessionInventoryRequest {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "serviceName" | "service_name" => Ok(GeneratedField::ServiceName),
                             "balanceOverride" | "balance_override" => Ok(GeneratedField::BalanceOverride),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -107,6 +117,7 @@ impl<'de> serde::Deserialize<'de> for AllocateSessionInventoryRequest {
                 let mut symbol__ = None;
                 let mut service_name__ = None;
                 let mut balance_override__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -135,6 +146,12 @@ impl<'de> serde::Deserialize<'de> for AllocateSessionInventoryRequest {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -145,6 +162,7 @@ impl<'de> serde::Deserialize<'de> for AllocateSessionInventoryRequest {
                     symbol: symbol__.unwrap_or_default(),
                     service_name: service_name__.unwrap_or_default(),
                     balance_override: balance_override__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -1021,6 +1039,9 @@ impl serde::Serialize for GetSessionInventoryRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.GetSessionInventoryRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
@@ -1030,6 +1051,9 @@ impl serde::Serialize for GetSessionInventoryRequest {
         }
         if true {
             struct_ser.serialize_field("service_name", &self.service_name)?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
         }
         struct_ser.end()
     }
@@ -1045,6 +1069,8 @@ impl<'de> serde::Deserialize<'de> for GetSessionInventoryRequest {
             "symbol",
             "service_name",
             "serviceName",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1052,6 +1078,7 @@ impl<'de> serde::Deserialize<'de> for GetSessionInventoryRequest {
             Fund,
             Symbol,
             ServiceName,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1077,6 +1104,7 @@ impl<'de> serde::Deserialize<'de> for GetSessionInventoryRequest {
                             "fund" => Ok(GeneratedField::Fund),
                             "symbol" => Ok(GeneratedField::Symbol),
                             "serviceName" | "service_name" => Ok(GeneratedField::ServiceName),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1099,6 +1127,7 @@ impl<'de> serde::Deserialize<'de> for GetSessionInventoryRequest {
                 let mut fund__ = None;
                 let mut symbol__ = None;
                 let mut service_name__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -1119,6 +1148,12 @@ impl<'de> serde::Deserialize<'de> for GetSessionInventoryRequest {
                             }
                             service_name__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1128,6 +1163,7 @@ impl<'de> serde::Deserialize<'de> for GetSessionInventoryRequest {
                     fund: fund__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
                     service_name: service_name__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -5977,6 +6013,9 @@ impl serde::Serialize for ReleaseSessionInventoryRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.ReleaseSessionInventoryRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
@@ -5986,6 +6025,9 @@ impl serde::Serialize for ReleaseSessionInventoryRequest {
         }
         if true {
             struct_ser.serialize_field("service_name", &self.service_name)?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
         }
         struct_ser.end()
     }
@@ -6001,6 +6043,8 @@ impl<'de> serde::Deserialize<'de> for ReleaseSessionInventoryRequest {
             "symbol",
             "service_name",
             "serviceName",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6008,6 +6052,7 @@ impl<'de> serde::Deserialize<'de> for ReleaseSessionInventoryRequest {
             Fund,
             Symbol,
             ServiceName,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6033,6 +6078,7 @@ impl<'de> serde::Deserialize<'de> for ReleaseSessionInventoryRequest {
                             "fund" => Ok(GeneratedField::Fund),
                             "symbol" => Ok(GeneratedField::Symbol),
                             "serviceName" | "service_name" => Ok(GeneratedField::ServiceName),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6055,6 +6101,7 @@ impl<'de> serde::Deserialize<'de> for ReleaseSessionInventoryRequest {
                 let mut fund__ = None;
                 let mut symbol__ = None;
                 let mut service_name__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -6075,6 +6122,12 @@ impl<'de> serde::Deserialize<'de> for ReleaseSessionInventoryRequest {
                             }
                             service_name__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6084,6 +6137,7 @@ impl<'de> serde::Deserialize<'de> for ReleaseSessionInventoryRequest {
                     fund: fund__.unwrap_or_default(),
                     symbol: symbol__.unwrap_or_default(),
                     service_name: service_name__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -6411,6 +6465,9 @@ impl serde::Serialize for ResizeSessionInventoryRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.ResizeSessionInventoryRequest", len)?;
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
@@ -6425,6 +6482,9 @@ impl serde::Serialize for ResizeSessionInventoryRequest {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("new_balance", ToString::to_string(&self.new_balance).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
         }
         struct_ser.end()
     }
@@ -6442,6 +6502,8 @@ impl<'de> serde::Deserialize<'de> for ResizeSessionInventoryRequest {
             "serviceName",
             "new_balance",
             "newBalance",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6450,6 +6512,7 @@ impl<'de> serde::Deserialize<'de> for ResizeSessionInventoryRequest {
             Symbol,
             ServiceName,
             NewBalance,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6476,6 +6539,7 @@ impl<'de> serde::Deserialize<'de> for ResizeSessionInventoryRequest {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "serviceName" | "service_name" => Ok(GeneratedField::ServiceName),
                             "newBalance" | "new_balance" => Ok(GeneratedField::NewBalance),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6499,6 +6563,7 @@ impl<'de> serde::Deserialize<'de> for ResizeSessionInventoryRequest {
                 let mut symbol__ = None;
                 let mut service_name__ = None;
                 let mut new_balance__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Fund => {
@@ -6527,6 +6592,12 @@ impl<'de> serde::Deserialize<'de> for ResizeSessionInventoryRequest {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6537,6 +6608,7 @@ impl<'de> serde::Deserialize<'de> for ResizeSessionInventoryRequest {
                     symbol: symbol__.unwrap_or_default(),
                     service_name: service_name__.unwrap_or_default(),
                     new_balance: new_balance__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }
@@ -6685,6 +6757,9 @@ impl serde::Serialize for SessionInventory {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.inventory.SessionInventory", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -6710,6 +6785,9 @@ impl serde::Serialize for SessionInventory {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("available", ToString::to_string(&self.available).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
         struct_ser.end()
     }
 }
@@ -6728,6 +6806,8 @@ impl<'de> serde::Deserialize<'de> for SessionInventory {
             "balance",
             "selling",
             "available",
+            "slot_id",
+            "slotId",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6738,6 +6818,7 @@ impl<'de> serde::Deserialize<'de> for SessionInventory {
             Balance,
             Selling,
             Available,
+            SlotId,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6766,6 +6847,7 @@ impl<'de> serde::Deserialize<'de> for SessionInventory {
                             "balance" => Ok(GeneratedField::Balance),
                             "selling" => Ok(GeneratedField::Selling),
                             "available" => Ok(GeneratedField::Available),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6791,6 +6873,7 @@ impl<'de> serde::Deserialize<'de> for SessionInventory {
                 let mut balance__ = None;
                 let mut selling__ = None;
                 let mut available__ = None;
+                let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -6835,6 +6918,12 @@ impl<'de> serde::Deserialize<'de> for SessionInventory {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6847,6 +6936,7 @@ impl<'de> serde::Deserialize<'de> for SessionInventory {
                     balance: balance__.unwrap_or_default(),
                     selling: selling__.unwrap_or_default(),
                     available: available__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
                 })
             }
         }

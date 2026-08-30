@@ -826,6 +826,7 @@ const SessionInventory$json = {
     {'1': 'balance', '3': 4, '4': 1, '5': 3, '10': 'balance'},
     {'1': 'selling', '3': 5, '4': 1, '5': 3, '10': 'selling'},
     {'1': 'available', '3': 6, '4': 1, '5': 3, '10': 'available'},
+    {'1': 'slot_id', '3': 7, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -834,7 +835,7 @@ final $typed_data.Uint8List sessionInventoryDescriptor = $convert.base64Decode(
     'ChBTZXNzaW9uSW52ZW50b3J5EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhsKCWZ1bmRfY29kZR'
     'gCIAEoCVIIZnVuZENvZGUSIQoMc2VydmljZV9uYW1lGAMgASgJUgtzZXJ2aWNlTmFtZRIYCgdi'
     'YWxhbmNlGAQgASgDUgdiYWxhbmNlEhgKB3NlbGxpbmcYBSABKANSB3NlbGxpbmcSHAoJYXZhaW'
-    'xhYmxlGAYgASgDUglhdmFpbGFibGU=');
+    'xhYmxlGAYgASgDUglhdmFpbGFibGUSFwoHc2xvdF9pZBgHIAEoCVIGc2xvdElk');
 
 @$core.Deprecated('Use allocateSessionInventoryRequestDescriptor instead')
 const AllocateSessionInventoryRequest$json = {
@@ -844,6 +845,7 @@ const AllocateSessionInventoryRequest$json = {
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
     {'1': 'balance_override', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'balanceOverride'},
+    {'1': 'slot_id', '3': 5, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -852,7 +854,8 @@ final $typed_data.Uint8List allocateSessionInventoryRequestDescriptor = $convert
     'Ch9BbGxvY2F0ZVNlc3Npb25JbnZlbnRvcnlSZXF1ZXN0EjEKBGZ1bmQYASABKAlCHeJBAQL6QR'
     'YKFGtkby5jZHNhcGlzLnh5ei9GdW5kUgRmdW5kEhwKBnN5bWJvbBgCIAEoCUIE4kEBAlIGc3lt'
     'Ym9sEicKDHNlcnZpY2VfbmFtZRgDIAEoCUIE4kEBAVILc2VydmljZU5hbWUSLwoQYmFsYW5jZV'
-    '9vdmVycmlkZRgEIAEoA0IE4kEBAVIPYmFsYW5jZU92ZXJyaWRl');
+    '9vdmVycmlkZRgEIAEoA0IE4kEBAVIPYmFsYW5jZU92ZXJyaWRlEhcKB3Nsb3RfaWQYBSABKAlS'
+    'BnNsb3RJZA==');
 
 @$core.Deprecated('Use allocateSessionInventoryResponseDescriptor instead')
 const AllocateSessionInventoryResponse$json = {
@@ -874,6 +877,7 @@ const ReleaseSessionInventoryRequest$json = {
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -881,7 +885,8 @@ const ReleaseSessionInventoryRequest$json = {
 final $typed_data.Uint8List releaseSessionInventoryRequestDescriptor = $convert.base64Decode(
     'Ch5SZWxlYXNlU2Vzc2lvbkludmVudG9yeVJlcXVlc3QSMQoEZnVuZBgBIAEoCUId4kEBAvpBFg'
     'oUa2RvLmNkc2FwaXMueHl6L0Z1bmRSBGZ1bmQSHAoGc3ltYm9sGAIgASgJQgTiQQECUgZzeW1i'
-    'b2wSJwoMc2VydmljZV9uYW1lGAMgASgJQgTiQQEBUgtzZXJ2aWNlTmFtZQ==');
+    'b2wSJwoMc2VydmljZV9uYW1lGAMgASgJQgTiQQEBUgtzZXJ2aWNlTmFtZRIXCgdzbG90X2lkGA'
+    'QgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use releaseSessionInventoryResponseDescriptor instead')
 const ReleaseSessionInventoryResponse$json = {
@@ -904,6 +909,7 @@ const GetSessionInventoryRequest$json = {
     {'1': 'fund', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fund'},
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
+    {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -911,7 +917,8 @@ const GetSessionInventoryRequest$json = {
 final $typed_data.Uint8List getSessionInventoryRequestDescriptor = $convert.base64Decode(
     'ChpHZXRTZXNzaW9uSW52ZW50b3J5UmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWChRrZG'
     '8uY2RzYXBpcy54eXovRnVuZFIEZnVuZBIcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJvbBIn'
-    'CgxzZXJ2aWNlX25hbWUYAyABKAlCBOJBAQFSC3NlcnZpY2VOYW1l');
+    'CgxzZXJ2aWNlX25hbWUYAyABKAlCBOJBAQFSC3NlcnZpY2VOYW1lEhcKB3Nsb3RfaWQYBCABKA'
+    'lSBnNsb3RJZA==');
 
 @$core.Deprecated('Use resizeSessionInventoryRequestDescriptor instead')
 const ResizeSessionInventoryRequest$json = {
@@ -921,6 +928,7 @@ const ResizeSessionInventoryRequest$json = {
     {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'service_name', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'serviceName'},
     {'1': 'new_balance', '3': 4, '4': 1, '5': 3, '8': {}, '10': 'newBalance'},
+    {'1': 'slot_id', '3': 5, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
@@ -929,7 +937,7 @@ final $typed_data.Uint8List resizeSessionInventoryRequestDescriptor = $convert.b
     'Ch1SZXNpemVTZXNzaW9uSW52ZW50b3J5UmVxdWVzdBIxCgRmdW5kGAEgASgJQh3iQQEC+kEWCh'
     'RrZG8uY2RzYXBpcy54eXovRnVuZFIEZnVuZBIcCgZzeW1ib2wYAiABKAlCBOJBAQJSBnN5bWJv'
     'bBInCgxzZXJ2aWNlX25hbWUYAyABKAlCBOJBAQFSC3NlcnZpY2VOYW1lEiUKC25ld19iYWxhbm'
-    'NlGAQgASgDQgTiQQECUgpuZXdCYWxhbmNl');
+    'NlGAQgASgDQgTiQQECUgpuZXdCYWxhbmNlEhcKB3Nsb3RfaWQYBSABKAlSBnNsb3RJZA==');
 
 @$core.Deprecated('Use resizeSessionInventoryResponseDescriptor instead')
 const ResizeSessionInventoryResponse$json = {

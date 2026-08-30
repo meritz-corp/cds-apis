@@ -811,6 +811,9 @@ pub struct SessionInventory {
     /// 매도 가용 수량 (= balance - selling)
     #[prost(int64, tag="6")]
     pub available: i64,
+    /// MM 슬롯 구분자 (기본 슬롯이면 빈 문자열 또는 "default").
+    #[prost(string, tag="7")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// AllocateSessionInventory 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -830,6 +833,10 @@ pub struct AllocateSessionInventoryRequest {
     /// 0 이면 서버가 DB 의 lp.session_inventory_balance 를 사용한다.
     #[prost(int64, tag="4")]
     pub balance_override: i64,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+    /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+    #[prost(string, tag="5")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// AllocateSessionInventory 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -853,6 +860,10 @@ pub struct ReleaseSessionInventoryRequest {
     /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
     #[prost(string, tag="3")]
     pub service_name: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+    /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// ReleaseSessionInventory 응답
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -876,6 +887,10 @@ pub struct GetSessionInventoryRequest {
     /// 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
     #[prost(string, tag="3")]
     pub service_name: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+    /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+    #[prost(string, tag="4")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// ResizeSessionInventory 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -895,6 +910,10 @@ pub struct ResizeSessionInventoryRequest {
     /// selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
     #[prost(int64, tag="4")]
     pub new_balance: i64,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+    /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+    #[prost(string, tag="5")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// ResizeSessionInventory 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

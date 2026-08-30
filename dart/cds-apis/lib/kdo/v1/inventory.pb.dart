@@ -3531,6 +3531,7 @@ class SessionInventory extends $pb.GeneratedMessage {
     $fixnum.Int64? balance,
     $fixnum.Int64? selling,
     $fixnum.Int64? available,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -3539,6 +3540,7 @@ class SessionInventory extends $pb.GeneratedMessage {
     if (balance != null) result.balance = balance;
     if (selling != null) result.selling = selling;
     if (available != null) result.available = available;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -3554,6 +3556,7 @@ class SessionInventory extends $pb.GeneratedMessage {
     ..aInt64(4, _omitFieldNames ? '' : 'balance')
     ..aInt64(5, _omitFieldNames ? '' : 'selling')
     ..aInt64(6, _omitFieldNames ? '' : 'available')
+    ..aOS(7, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -3633,6 +3636,16 @@ class SessionInventory extends $pb.GeneratedMessage {
   $core.bool hasAvailable() => $_has(5);
   @$pb.TagNumber(6)
   void clearAvailable() => $_clearField(6);
+
+  /// MM 슬롯 구분자 (기본 슬롯이면 빈 문자열 또는 "default").
+  @$pb.TagNumber(7)
+  $core.String get slotId => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set slotId($core.String value) => $_setString(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasSlotId() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSlotId() => $_clearField(7);
 }
 
 /// AllocateSessionInventory 요청
@@ -3642,12 +3655,14 @@ class AllocateSessionInventoryRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? serviceName,
     $fixnum.Int64? balanceOverride,
+    $core.String? slotId,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (symbol != null) result.symbol = symbol;
     if (serviceName != null) result.serviceName = serviceName;
     if (balanceOverride != null) result.balanceOverride = balanceOverride;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -3661,6 +3676,7 @@ class AllocateSessionInventoryRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'serviceName')
     ..aInt64(4, _omitFieldNames ? '' : 'balanceOverride')
+    ..aOS(5, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -3722,6 +3738,17 @@ class AllocateSessionInventoryRequest extends $pb.GeneratedMessage {
   $core.bool hasBalanceOverride() => $_has(3);
   @$pb.TagNumber(4)
   void clearBalanceOverride() => $_clearField(4);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+  /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+  @$pb.TagNumber(5)
+  $core.String get slotId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set slotId($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSlotId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSlotId() => $_clearField(5);
 }
 
 /// AllocateSessionInventory 응답
@@ -3780,11 +3807,13 @@ class ReleaseSessionInventoryRequest extends $pb.GeneratedMessage {
     $core.String? fund,
     $core.String? symbol,
     $core.String? serviceName,
+    $core.String? slotId,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (symbol != null) result.symbol = symbol;
     if (serviceName != null) result.serviceName = serviceName;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -3797,6 +3826,7 @@ class ReleaseSessionInventoryRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'serviceName')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -3847,6 +3877,17 @@ class ReleaseSessionInventoryRequest extends $pb.GeneratedMessage {
   $core.bool hasServiceName() => $_has(2);
   @$pb.TagNumber(3)
   void clearServiceName() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+  /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 /// ReleaseSessionInventory 응답
@@ -3905,11 +3946,13 @@ class GetSessionInventoryRequest extends $pb.GeneratedMessage {
     $core.String? fund,
     $core.String? symbol,
     $core.String? serviceName,
+    $core.String? slotId,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (symbol != null) result.symbol = symbol;
     if (serviceName != null) result.serviceName = serviceName;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -3922,6 +3965,7 @@ class GetSessionInventoryRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'fund')
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'serviceName')
+    ..aOS(4, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -3972,6 +4016,17 @@ class GetSessionInventoryRequest extends $pb.GeneratedMessage {
   $core.bool hasServiceName() => $_has(2);
   @$pb.TagNumber(3)
   void clearServiceName() => $_clearField(3);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+  /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+  @$pb.TagNumber(4)
+  $core.String get slotId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set slotId($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSlotId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSlotId() => $_clearField(4);
 }
 
 /// ResizeSessionInventory 요청
@@ -3981,12 +4036,14 @@ class ResizeSessionInventoryRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? serviceName,
     $fixnum.Int64? newBalance,
+    $core.String? slotId,
   }) {
     final result = create();
     if (fund != null) result.fund = fund;
     if (symbol != null) result.symbol = symbol;
     if (serviceName != null) result.serviceName = serviceName;
     if (newBalance != null) result.newBalance = newBalance;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4000,6 +4057,7 @@ class ResizeSessionInventoryRequest extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'symbol')
     ..aOS(3, _omitFieldNames ? '' : 'serviceName')
     ..aInt64(4, _omitFieldNames ? '' : 'newBalance')
+    ..aOS(5, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4061,6 +4119,17 @@ class ResizeSessionInventoryRequest extends $pb.GeneratedMessage {
   $core.bool hasNewBalance() => $_has(3);
   @$pb.TagNumber(4)
   void clearNewBalance() => $_clearField(4);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
+  /// named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
+  @$pb.TagNumber(5)
+  $core.String get slotId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set slotId($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSlotId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSlotId() => $_clearField(5);
 }
 
 /// ResizeSessionInventory 응답
