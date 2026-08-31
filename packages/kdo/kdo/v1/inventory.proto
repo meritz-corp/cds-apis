@@ -950,7 +950,7 @@ message SessionInventory {
   // 매도 가용 수량 (= balance - selling)
   int64 available = 6;
 
-  // MM 슬롯 구분자. AllocateSessionInventory 요청 시 지정한 slot_id 를 에코한다.
+  // MM 슬롯 구분자 (기본 슬롯이면 빈 문자열 또는 "default").
   string slot_id = 7;
 }
 
@@ -975,7 +975,7 @@ message AllocateSessionInventoryRequest {
   // 0 이면 서버가 DB 의 lp.session_inventory_balance 를 사용한다.
   int64 balance_override = 4 [(google.api.field_behavior) = OPTIONAL];
 
-  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 서버에서 필수(required) 검증한다; 빈 문자열이면 INVALID_ARGUMENT (HTTP 400).
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
   // named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
   string slot_id = 5;
 }
@@ -1003,7 +1003,7 @@ message ReleaseSessionInventoryRequest {
   // 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
   string service_name = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 서버에서 필수(required) 검증한다; 빈 문자열이면 INVALID_ARGUMENT (HTTP 400).
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
   // named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
   string slot_id = 4;
 }
@@ -1031,7 +1031,7 @@ message GetSessionInventoryRequest {
   // 빈 문자열이면 서버가 "multi_service" 를 기본값으로 사용한다.
   string service_name = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 서버에서 필수(required) 검증한다; 빈 문자열이면 INVALID_ARGUMENT (HTTP 400).
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
   // named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
   string slot_id = 4;
 }
@@ -1057,7 +1057,7 @@ message ResizeSessionInventoryRequest {
   // selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
   int64 new_balance = 4 [(google.api.field_behavior) = REQUIRED];
 
-  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 서버에서 필수(required) 검증한다; 빈 문자열이면 INVALID_ARGUMENT (HTTP 400).
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default", 단일 인스턴스 하위호환).
   // named MM 슬롯 세션(service_name "mm:{slot}") 을 조회/조작할 때 지정한다.
   string slot_id = 5;
 }
