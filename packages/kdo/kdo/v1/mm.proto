@@ -243,8 +243,8 @@ message MarketMakingConfiguration {
   // 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
   optional int64 basis = 15;
 
-  // 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
-  int32 base_half_ticks = 16;
+  // 호가 반폭(틱 수, 소수 허용). bid = mid − base_half_ticks·tick, ask = mid + base_half_ticks·tick
+  double base_half_ticks = 16;
 
   // 순포지션 수량 한도 (방향별 호가 차단)
   MarketMakingQuantityLimit quantity_limit = 17;

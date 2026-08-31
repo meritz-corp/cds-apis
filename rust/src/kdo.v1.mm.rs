@@ -58,9 +58,9 @@ pub struct MarketMakingConfiguration {
     /// 단일 basis (bid_basis/ask_basis 통합 후속, Price internal representation)
     #[prost(int64, optional, tag="15")]
     pub basis: ::core::option::Option<i64>,
-    /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
-    #[prost(int32, tag="16")]
-    pub base_half_ticks: i32,
+    /// 호가 반폭(틱 수, 소수 허용). bid = mid − base_half_ticks·tick, ask = mid + base_half_ticks·tick
+    #[prost(double, tag="16")]
+    pub base_half_ticks: f64,
     /// 순포지션 수량 한도 (방향별 호가 차단)
     #[prost(message, optional, tag="17")]
     pub quantity_limit: ::core::option::Option<MarketMakingQuantityLimit>,

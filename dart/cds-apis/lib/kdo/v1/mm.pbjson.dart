@@ -94,7 +94,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'bid_quantity', '3': 9, '4': 1, '5': 3, '10': 'bidQuantity'},
     {'1': 'ask_quantity', '3': 10, '4': 1, '5': 3, '10': 'askQuantity'},
     {'1': 'basis', '3': 15, '4': 1, '5': 3, '9': 0, '10': 'basis', '17': true},
-    {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 5, '10': 'baseHalfTicks'},
+    {'1': 'base_half_ticks', '3': 16, '4': 1, '5': 1, '10': 'baseHalfTicks'},
     {'1': 'quantity_limit', '3': 17, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQuantityLimit', '10': 'quantityLimit'},
     {'1': 'ma_cross', '3': 18, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMaCross', '10': 'maCross'},
     {'1': 'constituent_momentum', '3': 19, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConstituentMomentum', '10': 'constituentMomentum'},
@@ -132,7 +132,7 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'YW5jZXIYBiABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5nRXhwb3N1cmVCYWxhbmNlclIQZX'
     'hwb3N1cmVCYWxhbmNlchIhCgxiaWRfcXVhbnRpdHkYCSABKANSC2JpZFF1YW50aXR5EiEKDGFz'
     'a19xdWFudGl0eRgKIAEoA1ILYXNrUXVhbnRpdHkSGQoFYmFzaXMYDyABKANIAFIFYmFzaXOIAQ'
-    'ESJgoPYmFzZV9oYWxmX3RpY2tzGBAgASgFUg1iYXNlSGFsZlRpY2tzEksKDnF1YW50aXR5X2xp'
+    'ESJgoPYmFzZV9oYWxmX3RpY2tzGBAgASgBUg1iYXNlSGFsZlRpY2tzEksKDnF1YW50aXR5X2xp'
     'bWl0GBEgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ1F1YW50aXR5TGltaXRSDXF1YW50aX'
     'R5TGltaXQSOQoIbWFfY3Jvc3MYEiABKAsyHi5rZG8udjEubW0uTWFya2V0TWFraW5nTWFDcm9z'
     'c1IHbWFDcm9zcxJdChRjb25zdGl0dWVudF9tb21lbnR1bRgTIAEoCzIqLmtkby52MS5tbS5NYX'

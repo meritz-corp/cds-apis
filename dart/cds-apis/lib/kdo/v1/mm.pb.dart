@@ -149,7 +149,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? bidQuantity,
     $fixnum.Int64? askQuantity,
     $fixnum.Int64? basis,
-    $core.int? baseHalfTicks,
+    $core.double? baseHalfTicks,
     MarketMakingQuantityLimit? quantityLimit,
     MarketMakingMaCross? maCross,
     MarketMakingConstituentMomentum? constituentMomentum,
@@ -196,7 +196,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'bidQuantity')
     ..aInt64(10, _omitFieldNames ? '' : 'askQuantity')
     ..aInt64(15, _omitFieldNames ? '' : 'basis')
-    ..a<$core.int>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.O3)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'baseHalfTicks', $pb.PbFieldType.OD)
     ..aOM<MarketMakingQuantityLimit>(17, _omitFieldNames ? '' : 'quantityLimit', subBuilder: MarketMakingQuantityLimit.create)
     ..aOM<MarketMakingMaCross>(18, _omitFieldNames ? '' : 'maCross', subBuilder: MarketMakingMaCross.create)
     ..aOM<MarketMakingConstituentMomentum>(19, _omitFieldNames ? '' : 'constituentMomentum', subBuilder: MarketMakingConstituentMomentum.create)
@@ -325,11 +325,11 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(15)
   void clearBasis() => $_clearField(15);
 
-  /// 호가 반폭 (틱 수). bid = mid - half, ask = mid + half
+  /// 호가 반폭(틱 수, 소수 허용). bid = mid − base_half_ticks·tick, ask = mid + base_half_ticks·tick
   @$pb.TagNumber(16)
-  $core.int get baseHalfTicks => $_getIZ(9);
+  $core.double get baseHalfTicks => $_getN(9);
   @$pb.TagNumber(16)
-  set baseHalfTicks($core.int value) => $_setSignedInt32(9, value);
+  set baseHalfTicks($core.double value) => $_setDouble(9, value);
   @$pb.TagNumber(16)
   $core.bool hasBaseHalfTicks() => $_has(9);
   @$pb.TagNumber(16)
