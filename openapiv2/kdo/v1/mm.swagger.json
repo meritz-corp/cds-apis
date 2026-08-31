@@ -593,6 +593,13 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯(\"default\").\nnamed MM 슬롯의 손익만 조회하려면 지정한다.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [

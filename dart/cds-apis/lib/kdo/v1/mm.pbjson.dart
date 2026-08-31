@@ -958,6 +958,7 @@ const ListMmPnlHistoryRequest$json = {
     {'1': 'start_time', '3': 3, '4': 1, '5': 3, '10': 'startTime'},
     {'1': 'end_time', '3': 4, '4': 1, '5': 3, '10': 'endTime'},
     {'1': 'bucket_seconds', '3': 5, '4': 1, '5': 13, '10': 'bucketSeconds'},
+    {'1': 'slot_id', '3': 6, '4': 1, '5': 9, '10': 'slotId'},
   ],
   '8': [
     {'1': '_fund_code'},
@@ -969,7 +970,8 @@ final $typed_data.Uint8List listMmPnlHistoryRequestDescriptor = $convert.base64D
     'ChdMaXN0TW1QbmxIaXN0b3J5UmVxdWVzdBIcCgZzeW1ib2wYASABKAlCBOJBAQJSBnN5bWJvbB'
     'IgCglmdW5kX2NvZGUYAiABKAlIAFIIZnVuZENvZGWIAQESHQoKc3RhcnRfdGltZRgDIAEoA1IJ'
     'c3RhcnRUaW1lEhkKCGVuZF90aW1lGAQgASgDUgdlbmRUaW1lEiUKDmJ1Y2tldF9zZWNvbmRzGA'
-    'UgASgNUg1idWNrZXRTZWNvbmRzQgwKCl9mdW5kX2NvZGU=');
+    'UgASgNUg1idWNrZXRTZWNvbmRzEhcKB3Nsb3RfaWQYBiABKAlSBnNsb3RJZEIMCgpfZnVuZF9j'
+    'b2Rl');
 
 @$core.Deprecated('Use mmPnlPointDescriptor instead')
 const MmPnlPoint$json = {

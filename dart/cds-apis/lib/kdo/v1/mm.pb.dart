@@ -4071,6 +4071,7 @@ class ListMmPnlHistoryRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? startTime,
     $fixnum.Int64? endTime,
     $core.int? bucketSeconds,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -4078,6 +4079,7 @@ class ListMmPnlHistoryRequest extends $pb.GeneratedMessage {
     if (startTime != null) result.startTime = startTime;
     if (endTime != null) result.endTime = endTime;
     if (bucketSeconds != null) result.bucketSeconds = bucketSeconds;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -4092,6 +4094,7 @@ class ListMmPnlHistoryRequest extends $pb.GeneratedMessage {
     ..aInt64(3, _omitFieldNames ? '' : 'startTime')
     ..aInt64(4, _omitFieldNames ? '' : 'endTime')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'bucketSeconds', $pb.PbFieldType.OU3)
+    ..aOS(6, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -4161,6 +4164,17 @@ class ListMmPnlHistoryRequest extends $pb.GeneratedMessage {
   $core.bool hasBucketSeconds() => $_has(4);
   @$pb.TagNumber(5)
   void clearBucketSeconds() => $_clearField(5);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
+  /// named MM 슬롯의 손익만 조회하려면 지정한다.
+  @$pb.TagNumber(6)
+  $core.String get slotId => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set slotId($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSlotId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSlotId() => $_clearField(6);
 }
 
 /// 손익 시계열 포인트 (버킷 마지막 값)

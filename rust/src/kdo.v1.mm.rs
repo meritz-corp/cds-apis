@@ -834,6 +834,10 @@ pub struct ListMmPnlHistoryRequest {
     /// 버킷 간격 (초). 0/미지정 = 1초
     #[prost(uint32, tag="5")]
     pub bucket_seconds: u32,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
+    /// named MM 슬롯의 손익만 조회하려면 지정한다.
+    #[prost(string, tag="6")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// 손익 시계열 포인트 (버킷 마지막 값)
 #[allow(clippy::derive_partial_eq_without_eq)]
