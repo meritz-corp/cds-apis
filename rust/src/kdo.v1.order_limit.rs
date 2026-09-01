@@ -89,14 +89,19 @@ pub struct UpdateOrderLimiterConfigResponse {
 pub struct StreamOrderLimiterStatusRequest {
 }
 // ============================================================================
-// TurnoverLimit — (fund, symbol) 별 N초 슬라이딩 윈도우 gross 거래대금 서킷브레이커
+// TurnoverLimit — (symbol, fund_code, window_secs) 별 N초 슬라이딩 윈도우 gross 체결금액 서킷브레이커
 // ============================================================================
 
-/// 거래대금 서킷브레이커 설정
+/// 체결금액 서킷브레이커 설정.
+/// 키는 (symbol, fund_code, window_secs) 3-튜플 — 같은 (fund, symbol)에 여러 시간창(예: 1초/60초)
+/// 한도를 동시에 걸 수 있다. N초 윈도우 동안 gross 체결금액(체결가×수량, 매수+매도 합산)이
+/// max_amount 이상이면 해당 LP 를 정지시킨다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TurnoverLimit {
-    /// ETF 또는 선물 심볼
+    /// 대상 심볼. ETF/선물 심볼을 지정하면 그 종목만 집계한다.
+    /// 특수값 "*"(와일드카드)를 쓰면 해당 fund 의 "모든 종목 체결 합산"에 대해 한도를 걸며,
+    /// 초과 시 그 펀드의 활성 LP 전체가 정지된다. (심볼별 한도와 펀드 전체 한도를 동시에 둘 수 있다.)
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     /// 4자리 펀드코드
@@ -105,10 +110,10 @@ pub struct TurnoverLimit {
     /// 활성화 여부
     #[prost(bool, tag="3")]
     pub enabled: bool,
-    /// 슬라이딩 윈도우 (초)
+    /// 슬라이딩 윈도우 (초). (symbol, fund_code)와 함께 복합키를 이루어 창별로 별도 설정된다.
     #[prost(uint32, tag="4")]
     pub window_secs: u32,
-    /// 윈도우 gross 거래대금 상한 (원). 0=비활성
+    /// 윈도우 gross 체결금액 상한 (원). 0=비활성
     #[prost(int64, tag="5")]
     pub max_amount: i64,
 }
@@ -121,10 +126,12 @@ pub struct UpdateTurnoverLimitRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTurnoverLimitRequest {
+    /// 대상 심볼. 펀드 전체 한도는 "*"(와일드카드)로 조회한다.
     #[prost(string, tag="1")]
     pub symbol: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 조회할 시간창(초). 키가 (symbol, fund_code, window_secs) 이므로 창을 특정한다.
     #[prost(uint32, tag="3")]
     pub window_secs: u32,
 }

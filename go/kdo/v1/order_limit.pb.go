@@ -435,21 +435,26 @@ func (*StreamOrderLimiterStatusRequest) Descriptor() ([]byte, []int) {
 	return file_kdo_v1_order_limit_proto_rawDescGZIP(), []int{6}
 }
 
-// 거래대금 서킷브레이커 설정
+// 체결금액 서킷브레이커 설정.
+// 키는 (symbol, fund_code, window_secs) 3-튜플 — 같은 (fund, symbol)에 여러 시간창(예: 1초/60초)
+// 한도를 동시에 걸 수 있다. N초 윈도우 동안 gross 체결금액(체결가×수량, 매수+매도 합산)이
+// max_amount 이상이면 해당 LP 를 정지시킨다.
 type TurnoverLimit struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// ETF 또는 선물 심볼
+	// 대상 심볼. ETF/선물 심볼을 지정하면 그 종목만 집계한다.
+	// 특수값 "*"(와일드카드)를 쓰면 해당 fund 의 "모든 종목 체결 합산"에 대해 한도를 걸며,
+	// 초과 시 그 펀드의 활성 LP 전체가 정지된다. (심볼별 한도와 펀드 전체 한도를 동시에 둘 수 있다.)
 	Symbol string `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
 	// 4자리 펀드코드
 	FundCode string `protobuf:"bytes,2,opt,name=fund_code,json=fundCode,proto3" json:"fund_code,omitempty"`
 	// 활성화 여부
 	Enabled bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// 슬라이딩 윈도우 (초)
+	// 슬라이딩 윈도우 (초). (symbol, fund_code)와 함께 복합키를 이루어 창별로 별도 설정된다.
 	WindowSecs uint32 `protobuf:"varint,4,opt,name=window_secs,json=windowSecs,proto3" json:"window_secs,omitempty"`
-	// 윈도우 gross 거래대금 상한 (원). 0=비활성
+	// 윈도우 gross 체결금액 상한 (원). 0=비활성
 	MaxAmount int64 `protobuf:"varint,5,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 }
 
@@ -572,8 +577,10 @@ type GetTurnoverLimitRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Symbol     string `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	FundCode   string `protobuf:"bytes,2,opt,name=fund_code,json=fundCode,proto3" json:"fund_code,omitempty"`
+	// 대상 심볼. 펀드 전체 한도는 "*"(와일드카드)로 조회한다.
+	Symbol   string `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	FundCode string `protobuf:"bytes,2,opt,name=fund_code,json=fundCode,proto3" json:"fund_code,omitempty"`
+	// 조회할 시간창(초). 키가 (symbol, fund_code, window_secs) 이므로 창을 특정한다.
 	WindowSecs uint32 `protobuf:"varint,3,opt,name=window_secs,json=windowSecs,proto3" json:"window_secs,omitempty"`
 }
 

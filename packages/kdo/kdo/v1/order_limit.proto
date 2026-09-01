@@ -131,20 +131,25 @@ message StreamOrderLimiterStatusRequest {
 }
 
 // ============================================================================
-// TurnoverLimit — (fund, symbol) 별 N초 슬라이딩 윈도우 gross 거래대금 서킷브레이커
+// TurnoverLimit — (symbol, fund_code, window_secs) 별 N초 슬라이딩 윈도우 gross 체결금액 서킷브레이커
 // ============================================================================
 
-// 거래대금 서킷브레이커 설정
+// 체결금액 서킷브레이커 설정.
+// 키는 (symbol, fund_code, window_secs) 3-튜플 — 같은 (fund, symbol)에 여러 시간창(예: 1초/60초)
+// 한도를 동시에 걸 수 있다. N초 윈도우 동안 gross 체결금액(체결가×수량, 매수+매도 합산)이
+// max_amount 이상이면 해당 LP 를 정지시킨다.
 message TurnoverLimit {
-  // ETF 또는 선물 심볼
+  // 대상 심볼. ETF/선물 심볼을 지정하면 그 종목만 집계한다.
+  // 특수값 "*"(와일드카드)를 쓰면 해당 fund 의 "모든 종목 체결 합산"에 대해 한도를 걸며,
+  // 초과 시 그 펀드의 활성 LP 전체가 정지된다. (심볼별 한도와 펀드 전체 한도를 동시에 둘 수 있다.)
   string symbol = 1;
   // 4자리 펀드코드
   string fund_code = 2;
   // 활성화 여부
   bool enabled = 3;
-  // 슬라이딩 윈도우 (초)
+  // 슬라이딩 윈도우 (초). (symbol, fund_code)와 함께 복합키를 이루어 창별로 별도 설정된다.
   uint32 window_secs = 4;
-  // 윈도우 gross 거래대금 상한 (원). 0=비활성
+  // 윈도우 gross 체결금액 상한 (원). 0=비활성
   int64 max_amount = 5;
 }
 
@@ -153,8 +158,10 @@ message UpdateTurnoverLimitRequest {
 }
 
 message GetTurnoverLimitRequest {
+  // 대상 심볼. 펀드 전체 한도는 "*"(와일드카드)로 조회한다.
   string symbol = 1;
   string fund_code = 2;
+  // 조회할 시간창(초). 키가 (symbol, fund_code, window_secs) 이므로 창을 특정한다.
   uint32 window_secs = 3;
 }
 

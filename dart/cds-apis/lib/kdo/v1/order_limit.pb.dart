@@ -443,7 +443,10 @@ class StreamOrderLimiterStatusRequest extends $pb.GeneratedMessage {
   static StreamOrderLimiterStatusRequest? _defaultInstance;
 }
 
-/// 거래대금 서킷브레이커 설정
+/// 체결금액 서킷브레이커 설정.
+/// 키는 (symbol, fund_code, window_secs) 3-튜플 — 같은 (fund, symbol)에 여러 시간창(예: 1초/60초)
+/// 한도를 동시에 걸 수 있다. N초 윈도우 동안 gross 체결금액(체결가×수량, 매수+매도 합산)이
+/// max_amount 이상이면 해당 LP 를 정지시킨다.
 class TurnoverLimit extends $pb.GeneratedMessage {
   factory TurnoverLimit({
     $core.String? symbol,
@@ -492,7 +495,9 @@ class TurnoverLimit extends $pb.GeneratedMessage {
   static TurnoverLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TurnoverLimit>(create);
   static TurnoverLimit? _defaultInstance;
 
-  /// ETF 또는 선물 심볼
+  /// 대상 심볼. ETF/선물 심볼을 지정하면 그 종목만 집계한다.
+  /// 특수값 "*"(와일드카드)를 쓰면 해당 fund 의 "모든 종목 체결 합산"에 대해 한도를 걸며,
+  /// 초과 시 그 펀드의 활성 LP 전체가 정지된다. (심볼별 한도와 펀드 전체 한도를 동시에 둘 수 있다.)
   @$pb.TagNumber(1)
   $core.String get symbol => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -522,7 +527,7 @@ class TurnoverLimit extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearEnabled() => $_clearField(3);
 
-  /// 슬라이딩 윈도우 (초)
+  /// 슬라이딩 윈도우 (초). (symbol, fund_code)와 함께 복합키를 이루어 창별로 별도 설정된다.
   @$pb.TagNumber(4)
   $core.int get windowSecs => $_getIZ(3);
   @$pb.TagNumber(4)
@@ -532,7 +537,7 @@ class TurnoverLimit extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearWindowSecs() => $_clearField(4);
 
-  /// 윈도우 gross 거래대금 상한 (원). 0=비활성
+  /// 윈도우 gross 체결금액 상한 (원). 0=비활성
   @$pb.TagNumber(5)
   $fixnum.Int64 get maxAmount => $_getI64(4);
   @$pb.TagNumber(5)
@@ -633,6 +638,7 @@ class GetTurnoverLimitRequest extends $pb.GeneratedMessage {
   static GetTurnoverLimitRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTurnoverLimitRequest>(create);
   static GetTurnoverLimitRequest? _defaultInstance;
 
+  /// 대상 심볼. 펀드 전체 한도는 "*"(와일드카드)로 조회한다.
   @$pb.TagNumber(1)
   $core.String get symbol => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -651,6 +657,7 @@ class GetTurnoverLimitRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
+  /// 조회할 시간창(초). 키가 (symbol, fund_code, window_secs) 이므로 창을 특정한다.
   @$pb.TagNumber(3)
   $core.int get windowSecs => $_getIZ(2);
   @$pb.TagNumber(3)
