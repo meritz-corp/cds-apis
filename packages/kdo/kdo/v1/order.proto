@@ -138,6 +138,11 @@ message SubmitOrderRequest {
   // 퀵주문 출처 (미지정 시 UNSPECIFIED). MM 퀵화면에서 낸 주문은 MM 으로 설정하면
   // 그 체결이 MM 서비스 체결통계에 반영된다.
   optional QuickOrderOrigin quick_order_origin = 13;
+
+  // MM 퀵주문(quick_order_origin=MM)의 슬롯 귀속. 같은 (symbol,fund) 에 여러 MM 슬롯이
+  // 동시에 돌 때 어느 슬롯의 체결통계/노출에 귀속할지 지정한다. 미지정(빈 문자열)이면
+  // default 슬롯. quick_order_origin 이 MM 이 아니면 무시된다.
+  optional string slot_id = 14;
 }
 
 message SubmitOrderResponse {

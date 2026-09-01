@@ -122,6 +122,7 @@ const SubmitOrderRequest$json = {
     {'1': 'need_hedge', '3': 11, '4': 1, '5': 8, '9': 3, '10': 'needHedge', '17': true},
     {'1': 'auto_amend_initial_wait_ms', '3': 12, '4': 1, '5': 4, '9': 4, '10': 'autoAmendInitialWaitMs', '17': true},
     {'1': 'quick_order_origin', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.order.QuickOrderOrigin', '9': 5, '10': 'quickOrderOrigin', '17': true},
+    {'1': 'slot_id', '3': 14, '4': 1, '5': 9, '9': 6, '10': 'slotId', '17': true},
   ],
   '8': [
     {'1': '_auto_amend_strategy'},
@@ -130,6 +131,7 @@ const SubmitOrderRequest$json = {
     {'1': '_need_hedge'},
     {'1': '_auto_amend_initial_wait_ms'},
     {'1': '_quick_order_origin'},
+    {'1': '_slot_id'},
   ],
 };
 
@@ -147,10 +149,11 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     '5kaXRpb25UeXBlSAJSDm9yZGVyQ29uZGl0aW9uiAEBEiIKCm5lZWRfaGVkZ2UYCyABKAhIA1IJ'
     'bmVlZEhlZGdliAEBEj8KGmF1dG9fYW1lbmRfaW5pdGlhbF93YWl0X21zGAwgASgESARSFmF1dG'
     '9BbWVuZEluaXRpYWxXYWl0TXOIAQESUQoScXVpY2tfb3JkZXJfb3JpZ2luGA0gASgOMh4ua2Rv'
-    'LnYxLm9yZGVyLlF1aWNrT3JkZXJPcmlnaW5IBVIQcXVpY2tPcmRlck9yaWdpbogBAUIWChRfYX'
-    'V0b19hbWVuZF9zdHJhdGVneUITChFfbGltaXRfcHJpY2VfdHlwZUISChBfb3JkZXJfY29uZGl0'
-    'aW9uQg0KC19uZWVkX2hlZGdlQh0KG19hdXRvX2FtZW5kX2luaXRpYWxfd2FpdF9tc0IVChNfcX'
-    'VpY2tfb3JkZXJfb3JpZ2lu');
+    'LnYxLm9yZGVyLlF1aWNrT3JkZXJPcmlnaW5IBVIQcXVpY2tPcmRlck9yaWdpbogBARIcCgdzbG'
+    '90X2lkGA4gASgJSAZSBnNsb3RJZIgBAUIWChRfYXV0b19hbWVuZF9zdHJhdGVneUITChFfbGlt'
+    'aXRfcHJpY2VfdHlwZUISChBfb3JkZXJfY29uZGl0aW9uQg0KC19uZWVkX2hlZGdlQh0KG19hdX'
+    'RvX2FtZW5kX2luaXRpYWxfd2FpdF9tc0IVChNfcXVpY2tfb3JkZXJfb3JpZ2luQgoKCF9zbG90'
+    'X2lk');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {

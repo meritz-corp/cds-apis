@@ -47,6 +47,11 @@ pub struct SubmitOrderRequest {
     /// 그 체결이 MM 서비스 체결통계에 반영된다.
     #[prost(enumeration="QuickOrderOrigin", optional, tag="13")]
     pub quick_order_origin: ::core::option::Option<i32>,
+    /// MM 퀵주문(quick_order_origin=MM)의 슬롯 귀속. 같은 (symbol,fund) 에 여러 MM 슬롯이
+    /// 동시에 돌 때 어느 슬롯의 체결통계/노출에 귀속할지 지정한다. 미지정(빈 문자열)이면
+    /// default 슬롯. quick_order_origin 이 MM 이 아니면 무시된다.
+    #[prost(string, optional, tag="14")]
+    pub slot_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

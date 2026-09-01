@@ -38,6 +38,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $core.bool? needHedge,
     $fixnum.Int64? autoAmendInitialWaitMs,
     QuickOrderOrigin? quickOrderOrigin,
+    $core.String? slotId,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -53,6 +54,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (needHedge != null) result.needHedge = needHedge;
     if (autoAmendInitialWaitMs != null) result.autoAmendInitialWaitMs = autoAmendInitialWaitMs;
     if (quickOrderOrigin != null) result.quickOrderOrigin = quickOrderOrigin;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -75,6 +77,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..aOB(11, _omitFieldNames ? '' : 'needHedge')
     ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'autoAmendInitialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..e<QuickOrderOrigin>(13, _omitFieldNames ? '' : 'quickOrderOrigin', $pb.PbFieldType.OE, defaultOrMaker: QuickOrderOrigin.QUICK_ORDER_ORIGIN_UNSPECIFIED, valueOf: QuickOrderOrigin.valueOf, enumValues: QuickOrderOrigin.values)
+    ..aOS(14, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -227,6 +230,18 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasQuickOrderOrigin() => $_has(12);
   @$pb.TagNumber(13)
   void clearQuickOrderOrigin() => $_clearField(13);
+
+  /// MM 퀵주문(quick_order_origin=MM)의 슬롯 귀속. 같은 (symbol,fund) 에 여러 MM 슬롯이
+  /// 동시에 돌 때 어느 슬롯의 체결통계/노출에 귀속할지 지정한다. 미지정(빈 문자열)이면
+  /// default 슬롯. quick_order_origin 이 MM 이 아니면 무시된다.
+  @$pb.TagNumber(14)
+  $core.String get slotId => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set slotId($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasSlotId() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearSlotId() => $_clearField(14);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {
