@@ -88,6 +88,54 @@ pub struct UpdateOrderLimiterConfigResponse {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StreamOrderLimiterStatusRequest {
 }
+// ============================================================================
+// TurnoverLimit — (fund, symbol) 별 N초 슬라이딩 윈도우 gross 거래대금 서킷브레이커
+// ============================================================================
+
+/// 거래대금 서킷브레이커 설정
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TurnoverLimit {
+    /// ETF 또는 선물 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 4자리 펀드코드
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 활성화 여부
+    #[prost(bool, tag="3")]
+    pub enabled: bool,
+    /// 슬라이딩 윈도우 (초)
+    #[prost(uint32, tag="4")]
+    pub window_secs: u32,
+    /// 윈도우 gross 거래대금 상한 (원). 0=비활성
+    #[prost(int64, tag="5")]
+    pub max_amount: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateTurnoverLimitRequest {
+    #[prost(message, optional, tag="1")]
+    pub limit: ::core::option::Option<TurnoverLimit>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetTurnoverLimitRequest {
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ListTurnoverLimitsRequest {
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListTurnoverLimitsResponse {
+    #[prost(message, repeated, tag="1")]
+    pub limits: ::prost::alloc::vec::Vec<TurnoverLimit>,
+}
 include!("kdo.v1.order_limit.tonic.rs");
 include!("kdo.v1.order_limit.serde.rs");
 // @@protoc_insertion_point(module)

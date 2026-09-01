@@ -48,6 +48,100 @@
         ]
       }
     },
+    "/v1/order-limiter/turnover-limits": {
+      "get": {
+        "summary": "모든 거래대금 서킷브레이커 설정 목록 조회",
+        "operationId": "OrderLimiterService_ListTurnoverLimits",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_limitListTurnoverLimitsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "OrderLimiterService"
+        ]
+      }
+    },
+    "/v1/order-limiter/turnover-limits/{symbol}": {
+      "get": {
+        "summary": "(fund, symbol) 별 거래대금 서킷브레이커 설정 조회",
+        "operationId": "OrderLimiterService_GetTurnoverLimit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_limitTurnoverLimit"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLimiterService"
+        ]
+      }
+    },
+    "/v1/order-limiter/turnover-limits:update": {
+      "patch": {
+        "summary": "(fund, symbol) 별 거래대금 서킷브레이커 설정 업데이트",
+        "operationId": "OrderLimiterService_UpdateTurnoverLimit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_limitTurnoverLimit"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/order_limitUpdateTurnoverLimitRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderLimiterService"
+        ]
+      }
+    },
     "/v1/order-limiter:updateConfig": {
       "patch": {
         "summary": "전역 OrderLimiter 설정 업데이트",
@@ -83,6 +177,17 @@
     }
   },
   "definitions": {
+    "order_limitListTurnoverLimitsResponse": {
+      "type": "object",
+      "properties": {
+        "limits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/order_limitTurnoverLimit"
+          }
+        }
+      }
+    },
     "order_limitOrderLimiterConfig": {
       "type": "object",
       "properties": {
@@ -150,6 +255,34 @@
         "maxOrders"
       ]
     },
+    "order_limitTurnoverLimit": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "ETF 또는 선물 심볼"
+        },
+        "fundCode": {
+          "type": "string",
+          "title": "4자리 펀드코드"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "활성화 여부"
+        },
+        "windowSecs": {
+          "type": "integer",
+          "format": "int64",
+          "title": "슬라이딩 윈도우 (초)"
+        },
+        "maxAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "윈도우 gross 거래대금 상한 (원). 0=비활성"
+        }
+      },
+      "title": "거래대금 서킷브레이커 설정"
+    },
     "order_limitUpdateOrderLimiterConfigRequest": {
       "type": "object",
       "properties": {
@@ -174,6 +307,14 @@
         "message": {
           "type": "string",
           "title": "메시지"
+        }
+      }
+    },
+    "order_limitUpdateTurnoverLimitRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "$ref": "#/definitions/order_limitTurnoverLimit"
         }
       }
     },

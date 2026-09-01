@@ -138,3 +138,70 @@ const StreamOrderLimiterStatusRequest$json = {
 final $typed_data.Uint8List streamOrderLimiterStatusRequestDescriptor = $convert.base64Decode(
     'Ch9TdHJlYW1PcmRlckxpbWl0ZXJTdGF0dXNSZXF1ZXN0SgQIARACSgQIAhAD');
 
+@$core.Deprecated('Use turnoverLimitDescriptor instead')
+const TurnoverLimit$json = {
+  '1': 'TurnoverLimit',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'enabled', '3': 3, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'window_secs', '3': 4, '4': 1, '5': 13, '10': 'windowSecs'},
+    {'1': 'max_amount', '3': 5, '4': 1, '5': 3, '10': 'maxAmount'},
+  ],
+};
+
+/// Descriptor for `TurnoverLimit`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List turnoverLimitDescriptor = $convert.base64Decode(
+    'Cg1UdXJub3ZlckxpbWl0EhYKBnN5bWJvbBgBIAEoCVIGc3ltYm9sEhsKCWZ1bmRfY29kZRgCIA'
+    'EoCVIIZnVuZENvZGUSGAoHZW5hYmxlZBgDIAEoCFIHZW5hYmxlZBIfCgt3aW5kb3dfc2VjcxgE'
+    'IAEoDVIKd2luZG93U2VjcxIdCgptYXhfYW1vdW50GAUgASgDUgltYXhBbW91bnQ=');
+
+@$core.Deprecated('Use updateTurnoverLimitRequestDescriptor instead')
+const UpdateTurnoverLimitRequest$json = {
+  '1': 'UpdateTurnoverLimitRequest',
+  '2': [
+    {'1': 'limit', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.order_limit.TurnoverLimit', '10': 'limit'},
+  ],
+};
+
+/// Descriptor for `UpdateTurnoverLimitRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateTurnoverLimitRequestDescriptor = $convert.base64Decode(
+    'ChpVcGRhdGVUdXJub3ZlckxpbWl0UmVxdWVzdBI3CgVsaW1pdBgBIAEoCzIhLmtkby52MS5vcm'
+    'Rlcl9saW1pdC5UdXJub3ZlckxpbWl0UgVsaW1pdA==');
+
+@$core.Deprecated('Use getTurnoverLimitRequestDescriptor instead')
+const GetTurnoverLimitRequest$json = {
+  '1': 'GetTurnoverLimitRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+  ],
+};
+
+/// Descriptor for `GetTurnoverLimitRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getTurnoverLimitRequestDescriptor = $convert.base64Decode(
+    'ChdHZXRUdXJub3ZlckxpbWl0UmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCglmdW'
+    '5kX2NvZGUYAiABKAlSCGZ1bmRDb2Rl');
+
+@$core.Deprecated('Use listTurnoverLimitsRequestDescriptor instead')
+const ListTurnoverLimitsRequest$json = {
+  '1': 'ListTurnoverLimitsRequest',
+};
+
+/// Descriptor for `ListTurnoverLimitsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listTurnoverLimitsRequestDescriptor = $convert.base64Decode(
+    'ChlMaXN0VHVybm92ZXJMaW1pdHNSZXF1ZXN0');
+
+@$core.Deprecated('Use listTurnoverLimitsResponseDescriptor instead')
+const ListTurnoverLimitsResponse$json = {
+  '1': 'ListTurnoverLimitsResponse',
+  '2': [
+    {'1': 'limits', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.order_limit.TurnoverLimit', '10': 'limits'},
+  ],
+};
+
+/// Descriptor for `ListTurnoverLimitsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listTurnoverLimitsResponseDescriptor = $convert.base64Decode(
+    'ChpMaXN0VHVybm92ZXJMaW1pdHNSZXNwb25zZRI5CgZsaW1pdHMYASADKAsyIS5rZG8udjEub3'
+    'JkZXJfbGltaXQuVHVybm92ZXJMaW1pdFIGbGltaXRz');
+

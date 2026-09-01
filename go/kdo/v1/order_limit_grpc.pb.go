@@ -26,6 +26,12 @@ type OrderLimiterServiceClient interface {
 	UpdateOrderLimiterConfig(ctx context.Context, in *UpdateOrderLimiterConfigRequest, opts ...grpc.CallOption) (*UpdateOrderLimiterConfigResponse, error)
 	// 전역 OrderLimiter 시간 프레임 현황 스트리밍
 	StreamOrderLimiterStatus(ctx context.Context, in *StreamOrderLimiterStatusRequest, opts ...grpc.CallOption) (OrderLimiterService_StreamOrderLimiterStatusClient, error)
+	// (fund, symbol) 별 거래대금 서킷브레이커 설정 업데이트
+	UpdateTurnoverLimit(ctx context.Context, in *UpdateTurnoverLimitRequest, opts ...grpc.CallOption) (*TurnoverLimit, error)
+	// (fund, symbol) 별 거래대금 서킷브레이커 설정 조회
+	GetTurnoverLimit(ctx context.Context, in *GetTurnoverLimitRequest, opts ...grpc.CallOption) (*TurnoverLimit, error)
+	// 모든 거래대금 서킷브레이커 설정 목록 조회
+	ListTurnoverLimits(ctx context.Context, in *ListTurnoverLimitsRequest, opts ...grpc.CallOption) (*ListTurnoverLimitsResponse, error)
 }
 
 type orderLimiterServiceClient struct {
@@ -77,6 +83,33 @@ func (x *orderLimiterServiceStreamOrderLimiterStatusClient) Recv() (*OrderLimite
 	return m, nil
 }
 
+func (c *orderLimiterServiceClient) UpdateTurnoverLimit(ctx context.Context, in *UpdateTurnoverLimitRequest, opts ...grpc.CallOption) (*TurnoverLimit, error) {
+	out := new(TurnoverLimit)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order_limit.OrderLimiterService/UpdateTurnoverLimit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderLimiterServiceClient) GetTurnoverLimit(ctx context.Context, in *GetTurnoverLimitRequest, opts ...grpc.CallOption) (*TurnoverLimit, error) {
+	out := new(TurnoverLimit)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order_limit.OrderLimiterService/GetTurnoverLimit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderLimiterServiceClient) ListTurnoverLimits(ctx context.Context, in *ListTurnoverLimitsRequest, opts ...grpc.CallOption) (*ListTurnoverLimitsResponse, error) {
+	out := new(ListTurnoverLimitsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order_limit.OrderLimiterService/ListTurnoverLimits", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderLimiterServiceServer is the server API for OrderLimiterService service.
 // All implementations must embed UnimplementedOrderLimiterServiceServer
 // for forward compatibility
@@ -85,6 +118,12 @@ type OrderLimiterServiceServer interface {
 	UpdateOrderLimiterConfig(context.Context, *UpdateOrderLimiterConfigRequest) (*UpdateOrderLimiterConfigResponse, error)
 	// 전역 OrderLimiter 시간 프레임 현황 스트리밍
 	StreamOrderLimiterStatus(*StreamOrderLimiterStatusRequest, OrderLimiterService_StreamOrderLimiterStatusServer) error
+	// (fund, symbol) 별 거래대금 서킷브레이커 설정 업데이트
+	UpdateTurnoverLimit(context.Context, *UpdateTurnoverLimitRequest) (*TurnoverLimit, error)
+	// (fund, symbol) 별 거래대금 서킷브레이커 설정 조회
+	GetTurnoverLimit(context.Context, *GetTurnoverLimitRequest) (*TurnoverLimit, error)
+	// 모든 거래대금 서킷브레이커 설정 목록 조회
+	ListTurnoverLimits(context.Context, *ListTurnoverLimitsRequest) (*ListTurnoverLimitsResponse, error)
 	mustEmbedUnimplementedOrderLimiterServiceServer()
 }
 
@@ -97,6 +136,15 @@ func (UnimplementedOrderLimiterServiceServer) UpdateOrderLimiterConfig(context.C
 }
 func (UnimplementedOrderLimiterServiceServer) StreamOrderLimiterStatus(*StreamOrderLimiterStatusRequest, OrderLimiterService_StreamOrderLimiterStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamOrderLimiterStatus not implemented")
+}
+func (UnimplementedOrderLimiterServiceServer) UpdateTurnoverLimit(context.Context, *UpdateTurnoverLimitRequest) (*TurnoverLimit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTurnoverLimit not implemented")
+}
+func (UnimplementedOrderLimiterServiceServer) GetTurnoverLimit(context.Context, *GetTurnoverLimitRequest) (*TurnoverLimit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTurnoverLimit not implemented")
+}
+func (UnimplementedOrderLimiterServiceServer) ListTurnoverLimits(context.Context, *ListTurnoverLimitsRequest) (*ListTurnoverLimitsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTurnoverLimits not implemented")
 }
 func (UnimplementedOrderLimiterServiceServer) mustEmbedUnimplementedOrderLimiterServiceServer() {}
 
@@ -150,6 +198,60 @@ func (x *orderLimiterServiceStreamOrderLimiterStatusServer) Send(m *OrderLimiter
 	return x.ServerStream.SendMsg(m)
 }
 
+func _OrderLimiterService_UpdateTurnoverLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTurnoverLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderLimiterServiceServer).UpdateTurnoverLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order_limit.OrderLimiterService/UpdateTurnoverLimit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderLimiterServiceServer).UpdateTurnoverLimit(ctx, req.(*UpdateTurnoverLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderLimiterService_GetTurnoverLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTurnoverLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderLimiterServiceServer).GetTurnoverLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order_limit.OrderLimiterService/GetTurnoverLimit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderLimiterServiceServer).GetTurnoverLimit(ctx, req.(*GetTurnoverLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderLimiterService_ListTurnoverLimits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTurnoverLimitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderLimiterServiceServer).ListTurnoverLimits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order_limit.OrderLimiterService/ListTurnoverLimits",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderLimiterServiceServer).ListTurnoverLimits(ctx, req.(*ListTurnoverLimitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderLimiterService_ServiceDesc is the grpc.ServiceDesc for OrderLimiterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -160,6 +262,18 @@ var OrderLimiterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOrderLimiterConfig",
 			Handler:    _OrderLimiterService_UpdateOrderLimiterConfig_Handler,
+		},
+		{
+			MethodName: "UpdateTurnoverLimit",
+			Handler:    _OrderLimiterService_UpdateTurnoverLimit_Handler,
+		},
+		{
+			MethodName: "GetTurnoverLimit",
+			Handler:    _OrderLimiterService_GetTurnoverLimit_Handler,
+		},
+		{
+			MethodName: "ListTurnoverLimits",
+			Handler:    _OrderLimiterService_ListTurnoverLimits_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

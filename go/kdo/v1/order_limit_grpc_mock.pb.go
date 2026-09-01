@@ -277,6 +277,46 @@ func (m *MockOrderLimiterServiceClient) EXPECT() *MockOrderLimiterServiceClientM
 	return m.recorder
 }
 
+// GetTurnoverLimit mocks base method.
+func (m *MockOrderLimiterServiceClient) GetTurnoverLimit(ctx context.Context, in *GetTurnoverLimitRequest, opts ...grpc.CallOption) (*TurnoverLimit, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetTurnoverLimit", varargs...)
+	ret0, _ := ret[0].(*TurnoverLimit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTurnoverLimit indicates an expected call of GetTurnoverLimit.
+func (mr *MockOrderLimiterServiceClientMockRecorder) GetTurnoverLimit(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTurnoverLimit", reflect.TypeOf((*MockOrderLimiterServiceClient)(nil).GetTurnoverLimit), varargs...)
+}
+
+// ListTurnoverLimits mocks base method.
+func (m *MockOrderLimiterServiceClient) ListTurnoverLimits(ctx context.Context, in *ListTurnoverLimitsRequest, opts ...grpc.CallOption) (*ListTurnoverLimitsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListTurnoverLimits", varargs...)
+	ret0, _ := ret[0].(*ListTurnoverLimitsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListTurnoverLimits indicates an expected call of ListTurnoverLimits.
+func (mr *MockOrderLimiterServiceClientMockRecorder) ListTurnoverLimits(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTurnoverLimits", reflect.TypeOf((*MockOrderLimiterServiceClient)(nil).ListTurnoverLimits), varargs...)
+}
+
 // StreamOrderLimiterStatus mocks base method.
 func (m *MockOrderLimiterServiceClient) StreamOrderLimiterStatus(ctx context.Context, in *StreamOrderLimiterStatusRequest, opts ...grpc.CallOption) (OrderLimiterService_StreamOrderLimiterStatusClient, error) {
 	m.ctrl.T.Helper()
@@ -317,6 +357,26 @@ func (mr *MockOrderLimiterServiceClientMockRecorder) UpdateOrderLimiterConfig(ct
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrderLimiterConfig", reflect.TypeOf((*MockOrderLimiterServiceClient)(nil).UpdateOrderLimiterConfig), varargs...)
 }
 
+// UpdateTurnoverLimit mocks base method.
+func (m *MockOrderLimiterServiceClient) UpdateTurnoverLimit(ctx context.Context, in *UpdateTurnoverLimitRequest, opts ...grpc.CallOption) (*TurnoverLimit, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateTurnoverLimit", varargs...)
+	ret0, _ := ret[0].(*TurnoverLimit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTurnoverLimit indicates an expected call of UpdateTurnoverLimit.
+func (mr *MockOrderLimiterServiceClientMockRecorder) UpdateTurnoverLimit(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTurnoverLimit", reflect.TypeOf((*MockOrderLimiterServiceClient)(nil).UpdateTurnoverLimit), varargs...)
+}
+
 // MockOrderLimiterServiceServer is a mock of OrderLimiterServiceServer interface.
 type MockOrderLimiterServiceServer struct {
 	ctrl     *gomock.Controller
@@ -338,6 +398,36 @@ func NewMockOrderLimiterServiceServer(ctrl *gomock.Controller) *MockOrderLimiter
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockOrderLimiterServiceServer) EXPECT() *MockOrderLimiterServiceServerMockRecorder {
 	return m.recorder
+}
+
+// GetTurnoverLimit mocks base method.
+func (m *MockOrderLimiterServiceServer) GetTurnoverLimit(ctx context.Context, in *GetTurnoverLimitRequest) (*TurnoverLimit, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTurnoverLimit", ctx, in)
+	ret0, _ := ret[0].(*TurnoverLimit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTurnoverLimit indicates an expected call of GetTurnoverLimit.
+func (mr *MockOrderLimiterServiceServerMockRecorder) GetTurnoverLimit(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTurnoverLimit", reflect.TypeOf((*MockOrderLimiterServiceServer)(nil).GetTurnoverLimit), ctx, in)
+}
+
+// ListTurnoverLimits mocks base method.
+func (m *MockOrderLimiterServiceServer) ListTurnoverLimits(ctx context.Context, in *ListTurnoverLimitsRequest) (*ListTurnoverLimitsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListTurnoverLimits", ctx, in)
+	ret0, _ := ret[0].(*ListTurnoverLimitsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListTurnoverLimits indicates an expected call of ListTurnoverLimits.
+func (mr *MockOrderLimiterServiceServerMockRecorder) ListTurnoverLimits(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTurnoverLimits", reflect.TypeOf((*MockOrderLimiterServiceServer)(nil).ListTurnoverLimits), ctx, in)
 }
 
 // StreamOrderLimiterStatus mocks base method.
@@ -367,4 +457,19 @@ func (m *MockOrderLimiterServiceServer) UpdateOrderLimiterConfig(ctx context.Con
 func (mr *MockOrderLimiterServiceServerMockRecorder) UpdateOrderLimiterConfig(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrderLimiterConfig", reflect.TypeOf((*MockOrderLimiterServiceServer)(nil).UpdateOrderLimiterConfig), ctx, in)
+}
+
+// UpdateTurnoverLimit mocks base method.
+func (m *MockOrderLimiterServiceServer) UpdateTurnoverLimit(ctx context.Context, in *UpdateTurnoverLimitRequest) (*TurnoverLimit, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateTurnoverLimit", ctx, in)
+	ret0, _ := ret[0].(*TurnoverLimit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateTurnoverLimit indicates an expected call of UpdateTurnoverLimit.
+func (mr *MockOrderLimiterServiceServerMockRecorder) UpdateTurnoverLimit(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTurnoverLimit", reflect.TypeOf((*MockOrderLimiterServiceServer)(nil).UpdateTurnoverLimit), ctx, in)
 }

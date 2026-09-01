@@ -26,4 +26,28 @@ abstract final class OrderLimiterService {
     kdov1order_limit.StreamOrderLimiterStatusRequest.new,
     kdov1order_limit.OrderLimiterStatus.new,
   );
+
+  /// (fund, symbol) 별 거래대금 서킷브레이커 설정 업데이트
+  static const updateTurnoverLimit = connect.Spec(
+    '/$name/UpdateTurnoverLimit',
+    connect.StreamType.unary,
+    kdov1order_limit.UpdateTurnoverLimitRequest.new,
+    kdov1order_limit.TurnoverLimit.new,
+  );
+
+  /// (fund, symbol) 별 거래대금 서킷브레이커 설정 조회
+  static const getTurnoverLimit = connect.Spec(
+    '/$name/GetTurnoverLimit',
+    connect.StreamType.unary,
+    kdov1order_limit.GetTurnoverLimitRequest.new,
+    kdov1order_limit.TurnoverLimit.new,
+  );
+
+  /// 모든 거래대금 서킷브레이커 설정 목록 조회
+  static const listTurnoverLimits = connect.Spec(
+    '/$name/ListTurnoverLimits',
+    connect.StreamType.unary,
+    kdov1order_limit.ListTurnoverLimitsRequest.new,
+    kdov1order_limit.ListTurnoverLimitsResponse.new,
+  );
 }

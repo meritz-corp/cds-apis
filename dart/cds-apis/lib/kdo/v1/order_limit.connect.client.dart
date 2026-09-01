@@ -44,4 +44,58 @@ extension type OrderLimiterServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// (fund, symbol) 별 거래대금 서킷브레이커 설정 업데이트
+  Future<kdov1order_limit.TurnoverLimit> updateTurnoverLimit(
+    kdov1order_limit.UpdateTurnoverLimitRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLimiterService.updateTurnoverLimit,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// (fund, symbol) 별 거래대금 서킷브레이커 설정 조회
+  Future<kdov1order_limit.TurnoverLimit> getTurnoverLimit(
+    kdov1order_limit.GetTurnoverLimitRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLimiterService.getTurnoverLimit,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 모든 거래대금 서킷브레이커 설정 목록 조회
+  Future<kdov1order_limit.ListTurnoverLimitsResponse> listTurnoverLimits(
+    kdov1order_limit.ListTurnoverLimitsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLimiterService.listTurnoverLimits,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

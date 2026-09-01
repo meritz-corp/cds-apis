@@ -43,6 +43,21 @@ class OrderLimiterServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamOrderLimiterStatus, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// (fund, symbol) 별 거래대금 서킷브레이커 설정 업데이트
+  $grpc.ResponseFuture<$0.TurnoverLimit> updateTurnoverLimit($0.UpdateTurnoverLimitRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateTurnoverLimit, request, options: options);
+  }
+
+  /// (fund, symbol) 별 거래대금 서킷브레이커 설정 조회
+  $grpc.ResponseFuture<$0.TurnoverLimit> getTurnoverLimit($0.GetTurnoverLimitRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getTurnoverLimit, request, options: options);
+  }
+
+  /// 모든 거래대금 서킷브레이커 설정 목록 조회
+  $grpc.ResponseFuture<$0.ListTurnoverLimitsResponse> listTurnoverLimits($0.ListTurnoverLimitsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listTurnoverLimits, request, options: options);
+  }
+
     // method descriptors
 
   static final _$updateOrderLimiterConfig = $grpc.ClientMethod<$0.UpdateOrderLimiterConfigRequest, $0.UpdateOrderLimiterConfigResponse>(
@@ -53,6 +68,18 @@ class OrderLimiterServiceClient extends $grpc.Client {
       '/kdo.v1.order_limit.OrderLimiterService/StreamOrderLimiterStatus',
       ($0.StreamOrderLimiterStatusRequest value) => value.writeToBuffer(),
       $0.OrderLimiterStatus.fromBuffer);
+  static final _$updateTurnoverLimit = $grpc.ClientMethod<$0.UpdateTurnoverLimitRequest, $0.TurnoverLimit>(
+      '/kdo.v1.order_limit.OrderLimiterService/UpdateTurnoverLimit',
+      ($0.UpdateTurnoverLimitRequest value) => value.writeToBuffer(),
+      $0.TurnoverLimit.fromBuffer);
+  static final _$getTurnoverLimit = $grpc.ClientMethod<$0.GetTurnoverLimitRequest, $0.TurnoverLimit>(
+      '/kdo.v1.order_limit.OrderLimiterService/GetTurnoverLimit',
+      ($0.GetTurnoverLimitRequest value) => value.writeToBuffer(),
+      $0.TurnoverLimit.fromBuffer);
+  static final _$listTurnoverLimits = $grpc.ClientMethod<$0.ListTurnoverLimitsRequest, $0.ListTurnoverLimitsResponse>(
+      '/kdo.v1.order_limit.OrderLimiterService/ListTurnoverLimits',
+      ($0.ListTurnoverLimitsRequest value) => value.writeToBuffer(),
+      $0.ListTurnoverLimitsResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.order_limit.OrderLimiterService')
@@ -74,6 +101,27 @@ abstract class OrderLimiterServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamOrderLimiterStatusRequest.fromBuffer(value),
         ($0.OrderLimiterStatus value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateTurnoverLimitRequest, $0.TurnoverLimit>(
+        'UpdateTurnoverLimit',
+        updateTurnoverLimit_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateTurnoverLimitRequest.fromBuffer(value),
+        ($0.TurnoverLimit value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetTurnoverLimitRequest, $0.TurnoverLimit>(
+        'GetTurnoverLimit',
+        getTurnoverLimit_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetTurnoverLimitRequest.fromBuffer(value),
+        ($0.TurnoverLimit value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListTurnoverLimitsRequest, $0.ListTurnoverLimitsResponse>(
+        'ListTurnoverLimits',
+        listTurnoverLimits_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListTurnoverLimitsRequest.fromBuffer(value),
+        ($0.ListTurnoverLimitsResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.UpdateOrderLimiterConfigResponse> updateOrderLimiterConfig_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateOrderLimiterConfigRequest> $request) async {
@@ -87,5 +135,23 @@ abstract class OrderLimiterServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.OrderLimiterStatus> streamOrderLimiterStatus($grpc.ServiceCall call, $0.StreamOrderLimiterStatusRequest request);
+
+  $async.Future<$0.TurnoverLimit> updateTurnoverLimit_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateTurnoverLimitRequest> $request) async {
+    return updateTurnoverLimit($call, await $request);
+  }
+
+  $async.Future<$0.TurnoverLimit> updateTurnoverLimit($grpc.ServiceCall call, $0.UpdateTurnoverLimitRequest request);
+
+  $async.Future<$0.TurnoverLimit> getTurnoverLimit_Pre($grpc.ServiceCall $call, $async.Future<$0.GetTurnoverLimitRequest> $request) async {
+    return getTurnoverLimit($call, await $request);
+  }
+
+  $async.Future<$0.TurnoverLimit> getTurnoverLimit($grpc.ServiceCall call, $0.GetTurnoverLimitRequest request);
+
+  $async.Future<$0.ListTurnoverLimitsResponse> listTurnoverLimits_Pre($grpc.ServiceCall $call, $async.Future<$0.ListTurnoverLimitsRequest> $request) async {
+    return listTurnoverLimits($call, await $request);
+  }
+
+  $async.Future<$0.ListTurnoverLimitsResponse> listTurnoverLimits($grpc.ServiceCall call, $0.ListTurnoverLimitsRequest request);
 
 }

@@ -443,6 +443,282 @@ class StreamOrderLimiterStatusRequest extends $pb.GeneratedMessage {
   static StreamOrderLimiterStatusRequest? _defaultInstance;
 }
 
+/// 거래대금 서킷브레이커 설정
+class TurnoverLimit extends $pb.GeneratedMessage {
+  factory TurnoverLimit({
+    $core.String? symbol,
+    $core.String? fundCode,
+    $core.bool? enabled,
+    $core.int? windowSecs,
+    $fixnum.Int64? maxAmount,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (enabled != null) result.enabled = enabled;
+    if (windowSecs != null) result.windowSecs = windowSecs;
+    if (maxAmount != null) result.maxAmount = maxAmount;
+    return result;
+  }
+
+  TurnoverLimit._();
+
+  factory TurnoverLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TurnoverLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TurnoverLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOB(3, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'windowSecs', $pb.PbFieldType.OU3)
+    ..aInt64(5, _omitFieldNames ? '' : 'maxAmount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TurnoverLimit clone() => TurnoverLimit()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TurnoverLimit copyWith(void Function(TurnoverLimit) updates) => super.copyWith((message) => updates(message as TurnoverLimit)) as TurnoverLimit;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TurnoverLimit create() => TurnoverLimit._();
+  @$core.override
+  TurnoverLimit createEmptyInstance() => create();
+  static $pb.PbList<TurnoverLimit> createRepeated() => $pb.PbList<TurnoverLimit>();
+  @$core.pragma('dart2js:noInline')
+  static TurnoverLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TurnoverLimit>(create);
+  static TurnoverLimit? _defaultInstance;
+
+  /// ETF 또는 선물 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 4자리 펀드코드
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 활성화 여부
+  @$pb.TagNumber(3)
+  $core.bool get enabled => $_getBF(2);
+  @$pb.TagNumber(3)
+  set enabled($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasEnabled() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEnabled() => $_clearField(3);
+
+  /// 슬라이딩 윈도우 (초)
+  @$pb.TagNumber(4)
+  $core.int get windowSecs => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set windowSecs($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasWindowSecs() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearWindowSecs() => $_clearField(4);
+
+  /// 윈도우 gross 거래대금 상한 (원). 0=비활성
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get maxAmount => $_getI64(4);
+  @$pb.TagNumber(5)
+  set maxAmount($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMaxAmount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMaxAmount() => $_clearField(5);
+}
+
+class UpdateTurnoverLimitRequest extends $pb.GeneratedMessage {
+  factory UpdateTurnoverLimitRequest({
+    TurnoverLimit? limit,
+  }) {
+    final result = create();
+    if (limit != null) result.limit = limit;
+    return result;
+  }
+
+  UpdateTurnoverLimitRequest._();
+
+  factory UpdateTurnoverLimitRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateTurnoverLimitRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateTurnoverLimitRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
+    ..aOM<TurnoverLimit>(1, _omitFieldNames ? '' : 'limit', subBuilder: TurnoverLimit.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateTurnoverLimitRequest clone() => UpdateTurnoverLimitRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateTurnoverLimitRequest copyWith(void Function(UpdateTurnoverLimitRequest) updates) => super.copyWith((message) => updates(message as UpdateTurnoverLimitRequest)) as UpdateTurnoverLimitRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateTurnoverLimitRequest create() => UpdateTurnoverLimitRequest._();
+  @$core.override
+  UpdateTurnoverLimitRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateTurnoverLimitRequest> createRepeated() => $pb.PbList<UpdateTurnoverLimitRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateTurnoverLimitRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateTurnoverLimitRequest>(create);
+  static UpdateTurnoverLimitRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  TurnoverLimit get limit => $_getN(0);
+  @$pb.TagNumber(1)
+  set limit(TurnoverLimit value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLimit() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLimit() => $_clearField(1);
+  @$pb.TagNumber(1)
+  TurnoverLimit ensureLimit() => $_ensure(0);
+}
+
+class GetTurnoverLimitRequest extends $pb.GeneratedMessage {
+  factory GetTurnoverLimitRequest({
+    $core.String? symbol,
+    $core.String? fundCode,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    return result;
+  }
+
+  GetTurnoverLimitRequest._();
+
+  factory GetTurnoverLimitRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetTurnoverLimitRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTurnoverLimitRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTurnoverLimitRequest clone() => GetTurnoverLimitRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetTurnoverLimitRequest copyWith(void Function(GetTurnoverLimitRequest) updates) => super.copyWith((message) => updates(message as GetTurnoverLimitRequest)) as GetTurnoverLimitRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetTurnoverLimitRequest create() => GetTurnoverLimitRequest._();
+  @$core.override
+  GetTurnoverLimitRequest createEmptyInstance() => create();
+  static $pb.PbList<GetTurnoverLimitRequest> createRepeated() => $pb.PbList<GetTurnoverLimitRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetTurnoverLimitRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTurnoverLimitRequest>(create);
+  static GetTurnoverLimitRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+}
+
+class ListTurnoverLimitsRequest extends $pb.GeneratedMessage {
+  factory ListTurnoverLimitsRequest() => create();
+
+  ListTurnoverLimitsRequest._();
+
+  factory ListTurnoverLimitsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListTurnoverLimitsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListTurnoverLimitsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListTurnoverLimitsRequest clone() => ListTurnoverLimitsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListTurnoverLimitsRequest copyWith(void Function(ListTurnoverLimitsRequest) updates) => super.copyWith((message) => updates(message as ListTurnoverLimitsRequest)) as ListTurnoverLimitsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListTurnoverLimitsRequest create() => ListTurnoverLimitsRequest._();
+  @$core.override
+  ListTurnoverLimitsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListTurnoverLimitsRequest> createRepeated() => $pb.PbList<ListTurnoverLimitsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListTurnoverLimitsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTurnoverLimitsRequest>(create);
+  static ListTurnoverLimitsRequest? _defaultInstance;
+}
+
+class ListTurnoverLimitsResponse extends $pb.GeneratedMessage {
+  factory ListTurnoverLimitsResponse({
+    $core.Iterable<TurnoverLimit>? limits,
+  }) {
+    final result = create();
+    if (limits != null) result.limits.addAll(limits);
+    return result;
+  }
+
+  ListTurnoverLimitsResponse._();
+
+  factory ListTurnoverLimitsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListTurnoverLimitsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListTurnoverLimitsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
+    ..pc<TurnoverLimit>(1, _omitFieldNames ? '' : 'limits', $pb.PbFieldType.PM, subBuilder: TurnoverLimit.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListTurnoverLimitsResponse clone() => ListTurnoverLimitsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListTurnoverLimitsResponse copyWith(void Function(ListTurnoverLimitsResponse) updates) => super.copyWith((message) => updates(message as ListTurnoverLimitsResponse)) as ListTurnoverLimitsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListTurnoverLimitsResponse create() => ListTurnoverLimitsResponse._();
+  @$core.override
+  ListTurnoverLimitsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListTurnoverLimitsResponse> createRepeated() => $pb.PbList<ListTurnoverLimitsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListTurnoverLimitsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListTurnoverLimitsResponse>(create);
+  static ListTurnoverLimitsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<TurnoverLimit> get limits => $_getList(0);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
