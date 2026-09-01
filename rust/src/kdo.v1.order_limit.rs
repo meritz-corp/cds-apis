@@ -125,6 +125,8 @@ pub struct GetTurnoverLimitRequest {
     pub symbol: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    #[prost(uint32, tag="3")]
+    pub window_secs: u32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

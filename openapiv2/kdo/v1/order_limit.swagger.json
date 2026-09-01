@@ -102,6 +102,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "windowSecs",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [

@@ -155,6 +155,7 @@ message UpdateTurnoverLimitRequest {
 message GetTurnoverLimitRequest {
   string symbol = 1;
   string fund_code = 2;
+  uint32 window_secs = 3;
 }
 
 message ListTurnoverLimitsRequest {}

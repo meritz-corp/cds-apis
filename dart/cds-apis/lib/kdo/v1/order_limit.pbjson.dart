@@ -175,13 +175,14 @@ const GetTurnoverLimitRequest$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'window_secs', '3': 3, '4': 1, '5': 13, '10': 'windowSecs'},
   ],
 };
 
 /// Descriptor for `GetTurnoverLimitRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTurnoverLimitRequestDescriptor = $convert.base64Decode(
     'ChdHZXRUdXJub3ZlckxpbWl0UmVxdWVzdBIWCgZzeW1ib2wYASABKAlSBnN5bWJvbBIbCglmdW'
-    '5kX2NvZGUYAiABKAlSCGZ1bmRDb2Rl');
+    '5kX2NvZGUYAiABKAlSCGZ1bmRDb2RlEh8KC3dpbmRvd19zZWNzGAMgASgNUgp3aW5kb3dTZWNz');
 
 @$core.Deprecated('Use listTurnoverLimitsRequestDescriptor instead')
 const ListTurnoverLimitsRequest$json = {

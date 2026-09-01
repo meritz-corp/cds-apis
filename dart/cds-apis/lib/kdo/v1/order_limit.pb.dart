@@ -595,10 +595,12 @@ class GetTurnoverLimitRequest extends $pb.GeneratedMessage {
   factory GetTurnoverLimitRequest({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.int? windowSecs,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (windowSecs != null) result.windowSecs = windowSecs;
     return result;
   }
 
@@ -610,6 +612,7 @@ class GetTurnoverLimitRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTurnoverLimitRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_limit'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'windowSecs', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -647,6 +650,15 @@ class GetTurnoverLimitRequest extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get windowSecs => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set windowSecs($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasWindowSecs() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearWindowSecs() => $_clearField(3);
 }
 
 class ListTurnoverLimitsRequest extends $pb.GeneratedMessage {
