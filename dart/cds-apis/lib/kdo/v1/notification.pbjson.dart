@@ -195,13 +195,14 @@ const MmPageTarget$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
   ],
 };
 
 /// Descriptor for `MmPageTarget`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mmPageTargetDescriptor = $convert.base64Decode(
     'CgxNbVBhZ2VUYXJnZXQSFgoGc3ltYm9sGAEgASgJUgZzeW1ib2wSGwoJZnVuZF9jb2RlGAIgAS'
-    'gJUghmdW5kQ29kZQ==');
+    'gJUghmdW5kQ29kZRIXCgdzbG90X2lkGAMgASgJUgZzbG90SWQ=');
 
 @$core.Deprecated('Use pairPageTargetDescriptor instead')
 const PairPageTarget$json = {

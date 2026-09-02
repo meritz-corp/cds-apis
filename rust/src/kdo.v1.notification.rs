@@ -162,6 +162,11 @@ pub struct MmPageTarget {
     /// 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 같은 (symbol,fund) 내 MM 슬롯 라우팅 키.
+    /// 미지정("")은 default 슬롯.
+    /// 클라이언트가 동일 (symbol,fund)에서 slot 만 다른 MM 화면을 구분하는 데 사용.
+    #[prost(string, tag="3")]
+    pub slot_id: ::prost::alloc::string::String,
 }
 /// Pair page navigation target
 #[allow(clippy::derive_partial_eq_without_eq)]

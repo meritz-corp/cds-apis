@@ -217,6 +217,11 @@ message MmPageTarget {
 
   // 펀드 코드
   string fund_code = 2;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 라우팅 키.
+  // 미지정("")은 default 슬롯.
+  // 클라이언트가 동일 (symbol,fund)에서 slot 만 다른 MM 화면을 구분하는 데 사용.
+  string slot_id = 3;
 }
 
 // Pair page navigation target

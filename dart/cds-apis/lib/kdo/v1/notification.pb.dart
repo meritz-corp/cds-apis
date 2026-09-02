@@ -663,10 +663,12 @@ class MmPageTarget extends $pb.GeneratedMessage {
   factory MmPageTarget({
     $core.String? symbol,
     $core.String? fundCode,
+    $core.String? slotId,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
+    if (slotId != null) result.slotId = slotId;
     return result;
   }
 
@@ -678,6 +680,7 @@ class MmPageTarget extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmPageTarget', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.notification'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(3, _omitFieldNames ? '' : 'slotId')
     ..hasRequiredFields = false
   ;
 
@@ -717,6 +720,18 @@ class MmPageTarget extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(1);
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 라우팅 키.
+  /// 미지정("")은 default 슬롯.
+  /// 클라이언트가 동일 (symbol,fund)에서 slot 만 다른 MM 화면을 구분하는 데 사용.
+  @$pb.TagNumber(3)
+  $core.String get slotId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set slotId($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSlotId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSlotId() => $_clearField(3);
 }
 
 /// Pair page navigation target

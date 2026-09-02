@@ -220,6 +220,10 @@
         "fundCode": {
           "type": "string",
           "title": "펀드 코드"
+        },
+        "slotId": {
+          "type": "string",
+          "description": "같은 (symbol,fund) 내 MM 슬롯 라우팅 키.\n미지정(\"\")은 default 슬롯.\n클라이언트가 동일 (symbol,fund)에서 slot 만 다른 MM 화면을 구분하는 데 사용."
         }
       },
       "title": "MM(Market Making) page navigation target"
