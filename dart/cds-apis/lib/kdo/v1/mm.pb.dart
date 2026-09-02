@@ -158,6 +158,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? f2mRefitIntervalSecs,
     $fixnum.Int64? f2mMaWindowSecs,
     $core.bool? takeMode,
+    $core.bool? isLp,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -178,6 +179,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (f2mRefitIntervalSecs != null) result.f2mRefitIntervalSecs = f2mRefitIntervalSecs;
     if (f2mMaWindowSecs != null) result.f2mMaWindowSecs = f2mMaWindowSecs;
     if (takeMode != null) result.takeMode = takeMode;
+    if (isLp != null) result.isLp = isLp;
     return result;
   }
 
@@ -205,6 +207,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(22, _omitFieldNames ? '' : 'f2mRefitIntervalSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(23, _omitFieldNames ? '' : 'f2mMaWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOB(24, _omitFieldNames ? '' : 'takeMode')
+    ..aOB(25, _omitFieldNames ? '' : 'isLp')
     ..hasRequiredFields = false
   ;
 
@@ -428,6 +431,19 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasTakeMode() => $_has(17);
   @$pb.TagNumber(24)
   void clearTakeMode() => $_clearField(24);
+
+  /// ETF LP 시장조성자호가 여부 (기본 true). false 면 비-LP 잔존호가.
+  /// take_mode 와 결합: is_lp=true+take_mode=true → 합성 IOC(신규 FAS-LP+취소),
+  ///                    is_lp=false+take_mode=true → 네이티브 FAK.
+  /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비-LP 호가.
+  @$pb.TagNumber(25)
+  $core.bool get isLp => $_getBF(18);
+  @$pb.TagNumber(25)
+  set isLp($core.bool value) => $_setBool(18, value);
+  @$pb.TagNumber(25)
+  $core.bool hasIsLp() => $_has(18);
+  @$pb.TagNumber(25)
+  void clearIsLp() => $_clearField(25);
 }
 
 enum MarketMakingPricing_Pricing {

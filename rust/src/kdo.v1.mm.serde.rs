@@ -3637,6 +3637,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -3702,6 +3705,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.take_mode.as_ref() {
             struct_ser.serialize_field("take_mode", v)?;
         }
+        if let Some(v) = self.is_lp.as_ref() {
+            struct_ser.serialize_field("is_lp", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -3744,6 +3750,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "f2mMaWindowSecs",
             "take_mode",
             "takeMode",
+            "is_lp",
+            "isLp",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3766,6 +3774,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             F2mRefitIntervalSecs,
             F2mMaWindowSecs,
             TakeMode,
+            IsLp,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3806,6 +3815,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "f2mRefitIntervalSecs" | "f2m_refit_interval_secs" => Ok(GeneratedField::F2mRefitIntervalSecs),
                             "f2mMaWindowSecs" | "f2m_ma_window_secs" => Ok(GeneratedField::F2mMaWindowSecs),
                             "takeMode" | "take_mode" => Ok(GeneratedField::TakeMode),
+                            "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3843,6 +3853,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut f2m_refit_interval_secs__ = None;
                 let mut f2m_ma_window_secs__ = None;
                 let mut take_mode__ = None;
+                let mut is_lp__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3965,6 +3976,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             take_mode__ = map_.next_value()?;
                         }
+                        GeneratedField::IsLp => {
+                            if is_lp__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("isLp"));
+                            }
+                            is_lp__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3989,6 +4006,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     f2m_refit_interval_secs: f2m_refit_interval_secs__,
                     f2m_ma_window_secs: f2m_ma_window_secs__,
                     take_mode: take_mode__,
+                    is_lp: is_lp__,
                 })
             }
         }

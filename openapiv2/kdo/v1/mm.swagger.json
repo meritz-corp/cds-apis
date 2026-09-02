@@ -1430,6 +1430,10 @@
         "takeMode": {
           "type": "boolean",
           "description": "Take 모드: 잔존 호가 없이, 계산 호가가 시장 상대호가와 교차하는 tick 에만\n비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).\noptional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화."
+        },
+        "isLp": {
+          "type": "boolean",
+          "description": "ETF LP 시장조성자호가 여부 (기본 true). false 면 비-LP 잔존호가.\ntake_mode 와 결합: is_lp=true+take_mode=true → 합성 IOC(신규 FAS-LP+취소),\n                   is_lp=false+take_mode=true → 네이티브 FAK.\noptional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비-LP 호가."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

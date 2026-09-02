@@ -273,6 +273,12 @@ message MarketMakingConfiguration {
   // 비-LP 신규+취소(합성 IOC) 발사. Running 중 전환 불가(정지 상태에서만 변경).
   // optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
   optional bool take_mode = 24;
+
+  // ETF LP 시장조성자호가 여부 (기본 true). false 면 비-LP 잔존호가.
+  // take_mode 와 결합: is_lp=true+take_mode=true → 합성 IOC(신규 FAS-LP+취소),
+  //                    is_lp=false+take_mode=true → 네이티브 FAK.
+  // optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비-LP 호가.
+  optional bool is_lp = 25;
 }
 
 // NAV pricing 상세 설정

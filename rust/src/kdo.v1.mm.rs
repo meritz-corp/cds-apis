@@ -89,6 +89,12 @@ pub struct MarketMakingConfiguration {
     /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비활성화.
     #[prost(bool, optional, tag="24")]
     pub take_mode: ::core::option::Option<bool>,
+    /// ETF LP 시장조성자호가 여부 (기본 true). false 면 비-LP 잔존호가.
+    /// take_mode 와 결합: is_lp=true+take_mode=true → 합성 IOC(신규 FAS-LP+취소),
+    ///                     is_lp=false+take_mode=true → 네이티브 FAK.
+    /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비-LP 호가.
+    #[prost(bool, optional, tag="25")]
+    pub is_lp: ::core::option::Option<bool>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
