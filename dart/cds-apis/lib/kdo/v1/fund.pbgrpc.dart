@@ -58,6 +58,13 @@ class FundServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listFunds, request, options: options);
   }
 
+  /// 요청 IP 에 매핑된 펀드 목록 조회.
+  /// 서버가 요청 소켓의 IP → 사용자(요청자 롤) 를 확인하고, 소유자 롤이 요청자 롤과 같은
+  /// (= 이 IP 가 start/stop 권한을 가진) 펀드 목록을 반환한다. 파라미터 없음(IP 로 판정).
+  $grpc.ResponseFuture<$0.ListFundsForCallerResponse> listFundsForCaller($0.ListFundsForCallerRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listFundsForCaller, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getFund = $grpc.ClientMethod<$0.GetFundRequest, $0.Fund>(
@@ -80,6 +87,10 @@ class FundServiceClient extends $grpc.Client {
       '/kdo.v1.fund.FundService/ListFunds',
       ($0.ListFundsRequest value) => value.writeToBuffer(),
       $0.ListFundsResponse.fromBuffer);
+  static final _$listFundsForCaller = $grpc.ClientMethod<$0.ListFundsForCallerRequest, $0.ListFundsForCallerResponse>(
+      '/kdo.v1.fund.FundService/ListFundsForCaller',
+      ($0.ListFundsForCallerRequest value) => value.writeToBuffer(),
+      $0.ListFundsForCallerResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.fund.FundService')
@@ -122,6 +133,13 @@ abstract class FundServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListFundsRequest.fromBuffer(value),
         ($0.ListFundsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListFundsForCallerRequest, $0.ListFundsForCallerResponse>(
+        'ListFundsForCaller',
+        listFundsForCaller_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListFundsForCallerRequest.fromBuffer(value),
+        ($0.ListFundsForCallerResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Fund> getFund_Pre($grpc.ServiceCall $call, $async.Future<$0.GetFundRequest> $request) async {
@@ -153,5 +171,11 @@ abstract class FundServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListFundsResponse> listFunds($grpc.ServiceCall call, $0.ListFundsRequest request);
+
+  $async.Future<$0.ListFundsForCallerResponse> listFundsForCaller_Pre($grpc.ServiceCall $call, $async.Future<$0.ListFundsForCallerRequest> $request) async {
+    return listFundsForCaller($call, await $request);
+  }
+
+  $async.Future<$0.ListFundsForCallerResponse> listFundsForCaller($grpc.ServiceCall call, $0.ListFundsForCallerRequest request);
 
 }

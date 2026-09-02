@@ -978,6 +978,79 @@ class ListFundsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+/// ListFundsForCaller 요청 (요청 소켓 IP 로 판정 — 파라미터 없음)
+class ListFundsForCallerRequest extends $pb.GeneratedMessage {
+  factory ListFundsForCallerRequest() => create();
+
+  ListFundsForCallerRequest._();
+
+  factory ListFundsForCallerRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListFundsForCallerRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundsForCallerRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListFundsForCallerRequest clone() => ListFundsForCallerRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListFundsForCallerRequest copyWith(void Function(ListFundsForCallerRequest) updates) => super.copyWith((message) => updates(message as ListFundsForCallerRequest)) as ListFundsForCallerRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListFundsForCallerRequest create() => ListFundsForCallerRequest._();
+  @$core.override
+  ListFundsForCallerRequest createEmptyInstance() => create();
+  static $pb.PbList<ListFundsForCallerRequest> createRepeated() => $pb.PbList<ListFundsForCallerRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListFundsForCallerRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundsForCallerRequest>(create);
+  static ListFundsForCallerRequest? _defaultInstance;
+}
+
+/// ListFundsForCaller 응답
+class ListFundsForCallerResponse extends $pb.GeneratedMessage {
+  factory ListFundsForCallerResponse({
+    $core.Iterable<Fund>? funds,
+  }) {
+    final result = create();
+    if (funds != null) result.funds.addAll(funds);
+    return result;
+  }
+
+  ListFundsForCallerResponse._();
+
+  factory ListFundsForCallerResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListFundsForCallerResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListFundsForCallerResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.fund'), createEmptyInstance: create)
+    ..pc<Fund>(1, _omitFieldNames ? '' : 'funds', $pb.PbFieldType.PM, subBuilder: Fund.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListFundsForCallerResponse clone() => ListFundsForCallerResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListFundsForCallerResponse copyWith(void Function(ListFundsForCallerResponse) updates) => super.copyWith((message) => updates(message as ListFundsForCallerResponse)) as ListFundsForCallerResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListFundsForCallerResponse create() => ListFundsForCallerResponse._();
+  @$core.override
+  ListFundsForCallerResponse createEmptyInstance() => create();
+  static $pb.PbList<ListFundsForCallerResponse> createRepeated() => $pb.PbList<ListFundsForCallerResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListFundsForCallerResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListFundsForCallerResponse>(create);
+  static ListFundsForCallerResponse? _defaultInstance;
+
+  /// 요청 IP 에 매핑된 펀드 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<Fund> get funds => $_getList(0);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

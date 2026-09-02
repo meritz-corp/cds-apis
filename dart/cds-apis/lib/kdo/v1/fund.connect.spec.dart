@@ -50,4 +50,14 @@ abstract final class FundService {
     kdov1fund.ListFundsRequest.new,
     kdov1fund.ListFundsResponse.new,
   );
+
+  /// 요청 IP 에 매핑된 펀드 목록 조회.
+  /// 서버가 요청 소켓의 IP → 사용자(요청자 롤) 를 확인하고, 소유자 롤이 요청자 롤과 같은
+  /// (= 이 IP 가 start/stop 권한을 가진) 펀드 목록을 반환한다. 파라미터 없음(IP 로 판정).
+  static const listFundsForCaller = connect.Spec(
+    '/$name/ListFundsForCaller',
+    connect.StreamType.unary,
+    kdov1fund.ListFundsForCallerRequest.new,
+    kdov1fund.ListFundsForCallerResponse.new,
+  );
 }

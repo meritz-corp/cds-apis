@@ -337,6 +337,26 @@ func (mr *MockFundServiceClientMockRecorder) ListFunds(ctx, in interface{}, opts
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFunds", reflect.TypeOf((*MockFundServiceClient)(nil).ListFunds), varargs...)
 }
 
+// ListFundsForCaller mocks base method.
+func (m *MockFundServiceClient) ListFundsForCaller(ctx context.Context, in *ListFundsForCallerRequest, opts ...grpc.CallOption) (*ListFundsForCallerResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListFundsForCaller", varargs...)
+	ret0, _ := ret[0].(*ListFundsForCallerResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListFundsForCaller indicates an expected call of ListFundsForCaller.
+func (mr *MockFundServiceClientMockRecorder) ListFundsForCaller(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFundsForCaller", reflect.TypeOf((*MockFundServiceClient)(nil).ListFundsForCaller), varargs...)
+}
+
 // StreamFundLimit mocks base method.
 func (m *MockFundServiceClient) StreamFundLimit(ctx context.Context, in *GetFundLimitRequest, opts ...grpc.CallOption) (FundService_StreamFundLimitClient, error) {
 	m.ctrl.T.Helper()
@@ -443,6 +463,21 @@ func (m *MockFundServiceServer) ListFunds(ctx context.Context, in *ListFundsRequ
 func (mr *MockFundServiceServerMockRecorder) ListFunds(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFunds", reflect.TypeOf((*MockFundServiceServer)(nil).ListFunds), ctx, in)
+}
+
+// ListFundsForCaller mocks base method.
+func (m *MockFundServiceServer) ListFundsForCaller(ctx context.Context, in *ListFundsForCallerRequest) (*ListFundsForCallerResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListFundsForCaller", ctx, in)
+	ret0, _ := ret[0].(*ListFundsForCallerResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListFundsForCaller indicates an expected call of ListFundsForCaller.
+func (mr *MockFundServiceServerMockRecorder) ListFundsForCaller(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFundsForCaller", reflect.TypeOf((*MockFundServiceServer)(nil).ListFundsForCaller), ctx, in)
 }
 
 // StreamFundLimit mocks base method.

@@ -54,6 +54,16 @@ service FundService {
     };
     option (google.api.method_signature) = "";
   }
+
+  // 요청 IP 에 매핑된 펀드 목록 조회.
+  // 서버가 요청 소켓의 IP → 사용자(요청자 롤) 를 확인하고, 소유자 롤이 요청자 롤과 같은
+  // (= 이 IP 가 start/stop 권한을 가진) 펀드 목록을 반환한다. 파라미터 없음(IP 로 판정).
+  rpc ListFundsForCaller(ListFundsForCallerRequest) returns (ListFundsForCallerResponse) {
+    option (google.api.http) = {
+      get: "/v1/funds:forCaller"
+    };
+    option (google.api.method_signature) = "";
+  }
 }
 
 // 펀드 정보
@@ -260,4 +270,13 @@ message ListFundsResponse {
 
   // 다음 페이지 토큰
   string next_page_token = 2;
+}
+
+// ListFundsForCaller 요청 (요청 소켓 IP 로 판정 — 파라미터 없음)
+message ListFundsForCallerRequest {}
+
+// ListFundsForCaller 응답
+message ListFundsForCallerResponse {
+  // 요청 IP 에 매핑된 펀드 목록
+  repeated Fund funds = 1;
 }

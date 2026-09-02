@@ -272,3 +272,25 @@ final $typed_data.Uint8List listFundsResponseDescriptor = $convert.base64Decode(
     'ChFMaXN0RnVuZHNSZXNwb25zZRInCgVmdW5kcxgBIAMoCzIRLmtkby52MS5mdW5kLkZ1bmRSBW'
     'Z1bmRzEiYKD25leHRfcGFnZV90b2tlbhgCIAEoCVINbmV4dFBhZ2VUb2tlbg==');
 
+@$core.Deprecated('Use listFundsForCallerRequestDescriptor instead')
+const ListFundsForCallerRequest$json = {
+  '1': 'ListFundsForCallerRequest',
+};
+
+/// Descriptor for `ListFundsForCallerRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundsForCallerRequestDescriptor = $convert.base64Decode(
+    'ChlMaXN0RnVuZHNGb3JDYWxsZXJSZXF1ZXN0');
+
+@$core.Deprecated('Use listFundsForCallerResponseDescriptor instead')
+const ListFundsForCallerResponse$json = {
+  '1': 'ListFundsForCallerResponse',
+  '2': [
+    {'1': 'funds', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.fund.Fund', '10': 'funds'},
+  ],
+};
+
+/// Descriptor for `ListFundsForCallerResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listFundsForCallerResponseDescriptor = $convert.base64Decode(
+    'ChpMaXN0RnVuZHNGb3JDYWxsZXJSZXNwb25zZRInCgVmdW5kcxgBIAMoCzIRLmtkby52MS5mdW'
+    '5kLkZ1bmRSBWZ1bmRz');
+

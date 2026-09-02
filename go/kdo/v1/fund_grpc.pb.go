@@ -32,6 +32,10 @@ type FundServiceClient interface {
 	UpdateFundLimit(ctx context.Context, in *UpdateFundLimitRequest, opts ...grpc.CallOption) (*FundLimit, error)
 	// 펀드 목록 조회
 	ListFunds(ctx context.Context, in *ListFundsRequest, opts ...grpc.CallOption) (*ListFundsResponse, error)
+	// 요청 IP 에 매핑된 펀드 목록 조회.
+	// 서버가 요청 소켓의 IP → 사용자(요청자 롤) 를 확인하고, 소유자 롤이 요청자 롤과 같은
+	// (= 이 IP 가 start/stop 권한을 가진) 펀드 목록을 반환한다. 파라미터 없음(IP 로 판정).
+	ListFundsForCaller(ctx context.Context, in *ListFundsForCallerRequest, opts ...grpc.CallOption) (*ListFundsForCallerResponse, error)
 }
 
 type fundServiceClient struct {
@@ -110,6 +114,15 @@ func (c *fundServiceClient) ListFunds(ctx context.Context, in *ListFundsRequest,
 	return out, nil
 }
 
+func (c *fundServiceClient) ListFundsForCaller(ctx context.Context, in *ListFundsForCallerRequest, opts ...grpc.CallOption) (*ListFundsForCallerResponse, error) {
+	out := new(ListFundsForCallerResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.fund.FundService/ListFundsForCaller", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FundServiceServer is the server API for FundService service.
 // All implementations must embed UnimplementedFundServiceServer
 // for forward compatibility
@@ -124,6 +137,10 @@ type FundServiceServer interface {
 	UpdateFundLimit(context.Context, *UpdateFundLimitRequest) (*FundLimit, error)
 	// 펀드 목록 조회
 	ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error)
+	// 요청 IP 에 매핑된 펀드 목록 조회.
+	// 서버가 요청 소켓의 IP → 사용자(요청자 롤) 를 확인하고, 소유자 롤이 요청자 롤과 같은
+	// (= 이 IP 가 start/stop 권한을 가진) 펀드 목록을 반환한다. 파라미터 없음(IP 로 판정).
+	ListFundsForCaller(context.Context, *ListFundsForCallerRequest) (*ListFundsForCallerResponse, error)
 	mustEmbedUnimplementedFundServiceServer()
 }
 
@@ -145,6 +162,9 @@ func (UnimplementedFundServiceServer) UpdateFundLimit(context.Context, *UpdateFu
 }
 func (UnimplementedFundServiceServer) ListFunds(context.Context, *ListFundsRequest) (*ListFundsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFunds not implemented")
+}
+func (UnimplementedFundServiceServer) ListFundsForCaller(context.Context, *ListFundsForCallerRequest) (*ListFundsForCallerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFundsForCaller not implemented")
 }
 func (UnimplementedFundServiceServer) mustEmbedUnimplementedFundServiceServer() {}
 
@@ -252,6 +272,24 @@ func _FundService_ListFunds_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FundService_ListFundsForCaller_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFundsForCallerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FundServiceServer).ListFundsForCaller(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.fund.FundService/ListFundsForCaller",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FundServiceServer).ListFundsForCaller(ctx, req.(*ListFundsForCallerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FundService_ServiceDesc is the grpc.ServiceDesc for FundService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -274,6 +312,10 @@ var FundService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFunds",
 			Handler:    _FundService_ListFunds_Handler,
+		},
+		{
+			MethodName: "ListFundsForCaller",
+			Handler:    _FundService_ListFundsForCaller_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

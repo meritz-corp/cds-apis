@@ -293,6 +293,24 @@ func local_request_FundService_ListFunds_0(ctx context.Context, marshaler runtim
 
 }
 
+func request_FundService_ListFundsForCaller_0(ctx context.Context, marshaler runtime.Marshaler, client FundServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListFundsForCallerRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := client.ListFundsForCaller(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_FundService_ListFundsForCaller_0(ctx context.Context, marshaler runtime.Marshaler, server FundServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListFundsForCallerRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := server.ListFundsForCaller(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 // RegisterFundServiceHandlerServer registers the http handlers for service FundService to "mux".
 // UnaryRPC     :call FundServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -403,6 +421,31 @@ func RegisterFundServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		}
 
 		forward_FundService_ListFunds_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_FundService_ListFundsForCaller_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.fund.FundService/ListFundsForCaller", runtime.WithHTTPPathPattern("/v1/funds:forCaller"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_FundService_ListFundsForCaller_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_FundService_ListFundsForCaller_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -557,6 +600,28 @@ func RegisterFundServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+	mux.Handle("GET", pattern_FundService_ListFundsForCaller_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.fund.FundService/ListFundsForCaller", runtime.WithHTTPPathPattern("/v1/funds:forCaller"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_FundService_ListFundsForCaller_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_FundService_ListFundsForCaller_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -570,6 +635,8 @@ var (
 	pattern_FundService_UpdateFundLimit_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "funds", "fund", "limits", "symbol"}, ""))
 
 	pattern_FundService_ListFunds_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "funds"}, ""))
+
+	pattern_FundService_ListFundsForCaller_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "funds"}, "forCaller"))
 )
 
 var (
@@ -582,4 +649,6 @@ var (
 	forward_FundService_UpdateFundLimit_0 = runtime.ForwardResponseMessage
 
 	forward_FundService_ListFunds_0 = runtime.ForwardResponseMessage
+
+	forward_FundService_ListFundsForCaller_0 = runtime.ForwardResponseMessage
 )

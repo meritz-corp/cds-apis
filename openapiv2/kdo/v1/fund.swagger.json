@@ -63,6 +63,29 @@
         ]
       }
     },
+    "/v1/funds:forCaller": {
+      "get": {
+        "summary": "요청 IP 에 매핑된 펀드 목록 조회.\n서버가 요청 소켓의 IP → 사용자(요청자 롤) 를 확인하고, 소유자 롤이 요청자 롤과 같은\n(= 이 IP 가 start/stop 권한을 가진) 펀드 목록을 반환한다. 파라미터 없음(IP 로 판정).",
+        "operationId": "FundService_ListFundsForCaller",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fundListFundsForCallerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "FundService"
+        ]
+      }
+    },
     "/v1/{fund}": {
       "get": {
         "summary": "단일 펀드 조회",
@@ -399,6 +422,19 @@
         }
       },
       "title": "GetFundLimit 응답"
+    },
+    "fundListFundsForCallerResponse": {
+      "type": "object",
+      "properties": {
+        "funds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fundFund"
+          },
+          "title": "요청 IP 에 매핑된 펀드 목록"
+        }
+      },
+      "title": "ListFundsForCaller 응답"
     },
     "fundListFundsResponse": {
       "type": "object",

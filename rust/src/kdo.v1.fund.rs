@@ -206,6 +206,19 @@ pub struct ListFundsResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+/// ListFundsForCaller 요청 (요청 소켓 IP 로 판정 — 파라미터 없음)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ListFundsForCallerRequest {
+}
+/// ListFundsForCaller 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListFundsForCallerResponse {
+    /// 요청 IP 에 매핑된 펀드 목록
+    #[prost(message, repeated, tag="1")]
+    pub funds: ::prost::alloc::vec::Vec<Fund>,
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum FundLimitType {
