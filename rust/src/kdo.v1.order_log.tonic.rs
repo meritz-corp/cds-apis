@@ -348,6 +348,66 @@ pub mod order_log_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn list_quick_order_fills(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListQuickOrderFillsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListQuickOrderFillsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.order_log.OrderLogService/ListQuickOrderFills",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.order_log.OrderLogService",
+                        "ListQuickOrderFills",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stream_quick_order_fills(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamQuickOrderFillsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::OrderLog>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.order_log.OrderLogService/StreamQuickOrderFills",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.order_log.OrderLogService",
+                        "StreamQuickOrderFills",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -439,6 +499,26 @@ pub mod order_log_service_server {
             request: tonic::Request<super::StreamPairFillSummaryRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamPairFillSummaryStream>,
+            tonic::Status,
+        >;
+        async fn list_quick_order_fills(
+            &self,
+            request: tonic::Request<super::ListQuickOrderFillsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListQuickOrderFillsResponse>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamQuickOrderFills method.
+        type StreamQuickOrderFillsStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::OrderLog, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_quick_order_fills(
+            &self,
+            request: tonic::Request<super::StreamQuickOrderFillsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamQuickOrderFillsStream>,
             tonic::Status,
         >;
     }
@@ -942,6 +1022,106 @@ pub mod order_log_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = StreamPairFillSummarySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.order_log.OrderLogService/ListQuickOrderFills" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListQuickOrderFillsSvc<T: OrderLogService>(pub Arc<T>);
+                    impl<
+                        T: OrderLogService,
+                    > tonic::server::UnaryService<super::ListQuickOrderFillsRequest>
+                    for ListQuickOrderFillsSvc<T> {
+                        type Response = super::ListQuickOrderFillsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListQuickOrderFillsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as OrderLogService>::list_quick_order_fills(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListQuickOrderFillsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.order_log.OrderLogService/StreamQuickOrderFills" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamQuickOrderFillsSvc<T: OrderLogService>(pub Arc<T>);
+                    impl<
+                        T: OrderLogService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamQuickOrderFillsRequest,
+                    > for StreamQuickOrderFillsSvc<T> {
+                        type Response = super::OrderLog;
+                        type ResponseStream = T::StreamQuickOrderFillsStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamQuickOrderFillsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as OrderLogService>::stream_quick_order_fills(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamQuickOrderFillsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

@@ -170,4 +170,40 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
+  Future<kdov1order_log.ListQuickOrderFillsResponse> listQuickOrderFills(
+    kdov1order_log.ListQuickOrderFillsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderLogService.listQuickOrderFills,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 퀵주문 체결내역 실시간 스트림
+  Stream<kdov1order_log.OrderLog> streamQuickOrderFills(
+    kdov1order_log.StreamQuickOrderFillsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.OrderLogService.streamQuickOrderFills,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

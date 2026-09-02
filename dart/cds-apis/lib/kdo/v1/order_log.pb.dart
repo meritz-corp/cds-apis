@@ -1700,6 +1700,197 @@ class ListHedgePairDetailsResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
+/// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결내역 조회 요청.
+/// 서버가 log_type=FILLED, user_area=OrderServiceContext 를 강제하므로 요청에서 지정 불필요.
+class ListQuickOrderFillsRequest extends $pb.GeneratedMessage {
+  factory ListQuickOrderFillsRequest({
+    $core.int? pageSize,
+    $core.String? pageToken,
+    $core.String? filter,
+    $core.String? orderBy,
+  }) {
+    final result = create();
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    if (filter != null) result.filter = filter;
+    if (orderBy != null) result.orderBy = orderBy;
+    return result;
+  }
+
+  ListQuickOrderFillsRequest._();
+
+  factory ListQuickOrderFillsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListQuickOrderFillsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListQuickOrderFillsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
+    ..aOS(2, _omitFieldNames ? '' : 'pageToken')
+    ..aOS(3, _omitFieldNames ? '' : 'filter')
+    ..aOS(4, _omitFieldNames ? '' : 'orderBy')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListQuickOrderFillsRequest clone() => ListQuickOrderFillsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListQuickOrderFillsRequest copyWith(void Function(ListQuickOrderFillsRequest) updates) => super.copyWith((message) => updates(message as ListQuickOrderFillsRequest)) as ListQuickOrderFillsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListQuickOrderFillsRequest create() => ListQuickOrderFillsRequest._();
+  @$core.override
+  ListQuickOrderFillsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListQuickOrderFillsRequest> createRepeated() => $pb.PbList<ListQuickOrderFillsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListQuickOrderFillsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListQuickOrderFillsRequest>(create);
+  static ListQuickOrderFillsRequest? _defaultInstance;
+
+  /// 페이지 크기 (optional)
+  @$pb.TagNumber(1)
+  $core.int get pageSize => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set pageSize($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPageSize() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPageSize() => $_clearField(1);
+
+  /// 페이지 토큰 (optional, for pagination)
+  @$pb.TagNumber(2)
+  $core.String get pageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set pageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageToken() => $_clearField(2);
+
+  /// 추가 필터. 지원 필드: fund_code(equal/contains), symbol(equal/contains),
+  /// side(equal), order_type(equal), market_type(equal), exchange_time(범위 >,>=,<,<=).
+  /// log_type / user_area 는 서버가 강제하므로 무시된다.
+  @$pb.TagNumber(3)
+  $core.String get filter => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set filter($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilter() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilter() => $_clearField(3);
+
+  /// 정렬. 허용 필드: order_id, exchange_time, receive_time, created_at, date. 방향: asc|desc.
+  @$pb.TagNumber(4)
+  $core.String get orderBy => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set orderBy($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOrderBy() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOrderBy() => $_clearField(4);
+}
+
+/// ListQuickOrderFills 응답
+class ListQuickOrderFillsResponse extends $pb.GeneratedMessage {
+  factory ListQuickOrderFillsResponse({
+    $core.Iterable<OrderLog>? fills,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (fills != null) result.fills.addAll(fills);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListQuickOrderFillsResponse._();
+
+  factory ListQuickOrderFillsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListQuickOrderFillsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListQuickOrderFillsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..pc<OrderLog>(1, _omitFieldNames ? '' : 'fills', $pb.PbFieldType.PM, subBuilder: OrderLog.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListQuickOrderFillsResponse clone() => ListQuickOrderFillsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListQuickOrderFillsResponse copyWith(void Function(ListQuickOrderFillsResponse) updates) => super.copyWith((message) => updates(message as ListQuickOrderFillsResponse)) as ListQuickOrderFillsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListQuickOrderFillsResponse create() => ListQuickOrderFillsResponse._();
+  @$core.override
+  ListQuickOrderFillsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListQuickOrderFillsResponse> createRepeated() => $pb.PbList<ListQuickOrderFillsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListQuickOrderFillsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListQuickOrderFillsResponse>(create);
+  static ListQuickOrderFillsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<OrderLog> get fills => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
+}
+
+/// 퀵주문 체결내역 실시간 스트림 요청.
+class StreamQuickOrderFillsRequest extends $pb.GeneratedMessage {
+  factory StreamQuickOrderFillsRequest({
+    $core.String? filter,
+  }) {
+    final result = create();
+    if (filter != null) result.filter = filter;
+    return result;
+  }
+
+  StreamQuickOrderFillsRequest._();
+
+  factory StreamQuickOrderFillsRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory StreamQuickOrderFillsRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StreamQuickOrderFillsRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order_log'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'filter')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamQuickOrderFillsRequest clone() => StreamQuickOrderFillsRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  StreamQuickOrderFillsRequest copyWith(void Function(StreamQuickOrderFillsRequest) updates) => super.copyWith((message) => updates(message as StreamQuickOrderFillsRequest)) as StreamQuickOrderFillsRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static StreamQuickOrderFillsRequest create() => StreamQuickOrderFillsRequest._();
+  @$core.override
+  StreamQuickOrderFillsRequest createEmptyInstance() => create();
+  static $pb.PbList<StreamQuickOrderFillsRequest> createRepeated() => $pb.PbList<StreamQuickOrderFillsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static StreamQuickOrderFillsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamQuickOrderFillsRequest>(create);
+  static StreamQuickOrderFillsRequest? _defaultInstance;
+
+  /// 추가 필터(실시간). 지원 필드: fund_code, symbol, side, order_type, market_type.
+  @$pb.TagNumber(1)
+  $core.String get filter => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set filter($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => $_clearField(1);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

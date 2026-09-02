@@ -381,6 +381,43 @@ pub struct ListHedgePairDetailsResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+/// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결내역 조회 요청.
+/// 서버가 log_type=FILLED, user_area=OrderServiceContext 를 강제하므로 요청에서 지정 불필요.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListQuickOrderFillsRequest {
+    /// 페이지 크기 (optional)
+    #[prost(uint32, optional, tag="1")]
+    pub page_size: ::core::option::Option<u32>,
+    /// 페이지 토큰 (optional, for pagination)
+    #[prost(string, optional, tag="2")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// 추가 필터. 지원 필드: fund_code(equal/contains), symbol(equal/contains),
+    /// side(equal), order_type(equal), market_type(equal), exchange_time(범위 >,>=,<,<=).
+    /// log_type / user_area 는 서버가 강제하므로 무시된다.
+    #[prost(string, tag="3")]
+    pub filter: ::prost::alloc::string::String,
+    /// 정렬. 허용 필드: order_id, exchange_time, receive_time, created_at, date. 방향: asc|desc.
+    #[prost(string, tag="4")]
+    pub order_by: ::prost::alloc::string::String,
+}
+/// ListQuickOrderFills 응답
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListQuickOrderFillsResponse {
+    #[prost(message, repeated, tag="1")]
+    pub fills: ::prost::alloc::vec::Vec<OrderLog>,
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
+/// 퀵주문 체결내역 실시간 스트림 요청.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamQuickOrderFillsRequest {
+    /// 추가 필터(실시간). 지원 필드: fund_code, symbol, side, order_type, market_type.
+    #[prost(string, tag="1")]
+    pub filter: ::prost::alloc::string::String,
+}
 /// 주문 로그 타입
 ///
 /// Rust의 SCREAMING_SNAKE_CASE를 반영하여 정의

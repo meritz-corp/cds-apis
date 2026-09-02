@@ -82,4 +82,20 @@ abstract final class OrderLogService {
     kdov1order_log.StreamPairFillSummaryRequest.new,
     kdov1order_log.PairFillSummary.new,
   );
+
+  /// 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
+  static const listQuickOrderFills = connect.Spec(
+    '/$name/ListQuickOrderFills',
+    connect.StreamType.unary,
+    kdov1order_log.ListQuickOrderFillsRequest.new,
+    kdov1order_log.ListQuickOrderFillsResponse.new,
+  );
+
+  /// 퀵주문 체결내역 실시간 스트림
+  static const streamQuickOrderFills = connect.Spec(
+    '/$name/StreamQuickOrderFills',
+    connect.StreamType.server,
+    kdov1order_log.StreamQuickOrderFillsRequest.new,
+    kdov1order_log.OrderLog.new,
+  );
 }

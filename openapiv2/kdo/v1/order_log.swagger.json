@@ -70,6 +70,101 @@
         ]
       }
     },
+    "/v1/order_logs/quick_order_fills": {
+      "get": {
+        "summary": "퀵주문(직접 주문 API) 체결내역 페이지네이션 조회",
+        "operationId": "OrderLogService_ListQuickOrderFills",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/order_logListQuickOrderFillsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (optional)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageToken",
+            "description": "페이지 토큰 (optional, for pagination)",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "추가 필터. 지원 필드: fund_code(equal/contains), symbol(equal/contains),\nside(equal), order_type(equal), market_type(equal), exchange_time(범위 \u003e,\u003e=,\u003c,\u003c=).\nlog_type / user_area 는 서버가 강제하므로 무시된다.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "정렬. 허용 필드: order_id, exchange_time, receive_time, created_at, date. 방향: asc|desc.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
+    "/v1/order_logs/quick_order_fills:stream": {
+      "get": {
+        "summary": "퀵주문 체결내역 실시간 스트림",
+        "operationId": "OrderLogService_StreamQuickOrderFills",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/order_logOrderLog"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of order_logOrderLog"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "추가 필터(실시간). 지원 필드: fund_code, symbol, side, order_type, market_type.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderLogService"
+        ]
+      }
+    },
     "/v1/order_logs/statistics": {
       "get": {
         "summary": "주문 로그 조회",
@@ -695,6 +790,21 @@
         }
       },
       "title": "ListOrderLogs 응답"
+    },
+    "order_logListQuickOrderFillsResponse": {
+      "type": "object",
+      "properties": {
+        "fills": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/order_logOrderLog"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      },
+      "title": "ListQuickOrderFills 응답"
     },
     "order_logOrderLog": {
       "type": "object",

@@ -78,6 +78,16 @@ class OrderLogServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamPairFillSummary, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
+  $grpc.ResponseFuture<$0.ListQuickOrderFillsResponse> listQuickOrderFills($0.ListQuickOrderFillsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listQuickOrderFills, request, options: options);
+  }
+
+  /// 퀵주문 체결내역 실시간 스트림
+  $grpc.ResponseStream<$0.OrderLog> streamQuickOrderFills($0.StreamQuickOrderFillsRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamQuickOrderFills, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$listOrderLogs = $grpc.ClientMethod<$0.ListOrderLogsRequest, $0.ListOrderLogsResponse>(
@@ -116,6 +126,14 @@ class OrderLogServiceClient extends $grpc.Client {
       '/kdo.v1.order_log.OrderLogService/StreamPairFillSummary',
       ($0.StreamPairFillSummaryRequest value) => value.writeToBuffer(),
       $0.PairFillSummary.fromBuffer);
+  static final _$listQuickOrderFills = $grpc.ClientMethod<$0.ListQuickOrderFillsRequest, $0.ListQuickOrderFillsResponse>(
+      '/kdo.v1.order_log.OrderLogService/ListQuickOrderFills',
+      ($0.ListQuickOrderFillsRequest value) => value.writeToBuffer(),
+      $0.ListQuickOrderFillsResponse.fromBuffer);
+  static final _$streamQuickOrderFills = $grpc.ClientMethod<$0.StreamQuickOrderFillsRequest, $0.OrderLog>(
+      '/kdo.v1.order_log.OrderLogService/StreamQuickOrderFills',
+      ($0.StreamQuickOrderFillsRequest value) => value.writeToBuffer(),
+      $0.OrderLog.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.order_log.OrderLogService')
@@ -186,6 +204,20 @@ abstract class OrderLogServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamPairFillSummaryRequest.fromBuffer(value),
         ($0.PairFillSummary value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListQuickOrderFillsRequest, $0.ListQuickOrderFillsResponse>(
+        'ListQuickOrderFills',
+        listQuickOrderFills_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListQuickOrderFillsRequest.fromBuffer(value),
+        ($0.ListQuickOrderFillsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamQuickOrderFillsRequest, $0.OrderLog>(
+        'StreamQuickOrderFills',
+        streamQuickOrderFills_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamQuickOrderFillsRequest.fromBuffer(value),
+        ($0.OrderLog value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.ListOrderLogsResponse> listOrderLogs_Pre($grpc.ServiceCall $call, $async.Future<$0.ListOrderLogsRequest> $request) async {
@@ -241,5 +273,17 @@ abstract class OrderLogServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.PairFillSummary> streamPairFillSummary($grpc.ServiceCall call, $0.StreamPairFillSummaryRequest request);
+
+  $async.Future<$0.ListQuickOrderFillsResponse> listQuickOrderFills_Pre($grpc.ServiceCall $call, $async.Future<$0.ListQuickOrderFillsRequest> $request) async {
+    return listQuickOrderFills($call, await $request);
+  }
+
+  $async.Future<$0.ListQuickOrderFillsResponse> listQuickOrderFills($grpc.ServiceCall call, $0.ListQuickOrderFillsRequest request);
+
+  $async.Stream<$0.OrderLog> streamQuickOrderFills_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamQuickOrderFillsRequest> $request) async* {
+    yield* streamQuickOrderFills($call, await $request);
+  }
+
+  $async.Stream<$0.OrderLog> streamQuickOrderFills($grpc.ServiceCall call, $0.StreamQuickOrderFillsRequest request);
 
 }

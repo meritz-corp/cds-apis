@@ -87,6 +87,22 @@ service OrderLogService {
     };
     option (google.api.method_signature) = "quote_fund_code,quote_symbol,hedge_fund_code,hedge_symbol";
   }
+
+  // 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
+  rpc ListQuickOrderFills(ListQuickOrderFillsRequest) returns (ListQuickOrderFillsResponse) {
+    option (google.api.http) = {
+      get: "/v1/order_logs/quick_order_fills"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 퀵주문 체결내역 실시간 스트림
+  rpc StreamQuickOrderFills(StreamQuickOrderFillsRequest) returns (stream OrderLog) {
+    option (google.api.http) = {
+      get: "/v1/order_logs/quick_order_fills:stream"
+    };
+    option (google.api.method_signature) = "";
+  }
 }
 
 
@@ -439,4 +455,34 @@ message ListHedgePairDetailsRequest {
 message ListHedgePairDetailsResponse {
   repeated HedgePairDetail details = 1;
   string next_page_token = 2;
+}
+
+// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결내역 조회 요청.
+// 서버가 log_type=FILLED, user_area=OrderServiceContext 를 강제하므로 요청에서 지정 불필요.
+message ListQuickOrderFillsRequest {
+  // 페이지 크기 (optional)
+  optional uint32 page_size = 1;
+
+  // 페이지 토큰 (optional, for pagination)
+  optional string page_token = 2;
+
+  // 추가 필터. 지원 필드: fund_code(equal/contains), symbol(equal/contains),
+  // side(equal), order_type(equal), market_type(equal), exchange_time(범위 >,>=,<,<=).
+  // log_type / user_area 는 서버가 강제하므로 무시된다.
+  string filter = 3;
+
+  // 정렬. 허용 필드: order_id, exchange_time, receive_time, created_at, date. 방향: asc|desc.
+  string order_by = 4;
+}
+
+// ListQuickOrderFills 응답
+message ListQuickOrderFillsResponse {
+  repeated OrderLog fills = 1;
+  string next_page_token = 2;
+}
+
+// 퀵주문 체결내역 실시간 스트림 요청.
+message StreamQuickOrderFillsRequest {
+  // 추가 필터(실시간). 지원 필드: fund_code, symbol, side, order_type, market_type.
+  string filter = 1;
 }

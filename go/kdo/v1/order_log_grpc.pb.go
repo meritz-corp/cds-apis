@@ -40,6 +40,10 @@ type OrderLogServiceClient interface {
 	ListHedgePairDetails(ctx context.Context, in *ListHedgePairDetailsRequest, opts ...grpc.CallOption) (*ListHedgePairDetailsResponse, error)
 	// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
 	StreamPairFillSummary(ctx context.Context, in *StreamPairFillSummaryRequest, opts ...grpc.CallOption) (OrderLogService_StreamPairFillSummaryClient, error)
+	// 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
+	ListQuickOrderFills(ctx context.Context, in *ListQuickOrderFillsRequest, opts ...grpc.CallOption) (*ListQuickOrderFillsResponse, error)
+	// 퀵주문 체결내역 실시간 스트림
+	StreamQuickOrderFills(ctx context.Context, in *StreamQuickOrderFillsRequest, opts ...grpc.CallOption) (OrderLogService_StreamQuickOrderFillsClient, error)
 }
 
 type orderLogServiceClient struct {
@@ -223,6 +227,47 @@ func (x *orderLogServiceStreamPairFillSummaryClient) Recv() (*PairFillSummary, e
 	return m, nil
 }
 
+func (c *orderLogServiceClient) ListQuickOrderFills(ctx context.Context, in *ListQuickOrderFillsRequest, opts ...grpc.CallOption) (*ListQuickOrderFillsResponse, error) {
+	out := new(ListQuickOrderFillsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.order_log.OrderLogService/ListQuickOrderFills", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderLogServiceClient) StreamQuickOrderFills(ctx context.Context, in *StreamQuickOrderFillsRequest, opts ...grpc.CallOption) (OrderLogService_StreamQuickOrderFillsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &OrderLogService_ServiceDesc.Streams[4], "/kdo.v1.order_log.OrderLogService/StreamQuickOrderFills", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &orderLogServiceStreamQuickOrderFillsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type OrderLogService_StreamQuickOrderFillsClient interface {
+	Recv() (*OrderLog, error)
+	grpc.ClientStream
+}
+
+type orderLogServiceStreamQuickOrderFillsClient struct {
+	grpc.ClientStream
+}
+
+func (x *orderLogServiceStreamQuickOrderFillsClient) Recv() (*OrderLog, error) {
+	m := new(OrderLog)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // OrderLogServiceServer is the server API for OrderLogService service.
 // All implementations must embed UnimplementedOrderLogServiceServer
 // for forward compatibility
@@ -245,6 +290,10 @@ type OrderLogServiceServer interface {
 	ListHedgePairDetails(context.Context, *ListHedgePairDetailsRequest) (*ListHedgePairDetailsResponse, error)
 	// 원주문/헷지 두 다리의 당일 체결 집계를 페어로 실시간 스트리밍
 	StreamPairFillSummary(*StreamPairFillSummaryRequest, OrderLogService_StreamPairFillSummaryServer) error
+	// 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
+	ListQuickOrderFills(context.Context, *ListQuickOrderFillsRequest) (*ListQuickOrderFillsResponse, error)
+	// 퀵주문 체결내역 실시간 스트림
+	StreamQuickOrderFills(*StreamQuickOrderFillsRequest, OrderLogService_StreamQuickOrderFillsServer) error
 	mustEmbedUnimplementedOrderLogServiceServer()
 }
 
@@ -278,6 +327,12 @@ func (UnimplementedOrderLogServiceServer) ListHedgePairDetails(context.Context, 
 }
 func (UnimplementedOrderLogServiceServer) StreamPairFillSummary(*StreamPairFillSummaryRequest, OrderLogService_StreamPairFillSummaryServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamPairFillSummary not implemented")
+}
+func (UnimplementedOrderLogServiceServer) ListQuickOrderFills(context.Context, *ListQuickOrderFillsRequest) (*ListQuickOrderFillsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListQuickOrderFills not implemented")
+}
+func (UnimplementedOrderLogServiceServer) StreamQuickOrderFills(*StreamQuickOrderFillsRequest, OrderLogService_StreamQuickOrderFillsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamQuickOrderFills not implemented")
 }
 func (UnimplementedOrderLogServiceServer) mustEmbedUnimplementedOrderLogServiceServer() {}
 
@@ -466,6 +521,45 @@ func (x *orderLogServiceStreamPairFillSummaryServer) Send(m *PairFillSummary) er
 	return x.ServerStream.SendMsg(m)
 }
 
+func _OrderLogService_ListQuickOrderFills_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListQuickOrderFillsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderLogServiceServer).ListQuickOrderFills(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.order_log.OrderLogService/ListQuickOrderFills",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderLogServiceServer).ListQuickOrderFills(ctx, req.(*ListQuickOrderFillsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderLogService_StreamQuickOrderFills_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamQuickOrderFillsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(OrderLogServiceServer).StreamQuickOrderFills(m, &orderLogServiceStreamQuickOrderFillsServer{stream})
+}
+
+type OrderLogService_StreamQuickOrderFillsServer interface {
+	Send(*OrderLog) error
+	grpc.ServerStream
+}
+
+type orderLogServiceStreamQuickOrderFillsServer struct {
+	grpc.ServerStream
+}
+
+func (x *orderLogServiceStreamQuickOrderFillsServer) Send(m *OrderLog) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // OrderLogService_ServiceDesc is the grpc.ServiceDesc for OrderLogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -493,6 +587,10 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "ListHedgePairDetails",
 			Handler:    _OrderLogService_ListHedgePairDetails_Handler,
 		},
+		{
+			MethodName: "ListQuickOrderFills",
+			Handler:    _OrderLogService_ListQuickOrderFills_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -513,6 +611,11 @@ var OrderLogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamPairFillSummary",
 			Handler:       _OrderLogService_StreamPairFillSummary_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamQuickOrderFills",
+			Handler:       _OrderLogService_StreamQuickOrderFills_Handler,
 			ServerStreams: true,
 		},
 	},
