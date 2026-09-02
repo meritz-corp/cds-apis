@@ -429,52 +429,37 @@ final $typed_data.Uint8List listHedgePairDetailsResponseDescriptor = $convert.ba
     'Eub3JkZXJfbG9nLkhlZGdlUGFpckRldGFpbFIHZGV0YWlscxImCg9uZXh0X3BhZ2VfdG9rZW4Y'
     'AiABKAlSDW5leHRQYWdlVG9rZW4=');
 
-@$core.Deprecated('Use listQuickOrderFillsRequestDescriptor instead')
-const ListQuickOrderFillsRequest$json = {
-  '1': 'ListQuickOrderFillsRequest',
-  '2': [
-    {'1': 'page_size', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'pageSize', '17': true},
-    {'1': 'page_token', '3': 2, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
-    {'1': 'filter', '3': 3, '4': 1, '5': 9, '10': 'filter'},
-    {'1': 'order_by', '3': 4, '4': 1, '5': 9, '10': 'orderBy'},
-  ],
-  '8': [
-    {'1': '_page_size'},
-    {'1': '_page_token'},
-  ],
-};
-
-/// Descriptor for `ListQuickOrderFillsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listQuickOrderFillsRequestDescriptor = $convert.base64Decode(
-    'ChpMaXN0UXVpY2tPcmRlckZpbGxzUmVxdWVzdBIgCglwYWdlX3NpemUYASABKA1IAFIIcGFnZV'
-    'NpemWIAQESIgoKcGFnZV90b2tlbhgCIAEoCUgBUglwYWdlVG9rZW6IAQESFgoGZmlsdGVyGAMg'
-    'ASgJUgZmaWx0ZXISGQoIb3JkZXJfYnkYBCABKAlSB29yZGVyQnlCDAoKX3BhZ2Vfc2l6ZUINCg'
-    'tfcGFnZV90b2tlbg==');
-
-@$core.Deprecated('Use listQuickOrderFillsResponseDescriptor instead')
-const ListQuickOrderFillsResponse$json = {
-  '1': 'ListQuickOrderFillsResponse',
-  '2': [
-    {'1': 'fills', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.order_log.OrderLog', '10': 'fills'},
-    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
-  ],
-};
-
-/// Descriptor for `ListQuickOrderFillsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listQuickOrderFillsResponseDescriptor = $convert.base64Decode(
-    'ChtMaXN0UXVpY2tPcmRlckZpbGxzUmVzcG9uc2USMAoFZmlsbHMYASADKAsyGi5rZG8udjEub3'
-    'JkZXJfbG9nLk9yZGVyTG9nUgVmaWxscxImCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAlSDW5leHRQ'
-    'YWdlVG9rZW4=');
-
-@$core.Deprecated('Use streamQuickOrderFillsRequestDescriptor instead')
-const StreamQuickOrderFillsRequest$json = {
-  '1': 'StreamQuickOrderFillsRequest',
+@$core.Deprecated('Use getQuickOrderFillStatisticsRequestDescriptor instead')
+const GetQuickOrderFillStatisticsRequest$json = {
+  '1': 'GetQuickOrderFillStatisticsRequest',
   '2': [
     {'1': 'filter', '3': 1, '4': 1, '5': 9, '10': 'filter'},
   ],
 };
 
-/// Descriptor for `StreamQuickOrderFillsRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List streamQuickOrderFillsRequestDescriptor = $convert.base64Decode(
-    'ChxTdHJlYW1RdWlja09yZGVyRmlsbHNSZXF1ZXN0EhYKBmZpbHRlchgBIAEoCVIGZmlsdGVy');
+/// Descriptor for `GetQuickOrderFillStatisticsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getQuickOrderFillStatisticsRequestDescriptor = $convert.base64Decode(
+    'CiJHZXRRdWlja09yZGVyRmlsbFN0YXRpc3RpY3NSZXF1ZXN0EhYKBmZpbHRlchgBIAEoCVIGZm'
+    'lsdGVy');
+
+@$core.Deprecated('Use quickOrderFillStatisticsDescriptor instead')
+const QuickOrderFillStatistics$json = {
+  '1': 'QuickOrderFillStatistics',
+  '2': [
+    {'1': 'buy_quantity', '3': 1, '4': 1, '5': 3, '10': 'buyQuantity'},
+    {'1': 'buy_amount', '3': 2, '4': 1, '5': 3, '10': 'buyAmount'},
+    {'1': 'buy_avg_price', '3': 3, '4': 1, '5': 1, '10': 'buyAvgPrice'},
+    {'1': 'sell_quantity', '3': 4, '4': 1, '5': 3, '10': 'sellQuantity'},
+    {'1': 'sell_amount', '3': 5, '4': 1, '5': 3, '10': 'sellAmount'},
+    {'1': 'sell_avg_price', '3': 6, '4': 1, '5': 1, '10': 'sellAvgPrice'},
+  ],
+};
+
+/// Descriptor for `QuickOrderFillStatistics`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List quickOrderFillStatisticsDescriptor = $convert.base64Decode(
+    'ChhRdWlja09yZGVyRmlsbFN0YXRpc3RpY3MSIQoMYnV5X3F1YW50aXR5GAEgASgDUgtidXlRdW'
+    'FudGl0eRIdCgpidXlfYW1vdW50GAIgASgDUglidXlBbW91bnQSIgoNYnV5X2F2Z19wcmljZRgD'
+    'IAEoAVILYnV5QXZnUHJpY2USIwoNc2VsbF9xdWFudGl0eRgEIAEoA1IMc2VsbFF1YW50aXR5Eh'
+    '8KC3NlbGxfYW1vdW50GAUgASgDUgpzZWxsQW1vdW50EiQKDnNlbGxfYXZnX3ByaWNlGAYgASgB'
+    'UgxzZWxsQXZnUHJpY2U=');
 

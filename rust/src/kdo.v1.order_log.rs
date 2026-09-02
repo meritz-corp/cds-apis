@@ -381,42 +381,34 @@ pub struct ListHedgePairDetailsResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-/// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결내역 조회 요청.
-/// 서버가 log_type=FILLED, user_area=OrderServiceContext 를 강제하므로 요청에서 지정 불필요.
+/// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결 통계 요청.
+/// 서버가 log_type=FILLED + user_area=OrderServiceContext 를 강제하며, filter 에 날짜 범위가
+/// 없으면 당일(KST)로 기본 집계한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQuickOrderFillsRequest {
-    /// 페이지 크기 (optional)
-    #[prost(uint32, optional, tag="1")]
-    pub page_size: ::core::option::Option<u32>,
-    /// 페이지 토큰 (optional, for pagination)
-    #[prost(string, optional, tag="2")]
-    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
-    /// 추가 필터. 지원 필드: fund_code(equal/contains), symbol(equal/contains),
-    /// side(equal), order_type(equal), market_type(equal), exchange_time(범위 >,>=,<,<=).
-    /// log_type / user_area 는 서버가 강제하므로 무시된다.
-    #[prost(string, tag="3")]
-    pub filter: ::prost::alloc::string::String,
-    /// 정렬. 허용 필드: order_id, exchange_time, receive_time, created_at, date. 방향: asc|desc.
-    #[prost(string, tag="4")]
-    pub order_by: ::prost::alloc::string::String,
-}
-/// ListQuickOrderFills 응답
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListQuickOrderFillsResponse {
-    #[prost(message, repeated, tag="1")]
-    pub fills: ::prost::alloc::vec::Vec<OrderLog>,
-    #[prost(string, tag="2")]
-    pub next_page_token: ::prost::alloc::string::String,
-}
-/// 퀵주문 체결내역 실시간 스트림 요청.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct StreamQuickOrderFillsRequest {
-    /// 추가 필터(실시간). 지원 필드: fund_code, symbol, side, order_type, market_type.
+pub struct GetQuickOrderFillStatisticsRequest {
+    /// 추가 필터. 지원 필드: fund_code, symbol, side, order_type, market_type, exchange_time(범위 >,>=,<,<=).
     #[prost(string, tag="1")]
     pub filter: ::prost::alloc::string::String,
+}
+/// 퀵주문 체결 통계: 매수/매도별 체결금액과 체결단가(가중평균).
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct QuickOrderFillStatistics {
+    /// 매수(Bid)
+    #[prost(int64, tag="1")]
+    pub buy_quantity: i64,
+    #[prost(int64, tag="2")]
+    pub buy_amount: i64,
+    #[prost(double, tag="3")]
+    pub buy_avg_price: f64,
+    /// 매도(Ask)
+    #[prost(int64, tag="4")]
+    pub sell_quantity: i64,
+    #[prost(int64, tag="5")]
+    pub sell_amount: i64,
+    #[prost(double, tag="6")]
+    pub sell_avg_price: f64,
 }
 /// 주문 로그 타입
 ///

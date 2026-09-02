@@ -88,18 +88,18 @@ service OrderLogService {
     option (google.api.method_signature) = "quote_fund_code,quote_symbol,hedge_fund_code,hedge_symbol";
   }
 
-  // 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
-  rpc ListQuickOrderFills(ListQuickOrderFillsRequest) returns (ListQuickOrderFillsResponse) {
+  // 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결 통계 조회
+  rpc GetQuickOrderFillStatistics(GetQuickOrderFillStatisticsRequest) returns (QuickOrderFillStatistics) {
     option (google.api.http) = {
-      get: "/v1/order_logs/quick_order_fills"
+      get: "/v1/order_logs/quick_order_fills/statistics"
     };
     option (google.api.method_signature) = "";
   }
 
-  // 퀵주문 체결내역 실시간 스트림
-  rpc StreamQuickOrderFills(StreamQuickOrderFillsRequest) returns (stream OrderLog) {
+  // 퀵주문 체결 통계 실시간 스트림
+  rpc StreamQuickOrderFillStatistics(GetQuickOrderFillStatisticsRequest) returns (stream QuickOrderFillStatistics) {
     option (google.api.http) = {
-      get: "/v1/order_logs/quick_order_fills:stream"
+      get: "/v1/order_logs/quick_order_fills/statistics:stream"
     };
     option (google.api.method_signature) = "";
   }
@@ -457,32 +457,22 @@ message ListHedgePairDetailsResponse {
   string next_page_token = 2;
 }
 
-// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결내역 조회 요청.
-// 서버가 log_type=FILLED, user_area=OrderServiceContext 를 강제하므로 요청에서 지정 불필요.
-message ListQuickOrderFillsRequest {
-  // 페이지 크기 (optional)
-  optional uint32 page_size = 1;
-
-  // 페이지 토큰 (optional, for pagination)
-  optional string page_token = 2;
-
-  // 추가 필터. 지원 필드: fund_code(equal/contains), symbol(equal/contains),
-  // side(equal), order_type(equal), market_type(equal), exchange_time(범위 >,>=,<,<=).
-  // log_type / user_area 는 서버가 강제하므로 무시된다.
-  string filter = 3;
-
-  // 정렬. 허용 필드: order_id, exchange_time, receive_time, created_at, date. 방향: asc|desc.
-  string order_by = 4;
-}
-
-// ListQuickOrderFills 응답
-message ListQuickOrderFillsResponse {
-  repeated OrderLog fills = 1;
-  string next_page_token = 2;
-}
-
-// 퀵주문 체결내역 실시간 스트림 요청.
-message StreamQuickOrderFillsRequest {
-  // 추가 필터(실시간). 지원 필드: fund_code, symbol, side, order_type, market_type.
+// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결 통계 요청.
+// 서버가 log_type=FILLED + user_area=OrderServiceContext 를 강제하며, filter 에 날짜 범위가
+// 없으면 당일(KST)로 기본 집계한다.
+message GetQuickOrderFillStatisticsRequest {
+  // 추가 필터. 지원 필드: fund_code, symbol, side, order_type, market_type, exchange_time(범위 >,>=,<,<=).
   string filter = 1;
+}
+
+// 퀵주문 체결 통계: 매수/매도별 체결금액과 체결단가(가중평균).
+message QuickOrderFillStatistics {
+  // 매수(Bid)
+  int64 buy_quantity = 1;
+  int64 buy_amount = 2;
+  double buy_avg_price = 3;
+  // 매도(Ask)
+  int64 sell_quantity = 4;
+  int64 sell_amount = 5;
+  double sell_avg_price = 6;
 }

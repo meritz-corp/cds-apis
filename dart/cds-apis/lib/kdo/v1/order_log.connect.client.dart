@@ -171,16 +171,16 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 퀵주문(직접 주문 API) 체결내역 페이지네이션 조회
-  Future<kdov1order_log.ListQuickOrderFillsResponse> listQuickOrderFills(
-    kdov1order_log.ListQuickOrderFillsRequest input, {
+  /// 퀵주문(직접 주문 API, OrderContext=OrderServiceContext) 체결 통계 조회
+  Future<kdov1order_log.QuickOrderFillStatistics> getQuickOrderFillStatistics(
+    kdov1order_log.GetQuickOrderFillStatisticsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.OrderLogService.listQuickOrderFills,
+      specs.OrderLogService.getQuickOrderFillStatistics,
       input,
       signal: signal,
       headers: headers,
@@ -189,16 +189,16 @@ extension type OrderLogServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 퀵주문 체결내역 실시간 스트림
-  Stream<kdov1order_log.OrderLog> streamQuickOrderFills(
-    kdov1order_log.StreamQuickOrderFillsRequest input, {
+  /// 퀵주문 체결 통계 실시간 스트림
+  Stream<kdov1order_log.QuickOrderFillStatistics> streamQuickOrderFillStatistics(
+    kdov1order_log.GetQuickOrderFillStatisticsRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).server(
-      specs.OrderLogService.streamQuickOrderFills,
+      specs.OrderLogService.streamQuickOrderFillStatistics,
       input,
       signal: signal,
       headers: headers,
