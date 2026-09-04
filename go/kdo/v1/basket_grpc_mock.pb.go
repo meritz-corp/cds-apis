@@ -278,6 +278,26 @@ func (m *MockBasketServiceClient) EXPECT() *MockBasketServiceClientMockRecorder 
 	return m.recorder
 }
 
+// AmendBasketExecutionResidual mocks base method.
+func (m *MockBasketServiceClient) AmendBasketExecutionResidual(ctx context.Context, in *AmendBasketExecutionResidualRequest, opts ...grpc.CallOption) (*AmendBasketExecutionResidualResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AmendBasketExecutionResidual", varargs...)
+	ret0, _ := ret[0].(*AmendBasketExecutionResidualResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AmendBasketExecutionResidual indicates an expected call of AmendBasketExecutionResidual.
+func (mr *MockBasketServiceClientMockRecorder) AmendBasketExecutionResidual(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AmendBasketExecutionResidual", reflect.TypeOf((*MockBasketServiceClient)(nil).AmendBasketExecutionResidual), varargs...)
+}
+
 // CancelBasketExecutionResidual mocks base method.
 func (m *MockBasketServiceClient) CancelBasketExecutionResidual(ctx context.Context, in *CancelBasketExecutionResidualRequest, opts ...grpc.CallOption) (*CancelBasketExecutionResidualResponse, error) {
 	m.ctrl.T.Helper()
@@ -498,6 +518,26 @@ func (mr *MockBasketServiceClientMockRecorder) SubmitBasketExecutionRound(ctx, i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitBasketExecutionRound", reflect.TypeOf((*MockBasketServiceClient)(nil).SubmitBasketExecutionRound), varargs...)
 }
 
+// SubmitBasketExecutionUntilRound mocks base method.
+func (m *MockBasketServiceClient) SubmitBasketExecutionUntilRound(ctx context.Context, in *SubmitBasketExecutionUntilRoundRequest, opts ...grpc.CallOption) (*SubmitBasketExecutionUntilRoundResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SubmitBasketExecutionUntilRound", varargs...)
+	ret0, _ := ret[0].(*SubmitBasketExecutionUntilRoundResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SubmitBasketExecutionUntilRound indicates an expected call of SubmitBasketExecutionUntilRound.
+func (mr *MockBasketServiceClientMockRecorder) SubmitBasketExecutionUntilRound(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitBasketExecutionUntilRound", reflect.TypeOf((*MockBasketServiceClient)(nil).SubmitBasketExecutionUntilRound), varargs...)
+}
+
 // UpdateBasket mocks base method.
 func (m *MockBasketServiceClient) UpdateBasket(ctx context.Context, in *UpdateBasketRequest, opts ...grpc.CallOption) (*Basket, error) {
 	m.ctrl.T.Helper()
@@ -516,6 +556,26 @@ func (mr *MockBasketServiceClientMockRecorder) UpdateBasket(ctx, in interface{},
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBasket", reflect.TypeOf((*MockBasketServiceClient)(nil).UpdateBasket), varargs...)
+}
+
+// UpdateBasketExecution mocks base method.
+func (m *MockBasketServiceClient) UpdateBasketExecution(ctx context.Context, in *UpdateBasketExecutionRequest, opts ...grpc.CallOption) (*BasketExecution, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateBasketExecution", varargs...)
+	ret0, _ := ret[0].(*BasketExecution)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateBasketExecution indicates an expected call of UpdateBasketExecution.
+func (mr *MockBasketServiceClientMockRecorder) UpdateBasketExecution(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBasketExecution", reflect.TypeOf((*MockBasketServiceClient)(nil).UpdateBasketExecution), varargs...)
 }
 
 // MockBasketServiceServer is a mock of BasketServiceServer interface.
@@ -539,6 +599,21 @@ func NewMockBasketServiceServer(ctrl *gomock.Controller) *MockBasketServiceServe
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockBasketServiceServer) EXPECT() *MockBasketServiceServerMockRecorder {
 	return m.recorder
+}
+
+// AmendBasketExecutionResidual mocks base method.
+func (m *MockBasketServiceServer) AmendBasketExecutionResidual(ctx context.Context, in *AmendBasketExecutionResidualRequest) (*AmendBasketExecutionResidualResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AmendBasketExecutionResidual", ctx, in)
+	ret0, _ := ret[0].(*AmendBasketExecutionResidualResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AmendBasketExecutionResidual indicates an expected call of AmendBasketExecutionResidual.
+func (mr *MockBasketServiceServerMockRecorder) AmendBasketExecutionResidual(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AmendBasketExecutionResidual", reflect.TypeOf((*MockBasketServiceServer)(nil).AmendBasketExecutionResidual), ctx, in)
 }
 
 // CancelBasketExecutionResidual mocks base method.
@@ -705,6 +780,21 @@ func (mr *MockBasketServiceServerMockRecorder) SubmitBasketExecutionRound(ctx, i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitBasketExecutionRound", reflect.TypeOf((*MockBasketServiceServer)(nil).SubmitBasketExecutionRound), ctx, in)
 }
 
+// SubmitBasketExecutionUntilRound mocks base method.
+func (m *MockBasketServiceServer) SubmitBasketExecutionUntilRound(ctx context.Context, in *SubmitBasketExecutionUntilRoundRequest) (*SubmitBasketExecutionUntilRoundResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SubmitBasketExecutionUntilRound", ctx, in)
+	ret0, _ := ret[0].(*SubmitBasketExecutionUntilRoundResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SubmitBasketExecutionUntilRound indicates an expected call of SubmitBasketExecutionUntilRound.
+func (mr *MockBasketServiceServerMockRecorder) SubmitBasketExecutionUntilRound(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitBasketExecutionUntilRound", reflect.TypeOf((*MockBasketServiceServer)(nil).SubmitBasketExecutionUntilRound), ctx, in)
+}
+
 // UpdateBasket mocks base method.
 func (m *MockBasketServiceServer) UpdateBasket(ctx context.Context, in *UpdateBasketRequest) (*Basket, error) {
 	m.ctrl.T.Helper()
@@ -718,4 +808,19 @@ func (m *MockBasketServiceServer) UpdateBasket(ctx context.Context, in *UpdateBa
 func (mr *MockBasketServiceServerMockRecorder) UpdateBasket(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBasket", reflect.TypeOf((*MockBasketServiceServer)(nil).UpdateBasket), ctx, in)
+}
+
+// UpdateBasketExecution mocks base method.
+func (m *MockBasketServiceServer) UpdateBasketExecution(ctx context.Context, in *UpdateBasketExecutionRequest) (*BasketExecution, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateBasketExecution", ctx, in)
+	ret0, _ := ret[0].(*BasketExecution)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateBasketExecution indicates an expected call of UpdateBasketExecution.
+func (mr *MockBasketServiceServerMockRecorder) UpdateBasketExecution(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBasketExecution", reflect.TypeOf((*MockBasketServiceServer)(nil).UpdateBasketExecution), ctx, in)
 }

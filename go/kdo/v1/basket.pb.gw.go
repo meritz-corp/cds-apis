@@ -683,6 +683,242 @@ func local_request_BasketService_CancelBasketExecutionResidual_0(ctx context.Con
 
 }
 
+var (
+	filter_BasketService_UpdateBasketExecution_0 = &utilities.DoubleArray{Encoding: map[string]int{"execution": 0, "name": 1}, Base: []int{1, 4, 5, 2, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 4, 2, 2, 3}}
+)
+
+func request_BasketService_UpdateBasketExecution_0(ctx context.Context, marshaler runtime.Marshaler, client BasketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateBasketExecutionRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Execution); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if protoReq.UpdateMask == nil || len(protoReq.UpdateMask.GetPaths()) == 0 {
+		if fieldMask, err := runtime.FieldMaskFromRequestBody(newReader(), protoReq.Execution); err != nil {
+			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		} else {
+			protoReq.UpdateMask = fieldMask
+		}
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["execution.name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "execution.name")
+	}
+
+	err = runtime.PopulateFieldFromPath(&protoReq, "execution.name", val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "execution.name", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_BasketService_UpdateBasketExecution_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.UpdateBasketExecution(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_BasketService_UpdateBasketExecution_0(ctx context.Context, marshaler runtime.Marshaler, server BasketServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateBasketExecutionRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Execution); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if protoReq.UpdateMask == nil || len(protoReq.UpdateMask.GetPaths()) == 0 {
+		if fieldMask, err := runtime.FieldMaskFromRequestBody(newReader(), protoReq.Execution); err != nil {
+			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		} else {
+			protoReq.UpdateMask = fieldMask
+		}
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["execution.name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "execution.name")
+	}
+
+	err = runtime.PopulateFieldFromPath(&protoReq, "execution.name", val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "execution.name", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_BasketService_UpdateBasketExecution_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.UpdateBasketExecution(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_BasketService_AmendBasketExecutionResidual_0(ctx context.Context, marshaler runtime.Marshaler, client BasketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq AmendBasketExecutionResidualRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["execution"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "execution")
+	}
+
+	protoReq.Execution, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "execution", err)
+	}
+
+	msg, err := client.AmendBasketExecutionResidual(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_BasketService_AmendBasketExecutionResidual_0(ctx context.Context, marshaler runtime.Marshaler, server BasketServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq AmendBasketExecutionResidualRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["execution"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "execution")
+	}
+
+	protoReq.Execution, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "execution", err)
+	}
+
+	msg, err := server.AmendBasketExecutionResidual(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_BasketService_SubmitBasketExecutionUntilRound_0(ctx context.Context, marshaler runtime.Marshaler, client BasketServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SubmitBasketExecutionUntilRoundRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["execution"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "execution")
+	}
+
+	protoReq.Execution, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "execution", err)
+	}
+
+	msg, err := client.SubmitBasketExecutionUntilRound(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_BasketService_SubmitBasketExecutionUntilRound_0(ctx context.Context, marshaler runtime.Marshaler, server BasketServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SubmitBasketExecutionUntilRoundRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["execution"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "execution")
+	}
+
+	protoReq.Execution, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "execution", err)
+	}
+
+	msg, err := server.SubmitBasketExecutionUntilRound(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 func request_BasketService_StreamBasketExecution_0(ctx context.Context, marshaler runtime.Marshaler, client BasketServiceClient, req *http.Request, pathParams map[string]string) (BasketService_StreamBasketExecutionClient, runtime.ServerMetadata, error) {
 	var protoReq StreamBasketExecutionRequest
 	var metadata runtime.ServerMetadata
@@ -998,6 +1234,81 @@ func RegisterBasketServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("PATCH", pattern_BasketService_UpdateBasketExecution_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.basket.BasketService/UpdateBasketExecution", runtime.WithHTTPPathPattern("/v1/{execution.name=baskets/*/executions/*}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_BasketService_UpdateBasketExecution_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BasketService_UpdateBasketExecution_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_BasketService_AmendBasketExecutionResidual_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.basket.BasketService/AmendBasketExecutionResidual", runtime.WithHTTPPathPattern("/v1/{execution=baskets/*/executions/*}:amendResidual"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_BasketService_AmendBasketExecutionResidual_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BasketService_AmendBasketExecutionResidual_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_BasketService_SubmitBasketExecutionUntilRound_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.basket.BasketService/SubmitBasketExecutionUntilRound", runtime.WithHTTPPathPattern("/v1/{execution=baskets/*/executions/*}:submitUntilRound"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_BasketService_SubmitBasketExecutionUntilRound_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BasketService_SubmitBasketExecutionUntilRound_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_BasketService_StreamBasketExecution_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -1288,6 +1599,72 @@ func RegisterBasketServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("PATCH", pattern_BasketService_UpdateBasketExecution_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.basket.BasketService/UpdateBasketExecution", runtime.WithHTTPPathPattern("/v1/{execution.name=baskets/*/executions/*}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_BasketService_UpdateBasketExecution_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BasketService_UpdateBasketExecution_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_BasketService_AmendBasketExecutionResidual_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.basket.BasketService/AmendBasketExecutionResidual", runtime.WithHTTPPathPattern("/v1/{execution=baskets/*/executions/*}:amendResidual"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_BasketService_AmendBasketExecutionResidual_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BasketService_AmendBasketExecutionResidual_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_BasketService_SubmitBasketExecutionUntilRound_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.basket.BasketService/SubmitBasketExecutionUntilRound", runtime.WithHTTPPathPattern("/v1/{execution=baskets/*/executions/*}:submitUntilRound"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_BasketService_SubmitBasketExecutionUntilRound_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BasketService_SubmitBasketExecutionUntilRound_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_BasketService_StreamBasketExecution_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1336,6 +1713,12 @@ var (
 
 	pattern_BasketService_CancelBasketExecutionResidual_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 4, 4, 5, 3}, []string{"v1", "baskets", "executions", "execution"}, "cancelResidual"))
 
+	pattern_BasketService_UpdateBasketExecution_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 4, 4, 5, 3}, []string{"v1", "baskets", "executions", "execution.name"}, ""))
+
+	pattern_BasketService_AmendBasketExecutionResidual_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 4, 4, 5, 3}, []string{"v1", "baskets", "executions", "execution"}, "amendResidual"))
+
+	pattern_BasketService_SubmitBasketExecutionUntilRound_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 4, 4, 5, 3}, []string{"v1", "baskets", "executions", "execution"}, "submitUntilRound"))
+
 	pattern_BasketService_StreamBasketExecution_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 2, 2, 1, 0, 4, 4, 5, 3}, []string{"v1", "baskets", "executions", "execution"}, "stream"))
 )
 
@@ -1361,6 +1744,12 @@ var (
 	forward_BasketService_SubmitBasketExecutionRound_0 = runtime.ForwardResponseMessage
 
 	forward_BasketService_CancelBasketExecutionResidual_0 = runtime.ForwardResponseMessage
+
+	forward_BasketService_UpdateBasketExecution_0 = runtime.ForwardResponseMessage
+
+	forward_BasketService_AmendBasketExecutionResidual_0 = runtime.ForwardResponseMessage
+
+	forward_BasketService_SubmitBasketExecutionUntilRound_0 = runtime.ForwardResponseMessage
 
 	forward_BasketService_StreamBasketExecution_0 = runtime.ForwardResponseStream
 )

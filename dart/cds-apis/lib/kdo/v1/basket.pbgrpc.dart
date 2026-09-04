@@ -90,6 +90,24 @@ class BasketServiceClient extends $grpc.Client {
     return $createUnaryCall(_$cancelBasketExecutionResidual, request, options: options);
   }
 
+  /// 실행 수정 - 현재 pause_round_no(중지회차)만 지원
+  $grpc.ResponseFuture<$0.BasketExecution> updateBasketExecution($0.UpdateBasketExecutionRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateBasketExecution, request, options: options);
+  }
+
+  /// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 잔여 주문 일괄 정정 (mmm "미체결 1% 정정" 대응)
+  /// 매도 주문: 현재가 × (1 - pct/100) 방향으로, 매수 주문: 현재가 × (1 + pct/100) 방향으로.
+  /// 기존 주문가보다 공격적일 때만 정정한다.
+  $grpc.ResponseFuture<$0.AmendBasketExecutionResidualResponse> amendBasketExecutionResidual($0.AmendBasketExecutionResidualRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$amendBasketExecutionResidual, request, options: options);
+  }
+
+  /// 목표회차까지발주 - 항목별 누적 계획수량(target_round_no 기준)과 기발주(ordered) 수량의 차이만큼 보충 발주.
+  /// current_round_no 는 증가하지 않는다 (발주 누락 보충 용도, 반복 호출 안전)
+  $grpc.ResponseFuture<$0.SubmitBasketExecutionUntilRoundResponse> submitBasketExecutionUntilRound($0.SubmitBasketExecutionUntilRoundRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$submitBasketExecutionUntilRound, request, options: options);
+  }
+
   /// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
   $grpc.ResponseStream<$0.BasketExecution> streamBasketExecution($0.StreamBasketExecutionRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamBasketExecution, $async.Stream.fromIterable([request]), options: options);
@@ -141,6 +159,18 @@ class BasketServiceClient extends $grpc.Client {
       '/kdo.v1.basket.BasketService/CancelBasketExecutionResidual',
       ($0.CancelBasketExecutionResidualRequest value) => value.writeToBuffer(),
       $0.CancelBasketExecutionResidualResponse.fromBuffer);
+  static final _$updateBasketExecution = $grpc.ClientMethod<$0.UpdateBasketExecutionRequest, $0.BasketExecution>(
+      '/kdo.v1.basket.BasketService/UpdateBasketExecution',
+      ($0.UpdateBasketExecutionRequest value) => value.writeToBuffer(),
+      $0.BasketExecution.fromBuffer);
+  static final _$amendBasketExecutionResidual = $grpc.ClientMethod<$0.AmendBasketExecutionResidualRequest, $0.AmendBasketExecutionResidualResponse>(
+      '/kdo.v1.basket.BasketService/AmendBasketExecutionResidual',
+      ($0.AmendBasketExecutionResidualRequest value) => value.writeToBuffer(),
+      $0.AmendBasketExecutionResidualResponse.fromBuffer);
+  static final _$submitBasketExecutionUntilRound = $grpc.ClientMethod<$0.SubmitBasketExecutionUntilRoundRequest, $0.SubmitBasketExecutionUntilRoundResponse>(
+      '/kdo.v1.basket.BasketService/SubmitBasketExecutionUntilRound',
+      ($0.SubmitBasketExecutionUntilRoundRequest value) => value.writeToBuffer(),
+      $0.SubmitBasketExecutionUntilRoundResponse.fromBuffer);
   static final _$streamBasketExecution = $grpc.ClientMethod<$0.StreamBasketExecutionRequest, $0.BasketExecution>(
       '/kdo.v1.basket.BasketService/StreamBasketExecution',
       ($0.StreamBasketExecutionRequest value) => value.writeToBuffer(),
@@ -229,6 +259,27 @@ abstract class BasketServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CancelBasketExecutionResidualRequest.fromBuffer(value),
         ($0.CancelBasketExecutionResidualResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateBasketExecutionRequest, $0.BasketExecution>(
+        'UpdateBasketExecution',
+        updateBasketExecution_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateBasketExecutionRequest.fromBuffer(value),
+        ($0.BasketExecution value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AmendBasketExecutionResidualRequest, $0.AmendBasketExecutionResidualResponse>(
+        'AmendBasketExecutionResidual',
+        amendBasketExecutionResidual_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.AmendBasketExecutionResidualRequest.fromBuffer(value),
+        ($0.AmendBasketExecutionResidualResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SubmitBasketExecutionUntilRoundRequest, $0.SubmitBasketExecutionUntilRoundResponse>(
+        'SubmitBasketExecutionUntilRound',
+        submitBasketExecutionUntilRound_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SubmitBasketExecutionUntilRoundRequest.fromBuffer(value),
+        ($0.SubmitBasketExecutionUntilRoundResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.StreamBasketExecutionRequest, $0.BasketExecution>(
         'StreamBasketExecution',
         streamBasketExecution_Pre,
@@ -303,6 +354,24 @@ abstract class BasketServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.CancelBasketExecutionResidualResponse> cancelBasketExecutionResidual($grpc.ServiceCall call, $0.CancelBasketExecutionResidualRequest request);
+
+  $async.Future<$0.BasketExecution> updateBasketExecution_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateBasketExecutionRequest> $request) async {
+    return updateBasketExecution($call, await $request);
+  }
+
+  $async.Future<$0.BasketExecution> updateBasketExecution($grpc.ServiceCall call, $0.UpdateBasketExecutionRequest request);
+
+  $async.Future<$0.AmendBasketExecutionResidualResponse> amendBasketExecutionResidual_Pre($grpc.ServiceCall $call, $async.Future<$0.AmendBasketExecutionResidualRequest> $request) async {
+    return amendBasketExecutionResidual($call, await $request);
+  }
+
+  $async.Future<$0.AmendBasketExecutionResidualResponse> amendBasketExecutionResidual($grpc.ServiceCall call, $0.AmendBasketExecutionResidualRequest request);
+
+  $async.Future<$0.SubmitBasketExecutionUntilRoundResponse> submitBasketExecutionUntilRound_Pre($grpc.ServiceCall $call, $async.Future<$0.SubmitBasketExecutionUntilRoundRequest> $request) async {
+    return submitBasketExecutionUntilRound($call, await $request);
+  }
+
+  $async.Future<$0.SubmitBasketExecutionUntilRoundResponse> submitBasketExecutionUntilRound($grpc.ServiceCall call, $0.SubmitBasketExecutionUntilRoundRequest request);
 
   $async.Stream<$0.BasketExecution> streamBasketExecution_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamBasketExecutionRequest> $request) async* {
     yield* streamBasketExecution($call, await $request);

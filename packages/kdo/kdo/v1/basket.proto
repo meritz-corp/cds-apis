@@ -111,6 +111,34 @@ service BasketService {
     };
   }
 
+  // 실행 수정 - 현재 pause_round_no(중지회차)만 지원
+  rpc UpdateBasketExecution(UpdateBasketExecutionRequest) returns (BasketExecution) {
+    option (google.api.http) = {
+      patch: "/v1/{execution.name=baskets/*/executions/*}"
+      body: "execution"
+    };
+    option (google.api.method_signature) = "execution,update_mask";
+  }
+
+  // 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 잔여 주문 일괄 정정 (mmm "미체결 1% 정정" 대응)
+  // 매도 주문: 현재가 × (1 - pct/100) 방향으로, 매수 주문: 현재가 × (1 + pct/100) 방향으로.
+  // 기존 주문가보다 공격적일 때만 정정한다.
+  rpc AmendBasketExecutionResidual(AmendBasketExecutionResidualRequest) returns (AmendBasketExecutionResidualResponse) {
+    option (google.api.http) = {
+      post: "/v1/{execution=baskets/*/executions/*}:amendResidual"
+      body: "*"
+    };
+  }
+
+  // 목표회차까지발주 - 항목별 누적 계획수량(target_round_no 기준)과 기발주(ordered) 수량의 차이만큼 보충 발주.
+  // current_round_no 는 증가하지 않는다 (발주 누락 보충 용도, 반복 호출 안전)
+  rpc SubmitBasketExecutionUntilRound(SubmitBasketExecutionUntilRoundRequest) returns (SubmitBasketExecutionUntilRoundResponse) {
+    option (google.api.http) = {
+      post: "/v1/{execution=baskets/*/executions/*}:submitUntilRound"
+      body: "*"
+    };
+  }
+
   // 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
   rpc StreamBasketExecution(StreamBasketExecutionRequest) returns (stream BasketExecution) {
     option (google.api.http) = {
@@ -499,6 +527,9 @@ message BasketExecution {
   repeated BasketExecutionOrderRelation order_relations = 14 [
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
+
+  // 중지회차 - 설정 시 이 회차를 초과하는 발주 요청(회차발주/목표회차까지발주)을 차단 (미설정 = 제한 없음)
+  optional uint32 pause_round_no = 15;
 }
 
 // 바스켓 실행 상태
@@ -786,4 +817,81 @@ message StreamBasketExecutionRequest {
       type: "kdo.cdsapis.xyz/BasketExecution"
     }
   ];
+}
+
+message UpdateBasketExecutionRequest {
+  // 수정할 실행 (name 필수)
+  BasketExecution execution = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 수정할 필드 마스크 (지원 경로: "pause_round_no")
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message AmendBasketExecutionResidualRequest {
+  // 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  string execution = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/BasketExecution"
+    }
+  ];
+
+  // 정정 폭 % (예: 1.0 = 현재가 대비 1%). 0 < amend_pct <= 30
+  double amend_pct = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+// 정정된 주문
+message BasketExecutionAmendedOrder {
+  // 실행 항목 ID
+  int64 execution_item_id = 1;
+
+  // 종목 심볼
+  string symbol = 2;
+
+  // 정정 주문 ID
+  uint64 amend_order_id = 3;
+
+  // 정정 대상 원주문 ID
+  uint64 original_order_id = 4;
+
+  // 정정 후 가격
+  string price = 5;
+}
+
+message AmendBasketExecutionResidualResponse {
+  // 정정된 주문 목록
+  repeated BasketExecutionAmendedOrder amended_orders = 1;
+
+  // 건너뛴 항목 목록
+  repeated BasketExecutionSkippedItem skipped_items = 2;
+}
+
+message SubmitBasketExecutionUntilRoundRequest {
+  // 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  string execution = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/BasketExecution"
+    }
+  ];
+
+  // 목표 회차 (1..=planned_round_count)
+  uint32 target_round_no = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+}
+
+message SubmitBasketExecutionUntilRoundResponse {
+  // 목표 회차
+  uint32 target_round_no = 1;
+
+  // 제출된 주문 목록
+  repeated BasketExecutionSubmittedOrder submitted_orders = 2;
+
+  // 건너뛴 항목 목록
+  repeated BasketExecutionSkippedItem skipped_items = 3;
 }

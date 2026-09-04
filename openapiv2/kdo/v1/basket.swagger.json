@@ -296,6 +296,141 @@
         ]
       }
     },
+    "/v1/{execution.name}": {
+      "patch": {
+        "summary": "실행 수정 - 현재 pause_round_no(중지회차)만 지원",
+        "operationId": "BasketService_UpdateBasketExecution",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketBasketExecution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "execution.name",
+            "description": "리소스 이름 (baskets/{basket_id}/executions/{execution_id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "baskets/[^/]+/executions/[^/]+"
+          },
+          {
+            "name": "execution",
+            "description": "수정할 실행 (name 필수)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "실행 ID",
+                  "readOnly": true
+                },
+                "basketId": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "바스켓 ID",
+                  "readOnly": true
+                },
+                "basketDisplayName": {
+                  "type": "string",
+                  "title": "실행 생성 시점의 바스켓 이름 스냅샷",
+                  "readOnly": true
+                },
+                "status": {
+                  "$ref": "#/definitions/basketBasketExecutionStatus",
+                  "title": "실행 상태",
+                  "readOnly": true
+                },
+                "currentRoundNo": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "현재 회차 (0 = 미시작)",
+                  "readOnly": true
+                },
+                "plannedRoundCount": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "계획 분할 회차 수"
+                },
+                "summary": {
+                  "$ref": "#/definitions/basketBasketExecutionSummary",
+                  "title": "집계 요약 (수량/금액 합계)",
+                  "readOnly": true
+                },
+                "startTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "최초 발주 시간",
+                  "readOnly": true
+                },
+                "endTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "완료 시간",
+                  "readOnly": true
+                },
+                "createTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "생성 시간",
+                  "readOnly": true
+                },
+                "updateTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "title": "수정 시간",
+                  "readOnly": true
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/basketBasketExecutionItem"
+                  },
+                  "title": "구성 항목 (GetBasketExecution/StreamBasketExecution 응답에서만 채워짐)",
+                  "readOnly": true
+                },
+                "orderRelations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/basketBasketExecutionOrderRelation"
+                  },
+                  "title": "주문 연결 이력 (GetBasketExecution 응답에서만 채워짐)",
+                  "readOnly": true
+                },
+                "pauseRoundNo": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "중지회차 - 설정 시 이 회차를 초과하는 발주 요청(회차발주/목표회차까지발주)을 차단 (미설정 = 제한 없음)"
+                }
+              },
+              "title": "수정할 실행 (name 필수)"
+            }
+          },
+          {
+            "name": "updateMask",
+            "description": "수정할 필드 마스크 (지원 경로: \"pause_round_no\")",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    },
     "/v1/{execution}": {
       "get": {
         "summary": "단일 실행 조회 (items + order_relations 포함)",
@@ -322,6 +457,57 @@
             "required": true,
             "type": "string",
             "pattern": "baskets/[^/]+/executions/[^/]+"
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    },
+    "/v1/{execution}:amendResidual": {
+      "post": {
+        "summary": "미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 잔여 주문 일괄 정정 (mmm \"미체결 1% 정정\" 대응)\n매도 주문: 현재가 × (1 - pct/100) 방향으로, 매수 주문: 현재가 × (1 + pct/100) 방향으로.\n기존 주문가보다 공격적일 때만 정정한다.",
+        "operationId": "BasketService_AmendBasketExecutionResidual",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketAmendBasketExecutionResidualResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "execution",
+            "description": "리소스 이름 (baskets/{basket_id}/executions/{execution_id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "baskets/[^/]+/executions/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amendPct": {
+                  "type": "number",
+                  "format": "double",
+                  "title": "정정 폭 % (예: 1.0 = 현재가 대비 1%). 0 \u003c amend_pct \u003c= 30"
+                }
+              },
+              "required": [
+                "amendPct"
+              ]
+            }
           }
         ],
         "tags": [
@@ -460,6 +646,57 @@
         ]
       }
     },
+    "/v1/{execution}:submitUntilRound": {
+      "post": {
+        "summary": "목표회차까지발주 - 항목별 누적 계획수량(target_round_no 기준)과 기발주(ordered) 수량의 차이만큼 보충 발주.\ncurrent_round_no 는 증가하지 않는다 (발주 누락 보충 용도, 반복 호출 안전)",
+        "operationId": "BasketService_SubmitBasketExecutionUntilRound",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/basketSubmitBasketExecutionUntilRoundResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "execution",
+            "description": "리소스 이름 (baskets/{basket_id}/executions/{execution_id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "baskets/[^/]+/executions/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "targetRoundNo": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "목표 회차 (1..=planned_round_count)"
+                }
+              },
+              "required": [
+                "targetRoundNo"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "BasketService"
+        ]
+      }
+    },
     "/v1/{parent}/executions": {
       "get": {
         "summary": "실행 목록 조회 (items/order_relations 미포함)\nparent를 \"baskets/-\" 로 지정하면 전체 바스켓의 실행을 조회 (AIP-159)",
@@ -556,6 +793,25 @@
     }
   },
   "definitions": {
+    "basketAmendBasketExecutionResidualResponse": {
+      "type": "object",
+      "properties": {
+        "amendedOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basketBasketExecutionAmendedOrder"
+          },
+          "title": "정정된 주문 목록"
+        },
+        "skippedItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basketBasketExecutionSkippedItem"
+          },
+          "title": "건너뛴 항목 목록"
+        }
+      }
+    },
     "basketBasket": {
       "type": "object",
       "properties": {
@@ -698,6 +954,11 @@
           },
           "title": "주문 연결 이력 (GetBasketExecution 응답에서만 채워짐)",
           "readOnly": true
+        },
+        "pauseRoundNo": {
+          "type": "integer",
+          "format": "int64",
+          "title": "중지회차 - 설정 시 이 회차를 초과하는 발주 요청(회차발주/목표회차까지발주)을 차단 (미설정 = 제한 없음)"
         }
       },
       "title": "바스켓 실행 - 바스켓의 1회 발주 실행 인스턴스 (생성 시점 바스켓 스냅샷 기반)"
@@ -713,6 +974,35 @@
       "default": "BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED",
       "description": "- BASKET_EXECUTION_ACTION_TYPE_NEW: 신규 주문\n - BASKET_EXECUTION_ACTION_TYPE_AMEND: 정정 주문\n - BASKET_EXECUTION_ACTION_TYPE_CANCEL: 취소 주문",
       "title": "바스켓 실행 주문 액션 타입"
+    },
+    "basketBasketExecutionAmendedOrder": {
+      "type": "object",
+      "properties": {
+        "executionItemId": {
+          "type": "string",
+          "format": "int64",
+          "title": "실행 항목 ID"
+        },
+        "symbol": {
+          "type": "string",
+          "title": "종목 심볼"
+        },
+        "amendOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "정정 주문 ID"
+        },
+        "originalOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "정정 대상 원주문 ID"
+        },
+        "price": {
+          "type": "string",
+          "title": "정정 후 가격"
+        }
+      },
+      "title": "정정된 주문"
     },
     "basketBasketExecutionCancelledOrder": {
       "type": "object",
@@ -1194,6 +1484,30 @@
           "type": "integer",
           "format": "int64",
           "title": "발주된 회차"
+        },
+        "submittedOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basketBasketExecutionSubmittedOrder"
+          },
+          "title": "제출된 주문 목록"
+        },
+        "skippedItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basketBasketExecutionSkippedItem"
+          },
+          "title": "건너뛴 항목 목록"
+        }
+      }
+    },
+    "basketSubmitBasketExecutionUntilRoundResponse": {
+      "type": "object",
+      "properties": {
+        "targetRoundNo": {
+          "type": "integer",
+          "format": "int64",
+          "title": "목표 회차"
         },
         "submittedOrders": {
           "type": "array",

@@ -1212,6 +1212,7 @@ class BasketExecution extends $pb.GeneratedMessage {
     $2.Timestamp? updateTime,
     $core.Iterable<BasketExecutionItem>? items,
     $core.Iterable<BasketExecutionOrderRelation>? orderRelations,
+    $core.int? pauseRoundNo,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -1228,6 +1229,7 @@ class BasketExecution extends $pb.GeneratedMessage {
     if (updateTime != null) result.updateTime = updateTime;
     if (items != null) result.items.addAll(items);
     if (orderRelations != null) result.orderRelations.addAll(orderRelations);
+    if (pauseRoundNo != null) result.pauseRoundNo = pauseRoundNo;
     return result;
   }
 
@@ -1251,6 +1253,7 @@ class BasketExecution extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(12, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..pc<BasketExecutionItem>(13, _omitFieldNames ? '' : 'items', $pb.PbFieldType.PM, subBuilder: BasketExecutionItem.create)
     ..pc<BasketExecutionOrderRelation>(14, _omitFieldNames ? '' : 'orderRelations', $pb.PbFieldType.PM, subBuilder: BasketExecutionOrderRelation.create)
+    ..a<$core.int>(15, _omitFieldNames ? '' : 'pauseRoundNo', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -1408,6 +1411,16 @@ class BasketExecution extends $pb.GeneratedMessage {
   /// 주문 연결 이력 (GetBasketExecution 응답에서만 채워짐)
   @$pb.TagNumber(14)
   $pb.PbList<BasketExecutionOrderRelation> get orderRelations => $_getList(13);
+
+  /// 중지회차 - 설정 시 이 회차를 초과하는 발주 요청(회차발주/목표회차까지발주)을 차단 (미설정 = 제한 없음)
+  @$pb.TagNumber(15)
+  $core.int get pauseRoundNo => $_getIZ(14);
+  @$pb.TagNumber(15)
+  set pauseRoundNo($core.int value) => $_setUnsignedInt32(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasPauseRoundNo() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearPauseRoundNo() => $_clearField(15);
 }
 
 /// 바스켓 실행 집계 요약
@@ -2626,6 +2639,399 @@ class StreamBasketExecutionRequest extends $pb.GeneratedMessage {
   $core.bool hasExecution() => $_has(0);
   @$pb.TagNumber(1)
   void clearExecution() => $_clearField(1);
+}
+
+class UpdateBasketExecutionRequest extends $pb.GeneratedMessage {
+  factory UpdateBasketExecutionRequest({
+    BasketExecution? execution,
+    $3.FieldMask? updateMask,
+  }) {
+    final result = create();
+    if (execution != null) result.execution = execution;
+    if (updateMask != null) result.updateMask = updateMask;
+    return result;
+  }
+
+  UpdateBasketExecutionRequest._();
+
+  factory UpdateBasketExecutionRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateBasketExecutionRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateBasketExecutionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
+    ..aOM<BasketExecution>(1, _omitFieldNames ? '' : 'execution', subBuilder: BasketExecution.create)
+    ..aOM<$3.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateBasketExecutionRequest clone() => UpdateBasketExecutionRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateBasketExecutionRequest copyWith(void Function(UpdateBasketExecutionRequest) updates) => super.copyWith((message) => updates(message as UpdateBasketExecutionRequest)) as UpdateBasketExecutionRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateBasketExecutionRequest create() => UpdateBasketExecutionRequest._();
+  @$core.override
+  UpdateBasketExecutionRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateBasketExecutionRequest> createRepeated() => $pb.PbList<UpdateBasketExecutionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateBasketExecutionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateBasketExecutionRequest>(create);
+  static UpdateBasketExecutionRequest? _defaultInstance;
+
+  /// 수정할 실행 (name 필수)
+  @$pb.TagNumber(1)
+  BasketExecution get execution => $_getN(0);
+  @$pb.TagNumber(1)
+  set execution(BasketExecution value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasExecution() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearExecution() => $_clearField(1);
+  @$pb.TagNumber(1)
+  BasketExecution ensureExecution() => $_ensure(0);
+
+  /// 수정할 필드 마스크 (지원 경로: "pause_round_no")
+  @$pb.TagNumber(2)
+  $3.FieldMask get updateMask => $_getN(1);
+  @$pb.TagNumber(2)
+  set updateMask($3.FieldMask value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasUpdateMask() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUpdateMask() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $3.FieldMask ensureUpdateMask() => $_ensure(1);
+}
+
+class AmendBasketExecutionResidualRequest extends $pb.GeneratedMessage {
+  factory AmendBasketExecutionResidualRequest({
+    $core.String? execution,
+    $core.double? amendPct,
+  }) {
+    final result = create();
+    if (execution != null) result.execution = execution;
+    if (amendPct != null) result.amendPct = amendPct;
+    return result;
+  }
+
+  AmendBasketExecutionResidualRequest._();
+
+  factory AmendBasketExecutionResidualRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AmendBasketExecutionResidualRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AmendBasketExecutionResidualRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'execution')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'amendPct', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendBasketExecutionResidualRequest clone() => AmendBasketExecutionResidualRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendBasketExecutionResidualRequest copyWith(void Function(AmendBasketExecutionResidualRequest) updates) => super.copyWith((message) => updates(message as AmendBasketExecutionResidualRequest)) as AmendBasketExecutionResidualRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AmendBasketExecutionResidualRequest create() => AmendBasketExecutionResidualRequest._();
+  @$core.override
+  AmendBasketExecutionResidualRequest createEmptyInstance() => create();
+  static $pb.PbList<AmendBasketExecutionResidualRequest> createRepeated() => $pb.PbList<AmendBasketExecutionResidualRequest>();
+  @$core.pragma('dart2js:noInline')
+  static AmendBasketExecutionResidualRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AmendBasketExecutionResidualRequest>(create);
+  static AmendBasketExecutionResidualRequest? _defaultInstance;
+
+  /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  @$pb.TagNumber(1)
+  $core.String get execution => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set execution($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasExecution() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearExecution() => $_clearField(1);
+
+  /// 정정 폭 % (예: 1.0 = 현재가 대비 1%). 0 < amend_pct <= 30
+  @$pb.TagNumber(2)
+  $core.double get amendPct => $_getN(1);
+  @$pb.TagNumber(2)
+  set amendPct($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasAmendPct() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAmendPct() => $_clearField(2);
+}
+
+/// 정정된 주문
+class BasketExecutionAmendedOrder extends $pb.GeneratedMessage {
+  factory BasketExecutionAmendedOrder({
+    $fixnum.Int64? executionItemId,
+    $core.String? symbol,
+    $fixnum.Int64? amendOrderId,
+    $fixnum.Int64? originalOrderId,
+    $core.String? price,
+  }) {
+    final result = create();
+    if (executionItemId != null) result.executionItemId = executionItemId;
+    if (symbol != null) result.symbol = symbol;
+    if (amendOrderId != null) result.amendOrderId = amendOrderId;
+    if (originalOrderId != null) result.originalOrderId = originalOrderId;
+    if (price != null) result.price = price;
+    return result;
+  }
+
+  BasketExecutionAmendedOrder._();
+
+  factory BasketExecutionAmendedOrder.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory BasketExecutionAmendedOrder.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BasketExecutionAmendedOrder', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'executionItemId')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'amendOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(5, _omitFieldNames ? '' : 'price')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketExecutionAmendedOrder clone() => BasketExecutionAmendedOrder()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  BasketExecutionAmendedOrder copyWith(void Function(BasketExecutionAmendedOrder) updates) => super.copyWith((message) => updates(message as BasketExecutionAmendedOrder)) as BasketExecutionAmendedOrder;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static BasketExecutionAmendedOrder create() => BasketExecutionAmendedOrder._();
+  @$core.override
+  BasketExecutionAmendedOrder createEmptyInstance() => create();
+  static $pb.PbList<BasketExecutionAmendedOrder> createRepeated() => $pb.PbList<BasketExecutionAmendedOrder>();
+  @$core.pragma('dart2js:noInline')
+  static BasketExecutionAmendedOrder getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BasketExecutionAmendedOrder>(create);
+  static BasketExecutionAmendedOrder? _defaultInstance;
+
+  /// 실행 항목 ID
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get executionItemId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set executionItemId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasExecutionItemId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearExecutionItemId() => $_clearField(1);
+
+  /// 종목 심볼
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 정정 주문 ID
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get amendOrderId => $_getI64(2);
+  @$pb.TagNumber(3)
+  set amendOrderId($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAmendOrderId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAmendOrderId() => $_clearField(3);
+
+  /// 정정 대상 원주문 ID
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get originalOrderId => $_getI64(3);
+  @$pb.TagNumber(4)
+  set originalOrderId($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOriginalOrderId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOriginalOrderId() => $_clearField(4);
+
+  /// 정정 후 가격
+  @$pb.TagNumber(5)
+  $core.String get price => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set price($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPrice() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPrice() => $_clearField(5);
+}
+
+class AmendBasketExecutionResidualResponse extends $pb.GeneratedMessage {
+  factory AmendBasketExecutionResidualResponse({
+    $core.Iterable<BasketExecutionAmendedOrder>? amendedOrders,
+    $core.Iterable<BasketExecutionSkippedItem>? skippedItems,
+  }) {
+    final result = create();
+    if (amendedOrders != null) result.amendedOrders.addAll(amendedOrders);
+    if (skippedItems != null) result.skippedItems.addAll(skippedItems);
+    return result;
+  }
+
+  AmendBasketExecutionResidualResponse._();
+
+  factory AmendBasketExecutionResidualResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AmendBasketExecutionResidualResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AmendBasketExecutionResidualResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
+    ..pc<BasketExecutionAmendedOrder>(1, _omitFieldNames ? '' : 'amendedOrders', $pb.PbFieldType.PM, subBuilder: BasketExecutionAmendedOrder.create)
+    ..pc<BasketExecutionSkippedItem>(2, _omitFieldNames ? '' : 'skippedItems', $pb.PbFieldType.PM, subBuilder: BasketExecutionSkippedItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendBasketExecutionResidualResponse clone() => AmendBasketExecutionResidualResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendBasketExecutionResidualResponse copyWith(void Function(AmendBasketExecutionResidualResponse) updates) => super.copyWith((message) => updates(message as AmendBasketExecutionResidualResponse)) as AmendBasketExecutionResidualResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AmendBasketExecutionResidualResponse create() => AmendBasketExecutionResidualResponse._();
+  @$core.override
+  AmendBasketExecutionResidualResponse createEmptyInstance() => create();
+  static $pb.PbList<AmendBasketExecutionResidualResponse> createRepeated() => $pb.PbList<AmendBasketExecutionResidualResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AmendBasketExecutionResidualResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AmendBasketExecutionResidualResponse>(create);
+  static AmendBasketExecutionResidualResponse? _defaultInstance;
+
+  /// 정정된 주문 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<BasketExecutionAmendedOrder> get amendedOrders => $_getList(0);
+
+  /// 건너뛴 항목 목록
+  @$pb.TagNumber(2)
+  $pb.PbList<BasketExecutionSkippedItem> get skippedItems => $_getList(1);
+}
+
+class SubmitBasketExecutionUntilRoundRequest extends $pb.GeneratedMessage {
+  factory SubmitBasketExecutionUntilRoundRequest({
+    $core.String? execution,
+    $core.int? targetRoundNo,
+  }) {
+    final result = create();
+    if (execution != null) result.execution = execution;
+    if (targetRoundNo != null) result.targetRoundNo = targetRoundNo;
+    return result;
+  }
+
+  SubmitBasketExecutionUntilRoundRequest._();
+
+  factory SubmitBasketExecutionUntilRoundRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SubmitBasketExecutionUntilRoundRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubmitBasketExecutionUntilRoundRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'execution')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'targetRoundNo', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitBasketExecutionUntilRoundRequest clone() => SubmitBasketExecutionUntilRoundRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitBasketExecutionUntilRoundRequest copyWith(void Function(SubmitBasketExecutionUntilRoundRequest) updates) => super.copyWith((message) => updates(message as SubmitBasketExecutionUntilRoundRequest)) as SubmitBasketExecutionUntilRoundRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubmitBasketExecutionUntilRoundRequest create() => SubmitBasketExecutionUntilRoundRequest._();
+  @$core.override
+  SubmitBasketExecutionUntilRoundRequest createEmptyInstance() => create();
+  static $pb.PbList<SubmitBasketExecutionUntilRoundRequest> createRepeated() => $pb.PbList<SubmitBasketExecutionUntilRoundRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SubmitBasketExecutionUntilRoundRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubmitBasketExecutionUntilRoundRequest>(create);
+  static SubmitBasketExecutionUntilRoundRequest? _defaultInstance;
+
+  /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  @$pb.TagNumber(1)
+  $core.String get execution => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set execution($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasExecution() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearExecution() => $_clearField(1);
+
+  /// 목표 회차 (1..=planned_round_count)
+  @$pb.TagNumber(2)
+  $core.int get targetRoundNo => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set targetRoundNo($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTargetRoundNo() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTargetRoundNo() => $_clearField(2);
+}
+
+class SubmitBasketExecutionUntilRoundResponse extends $pb.GeneratedMessage {
+  factory SubmitBasketExecutionUntilRoundResponse({
+    $core.int? targetRoundNo,
+    $core.Iterable<BasketExecutionSubmittedOrder>? submittedOrders,
+    $core.Iterable<BasketExecutionSkippedItem>? skippedItems,
+  }) {
+    final result = create();
+    if (targetRoundNo != null) result.targetRoundNo = targetRoundNo;
+    if (submittedOrders != null) result.submittedOrders.addAll(submittedOrders);
+    if (skippedItems != null) result.skippedItems.addAll(skippedItems);
+    return result;
+  }
+
+  SubmitBasketExecutionUntilRoundResponse._();
+
+  factory SubmitBasketExecutionUntilRoundResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SubmitBasketExecutionUntilRoundResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubmitBasketExecutionUntilRoundResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.basket'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'targetRoundNo', $pb.PbFieldType.OU3)
+    ..pc<BasketExecutionSubmittedOrder>(2, _omitFieldNames ? '' : 'submittedOrders', $pb.PbFieldType.PM, subBuilder: BasketExecutionSubmittedOrder.create)
+    ..pc<BasketExecutionSkippedItem>(3, _omitFieldNames ? '' : 'skippedItems', $pb.PbFieldType.PM, subBuilder: BasketExecutionSkippedItem.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitBasketExecutionUntilRoundResponse clone() => SubmitBasketExecutionUntilRoundResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitBasketExecutionUntilRoundResponse copyWith(void Function(SubmitBasketExecutionUntilRoundResponse) updates) => super.copyWith((message) => updates(message as SubmitBasketExecutionUntilRoundResponse)) as SubmitBasketExecutionUntilRoundResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubmitBasketExecutionUntilRoundResponse create() => SubmitBasketExecutionUntilRoundResponse._();
+  @$core.override
+  SubmitBasketExecutionUntilRoundResponse createEmptyInstance() => create();
+  static $pb.PbList<SubmitBasketExecutionUntilRoundResponse> createRepeated() => $pb.PbList<SubmitBasketExecutionUntilRoundResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SubmitBasketExecutionUntilRoundResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubmitBasketExecutionUntilRoundResponse>(create);
+  static SubmitBasketExecutionUntilRoundResponse? _defaultInstance;
+
+  /// 목표 회차
+  @$pb.TagNumber(1)
+  $core.int get targetRoundNo => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set targetRoundNo($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTargetRoundNo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTargetRoundNo() => $_clearField(1);
+
+  /// 제출된 주문 목록
+  @$pb.TagNumber(2)
+  $pb.PbList<BasketExecutionSubmittedOrder> get submittedOrders => $_getList(1);
+
+  /// 건너뛴 항목 목록
+  @$pb.TagNumber(3)
+  $pb.PbList<BasketExecutionSkippedItem> get skippedItems => $_getList(2);
 }
 
 

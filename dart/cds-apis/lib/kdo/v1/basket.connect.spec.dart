@@ -101,6 +101,33 @@ abstract final class BasketService {
     kdov1basket.CancelBasketExecutionResidualResponse.new,
   );
 
+  /// 실행 수정 - 현재 pause_round_no(중지회차)만 지원
+  static const updateBasketExecution = connect.Spec(
+    '/$name/UpdateBasketExecution',
+    connect.StreamType.unary,
+    kdov1basket.UpdateBasketExecutionRequest.new,
+    kdov1basket.BasketExecution.new,
+  );
+
+  /// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 잔여 주문 일괄 정정 (mmm "미체결 1% 정정" 대응)
+  /// 매도 주문: 현재가 × (1 - pct/100) 방향으로, 매수 주문: 현재가 × (1 + pct/100) 방향으로.
+  /// 기존 주문가보다 공격적일 때만 정정한다.
+  static const amendBasketExecutionResidual = connect.Spec(
+    '/$name/AmendBasketExecutionResidual',
+    connect.StreamType.unary,
+    kdov1basket.AmendBasketExecutionResidualRequest.new,
+    kdov1basket.AmendBasketExecutionResidualResponse.new,
+  );
+
+  /// 목표회차까지발주 - 항목별 누적 계획수량(target_round_no 기준)과 기발주(ordered) 수량의 차이만큼 보충 발주.
+  /// current_round_no 는 증가하지 않는다 (발주 누락 보충 용도, 반복 호출 안전)
+  static const submitBasketExecutionUntilRound = connect.Spec(
+    '/$name/SubmitBasketExecutionUntilRound',
+    connect.StreamType.unary,
+    kdov1basket.SubmitBasketExecutionUntilRoundRequest.new,
+    kdov1basket.SubmitBasketExecutionUntilRoundResponse.new,
+  );
+
   /// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
   static const streamBasketExecution = connect.Spec(
     '/$name/StreamBasketExecution',

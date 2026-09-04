@@ -307,6 +307,9 @@ pub struct BasketExecution {
     /// 주문 연결 이력 (GetBasketExecution 응답에서만 채워짐)
     #[prost(message, repeated, tag="14")]
     pub order_relations: ::prost::alloc::vec::Vec<BasketExecutionOrderRelation>,
+    /// 중지회차 - 설정 시 이 회차를 초과하는 발주 요청(회차발주/목표회차까지발주)을 차단 (미설정 = 제한 없음)
+    #[prost(uint32, optional, tag="15")]
+    pub pause_round_no: ::core::option::Option<u32>,
 }
 /// 바스켓 실행 집계 요약
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -545,6 +548,79 @@ pub struct StreamBasketExecutionRequest {
     /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
     #[prost(string, tag="1")]
     pub execution: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateBasketExecutionRequest {
+    /// 수정할 실행 (name 필수)
+    #[prost(message, optional, tag="1")]
+    pub execution: ::core::option::Option<BasketExecution>,
+    /// 수정할 필드 마스크 (지원 경로: "pause_round_no")
+    #[prost(message, optional, tag="2")]
+    pub update_mask: ::core::option::Option<super::super::super::google::protobuf::FieldMask>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AmendBasketExecutionResidualRequest {
+    /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+    #[prost(string, tag="1")]
+    pub execution: ::prost::alloc::string::String,
+    /// 정정 폭 % (예: 1.0 = 현재가 대비 1%). 0 < amend_pct <= 30
+    #[prost(double, tag="2")]
+    pub amend_pct: f64,
+}
+/// 정정된 주문
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketExecutionAmendedOrder {
+    /// 실행 항목 ID
+    #[prost(int64, tag="1")]
+    pub execution_item_id: i64,
+    /// 종목 심볼
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 정정 주문 ID
+    #[prost(uint64, tag="3")]
+    pub amend_order_id: u64,
+    /// 정정 대상 원주문 ID
+    #[prost(uint64, tag="4")]
+    pub original_order_id: u64,
+    /// 정정 후 가격
+    #[prost(string, tag="5")]
+    pub price: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AmendBasketExecutionResidualResponse {
+    /// 정정된 주문 목록
+    #[prost(message, repeated, tag="1")]
+    pub amended_orders: ::prost::alloc::vec::Vec<BasketExecutionAmendedOrder>,
+    /// 건너뛴 항목 목록
+    #[prost(message, repeated, tag="2")]
+    pub skipped_items: ::prost::alloc::vec::Vec<BasketExecutionSkippedItem>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubmitBasketExecutionUntilRoundRequest {
+    /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+    #[prost(string, tag="1")]
+    pub execution: ::prost::alloc::string::String,
+    /// 목표 회차 (1..=planned_round_count)
+    #[prost(uint32, tag="2")]
+    pub target_round_no: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubmitBasketExecutionUntilRoundResponse {
+    /// 목표 회차
+    #[prost(uint32, tag="1")]
+    pub target_round_no: u32,
+    /// 제출된 주문 목록
+    #[prost(message, repeated, tag="2")]
+    pub submitted_orders: ::prost::alloc::vec::Vec<BasketExecutionSubmittedOrder>,
+    /// 건너뛴 항목 목록
+    #[prost(message, repeated, tag="3")]
+    pub skipped_items: ::prost::alloc::vec::Vec<BasketExecutionSkippedItem>,
 }
 /// 바스켓 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

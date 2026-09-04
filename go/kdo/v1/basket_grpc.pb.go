@@ -46,6 +46,15 @@ type BasketServiceClient interface {
 	SubmitBasketExecutionRound(ctx context.Context, in *SubmitBasketExecutionRoundRequest, opts ...grpc.CallOption) (*SubmitBasketExecutionRoundResponse, error)
 	// 미체결 잔량 취소 - 활성 주문 전량 취소 요청
 	CancelBasketExecutionResidual(ctx context.Context, in *CancelBasketExecutionResidualRequest, opts ...grpc.CallOption) (*CancelBasketExecutionResidualResponse, error)
+	// 실행 수정 - 현재 pause_round_no(중지회차)만 지원
+	UpdateBasketExecution(ctx context.Context, in *UpdateBasketExecutionRequest, opts ...grpc.CallOption) (*BasketExecution, error)
+	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 잔여 주문 일괄 정정 (mmm "미체결 1% 정정" 대응)
+	// 매도 주문: 현재가 × (1 - pct/100) 방향으로, 매수 주문: 현재가 × (1 + pct/100) 방향으로.
+	// 기존 주문가보다 공격적일 때만 정정한다.
+	AmendBasketExecutionResidual(ctx context.Context, in *AmendBasketExecutionResidualRequest, opts ...grpc.CallOption) (*AmendBasketExecutionResidualResponse, error)
+	// 목표회차까지발주 - 항목별 누적 계획수량(target_round_no 기준)과 기발주(ordered) 수량의 차이만큼 보충 발주.
+	// current_round_no 는 증가하지 않는다 (발주 누락 보충 용도, 반복 호출 안전)
+	SubmitBasketExecutionUntilRound(ctx context.Context, in *SubmitBasketExecutionUntilRoundRequest, opts ...grpc.CallOption) (*SubmitBasketExecutionUntilRoundResponse, error)
 	// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
 	StreamBasketExecution(ctx context.Context, in *StreamBasketExecutionRequest, opts ...grpc.CallOption) (BasketService_StreamBasketExecutionClient, error)
 }
@@ -157,6 +166,33 @@ func (c *basketServiceClient) CancelBasketExecutionResidual(ctx context.Context,
 	return out, nil
 }
 
+func (c *basketServiceClient) UpdateBasketExecution(ctx context.Context, in *UpdateBasketExecutionRequest, opts ...grpc.CallOption) (*BasketExecution, error) {
+	out := new(BasketExecution)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/UpdateBasketExecution", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *basketServiceClient) AmendBasketExecutionResidual(ctx context.Context, in *AmendBasketExecutionResidualRequest, opts ...grpc.CallOption) (*AmendBasketExecutionResidualResponse, error) {
+	out := new(AmendBasketExecutionResidualResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/AmendBasketExecutionResidual", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *basketServiceClient) SubmitBasketExecutionUntilRound(ctx context.Context, in *SubmitBasketExecutionUntilRoundRequest, opts ...grpc.CallOption) (*SubmitBasketExecutionUntilRoundResponse, error) {
+	out := new(SubmitBasketExecutionUntilRoundResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/SubmitBasketExecutionUntilRound", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *basketServiceClient) StreamBasketExecution(ctx context.Context, in *StreamBasketExecutionRequest, opts ...grpc.CallOption) (BasketService_StreamBasketExecutionClient, error) {
 	stream, err := c.cc.NewStream(ctx, &BasketService_ServiceDesc.Streams[0], "/kdo.v1.basket.BasketService/StreamBasketExecution", opts...)
 	if err != nil {
@@ -216,6 +252,15 @@ type BasketServiceServer interface {
 	SubmitBasketExecutionRound(context.Context, *SubmitBasketExecutionRoundRequest) (*SubmitBasketExecutionRoundResponse, error)
 	// 미체결 잔량 취소 - 활성 주문 전량 취소 요청
 	CancelBasketExecutionResidual(context.Context, *CancelBasketExecutionResidualRequest) (*CancelBasketExecutionResidualResponse, error)
+	// 실행 수정 - 현재 pause_round_no(중지회차)만 지원
+	UpdateBasketExecution(context.Context, *UpdateBasketExecutionRequest) (*BasketExecution, error)
+	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 잔여 주문 일괄 정정 (mmm "미체결 1% 정정" 대응)
+	// 매도 주문: 현재가 × (1 - pct/100) 방향으로, 매수 주문: 현재가 × (1 + pct/100) 방향으로.
+	// 기존 주문가보다 공격적일 때만 정정한다.
+	AmendBasketExecutionResidual(context.Context, *AmendBasketExecutionResidualRequest) (*AmendBasketExecutionResidualResponse, error)
+	// 목표회차까지발주 - 항목별 누적 계획수량(target_round_no 기준)과 기발주(ordered) 수량의 차이만큼 보충 발주.
+	// current_round_no 는 증가하지 않는다 (발주 누락 보충 용도, 반복 호출 안전)
+	SubmitBasketExecutionUntilRound(context.Context, *SubmitBasketExecutionUntilRoundRequest) (*SubmitBasketExecutionUntilRoundResponse, error)
 	// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
 	StreamBasketExecution(*StreamBasketExecutionRequest, BasketService_StreamBasketExecutionServer) error
 	mustEmbedUnimplementedBasketServiceServer()
@@ -257,6 +302,15 @@ func (UnimplementedBasketServiceServer) SubmitBasketExecutionRound(context.Conte
 }
 func (UnimplementedBasketServiceServer) CancelBasketExecutionResidual(context.Context, *CancelBasketExecutionResidualRequest) (*CancelBasketExecutionResidualResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelBasketExecutionResidual not implemented")
+}
+func (UnimplementedBasketServiceServer) UpdateBasketExecution(context.Context, *UpdateBasketExecutionRequest) (*BasketExecution, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBasketExecution not implemented")
+}
+func (UnimplementedBasketServiceServer) AmendBasketExecutionResidual(context.Context, *AmendBasketExecutionResidualRequest) (*AmendBasketExecutionResidualResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AmendBasketExecutionResidual not implemented")
+}
+func (UnimplementedBasketServiceServer) SubmitBasketExecutionUntilRound(context.Context, *SubmitBasketExecutionUntilRoundRequest) (*SubmitBasketExecutionUntilRoundResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitBasketExecutionUntilRound not implemented")
 }
 func (UnimplementedBasketServiceServer) StreamBasketExecution(*StreamBasketExecutionRequest, BasketService_StreamBasketExecutionServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamBasketExecution not implemented")
@@ -472,6 +526,60 @@ func _BasketService_CancelBasketExecutionResidual_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BasketService_UpdateBasketExecution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBasketExecutionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).UpdateBasketExecution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/UpdateBasketExecution",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).UpdateBasketExecution(ctx, req.(*UpdateBasketExecutionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BasketService_AmendBasketExecutionResidual_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AmendBasketExecutionResidualRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).AmendBasketExecutionResidual(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/AmendBasketExecutionResidual",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).AmendBasketExecutionResidual(ctx, req.(*AmendBasketExecutionResidualRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BasketService_SubmitBasketExecutionUntilRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitBasketExecutionUntilRoundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).SubmitBasketExecutionUntilRound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/SubmitBasketExecutionUntilRound",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).SubmitBasketExecutionUntilRound(ctx, req.(*SubmitBasketExecutionUntilRoundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BasketService_StreamBasketExecution_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(StreamBasketExecutionRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -543,6 +651,18 @@ var BasketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelBasketExecutionResidual",
 			Handler:    _BasketService_CancelBasketExecutionResidual_Handler,
+		},
+		{
+			MethodName: "UpdateBasketExecution",
+			Handler:    _BasketService_UpdateBasketExecution_Handler,
+		},
+		{
+			MethodName: "AmendBasketExecutionResidual",
+			Handler:    _BasketService_AmendBasketExecutionResidual_Handler,
+		},
+		{
+			MethodName: "SubmitBasketExecutionUntilRound",
+			Handler:    _BasketService_SubmitBasketExecutionUntilRound_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

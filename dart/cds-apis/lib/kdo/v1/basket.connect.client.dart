@@ -209,6 +209,63 @@ extension type BasketServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 실행 수정 - 현재 pause_round_no(중지회차)만 지원
+  Future<kdov1basket.BasketExecution> updateBasketExecution(
+    kdov1basket.UpdateBasketExecutionRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.updateBasketExecution,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 잔여 주문 일괄 정정 (mmm "미체결 1% 정정" 대응)
+  /// 매도 주문: 현재가 × (1 - pct/100) 방향으로, 매수 주문: 현재가 × (1 + pct/100) 방향으로.
+  /// 기존 주문가보다 공격적일 때만 정정한다.
+  Future<kdov1basket.AmendBasketExecutionResidualResponse> amendBasketExecutionResidual(
+    kdov1basket.AmendBasketExecutionResidualRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.amendBasketExecutionResidual,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 목표회차까지발주 - 항목별 누적 계획수량(target_round_no 기준)과 기발주(ordered) 수량의 차이만큼 보충 발주.
+  /// current_round_no 는 증가하지 않는다 (발주 누락 보충 용도, 반복 호출 안전)
+  Future<kdov1basket.SubmitBasketExecutionUntilRoundResponse> submitBasketExecutionUntilRound(
+    kdov1basket.SubmitBasketExecutionUntilRoundRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.submitBasketExecutionUntilRound,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
   Stream<kdov1basket.BasketExecution> streamBasketExecution(
     kdov1basket.StreamBasketExecutionRequest input, {
