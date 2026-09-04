@@ -1434,6 +1434,8 @@ class BasketExecutionSummary extends $pb.GeneratedMessage {
     $fixnum.Int64? filledAmountTotal,
     $core.int? filledItemCount,
     $core.int? failedItemCount,
+    $fixnum.Int64? targetAmountTotal,
+    $fixnum.Int64? remainingAmountTotal,
   }) {
     final result = create();
     if (itemCount != null) result.itemCount = itemCount;
@@ -1444,6 +1446,8 @@ class BasketExecutionSummary extends $pb.GeneratedMessage {
     if (filledAmountTotal != null) result.filledAmountTotal = filledAmountTotal;
     if (filledItemCount != null) result.filledItemCount = filledItemCount;
     if (failedItemCount != null) result.failedItemCount = failedItemCount;
+    if (targetAmountTotal != null) result.targetAmountTotal = targetAmountTotal;
+    if (remainingAmountTotal != null) result.remainingAmountTotal = remainingAmountTotal;
     return result;
   }
 
@@ -1461,6 +1465,8 @@ class BasketExecutionSummary extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'filledAmountTotal')
     ..a<$core.int>(7, _omitFieldNames ? '' : 'filledItemCount', $pb.PbFieldType.OU3)
     ..a<$core.int>(8, _omitFieldNames ? '' : 'failedItemCount', $pb.PbFieldType.OU3)
+    ..aInt64(9, _omitFieldNames ? '' : 'targetAmountTotal')
+    ..aInt64(10, _omitFieldNames ? '' : 'remainingAmountTotal')
     ..hasRequiredFields = false
   ;
 
@@ -1560,6 +1566,26 @@ class BasketExecutionSummary extends $pb.GeneratedMessage {
   $core.bool hasFailedItemCount() => $_has(7);
   @$pb.TagNumber(8)
   void clearFailedItemCount() => $_clearField(8);
+
+  /// 목표 총금액 합계 = Σ |target_quantity| × 참조 현재가 (조회 시점 계산, 시세 없는 종목은 0 합산)
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get targetAmountTotal => $_getI64(8);
+  @$pb.TagNumber(9)
+  set targetAmountTotal($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasTargetAmountTotal() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearTargetAmountTotal() => $_clearField(9);
+
+  /// 미체결 금액 합계 = Σ |remaining_quantity| × 참조 현재가 (조회 시점 계산)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get remainingAmountTotal => $_getI64(9);
+  @$pb.TagNumber(10)
+  set remainingAmountTotal($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasRemainingAmountTotal() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearRemainingAmountTotal() => $_clearField(10);
 }
 
 /// 바스켓 실행 구성 항목
@@ -1576,6 +1602,13 @@ class BasketExecutionItem extends $pb.GeneratedMessage {
     $fixnum.Int64? filledAmount,
     BasketExecutionItemStatus? status,
     $2.Timestamp? updateTime,
+    $4.OrderSide? side,
+    $core.String? lastOrderPrice,
+    $core.String? referencePrice,
+    $fixnum.Int64? targetAmount,
+    $fixnum.Int64? remainingAmount,
+    $core.int? completedRoundNo,
+    $core.int? filledRoundNo,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -1589,6 +1622,13 @@ class BasketExecutionItem extends $pb.GeneratedMessage {
     if (filledAmount != null) result.filledAmount = filledAmount;
     if (status != null) result.status = status;
     if (updateTime != null) result.updateTime = updateTime;
+    if (side != null) result.side = side;
+    if (lastOrderPrice != null) result.lastOrderPrice = lastOrderPrice;
+    if (referencePrice != null) result.referencePrice = referencePrice;
+    if (targetAmount != null) result.targetAmount = targetAmount;
+    if (remainingAmount != null) result.remainingAmount = remainingAmount;
+    if (completedRoundNo != null) result.completedRoundNo = completedRoundNo;
+    if (filledRoundNo != null) result.filledRoundNo = filledRoundNo;
     return result;
   }
 
@@ -1609,6 +1649,13 @@ class BasketExecutionItem extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'filledAmount')
     ..e<BasketExecutionItemStatus>(10, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: BasketExecutionItemStatus.BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED, valueOf: BasketExecutionItemStatus.valueOf, enumValues: BasketExecutionItemStatus.values)
     ..aOM<$2.Timestamp>(11, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..e<$4.OrderSide>(12, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $4.OrderSide.valueOf, enumValues: $4.OrderSide.values)
+    ..aOS(13, _omitFieldNames ? '' : 'lastOrderPrice')
+    ..aOS(14, _omitFieldNames ? '' : 'referencePrice')
+    ..aInt64(15, _omitFieldNames ? '' : 'targetAmount')
+    ..aInt64(16, _omitFieldNames ? '' : 'remainingAmount')
+    ..a<$core.int>(17, _omitFieldNames ? '' : 'completedRoundNo', $pb.PbFieldType.OU3)
+    ..a<$core.int>(18, _omitFieldNames ? '' : 'filledRoundNo', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -1740,6 +1787,76 @@ class BasketExecutionItem extends $pb.GeneratedMessage {
   void clearUpdateTime() => $_clearField(11);
   @$pb.TagNumber(11)
   $2.Timestamp ensureUpdateTime() => $_ensure(10);
+
+  /// 주문 방향 (target_quantity 부호에서 파생: 양수=매수, 음수=매도)
+  @$pb.TagNumber(12)
+  $4.OrderSide get side => $_getN(11);
+  @$pb.TagNumber(12)
+  set side($4.OrderSide value) => $_setField(12, value);
+  @$pb.TagNumber(12)
+  $core.bool hasSide() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearSide() => $_clearField(12);
+
+  /// 마지막 발주/정정 주문가격 (발주 이력 없으면 빈 문자열)
+  @$pb.TagNumber(13)
+  $core.String get lastOrderPrice => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set lastOrderPrice($core.String value) => $_setString(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasLastOrderPrice() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearLastOrderPrice() => $_clearField(13);
+
+  /// 참조 현재가 (서버 시세 기준 — 조회/스트림 시점 계산, 시세 없으면 빈 문자열)
+  @$pb.TagNumber(14)
+  $core.String get referencePrice => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set referencePrice($core.String value) => $_setString(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasReferencePrice() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearReferencePrice() => $_clearField(14);
+
+  /// 목표 총금액 = |target_quantity| × reference_price (시세 없으면 0)
+  @$pb.TagNumber(15)
+  $fixnum.Int64 get targetAmount => $_getI64(14);
+  @$pb.TagNumber(15)
+  set targetAmount($fixnum.Int64 value) => $_setInt64(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasTargetAmount() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearTargetAmount() => $_clearField(15);
+
+  /// 미체결 금액 = |remaining_quantity| × reference_price (시세 없으면 0)
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get remainingAmount => $_getI64(15);
+  @$pb.TagNumber(16)
+  set remainingAmount($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasRemainingAmount() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearRemainingAmount() => $_clearField(16);
+
+  /// 완료회차 - 이 항목이 마지막으로 발주된 회차 (0 = 미발주)
+  @$pb.TagNumber(17)
+  $core.int get completedRoundNo => $_getIZ(16);
+  @$pb.TagNumber(17)
+  set completedRoundNo($core.int value) => $_setUnsignedInt32(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasCompletedRoundNo() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearCompletedRoundNo() => $_clearField(17);
+
+  /// 체결회차 = floor(|체결수량| / |목표수량| × 계획회차수)
+  @$pb.TagNumber(18)
+  $core.int get filledRoundNo => $_getIZ(17);
+  @$pb.TagNumber(18)
+  set filledRoundNo($core.int value) => $_setUnsignedInt32(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasFilledRoundNo() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearFilledRoundNo() => $_clearField(18);
 }
 
 /// 바스켓 실행 주문 연결 이력 (실행 항목 ↔ 주문 감사 추적)
@@ -1752,6 +1869,12 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
     $core.int? roundNo,
     BasketExecutionActionType? actionType,
     $2.Timestamp? createTime,
+    $core.String? orderPrice,
+    $fixnum.Int64? orderQuantity,
+    $fixnum.Int64? filledQuantity,
+    $fixnum.Int64? remainingQuantity,
+    $core.String? averageFillPrice,
+    BasketExecutionOrderStatus? status,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -1761,6 +1884,12 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
     if (roundNo != null) result.roundNo = roundNo;
     if (actionType != null) result.actionType = actionType;
     if (createTime != null) result.createTime = createTime;
+    if (orderPrice != null) result.orderPrice = orderPrice;
+    if (orderQuantity != null) result.orderQuantity = orderQuantity;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (remainingQuantity != null) result.remainingQuantity = remainingQuantity;
+    if (averageFillPrice != null) result.averageFillPrice = averageFillPrice;
+    if (status != null) result.status = status;
     return result;
   }
 
@@ -1777,6 +1906,12 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
     ..a<$core.int>(5, _omitFieldNames ? '' : 'roundNo', $pb.PbFieldType.OU3)
     ..e<BasketExecutionActionType>(6, _omitFieldNames ? '' : 'actionType', $pb.PbFieldType.OE, defaultOrMaker: BasketExecutionActionType.BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED, valueOf: BasketExecutionActionType.valueOf, enumValues: BasketExecutionActionType.values)
     ..aOM<$2.Timestamp>(7, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
+    ..aOS(8, _omitFieldNames ? '' : 'orderPrice')
+    ..aInt64(9, _omitFieldNames ? '' : 'orderQuantity')
+    ..aInt64(10, _omitFieldNames ? '' : 'filledQuantity')
+    ..aInt64(11, _omitFieldNames ? '' : 'remainingQuantity')
+    ..aOS(12, _omitFieldNames ? '' : 'averageFillPrice')
+    ..e<BasketExecutionOrderStatus>(13, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: BasketExecutionOrderStatus.BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED, valueOf: BasketExecutionOrderStatus.valueOf, enumValues: BasketExecutionOrderStatus.values)
     ..hasRequiredFields = false
   ;
 
@@ -1868,6 +2003,66 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
   void clearCreateTime() => $_clearField(7);
   @$pb.TagNumber(7)
   $2.Timestamp ensureCreateTime() => $_ensure(6);
+
+  /// 주문가격 (취소 요청 행은 빈 문자열)
+  @$pb.TagNumber(8)
+  $core.String get orderPrice => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set orderPrice($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasOrderPrice() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearOrderPrice() => $_clearField(8);
+
+  /// 주문수량 (취소 요청 행은 0)
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get orderQuantity => $_getI64(8);
+  @$pb.TagNumber(9)
+  set orderQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasOrderQuantity() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearOrderQuantity() => $_clearField(9);
+
+  /// 체결수량 (누적)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get filledQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasFilledQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearFilledQuantity() => $_clearField(10);
+
+  /// 미체결수량 (접수/부분체결 상태에서만 >0, 터미널 상태는 0)
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get remainingQuantity => $_getI64(10);
+  @$pb.TagNumber(11)
+  set remainingQuantity($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasRemainingQuantity() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearRemainingQuantity() => $_clearField(11);
+
+  /// 평균 체결가격 (체결 없으면 빈 문자열)
+  @$pb.TagNumber(12)
+  $core.String get averageFillPrice => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set averageFillPrice($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasAverageFillPrice() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearAverageFillPrice() => $_clearField(12);
+
+  /// 주문 상태
+  @$pb.TagNumber(13)
+  BasketExecutionOrderStatus get status => $_getN(12);
+  @$pb.TagNumber(13)
+  set status(BasketExecutionOrderStatus value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasStatus() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearStatus() => $_clearField(13);
 }
 
 class CreateBasketExecutionRequest extends $pb.GeneratedMessage {

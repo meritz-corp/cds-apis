@@ -120,6 +120,32 @@ final $typed_data.Uint8List basketExecutionItemStatusDescriptor = $convert.base6
     'RBVFVTX0ZJTExFRBAFEioKJkJBU0tFVF9FWEVDVVRJT05fSVRFTV9TVEFUVVNfQ0FOQ0VMTEVE'
     'EAYSJwojQkFTS0VUX0VYRUNVVElPTl9JVEVNX1NUQVRVU19GQUlMRUQQBw==');
 
+@$core.Deprecated('Use basketExecutionOrderStatusDescriptor instead')
+const BasketExecutionOrderStatus$json = {
+  '1': 'BasketExecutionOrderStatus',
+  '2': [
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED', '2': 0},
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_SUBMITTED', '2': 1},
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_RECEIVED', '2': 2},
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED', '2': 3},
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_FILLED', '2': 4},
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_AMENDED', '2': 5},
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_CANCELLED', '2': 6},
+    {'1': 'BASKET_EXECUTION_ORDER_STATUS_REJECTED', '2': 7},
+  ],
+};
+
+/// Descriptor for `BasketExecutionOrderStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List basketExecutionOrderStatusDescriptor = $convert.base64Decode(
+    'ChpCYXNrZXRFeGVjdXRpb25PcmRlclN0YXR1cxItCilCQVNLRVRfRVhFQ1VUSU9OX09SREVSX1'
+    'NUQVRVU19VTlNQRUNJRklFRBAAEisKJ0JBU0tFVF9FWEVDVVRJT05fT1JERVJfU1RBVFVTX1NV'
+    'Qk1JVFRFRBABEioKJkJBU0tFVF9FWEVDVVRJT05fT1JERVJfU1RBVFVTX1JFQ0VJVkVEEAISMg'
+    'ouQkFTS0VUX0VYRUNVVElPTl9PUkRFUl9TVEFUVVNfUEFSVElBTExZX0ZJTExFRBADEigKJEJB'
+    'U0tFVF9FWEVDVVRJT05fT1JERVJfU1RBVFVTX0ZJTExFRBAEEikKJUJBU0tFVF9FWEVDVVRJT0'
+    '5fT1JERVJfU1RBVFVTX0FNRU5ERUQQBRIrCidCQVNLRVRfRVhFQ1VUSU9OX09SREVSX1NUQVRV'
+    'U19DQU5DRUxMRUQQBhIqCiZCQVNLRVRfRVhFQ1VUSU9OX09SREVSX1NUQVRVU19SRUpFQ1RFRB'
+    'AH');
+
 @$core.Deprecated('Use basketExecutionActionTypeDescriptor instead')
 const BasketExecutionActionType$json = {
   '1': 'BasketExecutionActionType',
@@ -468,6 +494,8 @@ const BasketExecutionSummary$json = {
     {'1': 'filled_amount_total', '3': 6, '4': 1, '5': 3, '10': 'filledAmountTotal'},
     {'1': 'filled_item_count', '3': 7, '4': 1, '5': 13, '10': 'filledItemCount'},
     {'1': 'failed_item_count', '3': 8, '4': 1, '5': 13, '10': 'failedItemCount'},
+    {'1': 'target_amount_total', '3': 9, '4': 1, '5': 3, '10': 'targetAmountTotal'},
+    {'1': 'remaining_amount_total', '3': 10, '4': 1, '5': 3, '10': 'remainingAmountTotal'},
   ],
 };
 
@@ -480,7 +508,9 @@ final $typed_data.Uint8List basketExecutionSummaryDescriptor = $convert.base64De
     'bmluZ19xdWFudGl0eV90b3RhbBgFIAEoA1IWcmVtYWluaW5nUXVhbnRpdHlUb3RhbBIuChNmaW'
     'xsZWRfYW1vdW50X3RvdGFsGAYgASgDUhFmaWxsZWRBbW91bnRUb3RhbBIqChFmaWxsZWRfaXRl'
     'bV9jb3VudBgHIAEoDVIPZmlsbGVkSXRlbUNvdW50EioKEWZhaWxlZF9pdGVtX2NvdW50GAggAS'
-    'gNUg9mYWlsZWRJdGVtQ291bnQ=');
+    'gNUg9mYWlsZWRJdGVtQ291bnQSLgoTdGFyZ2V0X2Ftb3VudF90b3RhbBgJIAEoA1IRdGFyZ2V0'
+    'QW1vdW50VG90YWwSNAoWcmVtYWluaW5nX2Ftb3VudF90b3RhbBgKIAEoA1IUcmVtYWluaW5nQW'
+    '1vdW50VG90YWw=');
 
 @$core.Deprecated('Use basketExecutionItemDescriptor instead')
 const BasketExecutionItem$json = {
@@ -497,6 +527,13 @@ const BasketExecutionItem$json = {
     {'1': 'filled_amount', '3': 9, '4': 1, '5': 3, '10': 'filledAmount'},
     {'1': 'status', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketExecutionItemStatus', '10': 'status'},
     {'1': 'update_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updateTime'},
+    {'1': 'side', '3': 12, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
+    {'1': 'last_order_price', '3': 13, '4': 1, '5': 9, '10': 'lastOrderPrice'},
+    {'1': 'reference_price', '3': 14, '4': 1, '5': 9, '10': 'referencePrice'},
+    {'1': 'target_amount', '3': 15, '4': 1, '5': 3, '10': 'targetAmount'},
+    {'1': 'remaining_amount', '3': 16, '4': 1, '5': 3, '10': 'remainingAmount'},
+    {'1': 'completed_round_no', '3': 17, '4': 1, '5': 13, '10': 'completedRoundNo'},
+    {'1': 'filled_round_no', '3': 18, '4': 1, '5': 13, '10': 'filledRoundNo'},
   ],
 };
 
@@ -510,7 +547,12 @@ final $typed_data.Uint8List basketExecutionItemDescriptor = $convert.base64Decod
     'xfcHJpY2UYCCABKAlSEGF2ZXJhZ2VGaWxsUHJpY2USIwoNZmlsbGVkX2Ftb3VudBgJIAEoA1IM'
     'ZmlsbGVkQW1vdW50EkAKBnN0YXR1cxgKIAEoDjIoLmtkby52MS5iYXNrZXQuQmFza2V0RXhlY3'
     'V0aW9uSXRlbVN0YXR1c1IGc3RhdHVzEjsKC3VwZGF0ZV90aW1lGAsgASgLMhouZ29vZ2xlLnBy'
-    'b3RvYnVmLlRpbWVzdGFtcFIKdXBkYXRlVGltZQ==');
+    'b3RvYnVmLlRpbWVzdGFtcFIKdXBkYXRlVGltZRIsCgRzaWRlGAwgASgOMhgua2RvLnYxLmNvbW'
+    '1vbi5PcmRlclNpZGVSBHNpZGUSKAoQbGFzdF9vcmRlcl9wcmljZRgNIAEoCVIObGFzdE9yZGVy'
+    'UHJpY2USJwoPcmVmZXJlbmNlX3ByaWNlGA4gASgJUg5yZWZlcmVuY2VQcmljZRIjCg10YXJnZX'
+    'RfYW1vdW50GA8gASgDUgx0YXJnZXRBbW91bnQSKQoQcmVtYWluaW5nX2Ftb3VudBgQIAEoA1IP'
+    'cmVtYWluaW5nQW1vdW50EiwKEmNvbXBsZXRlZF9yb3VuZF9ubxgRIAEoDVIQY29tcGxldGVkUm'
+    '91bmRObxImCg9maWxsZWRfcm91bmRfbm8YEiABKA1SDWZpbGxlZFJvdW5kTm8=');
 
 @$core.Deprecated('Use basketExecutionOrderRelationDescriptor instead')
 const BasketExecutionOrderRelation$json = {
@@ -523,6 +565,12 @@ const BasketExecutionOrderRelation$json = {
     {'1': 'round_no', '3': 5, '4': 1, '5': 13, '10': 'roundNo'},
     {'1': 'action_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketExecutionActionType', '10': 'actionType'},
     {'1': 'create_time', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createTime'},
+    {'1': 'order_price', '3': 8, '4': 1, '5': 9, '10': 'orderPrice'},
+    {'1': 'order_quantity', '3': 9, '4': 1, '5': 3, '10': 'orderQuantity'},
+    {'1': 'filled_quantity', '3': 10, '4': 1, '5': 3, '10': 'filledQuantity'},
+    {'1': 'remaining_quantity', '3': 11, '4': 1, '5': 3, '10': 'remainingQuantity'},
+    {'1': 'average_fill_price', '3': 12, '4': 1, '5': 9, '10': 'averageFillPrice'},
+    {'1': 'status', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketExecutionOrderStatus', '10': 'status'},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -536,8 +584,13 @@ final $typed_data.Uint8List basketExecutionOrderRelationDescriptor = $convert.ba
     'cmRlcklkEi8KEW9yaWdpbmFsX29yZGVyX2lkGAQgASgESABSD29yaWdpbmFsT3JkZXJJZIgBAR'
     'IZCghyb3VuZF9ubxgFIAEoDVIHcm91bmRObxJJCgthY3Rpb25fdHlwZRgGIAEoDjIoLmtkby52'
     'MS5iYXNrZXQuQmFza2V0RXhlY3V0aW9uQWN0aW9uVHlwZVIKYWN0aW9uVHlwZRI7CgtjcmVhdG'
-    'VfdGltZRgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCmNyZWF0ZVRpbWVCFAoS'
-    'X29yaWdpbmFsX29yZGVyX2lk');
+    'VfdGltZRgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCmNyZWF0ZVRpbWUSHwoL'
+    'b3JkZXJfcHJpY2UYCCABKAlSCm9yZGVyUHJpY2USJQoOb3JkZXJfcXVhbnRpdHkYCSABKANSDW'
+    '9yZGVyUXVhbnRpdHkSJwoPZmlsbGVkX3F1YW50aXR5GAogASgDUg5maWxsZWRRdWFudGl0eRIt'
+    'ChJyZW1haW5pbmdfcXVhbnRpdHkYCyABKANSEXJlbWFpbmluZ1F1YW50aXR5EiwKEmF2ZXJhZ2'
+    'VfZmlsbF9wcmljZRgMIAEoCVIQYXZlcmFnZUZpbGxQcmljZRJBCgZzdGF0dXMYDSABKA4yKS5r'
+    'ZG8udjEuYmFza2V0LkJhc2tldEV4ZWN1dGlvbk9yZGVyU3RhdHVzUgZzdGF0dXNCFAoSX29yaW'
+    'dpbmFsX29yZGVyX2lk');
 
 @$core.Deprecated('Use createBasketExecutionRequestDescriptor instead')
 const CreateBasketExecutionRequest$json = {

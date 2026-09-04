@@ -1082,6 +1082,38 @@
           "type": "string",
           "format": "date-time",
           "title": "수정 시간"
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide",
+          "title": "주문 방향 (target_quantity 부호에서 파생: 양수=매수, 음수=매도)"
+        },
+        "lastOrderPrice": {
+          "type": "string",
+          "title": "마지막 발주/정정 주문가격 (발주 이력 없으면 빈 문자열)"
+        },
+        "referencePrice": {
+          "type": "string",
+          "title": "참조 현재가 (서버 시세 기준 — 조회/스트림 시점 계산, 시세 없으면 빈 문자열)"
+        },
+        "targetAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "목표 총금액 = |target_quantity| × reference_price (시세 없으면 0)"
+        },
+        "remainingAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결 금액 = |remaining_quantity| × reference_price (시세 없으면 0)"
+        },
+        "completedRoundNo": {
+          "type": "integer",
+          "format": "int64",
+          "title": "완료회차 - 이 항목이 마지막으로 발주된 회차 (0 = 미발주)"
+        },
+        "filledRoundNo": {
+          "type": "integer",
+          "format": "int64",
+          "title": "체결회차 = floor(|체결수량| / |목표수량| × 계획회차수)"
         }
       },
       "title": "바스켓 실행 구성 항목"
@@ -1138,9 +1170,52 @@
           "type": "string",
           "format": "date-time",
           "title": "생성 시간"
+        },
+        "orderPrice": {
+          "type": "string",
+          "title": "주문가격 (취소 요청 행은 빈 문자열)"
+        },
+        "orderQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문수량 (취소 요청 행은 0)"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결수량 (누적)"
+        },
+        "remainingQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결수량 (접수/부분체결 상태에서만 \u003e0, 터미널 상태는 0)"
+        },
+        "averageFillPrice": {
+          "type": "string",
+          "title": "평균 체결가격 (체결 없으면 빈 문자열)"
+        },
+        "status": {
+          "$ref": "#/definitions/basketBasketExecutionOrderStatus",
+          "title": "주문 상태"
         }
       },
       "title": "바스켓 실행 주문 연결 이력 (실행 항목 ↔ 주문 감사 추적)"
+    },
+    "basketBasketExecutionOrderStatus": {
+      "type": "string",
+      "enum": [
+        "BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED",
+        "BASKET_EXECUTION_ORDER_STATUS_SUBMITTED",
+        "BASKET_EXECUTION_ORDER_STATUS_RECEIVED",
+        "BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED",
+        "BASKET_EXECUTION_ORDER_STATUS_FILLED",
+        "BASKET_EXECUTION_ORDER_STATUS_AMENDED",
+        "BASKET_EXECUTION_ORDER_STATUS_CANCELLED",
+        "BASKET_EXECUTION_ORDER_STATUS_REJECTED"
+      ],
+      "default": "BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED",
+      "description": "- BASKET_EXECUTION_ORDER_STATUS_SUBMITTED: 발주 요청됨 (거래소 접수 대기)\n - BASKET_EXECUTION_ORDER_STATUS_RECEIVED: 거래소 접수 확인\n - BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED: 부분 체결\n - BASKET_EXECUTION_ORDER_STATUS_FILLED: 전량 체결\n - BASKET_EXECUTION_ORDER_STATUS_AMENDED: 정정으로 대체됨 (잔량이 새 주문으로 이동)\n - BASKET_EXECUTION_ORDER_STATUS_CANCELLED: 취소됨\n - BASKET_EXECUTION_ORDER_STATUS_REJECTED: 거부됨",
+      "title": "바스켓 실행 주문 상태"
     },
     "basketBasketExecutionSkippedItem": {
       "type": "object",
@@ -1253,6 +1328,16 @@
           "type": "integer",
           "format": "int64",
           "title": "실패한 항목 수"
+        },
+        "targetAmountTotal": {
+          "type": "string",
+          "format": "int64",
+          "title": "목표 총금액 합계 = Σ |target_quantity| × 참조 현재가 (조회 시점 계산, 시세 없는 종목은 0 합산)"
+        },
+        "remainingAmountTotal": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결 금액 합계 = Σ |remaining_quantity| × 참조 현재가 (조회 시점 계산)"
         }
       },
       "title": "바스켓 실행 집계 요약"

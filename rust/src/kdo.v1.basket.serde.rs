@@ -1301,6 +1301,27 @@ impl serde::Serialize for BasketExecutionItem {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.basket.BasketExecutionItem", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1349,6 +1370,33 @@ impl serde::Serialize for BasketExecutionItem {
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
         }
+        if true {
+            let v = super::common::OrderSide::try_from(self.side)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
+            struct_ser.serialize_field("side", &v)?;
+        }
+        if true {
+            struct_ser.serialize_field("last_order_price", &self.last_order_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("reference_price", &self.reference_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("target_amount", ToString::to_string(&self.target_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("remaining_amount", ToString::to_string(&self.remaining_amount).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("completed_round_no", &self.completed_round_no)?;
+        }
+        if true {
+            struct_ser.serialize_field("filled_round_no", &self.filled_round_no)?;
+        }
         struct_ser.end()
     }
 }
@@ -1378,6 +1426,19 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionItem {
             "status",
             "update_time",
             "updateTime",
+            "side",
+            "last_order_price",
+            "lastOrderPrice",
+            "reference_price",
+            "referencePrice",
+            "target_amount",
+            "targetAmount",
+            "remaining_amount",
+            "remainingAmount",
+            "completed_round_no",
+            "completedRoundNo",
+            "filled_round_no",
+            "filledRoundNo",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1393,6 +1454,13 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionItem {
             FilledAmount,
             Status,
             UpdateTime,
+            Side,
+            LastOrderPrice,
+            ReferencePrice,
+            TargetAmount,
+            RemainingAmount,
+            CompletedRoundNo,
+            FilledRoundNo,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1426,6 +1494,13 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionItem {
                             "filledAmount" | "filled_amount" => Ok(GeneratedField::FilledAmount),
                             "status" => Ok(GeneratedField::Status),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
+                            "side" => Ok(GeneratedField::Side),
+                            "lastOrderPrice" | "last_order_price" => Ok(GeneratedField::LastOrderPrice),
+                            "referencePrice" | "reference_price" => Ok(GeneratedField::ReferencePrice),
+                            "targetAmount" | "target_amount" => Ok(GeneratedField::TargetAmount),
+                            "remainingAmount" | "remaining_amount" => Ok(GeneratedField::RemainingAmount),
+                            "completedRoundNo" | "completed_round_no" => Ok(GeneratedField::CompletedRoundNo),
+                            "filledRoundNo" | "filled_round_no" => Ok(GeneratedField::FilledRoundNo),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1456,6 +1531,13 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionItem {
                 let mut filled_amount__ = None;
                 let mut status__ = None;
                 let mut update_time__ = None;
+                let mut side__ = None;
+                let mut last_order_price__ = None;
+                let mut reference_price__ = None;
+                let mut target_amount__ = None;
+                let mut remaining_amount__ = None;
+                let mut completed_round_no__ = None;
+                let mut filled_round_no__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -1536,6 +1618,56 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionItem {
                             }
                             update_time__ = map_.next_value()?;
                         }
+                        GeneratedField::Side => {
+                            if side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("side"));
+                            }
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
+                        }
+                        GeneratedField::LastOrderPrice => {
+                            if last_order_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastOrderPrice"));
+                            }
+                            last_order_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ReferencePrice => {
+                            if reference_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("referencePrice"));
+                            }
+                            reference_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TargetAmount => {
+                            if target_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("targetAmount"));
+                            }
+                            target_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RemainingAmount => {
+                            if remaining_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("remainingAmount"));
+                            }
+                            remaining_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CompletedRoundNo => {
+                            if completed_round_no__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("completedRoundNo"));
+                            }
+                            completed_round_no__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FilledRoundNo => {
+                            if filled_round_no__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledRoundNo"));
+                            }
+                            filled_round_no__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1553,6 +1685,13 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionItem {
                     filled_amount: filled_amount__.unwrap_or_default(),
                     status: status__.unwrap_or_default(),
                     update_time: update_time__,
+                    side: side__.unwrap_or_default(),
+                    last_order_price: last_order_price__.unwrap_or_default(),
+                    reference_price: reference_price__.unwrap_or_default(),
+                    target_amount: target_amount__.unwrap_or_default(),
+                    remaining_amount: remaining_amount__.unwrap_or_default(),
+                    completed_round_no: completed_round_no__.unwrap_or_default(),
+                    filled_round_no: filled_round_no__.unwrap_or_default(),
                 })
             }
         }
@@ -1677,6 +1816,24 @@ impl serde::Serialize for BasketExecutionOrderRelation {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.basket.BasketExecutionOrderRelation", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1709,6 +1866,32 @@ impl serde::Serialize for BasketExecutionOrderRelation {
         if let Some(v) = self.create_time.as_ref() {
             struct_ser.serialize_field("create_time", v)?;
         }
+        if true {
+            struct_ser.serialize_field("order_price", &self.order_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("order_quantity", ToString::to_string(&self.order_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("filled_quantity", ToString::to_string(&self.filled_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("remaining_quantity", ToString::to_string(&self.remaining_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("average_fill_price", &self.average_fill_price)?;
+        }
+        if true {
+            let v = BasketExecutionOrderStatus::try_from(self.status)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.status)))?;
+            struct_ser.serialize_field("status", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1732,6 +1915,17 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
             "actionType",
             "create_time",
             "createTime",
+            "order_price",
+            "orderPrice",
+            "order_quantity",
+            "orderQuantity",
+            "filled_quantity",
+            "filledQuantity",
+            "remaining_quantity",
+            "remainingQuantity",
+            "average_fill_price",
+            "averageFillPrice",
+            "status",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1743,6 +1937,12 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
             RoundNo,
             ActionType,
             CreateTime,
+            OrderPrice,
+            OrderQuantity,
+            FilledQuantity,
+            RemainingQuantity,
+            AverageFillPrice,
+            Status,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1772,6 +1972,12 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                             "roundNo" | "round_no" => Ok(GeneratedField::RoundNo),
                             "actionType" | "action_type" => Ok(GeneratedField::ActionType),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
+                            "orderPrice" | "order_price" => Ok(GeneratedField::OrderPrice),
+                            "orderQuantity" | "order_quantity" => Ok(GeneratedField::OrderQuantity),
+                            "filledQuantity" | "filled_quantity" => Ok(GeneratedField::FilledQuantity),
+                            "remainingQuantity" | "remaining_quantity" => Ok(GeneratedField::RemainingQuantity),
+                            "averageFillPrice" | "average_fill_price" => Ok(GeneratedField::AverageFillPrice),
+                            "status" => Ok(GeneratedField::Status),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1798,6 +2004,12 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                 let mut round_no__ = None;
                 let mut action_type__ = None;
                 let mut create_time__ = None;
+                let mut order_price__ = None;
+                let mut order_quantity__ = None;
+                let mut filled_quantity__ = None;
+                let mut remaining_quantity__ = None;
+                let mut average_fill_price__ = None;
+                let mut status__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -1852,6 +2064,48 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                             }
                             create_time__ = map_.next_value()?;
                         }
+                        GeneratedField::OrderPrice => {
+                            if order_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderPrice"));
+                            }
+                            order_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::OrderQuantity => {
+                            if order_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderQuantity"));
+                            }
+                            order_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FilledQuantity => {
+                            if filled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledQuantity"));
+                            }
+                            filled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RemainingQuantity => {
+                            if remaining_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("remainingQuantity"));
+                            }
+                            remaining_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AverageFillPrice => {
+                            if average_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("averageFillPrice"));
+                            }
+                            average_fill_price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Status => {
+                            if status__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("status"));
+                            }
+                            status__ = Some(map_.next_value::<BasketExecutionOrderStatus>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1865,10 +2119,105 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                     round_no: round_no__.unwrap_or_default(),
                     action_type: action_type__.unwrap_or_default(),
                     create_time: create_time__,
+                    order_price: order_price__.unwrap_or_default(),
+                    order_quantity: order_quantity__.unwrap_or_default(),
+                    filled_quantity: filled_quantity__.unwrap_or_default(),
+                    remaining_quantity: remaining_quantity__.unwrap_or_default(),
+                    average_fill_price: average_fill_price__.unwrap_or_default(),
+                    status: status__.unwrap_or_default(),
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.basket.BasketExecutionOrderRelation", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for BasketExecutionOrderStatus {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED",
+            Self::Submitted => "BASKET_EXECUTION_ORDER_STATUS_SUBMITTED",
+            Self::Received => "BASKET_EXECUTION_ORDER_STATUS_RECEIVED",
+            Self::PartiallyFilled => "BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED",
+            Self::Filled => "BASKET_EXECUTION_ORDER_STATUS_FILLED",
+            Self::Amended => "BASKET_EXECUTION_ORDER_STATUS_AMENDED",
+            Self::Cancelled => "BASKET_EXECUTION_ORDER_STATUS_CANCELLED",
+            Self::Rejected => "BASKET_EXECUTION_ORDER_STATUS_REJECTED",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for BasketExecutionOrderStatus {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED",
+            "BASKET_EXECUTION_ORDER_STATUS_SUBMITTED",
+            "BASKET_EXECUTION_ORDER_STATUS_RECEIVED",
+            "BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED",
+            "BASKET_EXECUTION_ORDER_STATUS_FILLED",
+            "BASKET_EXECUTION_ORDER_STATUS_AMENDED",
+            "BASKET_EXECUTION_ORDER_STATUS_CANCELLED",
+            "BASKET_EXECUTION_ORDER_STATUS_REJECTED",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = BasketExecutionOrderStatus;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED" => Ok(BasketExecutionOrderStatus::Unspecified),
+                    "BASKET_EXECUTION_ORDER_STATUS_SUBMITTED" => Ok(BasketExecutionOrderStatus::Submitted),
+                    "BASKET_EXECUTION_ORDER_STATUS_RECEIVED" => Ok(BasketExecutionOrderStatus::Received),
+                    "BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED" => Ok(BasketExecutionOrderStatus::PartiallyFilled),
+                    "BASKET_EXECUTION_ORDER_STATUS_FILLED" => Ok(BasketExecutionOrderStatus::Filled),
+                    "BASKET_EXECUTION_ORDER_STATUS_AMENDED" => Ok(BasketExecutionOrderStatus::Amended),
+                    "BASKET_EXECUTION_ORDER_STATUS_CANCELLED" => Ok(BasketExecutionOrderStatus::Cancelled),
+                    "BASKET_EXECUTION_ORDER_STATUS_REJECTED" => Ok(BasketExecutionOrderStatus::Rejected),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for BasketExecutionSkippedItem {
@@ -2325,6 +2674,12 @@ impl serde::Serialize for BasketExecutionSummary {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.basket.BasketExecutionSummary", len)?;
         if true {
             struct_ser.serialize_field("item_count", &self.item_count)?;
@@ -2360,6 +2715,16 @@ impl serde::Serialize for BasketExecutionSummary {
         if true {
             struct_ser.serialize_field("failed_item_count", &self.failed_item_count)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("target_amount_total", ToString::to_string(&self.target_amount_total).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("remaining_amount_total", ToString::to_string(&self.remaining_amount_total).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -2386,6 +2751,10 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionSummary {
             "filledItemCount",
             "failed_item_count",
             "failedItemCount",
+            "target_amount_total",
+            "targetAmountTotal",
+            "remaining_amount_total",
+            "remainingAmountTotal",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2398,6 +2767,8 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionSummary {
             FilledAmountTotal,
             FilledItemCount,
             FailedItemCount,
+            TargetAmountTotal,
+            RemainingAmountTotal,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2428,6 +2799,8 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionSummary {
                             "filledAmountTotal" | "filled_amount_total" => Ok(GeneratedField::FilledAmountTotal),
                             "filledItemCount" | "filled_item_count" => Ok(GeneratedField::FilledItemCount),
                             "failedItemCount" | "failed_item_count" => Ok(GeneratedField::FailedItemCount),
+                            "targetAmountTotal" | "target_amount_total" => Ok(GeneratedField::TargetAmountTotal),
+                            "remainingAmountTotal" | "remaining_amount_total" => Ok(GeneratedField::RemainingAmountTotal),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2455,6 +2828,8 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionSummary {
                 let mut filled_amount_total__ = None;
                 let mut filled_item_count__ = None;
                 let mut failed_item_count__ = None;
+                let mut target_amount_total__ = None;
+                let mut remaining_amount_total__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ItemCount => {
@@ -2521,6 +2896,22 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::TargetAmountTotal => {
+                            if target_amount_total__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("targetAmountTotal"));
+                            }
+                            target_amount_total__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RemainingAmountTotal => {
+                            if remaining_amount_total__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("remainingAmountTotal"));
+                            }
+                            remaining_amount_total__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2535,6 +2926,8 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionSummary {
                     filled_amount_total: filled_amount_total__.unwrap_or_default(),
                     filled_item_count: filled_item_count__.unwrap_or_default(),
                     failed_item_count: failed_item_count__.unwrap_or_default(),
+                    target_amount_total: target_amount_total__.unwrap_or_default(),
+                    remaining_amount_total: remaining_amount_total__.unwrap_or_default(),
                 })
             }
         }

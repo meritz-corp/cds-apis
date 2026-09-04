@@ -339,6 +339,12 @@ pub struct BasketExecutionSummary {
     /// 실패한 항목 수
     #[prost(uint32, tag="8")]
     pub failed_item_count: u32,
+    /// 목표 총금액 합계 = Σ |target_quantity| × 참조 현재가 (조회 시점 계산, 시세 없는 종목은 0 합산)
+    #[prost(int64, tag="9")]
+    pub target_amount_total: i64,
+    /// 미체결 금액 합계 = Σ |remaining_quantity| × 참조 현재가 (조회 시점 계산)
+    #[prost(int64, tag="10")]
+    pub remaining_amount_total: i64,
 }
 /// 바스켓 실행 구성 항목
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -377,10 +383,31 @@ pub struct BasketExecutionItem {
     /// 수정 시간
     #[prost(message, optional, tag="11")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 주문 방향 (target_quantity 부호에서 파생: 양수=매수, 음수=매도)
+    #[prost(enumeration="super::common::OrderSide", tag="12")]
+    pub side: i32,
+    /// 마지막 발주/정정 주문가격 (발주 이력 없으면 빈 문자열)
+    #[prost(string, tag="13")]
+    pub last_order_price: ::prost::alloc::string::String,
+    /// 참조 현재가 (서버 시세 기준 — 조회/스트림 시점 계산, 시세 없으면 빈 문자열)
+    #[prost(string, tag="14")]
+    pub reference_price: ::prost::alloc::string::String,
+    /// 목표 총금액 = |target_quantity| × reference_price (시세 없으면 0)
+    #[prost(int64, tag="15")]
+    pub target_amount: i64,
+    /// 미체결 금액 = |remaining_quantity| × reference_price (시세 없으면 0)
+    #[prost(int64, tag="16")]
+    pub remaining_amount: i64,
+    /// 완료회차 - 이 항목이 마지막으로 발주된 회차 (0 = 미발주)
+    #[prost(uint32, tag="17")]
+    pub completed_round_no: u32,
+    /// 체결회차 = floor(|체결수량| / |목표수량| × 계획회차수)
+    #[prost(uint32, tag="18")]
+    pub filled_round_no: u32,
 }
 /// 바스켓 실행 주문 연결 이력 (실행 항목 ↔ 주문 감사 추적)
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BasketExecutionOrderRelation {
     /// 연결 ID
     #[prost(int64, tag="1")]
@@ -403,6 +430,24 @@ pub struct BasketExecutionOrderRelation {
     /// 생성 시간
     #[prost(message, optional, tag="7")]
     pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 주문가격 (취소 요청 행은 빈 문자열)
+    #[prost(string, tag="8")]
+    pub order_price: ::prost::alloc::string::String,
+    /// 주문수량 (취소 요청 행은 0)
+    #[prost(int64, tag="9")]
+    pub order_quantity: i64,
+    /// 체결수량 (누적)
+    #[prost(int64, tag="10")]
+    pub filled_quantity: i64,
+    /// 미체결수량 (접수/부분체결 상태에서만 >0, 터미널 상태는 0)
+    #[prost(int64, tag="11")]
+    pub remaining_quantity: i64,
+    /// 평균 체결가격 (체결 없으면 빈 문자열)
+    #[prost(string, tag="12")]
+    pub average_fill_price: ::prost::alloc::string::String,
+    /// 주문 상태
+    #[prost(enumeration="BasketExecutionOrderStatus", tag="13")]
+    pub status: i32,
 }
 // ============================================================================
 // Basket Execution Request/Response Messages
@@ -850,6 +895,58 @@ impl BasketExecutionItemStatus {
             "BASKET_EXECUTION_ITEM_STATUS_FILLED" => Some(Self::Filled),
             "BASKET_EXECUTION_ITEM_STATUS_CANCELLED" => Some(Self::Cancelled),
             "BASKET_EXECUTION_ITEM_STATUS_FAILED" => Some(Self::Failed),
+            _ => None,
+        }
+    }
+}
+/// 바스켓 실행 주문 상태
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum BasketExecutionOrderStatus {
+    Unspecified = 0,
+    /// 발주 요청됨 (거래소 접수 대기)
+    Submitted = 1,
+    /// 거래소 접수 확인
+    Received = 2,
+    /// 부분 체결
+    PartiallyFilled = 3,
+    /// 전량 체결
+    Filled = 4,
+    /// 정정으로 대체됨 (잔량이 새 주문으로 이동)
+    Amended = 5,
+    /// 취소됨
+    Cancelled = 6,
+    /// 거부됨
+    Rejected = 7,
+}
+impl BasketExecutionOrderStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            BasketExecutionOrderStatus::Unspecified => "BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED",
+            BasketExecutionOrderStatus::Submitted => "BASKET_EXECUTION_ORDER_STATUS_SUBMITTED",
+            BasketExecutionOrderStatus::Received => "BASKET_EXECUTION_ORDER_STATUS_RECEIVED",
+            BasketExecutionOrderStatus::PartiallyFilled => "BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED",
+            BasketExecutionOrderStatus::Filled => "BASKET_EXECUTION_ORDER_STATUS_FILLED",
+            BasketExecutionOrderStatus::Amended => "BASKET_EXECUTION_ORDER_STATUS_AMENDED",
+            BasketExecutionOrderStatus::Cancelled => "BASKET_EXECUTION_ORDER_STATUS_CANCELLED",
+            BasketExecutionOrderStatus::Rejected => "BASKET_EXECUTION_ORDER_STATUS_REJECTED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "BASKET_EXECUTION_ORDER_STATUS_SUBMITTED" => Some(Self::Submitted),
+            "BASKET_EXECUTION_ORDER_STATUS_RECEIVED" => Some(Self::Received),
+            "BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED" => Some(Self::PartiallyFilled),
+            "BASKET_EXECUTION_ORDER_STATUS_FILLED" => Some(Self::Filled),
+            "BASKET_EXECUTION_ORDER_STATUS_AMENDED" => Some(Self::Amended),
+            "BASKET_EXECUTION_ORDER_STATUS_CANCELLED" => Some(Self::Cancelled),
+            "BASKET_EXECUTION_ORDER_STATUS_REJECTED" => Some(Self::Rejected),
             _ => None,
         }
     }

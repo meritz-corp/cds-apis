@@ -168,6 +168,41 @@ class BasketExecutionItemStatus extends $pb.ProtobufEnum {
   const BasketExecutionItemStatus._(super.value, super.name);
 }
 
+/// 바스켓 실행 주문 상태
+class BasketExecutionOrderStatus extends $pb.ProtobufEnum {
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED = BasketExecutionOrderStatus._(0, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED');
+  /// 발주 요청됨 (거래소 접수 대기)
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_SUBMITTED = BasketExecutionOrderStatus._(1, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_SUBMITTED');
+  /// 거래소 접수 확인
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_RECEIVED = BasketExecutionOrderStatus._(2, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_RECEIVED');
+  /// 부분 체결
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED = BasketExecutionOrderStatus._(3, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED');
+  /// 전량 체결
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_FILLED = BasketExecutionOrderStatus._(4, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_FILLED');
+  /// 정정으로 대체됨 (잔량이 새 주문으로 이동)
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_AMENDED = BasketExecutionOrderStatus._(5, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_AMENDED');
+  /// 취소됨
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_CANCELLED = BasketExecutionOrderStatus._(6, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_CANCELLED');
+  /// 거부됨
+  static const BasketExecutionOrderStatus BASKET_EXECUTION_ORDER_STATUS_REJECTED = BasketExecutionOrderStatus._(7, _omitEnumNames ? '' : 'BASKET_EXECUTION_ORDER_STATUS_REJECTED');
+
+  static const $core.List<BasketExecutionOrderStatus> values = <BasketExecutionOrderStatus> [
+    BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED,
+    BASKET_EXECUTION_ORDER_STATUS_SUBMITTED,
+    BASKET_EXECUTION_ORDER_STATUS_RECEIVED,
+    BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED,
+    BASKET_EXECUTION_ORDER_STATUS_FILLED,
+    BASKET_EXECUTION_ORDER_STATUS_AMENDED,
+    BASKET_EXECUTION_ORDER_STATUS_CANCELLED,
+    BASKET_EXECUTION_ORDER_STATUS_REJECTED,
+  ];
+
+  static final $core.List<BasketExecutionOrderStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
+  static BasketExecutionOrderStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const BasketExecutionOrderStatus._(super.value, super.name);
+}
+
 /// 바스켓 실행 주문 액션 타입
 class BasketExecutionActionType extends $pb.ProtobufEnum {
   static const BasketExecutionActionType BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED = BasketExecutionActionType._(0, _omitEnumNames ? '' : 'BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED');

@@ -576,6 +576,12 @@ message BasketExecutionSummary {
 
   // 실패한 항목 수
   uint32 failed_item_count = 8;
+
+  // 목표 총금액 합계 = Σ |target_quantity| × 참조 현재가 (조회 시점 계산, 시세 없는 종목은 0 합산)
+  int64 target_amount_total = 9;
+
+  // 미체결 금액 합계 = Σ |remaining_quantity| × 참조 현재가 (조회 시점 계산)
+  int64 remaining_amount_total = 10;
 }
 
 // 바스켓 실행 구성 항목
@@ -612,6 +618,27 @@ message BasketExecutionItem {
 
   // 수정 시간
   google.protobuf.Timestamp update_time = 11;
+
+  // 주문 방향 (target_quantity 부호에서 파생: 양수=매수, 음수=매도)
+  kdo.v1.common.OrderSide side = 12;
+
+  // 마지막 발주/정정 주문가격 (발주 이력 없으면 빈 문자열)
+  string last_order_price = 13;
+
+  // 참조 현재가 (서버 시세 기준 — 조회/스트림 시점 계산, 시세 없으면 빈 문자열)
+  string reference_price = 14;
+
+  // 목표 총금액 = |target_quantity| × reference_price (시세 없으면 0)
+  int64 target_amount = 15;
+
+  // 미체결 금액 = |remaining_quantity| × reference_price (시세 없으면 0)
+  int64 remaining_amount = 16;
+
+  // 완료회차 - 이 항목이 마지막으로 발주된 회차 (0 = 미발주)
+  uint32 completed_round_no = 17;
+
+  // 체결회차 = floor(|체결수량| / |목표수량| × 계획회차수)
+  uint32 filled_round_no = 18;
 }
 
 // 바스켓 실행 항목 상태
@@ -655,6 +682,43 @@ message BasketExecutionOrderRelation {
 
   // 생성 시간
   google.protobuf.Timestamp create_time = 7;
+
+  // 주문가격 (취소 요청 행은 빈 문자열)
+  string order_price = 8;
+
+  // 주문수량 (취소 요청 행은 0)
+  int64 order_quantity = 9;
+
+  // 체결수량 (누적)
+  int64 filled_quantity = 10;
+
+  // 미체결수량 (접수/부분체결 상태에서만 >0, 터미널 상태는 0)
+  int64 remaining_quantity = 11;
+
+  // 평균 체결가격 (체결 없으면 빈 문자열)
+  string average_fill_price = 12;
+
+  // 주문 상태
+  BasketExecutionOrderStatus status = 13;
+}
+
+// 바스켓 실행 주문 상태
+enum BasketExecutionOrderStatus {
+  BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED = 0;
+  // 발주 요청됨 (거래소 접수 대기)
+  BASKET_EXECUTION_ORDER_STATUS_SUBMITTED = 1;
+  // 거래소 접수 확인
+  BASKET_EXECUTION_ORDER_STATUS_RECEIVED = 2;
+  // 부분 체결
+  BASKET_EXECUTION_ORDER_STATUS_PARTIALLY_FILLED = 3;
+  // 전량 체결
+  BASKET_EXECUTION_ORDER_STATUS_FILLED = 4;
+  // 정정으로 대체됨 (잔량이 새 주문으로 이동)
+  BASKET_EXECUTION_ORDER_STATUS_AMENDED = 5;
+  // 취소됨
+  BASKET_EXECUTION_ORDER_STATUS_CANCELLED = 6;
+  // 거부됨
+  BASKET_EXECUTION_ORDER_STATUS_REJECTED = 7;
 }
 
 // 바스켓 실행 주문 액션 타입
