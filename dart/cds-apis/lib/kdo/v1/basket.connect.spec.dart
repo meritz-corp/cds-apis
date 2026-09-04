@@ -59,4 +59,53 @@ abstract final class BasketService {
     kdov1basket.GetBasketValueRequest.new,
     kdov1basket.BasketValue.new,
   );
+
+  /// 바스켓 실행 생성 - 바스켓 구성 스냅샷 기반 실행 인스턴스 생성
+  static const createBasketExecution = connect.Spec(
+    '/$name/CreateBasketExecution',
+    connect.StreamType.unary,
+    kdov1basket.CreateBasketExecutionRequest.new,
+    kdov1basket.BasketExecution.new,
+  );
+
+  /// 단일 실행 조회 (items + order_relations 포함)
+  static const getBasketExecution = connect.Spec(
+    '/$name/GetBasketExecution',
+    connect.StreamType.unary,
+    kdov1basket.GetBasketExecutionRequest.new,
+    kdov1basket.BasketExecution.new,
+  );
+
+  /// 실행 목록 조회 (items/order_relations 미포함)
+  /// parent를 "baskets/-" 로 지정하면 전체 바스켓의 실행을 조회 (AIP-159)
+  static const listBasketExecutions = connect.Spec(
+    '/$name/ListBasketExecutions',
+    connect.StreamType.unary,
+    kdov1basket.ListBasketExecutionsRequest.new,
+    kdov1basket.ListBasketExecutionsResponse.new,
+  );
+
+  /// 회차 발주 - 잔여 수량을 남은 회차로 분할하여 이번 회차 주문 제출
+  static const submitBasketExecutionRound = connect.Spec(
+    '/$name/SubmitBasketExecutionRound',
+    connect.StreamType.unary,
+    kdov1basket.SubmitBasketExecutionRoundRequest.new,
+    kdov1basket.SubmitBasketExecutionRoundResponse.new,
+  );
+
+  /// 미체결 잔량 취소 - 활성 주문 전량 취소 요청
+  static const cancelBasketExecutionResidual = connect.Spec(
+    '/$name/CancelBasketExecutionResidual',
+    connect.StreamType.unary,
+    kdov1basket.CancelBasketExecutionResidualRequest.new,
+    kdov1basket.CancelBasketExecutionResidualResponse.new,
+  );
+
+  /// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
+  static const streamBasketExecution = connect.Spec(
+    '/$name/StreamBasketExecution',
+    connect.StreamType.server,
+    kdov1basket.StreamBasketExecutionRequest.new,
+    kdov1basket.BasketExecution.new,
+  );
 }

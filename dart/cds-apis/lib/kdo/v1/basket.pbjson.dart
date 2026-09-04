@@ -71,6 +71,73 @@ final $typed_data.Uint8List orderTypeDescriptor = $convert.base64Decode(
     'CglPcmRlclR5cGUSGgoWT1JERVJfVFlQRV9VTlNQRUNJRklFRBAAEhUKEU9SREVSX1RZUEVfTU'
     'FSS0VUEAESFAoQT1JERVJfVFlQRV9MSU1JVBACEhkKFU9SREVSX1RZUEVfQUdHUkVTU0lWRRAD');
 
+@$core.Deprecated('Use basketExecutionStatusDescriptor instead')
+const BasketExecutionStatus$json = {
+  '1': 'BasketExecutionStatus',
+  '2': [
+    {'1': 'BASKET_EXECUTION_STATUS_UNSPECIFIED', '2': 0},
+    {'1': 'BASKET_EXECUTION_STATUS_DRAFT', '2': 1},
+    {'1': 'BASKET_EXECUTION_STATUS_SCHEDULED', '2': 2},
+    {'1': 'BASKET_EXECUTION_STATUS_RUNNING', '2': 3},
+    {'1': 'BASKET_EXECUTION_STATUS_PAUSED', '2': 4},
+    {'1': 'BASKET_EXECUTION_STATUS_COMPLETED', '2': 5},
+    {'1': 'BASKET_EXECUTION_STATUS_CANCELLED', '2': 6},
+    {'1': 'BASKET_EXECUTION_STATUS_FAILED', '2': 7},
+  ],
+};
+
+/// Descriptor for `BasketExecutionStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List basketExecutionStatusDescriptor = $convert.base64Decode(
+    'ChVCYXNrZXRFeGVjdXRpb25TdGF0dXMSJwojQkFTS0VUX0VYRUNVVElPTl9TVEFUVVNfVU5TUE'
+    'VDSUZJRUQQABIhCh1CQVNLRVRfRVhFQ1VUSU9OX1NUQVRVU19EUkFGVBABEiUKIUJBU0tFVF9F'
+    'WEVDVVRJT05fU1RBVFVTX1NDSEVEVUxFRBACEiMKH0JBU0tFVF9FWEVDVVRJT05fU1RBVFVTX1'
+    'JVTk5JTkcQAxIiCh5CQVNLRVRfRVhFQ1VUSU9OX1NUQVRVU19QQVVTRUQQBBIlCiFCQVNLRVRf'
+    'RVhFQ1VUSU9OX1NUQVRVU19DT01QTEVURUQQBRIlCiFCQVNLRVRfRVhFQ1VUSU9OX1NUQVRVU1'
+    '9DQU5DRUxMRUQQBhIiCh5CQVNLRVRfRVhFQ1VUSU9OX1NUQVRVU19GQUlMRUQQBw==');
+
+@$core.Deprecated('Use basketExecutionItemStatusDescriptor instead')
+const BasketExecutionItemStatus$json = {
+  '1': 'BasketExecutionItemStatus',
+  '2': [
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED', '2': 0},
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_PENDING', '2': 1},
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_READY', '2': 2},
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_SUBMITTED', '2': 3},
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_PARTIALLY_FILLED', '2': 4},
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_FILLED', '2': 5},
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_CANCELLED', '2': 6},
+    {'1': 'BASKET_EXECUTION_ITEM_STATUS_FAILED', '2': 7},
+  ],
+};
+
+/// Descriptor for `BasketExecutionItemStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List basketExecutionItemStatusDescriptor = $convert.base64Decode(
+    'ChlCYXNrZXRFeGVjdXRpb25JdGVtU3RhdHVzEiwKKEJBU0tFVF9FWEVDVVRJT05fSVRFTV9TVE'
+    'FUVVNfVU5TUEVDSUZJRUQQABIoCiRCQVNLRVRfRVhFQ1VUSU9OX0lURU1fU1RBVFVTX1BFTkRJ'
+    'TkcQARImCiJCQVNLRVRfRVhFQ1VUSU9OX0lURU1fU1RBVFVTX1JFQURZEAISKgomQkFTS0VUX0'
+    'VYRUNVVElPTl9JVEVNX1NUQVRVU19TVUJNSVRURUQQAxIxCi1CQVNLRVRfRVhFQ1VUSU9OX0lU'
+    'RU1fU1RBVFVTX1BBUlRJQUxMWV9GSUxMRUQQBBInCiNCQVNLRVRfRVhFQ1VUSU9OX0lURU1fU1'
+    'RBVFVTX0ZJTExFRBAFEioKJkJBU0tFVF9FWEVDVVRJT05fSVRFTV9TVEFUVVNfQ0FOQ0VMTEVE'
+    'EAYSJwojQkFTS0VUX0VYRUNVVElPTl9JVEVNX1NUQVRVU19GQUlMRUQQBw==');
+
+@$core.Deprecated('Use basketExecutionActionTypeDescriptor instead')
+const BasketExecutionActionType$json = {
+  '1': 'BasketExecutionActionType',
+  '2': [
+    {'1': 'BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED', '2': 0},
+    {'1': 'BASKET_EXECUTION_ACTION_TYPE_NEW', '2': 1},
+    {'1': 'BASKET_EXECUTION_ACTION_TYPE_AMEND', '2': 2},
+    {'1': 'BASKET_EXECUTION_ACTION_TYPE_CANCEL', '2': 3},
+  ],
+};
+
+/// Descriptor for `BasketExecutionActionType`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List basketExecutionActionTypeDescriptor = $convert.base64Decode(
+    'ChlCYXNrZXRFeGVjdXRpb25BY3Rpb25UeXBlEiwKKEJBU0tFVF9FWEVDVVRJT05fQUNUSU9OX1'
+    'RZUEVfVU5TUEVDSUZJRUQQABIkCiBCQVNLRVRfRVhFQ1VUSU9OX0FDVElPTl9UWVBFX05FVxAB'
+    'EiYKIkJBU0tFVF9FWEVDVVRJT05fQUNUSU9OX1RZUEVfQU1FTkQQAhInCiNCQVNLRVRfRVhFQ1'
+    'VUSU9OX0FDVElPTl9UWVBFX0NBTkNFTBAD');
+
 @$core.Deprecated('Use basketDescriptor instead')
 const Basket$json = {
   '1': 'Basket',
@@ -342,4 +409,328 @@ const GetBasketValueRequest$json = {
 final $typed_data.Uint8List getBasketValueRequestDescriptor = $convert.base64Decode(
     'ChVHZXRCYXNrZXRWYWx1ZVJlcXVlc3QSNwoGYmFza2V0GAEgASgJQh/iQQEC+kEYChZrZG8uY2'
     'RzYXBpcy54eXovQmFza2V0UgZiYXNrZXQ=');
+
+@$core.Deprecated('Use basketExecutionDescriptor instead')
+const BasketExecution$json = {
+  '1': 'BasketExecution',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'id', '3': 2, '4': 1, '5': 3, '8': {}, '10': 'id'},
+    {'1': 'basket_id', '3': 3, '4': 1, '5': 5, '8': {}, '10': 'basketId'},
+    {'1': 'basket_display_name', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'basketDisplayName'},
+    {'1': 'status', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketExecutionStatus', '8': {}, '10': 'status'},
+    {'1': 'current_round_no', '3': 6, '4': 1, '5': 13, '8': {}, '10': 'currentRoundNo'},
+    {'1': 'planned_round_count', '3': 7, '4': 1, '5': 13, '10': 'plannedRoundCount'},
+    {'1': 'summary', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.basket.BasketExecutionSummary', '8': {}, '10': 'summary'},
+    {'1': 'start_time', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'startTime'},
+    {'1': 'end_time', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'endTime'},
+    {'1': 'create_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
+    {'1': 'update_time', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
+    {'1': 'items', '3': 13, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketExecutionItem', '8': {}, '10': 'items'},
+    {'1': 'order_relations', '3': 14, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketExecutionOrderRelation', '8': {}, '10': 'orderRelations'},
+  ],
+  '7': {},
+};
+
+/// Descriptor for `BasketExecution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketExecutionDescriptor = $convert.base64Decode(
+    'Cg9CYXNrZXRFeGVjdXRpb24SEgoEbmFtZRgBIAEoCVIEbmFtZRIUCgJpZBgCIAEoA0IE4kEBA1'
+    'ICaWQSIQoJYmFza2V0X2lkGAMgASgFQgTiQQEDUghiYXNrZXRJZBI0ChNiYXNrZXRfZGlzcGxh'
+    'eV9uYW1lGAQgASgJQgTiQQEDUhFiYXNrZXREaXNwbGF5TmFtZRJCCgZzdGF0dXMYBSABKA4yJC'
+    '5rZG8udjEuYmFza2V0LkJhc2tldEV4ZWN1dGlvblN0YXR1c0IE4kEBA1IGc3RhdHVzEi4KEGN1'
+    'cnJlbnRfcm91bmRfbm8YBiABKA1CBOJBAQNSDmN1cnJlbnRSb3VuZE5vEi4KE3BsYW5uZWRfcm'
+    '91bmRfY291bnQYByABKA1SEXBsYW5uZWRSb3VuZENvdW50EkUKB3N1bW1hcnkYCCABKAsyJS5r'
+    'ZG8udjEuYmFza2V0LkJhc2tldEV4ZWN1dGlvblN1bW1hcnlCBOJBAQNSB3N1bW1hcnkSPwoKc3'
+    'RhcnRfdGltZRgJIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCXN0YXJ0'
+    'VGltZRI7CghlbmRfdGltZRgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQ'
+    'NSB2VuZFRpbWUSQQoLY3JlYXRlX3RpbWUYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0'
+    'YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90aW1lGAwgASgLMhouZ29vZ2xlLnByb3'
+    'RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRI+CgVpdGVtcxgNIAMoCzIiLmtkby52'
+    'MS5iYXNrZXQuQmFza2V0RXhlY3V0aW9uSXRlbUIE4kEBA1IFaXRlbXMSWgoPb3JkZXJfcmVsYX'
+    'Rpb25zGA4gAygLMisua2RvLnYxLmJhc2tldC5CYXNrZXRFeGVjdXRpb25PcmRlclJlbGF0aW9u'
+    'QgTiQQEDUg5vcmRlclJlbGF0aW9uczpN6kFKCh9rZG8uY2RzYXBpcy54eXovQmFza2V0RXhlY3'
+    'V0aW9uEidiYXNrZXRzL3tiYXNrZXR9L2V4ZWN1dGlvbnMve2V4ZWN1dGlvbn0=');
+
+@$core.Deprecated('Use basketExecutionSummaryDescriptor instead')
+const BasketExecutionSummary$json = {
+  '1': 'BasketExecutionSummary',
+  '2': [
+    {'1': 'item_count', '3': 1, '4': 1, '5': 13, '10': 'itemCount'},
+    {'1': 'target_quantity_total', '3': 2, '4': 1, '5': 3, '10': 'targetQuantityTotal'},
+    {'1': 'ordered_quantity_total', '3': 3, '4': 1, '5': 3, '10': 'orderedQuantityTotal'},
+    {'1': 'filled_quantity_total', '3': 4, '4': 1, '5': 3, '10': 'filledQuantityTotal'},
+    {'1': 'remaining_quantity_total', '3': 5, '4': 1, '5': 3, '10': 'remainingQuantityTotal'},
+    {'1': 'filled_amount_total', '3': 6, '4': 1, '5': 3, '10': 'filledAmountTotal'},
+    {'1': 'filled_item_count', '3': 7, '4': 1, '5': 13, '10': 'filledItemCount'},
+    {'1': 'failed_item_count', '3': 8, '4': 1, '5': 13, '10': 'failedItemCount'},
+  ],
+};
+
+/// Descriptor for `BasketExecutionSummary`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketExecutionSummaryDescriptor = $convert.base64Decode(
+    'ChZCYXNrZXRFeGVjdXRpb25TdW1tYXJ5Eh0KCml0ZW1fY291bnQYASABKA1SCWl0ZW1Db3VudB'
+    'IyChV0YXJnZXRfcXVhbnRpdHlfdG90YWwYAiABKANSE3RhcmdldFF1YW50aXR5VG90YWwSNAoW'
+    'b3JkZXJlZF9xdWFudGl0eV90b3RhbBgDIAEoA1IUb3JkZXJlZFF1YW50aXR5VG90YWwSMgoVZm'
+    'lsbGVkX3F1YW50aXR5X3RvdGFsGAQgASgDUhNmaWxsZWRRdWFudGl0eVRvdGFsEjgKGHJlbWFp'
+    'bmluZ19xdWFudGl0eV90b3RhbBgFIAEoA1IWcmVtYWluaW5nUXVhbnRpdHlUb3RhbBIuChNmaW'
+    'xsZWRfYW1vdW50X3RvdGFsGAYgASgDUhFmaWxsZWRBbW91bnRUb3RhbBIqChFmaWxsZWRfaXRl'
+    'bV9jb3VudBgHIAEoDVIPZmlsbGVkSXRlbUNvdW50EioKEWZhaWxlZF9pdGVtX2NvdW50GAggAS'
+    'gNUg9mYWlsZWRJdGVtQ291bnQ=');
+
+@$core.Deprecated('Use basketExecutionItemDescriptor instead')
+const BasketExecutionItem$json = {
+  '1': 'BasketExecutionItem',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'target_quantity', '3': 4, '4': 1, '5': 3, '10': 'targetQuantity'},
+    {'1': 'ordered_quantity', '3': 5, '4': 1, '5': 3, '10': 'orderedQuantity'},
+    {'1': 'filled_quantity', '3': 6, '4': 1, '5': 3, '10': 'filledQuantity'},
+    {'1': 'remaining_quantity', '3': 7, '4': 1, '5': 3, '10': 'remainingQuantity'},
+    {'1': 'average_fill_price', '3': 8, '4': 1, '5': 9, '10': 'averageFillPrice'},
+    {'1': 'filled_amount', '3': 9, '4': 1, '5': 3, '10': 'filledAmount'},
+    {'1': 'status', '3': 10, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketExecutionItemStatus', '10': 'status'},
+    {'1': 'update_time', '3': 11, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updateTime'},
+  ],
+};
+
+/// Descriptor for `BasketExecutionItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketExecutionItemDescriptor = $convert.base64Decode(
+    'ChNCYXNrZXRFeGVjdXRpb25JdGVtEg4KAmlkGAEgASgDUgJpZBIWCgZzeW1ib2wYAiABKAlSBn'
+    'N5bWJvbBIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2RlEicKD3RhcmdldF9xdWFudGl0eRgE'
+    'IAEoA1IOdGFyZ2V0UXVhbnRpdHkSKQoQb3JkZXJlZF9xdWFudGl0eRgFIAEoA1IPb3JkZXJlZF'
+    'F1YW50aXR5EicKD2ZpbGxlZF9xdWFudGl0eRgGIAEoA1IOZmlsbGVkUXVhbnRpdHkSLQoScmVt'
+    'YWluaW5nX3F1YW50aXR5GAcgASgDUhFyZW1haW5pbmdRdWFudGl0eRIsChJhdmVyYWdlX2ZpbG'
+    'xfcHJpY2UYCCABKAlSEGF2ZXJhZ2VGaWxsUHJpY2USIwoNZmlsbGVkX2Ftb3VudBgJIAEoA1IM'
+    'ZmlsbGVkQW1vdW50EkAKBnN0YXR1cxgKIAEoDjIoLmtkby52MS5iYXNrZXQuQmFza2V0RXhlY3'
+    'V0aW9uSXRlbVN0YXR1c1IGc3RhdHVzEjsKC3VwZGF0ZV90aW1lGAsgASgLMhouZ29vZ2xlLnBy'
+    'b3RvYnVmLlRpbWVzdGFtcFIKdXBkYXRlVGltZQ==');
+
+@$core.Deprecated('Use basketExecutionOrderRelationDescriptor instead')
+const BasketExecutionOrderRelation$json = {
+  '1': 'BasketExecutionOrderRelation',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'execution_item_id', '3': 2, '4': 1, '5': 3, '10': 'executionItemId'},
+    {'1': 'order_id', '3': 3, '4': 1, '5': 4, '10': 'orderId'},
+    {'1': 'original_order_id', '3': 4, '4': 1, '5': 4, '9': 0, '10': 'originalOrderId', '17': true},
+    {'1': 'round_no', '3': 5, '4': 1, '5': 13, '10': 'roundNo'},
+    {'1': 'action_type', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketExecutionActionType', '10': 'actionType'},
+    {'1': 'create_time', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createTime'},
+  ],
+  '8': [
+    {'1': '_original_order_id'},
+  ],
+};
+
+/// Descriptor for `BasketExecutionOrderRelation`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketExecutionOrderRelationDescriptor = $convert.base64Decode(
+    'ChxCYXNrZXRFeGVjdXRpb25PcmRlclJlbGF0aW9uEg4KAmlkGAEgASgDUgJpZBIqChFleGVjdX'
+    'Rpb25faXRlbV9pZBgCIAEoA1IPZXhlY3V0aW9uSXRlbUlkEhkKCG9yZGVyX2lkGAMgASgEUgdv'
+    'cmRlcklkEi8KEW9yaWdpbmFsX29yZGVyX2lkGAQgASgESABSD29yaWdpbmFsT3JkZXJJZIgBAR'
+    'IZCghyb3VuZF9ubxgFIAEoDVIHcm91bmRObxJJCgthY3Rpb25fdHlwZRgGIAEoDjIoLmtkby52'
+    'MS5iYXNrZXQuQmFza2V0RXhlY3V0aW9uQWN0aW9uVHlwZVIKYWN0aW9uVHlwZRI7CgtjcmVhdG'
+    'VfdGltZRgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCmNyZWF0ZVRpbWVCFAoS'
+    'X29yaWdpbmFsX29yZGVyX2lk');
+
+@$core.Deprecated('Use createBasketExecutionRequestDescriptor instead')
+const CreateBasketExecutionRequest$json = {
+  '1': 'CreateBasketExecutionRequest',
+  '2': [
+    {'1': 'parent', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'parent'},
+    {'1': 'planned_round_count', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'plannedRoundCount', '17': true},
+  ],
+  '8': [
+    {'1': '_planned_round_count'},
+  ],
+};
+
+/// Descriptor for `CreateBasketExecutionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List createBasketExecutionRequestDescriptor = $convert.base64Decode(
+    'ChxDcmVhdGVCYXNrZXRFeGVjdXRpb25SZXF1ZXN0EkAKBnBhcmVudBgBIAEoCUIo4kEBAvpBIR'
+    'Ifa2RvLmNkc2FwaXMueHl6L0Jhc2tldEV4ZWN1dGlvblIGcGFyZW50EjMKE3BsYW5uZWRfcm91'
+    'bmRfY291bnQYAiABKA1IAFIRcGxhbm5lZFJvdW5kQ291bnSIAQFCFgoUX3BsYW5uZWRfcm91bm'
+    'RfY291bnQ=');
+
+@$core.Deprecated('Use getBasketExecutionRequestDescriptor instead')
+const GetBasketExecutionRequest$json = {
+  '1': 'GetBasketExecutionRequest',
+  '2': [
+    {'1': 'execution', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'execution'},
+  ],
+};
+
+/// Descriptor for `GetBasketExecutionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getBasketExecutionRequestDescriptor = $convert.base64Decode(
+    'ChlHZXRCYXNrZXRFeGVjdXRpb25SZXF1ZXN0EkYKCWV4ZWN1dGlvbhgBIAEoCUIo4kEBAvpBIQ'
+    'ofa2RvLmNkc2FwaXMueHl6L0Jhc2tldEV4ZWN1dGlvblIJZXhlY3V0aW9u');
+
+@$core.Deprecated('Use listBasketExecutionsRequestDescriptor instead')
+const ListBasketExecutionsRequest$json = {
+  '1': 'ListBasketExecutionsRequest',
+  '2': [
+    {'1': 'parent', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'parent'},
+    {'1': 'page_size', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'pageSize', '17': true},
+    {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
+  ],
+  '8': [
+    {'1': '_page_size'},
+    {'1': '_page_token'},
+  ],
+};
+
+/// Descriptor for `ListBasketExecutionsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listBasketExecutionsRequestDescriptor = $convert.base64Decode(
+    'ChtMaXN0QmFza2V0RXhlY3V0aW9uc1JlcXVlc3QSQAoGcGFyZW50GAEgASgJQijiQQEC+kEhEh'
+    '9rZG8uY2RzYXBpcy54eXovQmFza2V0RXhlY3V0aW9uUgZwYXJlbnQSIAoJcGFnZV9zaXplGAIg'
+    'ASgFSABSCHBhZ2VTaXpliAEBEiIKCnBhZ2VfdG9rZW4YAyABKAlIAVIJcGFnZVRva2VuiAEBQg'
+    'wKCl9wYWdlX3NpemVCDQoLX3BhZ2VfdG9rZW4=');
+
+@$core.Deprecated('Use listBasketExecutionsResponseDescriptor instead')
+const ListBasketExecutionsResponse$json = {
+  '1': 'ListBasketExecutionsResponse',
+  '2': [
+    {'1': 'executions', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketExecution', '10': 'executions'},
+    {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+  ],
+};
+
+/// Descriptor for `ListBasketExecutionsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listBasketExecutionsResponseDescriptor = $convert.base64Decode(
+    'ChxMaXN0QmFza2V0RXhlY3V0aW9uc1Jlc3BvbnNlEj4KCmV4ZWN1dGlvbnMYASADKAsyHi5rZG'
+    '8udjEuYmFza2V0LkJhc2tldEV4ZWN1dGlvblIKZXhlY3V0aW9ucxImCg9uZXh0X3BhZ2VfdG9r'
+    'ZW4YAiABKAlSDW5leHRQYWdlVG9rZW4=');
+
+@$core.Deprecated('Use submitBasketExecutionRoundRequestDescriptor instead')
+const SubmitBasketExecutionRoundRequest$json = {
+  '1': 'SubmitBasketExecutionRoundRequest',
+  '2': [
+    {'1': 'execution', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'execution'},
+    {'1': 'round_no', '3': 2, '4': 1, '5': 13, '9': 0, '10': 'roundNo', '17': true},
+  ],
+  '8': [
+    {'1': '_round_no'},
+  ],
+};
+
+/// Descriptor for `SubmitBasketExecutionRoundRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List submitBasketExecutionRoundRequestDescriptor = $convert.base64Decode(
+    'CiFTdWJtaXRCYXNrZXRFeGVjdXRpb25Sb3VuZFJlcXVlc3QSRgoJZXhlY3V0aW9uGAEgASgJQi'
+    'jiQQEC+kEhCh9rZG8uY2RzYXBpcy54eXovQmFza2V0RXhlY3V0aW9uUglleGVjdXRpb24SHgoI'
+    'cm91bmRfbm8YAiABKA1IAFIHcm91bmROb4gBAUILCglfcm91bmRfbm8=');
+
+@$core.Deprecated('Use basketExecutionSubmittedOrderDescriptor instead')
+const BasketExecutionSubmittedOrder$json = {
+  '1': 'BasketExecutionSubmittedOrder',
+  '2': [
+    {'1': 'execution_item_id', '3': 1, '4': 1, '5': 3, '10': 'executionItemId'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'order_id', '3': 3, '4': 1, '5': 4, '10': 'orderId'},
+    {'1': 'side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
+    {'1': 'quantity', '3': 5, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'price', '3': 6, '4': 1, '5': 9, '10': 'price'},
+    {'1': 'round_no', '3': 7, '4': 1, '5': 13, '10': 'roundNo'},
+  ],
+};
+
+/// Descriptor for `BasketExecutionSubmittedOrder`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketExecutionSubmittedOrderDescriptor = $convert.base64Decode(
+    'Ch1CYXNrZXRFeGVjdXRpb25TdWJtaXR0ZWRPcmRlchIqChFleGVjdXRpb25faXRlbV9pZBgBIA'
+    'EoA1IPZXhlY3V0aW9uSXRlbUlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEhkKCG9yZGVyX2lk'
+    'GAMgASgEUgdvcmRlcklkEiwKBHNpZGUYBCABKA4yGC5rZG8udjEuY29tbW9uLk9yZGVyU2lkZV'
+    'IEc2lkZRIaCghxdWFudGl0eRgFIAEoA1IIcXVhbnRpdHkSFAoFcHJpY2UYBiABKAlSBXByaWNl'
+    'EhkKCHJvdW5kX25vGAcgASgNUgdyb3VuZE5v');
+
+@$core.Deprecated('Use basketExecutionSkippedItemDescriptor instead')
+const BasketExecutionSkippedItem$json = {
+  '1': 'BasketExecutionSkippedItem',
+  '2': [
+    {'1': 'execution_item_id', '3': 1, '4': 1, '5': 3, '10': 'executionItemId'},
+    {'1': 'reason', '3': 2, '4': 1, '5': 9, '10': 'reason'},
+  ],
+};
+
+/// Descriptor for `BasketExecutionSkippedItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketExecutionSkippedItemDescriptor = $convert.base64Decode(
+    'ChpCYXNrZXRFeGVjdXRpb25Ta2lwcGVkSXRlbRIqChFleGVjdXRpb25faXRlbV9pZBgBIAEoA1'
+    'IPZXhlY3V0aW9uSXRlbUlkEhYKBnJlYXNvbhgCIAEoCVIGcmVhc29u');
+
+@$core.Deprecated('Use submitBasketExecutionRoundResponseDescriptor instead')
+const SubmitBasketExecutionRoundResponse$json = {
+  '1': 'SubmitBasketExecutionRoundResponse',
+  '2': [
+    {'1': 'round_no', '3': 1, '4': 1, '5': 13, '10': 'roundNo'},
+    {'1': 'submitted_orders', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketExecutionSubmittedOrder', '10': 'submittedOrders'},
+    {'1': 'skipped_items', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketExecutionSkippedItem', '10': 'skippedItems'},
+  ],
+};
+
+/// Descriptor for `SubmitBasketExecutionRoundResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List submitBasketExecutionRoundResponseDescriptor = $convert.base64Decode(
+    'CiJTdWJtaXRCYXNrZXRFeGVjdXRpb25Sb3VuZFJlc3BvbnNlEhkKCHJvdW5kX25vGAEgASgNUg'
+    'dyb3VuZE5vElcKEHN1Ym1pdHRlZF9vcmRlcnMYAiADKAsyLC5rZG8udjEuYmFza2V0LkJhc2tl'
+    'dEV4ZWN1dGlvblN1Ym1pdHRlZE9yZGVyUg9zdWJtaXR0ZWRPcmRlcnMSTgoNc2tpcHBlZF9pdG'
+    'VtcxgDIAMoCzIpLmtkby52MS5iYXNrZXQuQmFza2V0RXhlY3V0aW9uU2tpcHBlZEl0ZW1SDHNr'
+    'aXBwZWRJdGVtcw==');
+
+@$core.Deprecated('Use cancelBasketExecutionResidualRequestDescriptor instead')
+const CancelBasketExecutionResidualRequest$json = {
+  '1': 'CancelBasketExecutionResidualRequest',
+  '2': [
+    {'1': 'execution', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'execution'},
+  ],
+};
+
+/// Descriptor for `CancelBasketExecutionResidualRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelBasketExecutionResidualRequestDescriptor = $convert.base64Decode(
+    'CiRDYW5jZWxCYXNrZXRFeGVjdXRpb25SZXNpZHVhbFJlcXVlc3QSRgoJZXhlY3V0aW9uGAEgAS'
+    'gJQijiQQEC+kEhCh9rZG8uY2RzYXBpcy54eXovQmFza2V0RXhlY3V0aW9uUglleGVjdXRpb24=');
+
+@$core.Deprecated('Use basketExecutionCancelledOrderDescriptor instead')
+const BasketExecutionCancelledOrder$json = {
+  '1': 'BasketExecutionCancelledOrder',
+  '2': [
+    {'1': 'execution_item_id', '3': 1, '4': 1, '5': 3, '10': 'executionItemId'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '10': 'symbol'},
+    {'1': 'cancel_order_id', '3': 3, '4': 1, '5': 4, '10': 'cancelOrderId'},
+    {'1': 'original_order_id', '3': 4, '4': 1, '5': 4, '10': 'originalOrderId'},
+  ],
+};
+
+/// Descriptor for `BasketExecutionCancelledOrder`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List basketExecutionCancelledOrderDescriptor = $convert.base64Decode(
+    'Ch1CYXNrZXRFeGVjdXRpb25DYW5jZWxsZWRPcmRlchIqChFleGVjdXRpb25faXRlbV9pZBgBIA'
+    'EoA1IPZXhlY3V0aW9uSXRlbUlkEhYKBnN5bWJvbBgCIAEoCVIGc3ltYm9sEiYKD2NhbmNlbF9v'
+    'cmRlcl9pZBgDIAEoBFINY2FuY2VsT3JkZXJJZBIqChFvcmlnaW5hbF9vcmRlcl9pZBgEIAEoBF'
+    'IPb3JpZ2luYWxPcmRlcklk');
+
+@$core.Deprecated('Use cancelBasketExecutionResidualResponseDescriptor instead')
+const CancelBasketExecutionResidualResponse$json = {
+  '1': 'CancelBasketExecutionResidualResponse',
+  '2': [
+    {'1': 'cancelled_orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketExecutionCancelledOrder', '10': 'cancelledOrders'},
+    {'1': 'skipped_items', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.basket.BasketExecutionSkippedItem', '10': 'skippedItems'},
+  ],
+};
+
+/// Descriptor for `CancelBasketExecutionResidualResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelBasketExecutionResidualResponseDescriptor = $convert.base64Decode(
+    'CiVDYW5jZWxCYXNrZXRFeGVjdXRpb25SZXNpZHVhbFJlc3BvbnNlElcKEGNhbmNlbGxlZF9vcm'
+    'RlcnMYASADKAsyLC5rZG8udjEuYmFza2V0LkJhc2tldEV4ZWN1dGlvbkNhbmNlbGxlZE9yZGVy'
+    'Ug9jYW5jZWxsZWRPcmRlcnMSTgoNc2tpcHBlZF9pdGVtcxgCIAMoCzIpLmtkby52MS5iYXNrZX'
+    'QuQmFza2V0RXhlY3V0aW9uU2tpcHBlZEl0ZW1SDHNraXBwZWRJdGVtcw==');
+
+@$core.Deprecated('Use streamBasketExecutionRequestDescriptor instead')
+const StreamBasketExecutionRequest$json = {
+  '1': 'StreamBasketExecutionRequest',
+  '2': [
+    {'1': 'execution', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'execution'},
+  ],
+};
+
+/// Descriptor for `StreamBasketExecutionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List streamBasketExecutionRequestDescriptor = $convert.base64Decode(
+    'ChxTdHJlYW1CYXNrZXRFeGVjdXRpb25SZXF1ZXN0EkYKCWV4ZWN1dGlvbhgBIAEoCUIo4kEBAv'
+    'pBIQofa2RvLmNkc2FwaXMueHl6L0Jhc2tldEV4ZWN1dGlvblIJZXhlY3V0aW9u');
 

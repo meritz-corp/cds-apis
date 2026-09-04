@@ -98,5 +98,98 @@ class OrderType extends $pb.ProtobufEnum {
   const OrderType._(super.value, super.name);
 }
 
+/// 바스켓 실행 상태
+class BasketExecutionStatus extends $pb.ProtobufEnum {
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_UNSPECIFIED = BasketExecutionStatus._(0, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_UNSPECIFIED');
+  /// 생성됨 (미발주)
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_DRAFT = BasketExecutionStatus._(1, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_DRAFT');
+  /// 예약됨
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_SCHEDULED = BasketExecutionStatus._(2, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_SCHEDULED');
+  /// 발주 진행 중
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_RUNNING = BasketExecutionStatus._(3, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_RUNNING');
+  /// 일시정지
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_PAUSED = BasketExecutionStatus._(4, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_PAUSED');
+  /// 전량 체결 완료
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_COMPLETED = BasketExecutionStatus._(5, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_COMPLETED');
+  /// 취소됨
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_CANCELLED = BasketExecutionStatus._(6, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_CANCELLED');
+  /// 실패 항목 존재
+  static const BasketExecutionStatus BASKET_EXECUTION_STATUS_FAILED = BasketExecutionStatus._(7, _omitEnumNames ? '' : 'BASKET_EXECUTION_STATUS_FAILED');
+
+  static const $core.List<BasketExecutionStatus> values = <BasketExecutionStatus> [
+    BASKET_EXECUTION_STATUS_UNSPECIFIED,
+    BASKET_EXECUTION_STATUS_DRAFT,
+    BASKET_EXECUTION_STATUS_SCHEDULED,
+    BASKET_EXECUTION_STATUS_RUNNING,
+    BASKET_EXECUTION_STATUS_PAUSED,
+    BASKET_EXECUTION_STATUS_COMPLETED,
+    BASKET_EXECUTION_STATUS_CANCELLED,
+    BASKET_EXECUTION_STATUS_FAILED,
+  ];
+
+  static final $core.List<BasketExecutionStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
+  static BasketExecutionStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const BasketExecutionStatus._(super.value, super.name);
+}
+
+/// 바스켓 실행 항목 상태
+class BasketExecutionItemStatus extends $pb.ProtobufEnum {
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED = BasketExecutionItemStatus._(0, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED');
+  /// 대기
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_PENDING = BasketExecutionItemStatus._(1, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_PENDING');
+  /// 재발주 가능
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_READY = BasketExecutionItemStatus._(2, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_READY');
+  /// 발주됨
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_SUBMITTED = BasketExecutionItemStatus._(3, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_SUBMITTED');
+  /// 일부 체결
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_PARTIALLY_FILLED = BasketExecutionItemStatus._(4, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_PARTIALLY_FILLED');
+  /// 전량 체결
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_FILLED = BasketExecutionItemStatus._(5, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_FILLED');
+  /// 취소됨
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_CANCELLED = BasketExecutionItemStatus._(6, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_CANCELLED');
+  /// 실패 (주문 거부 등)
+  static const BasketExecutionItemStatus BASKET_EXECUTION_ITEM_STATUS_FAILED = BasketExecutionItemStatus._(7, _omitEnumNames ? '' : 'BASKET_EXECUTION_ITEM_STATUS_FAILED');
+
+  static const $core.List<BasketExecutionItemStatus> values = <BasketExecutionItemStatus> [
+    BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED,
+    BASKET_EXECUTION_ITEM_STATUS_PENDING,
+    BASKET_EXECUTION_ITEM_STATUS_READY,
+    BASKET_EXECUTION_ITEM_STATUS_SUBMITTED,
+    BASKET_EXECUTION_ITEM_STATUS_PARTIALLY_FILLED,
+    BASKET_EXECUTION_ITEM_STATUS_FILLED,
+    BASKET_EXECUTION_ITEM_STATUS_CANCELLED,
+    BASKET_EXECUTION_ITEM_STATUS_FAILED,
+  ];
+
+  static final $core.List<BasketExecutionItemStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
+  static BasketExecutionItemStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const BasketExecutionItemStatus._(super.value, super.name);
+}
+
+/// 바스켓 실행 주문 액션 타입
+class BasketExecutionActionType extends $pb.ProtobufEnum {
+  static const BasketExecutionActionType BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED = BasketExecutionActionType._(0, _omitEnumNames ? '' : 'BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED');
+  /// 신규 주문
+  static const BasketExecutionActionType BASKET_EXECUTION_ACTION_TYPE_NEW = BasketExecutionActionType._(1, _omitEnumNames ? '' : 'BASKET_EXECUTION_ACTION_TYPE_NEW');
+  /// 정정 주문
+  static const BasketExecutionActionType BASKET_EXECUTION_ACTION_TYPE_AMEND = BasketExecutionActionType._(2, _omitEnumNames ? '' : 'BASKET_EXECUTION_ACTION_TYPE_AMEND');
+  /// 취소 주문
+  static const BasketExecutionActionType BASKET_EXECUTION_ACTION_TYPE_CANCEL = BasketExecutionActionType._(3, _omitEnumNames ? '' : 'BASKET_EXECUTION_ACTION_TYPE_CANCEL');
+
+  static const $core.List<BasketExecutionActionType> values = <BasketExecutionActionType> [
+    BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED,
+    BASKET_EXECUTION_ACTION_TYPE_NEW,
+    BASKET_EXECUTION_ACTION_TYPE_AMEND,
+    BASKET_EXECUTION_ACTION_TYPE_CANCEL,
+  ];
+
+  static final $core.List<BasketExecutionActionType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
+  static BasketExecutionActionType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const BasketExecutionActionType._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

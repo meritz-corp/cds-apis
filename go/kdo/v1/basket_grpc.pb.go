@@ -35,6 +35,19 @@ type BasketServiceClient interface {
 	DeleteBasket(ctx context.Context, in *DeleteBasketRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// 바스켓 가치 조회 (현재 시세 기준)
 	GetBasketValue(ctx context.Context, in *GetBasketValueRequest, opts ...grpc.CallOption) (*BasketValue, error)
+	// 바스켓 실행 생성 - 바스켓 구성 스냅샷 기반 실행 인스턴스 생성
+	CreateBasketExecution(ctx context.Context, in *CreateBasketExecutionRequest, opts ...grpc.CallOption) (*BasketExecution, error)
+	// 단일 실행 조회 (items + order_relations 포함)
+	GetBasketExecution(ctx context.Context, in *GetBasketExecutionRequest, opts ...grpc.CallOption) (*BasketExecution, error)
+	// 실행 목록 조회 (items/order_relations 미포함)
+	// parent를 "baskets/-" 로 지정하면 전체 바스켓의 실행을 조회 (AIP-159)
+	ListBasketExecutions(ctx context.Context, in *ListBasketExecutionsRequest, opts ...grpc.CallOption) (*ListBasketExecutionsResponse, error)
+	// 회차 발주 - 잔여 수량을 남은 회차로 분할하여 이번 회차 주문 제출
+	SubmitBasketExecutionRound(ctx context.Context, in *SubmitBasketExecutionRoundRequest, opts ...grpc.CallOption) (*SubmitBasketExecutionRoundResponse, error)
+	// 미체결 잔량 취소 - 활성 주문 전량 취소 요청
+	CancelBasketExecutionResidual(ctx context.Context, in *CancelBasketExecutionResidualRequest, opts ...grpc.CallOption) (*CancelBasketExecutionResidualResponse, error)
+	// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
+	StreamBasketExecution(ctx context.Context, in *StreamBasketExecutionRequest, opts ...grpc.CallOption) (BasketService_StreamBasketExecutionClient, error)
 }
 
 type basketServiceClient struct {
@@ -99,6 +112,83 @@ func (c *basketServiceClient) GetBasketValue(ctx context.Context, in *GetBasketV
 	return out, nil
 }
 
+func (c *basketServiceClient) CreateBasketExecution(ctx context.Context, in *CreateBasketExecutionRequest, opts ...grpc.CallOption) (*BasketExecution, error) {
+	out := new(BasketExecution)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/CreateBasketExecution", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *basketServiceClient) GetBasketExecution(ctx context.Context, in *GetBasketExecutionRequest, opts ...grpc.CallOption) (*BasketExecution, error) {
+	out := new(BasketExecution)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/GetBasketExecution", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *basketServiceClient) ListBasketExecutions(ctx context.Context, in *ListBasketExecutionsRequest, opts ...grpc.CallOption) (*ListBasketExecutionsResponse, error) {
+	out := new(ListBasketExecutionsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/ListBasketExecutions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *basketServiceClient) SubmitBasketExecutionRound(ctx context.Context, in *SubmitBasketExecutionRoundRequest, opts ...grpc.CallOption) (*SubmitBasketExecutionRoundResponse, error) {
+	out := new(SubmitBasketExecutionRoundResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/SubmitBasketExecutionRound", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *basketServiceClient) CancelBasketExecutionResidual(ctx context.Context, in *CancelBasketExecutionResidualRequest, opts ...grpc.CallOption) (*CancelBasketExecutionResidualResponse, error) {
+	out := new(CancelBasketExecutionResidualResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.basket.BasketService/CancelBasketExecutionResidual", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *basketServiceClient) StreamBasketExecution(ctx context.Context, in *StreamBasketExecutionRequest, opts ...grpc.CallOption) (BasketService_StreamBasketExecutionClient, error) {
+	stream, err := c.cc.NewStream(ctx, &BasketService_ServiceDesc.Streams[0], "/kdo.v1.basket.BasketService/StreamBasketExecution", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &basketServiceStreamBasketExecutionClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type BasketService_StreamBasketExecutionClient interface {
+	Recv() (*BasketExecution, error)
+	grpc.ClientStream
+}
+
+type basketServiceStreamBasketExecutionClient struct {
+	grpc.ClientStream
+}
+
+func (x *basketServiceStreamBasketExecutionClient) Recv() (*BasketExecution, error) {
+	m := new(BasketExecution)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BasketServiceServer is the server API for BasketService service.
 // All implementations must embed UnimplementedBasketServiceServer
 // for forward compatibility
@@ -115,6 +205,19 @@ type BasketServiceServer interface {
 	DeleteBasket(context.Context, *DeleteBasketRequest) (*emptypb.Empty, error)
 	// 바스켓 가치 조회 (현재 시세 기준)
 	GetBasketValue(context.Context, *GetBasketValueRequest) (*BasketValue, error)
+	// 바스켓 실행 생성 - 바스켓 구성 스냅샷 기반 실행 인스턴스 생성
+	CreateBasketExecution(context.Context, *CreateBasketExecutionRequest) (*BasketExecution, error)
+	// 단일 실행 조회 (items + order_relations 포함)
+	GetBasketExecution(context.Context, *GetBasketExecutionRequest) (*BasketExecution, error)
+	// 실행 목록 조회 (items/order_relations 미포함)
+	// parent를 "baskets/-" 로 지정하면 전체 바스켓의 실행을 조회 (AIP-159)
+	ListBasketExecutions(context.Context, *ListBasketExecutionsRequest) (*ListBasketExecutionsResponse, error)
+	// 회차 발주 - 잔여 수량을 남은 회차로 분할하여 이번 회차 주문 제출
+	SubmitBasketExecutionRound(context.Context, *SubmitBasketExecutionRoundRequest) (*SubmitBasketExecutionRoundResponse, error)
+	// 미체결 잔량 취소 - 활성 주문 전량 취소 요청
+	CancelBasketExecutionResidual(context.Context, *CancelBasketExecutionResidualRequest) (*CancelBasketExecutionResidualResponse, error)
+	// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
+	StreamBasketExecution(*StreamBasketExecutionRequest, BasketService_StreamBasketExecutionServer) error
 	mustEmbedUnimplementedBasketServiceServer()
 }
 
@@ -139,6 +242,24 @@ func (UnimplementedBasketServiceServer) DeleteBasket(context.Context, *DeleteBas
 }
 func (UnimplementedBasketServiceServer) GetBasketValue(context.Context, *GetBasketValueRequest) (*BasketValue, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBasketValue not implemented")
+}
+func (UnimplementedBasketServiceServer) CreateBasketExecution(context.Context, *CreateBasketExecutionRequest) (*BasketExecution, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBasketExecution not implemented")
+}
+func (UnimplementedBasketServiceServer) GetBasketExecution(context.Context, *GetBasketExecutionRequest) (*BasketExecution, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBasketExecution not implemented")
+}
+func (UnimplementedBasketServiceServer) ListBasketExecutions(context.Context, *ListBasketExecutionsRequest) (*ListBasketExecutionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBasketExecutions not implemented")
+}
+func (UnimplementedBasketServiceServer) SubmitBasketExecutionRound(context.Context, *SubmitBasketExecutionRoundRequest) (*SubmitBasketExecutionRoundResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitBasketExecutionRound not implemented")
+}
+func (UnimplementedBasketServiceServer) CancelBasketExecutionResidual(context.Context, *CancelBasketExecutionResidualRequest) (*CancelBasketExecutionResidualResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelBasketExecutionResidual not implemented")
+}
+func (UnimplementedBasketServiceServer) StreamBasketExecution(*StreamBasketExecutionRequest, BasketService_StreamBasketExecutionServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamBasketExecution not implemented")
 }
 func (UnimplementedBasketServiceServer) mustEmbedUnimplementedBasketServiceServer() {}
 
@@ -261,6 +382,117 @@ func _BasketService_GetBasketValue_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BasketService_CreateBasketExecution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBasketExecutionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).CreateBasketExecution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/CreateBasketExecution",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).CreateBasketExecution(ctx, req.(*CreateBasketExecutionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BasketService_GetBasketExecution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBasketExecutionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).GetBasketExecution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/GetBasketExecution",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).GetBasketExecution(ctx, req.(*GetBasketExecutionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BasketService_ListBasketExecutions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBasketExecutionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).ListBasketExecutions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/ListBasketExecutions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).ListBasketExecutions(ctx, req.(*ListBasketExecutionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BasketService_SubmitBasketExecutionRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitBasketExecutionRoundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).SubmitBasketExecutionRound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/SubmitBasketExecutionRound",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).SubmitBasketExecutionRound(ctx, req.(*SubmitBasketExecutionRoundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BasketService_CancelBasketExecutionResidual_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelBasketExecutionResidualRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BasketServiceServer).CancelBasketExecutionResidual(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.basket.BasketService/CancelBasketExecutionResidual",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BasketServiceServer).CancelBasketExecutionResidual(ctx, req.(*CancelBasketExecutionResidualRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BasketService_StreamBasketExecution_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamBasketExecutionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BasketServiceServer).StreamBasketExecution(m, &basketServiceStreamBasketExecutionServer{stream})
+}
+
+type BasketService_StreamBasketExecutionServer interface {
+	Send(*BasketExecution) error
+	grpc.ServerStream
+}
+
+type basketServiceStreamBasketExecutionServer struct {
+	grpc.ServerStream
+}
+
+func (x *basketServiceStreamBasketExecutionServer) Send(m *BasketExecution) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // BasketService_ServiceDesc is the grpc.ServiceDesc for BasketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -292,7 +524,33 @@ var BasketService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetBasketValue",
 			Handler:    _BasketService_GetBasketValue_Handler,
 		},
+		{
+			MethodName: "CreateBasketExecution",
+			Handler:    _BasketService_CreateBasketExecution_Handler,
+		},
+		{
+			MethodName: "GetBasketExecution",
+			Handler:    _BasketService_GetBasketExecution_Handler,
+		},
+		{
+			MethodName: "ListBasketExecutions",
+			Handler:    _BasketService_ListBasketExecutions_Handler,
+		},
+		{
+			MethodName: "SubmitBasketExecutionRound",
+			Handler:    _BasketService_SubmitBasketExecutionRound_Handler,
+		},
+		{
+			MethodName: "CancelBasketExecutionResidual",
+			Handler:    _BasketService_CancelBasketExecutionResidual_Handler,
+		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamBasketExecution",
+			Handler:       _BasketService_StreamBasketExecution_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "kdo/v1/basket.proto",
 }

@@ -9,6 +9,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
+import "kdo/v1/common.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -62,6 +63,60 @@ service BasketService {
       get: "/v1/{basket=baskets/*}/value"
     };
     option (google.api.method_signature) = "basket";
+  }
+
+  // ==========================================================================
+  // Basket Execution - 바스켓 실행 (발주 인스턴스)
+  // ==========================================================================
+
+  // 바스켓 실행 생성 - 바스켓 구성 스냅샷 기반 실행 인스턴스 생성
+  rpc CreateBasketExecution(CreateBasketExecutionRequest) returns (BasketExecution) {
+    option (google.api.http) = {
+      post: "/v1/{parent=baskets/*}/executions"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // 단일 실행 조회 (items + order_relations 포함)
+  rpc GetBasketExecution(GetBasketExecutionRequest) returns (BasketExecution) {
+    option (google.api.http) = {
+      get: "/v1/{execution=baskets/*/executions/*}"
+    };
+    option (google.api.method_signature) = "execution";
+  }
+
+  // 실행 목록 조회 (items/order_relations 미포함)
+  // parent를 "baskets/-" 로 지정하면 전체 바스켓의 실행을 조회 (AIP-159)
+  rpc ListBasketExecutions(ListBasketExecutionsRequest) returns (ListBasketExecutionsResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=baskets/*}/executions"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // 회차 발주 - 잔여 수량을 남은 회차로 분할하여 이번 회차 주문 제출
+  rpc SubmitBasketExecutionRound(SubmitBasketExecutionRoundRequest) returns (SubmitBasketExecutionRoundResponse) {
+    option (google.api.http) = {
+      post: "/v1/{execution=baskets/*/executions/*}:submitRound"
+      body: "*"
+    };
+  }
+
+  // 미체결 잔량 취소 - 활성 주문 전량 취소 요청
+  rpc CancelBasketExecutionResidual(CancelBasketExecutionResidualRequest) returns (CancelBasketExecutionResidualResponse) {
+    option (google.api.http) = {
+      post: "/v1/{execution=baskets/*/executions/*}:cancelResidual"
+      body: "*"
+    };
+  }
+
+  // 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
+  rpc StreamBasketExecution(StreamBasketExecutionRequest) returns (stream BasketExecution) {
+    option (google.api.http) = {
+      get: "/v1/{execution=baskets/*/executions/*}:stream"
+    };
+    option (google.api.method_signature) = "execution";
   }
 }
 
@@ -364,6 +419,371 @@ message GetBasketValueRequest {
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
       type: "kdo.cdsapis.xyz/Basket"
+    }
+  ];
+}
+
+// ============================================================================
+// Basket Execution
+// ============================================================================
+
+// 바스켓 실행 - 바스켓의 1회 발주 실행 인스턴스 (생성 시점 바스켓 스냅샷 기반)
+message BasketExecution {
+  option (google.api.resource) = {
+    type: "kdo.cdsapis.xyz/BasketExecution"
+    pattern: "baskets/{basket}/executions/{execution}"
+  };
+
+  // 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  string name = 1;
+
+  // 실행 ID
+  int64 id = 2 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 바스켓 ID
+  int32 basket_id = 3 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 실행 생성 시점의 바스켓 이름 스냅샷
+  string basket_display_name = 4 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 실행 상태
+  BasketExecutionStatus status = 5 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 현재 회차 (0 = 미시작)
+  uint32 current_round_no = 6 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 계획 분할 회차 수
+  uint32 planned_round_count = 7;
+
+  // 집계 요약 (수량/금액 합계)
+  BasketExecutionSummary summary = 8 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 최초 발주 시간
+  google.protobuf.Timestamp start_time = 9 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 완료 시간
+  google.protobuf.Timestamp end_time = 10 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 11 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 12 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 구성 항목 (GetBasketExecution/StreamBasketExecution 응답에서만 채워짐)
+  repeated BasketExecutionItem items = 13 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // 주문 연결 이력 (GetBasketExecution 응답에서만 채워짐)
+  repeated BasketExecutionOrderRelation order_relations = 14 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
+
+// 바스켓 실행 상태
+enum BasketExecutionStatus {
+  BASKET_EXECUTION_STATUS_UNSPECIFIED = 0;
+  // 생성됨 (미발주)
+  BASKET_EXECUTION_STATUS_DRAFT = 1;
+  // 예약됨
+  BASKET_EXECUTION_STATUS_SCHEDULED = 2;
+  // 발주 진행 중
+  BASKET_EXECUTION_STATUS_RUNNING = 3;
+  // 일시정지
+  BASKET_EXECUTION_STATUS_PAUSED = 4;
+  // 전량 체결 완료
+  BASKET_EXECUTION_STATUS_COMPLETED = 5;
+  // 취소됨
+  BASKET_EXECUTION_STATUS_CANCELLED = 6;
+  // 실패 항목 존재
+  BASKET_EXECUTION_STATUS_FAILED = 7;
+}
+
+// 바스켓 실행 집계 요약
+message BasketExecutionSummary {
+  // 항목 수
+  uint32 item_count = 1;
+
+  // 목표 수량 합계 (절대값 합)
+  int64 target_quantity_total = 2;
+
+  // 발주 수량 합계
+  int64 ordered_quantity_total = 3;
+
+  // 체결 수량 합계
+  int64 filled_quantity_total = 4;
+
+  // 잔여 수량 합계
+  int64 remaining_quantity_total = 5;
+
+  // 체결 금액 합계 (원)
+  int64 filled_amount_total = 6;
+
+  // 전량 체결된 항목 수
+  uint32 filled_item_count = 7;
+
+  // 실패한 항목 수
+  uint32 failed_item_count = 8;
+}
+
+// 바스켓 실행 구성 항목
+message BasketExecutionItem {
+  // 실행 항목 ID
+  int64 id = 1;
+
+  // 종목 심볼
+  string symbol = 2;
+
+  // 펀드 코드
+  string fund_code = 3;
+
+  // 목표 수량 (음수 = 매도)
+  int64 target_quantity = 4;
+
+  // 발주 수량
+  int64 ordered_quantity = 5;
+
+  // 체결 수량
+  int64 filled_quantity = 6;
+
+  // 잔여 수량
+  int64 remaining_quantity = 7;
+
+  // 평균 체결가 (체결 없으면 빈 문자열)
+  string average_fill_price = 8;
+
+  // 체결 금액 (원)
+  int64 filled_amount = 9;
+
+  // 항목 상태
+  BasketExecutionItemStatus status = 10;
+
+  // 수정 시간
+  google.protobuf.Timestamp update_time = 11;
+}
+
+// 바스켓 실행 항목 상태
+enum BasketExecutionItemStatus {
+  BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED = 0;
+  // 대기
+  BASKET_EXECUTION_ITEM_STATUS_PENDING = 1;
+  // 재발주 가능
+  BASKET_EXECUTION_ITEM_STATUS_READY = 2;
+  // 발주됨
+  BASKET_EXECUTION_ITEM_STATUS_SUBMITTED = 3;
+  // 일부 체결
+  BASKET_EXECUTION_ITEM_STATUS_PARTIALLY_FILLED = 4;
+  // 전량 체결
+  BASKET_EXECUTION_ITEM_STATUS_FILLED = 5;
+  // 취소됨
+  BASKET_EXECUTION_ITEM_STATUS_CANCELLED = 6;
+  // 실패 (주문 거부 등)
+  BASKET_EXECUTION_ITEM_STATUS_FAILED = 7;
+}
+
+// 바스켓 실행 주문 연결 이력 (실행 항목 ↔ 주문 감사 추적)
+message BasketExecutionOrderRelation {
+  // 연결 ID
+  int64 id = 1;
+
+  // 실행 항목 ID
+  int64 execution_item_id = 2;
+
+  // 주문 ID
+  uint64 order_id = 3;
+
+  // 원주문 ID (취소/정정인 경우)
+  optional uint64 original_order_id = 4;
+
+  // 발주 회차
+  uint32 round_no = 5;
+
+  // 액션 타입
+  BasketExecutionActionType action_type = 6;
+
+  // 생성 시간
+  google.protobuf.Timestamp create_time = 7;
+}
+
+// 바스켓 실행 주문 액션 타입
+enum BasketExecutionActionType {
+  BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED = 0;
+  // 신규 주문
+  BASKET_EXECUTION_ACTION_TYPE_NEW = 1;
+  // 정정 주문
+  BASKET_EXECUTION_ACTION_TYPE_AMEND = 2;
+  // 취소 주문
+  BASKET_EXECUTION_ACTION_TYPE_CANCEL = 3;
+}
+
+// ============================================================================
+// Basket Execution Request/Response Messages
+// ============================================================================
+
+message CreateBasketExecutionRequest {
+  // 부모 바스켓 (baskets/{id})
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "kdo.cdsapis.xyz/BasketExecution"
+    }
+  ];
+
+  // 계획 분할 회차 수 (미지정 시 바스켓 execution_config.rounds, 그것도 없으면 1)
+  optional uint32 planned_round_count = 2;
+}
+
+message GetBasketExecutionRequest {
+  // 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  string execution = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/BasketExecution"
+    }
+  ];
+}
+
+message ListBasketExecutionsRequest {
+  // 부모 바스켓 (baskets/{id}). 전체 조회는 "baskets/-"
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "kdo.cdsapis.xyz/BasketExecution"
+    }
+  ];
+
+  // 페이지 크기 (optional)
+  optional int32 page_size = 2;
+
+  // 페이지 토큰 (optional)
+  optional string page_token = 3;
+}
+
+message ListBasketExecutionsResponse {
+  // 실행 목록 (items/order_relations 미포함)
+  repeated BasketExecution executions = 1;
+
+  // 다음 페이지 토큰
+  string next_page_token = 2;
+}
+
+message SubmitBasketExecutionRoundRequest {
+  // 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  string execution = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/BasketExecution"
+    }
+  ];
+
+  // 발주할 회차 (미지정 시 current_round_no + 1)
+  optional uint32 round_no = 2;
+}
+
+// 회차 발주로 제출된 주문
+message BasketExecutionSubmittedOrder {
+  // 실행 항목 ID
+  int64 execution_item_id = 1;
+
+  // 종목 심볼
+  string symbol = 2;
+
+  // 주문 ID
+  uint64 order_id = 3;
+
+  // 주문 방향
+  kdo.v1.common.OrderSide side = 4;
+
+  // 주문 수량
+  int64 quantity = 5;
+
+  // 주문 가격
+  string price = 6;
+
+  // 발주 회차
+  uint32 round_no = 7;
+}
+
+// 발주/취소에서 건너뛴 항목
+message BasketExecutionSkippedItem {
+  // 실행 항목 ID
+  int64 execution_item_id = 1;
+
+  // 건너뛴 사유
+  string reason = 2;
+}
+
+message SubmitBasketExecutionRoundResponse {
+  // 발주된 회차
+  uint32 round_no = 1;
+
+  // 제출된 주문 목록
+  repeated BasketExecutionSubmittedOrder submitted_orders = 2;
+
+  // 건너뛴 항목 목록
+  repeated BasketExecutionSkippedItem skipped_items = 3;
+}
+
+message CancelBasketExecutionResidualRequest {
+  // 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  string execution = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/BasketExecution"
+    }
+  ];
+}
+
+// 취소 요청된 주문
+message BasketExecutionCancelledOrder {
+  // 실행 항목 ID
+  int64 execution_item_id = 1;
+
+  // 종목 심볼
+  string symbol = 2;
+
+  // 취소 주문 ID
+  uint64 cancel_order_id = 3;
+
+  // 취소 대상 원주문 ID
+  uint64 original_order_id = 4;
+}
+
+message CancelBasketExecutionResidualResponse {
+  // 취소 요청된 주문 목록
+  repeated BasketExecutionCancelledOrder cancelled_orders = 1;
+
+  // 건너뛴 항목 목록
+  repeated BasketExecutionSkippedItem skipped_items = 2;
+}
+
+message StreamBasketExecutionRequest {
+  // 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+  string execution = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/BasketExecution"
     }
   ];
 }

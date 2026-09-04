@@ -257,6 +257,295 @@ pub struct GetBasketValueRequest {
     #[prost(string, tag="1")]
     pub basket: ::prost::alloc::string::String,
 }
+// ============================================================================
+// Basket Execution
+// ============================================================================
+
+/// 바스켓 실행 - 바스켓의 1회 발주 실행 인스턴스 (생성 시점 바스켓 스냅샷 기반)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketExecution {
+    /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
+    /// 실행 ID
+    #[prost(int64, tag="2")]
+    pub id: i64,
+    /// 바스켓 ID
+    #[prost(int32, tag="3")]
+    pub basket_id: i32,
+    /// 실행 생성 시점의 바스켓 이름 스냅샷
+    #[prost(string, tag="4")]
+    pub basket_display_name: ::prost::alloc::string::String,
+    /// 실행 상태
+    #[prost(enumeration="BasketExecutionStatus", tag="5")]
+    pub status: i32,
+    /// 현재 회차 (0 = 미시작)
+    #[prost(uint32, tag="6")]
+    pub current_round_no: u32,
+    /// 계획 분할 회차 수
+    #[prost(uint32, tag="7")]
+    pub planned_round_count: u32,
+    /// 집계 요약 (수량/금액 합계)
+    #[prost(message, optional, tag="8")]
+    pub summary: ::core::option::Option<BasketExecutionSummary>,
+    /// 최초 발주 시간
+    #[prost(message, optional, tag="9")]
+    pub start_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 완료 시간
+    #[prost(message, optional, tag="10")]
+    pub end_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 생성 시간
+    #[prost(message, optional, tag="11")]
+    pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 수정 시간
+    #[prost(message, optional, tag="12")]
+    pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 구성 항목 (GetBasketExecution/StreamBasketExecution 응답에서만 채워짐)
+    #[prost(message, repeated, tag="13")]
+    pub items: ::prost::alloc::vec::Vec<BasketExecutionItem>,
+    /// 주문 연결 이력 (GetBasketExecution 응답에서만 채워짐)
+    #[prost(message, repeated, tag="14")]
+    pub order_relations: ::prost::alloc::vec::Vec<BasketExecutionOrderRelation>,
+}
+/// 바스켓 실행 집계 요약
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct BasketExecutionSummary {
+    /// 항목 수
+    #[prost(uint32, tag="1")]
+    pub item_count: u32,
+    /// 목표 수량 합계 (절대값 합)
+    #[prost(int64, tag="2")]
+    pub target_quantity_total: i64,
+    /// 발주 수량 합계
+    #[prost(int64, tag="3")]
+    pub ordered_quantity_total: i64,
+    /// 체결 수량 합계
+    #[prost(int64, tag="4")]
+    pub filled_quantity_total: i64,
+    /// 잔여 수량 합계
+    #[prost(int64, tag="5")]
+    pub remaining_quantity_total: i64,
+    /// 체결 금액 합계 (원)
+    #[prost(int64, tag="6")]
+    pub filled_amount_total: i64,
+    /// 전량 체결된 항목 수
+    #[prost(uint32, tag="7")]
+    pub filled_item_count: u32,
+    /// 실패한 항목 수
+    #[prost(uint32, tag="8")]
+    pub failed_item_count: u32,
+}
+/// 바스켓 실행 구성 항목
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketExecutionItem {
+    /// 실행 항목 ID
+    #[prost(int64, tag="1")]
+    pub id: i64,
+    /// 종목 심볼
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드
+    #[prost(string, tag="3")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 목표 수량 (음수 = 매도)
+    #[prost(int64, tag="4")]
+    pub target_quantity: i64,
+    /// 발주 수량
+    #[prost(int64, tag="5")]
+    pub ordered_quantity: i64,
+    /// 체결 수량
+    #[prost(int64, tag="6")]
+    pub filled_quantity: i64,
+    /// 잔여 수량
+    #[prost(int64, tag="7")]
+    pub remaining_quantity: i64,
+    /// 평균 체결가 (체결 없으면 빈 문자열)
+    #[prost(string, tag="8")]
+    pub average_fill_price: ::prost::alloc::string::String,
+    /// 체결 금액 (원)
+    #[prost(int64, tag="9")]
+    pub filled_amount: i64,
+    /// 항목 상태
+    #[prost(enumeration="BasketExecutionItemStatus", tag="10")]
+    pub status: i32,
+    /// 수정 시간
+    #[prost(message, optional, tag="11")]
+    pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
+/// 바스켓 실행 주문 연결 이력 (실행 항목 ↔ 주문 감사 추적)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct BasketExecutionOrderRelation {
+    /// 연결 ID
+    #[prost(int64, tag="1")]
+    pub id: i64,
+    /// 실행 항목 ID
+    #[prost(int64, tag="2")]
+    pub execution_item_id: i64,
+    /// 주문 ID
+    #[prost(uint64, tag="3")]
+    pub order_id: u64,
+    /// 원주문 ID (취소/정정인 경우)
+    #[prost(uint64, optional, tag="4")]
+    pub original_order_id: ::core::option::Option<u64>,
+    /// 발주 회차
+    #[prost(uint32, tag="5")]
+    pub round_no: u32,
+    /// 액션 타입
+    #[prost(enumeration="BasketExecutionActionType", tag="6")]
+    pub action_type: i32,
+    /// 생성 시간
+    #[prost(message, optional, tag="7")]
+    pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
+// ============================================================================
+// Basket Execution Request/Response Messages
+// ============================================================================
+
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateBasketExecutionRequest {
+    /// 부모 바스켓 (baskets/{id})
+    #[prost(string, tag="1")]
+    pub parent: ::prost::alloc::string::String,
+    /// 계획 분할 회차 수 (미지정 시 바스켓 execution_config.rounds, 그것도 없으면 1)
+    #[prost(uint32, optional, tag="2")]
+    pub planned_round_count: ::core::option::Option<u32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetBasketExecutionRequest {
+    /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+    #[prost(string, tag="1")]
+    pub execution: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListBasketExecutionsRequest {
+    /// 부모 바스켓 (baskets/{id}). 전체 조회는 "baskets/-"
+    #[prost(string, tag="1")]
+    pub parent: ::prost::alloc::string::String,
+    /// 페이지 크기 (optional)
+    #[prost(int32, optional, tag="2")]
+    pub page_size: ::core::option::Option<i32>,
+    /// 페이지 토큰 (optional)
+    #[prost(string, optional, tag="3")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListBasketExecutionsResponse {
+    /// 실행 목록 (items/order_relations 미포함)
+    #[prost(message, repeated, tag="1")]
+    pub executions: ::prost::alloc::vec::Vec<BasketExecution>,
+    /// 다음 페이지 토큰
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubmitBasketExecutionRoundRequest {
+    /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+    #[prost(string, tag="1")]
+    pub execution: ::prost::alloc::string::String,
+    /// 발주할 회차 (미지정 시 current_round_no + 1)
+    #[prost(uint32, optional, tag="2")]
+    pub round_no: ::core::option::Option<u32>,
+}
+/// 회차 발주로 제출된 주문
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketExecutionSubmittedOrder {
+    /// 실행 항목 ID
+    #[prost(int64, tag="1")]
+    pub execution_item_id: i64,
+    /// 종목 심볼
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 주문 ID
+    #[prost(uint64, tag="3")]
+    pub order_id: u64,
+    /// 주문 방향
+    #[prost(enumeration="super::common::OrderSide", tag="4")]
+    pub side: i32,
+    /// 주문 수량
+    #[prost(int64, tag="5")]
+    pub quantity: i64,
+    /// 주문 가격
+    #[prost(string, tag="6")]
+    pub price: ::prost::alloc::string::String,
+    /// 발주 회차
+    #[prost(uint32, tag="7")]
+    pub round_no: u32,
+}
+/// 발주/취소에서 건너뛴 항목
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketExecutionSkippedItem {
+    /// 실행 항목 ID
+    #[prost(int64, tag="1")]
+    pub execution_item_id: i64,
+    /// 건너뛴 사유
+    #[prost(string, tag="2")]
+    pub reason: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubmitBasketExecutionRoundResponse {
+    /// 발주된 회차
+    #[prost(uint32, tag="1")]
+    pub round_no: u32,
+    /// 제출된 주문 목록
+    #[prost(message, repeated, tag="2")]
+    pub submitted_orders: ::prost::alloc::vec::Vec<BasketExecutionSubmittedOrder>,
+    /// 건너뛴 항목 목록
+    #[prost(message, repeated, tag="3")]
+    pub skipped_items: ::prost::alloc::vec::Vec<BasketExecutionSkippedItem>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelBasketExecutionResidualRequest {
+    /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+    #[prost(string, tag="1")]
+    pub execution: ::prost::alloc::string::String,
+}
+/// 취소 요청된 주문
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BasketExecutionCancelledOrder {
+    /// 실행 항목 ID
+    #[prost(int64, tag="1")]
+    pub execution_item_id: i64,
+    /// 종목 심볼
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 취소 주문 ID
+    #[prost(uint64, tag="3")]
+    pub cancel_order_id: u64,
+    /// 취소 대상 원주문 ID
+    #[prost(uint64, tag="4")]
+    pub original_order_id: u64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelBasketExecutionResidualResponse {
+    /// 취소 요청된 주문 목록
+    #[prost(message, repeated, tag="1")]
+    pub cancelled_orders: ::prost::alloc::vec::Vec<BasketExecutionCancelledOrder>,
+    /// 건너뛴 항목 목록
+    #[prost(message, repeated, tag="2")]
+    pub skipped_items: ::prost::alloc::vec::Vec<BasketExecutionSkippedItem>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StreamBasketExecutionRequest {
+    /// 리소스 이름 (baskets/{basket_id}/executions/{execution_id})
+    #[prost(string, tag="1")]
+    pub execution: ::prost::alloc::string::String,
+}
 /// 바스켓 타입
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -381,6 +670,146 @@ impl OrderType {
             "ORDER_TYPE_MARKET" => Some(Self::Market),
             "ORDER_TYPE_LIMIT" => Some(Self::Limit),
             "ORDER_TYPE_AGGRESSIVE" => Some(Self::Aggressive),
+            _ => None,
+        }
+    }
+}
+/// 바스켓 실행 상태
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum BasketExecutionStatus {
+    Unspecified = 0,
+    /// 생성됨 (미발주)
+    Draft = 1,
+    /// 예약됨
+    Scheduled = 2,
+    /// 발주 진행 중
+    Running = 3,
+    /// 일시정지
+    Paused = 4,
+    /// 전량 체결 완료
+    Completed = 5,
+    /// 취소됨
+    Cancelled = 6,
+    /// 실패 항목 존재
+    Failed = 7,
+}
+impl BasketExecutionStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            BasketExecutionStatus::Unspecified => "BASKET_EXECUTION_STATUS_UNSPECIFIED",
+            BasketExecutionStatus::Draft => "BASKET_EXECUTION_STATUS_DRAFT",
+            BasketExecutionStatus::Scheduled => "BASKET_EXECUTION_STATUS_SCHEDULED",
+            BasketExecutionStatus::Running => "BASKET_EXECUTION_STATUS_RUNNING",
+            BasketExecutionStatus::Paused => "BASKET_EXECUTION_STATUS_PAUSED",
+            BasketExecutionStatus::Completed => "BASKET_EXECUTION_STATUS_COMPLETED",
+            BasketExecutionStatus::Cancelled => "BASKET_EXECUTION_STATUS_CANCELLED",
+            BasketExecutionStatus::Failed => "BASKET_EXECUTION_STATUS_FAILED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BASKET_EXECUTION_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "BASKET_EXECUTION_STATUS_DRAFT" => Some(Self::Draft),
+            "BASKET_EXECUTION_STATUS_SCHEDULED" => Some(Self::Scheduled),
+            "BASKET_EXECUTION_STATUS_RUNNING" => Some(Self::Running),
+            "BASKET_EXECUTION_STATUS_PAUSED" => Some(Self::Paused),
+            "BASKET_EXECUTION_STATUS_COMPLETED" => Some(Self::Completed),
+            "BASKET_EXECUTION_STATUS_CANCELLED" => Some(Self::Cancelled),
+            "BASKET_EXECUTION_STATUS_FAILED" => Some(Self::Failed),
+            _ => None,
+        }
+    }
+}
+/// 바스켓 실행 항목 상태
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum BasketExecutionItemStatus {
+    Unspecified = 0,
+    /// 대기
+    Pending = 1,
+    /// 재발주 가능
+    Ready = 2,
+    /// 발주됨
+    Submitted = 3,
+    /// 일부 체결
+    PartiallyFilled = 4,
+    /// 전량 체결
+    Filled = 5,
+    /// 취소됨
+    Cancelled = 6,
+    /// 실패 (주문 거부 등)
+    Failed = 7,
+}
+impl BasketExecutionItemStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            BasketExecutionItemStatus::Unspecified => "BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED",
+            BasketExecutionItemStatus::Pending => "BASKET_EXECUTION_ITEM_STATUS_PENDING",
+            BasketExecutionItemStatus::Ready => "BASKET_EXECUTION_ITEM_STATUS_READY",
+            BasketExecutionItemStatus::Submitted => "BASKET_EXECUTION_ITEM_STATUS_SUBMITTED",
+            BasketExecutionItemStatus::PartiallyFilled => "BASKET_EXECUTION_ITEM_STATUS_PARTIALLY_FILLED",
+            BasketExecutionItemStatus::Filled => "BASKET_EXECUTION_ITEM_STATUS_FILLED",
+            BasketExecutionItemStatus::Cancelled => "BASKET_EXECUTION_ITEM_STATUS_CANCELLED",
+            BasketExecutionItemStatus::Failed => "BASKET_EXECUTION_ITEM_STATUS_FAILED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BASKET_EXECUTION_ITEM_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "BASKET_EXECUTION_ITEM_STATUS_PENDING" => Some(Self::Pending),
+            "BASKET_EXECUTION_ITEM_STATUS_READY" => Some(Self::Ready),
+            "BASKET_EXECUTION_ITEM_STATUS_SUBMITTED" => Some(Self::Submitted),
+            "BASKET_EXECUTION_ITEM_STATUS_PARTIALLY_FILLED" => Some(Self::PartiallyFilled),
+            "BASKET_EXECUTION_ITEM_STATUS_FILLED" => Some(Self::Filled),
+            "BASKET_EXECUTION_ITEM_STATUS_CANCELLED" => Some(Self::Cancelled),
+            "BASKET_EXECUTION_ITEM_STATUS_FAILED" => Some(Self::Failed),
+            _ => None,
+        }
+    }
+}
+/// 바스켓 실행 주문 액션 타입
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum BasketExecutionActionType {
+    Unspecified = 0,
+    /// 신규 주문
+    New = 1,
+    /// 정정 주문
+    Amend = 2,
+    /// 취소 주문
+    Cancel = 3,
+}
+impl BasketExecutionActionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            BasketExecutionActionType::Unspecified => "BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED",
+            BasketExecutionActionType::New => "BASKET_EXECUTION_ACTION_TYPE_NEW",
+            BasketExecutionActionType::Amend => "BASKET_EXECUTION_ACTION_TYPE_AMEND",
+            BasketExecutionActionType::Cancel => "BASKET_EXECUTION_ACTION_TYPE_CANCEL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BASKET_EXECUTION_ACTION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "BASKET_EXECUTION_ACTION_TYPE_NEW" => Some(Self::New),
+            "BASKET_EXECUTION_ACTION_TYPE_AMEND" => Some(Self::Amend),
+            "BASKET_EXECUTION_ACTION_TYPE_CANCEL" => Some(Self::Cancel),
             _ => None,
         }
     }

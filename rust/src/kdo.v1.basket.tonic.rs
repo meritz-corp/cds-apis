@@ -221,6 +221,183 @@ pub mod basket_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn create_basket_execution(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateBasketExecutionRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::BasketExecution>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.basket.BasketService/CreateBasketExecution",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.basket.BasketService",
+                        "CreateBasketExecution",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn get_basket_execution(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetBasketExecutionRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::BasketExecution>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.basket.BasketService/GetBasketExecution",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.basket.BasketService", "GetBasketExecution"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_basket_executions(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListBasketExecutionsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListBasketExecutionsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.basket.BasketService/ListBasketExecutions",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.basket.BasketService",
+                        "ListBasketExecutions",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn submit_basket_execution_round(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubmitBasketExecutionRoundRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SubmitBasketExecutionRoundResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.basket.BasketService/SubmitBasketExecutionRound",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.basket.BasketService",
+                        "SubmitBasketExecutionRound",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn cancel_basket_execution_residual(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CancelBasketExecutionResidualRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelBasketExecutionResidualResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.basket.BasketService/CancelBasketExecutionResidual",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.basket.BasketService",
+                        "CancelBasketExecutionResidual",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stream_basket_execution(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StreamBasketExecutionRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::BasketExecution>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.basket.BasketService/StreamBasketExecution",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.basket.BasketService",
+                        "StreamBasketExecution",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -257,6 +434,48 @@ pub mod basket_service_server {
             &self,
             request: tonic::Request<super::GetBasketValueRequest>,
         ) -> std::result::Result<tonic::Response<super::BasketValue>, tonic::Status>;
+        async fn create_basket_execution(
+            &self,
+            request: tonic::Request<super::CreateBasketExecutionRequest>,
+        ) -> std::result::Result<tonic::Response<super::BasketExecution>, tonic::Status>;
+        async fn get_basket_execution(
+            &self,
+            request: tonic::Request<super::GetBasketExecutionRequest>,
+        ) -> std::result::Result<tonic::Response<super::BasketExecution>, tonic::Status>;
+        async fn list_basket_executions(
+            &self,
+            request: tonic::Request<super::ListBasketExecutionsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListBasketExecutionsResponse>,
+            tonic::Status,
+        >;
+        async fn submit_basket_execution_round(
+            &self,
+            request: tonic::Request<super::SubmitBasketExecutionRoundRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SubmitBasketExecutionRoundResponse>,
+            tonic::Status,
+        >;
+        async fn cancel_basket_execution_residual(
+            &self,
+            request: tonic::Request<super::CancelBasketExecutionResidualRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelBasketExecutionResidualResponse>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamBasketExecution method.
+        type StreamBasketExecutionStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::BasketExecution, tonic::Status>,
+            >
+            + Send
+            + 'static;
+        async fn stream_basket_execution(
+            &self,
+            request: tonic::Request<super::StreamBasketExecutionRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamBasketExecutionStream>,
+            tonic::Status,
+        >;
     }
     #[derive(Debug)]
     pub struct BasketServiceServer<T: BasketService> {
@@ -601,6 +820,307 @@ pub mod basket_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.basket.BasketService/CreateBasketExecution" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateBasketExecutionSvc<T: BasketService>(pub Arc<T>);
+                    impl<
+                        T: BasketService,
+                    > tonic::server::UnaryService<super::CreateBasketExecutionRequest>
+                    for CreateBasketExecutionSvc<T> {
+                        type Response = super::BasketExecution;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CreateBasketExecutionRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as BasketService>::create_basket_execution(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CreateBasketExecutionSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.basket.BasketService/GetBasketExecution" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetBasketExecutionSvc<T: BasketService>(pub Arc<T>);
+                    impl<
+                        T: BasketService,
+                    > tonic::server::UnaryService<super::GetBasketExecutionRequest>
+                    for GetBasketExecutionSvc<T> {
+                        type Response = super::BasketExecution;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetBasketExecutionRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as BasketService>::get_basket_execution(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetBasketExecutionSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.basket.BasketService/ListBasketExecutions" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListBasketExecutionsSvc<T: BasketService>(pub Arc<T>);
+                    impl<
+                        T: BasketService,
+                    > tonic::server::UnaryService<super::ListBasketExecutionsRequest>
+                    for ListBasketExecutionsSvc<T> {
+                        type Response = super::ListBasketExecutionsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListBasketExecutionsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as BasketService>::list_basket_executions(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListBasketExecutionsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.basket.BasketService/SubmitBasketExecutionRound" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubmitBasketExecutionRoundSvc<T: BasketService>(pub Arc<T>);
+                    impl<
+                        T: BasketService,
+                    > tonic::server::UnaryService<
+                        super::SubmitBasketExecutionRoundRequest,
+                    > for SubmitBasketExecutionRoundSvc<T> {
+                        type Response = super::SubmitBasketExecutionRoundResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::SubmitBasketExecutionRoundRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as BasketService>::submit_basket_execution_round(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SubmitBasketExecutionRoundSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.basket.BasketService/CancelBasketExecutionResidual" => {
+                    #[allow(non_camel_case_types)]
+                    struct CancelBasketExecutionResidualSvc<T: BasketService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: BasketService,
+                    > tonic::server::UnaryService<
+                        super::CancelBasketExecutionResidualRequest,
+                    > for CancelBasketExecutionResidualSvc<T> {
+                        type Response = super::CancelBasketExecutionResidualResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::CancelBasketExecutionResidualRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as BasketService>::cancel_basket_execution_residual(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CancelBasketExecutionResidualSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.basket.BasketService/StreamBasketExecution" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamBasketExecutionSvc<T: BasketService>(pub Arc<T>);
+                    impl<
+                        T: BasketService,
+                    > tonic::server::ServerStreamingService<
+                        super::StreamBasketExecutionRequest,
+                    > for StreamBasketExecutionSvc<T> {
+                        type Response = super::BasketExecution;
+                        type ResponseStream = T::StreamBasketExecutionStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::StreamBasketExecutionRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as BasketService>::stream_basket_execution(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamBasketExecutionSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

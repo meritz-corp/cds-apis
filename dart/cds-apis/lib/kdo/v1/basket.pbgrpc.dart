@@ -64,6 +64,37 @@ class BasketServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getBasketValue, request, options: options);
   }
 
+  /// 바스켓 실행 생성 - 바스켓 구성 스냅샷 기반 실행 인스턴스 생성
+  $grpc.ResponseFuture<$0.BasketExecution> createBasketExecution($0.CreateBasketExecutionRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$createBasketExecution, request, options: options);
+  }
+
+  /// 단일 실행 조회 (items + order_relations 포함)
+  $grpc.ResponseFuture<$0.BasketExecution> getBasketExecution($0.GetBasketExecutionRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getBasketExecution, request, options: options);
+  }
+
+  /// 실행 목록 조회 (items/order_relations 미포함)
+  /// parent를 "baskets/-" 로 지정하면 전체 바스켓의 실행을 조회 (AIP-159)
+  $grpc.ResponseFuture<$0.ListBasketExecutionsResponse> listBasketExecutions($0.ListBasketExecutionsRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listBasketExecutions, request, options: options);
+  }
+
+  /// 회차 발주 - 잔여 수량을 남은 회차로 분할하여 이번 회차 주문 제출
+  $grpc.ResponseFuture<$0.SubmitBasketExecutionRoundResponse> submitBasketExecutionRound($0.SubmitBasketExecutionRoundRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$submitBasketExecutionRound, request, options: options);
+  }
+
+  /// 미체결 잔량 취소 - 활성 주문 전량 취소 요청
+  $grpc.ResponseFuture<$0.CancelBasketExecutionResidualResponse> cancelBasketExecutionResidual($0.CancelBasketExecutionResidualRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$cancelBasketExecutionResidual, request, options: options);
+  }
+
+  /// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
+  $grpc.ResponseStream<$0.BasketExecution> streamBasketExecution($0.StreamBasketExecutionRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamBasketExecution, $async.Stream.fromIterable([request]), options: options);
+  }
+
     // method descriptors
 
   static final _$getBasket = $grpc.ClientMethod<$0.GetBasketRequest, $0.Basket>(
@@ -90,6 +121,30 @@ class BasketServiceClient extends $grpc.Client {
       '/kdo.v1.basket.BasketService/GetBasketValue',
       ($0.GetBasketValueRequest value) => value.writeToBuffer(),
       $0.BasketValue.fromBuffer);
+  static final _$createBasketExecution = $grpc.ClientMethod<$0.CreateBasketExecutionRequest, $0.BasketExecution>(
+      '/kdo.v1.basket.BasketService/CreateBasketExecution',
+      ($0.CreateBasketExecutionRequest value) => value.writeToBuffer(),
+      $0.BasketExecution.fromBuffer);
+  static final _$getBasketExecution = $grpc.ClientMethod<$0.GetBasketExecutionRequest, $0.BasketExecution>(
+      '/kdo.v1.basket.BasketService/GetBasketExecution',
+      ($0.GetBasketExecutionRequest value) => value.writeToBuffer(),
+      $0.BasketExecution.fromBuffer);
+  static final _$listBasketExecutions = $grpc.ClientMethod<$0.ListBasketExecutionsRequest, $0.ListBasketExecutionsResponse>(
+      '/kdo.v1.basket.BasketService/ListBasketExecutions',
+      ($0.ListBasketExecutionsRequest value) => value.writeToBuffer(),
+      $0.ListBasketExecutionsResponse.fromBuffer);
+  static final _$submitBasketExecutionRound = $grpc.ClientMethod<$0.SubmitBasketExecutionRoundRequest, $0.SubmitBasketExecutionRoundResponse>(
+      '/kdo.v1.basket.BasketService/SubmitBasketExecutionRound',
+      ($0.SubmitBasketExecutionRoundRequest value) => value.writeToBuffer(),
+      $0.SubmitBasketExecutionRoundResponse.fromBuffer);
+  static final _$cancelBasketExecutionResidual = $grpc.ClientMethod<$0.CancelBasketExecutionResidualRequest, $0.CancelBasketExecutionResidualResponse>(
+      '/kdo.v1.basket.BasketService/CancelBasketExecutionResidual',
+      ($0.CancelBasketExecutionResidualRequest value) => value.writeToBuffer(),
+      $0.CancelBasketExecutionResidualResponse.fromBuffer);
+  static final _$streamBasketExecution = $grpc.ClientMethod<$0.StreamBasketExecutionRequest, $0.BasketExecution>(
+      '/kdo.v1.basket.BasketService/StreamBasketExecution',
+      ($0.StreamBasketExecutionRequest value) => value.writeToBuffer(),
+      $0.BasketExecution.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.basket.BasketService')
@@ -139,6 +194,48 @@ abstract class BasketServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetBasketValueRequest.fromBuffer(value),
         ($0.BasketValue value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CreateBasketExecutionRequest, $0.BasketExecution>(
+        'CreateBasketExecution',
+        createBasketExecution_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CreateBasketExecutionRequest.fromBuffer(value),
+        ($0.BasketExecution value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetBasketExecutionRequest, $0.BasketExecution>(
+        'GetBasketExecution',
+        getBasketExecution_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetBasketExecutionRequest.fromBuffer(value),
+        ($0.BasketExecution value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListBasketExecutionsRequest, $0.ListBasketExecutionsResponse>(
+        'ListBasketExecutions',
+        listBasketExecutions_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListBasketExecutionsRequest.fromBuffer(value),
+        ($0.ListBasketExecutionsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SubmitBasketExecutionRoundRequest, $0.SubmitBasketExecutionRoundResponse>(
+        'SubmitBasketExecutionRound',
+        submitBasketExecutionRound_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SubmitBasketExecutionRoundRequest.fromBuffer(value),
+        ($0.SubmitBasketExecutionRoundResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CancelBasketExecutionResidualRequest, $0.CancelBasketExecutionResidualResponse>(
+        'CancelBasketExecutionResidual',
+        cancelBasketExecutionResidual_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CancelBasketExecutionResidualRequest.fromBuffer(value),
+        ($0.CancelBasketExecutionResidualResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.StreamBasketExecutionRequest, $0.BasketExecution>(
+        'StreamBasketExecution',
+        streamBasketExecution_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.StreamBasketExecutionRequest.fromBuffer(value),
+        ($0.BasketExecution value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Basket> getBasket_Pre($grpc.ServiceCall $call, $async.Future<$0.GetBasketRequest> $request) async {
@@ -176,5 +273,41 @@ abstract class BasketServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.BasketValue> getBasketValue($grpc.ServiceCall call, $0.GetBasketValueRequest request);
+
+  $async.Future<$0.BasketExecution> createBasketExecution_Pre($grpc.ServiceCall $call, $async.Future<$0.CreateBasketExecutionRequest> $request) async {
+    return createBasketExecution($call, await $request);
+  }
+
+  $async.Future<$0.BasketExecution> createBasketExecution($grpc.ServiceCall call, $0.CreateBasketExecutionRequest request);
+
+  $async.Future<$0.BasketExecution> getBasketExecution_Pre($grpc.ServiceCall $call, $async.Future<$0.GetBasketExecutionRequest> $request) async {
+    return getBasketExecution($call, await $request);
+  }
+
+  $async.Future<$0.BasketExecution> getBasketExecution($grpc.ServiceCall call, $0.GetBasketExecutionRequest request);
+
+  $async.Future<$0.ListBasketExecutionsResponse> listBasketExecutions_Pre($grpc.ServiceCall $call, $async.Future<$0.ListBasketExecutionsRequest> $request) async {
+    return listBasketExecutions($call, await $request);
+  }
+
+  $async.Future<$0.ListBasketExecutionsResponse> listBasketExecutions($grpc.ServiceCall call, $0.ListBasketExecutionsRequest request);
+
+  $async.Future<$0.SubmitBasketExecutionRoundResponse> submitBasketExecutionRound_Pre($grpc.ServiceCall $call, $async.Future<$0.SubmitBasketExecutionRoundRequest> $request) async {
+    return submitBasketExecutionRound($call, await $request);
+  }
+
+  $async.Future<$0.SubmitBasketExecutionRoundResponse> submitBasketExecutionRound($grpc.ServiceCall call, $0.SubmitBasketExecutionRoundRequest request);
+
+  $async.Future<$0.CancelBasketExecutionResidualResponse> cancelBasketExecutionResidual_Pre($grpc.ServiceCall $call, $async.Future<$0.CancelBasketExecutionResidualRequest> $request) async {
+    return cancelBasketExecutionResidual($call, await $request);
+  }
+
+  $async.Future<$0.CancelBasketExecutionResidualResponse> cancelBasketExecutionResidual($grpc.ServiceCall call, $0.CancelBasketExecutionResidualRequest request);
+
+  $async.Stream<$0.BasketExecution> streamBasketExecution_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamBasketExecutionRequest> $request) async* {
+    yield* streamBasketExecution($call, await $request);
+  }
+
+  $async.Stream<$0.BasketExecution> streamBasketExecution($grpc.ServiceCall call, $0.StreamBasketExecutionRequest request);
 
 }

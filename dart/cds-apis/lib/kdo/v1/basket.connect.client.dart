@@ -117,4 +117,113 @@ extension type BasketServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 바스켓 실행 생성 - 바스켓 구성 스냅샷 기반 실행 인스턴스 생성
+  Future<kdov1basket.BasketExecution> createBasketExecution(
+    kdov1basket.CreateBasketExecutionRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.createBasketExecution,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 단일 실행 조회 (items + order_relations 포함)
+  Future<kdov1basket.BasketExecution> getBasketExecution(
+    kdov1basket.GetBasketExecutionRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.getBasketExecution,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 실행 목록 조회 (items/order_relations 미포함)
+  /// parent를 "baskets/-" 로 지정하면 전체 바스켓의 실행을 조회 (AIP-159)
+  Future<kdov1basket.ListBasketExecutionsResponse> listBasketExecutions(
+    kdov1basket.ListBasketExecutionsRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.listBasketExecutions,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 회차 발주 - 잔여 수량을 남은 회차로 분할하여 이번 회차 주문 제출
+  Future<kdov1basket.SubmitBasketExecutionRoundResponse> submitBasketExecutionRound(
+    kdov1basket.SubmitBasketExecutionRoundRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.submitBasketExecutionRound,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 미체결 잔량 취소 - 활성 주문 전량 취소 요청
+  Future<kdov1basket.CancelBasketExecutionResidualResponse> cancelBasketExecutionResidual(
+    kdov1basket.CancelBasketExecutionResidualRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.BasketService.cancelBasketExecutionResidual,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 실행 상태 스트리밍 - 최초 1회 현재 상태 push 후 변경 시마다 push (items 포함, order_relations 미포함)
+  Stream<kdov1basket.BasketExecution> streamBasketExecution(
+    kdov1basket.StreamBasketExecutionRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.BasketService.streamBasketExecution,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }
