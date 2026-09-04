@@ -1049,6 +1049,30 @@
           "type": "number",
           "format": "double",
           "title": "매도 방향 누적값"
+        },
+        "sourceSymbol": {
+          "type": "string",
+          "title": "이 route의 source 심볼\nHedgeGroup.separate_by_source=true 일 때 route별 source 심볼, false 이면 비어 있음"
+        },
+        "sourceBidFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "이 route source의 매수 총 체결수량"
+        },
+        "sourceAskFilledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "이 route source의 매도 총 체결수량"
+        },
+        "desiredBidHedgeQuantity": {
+          "type": "number",
+          "format": "double",
+          "title": "이 route의 매수 desired 헷지수량 (선물환산 누적)"
+        },
+        "desiredAskHedgeQuantity": {
+          "type": "number",
+          "format": "double",
+          "title": "이 route의 매도 desired 헷지수량 (선물환산 누적)"
         }
       },
       "title": "InstrumentAccumulatorState: instrument 별 bid/ask 누적기 상태"

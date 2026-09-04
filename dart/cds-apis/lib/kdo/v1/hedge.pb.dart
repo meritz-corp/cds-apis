@@ -1780,11 +1780,21 @@ class InstrumentAccumulatorState extends $pb.GeneratedMessage {
     $core.String? hedgeSymbol,
     $core.double? bidAccumulator,
     $core.double? askAccumulator,
+    $core.String? sourceSymbol,
+    $fixnum.Int64? sourceBidFilledQuantity,
+    $fixnum.Int64? sourceAskFilledQuantity,
+    $core.double? desiredBidHedgeQuantity,
+    $core.double? desiredAskHedgeQuantity,
   }) {
     final result = create();
     if (hedgeSymbol != null) result.hedgeSymbol = hedgeSymbol;
     if (bidAccumulator != null) result.bidAccumulator = bidAccumulator;
     if (askAccumulator != null) result.askAccumulator = askAccumulator;
+    if (sourceSymbol != null) result.sourceSymbol = sourceSymbol;
+    if (sourceBidFilledQuantity != null) result.sourceBidFilledQuantity = sourceBidFilledQuantity;
+    if (sourceAskFilledQuantity != null) result.sourceAskFilledQuantity = sourceAskFilledQuantity;
+    if (desiredBidHedgeQuantity != null) result.desiredBidHedgeQuantity = desiredBidHedgeQuantity;
+    if (desiredAskHedgeQuantity != null) result.desiredAskHedgeQuantity = desiredAskHedgeQuantity;
     return result;
   }
 
@@ -1797,6 +1807,11 @@ class InstrumentAccumulatorState extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'hedgeSymbol')
     ..a<$core.double>(2, _omitFieldNames ? '' : 'bidAccumulator', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'askAccumulator', $pb.PbFieldType.OD)
+    ..aOS(4, _omitFieldNames ? '' : 'sourceSymbol')
+    ..aInt64(5, _omitFieldNames ? '' : 'sourceBidFilledQuantity')
+    ..aInt64(6, _omitFieldNames ? '' : 'sourceAskFilledQuantity')
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'desiredBidHedgeQuantity', $pb.PbFieldType.OD)
+    ..a<$core.double>(8, _omitFieldNames ? '' : 'desiredAskHedgeQuantity', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1846,6 +1861,57 @@ class InstrumentAccumulatorState extends $pb.GeneratedMessage {
   $core.bool hasAskAccumulator() => $_has(2);
   @$pb.TagNumber(3)
   void clearAskAccumulator() => $_clearField(3);
+
+  /// 이 route의 source 심볼
+  /// HedgeGroup.separate_by_source=true 일 때 route별 source 심볼, false 이면 비어 있음
+  @$pb.TagNumber(4)
+  $core.String get sourceSymbol => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set sourceSymbol($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSourceSymbol() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSourceSymbol() => $_clearField(4);
+
+  /// 이 route source의 매수 총 체결수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get sourceBidFilledQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set sourceBidFilledQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSourceBidFilledQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSourceBidFilledQuantity() => $_clearField(5);
+
+  /// 이 route source의 매도 총 체결수량
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get sourceAskFilledQuantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set sourceAskFilledQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSourceAskFilledQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSourceAskFilledQuantity() => $_clearField(6);
+
+  /// 이 route의 매수 desired 헷지수량 (선물환산 누적)
+  @$pb.TagNumber(7)
+  $core.double get desiredBidHedgeQuantity => $_getN(6);
+  @$pb.TagNumber(7)
+  set desiredBidHedgeQuantity($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasDesiredBidHedgeQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDesiredBidHedgeQuantity() => $_clearField(7);
+
+  /// 이 route의 매도 desired 헷지수량 (선물환산 누적)
+  @$pb.TagNumber(8)
+  $core.double get desiredAskHedgeQuantity => $_getN(7);
+  @$pb.TagNumber(8)
+  set desiredAskHedgeQuantity($core.double value) => $_setDouble(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasDesiredAskHedgeQuantity() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearDesiredAskHedgeQuantity() => $_clearField(8);
 }
 
 /// HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태

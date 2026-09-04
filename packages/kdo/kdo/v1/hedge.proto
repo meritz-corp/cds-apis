@@ -545,6 +545,22 @@ message InstrumentAccumulatorState {
 
   // 매도 방향 누적값
   double ask_accumulator = 3;
+
+  // 이 route의 source 심볼
+  // HedgeGroup.separate_by_source=true 일 때 route별 source 심볼, false 이면 비어 있음
+  string source_symbol = 4;
+
+  // 이 route source의 매수 총 체결수량
+  int64 source_bid_filled_quantity = 5;
+
+  // 이 route source의 매도 총 체결수량
+  int64 source_ask_filled_quantity = 6;
+
+  // 이 route의 매수 desired 헷지수량 (선물환산 누적)
+  double desired_bid_hedge_quantity = 7;
+
+  // 이 route의 매도 desired 헷지수량 (선물환산 누적)
+  double desired_ask_hedge_quantity = 8;
 }
 
 // HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태

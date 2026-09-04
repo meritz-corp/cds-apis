@@ -392,6 +392,22 @@ pub struct InstrumentAccumulatorState {
     /// 매도 방향 누적값
     #[prost(double, tag="3")]
     pub ask_accumulator: f64,
+    /// 이 route의 source 심볼
+    /// HedgeGroup.separate_by_source=true 일 때 route별 source 심볼, false 이면 비어 있음
+    #[prost(string, tag="4")]
+    pub source_symbol: ::prost::alloc::string::String,
+    /// 이 route source의 매수 총 체결수량
+    #[prost(int64, tag="5")]
+    pub source_bid_filled_quantity: i64,
+    /// 이 route source의 매도 총 체결수량
+    #[prost(int64, tag="6")]
+    pub source_ask_filled_quantity: i64,
+    /// 이 route의 매수 desired 헷지수량 (선물환산 누적)
+    #[prost(double, tag="7")]
+    pub desired_bid_hedge_quantity: f64,
+    /// 이 route의 매도 desired 헷지수량 (선물환산 누적)
+    #[prost(double, tag="8")]
+    pub desired_ask_hedge_quantity: f64,
 }
 /// HedgeAccumulatorState: 즉시 헷지 per-side 누적기의 현재 상태
 /// bid_accumulator: 매수 방향 ETF 체결의 선물 환산 누적값

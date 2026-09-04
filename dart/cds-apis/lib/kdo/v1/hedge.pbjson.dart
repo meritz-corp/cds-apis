@@ -513,6 +513,11 @@ const InstrumentAccumulatorState$json = {
     {'1': 'hedge_symbol', '3': 1, '4': 1, '5': 9, '10': 'hedgeSymbol'},
     {'1': 'bid_accumulator', '3': 2, '4': 1, '5': 1, '10': 'bidAccumulator'},
     {'1': 'ask_accumulator', '3': 3, '4': 1, '5': 1, '10': 'askAccumulator'},
+    {'1': 'source_symbol', '3': 4, '4': 1, '5': 9, '10': 'sourceSymbol'},
+    {'1': 'source_bid_filled_quantity', '3': 5, '4': 1, '5': 3, '10': 'sourceBidFilledQuantity'},
+    {'1': 'source_ask_filled_quantity', '3': 6, '4': 1, '5': 3, '10': 'sourceAskFilledQuantity'},
+    {'1': 'desired_bid_hedge_quantity', '3': 7, '4': 1, '5': 1, '10': 'desiredBidHedgeQuantity'},
+    {'1': 'desired_ask_hedge_quantity', '3': 8, '4': 1, '5': 1, '10': 'desiredAskHedgeQuantity'},
   ],
 };
 
@@ -520,7 +525,12 @@ const InstrumentAccumulatorState$json = {
 final $typed_data.Uint8List instrumentAccumulatorStateDescriptor = $convert.base64Decode(
     'ChpJbnN0cnVtZW50QWNjdW11bGF0b3JTdGF0ZRIhCgxoZWRnZV9zeW1ib2wYASABKAlSC2hlZG'
     'dlU3ltYm9sEicKD2JpZF9hY2N1bXVsYXRvchgCIAEoAVIOYmlkQWNjdW11bGF0b3ISJwoPYXNr'
-    'X2FjY3VtdWxhdG9yGAMgASgBUg5hc2tBY2N1bXVsYXRvcg==');
+    'X2FjY3VtdWxhdG9yGAMgASgBUg5hc2tBY2N1bXVsYXRvchIjCg1zb3VyY2Vfc3ltYm9sGAQgAS'
+    'gJUgxzb3VyY2VTeW1ib2wSOwoac291cmNlX2JpZF9maWxsZWRfcXVhbnRpdHkYBSABKANSF3Nv'
+    'dXJjZUJpZEZpbGxlZFF1YW50aXR5EjsKGnNvdXJjZV9hc2tfZmlsbGVkX3F1YW50aXR5GAYgAS'
+    'gDUhdzb3VyY2VBc2tGaWxsZWRRdWFudGl0eRI7ChpkZXNpcmVkX2JpZF9oZWRnZV9xdWFudGl0'
+    'eRgHIAEoAVIXZGVzaXJlZEJpZEhlZGdlUXVhbnRpdHkSOwoaZGVzaXJlZF9hc2tfaGVkZ2VfcX'
+    'VhbnRpdHkYCCABKAFSF2Rlc2lyZWRBc2tIZWRnZVF1YW50aXR5');
 
 @$core.Deprecated('Use hedgeAccumulatorStateDescriptor instead')
 const HedgeAccumulatorState$json = {
