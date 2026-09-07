@@ -47,6 +47,7 @@ class PairV2 extends $pb.GeneratedMessage {
     $core.int? pauseLaunchNo,
     $core.String? tradingWindowStart,
     $core.String? tradingWindowEnd,
+    $core.bool? slippageGuard,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -67,6 +68,7 @@ class PairV2 extends $pb.GeneratedMessage {
     if (pauseLaunchNo != null) result.pauseLaunchNo = pauseLaunchNo;
     if (tradingWindowStart != null) result.tradingWindowStart = tradingWindowStart;
     if (tradingWindowEnd != null) result.tradingWindowEnd = tradingWindowEnd;
+    if (slippageGuard != null) result.slippageGuard = slippageGuard;
     return result;
   }
 
@@ -94,6 +96,7 @@ class PairV2 extends $pb.GeneratedMessage {
     ..a<$core.int>(16, _omitFieldNames ? '' : 'pauseLaunchNo', $pb.PbFieldType.OU3)
     ..aOS(17, _omitFieldNames ? '' : 'tradingWindowStart')
     ..aOS(18, _omitFieldNames ? '' : 'tradingWindowEnd')
+    ..aOB(19, _omitFieldNames ? '' : 'slippageGuard')
     ..hasRequiredFields = false
   ;
 
@@ -310,6 +313,18 @@ class PairV2 extends $pb.GeneratedMessage {
   $core.bool hasTradingWindowEnd() => $_has(17);
   @$pb.TagNumber(18)
   void clearTradingWindowEnd() => $_clearField(18);
+
+  /// 슬리피지 가드 - true 면 발사 직전 양다리의 상대호가 1호가 잔량이 발주수량 이상일 때만
+  /// 자동 발사한다 (잔량 부족 = 즉시 체결 불가/슬리피지 위험 → 발사 보류).
+  /// 수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false.
+  @$pb.TagNumber(19)
+  $core.bool get slippageGuard => $_getBF(18);
+  @$pb.TagNumber(19)
+  set slippageGuard($core.bool value) => $_setBool(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasSlippageGuard() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearSlippageGuard() => $_clearField(19);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).
@@ -2009,6 +2024,8 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     $2.Timestamp? updatedAt,
     $core.int? launchCount,
     $core.double? currentSpread,
+    $fixnum.Int64? baseTopQuantity,
+    $fixnum.Int64? counterTopQuantity,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
@@ -2016,6 +2033,8 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     if (updatedAt != null) result.updatedAt = updatedAt;
     if (launchCount != null) result.launchCount = launchCount;
     if (currentSpread != null) result.currentSpread = currentSpread;
+    if (baseTopQuantity != null) result.baseTopQuantity = baseTopQuantity;
+    if (counterTopQuantity != null) result.counterTopQuantity = counterTopQuantity;
     return result;
   }
 
@@ -2030,6 +2049,8 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'launchCount', $pb.PbFieldType.OU3)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'currentSpread', $pb.PbFieldType.OD)
+    ..aInt64(6, _omitFieldNames ? '' : 'baseTopQuantity')
+    ..aInt64(7, _omitFieldNames ? '' : 'counterTopQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -2102,6 +2123,26 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasCurrentSpread() => $_has(4);
   @$pb.TagNumber(5)
   void clearCurrentSpread() => $_clearField(5);
+
+  /// base 다리의 발주 방향 상대호가 1호가 잔량 (측정 시점, ~1초 주기 — 슬리피지 가드 판단 근거 표시용)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get baseTopQuantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set baseTopQuantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBaseTopQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBaseTopQuantity() => $_clearField(6);
+
+  /// counter 다리의 발주 방향 상대호가 1호가 잔량
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get counterTopQuantity => $_getI64(6);
+  @$pb.TagNumber(7)
+  set counterTopQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCounterTopQuantity() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCounterTopQuantity() => $_clearField(7);
 }
 
 /// 페어 주문 추적 행

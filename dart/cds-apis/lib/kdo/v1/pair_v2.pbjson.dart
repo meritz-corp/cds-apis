@@ -133,6 +133,7 @@ const PairV2$json = {
     {'1': 'pause_launch_no', '3': 16, '4': 1, '5': 13, '9': 0, '10': 'pauseLaunchNo', '17': true},
     {'1': 'trading_window_start', '3': 17, '4': 1, '5': 9, '9': 1, '10': 'tradingWindowStart', '17': true},
     {'1': 'trading_window_end', '3': 18, '4': 1, '5': 9, '9': 2, '10': 'tradingWindowEnd', '17': true},
+    {'1': 'slippage_guard', '3': 19, '4': 1, '5': 8, '10': 'slippageGuard'},
   ],
   '7': {},
   '8': [
@@ -159,9 +160,10 @@ final $typed_data.Uint8List pairV2Descriptor = $convert.base64Decode(
     'Z2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRIrCg9wYXVzZV9sYXVuY2'
     'hfbm8YECABKA1IAFINcGF1c2VMYXVuY2hOb4gBARI1ChR0cmFkaW5nX3dpbmRvd19zdGFydBgR'
     'IAEoCUgBUhJ0cmFkaW5nV2luZG93U3RhcnSIAQESMQoSdHJhZGluZ193aW5kb3dfZW5kGBIgAS'
-    'gJSAJSEHRyYWRpbmdXaW5kb3dFbmSIAQE6L+pBLAoWa2RvLmNkc2FwaXMueHl6L1BhaXJWMhIS'
-    'cGFpcl92MnMve3BhaXJfdjJ9QhIKEF9wYXVzZV9sYXVuY2hfbm9CFwoVX3RyYWRpbmdfd2luZG'
-    '93X3N0YXJ0QhUKE190cmFkaW5nX3dpbmRvd19lbmQ=');
+    'gJSAJSEHRyYWRpbmdXaW5kb3dFbmSIAQESJQoOc2xpcHBhZ2VfZ3VhcmQYEyABKAhSDXNsaXBw'
+    'YWdlR3VhcmQ6L+pBLAoWa2RvLmNkc2FwaXMueHl6L1BhaXJWMhIScGFpcl92MnMve3BhaXJfdj'
+    'J9QhIKEF9wYXVzZV9sYXVuY2hfbm9CFwoVX3RyYWRpbmdfd2luZG93X3N0YXJ0QhUKE190cmFk'
+    'aW5nX3dpbmRvd19lbmQ=');
 
 @$core.Deprecated('Use pairV2EntryDescriptor instead')
 const PairV2Entry$json = {
@@ -580,9 +582,13 @@ const PairV2StatusUpdate$json = {
     {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     {'1': 'launch_count', '3': 4, '4': 1, '5': 13, '10': 'launchCount'},
     {'1': 'current_spread', '3': 5, '4': 1, '5': 1, '9': 0, '10': 'currentSpread', '17': true},
+    {'1': 'base_top_quantity', '3': 6, '4': 1, '5': 3, '9': 1, '10': 'baseTopQuantity', '17': true},
+    {'1': 'counter_top_quantity', '3': 7, '4': 1, '5': 3, '9': 2, '10': 'counterTopQuantity', '17': true},
   ],
   '8': [
     {'1': '_current_spread'},
+    {'1': '_base_top_quantity'},
+    {'1': '_counter_top_quantity'},
   ],
 };
 
@@ -592,7 +598,10 @@ final $typed_data.Uint8List pairV2StatusUpdateDescriptor = $convert.base64Decode
     'IgASgOMiIua2RvLnYxLnBhaXJfdjIuUGFpclYyUnVudGltZVBoYXNlUgVwaGFzZRI5Cgp1cGRh'
     'dGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJdXBkYXRlZEF0EiEKDG'
     'xhdW5jaF9jb3VudBgEIAEoDVILbGF1bmNoQ291bnQSKgoOY3VycmVudF9zcHJlYWQYBSABKAFI'
-    'AFINY3VycmVudFNwcmVhZIgBAUIRCg9fY3VycmVudF9zcHJlYWQ=');
+    'AFINY3VycmVudFNwcmVhZIgBARIvChFiYXNlX3RvcF9xdWFudGl0eRgGIAEoA0gBUg9iYXNlVG'
+    '9wUXVhbnRpdHmIAQESNQoUY291bnRlcl90b3BfcXVhbnRpdHkYByABKANIAlISY291bnRlclRv'
+    'cFF1YW50aXR5iAEBQhEKD19jdXJyZW50X3NwcmVhZEIUChJfYmFzZV90b3BfcXVhbnRpdHlCFw'
+    'oVX2NvdW50ZXJfdG9wX3F1YW50aXR5');
 
 @$core.Deprecated('Use pairV2OrderDescriptor instead')
 const PairV2Order$json = {

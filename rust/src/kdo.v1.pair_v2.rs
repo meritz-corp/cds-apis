@@ -68,6 +68,11 @@ pub struct PairV2 {
     /// 자동 발사 운영 시간창 종료 (KST "HH:MM:SS", 미설정 = 상시)
     #[prost(string, optional, tag="18")]
     pub trading_window_end: ::core::option::Option<::prost::alloc::string::String>,
+    /// 슬리피지 가드 - true 면 발사 직전 양다리의 상대호가 1호가 잔량이 발주수량 이상일 때만
+    /// 자동 발사한다 (잔량 부족 = 즉시 체결 불가/슬리피지 위험 → 발사 보류).
+    /// 수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false.
+    #[prost(bool, tag="19")]
+    pub slippage_guard: bool,
 }
 // ============================================================================
 // Pair Entry
@@ -448,6 +453,12 @@ pub struct PairV2StatusUpdate {
     /// 시세 미수신 구간에는 실리지 않는다.
     #[prost(double, optional, tag="5")]
     pub current_spread: ::core::option::Option<f64>,
+    /// base 다리의 발주 방향 상대호가 1호가 잔량 (측정 시점, ~1초 주기 — 슬리피지 가드 판단 근거 표시용)
+    #[prost(int64, optional, tag="6")]
+    pub base_top_quantity: ::core::option::Option<i64>,
+    /// counter 다리의 발주 방향 상대호가 1호가 잔량
+    #[prost(int64, optional, tag="7")]
+    pub counter_top_quantity: ::core::option::Option<i64>,
 }
 /// 페어 주문 추적 행
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -213,6 +213,10 @@
                 "tradingWindowEnd": {
                   "type": "string",
                   "title": "자동 발사 운영 시간창 종료 (KST \"HH:MM:SS\", 미설정 = 상시)"
+                },
+                "slippageGuard": {
+                  "type": "boolean",
+                  "description": "슬리피지 가드 - true 면 발사 직전 양다리의 상대호가 1호가 잔량이 발주수량 이상일 때만\n자동 발사한다 (잔량 부족 = 즉시 체결 불가/슬리피지 위험 → 발사 보류).\n수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false."
                 }
               },
               "title": "수정할 PairV2",
@@ -965,6 +969,10 @@
         "tradingWindowEnd": {
           "type": "string",
           "title": "자동 발사 운영 시간창 종료 (KST \"HH:MM:SS\", 미설정 = 상시)"
+        },
+        "slippageGuard": {
+          "type": "boolean",
+          "description": "슬리피지 가드 - true 면 발사 직전 양다리의 상대호가 1호가 잔량이 발주수량 이상일 때만\n자동 발사한다 (잔량 부족 = 즉시 체결 불가/슬리피지 위험 → 발사 보류).\n수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false."
         }
       },
       "description": "PairV2 전략 — base·counter 지정 호가로 재는 스프레드가 target_spread 를 초과하면\n그 가격 그대로 양다리를 동시 발주한다.",
@@ -1367,6 +1375,16 @@
           "type": "number",
           "format": "double",
           "description": "최근 측정 스프레드 (base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 \"시장가격\" 대응).\n시세 미수신 구간에는 실리지 않는다."
+        },
+        "baseTopQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "base 다리의 발주 방향 상대호가 1호가 잔량 (측정 시점, ~1초 주기 — 슬리피지 가드 판단 근거 표시용)"
+        },
+        "counterTopQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "counter 다리의 발주 방향 상대호가 1호가 잔량"
         }
       },
       "title": "StreamPairV2Status 스트리밍 응답 — 운영 단계 변경 시마다 emit"

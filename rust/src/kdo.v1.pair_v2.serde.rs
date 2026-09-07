@@ -2140,6 +2140,9 @@ impl serde::Serialize for PairV2 {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -2201,6 +2204,9 @@ impl serde::Serialize for PairV2 {
         if let Some(v) = self.trading_window_end.as_ref() {
             struct_ser.serialize_field("trading_window_end", v)?;
         }
+        if true {
+            struct_ser.serialize_field("slippage_guard", &self.slippage_guard)?;
+        }
         struct_ser.end()
     }
 }
@@ -2240,6 +2246,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             "tradingWindowStart",
             "trading_window_end",
             "tradingWindowEnd",
+            "slippage_guard",
+            "slippageGuard",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2262,6 +2270,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             PauseLaunchNo,
             TradingWindowStart,
             TradingWindowEnd,
+            SlippageGuard,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2302,6 +2311,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             "pauseLaunchNo" | "pause_launch_no" => Ok(GeneratedField::PauseLaunchNo),
                             "tradingWindowStart" | "trading_window_start" => Ok(GeneratedField::TradingWindowStart),
                             "tradingWindowEnd" | "trading_window_end" => Ok(GeneratedField::TradingWindowEnd),
+                            "slippageGuard" | "slippage_guard" => Ok(GeneratedField::SlippageGuard),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2339,6 +2349,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                 let mut pause_launch_no__ = None;
                 let mut trading_window_start__ = None;
                 let mut trading_window_end__ = None;
+                let mut slippage_guard__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -2463,6 +2474,12 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             }
                             trading_window_end__ = map_.next_value()?;
                         }
+                        GeneratedField::SlippageGuard => {
+                            if slippage_guard__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slippageGuard"));
+                            }
+                            slippage_guard__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2487,6 +2504,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                     pause_launch_no: pause_launch_no__,
                     trading_window_start: trading_window_start__,
                     trading_window_end: trading_window_end__,
+                    slippage_guard: slippage_guard__.unwrap_or_default(),
                 })
             }
         }
@@ -4788,6 +4806,12 @@ impl serde::Serialize for PairV2StatusUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2StatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
@@ -4805,6 +4829,16 @@ impl serde::Serialize for PairV2StatusUpdate {
         }
         if let Some(v) = self.current_spread.as_ref() {
             struct_ser.serialize_field("current_spread", v)?;
+        }
+        if let Some(v) = self.base_top_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_top_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.counter_top_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_top_quantity", ToString::to_string(&v).as_str())?;
         }
         struct_ser.end()
     }
@@ -4825,6 +4859,10 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             "launchCount",
             "current_spread",
             "currentSpread",
+            "base_top_quantity",
+            "baseTopQuantity",
+            "counter_top_quantity",
+            "counterTopQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4834,6 +4872,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             UpdatedAt,
             LaunchCount,
             CurrentSpread,
+            BaseTopQuantity,
+            CounterTopQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4861,6 +4901,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                             "updatedAt" | "updated_at" => Ok(GeneratedField::UpdatedAt),
                             "launchCount" | "launch_count" => Ok(GeneratedField::LaunchCount),
                             "currentSpread" | "current_spread" => Ok(GeneratedField::CurrentSpread),
+                            "baseTopQuantity" | "base_top_quantity" => Ok(GeneratedField::BaseTopQuantity),
+                            "counterTopQuantity" | "counter_top_quantity" => Ok(GeneratedField::CounterTopQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4885,6 +4927,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                 let mut updated_at__ = None;
                 let mut launch_count__ = None;
                 let mut current_spread__ = None;
+                let mut base_top_quantity__ = None;
+                let mut counter_top_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairV2 => {
@@ -4921,6 +4965,22 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::BaseTopQuantity => {
+                            if base_top_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseTopQuantity"));
+                            }
+                            base_top_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::CounterTopQuantity => {
+                            if counter_top_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterTopQuantity"));
+                            }
+                            counter_top_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4932,6 +4992,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                     updated_at: updated_at__,
                     launch_count: launch_count__.unwrap_or_default(),
                     current_spread: current_spread__,
+                    base_top_quantity: base_top_quantity__,
+                    counter_top_quantity: counter_top_quantity__,
                 })
             }
         }
