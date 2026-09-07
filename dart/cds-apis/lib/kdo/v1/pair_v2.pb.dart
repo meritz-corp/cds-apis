@@ -45,6 +45,8 @@ class PairV2 extends $pb.GeneratedMessage {
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
     $core.int? pauseLaunchNo,
+    $core.String? tradingWindowStart,
+    $core.String? tradingWindowEnd,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -63,6 +65,8 @@ class PairV2 extends $pb.GeneratedMessage {
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
     if (pauseLaunchNo != null) result.pauseLaunchNo = pauseLaunchNo;
+    if (tradingWindowStart != null) result.tradingWindowStart = tradingWindowStart;
+    if (tradingWindowEnd != null) result.tradingWindowEnd = tradingWindowEnd;
     return result;
   }
 
@@ -88,6 +92,8 @@ class PairV2 extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(14, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(15, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..a<$core.int>(16, _omitFieldNames ? '' : 'pauseLaunchNo', $pb.PbFieldType.OU3)
+    ..aOS(17, _omitFieldNames ? '' : 'tradingWindowStart')
+    ..aOS(18, _omitFieldNames ? '' : 'tradingWindowEnd')
     ..hasRequiredFields = false
   ;
 
@@ -282,6 +288,28 @@ class PairV2 extends $pb.GeneratedMessage {
   $core.bool hasPauseLaunchNo() => $_has(15);
   @$pb.TagNumber(16)
   void clearPauseLaunchNo() => $_clearField(16);
+
+  /// 자동 발사 운영 시간창 시작 (KST "HH:MM:SS", 미설정 = 상시).
+  /// 시간창 밖에서는 자동 발사만 중지되고 수동 발사(LaunchPairV2Once)는 허용된다.
+  /// start > end 이면 자정을 넘기는 창으로 해석한다 (예: 18:00:00 ~ 02:00:00).
+  @$pb.TagNumber(17)
+  $core.String get tradingWindowStart => $_getSZ(16);
+  @$pb.TagNumber(17)
+  set tradingWindowStart($core.String value) => $_setString(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasTradingWindowStart() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearTradingWindowStart() => $_clearField(17);
+
+  /// 자동 발사 운영 시간창 종료 (KST "HH:MM:SS", 미설정 = 상시)
+  @$pb.TagNumber(18)
+  $core.String get tradingWindowEnd => $_getSZ(17);
+  @$pb.TagNumber(18)
+  set tradingWindowEnd($core.String value) => $_setString(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasTradingWindowEnd() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearTradingWindowEnd() => $_clearField(18);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).
@@ -1980,12 +2008,14 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     PairV2RuntimePhase? phase,
     $2.Timestamp? updatedAt,
     $core.int? launchCount,
+    $core.double? currentSpread,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
     if (phase != null) result.phase = phase;
     if (updatedAt != null) result.updatedAt = updatedAt;
     if (launchCount != null) result.launchCount = launchCount;
+    if (currentSpread != null) result.currentSpread = currentSpread;
     return result;
   }
 
@@ -1999,6 +2029,7 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     ..e<PairV2RuntimePhase>(2, _omitFieldNames ? '' : 'phase', $pb.PbFieldType.OE, defaultOrMaker: PairV2RuntimePhase.PAIR_V2_RUNTIME_PHASE_UNSPECIFIED, valueOf: PairV2RuntimePhase.valueOf, enumValues: PairV2RuntimePhase.values)
     ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'launchCount', $pb.PbFieldType.OU3)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'currentSpread', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2060,6 +2091,17 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasLaunchCount() => $_has(3);
   @$pb.TagNumber(4)
   void clearLaunchCount() => $_clearField(4);
+
+  /// 최근 측정 스프레드 (base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
+  /// 시세 미수신 구간에는 실리지 않는다.
+  @$pb.TagNumber(5)
+  $core.double get currentSpread => $_getN(4);
+  @$pb.TagNumber(5)
+  set currentSpread($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasCurrentSpread() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCurrentSpread() => $_clearField(5);
 }
 
 /// 페어 주문 추적 행

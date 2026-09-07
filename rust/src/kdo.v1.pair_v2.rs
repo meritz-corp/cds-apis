@@ -60,6 +60,14 @@ pub struct PairV2 {
     /// 수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작.
     #[prost(uint32, optional, tag="16")]
     pub pause_launch_no: ::core::option::Option<u32>,
+    /// 자동 발사 운영 시간창 시작 (KST "HH:MM:SS", 미설정 = 상시).
+    /// 시간창 밖에서는 자동 발사만 중지되고 수동 발사(LaunchPairV2Once)는 허용된다.
+    /// start > end 이면 자정을 넘기는 창으로 해석한다 (예: 18:00:00 ~ 02:00:00).
+    #[prost(string, optional, tag="17")]
+    pub trading_window_start: ::core::option::Option<::prost::alloc::string::String>,
+    /// 자동 발사 운영 시간창 종료 (KST "HH:MM:SS", 미설정 = 상시)
+    #[prost(string, optional, tag="18")]
+    pub trading_window_end: ::core::option::Option<::prost::alloc::string::String>,
 }
 // ============================================================================
 // Pair Entry
@@ -436,6 +444,10 @@ pub struct PairV2StatusUpdate {
     /// 이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)
     #[prost(uint32, tag="4")]
     pub launch_count: u32,
+    /// 최근 측정 스프레드 (base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
+    /// 시세 미수신 구간에는 실리지 않는다.
+    #[prost(double, optional, tag="5")]
+    pub current_spread: ::core::option::Option<f64>,
 }
 /// 페어 주문 추적 행
 #[allow(clippy::derive_partial_eq_without_eq)]

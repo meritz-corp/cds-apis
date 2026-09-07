@@ -205,6 +205,14 @@
                   "type": "integer",
                   "format": "int64",
                   "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작."
+                },
+                "tradingWindowStart": {
+                  "type": "string",
+                  "description": "자동 발사 운영 시간창 시작 (KST \"HH:MM:SS\", 미설정 = 상시).\n시간창 밖에서는 자동 발사만 중지되고 수동 발사(LaunchPairV2Once)는 허용된다.\nstart \u003e end 이면 자정을 넘기는 창으로 해석한다 (예: 18:00:00 ~ 02:00:00)."
+                },
+                "tradingWindowEnd": {
+                  "type": "string",
+                  "title": "자동 발사 운영 시간창 종료 (KST \"HH:MM:SS\", 미설정 = 상시)"
                 }
               },
               "title": "수정할 PairV2",
@@ -949,6 +957,14 @@
           "type": "integer",
           "format": "int64",
           "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작."
+        },
+        "tradingWindowStart": {
+          "type": "string",
+          "description": "자동 발사 운영 시간창 시작 (KST \"HH:MM:SS\", 미설정 = 상시).\n시간창 밖에서는 자동 발사만 중지되고 수동 발사(LaunchPairV2Once)는 허용된다.\nstart \u003e end 이면 자정을 넘기는 창으로 해석한다 (예: 18:00:00 ~ 02:00:00)."
+        },
+        "tradingWindowEnd": {
+          "type": "string",
+          "title": "자동 발사 운영 시간창 종료 (KST \"HH:MM:SS\", 미설정 = 상시)"
         }
       },
       "description": "PairV2 전략 — base·counter 지정 호가로 재는 스프레드가 target_spread 를 초과하면\n그 가격 그대로 양다리를 동시 발주한다.",
@@ -1346,6 +1362,11 @@
           "type": "integer",
           "format": "int64",
           "title": "이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)"
+        },
+        "currentSpread": {
+          "type": "number",
+          "format": "double",
+          "description": "최근 측정 스프레드 (base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 \"시장가격\" 대응).\n시세 미수신 구간에는 실리지 않는다."
         }
       },
       "title": "StreamPairV2Status 스트리밍 응답 — 운영 단계 변경 시마다 emit"
