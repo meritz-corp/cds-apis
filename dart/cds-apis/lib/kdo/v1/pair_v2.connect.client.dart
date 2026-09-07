@@ -233,4 +233,40 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
+  Future<kdov1pair_v2.ListPairV2OrdersResponse> listPairV2Orders(
+    kdov1pair_v2.ListPairV2OrdersRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PairV2Service.listPairV2Orders,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// leg(base/counter)별 누적 집계 (상단 요약)
+  Future<kdov1pair_v2.GetPairV2OrderSummaryResponse> getPairV2OrderSummary(
+    kdov1pair_v2.GetPairV2OrderSummaryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PairV2Service.getPairV2OrderSummary,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

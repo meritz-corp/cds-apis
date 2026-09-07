@@ -104,6 +104,16 @@ class PairV2ServiceClient extends $grpc.Client {
     return $createUnaryCall(_$amendPairV2ResidualPct, request, options: options);
   }
 
+  /// 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
+  $grpc.ResponseFuture<$0.ListPairV2OrdersResponse> listPairV2Orders($0.ListPairV2OrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listPairV2Orders, request, options: options);
+  }
+
+  /// leg(base/counter)별 누적 집계 (상단 요약)
+  $grpc.ResponseFuture<$0.GetPairV2OrderSummaryResponse> getPairV2OrderSummary($0.GetPairV2OrderSummaryRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getPairV2OrderSummary, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getPairV2 = $grpc.ClientMethod<$0.GetPairV2Request, $0.PairV2>(
@@ -154,6 +164,14 @@ class PairV2ServiceClient extends $grpc.Client {
       '/kdo.v1.pair_v2.PairV2Service/AmendPairV2ResidualPct',
       ($0.AmendPairV2ResidualPctRequest value) => value.writeToBuffer(),
       $0.AmendPairV2ResidualPctResponse.fromBuffer);
+  static final _$listPairV2Orders = $grpc.ClientMethod<$0.ListPairV2OrdersRequest, $0.ListPairV2OrdersResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/ListPairV2Orders',
+      ($0.ListPairV2OrdersRequest value) => value.writeToBuffer(),
+      $0.ListPairV2OrdersResponse.fromBuffer);
+  static final _$getPairV2OrderSummary = $grpc.ClientMethod<$0.GetPairV2OrderSummaryRequest, $0.GetPairV2OrderSummaryResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/GetPairV2OrderSummary',
+      ($0.GetPairV2OrderSummaryRequest value) => value.writeToBuffer(),
+      $0.GetPairV2OrderSummaryResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.pair_v2.PairV2Service')
@@ -245,6 +263,20 @@ abstract class PairV2ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.AmendPairV2ResidualPctRequest.fromBuffer(value),
         ($0.AmendPairV2ResidualPctResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListPairV2OrdersRequest, $0.ListPairV2OrdersResponse>(
+        'ListPairV2Orders',
+        listPairV2Orders_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListPairV2OrdersRequest.fromBuffer(value),
+        ($0.ListPairV2OrdersResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetPairV2OrderSummaryRequest, $0.GetPairV2OrderSummaryResponse>(
+        'GetPairV2OrderSummary',
+        getPairV2OrderSummary_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetPairV2OrderSummaryRequest.fromBuffer(value),
+        ($0.GetPairV2OrderSummaryResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.PairV2> getPairV2_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPairV2Request> $request) async {
@@ -318,5 +350,17 @@ abstract class PairV2ServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.AmendPairV2ResidualPctResponse> amendPairV2ResidualPct($grpc.ServiceCall call, $0.AmendPairV2ResidualPctRequest request);
+
+  $async.Future<$0.ListPairV2OrdersResponse> listPairV2Orders_Pre($grpc.ServiceCall $call, $async.Future<$0.ListPairV2OrdersRequest> $request) async {
+    return listPairV2Orders($call, await $request);
+  }
+
+  $async.Future<$0.ListPairV2OrdersResponse> listPairV2Orders($grpc.ServiceCall call, $0.ListPairV2OrdersRequest request);
+
+  $async.Future<$0.GetPairV2OrderSummaryResponse> getPairV2OrderSummary_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPairV2OrderSummaryRequest> $request) async {
+    return getPairV2OrderSummary($call, await $request);
+  }
+
+  $async.Future<$0.GetPairV2OrderSummaryResponse> getPairV2OrderSummary($grpc.ServiceCall call, $0.GetPairV2OrderSummaryRequest request);
 
 }

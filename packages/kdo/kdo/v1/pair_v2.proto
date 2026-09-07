@@ -125,6 +125,20 @@ service PairV2Service {
       body: "*"
     };
   }
+
+  // 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
+  rpc ListPairV2Orders(ListPairV2OrdersRequest) returns (ListPairV2OrdersResponse) {
+    option (google.api.http) = {
+      get: "/v1/{pair_v2=pair_v2s/*}/orders"
+    };
+  }
+
+  // leg(base/counter)별 누적 집계 (상단 요약)
+  rpc GetPairV2OrderSummary(GetPairV2OrderSummaryRequest) returns (GetPairV2OrderSummaryResponse) {
+    option (google.api.http) = {
+      get: "/v1/{pair_v2=pair_v2s/*}/orderSummary"
+    };
+  }
 }
 
 // ============================================================================
@@ -620,4 +634,96 @@ message PairV2StatusUpdate {
 
   // 이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)
   uint32 launch_count = 4;
+}
+
+// ============================================================================
+// Order Tracking & Summary
+// ============================================================================
+
+// 페어의 두 다리 식별자 (base / counter)
+enum PairV2Slot {
+  PAIR_V2_SLOT_UNSPECIFIED = 0;
+  PAIR_V2_SLOT_BASE = 1;
+  PAIR_V2_SLOT_COUNTER = 2;
+}
+
+// 주문 단위 상태
+enum PairV2OrderStatus {
+  PAIR_V2_ORDER_STATUS_UNSPECIFIED = 0;
+  // 발주 요청 (접수 대기)
+  PAIR_V2_ORDER_STATUS_SUBMITTED = 1;
+  // 거래소 접수
+  PAIR_V2_ORDER_STATUS_RECEIVED = 2;
+  PAIR_V2_ORDER_STATUS_PARTIALLY_FILLED = 3;
+  PAIR_V2_ORDER_STATUS_FILLED = 4;
+  // 정정으로 대체됨
+  PAIR_V2_ORDER_STATUS_AMENDED = 5;
+  PAIR_V2_ORDER_STATUS_CANCELLED = 6;
+  PAIR_V2_ORDER_STATUS_REJECTED = 7;
+}
+
+// 페어 주문 추적 행
+message PairV2Order {
+  int32 pair_id = 1;
+  // 다리 구분 (BASE / COUNTER)
+  PairV2Slot slot = 2;
+  // 발사 사이클 식별자
+  uint32 cycle_id = 3;
+  uint64 order_id = 4;
+  // 정정/취소인 경우 원주문
+  optional uint64 original_order_id = 5;
+  string symbol = 6;
+  kdo.v1.common.OrderSide side = 7;
+  string order_price = 8;
+  int64 order_quantity = 9;
+  int64 filled_quantity = 10;
+  // 살아있는 상태에서만 >0
+  int64 remaining_quantity = 11;
+  // 체결 없으면 빈 문자열
+  string average_fill_price = 12;
+  PairV2OrderStatus status = 13;
+  google.protobuf.Timestamp create_time = 14;
+  google.protobuf.Timestamp update_time = 15;
+}
+
+message ListPairV2OrdersRequest {
+  string pair_v2 = 1 [(google.api.field_behavior) = REQUIRED];
+  optional int32 page_size = 2;
+  optional string page_token = 3;
+  // true 면 살아있는(접수/부분체결) 주문만
+  bool live_only = 4;
+}
+
+message ListPairV2OrdersResponse {
+  repeated PairV2Order orders = 1;
+  string next_page_token = 2;
+}
+
+// leg별 누적 집계
+message PairV2LegSummary {
+  PairV2Slot slot = 1;
+  string symbol = 2;
+  // 누적 발주 수량
+  int64 ordered_quantity = 3;
+  // 누적 체결 수량
+  int64 filled_quantity = 4;
+  // 살아있는 미체결 합
+  int64 remaining_quantity = 5;
+  string average_fill_price = 6;
+  // 체결금액 (원)
+  int64 filled_amount = 7;
+  // 참조 현재가 (조회 시점, 없으면 빈 문자열)
+  string reference_price = 8;
+  // 미체결 × 참조가
+  int64 remaining_amount = 9;
+}
+
+message GetPairV2OrderSummaryRequest {
+  string pair_v2 = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetPairV2OrderSummaryResponse {
+  repeated PairV2LegSummary legs = 1;
+  // 세션 발사 횟수 (실행 중 아니면 0)
+  uint32 launch_count = 2;
 }

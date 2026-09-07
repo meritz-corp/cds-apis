@@ -376,6 +376,90 @@
         ]
       }
     },
+    "/v1/{pairV2}/orderSummary": {
+      "get": {
+        "summary": "leg(base/counter)별 누적 집계 (상단 요약)",
+        "operationId": "PairV2Service_GetPairV2OrderSummary",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pair_v2GetPairV2OrderSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairV2",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairV2s/[^/]+"
+          }
+        ],
+        "tags": [
+          "PairV2Service"
+        ]
+      }
+    },
+    "/v1/{pairV2}/orders": {
+      "get": {
+        "summary": "이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.",
+        "operationId": "PairV2Service_ListPairV2Orders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pair_v2ListPairV2OrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairV2",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairV2s/[^/]+"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "liveOnly",
+            "description": "true 면 살아있는(접수/부분체결) 주문만",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "PairV2Service"
+        ]
+      }
+    },
     "/v1/{pairV2}:activate": {
       "post": {
         "summary": "PairV2 활성화 (status → ACTIVE, hot loop 시작)",
@@ -706,6 +790,22 @@
         }
       }
     },
+    "pair_v2GetPairV2OrderSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "legs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pair_v2PairV2LegSummary"
+          }
+        },
+        "launchCount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "세션 발사 횟수 (실행 중 아니면 0)"
+        }
+      }
+    },
     "pair_v2LaunchPairV2OnceResponse": {
       "type": "object",
       "properties": {
@@ -737,6 +837,20 @@
           "type": "integer",
           "format": "int32",
           "title": "필터 조건(outcome/dispatched_from/dispatched_to) 기준 전체 건수 (cursor 무관)"
+        }
+      }
+    },
+    "pair_v2ListPairV2OrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pair_v2PairV2Order"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
         }
       }
     },
@@ -992,6 +1106,50 @@
       "description": "- PAIR_V2_EXECUTION_OUTCOME_SUBMITTED: 양 다리 모두 제출 성공\n - PAIR_V2_EXECUTION_OUTCOME_SKIPPED_COOLDOWN: 쿨다운 미충족\n - PAIR_V2_EXECUTION_OUTCOME_SKIPPED_MAX_QUANTITY: base 누적(체결+미체결)이 max_base_quantity 도달\n - PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE: 한쪽 호가 미형성 등으로 스프레드 산출 불가\n - PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE: 한 다리만 제출 성공 — 반대 다리 없이 노출이 남는다\n - PAIR_V2_EXECUTION_OUTCOME_FAILED: 양 다리 모두 제출 실패",
       "title": "페어 실행 결과"
     },
+    "pair_v2PairV2LegSummary": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "$ref": "#/definitions/pair_v2PairV2Slot"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "orderedQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 발주 수량"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "누적 체결 수량"
+        },
+        "remainingQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "살아있는 미체결 합"
+        },
+        "averageFillPrice": {
+          "type": "string"
+        },
+        "filledAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "체결금액 (원)"
+        },
+        "referencePrice": {
+          "type": "string",
+          "title": "참조 현재가 (조회 시점, 없으면 빈 문자열)"
+        },
+        "remainingAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "미체결 × 참조가"
+        }
+      },
+      "title": "leg별 누적 집계"
+    },
     "pair_v2PairV2Nav": {
       "type": "object",
       "properties": {
@@ -1013,6 +1171,87 @@
     "pair_v2PairV2NavSpread": {
       "type": "object",
       "title": "NAV 환산 스프레드 (PairV2.nav 설정 사용, 파라미터 없음)"
+    },
+    "pair_v2PairV2Order": {
+      "type": "object",
+      "properties": {
+        "pairId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "slot": {
+          "$ref": "#/definitions/pair_v2PairV2Slot",
+          "title": "다리 구분 (BASE / COUNTER)"
+        },
+        "cycleId": {
+          "type": "integer",
+          "format": "int64",
+          "title": "발사 사이클 식별자"
+        },
+        "orderId": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "originalOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "정정/취소인 경우 원주문"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide"
+        },
+        "orderPrice": {
+          "type": "string"
+        },
+        "orderQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "remainingQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "살아있는 상태에서만 \u003e0"
+        },
+        "averageFillPrice": {
+          "type": "string",
+          "title": "체결 없으면 빈 문자열"
+        },
+        "status": {
+          "$ref": "#/definitions/pair_v2PairV2OrderStatus"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "페어 주문 추적 행"
+    },
+    "pair_v2PairV2OrderStatus": {
+      "type": "string",
+      "enum": [
+        "PAIR_V2_ORDER_STATUS_UNSPECIFIED",
+        "PAIR_V2_ORDER_STATUS_SUBMITTED",
+        "PAIR_V2_ORDER_STATUS_RECEIVED",
+        "PAIR_V2_ORDER_STATUS_PARTIALLY_FILLED",
+        "PAIR_V2_ORDER_STATUS_FILLED",
+        "PAIR_V2_ORDER_STATUS_AMENDED",
+        "PAIR_V2_ORDER_STATUS_CANCELLED",
+        "PAIR_V2_ORDER_STATUS_REJECTED"
+      ],
+      "default": "PAIR_V2_ORDER_STATUS_UNSPECIFIED",
+      "description": "- PAIR_V2_ORDER_STATUS_SUBMITTED: 발주 요청 (접수 대기)\n - PAIR_V2_ORDER_STATUS_RECEIVED: 거래소 접수\n - PAIR_V2_ORDER_STATUS_AMENDED: 정정으로 대체됨",
+      "title": "주문 단위 상태"
     },
     "pair_v2PairV2ResidualError": {
       "type": "object",
@@ -1050,6 +1289,16 @@
         }
       },
       "title": "counter 가격 × k 선형 환산 스프레드"
+    },
+    "pair_v2PairV2Slot": {
+      "type": "string",
+      "enum": [
+        "PAIR_V2_SLOT_UNSPECIFIED",
+        "PAIR_V2_SLOT_BASE",
+        "PAIR_V2_SLOT_COUNTER"
+      ],
+      "default": "PAIR_V2_SLOT_UNSPECIFIED",
+      "title": "페어의 두 다리 식별자 (base / counter)"
     },
     "pair_v2PairV2SpreadType": {
       "type": "object",

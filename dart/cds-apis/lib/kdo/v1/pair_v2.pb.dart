@@ -2062,6 +2062,613 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   void clearLaunchCount() => $_clearField(4);
 }
 
+/// 페어 주문 추적 행
+class PairV2Order extends $pb.GeneratedMessage {
+  factory PairV2Order({
+    $core.int? pairId,
+    PairV2Slot? slot,
+    $core.int? cycleId,
+    $fixnum.Int64? orderId,
+    $fixnum.Int64? originalOrderId,
+    $core.String? symbol,
+    $4.OrderSide? side,
+    $core.String? orderPrice,
+    $fixnum.Int64? orderQuantity,
+    $fixnum.Int64? filledQuantity,
+    $fixnum.Int64? remainingQuantity,
+    $core.String? averageFillPrice,
+    PairV2OrderStatus? status,
+    $2.Timestamp? createTime,
+    $2.Timestamp? updateTime,
+  }) {
+    final result = create();
+    if (pairId != null) result.pairId = pairId;
+    if (slot != null) result.slot = slot;
+    if (cycleId != null) result.cycleId = cycleId;
+    if (orderId != null) result.orderId = orderId;
+    if (originalOrderId != null) result.originalOrderId = originalOrderId;
+    if (symbol != null) result.symbol = symbol;
+    if (side != null) result.side = side;
+    if (orderPrice != null) result.orderPrice = orderPrice;
+    if (orderQuantity != null) result.orderQuantity = orderQuantity;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (remainingQuantity != null) result.remainingQuantity = remainingQuantity;
+    if (averageFillPrice != null) result.averageFillPrice = averageFillPrice;
+    if (status != null) result.status = status;
+    if (createTime != null) result.createTime = createTime;
+    if (updateTime != null) result.updateTime = updateTime;
+    return result;
+  }
+
+  PairV2Order._();
+
+  factory PairV2Order.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2Order.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2Order', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'pairId', $pb.PbFieldType.O3)
+    ..e<PairV2Slot>(2, _omitFieldNames ? '' : 'slot', $pb.PbFieldType.OE, defaultOrMaker: PairV2Slot.PAIR_V2_SLOT_UNSPECIFIED, valueOf: PairV2Slot.valueOf, enumValues: PairV2Slot.values)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'cycleId', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(6, _omitFieldNames ? '' : 'symbol')
+    ..e<$4.OrderSide>(7, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $4.OrderSide.valueOf, enumValues: $4.OrderSide.values)
+    ..aOS(8, _omitFieldNames ? '' : 'orderPrice')
+    ..aInt64(9, _omitFieldNames ? '' : 'orderQuantity')
+    ..aInt64(10, _omitFieldNames ? '' : 'filledQuantity')
+    ..aInt64(11, _omitFieldNames ? '' : 'remainingQuantity')
+    ..aOS(12, _omitFieldNames ? '' : 'averageFillPrice')
+    ..e<PairV2OrderStatus>(13, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PairV2OrderStatus.PAIR_V2_ORDER_STATUS_UNSPECIFIED, valueOf: PairV2OrderStatus.valueOf, enumValues: PairV2OrderStatus.values)
+    ..aOM<$2.Timestamp>(14, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(15, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2Order clone() => PairV2Order()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2Order copyWith(void Function(PairV2Order) updates) => super.copyWith((message) => updates(message as PairV2Order)) as PairV2Order;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2Order create() => PairV2Order._();
+  @$core.override
+  PairV2Order createEmptyInstance() => create();
+  static $pb.PbList<PairV2Order> createRepeated() => $pb.PbList<PairV2Order>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2Order getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2Order>(create);
+  static PairV2Order? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get pairId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set pairId($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairId() => $_clearField(1);
+
+  /// 다리 구분 (BASE / COUNTER)
+  @$pb.TagNumber(2)
+  PairV2Slot get slot => $_getN(1);
+  @$pb.TagNumber(2)
+  set slot(PairV2Slot value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSlot() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSlot() => $_clearField(2);
+
+  /// 발사 사이클 식별자
+  @$pb.TagNumber(3)
+  $core.int get cycleId => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set cycleId($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCycleId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCycleId() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get orderId => $_getI64(3);
+  @$pb.TagNumber(4)
+  set orderId($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOrderId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOrderId() => $_clearField(4);
+
+  /// 정정/취소인 경우 원주문
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get originalOrderId => $_getI64(4);
+  @$pb.TagNumber(5)
+  set originalOrderId($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOriginalOrderId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOriginalOrderId() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get symbol => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set symbol($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSymbol() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSymbol() => $_clearField(6);
+
+  @$pb.TagNumber(7)
+  $4.OrderSide get side => $_getN(6);
+  @$pb.TagNumber(7)
+  set side($4.OrderSide value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasSide() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSide() => $_clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get orderPrice => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set orderPrice($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasOrderPrice() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearOrderPrice() => $_clearField(8);
+
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get orderQuantity => $_getI64(8);
+  @$pb.TagNumber(9)
+  set orderQuantity($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasOrderQuantity() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearOrderQuantity() => $_clearField(9);
+
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get filledQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasFilledQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearFilledQuantity() => $_clearField(10);
+
+  /// 살아있는 상태에서만 >0
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get remainingQuantity => $_getI64(10);
+  @$pb.TagNumber(11)
+  set remainingQuantity($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasRemainingQuantity() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearRemainingQuantity() => $_clearField(11);
+
+  /// 체결 없으면 빈 문자열
+  @$pb.TagNumber(12)
+  $core.String get averageFillPrice => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set averageFillPrice($core.String value) => $_setString(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasAverageFillPrice() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearAverageFillPrice() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  PairV2OrderStatus get status => $_getN(12);
+  @$pb.TagNumber(13)
+  set status(PairV2OrderStatus value) => $_setField(13, value);
+  @$pb.TagNumber(13)
+  $core.bool hasStatus() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearStatus() => $_clearField(13);
+
+  @$pb.TagNumber(14)
+  $2.Timestamp get createTime => $_getN(13);
+  @$pb.TagNumber(14)
+  set createTime($2.Timestamp value) => $_setField(14, value);
+  @$pb.TagNumber(14)
+  $core.bool hasCreateTime() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearCreateTime() => $_clearField(14);
+  @$pb.TagNumber(14)
+  $2.Timestamp ensureCreateTime() => $_ensure(13);
+
+  @$pb.TagNumber(15)
+  $2.Timestamp get updateTime => $_getN(14);
+  @$pb.TagNumber(15)
+  set updateTime($2.Timestamp value) => $_setField(15, value);
+  @$pb.TagNumber(15)
+  $core.bool hasUpdateTime() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearUpdateTime() => $_clearField(15);
+  @$pb.TagNumber(15)
+  $2.Timestamp ensureUpdateTime() => $_ensure(14);
+}
+
+class ListPairV2OrdersRequest extends $pb.GeneratedMessage {
+  factory ListPairV2OrdersRequest({
+    $core.String? pairV2,
+    $core.int? pageSize,
+    $core.String? pageToken,
+    $core.bool? liveOnly,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    if (liveOnly != null) result.liveOnly = liveOnly;
+    return result;
+  }
+
+  ListPairV2OrdersRequest._();
+
+  factory ListPairV2OrdersRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListPairV2OrdersRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPairV2OrdersRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(3, _omitFieldNames ? '' : 'pageToken')
+    ..aOB(4, _omitFieldNames ? '' : 'liveOnly')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPairV2OrdersRequest clone() => ListPairV2OrdersRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPairV2OrdersRequest copyWith(void Function(ListPairV2OrdersRequest) updates) => super.copyWith((message) => updates(message as ListPairV2OrdersRequest)) as ListPairV2OrdersRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListPairV2OrdersRequest create() => ListPairV2OrdersRequest._();
+  @$core.override
+  ListPairV2OrdersRequest createEmptyInstance() => create();
+  static $pb.PbList<ListPairV2OrdersRequest> createRepeated() => $pb.PbList<ListPairV2OrdersRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListPairV2OrdersRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListPairV2OrdersRequest>(create);
+  static ListPairV2OrdersRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get pageSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set pageSize($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPageSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageSize() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get pageToken => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set pageToken($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPageToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPageToken() => $_clearField(3);
+
+  /// true 면 살아있는(접수/부분체결) 주문만
+  @$pb.TagNumber(4)
+  $core.bool get liveOnly => $_getBF(3);
+  @$pb.TagNumber(4)
+  set liveOnly($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasLiveOnly() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLiveOnly() => $_clearField(4);
+}
+
+class ListPairV2OrdersResponse extends $pb.GeneratedMessage {
+  factory ListPairV2OrdersResponse({
+    $core.Iterable<PairV2Order>? orders,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (orders != null) result.orders.addAll(orders);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListPairV2OrdersResponse._();
+
+  factory ListPairV2OrdersResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListPairV2OrdersResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListPairV2OrdersResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..pc<PairV2Order>(1, _omitFieldNames ? '' : 'orders', $pb.PbFieldType.PM, subBuilder: PairV2Order.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPairV2OrdersResponse clone() => ListPairV2OrdersResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListPairV2OrdersResponse copyWith(void Function(ListPairV2OrdersResponse) updates) => super.copyWith((message) => updates(message as ListPairV2OrdersResponse)) as ListPairV2OrdersResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListPairV2OrdersResponse create() => ListPairV2OrdersResponse._();
+  @$core.override
+  ListPairV2OrdersResponse createEmptyInstance() => create();
+  static $pb.PbList<ListPairV2OrdersResponse> createRepeated() => $pb.PbList<ListPairV2OrdersResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListPairV2OrdersResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListPairV2OrdersResponse>(create);
+  static ListPairV2OrdersResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<PairV2Order> get orders => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
+}
+
+/// leg별 누적 집계
+class PairV2LegSummary extends $pb.GeneratedMessage {
+  factory PairV2LegSummary({
+    PairV2Slot? slot,
+    $core.String? symbol,
+    $fixnum.Int64? orderedQuantity,
+    $fixnum.Int64? filledQuantity,
+    $fixnum.Int64? remainingQuantity,
+    $core.String? averageFillPrice,
+    $fixnum.Int64? filledAmount,
+    $core.String? referencePrice,
+    $fixnum.Int64? remainingAmount,
+  }) {
+    final result = create();
+    if (slot != null) result.slot = slot;
+    if (symbol != null) result.symbol = symbol;
+    if (orderedQuantity != null) result.orderedQuantity = orderedQuantity;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (remainingQuantity != null) result.remainingQuantity = remainingQuantity;
+    if (averageFillPrice != null) result.averageFillPrice = averageFillPrice;
+    if (filledAmount != null) result.filledAmount = filledAmount;
+    if (referencePrice != null) result.referencePrice = referencePrice;
+    if (remainingAmount != null) result.remainingAmount = remainingAmount;
+    return result;
+  }
+
+  PairV2LegSummary._();
+
+  factory PairV2LegSummary.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2LegSummary.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2LegSummary', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..e<PairV2Slot>(1, _omitFieldNames ? '' : 'slot', $pb.PbFieldType.OE, defaultOrMaker: PairV2Slot.PAIR_V2_SLOT_UNSPECIFIED, valueOf: PairV2Slot.valueOf, enumValues: PairV2Slot.values)
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..aInt64(3, _omitFieldNames ? '' : 'orderedQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'filledQuantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'remainingQuantity')
+    ..aOS(6, _omitFieldNames ? '' : 'averageFillPrice')
+    ..aInt64(7, _omitFieldNames ? '' : 'filledAmount')
+    ..aOS(8, _omitFieldNames ? '' : 'referencePrice')
+    ..aInt64(9, _omitFieldNames ? '' : 'remainingAmount')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2LegSummary clone() => PairV2LegSummary()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2LegSummary copyWith(void Function(PairV2LegSummary) updates) => super.copyWith((message) => updates(message as PairV2LegSummary)) as PairV2LegSummary;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2LegSummary create() => PairV2LegSummary._();
+  @$core.override
+  PairV2LegSummary createEmptyInstance() => create();
+  static $pb.PbList<PairV2LegSummary> createRepeated() => $pb.PbList<PairV2LegSummary>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2LegSummary getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2LegSummary>(create);
+  static PairV2LegSummary? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  PairV2Slot get slot => $_getN(0);
+  @$pb.TagNumber(1)
+  set slot(PairV2Slot value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSlot() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSlot() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 누적 발주 수량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get orderedQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set orderedQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasOrderedQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearOrderedQuantity() => $_clearField(3);
+
+  /// 누적 체결 수량
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get filledQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasFilledQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearFilledQuantity() => $_clearField(4);
+
+  /// 살아있는 미체결 합
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get remainingQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set remainingQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasRemainingQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearRemainingQuantity() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get averageFillPrice => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set averageFillPrice($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasAverageFillPrice() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAverageFillPrice() => $_clearField(6);
+
+  /// 체결금액 (원)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get filledAmount => $_getI64(6);
+  @$pb.TagNumber(7)
+  set filledAmount($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasFilledAmount() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearFilledAmount() => $_clearField(7);
+
+  /// 참조 현재가 (조회 시점, 없으면 빈 문자열)
+  @$pb.TagNumber(8)
+  $core.String get referencePrice => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set referencePrice($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasReferencePrice() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearReferencePrice() => $_clearField(8);
+
+  /// 미체결 × 참조가
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get remainingAmount => $_getI64(8);
+  @$pb.TagNumber(9)
+  set remainingAmount($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasRemainingAmount() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearRemainingAmount() => $_clearField(9);
+}
+
+class GetPairV2OrderSummaryRequest extends $pb.GeneratedMessage {
+  factory GetPairV2OrderSummaryRequest({
+    $core.String? pairV2,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    return result;
+  }
+
+  GetPairV2OrderSummaryRequest._();
+
+  factory GetPairV2OrderSummaryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetPairV2OrderSummaryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPairV2OrderSummaryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPairV2OrderSummaryRequest clone() => GetPairV2OrderSummaryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPairV2OrderSummaryRequest copyWith(void Function(GetPairV2OrderSummaryRequest) updates) => super.copyWith((message) => updates(message as GetPairV2OrderSummaryRequest)) as GetPairV2OrderSummaryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPairV2OrderSummaryRequest create() => GetPairV2OrderSummaryRequest._();
+  @$core.override
+  GetPairV2OrderSummaryRequest createEmptyInstance() => create();
+  static $pb.PbList<GetPairV2OrderSummaryRequest> createRepeated() => $pb.PbList<GetPairV2OrderSummaryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetPairV2OrderSummaryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPairV2OrderSummaryRequest>(create);
+  static GetPairV2OrderSummaryRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+}
+
+class GetPairV2OrderSummaryResponse extends $pb.GeneratedMessage {
+  factory GetPairV2OrderSummaryResponse({
+    $core.Iterable<PairV2LegSummary>? legs,
+    $core.int? launchCount,
+  }) {
+    final result = create();
+    if (legs != null) result.legs.addAll(legs);
+    if (launchCount != null) result.launchCount = launchCount;
+    return result;
+  }
+
+  GetPairV2OrderSummaryResponse._();
+
+  factory GetPairV2OrderSummaryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetPairV2OrderSummaryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPairV2OrderSummaryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..pc<PairV2LegSummary>(1, _omitFieldNames ? '' : 'legs', $pb.PbFieldType.PM, subBuilder: PairV2LegSummary.create)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'launchCount', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPairV2OrderSummaryResponse clone() => GetPairV2OrderSummaryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetPairV2OrderSummaryResponse copyWith(void Function(GetPairV2OrderSummaryResponse) updates) => super.copyWith((message) => updates(message as GetPairV2OrderSummaryResponse)) as GetPairV2OrderSummaryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetPairV2OrderSummaryResponse create() => GetPairV2OrderSummaryResponse._();
+  @$core.override
+  GetPairV2OrderSummaryResponse createEmptyInstance() => create();
+  static $pb.PbList<GetPairV2OrderSummaryResponse> createRepeated() => $pb.PbList<GetPairV2OrderSummaryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetPairV2OrderSummaryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPairV2OrderSummaryResponse>(create);
+  static GetPairV2OrderSummaryResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<PairV2LegSummary> get legs => $_getList(0);
+
+  /// 세션 발사 횟수 (실행 중 아니면 0)
+  @$pb.TagNumber(2)
+  $core.int get launchCount => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set launchCount($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLaunchCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLaunchCount() => $_clearField(2);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

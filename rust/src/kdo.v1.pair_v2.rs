@@ -437,6 +437,111 @@ pub struct PairV2StatusUpdate {
     #[prost(uint32, tag="4")]
     pub launch_count: u32,
 }
+/// 페어 주문 추적 행
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PairV2Order {
+    #[prost(int32, tag="1")]
+    pub pair_id: i32,
+    /// 다리 구분 (BASE / COUNTER)
+    #[prost(enumeration="PairV2Slot", tag="2")]
+    pub slot: i32,
+    /// 발사 사이클 식별자
+    #[prost(uint32, tag="3")]
+    pub cycle_id: u32,
+    #[prost(uint64, tag="4")]
+    pub order_id: u64,
+    /// 정정/취소인 경우 원주문
+    #[prost(uint64, optional, tag="5")]
+    pub original_order_id: ::core::option::Option<u64>,
+    #[prost(string, tag="6")]
+    pub symbol: ::prost::alloc::string::String,
+    #[prost(enumeration="super::common::OrderSide", tag="7")]
+    pub side: i32,
+    #[prost(string, tag="8")]
+    pub order_price: ::prost::alloc::string::String,
+    #[prost(int64, tag="9")]
+    pub order_quantity: i64,
+    #[prost(int64, tag="10")]
+    pub filled_quantity: i64,
+    /// 살아있는 상태에서만 >0
+    #[prost(int64, tag="11")]
+    pub remaining_quantity: i64,
+    /// 체결 없으면 빈 문자열
+    #[prost(string, tag="12")]
+    pub average_fill_price: ::prost::alloc::string::String,
+    #[prost(enumeration="PairV2OrderStatus", tag="13")]
+    pub status: i32,
+    #[prost(message, optional, tag="14")]
+    pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    #[prost(message, optional, tag="15")]
+    pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPairV2OrdersRequest {
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+    #[prost(int32, optional, tag="2")]
+    pub page_size: ::core::option::Option<i32>,
+    #[prost(string, optional, tag="3")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// true 면 살아있는(접수/부분체결) 주문만
+    #[prost(bool, tag="4")]
+    pub live_only: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPairV2OrdersResponse {
+    #[prost(message, repeated, tag="1")]
+    pub orders: ::prost::alloc::vec::Vec<PairV2Order>,
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
+}
+/// leg별 누적 집계
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PairV2LegSummary {
+    #[prost(enumeration="PairV2Slot", tag="1")]
+    pub slot: i32,
+    #[prost(string, tag="2")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 누적 발주 수량
+    #[prost(int64, tag="3")]
+    pub ordered_quantity: i64,
+    /// 누적 체결 수량
+    #[prost(int64, tag="4")]
+    pub filled_quantity: i64,
+    /// 살아있는 미체결 합
+    #[prost(int64, tag="5")]
+    pub remaining_quantity: i64,
+    #[prost(string, tag="6")]
+    pub average_fill_price: ::prost::alloc::string::String,
+    /// 체결금액 (원)
+    #[prost(int64, tag="7")]
+    pub filled_amount: i64,
+    /// 참조 현재가 (조회 시점, 없으면 빈 문자열)
+    #[prost(string, tag="8")]
+    pub reference_price: ::prost::alloc::string::String,
+    /// 미체결 × 참조가
+    #[prost(int64, tag="9")]
+    pub remaining_amount: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPairV2OrderSummaryRequest {
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPairV2OrderSummaryResponse {
+    #[prost(message, repeated, tag="1")]
+    pub legs: ::prost::alloc::vec::Vec<PairV2LegSummary>,
+    /// 세션 발사 횟수 (실행 중 아니면 0)
+    #[prost(uint32, tag="2")]
+    pub launch_count: u32,
+}
 // ============================================================================
 // Pair Status
 // ============================================================================
@@ -560,6 +665,88 @@ impl PairV2ExecutionOutcome {
             "PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE" => Some(Self::SkippedPriceUnavailable),
             "PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE" => Some(Self::PartialFailure),
             "PAIR_V2_EXECUTION_OUTCOME_FAILED" => Some(Self::Failed),
+            _ => None,
+        }
+    }
+}
+// ============================================================================
+// Order Tracking & Summary
+// ============================================================================
+
+/// 페어의 두 다리 식별자 (base / counter)
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PairV2Slot {
+    Unspecified = 0,
+    Base = 1,
+    Counter = 2,
+}
+impl PairV2Slot {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PairV2Slot::Unspecified => "PAIR_V2_SLOT_UNSPECIFIED",
+            PairV2Slot::Base => "PAIR_V2_SLOT_BASE",
+            PairV2Slot::Counter => "PAIR_V2_SLOT_COUNTER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PAIR_V2_SLOT_UNSPECIFIED" => Some(Self::Unspecified),
+            "PAIR_V2_SLOT_BASE" => Some(Self::Base),
+            "PAIR_V2_SLOT_COUNTER" => Some(Self::Counter),
+            _ => None,
+        }
+    }
+}
+/// 주문 단위 상태
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PairV2OrderStatus {
+    Unspecified = 0,
+    /// 발주 요청 (접수 대기)
+    Submitted = 1,
+    /// 거래소 접수
+    Received = 2,
+    PartiallyFilled = 3,
+    Filled = 4,
+    /// 정정으로 대체됨
+    Amended = 5,
+    Cancelled = 6,
+    Rejected = 7,
+}
+impl PairV2OrderStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PairV2OrderStatus::Unspecified => "PAIR_V2_ORDER_STATUS_UNSPECIFIED",
+            PairV2OrderStatus::Submitted => "PAIR_V2_ORDER_STATUS_SUBMITTED",
+            PairV2OrderStatus::Received => "PAIR_V2_ORDER_STATUS_RECEIVED",
+            PairV2OrderStatus::PartiallyFilled => "PAIR_V2_ORDER_STATUS_PARTIALLY_FILLED",
+            PairV2OrderStatus::Filled => "PAIR_V2_ORDER_STATUS_FILLED",
+            PairV2OrderStatus::Amended => "PAIR_V2_ORDER_STATUS_AMENDED",
+            PairV2OrderStatus::Cancelled => "PAIR_V2_ORDER_STATUS_CANCELLED",
+            PairV2OrderStatus::Rejected => "PAIR_V2_ORDER_STATUS_REJECTED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PAIR_V2_ORDER_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "PAIR_V2_ORDER_STATUS_SUBMITTED" => Some(Self::Submitted),
+            "PAIR_V2_ORDER_STATUS_RECEIVED" => Some(Self::Received),
+            "PAIR_V2_ORDER_STATUS_PARTIALLY_FILLED" => Some(Self::PartiallyFilled),
+            "PAIR_V2_ORDER_STATUS_FILLED" => Some(Self::Filled),
+            "PAIR_V2_ORDER_STATUS_AMENDED" => Some(Self::Amended),
+            "PAIR_V2_ORDER_STATUS_CANCELLED" => Some(Self::Cancelled),
+            "PAIR_V2_ORDER_STATUS_REJECTED" => Some(Self::Rejected),
             _ => None,
         }
     }

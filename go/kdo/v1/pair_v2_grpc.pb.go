@@ -49,6 +49,10 @@ type PairV2ServiceClient interface {
 	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
 	// 정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).
 	AmendPairV2ResidualPct(ctx context.Context, in *AmendPairV2ResidualPctRequest, opts ...grpc.CallOption) (*AmendPairV2ResidualPctResponse, error)
+	// 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
+	ListPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (*ListPairV2OrdersResponse, error)
+	// leg(base/counter)별 누적 집계 (상단 요약)
+	GetPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (*GetPairV2OrderSummaryResponse, error)
 }
 
 type pairV2ServiceClient struct {
@@ -190,6 +194,24 @@ func (c *pairV2ServiceClient) AmendPairV2ResidualPct(ctx context.Context, in *Am
 	return out, nil
 }
 
+func (c *pairV2ServiceClient) ListPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (*ListPairV2OrdersResponse, error) {
+	out := new(ListPairV2OrdersResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/ListPairV2Orders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pairV2ServiceClient) GetPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (*GetPairV2OrderSummaryResponse, error) {
+	out := new(GetPairV2OrderSummaryResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/GetPairV2OrderSummary", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PairV2ServiceServer is the server API for PairV2Service service.
 // All implementations must embed UnimplementedPairV2ServiceServer
 // for forward compatibility
@@ -220,6 +242,10 @@ type PairV2ServiceServer interface {
 	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
 	// 정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).
 	AmendPairV2ResidualPct(context.Context, *AmendPairV2ResidualPctRequest) (*AmendPairV2ResidualPctResponse, error)
+	// 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
+	ListPairV2Orders(context.Context, *ListPairV2OrdersRequest) (*ListPairV2OrdersResponse, error)
+	// leg(base/counter)별 누적 집계 (상단 요약)
+	GetPairV2OrderSummary(context.Context, *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error)
 	mustEmbedUnimplementedPairV2ServiceServer()
 }
 
@@ -262,6 +288,12 @@ func (UnimplementedPairV2ServiceServer) CancelPairV2Residual(context.Context, *C
 }
 func (UnimplementedPairV2ServiceServer) AmendPairV2ResidualPct(context.Context, *AmendPairV2ResidualPctRequest) (*AmendPairV2ResidualPctResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AmendPairV2ResidualPct not implemented")
+}
+func (UnimplementedPairV2ServiceServer) ListPairV2Orders(context.Context, *ListPairV2OrdersRequest) (*ListPairV2OrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPairV2Orders not implemented")
+}
+func (UnimplementedPairV2ServiceServer) GetPairV2OrderSummary(context.Context, *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPairV2OrderSummary not implemented")
 }
 func (UnimplementedPairV2ServiceServer) mustEmbedUnimplementedPairV2ServiceServer() {}
 
@@ -495,6 +527,42 @@ func _PairV2Service_AmendPairV2ResidualPct_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PairV2Service_ListPairV2Orders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPairV2OrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PairV2ServiceServer).ListPairV2Orders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.pair_v2.PairV2Service/ListPairV2Orders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PairV2ServiceServer).ListPairV2Orders(ctx, req.(*ListPairV2OrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PairV2Service_GetPairV2OrderSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPairV2OrderSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PairV2ServiceServer).GetPairV2OrderSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.pair_v2.PairV2Service/GetPairV2OrderSummary",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PairV2ServiceServer).GetPairV2OrderSummary(ctx, req.(*GetPairV2OrderSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PairV2Service_ServiceDesc is the grpc.ServiceDesc for PairV2Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -545,6 +613,14 @@ var PairV2Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AmendPairV2ResidualPct",
 			Handler:    _PairV2Service_AmendPairV2ResidualPct_Handler,
+		},
+		{
+			MethodName: "ListPairV2Orders",
+			Handler:    _PairV2Service_ListPairV2Orders_Handler,
+		},
+		{
+			MethodName: "GetPairV2OrderSummary",
+			Handler:    _PairV2Service_GetPairV2OrderSummary_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

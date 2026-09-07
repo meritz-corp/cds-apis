@@ -95,5 +95,54 @@ class PairV2ExecutionOutcome extends $pb.ProtobufEnum {
   const PairV2ExecutionOutcome._(super.value, super.name);
 }
 
+/// 페어의 두 다리 식별자 (base / counter)
+class PairV2Slot extends $pb.ProtobufEnum {
+  static const PairV2Slot PAIR_V2_SLOT_UNSPECIFIED = PairV2Slot._(0, _omitEnumNames ? '' : 'PAIR_V2_SLOT_UNSPECIFIED');
+  static const PairV2Slot PAIR_V2_SLOT_BASE = PairV2Slot._(1, _omitEnumNames ? '' : 'PAIR_V2_SLOT_BASE');
+  static const PairV2Slot PAIR_V2_SLOT_COUNTER = PairV2Slot._(2, _omitEnumNames ? '' : 'PAIR_V2_SLOT_COUNTER');
+
+  static const $core.List<PairV2Slot> values = <PairV2Slot> [
+    PAIR_V2_SLOT_UNSPECIFIED,
+    PAIR_V2_SLOT_BASE,
+    PAIR_V2_SLOT_COUNTER,
+  ];
+
+  static final $core.List<PairV2Slot?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static PairV2Slot? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const PairV2Slot._(super.value, super.name);
+}
+
+/// 주문 단위 상태
+class PairV2OrderStatus extends $pb.ProtobufEnum {
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_UNSPECIFIED = PairV2OrderStatus._(0, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_UNSPECIFIED');
+  /// 발주 요청 (접수 대기)
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_SUBMITTED = PairV2OrderStatus._(1, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_SUBMITTED');
+  /// 거래소 접수
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_RECEIVED = PairV2OrderStatus._(2, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_RECEIVED');
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_PARTIALLY_FILLED = PairV2OrderStatus._(3, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_PARTIALLY_FILLED');
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_FILLED = PairV2OrderStatus._(4, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_FILLED');
+  /// 정정으로 대체됨
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_AMENDED = PairV2OrderStatus._(5, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_AMENDED');
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_CANCELLED = PairV2OrderStatus._(6, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_CANCELLED');
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_REJECTED = PairV2OrderStatus._(7, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_REJECTED');
+
+  static const $core.List<PairV2OrderStatus> values = <PairV2OrderStatus> [
+    PAIR_V2_ORDER_STATUS_UNSPECIFIED,
+    PAIR_V2_ORDER_STATUS_SUBMITTED,
+    PAIR_V2_ORDER_STATUS_RECEIVED,
+    PAIR_V2_ORDER_STATUS_PARTIALLY_FILLED,
+    PAIR_V2_ORDER_STATUS_FILLED,
+    PAIR_V2_ORDER_STATUS_AMENDED,
+    PAIR_V2_ORDER_STATUS_CANCELLED,
+    PAIR_V2_ORDER_STATUS_REJECTED,
+  ];
+
+  static final $core.List<PairV2OrderStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
+  static PairV2OrderStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const PairV2OrderStatus._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

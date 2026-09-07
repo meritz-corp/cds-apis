@@ -115,4 +115,20 @@ abstract final class PairV2Service {
     kdov1pair_v2.AmendPairV2ResidualPctRequest.new,
     kdov1pair_v2.AmendPairV2ResidualPctResponse.new,
   );
+
+  /// 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
+  static const listPairV2Orders = connect.Spec(
+    '/$name/ListPairV2Orders',
+    connect.StreamType.unary,
+    kdov1pair_v2.ListPairV2OrdersRequest.new,
+    kdov1pair_v2.ListPairV2OrdersResponse.new,
+  );
+
+  /// leg(base/counter)별 누적 집계 (상단 요약)
+  static const getPairV2OrderSummary = connect.Spec(
+    '/$name/GetPairV2OrderSummary',
+    connect.StreamType.unary,
+    kdov1pair_v2.GetPairV2OrderSummaryRequest.new,
+    kdov1pair_v2.GetPairV2OrderSummaryResponse.new,
+  );
 }

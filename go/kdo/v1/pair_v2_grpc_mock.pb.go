@@ -398,6 +398,26 @@ func (mr *MockPairV2ServiceClientMockRecorder) GetPairV2(ctx, in interface{}, op
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairV2", reflect.TypeOf((*MockPairV2ServiceClient)(nil).GetPairV2), varargs...)
 }
 
+// GetPairV2OrderSummary mocks base method.
+func (m *MockPairV2ServiceClient) GetPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (*GetPairV2OrderSummaryResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetPairV2OrderSummary", varargs...)
+	ret0, _ := ret[0].(*GetPairV2OrderSummaryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPairV2OrderSummary indicates an expected call of GetPairV2OrderSummary.
+func (mr *MockPairV2ServiceClientMockRecorder) GetPairV2OrderSummary(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairV2OrderSummary", reflect.TypeOf((*MockPairV2ServiceClient)(nil).GetPairV2OrderSummary), varargs...)
+}
+
 // LaunchPairV2Once mocks base method.
 func (m *MockPairV2ServiceClient) LaunchPairV2Once(ctx context.Context, in *LaunchPairV2OnceRequest, opts ...grpc.CallOption) (*LaunchPairV2OnceResponse, error) {
 	m.ctrl.T.Helper()
@@ -436,6 +456,26 @@ func (mr *MockPairV2ServiceClientMockRecorder) ListPairV2ExecutionLogs(ctx, in i
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPairV2ExecutionLogs", reflect.TypeOf((*MockPairV2ServiceClient)(nil).ListPairV2ExecutionLogs), varargs...)
+}
+
+// ListPairV2Orders mocks base method.
+func (m *MockPairV2ServiceClient) ListPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (*ListPairV2OrdersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListPairV2Orders", varargs...)
+	ret0, _ := ret[0].(*ListPairV2OrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListPairV2Orders indicates an expected call of ListPairV2Orders.
+func (mr *MockPairV2ServiceClientMockRecorder) ListPairV2Orders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPairV2Orders", reflect.TypeOf((*MockPairV2ServiceClient)(nil).ListPairV2Orders), varargs...)
 }
 
 // ListPairV2S mocks base method.
@@ -631,6 +671,21 @@ func (mr *MockPairV2ServiceServerMockRecorder) GetPairV2(ctx, in interface{}) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairV2", reflect.TypeOf((*MockPairV2ServiceServer)(nil).GetPairV2), ctx, in)
 }
 
+// GetPairV2OrderSummary mocks base method.
+func (m *MockPairV2ServiceServer) GetPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetPairV2OrderSummary", ctx, in)
+	ret0, _ := ret[0].(*GetPairV2OrderSummaryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPairV2OrderSummary indicates an expected call of GetPairV2OrderSummary.
+func (mr *MockPairV2ServiceServerMockRecorder) GetPairV2OrderSummary(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairV2OrderSummary", reflect.TypeOf((*MockPairV2ServiceServer)(nil).GetPairV2OrderSummary), ctx, in)
+}
+
 // LaunchPairV2Once mocks base method.
 func (m *MockPairV2ServiceServer) LaunchPairV2Once(ctx context.Context, in *LaunchPairV2OnceRequest) (*LaunchPairV2OnceResponse, error) {
 	m.ctrl.T.Helper()
@@ -659,6 +714,21 @@ func (m *MockPairV2ServiceServer) ListPairV2ExecutionLogs(ctx context.Context, i
 func (mr *MockPairV2ServiceServerMockRecorder) ListPairV2ExecutionLogs(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPairV2ExecutionLogs", reflect.TypeOf((*MockPairV2ServiceServer)(nil).ListPairV2ExecutionLogs), ctx, in)
+}
+
+// ListPairV2Orders mocks base method.
+func (m *MockPairV2ServiceServer) ListPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest) (*ListPairV2OrdersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListPairV2Orders", ctx, in)
+	ret0, _ := ret[0].(*ListPairV2OrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListPairV2Orders indicates an expected call of ListPairV2Orders.
+func (mr *MockPairV2ServiceServerMockRecorder) ListPairV2Orders(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPairV2Orders", reflect.TypeOf((*MockPairV2ServiceServer)(nil).ListPairV2Orders), ctx, in)
 }
 
 // ListPairV2S mocks base method.
