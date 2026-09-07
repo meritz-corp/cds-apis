@@ -95,6 +95,447 @@ impl<'de> serde::Deserialize<'de> for ActivatePairV2Request {
         deserializer.deserialize_struct("kdo.v1.pair_v2.ActivatePairV2Request", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for AmendPairV2ResidualPctRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.AmendPairV2ResidualPctRequest", len)?;
+        if true {
+            struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
+        }
+        if true {
+            struct_ser.serialize_field("amend_pct", &self.amend_pct)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for AmendPairV2ResidualPctRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pair_v2",
+            "pairV2",
+            "amend_pct",
+            "amendPct",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PairV2,
+            AmendPct,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
+                            "amendPct" | "amend_pct" => Ok(GeneratedField::AmendPct),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = AmendPairV2ResidualPctRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.AmendPairV2ResidualPctRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<AmendPairV2ResidualPctRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pair_v2__ = None;
+                let mut amend_pct__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PairV2 => {
+                            if pair_v2__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pairV2"));
+                            }
+                            pair_v2__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::AmendPct => {
+                            if amend_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("amendPct"));
+                            }
+                            amend_pct__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(AmendPairV2ResidualPctRequest {
+                    pair_v2: pair_v2__.unwrap_or_default(),
+                    amend_pct: amend_pct__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.AmendPairV2ResidualPctRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for AmendPairV2ResidualPctResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.AmendPairV2ResidualPctResponse", len)?;
+        if true {
+            struct_ser.serialize_field("amended_orders", &self.amended_orders)?;
+        }
+        if true {
+            struct_ser.serialize_field("errors", &self.errors)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for AmendPairV2ResidualPctResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "amended_orders",
+            "amendedOrders",
+            "errors",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            AmendedOrders,
+            Errors,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "amendedOrders" | "amended_orders" => Ok(GeneratedField::AmendedOrders),
+                            "errors" => Ok(GeneratedField::Errors),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = AmendPairV2ResidualPctResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.AmendPairV2ResidualPctResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<AmendPairV2ResidualPctResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut amended_orders__ = None;
+                let mut errors__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::AmendedOrders => {
+                            if amended_orders__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("amendedOrders"));
+                            }
+                            amended_orders__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Errors => {
+                            if errors__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("errors"));
+                            }
+                            errors__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(AmendPairV2ResidualPctResponse {
+                    amended_orders: amended_orders__.unwrap_or_default(),
+                    errors: errors__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.AmendPairV2ResidualPctResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CancelPairV2ResidualRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.CancelPairV2ResidualRequest", len)?;
+        if true {
+            struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CancelPairV2ResidualRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pair_v2",
+            "pairV2",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PairV2,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CancelPairV2ResidualRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.CancelPairV2ResidualRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CancelPairV2ResidualRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pair_v2__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PairV2 => {
+                            if pair_v2__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pairV2"));
+                            }
+                            pair_v2__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CancelPairV2ResidualRequest {
+                    pair_v2: pair_v2__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.CancelPairV2ResidualRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CancelPairV2ResidualResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.CancelPairV2ResidualResponse", len)?;
+        if true {
+            struct_ser.serialize_field("cancelled_order_ids", &self.cancelled_order_ids.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+        }
+        if true {
+            struct_ser.serialize_field("errors", &self.errors)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CancelPairV2ResidualResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "cancelled_order_ids",
+            "cancelledOrderIds",
+            "errors",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            CancelledOrderIds,
+            Errors,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "cancelledOrderIds" | "cancelled_order_ids" => Ok(GeneratedField::CancelledOrderIds),
+                            "errors" => Ok(GeneratedField::Errors),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CancelPairV2ResidualResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.CancelPairV2ResidualResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CancelPairV2ResidualResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut cancelled_order_ids__ = None;
+                let mut errors__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::CancelledOrderIds => {
+                            if cancelled_order_ids__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cancelledOrderIds"));
+                            }
+                            cancelled_order_ids__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
+                        GeneratedField::Errors => {
+                            if errors__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("errors"));
+                            }
+                            errors__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CancelPairV2ResidualResponse {
+                    cancelled_order_ids: cancelled_order_ids__.unwrap_or_default(),
+                    errors: errors__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.CancelPairV2ResidualResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for CreatePairV2Request {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -381,6 +822,214 @@ impl<'de> serde::Deserialize<'de> for GetPairV2Request {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.GetPairV2Request", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LaunchPairV2OnceRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.LaunchPairV2OnceRequest", len)?;
+        if true {
+            struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LaunchPairV2OnceRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pair_v2",
+            "pairV2",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PairV2,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LaunchPairV2OnceRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.LaunchPairV2OnceRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LaunchPairV2OnceRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pair_v2__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PairV2 => {
+                            if pair_v2__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pairV2"));
+                            }
+                            pair_v2__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LaunchPairV2OnceRequest {
+                    pair_v2: pair_v2__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.LaunchPairV2OnceRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for LaunchPairV2OnceResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.LaunchPairV2OnceResponse", len)?;
+        if true {
+            struct_ser.serialize_field("accepted", &self.accepted)?;
+        }
+        if true {
+            struct_ser.serialize_field("reason", &self.reason)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for LaunchPairV2OnceResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "accepted",
+            "reason",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Accepted,
+            Reason,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "accepted" => Ok(GeneratedField::Accepted),
+                            "reason" => Ok(GeneratedField::Reason),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = LaunchPairV2OnceResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.LaunchPairV2OnceResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<LaunchPairV2OnceResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut accepted__ = None;
+                let mut reason__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Accepted => {
+                            if accepted__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("accepted"));
+                            }
+                            accepted__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Reason => {
+                            if reason__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reason"));
+                            }
+                            reason__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(LaunchPairV2OnceResponse {
+                    accepted: accepted__.unwrap_or_default(),
+                    reason: reason__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.LaunchPairV2OnceResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ListPairV2ExecutionLogsRequest {
@@ -1006,6 +1655,9 @@ impl serde::Serialize for PairV2 {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1058,6 +1710,9 @@ impl serde::Serialize for PairV2 {
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
         }
+        if let Some(v) = self.pause_launch_no.as_ref() {
+            struct_ser.serialize_field("pause_launch_no", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1091,6 +1746,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             "createTime",
             "update_time",
             "updateTime",
+            "pause_launch_no",
+            "pauseLaunchNo",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1110,6 +1767,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             Status,
             CreateTime,
             UpdateTime,
+            PauseLaunchNo,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1147,6 +1805,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             "status" => Ok(GeneratedField::Status),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
+                            "pauseLaunchNo" | "pause_launch_no" => Ok(GeneratedField::PauseLaunchNo),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1181,6 +1840,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                 let mut status__ = None;
                 let mut create_time__ = None;
                 let mut update_time__ = None;
+                let mut pause_launch_no__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1285,6 +1945,14 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             }
                             update_time__ = map_.next_value()?;
                         }
+                        GeneratedField::PauseLaunchNo => {
+                            if pause_launch_no__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pauseLaunchNo"));
+                            }
+                            pause_launch_no__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1306,10 +1974,150 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                     status: status__.unwrap_or_default(),
                     create_time: create_time__,
                     update_time: update_time__,
+                    pause_launch_no: pause_launch_no__,
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PairV2AmendedOrder {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2AmendedOrder", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("original_order_id", ToString::to_string(&self.original_order_id).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("amend_order_id", ToString::to_string(&self.amend_order_id).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("price", &self.price)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2AmendedOrder {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "original_order_id",
+            "originalOrderId",
+            "amend_order_id",
+            "amendOrderId",
+            "price",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            OriginalOrderId,
+            AmendOrderId,
+            Price,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
+                            "amendOrderId" | "amend_order_id" => Ok(GeneratedField::AmendOrderId),
+                            "price" => Ok(GeneratedField::Price),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2AmendedOrder;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.PairV2AmendedOrder")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairV2AmendedOrder, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut original_order_id__ = None;
+                let mut amend_order_id__ = None;
+                let mut price__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::OriginalOrderId => {
+                            if original_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("originalOrderId"));
+                            }
+                            original_order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AmendOrderId => {
+                            if amend_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("amendOrderId"));
+                            }
+                            amend_order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Price => {
+                            if price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("price"));
+                            }
+                            price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PairV2AmendedOrder {
+                    original_order_id: original_order_id__.unwrap_or_default(),
+                    amend_order_id: amend_order_id__.unwrap_or_default(),
+                    price: price__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2AmendedOrder", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairV2Entry {
@@ -2167,6 +2975,123 @@ impl<'de> serde::Deserialize<'de> for PairV2NavSpread {
         deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2NavSpread", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for PairV2ResidualError {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2ResidualError", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("reason", &self.reason)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2ResidualError {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "order_id",
+            "orderId",
+            "reason",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            OrderId,
+            Reason,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
+                            "reason" => Ok(GeneratedField::Reason),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2ResidualError;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.PairV2ResidualError")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairV2ResidualError, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut order_id__ = None;
+                let mut reason__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::OrderId => {
+                            if order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderId"));
+                            }
+                            order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Reason => {
+                            if reason__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reason"));
+                            }
+                            reason__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PairV2ResidualError {
+                    order_id: order_id__.unwrap_or_default(),
+                    reason: reason__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2ResidualError", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for PairV2RuntimePhase {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2548,6 +3473,9 @@ impl serde::Serialize for PairV2StatusUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2StatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
@@ -2559,6 +3487,9 @@ impl serde::Serialize for PairV2StatusUpdate {
         }
         if let Some(v) = self.updated_at.as_ref() {
             struct_ser.serialize_field("updated_at", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("launch_count", &self.launch_count)?;
         }
         struct_ser.end()
     }
@@ -2575,6 +3506,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             "phase",
             "updated_at",
             "updatedAt",
+            "launch_count",
+            "launchCount",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2582,6 +3515,7 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             PairV2,
             Phase,
             UpdatedAt,
+            LaunchCount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2607,6 +3541,7 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                             "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
                             "phase" => Ok(GeneratedField::Phase),
                             "updatedAt" | "updated_at" => Ok(GeneratedField::UpdatedAt),
+                            "launchCount" | "launch_count" => Ok(GeneratedField::LaunchCount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2629,6 +3564,7 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                 let mut pair_v2__ = None;
                 let mut phase__ = None;
                 let mut updated_at__ = None;
+                let mut launch_count__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairV2 => {
@@ -2649,6 +3585,14 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                             }
                             updated_at__ = map_.next_value()?;
                         }
+                        GeneratedField::LaunchCount => {
+                            if launch_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("launchCount"));
+                            }
+                            launch_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2658,6 +3602,7 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                     pair_v2: pair_v2__.unwrap_or_default(),
                     phase: phase__.unwrap_or_default(),
                     updated_at: updated_at__,
+                    launch_count: launch_count__.unwrap_or_default(),
                 })
             }
         }

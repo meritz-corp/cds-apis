@@ -177,4 +177,60 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
+  /// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+  Future<kdov1pair_v2.LaunchPairV2OnceResponse> launchPairV2Once(
+    kdov1pair_v2.LaunchPairV2OnceRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PairV2Service.launchPairV2Once,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
+  Future<kdov1pair_v2.CancelPairV2ResidualResponse> cancelPairV2Residual(
+    kdov1pair_v2.CancelPairV2ResidualRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PairV2Service.cancelPairV2Residual,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
+  /// 정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).
+  Future<kdov1pair_v2.AmendPairV2ResidualPctResponse> amendPairV2ResidualPct(
+    kdov1pair_v2.AmendPairV2ResidualPctRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PairV2Service.amendPairV2ResidualPct,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

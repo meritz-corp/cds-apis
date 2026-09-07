@@ -44,6 +44,7 @@ class PairV2 extends $pb.GeneratedMessage {
     PairV2Status? status,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
+    $core.int? pauseLaunchNo,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -61,6 +62,7 @@ class PairV2 extends $pb.GeneratedMessage {
     if (status != null) result.status = status;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
+    if (pauseLaunchNo != null) result.pauseLaunchNo = pauseLaunchNo;
     return result;
   }
 
@@ -85,6 +87,7 @@ class PairV2 extends $pb.GeneratedMessage {
     ..e<PairV2Status>(13, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PairV2Status.PAIR_V2_STATUS_UNSPECIFIED, valueOf: PairV2Status.valueOf, enumValues: PairV2Status.values)
     ..aOM<$2.Timestamp>(14, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(15, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..a<$core.int>(16, _omitFieldNames ? '' : 'pauseLaunchNo', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -268,6 +271,17 @@ class PairV2 extends $pb.GeneratedMessage {
   void clearUpdateTime() => $_clearField(15);
   @$pb.TagNumber(15)
   $2.Timestamp ensureUpdateTime() => $_ensure(14);
+
+  /// 중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).
+  /// 수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작.
+  @$pb.TagNumber(16)
+  $core.int get pauseLaunchNo => $_getIZ(15);
+  @$pb.TagNumber(16)
+  set pauseLaunchNo($core.int value) => $_setUnsignedInt32(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasPauseLaunchNo() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearPauseLaunchNo() => $_clearField(16);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).
@@ -1513,17 +1527,465 @@ class StreamPairV2StatusRequest extends $pb.GeneratedMessage {
   void clearPairV2() => $_clearField(1);
 }
 
+class LaunchPairV2OnceRequest extends $pb.GeneratedMessage {
+  factory LaunchPairV2OnceRequest({
+    $core.String? pairV2,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    return result;
+  }
+
+  LaunchPairV2OnceRequest._();
+
+  factory LaunchPairV2OnceRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LaunchPairV2OnceRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LaunchPairV2OnceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LaunchPairV2OnceRequest clone() => LaunchPairV2OnceRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LaunchPairV2OnceRequest copyWith(void Function(LaunchPairV2OnceRequest) updates) => super.copyWith((message) => updates(message as LaunchPairV2OnceRequest)) as LaunchPairV2OnceRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LaunchPairV2OnceRequest create() => LaunchPairV2OnceRequest._();
+  @$core.override
+  LaunchPairV2OnceRequest createEmptyInstance() => create();
+  static $pb.PbList<LaunchPairV2OnceRequest> createRepeated() => $pb.PbList<LaunchPairV2OnceRequest>();
+  @$core.pragma('dart2js:noInline')
+  static LaunchPairV2OnceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LaunchPairV2OnceRequest>(create);
+  static LaunchPairV2OnceRequest? _defaultInstance;
+
+  /// 리소스 이름 (pair_v2s/{id})
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+}
+
+class LaunchPairV2OnceResponse extends $pb.GeneratedMessage {
+  factory LaunchPairV2OnceResponse({
+    $core.bool? accepted,
+    $core.String? reason,
+  }) {
+    final result = create();
+    if (accepted != null) result.accepted = accepted;
+    if (reason != null) result.reason = reason;
+    return result;
+  }
+
+  LaunchPairV2OnceResponse._();
+
+  factory LaunchPairV2OnceResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory LaunchPairV2OnceResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LaunchPairV2OnceResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'accepted')
+    ..aOS(2, _omitFieldNames ? '' : 'reason')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LaunchPairV2OnceResponse clone() => LaunchPairV2OnceResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  LaunchPairV2OnceResponse copyWith(void Function(LaunchPairV2OnceResponse) updates) => super.copyWith((message) => updates(message as LaunchPairV2OnceResponse)) as LaunchPairV2OnceResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static LaunchPairV2OnceResponse create() => LaunchPairV2OnceResponse._();
+  @$core.override
+  LaunchPairV2OnceResponse createEmptyInstance() => create();
+  static $pb.PbList<LaunchPairV2OnceResponse> createRepeated() => $pb.PbList<LaunchPairV2OnceResponse>();
+  @$core.pragma('dart2js:noInline')
+  static LaunchPairV2OnceResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LaunchPairV2OnceResponse>(create);
+  static LaunchPairV2OnceResponse? _defaultInstance;
+
+  /// 발사 큐잉 성공 여부 (실제 발주는 핫루프 다음 tick 에서 실행)
+  @$pb.TagNumber(1)
+  $core.bool get accepted => $_getBF(0);
+  @$pb.TagNumber(1)
+  set accepted($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasAccepted() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccepted() => $_clearField(1);
+
+  /// 거부 사유 (accepted=false 일 때)
+  @$pb.TagNumber(2)
+  $core.String get reason => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set reason($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasReason() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReason() => $_clearField(2);
+}
+
+class CancelPairV2ResidualRequest extends $pb.GeneratedMessage {
+  factory CancelPairV2ResidualRequest({
+    $core.String? pairV2,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    return result;
+  }
+
+  CancelPairV2ResidualRequest._();
+
+  factory CancelPairV2ResidualRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelPairV2ResidualRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelPairV2ResidualRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelPairV2ResidualRequest clone() => CancelPairV2ResidualRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelPairV2ResidualRequest copyWith(void Function(CancelPairV2ResidualRequest) updates) => super.copyWith((message) => updates(message as CancelPairV2ResidualRequest)) as CancelPairV2ResidualRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelPairV2ResidualRequest create() => CancelPairV2ResidualRequest._();
+  @$core.override
+  CancelPairV2ResidualRequest createEmptyInstance() => create();
+  static $pb.PbList<CancelPairV2ResidualRequest> createRepeated() => $pb.PbList<CancelPairV2ResidualRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CancelPairV2ResidualRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelPairV2ResidualRequest>(create);
+  static CancelPairV2ResidualRequest? _defaultInstance;
+
+  /// 리소스 이름 (pair_v2s/{id})
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+}
+
+class CancelPairV2ResidualResponse extends $pb.GeneratedMessage {
+  factory CancelPairV2ResidualResponse({
+    $core.Iterable<$fixnum.Int64>? cancelledOrderIds,
+    $core.Iterable<PairV2ResidualError>? errors,
+  }) {
+    final result = create();
+    if (cancelledOrderIds != null) result.cancelledOrderIds.addAll(cancelledOrderIds);
+    if (errors != null) result.errors.addAll(errors);
+    return result;
+  }
+
+  CancelPairV2ResidualResponse._();
+
+  factory CancelPairV2ResidualResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CancelPairV2ResidualResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CancelPairV2ResidualResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'cancelledOrderIds', $pb.PbFieldType.KU6)
+    ..pc<PairV2ResidualError>(2, _omitFieldNames ? '' : 'errors', $pb.PbFieldType.PM, subBuilder: PairV2ResidualError.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelPairV2ResidualResponse clone() => CancelPairV2ResidualResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CancelPairV2ResidualResponse copyWith(void Function(CancelPairV2ResidualResponse) updates) => super.copyWith((message) => updates(message as CancelPairV2ResidualResponse)) as CancelPairV2ResidualResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CancelPairV2ResidualResponse create() => CancelPairV2ResidualResponse._();
+  @$core.override
+  CancelPairV2ResidualResponse createEmptyInstance() => create();
+  static $pb.PbList<CancelPairV2ResidualResponse> createRepeated() => $pb.PbList<CancelPairV2ResidualResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CancelPairV2ResidualResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CancelPairV2ResidualResponse>(create);
+  static CancelPairV2ResidualResponse? _defaultInstance;
+
+  /// 취소 요청된 원주문 ID 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<$fixnum.Int64> get cancelledOrderIds => $_getList(0);
+
+  /// 취소 실패 항목 (주문ID: 사유)
+  @$pb.TagNumber(2)
+  $pb.PbList<PairV2ResidualError> get errors => $_getList(1);
+}
+
+class AmendPairV2ResidualPctRequest extends $pb.GeneratedMessage {
+  factory AmendPairV2ResidualPctRequest({
+    $core.String? pairV2,
+    $core.double? amendPct,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    if (amendPct != null) result.amendPct = amendPct;
+    return result;
+  }
+
+  AmendPairV2ResidualPctRequest._();
+
+  factory AmendPairV2ResidualPctRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AmendPairV2ResidualPctRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AmendPairV2ResidualPctRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'amendPct', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendPairV2ResidualPctRequest clone() => AmendPairV2ResidualPctRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendPairV2ResidualPctRequest copyWith(void Function(AmendPairV2ResidualPctRequest) updates) => super.copyWith((message) => updates(message as AmendPairV2ResidualPctRequest)) as AmendPairV2ResidualPctRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AmendPairV2ResidualPctRequest create() => AmendPairV2ResidualPctRequest._();
+  @$core.override
+  AmendPairV2ResidualPctRequest createEmptyInstance() => create();
+  static $pb.PbList<AmendPairV2ResidualPctRequest> createRepeated() => $pb.PbList<AmendPairV2ResidualPctRequest>();
+  @$core.pragma('dart2js:noInline')
+  static AmendPairV2ResidualPctRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AmendPairV2ResidualPctRequest>(create);
+  static AmendPairV2ResidualPctRequest? _defaultInstance;
+
+  /// 리소스 이름 (pair_v2s/{id})
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+
+  /// 정정 폭 % (예: 1.0 = 현재가 대비 1%). 0 < amend_pct <= 30.
+  /// 매도 주문은 현재가×(1-pct/100), 매수 주문은 ×(1+pct/100) 방향. 기존 주문가보다 공격적일 때만 정정.
+  @$pb.TagNumber(2)
+  $core.double get amendPct => $_getN(1);
+  @$pb.TagNumber(2)
+  set amendPct($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasAmendPct() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAmendPct() => $_clearField(2);
+}
+
+/// 정정된 주문
+class PairV2AmendedOrder extends $pb.GeneratedMessage {
+  factory PairV2AmendedOrder({
+    $fixnum.Int64? originalOrderId,
+    $fixnum.Int64? amendOrderId,
+    $core.String? price,
+  }) {
+    final result = create();
+    if (originalOrderId != null) result.originalOrderId = originalOrderId;
+    if (amendOrderId != null) result.amendOrderId = amendOrderId;
+    if (price != null) result.price = price;
+    return result;
+  }
+
+  PairV2AmendedOrder._();
+
+  factory PairV2AmendedOrder.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2AmendedOrder.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2AmendedOrder', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'originalOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'amendOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(3, _omitFieldNames ? '' : 'price')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2AmendedOrder clone() => PairV2AmendedOrder()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2AmendedOrder copyWith(void Function(PairV2AmendedOrder) updates) => super.copyWith((message) => updates(message as PairV2AmendedOrder)) as PairV2AmendedOrder;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2AmendedOrder create() => PairV2AmendedOrder._();
+  @$core.override
+  PairV2AmendedOrder createEmptyInstance() => create();
+  static $pb.PbList<PairV2AmendedOrder> createRepeated() => $pb.PbList<PairV2AmendedOrder>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2AmendedOrder getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2AmendedOrder>(create);
+  static PairV2AmendedOrder? _defaultInstance;
+
+  /// 원주문 ID
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get originalOrderId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set originalOrderId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOriginalOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOriginalOrderId() => $_clearField(1);
+
+  /// 정정 주문 ID
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get amendOrderId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set amendOrderId($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasAmendOrderId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAmendOrderId() => $_clearField(2);
+
+  /// 정정 후 가격
+  @$pb.TagNumber(3)
+  $core.String get price => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set price($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPrice() => $_clearField(3);
+}
+
+class AmendPairV2ResidualPctResponse extends $pb.GeneratedMessage {
+  factory AmendPairV2ResidualPctResponse({
+    $core.Iterable<PairV2AmendedOrder>? amendedOrders,
+    $core.Iterable<PairV2ResidualError>? errors,
+  }) {
+    final result = create();
+    if (amendedOrders != null) result.amendedOrders.addAll(amendedOrders);
+    if (errors != null) result.errors.addAll(errors);
+    return result;
+  }
+
+  AmendPairV2ResidualPctResponse._();
+
+  factory AmendPairV2ResidualPctResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory AmendPairV2ResidualPctResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AmendPairV2ResidualPctResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..pc<PairV2AmendedOrder>(1, _omitFieldNames ? '' : 'amendedOrders', $pb.PbFieldType.PM, subBuilder: PairV2AmendedOrder.create)
+    ..pc<PairV2ResidualError>(2, _omitFieldNames ? '' : 'errors', $pb.PbFieldType.PM, subBuilder: PairV2ResidualError.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendPairV2ResidualPctResponse clone() => AmendPairV2ResidualPctResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  AmendPairV2ResidualPctResponse copyWith(void Function(AmendPairV2ResidualPctResponse) updates) => super.copyWith((message) => updates(message as AmendPairV2ResidualPctResponse)) as AmendPairV2ResidualPctResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AmendPairV2ResidualPctResponse create() => AmendPairV2ResidualPctResponse._();
+  @$core.override
+  AmendPairV2ResidualPctResponse createEmptyInstance() => create();
+  static $pb.PbList<AmendPairV2ResidualPctResponse> createRepeated() => $pb.PbList<AmendPairV2ResidualPctResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AmendPairV2ResidualPctResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AmendPairV2ResidualPctResponse>(create);
+  static AmendPairV2ResidualPctResponse? _defaultInstance;
+
+  /// 정정된 주문 목록
+  @$pb.TagNumber(1)
+  $pb.PbList<PairV2AmendedOrder> get amendedOrders => $_getList(0);
+
+  /// 정정 실패/스킵 항목
+  @$pb.TagNumber(2)
+  $pb.PbList<PairV2ResidualError> get errors => $_getList(1);
+}
+
+/// 잔량 개입(취소/정정) 실패 항목
+class PairV2ResidualError extends $pb.GeneratedMessage {
+  factory PairV2ResidualError({
+    $fixnum.Int64? orderId,
+    $core.String? reason,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    if (reason != null) result.reason = reason;
+    return result;
+  }
+
+  PairV2ResidualError._();
+
+  factory PairV2ResidualError.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2ResidualError.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2ResidualError', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2, _omitFieldNames ? '' : 'reason')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2ResidualError clone() => PairV2ResidualError()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2ResidualError copyWith(void Function(PairV2ResidualError) updates) => super.copyWith((message) => updates(message as PairV2ResidualError)) as PairV2ResidualError;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2ResidualError create() => PairV2ResidualError._();
+  @$core.override
+  PairV2ResidualError createEmptyInstance() => create();
+  static $pb.PbList<PairV2ResidualError> createRepeated() => $pb.PbList<PairV2ResidualError>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2ResidualError getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2ResidualError>(create);
+  static PairV2ResidualError? _defaultInstance;
+
+  /// 대상 주문 ID
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get orderId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+
+  /// 사유
+  @$pb.TagNumber(2)
+  $core.String get reason => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set reason($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasReason() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReason() => $_clearField(2);
+}
+
 /// StreamPairV2Status 스트리밍 응답 — 운영 단계 변경 시마다 emit
 class PairV2StatusUpdate extends $pb.GeneratedMessage {
   factory PairV2StatusUpdate({
     $core.String? pairV2,
     PairV2RuntimePhase? phase,
     $2.Timestamp? updatedAt,
+    $core.int? launchCount,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
     if (phase != null) result.phase = phase;
     if (updatedAt != null) result.updatedAt = updatedAt;
+    if (launchCount != null) result.launchCount = launchCount;
     return result;
   }
 
@@ -1536,6 +1998,7 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'pairV2')
     ..e<PairV2RuntimePhase>(2, _omitFieldNames ? '' : 'phase', $pb.PbFieldType.OE, defaultOrMaker: PairV2RuntimePhase.PAIR_V2_RUNTIME_PHASE_UNSPECIFIED, valueOf: PairV2RuntimePhase.valueOf, enumValues: PairV2RuntimePhase.values)
     ..aOM<$2.Timestamp>(3, _omitFieldNames ? '' : 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'launchCount', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -1587,6 +2050,16 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   void clearUpdatedAt() => $_clearField(3);
   @$pb.TagNumber(3)
   $2.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  /// 이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)
+  @$pb.TagNumber(4)
+  $core.int get launchCount => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set launchCount($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasLaunchCount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLaunchCount() => $_clearField(4);
 }
 
 

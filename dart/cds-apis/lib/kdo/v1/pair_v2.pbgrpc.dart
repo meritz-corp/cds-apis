@@ -87,6 +87,23 @@ class PairV2ServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamPairV2Status, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
+  /// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+  $grpc.ResponseFuture<$0.LaunchPairV2OnceResponse> launchPairV2Once($0.LaunchPairV2OnceRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$launchPairV2Once, request, options: options);
+  }
+
+  /// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
+  $grpc.ResponseFuture<$0.CancelPairV2ResidualResponse> cancelPairV2Residual($0.CancelPairV2ResidualRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$cancelPairV2Residual, request, options: options);
+  }
+
+  /// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
+  /// 정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).
+  $grpc.ResponseFuture<$0.AmendPairV2ResidualPctResponse> amendPairV2ResidualPct($0.AmendPairV2ResidualPctRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$amendPairV2ResidualPct, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getPairV2 = $grpc.ClientMethod<$0.GetPairV2Request, $0.PairV2>(
@@ -125,6 +142,18 @@ class PairV2ServiceClient extends $grpc.Client {
       '/kdo.v1.pair_v2.PairV2Service/StreamPairV2Status',
       ($0.StreamPairV2StatusRequest value) => value.writeToBuffer(),
       $0.PairV2StatusUpdate.fromBuffer);
+  static final _$launchPairV2Once = $grpc.ClientMethod<$0.LaunchPairV2OnceRequest, $0.LaunchPairV2OnceResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/LaunchPairV2Once',
+      ($0.LaunchPairV2OnceRequest value) => value.writeToBuffer(),
+      $0.LaunchPairV2OnceResponse.fromBuffer);
+  static final _$cancelPairV2Residual = $grpc.ClientMethod<$0.CancelPairV2ResidualRequest, $0.CancelPairV2ResidualResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/CancelPairV2Residual',
+      ($0.CancelPairV2ResidualRequest value) => value.writeToBuffer(),
+      $0.CancelPairV2ResidualResponse.fromBuffer);
+  static final _$amendPairV2ResidualPct = $grpc.ClientMethod<$0.AmendPairV2ResidualPctRequest, $0.AmendPairV2ResidualPctResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/AmendPairV2ResidualPct',
+      ($0.AmendPairV2ResidualPctRequest value) => value.writeToBuffer(),
+      $0.AmendPairV2ResidualPctResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.pair_v2.PairV2Service')
@@ -195,6 +224,27 @@ abstract class PairV2ServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamPairV2StatusRequest.fromBuffer(value),
         ($0.PairV2StatusUpdate value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.LaunchPairV2OnceRequest, $0.LaunchPairV2OnceResponse>(
+        'LaunchPairV2Once',
+        launchPairV2Once_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.LaunchPairV2OnceRequest.fromBuffer(value),
+        ($0.LaunchPairV2OnceResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CancelPairV2ResidualRequest, $0.CancelPairV2ResidualResponse>(
+        'CancelPairV2Residual',
+        cancelPairV2Residual_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CancelPairV2ResidualRequest.fromBuffer(value),
+        ($0.CancelPairV2ResidualResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AmendPairV2ResidualPctRequest, $0.AmendPairV2ResidualPctResponse>(
+        'AmendPairV2ResidualPct',
+        amendPairV2ResidualPct_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.AmendPairV2ResidualPctRequest.fromBuffer(value),
+        ($0.AmendPairV2ResidualPctResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.PairV2> getPairV2_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPairV2Request> $request) async {
@@ -250,5 +300,23 @@ abstract class PairV2ServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.PairV2StatusUpdate> streamPairV2Status($grpc.ServiceCall call, $0.StreamPairV2StatusRequest request);
+
+  $async.Future<$0.LaunchPairV2OnceResponse> launchPairV2Once_Pre($grpc.ServiceCall $call, $async.Future<$0.LaunchPairV2OnceRequest> $request) async {
+    return launchPairV2Once($call, await $request);
+  }
+
+  $async.Future<$0.LaunchPairV2OnceResponse> launchPairV2Once($grpc.ServiceCall call, $0.LaunchPairV2OnceRequest request);
+
+  $async.Future<$0.CancelPairV2ResidualResponse> cancelPairV2Residual_Pre($grpc.ServiceCall $call, $async.Future<$0.CancelPairV2ResidualRequest> $request) async {
+    return cancelPairV2Residual($call, await $request);
+  }
+
+  $async.Future<$0.CancelPairV2ResidualResponse> cancelPairV2Residual($grpc.ServiceCall call, $0.CancelPairV2ResidualRequest request);
+
+  $async.Future<$0.AmendPairV2ResidualPctResponse> amendPairV2ResidualPct_Pre($grpc.ServiceCall $call, $async.Future<$0.AmendPairV2ResidualPctRequest> $request) async {
+    return amendPairV2ResidualPct($call, await $request);
+  }
+
+  $async.Future<$0.AmendPairV2ResidualPctResponse> amendPairV2ResidualPct($grpc.ServiceCall call, $0.AmendPairV2ResidualPctRequest request);
 
 }

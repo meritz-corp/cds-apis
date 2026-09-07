@@ -300,6 +300,93 @@ pub mod pair_v2_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        pub async fn launch_pair_v2_once(
+            &mut self,
+            request: impl tonic::IntoRequest<super::LaunchPairV2OnceRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::LaunchPairV2OnceResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.pair_v2.PairV2Service/LaunchPairV2Once",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.pair_v2.PairV2Service", "LaunchPairV2Once"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn cancel_pair_v2_residual(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CancelPairV2ResidualRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelPairV2ResidualResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.pair_v2.PairV2Service/CancelPairV2Residual",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.pair_v2.PairV2Service",
+                        "CancelPairV2Residual",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn amend_pair_v2_residual_pct(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AmendPairV2ResidualPctRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AmendPairV2ResidualPctResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.pair_v2.PairV2Service/AmendPairV2ResidualPct",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.pair_v2.PairV2Service",
+                        "AmendPairV2ResidualPct",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -358,6 +445,27 @@ pub mod pair_v2_service_server {
             request: tonic::Request<super::StreamPairV2StatusRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::StreamPairV2StatusStream>,
+            tonic::Status,
+        >;
+        async fn launch_pair_v2_once(
+            &self,
+            request: tonic::Request<super::LaunchPairV2OnceRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::LaunchPairV2OnceResponse>,
+            tonic::Status,
+        >;
+        async fn cancel_pair_v2_residual(
+            &self,
+            request: tonic::Request<super::CancelPairV2ResidualRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelPairV2ResidualResponse>,
+            tonic::Status,
+        >;
+        async fn amend_pair_v2_residual_pct(
+            &self,
+            request: tonic::Request<super::AmendPairV2ResidualPctRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AmendPairV2ResidualPctResponse>,
             tonic::Status,
         >;
     }
@@ -848,6 +956,150 @@ pub mod pair_v2_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.pair_v2.PairV2Service/LaunchPairV2Once" => {
+                    #[allow(non_camel_case_types)]
+                    struct LaunchPairV2OnceSvc<T: PairV2Service>(pub Arc<T>);
+                    impl<
+                        T: PairV2Service,
+                    > tonic::server::UnaryService<super::LaunchPairV2OnceRequest>
+                    for LaunchPairV2OnceSvc<T> {
+                        type Response = super::LaunchPairV2OnceResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::LaunchPairV2OnceRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PairV2Service>::launch_pair_v2_once(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = LaunchPairV2OnceSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.pair_v2.PairV2Service/CancelPairV2Residual" => {
+                    #[allow(non_camel_case_types)]
+                    struct CancelPairV2ResidualSvc<T: PairV2Service>(pub Arc<T>);
+                    impl<
+                        T: PairV2Service,
+                    > tonic::server::UnaryService<super::CancelPairV2ResidualRequest>
+                    for CancelPairV2ResidualSvc<T> {
+                        type Response = super::CancelPairV2ResidualResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CancelPairV2ResidualRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PairV2Service>::cancel_pair_v2_residual(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CancelPairV2ResidualSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.pair_v2.PairV2Service/AmendPairV2ResidualPct" => {
+                    #[allow(non_camel_case_types)]
+                    struct AmendPairV2ResidualPctSvc<T: PairV2Service>(pub Arc<T>);
+                    impl<
+                        T: PairV2Service,
+                    > tonic::server::UnaryService<super::AmendPairV2ResidualPctRequest>
+                    for AmendPairV2ResidualPctSvc<T> {
+                        type Response = super::AmendPairV2ResidualPctResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::AmendPairV2ResidualPctRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PairV2Service>::amend_pair_v2_residual_pct(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = AmendPairV2ResidualPctSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

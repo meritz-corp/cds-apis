@@ -200,6 +200,11 @@
                   "format": "date-time",
                   "title": "수정 시간",
                   "readOnly": true
+                },
+                "pauseLaunchNo": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작."
                 }
               },
               "title": "수정할 PairV2",
@@ -412,6 +417,139 @@
         ]
       }
     },
+    "/v1/{pairV2}:amendResidualPct": {
+      "post": {
+        "summary": "미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm \"미체결 1% 정정\" 대응).\n정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).",
+        "operationId": "PairV2Service_AmendPairV2ResidualPct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pair_v2AmendPairV2ResidualPctResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairV2",
+            "description": "리소스 이름 (pair_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairV2s/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amendPct": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "정정 폭 % (예: 1.0 = 현재가 대비 1%). 0 \u003c amend_pct \u003c= 30.\n매도 주문은 현재가×(1-pct/100), 매수 주문은 ×(1+pct/100) 방향. 기존 주문가보다 공격적일 때만 정정."
+                }
+              },
+              "required": [
+                "amendPct"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "PairV2Service"
+        ]
+      }
+    },
+    "/v1/{pairV2}:cancelResidual": {
+      "post": {
+        "summary": "미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.",
+        "operationId": "PairV2Service_CancelPairV2Residual",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pair_v2CancelPairV2ResidualResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairV2",
+            "description": "리소스 이름 (pair_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairV2s/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "PairV2Service"
+        ]
+      }
+    },
+    "/v1/{pairV2}:launchOnce": {
+      "post": {
+        "summary": "수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.\nmax_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.",
+        "operationId": "PairV2Service_LaunchPairV2Once",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pair_v2LaunchPairV2OnceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairV2",
+            "description": "리소스 이름 (pair_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairV2s/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "PairV2Service"
+        ]
+      }
+    },
     "/v1/{pairV2}:pause": {
       "post": {
         "summary": "PairV2 일시 중지 (hot loop 중지, status → PAUSED)",
@@ -529,6 +667,58 @@
       "description": "- ORDER_TP_CODE_UNSPECIFIED: 미지정 (도메인에서 None으로 매핑)\n - ORDER_TP_CODE_NONE: 일반 주문\n - ORDER_TP_CODE_LP: LP 주문",
       "title": "헷지 주문 TP 코드 (호가 구분)"
     },
+    "pair_v2AmendPairV2ResidualPctResponse": {
+      "type": "object",
+      "properties": {
+        "amendedOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pair_v2PairV2AmendedOrder"
+          },
+          "title": "정정된 주문 목록"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pair_v2PairV2ResidualError"
+          },
+          "title": "정정 실패/스킵 항목"
+        }
+      }
+    },
+    "pair_v2CancelPairV2ResidualResponse": {
+      "type": "object",
+      "properties": {
+        "cancelledOrderIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uint64"
+          },
+          "title": "취소 요청된 원주문 ID 목록"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pair_v2PairV2ResidualError"
+          },
+          "title": "취소 실패 항목 (주문ID: 사유)"
+        }
+      }
+    },
+    "pair_v2LaunchPairV2OnceResponse": {
+      "type": "object",
+      "properties": {
+        "accepted": {
+          "type": "boolean",
+          "title": "발사 큐잉 성공 여부 (실제 발주는 핫루프 다음 tick 에서 실행)"
+        },
+        "reason": {
+          "type": "string",
+          "title": "거부 사유 (accepted=false 일 때)"
+        }
+      }
+    },
     "pair_v2ListPairV2ExecutionLogsResponse": {
       "type": "object",
       "properties": {
@@ -640,6 +830,11 @@
           "format": "date-time",
           "title": "수정 시간",
           "readOnly": true
+        },
+        "pauseLaunchNo": {
+          "type": "integer",
+          "format": "int64",
+          "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작."
         }
       },
       "description": "PairV2 전략 — base·counter 지정 호가로 재는 스프레드가 target_spread 를 초과하면\n그 가격 그대로 양다리를 동시 발주한다.",
@@ -650,6 +845,26 @@
         "counter",
         "spread"
       ]
+    },
+    "pair_v2PairV2AmendedOrder": {
+      "type": "object",
+      "properties": {
+        "originalOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "원주문 ID"
+        },
+        "amendOrderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "정정 주문 ID"
+        },
+        "price": {
+          "type": "string",
+          "title": "정정 후 가격"
+        }
+      },
+      "title": "정정된 주문"
     },
     "pair_v2PairV2Entry": {
       "type": "object",
@@ -799,6 +1014,21 @@
       "type": "object",
       "title": "NAV 환산 스프레드 (PairV2.nav 설정 사용, 파라미터 없음)"
     },
+    "pair_v2PairV2ResidualError": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "uint64",
+          "title": "대상 주문 ID"
+        },
+        "reason": {
+          "type": "string",
+          "title": "사유"
+        }
+      },
+      "title": "잔량 개입(취소/정정) 실패 항목"
+    },
     "pair_v2PairV2RuntimePhase": {
       "type": "string",
       "enum": [
@@ -862,6 +1092,11 @@
           "type": "string",
           "format": "date-time",
           "title": "스냅샷 시각"
+        },
+        "launchCount": {
+          "type": "integer",
+          "format": "int64",
+          "title": "이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)"
         }
       },
       "title": "StreamPairV2Status 스트리밍 응답 — 운영 단계 변경 시마다 emit"

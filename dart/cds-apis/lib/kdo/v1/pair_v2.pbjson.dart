@@ -91,8 +91,12 @@ const PairV2$json = {
     {'1': 'status', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2Status', '8': {}, '10': 'status'},
     {'1': 'create_time', '3': 14, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
     {'1': 'update_time', '3': 15, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
+    {'1': 'pause_launch_no', '3': 16, '4': 1, '5': 13, '9': 0, '10': 'pauseLaunchNo', '17': true},
   ],
   '7': {},
+  '8': [
+    {'1': '_pause_launch_no'},
+  ],
 };
 
 /// Descriptor for `PairV2`. Decode as a `google.protobuf.DescriptorProto`.
@@ -109,8 +113,9 @@ final $typed_data.Uint8List pairV2Descriptor = $convert.base64Decode(
     'hCYXNlUXVhbnRpdHkSOgoGc3RhdHVzGA0gASgOMhwua2RvLnYxLnBhaXJfdjIuUGFpclYyU3Rh'
     'dHVzQgTiQQEDUgZzdGF0dXMSQQoLY3JlYXRlX3RpbWUYDiABKAsyGi5nb29nbGUucHJvdG9idW'
     'YuVGltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90aW1lGA8gASgLMhouZ29v'
-    'Z2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZTov6kEsChZrZG8uY2RzYX'
-    'Bpcy54eXovUGFpclYyEhJwYWlyX3Yycy97cGFpcl92Mn0=');
+    'Z2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRIrCg9wYXVzZV9sYXVuY2'
+    'hfbm8YECABKA1IAFINcGF1c2VMYXVuY2hOb4gBATov6kEsChZrZG8uY2RzYXBpcy54eXovUGFp'
+    'clYyEhJwYWlyX3Yycy97cGFpcl92Mn1CEgoQX3BhdXNlX2xhdW5jaF9ubw==');
 
 @$core.Deprecated('Use pairV2EntryDescriptor instead')
 const PairV2Entry$json = {
@@ -405,6 +410,121 @@ final $typed_data.Uint8List streamPairV2StatusRequestDescriptor = $convert.base6
     'ChlTdHJlYW1QYWlyVjJTdGF0dXNSZXF1ZXN0EjgKB3BhaXJfdjIYASABKAlCH+JBAQL6QRgKFm'
     'tkby5jZHNhcGlzLnh5ei9QYWlyVjJSBnBhaXJWMg==');
 
+@$core.Deprecated('Use launchPairV2OnceRequestDescriptor instead')
+const LaunchPairV2OnceRequest$json = {
+  '1': 'LaunchPairV2OnceRequest',
+  '2': [
+    {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pairV2'},
+  ],
+};
+
+/// Descriptor for `LaunchPairV2OnceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List launchPairV2OnceRequestDescriptor = $convert.base64Decode(
+    'ChdMYXVuY2hQYWlyVjJPbmNlUmVxdWVzdBIdCgdwYWlyX3YyGAEgASgJQgTiQQECUgZwYWlyVj'
+    'I=');
+
+@$core.Deprecated('Use launchPairV2OnceResponseDescriptor instead')
+const LaunchPairV2OnceResponse$json = {
+  '1': 'LaunchPairV2OnceResponse',
+  '2': [
+    {'1': 'accepted', '3': 1, '4': 1, '5': 8, '10': 'accepted'},
+    {'1': 'reason', '3': 2, '4': 1, '5': 9, '10': 'reason'},
+  ],
+};
+
+/// Descriptor for `LaunchPairV2OnceResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List launchPairV2OnceResponseDescriptor = $convert.base64Decode(
+    'ChhMYXVuY2hQYWlyVjJPbmNlUmVzcG9uc2USGgoIYWNjZXB0ZWQYASABKAhSCGFjY2VwdGVkEh'
+    'YKBnJlYXNvbhgCIAEoCVIGcmVhc29u');
+
+@$core.Deprecated('Use cancelPairV2ResidualRequestDescriptor instead')
+const CancelPairV2ResidualRequest$json = {
+  '1': 'CancelPairV2ResidualRequest',
+  '2': [
+    {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pairV2'},
+  ],
+};
+
+/// Descriptor for `CancelPairV2ResidualRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelPairV2ResidualRequestDescriptor = $convert.base64Decode(
+    'ChtDYW5jZWxQYWlyVjJSZXNpZHVhbFJlcXVlc3QSHQoHcGFpcl92MhgBIAEoCUIE4kEBAlIGcG'
+    'FpclYy');
+
+@$core.Deprecated('Use cancelPairV2ResidualResponseDescriptor instead')
+const CancelPairV2ResidualResponse$json = {
+  '1': 'CancelPairV2ResidualResponse',
+  '2': [
+    {'1': 'cancelled_order_ids', '3': 1, '4': 3, '5': 4, '10': 'cancelledOrderIds'},
+    {'1': 'errors', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.pair_v2.PairV2ResidualError', '10': 'errors'},
+  ],
+};
+
+/// Descriptor for `CancelPairV2ResidualResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelPairV2ResidualResponseDescriptor = $convert.base64Decode(
+    'ChxDYW5jZWxQYWlyVjJSZXNpZHVhbFJlc3BvbnNlEi4KE2NhbmNlbGxlZF9vcmRlcl9pZHMYAS'
+    'ADKARSEWNhbmNlbGxlZE9yZGVySWRzEjsKBmVycm9ycxgCIAMoCzIjLmtkby52MS5wYWlyX3Yy'
+    'LlBhaXJWMlJlc2lkdWFsRXJyb3JSBmVycm9ycw==');
+
+@$core.Deprecated('Use amendPairV2ResidualPctRequestDescriptor instead')
+const AmendPairV2ResidualPctRequest$json = {
+  '1': 'AmendPairV2ResidualPctRequest',
+  '2': [
+    {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pairV2'},
+    {'1': 'amend_pct', '3': 2, '4': 1, '5': 1, '8': {}, '10': 'amendPct'},
+  ],
+};
+
+/// Descriptor for `AmendPairV2ResidualPctRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List amendPairV2ResidualPctRequestDescriptor = $convert.base64Decode(
+    'Ch1BbWVuZFBhaXJWMlJlc2lkdWFsUGN0UmVxdWVzdBIdCgdwYWlyX3YyGAEgASgJQgTiQQECUg'
+    'ZwYWlyVjISIQoJYW1lbmRfcGN0GAIgASgBQgTiQQECUghhbWVuZFBjdA==');
+
+@$core.Deprecated('Use pairV2AmendedOrderDescriptor instead')
+const PairV2AmendedOrder$json = {
+  '1': 'PairV2AmendedOrder',
+  '2': [
+    {'1': 'original_order_id', '3': 1, '4': 1, '5': 4, '10': 'originalOrderId'},
+    {'1': 'amend_order_id', '3': 2, '4': 1, '5': 4, '10': 'amendOrderId'},
+    {'1': 'price', '3': 3, '4': 1, '5': 9, '10': 'price'},
+  ],
+};
+
+/// Descriptor for `PairV2AmendedOrder`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairV2AmendedOrderDescriptor = $convert.base64Decode(
+    'ChJQYWlyVjJBbWVuZGVkT3JkZXISKgoRb3JpZ2luYWxfb3JkZXJfaWQYASABKARSD29yaWdpbm'
+    'FsT3JkZXJJZBIkCg5hbWVuZF9vcmRlcl9pZBgCIAEoBFIMYW1lbmRPcmRlcklkEhQKBXByaWNl'
+    'GAMgASgJUgVwcmljZQ==');
+
+@$core.Deprecated('Use amendPairV2ResidualPctResponseDescriptor instead')
+const AmendPairV2ResidualPctResponse$json = {
+  '1': 'AmendPairV2ResidualPctResponse',
+  '2': [
+    {'1': 'amended_orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.pair_v2.PairV2AmendedOrder', '10': 'amendedOrders'},
+    {'1': 'errors', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.pair_v2.PairV2ResidualError', '10': 'errors'},
+  ],
+};
+
+/// Descriptor for `AmendPairV2ResidualPctResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List amendPairV2ResidualPctResponseDescriptor = $convert.base64Decode(
+    'Ch5BbWVuZFBhaXJWMlJlc2lkdWFsUGN0UmVzcG9uc2USSQoOYW1lbmRlZF9vcmRlcnMYASADKA'
+    'syIi5rZG8udjEucGFpcl92Mi5QYWlyVjJBbWVuZGVkT3JkZXJSDWFtZW5kZWRPcmRlcnMSOwoG'
+    'ZXJyb3JzGAIgAygLMiMua2RvLnYxLnBhaXJfdjIuUGFpclYyUmVzaWR1YWxFcnJvclIGZXJyb3'
+    'Jz');
+
+@$core.Deprecated('Use pairV2ResidualErrorDescriptor instead')
+const PairV2ResidualError$json = {
+  '1': 'PairV2ResidualError',
+  '2': [
+    {'1': 'order_id', '3': 1, '4': 1, '5': 4, '10': 'orderId'},
+    {'1': 'reason', '3': 2, '4': 1, '5': 9, '10': 'reason'},
+  ],
+};
+
+/// Descriptor for `PairV2ResidualError`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairV2ResidualErrorDescriptor = $convert.base64Decode(
+    'ChNQYWlyVjJSZXNpZHVhbEVycm9yEhkKCG9yZGVyX2lkGAEgASgEUgdvcmRlcklkEhYKBnJlYX'
+    'NvbhgCIAEoCVIGcmVhc29u');
+
 @$core.Deprecated('Use pairV2StatusUpdateDescriptor instead')
 const PairV2StatusUpdate$json = {
   '1': 'PairV2StatusUpdate',
@@ -412,6 +532,7 @@ const PairV2StatusUpdate$json = {
     {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '10': 'pairV2'},
     {'1': 'phase', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2RuntimePhase', '10': 'phase'},
     {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    {'1': 'launch_count', '3': 4, '4': 1, '5': 13, '10': 'launchCount'},
   ],
 };
 
@@ -419,5 +540,6 @@ const PairV2StatusUpdate$json = {
 final $typed_data.Uint8List pairV2StatusUpdateDescriptor = $convert.base64Decode(
     'ChJQYWlyVjJTdGF0dXNVcGRhdGUSFwoHcGFpcl92MhgBIAEoCVIGcGFpclYyEjgKBXBoYXNlGA'
     'IgASgOMiIua2RvLnYxLnBhaXJfdjIuUGFpclYyUnVudGltZVBoYXNlUgVwaGFzZRI5Cgp1cGRh'
-    'dGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJdXBkYXRlZEF0');
+    'dGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJdXBkYXRlZEF0EiEKDG'
+    'xhdW5jaF9jb3VudBgEIAEoDVILbGF1bmNoQ291bnQ=');
 

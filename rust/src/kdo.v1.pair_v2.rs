@@ -56,6 +56,10 @@ pub struct PairV2 {
     /// 수정 시간
     #[prost(message, optional, tag="15")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).
+    /// 수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작.
+    #[prost(uint32, optional, tag="16")]
+    pub pause_launch_no: ::core::option::Option<u32>,
 }
 // ============================================================================
 // Pair Entry
@@ -332,6 +336,90 @@ pub struct StreamPairV2StatusRequest {
     #[prost(string, tag="1")]
     pub pair_v2: ::prost::alloc::string::String,
 }
+// ============================================================================
+// Request / Response Messages — Manual Operations
+// ============================================================================
+
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LaunchPairV2OnceRequest {
+    /// 리소스 이름 (pair_v2s/{id})
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LaunchPairV2OnceResponse {
+    /// 발사 큐잉 성공 여부 (실제 발주는 핫루프 다음 tick 에서 실행)
+    #[prost(bool, tag="1")]
+    pub accepted: bool,
+    /// 거부 사유 (accepted=false 일 때)
+    #[prost(string, tag="2")]
+    pub reason: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelPairV2ResidualRequest {
+    /// 리소스 이름 (pair_v2s/{id})
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CancelPairV2ResidualResponse {
+    /// 취소 요청된 원주문 ID 목록
+    #[prost(uint64, repeated, tag="1")]
+    pub cancelled_order_ids: ::prost::alloc::vec::Vec<u64>,
+    /// 취소 실패 항목 (주문ID: 사유)
+    #[prost(message, repeated, tag="2")]
+    pub errors: ::prost::alloc::vec::Vec<PairV2ResidualError>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AmendPairV2ResidualPctRequest {
+    /// 리소스 이름 (pair_v2s/{id})
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+    /// 정정 폭 % (예: 1.0 = 현재가 대비 1%). 0 < amend_pct <= 30.
+    /// 매도 주문은 현재가×(1-pct/100), 매수 주문은 ×(1+pct/100) 방향. 기존 주문가보다 공격적일 때만 정정.
+    #[prost(double, tag="2")]
+    pub amend_pct: f64,
+}
+/// 정정된 주문
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PairV2AmendedOrder {
+    /// 원주문 ID
+    #[prost(uint64, tag="1")]
+    pub original_order_id: u64,
+    /// 정정 주문 ID
+    #[prost(uint64, tag="2")]
+    pub amend_order_id: u64,
+    /// 정정 후 가격
+    #[prost(string, tag="3")]
+    pub price: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AmendPairV2ResidualPctResponse {
+    /// 정정된 주문 목록
+    #[prost(message, repeated, tag="1")]
+    pub amended_orders: ::prost::alloc::vec::Vec<PairV2AmendedOrder>,
+    /// 정정 실패/스킵 항목
+    #[prost(message, repeated, tag="2")]
+    pub errors: ::prost::alloc::vec::Vec<PairV2ResidualError>,
+}
+/// 잔량 개입(취소/정정) 실패 항목
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PairV2ResidualError {
+    /// 대상 주문 ID
+    #[prost(uint64, tag="1")]
+    pub order_id: u64,
+    /// 사유
+    #[prost(string, tag="2")]
+    pub reason: ::prost::alloc::string::String,
+}
 /// StreamPairV2Status 스트리밍 응답 — 운영 단계 변경 시마다 emit
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -345,6 +433,9 @@ pub struct PairV2StatusUpdate {
     /// 스냅샷 시각
     #[prost(message, optional, tag="3")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)
+    #[prost(uint32, tag="4")]
+    pub launch_count: u32,
 }
 // ============================================================================
 // Pair Status

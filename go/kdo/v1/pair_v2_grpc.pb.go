@@ -41,6 +41,14 @@ type PairV2ServiceClient interface {
 	ListPairV2ExecutionLogs(ctx context.Context, in *ListPairV2ExecutionLogsRequest, opts ...grpc.CallOption) (*ListPairV2ExecutionLogsResponse, error)
 	// PairV2 실시간 운영 단계(phase) 스트리밍 (변경 시마다 emit)
 	StreamPairV2Status(ctx context.Context, in *StreamPairV2StatusRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2StatusClient, error)
+	// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
+	// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+	LaunchPairV2Once(ctx context.Context, in *LaunchPairV2OnceRequest, opts ...grpc.CallOption) (*LaunchPairV2OnceResponse, error)
+	// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
+	CancelPairV2Residual(ctx context.Context, in *CancelPairV2ResidualRequest, opts ...grpc.CallOption) (*CancelPairV2ResidualResponse, error)
+	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
+	// 정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).
+	AmendPairV2ResidualPct(ctx context.Context, in *AmendPairV2ResidualPctRequest, opts ...grpc.CallOption) (*AmendPairV2ResidualPctResponse, error)
 }
 
 type pairV2ServiceClient struct {
@@ -155,6 +163,33 @@ func (x *pairV2ServiceStreamPairV2StatusClient) Recv() (*PairV2StatusUpdate, err
 	return m, nil
 }
 
+func (c *pairV2ServiceClient) LaunchPairV2Once(ctx context.Context, in *LaunchPairV2OnceRequest, opts ...grpc.CallOption) (*LaunchPairV2OnceResponse, error) {
+	out := new(LaunchPairV2OnceResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/LaunchPairV2Once", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pairV2ServiceClient) CancelPairV2Residual(ctx context.Context, in *CancelPairV2ResidualRequest, opts ...grpc.CallOption) (*CancelPairV2ResidualResponse, error) {
+	out := new(CancelPairV2ResidualResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/CancelPairV2Residual", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pairV2ServiceClient) AmendPairV2ResidualPct(ctx context.Context, in *AmendPairV2ResidualPctRequest, opts ...grpc.CallOption) (*AmendPairV2ResidualPctResponse, error) {
+	out := new(AmendPairV2ResidualPctResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/AmendPairV2ResidualPct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PairV2ServiceServer is the server API for PairV2Service service.
 // All implementations must embed UnimplementedPairV2ServiceServer
 // for forward compatibility
@@ -177,6 +212,14 @@ type PairV2ServiceServer interface {
 	ListPairV2ExecutionLogs(context.Context, *ListPairV2ExecutionLogsRequest) (*ListPairV2ExecutionLogsResponse, error)
 	// PairV2 실시간 운영 단계(phase) 스트리밍 (변경 시마다 emit)
 	StreamPairV2Status(*StreamPairV2StatusRequest, PairV2Service_StreamPairV2StatusServer) error
+	// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
+	// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+	LaunchPairV2Once(context.Context, *LaunchPairV2OnceRequest) (*LaunchPairV2OnceResponse, error)
+	// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
+	CancelPairV2Residual(context.Context, *CancelPairV2ResidualRequest) (*CancelPairV2ResidualResponse, error)
+	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
+	// 정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).
+	AmendPairV2ResidualPct(context.Context, *AmendPairV2ResidualPctRequest) (*AmendPairV2ResidualPctResponse, error)
 	mustEmbedUnimplementedPairV2ServiceServer()
 }
 
@@ -210,6 +253,15 @@ func (UnimplementedPairV2ServiceServer) ListPairV2ExecutionLogs(context.Context,
 }
 func (UnimplementedPairV2ServiceServer) StreamPairV2Status(*StreamPairV2StatusRequest, PairV2Service_StreamPairV2StatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamPairV2Status not implemented")
+}
+func (UnimplementedPairV2ServiceServer) LaunchPairV2Once(context.Context, *LaunchPairV2OnceRequest) (*LaunchPairV2OnceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LaunchPairV2Once not implemented")
+}
+func (UnimplementedPairV2ServiceServer) CancelPairV2Residual(context.Context, *CancelPairV2ResidualRequest) (*CancelPairV2ResidualResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelPairV2Residual not implemented")
+}
+func (UnimplementedPairV2ServiceServer) AmendPairV2ResidualPct(context.Context, *AmendPairV2ResidualPctRequest) (*AmendPairV2ResidualPctResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AmendPairV2ResidualPct not implemented")
 }
 func (UnimplementedPairV2ServiceServer) mustEmbedUnimplementedPairV2ServiceServer() {}
 
@@ -389,6 +441,60 @@ func (x *pairV2ServiceStreamPairV2StatusServer) Send(m *PairV2StatusUpdate) erro
 	return x.ServerStream.SendMsg(m)
 }
 
+func _PairV2Service_LaunchPairV2Once_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LaunchPairV2OnceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PairV2ServiceServer).LaunchPairV2Once(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.pair_v2.PairV2Service/LaunchPairV2Once",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PairV2ServiceServer).LaunchPairV2Once(ctx, req.(*LaunchPairV2OnceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PairV2Service_CancelPairV2Residual_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelPairV2ResidualRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PairV2ServiceServer).CancelPairV2Residual(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.pair_v2.PairV2Service/CancelPairV2Residual",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PairV2ServiceServer).CancelPairV2Residual(ctx, req.(*CancelPairV2ResidualRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PairV2Service_AmendPairV2ResidualPct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AmendPairV2ResidualPctRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PairV2ServiceServer).AmendPairV2ResidualPct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.pair_v2.PairV2Service/AmendPairV2ResidualPct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PairV2ServiceServer).AmendPairV2ResidualPct(ctx, req.(*AmendPairV2ResidualPctRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PairV2Service_ServiceDesc is the grpc.ServiceDesc for PairV2Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -427,6 +533,18 @@ var PairV2Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPairV2ExecutionLogs",
 			Handler:    _PairV2Service_ListPairV2ExecutionLogs_Handler,
+		},
+		{
+			MethodName: "LaunchPairV2Once",
+			Handler:    _PairV2Service_LaunchPairV2Once_Handler,
+		},
+		{
+			MethodName: "CancelPairV2Residual",
+			Handler:    _PairV2Service_CancelPairV2Residual_Handler,
+		},
+		{
+			MethodName: "AmendPairV2ResidualPct",
+			Handler:    _PairV2Service_AmendPairV2ResidualPct_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

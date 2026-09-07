@@ -298,6 +298,46 @@ func (mr *MockPairV2ServiceClientMockRecorder) ActivatePairV2(ctx, in interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ActivatePairV2", reflect.TypeOf((*MockPairV2ServiceClient)(nil).ActivatePairV2), varargs...)
 }
 
+// AmendPairV2ResidualPct mocks base method.
+func (m *MockPairV2ServiceClient) AmendPairV2ResidualPct(ctx context.Context, in *AmendPairV2ResidualPctRequest, opts ...grpc.CallOption) (*AmendPairV2ResidualPctResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "AmendPairV2ResidualPct", varargs...)
+	ret0, _ := ret[0].(*AmendPairV2ResidualPctResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AmendPairV2ResidualPct indicates an expected call of AmendPairV2ResidualPct.
+func (mr *MockPairV2ServiceClientMockRecorder) AmendPairV2ResidualPct(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AmendPairV2ResidualPct", reflect.TypeOf((*MockPairV2ServiceClient)(nil).AmendPairV2ResidualPct), varargs...)
+}
+
+// CancelPairV2Residual mocks base method.
+func (m *MockPairV2ServiceClient) CancelPairV2Residual(ctx context.Context, in *CancelPairV2ResidualRequest, opts ...grpc.CallOption) (*CancelPairV2ResidualResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CancelPairV2Residual", varargs...)
+	ret0, _ := ret[0].(*CancelPairV2ResidualResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelPairV2Residual indicates an expected call of CancelPairV2Residual.
+func (mr *MockPairV2ServiceClientMockRecorder) CancelPairV2Residual(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelPairV2Residual", reflect.TypeOf((*MockPairV2ServiceClient)(nil).CancelPairV2Residual), varargs...)
+}
+
 // CreatePairV2 mocks base method.
 func (m *MockPairV2ServiceClient) CreatePairV2(ctx context.Context, in *CreatePairV2Request, opts ...grpc.CallOption) (*PairV2, error) {
 	m.ctrl.T.Helper()
@@ -356,6 +396,26 @@ func (mr *MockPairV2ServiceClientMockRecorder) GetPairV2(ctx, in interface{}, op
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairV2", reflect.TypeOf((*MockPairV2ServiceClient)(nil).GetPairV2), varargs...)
+}
+
+// LaunchPairV2Once mocks base method.
+func (m *MockPairV2ServiceClient) LaunchPairV2Once(ctx context.Context, in *LaunchPairV2OnceRequest, opts ...grpc.CallOption) (*LaunchPairV2OnceResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "LaunchPairV2Once", varargs...)
+	ret0, _ := ret[0].(*LaunchPairV2OnceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LaunchPairV2Once indicates an expected call of LaunchPairV2Once.
+func (mr *MockPairV2ServiceClientMockRecorder) LaunchPairV2Once(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LaunchPairV2Once", reflect.TypeOf((*MockPairV2ServiceClient)(nil).LaunchPairV2Once), varargs...)
 }
 
 // ListPairV2ExecutionLogs mocks base method.
@@ -496,6 +556,36 @@ func (mr *MockPairV2ServiceServerMockRecorder) ActivatePairV2(ctx, in interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ActivatePairV2", reflect.TypeOf((*MockPairV2ServiceServer)(nil).ActivatePairV2), ctx, in)
 }
 
+// AmendPairV2ResidualPct mocks base method.
+func (m *MockPairV2ServiceServer) AmendPairV2ResidualPct(ctx context.Context, in *AmendPairV2ResidualPctRequest) (*AmendPairV2ResidualPctResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AmendPairV2ResidualPct", ctx, in)
+	ret0, _ := ret[0].(*AmendPairV2ResidualPctResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AmendPairV2ResidualPct indicates an expected call of AmendPairV2ResidualPct.
+func (mr *MockPairV2ServiceServerMockRecorder) AmendPairV2ResidualPct(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AmendPairV2ResidualPct", reflect.TypeOf((*MockPairV2ServiceServer)(nil).AmendPairV2ResidualPct), ctx, in)
+}
+
+// CancelPairV2Residual mocks base method.
+func (m *MockPairV2ServiceServer) CancelPairV2Residual(ctx context.Context, in *CancelPairV2ResidualRequest) (*CancelPairV2ResidualResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CancelPairV2Residual", ctx, in)
+	ret0, _ := ret[0].(*CancelPairV2ResidualResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelPairV2Residual indicates an expected call of CancelPairV2Residual.
+func (mr *MockPairV2ServiceServerMockRecorder) CancelPairV2Residual(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelPairV2Residual", reflect.TypeOf((*MockPairV2ServiceServer)(nil).CancelPairV2Residual), ctx, in)
+}
+
 // CreatePairV2 mocks base method.
 func (m *MockPairV2ServiceServer) CreatePairV2(ctx context.Context, in *CreatePairV2Request) (*PairV2, error) {
 	m.ctrl.T.Helper()
@@ -539,6 +629,21 @@ func (m *MockPairV2ServiceServer) GetPairV2(ctx context.Context, in *GetPairV2Re
 func (mr *MockPairV2ServiceServerMockRecorder) GetPairV2(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPairV2", reflect.TypeOf((*MockPairV2ServiceServer)(nil).GetPairV2), ctx, in)
+}
+
+// LaunchPairV2Once mocks base method.
+func (m *MockPairV2ServiceServer) LaunchPairV2Once(ctx context.Context, in *LaunchPairV2OnceRequest) (*LaunchPairV2OnceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "LaunchPairV2Once", ctx, in)
+	ret0, _ := ret[0].(*LaunchPairV2OnceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LaunchPairV2Once indicates an expected call of LaunchPairV2Once.
+func (mr *MockPairV2ServiceServerMockRecorder) LaunchPairV2Once(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LaunchPairV2Once", reflect.TypeOf((*MockPairV2ServiceServer)(nil).LaunchPairV2Once), ctx, in)
 }
 
 // ListPairV2ExecutionLogs mocks base method.

@@ -89,4 +89,30 @@ abstract final class PairV2Service {
     kdov1pair_v2.StreamPairV2StatusRequest.new,
     kdov1pair_v2.PairV2StatusUpdate.new,
   );
+
+  /// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
+  /// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+  static const launchPairV2Once = connect.Spec(
+    '/$name/LaunchPairV2Once',
+    connect.StreamType.unary,
+    kdov1pair_v2.LaunchPairV2OnceRequest.new,
+    kdov1pair_v2.LaunchPairV2OnceResponse.new,
+  );
+
+  /// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
+  static const cancelPairV2Residual = connect.Spec(
+    '/$name/CancelPairV2Residual',
+    connect.StreamType.unary,
+    kdov1pair_v2.CancelPairV2ResidualRequest.new,
+    kdov1pair_v2.CancelPairV2ResidualResponse.new,
+  );
+
+  /// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
+  /// 정정된 주문은 auto_amend 자동 추적에서 해제된다 (운영자 수동 개입 시맨틱).
+  static const amendPairV2ResidualPct = connect.Spec(
+    '/$name/AmendPairV2ResidualPct',
+    connect.StreamType.unary,
+    kdov1pair_v2.AmendPairV2ResidualPctRequest.new,
+    kdov1pair_v2.AmendPairV2ResidualPctResponse.new,
+  );
 }
