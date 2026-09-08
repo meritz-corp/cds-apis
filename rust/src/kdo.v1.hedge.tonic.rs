@@ -289,9 +289,9 @@ pub mod hedge_service_client {
                 .insert(GrpcMethod::new("kdo.v1.hedge.HedgeService", "UpdateHedge"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_hedge_merge_future_month(
+        pub async fn update_hedge_target_future_month(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateHedgeMergeFutureMonthRequest>,
+            request: impl tonic::IntoRequest<super::UpdateHedgeTargetFutureMonthRequest>,
         ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status> {
             self.inner
                 .ready()
@@ -304,14 +304,14 @@ pub mod hedge_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.hedge.HedgeService/UpdateHedgeMergeFutureMonth",
+                "/kdo.v1.hedge.HedgeService/UpdateHedgeTargetFutureMonth",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "kdo.v1.hedge.HedgeService",
-                        "UpdateHedgeMergeFutureMonth",
+                        "UpdateHedgeTargetFutureMonth",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -519,9 +519,9 @@ pub mod hedge_service_server {
             &self,
             request: tonic::Request<super::UpdateHedgeRequest>,
         ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
-        async fn update_hedge_merge_future_month(
+        async fn update_hedge_target_future_month(
             &self,
-            request: tonic::Request<super::UpdateHedgeMergeFutureMonthRequest>,
+            request: tonic::Request<super::UpdateHedgeTargetFutureMonthRequest>,
         ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
         async fn delete_hedge(
             &self,
@@ -1008,14 +1008,14 @@ pub mod hedge_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.hedge.HedgeService/UpdateHedgeMergeFutureMonth" => {
+                "/kdo.v1.hedge.HedgeService/UpdateHedgeTargetFutureMonth" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateHedgeMergeFutureMonthSvc<T: HedgeService>(pub Arc<T>);
+                    struct UpdateHedgeTargetFutureMonthSvc<T: HedgeService>(pub Arc<T>);
                     impl<
                         T: HedgeService,
                     > tonic::server::UnaryService<
-                        super::UpdateHedgeMergeFutureMonthRequest,
-                    > for UpdateHedgeMergeFutureMonthSvc<T> {
+                        super::UpdateHedgeTargetFutureMonthRequest,
+                    > for UpdateHedgeTargetFutureMonthSvc<T> {
                         type Response = super::Hedge;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
@@ -1024,12 +1024,12 @@ pub mod hedge_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::UpdateHedgeMergeFutureMonthRequest,
+                                super::UpdateHedgeTargetFutureMonthRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as HedgeService>::update_hedge_merge_future_month(
+                                <T as HedgeService>::update_hedge_target_future_month(
                                         &inner,
                                         request,
                                     )
@@ -1044,7 +1044,7 @@ pub mod hedge_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = UpdateHedgeMergeFutureMonthSvc(inner);
+                        let method = UpdateHedgeTargetFutureMonthSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

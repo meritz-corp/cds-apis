@@ -1294,9 +1294,9 @@ impl serde::Serialize for Hedge {
             struct_ser.serialize_field("is_valid", &self.is_valid)?;
         }
         if true {
-            let v = MergeFutureMonth::try_from(self.merge_future_month)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.merge_future_month)))?;
-            struct_ser.serialize_field("merge_future_month", &v)?;
+            let v = TargetFutureMonth::try_from(self.target_future_month)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.target_future_month)))?;
+            struct_ser.serialize_field("target_future_month", &v)?;
         }
         struct_ser.end()
     }
@@ -1340,8 +1340,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "initialWaitMs",
             "is_valid",
             "isValid",
-            "merge_future_month",
-            "mergeFutureMonth",
+            "target_future_month",
+            "targetFutureMonth",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1363,7 +1363,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             TpCode,
             InitialWaitMs,
             IsValid,
-            MergeFutureMonth,
+            TargetFutureMonth,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1403,7 +1403,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "tpCode" | "tp_code" => Ok(GeneratedField::TpCode),
                             "initialWaitMs" | "initial_wait_ms" => Ok(GeneratedField::InitialWaitMs),
                             "isValid" | "is_valid" => Ok(GeneratedField::IsValid),
-                            "mergeFutureMonth" | "merge_future_month" => Ok(GeneratedField::MergeFutureMonth),
+                            "targetFutureMonth" | "target_future_month" => Ok(GeneratedField::TargetFutureMonth),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1440,7 +1440,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut tp_code__ = None;
                 let mut initial_wait_ms__ = None;
                 let mut is_valid__ = None;
-                let mut merge_future_month__ = None;
+                let mut target_future_month__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1553,11 +1553,11 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             }
                             is_valid__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::MergeFutureMonth => {
-                            if merge_future_month__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mergeFutureMonth"));
+                        GeneratedField::TargetFutureMonth => {
+                            if target_future_month__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("targetFutureMonth"));
                             }
-                            merge_future_month__ = Some(map_.next_value::<MergeFutureMonth>()? as i32);
+                            target_future_month__ = Some(map_.next_value::<TargetFutureMonth>()? as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
@@ -1582,7 +1582,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     tp_code: tp_code__.unwrap_or_default(),
                     initial_wait_ms: initial_wait_ms__.unwrap_or_default(),
                     is_valid: is_valid__.unwrap_or_default(),
-                    merge_future_month: merge_future_month__.unwrap_or_default(),
+                    target_future_month: target_future_month__.unwrap_or_default(),
                 })
             }
         }
@@ -3419,80 +3419,6 @@ impl<'de> serde::Deserialize<'de> for LookupHedgeResponse {
         deserializer.deserialize_struct("kdo.v1.hedge.LookupHedgeResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for MergeFutureMonth {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Unspecified => "MERGE_FUTURE_MONTH_UNSPECIFIED",
-            Self::Near => "MERGE_FUTURE_MONTH_NEAR",
-            Self::Far => "MERGE_FUTURE_MONTH_FAR",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for MergeFutureMonth {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "MERGE_FUTURE_MONTH_UNSPECIFIED",
-            "MERGE_FUTURE_MONTH_NEAR",
-            "MERGE_FUTURE_MONTH_FAR",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = MergeFutureMonth;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "MERGE_FUTURE_MONTH_UNSPECIFIED" => Ok(MergeFutureMonth::Unspecified),
-                    "MERGE_FUTURE_MONTH_NEAR" => Ok(MergeFutureMonth::Near),
-                    "MERGE_FUTURE_MONTH_FAR" => Ok(MergeFutureMonth::Far),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
 impl serde::Serialize for OrderTpCode {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3796,6 +3722,80 @@ impl<'de> serde::Deserialize<'de> for StreamHedgeAccumulatorsRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.hedge.StreamHedgeAccumulatorsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for TargetFutureMonth {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "TARGET_FUTURE_MONTH_UNSPECIFIED",
+            Self::Near => "TARGET_FUTURE_MONTH_NEAR",
+            Self::Far => "TARGET_FUTURE_MONTH_FAR",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for TargetFutureMonth {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "TARGET_FUTURE_MONTH_UNSPECIFIED",
+            "TARGET_FUTURE_MONTH_NEAR",
+            "TARGET_FUTURE_MONTH_FAR",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = TargetFutureMonth;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "TARGET_FUTURE_MONTH_UNSPECIFIED" => Ok(TargetFutureMonth::Unspecified),
+                    "TARGET_FUTURE_MONTH_NEAR" => Ok(TargetFutureMonth::Near),
+                    "TARGET_FUTURE_MONTH_FAR" => Ok(TargetFutureMonth::Far),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for TriggerCondition {
@@ -4165,121 +4165,6 @@ impl<'de> serde::Deserialize<'de> for UpdateHedgeGroupRequest {
         deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeGroupRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for UpdateHedgeMergeFutureMonthRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.UpdateHedgeMergeFutureMonthRequest", len)?;
-        if true {
-            struct_ser.serialize_field("name", &self.name)?;
-        }
-        if true {
-            let v = MergeFutureMonth::try_from(self.merge_future_month)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.merge_future_month)))?;
-            struct_ser.serialize_field("merge_future_month", &v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for UpdateHedgeMergeFutureMonthRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "name",
-            "merge_future_month",
-            "mergeFutureMonth",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Name,
-            MergeFutureMonth,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "name" => Ok(GeneratedField::Name),
-                            "mergeFutureMonth" | "merge_future_month" => Ok(GeneratedField::MergeFutureMonth),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateHedgeMergeFutureMonthRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.hedge.UpdateHedgeMergeFutureMonthRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateHedgeMergeFutureMonthRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut name__ = None;
-                let mut merge_future_month__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Name => {
-                            if name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("name"));
-                            }
-                            name__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::MergeFutureMonth => {
-                            if merge_future_month__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("mergeFutureMonth"));
-                            }
-                            merge_future_month__ = Some(map_.next_value::<MergeFutureMonth>()? as i32);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(UpdateHedgeMergeFutureMonthRequest {
-                    name: name__.unwrap_or_default(),
-                    merge_future_month: merge_future_month__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeMergeFutureMonthRequest", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for UpdateHedgeRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4373,5 +4258,120 @@ impl<'de> serde::Deserialize<'de> for UpdateHedgeRequest {
             }
         }
         deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for UpdateHedgeTargetFutureMonthRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.UpdateHedgeTargetFutureMonthRequest", len)?;
+        if true {
+            struct_ser.serialize_field("name", &self.name)?;
+        }
+        if true {
+            let v = TargetFutureMonth::try_from(self.target_future_month)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.target_future_month)))?;
+            struct_ser.serialize_field("target_future_month", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for UpdateHedgeTargetFutureMonthRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "name",
+            "target_future_month",
+            "targetFutureMonth",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Name,
+            TargetFutureMonth,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "name" => Ok(GeneratedField::Name),
+                            "targetFutureMonth" | "target_future_month" => Ok(GeneratedField::TargetFutureMonth),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = UpdateHedgeTargetFutureMonthRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.hedge.UpdateHedgeTargetFutureMonthRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateHedgeTargetFutureMonthRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut name__ = None;
+                let mut target_future_month__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TargetFutureMonth => {
+                            if target_future_month__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("targetFutureMonth"));
+                            }
+                            target_future_month__ = Some(map_.next_value::<TargetFutureMonth>()? as i32);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(UpdateHedgeTargetFutureMonthRequest {
+                    name: name__.unwrap_or_default(),
+                    target_future_month: target_future_month__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeTargetFutureMonthRequest", FIELDS, GeneratedVisitor)
     }
 }

@@ -85,15 +85,15 @@ service HedgeService {
     option (google.api.method_signature) = "hedge";
   }
 
-  // ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.
-  // 대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.
-  // 변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.
-  rpc UpdateHedgeMergeFutureMonth(UpdateHedgeMergeFutureMonthRequest) returns (Hedge) {
+  // ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의
+  // 대상 월물(target_future_month)을 변경한다.
+  // 다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.
+  rpc UpdateHedgeTargetFutureMonth(UpdateHedgeTargetFutureMonthRequest) returns (Hedge) {
     option (google.api.http) = {
-      post: "/v1/{name=hedges/*}:updateMergeFutureMonth"
+      post: "/v1/{name=hedges/*}:updateTargetFutureMonth"
       body: "*"
     };
-    option (google.api.method_signature) = "name,merge_future_month";
+    option (google.api.method_signature) = "name,target_future_month";
   }
 
   // Hedge 삭제
@@ -149,16 +149,17 @@ service HedgeService {
 
 // ========== Enums ==========
 
-// ETF_DECOMPOSITION_SINGLE_FUTURE 병합 대상 월물.
-// PDF 분해 결과에 같은 underlying 선물이 복수(근월+원월)면 지정 월물 하나로 수량 1:1 합산.
-enum MergeFutureMonth {
-  MERGE_FUTURE_MONTH_UNSPECIFIED = 0;
+// 대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE 의 병합 대상 월물,
+// DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve_hedge_symbol=true) 의 선물 resolve 대상 월물로 쓰인다.
+enum TargetFutureMonth {
+  TARGET_FUTURE_MONTH_UNSPECIFIED = 0;
 
-  // 분해 결과에 존재하는 선물 중 maturity_date 최소 월물로 합산
-  MERGE_FUTURE_MONTH_NEAR = 1;
+  // 근월물 (만기 최소 월물)
+  TARGET_FUTURE_MONTH_NEAR = 1;
 
-  // 분해 결과에 존재하는 선물 중 maturity_date 최대 월물로 합산
-  MERGE_FUTURE_MONTH_FAR = 2;
+  // 원월물 — resolve 계열(DIRECT_FUTURE_RESOLVE, UNIT_DELTA_AUTO_RATIO)에선 차근월물(근월 다음 만기),
+  // ETF_DECOMPOSITION_SINGLE_FUTURE 병합에선 분해 결과에 존재하는 선물 중 만기 최대
+  TARGET_FUTURE_MONTH_FAR = 2;
 }
 
 // 헷지 주문 TP 코드 (호가 구분)
@@ -270,8 +271,8 @@ message Hedge {
   // 선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시).
   bool is_valid = 17;
 
-  // ETF_DECOMPOSITION_SINGLE_FUTURE 전용 병합 대상 월물. 다른 hedge method 면 UNSPECIFIED.
-  MergeFutureMonth merge_future_month = 18;
+  // 대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE(병합 대상) / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve 대상)에 적용, 그 외 method 는 무시. 기본 NEAR.
+  TargetFutureMonth target_future_month = 18;
 }
 
 // 헷지 방식
@@ -484,8 +485,8 @@ message UpdateHedgeRequest {
   Hedge hedge = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
-// UpdateHedgeMergeFutureMonth 요청
-message UpdateHedgeMergeFutureMonthRequest {
+// UpdateHedgeTargetFutureMonth 요청
+message UpdateHedgeTargetFutureMonthRequest {
   // 헷지 리소스 이름 (예: hedges/1)
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -495,7 +496,7 @@ message UpdateHedgeMergeFutureMonthRequest {
   ];
 
   // NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
-  MergeFutureMonth merge_future_month = 2 [(google.api.field_behavior) = REQUIRED];
+  TargetFutureMonth target_future_month = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // DeleteHedge 요청

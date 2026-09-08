@@ -67,9 +67,9 @@ pub struct Hedge {
     /// 선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시).
     #[prost(bool, tag="17")]
     pub is_valid: bool,
-    /// ETF_DECOMPOSITION_SINGLE_FUTURE 전용 병합 대상 월물. 다른 hedge method 면 UNSPECIFIED.
-    #[prost(enumeration="MergeFutureMonth", tag="18")]
-    pub merge_future_month: i32,
+    /// 대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE(병합 대상) / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve 대상)에 적용, 그 외 method 는 무시. 기본 NEAR.
+    #[prost(enumeration="TargetFutureMonth", tag="18")]
+    pub target_future_month: i32,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -306,16 +306,16 @@ pub struct UpdateHedgeRequest {
     #[prost(message, optional, tag="1")]
     pub hedge: ::core::option::Option<Hedge>,
 }
-/// UpdateHedgeMergeFutureMonth 요청
+/// UpdateHedgeTargetFutureMonth 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateHedgeMergeFutureMonthRequest {
+pub struct UpdateHedgeTargetFutureMonthRequest {
     /// 헷지 리소스 이름 (예: hedges/1)
     #[prost(string, tag="1")]
     pub name: ::prost::alloc::string::String,
     /// NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
-    #[prost(enumeration="MergeFutureMonth", tag="2")]
-    pub merge_future_month: i32,
+    #[prost(enumeration="TargetFutureMonth", tag="2")]
+    pub target_future_month: i32,
 }
 /// DeleteHedge 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -529,35 +529,36 @@ pub struct UpdateHedgeAccumulatorFilledQuantitiesRequest {
 }
 // ========== Enums ==========
 
-/// ETF_DECOMPOSITION_SINGLE_FUTURE 병합 대상 월물.
-/// PDF 분해 결과에 같은 underlying 선물이 복수(근월+원월)면 지정 월물 하나로 수량 1:1 합산.
+/// 대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE 의 병합 대상 월물,
+/// DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve_hedge_symbol=true) 의 선물 resolve 대상 월물로 쓰인다.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum MergeFutureMonth {
+pub enum TargetFutureMonth {
     Unspecified = 0,
-    /// 분해 결과에 존재하는 선물 중 maturity_date 최소 월물로 합산
+    /// 근월물 (만기 최소 월물)
     Near = 1,
-    /// 분해 결과에 존재하는 선물 중 maturity_date 최대 월물로 합산
+    /// 원월물 — resolve 계열(DIRECT_FUTURE_RESOLVE, UNIT_DELTA_AUTO_RATIO)에선 차근월물(근월 다음 만기),
+    /// ETF_DECOMPOSITION_SINGLE_FUTURE 병합에선 분해 결과에 존재하는 선물 중 만기 최대
     Far = 2,
 }
-impl MergeFutureMonth {
+impl TargetFutureMonth {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            MergeFutureMonth::Unspecified => "MERGE_FUTURE_MONTH_UNSPECIFIED",
-            MergeFutureMonth::Near => "MERGE_FUTURE_MONTH_NEAR",
-            MergeFutureMonth::Far => "MERGE_FUTURE_MONTH_FAR",
+            TargetFutureMonth::Unspecified => "TARGET_FUTURE_MONTH_UNSPECIFIED",
+            TargetFutureMonth::Near => "TARGET_FUTURE_MONTH_NEAR",
+            TargetFutureMonth::Far => "TARGET_FUTURE_MONTH_FAR",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "MERGE_FUTURE_MONTH_UNSPECIFIED" => Some(Self::Unspecified),
-            "MERGE_FUTURE_MONTH_NEAR" => Some(Self::Near),
-            "MERGE_FUTURE_MONTH_FAR" => Some(Self::Far),
+            "TARGET_FUTURE_MONTH_UNSPECIFIED" => Some(Self::Unspecified),
+            "TARGET_FUTURE_MONTH_NEAR" => Some(Self::Near),
+            "TARGET_FUTURE_MONTH_FAR" => Some(Self::Far),
             _ => None,
         }
     }

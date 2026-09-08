@@ -14,25 +14,26 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-/// ETF_DECOMPOSITION_SINGLE_FUTURE 병합 대상 월물.
-/// PDF 분해 결과에 같은 underlying 선물이 복수(근월+원월)면 지정 월물 하나로 수량 1:1 합산.
-class MergeFutureMonth extends $pb.ProtobufEnum {
-  static const MergeFutureMonth MERGE_FUTURE_MONTH_UNSPECIFIED = MergeFutureMonth._(0, _omitEnumNames ? '' : 'MERGE_FUTURE_MONTH_UNSPECIFIED');
-  /// 분해 결과에 존재하는 선물 중 maturity_date 최소 월물로 합산
-  static const MergeFutureMonth MERGE_FUTURE_MONTH_NEAR = MergeFutureMonth._(1, _omitEnumNames ? '' : 'MERGE_FUTURE_MONTH_NEAR');
-  /// 분해 결과에 존재하는 선물 중 maturity_date 최대 월물로 합산
-  static const MergeFutureMonth MERGE_FUTURE_MONTH_FAR = MergeFutureMonth._(2, _omitEnumNames ? '' : 'MERGE_FUTURE_MONTH_FAR');
+/// 대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE 의 병합 대상 월물,
+/// DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve_hedge_symbol=true) 의 선물 resolve 대상 월물로 쓰인다.
+class TargetFutureMonth extends $pb.ProtobufEnum {
+  static const TargetFutureMonth TARGET_FUTURE_MONTH_UNSPECIFIED = TargetFutureMonth._(0, _omitEnumNames ? '' : 'TARGET_FUTURE_MONTH_UNSPECIFIED');
+  /// 근월물 (만기 최소 월물)
+  static const TargetFutureMonth TARGET_FUTURE_MONTH_NEAR = TargetFutureMonth._(1, _omitEnumNames ? '' : 'TARGET_FUTURE_MONTH_NEAR');
+  /// 원월물 — resolve 계열(DIRECT_FUTURE_RESOLVE, UNIT_DELTA_AUTO_RATIO)에선 차근월물(근월 다음 만기),
+  /// ETF_DECOMPOSITION_SINGLE_FUTURE 병합에선 분해 결과에 존재하는 선물 중 만기 최대
+  static const TargetFutureMonth TARGET_FUTURE_MONTH_FAR = TargetFutureMonth._(2, _omitEnumNames ? '' : 'TARGET_FUTURE_MONTH_FAR');
 
-  static const $core.List<MergeFutureMonth> values = <MergeFutureMonth> [
-    MERGE_FUTURE_MONTH_UNSPECIFIED,
-    MERGE_FUTURE_MONTH_NEAR,
-    MERGE_FUTURE_MONTH_FAR,
+  static const $core.List<TargetFutureMonth> values = <TargetFutureMonth> [
+    TARGET_FUTURE_MONTH_UNSPECIFIED,
+    TARGET_FUTURE_MONTH_NEAR,
+    TARGET_FUTURE_MONTH_FAR,
   ];
 
-  static final $core.List<MergeFutureMonth?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static MergeFutureMonth? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.List<TargetFutureMonth?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static TargetFutureMonth? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const MergeFutureMonth._(super.value, super.name);
+  const TargetFutureMonth._(super.value, super.name);
 }
 
 /// 헷지 주문 TP 코드 (호가 구분)

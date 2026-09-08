@@ -14,20 +14,21 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use mergeFutureMonthDescriptor instead')
-const MergeFutureMonth$json = {
-  '1': 'MergeFutureMonth',
+@$core.Deprecated('Use targetFutureMonthDescriptor instead')
+const TargetFutureMonth$json = {
+  '1': 'TargetFutureMonth',
   '2': [
-    {'1': 'MERGE_FUTURE_MONTH_UNSPECIFIED', '2': 0},
-    {'1': 'MERGE_FUTURE_MONTH_NEAR', '2': 1},
-    {'1': 'MERGE_FUTURE_MONTH_FAR', '2': 2},
+    {'1': 'TARGET_FUTURE_MONTH_UNSPECIFIED', '2': 0},
+    {'1': 'TARGET_FUTURE_MONTH_NEAR', '2': 1},
+    {'1': 'TARGET_FUTURE_MONTH_FAR', '2': 2},
   ],
 };
 
-/// Descriptor for `MergeFutureMonth`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List mergeFutureMonthDescriptor = $convert.base64Decode(
-    'ChBNZXJnZUZ1dHVyZU1vbnRoEiIKHk1FUkdFX0ZVVFVSRV9NT05USF9VTlNQRUNJRklFRBAAEh'
-    'sKF01FUkdFX0ZVVFVSRV9NT05USF9ORUFSEAESGgoWTUVSR0VfRlVUVVJFX01PTlRIX0ZBUhAC');
+/// Descriptor for `TargetFutureMonth`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List targetFutureMonthDescriptor = $convert.base64Decode(
+    'ChFUYXJnZXRGdXR1cmVNb250aBIjCh9UQVJHRVRfRlVUVVJFX01PTlRIX1VOU1BFQ0lGSUVEEA'
+    'ASHAoYVEFSR0VUX0ZVVFVSRV9NT05USF9ORUFSEAESGwoXVEFSR0VUX0ZVVFVSRV9NT05USF9G'
+    'QVIQAg==');
 
 @$core.Deprecated('Use orderTpCodeDescriptor instead')
 const OrderTpCode$json = {
@@ -105,7 +106,7 @@ const Hedge$json = {
     {'1': 'tp_code', '3': 15, '4': 1, '5': 14, '6': '.kdo.v1.hedge.OrderTpCode', '10': 'tpCode'},
     {'1': 'initial_wait_ms', '3': 16, '4': 1, '5': 4, '10': 'initialWaitMs'},
     {'1': 'is_valid', '3': 17, '4': 1, '5': 8, '10': 'isValid'},
-    {'1': 'merge_future_month', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.hedge.MergeFutureMonth', '10': 'mergeFutureMonth'},
+    {'1': 'target_future_month', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.hedge.TargetFutureMonth', '10': 'targetFutureMonth'},
   ],
   '3': [Hedge_QuantityPerHedgeEntry$json],
   '7': {},
@@ -138,10 +139,10 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     '4kEBAlINaGVkZ2VGdW5kQ29kZRIfCgt0aWNrX29mZnNldBgOIAEoBVIKdGlja09mZnNldBIyCg'
     'd0cF9jb2RlGA8gASgOMhkua2RvLnYxLmhlZGdlLk9yZGVyVHBDb2RlUgZ0cENvZGUSJgoPaW5p'
     'dGlhbF93YWl0X21zGBAgASgEUg1pbml0aWFsV2FpdE1zEhkKCGlzX3ZhbGlkGBEgASgIUgdpc1'
-    'ZhbGlkEkwKEm1lcmdlX2Z1dHVyZV9tb250aBgSIAEoDjIeLmtkby52MS5oZWRnZS5NZXJnZUZ1'
-    'dHVyZU1vbnRoUhBtZXJnZUZ1dHVyZU1vbnRoGkMKFVF1YW50aXR5UGVySGVkZ2VFbnRyeRIQCg'
-    'NrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBOirqQScKFWtkby5jZHNh'
-    'cGlzLnh5ei9IZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
+    'ZhbGlkEk8KE3RhcmdldF9mdXR1cmVfbW9udGgYEiABKA4yHy5rZG8udjEuaGVkZ2UuVGFyZ2V0'
+    'RnV0dXJlTW9udGhSEXRhcmdldEZ1dHVyZU1vbnRoGkMKFVF1YW50aXR5UGVySGVkZ2VFbnRyeR'
+    'IQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBOirqQScKFWtkby5j'
+    'ZHNhcGlzLnh5ei9IZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {
@@ -423,21 +424,21 @@ final $typed_data.Uint8List updateHedgeRequestDescriptor = $convert.base64Decode
     'ChJVcGRhdGVIZWRnZVJlcXVlc3QSLwoFaGVkZ2UYASABKAsyEy5rZG8udjEuaGVkZ2UuSGVkZ2'
     'VCBOJBAQJSBWhlZGdl');
 
-@$core.Deprecated('Use updateHedgeMergeFutureMonthRequestDescriptor instead')
-const UpdateHedgeMergeFutureMonthRequest$json = {
-  '1': 'UpdateHedgeMergeFutureMonthRequest',
+@$core.Deprecated('Use updateHedgeTargetFutureMonthRequestDescriptor instead')
+const UpdateHedgeTargetFutureMonthRequest$json = {
+  '1': 'UpdateHedgeTargetFutureMonthRequest',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
-    {'1': 'merge_future_month', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.hedge.MergeFutureMonth', '8': {}, '10': 'mergeFutureMonth'},
+    {'1': 'target_future_month', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.hedge.TargetFutureMonth', '8': {}, '10': 'targetFutureMonth'},
   ],
 };
 
-/// Descriptor for `UpdateHedgeMergeFutureMonthRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateHedgeMergeFutureMonthRequestDescriptor = $convert.base64Decode(
-    'CiJVcGRhdGVIZWRnZU1lcmdlRnV0dXJlTW9udGhSZXF1ZXN0EjIKBG5hbWUYASABKAlCHuJBAQ'
-    'L6QRcKFWtkby5jZHNhcGlzLnh5ei9IZWRnZVIEbmFtZRJSChJtZXJnZV9mdXR1cmVfbW9udGgY'
-    'AiABKA4yHi5rZG8udjEuaGVkZ2UuTWVyZ2VGdXR1cmVNb250aEIE4kEBAlIQbWVyZ2VGdXR1cm'
-    'VNb250aA==');
+/// Descriptor for `UpdateHedgeTargetFutureMonthRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateHedgeTargetFutureMonthRequestDescriptor = $convert.base64Decode(
+    'CiNVcGRhdGVIZWRnZVRhcmdldEZ1dHVyZU1vbnRoUmVxdWVzdBIyCgRuYW1lGAEgASgJQh7iQQ'
+    'EC+kEXChVrZG8uY2RzYXBpcy54eXovSGVkZ2VSBG5hbWUSVQoTdGFyZ2V0X2Z1dHVyZV9tb250'
+    'aBgCIAEoDjIfLmtkby52MS5oZWRnZS5UYXJnZXRGdXR1cmVNb250aEIE4kEBAlIRdGFyZ2V0Rn'
+    'V0dXJlTW9udGg=');
 
 @$core.Deprecated('Use deleteHedgeRequestDescriptor instead')
 const DeleteHedgeRequest$json = {
