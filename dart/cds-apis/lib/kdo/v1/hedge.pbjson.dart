@@ -440,6 +440,21 @@ final $typed_data.Uint8List updateHedgeTargetFutureMonthRequestDescriptor = $con
     'aBgCIAEoDjIfLmtkby52MS5oZWRnZS5UYXJnZXRGdXR1cmVNb250aEIE4kEBAlIRdGFyZ2V0Rn'
     'V0dXJlTW9udGg=');
 
+@$core.Deprecated('Use updateHedgeSymbolRequestDescriptor instead')
+const UpdateHedgeSymbolRequest$json = {
+  '1': 'UpdateHedgeSymbolRequest',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
+    {'1': 'hedge_symbol_or_underlying_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'hedgeSymbolOrUnderlyingSymbol'},
+  ],
+};
+
+/// Descriptor for `UpdateHedgeSymbolRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateHedgeSymbolRequestDescriptor = $convert.base64Decode(
+    'ChhVcGRhdGVIZWRnZVN5bWJvbFJlcXVlc3QSMgoEbmFtZRgBIAEoCUIe4kEBAvpBFwoVa2RvLm'
+    'Nkc2FwaXMueHl6L0hlZGdlUgRuYW1lEk4KIWhlZGdlX3N5bWJvbF9vcl91bmRlcmx5aW5nX3N5'
+    'bWJvbBgCIAEoCUIE4kEBAlIdaGVkZ2VTeW1ib2xPclVuZGVybHlpbmdTeW1ib2w=');
+
 @$core.Deprecated('Use deleteHedgeRequestDescriptor instead')
 const DeleteHedgeRequest$json = {
   '1': 'DeleteHedgeRequest',

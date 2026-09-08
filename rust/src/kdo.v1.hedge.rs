@@ -317,6 +317,17 @@ pub struct UpdateHedgeTargetFutureMonthRequest {
     #[prost(enumeration="TargetFutureMonth", tag="2")]
     pub target_future_month: i32,
 }
+/// UpdateHedgeSymbol 요청
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateHedgeSymbolRequest {
+    /// 헷지 리소스 이름 (예: hedges/1)
+    #[prost(string, tag="1")]
+    pub name: ::prost::alloc::string::String,
+    /// 새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)
+    #[prost(string, tag="2")]
+    pub hedge_symbol_or_underlying_symbol: ::prost::alloc::string::String,
+}
 /// DeleteHedge 요청
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

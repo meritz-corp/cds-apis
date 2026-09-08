@@ -91,6 +91,19 @@ abstract final class HedgeService {
     kdov1hedge.Hedge.new,
   );
 
+  /// Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.
+  /// 의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,
+  /// DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),
+  /// ETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.
+  /// UpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.
+  /// 변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.
+  static const updateHedgeSymbol = connect.Spec(
+    '/$name/UpdateHedgeSymbol',
+    connect.StreamType.unary,
+    kdov1hedge.UpdateHedgeSymbolRequest.new,
+    kdov1hedge.Hedge.new,
+  );
+
   /// Hedge 삭제
   static const deleteHedge = connect.Spec(
     '/$name/DeleteHedge',

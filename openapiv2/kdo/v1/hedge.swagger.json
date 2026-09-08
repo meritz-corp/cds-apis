@@ -698,6 +698,57 @@
         ]
       }
     },
+    "/v1/{name}:updateSymbol": {
+      "post": {
+        "summary": "Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.\n의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,\nDIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),\nETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.\nUpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.\n변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.",
+        "operationId": "HedgeService_UpdateHedgeSymbol",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedge"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "헷지 리소스 이름 (예: hedges/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedges/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hedgeSymbolOrUnderlyingSymbol": {
+                  "type": "string",
+                  "title": "새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)"
+                }
+              },
+              "title": "UpdateHedgeSymbol 요청",
+              "required": [
+                "hedgeSymbolOrUnderlyingSymbol"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
+    },
     "/v1/{name}:updateTargetFutureMonth": {
       "post": {
         "summary": "ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의\n대상 월물(target_future_month)을 변경한다.\n다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.",

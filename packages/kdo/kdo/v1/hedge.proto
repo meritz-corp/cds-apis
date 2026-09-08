@@ -96,6 +96,20 @@ service HedgeService {
     option (google.api.method_signature) = "name,target_future_month";
   }
 
+  // Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.
+  // 의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,
+  // DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),
+  // ETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.
+  // UpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.
+  // 변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.
+  rpc UpdateHedgeSymbol(UpdateHedgeSymbolRequest) returns (Hedge) {
+    option (google.api.http) = {
+      post: "/v1/{name=hedges/*}:updateSymbol"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name,hedge_symbol_or_underlying_symbol";
+  }
+
   // Hedge 삭제
   rpc DeleteHedge(DeleteHedgeRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
@@ -497,6 +511,20 @@ message UpdateHedgeTargetFutureMonthRequest {
 
   // NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
   TargetFutureMonth target_future_month = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// UpdateHedgeSymbol 요청
+message UpdateHedgeSymbolRequest {
+  // 헷지 리소스 이름 (예: hedges/1)
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Hedge"
+    }
+  ];
+
+  // 새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)
+  string hedge_symbol_or_underlying_symbol = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // DeleteHedge 요청

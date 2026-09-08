@@ -1464,6 +1464,67 @@ class UpdateHedgeTargetFutureMonthRequest extends $pb.GeneratedMessage {
   void clearTargetFutureMonth() => $_clearField(2);
 }
 
+/// UpdateHedgeSymbol 요청
+class UpdateHedgeSymbolRequest extends $pb.GeneratedMessage {
+  factory UpdateHedgeSymbolRequest({
+    $core.String? name,
+    $core.String? hedgeSymbolOrUnderlyingSymbol,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (hedgeSymbolOrUnderlyingSymbol != null) result.hedgeSymbolOrUnderlyingSymbol = hedgeSymbolOrUnderlyingSymbol;
+    return result;
+  }
+
+  UpdateHedgeSymbolRequest._();
+
+  factory UpdateHedgeSymbolRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateHedgeSymbolRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHedgeSymbolRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'hedgeSymbolOrUnderlyingSymbol')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateHedgeSymbolRequest clone() => UpdateHedgeSymbolRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateHedgeSymbolRequest copyWith(void Function(UpdateHedgeSymbolRequest) updates) => super.copyWith((message) => updates(message as UpdateHedgeSymbolRequest)) as UpdateHedgeSymbolRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateHedgeSymbolRequest create() => UpdateHedgeSymbolRequest._();
+  @$core.override
+  UpdateHedgeSymbolRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateHedgeSymbolRequest> createRepeated() => $pb.PbList<UpdateHedgeSymbolRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateHedgeSymbolRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHedgeSymbolRequest>(create);
+  static UpdateHedgeSymbolRequest? _defaultInstance;
+
+  /// 헷지 리소스 이름 (예: hedges/1)
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  /// 새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)
+  @$pb.TagNumber(2)
+  $core.String get hedgeSymbolOrUnderlyingSymbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set hedgeSymbolOrUnderlyingSymbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasHedgeSymbolOrUnderlyingSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHedgeSymbolOrUnderlyingSymbol() => $_clearField(2);
+}
+
 /// DeleteHedge 요청
 class DeleteHedgeRequest extends $pb.GeneratedMessage {
   factory DeleteHedgeRequest({
