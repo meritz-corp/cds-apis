@@ -81,6 +81,16 @@ abstract final class HedgeService {
     kdov1hedge.Hedge.new,
   );
 
+  /// ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.
+  /// 대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.
+  /// 변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.
+  static const updateHedgeMergeFutureMonth = connect.Spec(
+    '/$name/UpdateHedgeMergeFutureMonth',
+    connect.StreamType.unary,
+    kdov1hedge.UpdateHedgeMergeFutureMonthRequest.new,
+    kdov1hedge.Hedge.new,
+  );
+
   /// Hedge 삭제
   static const deleteHedge = connect.Spec(
     '/$name/DeleteHedge',

@@ -85,6 +85,17 @@ service HedgeService {
     option (google.api.method_signature) = "hedge";
   }
 
+  // ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.
+  // 대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.
+  // 변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.
+  rpc UpdateHedgeMergeFutureMonth(UpdateHedgeMergeFutureMonthRequest) returns (Hedge) {
+    option (google.api.http) = {
+      post: "/v1/{name=hedges/*}:updateMergeFutureMonth"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name,merge_future_month";
+  }
+
   // Hedge 삭제
   rpc DeleteHedge(DeleteHedgeRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
@@ -137,6 +148,18 @@ service HedgeService {
 }
 
 // ========== Enums ==========
+
+// ETF_DECOMPOSITION_SINGLE_FUTURE 병합 대상 월물.
+// PDF 분해 결과에 같은 underlying 선물이 복수(근월+원월)면 지정 월물 하나로 수량 1:1 합산.
+enum MergeFutureMonth {
+  MERGE_FUTURE_MONTH_UNSPECIFIED = 0;
+
+  // 분해 결과에 존재하는 선물 중 maturity_date 최소 월물로 합산
+  MERGE_FUTURE_MONTH_NEAR = 1;
+
+  // 분해 결과에 존재하는 선물 중 maturity_date 최대 월물로 합산
+  MERGE_FUTURE_MONTH_FAR = 2;
+}
 
 // 헷지 주문 TP 코드 (호가 구분)
 enum OrderTpCode {
@@ -246,6 +269,9 @@ message Hedge {
   // standalone hedge 는 is_active && is_valid 일 때만 사용.
   // 선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시).
   bool is_valid = 17;
+
+  // ETF_DECOMPOSITION_SINGLE_FUTURE 전용 병합 대상 월물. 다른 hedge method 면 UNSPECIFIED.
+  MergeFutureMonth merge_future_month = 18;
 }
 
 // 헷지 방식
@@ -456,6 +482,20 @@ message ListHedgesResponse {
 message UpdateHedgeRequest {
   // 수정할 헷지 정보
   Hedge hedge = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// UpdateHedgeMergeFutureMonth 요청
+message UpdateHedgeMergeFutureMonthRequest {
+  // 헷지 리소스 이름 (예: hedges/1)
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "kdo.cdsapis.xyz/Hedge"
+    }
+  ];
+
+  // NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
+  MergeFutureMonth merge_future_month = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 // DeleteHedge 요청

@@ -558,6 +558,26 @@ func (mr *MockHedgeServiceClientMockRecorder) UpdateHedgeGroup(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeGroup", reflect.TypeOf((*MockHedgeServiceClient)(nil).UpdateHedgeGroup), varargs...)
 }
 
+// UpdateHedgeMergeFutureMonth mocks base method.
+func (m *MockHedgeServiceClient) UpdateHedgeMergeFutureMonth(ctx context.Context, in *UpdateHedgeMergeFutureMonthRequest, opts ...grpc.CallOption) (*Hedge, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UpdateHedgeMergeFutureMonth", varargs...)
+	ret0, _ := ret[0].(*Hedge)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateHedgeMergeFutureMonth indicates an expected call of UpdateHedgeMergeFutureMonth.
+func (mr *MockHedgeServiceClientMockRecorder) UpdateHedgeMergeFutureMonth(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeMergeFutureMonth", reflect.TypeOf((*MockHedgeServiceClient)(nil).UpdateHedgeMergeFutureMonth), varargs...)
+}
+
 // MockHedgeServiceServer is a mock of HedgeServiceServer interface.
 type MockHedgeServiceServer struct {
 	ctrl     *gomock.Controller
@@ -788,4 +808,19 @@ func (m *MockHedgeServiceServer) UpdateHedgeGroup(ctx context.Context, in *Updat
 func (mr *MockHedgeServiceServerMockRecorder) UpdateHedgeGroup(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeGroup", reflect.TypeOf((*MockHedgeServiceServer)(nil).UpdateHedgeGroup), ctx, in)
+}
+
+// UpdateHedgeMergeFutureMonth mocks base method.
+func (m *MockHedgeServiceServer) UpdateHedgeMergeFutureMonth(ctx context.Context, in *UpdateHedgeMergeFutureMonthRequest) (*Hedge, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateHedgeMergeFutureMonth", ctx, in)
+	ret0, _ := ret[0].(*Hedge)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateHedgeMergeFutureMonth indicates an expected call of UpdateHedgeMergeFutureMonth.
+func (mr *MockHedgeServiceServerMockRecorder) UpdateHedgeMergeFutureMonth(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeMergeFutureMonth", reflect.TypeOf((*MockHedgeServiceServer)(nil).UpdateHedgeMergeFutureMonth), ctx, in)
 }

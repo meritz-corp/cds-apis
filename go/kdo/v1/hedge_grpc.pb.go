@@ -42,6 +42,10 @@ type HedgeServiceClient interface {
 	ListHedges(ctx context.Context, in *ListHedgesRequest, opts ...grpc.CallOption) (*ListHedgesResponse, error)
 	// Hedge 수정
 	UpdateHedge(ctx context.Context, in *UpdateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
+	// ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.
+	// 대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.
+	// 변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.
+	UpdateHedgeMergeFutureMonth(ctx context.Context, in *UpdateHedgeMergeFutureMonthRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// Hedge 삭제
 	DeleteHedge(ctx context.Context, in *DeleteHedgeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// 단일 HedgeGroup 조회
@@ -159,6 +163,15 @@ func (c *hedgeServiceClient) UpdateHedge(ctx context.Context, in *UpdateHedgeReq
 	return out, nil
 }
 
+func (c *hedgeServiceClient) UpdateHedgeMergeFutureMonth(ctx context.Context, in *UpdateHedgeMergeFutureMonthRequest, opts ...grpc.CallOption) (*Hedge, error) {
+	out := new(Hedge)
+	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/UpdateHedgeMergeFutureMonth", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *hedgeServiceClient) DeleteHedge(ctx context.Context, in *DeleteHedgeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/DeleteHedge", in, out, opts...)
@@ -236,6 +249,10 @@ type HedgeServiceServer interface {
 	ListHedges(context.Context, *ListHedgesRequest) (*ListHedgesResponse, error)
 	// Hedge 수정
 	UpdateHedge(context.Context, *UpdateHedgeRequest) (*Hedge, error)
+	// ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.
+	// 대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.
+	// 변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.
+	UpdateHedgeMergeFutureMonth(context.Context, *UpdateHedgeMergeFutureMonthRequest) (*Hedge, error)
 	// Hedge 삭제
 	DeleteHedge(context.Context, *DeleteHedgeRequest) (*emptypb.Empty, error)
 	// 단일 HedgeGroup 조회
@@ -278,6 +295,9 @@ func (UnimplementedHedgeServiceServer) ListHedges(context.Context, *ListHedgesRe
 }
 func (UnimplementedHedgeServiceServer) UpdateHedge(context.Context, *UpdateHedgeRequest) (*Hedge, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHedge not implemented")
+}
+func (UnimplementedHedgeServiceServer) UpdateHedgeMergeFutureMonth(context.Context, *UpdateHedgeMergeFutureMonthRequest) (*Hedge, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHedgeMergeFutureMonth not implemented")
 }
 func (UnimplementedHedgeServiceServer) DeleteHedge(context.Context, *DeleteHedgeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHedge not implemented")
@@ -457,6 +477,24 @@ func _HedgeService_UpdateHedge_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HedgeService_UpdateHedgeMergeFutureMonth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateHedgeMergeFutureMonthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HedgeServiceServer).UpdateHedgeMergeFutureMonth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.hedge.HedgeService/UpdateHedgeMergeFutureMonth",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HedgeServiceServer).UpdateHedgeMergeFutureMonth(ctx, req.(*UpdateHedgeMergeFutureMonthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _HedgeService_DeleteHedge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteHedgeRequest)
 	if err := dec(in); err != nil {
@@ -599,6 +637,10 @@ var HedgeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateHedge",
 			Handler:    _HedgeService_UpdateHedge_Handler,
+		},
+		{
+			MethodName: "UpdateHedgeMergeFutureMonth",
+			Handler:    _HedgeService_UpdateHedgeMergeFutureMonth_Handler,
 		},
 		{
 			MethodName: "DeleteHedge",

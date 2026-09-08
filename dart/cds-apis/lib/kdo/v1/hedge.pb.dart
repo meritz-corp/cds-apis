@@ -44,6 +44,7 @@ class Hedge extends $pb.GeneratedMessage {
     OrderTpCode? tpCode,
     $fixnum.Int64? initialWaitMs,
     $core.bool? isValid,
+    MergeFutureMonth? mergeFutureMonth,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -63,6 +64,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (tpCode != null) result.tpCode = tpCode;
     if (initialWaitMs != null) result.initialWaitMs = initialWaitMs;
     if (isValid != null) result.isValid = isValid;
+    if (mergeFutureMonth != null) result.mergeFutureMonth = mergeFutureMonth;
     return result;
   }
 
@@ -89,6 +91,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..e<OrderTpCode>(15, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: OrderTpCode.valueOf, enumValues: OrderTpCode.values)
     ..a<$fixnum.Int64>(16, _omitFieldNames ? '' : 'initialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOB(17, _omitFieldNames ? '' : 'isValid')
+    ..e<MergeFutureMonth>(18, _omitFieldNames ? '' : 'mergeFutureMonth', $pb.PbFieldType.OE, defaultOrMaker: MergeFutureMonth.MERGE_FUTURE_MONTH_UNSPECIFIED, valueOf: MergeFutureMonth.valueOf, enumValues: MergeFutureMonth.values)
     ..hasRequiredFields = false
   ;
 
@@ -287,6 +290,16 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasIsValid() => $_has(16);
   @$pb.TagNumber(17)
   void clearIsValid() => $_clearField(17);
+
+  /// ETF_DECOMPOSITION_SINGLE_FUTURE 전용 병합 대상 월물. 다른 hedge method 면 UNSPECIFIED.
+  @$pb.TagNumber(18)
+  MergeFutureMonth get mergeFutureMonth => $_getN(17);
+  @$pb.TagNumber(18)
+  set mergeFutureMonth(MergeFutureMonth value) => $_setField(18, value);
+  @$pb.TagNumber(18)
+  $core.bool hasMergeFutureMonth() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearMergeFutureMonth() => $_clearField(18);
 }
 
 enum HedgeMethod_Method {
@@ -1388,6 +1401,67 @@ class UpdateHedgeRequest extends $pb.GeneratedMessage {
   void clearHedge() => $_clearField(1);
   @$pb.TagNumber(1)
   Hedge ensureHedge() => $_ensure(0);
+}
+
+/// UpdateHedgeMergeFutureMonth 요청
+class UpdateHedgeMergeFutureMonthRequest extends $pb.GeneratedMessage {
+  factory UpdateHedgeMergeFutureMonthRequest({
+    $core.String? name,
+    MergeFutureMonth? mergeFutureMonth,
+  }) {
+    final result = create();
+    if (name != null) result.name = name;
+    if (mergeFutureMonth != null) result.mergeFutureMonth = mergeFutureMonth;
+    return result;
+  }
+
+  UpdateHedgeMergeFutureMonthRequest._();
+
+  factory UpdateHedgeMergeFutureMonthRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory UpdateHedgeMergeFutureMonthRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHedgeMergeFutureMonthRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..e<MergeFutureMonth>(2, _omitFieldNames ? '' : 'mergeFutureMonth', $pb.PbFieldType.OE, defaultOrMaker: MergeFutureMonth.MERGE_FUTURE_MONTH_UNSPECIFIED, valueOf: MergeFutureMonth.valueOf, enumValues: MergeFutureMonth.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateHedgeMergeFutureMonthRequest clone() => UpdateHedgeMergeFutureMonthRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  UpdateHedgeMergeFutureMonthRequest copyWith(void Function(UpdateHedgeMergeFutureMonthRequest) updates) => super.copyWith((message) => updates(message as UpdateHedgeMergeFutureMonthRequest)) as UpdateHedgeMergeFutureMonthRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateHedgeMergeFutureMonthRequest create() => UpdateHedgeMergeFutureMonthRequest._();
+  @$core.override
+  UpdateHedgeMergeFutureMonthRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateHedgeMergeFutureMonthRequest> createRepeated() => $pb.PbList<UpdateHedgeMergeFutureMonthRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateHedgeMergeFutureMonthRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHedgeMergeFutureMonthRequest>(create);
+  static UpdateHedgeMergeFutureMonthRequest? _defaultInstance;
+
+  /// 헷지 리소스 이름 (예: hedges/1)
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => $_clearField(1);
+
+  /// NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
+  @$pb.TagNumber(2)
+  MergeFutureMonth get mergeFutureMonth => $_getN(1);
+  @$pb.TagNumber(2)
+  set mergeFutureMonth(MergeFutureMonth value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasMergeFutureMonth() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMergeFutureMonth() => $_clearField(2);
 }
 
 /// DeleteHedge 요청

@@ -159,6 +159,26 @@ extension type HedgeServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.
+  /// 대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.
+  /// 변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.
+  Future<kdov1hedge.Hedge> updateHedgeMergeFutureMonth(
+    kdov1hedge.UpdateHedgeMergeFutureMonthRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.HedgeService.updateHedgeMergeFutureMonth,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// Hedge 삭제
   Future<googleprotobufempty.Empty> deleteHedge(
     kdov1hedge.DeleteHedgeRequest input, {

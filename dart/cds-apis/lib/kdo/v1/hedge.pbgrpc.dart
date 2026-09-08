@@ -79,6 +79,13 @@ class HedgeServiceClient extends $grpc.Client {
     return $createUnaryCall(_$updateHedge, request, options: options);
   }
 
+  /// ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.
+  /// 대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.
+  /// 변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.
+  $grpc.ResponseFuture<$0.Hedge> updateHedgeMergeFutureMonth($0.UpdateHedgeMergeFutureMonthRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$updateHedgeMergeFutureMonth, request, options: options);
+  }
+
   /// Hedge 삭제
   $grpc.ResponseFuture<$1.Empty> deleteHedge($0.DeleteHedgeRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$deleteHedge, request, options: options);
@@ -142,6 +149,10 @@ class HedgeServiceClient extends $grpc.Client {
   static final _$updateHedge = $grpc.ClientMethod<$0.UpdateHedgeRequest, $0.Hedge>(
       '/kdo.v1.hedge.HedgeService/UpdateHedge',
       ($0.UpdateHedgeRequest value) => value.writeToBuffer(),
+      $0.Hedge.fromBuffer);
+  static final _$updateHedgeMergeFutureMonth = $grpc.ClientMethod<$0.UpdateHedgeMergeFutureMonthRequest, $0.Hedge>(
+      '/kdo.v1.hedge.HedgeService/UpdateHedgeMergeFutureMonth',
+      ($0.UpdateHedgeMergeFutureMonthRequest value) => value.writeToBuffer(),
       $0.Hedge.fromBuffer);
   static final _$deleteHedge = $grpc.ClientMethod<$0.DeleteHedgeRequest, $1.Empty>(
       '/kdo.v1.hedge.HedgeService/DeleteHedge',
@@ -229,6 +240,13 @@ abstract class HedgeServiceBase extends $grpc.Service {
         false,
         false,
         ($core.List<$core.int> value) => $0.UpdateHedgeRequest.fromBuffer(value),
+        ($0.Hedge value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateHedgeMergeFutureMonthRequest, $0.Hedge>(
+        'UpdateHedgeMergeFutureMonth',
+        updateHedgeMergeFutureMonth_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateHedgeMergeFutureMonthRequest.fromBuffer(value),
         ($0.Hedge value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.DeleteHedgeRequest, $1.Empty>(
         'DeleteHedge',
@@ -321,6 +339,12 @@ abstract class HedgeServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.Hedge> updateHedge($grpc.ServiceCall call, $0.UpdateHedgeRequest request);
+
+  $async.Future<$0.Hedge> updateHedgeMergeFutureMonth_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateHedgeMergeFutureMonthRequest> $request) async {
+    return updateHedgeMergeFutureMonth($call, await $request);
+  }
+
+  $async.Future<$0.Hedge> updateHedgeMergeFutureMonth($grpc.ServiceCall call, $0.UpdateHedgeMergeFutureMonthRequest request);
 
   $async.Future<$1.Empty> deleteHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.DeleteHedgeRequest> $request) async {
     return deleteHedge($call, await $request);

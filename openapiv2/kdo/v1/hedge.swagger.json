@@ -454,6 +454,10 @@
                 "isValid": {
                   "type": "boolean",
                   "description": "유효한 모델 여부 — 실행 라우팅 게이트.\nstandalone hedge 는 is_active \u0026\u0026 is_valid 일 때만 사용.\n선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시)."
+                },
+                "mergeFutureMonth": {
+                  "$ref": "#/definitions/hedgeMergeFutureMonth",
+                  "description": "ETF_DECOMPOSITION_SINGLE_FUTURE 전용 병합 대상 월물. 다른 hedge method 면 UNSPECIFIED."
                 }
               },
               "title": "수정할 헷지 정보",
@@ -693,6 +697,57 @@
           "HedgeService"
         ]
       }
+    },
+    "/v1/{name}:updateMergeFutureMonth": {
+      "post": {
+        "summary": "ETF_DECOMPOSITION_SINGLE_FUTURE hedge 의 병합 대상 월물(NEAR/FAR)을 변경한다.\n대상 hedge 의 method 가 ETF_DECOMPOSITION_SINGLE_FUTURE 가 아니면 INVALID_ARGUMENT.\n변경은 DB 반영 + 서버 메모리 hedge 재구성(핫스왑)까지 수행된다.",
+        "operationId": "HedgeService_UpdateHedgeMergeFutureMonth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hedgeHedge"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "헷지 리소스 이름 (예: hedges/1)",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "hedges/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mergeFutureMonth": {
+                  "$ref": "#/definitions/hedgeMergeFutureMonth",
+                  "title": "NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)"
+                }
+              },
+              "title": "UpdateHedgeMergeFutureMonth 요청",
+              "required": [
+                "mergeFutureMonth"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "HedgeService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -886,6 +941,10 @@
         "isValid": {
           "type": "boolean",
           "description": "유효한 모델 여부 — 실행 라우팅 게이트.\nstandalone hedge 는 is_active \u0026\u0026 is_valid 일 때만 사용.\n선물 LP 내재화 헷지는 is_valid=true 일 때만 사용 (is_active 무시)."
+        },
+        "mergeFutureMonth": {
+          "$ref": "#/definitions/hedgeMergeFutureMonth",
+          "description": "ETF_DECOMPOSITION_SINGLE_FUTURE 전용 병합 대상 월물. 다른 hedge method 면 UNSPECIFIED."
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",
@@ -1136,6 +1195,16 @@
         }
       },
       "title": "LookupHedge 응답"
+    },
+    "hedgeMergeFutureMonth": {
+      "type": "string",
+      "enum": [
+        "MERGE_FUTURE_MONTH_UNSPECIFIED",
+        "MERGE_FUTURE_MONTH_NEAR",
+        "MERGE_FUTURE_MONTH_FAR"
+      ],
+      "default": "MERGE_FUTURE_MONTH_UNSPECIFIED",
+      "description": "ETF_DECOMPOSITION_SINGLE_FUTURE 병합 대상 월물.\nPDF 분해 결과에 같은 underlying 선물이 복수(근월+원월)면 지정 월물 하나로 수량 1:1 합산.\n\n - MERGE_FUTURE_MONTH_NEAR: 분해 결과에 존재하는 선물 중 maturity_date 최소 월물로 합산\n - MERGE_FUTURE_MONTH_FAR: 분해 결과에 존재하는 선물 중 maturity_date 최대 월물로 합산"
     },
     "hedgeOrderTpCode": {
       "type": "string",
