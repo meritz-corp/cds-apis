@@ -95,6 +95,49 @@ class PairV2ExecutionOutcome extends $pb.ProtobufEnum {
   const PairV2ExecutionOutcome._(super.value, super.name);
 }
 
+class PairV2BlockReason extends $pb.ProtobufEnum {
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_UNSPECIFIED = PairV2BlockReason._(0, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_UNSPECIFIED');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_NONE = PairV2BlockReason._(1, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_NONE');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_PAUSED = PairV2BlockReason._(2, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_PAUSED');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE = PairV2BlockReason._(3, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_STALE_QUOTE = PairV2BlockReason._(4, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_STALE_QUOTE');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION = PairV2BlockReason._(5, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_SPREAD = PairV2BlockReason._(6, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_SPREAD');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_COOLDOWN = PairV2BlockReason._(7, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_COOLDOWN');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_TRADING_WINDOW = PairV2BlockReason._(8, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_TRADING_WINDOW');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT = PairV2BlockReason._(9, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_FILL_RATE = PairV2BlockReason._(10, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_FILL_RATE');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_SLIPPAGE = PairV2BlockReason._(11, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_SLIPPAGE');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT = PairV2BlockReason._(12, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_ORDER_VALIDATION = PairV2BlockReason._(13, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_ORDER_VALIDATION');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE = PairV2BlockReason._(14, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE');
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_RUNTIME_ERROR = PairV2BlockReason._(15, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_RUNTIME_ERROR');
+
+  static const $core.List<PairV2BlockReason> values = <PairV2BlockReason> [
+    PAIR_V2_BLOCK_REASON_UNSPECIFIED,
+    PAIR_V2_BLOCK_REASON_NONE,
+    PAIR_V2_BLOCK_REASON_PAUSED,
+    PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE,
+    PAIR_V2_BLOCK_REASON_STALE_QUOTE,
+    PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION,
+    PAIR_V2_BLOCK_REASON_SPREAD,
+    PAIR_V2_BLOCK_REASON_COOLDOWN,
+    PAIR_V2_BLOCK_REASON_TRADING_WINDOW,
+    PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT,
+    PAIR_V2_BLOCK_REASON_FILL_RATE,
+    PAIR_V2_BLOCK_REASON_SLIPPAGE,
+    PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT,
+    PAIR_V2_BLOCK_REASON_ORDER_VALIDATION,
+    PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE,
+    PAIR_V2_BLOCK_REASON_RUNTIME_ERROR,
+  ];
+
+  static final $core.List<PairV2BlockReason?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 15);
+  static PairV2BlockReason? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const PairV2BlockReason._(super.value, super.name);
+}
+
 /// 페어의 두 다리 식별자 (base / counter)
 class PairV2Slot extends $pb.ProtobufEnum {
   static const PairV2Slot PAIR_V2_SLOT_UNSPECIFIED = PairV2Slot._(0, _omitEnumNames ? '' : 'PAIR_V2_SLOT_UNSPECIFIED');

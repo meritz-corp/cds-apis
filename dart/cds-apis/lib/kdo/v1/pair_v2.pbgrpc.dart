@@ -88,7 +88,9 @@ class PairV2ServiceClient extends $grpc.Client {
   }
 
   /// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
-  /// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+  /// PAUSED 상태에서도 허용하며 자동발주를 켜지 않는다. 중복 대기 요청은 FAILED_PRECONDITION.
+  /// 시세 유효성(양다리 5초 이내), 연속매매, 수량 상한, 주문/잔고 검증은 유지한다.
+  /// 대기 요청은 5초 뒤 만료된다. accepted는 접수이고 결과는 실행로그/상태 스트림에서 확인한다.
   $grpc.ResponseFuture<$0.LaunchPairV2OnceResponse> launchPairV2Once($0.LaunchPairV2OnceRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$launchPairV2Once, request, options: options);
   }
@@ -112,6 +114,12 @@ class PairV2ServiceClient extends $grpc.Client {
   /// leg(base/counter)별 누적 집계 (상단 요약)
   $grpc.ResponseFuture<$0.GetPairV2OrderSummaryResponse> getPairV2OrderSummary($0.GetPairV2OrderSummaryRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getPairV2OrderSummary, request, options: options);
+  }
+
+  /// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
+  /// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
+  $grpc.ResponseFuture<$0.PairV2> resetPairV2Session($0.ResetPairV2SessionRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$resetPairV2Session, request, options: options);
   }
 
     // method descriptors
@@ -172,6 +180,10 @@ class PairV2ServiceClient extends $grpc.Client {
       '/kdo.v1.pair_v2.PairV2Service/GetPairV2OrderSummary',
       ($0.GetPairV2OrderSummaryRequest value) => value.writeToBuffer(),
       $0.GetPairV2OrderSummaryResponse.fromBuffer);
+  static final _$resetPairV2Session = $grpc.ClientMethod<$0.ResetPairV2SessionRequest, $0.PairV2>(
+      '/kdo.v1.pair_v2.PairV2Service/ResetPairV2Session',
+      ($0.ResetPairV2SessionRequest value) => value.writeToBuffer(),
+      $0.PairV2.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.pair_v2.PairV2Service')
@@ -277,6 +289,13 @@ abstract class PairV2ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetPairV2OrderSummaryRequest.fromBuffer(value),
         ($0.GetPairV2OrderSummaryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ResetPairV2SessionRequest, $0.PairV2>(
+        'ResetPairV2Session',
+        resetPairV2Session_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ResetPairV2SessionRequest.fromBuffer(value),
+        ($0.PairV2 value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.PairV2> getPairV2_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPairV2Request> $request) async {
@@ -362,5 +381,11 @@ abstract class PairV2ServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetPairV2OrderSummaryResponse> getPairV2OrderSummary($grpc.ServiceCall call, $0.GetPairV2OrderSummaryRequest request);
+
+  $async.Future<$0.PairV2> resetPairV2Session_Pre($grpc.ServiceCall $call, $async.Future<$0.ResetPairV2SessionRequest> $request) async {
+    return resetPairV2Session($call, await $request);
+  }
+
+  $async.Future<$0.PairV2> resetPairV2Session($grpc.ServiceCall call, $0.ResetPairV2SessionRequest request);
 
 }

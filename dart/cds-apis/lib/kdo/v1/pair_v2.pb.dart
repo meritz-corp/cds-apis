@@ -48,6 +48,8 @@ class PairV2 extends $pb.GeneratedMessage {
     $core.String? tradingWindowStart,
     $core.String? tradingWindowEnd,
     $core.bool? slippageGuard,
+    $core.bool? allowBorrowedSell,
+    $core.double? minFillRatePct,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -69,6 +71,8 @@ class PairV2 extends $pb.GeneratedMessage {
     if (tradingWindowStart != null) result.tradingWindowStart = tradingWindowStart;
     if (tradingWindowEnd != null) result.tradingWindowEnd = tradingWindowEnd;
     if (slippageGuard != null) result.slippageGuard = slippageGuard;
+    if (allowBorrowedSell != null) result.allowBorrowedSell = allowBorrowedSell;
+    if (minFillRatePct != null) result.minFillRatePct = minFillRatePct;
     return result;
   }
 
@@ -97,6 +101,8 @@ class PairV2 extends $pb.GeneratedMessage {
     ..aOS(17, _omitFieldNames ? '' : 'tradingWindowStart')
     ..aOS(18, _omitFieldNames ? '' : 'tradingWindowEnd')
     ..aOB(19, _omitFieldNames ? '' : 'slippageGuard')
+    ..aOB(20, _omitFieldNames ? '' : 'allowBorrowedSell')
+    ..a<$core.double>(21, _omitFieldNames ? '' : 'minFillRatePct', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -169,7 +175,7 @@ class PairV2 extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   PairV2Entry ensureBase() => $_ensure(4);
 
-  /// Counter 다리. quantity 는 무시(런타임 = base.quantity × hedge_ratio).
+  /// Counter 다리. quantity는 명시적인 1회 발주량으로 그대로 사용한다.
   @$pb.TagNumber(6)
   PairV2Entry get counter => $_getN(5);
   @$pb.TagNumber(6)
@@ -282,7 +288,8 @@ class PairV2 extends $pb.GeneratedMessage {
   $2.Timestamp ensureUpdateTime() => $_ensure(14);
 
   /// 중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).
-  /// 수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작.
+  /// 수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.
+  /// 설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (서버 프로세스 내 세션).
   @$pb.TagNumber(16)
   $core.int get pauseLaunchNo => $_getIZ(15);
   @$pb.TagNumber(16)
@@ -314,7 +321,7 @@ class PairV2 extends $pb.GeneratedMessage {
   @$pb.TagNumber(18)
   void clearTradingWindowEnd() => $_clearField(18);
 
-  /// 슬리피지 가드 - true 면 발사 직전 양다리의 상대호가 1호가 잔량이 발주수량 이상일 때만
+  /// 슬리피지 가드 - true 면 양다리의 발주 호가(BEST_TAKE=상대, BEST_MAKE=자기) 잔량이 발주수량 이상일 때만
   /// 자동 발사한다 (잔량 부족 = 즉시 체결 불가/슬리피지 위험 → 발사 보류).
   /// 수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false.
   @$pb.TagNumber(19)
@@ -325,6 +332,29 @@ class PairV2 extends $pb.GeneratedMessage {
   $core.bool hasSlippageGuard() => $_has(18);
   @$pb.TagNumber(19)
   void clearSlippageGuard() => $_clearField(19);
+
+  /// 일반 매도 가능 수량 부족 시 차입 재고 사용 허용. 기본 false.
+  /// 수동/자동 모두 적용하며, 체크와 예약은 동일 잔고 잠금 아래 수행한다.
+  @$pb.TagNumber(20)
+  $core.bool get allowBorrowedSell => $_getBF(19);
+  @$pb.TagNumber(20)
+  set allowBorrowedSell($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasAllowBorrowedSell() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearAllowBorrowedSell() => $_clearField(20);
+
+  /// 이전 회차 양다리 체결률의 최솟값 >= 설정값일 때 다음 자동 발사 허용.
+  /// 0..100, 미설정=제한 없음, 첫 회차=통과. 수동 발사는 무시한다.
+  /// 분모는 해당 회차 최초 발주수량. 정정은 중복 집계하지 않고 취소/거부는 체결로 세지 않는다.
+  @$pb.TagNumber(21)
+  $core.double get minFillRatePct => $_getN(20);
+  @$pb.TagNumber(21)
+  set minFillRatePct($core.double value) => $_setDouble(20, value);
+  @$pb.TagNumber(21)
+  $core.bool hasMinFillRatePct() => $_has(20);
+  @$pb.TagNumber(21)
+  void clearMinFillRatePct() => $_clearField(21);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).
@@ -412,7 +442,7 @@ class PairV2Entry extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSide() => $_clearField(3);
 
-  /// 주문 수량. base 는 1회 발주량(필수), counter 는 무시(런타임 = base.quantity × hedge_ratio).
+  /// 주문 수량. base/counter 모두 명시적인 1회 발주량.
   @$pb.TagNumber(4)
   $fixnum.Int64 get quantity => $_getI64(3);
   @$pb.TagNumber(4)
@@ -1677,6 +1707,52 @@ class LaunchPairV2OnceResponse extends $pb.GeneratedMessage {
   void clearReason() => $_clearField(2);
 }
 
+class ResetPairV2SessionRequest extends $pb.GeneratedMessage {
+  factory ResetPairV2SessionRequest({
+    $core.String? pairV2,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    return result;
+  }
+
+  ResetPairV2SessionRequest._();
+
+  factory ResetPairV2SessionRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ResetPairV2SessionRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResetPairV2SessionRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResetPairV2SessionRequest clone() => ResetPairV2SessionRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ResetPairV2SessionRequest copyWith(void Function(ResetPairV2SessionRequest) updates) => super.copyWith((message) => updates(message as ResetPairV2SessionRequest)) as ResetPairV2SessionRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ResetPairV2SessionRequest create() => ResetPairV2SessionRequest._();
+  @$core.override
+  ResetPairV2SessionRequest createEmptyInstance() => create();
+  static $pb.PbList<ResetPairV2SessionRequest> createRepeated() => $pb.PbList<ResetPairV2SessionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ResetPairV2SessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPairV2SessionRequest>(create);
+  static ResetPairV2SessionRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+}
+
 class CancelPairV2ResidualRequest extends $pb.GeneratedMessage {
   factory CancelPairV2ResidualRequest({
     $core.String? pairV2,
@@ -2026,6 +2102,10 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     $core.double? currentSpread,
     $fixnum.Int64? baseTopQuantity,
     $fixnum.Int64? counterTopQuantity,
+    PairV2BlockReason? blockReason,
+    $core.double? previousFillRatePct,
+    $core.bool? manualLaunchPending,
+    $core.String? lastLaunchError,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
@@ -2035,6 +2115,10 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     if (currentSpread != null) result.currentSpread = currentSpread;
     if (baseTopQuantity != null) result.baseTopQuantity = baseTopQuantity;
     if (counterTopQuantity != null) result.counterTopQuantity = counterTopQuantity;
+    if (blockReason != null) result.blockReason = blockReason;
+    if (previousFillRatePct != null) result.previousFillRatePct = previousFillRatePct;
+    if (manualLaunchPending != null) result.manualLaunchPending = manualLaunchPending;
+    if (lastLaunchError != null) result.lastLaunchError = lastLaunchError;
     return result;
   }
 
@@ -2051,6 +2135,10 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.double>(5, _omitFieldNames ? '' : 'currentSpread', $pb.PbFieldType.OD)
     ..aInt64(6, _omitFieldNames ? '' : 'baseTopQuantity')
     ..aInt64(7, _omitFieldNames ? '' : 'counterTopQuantity')
+    ..e<PairV2BlockReason>(8, _omitFieldNames ? '' : 'blockReason', $pb.PbFieldType.OE, defaultOrMaker: PairV2BlockReason.PAIR_V2_BLOCK_REASON_UNSPECIFIED, valueOf: PairV2BlockReason.valueOf, enumValues: PairV2BlockReason.values)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'previousFillRatePct', $pb.PbFieldType.OD)
+    ..aOB(10, _omitFieldNames ? '' : 'manualLaunchPending')
+    ..aOS(11, _omitFieldNames ? '' : 'lastLaunchError')
     ..hasRequiredFields = false
   ;
 
@@ -2103,7 +2191,7 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $2.Timestamp ensureUpdatedAt() => $_ensure(2);
 
-  /// 이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)
+  /// 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate 시 유지)
   @$pb.TagNumber(4)
   $core.int get launchCount => $_getIZ(3);
   @$pb.TagNumber(4)
@@ -2143,6 +2231,45 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasCounterTopQuantity() => $_has(6);
   @$pb.TagNumber(7)
   void clearCounterTopQuantity() => $_clearField(7);
+
+  /// 현재 자동 발사를 막는 주된 사유. 여러 조건 미충족 시 서버 판정 우선순위의 첫 사유.
+  @$pb.TagNumber(8)
+  PairV2BlockReason get blockReason => $_getN(7);
+  @$pb.TagNumber(8)
+  set blockReason(PairV2BlockReason value) => $_setField(8, value);
+  @$pb.TagNumber(8)
+  $core.bool hasBlockReason() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBlockReason() => $_clearField(8);
+
+  /// 이전 회차 양다리 체결률 중 작은 값. 발사 이력이 없으면 미설정.
+  @$pb.TagNumber(9)
+  $core.double get previousFillRatePct => $_getN(8);
+  @$pb.TagNumber(9)
+  set previousFillRatePct($core.double value) => $_setDouble(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasPreviousFillRatePct() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearPreviousFillRatePct() => $_clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.bool get manualLaunchPending => $_getBF(9);
+  @$pb.TagNumber(10)
+  set manualLaunchPending($core.bool value) => $_setBool(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasManualLaunchPending() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearManualLaunchPending() => $_clearField(10);
+
+  /// 최근 발사 요청 오류. 다음 발주 성공/세션 초기화 시 해제.
+  @$pb.TagNumber(11)
+  $core.String get lastLaunchError => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set lastLaunchError($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasLastLaunchError() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearLastLaunchError() => $_clearField(11);
 }
 
 /// 페어 주문 추적 행

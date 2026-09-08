@@ -72,6 +72,44 @@ final $typed_data.Uint8List pairV2ExecutionOutcomeDescriptor = $convert.base64De
     'VYRUNVVElPTl9PVVRDT01FX1BBUlRJQUxfRkFJTFVSRRAFEiQKIFBBSVJfVjJfRVhFQ1VUSU9O'
     'X09VVENPTUVfRkFJTEVEEAY=');
 
+@$core.Deprecated('Use pairV2BlockReasonDescriptor instead')
+const PairV2BlockReason$json = {
+  '1': 'PairV2BlockReason',
+  '2': [
+    {'1': 'PAIR_V2_BLOCK_REASON_UNSPECIFIED', '2': 0},
+    {'1': 'PAIR_V2_BLOCK_REASON_NONE', '2': 1},
+    {'1': 'PAIR_V2_BLOCK_REASON_PAUSED', '2': 2},
+    {'1': 'PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE', '2': 3},
+    {'1': 'PAIR_V2_BLOCK_REASON_STALE_QUOTE', '2': 4},
+    {'1': 'PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION', '2': 5},
+    {'1': 'PAIR_V2_BLOCK_REASON_SPREAD', '2': 6},
+    {'1': 'PAIR_V2_BLOCK_REASON_COOLDOWN', '2': 7},
+    {'1': 'PAIR_V2_BLOCK_REASON_TRADING_WINDOW', '2': 8},
+    {'1': 'PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT', '2': 9},
+    {'1': 'PAIR_V2_BLOCK_REASON_FILL_RATE', '2': 10},
+    {'1': 'PAIR_V2_BLOCK_REASON_SLIPPAGE', '2': 11},
+    {'1': 'PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT', '2': 12},
+    {'1': 'PAIR_V2_BLOCK_REASON_ORDER_VALIDATION', '2': 13},
+    {'1': 'PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE', '2': 14},
+    {'1': 'PAIR_V2_BLOCK_REASON_RUNTIME_ERROR', '2': 15},
+  ],
+};
+
+/// Descriptor for `PairV2BlockReason`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List pairV2BlockReasonDescriptor = $convert.base64Decode(
+    'ChFQYWlyVjJCbG9ja1JlYXNvbhIkCiBQQUlSX1YyX0JMT0NLX1JFQVNPTl9VTlNQRUNJRklFRB'
+    'AAEh0KGVBBSVJfVjJfQkxPQ0tfUkVBU09OX05PTkUQARIfChtQQUlSX1YyX0JMT0NLX1JFQVNP'
+    'Tl9QQVVTRUQQAhIqCiZQQUlSX1YyX0JMT0NLX1JFQVNPTl9QUklDRV9VTkFWQUlMQUJMRRADEi'
+    'QKIFBBSVJfVjJfQkxPQ0tfUkVBU09OX1NUQUxFX1FVT1RFEAQSLworUEFJUl9WMl9CTE9DS19S'
+    'RUFTT05fTk9OX0NPTlRJTlVPVVNfU0VTU0lPThAFEh8KG1BBSVJfVjJfQkxPQ0tfUkVBU09OX1'
+    'NQUkVBRBAGEiEKHVBBSVJfVjJfQkxPQ0tfUkVBU09OX0NPT0xET1dOEAcSJwojUEFJUl9WMl9C'
+    'TE9DS19SRUFTT05fVFJBRElOR19XSU5ET1cQCBIlCiFQQUlSX1YyX0JMT0NLX1JFQVNPTl9MQV'
+    'VOQ0hfTElNSVQQCRIiCh5QQUlSX1YyX0JMT0NLX1JFQVNPTl9GSUxMX1JBVEUQChIhCh1QQUlS'
+    'X1YyX0JMT0NLX1JFQVNPTl9TTElQUEFHRRALEicKI1BBSVJfVjJfQkxPQ0tfUkVBU09OX1FVQU'
+    '5USVRZX0xJTUlUEAwSKQolUEFJUl9WMl9CTE9DS19SRUFTT05fT1JERVJfVkFMSURBVElPThAN'
+    'EigKJFBBSVJfVjJfQkxPQ0tfUkVBU09OX1BBUlRJQUxfRkFJTFVSRRAOEiYKIlBBSVJfVjJfQk'
+    'xPQ0tfUkVBU09OX1JVTlRJTUVfRVJST1IQDw==');
+
 @$core.Deprecated('Use pairV2SlotDescriptor instead')
 const PairV2Slot$json = {
   '1': 'PairV2Slot',
@@ -134,12 +172,15 @@ const PairV2$json = {
     {'1': 'trading_window_start', '3': 17, '4': 1, '5': 9, '9': 1, '10': 'tradingWindowStart', '17': true},
     {'1': 'trading_window_end', '3': 18, '4': 1, '5': 9, '9': 2, '10': 'tradingWindowEnd', '17': true},
     {'1': 'slippage_guard', '3': 19, '4': 1, '5': 8, '10': 'slippageGuard'},
+    {'1': 'allow_borrowed_sell', '3': 20, '4': 1, '5': 8, '10': 'allowBorrowedSell'},
+    {'1': 'min_fill_rate_pct', '3': 21, '4': 1, '5': 1, '9': 3, '10': 'minFillRatePct', '17': true},
   ],
   '7': {},
   '8': [
     {'1': '_pause_launch_no'},
     {'1': '_trading_window_start'},
     {'1': '_trading_window_end'},
+    {'1': '_min_fill_rate_pct'},
   ],
 };
 
@@ -161,9 +202,11 @@ final $typed_data.Uint8List pairV2Descriptor = $convert.base64Decode(
     'hfbm8YECABKA1IAFINcGF1c2VMYXVuY2hOb4gBARI1ChR0cmFkaW5nX3dpbmRvd19zdGFydBgR'
     'IAEoCUgBUhJ0cmFkaW5nV2luZG93U3RhcnSIAQESMQoSdHJhZGluZ193aW5kb3dfZW5kGBIgAS'
     'gJSAJSEHRyYWRpbmdXaW5kb3dFbmSIAQESJQoOc2xpcHBhZ2VfZ3VhcmQYEyABKAhSDXNsaXBw'
-    'YWdlR3VhcmQ6L+pBLAoWa2RvLmNkc2FwaXMueHl6L1BhaXJWMhIScGFpcl92MnMve3BhaXJfdj'
-    'J9QhIKEF9wYXVzZV9sYXVuY2hfbm9CFwoVX3RyYWRpbmdfd2luZG93X3N0YXJ0QhUKE190cmFk'
-    'aW5nX3dpbmRvd19lbmQ=');
+    'YWdlR3VhcmQSLgoTYWxsb3dfYm9ycm93ZWRfc2VsbBgUIAEoCFIRYWxsb3dCb3Jyb3dlZFNlbG'
+    'wSLgoRbWluX2ZpbGxfcmF0ZV9wY3QYFSABKAFIA1IObWluRmlsbFJhdGVQY3SIAQE6L+pBLAoW'
+    'a2RvLmNkc2FwaXMueHl6L1BhaXJWMhIScGFpcl92MnMve3BhaXJfdjJ9QhIKEF9wYXVzZV9sYX'
+    'VuY2hfbm9CFwoVX3RyYWRpbmdfd2luZG93X3N0YXJ0QhUKE190cmFkaW5nX3dpbmRvd19lbmRC'
+    'FAoSX21pbl9maWxsX3JhdGVfcGN0');
 
 @$core.Deprecated('Use pairV2EntryDescriptor instead')
 const PairV2Entry$json = {
@@ -485,6 +528,19 @@ final $typed_data.Uint8List launchPairV2OnceResponseDescriptor = $convert.base64
     'ChhMYXVuY2hQYWlyVjJPbmNlUmVzcG9uc2USGgoIYWNjZXB0ZWQYASABKAhSCGFjY2VwdGVkEh'
     'YKBnJlYXNvbhgCIAEoCVIGcmVhc29u');
 
+@$core.Deprecated('Use resetPairV2SessionRequestDescriptor instead')
+const ResetPairV2SessionRequest$json = {
+  '1': 'ResetPairV2SessionRequest',
+  '2': [
+    {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pairV2'},
+  ],
+};
+
+/// Descriptor for `ResetPairV2SessionRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List resetPairV2SessionRequestDescriptor = $convert.base64Decode(
+    'ChlSZXNldFBhaXJWMlNlc3Npb25SZXF1ZXN0EjgKB3BhaXJfdjIYASABKAlCH+JBAQL6QRgKFm'
+    'tkby5jZHNhcGlzLnh5ei9QYWlyVjJSBnBhaXJWMg==');
+
 @$core.Deprecated('Use cancelPairV2ResidualRequestDescriptor instead')
 const CancelPairV2ResidualRequest$json = {
   '1': 'CancelPairV2ResidualRequest',
@@ -584,11 +640,17 @@ const PairV2StatusUpdate$json = {
     {'1': 'current_spread', '3': 5, '4': 1, '5': 1, '9': 0, '10': 'currentSpread', '17': true},
     {'1': 'base_top_quantity', '3': 6, '4': 1, '5': 3, '9': 1, '10': 'baseTopQuantity', '17': true},
     {'1': 'counter_top_quantity', '3': 7, '4': 1, '5': 3, '9': 2, '10': 'counterTopQuantity', '17': true},
+    {'1': 'block_reason', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2BlockReason', '10': 'blockReason'},
+    {'1': 'previous_fill_rate_pct', '3': 9, '4': 1, '5': 1, '9': 3, '10': 'previousFillRatePct', '17': true},
+    {'1': 'manual_launch_pending', '3': 10, '4': 1, '5': 8, '10': 'manualLaunchPending'},
+    {'1': 'last_launch_error', '3': 11, '4': 1, '5': 9, '9': 4, '10': 'lastLaunchError', '17': true},
   ],
   '8': [
     {'1': '_current_spread'},
     {'1': '_base_top_quantity'},
     {'1': '_counter_top_quantity'},
+    {'1': '_previous_fill_rate_pct'},
+    {'1': '_last_launch_error'},
   ],
 };
 
@@ -600,8 +662,13 @@ final $typed_data.Uint8List pairV2StatusUpdateDescriptor = $convert.base64Decode
     'xhdW5jaF9jb3VudBgEIAEoDVILbGF1bmNoQ291bnQSKgoOY3VycmVudF9zcHJlYWQYBSABKAFI'
     'AFINY3VycmVudFNwcmVhZIgBARIvChFiYXNlX3RvcF9xdWFudGl0eRgGIAEoA0gBUg9iYXNlVG'
     '9wUXVhbnRpdHmIAQESNQoUY291bnRlcl90b3BfcXVhbnRpdHkYByABKANIAlISY291bnRlclRv'
-    'cFF1YW50aXR5iAEBQhEKD19jdXJyZW50X3NwcmVhZEIUChJfYmFzZV90b3BfcXVhbnRpdHlCFw'
-    'oVX2NvdW50ZXJfdG9wX3F1YW50aXR5');
+    'cFF1YW50aXR5iAEBEkQKDGJsb2NrX3JlYXNvbhgIIAEoDjIhLmtkby52MS5wYWlyX3YyLlBhaX'
+    'JWMkJsb2NrUmVhc29uUgtibG9ja1JlYXNvbhI4ChZwcmV2aW91c19maWxsX3JhdGVfcGN0GAkg'
+    'ASgBSANSE3ByZXZpb3VzRmlsbFJhdGVQY3SIAQESMgoVbWFudWFsX2xhdW5jaF9wZW5kaW5nGA'
+    'ogASgIUhNtYW51YWxMYXVuY2hQZW5kaW5nEi8KEWxhc3RfbGF1bmNoX2Vycm9yGAsgASgJSARS'
+    'D2xhc3RMYXVuY2hFcnJvcogBAUIRCg9fY3VycmVudF9zcHJlYWRCFAoSX2Jhc2VfdG9wX3F1YW'
+    '50aXR5QhcKFV9jb3VudGVyX3RvcF9xdWFudGl0eUIZChdfcHJldmlvdXNfZmlsbF9yYXRlX3Bj'
+    'dEIUChJfbGFzdF9sYXVuY2hfZXJyb3I=');
 
 @$core.Deprecated('Use pairV2OrderDescriptor instead')
 const PairV2Order$json = {

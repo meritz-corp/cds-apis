@@ -2143,6 +2143,12 @@ impl serde::Serialize for PairV2 {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -2207,6 +2213,12 @@ impl serde::Serialize for PairV2 {
         if true {
             struct_ser.serialize_field("slippage_guard", &self.slippage_guard)?;
         }
+        if true {
+            struct_ser.serialize_field("allow_borrowed_sell", &self.allow_borrowed_sell)?;
+        }
+        if let Some(v) = self.min_fill_rate_pct.as_ref() {
+            struct_ser.serialize_field("min_fill_rate_pct", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2248,6 +2260,10 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             "tradingWindowEnd",
             "slippage_guard",
             "slippageGuard",
+            "allow_borrowed_sell",
+            "allowBorrowedSell",
+            "min_fill_rate_pct",
+            "minFillRatePct",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2271,6 +2287,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             TradingWindowStart,
             TradingWindowEnd,
             SlippageGuard,
+            AllowBorrowedSell,
+            MinFillRatePct,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2312,6 +2330,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             "tradingWindowStart" | "trading_window_start" => Ok(GeneratedField::TradingWindowStart),
                             "tradingWindowEnd" | "trading_window_end" => Ok(GeneratedField::TradingWindowEnd),
                             "slippageGuard" | "slippage_guard" => Ok(GeneratedField::SlippageGuard),
+                            "allowBorrowedSell" | "allow_borrowed_sell" => Ok(GeneratedField::AllowBorrowedSell),
+                            "minFillRatePct" | "min_fill_rate_pct" => Ok(GeneratedField::MinFillRatePct),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2350,6 +2370,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                 let mut trading_window_start__ = None;
                 let mut trading_window_end__ = None;
                 let mut slippage_guard__ = None;
+                let mut allow_borrowed_sell__ = None;
+                let mut min_fill_rate_pct__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -2480,6 +2502,20 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             }
                             slippage_guard__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::AllowBorrowedSell => {
+                            if allow_borrowed_sell__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("allowBorrowedSell"));
+                            }
+                            allow_borrowed_sell__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::MinFillRatePct => {
+                            if min_fill_rate_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minFillRatePct"));
+                            }
+                            min_fill_rate_pct__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2505,6 +2541,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                     trading_window_start: trading_window_start__,
                     trading_window_end: trading_window_end__,
                     slippage_guard: slippage_guard__.unwrap_or_default(),
+                    allow_borrowed_sell: allow_borrowed_sell__.unwrap_or_default(),
+                    min_fill_rate_pct: min_fill_rate_pct__,
                 })
             }
         }
@@ -2648,6 +2686,119 @@ impl<'de> serde::Deserialize<'de> for PairV2AmendedOrder {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2AmendedOrder", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PairV2BlockReason {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "PAIR_V2_BLOCK_REASON_UNSPECIFIED",
+            Self::None => "PAIR_V2_BLOCK_REASON_NONE",
+            Self::Paused => "PAIR_V2_BLOCK_REASON_PAUSED",
+            Self::PriceUnavailable => "PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE",
+            Self::StaleQuote => "PAIR_V2_BLOCK_REASON_STALE_QUOTE",
+            Self::NonContinuousSession => "PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION",
+            Self::Spread => "PAIR_V2_BLOCK_REASON_SPREAD",
+            Self::Cooldown => "PAIR_V2_BLOCK_REASON_COOLDOWN",
+            Self::TradingWindow => "PAIR_V2_BLOCK_REASON_TRADING_WINDOW",
+            Self::LaunchLimit => "PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT",
+            Self::FillRate => "PAIR_V2_BLOCK_REASON_FILL_RATE",
+            Self::Slippage => "PAIR_V2_BLOCK_REASON_SLIPPAGE",
+            Self::QuantityLimit => "PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT",
+            Self::OrderValidation => "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION",
+            Self::PartialFailure => "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE",
+            Self::RuntimeError => "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2BlockReason {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "PAIR_V2_BLOCK_REASON_UNSPECIFIED",
+            "PAIR_V2_BLOCK_REASON_NONE",
+            "PAIR_V2_BLOCK_REASON_PAUSED",
+            "PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE",
+            "PAIR_V2_BLOCK_REASON_STALE_QUOTE",
+            "PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION",
+            "PAIR_V2_BLOCK_REASON_SPREAD",
+            "PAIR_V2_BLOCK_REASON_COOLDOWN",
+            "PAIR_V2_BLOCK_REASON_TRADING_WINDOW",
+            "PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT",
+            "PAIR_V2_BLOCK_REASON_FILL_RATE",
+            "PAIR_V2_BLOCK_REASON_SLIPPAGE",
+            "PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT",
+            "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION",
+            "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE",
+            "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2BlockReason;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "PAIR_V2_BLOCK_REASON_UNSPECIFIED" => Ok(PairV2BlockReason::Unspecified),
+                    "PAIR_V2_BLOCK_REASON_NONE" => Ok(PairV2BlockReason::None),
+                    "PAIR_V2_BLOCK_REASON_PAUSED" => Ok(PairV2BlockReason::Paused),
+                    "PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE" => Ok(PairV2BlockReason::PriceUnavailable),
+                    "PAIR_V2_BLOCK_REASON_STALE_QUOTE" => Ok(PairV2BlockReason::StaleQuote),
+                    "PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION" => Ok(PairV2BlockReason::NonContinuousSession),
+                    "PAIR_V2_BLOCK_REASON_SPREAD" => Ok(PairV2BlockReason::Spread),
+                    "PAIR_V2_BLOCK_REASON_COOLDOWN" => Ok(PairV2BlockReason::Cooldown),
+                    "PAIR_V2_BLOCK_REASON_TRADING_WINDOW" => Ok(PairV2BlockReason::TradingWindow),
+                    "PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT" => Ok(PairV2BlockReason::LaunchLimit),
+                    "PAIR_V2_BLOCK_REASON_FILL_RATE" => Ok(PairV2BlockReason::FillRate),
+                    "PAIR_V2_BLOCK_REASON_SLIPPAGE" => Ok(PairV2BlockReason::Slippage),
+                    "PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT" => Ok(PairV2BlockReason::QuantityLimit),
+                    "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION" => Ok(PairV2BlockReason::OrderValidation),
+                    "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE" => Ok(PairV2BlockReason::PartialFailure),
+                    "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR" => Ok(PairV2BlockReason::RuntimeError),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairV2Entry {
@@ -4812,6 +4963,18 @@ impl serde::Serialize for PairV2StatusUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2StatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
@@ -4840,6 +5003,20 @@ impl serde::Serialize for PairV2StatusUpdate {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("counter_top_quantity", ToString::to_string(&v).as_str())?;
         }
+        if true {
+            let v = PairV2BlockReason::try_from(self.block_reason)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.block_reason)))?;
+            struct_ser.serialize_field("block_reason", &v)?;
+        }
+        if let Some(v) = self.previous_fill_rate_pct.as_ref() {
+            struct_ser.serialize_field("previous_fill_rate_pct", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("manual_launch_pending", &self.manual_launch_pending)?;
+        }
+        if let Some(v) = self.last_launch_error.as_ref() {
+            struct_ser.serialize_field("last_launch_error", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4863,6 +5040,14 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             "baseTopQuantity",
             "counter_top_quantity",
             "counterTopQuantity",
+            "block_reason",
+            "blockReason",
+            "previous_fill_rate_pct",
+            "previousFillRatePct",
+            "manual_launch_pending",
+            "manualLaunchPending",
+            "last_launch_error",
+            "lastLaunchError",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4874,6 +5059,10 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             CurrentSpread,
             BaseTopQuantity,
             CounterTopQuantity,
+            BlockReason,
+            PreviousFillRatePct,
+            ManualLaunchPending,
+            LastLaunchError,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4903,6 +5092,10 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                             "currentSpread" | "current_spread" => Ok(GeneratedField::CurrentSpread),
                             "baseTopQuantity" | "base_top_quantity" => Ok(GeneratedField::BaseTopQuantity),
                             "counterTopQuantity" | "counter_top_quantity" => Ok(GeneratedField::CounterTopQuantity),
+                            "blockReason" | "block_reason" => Ok(GeneratedField::BlockReason),
+                            "previousFillRatePct" | "previous_fill_rate_pct" => Ok(GeneratedField::PreviousFillRatePct),
+                            "manualLaunchPending" | "manual_launch_pending" => Ok(GeneratedField::ManualLaunchPending),
+                            "lastLaunchError" | "last_launch_error" => Ok(GeneratedField::LastLaunchError),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4929,6 +5122,10 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                 let mut current_spread__ = None;
                 let mut base_top_quantity__ = None;
                 let mut counter_top_quantity__ = None;
+                let mut block_reason__ = None;
+                let mut previous_fill_rate_pct__ = None;
+                let mut manual_launch_pending__ = None;
+                let mut last_launch_error__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairV2 => {
@@ -4981,6 +5178,32 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::BlockReason => {
+                            if block_reason__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("blockReason"));
+                            }
+                            block_reason__ = Some(map_.next_value::<PairV2BlockReason>()? as i32);
+                        }
+                        GeneratedField::PreviousFillRatePct => {
+                            if previous_fill_rate_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("previousFillRatePct"));
+                            }
+                            previous_fill_rate_pct__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::ManualLaunchPending => {
+                            if manual_launch_pending__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("manualLaunchPending"));
+                            }
+                            manual_launch_pending__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LastLaunchError => {
+                            if last_launch_error__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastLaunchError"));
+                            }
+                            last_launch_error__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4994,6 +5217,10 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                     current_spread: current_spread__,
                     base_top_quantity: base_top_quantity__,
                     counter_top_quantity: counter_top_quantity__,
+                    block_reason: block_reason__.unwrap_or_default(),
+                    previous_fill_rate_pct: previous_fill_rate_pct__,
+                    manual_launch_pending: manual_launch_pending__.unwrap_or_default(),
+                    last_launch_error: last_launch_error__,
                 })
             }
         }
@@ -5094,6 +5321,102 @@ impl<'de> serde::Deserialize<'de> for PausePairV2Request {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.PausePairV2Request", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ResetPairV2SessionRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.ResetPairV2SessionRequest", len)?;
+        if true {
+            struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ResetPairV2SessionRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pair_v2",
+            "pairV2",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PairV2,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ResetPairV2SessionRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.ResetPairV2SessionRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ResetPairV2SessionRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pair_v2__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PairV2 => {
+                            if pair_v2__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pairV2"));
+                            }
+                            pair_v2__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ResetPairV2SessionRequest {
+                    pair_v2: pair_v2__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.ResetPairV2SessionRequest", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StreamPairV2StatusRequest {

@@ -179,7 +179,9 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
   }
 
   /// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
-  /// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+  /// PAUSED 상태에서도 허용하며 자동발주를 켜지 않는다. 중복 대기 요청은 FAILED_PRECONDITION.
+  /// 시세 유효성(양다리 5초 이내), 연속매매, 수량 상한, 주문/잔고 검증은 유지한다.
+  /// 대기 요청은 5초 뒤 만료된다. accepted는 접수이고 결과는 실행로그/상태 스트림에서 확인한다.
   Future<kdov1pair_v2.LaunchPairV2OnceResponse> launchPairV2Once(
     kdov1pair_v2.LaunchPairV2OnceRequest input, {
     connect.Headers? headers,
@@ -262,6 +264,25 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
   }) {
     return connect.Client(_transport).unary(
       specs.PairV2Service.getPairV2OrderSummary,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
+  /// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
+  Future<kdov1pair_v2.PairV2> resetPairV2Session(
+    kdov1pair_v2.ResetPairV2SessionRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PairV2Service.resetPairV2Session,
       input,
       signal: signal,
       headers: headers,

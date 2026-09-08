@@ -518,6 +518,26 @@ func (mr *MockPairV2ServiceClientMockRecorder) PausePairV2(ctx, in interface{}, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PausePairV2", reflect.TypeOf((*MockPairV2ServiceClient)(nil).PausePairV2), varargs...)
 }
 
+// ResetPairV2Session mocks base method.
+func (m *MockPairV2ServiceClient) ResetPairV2Session(ctx context.Context, in *ResetPairV2SessionRequest, opts ...grpc.CallOption) (*PairV2, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ResetPairV2Session", varargs...)
+	ret0, _ := ret[0].(*PairV2)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResetPairV2Session indicates an expected call of ResetPairV2Session.
+func (mr *MockPairV2ServiceClientMockRecorder) ResetPairV2Session(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetPairV2Session", reflect.TypeOf((*MockPairV2ServiceClient)(nil).ResetPairV2Session), varargs...)
+}
+
 // StreamPairV2Status mocks base method.
 func (m *MockPairV2ServiceClient) StreamPairV2Status(ctx context.Context, in *StreamPairV2StatusRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2StatusClient, error) {
 	m.ctrl.T.Helper()
@@ -759,6 +779,21 @@ func (m *MockPairV2ServiceServer) PausePairV2(ctx context.Context, in *PausePair
 func (mr *MockPairV2ServiceServerMockRecorder) PausePairV2(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PausePairV2", reflect.TypeOf((*MockPairV2ServiceServer)(nil).PausePairV2), ctx, in)
+}
+
+// ResetPairV2Session mocks base method.
+func (m *MockPairV2ServiceServer) ResetPairV2Session(ctx context.Context, in *ResetPairV2SessionRequest) (*PairV2, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ResetPairV2Session", ctx, in)
+	ret0, _ := ret[0].(*PairV2)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResetPairV2Session indicates an expected call of ResetPairV2Session.
+func (mr *MockPairV2ServiceServerMockRecorder) ResetPairV2Session(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetPairV2Session", reflect.TypeOf((*MockPairV2ServiceServer)(nil).ResetPairV2Session), ctx, in)
 }
 
 // StreamPairV2Status mocks base method.

@@ -42,7 +42,9 @@ type PairV2ServiceClient interface {
 	// PairV2 실시간 운영 단계(phase) 스트리밍 (변경 시마다 emit)
 	StreamPairV2Status(ctx context.Context, in *StreamPairV2StatusRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2StatusClient, error)
 	// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
-	// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+	// PAUSED 상태에서도 허용하며 자동발주를 켜지 않는다. 중복 대기 요청은 FAILED_PRECONDITION.
+	// 시세 유효성(양다리 5초 이내), 연속매매, 수량 상한, 주문/잔고 검증은 유지한다.
+	// 대기 요청은 5초 뒤 만료된다. accepted는 접수이고 결과는 실행로그/상태 스트림에서 확인한다.
 	LaunchPairV2Once(ctx context.Context, in *LaunchPairV2OnceRequest, opts ...grpc.CallOption) (*LaunchPairV2OnceResponse, error)
 	// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
 	CancelPairV2Residual(ctx context.Context, in *CancelPairV2ResidualRequest, opts ...grpc.CallOption) (*CancelPairV2ResidualResponse, error)
@@ -53,6 +55,9 @@ type PairV2ServiceClient interface {
 	ListPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (*ListPairV2OrdersResponse, error)
 	// leg(base/counter)별 누적 집계 (상단 요약)
 	GetPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (*GetPairV2OrderSummaryResponse, error)
+	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
+	// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
+	ResetPairV2Session(ctx context.Context, in *ResetPairV2SessionRequest, opts ...grpc.CallOption) (*PairV2, error)
 }
 
 type pairV2ServiceClient struct {
@@ -212,6 +217,15 @@ func (c *pairV2ServiceClient) GetPairV2OrderSummary(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *pairV2ServiceClient) ResetPairV2Session(ctx context.Context, in *ResetPairV2SessionRequest, opts ...grpc.CallOption) (*PairV2, error) {
+	out := new(PairV2)
+	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/ResetPairV2Session", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PairV2ServiceServer is the server API for PairV2Service service.
 // All implementations must embed UnimplementedPairV2ServiceServer
 // for forward compatibility
@@ -235,7 +249,9 @@ type PairV2ServiceServer interface {
 	// PairV2 실시간 운영 단계(phase) 스트리밍 (변경 시마다 emit)
 	StreamPairV2Status(*StreamPairV2StatusRequest, PairV2Service_StreamPairV2StatusServer) error
 	// 수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.
-	// max_base_quantity 상한과 시세 존재(sanity)는 유지된다. 페어가 실행 중이 아니면 실패.
+	// PAUSED 상태에서도 허용하며 자동발주를 켜지 않는다. 중복 대기 요청은 FAILED_PRECONDITION.
+	// 시세 유효성(양다리 5초 이내), 연속매매, 수량 상한, 주문/잔고 검증은 유지한다.
+	// 대기 요청은 5초 뒤 만료된다. accepted는 접수이고 결과는 실행로그/상태 스트림에서 확인한다.
 	LaunchPairV2Once(context.Context, *LaunchPairV2OnceRequest) (*LaunchPairV2OnceResponse, error)
 	// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
 	CancelPairV2Residual(context.Context, *CancelPairV2ResidualRequest) (*CancelPairV2ResidualResponse, error)
@@ -246,6 +262,9 @@ type PairV2ServiceServer interface {
 	ListPairV2Orders(context.Context, *ListPairV2OrdersRequest) (*ListPairV2OrdersResponse, error)
 	// leg(base/counter)별 누적 집계 (상단 요약)
 	GetPairV2OrderSummary(context.Context, *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error)
+	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
+	// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
+	ResetPairV2Session(context.Context, *ResetPairV2SessionRequest) (*PairV2, error)
 	mustEmbedUnimplementedPairV2ServiceServer()
 }
 
@@ -294,6 +313,9 @@ func (UnimplementedPairV2ServiceServer) ListPairV2Orders(context.Context, *ListP
 }
 func (UnimplementedPairV2ServiceServer) GetPairV2OrderSummary(context.Context, *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPairV2OrderSummary not implemented")
+}
+func (UnimplementedPairV2ServiceServer) ResetPairV2Session(context.Context, *ResetPairV2SessionRequest) (*PairV2, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPairV2Session not implemented")
 }
 func (UnimplementedPairV2ServiceServer) mustEmbedUnimplementedPairV2ServiceServer() {}
 
@@ -563,6 +585,24 @@ func _PairV2Service_GetPairV2OrderSummary_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PairV2Service_ResetPairV2Session_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPairV2SessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PairV2ServiceServer).ResetPairV2Session(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.pair_v2.PairV2Service/ResetPairV2Session",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PairV2ServiceServer).ResetPairV2Session(ctx, req.(*ResetPairV2SessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PairV2Service_ServiceDesc is the grpc.ServiceDesc for PairV2Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -621,6 +661,10 @@ var PairV2Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPairV2OrderSummary",
 			Handler:    _PairV2Service_GetPairV2OrderSummary_Handler,
+		},
+		{
+			MethodName: "ResetPairV2Session",
+			Handler:    _PairV2Service_ResetPairV2Session_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

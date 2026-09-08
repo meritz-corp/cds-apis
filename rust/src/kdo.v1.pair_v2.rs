@@ -24,7 +24,7 @@ pub struct PairV2 {
     /// Base 다리. side 가 매수차(BID)/매도차(ASK) 를 결정하고, quantity 가 1회 발주량.
     #[prost(message, optional, tag="5")]
     pub base: ::core::option::Option<PairV2Entry>,
-    /// Counter 다리. quantity 는 무시(런타임 = base.quantity × hedge_ratio).
+    /// Counter 다리. quantity는 명시적인 1회 발주량으로 그대로 사용한다.
     #[prost(message, optional, tag="6")]
     pub counter: ::core::option::Option<PairV2Entry>,
     /// counter 가격을 base 가격축으로 옮기는 방법.
@@ -57,7 +57,8 @@ pub struct PairV2 {
     #[prost(message, optional, tag="15")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).
-    /// 수동 발사(LaunchPairV2Once)는 이 게이트를 무시한다. 발사 횟수는 활성화(activate) 시 0부터 시작.
+    /// 수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.
+    /// 설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (서버 프로세스 내 세션).
     #[prost(uint32, optional, tag="16")]
     pub pause_launch_no: ::core::option::Option<u32>,
     /// 자동 발사 운영 시간창 시작 (KST "HH:MM:SS", 미설정 = 상시).
@@ -68,11 +69,20 @@ pub struct PairV2 {
     /// 자동 발사 운영 시간창 종료 (KST "HH:MM:SS", 미설정 = 상시)
     #[prost(string, optional, tag="18")]
     pub trading_window_end: ::core::option::Option<::prost::alloc::string::String>,
-    /// 슬리피지 가드 - true 면 발사 직전 양다리의 상대호가 1호가 잔량이 발주수량 이상일 때만
+    /// 슬리피지 가드 - true 면 양다리의 발주 호가(BEST_TAKE=상대, BEST_MAKE=자기) 잔량이 발주수량 이상일 때만
     /// 자동 발사한다 (잔량 부족 = 즉시 체결 불가/슬리피지 위험 → 발사 보류).
     /// 수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false.
     #[prost(bool, tag="19")]
     pub slippage_guard: bool,
+    /// 일반 매도 가능 수량 부족 시 차입 재고 사용 허용. 기본 false.
+    /// 수동/자동 모두 적용하며, 체크와 예약은 동일 잔고 잠금 아래 수행한다.
+    #[prost(bool, tag="20")]
+    pub allow_borrowed_sell: bool,
+    /// 이전 회차 양다리 체결률의 최솟값 >= 설정값일 때 다음 자동 발사 허용.
+    /// 0..100, 미설정=제한 없음, 첫 회차=통과. 수동 발사는 무시한다.
+    /// 분모는 해당 회차 최초 발주수량. 정정은 중복 집계하지 않고 취소/거부는 체결로 세지 않는다.
+    #[prost(double, optional, tag="21")]
+    pub min_fill_rate_pct: ::core::option::Option<f64>,
 }
 // ============================================================================
 // Pair Entry
@@ -94,7 +104,7 @@ pub struct PairV2Entry {
     /// 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
     #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
-    /// 주문 수량. base 는 1회 발주량(필수), counter 는 무시(런타임 = base.quantity × hedge_ratio).
+    /// 주문 수량. base/counter 모두 명시적인 1회 발주량.
     #[prost(int64, tag="4")]
     pub quantity: i64,
     /// 호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값
@@ -372,6 +382,12 @@ pub struct LaunchPairV2OnceResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResetPairV2SessionRequest {
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelPairV2ResidualRequest {
     /// 리소스 이름 (pair_v2s/{id})
     #[prost(string, tag="1")]
@@ -446,7 +462,7 @@ pub struct PairV2StatusUpdate {
     /// 스냅샷 시각
     #[prost(message, optional, tag="3")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// 이번 실행 세션의 누적 발사 횟수 (완료회차 대응, activate 시 0부터)
+    /// 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate 시 유지)
     #[prost(uint32, tag="4")]
     pub launch_count: u32,
     /// 최근 측정 스프레드 (base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
@@ -459,6 +475,17 @@ pub struct PairV2StatusUpdate {
     /// counter 다리의 발주 방향 상대호가 1호가 잔량
     #[prost(int64, optional, tag="7")]
     pub counter_top_quantity: ::core::option::Option<i64>,
+    /// 현재 자동 발사를 막는 주된 사유. 여러 조건 미충족 시 서버 판정 우선순위의 첫 사유.
+    #[prost(enumeration="PairV2BlockReason", tag="8")]
+    pub block_reason: i32,
+    /// 이전 회차 양다리 체결률 중 작은 값. 발사 이력이 없으면 미설정.
+    #[prost(double, optional, tag="9")]
+    pub previous_fill_rate_pct: ::core::option::Option<f64>,
+    #[prost(bool, tag="10")]
+    pub manual_launch_pending: bool,
+    /// 최근 발사 요청 오류. 다음 발주 성공/세션 초기화 시 해제.
+    #[prost(string, optional, tag="11")]
+    pub last_launch_error: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// 페어 주문 추적 행
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -688,6 +715,74 @@ impl PairV2ExecutionOutcome {
             "PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE" => Some(Self::SkippedPriceUnavailable),
             "PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE" => Some(Self::PartialFailure),
             "PAIR_V2_EXECUTION_OUTCOME_FAILED" => Some(Self::Failed),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PairV2BlockReason {
+    Unspecified = 0,
+    None = 1,
+    Paused = 2,
+    PriceUnavailable = 3,
+    StaleQuote = 4,
+    NonContinuousSession = 5,
+    Spread = 6,
+    Cooldown = 7,
+    TradingWindow = 8,
+    LaunchLimit = 9,
+    FillRate = 10,
+    Slippage = 11,
+    QuantityLimit = 12,
+    OrderValidation = 13,
+    PartialFailure = 14,
+    RuntimeError = 15,
+}
+impl PairV2BlockReason {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PairV2BlockReason::Unspecified => "PAIR_V2_BLOCK_REASON_UNSPECIFIED",
+            PairV2BlockReason::None => "PAIR_V2_BLOCK_REASON_NONE",
+            PairV2BlockReason::Paused => "PAIR_V2_BLOCK_REASON_PAUSED",
+            PairV2BlockReason::PriceUnavailable => "PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE",
+            PairV2BlockReason::StaleQuote => "PAIR_V2_BLOCK_REASON_STALE_QUOTE",
+            PairV2BlockReason::NonContinuousSession => "PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION",
+            PairV2BlockReason::Spread => "PAIR_V2_BLOCK_REASON_SPREAD",
+            PairV2BlockReason::Cooldown => "PAIR_V2_BLOCK_REASON_COOLDOWN",
+            PairV2BlockReason::TradingWindow => "PAIR_V2_BLOCK_REASON_TRADING_WINDOW",
+            PairV2BlockReason::LaunchLimit => "PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT",
+            PairV2BlockReason::FillRate => "PAIR_V2_BLOCK_REASON_FILL_RATE",
+            PairV2BlockReason::Slippage => "PAIR_V2_BLOCK_REASON_SLIPPAGE",
+            PairV2BlockReason::QuantityLimit => "PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT",
+            PairV2BlockReason::OrderValidation => "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION",
+            PairV2BlockReason::PartialFailure => "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE",
+            PairV2BlockReason::RuntimeError => "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PAIR_V2_BLOCK_REASON_UNSPECIFIED" => Some(Self::Unspecified),
+            "PAIR_V2_BLOCK_REASON_NONE" => Some(Self::None),
+            "PAIR_V2_BLOCK_REASON_PAUSED" => Some(Self::Paused),
+            "PAIR_V2_BLOCK_REASON_PRICE_UNAVAILABLE" => Some(Self::PriceUnavailable),
+            "PAIR_V2_BLOCK_REASON_STALE_QUOTE" => Some(Self::StaleQuote),
+            "PAIR_V2_BLOCK_REASON_NON_CONTINUOUS_SESSION" => Some(Self::NonContinuousSession),
+            "PAIR_V2_BLOCK_REASON_SPREAD" => Some(Self::Spread),
+            "PAIR_V2_BLOCK_REASON_COOLDOWN" => Some(Self::Cooldown),
+            "PAIR_V2_BLOCK_REASON_TRADING_WINDOW" => Some(Self::TradingWindow),
+            "PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT" => Some(Self::LaunchLimit),
+            "PAIR_V2_BLOCK_REASON_FILL_RATE" => Some(Self::FillRate),
+            "PAIR_V2_BLOCK_REASON_SLIPPAGE" => Some(Self::Slippage),
+            "PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT" => Some(Self::QuantityLimit),
+            "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION" => Some(Self::OrderValidation),
+            "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE" => Some(Self::PartialFailure),
+            "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR" => Some(Self::RuntimeError),
             _ => None,
         }
     }
