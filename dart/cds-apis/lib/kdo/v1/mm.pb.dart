@@ -160,6 +160,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $core.bool? takeMode,
     $core.bool? isLp,
     $core.bool? useQtyWeightedMid,
+    $fixnum.Int64? f2mSampleIntervalMs,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -182,6 +183,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (takeMode != null) result.takeMode = takeMode;
     if (isLp != null) result.isLp = isLp;
     if (useQtyWeightedMid != null) result.useQtyWeightedMid = useQtyWeightedMid;
+    if (f2mSampleIntervalMs != null) result.f2mSampleIntervalMs = f2mSampleIntervalMs;
     return result;
   }
 
@@ -211,6 +213,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOB(24, _omitFieldNames ? '' : 'takeMode')
     ..aOB(25, _omitFieldNames ? '' : 'isLp')
     ..aOB(26, _omitFieldNames ? '' : 'useQtyWeightedMid')
+    ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'f2mSampleIntervalMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -461,6 +464,18 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasUseQtyWeightedMid() => $_has(19);
   @$pb.TagNumber(26)
   void clearUseQtyWeightedMid() => $_clearField(26);
+
+  /// F2M(Fit to Market) 괴리 샘플링 최소 간격(밀리초). 자기 심볼 tick 이 이보다 촘촘히
+  /// 들어오면 샘플을 스킵해 시간창 MA 가 tick 버스트에 덜 휘둘리게 한다. 기본 100ms.
+  /// optional: 미설정 시 기존값 유지. 0 은 무효값 — 서버가 거부.
+  @$pb.TagNumber(27)
+  $fixnum.Int64 get f2mSampleIntervalMs => $_getI64(20);
+  @$pb.TagNumber(27)
+  set f2mSampleIntervalMs($fixnum.Int64 value) => $_setInt64(20, value);
+  @$pb.TagNumber(27)
+  $core.bool hasF2mSampleIntervalMs() => $_has(20);
+  @$pb.TagNumber(27)
+  void clearF2mSampleIntervalMs() => $_clearField(27);
 }
 
 enum MarketMakingPricing_Pricing {

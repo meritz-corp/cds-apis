@@ -3643,6 +3643,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -3714,6 +3717,11 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.use_qty_weighted_mid.as_ref() {
             struct_ser.serialize_field("use_qty_weighted_mid", v)?;
         }
+        if let Some(v) = self.f2m_sample_interval_ms.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("f2m_sample_interval_ms", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -3760,6 +3768,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "isLp",
             "use_qty_weighted_mid",
             "useQtyWeightedMid",
+            "f2m_sample_interval_ms",
+            "f2mSampleIntervalMs",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3784,6 +3794,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             TakeMode,
             IsLp,
             UseQtyWeightedMid,
+            F2mSampleIntervalMs,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3826,6 +3837,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "takeMode" | "take_mode" => Ok(GeneratedField::TakeMode),
                             "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
                             "useQtyWeightedMid" | "use_qty_weighted_mid" => Ok(GeneratedField::UseQtyWeightedMid),
+                            "f2mSampleIntervalMs" | "f2m_sample_interval_ms" => Ok(GeneratedField::F2mSampleIntervalMs),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3865,6 +3877,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut take_mode__ = None;
                 let mut is_lp__ = None;
                 let mut use_qty_weighted_mid__ = None;
+                let mut f2m_sample_interval_ms__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3999,6 +4012,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             use_qty_weighted_mid__ = map_.next_value()?;
                         }
+                        GeneratedField::F2mSampleIntervalMs => {
+                            if f2m_sample_interval_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("f2mSampleIntervalMs"));
+                            }
+                            f2m_sample_interval_ms__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4025,6 +4046,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     take_mode: take_mode__,
                     is_lp: is_lp__,
                     use_qty_weighted_mid: use_qty_weighted_mid__,
+                    f2m_sample_interval_ms: f2m_sample_interval_ms__,
                 })
             }
         }

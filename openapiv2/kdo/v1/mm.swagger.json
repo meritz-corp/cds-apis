@@ -1438,6 +1438,11 @@
         "useQtyWeightedMid": {
           "type": "boolean",
           "description": "MM NAV 입력 microprice(상위 3호가 잔량가중 mid) 사용 여부.\ntrue(기본) = 기존 동작(구성종목/nav-dep NAV 입력을 잔량가중 microprice 로 치환),\nfalse = 단순 mid ((best_bid+best_ask)/2) 로 치환.\n자기 ETF mid·proxy 는 영향 없음. Running 중 변경 허용(다음 tick 반영).\noptional: presence 로 \"설정 vs 미변경\" 구분(부분 업데이트가 기존 값을 덮지 않도록). is_lp 와 동일 패턴."
+        },
+        "f2mSampleIntervalMs": {
+          "type": "string",
+          "format": "uint64",
+          "description": "F2M(Fit to Market) 괴리 샘플링 최소 간격(밀리초). 자기 심볼 tick 이 이보다 촘촘히\n들어오면 샘플을 스킵해 시간창 MA 가 tick 버스트에 덜 휘둘리게 한다. 기본 100ms.\noptional: 미설정 시 기존값 유지. 0 은 무효값 — 서버가 거부."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

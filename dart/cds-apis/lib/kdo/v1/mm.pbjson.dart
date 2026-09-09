@@ -105,6 +105,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'take_mode', '3': 24, '4': 1, '5': 8, '9': 3, '10': 'takeMode', '17': true},
     {'1': 'is_lp', '3': 25, '4': 1, '5': 8, '9': 4, '10': 'isLp', '17': true},
     {'1': 'use_qty_weighted_mid', '3': 26, '4': 1, '5': 8, '9': 5, '10': 'useQtyWeightedMid', '17': true},
+    {'1': 'f2m_sample_interval_ms', '3': 27, '4': 1, '5': 4, '9': 6, '10': 'f2mSampleIntervalMs', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -113,6 +114,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_take_mode'},
     {'1': '_is_lp'},
     {'1': '_use_qty_weighted_mid'},
+    {'1': '_f2m_sample_interval_ms'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -147,11 +149,13 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'VmaXRfaW50ZXJ2YWxfc2VjcxgWIAEoBEgBUhRmMm1SZWZpdEludGVydmFsU2Vjc4gBARIwChJm'
     'Mm1fbWFfd2luZG93X3NlY3MYFyABKARIAlIPZjJtTWFXaW5kb3dTZWNziAEBEiAKCXRha2VfbW'
     '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBARIYCgVpc19scBgZIAEoCEgEUgRpc0xwiAEBEjQKFHVz'
-    'ZV9xdHlfd2VpZ2h0ZWRfbWlkGBogASgISAVSEXVzZVF0eVdlaWdodGVkTWlkiAEBQggKBl9iYX'
-    'Npc0IaChhfZjJtX3JlZml0X2ludGVydmFsX3NlY3NCFQoTX2YybV9tYV93aW5kb3dfc2Vjc0IM'
-    'CgpfdGFrZV9tb2RlQggKBl9pc19scEIXChVfdXNlX3F0eV93ZWlnaHRlZF9taWRKBAgHEAhKBA'
-    'gIEAlKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9hZGp1c3RtZW50Ug5hc2tfYWRqdXN0'
-    'bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZmZzZXRSCmFza19vZmZzZXQ=');
+    'ZV9xdHlfd2VpZ2h0ZWRfbWlkGBogASgISAVSEXVzZVF0eVdlaWdodGVkTWlkiAEBEjgKFmYybV'
+    '9zYW1wbGVfaW50ZXJ2YWxfbXMYGyABKARIBlITZjJtU2FtcGxlSW50ZXJ2YWxNc4gBAUIICgZf'
+    'YmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3'
+    'NCDAoKX3Rha2VfbW9kZUIICgZfaXNfbHBCFwoVX3VzZV9xdHlfd2VpZ2h0ZWRfbWlkQhkKF19m'
+    'Mm1fc2FtcGxlX2ludGVydmFsX21zSgQIBxAISgQICBAJSgQICxAMSgQIDBANSgQIDRAOSgQIDh'
+    'APUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJYXNrX2Jhc2lz'
+    'UgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

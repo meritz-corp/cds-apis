@@ -102,6 +102,11 @@ pub struct MarketMakingConfiguration {
     /// optional: presence 로 "설정 vs 미변경" 구분(부분 업데이트가 기존 값을 덮지 않도록). is_lp 와 동일 패턴.
     #[prost(bool, optional, tag="26")]
     pub use_qty_weighted_mid: ::core::option::Option<bool>,
+    /// F2M(Fit to Market) 괴리 샘플링 최소 간격(밀리초). 자기 심볼 tick 이 이보다 촘촘히
+    /// 들어오면 샘플을 스킵해 시간창 MA 가 tick 버스트에 덜 휘둘리게 한다. 기본 100ms.
+    /// optional: 미설정 시 기존값 유지. 0 은 무효값 — 서버가 거부.
+    #[prost(uint64, optional, tag="27")]
+    pub f2m_sample_interval_ms: ::core::option::Option<u64>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
