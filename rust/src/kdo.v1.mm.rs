@@ -95,6 +95,13 @@ pub struct MarketMakingConfiguration {
     /// optional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비-LP 호가.
     #[prost(bool, optional, tag="25")]
     pub is_lp: ::core::option::Option<bool>,
+    /// MM NAV 입력 microprice(상위 3호가 잔량가중 mid) 사용 여부.
+    /// true(기본) = 기존 동작(구성종목/nav-dep NAV 입력을 잔량가중 microprice 로 치환),
+    /// false = 단순 mid ((best_bid+best_ask)/2) 로 치환.
+    /// 자기 ETF mid·proxy 는 영향 없음. Running 중 변경 허용(다음 tick 반영).
+    /// optional: presence 로 "설정 vs 미변경" 구분(부분 업데이트가 기존 값을 덮지 않도록). is_lp 와 동일 패턴.
+    #[prost(bool, optional, tag="26")]
+    pub use_qty_weighted_mid: ::core::option::Option<bool>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

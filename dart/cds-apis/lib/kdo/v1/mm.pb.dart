@@ -159,6 +159,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? f2mMaWindowSecs,
     $core.bool? takeMode,
     $core.bool? isLp,
+    $core.bool? useQtyWeightedMid,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -180,6 +181,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (f2mMaWindowSecs != null) result.f2mMaWindowSecs = f2mMaWindowSecs;
     if (takeMode != null) result.takeMode = takeMode;
     if (isLp != null) result.isLp = isLp;
+    if (useQtyWeightedMid != null) result.useQtyWeightedMid = useQtyWeightedMid;
     return result;
   }
 
@@ -208,6 +210,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(23, _omitFieldNames ? '' : 'f2mMaWindowSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOB(24, _omitFieldNames ? '' : 'takeMode')
     ..aOB(25, _omitFieldNames ? '' : 'isLp')
+    ..aOB(26, _omitFieldNames ? '' : 'useQtyWeightedMid')
     ..hasRequiredFields = false
   ;
 
@@ -444,6 +447,20 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasIsLp() => $_has(18);
   @$pb.TagNumber(25)
   void clearIsLp() => $_clearField(25);
+
+  /// MM NAV 입력 microprice(상위 3호가 잔량가중 mid) 사용 여부.
+  /// true(기본) = 기존 동작(구성종목/nav-dep NAV 입력을 잔량가중 microprice 로 치환),
+  /// false = 단순 mid ((best_bid+best_ask)/2) 로 치환.
+  /// 자기 ETF mid·proxy 는 영향 없음. Running 중 변경 허용(다음 tick 반영).
+  /// optional: presence 로 "설정 vs 미변경" 구분(부분 업데이트가 기존 값을 덮지 않도록). is_lp 와 동일 패턴.
+  @$pb.TagNumber(26)
+  $core.bool get useQtyWeightedMid => $_getBF(19);
+  @$pb.TagNumber(26)
+  set useQtyWeightedMid($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(26)
+  $core.bool hasUseQtyWeightedMid() => $_has(19);
+  @$pb.TagNumber(26)
+  void clearUseQtyWeightedMid() => $_clearField(26);
 }
 
 enum MarketMakingPricing_Pricing {

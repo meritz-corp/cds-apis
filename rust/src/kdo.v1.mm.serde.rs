@@ -3640,6 +3640,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -3708,6 +3711,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.is_lp.as_ref() {
             struct_ser.serialize_field("is_lp", v)?;
         }
+        if let Some(v) = self.use_qty_weighted_mid.as_ref() {
+            struct_ser.serialize_field("use_qty_weighted_mid", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -3752,6 +3758,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "takeMode",
             "is_lp",
             "isLp",
+            "use_qty_weighted_mid",
+            "useQtyWeightedMid",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3775,6 +3783,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             F2mMaWindowSecs,
             TakeMode,
             IsLp,
+            UseQtyWeightedMid,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -3816,6 +3825,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "f2mMaWindowSecs" | "f2m_ma_window_secs" => Ok(GeneratedField::F2mMaWindowSecs),
                             "takeMode" | "take_mode" => Ok(GeneratedField::TakeMode),
                             "isLp" | "is_lp" => Ok(GeneratedField::IsLp),
+                            "useQtyWeightedMid" | "use_qty_weighted_mid" => Ok(GeneratedField::UseQtyWeightedMid),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3854,6 +3864,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut f2m_ma_window_secs__ = None;
                 let mut take_mode__ = None;
                 let mut is_lp__ = None;
+                let mut use_qty_weighted_mid__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -3982,6 +3993,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             is_lp__ = map_.next_value()?;
                         }
+                        GeneratedField::UseQtyWeightedMid => {
+                            if use_qty_weighted_mid__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("useQtyWeightedMid"));
+                            }
+                            use_qty_weighted_mid__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4007,6 +4024,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     f2m_ma_window_secs: f2m_ma_window_secs__,
                     take_mode: take_mode__,
                     is_lp: is_lp__,
+                    use_qty_weighted_mid: use_qty_weighted_mid__,
                 })
             }
         }

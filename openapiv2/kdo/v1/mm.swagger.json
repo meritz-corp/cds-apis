@@ -1434,6 +1434,10 @@
         "isLp": {
           "type": "boolean",
           "description": "ETF LP 시장조성자호가 여부 (기본 true). false 면 비-LP 잔존호가.\ntake_mode 와 결합: is_lp=true+take_mode=true → 합성 IOC(신규 FAS-LP+취소),\n                   is_lp=false+take_mode=true → 네이티브 FAK.\noptional: 미설정 시 서버가 기존값 유지(None), 명시적 false = 비-LP 호가."
+        },
+        "useQtyWeightedMid": {
+          "type": "boolean",
+          "description": "MM NAV 입력 microprice(상위 3호가 잔량가중 mid) 사용 여부.\ntrue(기본) = 기존 동작(구성종목/nav-dep NAV 입력을 잔량가중 microprice 로 치환),\nfalse = 단순 mid ((best_bid+best_ask)/2) 로 치환.\n자기 ETF mid·proxy 는 영향 없음. Running 중 변경 허용(다음 tick 반영).\noptional: presence 로 \"설정 vs 미변경\" 구분(부분 업데이트가 기존 값을 덮지 않도록). is_lp 와 동일 패턴."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
