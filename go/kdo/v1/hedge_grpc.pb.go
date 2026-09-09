@@ -41,18 +41,9 @@ type HedgeServiceClient interface {
 	// Hedge 목록 조회
 	ListHedges(ctx context.Context, in *ListHedgesRequest, opts ...grpc.CallOption) (*ListHedgesResponse, error)
 	// Hedge 수정
+	// update_mask 로 지정한 필드만 갱신. hedge_method/hedge_ratio/resolve_hedge_symbol/create_time 등은 갱신 불가.
+	// 변경은 DB+서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영.
 	UpdateHedge(ctx context.Context, in *UpdateHedgeRequest, opts ...grpc.CallOption) (*Hedge, error)
-	// ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의
-	// 대상 월물(target_future_month)을 변경한다.
-	// 다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.
-	UpdateHedgeTargetFutureMonth(ctx context.Context, in *UpdateHedgeTargetFutureMonthRequest, opts ...grpc.CallOption) (*Hedge, error)
-	// Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.
-	// 의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,
-	// DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),
-	// ETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.
-	// UpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.
-	// 변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.
-	UpdateHedgeSymbol(ctx context.Context, in *UpdateHedgeSymbolRequest, opts ...grpc.CallOption) (*Hedge, error)
 	// Hedge 삭제
 	DeleteHedge(ctx context.Context, in *DeleteHedgeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// 단일 HedgeGroup 조회
@@ -170,24 +161,6 @@ func (c *hedgeServiceClient) UpdateHedge(ctx context.Context, in *UpdateHedgeReq
 	return out, nil
 }
 
-func (c *hedgeServiceClient) UpdateHedgeTargetFutureMonth(ctx context.Context, in *UpdateHedgeTargetFutureMonthRequest, opts ...grpc.CallOption) (*Hedge, error) {
-	out := new(Hedge)
-	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/UpdateHedgeTargetFutureMonth", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *hedgeServiceClient) UpdateHedgeSymbol(ctx context.Context, in *UpdateHedgeSymbolRequest, opts ...grpc.CallOption) (*Hedge, error) {
-	out := new(Hedge)
-	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/UpdateHedgeSymbol", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *hedgeServiceClient) DeleteHedge(ctx context.Context, in *DeleteHedgeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/kdo.v1.hedge.HedgeService/DeleteHedge", in, out, opts...)
@@ -264,18 +237,9 @@ type HedgeServiceServer interface {
 	// Hedge 목록 조회
 	ListHedges(context.Context, *ListHedgesRequest) (*ListHedgesResponse, error)
 	// Hedge 수정
+	// update_mask 로 지정한 필드만 갱신. hedge_method/hedge_ratio/resolve_hedge_symbol/create_time 등은 갱신 불가.
+	// 변경은 DB+서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영.
 	UpdateHedge(context.Context, *UpdateHedgeRequest) (*Hedge, error)
-	// ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의
-	// 대상 월물(target_future_month)을 변경한다.
-	// 다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.
-	UpdateHedgeTargetFutureMonth(context.Context, *UpdateHedgeTargetFutureMonthRequest) (*Hedge, error)
-	// Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.
-	// 의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,
-	// DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),
-	// ETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.
-	// UpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.
-	// 변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.
-	UpdateHedgeSymbol(context.Context, *UpdateHedgeSymbolRequest) (*Hedge, error)
 	// Hedge 삭제
 	DeleteHedge(context.Context, *DeleteHedgeRequest) (*emptypb.Empty, error)
 	// 단일 HedgeGroup 조회
@@ -318,12 +282,6 @@ func (UnimplementedHedgeServiceServer) ListHedges(context.Context, *ListHedgesRe
 }
 func (UnimplementedHedgeServiceServer) UpdateHedge(context.Context, *UpdateHedgeRequest) (*Hedge, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHedge not implemented")
-}
-func (UnimplementedHedgeServiceServer) UpdateHedgeTargetFutureMonth(context.Context, *UpdateHedgeTargetFutureMonthRequest) (*Hedge, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateHedgeTargetFutureMonth not implemented")
-}
-func (UnimplementedHedgeServiceServer) UpdateHedgeSymbol(context.Context, *UpdateHedgeSymbolRequest) (*Hedge, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateHedgeSymbol not implemented")
 }
 func (UnimplementedHedgeServiceServer) DeleteHedge(context.Context, *DeleteHedgeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteHedge not implemented")
@@ -503,42 +461,6 @@ func _HedgeService_UpdateHedge_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HedgeService_UpdateHedgeTargetFutureMonth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateHedgeTargetFutureMonthRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HedgeServiceServer).UpdateHedgeTargetFutureMonth(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.hedge.HedgeService/UpdateHedgeTargetFutureMonth",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HedgeServiceServer).UpdateHedgeTargetFutureMonth(ctx, req.(*UpdateHedgeTargetFutureMonthRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _HedgeService_UpdateHedgeSymbol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateHedgeSymbolRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HedgeServiceServer).UpdateHedgeSymbol(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.hedge.HedgeService/UpdateHedgeSymbol",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HedgeServiceServer).UpdateHedgeSymbol(ctx, req.(*UpdateHedgeSymbolRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _HedgeService_DeleteHedge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteHedgeRequest)
 	if err := dec(in); err != nil {
@@ -681,14 +603,6 @@ var HedgeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateHedge",
 			Handler:    _HedgeService_UpdateHedge_Handler,
-		},
-		{
-			MethodName: "UpdateHedgeTargetFutureMonth",
-			Handler:    _HedgeService_UpdateHedgeTargetFutureMonth_Handler,
-		},
-		{
-			MethodName: "UpdateHedgeSymbol",
-			Handler:    _HedgeService_UpdateHedgeSymbol_Handler,
 		},
 		{
 			MethodName: "DeleteHedge",

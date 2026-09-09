@@ -15,8 +15,9 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import '../../google/protobuf/field_mask.pb.dart' as $3;
 import '../../google/protobuf/timestamp.pb.dart' as $2;
-import 'common.pbenum.dart' as $3;
+import 'common.pbenum.dart' as $4;
 import 'hedge.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -37,7 +38,7 @@ class Hedge extends $pb.GeneratedMessage {
     $2.Timestamp? updateTime,
     ExecPriceType? execPriceType,
     $core.bool? autoAmend,
-    $3.AmendMethodType? amendMethod,
+    $4.AmendMethodType? amendMethod,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? quantityPerHedge,
     $core.String? hedgeFundCode,
     $core.int? tickOffset,
@@ -45,6 +46,7 @@ class Hedge extends $pb.GeneratedMessage {
     $fixnum.Int64? initialWaitMs,
     $core.bool? isValid,
     TargetFutureMonth? targetFutureMonth,
+    $core.String? hedgeSymbolOrUnderlyingSymbol,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -65,6 +67,7 @@ class Hedge extends $pb.GeneratedMessage {
     if (initialWaitMs != null) result.initialWaitMs = initialWaitMs;
     if (isValid != null) result.isValid = isValid;
     if (targetFutureMonth != null) result.targetFutureMonth = targetFutureMonth;
+    if (hedgeSymbolOrUnderlyingSymbol != null) result.hedgeSymbolOrUnderlyingSymbol = hedgeSymbolOrUnderlyingSymbol;
     return result;
   }
 
@@ -84,7 +87,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(8, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
     ..e<ExecPriceType>(9, _omitFieldNames ? '' : 'execPriceType', $pb.PbFieldType.OE, defaultOrMaker: ExecPriceType.EXEC_PRICE_TYPE_UNSPECIFIED, valueOf: ExecPriceType.valueOf, enumValues: ExecPriceType.values)
     ..aOB(10, _omitFieldNames ? '' : 'autoAmend')
-    ..e<$3.AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: $3.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $3.AmendMethodType.valueOf, enumValues: $3.AmendMethodType.values)
+    ..e<$4.AmendMethodType>(11, _omitFieldNames ? '' : 'amendMethod', $pb.PbFieldType.OE, defaultOrMaker: $4.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $4.AmendMethodType.valueOf, enumValues: $4.AmendMethodType.values)
     ..m<$core.String, $core.String>(12, _omitFieldNames ? '' : 'quantityPerHedge', entryClassName: 'Hedge.QuantityPerHedgeEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('kdo.v1.hedge'))
     ..aOS(13, _omitFieldNames ? '' : 'hedgeFundCode')
     ..a<$core.int>(14, _omitFieldNames ? '' : 'tickOffset', $pb.PbFieldType.O3)
@@ -92,6 +95,7 @@ class Hedge extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(16, _omitFieldNames ? '' : 'initialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOB(17, _omitFieldNames ? '' : 'isValid')
     ..e<TargetFutureMonth>(18, _omitFieldNames ? '' : 'targetFutureMonth', $pb.PbFieldType.OE, defaultOrMaker: TargetFutureMonth.TARGET_FUTURE_MONTH_UNSPECIFIED, valueOf: TargetFutureMonth.valueOf, enumValues: TargetFutureMonth.values)
+    ..aOS(19, _omitFieldNames ? '' : 'hedgeSymbolOrUnderlyingSymbol')
     ..hasRequiredFields = false
   ;
 
@@ -221,9 +225,9 @@ class Hedge extends $pb.GeneratedMessage {
   /// 자동정정 전략 유형 (auto_amend=true 일 때 유효)
   /// 미지정(UNSPECIFIED) 시 TIMED_MARKET으로 처리됨
   @$pb.TagNumber(11)
-  $3.AmendMethodType get amendMethod => $_getN(10);
+  $4.AmendMethodType get amendMethod => $_getN(10);
   @$pb.TagNumber(11)
-  set amendMethod($3.AmendMethodType value) => $_setField(11, value);
+  set amendMethod($4.AmendMethodType value) => $_setField(11, value);
   @$pb.TagNumber(11)
   $core.bool hasAmendMethod() => $_has(10);
   @$pb.TagNumber(11)
@@ -300,6 +304,19 @@ class Hedge extends $pb.GeneratedMessage {
   $core.bool hasTargetFutureMonth() => $_has(17);
   @$pb.TagNumber(18)
   void clearTargetFutureMonth() => $_clearField(18);
+
+  /// 저장된 대상 심볼 원본 (hedge_symbol_or_underlying_symbol 컬럼).
+  /// DIRECT=실코드, DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO=선물 underlying_code,
+  /// ETF_DECOMPOSITION(비-ETF source)=기준 ETF. read 시 resolve 전 raw 값,
+  /// UpdateHedge update_mask 로 이 경로 지정 시 이 값을 그대로 저장.
+  @$pb.TagNumber(19)
+  $core.String get hedgeSymbolOrUnderlyingSymbol => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set hedgeSymbolOrUnderlyingSymbol($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasHedgeSymbolOrUnderlyingSymbol() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearHedgeSymbolOrUnderlyingSymbol() => $_clearField(19);
 }
 
 enum HedgeMethod_Method {
@@ -1357,9 +1374,11 @@ class ListHedgesResponse extends $pb.GeneratedMessage {
 class UpdateHedgeRequest extends $pb.GeneratedMessage {
   factory UpdateHedgeRequest({
     Hedge? hedge,
+    $3.FieldMask? updateMask,
   }) {
     final result = create();
     if (hedge != null) result.hedge = hedge;
+    if (updateMask != null) result.updateMask = updateMask;
     return result;
   }
 
@@ -1370,6 +1389,7 @@ class UpdateHedgeRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHedgeRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
     ..aOM<Hedge>(1, _omitFieldNames ? '' : 'hedge', subBuilder: Hedge.create)
+    ..aOM<$3.FieldMask>(2, _omitFieldNames ? '' : 'updateMask', subBuilder: $3.FieldMask.create)
     ..hasRequiredFields = false
   ;
 
@@ -1401,128 +1421,20 @@ class UpdateHedgeRequest extends $pb.GeneratedMessage {
   void clearHedge() => $_clearField(1);
   @$pb.TagNumber(1)
   Hedge ensureHedge() => $_ensure(0);
-}
 
-/// UpdateHedgeTargetFutureMonth 요청
-class UpdateHedgeTargetFutureMonthRequest extends $pb.GeneratedMessage {
-  factory UpdateHedgeTargetFutureMonthRequest({
-    $core.String? name,
-    TargetFutureMonth? targetFutureMonth,
-  }) {
-    final result = create();
-    if (name != null) result.name = name;
-    if (targetFutureMonth != null) result.targetFutureMonth = targetFutureMonth;
-    return result;
-  }
-
-  UpdateHedgeTargetFutureMonthRequest._();
-
-  factory UpdateHedgeTargetFutureMonthRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory UpdateHedgeTargetFutureMonthRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHedgeTargetFutureMonthRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..e<TargetFutureMonth>(2, _omitFieldNames ? '' : 'targetFutureMonth', $pb.PbFieldType.OE, defaultOrMaker: TargetFutureMonth.TARGET_FUTURE_MONTH_UNSPECIFIED, valueOf: TargetFutureMonth.valueOf, enumValues: TargetFutureMonth.values)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateHedgeTargetFutureMonthRequest clone() => UpdateHedgeTargetFutureMonthRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateHedgeTargetFutureMonthRequest copyWith(void Function(UpdateHedgeTargetFutureMonthRequest) updates) => super.copyWith((message) => updates(message as UpdateHedgeTargetFutureMonthRequest)) as UpdateHedgeTargetFutureMonthRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UpdateHedgeTargetFutureMonthRequest create() => UpdateHedgeTargetFutureMonthRequest._();
-  @$core.override
-  UpdateHedgeTargetFutureMonthRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateHedgeTargetFutureMonthRequest> createRepeated() => $pb.PbList<UpdateHedgeTargetFutureMonthRequest>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateHedgeTargetFutureMonthRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHedgeTargetFutureMonthRequest>(create);
-  static UpdateHedgeTargetFutureMonthRequest? _defaultInstance;
-
-  /// 헷지 리소스 이름 (예: hedges/1)
-  @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set name($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearName() => $_clearField(1);
-
-  /// NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
+  /// 갱신할 필드 경로. 없으면(unset) 기존 하위호환 동작(설정 필드만 갱신).
+  /// 지원 경로: exec_price_type, tick_offset, auto_amend, amend_method,
+  ///   initial_wait_ms, is_valid, target_future_month, hedge_symbol_or_underlying_symbol.
   @$pb.TagNumber(2)
-  TargetFutureMonth get targetFutureMonth => $_getN(1);
+  $3.FieldMask get updateMask => $_getN(1);
   @$pb.TagNumber(2)
-  set targetFutureMonth(TargetFutureMonth value) => $_setField(2, value);
+  set updateMask($3.FieldMask value) => $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasTargetFutureMonth() => $_has(1);
+  $core.bool hasUpdateMask() => $_has(1);
   @$pb.TagNumber(2)
-  void clearTargetFutureMonth() => $_clearField(2);
-}
-
-/// UpdateHedgeSymbol 요청
-class UpdateHedgeSymbolRequest extends $pb.GeneratedMessage {
-  factory UpdateHedgeSymbolRequest({
-    $core.String? name,
-    $core.String? hedgeSymbolOrUnderlyingSymbol,
-  }) {
-    final result = create();
-    if (name != null) result.name = name;
-    if (hedgeSymbolOrUnderlyingSymbol != null) result.hedgeSymbolOrUnderlyingSymbol = hedgeSymbolOrUnderlyingSymbol;
-    return result;
-  }
-
-  UpdateHedgeSymbolRequest._();
-
-  factory UpdateHedgeSymbolRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
-  factory UpdateHedgeSymbolRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHedgeSymbolRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.hedge'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aOS(2, _omitFieldNames ? '' : 'hedgeSymbolOrUnderlyingSymbol')
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateHedgeSymbolRequest clone() => UpdateHedgeSymbolRequest()..mergeFromMessage(this);
-  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UpdateHedgeSymbolRequest copyWith(void Function(UpdateHedgeSymbolRequest) updates) => super.copyWith((message) => updates(message as UpdateHedgeSymbolRequest)) as UpdateHedgeSymbolRequest;
-
-  @$core.override
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UpdateHedgeSymbolRequest create() => UpdateHedgeSymbolRequest._();
-  @$core.override
-  UpdateHedgeSymbolRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateHedgeSymbolRequest> createRepeated() => $pb.PbList<UpdateHedgeSymbolRequest>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateHedgeSymbolRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHedgeSymbolRequest>(create);
-  static UpdateHedgeSymbolRequest? _defaultInstance;
-
-  /// 헷지 리소스 이름 (예: hedges/1)
-  @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set name($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearName() => $_clearField(1);
-
-  /// 새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)
+  void clearUpdateMask() => $_clearField(2);
   @$pb.TagNumber(2)
-  $core.String get hedgeSymbolOrUnderlyingSymbol => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set hedgeSymbolOrUnderlyingSymbol($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasHedgeSymbolOrUnderlyingSymbol() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearHedgeSymbolOrUnderlyingSymbol() => $_clearField(2);
+  $3.FieldMask ensureUpdateMask() => $_ensure(1);
 }
 
 /// DeleteHedge 요청

@@ -558,46 +558,6 @@ func (mr *MockHedgeServiceClientMockRecorder) UpdateHedgeGroup(ctx, in interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeGroup", reflect.TypeOf((*MockHedgeServiceClient)(nil).UpdateHedgeGroup), varargs...)
 }
 
-// UpdateHedgeSymbol mocks base method.
-func (m *MockHedgeServiceClient) UpdateHedgeSymbol(ctx context.Context, in *UpdateHedgeSymbolRequest, opts ...grpc.CallOption) (*Hedge, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "UpdateHedgeSymbol", varargs...)
-	ret0, _ := ret[0].(*Hedge)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateHedgeSymbol indicates an expected call of UpdateHedgeSymbol.
-func (mr *MockHedgeServiceClientMockRecorder) UpdateHedgeSymbol(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeSymbol", reflect.TypeOf((*MockHedgeServiceClient)(nil).UpdateHedgeSymbol), varargs...)
-}
-
-// UpdateHedgeTargetFutureMonth mocks base method.
-func (m *MockHedgeServiceClient) UpdateHedgeTargetFutureMonth(ctx context.Context, in *UpdateHedgeTargetFutureMonthRequest, opts ...grpc.CallOption) (*Hedge, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "UpdateHedgeTargetFutureMonth", varargs...)
-	ret0, _ := ret[0].(*Hedge)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateHedgeTargetFutureMonth indicates an expected call of UpdateHedgeTargetFutureMonth.
-func (mr *MockHedgeServiceClientMockRecorder) UpdateHedgeTargetFutureMonth(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeTargetFutureMonth", reflect.TypeOf((*MockHedgeServiceClient)(nil).UpdateHedgeTargetFutureMonth), varargs...)
-}
-
 // MockHedgeServiceServer is a mock of HedgeServiceServer interface.
 type MockHedgeServiceServer struct {
 	ctrl     *gomock.Controller
@@ -828,34 +788,4 @@ func (m *MockHedgeServiceServer) UpdateHedgeGroup(ctx context.Context, in *Updat
 func (mr *MockHedgeServiceServerMockRecorder) UpdateHedgeGroup(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeGroup", reflect.TypeOf((*MockHedgeServiceServer)(nil).UpdateHedgeGroup), ctx, in)
-}
-
-// UpdateHedgeSymbol mocks base method.
-func (m *MockHedgeServiceServer) UpdateHedgeSymbol(ctx context.Context, in *UpdateHedgeSymbolRequest) (*Hedge, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateHedgeSymbol", ctx, in)
-	ret0, _ := ret[0].(*Hedge)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateHedgeSymbol indicates an expected call of UpdateHedgeSymbol.
-func (mr *MockHedgeServiceServerMockRecorder) UpdateHedgeSymbol(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeSymbol", reflect.TypeOf((*MockHedgeServiceServer)(nil).UpdateHedgeSymbol), ctx, in)
-}
-
-// UpdateHedgeTargetFutureMonth mocks base method.
-func (m *MockHedgeServiceServer) UpdateHedgeTargetFutureMonth(ctx context.Context, in *UpdateHedgeTargetFutureMonthRequest) (*Hedge, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateHedgeTargetFutureMonth", ctx, in)
-	ret0, _ := ret[0].(*Hedge)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// UpdateHedgeTargetFutureMonth indicates an expected call of UpdateHedgeTargetFutureMonth.
-func (mr *MockHedgeServiceServerMockRecorder) UpdateHedgeTargetFutureMonth(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHedgeTargetFutureMonth", reflect.TypeOf((*MockHedgeServiceServer)(nil).UpdateHedgeTargetFutureMonth), ctx, in)
 }

@@ -70,6 +70,12 @@ pub struct Hedge {
     /// 대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE(병합 대상) / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve 대상)에 적용, 그 외 method 는 무시. 기본 NEAR.
     #[prost(enumeration="TargetFutureMonth", tag="18")]
     pub target_future_month: i32,
+    /// 저장된 대상 심볼 원본 (hedge_symbol_or_underlying_symbol 컬럼).
+    /// DIRECT=실코드, DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO=선물 underlying_code,
+    /// ETF_DECOMPOSITION(비-ETF source)=기준 ETF. read 시 resolve 전 raw 값,
+    /// UpdateHedge update_mask 로 이 경로 지정 시 이 값을 그대로 저장.
+    #[prost(string, tag="19")]
+    pub hedge_symbol_or_underlying_symbol: ::prost::alloc::string::String,
 }
 /// 헷지 방식
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -305,28 +311,11 @@ pub struct UpdateHedgeRequest {
     /// 수정할 헷지 정보
     #[prost(message, optional, tag="1")]
     pub hedge: ::core::option::Option<Hedge>,
-}
-/// UpdateHedgeTargetFutureMonth 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateHedgeTargetFutureMonthRequest {
-    /// 헷지 리소스 이름 (예: hedges/1)
-    #[prost(string, tag="1")]
-    pub name: ::prost::alloc::string::String,
-    /// NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
-    #[prost(enumeration="TargetFutureMonth", tag="2")]
-    pub target_future_month: i32,
-}
-/// UpdateHedgeSymbol 요청
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateHedgeSymbolRequest {
-    /// 헷지 리소스 이름 (예: hedges/1)
-    #[prost(string, tag="1")]
-    pub name: ::prost::alloc::string::String,
-    /// 새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)
-    #[prost(string, tag="2")]
-    pub hedge_symbol_or_underlying_symbol: ::prost::alloc::string::String,
+    /// 갱신할 필드 경로. 없으면(unset) 기존 하위호환 동작(설정 필드만 갱신).
+    /// 지원 경로: exec_price_type, tick_offset, auto_amend, amend_method,
+    ///    initial_wait_ms, is_valid, target_future_month, hedge_symbol_or_underlying_symbol.
+    #[prost(message, optional, tag="2")]
+    pub update_mask: ::core::option::Option<super::super::super::google::protobuf::FieldMask>,
 }
 /// DeleteHedge 요청
 #[allow(clippy::derive_partial_eq_without_eq)]

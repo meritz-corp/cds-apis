@@ -74,33 +74,12 @@ abstract final class HedgeService {
   );
 
   /// Hedge 수정
+  /// update_mask 로 지정한 필드만 갱신. hedge_method/hedge_ratio/resolve_hedge_symbol/create_time 등은 갱신 불가.
+  /// 변경은 DB+서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영.
   static const updateHedge = connect.Spec(
     '/$name/UpdateHedge',
     connect.StreamType.unary,
     kdov1hedge.UpdateHedgeRequest.new,
-    kdov1hedge.Hedge.new,
-  );
-
-  /// ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의
-  /// 대상 월물(target_future_month)을 변경한다.
-  /// 다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.
-  static const updateHedgeTargetFutureMonth = connect.Spec(
-    '/$name/UpdateHedgeTargetFutureMonth',
-    connect.StreamType.unary,
-    kdov1hedge.UpdateHedgeTargetFutureMonthRequest.new,
-    kdov1hedge.Hedge.new,
-  );
-
-  /// Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.
-  /// 의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,
-  /// DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),
-  /// ETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.
-  /// UpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.
-  /// 변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.
-  static const updateHedgeSymbol = connect.Spec(
-    '/$name/UpdateHedgeSymbol',
-    connect.StreamType.unary,
-    kdov1hedge.UpdateHedgeSymbolRequest.new,
     kdov1hedge.Hedge.new,
   );
 

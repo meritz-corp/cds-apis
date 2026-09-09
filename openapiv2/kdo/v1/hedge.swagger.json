@@ -346,7 +346,7 @@
     },
     "/v1/{hedge.name}": {
       "patch": {
-        "summary": "Hedge 수정",
+        "summary": "Hedge 수정\nupdate_mask 로 지정한 필드만 갱신. hedge_method/hedge_ratio/resolve_hedge_symbol/create_time 등은 갱신 불가.\n변경은 DB+서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영.",
         "operationId": "HedgeService_UpdateHedge",
         "responses": {
           "200": {
@@ -458,6 +458,10 @@
                 "targetFutureMonth": {
                   "$ref": "#/definitions/hedgeTargetFutureMonth",
                   "description": "대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE(병합 대상) / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve 대상)에 적용, 그 외 method 는 무시. 기본 NEAR."
+                },
+                "hedgeSymbolOrUnderlyingSymbol": {
+                  "type": "string",
+                  "description": "저장된 대상 심볼 원본 (hedge_symbol_or_underlying_symbol 컬럼).\nDIRECT=실코드, DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO=선물 underlying_code,\nETF_DECOMPOSITION(비-ETF source)=기준 ETF. read 시 resolve 전 raw 값,\nUpdateHedge update_mask 로 이 경로 지정 시 이 값을 그대로 저장."
                 }
               },
               "title": "수정할 헷지 정보",
@@ -468,6 +472,13 @@
                 "hedgeFundCode"
               ]
             }
+          },
+          {
+            "name": "updateMask",
+            "description": "갱신할 필드 경로. 없으면(unset) 기존 하위호환 동작(설정 필드만 갱신).\n지원 경로: exec_price_type, tick_offset, auto_amend, amend_method,\n  initial_wait_ms, is_valid, target_future_month, hedge_symbol_or_underlying_symbol.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -697,108 +708,6 @@
           "HedgeService"
         ]
       }
-    },
-    "/v1/{name}:updateSymbol": {
-      "post": {
-        "summary": "Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.\n의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,\nDIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),\nETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.\nUpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.\n변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.",
-        "operationId": "HedgeService_UpdateHedgeSymbol",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/hedgeHedge"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "name",
-            "description": "헷지 리소스 이름 (예: hedges/1)",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "hedges/[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "hedgeSymbolOrUnderlyingSymbol": {
-                  "type": "string",
-                  "title": "새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)"
-                }
-              },
-              "title": "UpdateHedgeSymbol 요청",
-              "required": [
-                "hedgeSymbolOrUnderlyingSymbol"
-              ]
-            }
-          }
-        ],
-        "tags": [
-          "HedgeService"
-        ]
-      }
-    },
-    "/v1/{name}:updateTargetFutureMonth": {
-      "post": {
-        "summary": "ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의\n대상 월물(target_future_month)을 변경한다.\n다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.",
-        "operationId": "HedgeService_UpdateHedgeTargetFutureMonth",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/hedgeHedge"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "name",
-            "description": "헷지 리소스 이름 (예: hedges/1)",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "hedges/[^/]+"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "targetFutureMonth": {
-                  "$ref": "#/definitions/hedgeTargetFutureMonth",
-                  "title": "NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)"
-                }
-              },
-              "title": "UpdateHedgeTargetFutureMonth 요청",
-              "required": [
-                "targetFutureMonth"
-              ]
-            }
-          }
-        ],
-        "tags": [
-          "HedgeService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -996,6 +905,10 @@
         "targetFutureMonth": {
           "$ref": "#/definitions/hedgeTargetFutureMonth",
           "description": "대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE(병합 대상) / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve 대상)에 적용, 그 외 method 는 무시. 기본 NEAR."
+        },
+        "hedgeSymbolOrUnderlyingSymbol": {
+          "type": "string",
+          "description": "저장된 대상 심볼 원본 (hedge_symbol_or_underlying_symbol 컬럼).\nDIRECT=실코드, DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO=선물 underlying_code,\nETF_DECOMPOSITION(비-ETF source)=기준 ETF. read 시 resolve 전 raw 값,\nUpdateHedge update_mask 로 이 경로 지정 시 이 값을 그대로 저장."
         }
       },
       "title": "Hedge: 펀드 단위 즉시 헷지 설정\n소스 종목의 체결에 대해 즉시 헷지 주문을 실행",

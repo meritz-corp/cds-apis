@@ -7,6 +7,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "kdo/v1/common.proto";
 
@@ -77,37 +78,14 @@ service HedgeService {
   }
 
   // Hedge 수정
+  // update_mask 로 지정한 필드만 갱신. hedge_method/hedge_ratio/resolve_hedge_symbol/create_time 등은 갱신 불가.
+  // 변경은 DB+서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영.
   rpc UpdateHedge(UpdateHedgeRequest) returns (Hedge) {
     option (google.api.http) = {
       patch: "/v1/{hedge.name=hedges/*}"
       body: "hedge"
     };
-    option (google.api.method_signature) = "hedge";
-  }
-
-  // ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의
-  // 대상 월물(target_future_month)을 변경한다.
-  // 다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.
-  rpc UpdateHedgeTargetFutureMonth(UpdateHedgeTargetFutureMonthRequest) returns (Hedge) {
-    option (google.api.http) = {
-      post: "/v1/{name=hedges/*}:updateTargetFutureMonth"
-      body: "*"
-    };
-    option (google.api.method_signature) = "name,target_future_month";
-  }
-
-  // Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.
-  // 의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,
-  // DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),
-  // ETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.
-  // UpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.
-  // 변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.
-  rpc UpdateHedgeSymbol(UpdateHedgeSymbolRequest) returns (Hedge) {
-    option (google.api.http) = {
-      post: "/v1/{name=hedges/*}:updateSymbol"
-      body: "*"
-    };
-    option (google.api.method_signature) = "name,hedge_symbol_or_underlying_symbol";
+    option (google.api.method_signature) = "hedge,update_mask";
   }
 
   // Hedge 삭제
@@ -287,6 +265,12 @@ message Hedge {
 
   // 대상 월물. ETF_DECOMPOSITION_SINGLE_FUTURE(병합 대상) / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO(resolve 대상)에 적용, 그 외 method 는 무시. 기본 NEAR.
   TargetFutureMonth target_future_month = 18;
+
+  // 저장된 대상 심볼 원본 (hedge_symbol_or_underlying_symbol 컬럼).
+  // DIRECT=실코드, DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO=선물 underlying_code,
+  // ETF_DECOMPOSITION(비-ETF source)=기준 ETF. read 시 resolve 전 raw 값,
+  // UpdateHedge update_mask 로 이 경로 지정 시 이 값을 그대로 저장.
+  string hedge_symbol_or_underlying_symbol = 19;
 }
 
 // 헷지 방식
@@ -497,34 +481,11 @@ message ListHedgesResponse {
 message UpdateHedgeRequest {
   // 수정할 헷지 정보
   Hedge hedge = 1 [(google.api.field_behavior) = REQUIRED];
-}
 
-// UpdateHedgeTargetFutureMonth 요청
-message UpdateHedgeTargetFutureMonthRequest {
-  // 헷지 리소스 이름 (예: hedges/1)
-  string name = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/Hedge"
-    }
-  ];
-
-  // NEAR 또는 FAR (UNSPECIFIED 는 INVALID_ARGUMENT)
-  TargetFutureMonth target_future_month = 2 [(google.api.field_behavior) = REQUIRED];
-}
-
-// UpdateHedgeSymbol 요청
-message UpdateHedgeSymbolRequest {
-  // 헷지 리소스 이름 (예: hedges/1)
-  string name = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "kdo.cdsapis.xyz/Hedge"
-    }
-  ];
-
-  // 새 대상 심볼/underlying_code (빈 값은 INVALID_ARGUMENT)
-  string hedge_symbol_or_underlying_symbol = 2 [(google.api.field_behavior) = REQUIRED];
+  // 갱신할 필드 경로. 없으면(unset) 기존 하위호환 동작(설정 필드만 갱신).
+  // 지원 경로: exec_price_type, tick_offset, auto_amend, amend_method,
+  //   initial_wait_ms, is_valid, target_future_month, hedge_symbol_or_underlying_symbol.
+  google.protobuf.FieldMask update_mask = 2;
 }
 
 // DeleteHedge 요청

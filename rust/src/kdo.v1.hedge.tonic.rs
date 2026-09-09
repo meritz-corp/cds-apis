@@ -289,57 +289,6 @@ pub mod hedge_service_client {
                 .insert(GrpcMethod::new("kdo.v1.hedge.HedgeService", "UpdateHedge"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_hedge_target_future_month(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UpdateHedgeTargetFutureMonthRequest>,
-        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.hedge.HedgeService/UpdateHedgeTargetFutureMonth",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.hedge.HedgeService",
-                        "UpdateHedgeTargetFutureMonth",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn update_hedge_symbol(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UpdateHedgeSymbolRequest>,
-        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status> {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.hedge.HedgeService/UpdateHedgeSymbol",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("kdo.v1.hedge.HedgeService", "UpdateHedgeSymbol"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn delete_hedge(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteHedgeRequest>,
@@ -542,14 +491,6 @@ pub mod hedge_service_server {
         async fn update_hedge(
             &self,
             request: tonic::Request<super::UpdateHedgeRequest>,
-        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
-        async fn update_hedge_target_future_month(
-            &self,
-            request: tonic::Request<super::UpdateHedgeTargetFutureMonthRequest>,
-        ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
-        async fn update_hedge_symbol(
-            &self,
-            request: tonic::Request<super::UpdateHedgeSymbolRequest>,
         ) -> std::result::Result<tonic::Response<super::Hedge>, tonic::Status>;
         async fn delete_hedge(
             &self,
@@ -1021,104 +962,6 @@ pub mod hedge_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = UpdateHedgeSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.hedge.HedgeService/UpdateHedgeTargetFutureMonth" => {
-                    #[allow(non_camel_case_types)]
-                    struct UpdateHedgeTargetFutureMonthSvc<T: HedgeService>(pub Arc<T>);
-                    impl<
-                        T: HedgeService,
-                    > tonic::server::UnaryService<
-                        super::UpdateHedgeTargetFutureMonthRequest,
-                    > for UpdateHedgeTargetFutureMonthSvc<T> {
-                        type Response = super::Hedge;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<
-                                super::UpdateHedgeTargetFutureMonthRequest,
-                            >,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as HedgeService>::update_hedge_target_future_month(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UpdateHedgeTargetFutureMonthSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.hedge.HedgeService/UpdateHedgeSymbol" => {
-                    #[allow(non_camel_case_types)]
-                    struct UpdateHedgeSymbolSvc<T: HedgeService>(pub Arc<T>);
-                    impl<
-                        T: HedgeService,
-                    > tonic::server::UnaryService<super::UpdateHedgeSymbolRequest>
-                    for UpdateHedgeSymbolSvc<T> {
-                        type Response = super::Hedge;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UpdateHedgeSymbolRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as HedgeService>::update_hedge_symbol(&inner, request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UpdateHedgeSymbolSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

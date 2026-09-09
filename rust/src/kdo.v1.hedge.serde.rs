@@ -1233,6 +1233,9 @@ impl serde::Serialize for Hedge {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.Hedge", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1298,6 +1301,9 @@ impl serde::Serialize for Hedge {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.target_future_month)))?;
             struct_ser.serialize_field("target_future_month", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("hedge_symbol_or_underlying_symbol", &self.hedge_symbol_or_underlying_symbol)?;
+        }
         struct_ser.end()
     }
 }
@@ -1342,6 +1348,8 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             "isValid",
             "target_future_month",
             "targetFutureMonth",
+            "hedge_symbol_or_underlying_symbol",
+            "hedgeSymbolOrUnderlyingSymbol",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1364,6 +1372,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
             InitialWaitMs,
             IsValid,
             TargetFutureMonth,
+            HedgeSymbolOrUnderlyingSymbol,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1404,6 +1413,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             "initialWaitMs" | "initial_wait_ms" => Ok(GeneratedField::InitialWaitMs),
                             "isValid" | "is_valid" => Ok(GeneratedField::IsValid),
                             "targetFutureMonth" | "target_future_month" => Ok(GeneratedField::TargetFutureMonth),
+                            "hedgeSymbolOrUnderlyingSymbol" | "hedge_symbol_or_underlying_symbol" => Ok(GeneratedField::HedgeSymbolOrUnderlyingSymbol),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1441,6 +1451,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                 let mut initial_wait_ms__ = None;
                 let mut is_valid__ = None;
                 let mut target_future_month__ = None;
+                let mut hedge_symbol_or_underlying_symbol__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1559,6 +1570,12 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                             }
                             target_future_month__ = Some(map_.next_value::<TargetFutureMonth>()? as i32);
                         }
+                        GeneratedField::HedgeSymbolOrUnderlyingSymbol => {
+                            if hedge_symbol_or_underlying_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("hedgeSymbolOrUnderlyingSymbol"));
+                            }
+                            hedge_symbol_or_underlying_symbol__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1583,6 +1600,7 @@ impl<'de> serde::Deserialize<'de> for Hedge {
                     initial_wait_ms: initial_wait_ms__.unwrap_or_default(),
                     is_valid: is_valid__.unwrap_or_default(),
                     target_future_month: target_future_month__.unwrap_or_default(),
+                    hedge_symbol_or_underlying_symbol: hedge_symbol_or_underlying_symbol__.unwrap_or_default(),
                 })
             }
         }
@@ -4176,9 +4194,15 @@ impl serde::Serialize for UpdateHedgeRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.UpdateHedgeRequest", len)?;
         if let Some(v) = self.hedge.as_ref() {
             struct_ser.serialize_field("hedge", v)?;
+        }
+        if let Some(v) = self.update_mask.as_ref() {
+            struct_ser.serialize_field("update_mask", v)?;
         }
         struct_ser.end()
     }
@@ -4191,11 +4215,14 @@ impl<'de> serde::Deserialize<'de> for UpdateHedgeRequest {
     {
         const FIELDS: &[&str] = &[
             "hedge",
+            "update_mask",
+            "updateMask",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Hedge,
+            UpdateMask,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4219,6 +4246,7 @@ impl<'de> serde::Deserialize<'de> for UpdateHedgeRequest {
                     {
                         match value {
                             "hedge" => Ok(GeneratedField::Hedge),
+                            "updateMask" | "update_mask" => Ok(GeneratedField::UpdateMask),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4239,6 +4267,7 @@ impl<'de> serde::Deserialize<'de> for UpdateHedgeRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut hedge__ = None;
+                let mut update_mask__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Hedge => {
@@ -4247,6 +4276,12 @@ impl<'de> serde::Deserialize<'de> for UpdateHedgeRequest {
                             }
                             hedge__ = map_.next_value()?;
                         }
+                        GeneratedField::UpdateMask => {
+                            if update_mask__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updateMask"));
+                            }
+                            update_mask__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4254,237 +4289,10 @@ impl<'de> serde::Deserialize<'de> for UpdateHedgeRequest {
                 }
                 Ok(UpdateHedgeRequest {
                     hedge: hedge__,
+                    update_mask: update_mask__,
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for UpdateHedgeSymbolRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.UpdateHedgeSymbolRequest", len)?;
-        if true {
-            struct_ser.serialize_field("name", &self.name)?;
-        }
-        if true {
-            struct_ser.serialize_field("hedge_symbol_or_underlying_symbol", &self.hedge_symbol_or_underlying_symbol)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for UpdateHedgeSymbolRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "name",
-            "hedge_symbol_or_underlying_symbol",
-            "hedgeSymbolOrUnderlyingSymbol",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Name,
-            HedgeSymbolOrUnderlyingSymbol,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "name" => Ok(GeneratedField::Name),
-                            "hedgeSymbolOrUnderlyingSymbol" | "hedge_symbol_or_underlying_symbol" => Ok(GeneratedField::HedgeSymbolOrUnderlyingSymbol),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateHedgeSymbolRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.hedge.UpdateHedgeSymbolRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateHedgeSymbolRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut name__ = None;
-                let mut hedge_symbol_or_underlying_symbol__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Name => {
-                            if name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("name"));
-                            }
-                            name__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::HedgeSymbolOrUnderlyingSymbol => {
-                            if hedge_symbol_or_underlying_symbol__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("hedgeSymbolOrUnderlyingSymbol"));
-                            }
-                            hedge_symbol_or_underlying_symbol__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(UpdateHedgeSymbolRequest {
-                    name: name__.unwrap_or_default(),
-                    hedge_symbol_or_underlying_symbol: hedge_symbol_or_underlying_symbol__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeSymbolRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for UpdateHedgeTargetFutureMonthRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.hedge.UpdateHedgeTargetFutureMonthRequest", len)?;
-        if true {
-            struct_ser.serialize_field("name", &self.name)?;
-        }
-        if true {
-            let v = TargetFutureMonth::try_from(self.target_future_month)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.target_future_month)))?;
-            struct_ser.serialize_field("target_future_month", &v)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for UpdateHedgeTargetFutureMonthRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "name",
-            "target_future_month",
-            "targetFutureMonth",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Name,
-            TargetFutureMonth,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "name" => Ok(GeneratedField::Name),
-                            "targetFutureMonth" | "target_future_month" => Ok(GeneratedField::TargetFutureMonth),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = UpdateHedgeTargetFutureMonthRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.hedge.UpdateHedgeTargetFutureMonthRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<UpdateHedgeTargetFutureMonthRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut name__ = None;
-                let mut target_future_month__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Name => {
-                            if name__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("name"));
-                            }
-                            name__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::TargetFutureMonth => {
-                            if target_future_month__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("targetFutureMonth"));
-                            }
-                            target_future_month__ = Some(map_.next_value::<TargetFutureMonth>()? as i32);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(UpdateHedgeTargetFutureMonthRequest {
-                    name: name__.unwrap_or_default(),
-                    target_future_month: target_future_month__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.hedge.UpdateHedgeTargetFutureMonthRequest", FIELDS, GeneratedVisitor)
     }
 }

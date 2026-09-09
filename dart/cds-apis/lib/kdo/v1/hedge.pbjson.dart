@@ -107,6 +107,7 @@ const Hedge$json = {
     {'1': 'initial_wait_ms', '3': 16, '4': 1, '5': 4, '10': 'initialWaitMs'},
     {'1': 'is_valid', '3': 17, '4': 1, '5': 8, '10': 'isValid'},
     {'1': 'target_future_month', '3': 18, '4': 1, '5': 14, '6': '.kdo.v1.hedge.TargetFutureMonth', '10': 'targetFutureMonth'},
+    {'1': 'hedge_symbol_or_underlying_symbol', '3': 19, '4': 1, '5': 9, '10': 'hedgeSymbolOrUnderlyingSymbol'},
   ],
   '3': [Hedge_QuantityPerHedgeEntry$json],
   '7': {},
@@ -140,9 +141,10 @@ final $typed_data.Uint8List hedgeDescriptor = $convert.base64Decode(
     'd0cF9jb2RlGA8gASgOMhkua2RvLnYxLmhlZGdlLk9yZGVyVHBDb2RlUgZ0cENvZGUSJgoPaW5p'
     'dGlhbF93YWl0X21zGBAgASgEUg1pbml0aWFsV2FpdE1zEhkKCGlzX3ZhbGlkGBEgASgIUgdpc1'
     'ZhbGlkEk8KE3RhcmdldF9mdXR1cmVfbW9udGgYEiABKA4yHy5rZG8udjEuaGVkZ2UuVGFyZ2V0'
-    'RnV0dXJlTW9udGhSEXRhcmdldEZ1dHVyZU1vbnRoGkMKFVF1YW50aXR5UGVySGVkZ2VFbnRyeR'
-    'IQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBOirqQScKFWtkby5j'
-    'ZHNhcGlzLnh5ei9IZWRnZRIOaGVkZ2VzL3toZWRnZX0=');
+    'RnV0dXJlTW9udGhSEXRhcmdldEZ1dHVyZU1vbnRoEkgKIWhlZGdlX3N5bWJvbF9vcl91bmRlcm'
+    'x5aW5nX3N5bWJvbBgTIAEoCVIdaGVkZ2VTeW1ib2xPclVuZGVybHlpbmdTeW1ib2waQwoVUXVh'
+    'bnRpdHlQZXJIZWRnZUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YW'
+    'x1ZToCOAE6KupBJwoVa2RvLmNkc2FwaXMueHl6L0hlZGdlEg5oZWRnZXMve2hlZGdlfQ==');
 
 @$core.Deprecated('Use hedgeMethodDescriptor instead')
 const HedgeMethod$json = {
@@ -416,44 +418,15 @@ const UpdateHedgeRequest$json = {
   '1': 'UpdateHedgeRequest',
   '2': [
     {'1': 'hedge', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.hedge.Hedge', '8': {}, '10': 'hedge'},
+    {'1': 'update_mask', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.FieldMask', '10': 'updateMask'},
   ],
 };
 
 /// Descriptor for `UpdateHedgeRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateHedgeRequestDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVIZWRnZVJlcXVlc3QSLwoFaGVkZ2UYASABKAsyEy5rZG8udjEuaGVkZ2UuSGVkZ2'
-    'VCBOJBAQJSBWhlZGdl');
-
-@$core.Deprecated('Use updateHedgeTargetFutureMonthRequestDescriptor instead')
-const UpdateHedgeTargetFutureMonthRequest$json = {
-  '1': 'UpdateHedgeTargetFutureMonthRequest',
-  '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
-    {'1': 'target_future_month', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.hedge.TargetFutureMonth', '8': {}, '10': 'targetFutureMonth'},
-  ],
-};
-
-/// Descriptor for `UpdateHedgeTargetFutureMonthRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateHedgeTargetFutureMonthRequestDescriptor = $convert.base64Decode(
-    'CiNVcGRhdGVIZWRnZVRhcmdldEZ1dHVyZU1vbnRoUmVxdWVzdBIyCgRuYW1lGAEgASgJQh7iQQ'
-    'EC+kEXChVrZG8uY2RzYXBpcy54eXovSGVkZ2VSBG5hbWUSVQoTdGFyZ2V0X2Z1dHVyZV9tb250'
-    'aBgCIAEoDjIfLmtkby52MS5oZWRnZS5UYXJnZXRGdXR1cmVNb250aEIE4kEBAlIRdGFyZ2V0Rn'
-    'V0dXJlTW9udGg=');
-
-@$core.Deprecated('Use updateHedgeSymbolRequestDescriptor instead')
-const UpdateHedgeSymbolRequest$json = {
-  '1': 'UpdateHedgeSymbolRequest',
-  '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'name'},
-    {'1': 'hedge_symbol_or_underlying_symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'hedgeSymbolOrUnderlyingSymbol'},
-  ],
-};
-
-/// Descriptor for `UpdateHedgeSymbolRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateHedgeSymbolRequestDescriptor = $convert.base64Decode(
-    'ChhVcGRhdGVIZWRnZVN5bWJvbFJlcXVlc3QSMgoEbmFtZRgBIAEoCUIe4kEBAvpBFwoVa2RvLm'
-    'Nkc2FwaXMueHl6L0hlZGdlUgRuYW1lEk4KIWhlZGdlX3N5bWJvbF9vcl91bmRlcmx5aW5nX3N5'
-    'bWJvbBgCIAEoCUIE4kEBAlIdaGVkZ2VTeW1ib2xPclVuZGVybHlpbmdTeW1ib2w=');
+    'VCBOJBAQJSBWhlZGdlEjsKC3VwZGF0ZV9tYXNrGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLkZp'
+    'ZWxkTWFza1IKdXBkYXRlTWFzaw==');
 
 @$core.Deprecated('Use deleteHedgeRequestDescriptor instead')
 const DeleteHedgeRequest$json = {

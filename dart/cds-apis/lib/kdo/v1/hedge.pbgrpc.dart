@@ -75,25 +75,10 @@ class HedgeServiceClient extends $grpc.Client {
   }
 
   /// Hedge 수정
+  /// update_mask 로 지정한 필드만 갱신. hedge_method/hedge_ratio/resolve_hedge_symbol/create_time 등은 갱신 불가.
+  /// 변경은 DB+서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영.
   $grpc.ResponseFuture<$0.Hedge> updateHedge($0.UpdateHedgeRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$updateHedge, request, options: options);
-  }
-
-  /// ETF_DECOMPOSITION_SINGLE_FUTURE / DIRECT_FUTURE_RESOLVE / UNIT_DELTA_AUTO_RATIO 의
-  /// 대상 월물(target_future_month)을 변경한다.
-  /// 다른 method 면 INVALID_ARGUMENT. 변경은 DB + 서버 런타임(발주 경로)까지 즉시 반영된다.
-  $grpc.ResponseFuture<$0.Hedge> updateHedgeTargetFutureMonth($0.UpdateHedgeTargetFutureMonthRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$updateHedgeTargetFutureMonth, request, options: options);
-  }
-
-  /// Hedge 의 대상 심볼(hedge_symbol_or_underlying_symbol)을 명시적으로 변경한다.
-  /// 의미는 hedge_method 별: DIRECT=실제 종목코드 그대로,
-  /// DIRECT_FUTURE_RESOLVE/UNIT_DELTA_AUTO_RATIO(resolve 시)=선물 underlying_code(런타임에 target_future_month 월물로 resolve),
-  /// ETF_DECOMPOSITION(비-ETF source)=분해 기준 ETF.
-  /// UpdateHedge 는 이 컬럼을 건드리지 않는다 — resolve 된 값의 round-trip 파괴 방지. 변경은 이 RPC 로만.
-  /// 변경은 DB + 서버 런타임(재로드·재resolve, 발주 경로)까지 즉시 반영된다.
-  $grpc.ResponseFuture<$0.Hedge> updateHedgeSymbol($0.UpdateHedgeSymbolRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$updateHedgeSymbol, request, options: options);
   }
 
   /// Hedge 삭제
@@ -159,14 +144,6 @@ class HedgeServiceClient extends $grpc.Client {
   static final _$updateHedge = $grpc.ClientMethod<$0.UpdateHedgeRequest, $0.Hedge>(
       '/kdo.v1.hedge.HedgeService/UpdateHedge',
       ($0.UpdateHedgeRequest value) => value.writeToBuffer(),
-      $0.Hedge.fromBuffer);
-  static final _$updateHedgeTargetFutureMonth = $grpc.ClientMethod<$0.UpdateHedgeTargetFutureMonthRequest, $0.Hedge>(
-      '/kdo.v1.hedge.HedgeService/UpdateHedgeTargetFutureMonth',
-      ($0.UpdateHedgeTargetFutureMonthRequest value) => value.writeToBuffer(),
-      $0.Hedge.fromBuffer);
-  static final _$updateHedgeSymbol = $grpc.ClientMethod<$0.UpdateHedgeSymbolRequest, $0.Hedge>(
-      '/kdo.v1.hedge.HedgeService/UpdateHedgeSymbol',
-      ($0.UpdateHedgeSymbolRequest value) => value.writeToBuffer(),
       $0.Hedge.fromBuffer);
   static final _$deleteHedge = $grpc.ClientMethod<$0.DeleteHedgeRequest, $1.Empty>(
       '/kdo.v1.hedge.HedgeService/DeleteHedge',
@@ -254,20 +231,6 @@ abstract class HedgeServiceBase extends $grpc.Service {
         false,
         false,
         ($core.List<$core.int> value) => $0.UpdateHedgeRequest.fromBuffer(value),
-        ($0.Hedge value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateHedgeTargetFutureMonthRequest, $0.Hedge>(
-        'UpdateHedgeTargetFutureMonth',
-        updateHedgeTargetFutureMonth_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.UpdateHedgeTargetFutureMonthRequest.fromBuffer(value),
-        ($0.Hedge value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.UpdateHedgeSymbolRequest, $0.Hedge>(
-        'UpdateHedgeSymbol',
-        updateHedgeSymbol_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.UpdateHedgeSymbolRequest.fromBuffer(value),
         ($0.Hedge value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.DeleteHedgeRequest, $1.Empty>(
         'DeleteHedge',
@@ -360,18 +323,6 @@ abstract class HedgeServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.Hedge> updateHedge($grpc.ServiceCall call, $0.UpdateHedgeRequest request);
-
-  $async.Future<$0.Hedge> updateHedgeTargetFutureMonth_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateHedgeTargetFutureMonthRequest> $request) async {
-    return updateHedgeTargetFutureMonth($call, await $request);
-  }
-
-  $async.Future<$0.Hedge> updateHedgeTargetFutureMonth($grpc.ServiceCall call, $0.UpdateHedgeTargetFutureMonthRequest request);
-
-  $async.Future<$0.Hedge> updateHedgeSymbol_Pre($grpc.ServiceCall $call, $async.Future<$0.UpdateHedgeSymbolRequest> $request) async {
-    return updateHedgeSymbol($call, await $request);
-  }
-
-  $async.Future<$0.Hedge> updateHedgeSymbol($grpc.ServiceCall call, $0.UpdateHedgeSymbolRequest request);
 
   $async.Future<$1.Empty> deleteHedge_Pre($grpc.ServiceCall $call, $async.Future<$0.DeleteHedgeRequest> $request) async {
     return deleteHedge($call, await $request);
