@@ -1750,6 +1750,9 @@ impl serde::Serialize for OrderLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLog", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1842,6 +1845,9 @@ impl serde::Serialize for OrderLog {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.tp_code)))?;
             struct_ser.serialize_field("tp_code", &v)?;
         }
+        if let Some(v) = self.cancellation_code.as_ref() {
+            struct_ser.serialize_field("cancellation_code", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1892,6 +1898,8 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             "lastAskBidTpCode",
             "tp_code",
             "tpCode",
+            "cancellation_code",
+            "cancellationCode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1919,6 +1927,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
             UserArea,
             LastAskBidTpCode,
             TpCode,
+            CancellationCode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1964,6 +1973,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             "userArea" | "user_area" => Ok(GeneratedField::UserArea),
                             "lastAskBidTpCode" | "last_ask_bid_tp_code" => Ok(GeneratedField::LastAskBidTpCode),
                             "tpCode" | "tp_code" => Ok(GeneratedField::TpCode),
+                            "cancellationCode" | "cancellation_code" => Ok(GeneratedField::CancellationCode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2006,6 +2016,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                 let mut user_area__ = None;
                 let mut last_ask_bid_tp_code__ = None;
                 let mut tp_code__ = None;
+                let mut cancellation_code__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -2158,6 +2169,12 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                             }
                             tp_code__ = Some(map_.next_value::<super::hedge::OrderTpCode>()? as i32);
                         }
+                        GeneratedField::CancellationCode => {
+                            if cancellation_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cancellationCode"));
+                            }
+                            cancellation_code__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2187,6 +2204,7 @@ impl<'de> serde::Deserialize<'de> for OrderLog {
                     user_area: user_area__,
                     last_ask_bid_tp_code: last_ask_bid_tp_code__,
                     tp_code: tp_code__.unwrap_or_default(),
+                    cancellation_code: cancellation_code__,
                 })
             }
         }

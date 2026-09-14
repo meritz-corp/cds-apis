@@ -92,6 +92,7 @@ const OrderLog$json = {
     {'1': 'user_area', '3': 21, '4': 1, '5': 9, '9': 6, '10': 'userArea', '17': true},
     {'1': 'last_ask_bid_tp_code', '3': 23, '4': 1, '5': 14, '6': '.kdo.v1.order_log.LastAskBidTpCode', '9': 7, '10': 'lastAskBidTpCode', '17': true},
     {'1': 'tp_code', '3': 24, '4': 1, '5': 14, '6': '.kdo.v1.hedge.OrderTpCode', '10': 'tpCode'},
+    {'1': 'cancellation_code', '3': 25, '4': 1, '5': 9, '9': 8, '10': 'cancellationCode', '17': true},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -102,6 +103,7 @@ const OrderLog$json = {
     {'1': '_error_message'},
     {'1': '_user_area'},
     {'1': '_last_ask_bid_tp_code'},
+    {'1': '_cancellation_code'},
   ],
   '9': [
     {'1': 22, '2': 23},
@@ -127,10 +129,11 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
     'CgRkYXRlGBQgASgNUgRkYXRlEiAKCXVzZXJfYXJlYRgVIAEoCUgGUgh1c2VyQXJlYYgBARJXCh'
     'RsYXN0X2Fza19iaWRfdHBfY29kZRgXIAEoDjIiLmtkby52MS5vcmRlcl9sb2cuTGFzdEFza0Jp'
     'ZFRwQ29kZUgHUhBsYXN0QXNrQmlkVHBDb2RliAEBEjIKB3RwX2NvZGUYGCABKA4yGS5rZG8udj'
-    'EuaGVkZ2UuT3JkZXJUcENvZGVSBnRwQ29kZUIUChJfb3JpZ2luYWxfb3JkZXJfaWRCDwoNX2Zp'
-    'bGxlZF9wcmljZUISChBfZmlsbGVkX3F1YW50aXR5QhAKDl9maWxsZWRfYW1vdW50QhEKD19yZW'
-    'plY3Rpb25fY29kZUIQCg5fZXJyb3JfbWVzc2FnZUIMCgpfdXNlcl9hcmVhQhcKFV9sYXN0X2Fz'
-    'a19iaWRfdHBfY29kZUoECBYQFw==');
+    'EuaGVkZ2UuT3JkZXJUcENvZGVSBnRwQ29kZRIwChFjYW5jZWxsYXRpb25fY29kZRgZIAEoCUgI'
+    'UhBjYW5jZWxsYXRpb25Db2RliAEBQhQKEl9vcmlnaW5hbF9vcmRlcl9pZEIPCg1fZmlsbGVkX3'
+    'ByaWNlQhIKEF9maWxsZWRfcXVhbnRpdHlCEAoOX2ZpbGxlZF9hbW91bnRCEQoPX3JlamVjdGlv'
+    'bl9jb2RlQhAKDl9lcnJvcl9tZXNzYWdlQgwKCl91c2VyX2FyZWFCFwoVX2xhc3RfYXNrX2JpZF'
+    '90cF9jb2RlQhQKEl9jYW5jZWxsYXRpb25fY29kZUoECBYQFw==');
 
 @$core.Deprecated('Use orderLogFillStatisticsDescriptor instead')
 const OrderLogFillStatistics$json = {

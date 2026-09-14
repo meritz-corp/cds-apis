@@ -50,6 +50,7 @@ class OrderLog extends $pb.GeneratedMessage {
     $core.String? userArea,
     LastAskBidTpCode? lastAskBidTpCode,
     $3.OrderTpCode? tpCode,
+    $core.String? cancellationCode,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -75,6 +76,7 @@ class OrderLog extends $pb.GeneratedMessage {
     if (userArea != null) result.userArea = userArea;
     if (lastAskBidTpCode != null) result.lastAskBidTpCode = lastAskBidTpCode;
     if (tpCode != null) result.tpCode = tpCode;
+    if (cancellationCode != null) result.cancellationCode = cancellationCode;
     return result;
   }
 
@@ -107,6 +109,7 @@ class OrderLog extends $pb.GeneratedMessage {
     ..aOS(21, _omitFieldNames ? '' : 'userArea')
     ..e<LastAskBidTpCode>(23, _omitFieldNames ? '' : 'lastAskBidTpCode', $pb.PbFieldType.OE, defaultOrMaker: LastAskBidTpCode.LAST_ASK_BID_TP_CODE_UNSPECIFIED, valueOf: LastAskBidTpCode.valueOf, enumValues: LastAskBidTpCode.values)
     ..e<$3.OrderTpCode>(24, _omitFieldNames ? '' : 'tpCode', $pb.PbFieldType.OE, defaultOrMaker: $3.OrderTpCode.ORDER_TP_CODE_UNSPECIFIED, valueOf: $3.OrderTpCode.valueOf, enumValues: $3.OrderTpCode.values)
+    ..aOS(25, _omitFieldNames ? '' : 'cancellationCode')
     ..hasRequiredFields = false
   ;
 
@@ -365,6 +368,19 @@ class OrderLog extends $pb.GeneratedMessage {
   $core.bool hasTpCode() => $_has(22);
   @$pb.TagNumber(24)
   void clearTpCode() => $_clearField(24);
+
+  /// 자동취소(AUTO_CANCELLED) 전문의 취소유형코드.
+  /// rejection_code(거부코드, Rejected 전문의 4자리 코드)와는 다른 코드 공간이므로 별도 필드로 저장한다.
+  /// 값: 0 해당없음, 1 조건호가취소(FAK/FOK 잔량), 2 일괄취소, 3 KillSwitch, 4 CancelOnDisconnect,
+  ///     5 실시간가격제한(파생), 6 MOC, 7 SMP(자기체결방지)
+  @$pb.TagNumber(25)
+  $core.String get cancellationCode => $_getSZ(23);
+  @$pb.TagNumber(25)
+  set cancellationCode($core.String value) => $_setString(23, value);
+  @$pb.TagNumber(25)
+  $core.bool hasCancellationCode() => $_has(23);
+  @$pb.TagNumber(25)
+  void clearCancellationCode() => $_clearField(25);
 }
 
 class OrderLogFillStatistics extends $pb.GeneratedMessage {

@@ -185,6 +185,12 @@ message OrderLog {
 
   // LP 구분
   kdo.v1.hedge.OrderTpCode tp_code = 24;
+
+  // 자동취소(AUTO_CANCELLED) 전문의 취소유형코드.
+  // rejection_code(거부코드, Rejected 전문의 4자리 코드)와는 다른 코드 공간이므로 별도 필드로 저장한다.
+  // 값: 0 해당없음, 1 조건호가취소(FAK/FOK 잔량), 2 일괄취소, 3 KillSwitch, 4 CancelOnDisconnect,
+  //     5 실시간가격제한(파생), 6 MOC, 7 SMP(자기체결방지)
+  optional string cancellation_code = 25;
 }
 
 // 주문 로그 타입
