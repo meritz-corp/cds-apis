@@ -1063,6 +1063,11 @@
           "type": "number",
           "format": "double",
           "title": "정규화 비중 (선정된 top_n 종목끼리 합 = 1)"
+        },
+        "decayUnitQty": {
+          "type": "string",
+          "format": "int64",
+          "description": "이 종목에 실제 적용된 decay_unit_qty. decay_unit_qtys 는 심볼이 아니라 랭크에\n묶이므로 PDF 리밸런싱 시 다른 종목에 재배정될 수 있다 — 오배정 확인용 에코."
         }
       },
       "title": "선정된 상위 구성종목 1개 (심볼 + 정규화 비중)"
@@ -1466,6 +1471,14 @@
         "shift": {
           "$ref": "#/definitions/mmMarketMakingMomentum",
           "title": "집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)"
+        },
+        "decayUnitQtys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "랭크(비중 내림차순, seed 선정 순서) 순 decay_unit_qty 오버라이드.\n목록이 top_n 보다 짧거나 값이 0 이면 analyzer.decay_unit_qty 로 폴백."
         }
       },
       "title": "상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)"
@@ -1706,6 +1719,14 @@
         "shift": {
           "$ref": "#/definitions/mmMarketMakingMomentum",
           "title": "집계 (ratio, strength) → 즉각 평행 shift 변환 (역상관 참조는 shift.is_opposite)"
+        },
+        "decayUnitQtys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "symbols 와 같은 순서(빈 값/중복 제거 후)의 decay_unit_qty 오버라이드.\n목록이 짧거나 값이 0 이면 analyzer.decay_unit_qty 로 폴백."
         }
       },
       "title": "운영자가 지정한 제3(참조) 종목 체결강도 → 즉각 호가 평행 shift\n(자기 ETF momentum / 구성종목 momentum 의 \"임의 지정 종목\" 확장. PDF 무관)"
@@ -1773,6 +1794,11 @@
           "type": "string",
           "format": "int64",
           "title": "strength 분모 최소치 (기본 100)"
+        },
+        "decayUnitQty": {
+          "type": "string",
+          "format": "int64",
+          "description": "count 감쇠 1스텝을 채우는 gross 체결 수량. 0 = 기존 체결 1건당 1스텝(레거시).\n감쇠를 체결 건수가 아닌 거래량에 걸어, 같은 물량이 1주x100건으로 들어오든\n100주x1건으로 들어오든 같은 스텝 수를 소비하게 한다."
         }
       },
       "title": "Trade Analyzer 설정 (갤럭티코 SingleTradeAnalyzer 포팅 — 시장 체결 추종)"

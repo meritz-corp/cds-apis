@@ -245,6 +245,7 @@ const MarketMakingTradeAnalyzer$json = {
     {'1': 'total_decay_ratio', '3': 4, '4': 1, '5': 1, '10': 'totalDecayRatio'},
     {'1': 'net_decay_ratio', '3': 5, '4': 1, '5': 1, '10': 'netDecayRatio'},
     {'1': 'min_book_qty', '3': 6, '4': 1, '5': 3, '10': 'minBookQty'},
+    {'1': 'decay_unit_qty', '3': 7, '4': 1, '5': 3, '10': 'decayUnitQty'},
   ],
 };
 
@@ -254,7 +255,8 @@ final $typed_data.Uint8List marketMakingTradeAnalyzerDescriptor = $convert.base6
     'oRY291bnRfZGVjYXlfcmF0aW8YAiABKAFSD2NvdW50RGVjYXlSYXRpbxIuChNkZWNheV9pbnRl'
     'cnZhbF9zZWNzGAMgASgEUhFkZWNheUludGVydmFsU2VjcxIqChF0b3RhbF9kZWNheV9yYXRpbx'
     'gEIAEoAVIPdG90YWxEZWNheVJhdGlvEiYKD25ldF9kZWNheV9yYXRpbxgFIAEoAVINbmV0RGVj'
-    'YXlSYXRpbxIgCgxtaW5fYm9va19xdHkYBiABKANSCm1pbkJvb2tRdHk=');
+    'YXlSYXRpbxIgCgxtaW5fYm9va19xdHkYBiABKANSCm1pbkJvb2tRdHkSJAoOZGVjYXlfdW5pdF'
+    '9xdHkYByABKANSDGRlY2F5VW5pdFF0eQ==');
 
 @$core.Deprecated('Use marketMakingMomentumDescriptor instead')
 const MarketMakingMomentum$json = {
@@ -328,6 +330,7 @@ const MarketMakingConstituentMomentum$json = {
     {'1': 'top_n', '3': 2, '4': 1, '5': 13, '10': 'topN'},
     {'1': 'analyzer', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTradeAnalyzer', '10': 'analyzer'},
     {'1': 'shift', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMomentum', '10': 'shift'},
+    {'1': 'decay_unit_qtys', '3': 5, '4': 3, '5': 3, '10': 'decayUnitQtys'},
   ],
 };
 
@@ -336,7 +339,8 @@ final $typed_data.Uint8List marketMakingConstituentMomentumDescriptor = $convert
     'Ch9NYXJrZXRNYWtpbmdDb25zdGl0dWVudE1vbWVudHVtEhgKB2VuYWJsZWQYASABKAhSB2VuYW'
     'JsZWQSEwoFdG9wX24YAiABKA1SBHRvcE4SQAoIYW5hbHl6ZXIYAyABKAsyJC5rZG8udjEubW0u'
     'TWFya2V0TWFraW5nVHJhZGVBbmFseXplclIIYW5hbHl6ZXISNQoFc2hpZnQYBCABKAsyHy5rZG'
-    '8udjEubW0uTWFya2V0TWFraW5nTW9tZW50dW1SBXNoaWZ0');
+    '8udjEubW0uTWFya2V0TWFraW5nTW9tZW50dW1SBXNoaWZ0EiYKD2RlY2F5X3VuaXRfcXR5cxgF'
+    'IAMoA1INZGVjYXlVbml0UXR5cw==');
 
 @$core.Deprecated('Use marketMakingProxyMomentumDescriptor instead')
 const MarketMakingProxyMomentum$json = {
@@ -346,6 +350,7 @@ const MarketMakingProxyMomentum$json = {
     {'1': 'symbols', '3': 2, '4': 3, '5': 9, '10': 'symbols'},
     {'1': 'analyzer', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTradeAnalyzer', '10': 'analyzer'},
     {'1': 'shift', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingMomentum', '10': 'shift'},
+    {'1': 'decay_unit_qtys', '3': 5, '4': 3, '5': 3, '10': 'decayUnitQtys'},
   ],
 };
 
@@ -354,7 +359,8 @@ final $typed_data.Uint8List marketMakingProxyMomentumDescriptor = $convert.base6
     'ChlNYXJrZXRNYWtpbmdQcm94eU1vbWVudHVtEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSGA'
     'oHc3ltYm9scxgCIAMoCVIHc3ltYm9scxJACghhbmFseXplchgDIAEoCzIkLmtkby52MS5tbS5N'
     'YXJrZXRNYWtpbmdUcmFkZUFuYWx5emVyUghhbmFseXplchI1CgVzaGlmdBgEIAEoCzIfLmtkby'
-    '52MS5tbS5NYXJrZXRNYWtpbmdNb21lbnR1bVIFc2hpZnQ=');
+    '52MS5tbS5NYXJrZXRNYWtpbmdNb21lbnR1bVIFc2hpZnQSJgoPZGVjYXlfdW5pdF9xdHlzGAUg'
+    'AygDUg1kZWNheVVuaXRRdHlz');
 
 @$core.Deprecated('Use marketMakingAdverseSelectionDescriptor instead')
 const MarketMakingAdverseSelection$json = {
@@ -503,13 +509,15 @@ const ConstituentMomentumSelectedItem$json = {
   '2': [
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '10': 'symbol'},
     {'1': 'weight', '3': 2, '4': 1, '5': 1, '10': 'weight'},
+    {'1': 'decay_unit_qty', '3': 3, '4': 1, '5': 3, '10': 'decayUnitQty'},
   ],
 };
 
 /// Descriptor for `ConstituentMomentumSelectedItem`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List constituentMomentumSelectedItemDescriptor = $convert.base64Decode(
     'Ch9Db25zdGl0dWVudE1vbWVudHVtU2VsZWN0ZWRJdGVtEhYKBnN5bWJvbBgBIAEoCVIGc3ltYm'
-    '9sEhYKBndlaWdodBgCIAEoAVIGd2VpZ2h0');
+    '9sEhYKBndlaWdodBgCIAEoAVIGd2VpZ2h0EiQKDmRlY2F5X3VuaXRfcXR5GAMgASgDUgxkZWNh'
+    'eVVuaXRRdHk=');
 
 @$core.Deprecated('Use getConstituentMomentumResponseDescriptor instead')
 const GetConstituentMomentumResponse$json = {

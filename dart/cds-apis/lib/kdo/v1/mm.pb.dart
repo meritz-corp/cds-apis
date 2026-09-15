@@ -822,6 +822,7 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
     $core.double? totalDecayRatio,
     $core.double? netDecayRatio,
     $fixnum.Int64? minBookQty,
+    $fixnum.Int64? decayUnitQty,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -830,6 +831,7 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
     if (totalDecayRatio != null) result.totalDecayRatio = totalDecayRatio;
     if (netDecayRatio != null) result.netDecayRatio = netDecayRatio;
     if (minBookQty != null) result.minBookQty = minBookQty;
+    if (decayUnitQty != null) result.decayUnitQty = decayUnitQty;
     return result;
   }
 
@@ -845,6 +847,7 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
     ..a<$core.double>(4, _omitFieldNames ? '' : 'totalDecayRatio', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'netDecayRatio', $pb.PbFieldType.OD)
     ..aInt64(6, _omitFieldNames ? '' : 'minBookQty')
+    ..aInt64(7, _omitFieldNames ? '' : 'decayUnitQty')
     ..hasRequiredFields = false
   ;
 
@@ -924,6 +927,18 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
   $core.bool hasMinBookQty() => $_has(5);
   @$pb.TagNumber(6)
   void clearMinBookQty() => $_clearField(6);
+
+  /// count 감쇠 1스텝을 채우는 gross 체결 수량. 0 = 기존 체결 1건당 1스텝(레거시).
+  /// 감쇠를 체결 건수가 아닌 거래량에 걸어, 같은 물량이 1주x100건으로 들어오든
+  /// 100주x1건으로 들어오든 같은 스텝 수를 소비하게 한다.
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get decayUnitQty => $_getI64(6);
+  @$pb.TagNumber(7)
+  set decayUnitQty($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasDecayUnitQty() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearDecayUnitQty() => $_clearField(7);
 }
 
 /// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
@@ -1287,12 +1302,14 @@ class MarketMakingConstituentMomentum extends $pb.GeneratedMessage {
     $core.int? topN,
     MarketMakingTradeAnalyzer? analyzer,
     MarketMakingMomentum? shift,
+    $core.Iterable<$fixnum.Int64>? decayUnitQtys,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (topN != null) result.topN = topN;
     if (analyzer != null) result.analyzer = analyzer;
     if (shift != null) result.shift = shift;
+    if (decayUnitQtys != null) result.decayUnitQtys.addAll(decayUnitQtys);
     return result;
   }
 
@@ -1306,6 +1323,7 @@ class MarketMakingConstituentMomentum extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'topN', $pb.PbFieldType.OU3)
     ..aOM<MarketMakingTradeAnalyzer>(3, _omitFieldNames ? '' : 'analyzer', subBuilder: MarketMakingTradeAnalyzer.create)
     ..aOM<MarketMakingMomentum>(4, _omitFieldNames ? '' : 'shift', subBuilder: MarketMakingMomentum.create)
+    ..p<$fixnum.Int64>(5, _omitFieldNames ? '' : 'decayUnitQtys', $pb.PbFieldType.K6)
     ..hasRequiredFields = false
   ;
 
@@ -1369,6 +1387,11 @@ class MarketMakingConstituentMomentum extends $pb.GeneratedMessage {
   void clearShift() => $_clearField(4);
   @$pb.TagNumber(4)
   MarketMakingMomentum ensureShift() => $_ensure(3);
+
+  /// 랭크(비중 내림차순, seed 선정 순서) 순 decay_unit_qty 오버라이드.
+  /// 목록이 top_n 보다 짧거나 값이 0 이면 analyzer.decay_unit_qty 로 폴백.
+  @$pb.TagNumber(5)
+  $pb.PbList<$fixnum.Int64> get decayUnitQtys => $_getList(4);
 }
 
 /// 운영자가 지정한 제3(참조) 종목 체결강도 → 즉각 호가 평행 shift
@@ -1379,12 +1402,14 @@ class MarketMakingProxyMomentum extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? symbols,
     MarketMakingTradeAnalyzer? analyzer,
     MarketMakingMomentum? shift,
+    $core.Iterable<$fixnum.Int64>? decayUnitQtys,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (symbols != null) result.symbols.addAll(symbols);
     if (analyzer != null) result.analyzer = analyzer;
     if (shift != null) result.shift = shift;
+    if (decayUnitQtys != null) result.decayUnitQtys.addAll(decayUnitQtys);
     return result;
   }
 
@@ -1398,6 +1423,7 @@ class MarketMakingProxyMomentum extends $pb.GeneratedMessage {
     ..pPS(2, _omitFieldNames ? '' : 'symbols')
     ..aOM<MarketMakingTradeAnalyzer>(3, _omitFieldNames ? '' : 'analyzer', subBuilder: MarketMakingTradeAnalyzer.create)
     ..aOM<MarketMakingMomentum>(4, _omitFieldNames ? '' : 'shift', subBuilder: MarketMakingMomentum.create)
+    ..p<$fixnum.Int64>(5, _omitFieldNames ? '' : 'decayUnitQtys', $pb.PbFieldType.K6)
     ..hasRequiredFields = false
   ;
 
@@ -1455,6 +1481,11 @@ class MarketMakingProxyMomentum extends $pb.GeneratedMessage {
   void clearShift() => $_clearField(4);
   @$pb.TagNumber(4)
   MarketMakingMomentum ensureShift() => $_ensure(3);
+
+  /// symbols 와 같은 순서(빈 값/중복 제거 후)의 decay_unit_qty 오버라이드.
+  /// 목록이 짧거나 값이 0 이면 analyzer.decay_unit_qty 로 폴백.
+  @$pb.TagNumber(5)
+  $pb.PbList<$fixnum.Int64> get decayUnitQtys => $_getList(4);
 }
 
 /// 역선택 방어: 자기 체결의 markout(체결 후 공정가 역행)을 시간감쇠 누적,
@@ -2012,10 +2043,12 @@ class ConstituentMomentumSelectedItem extends $pb.GeneratedMessage {
   factory ConstituentMomentumSelectedItem({
     $core.String? symbol,
     $core.double? weight,
+    $fixnum.Int64? decayUnitQty,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (weight != null) result.weight = weight;
+    if (decayUnitQty != null) result.decayUnitQty = decayUnitQty;
     return result;
   }
 
@@ -2027,6 +2060,7 @@ class ConstituentMomentumSelectedItem extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ConstituentMomentumSelectedItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..a<$core.double>(2, _omitFieldNames ? '' : 'weight', $pb.PbFieldType.OD)
+    ..aInt64(3, _omitFieldNames ? '' : 'decayUnitQty')
     ..hasRequiredFields = false
   ;
 
@@ -2066,6 +2100,17 @@ class ConstituentMomentumSelectedItem extends $pb.GeneratedMessage {
   $core.bool hasWeight() => $_has(1);
   @$pb.TagNumber(2)
   void clearWeight() => $_clearField(2);
+
+  /// 이 종목에 실제 적용된 decay_unit_qty. decay_unit_qtys 는 심볼이 아니라 랭크에
+  /// 묶이므로 PDF 리밸런싱 시 다른 종목에 재배정될 수 있다 — 오배정 확인용 에코.
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get decayUnitQty => $_getI64(2);
+  @$pb.TagNumber(3)
+  set decayUnitQty($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasDecayUnitQty() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDecayUnitQty() => $_clearField(3);
 }
 
 class GetConstituentMomentumResponse extends $pb.GeneratedMessage {

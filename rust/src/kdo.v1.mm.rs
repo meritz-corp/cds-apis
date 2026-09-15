@@ -195,6 +195,11 @@ pub struct MarketMakingTradeAnalyzer {
     /// strength 분모 최소치 (기본 100)
     #[prost(int64, tag="6")]
     pub min_book_qty: i64,
+    /// count 감쇠 1스텝을 채우는 gross 체결 수량. 0 = 기존 체결 1건당 1스텝(레거시).
+    /// 감쇠를 체결 건수가 아닌 거래량에 걸어, 같은 물량이 1주x100건으로 들어오든
+    /// 100주x1건으로 들어오든 같은 스텝 수를 소비하게 한다.
+    #[prost(int64, tag="7")]
+    pub decay_unit_qty: i64,
 }
 /// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -272,7 +277,7 @@ pub struct MarketMakingMaCross {
 }
 /// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MarketMakingConstituentMomentum {
     /// 활성화 여부
     #[prost(bool, tag="1")]
@@ -286,6 +291,10 @@ pub struct MarketMakingConstituentMomentum {
     /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (인버스 ETF 는 shift.is_opposite)
     #[prost(message, optional, tag="4")]
     pub shift: ::core::option::Option<MarketMakingMomentum>,
+    /// 랭크(비중 내림차순, seed 선정 순서) 순 decay_unit_qty 오버라이드.
+    /// 목록이 top_n 보다 짧거나 값이 0 이면 analyzer.decay_unit_qty 로 폴백.
+    #[prost(int64, repeated, tag="5")]
+    pub decay_unit_qtys: ::prost::alloc::vec::Vec<i64>,
 }
 /// 운영자가 지정한 제3(참조) 종목 체결강도 → 즉각 호가 평행 shift
 /// (자기 ETF momentum / 구성종목 momentum 의 "임의 지정 종목" 확장. PDF 무관)
@@ -304,6 +313,10 @@ pub struct MarketMakingProxyMomentum {
     /// 집계 (ratio, strength) → 즉각 평행 shift 변환 (역상관 참조는 shift.is_opposite)
     #[prost(message, optional, tag="4")]
     pub shift: ::core::option::Option<MarketMakingMomentum>,
+    /// symbols 와 같은 순서(빈 값/중복 제거 후)의 decay_unit_qty 오버라이드.
+    /// 목록이 짧거나 값이 0 이면 analyzer.decay_unit_qty 로 폴백.
+    #[prost(int64, repeated, tag="5")]
+    pub decay_unit_qtys: ::prost::alloc::vec::Vec<i64>,
 }
 /// 역선택 방어: 자기 체결의 markout(체결 후 공정가 역행)을 시간감쇠 누적,
 /// 임계 초과 시 양방향 호가를 cooldown 동안 정지.
@@ -427,6 +440,10 @@ pub struct ConstituentMomentumSelectedItem {
     /// 정규화 비중 (선정된 top_n 종목끼리 합 = 1)
     #[prost(double, tag="2")]
     pub weight: f64,
+    /// 이 종목에 실제 적용된 decay_unit_qty. decay_unit_qtys 는 심볼이 아니라 랭크에
+    /// 묶이므로 PDF 리밸런싱 시 다른 종목에 재배정될 수 있다 — 오배정 확인용 에코.
+    #[prost(int64, tag="3")]
+    pub decay_unit_qty: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

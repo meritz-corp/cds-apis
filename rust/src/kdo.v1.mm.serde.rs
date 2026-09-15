@@ -161,12 +161,20 @@ impl serde::Serialize for ConstituentMomentumSelectedItem {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ConstituentMomentumSelectedItem", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
         }
         if true {
             struct_ser.serialize_field("weight", &self.weight)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("decay_unit_qty", ToString::to_string(&self.decay_unit_qty).as_str())?;
         }
         struct_ser.end()
     }
@@ -180,12 +188,15 @@ impl<'de> serde::Deserialize<'de> for ConstituentMomentumSelectedItem {
         const FIELDS: &[&str] = &[
             "symbol",
             "weight",
+            "decay_unit_qty",
+            "decayUnitQty",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Symbol,
             Weight,
+            DecayUnitQty,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -210,6 +221,7 @@ impl<'de> serde::Deserialize<'de> for ConstituentMomentumSelectedItem {
                         match value {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "weight" => Ok(GeneratedField::Weight),
+                            "decayUnitQty" | "decay_unit_qty" => Ok(GeneratedField::DecayUnitQty),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -231,6 +243,7 @@ impl<'de> serde::Deserialize<'de> for ConstituentMomentumSelectedItem {
             {
                 let mut symbol__ = None;
                 let mut weight__ = None;
+                let mut decay_unit_qty__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -247,6 +260,14 @@ impl<'de> serde::Deserialize<'de> for ConstituentMomentumSelectedItem {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::DecayUnitQty => {
+                            if decay_unit_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decayUnitQty"));
+                            }
+                            decay_unit_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -255,6 +276,7 @@ impl<'de> serde::Deserialize<'de> for ConstituentMomentumSelectedItem {
                 Ok(ConstituentMomentumSelectedItem {
                     symbol: symbol__.unwrap_or_default(),
                     weight: weight__.unwrap_or_default(),
+                    decay_unit_qty: decay_unit_qty__.unwrap_or_default(),
                 })
             }
         }
@@ -4073,6 +4095,9 @@ impl serde::Serialize for MarketMakingConstituentMomentum {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConstituentMomentum", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4085,6 +4110,9 @@ impl serde::Serialize for MarketMakingConstituentMomentum {
         }
         if let Some(v) = self.shift.as_ref() {
             struct_ser.serialize_field("shift", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("decay_unit_qtys", &self.decay_unit_qtys.iter().map(ToString::to_string).collect::<Vec<_>>())?;
         }
         struct_ser.end()
     }
@@ -4101,6 +4129,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConstituentMomentum {
             "topN",
             "analyzer",
             "shift",
+            "decay_unit_qtys",
+            "decayUnitQtys",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4109,6 +4139,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConstituentMomentum {
             TopN,
             Analyzer,
             Shift,
+            DecayUnitQtys,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4135,6 +4166,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConstituentMomentum {
                             "topN" | "top_n" => Ok(GeneratedField::TopN),
                             "analyzer" => Ok(GeneratedField::Analyzer),
                             "shift" => Ok(GeneratedField::Shift),
+                            "decayUnitQtys" | "decay_unit_qtys" => Ok(GeneratedField::DecayUnitQtys),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4158,6 +4190,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConstituentMomentum {
                 let mut top_n__ = None;
                 let mut analyzer__ = None;
                 let mut shift__ = None;
+                let mut decay_unit_qtys__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4186,6 +4219,15 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConstituentMomentum {
                             }
                             shift__ = map_.next_value()?;
                         }
+                        GeneratedField::DecayUnitQtys => {
+                            if decay_unit_qtys__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decayUnitQtys"));
+                            }
+                            decay_unit_qtys__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4196,6 +4238,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConstituentMomentum {
                     top_n: top_n__.unwrap_or_default(),
                     analyzer: analyzer__,
                     shift: shift__,
+                    decay_unit_qtys: decay_unit_qtys__.unwrap_or_default(),
                 })
             }
         }
@@ -5432,6 +5475,9 @@ impl serde::Serialize for MarketMakingProxyMomentum {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingProxyMomentum", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -5444,6 +5490,9 @@ impl serde::Serialize for MarketMakingProxyMomentum {
         }
         if let Some(v) = self.shift.as_ref() {
             struct_ser.serialize_field("shift", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("decay_unit_qtys", &self.decay_unit_qtys.iter().map(ToString::to_string).collect::<Vec<_>>())?;
         }
         struct_ser.end()
     }
@@ -5459,6 +5508,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
             "symbols",
             "analyzer",
             "shift",
+            "decay_unit_qtys",
+            "decayUnitQtys",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5467,6 +5518,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
             Symbols,
             Analyzer,
             Shift,
+            DecayUnitQtys,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5493,6 +5545,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
                             "symbols" => Ok(GeneratedField::Symbols),
                             "analyzer" => Ok(GeneratedField::Analyzer),
                             "shift" => Ok(GeneratedField::Shift),
+                            "decayUnitQtys" | "decay_unit_qtys" => Ok(GeneratedField::DecayUnitQtys),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5516,6 +5569,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
                 let mut symbols__ = None;
                 let mut analyzer__ = None;
                 let mut shift__ = None;
+                let mut decay_unit_qtys__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -5542,6 +5596,15 @@ impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
                             }
                             shift__ = map_.next_value()?;
                         }
+                        GeneratedField::DecayUnitQtys => {
+                            if decay_unit_qtys__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decayUnitQtys"));
+                            }
+                            decay_unit_qtys__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5552,6 +5615,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
                     symbols: symbols__.unwrap_or_default(),
                     analyzer: analyzer__,
                     shift: shift__,
+                    decay_unit_qtys: decay_unit_qtys__.unwrap_or_default(),
                 })
             }
         }
@@ -5802,6 +5866,9 @@ impl serde::Serialize for MarketMakingTradeAnalyzer {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingTradeAnalyzer", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -5825,6 +5892,11 @@ impl serde::Serialize for MarketMakingTradeAnalyzer {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("min_book_qty", ToString::to_string(&self.min_book_qty).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("decay_unit_qty", ToString::to_string(&self.decay_unit_qty).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -5846,6 +5918,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
             "netDecayRatio",
             "min_book_qty",
             "minBookQty",
+            "decay_unit_qty",
+            "decayUnitQty",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5856,6 +5930,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
             TotalDecayRatio,
             NetDecayRatio,
             MinBookQty,
+            DecayUnitQty,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5884,6 +5959,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                             "totalDecayRatio" | "total_decay_ratio" => Ok(GeneratedField::TotalDecayRatio),
                             "netDecayRatio" | "net_decay_ratio" => Ok(GeneratedField::NetDecayRatio),
                             "minBookQty" | "min_book_qty" => Ok(GeneratedField::MinBookQty),
+                            "decayUnitQty" | "decay_unit_qty" => Ok(GeneratedField::DecayUnitQty),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5909,6 +5985,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                 let mut total_decay_ratio__ = None;
                 let mut net_decay_ratio__ = None;
                 let mut min_book_qty__ = None;
+                let mut decay_unit_qty__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -5957,6 +6034,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::DecayUnitQty => {
+                            if decay_unit_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("decayUnitQty"));
+                            }
+                            decay_unit_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5969,6 +6054,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                     total_decay_ratio: total_decay_ratio__.unwrap_or_default(),
                     net_decay_ratio: net_decay_ratio__.unwrap_or_default(),
                     min_book_qty: min_book_qty__.unwrap_or_default(),
+                    decay_unit_qty: decay_unit_qty__.unwrap_or_default(),
                 })
             }
         }
