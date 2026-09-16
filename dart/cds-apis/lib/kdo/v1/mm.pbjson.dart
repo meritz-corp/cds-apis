@@ -1021,6 +1021,63 @@ final $typed_data.Uint8List listMmPnlHistoryResponseDescriptor = $convert.base64
     'ChhMaXN0TW1QbmxIaXN0b3J5UmVzcG9uc2USLQoGcG9pbnRzGAEgAygLMhUua2RvLnYxLm1tLk'
     '1tUG5sUG9pbnRSBnBvaW50cw==');
 
+@$core.Deprecated('Use listMmDailyPnlRequestDescriptor instead')
+const ListMmDailyPnlRequest$json = {
+  '1': 'ListMmDailyPnlRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'fundCode', '17': true},
+    {'1': 'start_date', '3': 3, '4': 1, '5': 13, '10': 'startDate'},
+    {'1': 'end_date', '3': 4, '4': 1, '5': 13, '10': 'endDate'},
+    {'1': 'slot_id', '3': 5, '4': 1, '5': 9, '10': 'slotId'},
+  ],
+  '8': [
+    {'1': '_fund_code'},
+  ],
+};
+
+/// Descriptor for `ListMmDailyPnlRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmDailyPnlRequestDescriptor = $convert.base64Decode(
+    'ChVMaXN0TW1EYWlseVBubFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSIA'
+    'oJZnVuZF9jb2RlGAIgASgJSABSCGZ1bmRDb2RliAEBEh0KCnN0YXJ0X2RhdGUYAyABKA1SCXN0'
+    'YXJ0RGF0ZRIZCghlbmRfZGF0ZRgEIAEoDVIHZW5kRGF0ZRIXCgdzbG90X2lkGAUgASgJUgZzbG'
+    '90SWRCDAoKX2Z1bmRfY29kZQ==');
+
+@$core.Deprecated('Use mmDailyPnlDescriptor instead')
+const MmDailyPnl$json = {
+  '1': 'MmDailyPnl',
+  '2': [
+    {'1': 'date', '3': 1, '4': 1, '5': 13, '10': 'date'},
+    {'1': 'realized_pnl', '3': 2, '4': 1, '5': 3, '10': 'realizedPnl'},
+    {'1': 'unrealized_pnl', '3': 3, '4': 1, '5': 3, '10': 'unrealizedPnl'},
+    {'1': 'total_pnl', '3': 4, '4': 1, '5': 3, '10': 'totalPnl'},
+    {'1': 'worst_unrealized_pnl', '3': 5, '4': 1, '5': 3, '10': 'worstUnrealizedPnl'},
+    {'1': 'best_unrealized_pnl', '3': 6, '4': 1, '5': 3, '10': 'bestUnrealizedPnl'},
+    {'1': 'net_position', '3': 7, '4': 1, '5': 3, '10': 'netPosition'},
+  ],
+};
+
+/// Descriptor for `MmDailyPnl`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmDailyPnlDescriptor = $convert.base64Decode(
+    'CgpNbURhaWx5UG5sEhIKBGRhdGUYASABKA1SBGRhdGUSIQoMcmVhbGl6ZWRfcG5sGAIgASgDUg'
+    'tyZWFsaXplZFBubBIlCg51bnJlYWxpemVkX3BubBgDIAEoA1INdW5yZWFsaXplZFBubBIbCgl0'
+    'b3RhbF9wbmwYBCABKANSCHRvdGFsUG5sEjAKFHdvcnN0X3VucmVhbGl6ZWRfcG5sGAUgASgDUh'
+    'J3b3JzdFVucmVhbGl6ZWRQbmwSLgoTYmVzdF91bnJlYWxpemVkX3BubBgGIAEoA1IRYmVzdFVu'
+    'cmVhbGl6ZWRQbmwSIQoMbmV0X3Bvc2l0aW9uGAcgASgDUgtuZXRQb3NpdGlvbg==');
+
+@$core.Deprecated('Use listMmDailyPnlResponseDescriptor instead')
+const ListMmDailyPnlResponse$json = {
+  '1': 'ListMmDailyPnlResponse',
+  '2': [
+    {'1': 'days', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.mm.MmDailyPnl', '10': 'days'},
+  ],
+};
+
+/// Descriptor for `ListMmDailyPnlResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmDailyPnlResponseDescriptor = $convert.base64Decode(
+    'ChZMaXN0TW1EYWlseVBubFJlc3BvbnNlEikKBGRheXMYASADKAsyFS5rZG8udjEubW0uTW1EYW'
+    'lseVBubFIEZGF5cw==');
+
 @$core.Deprecated('Use spreadDecompositionDescriptor instead')
 const SpreadDecomposition$json = {
   '1': 'SpreadDecomposition',

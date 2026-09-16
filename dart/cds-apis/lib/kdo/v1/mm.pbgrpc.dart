@@ -96,6 +96,14 @@ class MarketMakingServiceClient extends $grpc.Client {
     return $createUnaryCall(_$listMmPnlHistory, request, options: options);
   }
 
+  /// 일자별 손익 요약 조회 — 영업일(KST 자정 경계)별로 마감 시점 실현/미실현 손익과
+  /// 장중 미실현 최저/최고를 반환. 실현손익은 영업일 단위로 리셋되므로 여러 날을
+  /// ListMmPnlHistory 로 한 번에 조회하면 자정마다 0 으로 떨어지는 톱니가 된다.
+  /// 날짜별 비교·집계는 이 RPC 를 쓴다.
+  $grpc.ResponseFuture<$0.ListMmDailyPnlResponse> listMmDailyPnl($0.ListMmDailyPnlRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listMmDailyPnl, request, options: options);
+  }
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   $grpc.ResponseFuture<$0.FitToMarketResponse> fitToMarket($0.FitToMarketRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$fitToMarket, request, options: options);
@@ -176,6 +184,10 @@ class MarketMakingServiceClient extends $grpc.Client {
       '/kdo.v1.mm.MarketMakingService/ListMmPnlHistory',
       ($0.ListMmPnlHistoryRequest value) => value.writeToBuffer(),
       $0.ListMmPnlHistoryResponse.fromBuffer);
+  static final _$listMmDailyPnl = $grpc.ClientMethod<$0.ListMmDailyPnlRequest, $0.ListMmDailyPnlResponse>(
+      '/kdo.v1.mm.MarketMakingService/ListMmDailyPnl',
+      ($0.ListMmDailyPnlRequest value) => value.writeToBuffer(),
+      $0.ListMmDailyPnlResponse.fromBuffer);
   static final _$fitToMarket = $grpc.ClientMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
       '/kdo.v1.mm.MarketMakingService/FitToMarket',
       ($0.FitToMarketRequest value) => value.writeToBuffer(),
@@ -291,6 +303,13 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ListMmPnlHistoryRequest.fromBuffer(value),
         ($0.ListMmPnlHistoryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListMmDailyPnlRequest, $0.ListMmDailyPnlResponse>(
+        'ListMmDailyPnl',
+        listMmDailyPnl_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListMmDailyPnlRequest.fromBuffer(value),
+        ($0.ListMmDailyPnlResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.FitToMarketRequest, $0.FitToMarketResponse>(
         'FitToMarket',
         fitToMarket_Pre,
@@ -406,6 +425,12 @@ abstract class MarketMakingServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ListMmPnlHistoryResponse> listMmPnlHistory($grpc.ServiceCall call, $0.ListMmPnlHistoryRequest request);
+
+  $async.Future<$0.ListMmDailyPnlResponse> listMmDailyPnl_Pre($grpc.ServiceCall $call, $async.Future<$0.ListMmDailyPnlRequest> $request) async {
+    return listMmDailyPnl($call, await $request);
+  }
+
+  $async.Future<$0.ListMmDailyPnlResponse> listMmDailyPnl($grpc.ServiceCall call, $0.ListMmDailyPnlRequest request);
 
   $async.Future<$0.FitToMarketResponse> fitToMarket_Pre($grpc.ServiceCall $call, $async.Future<$0.FitToMarketRequest> $request) async {
     return fitToMarket($call, await $request);

@@ -321,6 +321,69 @@
         ]
       }
     },
+    "/v1/mm/{symbol}/daily-pnl": {
+      "get": {
+        "summary": "일자별 손익 요약 조회 — 영업일(KST 자정 경계)별로 마감 시점 실현/미실현 손익과\n장중 미실현 최저/최고를 반환. 실현손익은 영업일 단위로 리셋되므로 여러 날을\nListMmPnlHistory 로 한 번에 조회하면 자정마다 0 으로 떨어지는 톱니가 된다.\n날짜별 비교·집계는 이 RPC 를 쓴다.",
+        "operationId": "MarketMakingService_ListMmDailyPnl",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmListMmDailyPnlResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼 다중 펀드 구분용",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "description": "조회 시작 영업일 (KST, YYYYMMDD, inclusive)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "endDate",
+            "description": "조회 종료 영업일 (KST, YYYYMMDD, inclusive)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯(\"default\").",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
     "/v1/mm/{symbol}/engine-state:stream": {
       "get": {
         "summary": "MM 엔진 런타임 상태 실시간 스트리밍",
@@ -1215,6 +1278,18 @@
         }
       }
     },
+    "mmListMmDailyPnlResponse": {
+      "type": "object",
+      "properties": {
+        "days": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mmMmDailyPnl"
+          },
+          "description": "영업일 오름차순 요약 목록. MM 미가동일(샘플 없음)은 행 자체가 빠진다."
+        }
+      }
+    },
     "mmListMmPnlHistoryResponse": {
       "type": "object",
       "properties": {
@@ -1848,6 +1923,47 @@
         }
       },
       "title": "MM 시작/설정변경 시점에 저장된 설정 스냅샷"
+    },
+    "mmMmDailyPnl": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "integer",
+          "format": "int64",
+          "title": "영업일 (KST, YYYYMMDD)"
+        },
+        "realizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "마감 시점 실현손익 (원, 평균단가법) — 그날 마지막 샘플 값"
+        },
+        "unrealizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "마감 시점 미실현손익 (원) — 그날 마지막 샘플 값"
+        },
+        "totalPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "전체 손익 = 실현 + 미실현 (원)"
+        },
+        "worstUnrealizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "장중 미실현손익 최저 (원, drawdown 분석용)"
+        },
+        "bestUnrealizedPnl": {
+          "type": "string",
+          "format": "int64",
+          "title": "장중 미실현손익 최고 (원)"
+        },
+        "netPosition": {
+          "type": "string",
+          "format": "int64",
+          "title": "마감 시점 순포지션 (매수 − 매도, 롱 +)"
+        }
+      },
+      "title": "영업일 1일 손익 요약 (KST 자정 경계)"
     },
     "mmMmFillSummary": {
       "type": "object",

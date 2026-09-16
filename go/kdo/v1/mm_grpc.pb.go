@@ -49,6 +49,11 @@ type MarketMakingServiceClient interface {
 	StreamMmFills(ctx context.Context, in *StreamMmFillsRequest, opts ...grpc.CallOption) (MarketMakingService_StreamMmFillsClient, error)
 	// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
 	ListMmPnlHistory(ctx context.Context, in *ListMmPnlHistoryRequest, opts ...grpc.CallOption) (*ListMmPnlHistoryResponse, error)
+	// 일자별 손익 요약 조회 — 영업일(KST 자정 경계)별로 마감 시점 실현/미실현 손익과
+	// 장중 미실현 최저/최고를 반환. 실현손익은 영업일 단위로 리셋되므로 여러 날을
+	// ListMmPnlHistory 로 한 번에 조회하면 자정마다 0 으로 떨어지는 톱니가 된다.
+	// 날짜별 비교·집계는 이 RPC 를 쓴다.
+	ListMmDailyPnl(ctx context.Context, in *ListMmDailyPnlRequest, opts ...grpc.CallOption) (*ListMmDailyPnlResponse, error)
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error)
 	// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
@@ -248,6 +253,15 @@ func (c *marketMakingServiceClient) ListMmPnlHistory(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *marketMakingServiceClient) ListMmDailyPnl(ctx context.Context, in *ListMmDailyPnlRequest, opts ...grpc.CallOption) (*ListMmDailyPnlResponse, error) {
+	out := new(ListMmDailyPnlResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/ListMmDailyPnl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *marketMakingServiceClient) FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error) {
 	out := new(FitToMarketResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.mm.MarketMakingService/FitToMarket", in, out, opts...)
@@ -333,6 +347,11 @@ type MarketMakingServiceServer interface {
 	StreamMmFills(*StreamMmFillsRequest, MarketMakingService_StreamMmFillsServer) error
 	// 손익 시계열 조회 — 저장된 손익 샘플을 버킷 간격으로 다운샘플(버킷 마지막 값)해 반환
 	ListMmPnlHistory(context.Context, *ListMmPnlHistoryRequest) (*ListMmPnlHistoryResponse, error)
+	// 일자별 손익 요약 조회 — 영업일(KST 자정 경계)별로 마감 시점 실현/미실현 손익과
+	// 장중 미실현 최저/최고를 반환. 실현손익은 영업일 단위로 리셋되므로 여러 날을
+	// ListMmPnlHistory 로 한 번에 조회하면 자정마다 0 으로 떨어지는 톱니가 된다.
+	// 날짜별 비교·집계는 이 RPC 를 쓴다.
+	ListMmDailyPnl(context.Context, *ListMmDailyPnlRequest) (*ListMmDailyPnlResponse, error)
 	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
 	FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error)
 	// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
@@ -387,6 +406,9 @@ func (UnimplementedMarketMakingServiceServer) StreamMmFills(*StreamMmFillsReques
 }
 func (UnimplementedMarketMakingServiceServer) ListMmPnlHistory(context.Context, *ListMmPnlHistoryRequest) (*ListMmPnlHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMmPnlHistory not implemented")
+}
+func (UnimplementedMarketMakingServiceServer) ListMmDailyPnl(context.Context, *ListMmDailyPnlRequest) (*ListMmDailyPnlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMmDailyPnl not implemented")
 }
 func (UnimplementedMarketMakingServiceServer) FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FitToMarket not implemented")
@@ -644,6 +666,24 @@ func _MarketMakingService_ListMmPnlHistory_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MarketMakingService_ListMmDailyPnl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMmDailyPnlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketMakingServiceServer).ListMmDailyPnl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.mm.MarketMakingService/ListMmDailyPnl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketMakingServiceServer).ListMmDailyPnl(ctx, req.(*ListMmDailyPnlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MarketMakingService_FitToMarket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FitToMarketRequest)
 	if err := dec(in); err != nil {
@@ -794,6 +834,10 @@ var MarketMakingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMmPnlHistory",
 			Handler:    _MarketMakingService_ListMmPnlHistory_Handler,
+		},
+		{
+			MethodName: "ListMmDailyPnl",
+			Handler:    _MarketMakingService_ListMmDailyPnl_Handler,
 		},
 		{
 			MethodName: "FitToMarket",

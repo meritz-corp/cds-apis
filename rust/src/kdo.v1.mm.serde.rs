@@ -2375,6 +2375,272 @@ impl<'de> serde::Deserialize<'de> for ListMmConfigHistoryResponse {
         deserializer.deserialize_struct("kdo.v1.mm.ListMmConfigHistoryResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ListMmDailyPnlRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMmDailyPnlRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if let Some(v) = self.fund_code.as_ref() {
+            struct_ser.serialize_field("fund_code", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("start_date", &self.start_date)?;
+        }
+        if true {
+            struct_ser.serialize_field("end_date", &self.end_date)?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListMmDailyPnlRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund_code",
+            "fundCode",
+            "start_date",
+            "startDate",
+            "end_date",
+            "endDate",
+            "slot_id",
+            "slotId",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            FundCode,
+            StartDate,
+            EndDate,
+            SlotId,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "startDate" | "start_date" => Ok(GeneratedField::StartDate),
+                            "endDate" | "end_date" => Ok(GeneratedField::EndDate),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListMmDailyPnlRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.ListMmDailyPnlRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmDailyPnlRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                let mut start_date__ = None;
+                let mut end_date__ = None;
+                let mut slot_id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = map_.next_value()?;
+                        }
+                        GeneratedField::StartDate => {
+                            if start_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("startDate"));
+                            }
+                            start_date__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EndDate => {
+                            if end_date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("endDate"));
+                            }
+                            end_date__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListMmDailyPnlRequest {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__,
+                    start_date: start_date__.unwrap_or_default(),
+                    end_date: end_date__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.ListMmDailyPnlRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListMmDailyPnlResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMmDailyPnlResponse", len)?;
+        if true {
+            struct_ser.serialize_field("days", &self.days)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListMmDailyPnlResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "days",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Days,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "days" => Ok(GeneratedField::Days),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListMmDailyPnlResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.ListMmDailyPnlResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmDailyPnlResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut days__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Days => {
+                            if days__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("days"));
+                            }
+                            days__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListMmDailyPnlResponse {
+                    days: days__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.ListMmDailyPnlResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListMmPnlHistoryRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -6395,6 +6661,235 @@ impl<'de> serde::Deserialize<'de> for MmConfigSnapshot {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MmConfigSnapshot", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MmDailyPnl {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmDailyPnl", len)?;
+        if true {
+            struct_ser.serialize_field("date", &self.date)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("realized_pnl", ToString::to_string(&self.realized_pnl).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("unrealized_pnl", ToString::to_string(&self.unrealized_pnl).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("total_pnl", ToString::to_string(&self.total_pnl).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("worst_unrealized_pnl", ToString::to_string(&self.worst_unrealized_pnl).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("best_unrealized_pnl", ToString::to_string(&self.best_unrealized_pnl).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_position", ToString::to_string(&self.net_position).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmDailyPnl {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "date",
+            "realized_pnl",
+            "realizedPnl",
+            "unrealized_pnl",
+            "unrealizedPnl",
+            "total_pnl",
+            "totalPnl",
+            "worst_unrealized_pnl",
+            "worstUnrealizedPnl",
+            "best_unrealized_pnl",
+            "bestUnrealizedPnl",
+            "net_position",
+            "netPosition",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Date,
+            RealizedPnl,
+            UnrealizedPnl,
+            TotalPnl,
+            WorstUnrealizedPnl,
+            BestUnrealizedPnl,
+            NetPosition,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "date" => Ok(GeneratedField::Date),
+                            "realizedPnl" | "realized_pnl" => Ok(GeneratedField::RealizedPnl),
+                            "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
+                            "totalPnl" | "total_pnl" => Ok(GeneratedField::TotalPnl),
+                            "worstUnrealizedPnl" | "worst_unrealized_pnl" => Ok(GeneratedField::WorstUnrealizedPnl),
+                            "bestUnrealizedPnl" | "best_unrealized_pnl" => Ok(GeneratedField::BestUnrealizedPnl),
+                            "netPosition" | "net_position" => Ok(GeneratedField::NetPosition),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmDailyPnl;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MmDailyPnl")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmDailyPnl, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut date__ = None;
+                let mut realized_pnl__ = None;
+                let mut unrealized_pnl__ = None;
+                let mut total_pnl__ = None;
+                let mut worst_unrealized_pnl__ = None;
+                let mut best_unrealized_pnl__ = None;
+                let mut net_position__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RealizedPnl => {
+                            if realized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("realizedPnl"));
+                            }
+                            realized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::UnrealizedPnl => {
+                            if unrealized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unrealizedPnl"));
+                            }
+                            unrealized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::TotalPnl => {
+                            if total_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalPnl"));
+                            }
+                            total_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::WorstUnrealizedPnl => {
+                            if worst_unrealized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("worstUnrealizedPnl"));
+                            }
+                            worst_unrealized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BestUnrealizedPnl => {
+                            if best_unrealized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bestUnrealizedPnl"));
+                            }
+                            best_unrealized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetPosition => {
+                            if net_position__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netPosition"));
+                            }
+                            net_position__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmDailyPnl {
+                    date: date__.unwrap_or_default(),
+                    realized_pnl: realized_pnl__.unwrap_or_default(),
+                    unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
+                    total_pnl: total_pnl__.unwrap_or_default(),
+                    worst_unrealized_pnl: worst_unrealized_pnl__.unwrap_or_default(),
+                    best_unrealized_pnl: best_unrealized_pnl__.unwrap_or_default(),
+                    net_position: net_position__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MmDailyPnl", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MmFillSummary {

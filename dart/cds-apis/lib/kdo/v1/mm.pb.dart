@@ -4398,6 +4398,273 @@ class ListMmPnlHistoryResponse extends $pb.GeneratedMessage {
   $pb.PbList<MmPnlPoint> get points => $_getList(0);
 }
 
+/// ListMmDailyPnl
+class ListMmDailyPnlRequest extends $pb.GeneratedMessage {
+  factory ListMmDailyPnlRequest({
+    $core.String? symbol,
+    $core.String? fundCode,
+    $core.int? startDate,
+    $core.int? endDate,
+    $core.String? slotId,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (startDate != null) result.startDate = startDate;
+    if (endDate != null) result.endDate = endDate;
+    if (slotId != null) result.slotId = slotId;
+    return result;
+  }
+
+  ListMmDailyPnlRequest._();
+
+  factory ListMmDailyPnlRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmDailyPnlRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmDailyPnlRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'startDate', $pb.PbFieldType.OU3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'endDate', $pb.PbFieldType.OU3)
+    ..aOS(5, _omitFieldNames ? '' : 'slotId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmDailyPnlRequest clone() => ListMmDailyPnlRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmDailyPnlRequest copyWith(void Function(ListMmDailyPnlRequest) updates) => super.copyWith((message) => updates(message as ListMmDailyPnlRequest)) as ListMmDailyPnlRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmDailyPnlRequest create() => ListMmDailyPnlRequest._();
+  @$core.override
+  ListMmDailyPnlRequest createEmptyInstance() => create();
+  static $pb.PbList<ListMmDailyPnlRequest> createRepeated() => $pb.PbList<ListMmDailyPnlRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmDailyPnlRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmDailyPnlRequest>(create);
+  static ListMmDailyPnlRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼 다중 펀드 구분용
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 조회 시작 영업일 (KST, YYYYMMDD, inclusive)
+  @$pb.TagNumber(3)
+  $core.int get startDate => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set startDate($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStartDate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStartDate() => $_clearField(3);
+
+  /// 조회 종료 영업일 (KST, YYYYMMDD, inclusive)
+  @$pb.TagNumber(4)
+  $core.int get endDate => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set endDate($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEndDate() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEndDate() => $_clearField(4);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
+  @$pb.TagNumber(5)
+  $core.String get slotId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set slotId($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSlotId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSlotId() => $_clearField(5);
+}
+
+/// 영업일 1일 손익 요약 (KST 자정 경계)
+class MmDailyPnl extends $pb.GeneratedMessage {
+  factory MmDailyPnl({
+    $core.int? date,
+    $fixnum.Int64? realizedPnl,
+    $fixnum.Int64? unrealizedPnl,
+    $fixnum.Int64? totalPnl,
+    $fixnum.Int64? worstUnrealizedPnl,
+    $fixnum.Int64? bestUnrealizedPnl,
+    $fixnum.Int64? netPosition,
+  }) {
+    final result = create();
+    if (date != null) result.date = date;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
+    if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
+    if (totalPnl != null) result.totalPnl = totalPnl;
+    if (worstUnrealizedPnl != null) result.worstUnrealizedPnl = worstUnrealizedPnl;
+    if (bestUnrealizedPnl != null) result.bestUnrealizedPnl = bestUnrealizedPnl;
+    if (netPosition != null) result.netPosition = netPosition;
+    return result;
+  }
+
+  MmDailyPnl._();
+
+  factory MmDailyPnl.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmDailyPnl.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmDailyPnl', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..aInt64(2, _omitFieldNames ? '' : 'realizedPnl')
+    ..aInt64(3, _omitFieldNames ? '' : 'unrealizedPnl')
+    ..aInt64(4, _omitFieldNames ? '' : 'totalPnl')
+    ..aInt64(5, _omitFieldNames ? '' : 'worstUnrealizedPnl')
+    ..aInt64(6, _omitFieldNames ? '' : 'bestUnrealizedPnl')
+    ..aInt64(7, _omitFieldNames ? '' : 'netPosition')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmDailyPnl clone() => MmDailyPnl()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmDailyPnl copyWith(void Function(MmDailyPnl) updates) => super.copyWith((message) => updates(message as MmDailyPnl)) as MmDailyPnl;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmDailyPnl create() => MmDailyPnl._();
+  @$core.override
+  MmDailyPnl createEmptyInstance() => create();
+  static $pb.PbList<MmDailyPnl> createRepeated() => $pb.PbList<MmDailyPnl>();
+  @$core.pragma('dart2js:noInline')
+  static MmDailyPnl getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmDailyPnl>(create);
+  static MmDailyPnl? _defaultInstance;
+
+  /// 영업일 (KST, YYYYMMDD)
+  @$pb.TagNumber(1)
+  $core.int get date => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set date($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasDate() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDate() => $_clearField(1);
+
+  /// 마감 시점 실현손익 (원, 평균단가법) — 그날 마지막 샘플 값
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get realizedPnl => $_getI64(1);
+  @$pb.TagNumber(2)
+  set realizedPnl($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRealizedPnl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRealizedPnl() => $_clearField(2);
+
+  /// 마감 시점 미실현손익 (원) — 그날 마지막 샘플 값
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get unrealizedPnl => $_getI64(2);
+  @$pb.TagNumber(3)
+  set unrealizedPnl($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUnrealizedPnl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUnrealizedPnl() => $_clearField(3);
+
+  /// 전체 손익 = 실현 + 미실현 (원)
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get totalPnl => $_getI64(3);
+  @$pb.TagNumber(4)
+  set totalPnl($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasTotalPnl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearTotalPnl() => $_clearField(4);
+
+  /// 장중 미실현손익 최저 (원, drawdown 분석용)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get worstUnrealizedPnl => $_getI64(4);
+  @$pb.TagNumber(5)
+  set worstUnrealizedPnl($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasWorstUnrealizedPnl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearWorstUnrealizedPnl() => $_clearField(5);
+
+  /// 장중 미실현손익 최고 (원)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get bestUnrealizedPnl => $_getI64(5);
+  @$pb.TagNumber(6)
+  set bestUnrealizedPnl($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasBestUnrealizedPnl() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBestUnrealizedPnl() => $_clearField(6);
+
+  /// 마감 시점 순포지션 (매수 − 매도, 롱 +)
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get netPosition => $_getI64(6);
+  @$pb.TagNumber(7)
+  set netPosition($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasNetPosition() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearNetPosition() => $_clearField(7);
+}
+
+class ListMmDailyPnlResponse extends $pb.GeneratedMessage {
+  factory ListMmDailyPnlResponse({
+    $core.Iterable<MmDailyPnl>? days,
+  }) {
+    final result = create();
+    if (days != null) result.days.addAll(days);
+    return result;
+  }
+
+  ListMmDailyPnlResponse._();
+
+  factory ListMmDailyPnlResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmDailyPnlResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmDailyPnlResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..pc<MmDailyPnl>(1, _omitFieldNames ? '' : 'days', $pb.PbFieldType.PM, subBuilder: MmDailyPnl.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmDailyPnlResponse clone() => ListMmDailyPnlResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmDailyPnlResponse copyWith(void Function(ListMmDailyPnlResponse) updates) => super.copyWith((message) => updates(message as ListMmDailyPnlResponse)) as ListMmDailyPnlResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmDailyPnlResponse create() => ListMmDailyPnlResponse._();
+  @$core.override
+  ListMmDailyPnlResponse createEmptyInstance() => create();
+  static $pb.PbList<ListMmDailyPnlResponse> createRepeated() => $pb.PbList<ListMmDailyPnlResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmDailyPnlResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmDailyPnlResponse>(create);
+  static ListMmDailyPnlResponse? _defaultInstance;
+
+  /// 영업일 오름차순 요약 목록. MM 미가동일(샘플 없음)은 행 자체가 빠진다.
+  @$pb.TagNumber(1)
+  $pb.PbList<MmDailyPnl> get days => $_getList(0);
+}
+
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 class SpreadDecomposition extends $pb.GeneratedMessage {
   factory SpreadDecomposition({

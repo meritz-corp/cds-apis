@@ -110,6 +110,17 @@ abstract final class MarketMakingService {
     kdov1mm.ListMmPnlHistoryResponse.new,
   );
 
+  /// 일자별 손익 요약 조회 — 영업일(KST 자정 경계)별로 마감 시점 실현/미실현 손익과
+  /// 장중 미실현 최저/최고를 반환. 실현손익은 영업일 단위로 리셋되므로 여러 날을
+  /// ListMmPnlHistory 로 한 번에 조회하면 자정마다 0 으로 떨어지는 톱니가 된다.
+  /// 날짜별 비교·집계는 이 RPC 를 쓴다.
+  static const listMmDailyPnl = connect.Spec(
+    '/$name/ListMmDailyPnl',
+    connect.StreamType.unary,
+    kdov1mm.ListMmDailyPnlRequest.new,
+    kdov1mm.ListMmDailyPnlResponse.new,
+  );
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   static const fitToMarket = connect.Spec(
     '/$name/FitToMarket',

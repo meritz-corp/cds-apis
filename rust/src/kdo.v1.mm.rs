@@ -898,6 +898,59 @@ pub struct ListMmPnlHistoryResponse {
     #[prost(message, repeated, tag="1")]
     pub points: ::prost::alloc::vec::Vec<MmPnlPoint>,
 }
+/// ListMmDailyPnl
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmDailyPnlRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼 다중 펀드 구분용
+    #[prost(string, optional, tag="2")]
+    pub fund_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// 조회 시작 영업일 (KST, YYYYMMDD, inclusive)
+    #[prost(uint32, tag="3")]
+    pub start_date: u32,
+    /// 조회 종료 영업일 (KST, YYYYMMDD, inclusive)
+    #[prost(uint32, tag="4")]
+    pub end_date: u32,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
+    #[prost(string, tag="5")]
+    pub slot_id: ::prost::alloc::string::String,
+}
+/// 영업일 1일 손익 요약 (KST 자정 경계)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MmDailyPnl {
+    /// 영업일 (KST, YYYYMMDD)
+    #[prost(uint32, tag="1")]
+    pub date: u32,
+    /// 마감 시점 실현손익 (원, 평균단가법) — 그날 마지막 샘플 값
+    #[prost(int64, tag="2")]
+    pub realized_pnl: i64,
+    /// 마감 시점 미실현손익 (원) — 그날 마지막 샘플 값
+    #[prost(int64, tag="3")]
+    pub unrealized_pnl: i64,
+    /// 전체 손익 = 실현 + 미실현 (원)
+    #[prost(int64, tag="4")]
+    pub total_pnl: i64,
+    /// 장중 미실현손익 최저 (원, drawdown 분석용)
+    #[prost(int64, tag="5")]
+    pub worst_unrealized_pnl: i64,
+    /// 장중 미실현손익 최고 (원)
+    #[prost(int64, tag="6")]
+    pub best_unrealized_pnl: i64,
+    /// 마감 시점 순포지션 (매수 − 매도, 롱 +)
+    #[prost(int64, tag="7")]
+    pub net_position: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmDailyPnlResponse {
+    /// 영업일 오름차순 요약 목록. MM 미가동일(샘플 없음)은 행 자체가 빠진다.
+    #[prost(message, repeated, tag="1")]
+    pub days: ::prost::alloc::vec::Vec<MmDailyPnl>,
+}
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
