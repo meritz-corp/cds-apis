@@ -11,6 +11,14 @@ abstract final class SystemService {
   /// Fully-qualified name of the SystemService service.
   static const name = 'kdo.v1.system.SystemService';
 
+  /// GetServerInfo returns the identity and trading role of the running KDO instance.
+  static const getServerInfo = connect.Spec(
+    '/$name/GetServerInfo',
+    connect.StreamType.unary,
+    kdov1system.GetServerInfoRequest.new,
+    kdov1system.GetServerInfoResponse.new,
+  );
+
   /// GetConnectionInfo returns current market feed and FEP connection information.
   static const getConnectionInfo = connect.Spec(
     '/$name/GetConnectionInfo',

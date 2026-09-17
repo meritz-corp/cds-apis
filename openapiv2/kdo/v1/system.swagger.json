@@ -121,6 +121,19 @@
         }
       }
     },
+    "systemGetServerInfoResponse": {
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Hostname identifying the running KDO instance."
+        },
+        "role": {
+          "$ref": "#/definitions/userRole",
+          "description": "The single trading role supported by this instance."
+        }
+      }
+    },
     "systemGetVersionInfoResponse": {
       "type": "object",
       "properties": {
@@ -169,6 +182,18 @@
           "type": "string"
         }
       }
+    },
+    "userRole": {
+      "type": "string",
+      "enum": [
+        "ROLE_UNSPECIFIED",
+        "ROLE_LP",
+        "ROLE_ARBITRAGE",
+        "ROLE_BROKERAGE",
+        "ROLE_LOAN"
+      ],
+      "default": "ROLE_UNSPECIFIED",
+      "description": "Role represents the trading role assigned to a user."
     }
   }
 }

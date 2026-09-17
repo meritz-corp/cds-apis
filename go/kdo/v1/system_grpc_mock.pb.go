@@ -54,6 +54,26 @@ func (mr *MockSystemServiceClientMockRecorder) GetConnectionInfo(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetConnectionInfo", reflect.TypeOf((*MockSystemServiceClient)(nil).GetConnectionInfo), varargs...)
 }
 
+// GetServerInfo mocks base method.
+func (m *MockSystemServiceClient) GetServerInfo(ctx context.Context, in *GetServerInfoRequest, opts ...grpc.CallOption) (*GetServerInfoResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetServerInfo", varargs...)
+	ret0, _ := ret[0].(*GetServerInfoResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetServerInfo indicates an expected call of GetServerInfo.
+func (mr *MockSystemServiceClientMockRecorder) GetServerInfo(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetServerInfo", reflect.TypeOf((*MockSystemServiceClient)(nil).GetServerInfo), varargs...)
+}
+
 // GetVersionInfo mocks base method.
 func (m *MockSystemServiceClient) GetVersionInfo(ctx context.Context, in *GetVersionInfoRequest, opts ...grpc.CallOption) (*GetVersionInfoResponse, error) {
 	m.ctrl.T.Helper()
@@ -150,6 +170,21 @@ func (m *MockSystemServiceServer) GetConnectionInfo(ctx context.Context, in *Get
 func (mr *MockSystemServiceServerMockRecorder) GetConnectionInfo(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetConnectionInfo", reflect.TypeOf((*MockSystemServiceServer)(nil).GetConnectionInfo), ctx, in)
+}
+
+// GetServerInfo mocks base method.
+func (m *MockSystemServiceServer) GetServerInfo(ctx context.Context, in *GetServerInfoRequest) (*GetServerInfoResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetServerInfo", ctx, in)
+	ret0, _ := ret[0].(*GetServerInfoResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetServerInfo indicates an expected call of GetServerInfo.
+func (mr *MockSystemServiceServerMockRecorder) GetServerInfo(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetServerInfo", reflect.TypeOf((*MockSystemServiceServer)(nil).GetServerInfo), ctx, in)
 }
 
 // GetVersionInfo mocks base method.

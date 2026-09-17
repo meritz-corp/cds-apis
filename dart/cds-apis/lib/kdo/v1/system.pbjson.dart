@@ -93,6 +93,29 @@ const GetVersionInfoRequest$json = {
 final $typed_data.Uint8List getVersionInfoRequestDescriptor = $convert.base64Decode(
     'ChVHZXRWZXJzaW9uSW5mb1JlcXVlc3Q=');
 
+@$core.Deprecated('Use getServerInfoRequestDescriptor instead')
+const GetServerInfoRequest$json = {
+  '1': 'GetServerInfoRequest',
+};
+
+/// Descriptor for `GetServerInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getServerInfoRequestDescriptor = $convert.base64Decode(
+    'ChRHZXRTZXJ2ZXJJbmZvUmVxdWVzdA==');
+
+@$core.Deprecated('Use getServerInfoResponseDescriptor instead')
+const GetServerInfoResponse$json = {
+  '1': 'GetServerInfoResponse',
+  '2': [
+    {'1': 'server_name', '3': 1, '4': 1, '5': 9, '10': 'serverName'},
+    {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.user.Role', '10': 'role'},
+  ],
+};
+
+/// Descriptor for `GetServerInfoResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getServerInfoResponseDescriptor = $convert.base64Decode(
+    'ChVHZXRTZXJ2ZXJJbmZvUmVzcG9uc2USHwoLc2VydmVyX25hbWUYASABKAlSCnNlcnZlck5hbW'
+    'USJQoEcm9sZRgCIAEoDjIRLmtkby52MS51c2VyLlJvbGVSBHJvbGU=');
+
 @$core.Deprecated('Use getVersionInfoResponseDescriptor instead')
 const GetVersionInfoResponse$json = {
   '1': 'GetVersionInfoResponse',

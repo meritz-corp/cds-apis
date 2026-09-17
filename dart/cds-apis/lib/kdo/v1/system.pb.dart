@@ -14,6 +14,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'user.pbenum.dart' as $1;
+
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 class StopAllTradingRequest extends $pb.GeneratedMessage {
@@ -314,6 +316,96 @@ class GetVersionInfoRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetVersionInfoRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetVersionInfoRequest>(create);
   static GetVersionInfoRequest? _defaultInstance;
+}
+
+class GetServerInfoRequest extends $pb.GeneratedMessage {
+  factory GetServerInfoRequest() => create();
+
+  GetServerInfoRequest._();
+
+  factory GetServerInfoRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetServerInfoRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetServerInfoRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetServerInfoRequest clone() => GetServerInfoRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetServerInfoRequest copyWith(void Function(GetServerInfoRequest) updates) => super.copyWith((message) => updates(message as GetServerInfoRequest)) as GetServerInfoRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetServerInfoRequest create() => GetServerInfoRequest._();
+  @$core.override
+  GetServerInfoRequest createEmptyInstance() => create();
+  static $pb.PbList<GetServerInfoRequest> createRepeated() => $pb.PbList<GetServerInfoRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetServerInfoRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetServerInfoRequest>(create);
+  static GetServerInfoRequest? _defaultInstance;
+}
+
+class GetServerInfoResponse extends $pb.GeneratedMessage {
+  factory GetServerInfoResponse({
+    $core.String? serverName,
+    $1.Role? role,
+  }) {
+    final result = create();
+    if (serverName != null) result.serverName = serverName;
+    if (role != null) result.role = role;
+    return result;
+  }
+
+  GetServerInfoResponse._();
+
+  factory GetServerInfoResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetServerInfoResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetServerInfoResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'serverName')
+    ..e<$1.Role>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $1.Role.ROLE_UNSPECIFIED, valueOf: $1.Role.valueOf, enumValues: $1.Role.values)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetServerInfoResponse clone() => GetServerInfoResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetServerInfoResponse copyWith(void Function(GetServerInfoResponse) updates) => super.copyWith((message) => updates(message as GetServerInfoResponse)) as GetServerInfoResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetServerInfoResponse create() => GetServerInfoResponse._();
+  @$core.override
+  GetServerInfoResponse createEmptyInstance() => create();
+  static $pb.PbList<GetServerInfoResponse> createRepeated() => $pb.PbList<GetServerInfoResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetServerInfoResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetServerInfoResponse>(create);
+  static GetServerInfoResponse? _defaultInstance;
+
+  /// Hostname identifying the running KDO instance.
+  @$pb.TagNumber(1)
+  $core.String get serverName => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set serverName($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasServerName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearServerName() => $_clearField(1);
+
+  /// The single trading role supported by this instance.
+  @$pb.TagNumber(2)
+  $1.Role get role => $_getN(1);
+  @$pb.TagNumber(2)
+  set role($1.Role value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasRole() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRole() => $_clearField(2);
 }
 
 class GetVersionInfoResponse extends $pb.GeneratedMessage {

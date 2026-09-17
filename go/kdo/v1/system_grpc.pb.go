@@ -22,6 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SystemServiceClient interface {
+	// GetServerInfo returns the identity and trading role of the running KDO instance.
+	GetServerInfo(ctx context.Context, in *GetServerInfoRequest, opts ...grpc.CallOption) (*GetServerInfoResponse, error)
 	// GetConnectionInfo returns current market feed and FEP connection information.
 	GetConnectionInfo(ctx context.Context, in *GetConnectionInfoRequest, opts ...grpc.CallOption) (*GetConnectionInfoResponse, error)
 	// GetVersionInfo returns build-time version information of the running KDO instance.
@@ -39,6 +41,15 @@ type systemServiceClient struct {
 
 func NewSystemServiceClient(cc grpc.ClientConnInterface) SystemServiceClient {
 	return &systemServiceClient{cc}
+}
+
+func (c *systemServiceClient) GetServerInfo(ctx context.Context, in *GetServerInfoRequest, opts ...grpc.CallOption) (*GetServerInfoResponse, error) {
+	out := new(GetServerInfoResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.system.SystemService/GetServerInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *systemServiceClient) GetConnectionInfo(ctx context.Context, in *GetConnectionInfoRequest, opts ...grpc.CallOption) (*GetConnectionInfoResponse, error) {
@@ -81,6 +92,8 @@ func (c *systemServiceClient) StopSymbolFund(ctx context.Context, in *StopSymbol
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility
 type SystemServiceServer interface {
+	// GetServerInfo returns the identity and trading role of the running KDO instance.
+	GetServerInfo(context.Context, *GetServerInfoRequest) (*GetServerInfoResponse, error)
 	// GetConnectionInfo returns current market feed and FEP connection information.
 	GetConnectionInfo(context.Context, *GetConnectionInfoRequest) (*GetConnectionInfoResponse, error)
 	// GetVersionInfo returns build-time version information of the running KDO instance.
@@ -97,6 +110,9 @@ type SystemServiceServer interface {
 type UnimplementedSystemServiceServer struct {
 }
 
+func (UnimplementedSystemServiceServer) GetServerInfo(context.Context, *GetServerInfoRequest) (*GetServerInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServerInfo not implemented")
+}
 func (UnimplementedSystemServiceServer) GetConnectionInfo(context.Context, *GetConnectionInfoRequest) (*GetConnectionInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConnectionInfo not implemented")
 }
@@ -120,6 +136,24 @@ type UnsafeSystemServiceServer interface {
 
 func RegisterSystemServiceServer(s grpc.ServiceRegistrar, srv SystemServiceServer) {
 	s.RegisterService(&SystemService_ServiceDesc, srv)
+}
+
+func _SystemService_GetServerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServerInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).GetServerInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.system.SystemService/GetServerInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).GetServerInfo(ctx, req.(*GetServerInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _SystemService_GetConnectionInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -201,6 +235,10 @@ var SystemService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "kdo.v1.system.SystemService",
 	HandlerType: (*SystemServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetServerInfo",
+			Handler:    _SystemService_GetServerInfo_Handler,
+		},
 		{
 			MethodName: "GetConnectionInfo",
 			Handler:    _SystemService_GetConnectionInfo_Handler,

@@ -2,10 +2,15 @@ syntax = "proto3";
 
 package kdo.v1.system;
 
+import "kdo/v1/user.proto";
+
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
 // SystemService provides system-level information about the running KDO instance.
 service SystemService {
+  // GetServerInfo returns the identity and trading role of the running KDO instance.
+  rpc GetServerInfo(GetServerInfoRequest) returns (GetServerInfoResponse) {}
+
   // GetConnectionInfo returns current market feed and FEP connection information.
   rpc GetConnectionInfo(GetConnectionInfoRequest) returns (GetConnectionInfoResponse) {}
 
@@ -43,6 +48,16 @@ message StoppedService {
 message GetConnectionInfoRequest {}
 
 message GetVersionInfoRequest {}
+
+message GetServerInfoRequest {}
+
+message GetServerInfoResponse {
+  // Hostname identifying the running KDO instance.
+  string server_name = 1;
+
+  // The single trading role supported by this instance.
+  kdo.v1.user.Role role = 2;
+}
 
 message GetVersionInfoResponse {
   // Full git commit hash (e.g., "33d5b91abc...")

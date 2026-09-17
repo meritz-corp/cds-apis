@@ -33,6 +33,11 @@ class SystemServiceClient extends $grpc.Client {
 
   SystemServiceClient(super.channel, {super.options, super.interceptors});
 
+  /// GetServerInfo returns the identity and trading role of the running KDO instance.
+  $grpc.ResponseFuture<$0.GetServerInfoResponse> getServerInfo($0.GetServerInfoRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getServerInfo, request, options: options);
+  }
+
   /// GetConnectionInfo returns current market feed and FEP connection information.
   $grpc.ResponseFuture<$0.GetConnectionInfoResponse> getConnectionInfo($0.GetConnectionInfoRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getConnectionInfo, request, options: options);
@@ -56,6 +61,10 @@ class SystemServiceClient extends $grpc.Client {
 
     // method descriptors
 
+  static final _$getServerInfo = $grpc.ClientMethod<$0.GetServerInfoRequest, $0.GetServerInfoResponse>(
+      '/kdo.v1.system.SystemService/GetServerInfo',
+      ($0.GetServerInfoRequest value) => value.writeToBuffer(),
+      $0.GetServerInfoResponse.fromBuffer);
   static final _$getConnectionInfo = $grpc.ClientMethod<$0.GetConnectionInfoRequest, $0.GetConnectionInfoResponse>(
       '/kdo.v1.system.SystemService/GetConnectionInfo',
       ($0.GetConnectionInfoRequest value) => value.writeToBuffer(),
@@ -79,6 +88,13 @@ abstract class SystemServiceBase extends $grpc.Service {
   $core.String get $name => 'kdo.v1.system.SystemService';
 
   SystemServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.GetServerInfoRequest, $0.GetServerInfoResponse>(
+        'GetServerInfo',
+        getServerInfo_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetServerInfoRequest.fromBuffer(value),
+        ($0.GetServerInfoResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetConnectionInfoRequest, $0.GetConnectionInfoResponse>(
         'GetConnectionInfo',
         getConnectionInfo_Pre,
@@ -108,6 +124,12 @@ abstract class SystemServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) => $0.StopSymbolFundRequest.fromBuffer(value),
         ($0.StopSymbolFundResponse value) => value.writeToBuffer()));
   }
+
+  $async.Future<$0.GetServerInfoResponse> getServerInfo_Pre($grpc.ServiceCall $call, $async.Future<$0.GetServerInfoRequest> $request) async {
+    return getServerInfo($call, await $request);
+  }
+
+  $async.Future<$0.GetServerInfoResponse> getServerInfo($grpc.ServiceCall call, $0.GetServerInfoRequest request);
 
   $async.Future<$0.GetConnectionInfoResponse> getConnectionInfo_Pre($grpc.ServiceCall $call, $async.Future<$0.GetConnectionInfoRequest> $request) async {
     return getConnectionInfo($call, await $request);

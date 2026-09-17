@@ -45,6 +45,20 @@ pub struct GetConnectionInfoRequest {
 pub struct GetVersionInfoRequest {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetServerInfoRequest {
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetServerInfoResponse {
+    /// Hostname identifying the running KDO instance.
+    #[prost(string, tag="1")]
+    pub server_name: ::prost::alloc::string::String,
+    /// The single trading role supported by this instance.
+    #[prost(enumeration="super::user::Role", tag="2")]
+    pub role: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVersionInfoResponse {
     /// Full git commit hash (e.g., "33d5b91abc...")
