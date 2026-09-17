@@ -51,7 +51,7 @@
           },
           {
             "name": "filter",
-            "description": "필터링 조건 (optional, AIP-160)",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields (아래 3개 외 필드는 INVALID_ARGUMENT):\n* symbol - 표준코드, 예: \"KR7069500007\"\n* name   - 종목명, 예: \"KODEX 200\"\n* code   - 단축코드, 예: \"A069500\"\n\nOperators:\n* `=` 정확일치 (대소문자 구분)\n* `:` 부분일치 (대소문자 무시)\n* 값은 큰따옴표로 감싼다\n\nCombining:\n* AND 만 지원 — OR 는 INVALID_ARGUMENT\n* 같은 필드에 `=` 를 여러 번 주면 그 값들의 OR(IN) 으로 동작\n* 같은 필드에 `=` 와 `:` 를 같이 주면 `=` 가 우선\n* `symbol:\"*\"` 는 해당 필드 무필터 (빈 filter 와 동일)\n\nExamples:\n* symbol = \"KR7069500007\"\n* symbol = \"KR7069500007\" AND symbol = \"KR7229200001\"   // 둘 중 하나\n* code = \"A069500\"\n* symbol:\"KR70\" AND name:\"KODEX\"",
             "in": "query",
             "required": false,
             "type": "string"

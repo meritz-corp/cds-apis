@@ -52,7 +52,7 @@
           },
           {
             "name": "filter",
-            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields:\n* code - 종목 코드\n* symbol - 심볼\n* market_type - 시장 유형 (MARKET_TYPE_KOSPI, MARKET_TYPE_KOSDAQ, MARKET_TYPE_DERIVATIVE)\n* future_option_type - 선물/옵션 유형 (FUTURE_OPTION_TYPE_FUTURE, FUTURE_OPTION_TYPE_CALL, FUTURE_OPTION_TYPE_PUT)\n* tradable - 거래 가능 여부\n* underlying_code - 기초자산 코드\n\nExamples:\n* future_option_type=FUTURE_OPTION_TYPE_FUTURE\n* tradable=true\n* underlying_code=\"101S6\"\n* future_option_type=FUTURE_OPTION_TYPE_FUTURE AND tradable=true",
+            "description": "필터링 조건 (optional, AIP-160)\n\nAvailable Fields (아래 3개 외 필드는 INVALID_ARGUMENT):\n* symbol - 표준코드, 예: \"KR4A01630008\"\n* name   - 종목명, 예: \"코스피200 F 202603\"\n* code   - 단축코드, 예: \"KA0163000\"\n\nNOTE: market_type / future_option_type / tradable / underlying_code 은 서버 미구현 — 사용 시 INVALID_ARGUMENT\n\nOperators:\n* `=` 정확일치 (대소문자 구분)\n* `:` 부분일치 (대소문자 무시)\n* 값은 큰따옴표로 감싼다\n\nCombining:\n* AND 만 지원 — OR 는 INVALID_ARGUMENT\n* 같은 필드에 `=` 를 여러 번 주면 그 값들의 OR(IN) 으로 동작\n* 같은 필드에 `=` 와 `:` 를 같이 주면 `=` 가 우선\n* `symbol:\"*\"` 는 해당 필드 무필터 (빈 filter 와 동일)\n\nExamples:\n* symbol = \"KR4A01630008\"\n* code = \"KA0163000\"\n* name:\"코스피200\"",
             "in": "query",
             "required": false,
             "type": "string"

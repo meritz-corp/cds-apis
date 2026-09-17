@@ -250,6 +250,28 @@ pub struct ListEtfsRequest {
     #[prost(string, optional, tag="2")]
     pub page_token: ::core::option::Option<::prost::alloc::string::String>,
     /// 필터링 조건 (optional, AIP-160)
+    ///
+    /// Available Fields (아래 3개 외 필드는 INVALID_ARGUMENT):
+    /// * symbol - 표준코드, 예: "KR7069500007"
+    /// * name   - 종목명, 예: "KODEX 200"
+    /// * code   - 단축코드, 예: "A069500"
+    ///
+    /// Operators:
+    /// * `=` 정확일치 (대소문자 구분)
+    /// * `:` 부분일치 (대소문자 무시)
+    /// * 값은 큰따옴표로 감싼다
+    ///
+    /// Combining:
+    /// * AND 만 지원 — OR 는 INVALID_ARGUMENT
+    /// * 같은 필드에 `=` 를 여러 번 주면 그 값들의 OR(IN) 으로 동작
+    /// * 같은 필드에 `=` 와 `:` 를 같이 주면 `=` 가 우선
+    /// * `symbol:"*"` 는 해당 필드 무필터 (빈 filter 와 동일)
+    ///
+    /// Examples:
+    /// * symbol = "KR7069500007"
+    /// * symbol = "KR7069500007" AND symbol = "KR7229200001"   // 둘 중 하나
+    /// * code = "A069500"
+    /// * symbol:"KR70" AND name:"KODEX"
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }

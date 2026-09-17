@@ -99,18 +99,29 @@ message ListStocksRequest {
 
   // 필터링 조건 (optional, AIP-160)
   //
-  // Available Fields:
-  // * code - 종목 코드
-  // * symbol - 심볼
-  // * market_type - 시장 유형 (MARKET_TYPE_KOSPI, MARKET_TYPE_KOSDAQ)
-  // * tradable - 거래 가능 여부
-  // * short_sellable - 대차 가능 여부
+  // Available Fields (아래 3개 외 필드는 INVALID_ARGUMENT):
+  // * symbol - 표준코드, 예: "KR7005930003"
+  // * name   - 종목명, 예: "삼성전자"
+  // * code   - 단축코드, 예: "A005930"
+  //
+  // NOTE: market_type / tradable / short_sellable 은 서버 미구현 — 사용 시 INVALID_ARGUMENT
+  //
+  // Operators:
+  // * `=` 정확일치 (대소문자 구분)
+  // * `:` 부분일치 (대소문자 무시)
+  // * 값은 큰따옴표로 감싼다
+  //
+  // Combining:
+  // * AND 만 지원 — OR 는 INVALID_ARGUMENT
+  // * 같은 필드에 `=` 를 여러 번 주면 그 값들의 OR(IN) 으로 동작
+  // * 같은 필드에 `=` 와 `:` 를 같이 주면 `=` 가 우선
+  // * `symbol:"*"` 는 해당 필드 무필터 (빈 filter 와 동일)
   //
   // Examples:
-  // * code:"005930"
-  // * market_type=MARKET_TYPE_KOSPI
-  // * tradable=true AND short_sellable=true
-  // * market_type=MARKET_TYPE_KOSPI AND tradable=true
+  // * symbol = "KR7005930003"
+  // * symbol = "KR7005930003" AND symbol = "KR7000660001"   // 둘 중 하나
+  // * code = "A005930"
+  // * name:"삼성"
   string filter = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 

@@ -94,19 +94,28 @@ pub struct ListFuturesRequest {
     pub page_token: ::core::option::Option<::prost::alloc::string::String>,
     /// 필터링 조건 (optional, AIP-160)
     ///
-    /// Available Fields:
-    /// * code - 종목 코드
-    /// * symbol - 심볼
-    /// * market_type - 시장 유형 (MARKET_TYPE_KOSPI, MARKET_TYPE_KOSDAQ, MARKET_TYPE_DERIVATIVE)
-    /// * future_option_type - 선물/옵션 유형 (FUTURE_OPTION_TYPE_FUTURE, FUTURE_OPTION_TYPE_CALL, FUTURE_OPTION_TYPE_PUT)
-    /// * tradable - 거래 가능 여부
-    /// * underlying_code - 기초자산 코드
+    /// Available Fields (아래 3개 외 필드는 INVALID_ARGUMENT):
+    /// * symbol - 표준코드, 예: "KR4A01630008"
+    /// * name   - 종목명, 예: "코스피200 F 202603"
+    /// * code   - 단축코드, 예: "KA0163000"
+    ///
+    /// NOTE: market_type / future_option_type / tradable / underlying_code 은 서버 미구현 — 사용 시 INVALID_ARGUMENT
+    ///
+    /// Operators:
+    /// * `=` 정확일치 (대소문자 구분)
+    /// * `:` 부분일치 (대소문자 무시)
+    /// * 값은 큰따옴표로 감싼다
+    ///
+    /// Combining:
+    /// * AND 만 지원 — OR 는 INVALID_ARGUMENT
+    /// * 같은 필드에 `=` 를 여러 번 주면 그 값들의 OR(IN) 으로 동작
+    /// * 같은 필드에 `=` 와 `:` 를 같이 주면 `=` 가 우선
+    /// * `symbol:"*"` 는 해당 필드 무필터 (빈 filter 와 동일)
     ///
     /// Examples:
-    /// * future_option_type=FUTURE_OPTION_TYPE_FUTURE
-    /// * tradable=true
-    /// * underlying_code="101S6"
-    /// * future_option_type=FUTURE_OPTION_TYPE_FUTURE AND tradable=true
+    /// * symbol = "KR4A01630008"
+    /// * code = "KA0163000"
+    /// * name:"코스피200"
     #[prost(string, tag="3")]
     pub filter: ::prost::alloc::string::String,
 }
