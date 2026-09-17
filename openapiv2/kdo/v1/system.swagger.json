@@ -130,7 +130,14 @@
         },
         "role": {
           "$ref": "#/definitions/userRole",
-          "description": "The single trading role supported by this instance."
+          "description": "Legacy single-role field. A single-role instance returns its role here and\nsupported_roles = [role]. A wildcard instance returns ROLE_UNSPECIFIED here.\nROLE_UNSPECIFIED never means that every role is supported."
+        },
+        "supportedRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userRole"
+          },
+          "description": "Trading roles supported by this instance. A wildcard (server.role = \"*\")\ninstance returns [ROLE_LP, ROLE_ARBITRAGE, ROLE_BROKERAGE, ROLE_LOAN].\nClients use this list when nonempty. If empty, clients may fall back to the\nlegacy role field, accepting only a concrete role (never ROLE_UNSPECIFIED)."
         }
       }
     },

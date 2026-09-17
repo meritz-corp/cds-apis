@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SystemServiceClient interface {
-	// GetServerInfo returns the identity and trading role of the running KDO instance.
+	// GetServerInfo returns the identity and supported trading roles of the running KDO instance.
 	GetServerInfo(ctx context.Context, in *GetServerInfoRequest, opts ...grpc.CallOption) (*GetServerInfoResponse, error)
 	// GetConnectionInfo returns current market feed and FEP connection information.
 	GetConnectionInfo(ctx context.Context, in *GetConnectionInfoRequest, opts ...grpc.CallOption) (*GetConnectionInfoResponse, error)
@@ -92,7 +92,7 @@ func (c *systemServiceClient) StopSymbolFund(ctx context.Context, in *StopSymbol
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility
 type SystemServiceServer interface {
-	// GetServerInfo returns the identity and trading role of the running KDO instance.
+	// GetServerInfo returns the identity and supported trading roles of the running KDO instance.
 	GetServerInfo(context.Context, *GetServerInfoRequest) (*GetServerInfoResponse, error)
 	// GetConnectionInfo returns current market feed and FEP connection information.
 	GetConnectionInfo(context.Context, *GetConnectionInfoRequest) (*GetConnectionInfoResponse, error)

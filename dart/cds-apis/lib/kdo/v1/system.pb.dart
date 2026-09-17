@@ -352,10 +352,12 @@ class GetServerInfoResponse extends $pb.GeneratedMessage {
   factory GetServerInfoResponse({
     $core.String? serverName,
     $1.Role? role,
+    $core.Iterable<$1.Role>? supportedRoles,
   }) {
     final result = create();
     if (serverName != null) result.serverName = serverName;
     if (role != null) result.role = role;
+    if (supportedRoles != null) result.supportedRoles.addAll(supportedRoles);
     return result;
   }
 
@@ -367,6 +369,7 @@ class GetServerInfoResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetServerInfoResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'serverName')
     ..e<$1.Role>(2, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $1.Role.ROLE_UNSPECIFIED, valueOf: $1.Role.valueOf, enumValues: $1.Role.values)
+    ..pc<$1.Role>(3, _omitFieldNames ? '' : 'supportedRoles', $pb.PbFieldType.KE, valueOf: $1.Role.valueOf, enumValues: $1.Role.values, defaultEnumValue: $1.Role.ROLE_UNSPECIFIED)
     ..hasRequiredFields = false
   ;
 
@@ -397,7 +400,9 @@ class GetServerInfoResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearServerName() => $_clearField(1);
 
-  /// The single trading role supported by this instance.
+  /// Legacy single-role field. A single-role instance returns its role here and
+  /// supported_roles = [role]. A wildcard instance returns ROLE_UNSPECIFIED here.
+  /// ROLE_UNSPECIFIED never means that every role is supported.
   @$pb.TagNumber(2)
   $1.Role get role => $_getN(1);
   @$pb.TagNumber(2)
@@ -406,6 +411,13 @@ class GetServerInfoResponse extends $pb.GeneratedMessage {
   $core.bool hasRole() => $_has(1);
   @$pb.TagNumber(2)
   void clearRole() => $_clearField(2);
+
+  /// Trading roles supported by this instance. A wildcard (server.role = "*")
+  /// instance returns [ROLE_LP, ROLE_ARBITRAGE, ROLE_BROKERAGE, ROLE_LOAN].
+  /// Clients use this list when nonempty. If empty, clients may fall back to the
+  /// legacy role field, accepting only a concrete role (never ROLE_UNSPECIFIED).
+  @$pb.TagNumber(3)
+  $pb.PbList<$1.Role> get supportedRoles => $_getList(2);
 }
 
 class GetVersionInfoResponse extends $pb.GeneratedMessage {

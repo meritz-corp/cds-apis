@@ -108,13 +108,15 @@ const GetServerInfoResponse$json = {
   '2': [
     {'1': 'server_name', '3': 1, '4': 1, '5': 9, '10': 'serverName'},
     {'1': 'role', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.user.Role', '10': 'role'},
+    {'1': 'supported_roles', '3': 3, '4': 3, '5': 14, '6': '.kdo.v1.user.Role', '10': 'supportedRoles'},
   ],
 };
 
 /// Descriptor for `GetServerInfoResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getServerInfoResponseDescriptor = $convert.base64Decode(
     'ChVHZXRTZXJ2ZXJJbmZvUmVzcG9uc2USHwoLc2VydmVyX25hbWUYASABKAlSCnNlcnZlck5hbW'
-    'USJQoEcm9sZRgCIAEoDjIRLmtkby52MS51c2VyLlJvbGVSBHJvbGU=');
+    'USJQoEcm9sZRgCIAEoDjIRLmtkby52MS51c2VyLlJvbGVSBHJvbGUSOgoPc3VwcG9ydGVkX3Jv'
+    'bGVzGAMgAygOMhEua2RvLnYxLnVzZXIuUm9sZVIOc3VwcG9ydGVkUm9sZXM=');
 
 @$core.Deprecated('Use getVersionInfoResponseDescriptor instead')
 const GetVersionInfoResponse$json = {

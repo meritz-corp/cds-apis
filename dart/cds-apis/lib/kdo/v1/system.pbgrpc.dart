@@ -33,7 +33,7 @@ class SystemServiceClient extends $grpc.Client {
 
   SystemServiceClient(super.channel, {super.options, super.interceptors});
 
-  /// GetServerInfo returns the identity and trading role of the running KDO instance.
+  /// GetServerInfo returns the identity and supported trading roles of the running KDO instance.
   $grpc.ResponseFuture<$0.GetServerInfoResponse> getServerInfo($0.GetServerInfoRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$getServerInfo, request, options: options);
   }

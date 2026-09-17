@@ -54,9 +54,17 @@ pub struct GetServerInfoResponse {
     /// Hostname identifying the running KDO instance.
     #[prost(string, tag="1")]
     pub server_name: ::prost::alloc::string::String,
-    /// The single trading role supported by this instance.
+    /// Legacy single-role field. A single-role instance returns its role here and
+    /// supported_roles = \[role\]. A wildcard instance returns ROLE_UNSPECIFIED here.
+    /// ROLE_UNSPECIFIED never means that every role is supported.
     #[prost(enumeration="super::user::Role", tag="2")]
     pub role: i32,
+    /// Trading roles supported by this instance. A wildcard (server.role = "*")
+    /// instance returns \[ROLE_LP, ROLE_ARBITRAGE, ROLE_BROKERAGE, ROLE_LOAN\].
+    /// Clients use this list when nonempty. If empty, clients may fall back to the
+    /// legacy role field, accepting only a concrete role (never ROLE_UNSPECIFIED).
+    #[prost(enumeration="super::user::Role", repeated, tag="3")]
+    pub supported_roles: ::prost::alloc::vec::Vec<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

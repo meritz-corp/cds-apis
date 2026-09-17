@@ -638,6 +638,9 @@ impl serde::Serialize for GetServerInfoResponse {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.system.GetServerInfoResponse", len)?;
         if true {
             struct_ser.serialize_field("server_name", &self.server_name)?;
@@ -646,6 +649,13 @@ impl serde::Serialize for GetServerInfoResponse {
             let v = super::user::Role::try_from(self.role)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.role)))?;
             struct_ser.serialize_field("role", &v)?;
+        }
+        if true {
+            let v = self.supported_roles.iter().cloned().map(|v| {
+                super::user::Role::try_from(v)
+                    .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", v)))
+                }).collect::<std::result::Result<Vec<_>, _>>()?;
+            struct_ser.serialize_field("supported_roles", &v)?;
         }
         struct_ser.end()
     }
@@ -660,12 +670,15 @@ impl<'de> serde::Deserialize<'de> for GetServerInfoResponse {
             "server_name",
             "serverName",
             "role",
+            "supported_roles",
+            "supportedRoles",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             ServerName,
             Role,
+            SupportedRoles,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -690,6 +703,7 @@ impl<'de> serde::Deserialize<'de> for GetServerInfoResponse {
                         match value {
                             "serverName" | "server_name" => Ok(GeneratedField::ServerName),
                             "role" => Ok(GeneratedField::Role),
+                            "supportedRoles" | "supported_roles" => Ok(GeneratedField::SupportedRoles),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -711,6 +725,7 @@ impl<'de> serde::Deserialize<'de> for GetServerInfoResponse {
             {
                 let mut server_name__ = None;
                 let mut role__ = None;
+                let mut supported_roles__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::ServerName => {
@@ -725,6 +740,12 @@ impl<'de> serde::Deserialize<'de> for GetServerInfoResponse {
                             }
                             role__ = Some(map_.next_value::<super::user::Role>()? as i32);
                         }
+                        GeneratedField::SupportedRoles => {
+                            if supported_roles__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("supportedRoles"));
+                            }
+                            supported_roles__ = Some(map_.next_value::<Vec<super::user::Role>>()?.into_iter().map(|x| x as i32).collect());
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -733,6 +754,7 @@ impl<'de> serde::Deserialize<'de> for GetServerInfoResponse {
                 Ok(GetServerInfoResponse {
                     server_name: server_name__.unwrap_or_default(),
                     role: role__.unwrap_or_default(),
+                    supported_roles: supported_roles__.unwrap_or_default(),
                 })
             }
         }

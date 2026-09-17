@@ -9,7 +9,7 @@ import "system.connect.spec.dart" as specs;
 
 /// SystemService provides system-level information about the running KDO instance.
 extension type SystemServiceClient (connect.Transport _transport) {
-  /// GetServerInfo returns the identity and trading role of the running KDO instance.
+  /// GetServerInfo returns the identity and supported trading roles of the running KDO instance.
   Future<kdov1system.GetServerInfoResponse> getServerInfo(
     kdov1system.GetServerInfoRequest input, {
     connect.Headers? headers,

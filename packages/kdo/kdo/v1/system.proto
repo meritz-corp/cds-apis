@@ -8,7 +8,7 @@ option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
 // SystemService provides system-level information about the running KDO instance.
 service SystemService {
-  // GetServerInfo returns the identity and trading role of the running KDO instance.
+  // GetServerInfo returns the identity and supported trading roles of the running KDO instance.
   rpc GetServerInfo(GetServerInfoRequest) returns (GetServerInfoResponse) {}
 
   // GetConnectionInfo returns current market feed and FEP connection information.
@@ -55,8 +55,16 @@ message GetServerInfoResponse {
   // Hostname identifying the running KDO instance.
   string server_name = 1;
 
-  // The single trading role supported by this instance.
+  // Legacy single-role field. A single-role instance returns its role here and
+  // supported_roles = [role]. A wildcard instance returns ROLE_UNSPECIFIED here.
+  // ROLE_UNSPECIFIED never means that every role is supported.
   kdo.v1.user.Role role = 2;
+
+  // Trading roles supported by this instance. A wildcard (server.role = "*")
+  // instance returns [ROLE_LP, ROLE_ARBITRAGE, ROLE_BROKERAGE, ROLE_LOAN].
+  // Clients use this list when nonempty. If empty, clients may fall back to the
+  // legacy role field, accepting only a concrete role (never ROLE_UNSPECIFIED).
+  repeated kdo.v1.user.Role supported_roles = 3;
 }
 
 message GetVersionInfoResponse {
