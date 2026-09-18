@@ -121,6 +121,16 @@ abstract final class MarketMakingService {
     kdov1mm.ListMmDailyPnlResponse.new,
   );
 
+  /// 시간별 체결량 조회 — 저장된 손익 샘플의 당일 누적 체결수량을 버킷 간격으로 잘라
+  /// 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
+  /// 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
+  static const listMmFillHistory = connect.Spec(
+    '/$name/ListMmFillHistory',
+    connect.StreamType.unary,
+    kdov1mm.ListMmFillHistoryRequest.new,
+    kdov1mm.ListMmFillHistoryResponse.new,
+  );
+
   /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   static const fitToMarket = connect.Spec(
     '/$name/FitToMarket',

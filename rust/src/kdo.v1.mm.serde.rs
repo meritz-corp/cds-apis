@@ -2641,6 +2641,296 @@ impl<'de> serde::Deserialize<'de> for ListMmDailyPnlResponse {
         deserializer.deserialize_struct("kdo.v1.mm.ListMmDailyPnlResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ListMmFillHistoryRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMmFillHistoryRequest", len)?;
+        if true {
+            struct_ser.serialize_field("symbol", &self.symbol)?;
+        }
+        if let Some(v) = self.fund_code.as_ref() {
+            struct_ser.serialize_field("fund_code", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("start_time", ToString::to_string(&self.start_time).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("end_time", ToString::to_string(&self.end_time).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("bucket_seconds", &self.bucket_seconds)?;
+        }
+        if true {
+            struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListMmFillHistoryRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbol",
+            "fund_code",
+            "fundCode",
+            "start_time",
+            "startTime",
+            "end_time",
+            "endTime",
+            "bucket_seconds",
+            "bucketSeconds",
+            "slot_id",
+            "slotId",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbol,
+            FundCode,
+            StartTime,
+            EndTime,
+            BucketSeconds,
+            SlotId,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbol" => Ok(GeneratedField::Symbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "startTime" | "start_time" => Ok(GeneratedField::StartTime),
+                            "endTime" | "end_time" => Ok(GeneratedField::EndTime),
+                            "bucketSeconds" | "bucket_seconds" => Ok(GeneratedField::BucketSeconds),
+                            "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListMmFillHistoryRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.ListMmFillHistoryRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmFillHistoryRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbol__ = None;
+                let mut fund_code__ = None;
+                let mut start_time__ = None;
+                let mut end_time__ = None;
+                let mut bucket_seconds__ = None;
+                let mut slot_id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbol => {
+                            if symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbol"));
+                            }
+                            symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = map_.next_value()?;
+                        }
+                        GeneratedField::StartTime => {
+                            if start_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("startTime"));
+                            }
+                            start_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EndTime => {
+                            if end_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("endTime"));
+                            }
+                            end_time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BucketSeconds => {
+                            if bucket_seconds__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bucketSeconds"));
+                            }
+                            bucket_seconds__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SlotId => {
+                            if slot_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slotId"));
+                            }
+                            slot_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListMmFillHistoryRequest {
+                    symbol: symbol__.unwrap_or_default(),
+                    fund_code: fund_code__,
+                    start_time: start_time__.unwrap_or_default(),
+                    end_time: end_time__.unwrap_or_default(),
+                    bucket_seconds: bucket_seconds__.unwrap_or_default(),
+                    slot_id: slot_id__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.ListMmFillHistoryRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListMmFillHistoryResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ListMmFillHistoryResponse", len)?;
+        if true {
+            struct_ser.serialize_field("points", &self.points)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListMmFillHistoryResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "points",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Points,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "points" => Ok(GeneratedField::Points),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListMmFillHistoryResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.ListMmFillHistoryResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListMmFillHistoryResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut points__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Points => {
+                            if points__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("points"));
+                            }
+                            points__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListMmFillHistoryResponse {
+                    points: points__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.ListMmFillHistoryResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListMmPnlHistoryRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -6890,6 +7180,193 @@ impl<'de> serde::Deserialize<'de> for MmDailyPnl {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MmDailyPnl", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MmFillPoint {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmFillPoint", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("time", ToString::to_string(&self.time).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("buy_quantity", ToString::to_string(&self.buy_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sell_quantity", ToString::to_string(&self.sell_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("buy_volume", ToString::to_string(&self.buy_volume).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sell_volume", ToString::to_string(&self.sell_volume).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MmFillPoint {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "time",
+            "buy_quantity",
+            "buyQuantity",
+            "sell_quantity",
+            "sellQuantity",
+            "buy_volume",
+            "buyVolume",
+            "sell_volume",
+            "sellVolume",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Time,
+            BuyQuantity,
+            SellQuantity,
+            BuyVolume,
+            SellVolume,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "time" => Ok(GeneratedField::Time),
+                            "buyQuantity" | "buy_quantity" => Ok(GeneratedField::BuyQuantity),
+                            "sellQuantity" | "sell_quantity" => Ok(GeneratedField::SellQuantity),
+                            "buyVolume" | "buy_volume" => Ok(GeneratedField::BuyVolume),
+                            "sellVolume" | "sell_volume" => Ok(GeneratedField::SellVolume),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MmFillPoint;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MmFillPoint")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MmFillPoint, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut time__ = None;
+                let mut buy_quantity__ = None;
+                let mut sell_quantity__ = None;
+                let mut buy_volume__ = None;
+                let mut sell_volume__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Time => {
+                            if time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("time"));
+                            }
+                            time__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BuyQuantity => {
+                            if buy_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyQuantity"));
+                            }
+                            buy_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellQuantity => {
+                            if sell_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellQuantity"));
+                            }
+                            sell_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BuyVolume => {
+                            if buy_volume__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyVolume"));
+                            }
+                            buy_volume__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellVolume => {
+                            if sell_volume__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellVolume"));
+                            }
+                            sell_volume__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MmFillPoint {
+                    time: time__.unwrap_or_default(),
+                    buy_quantity: buy_quantity__.unwrap_or_default(),
+                    sell_quantity: sell_quantity__.unwrap_or_default(),
+                    buy_volume: buy_volume__.unwrap_or_default(),
+                    sell_volume: sell_volume__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MmFillPoint", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MmFillSummary {

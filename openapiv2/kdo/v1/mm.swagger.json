@@ -440,6 +440,77 @@
         ]
       }
     },
+    "/v1/mm/{symbol}/fill-history": {
+      "get": {
+        "summary": "시간별 체결량 조회 — 저장된 손익 샘플의 당일 누적 체결수량을 버킷 간격으로 잘라\n버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.\n손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.",
+        "operationId": "MarketMakingService_ListMmFillHistory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/mmListMmFillHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "symbol",
+            "description": "ISIN 심볼",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "fundCode",
+            "description": "펀드 코드 — 같은 심볼 다중 펀드 구분용",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "description": "조회 구간 시작 (unix epoch seconds, inclusive)",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "endTime",
+            "description": "조회 구간 끝 (unix epoch seconds, exclusive). 0 = 현재 시각까지",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "bucketSeconds",
+            "description": "버킷 간격 (초). 0/미지정 = 1초",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "slotId",
+            "description": "같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯(\"default\").",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MarketMakingService"
+        ]
+      }
+    },
     "/v1/mm/{symbol}/fills:stream": {
       "get": {
         "summary": "MM 체결 요약 실시간 스트리밍 (당일 누적). 구독 즉시 현재 누적 스냅샷을 1회 내려주고,\n이후 체결마다 갱신된 누적 요약을 emit. MM 전략 자기 체결만 포함 — 같은 심볼의\n타 전략(선물LP 헷지·페어 등) 체결은 제외된다.",
@@ -1290,6 +1361,18 @@
         }
       }
     },
+    "mmListMmFillHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mmMmFillPoint"
+          },
+          "description": "체결량 시계열 포인트 목록 (시각 오름차순). 샘플이 없는 버킷은 행 자체가 빠진다."
+        }
+      }
+    },
     "mmListMmPnlHistoryResponse": {
       "type": "object",
       "properties": {
@@ -1964,6 +2047,37 @@
         }
       },
       "title": "영업일 1일 손익 요약 (KST 자정 경계)"
+    },
+    "mmMmFillPoint": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "int64",
+          "title": "버킷 시작 시각 (unix epoch seconds)"
+        },
+        "buyQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "버킷 마지막 시점의 당일 누적 매수 체결량"
+        },
+        "sellQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "버킷 마지막 시점의 당일 누적 매도 체결량"
+        },
+        "buyVolume": {
+          "type": "string",
+          "format": "int64",
+          "description": "이 버킷 구간에서 체결된 매수량 (직전 버킷 누적 대비 증분).\n영업일 경계로 누적이 리셋된 버킷은 리셋 이후 누적분을 그대로 쓴다."
+        },
+        "sellVolume": {
+          "type": "string",
+          "format": "int64",
+          "description": "이 버킷 구간에서 체결된 매도량 (직전 버킷 누적 대비 증분)."
+        }
+      },
+      "title": "체결량 시계열 포인트 (버킷 마지막 샘플 기준)"
     },
     "mmMmFillSummary": {
       "type": "object",

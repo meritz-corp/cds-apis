@@ -951,6 +951,57 @@ pub struct ListMmDailyPnlResponse {
     #[prost(message, repeated, tag="1")]
     pub days: ::prost::alloc::vec::Vec<MmDailyPnl>,
 }
+/// ListMmFillHistory
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmFillHistoryRequest {
+    /// ISIN 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 펀드 코드 — 같은 심볼 다중 펀드 구분용
+    #[prost(string, optional, tag="2")]
+    pub fund_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// 조회 구간 시작 (unix epoch seconds, inclusive)
+    #[prost(int64, tag="3")]
+    pub start_time: i64,
+    /// 조회 구간 끝 (unix epoch seconds, exclusive). 0 = 현재 시각까지
+    #[prost(int64, tag="4")]
+    pub end_time: i64,
+    /// 버킷 간격 (초). 0/미지정 = 1초
+    #[prost(uint32, tag="5")]
+    pub bucket_seconds: u32,
+    /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
+    #[prost(string, tag="6")]
+    pub slot_id: ::prost::alloc::string::String,
+}
+/// 체결량 시계열 포인트 (버킷 마지막 샘플 기준)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MmFillPoint {
+    /// 버킷 시작 시각 (unix epoch seconds)
+    #[prost(int64, tag="1")]
+    pub time: i64,
+    /// 버킷 마지막 시점의 당일 누적 매수 체결량
+    #[prost(int64, tag="2")]
+    pub buy_quantity: i64,
+    /// 버킷 마지막 시점의 당일 누적 매도 체결량
+    #[prost(int64, tag="3")]
+    pub sell_quantity: i64,
+    /// 이 버킷 구간에서 체결된 매수량 (직전 버킷 누적 대비 증분).
+    /// 영업일 경계로 누적이 리셋된 버킷은 리셋 이후 누적분을 그대로 쓴다.
+    #[prost(int64, tag="4")]
+    pub buy_volume: i64,
+    /// 이 버킷 구간에서 체결된 매도량 (직전 버킷 누적 대비 증분).
+    #[prost(int64, tag="5")]
+    pub sell_volume: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListMmFillHistoryResponse {
+    /// 체결량 시계열 포인트 목록 (시각 오름차순). 샘플이 없는 버킷은 행 자체가 빠진다.
+    #[prost(message, repeated, tag="1")]
+    pub points: ::prost::alloc::vec::Vec<MmFillPoint>,
+}
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

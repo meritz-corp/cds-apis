@@ -4665,6 +4665,261 @@ class ListMmDailyPnlResponse extends $pb.GeneratedMessage {
   $pb.PbList<MmDailyPnl> get days => $_getList(0);
 }
 
+/// ListMmFillHistory
+class ListMmFillHistoryRequest extends $pb.GeneratedMessage {
+  factory ListMmFillHistoryRequest({
+    $core.String? symbol,
+    $core.String? fundCode,
+    $fixnum.Int64? startTime,
+    $fixnum.Int64? endTime,
+    $core.int? bucketSeconds,
+    $core.String? slotId,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (startTime != null) result.startTime = startTime;
+    if (endTime != null) result.endTime = endTime;
+    if (bucketSeconds != null) result.bucketSeconds = bucketSeconds;
+    if (slotId != null) result.slotId = slotId;
+    return result;
+  }
+
+  ListMmFillHistoryRequest._();
+
+  factory ListMmFillHistoryRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmFillHistoryRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmFillHistoryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aInt64(3, _omitFieldNames ? '' : 'startTime')
+    ..aInt64(4, _omitFieldNames ? '' : 'endTime')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'bucketSeconds', $pb.PbFieldType.OU3)
+    ..aOS(6, _omitFieldNames ? '' : 'slotId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmFillHistoryRequest clone() => ListMmFillHistoryRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmFillHistoryRequest copyWith(void Function(ListMmFillHistoryRequest) updates) => super.copyWith((message) => updates(message as ListMmFillHistoryRequest)) as ListMmFillHistoryRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmFillHistoryRequest create() => ListMmFillHistoryRequest._();
+  @$core.override
+  ListMmFillHistoryRequest createEmptyInstance() => create();
+  static $pb.PbList<ListMmFillHistoryRequest> createRepeated() => $pb.PbList<ListMmFillHistoryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmFillHistoryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmFillHistoryRequest>(create);
+  static ListMmFillHistoryRequest? _defaultInstance;
+
+  /// ISIN 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 펀드 코드 — 같은 심볼 다중 펀드 구분용
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 조회 구간 시작 (unix epoch seconds, inclusive)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get startTime => $_getI64(2);
+  @$pb.TagNumber(3)
+  set startTime($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStartTime() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStartTime() => $_clearField(3);
+
+  /// 조회 구간 끝 (unix epoch seconds, exclusive). 0 = 현재 시각까지
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get endTime => $_getI64(3);
+  @$pb.TagNumber(4)
+  set endTime($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasEndTime() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEndTime() => $_clearField(4);
+
+  /// 버킷 간격 (초). 0/미지정 = 1초
+  @$pb.TagNumber(5)
+  $core.int get bucketSeconds => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set bucketSeconds($core.int value) => $_setUnsignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBucketSeconds() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBucketSeconds() => $_clearField(5);
+
+  /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
+  @$pb.TagNumber(6)
+  $core.String get slotId => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set slotId($core.String value) => $_setString(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSlotId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSlotId() => $_clearField(6);
+}
+
+/// 체결량 시계열 포인트 (버킷 마지막 샘플 기준)
+class MmFillPoint extends $pb.GeneratedMessage {
+  factory MmFillPoint({
+    $fixnum.Int64? time,
+    $fixnum.Int64? buyQuantity,
+    $fixnum.Int64? sellQuantity,
+    $fixnum.Int64? buyVolume,
+    $fixnum.Int64? sellVolume,
+  }) {
+    final result = create();
+    if (time != null) result.time = time;
+    if (buyQuantity != null) result.buyQuantity = buyQuantity;
+    if (sellQuantity != null) result.sellQuantity = sellQuantity;
+    if (buyVolume != null) result.buyVolume = buyVolume;
+    if (sellVolume != null) result.sellVolume = sellVolume;
+    return result;
+  }
+
+  MmFillPoint._();
+
+  factory MmFillPoint.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MmFillPoint.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmFillPoint', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'time')
+    ..aInt64(2, _omitFieldNames ? '' : 'buyQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'sellQuantity')
+    ..aInt64(4, _omitFieldNames ? '' : 'buyVolume')
+    ..aInt64(5, _omitFieldNames ? '' : 'sellVolume')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmFillPoint clone() => MmFillPoint()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MmFillPoint copyWith(void Function(MmFillPoint) updates) => super.copyWith((message) => updates(message as MmFillPoint)) as MmFillPoint;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MmFillPoint create() => MmFillPoint._();
+  @$core.override
+  MmFillPoint createEmptyInstance() => create();
+  static $pb.PbList<MmFillPoint> createRepeated() => $pb.PbList<MmFillPoint>();
+  @$core.pragma('dart2js:noInline')
+  static MmFillPoint getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MmFillPoint>(create);
+  static MmFillPoint? _defaultInstance;
+
+  /// 버킷 시작 시각 (unix epoch seconds)
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get time => $_getI64(0);
+  @$pb.TagNumber(1)
+  set time($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTime() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTime() => $_clearField(1);
+
+  /// 버킷 마지막 시점의 당일 누적 매수 체결량
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get buyQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set buyQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBuyQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBuyQuantity() => $_clearField(2);
+
+  /// 버킷 마지막 시점의 당일 누적 매도 체결량
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get sellQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set sellQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSellQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSellQuantity() => $_clearField(3);
+
+  /// 이 버킷 구간에서 체결된 매수량 (직전 버킷 누적 대비 증분).
+  /// 영업일 경계로 누적이 리셋된 버킷은 리셋 이후 누적분을 그대로 쓴다.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get buyVolume => $_getI64(3);
+  @$pb.TagNumber(4)
+  set buyVolume($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasBuyVolume() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBuyVolume() => $_clearField(4);
+
+  /// 이 버킷 구간에서 체결된 매도량 (직전 버킷 누적 대비 증분).
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get sellVolume => $_getI64(4);
+  @$pb.TagNumber(5)
+  set sellVolume($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSellVolume() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSellVolume() => $_clearField(5);
+}
+
+class ListMmFillHistoryResponse extends $pb.GeneratedMessage {
+  factory ListMmFillHistoryResponse({
+    $core.Iterable<MmFillPoint>? points,
+  }) {
+    final result = create();
+    if (points != null) result.points.addAll(points);
+    return result;
+  }
+
+  ListMmFillHistoryResponse._();
+
+  factory ListMmFillHistoryResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListMmFillHistoryResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListMmFillHistoryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..pc<MmFillPoint>(1, _omitFieldNames ? '' : 'points', $pb.PbFieldType.PM, subBuilder: MmFillPoint.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmFillHistoryResponse clone() => ListMmFillHistoryResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListMmFillHistoryResponse copyWith(void Function(ListMmFillHistoryResponse) updates) => super.copyWith((message) => updates(message as ListMmFillHistoryResponse)) as ListMmFillHistoryResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListMmFillHistoryResponse create() => ListMmFillHistoryResponse._();
+  @$core.override
+  ListMmFillHistoryResponse createEmptyInstance() => create();
+  static $pb.PbList<ListMmFillHistoryResponse> createRepeated() => $pb.PbList<ListMmFillHistoryResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListMmFillHistoryResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListMmFillHistoryResponse>(create);
+  static ListMmFillHistoryResponse? _defaultInstance;
+
+  /// 체결량 시계열 포인트 목록 (시각 오름차순). 샘플이 없는 버킷은 행 자체가 빠진다.
+  @$pb.TagNumber(1)
+  $pb.PbList<MmFillPoint> get points => $_getList(0);
+}
+
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 class SpreadDecomposition extends $pb.GeneratedMessage {
   factory SpreadDecomposition({

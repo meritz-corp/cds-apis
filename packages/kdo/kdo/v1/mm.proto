@@ -124,6 +124,16 @@ service MarketMakingService {
     option (google.api.method_signature) = "symbol";
   }
 
+  // 시간별 체결량 조회 — 저장된 손익 샘플의 당일 누적 체결수량을 버킷 간격으로 잘라
+  // 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
+  // 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
+  rpc ListMmFillHistory(ListMmFillHistoryRequest) returns (ListMmFillHistoryResponse) {
+    option (google.api.http) = {
+      get: "/v1/mm/{symbol=*}/fill-history"
+    };
+    option (google.api.method_signature) = "symbol";
+  }
+
   // Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
   rpc FitToMarket(FitToMarketRequest) returns (FitToMarketResponse) {
     option (google.api.http) = {
@@ -1014,6 +1024,51 @@ message MmDailyPnl {
 message ListMmDailyPnlResponse {
   // 영업일 오름차순 요약 목록. MM 미가동일(샘플 없음)은 행 자체가 빠진다.
   repeated MmDailyPnl days = 1;
+}
+
+// ListMmFillHistory
+message ListMmFillHistoryRequest {
+  // ISIN 심볼
+  string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 펀드 코드 — 같은 심볼 다중 펀드 구분용
+  optional string fund_code = 2;
+
+  // 조회 구간 시작 (unix epoch seconds, inclusive)
+  int64 start_time = 3;
+
+  // 조회 구간 끝 (unix epoch seconds, exclusive). 0 = 현재 시각까지
+  int64 end_time = 4;
+
+  // 버킷 간격 (초). 0/미지정 = 1초
+  uint32 bucket_seconds = 5;
+
+  // 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
+  string slot_id = 6;
+}
+
+// 체결량 시계열 포인트 (버킷 마지막 샘플 기준)
+message MmFillPoint {
+  // 버킷 시작 시각 (unix epoch seconds)
+  int64 time = 1;
+
+  // 버킷 마지막 시점의 당일 누적 매수 체결량
+  int64 buy_quantity = 2;
+
+  // 버킷 마지막 시점의 당일 누적 매도 체결량
+  int64 sell_quantity = 3;
+
+  // 이 버킷 구간에서 체결된 매수량 (직전 버킷 누적 대비 증분).
+  // 영업일 경계로 누적이 리셋된 버킷은 리셋 이후 누적분을 그대로 쓴다.
+  int64 buy_volume = 4;
+
+  // 이 버킷 구간에서 체결된 매도량 (직전 버킷 누적 대비 증분).
+  int64 sell_volume = 5;
+}
+
+message ListMmFillHistoryResponse {
+  // 체결량 시계열 포인트 목록 (시각 오름차순). 샘플이 없는 버킷은 행 자체가 빠진다.
+  repeated MmFillPoint points = 1;
 }
 
 // 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.

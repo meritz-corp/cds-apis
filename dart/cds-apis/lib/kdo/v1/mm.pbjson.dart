@@ -1078,6 +1078,62 @@ final $typed_data.Uint8List listMmDailyPnlResponseDescriptor = $convert.base64De
     'ChZMaXN0TW1EYWlseVBubFJlc3BvbnNlEikKBGRheXMYASADKAsyFS5rZG8udjEubW0uTW1EYW'
     'lseVBubFIEZGF5cw==');
 
+@$core.Deprecated('Use listMmFillHistoryRequestDescriptor instead')
+const ListMmFillHistoryRequest$json = {
+  '1': 'ListMmFillHistoryRequest',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '9': 0, '10': 'fundCode', '17': true},
+    {'1': 'start_time', '3': 3, '4': 1, '5': 3, '10': 'startTime'},
+    {'1': 'end_time', '3': 4, '4': 1, '5': 3, '10': 'endTime'},
+    {'1': 'bucket_seconds', '3': 5, '4': 1, '5': 13, '10': 'bucketSeconds'},
+    {'1': 'slot_id', '3': 6, '4': 1, '5': 9, '10': 'slotId'},
+  ],
+  '8': [
+    {'1': '_fund_code'},
+  ],
+};
+
+/// Descriptor for `ListMmFillHistoryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmFillHistoryRequestDescriptor = $convert.base64Decode(
+    'ChhMaXN0TW1GaWxsSGlzdG9yeVJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2'
+    'wSIAoJZnVuZF9jb2RlGAIgASgJSABSCGZ1bmRDb2RliAEBEh0KCnN0YXJ0X3RpbWUYAyABKANS'
+    'CXN0YXJ0VGltZRIZCghlbmRfdGltZRgEIAEoA1IHZW5kVGltZRIlCg5idWNrZXRfc2Vjb25kcx'
+    'gFIAEoDVINYnVja2V0U2Vjb25kcxIXCgdzbG90X2lkGAYgASgJUgZzbG90SWRCDAoKX2Z1bmRf'
+    'Y29kZQ==');
+
+@$core.Deprecated('Use mmFillPointDescriptor instead')
+const MmFillPoint$json = {
+  '1': 'MmFillPoint',
+  '2': [
+    {'1': 'time', '3': 1, '4': 1, '5': 3, '10': 'time'},
+    {'1': 'buy_quantity', '3': 2, '4': 1, '5': 3, '10': 'buyQuantity'},
+    {'1': 'sell_quantity', '3': 3, '4': 1, '5': 3, '10': 'sellQuantity'},
+    {'1': 'buy_volume', '3': 4, '4': 1, '5': 3, '10': 'buyVolume'},
+    {'1': 'sell_volume', '3': 5, '4': 1, '5': 3, '10': 'sellVolume'},
+  ],
+};
+
+/// Descriptor for `MmFillPoint`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mmFillPointDescriptor = $convert.base64Decode(
+    'CgtNbUZpbGxQb2ludBISCgR0aW1lGAEgASgDUgR0aW1lEiEKDGJ1eV9xdWFudGl0eRgCIAEoA1'
+    'ILYnV5UXVhbnRpdHkSIwoNc2VsbF9xdWFudGl0eRgDIAEoA1IMc2VsbFF1YW50aXR5Eh0KCmJ1'
+    'eV92b2x1bWUYBCABKANSCWJ1eVZvbHVtZRIfCgtzZWxsX3ZvbHVtZRgFIAEoA1IKc2VsbFZvbH'
+    'VtZQ==');
+
+@$core.Deprecated('Use listMmFillHistoryResponseDescriptor instead')
+const ListMmFillHistoryResponse$json = {
+  '1': 'ListMmFillHistoryResponse',
+  '2': [
+    {'1': 'points', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.mm.MmFillPoint', '10': 'points'},
+  ],
+};
+
+/// Descriptor for `ListMmFillHistoryResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMmFillHistoryResponseDescriptor = $convert.base64Decode(
+    'ChlMaXN0TW1GaWxsSGlzdG9yeVJlc3BvbnNlEi4KBnBvaW50cxgBIAMoCzIWLmtkby52MS5tbS'
+    '5NbUZpbGxQb2ludFIGcG9pbnRz');
+
 @$core.Deprecated('Use spreadDecompositionDescriptor instead')
 const SpreadDecomposition$json = {
   '1': 'SpreadDecomposition',

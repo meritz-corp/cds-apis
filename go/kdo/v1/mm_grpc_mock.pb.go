@@ -941,6 +941,26 @@ func (mr *MockMarketMakingServiceClientMockRecorder) ListMmDailyPnl(ctx, in inte
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmDailyPnl", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ListMmDailyPnl), varargs...)
 }
 
+// ListMmFillHistory mocks base method.
+func (m *MockMarketMakingServiceClient) ListMmFillHistory(ctx context.Context, in *ListMmFillHistoryRequest, opts ...grpc.CallOption) (*ListMmFillHistoryResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListMmFillHistory", varargs...)
+	ret0, _ := ret[0].(*ListMmFillHistoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListMmFillHistory indicates an expected call of ListMmFillHistory.
+func (mr *MockMarketMakingServiceClientMockRecorder) ListMmFillHistory(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmFillHistory", reflect.TypeOf((*MockMarketMakingServiceClient)(nil).ListMmFillHistory), varargs...)
+}
+
 // ListMmPnlHistory mocks base method.
 func (m *MockMarketMakingServiceClient) ListMmPnlHistory(ctx context.Context, in *ListMmPnlHistoryRequest, opts ...grpc.CallOption) (*ListMmPnlHistoryResponse, error) {
 	m.ctrl.T.Helper()
@@ -1297,6 +1317,21 @@ func (m *MockMarketMakingServiceServer) ListMmDailyPnl(ctx context.Context, in *
 func (mr *MockMarketMakingServiceServerMockRecorder) ListMmDailyPnl(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmDailyPnl", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ListMmDailyPnl), ctx, in)
+}
+
+// ListMmFillHistory mocks base method.
+func (m *MockMarketMakingServiceServer) ListMmFillHistory(ctx context.Context, in *ListMmFillHistoryRequest) (*ListMmFillHistoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListMmFillHistory", ctx, in)
+	ret0, _ := ret[0].(*ListMmFillHistoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListMmFillHistory indicates an expected call of ListMmFillHistory.
+func (mr *MockMarketMakingServiceServerMockRecorder) ListMmFillHistory(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMmFillHistory", reflect.TypeOf((*MockMarketMakingServiceServer)(nil).ListMmFillHistory), ctx, in)
 }
 
 // ListMmPnlHistory mocks base method.
