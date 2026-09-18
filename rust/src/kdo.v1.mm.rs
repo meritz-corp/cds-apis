@@ -967,31 +967,25 @@ pub struct ListMmFillHistoryRequest {
     /// 조회 구간 끝 (unix epoch seconds, exclusive). 0 = 현재 시각까지
     #[prost(int64, tag="4")]
     pub end_time: i64,
-    /// 버킷 간격 (초). 0/미지정 = 1초
+    /// 버킷 간격 (초). 최소 60 — 60 미만/미지정은 60(1분)으로 올린다.
     #[prost(uint32, tag="5")]
     pub bucket_seconds: u32,
     /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 기본 슬롯("default").
     #[prost(string, tag="6")]
     pub slot_id: ::prost::alloc::string::String,
 }
-/// 체결량 시계열 포인트 (버킷 마지막 샘플 기준)
+/// 체결량 시계열 포인트 (버킷 구간 체결량)
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MmFillPoint {
     /// 버킷 시작 시각 (unix epoch seconds)
     #[prost(int64, tag="1")]
     pub time: i64,
-    /// 버킷 마지막 시점의 당일 누적 매수 체결량
-    #[prost(int64, tag="2")]
-    pub buy_quantity: i64,
-    /// 버킷 마지막 시점의 당일 누적 매도 체결량
-    #[prost(int64, tag="3")]
-    pub sell_quantity: i64,
-    /// 이 버킷 구간에서 체결된 매수량 (직전 버킷 누적 대비 증분).
-    /// 영업일 경계로 누적이 리셋된 버킷은 리셋 이후 누적분을 그대로 쓴다.
+    /// 이 버킷 구간에서 체결된 매수량.
+    /// 영업일 경계 또는 프로세스 재시작으로 누적이 리셋된 버킷은 리셋 이후 누적분을 쓴다.
     #[prost(int64, tag="4")]
     pub buy_volume: i64,
-    /// 이 버킷 구간에서 체결된 매도량 (직전 버킷 누적 대비 증분).
+    /// 이 버킷 구간에서 체결된 매도량.
     #[prost(int64, tag="5")]
     pub sell_volume: i64,
 }

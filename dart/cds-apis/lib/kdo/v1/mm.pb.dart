@@ -4757,7 +4757,7 @@ class ListMmFillHistoryRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearEndTime() => $_clearField(4);
 
-  /// 버킷 간격 (초). 0/미지정 = 1초
+  /// 버킷 간격 (초). 최소 60 — 60 미만/미지정은 60(1분)으로 올린다.
   @$pb.TagNumber(5)
   $core.int get bucketSeconds => $_getIZ(4);
   @$pb.TagNumber(5)
@@ -4778,19 +4778,15 @@ class ListMmFillHistoryRequest extends $pb.GeneratedMessage {
   void clearSlotId() => $_clearField(6);
 }
 
-/// 체결량 시계열 포인트 (버킷 마지막 샘플 기준)
+/// 체결량 시계열 포인트 (버킷 구간 체결량)
 class MmFillPoint extends $pb.GeneratedMessage {
   factory MmFillPoint({
     $fixnum.Int64? time,
-    $fixnum.Int64? buyQuantity,
-    $fixnum.Int64? sellQuantity,
     $fixnum.Int64? buyVolume,
     $fixnum.Int64? sellVolume,
   }) {
     final result = create();
     if (time != null) result.time = time;
-    if (buyQuantity != null) result.buyQuantity = buyQuantity;
-    if (sellQuantity != null) result.sellQuantity = sellQuantity;
     if (buyVolume != null) result.buyVolume = buyVolume;
     if (sellVolume != null) result.sellVolume = sellVolume;
     return result;
@@ -4803,8 +4799,6 @@ class MmFillPoint extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MmFillPoint', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'time')
-    ..aInt64(2, _omitFieldNames ? '' : 'buyQuantity')
-    ..aInt64(3, _omitFieldNames ? '' : 'sellQuantity')
     ..aInt64(4, _omitFieldNames ? '' : 'buyVolume')
     ..aInt64(5, _omitFieldNames ? '' : 'sellVolume')
     ..hasRequiredFields = false
@@ -4837,44 +4831,24 @@ class MmFillPoint extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearTime() => $_clearField(1);
 
-  /// 버킷 마지막 시점의 당일 누적 매수 체결량
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get buyQuantity => $_getI64(1);
-  @$pb.TagNumber(2)
-  set buyQuantity($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBuyQuantity() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearBuyQuantity() => $_clearField(2);
-
-  /// 버킷 마지막 시점의 당일 누적 매도 체결량
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get sellQuantity => $_getI64(2);
-  @$pb.TagNumber(3)
-  set sellQuantity($fixnum.Int64 value) => $_setInt64(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasSellQuantity() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSellQuantity() => $_clearField(3);
-
-  /// 이 버킷 구간에서 체결된 매수량 (직전 버킷 누적 대비 증분).
-  /// 영업일 경계로 누적이 리셋된 버킷은 리셋 이후 누적분을 그대로 쓴다.
+  /// 이 버킷 구간에서 체결된 매수량.
+  /// 영업일 경계 또는 프로세스 재시작으로 누적이 리셋된 버킷은 리셋 이후 누적분을 쓴다.
   @$pb.TagNumber(4)
-  $fixnum.Int64 get buyVolume => $_getI64(3);
+  $fixnum.Int64 get buyVolume => $_getI64(1);
   @$pb.TagNumber(4)
-  set buyVolume($fixnum.Int64 value) => $_setInt64(3, value);
+  set buyVolume($fixnum.Int64 value) => $_setInt64(1, value);
   @$pb.TagNumber(4)
-  $core.bool hasBuyVolume() => $_has(3);
+  $core.bool hasBuyVolume() => $_has(1);
   @$pb.TagNumber(4)
   void clearBuyVolume() => $_clearField(4);
 
-  /// 이 버킷 구간에서 체결된 매도량 (직전 버킷 누적 대비 증분).
+  /// 이 버킷 구간에서 체결된 매도량.
   @$pb.TagNumber(5)
-  $fixnum.Int64 get sellVolume => $_getI64(4);
+  $fixnum.Int64 get sellVolume => $_getI64(2);
   @$pb.TagNumber(5)
-  set sellVolume($fixnum.Int64 value) => $_setInt64(4, value);
+  set sellVolume($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(5)
-  $core.bool hasSellVolume() => $_has(4);
+  $core.bool hasSellVolume() => $_has(2);
   @$pb.TagNumber(5)
   void clearSellVolume() => $_clearField(5);
 }

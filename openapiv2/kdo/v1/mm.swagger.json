@@ -492,7 +492,7 @@
           },
           {
             "name": "bucketSeconds",
-            "description": "버킷 간격 (초). 0/미지정 = 1초",
+            "description": "버킷 간격 (초). 최소 60 — 60 미만/미지정은 60(1분)으로 올린다.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -2056,28 +2056,18 @@
           "format": "int64",
           "title": "버킷 시작 시각 (unix epoch seconds)"
         },
-        "buyQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "버킷 마지막 시점의 당일 누적 매수 체결량"
-        },
-        "sellQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "버킷 마지막 시점의 당일 누적 매도 체결량"
-        },
         "buyVolume": {
           "type": "string",
           "format": "int64",
-          "description": "이 버킷 구간에서 체결된 매수량 (직전 버킷 누적 대비 증분).\n영업일 경계로 누적이 리셋된 버킷은 리셋 이후 누적분을 그대로 쓴다."
+          "description": "이 버킷 구간에서 체결된 매수량.\n영업일 경계 또는 프로세스 재시작으로 누적이 리셋된 버킷은 리셋 이후 누적분을 쓴다."
         },
         "sellVolume": {
           "type": "string",
           "format": "int64",
-          "description": "이 버킷 구간에서 체결된 매도량 (직전 버킷 누적 대비 증분)."
+          "description": "이 버킷 구간에서 체결된 매도량."
         }
       },
-      "title": "체결량 시계열 포인트 (버킷 마지막 샘플 기준)"
+      "title": "체결량 시계열 포인트 (버킷 구간 체결량)"
     },
     "mmMmFillSummary": {
       "type": "object",
