@@ -158,7 +158,7 @@
                 },
                 "spread": {
                   "$ref": "#/definitions/pair_v2PairV2SpreadType",
-                  "description": "counter 가격을 base 가격축으로 옮기는 방법."
+                  "description": "[DEPRECATED] pricing 으로 대체됐다. 구 클라이언트 호환을 위해 서버가 계속 채워 보내고,\npricing 이 비어 있으면 spread + nav 조합을 읽어 pricing 으로 해석한다."
                 },
                 "targetSpread": {
                   "type": "number",
@@ -177,7 +177,7 @@
                 },
                 "nav": {
                   "$ref": "#/definitions/pair_v2PairV2Nav",
-                  "description": "spread 가 NAV 일 때 필수인 NAV 환산 설정."
+                  "description": "[DEPRECATED] pricing 으로 대체됐다. spread 와 짝으로만 의미를 갖는다."
                 },
                 "maxBaseQuantity": {
                   "type": "string",
@@ -226,6 +226,10 @@
                   "type": "number",
                   "format": "double",
                   "description": "이전 회차 양다리 체결률의 최솟값 \u003e= 설정값일 때 다음 자동 발사 허용.\n0..100, 미설정=제한 없음, 첫 회차=통과. 수동 발사는 무시한다.\n분모는 해당 회차 최초 발주수량. 정정은 중복 집계하지 않고 취소/거부는 체결로 세지 않는다."
+                },
+                "pricing": {
+                  "$ref": "#/definitions/pair_v2PairV2Pricing",
+                  "description": "counter 가격을 base 가격축으로 옮기는 방법 — 구 spread(선형/NAV) + nav(NavKind) 두 축을\n하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다."
                 }
               },
               "title": "수정할 PairV2",
@@ -233,8 +237,7 @@
                 "displayName",
                 "portfolioId",
                 "base",
-                "counter",
-                "spread"
+                "counter"
               ]
             }
           },
@@ -963,7 +966,7 @@
         },
         "spread": {
           "$ref": "#/definitions/pair_v2PairV2SpreadType",
-          "description": "counter 가격을 base 가격축으로 옮기는 방법."
+          "description": "[DEPRECATED] pricing 으로 대체됐다. 구 클라이언트 호환을 위해 서버가 계속 채워 보내고,\npricing 이 비어 있으면 spread + nav 조합을 읽어 pricing 으로 해석한다."
         },
         "targetSpread": {
           "type": "number",
@@ -982,7 +985,7 @@
         },
         "nav": {
           "$ref": "#/definitions/pair_v2PairV2Nav",
-          "description": "spread 가 NAV 일 때 필수인 NAV 환산 설정."
+          "description": "[DEPRECATED] pricing 으로 대체됐다. spread 와 짝으로만 의미를 갖는다."
         },
         "maxBaseQuantity": {
           "type": "string",
@@ -1031,6 +1034,10 @@
           "type": "number",
           "format": "double",
           "description": "이전 회차 양다리 체결률의 최솟값 \u003e= 설정값일 때 다음 자동 발사 허용.\n0..100, 미설정=제한 없음, 첫 회차=통과. 수동 발사는 무시한다.\n분모는 해당 회차 최초 발주수량. 정정은 중복 집계하지 않고 취소/거부는 체결로 세지 않는다."
+        },
+        "pricing": {
+          "$ref": "#/definitions/pair_v2PairV2Pricing",
+          "description": "counter 가격을 base 가격축으로 옮기는 방법 — 구 spread(선형/NAV) + nav(NavKind) 두 축을\n하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다."
         }
       },
       "description": "PairV2 전략 — base·counter 지정 호가로 재는 스프레드가 target_spread 를 초과하면\n그 가격 그대로 양다리를 동시 발주한다.",
@@ -1038,8 +1045,7 @@
         "displayName",
         "portfolioId",
         "base",
-        "counter",
-        "spread"
+        "counter"
       ]
     },
     "pair_v2PairV2AmendedOrder": {
@@ -1210,6 +1216,10 @@
       "description": "- PAIR_V2_EXECUTION_OUTCOME_SUBMITTED: 양 다리 모두 제출 성공\n - PAIR_V2_EXECUTION_OUTCOME_SKIPPED_COOLDOWN: 쿨다운 미충족\n - PAIR_V2_EXECUTION_OUTCOME_SKIPPED_MAX_QUANTITY: base 누적(체결+미체결)이 max_base_quantity 도달\n - PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE: 한쪽 호가 미형성 등으로 스프레드 산출 불가\n - PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE: 한 다리만 제출 성공 — 반대 다리 없이 노출이 남는다\n - PAIR_V2_EXECUTION_OUTCOME_FAILED: 양 다리 모두 제출 실패",
       "title": "페어 실행 결과"
     },
+    "pair_v2PairV2IndexTrackingPricing": {
+      "type": "object",
+      "description": "지수추종 NAV — nav = F × tracking_multiple. 파라미터 없음(basis 미적용)."
+    },
     "pair_v2PairV2LegSummary": {
       "type": "object",
       "properties": {
@@ -1253,6 +1263,28 @@
         }
       },
       "title": "leg별 누적 집계"
+    },
+    "pair_v2PairV2LeverageFuturePricing": {
+      "type": "object",
+      "properties": {
+        "basis": {
+          "type": "number",
+          "format": "double",
+          "description": "NAV 베이시스 — 선물 가격축(포인트). 선물 틱(0.05)을 표현할 수 있도록 실수다."
+        }
+      },
+      "description": "레버리지/인버스 선물 기반 NAV."
+    },
+    "pair_v2PairV2LinearPricing": {
+      "type": "object",
+      "properties": {
+        "k": {
+          "type": "number",
+          "format": "double",
+          "description": "k 는 양수 필수. counter.side != base.side 여야 한다(역방향은 NAV 변종 사용)."
+        }
+      },
+      "title": "counter 가격 × k 선형 환산"
     },
     "pair_v2PairV2Nav": {
       "type": "object",
@@ -1357,6 +1389,32 @@
       "description": "- PAIR_V2_ORDER_STATUS_SUBMITTED: 발주 요청 (접수 대기)\n - PAIR_V2_ORDER_STATUS_RECEIVED: 거래소 접수\n - PAIR_V2_ORDER_STATUS_AMENDED: 정정으로 대체됨",
       "title": "주문 단위 상태"
     },
+    "pair_v2PairV2PdfDecomposePricing": {
+      "type": "object",
+      "description": "PDF 분해 NAV — flatten 후 단일 선물 구성 전제. 파라미터 없음(basis 미적용)."
+    },
+    "pair_v2PairV2Pricing": {
+      "type": "object",
+      "properties": {
+        "linear": {
+          "$ref": "#/definitions/pair_v2PairV2LinearPricing",
+          "description": "counter 가격 × k 로 선형 환산. k=1 → 단순 가격차(원월−근월, KODEX200−TIGER200),\nk≠1 → 이종 가격축(KODEX200 − K200선물×ETF배수). 선형이라 역방향(인버스)은 표현 불가."
+        },
+        "indexTracking": {
+          "$ref": "#/definitions/pair_v2PairV2IndexTrackingPricing",
+          "description": "nav = F × tracking_multiple. ETF 마스터의 tracking_asset.multiple 이 필요하다."
+        },
+        "leverageFuture": {
+          "$ref": "#/definitions/pair_v2PairV2LeverageFuturePricing",
+          "description": "레버리지·인버스 ETF 의 선물 기반 NAV. basis 를 쓰는 유일한 변종이다."
+        },
+        "pdfDecompose": {
+          "$ref": "#/definitions/pair_v2PairV2PdfDecomposePricing",
+          "description": "PDF flatten(단일 선물 + Cash) 기반 선형 환산. flattened 구성 필수."
+        }
+      },
+      "description": "counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위이고,\n의미는 \"그 방향으로 진입했을 때의 실행가능 이익\"이다.\n\nlinear 외 세 변종은 (ETF, Future) 상품쌍 전용이다 — 서버가 상품타입을 확인하고 아니면\n페어 루프를 띄우지 않는다."
+    },
     "pair_v2PairV2ResidualError": {
       "type": "object",
       "properties": {
@@ -1416,7 +1474,7 @@
           "description": "PairV2.nav (NavKind) 로 counter → base 이론가 환산. 인버스·PDF 분해 등 비선형은 이쪽."
         }
       },
-      "description": "counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위."
+      "description": "[DEPRECATED] counter 가격을 base 가격축으로 옮기는 방법. PairV2Pricing 을 쓴다."
     },
     "pair_v2PairV2Status": {
       "type": "string",

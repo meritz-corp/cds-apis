@@ -2149,6 +2149,9 @@ impl serde::Serialize for PairV2 {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -2219,6 +2222,9 @@ impl serde::Serialize for PairV2 {
         if let Some(v) = self.min_fill_rate_pct.as_ref() {
             struct_ser.serialize_field("min_fill_rate_pct", v)?;
         }
+        if let Some(v) = self.pricing.as_ref() {
+            struct_ser.serialize_field("pricing", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2264,6 +2270,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             "allowBorrowedSell",
             "min_fill_rate_pct",
             "minFillRatePct",
+            "pricing",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2289,6 +2296,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             SlippageGuard,
             AllowBorrowedSell,
             MinFillRatePct,
+            Pricing,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2332,6 +2340,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             "slippageGuard" | "slippage_guard" => Ok(GeneratedField::SlippageGuard),
                             "allowBorrowedSell" | "allow_borrowed_sell" => Ok(GeneratedField::AllowBorrowedSell),
                             "minFillRatePct" | "min_fill_rate_pct" => Ok(GeneratedField::MinFillRatePct),
+                            "pricing" => Ok(GeneratedField::Pricing),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2372,6 +2381,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                 let mut slippage_guard__ = None;
                 let mut allow_borrowed_sell__ = None;
                 let mut min_fill_rate_pct__ = None;
+                let mut pricing__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -2516,6 +2526,12 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::Pricing => {
+                            if pricing__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pricing"));
+                            }
+                            pricing__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2543,6 +2559,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                     slippage_guard: slippage_guard__.unwrap_or_default(),
                     allow_borrowed_sell: allow_borrowed_sell__.unwrap_or_default(),
                     min_fill_rate_pct: min_fill_rate_pct__,
+                    pricing: pricing__,
                 })
             }
         }
@@ -3447,6 +3464,78 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionOutcome {
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
+impl serde::Serialize for PairV2IndexTrackingPricing {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2IndexTrackingPricing", len)?;
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2IndexTrackingPricing {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                            Ok(GeneratedField::__SkipField__)
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2IndexTrackingPricing;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.PairV2IndexTrackingPricing")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairV2IndexTrackingPricing, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                }
+                Ok(PairV2IndexTrackingPricing {
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2IndexTrackingPricing", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for PairV2LegSummary {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -3705,6 +3794,200 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
             }
         }
         deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2LegSummary", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PairV2LeverageFuturePricing {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2LeverageFuturePricing", len)?;
+        if true {
+            struct_ser.serialize_field("basis", &self.basis)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2LeverageFuturePricing {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "basis",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Basis,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "basis" => Ok(GeneratedField::Basis),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2LeverageFuturePricing;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.PairV2LeverageFuturePricing")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairV2LeverageFuturePricing, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut basis__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Basis => {
+                            if basis__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("basis"));
+                            }
+                            basis__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PairV2LeverageFuturePricing {
+                    basis: basis__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2LeverageFuturePricing", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PairV2LinearPricing {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2LinearPricing", len)?;
+        if true {
+            struct_ser.serialize_field("k", &self.k)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2LinearPricing {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "k",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            K,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "k" => Ok(GeneratedField::K),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2LinearPricing;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.PairV2LinearPricing")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairV2LinearPricing, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut k__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::K => {
+                            if k__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("k"));
+                            }
+                            k__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PairV2LinearPricing {
+                    k: k__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2LinearPricing", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairV2Nav {
@@ -4377,6 +4660,220 @@ impl<'de> serde::Deserialize<'de> for PairV2OrderStatus {
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PairV2PdfDecomposePricing {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2PdfDecomposePricing", len)?;
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2PdfDecomposePricing {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                            Ok(GeneratedField::__SkipField__)
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2PdfDecomposePricing;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.PairV2PdfDecomposePricing")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairV2PdfDecomposePricing, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                }
+                Ok(PairV2PdfDecomposePricing {
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2PdfDecomposePricing", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for PairV2Pricing {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if self.kind.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2Pricing", len)?;
+        if let Some(v) = self.kind.as_ref() {
+            match v {
+                pair_v2_pricing::Kind::Linear(v) => {
+                    struct_ser.serialize_field("linear", v)?;
+                }
+                pair_v2_pricing::Kind::IndexTracking(v) => {
+                    struct_ser.serialize_field("index_tracking", v)?;
+                }
+                pair_v2_pricing::Kind::LeverageFuture(v) => {
+                    struct_ser.serialize_field("leverage_future", v)?;
+                }
+                pair_v2_pricing::Kind::PdfDecompose(v) => {
+                    struct_ser.serialize_field("pdf_decompose", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for PairV2Pricing {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "linear",
+            "index_tracking",
+            "indexTracking",
+            "leverage_future",
+            "leverageFuture",
+            "pdf_decompose",
+            "pdfDecompose",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Linear,
+            IndexTracking,
+            LeverageFuture,
+            PdfDecompose,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "linear" => Ok(GeneratedField::Linear),
+                            "indexTracking" | "index_tracking" => Ok(GeneratedField::IndexTracking),
+                            "leverageFuture" | "leverage_future" => Ok(GeneratedField::LeverageFuture),
+                            "pdfDecompose" | "pdf_decompose" => Ok(GeneratedField::PdfDecompose),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = PairV2Pricing;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.PairV2Pricing")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PairV2Pricing, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut kind__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Linear => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("linear"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(pair_v2_pricing::Kind::Linear)
+;
+                        }
+                        GeneratedField::IndexTracking => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("indexTracking"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(pair_v2_pricing::Kind::IndexTracking)
+;
+                        }
+                        GeneratedField::LeverageFuture => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("leverageFuture"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(pair_v2_pricing::Kind::LeverageFuture)
+;
+                        }
+                        GeneratedField::PdfDecompose => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pdfDecompose"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<_>>()?.map(pair_v2_pricing::Kind::PdfDecompose)
+;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(PairV2Pricing {
+                    kind: kind__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.PairV2Pricing", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for PairV2ResidualError {

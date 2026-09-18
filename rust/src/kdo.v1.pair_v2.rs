@@ -27,7 +27,9 @@ pub struct PairV2 {
     /// Counter 다리. quantity는 명시적인 1회 발주량으로 그대로 사용한다.
     #[prost(message, optional, tag="6")]
     pub counter: ::core::option::Option<PairV2Entry>,
-    /// counter 가격을 base 가격축으로 옮기는 방법.
+    /// \[DEPRECATED\] pricing 으로 대체됐다. 구 클라이언트 호환을 위해 서버가 계속 채워 보내고,
+    /// pricing 이 비어 있으면 spread + nav 조합을 읽어 pricing 으로 해석한다.
+    #[deprecated]
     #[prost(message, optional, tag="7")]
     pub spread: ::core::option::Option<PairV2SpreadType>,
     /// 진입 최소 스프레드. 현재 스프레드가 이 값을 "초과"할 때 발사. 단위 = base 가격 단위.
@@ -41,7 +43,8 @@ pub struct PairV2 {
     /// base/counter 공유. 0 이면 절대 정정하지 않아 미체결이 영구히 남으므로 양수 필수.
     #[prost(double, tag="10")]
     pub amend_threshold: f64,
-    /// spread 가 NAV 일 때 필수인 NAV 환산 설정.
+    /// \[DEPRECATED\] pricing 으로 대체됐다. spread 와 짝으로만 의미를 갖는다.
+    #[deprecated]
     #[prost(message, optional, tag="11")]
     pub nav: ::core::option::Option<PairV2Nav>,
     /// base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다.
@@ -83,6 +86,10 @@ pub struct PairV2 {
     /// 분모는 해당 회차 최초 발주수량. 정정은 중복 집계하지 않고 취소/거부는 체결로 세지 않는다.
     #[prost(double, optional, tag="21")]
     pub min_fill_rate_pct: ::core::option::Option<f64>,
+    /// counter 가격을 base 가격축으로 옮기는 방법 — 구 spread(선형/NAV) + nav(NavKind) 두 축을
+    /// 하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다.
+    #[prost(message, optional, tag="22")]
+    pub pricing: ::core::option::Option<PairV2Pricing>,
 }
 // ============================================================================
 // Pair Entry
@@ -116,10 +123,71 @@ pub struct PairV2Entry {
     pub tp_code: i32,
 }
 // ============================================================================
-// Spread
+// Pricing
 // ============================================================================
 
-/// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위.
+/// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위이고,
+/// 의미는 "그 방향으로 진입했을 때의 실행가능 이익"이다.
+///
+/// linear 외 세 변종은 (ETF, Future) 상품쌍 전용이다 — 서버가 상품타입을 확인하고 아니면
+/// 페어 루프를 띄우지 않는다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PairV2Pricing {
+    #[prost(oneof="pair_v2_pricing::Kind", tags="1, 2, 3, 4")]
+    pub kind: ::core::option::Option<pair_v2_pricing::Kind>,
+}
+/// Nested message and enum types in `PairV2Pricing`.
+pub mod pair_v2_pricing {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Kind {
+        /// counter 가격 × k 로 선형 환산. k=1 → 단순 가격차(원월−근월, KODEX200−TIGER200),
+        /// k≠1 → 이종 가격축(KODEX200 − K200선물×ETF배수). 선형이라 역방향(인버스)은 표현 불가.
+        #[prost(message, tag="1")]
+        Linear(super::PairV2LinearPricing),
+        /// nav = F × tracking_multiple. ETF 마스터의 tracking_asset.multiple 이 필요하다.
+        #[prost(message, tag="2")]
+        IndexTracking(super::PairV2IndexTrackingPricing),
+        /// 레버리지·인버스 ETF 의 선물 기반 NAV. basis 를 쓰는 유일한 변종이다.
+        #[prost(message, tag="3")]
+        LeverageFuture(super::PairV2LeverageFuturePricing),
+        /// PDF flatten(단일 선물 + Cash) 기반 선형 환산. flattened 구성 필수.
+        #[prost(message, tag="4")]
+        PdfDecompose(super::PairV2PdfDecomposePricing),
+    }
+}
+/// counter 가격 × k 선형 환산
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PairV2LinearPricing {
+    /// k 는 양수 필수. counter.side != base.side 여야 한다(역방향은 NAV 변종 사용).
+    #[prost(double, tag="1")]
+    pub k: f64,
+}
+/// 지수추종 NAV — nav = F × tracking_multiple. 파라미터 없음(basis 미적용).
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PairV2IndexTrackingPricing {
+}
+/// 레버리지/인버스 선물 기반 NAV.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PairV2LeverageFuturePricing {
+    /// NAV 베이시스 — 선물 가격축(포인트). 선물 틱(0.05)을 표현할 수 있도록 실수다.
+    #[prost(double, tag="1")]
+    pub basis: f64,
+}
+/// PDF 분해 NAV — flatten 후 단일 선물 구성 전제. 파라미터 없음(basis 미적용).
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct PairV2PdfDecomposePricing {
+}
+// ============================================================================
+// Spread (DEPRECATED — PairV2Pricing 으로 대체)
+// ============================================================================
+
+/// \[DEPRECATED\] counter 가격을 base 가격축으로 옮기는 방법. PairV2Pricing 을 쓴다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PairV2SpreadType {
@@ -154,7 +222,7 @@ pub struct PairV2ScaledSpread {
 pub struct PairV2NavSpread {
 }
 // ============================================================================
-// NAV
+// NAV (DEPRECATED — PairV2Pricing 으로 대체)
 // ============================================================================
 
 /// ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base

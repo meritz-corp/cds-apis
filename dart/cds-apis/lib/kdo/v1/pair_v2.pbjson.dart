@@ -159,11 +159,27 @@ const PairV2$json = {
     {'1': 'portfolio_id', '3': 4, '4': 1, '5': 5, '8': {}, '10': 'portfolioId'},
     {'1': 'base', '3': 5, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2Entry', '8': {}, '10': 'base'},
     {'1': 'counter', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2Entry', '8': {}, '10': 'counter'},
-    {'1': 'spread', '3': 7, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2SpreadType', '8': {}, '10': 'spread'},
+    {
+      '1': 'spread',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.kdo.v1.pair_v2.PairV2SpreadType',
+      '8': {'3': true},
+      '10': 'spread',
+    },
     {'1': 'target_spread', '3': 8, '4': 1, '5': 1, '10': 'targetSpread'},
     {'1': 'cooldown_ms', '3': 9, '4': 1, '5': 4, '10': 'cooldownMs'},
     {'1': 'amend_threshold', '3': 10, '4': 1, '5': 1, '10': 'amendThreshold'},
-    {'1': 'nav', '3': 11, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2Nav', '10': 'nav'},
+    {
+      '1': 'nav',
+      '3': 11,
+      '4': 1,
+      '5': 11,
+      '6': '.kdo.v1.pair_v2.PairV2Nav',
+      '8': {'3': true},
+      '10': 'nav',
+    },
     {'1': 'max_base_quantity', '3': 12, '4': 1, '5': 3, '10': 'maxBaseQuantity'},
     {'1': 'status', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2Status', '8': {}, '10': 'status'},
     {'1': 'create_time', '3': 14, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'createTime'},
@@ -174,6 +190,7 @@ const PairV2$json = {
     {'1': 'slippage_guard', '3': 19, '4': 1, '5': 8, '10': 'slippageGuard'},
     {'1': 'allow_borrowed_sell', '3': 20, '4': 1, '5': 8, '10': 'allowBorrowedSell'},
     {'1': 'min_fill_rate_pct', '3': 21, '4': 1, '5': 1, '9': 3, '10': 'minFillRatePct', '17': true},
+    {'1': 'pricing', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2Pricing', '10': 'pricing'},
   ],
   '7': {},
   '8': [
@@ -190,23 +207,24 @@ final $typed_data.Uint8List pairV2Descriptor = $convert.base64Decode(
     'lzcGxheV9uYW1lGAMgASgJQgTiQQECUgtkaXNwbGF5TmFtZRInCgxwb3J0Zm9saW9faWQYBCAB'
     'KAVCBOJBAQJSC3BvcnRmb2xpb0lkEjUKBGJhc2UYBSABKAsyGy5rZG8udjEucGFpcl92Mi5QYW'
     'lyVjJFbnRyeUIE4kEBAlIEYmFzZRI7Cgdjb3VudGVyGAYgASgLMhsua2RvLnYxLnBhaXJfdjIu'
-    'UGFpclYyRW50cnlCBOJBAQJSB2NvdW50ZXISPgoGc3ByZWFkGAcgASgLMiAua2RvLnYxLnBhaX'
-    'JfdjIuUGFpclYyU3ByZWFkVHlwZUIE4kEBAlIGc3ByZWFkEiMKDXRhcmdldF9zcHJlYWQYCCAB'
-    'KAFSDHRhcmdldFNwcmVhZBIfCgtjb29sZG93bl9tcxgJIAEoBFIKY29vbGRvd25NcxInCg9hbW'
-    'VuZF90aHJlc2hvbGQYCiABKAFSDmFtZW5kVGhyZXNob2xkEisKA25hdhgLIAEoCzIZLmtkby52'
-    'MS5wYWlyX3YyLlBhaXJWMk5hdlIDbmF2EioKEW1heF9iYXNlX3F1YW50aXR5GAwgASgDUg9tYX'
-    'hCYXNlUXVhbnRpdHkSOgoGc3RhdHVzGA0gASgOMhwua2RvLnYxLnBhaXJfdjIuUGFpclYyU3Rh'
-    'dHVzQgTiQQEDUgZzdGF0dXMSQQoLY3JlYXRlX3RpbWUYDiABKAsyGi5nb29nbGUucHJvdG9idW'
-    'YuVGltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkEKC3VwZGF0ZV90aW1lGA8gASgLMhouZ29v'
-    'Z2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZRIrCg9wYXVzZV9sYXVuY2'
-    'hfbm8YECABKA1IAFINcGF1c2VMYXVuY2hOb4gBARI1ChR0cmFkaW5nX3dpbmRvd19zdGFydBgR'
-    'IAEoCUgBUhJ0cmFkaW5nV2luZG93U3RhcnSIAQESMQoSdHJhZGluZ193aW5kb3dfZW5kGBIgAS'
-    'gJSAJSEHRyYWRpbmdXaW5kb3dFbmSIAQESJQoOc2xpcHBhZ2VfZ3VhcmQYEyABKAhSDXNsaXBw'
-    'YWdlR3VhcmQSLgoTYWxsb3dfYm9ycm93ZWRfc2VsbBgUIAEoCFIRYWxsb3dCb3Jyb3dlZFNlbG'
-    'wSLgoRbWluX2ZpbGxfcmF0ZV9wY3QYFSABKAFIA1IObWluRmlsbFJhdGVQY3SIAQE6L+pBLAoW'
-    'a2RvLmNkc2FwaXMueHl6L1BhaXJWMhIScGFpcl92MnMve3BhaXJfdjJ9QhIKEF9wYXVzZV9sYX'
-    'VuY2hfbm9CFwoVX3RyYWRpbmdfd2luZG93X3N0YXJ0QhUKE190cmFkaW5nX3dpbmRvd19lbmRC'
-    'FAoSX21pbl9maWxsX3JhdGVfcGN0');
+    'UGFpclYyRW50cnlCBOJBAQJSB2NvdW50ZXISPAoGc3ByZWFkGAcgASgLMiAua2RvLnYxLnBhaX'
+    'JfdjIuUGFpclYyU3ByZWFkVHlwZUICGAFSBnNwcmVhZBIjCg10YXJnZXRfc3ByZWFkGAggASgB'
+    'Ugx0YXJnZXRTcHJlYWQSHwoLY29vbGRvd25fbXMYCSABKARSCmNvb2xkb3duTXMSJwoPYW1lbm'
+    'RfdGhyZXNob2xkGAogASgBUg5hbWVuZFRocmVzaG9sZBIvCgNuYXYYCyABKAsyGS5rZG8udjEu'
+    'cGFpcl92Mi5QYWlyVjJOYXZCAhgBUgNuYXYSKgoRbWF4X2Jhc2VfcXVhbnRpdHkYDCABKANSD2'
+    '1heEJhc2VRdWFudGl0eRI6CgZzdGF0dXMYDSABKA4yHC5rZG8udjEucGFpcl92Mi5QYWlyVjJT'
+    'dGF0dXNCBOJBAQNSBnN0YXR1cxJBCgtjcmVhdGVfdGltZRgOIAEoCzIaLmdvb2dsZS5wcm90b2'
+    'J1Zi5UaW1lc3RhbXBCBOJBAQNSCmNyZWF0ZVRpbWUSQQoLdXBkYXRlX3RpbWUYDyABKAsyGi5n'
+    'b29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lEisKD3BhdXNlX2xhdW'
+    '5jaF9ubxgQIAEoDUgAUg1wYXVzZUxhdW5jaE5viAEBEjUKFHRyYWRpbmdfd2luZG93X3N0YXJ0'
+    'GBEgASgJSAFSEnRyYWRpbmdXaW5kb3dTdGFydIgBARIxChJ0cmFkaW5nX3dpbmRvd19lbmQYEi'
+    'ABKAlIAlIQdHJhZGluZ1dpbmRvd0VuZIgBARIlCg5zbGlwcGFnZV9ndWFyZBgTIAEoCFINc2xp'
+    'cHBhZ2VHdWFyZBIuChNhbGxvd19ib3Jyb3dlZF9zZWxsGBQgASgIUhFhbGxvd0JvcnJvd2VkU2'
+    'VsbBIuChFtaW5fZmlsbF9yYXRlX3BjdBgVIAEoAUgDUg5taW5GaWxsUmF0ZVBjdIgBARI3Cgdw'
+    'cmljaW5nGBYgASgLMh0ua2RvLnYxLnBhaXJfdjIuUGFpclYyUHJpY2luZ1IHcHJpY2luZzov6k'
+    'EsChZrZG8uY2RzYXBpcy54eXovUGFpclYyEhJwYWlyX3Yycy97cGFpcl92Mn1CEgoQX3BhdXNl'
+    'X2xhdW5jaF9ub0IXChVfdHJhZGluZ193aW5kb3dfc3RhcnRCFQoTX3RyYWRpbmdfd2luZG93X2'
+    'VuZEIUChJfbWluX2ZpbGxfcmF0ZV9wY3Q=');
 
 @$core.Deprecated('Use pairV2EntryDescriptor instead')
 const PairV2Entry$json = {
@@ -230,6 +248,72 @@ final $typed_data.Uint8List pairV2EntryDescriptor = $convert.base64Decode(
     'UgtwcmljZVNvdXJjZRIyCgd0cF9jb2RlGAYgASgOMhkua2RvLnYxLmhlZGdlLk9yZGVyVHBDb2'
     'RlUgZ0cENvZGU=');
 
+@$core.Deprecated('Use pairV2PricingDescriptor instead')
+const PairV2Pricing$json = {
+  '1': 'PairV2Pricing',
+  '2': [
+    {'1': 'linear', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2LinearPricing', '9': 0, '10': 'linear'},
+    {'1': 'index_tracking', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2IndexTrackingPricing', '9': 0, '10': 'indexTracking'},
+    {'1': 'leverage_future', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2LeverageFuturePricing', '9': 0, '10': 'leverageFuture'},
+    {'1': 'pdf_decompose', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2PdfDecomposePricing', '9': 0, '10': 'pdfDecompose'},
+  ],
+  '8': [
+    {'1': 'kind'},
+  ],
+};
+
+/// Descriptor for `PairV2Pricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairV2PricingDescriptor = $convert.base64Decode(
+    'Cg1QYWlyVjJQcmljaW5nEj0KBmxpbmVhchgBIAEoCzIjLmtkby52MS5wYWlyX3YyLlBhaXJWMk'
+    'xpbmVhclByaWNpbmdIAFIGbGluZWFyElMKDmluZGV4X3RyYWNraW5nGAIgASgLMioua2RvLnYx'
+    'LnBhaXJfdjIuUGFpclYySW5kZXhUcmFja2luZ1ByaWNpbmdIAFINaW5kZXhUcmFja2luZxJWCg'
+    '9sZXZlcmFnZV9mdXR1cmUYAyABKAsyKy5rZG8udjEucGFpcl92Mi5QYWlyVjJMZXZlcmFnZUZ1'
+    'dHVyZVByaWNpbmdIAFIObGV2ZXJhZ2VGdXR1cmUSUAoNcGRmX2RlY29tcG9zZRgEIAEoCzIpLm'
+    'tkby52MS5wYWlyX3YyLlBhaXJWMlBkZkRlY29tcG9zZVByaWNpbmdIAFIMcGRmRGVjb21wb3Nl'
+    'QgYKBGtpbmQ=');
+
+@$core.Deprecated('Use pairV2LinearPricingDescriptor instead')
+const PairV2LinearPricing$json = {
+  '1': 'PairV2LinearPricing',
+  '2': [
+    {'1': 'k', '3': 1, '4': 1, '5': 1, '10': 'k'},
+  ],
+};
+
+/// Descriptor for `PairV2LinearPricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairV2LinearPricingDescriptor = $convert.base64Decode(
+    'ChNQYWlyVjJMaW5lYXJQcmljaW5nEgwKAWsYASABKAFSAWs=');
+
+@$core.Deprecated('Use pairV2IndexTrackingPricingDescriptor instead')
+const PairV2IndexTrackingPricing$json = {
+  '1': 'PairV2IndexTrackingPricing',
+};
+
+/// Descriptor for `PairV2IndexTrackingPricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairV2IndexTrackingPricingDescriptor = $convert.base64Decode(
+    'ChpQYWlyVjJJbmRleFRyYWNraW5nUHJpY2luZw==');
+
+@$core.Deprecated('Use pairV2LeverageFuturePricingDescriptor instead')
+const PairV2LeverageFuturePricing$json = {
+  '1': 'PairV2LeverageFuturePricing',
+  '2': [
+    {'1': 'basis', '3': 1, '4': 1, '5': 1, '10': 'basis'},
+  ],
+};
+
+/// Descriptor for `PairV2LeverageFuturePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairV2LeverageFuturePricingDescriptor = $convert.base64Decode(
+    'ChtQYWlyVjJMZXZlcmFnZUZ1dHVyZVByaWNpbmcSFAoFYmFzaXMYASABKAFSBWJhc2lz');
+
+@$core.Deprecated('Use pairV2PdfDecomposePricingDescriptor instead')
+const PairV2PdfDecomposePricing$json = {
+  '1': 'PairV2PdfDecomposePricing',
+};
+
+/// Descriptor for `PairV2PdfDecomposePricing`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pairV2PdfDecomposePricingDescriptor = $convert.base64Decode(
+    'ChlQYWlyVjJQZGZEZWNvbXBvc2VQcmljaW5n');
+
 @$core.Deprecated('Use pairV2SpreadTypeDescriptor instead')
 const PairV2SpreadType$json = {
   '1': 'PairV2SpreadType',
@@ -237,6 +321,7 @@ const PairV2SpreadType$json = {
     {'1': 'scaled', '3': 1, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2ScaledSpread', '9': 0, '10': 'scaled'},
     {'1': 'nav', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2NavSpread', '9': 0, '10': 'nav'},
   ],
+  '7': {'3': true},
   '8': [
     {'1': 'kind'},
   ],
@@ -246,7 +331,7 @@ const PairV2SpreadType$json = {
 final $typed_data.Uint8List pairV2SpreadTypeDescriptor = $convert.base64Decode(
     'ChBQYWlyVjJTcHJlYWRUeXBlEjwKBnNjYWxlZBgBIAEoCzIiLmtkby52MS5wYWlyX3YyLlBhaX'
     'JWMlNjYWxlZFNwcmVhZEgAUgZzY2FsZWQSMwoDbmF2GAIgASgLMh8ua2RvLnYxLnBhaXJfdjIu'
-    'UGFpclYyTmF2U3ByZWFkSABSA25hdkIGCgRraW5k');
+    'UGFpclYyTmF2U3ByZWFkSABSA25hdjoCGAFCBgoEa2luZA==');
 
 @$core.Deprecated('Use pairV2ScaledSpreadDescriptor instead')
 const PairV2ScaledSpread$json = {
@@ -277,13 +362,14 @@ const PairV2Nav$json = {
     {'1': 'basis', '3': 2, '4': 1, '5': 3, '10': 'basis'},
     {'1': 'dynamic_basis', '3': 3, '4': 1, '5': 8, '10': 'dynamicBasis'},
   ],
+  '7': {'3': true},
 };
 
 /// Descriptor for `PairV2Nav`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pairV2NavDescriptor = $convert.base64Decode(
     'CglQYWlyVjJOYXYSNAoIbmF2X2tpbmQYASABKA4yGS5rZG8udjEuY29tbW9uLkV0Zk5hdktpbm'
     'RSB25hdktpbmQSFAoFYmFzaXMYAiABKANSBWJhc2lzEiMKDWR5bmFtaWNfYmFzaXMYAyABKAhS'
-    'DGR5bmFtaWNCYXNpcw==');
+    'DGR5bmFtaWNCYXNpczoCGAE=');
 
 @$core.Deprecated('Use getPairV2RequestDescriptor instead')
 const GetPairV2Request$json = {

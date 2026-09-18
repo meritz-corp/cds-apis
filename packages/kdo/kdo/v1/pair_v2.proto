@@ -193,10 +193,9 @@ message PairV2 {
     (google.api.field_behavior) = REQUIRED
   ];
 
-  // counter 가격을 base 가격축으로 옮기는 방법.
-  PairV2SpreadType spread = 7 [
-    (google.api.field_behavior) = REQUIRED
-  ];
+  // [DEPRECATED] pricing 으로 대체됐다. 구 클라이언트 호환을 위해 서버가 계속 채워 보내고,
+  // pricing 이 비어 있으면 spread + nav 조합을 읽어 pricing 으로 해석한다.
+  PairV2SpreadType spread = 7 [deprecated = true];
 
   // 진입 최소 스프레드. 현재 스프레드가 이 값을 "초과"할 때 발사. 단위 = base 가격 단위.
   // 캘린더 스프레드처럼 즉시 차익이 아닌 운용은 음수가 정상이다.
@@ -209,8 +208,8 @@ message PairV2 {
   // base/counter 공유. 0 이면 절대 정정하지 않아 미체결이 영구히 남으므로 양수 필수.
   double amend_threshold = 10;
 
-  // spread 가 NAV 일 때 필수인 NAV 환산 설정.
-  PairV2Nav nav = 11;
+  // [DEPRECATED] pricing 으로 대체됐다. spread 와 짝으로만 의미를 갖는다.
+  PairV2Nav nav = 11 [deprecated = true];
 
   // base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다.
   int64 max_base_quantity = 12;
@@ -256,6 +255,10 @@ message PairV2 {
   // 0..100, 미설정=제한 없음, 첫 회차=통과. 수동 발사는 무시한다.
   // 분모는 해당 회차 최초 발주수량. 정정은 중복 집계하지 않고 취소/거부는 체결로 세지 않는다.
   optional double min_fill_rate_pct = 21;
+
+  // counter 가격을 base 가격축으로 옮기는 방법 — 구 spread(선형/NAV) + nav(NavKind) 두 축을
+  // 하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다.
+  PairV2Pricing pricing = 22;
 }
 
 // ============================================================================
@@ -296,11 +299,56 @@ message PairV2Entry {
 }
 
 // ============================================================================
-// Spread
+// Pricing
 // ============================================================================
 
-// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위.
+// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위이고,
+// 의미는 "그 방향으로 진입했을 때의 실행가능 이익"이다.
+//
+// linear 외 세 변종은 (ETF, Future) 상품쌍 전용이다 — 서버가 상품타입을 확인하고 아니면
+// 페어 루프를 띄우지 않는다.
+message PairV2Pricing {
+  oneof kind {
+    // counter 가격 × k 로 선형 환산. k=1 → 단순 가격차(원월−근월, KODEX200−TIGER200),
+    // k≠1 → 이종 가격축(KODEX200 − K200선물×ETF배수). 선형이라 역방향(인버스)은 표현 불가.
+    PairV2LinearPricing linear = 1;
+    // nav = F × tracking_multiple. ETF 마스터의 tracking_asset.multiple 이 필요하다.
+    PairV2IndexTrackingPricing index_tracking = 2;
+    // 레버리지·인버스 ETF 의 선물 기반 NAV. basis 를 쓰는 유일한 변종이다.
+    PairV2LeverageFuturePricing leverage_future = 3;
+    // PDF flatten(단일 선물 + Cash) 기반 선형 환산. flattened 구성 필수.
+    PairV2PdfDecomposePricing pdf_decompose = 4;
+  }
+}
+
+// counter 가격 × k 선형 환산
+message PairV2LinearPricing {
+  // k 는 양수 필수. counter.side != base.side 여야 한다(역방향은 NAV 변종 사용).
+  double k = 1;
+}
+
+// 지수추종 NAV — nav = F × tracking_multiple. 파라미터 없음(basis 미적용).
+message PairV2IndexTrackingPricing {
+}
+
+// 레버리지/인버스 선물 기반 NAV.
+message PairV2LeverageFuturePricing {
+  // NAV 베이시스 — 선물 가격축(포인트). 선물 틱(0.05)을 표현할 수 있도록 실수다.
+  double basis = 1;
+}
+
+// PDF 분해 NAV — flatten 후 단일 선물 구성 전제. 파라미터 없음(basis 미적용).
+message PairV2PdfDecomposePricing {
+}
+
+// ============================================================================
+// Spread (DEPRECATED — PairV2Pricing 으로 대체)
+// ============================================================================
+
+// [DEPRECATED] counter 가격을 base 가격축으로 옮기는 방법. PairV2Pricing 을 쓴다.
 message PairV2SpreadType {
+  option deprecated = true;
+
   oneof kind {
     // counter 가격 × k 로 선형 환산. k=1 → 단순 가격차(원월−근월, KODEX200−TIGER200),
     // k≠1 → 이종 가격축(KODEX200 − K200선물×ETF배수). 선형이라 역방향(인버스)은 표현 불가.
@@ -321,13 +369,15 @@ message PairV2NavSpread {
 }
 
 // ============================================================================
-// NAV
+// NAV (DEPRECATED — PairV2Pricing 으로 대체)
 // ============================================================================
 
 // ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base
 // 목표가 산출에 사용한다. nav_kind 는 실제 EtfPricing/PricingContext 조립에 쓰는 파라미터
 // 없는 태그다 (실 조립은 런w타임에 선물 + ETF 엔티티에서 수행).
 message PairV2Nav {
+  option deprecated = true;
+
   kdo.v1.common.EtfNavKind nav_kind = 1;
   // NAV 베이시스 (선물 가격축 단일값, 원)
   int64 basis = 2;

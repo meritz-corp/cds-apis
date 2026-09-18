@@ -35,10 +35,12 @@ class PairV2 extends $pb.GeneratedMessage {
     $core.int? portfolioId,
     PairV2Entry? base,
     PairV2Entry? counter,
+  @$core.Deprecated('This field is deprecated.')
     PairV2SpreadType? spread,
     $core.double? targetSpread,
     $fixnum.Int64? cooldownMs,
     $core.double? amendThreshold,
+  @$core.Deprecated('This field is deprecated.')
     PairV2Nav? nav,
     $fixnum.Int64? maxBaseQuantity,
     PairV2Status? status,
@@ -50,6 +52,7 @@ class PairV2 extends $pb.GeneratedMessage {
     $core.bool? slippageGuard,
     $core.bool? allowBorrowedSell,
     $core.double? minFillRatePct,
+    PairV2Pricing? pricing,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -73,6 +76,7 @@ class PairV2 extends $pb.GeneratedMessage {
     if (slippageGuard != null) result.slippageGuard = slippageGuard;
     if (allowBorrowedSell != null) result.allowBorrowedSell = allowBorrowedSell;
     if (minFillRatePct != null) result.minFillRatePct = minFillRatePct;
+    if (pricing != null) result.pricing = pricing;
     return result;
   }
 
@@ -103,6 +107,7 @@ class PairV2 extends $pb.GeneratedMessage {
     ..aOB(19, _omitFieldNames ? '' : 'slippageGuard')
     ..aOB(20, _omitFieldNames ? '' : 'allowBorrowedSell')
     ..a<$core.double>(21, _omitFieldNames ? '' : 'minFillRatePct', $pb.PbFieldType.OD)
+    ..aOM<PairV2Pricing>(22, _omitFieldNames ? '' : 'pricing', subBuilder: PairV2Pricing.create)
     ..hasRequiredFields = false
   ;
 
@@ -187,15 +192,21 @@ class PairV2 extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   PairV2Entry ensureCounter() => $_ensure(5);
 
-  /// counter 가격을 base 가격축으로 옮기는 방법.
+  /// [DEPRECATED] pricing 으로 대체됐다. 구 클라이언트 호환을 위해 서버가 계속 채워 보내고,
+  /// pricing 이 비어 있으면 spread + nav 조합을 읽어 pricing 으로 해석한다.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   PairV2SpreadType get spread => $_getN(6);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   set spread(PairV2SpreadType value) => $_setField(7, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   $core.bool hasSpread() => $_has(6);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   void clearSpread() => $_clearField(7);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   PairV2SpreadType ensureSpread() => $_ensure(6);
 
@@ -231,15 +242,20 @@ class PairV2 extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearAmendThreshold() => $_clearField(10);
 
-  /// spread 가 NAV 일 때 필수인 NAV 환산 설정.
+  /// [DEPRECATED] pricing 으로 대체됐다. spread 와 짝으로만 의미를 갖는다.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   PairV2Nav get nav => $_getN(10);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   set nav(PairV2Nav value) => $_setField(11, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   $core.bool hasNav() => $_has(10);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   void clearNav() => $_clearField(11);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(11)
   PairV2Nav ensureNav() => $_ensure(10);
 
@@ -355,6 +371,19 @@ class PairV2 extends $pb.GeneratedMessage {
   $core.bool hasMinFillRatePct() => $_has(20);
   @$pb.TagNumber(21)
   void clearMinFillRatePct() => $_clearField(21);
+
+  /// counter 가격을 base 가격축으로 옮기는 방법 — 구 spread(선형/NAV) + nav(NavKind) 두 축을
+  /// 하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다.
+  @$pb.TagNumber(22)
+  PairV2Pricing get pricing => $_getN(21);
+  @$pb.TagNumber(22)
+  set pricing(PairV2Pricing value) => $_setField(22, value);
+  @$pb.TagNumber(22)
+  $core.bool hasPricing() => $_has(21);
+  @$pb.TagNumber(22)
+  void clearPricing() => $_clearField(22);
+  @$pb.TagNumber(22)
+  PairV2Pricing ensurePricing() => $_ensure(21);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).
@@ -474,13 +503,291 @@ class PairV2Entry extends $pb.GeneratedMessage {
   void clearTpCode() => $_clearField(6);
 }
 
+enum PairV2Pricing_Kind {
+  linear, 
+  indexTracking, 
+  leverageFuture, 
+  pdfDecompose, 
+  notSet
+}
+
+/// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위이고,
+/// 의미는 "그 방향으로 진입했을 때의 실행가능 이익"이다.
+///
+/// linear 외 세 변종은 (ETF, Future) 상품쌍 전용이다 — 서버가 상품타입을 확인하고 아니면
+/// 페어 루프를 띄우지 않는다.
+class PairV2Pricing extends $pb.GeneratedMessage {
+  factory PairV2Pricing({
+    PairV2LinearPricing? linear,
+    PairV2IndexTrackingPricing? indexTracking,
+    PairV2LeverageFuturePricing? leverageFuture,
+    PairV2PdfDecomposePricing? pdfDecompose,
+  }) {
+    final result = create();
+    if (linear != null) result.linear = linear;
+    if (indexTracking != null) result.indexTracking = indexTracking;
+    if (leverageFuture != null) result.leverageFuture = leverageFuture;
+    if (pdfDecompose != null) result.pdfDecompose = pdfDecompose;
+    return result;
+  }
+
+  PairV2Pricing._();
+
+  factory PairV2Pricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2Pricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static const $core.Map<$core.int, PairV2Pricing_Kind> _PairV2Pricing_KindByTag = {
+    1 : PairV2Pricing_Kind.linear,
+    2 : PairV2Pricing_Kind.indexTracking,
+    3 : PairV2Pricing_Kind.leverageFuture,
+    4 : PairV2Pricing_Kind.pdfDecompose,
+    0 : PairV2Pricing_Kind.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2Pricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3, 4])
+    ..aOM<PairV2LinearPricing>(1, _omitFieldNames ? '' : 'linear', subBuilder: PairV2LinearPricing.create)
+    ..aOM<PairV2IndexTrackingPricing>(2, _omitFieldNames ? '' : 'indexTracking', subBuilder: PairV2IndexTrackingPricing.create)
+    ..aOM<PairV2LeverageFuturePricing>(3, _omitFieldNames ? '' : 'leverageFuture', subBuilder: PairV2LeverageFuturePricing.create)
+    ..aOM<PairV2PdfDecomposePricing>(4, _omitFieldNames ? '' : 'pdfDecompose', subBuilder: PairV2PdfDecomposePricing.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2Pricing clone() => PairV2Pricing()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2Pricing copyWith(void Function(PairV2Pricing) updates) => super.copyWith((message) => updates(message as PairV2Pricing)) as PairV2Pricing;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2Pricing create() => PairV2Pricing._();
+  @$core.override
+  PairV2Pricing createEmptyInstance() => create();
+  static $pb.PbList<PairV2Pricing> createRepeated() => $pb.PbList<PairV2Pricing>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2Pricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2Pricing>(create);
+  static PairV2Pricing? _defaultInstance;
+
+  PairV2Pricing_Kind whichKind() => _PairV2Pricing_KindByTag[$_whichOneof(0)]!;
+  void clearKind() => $_clearField($_whichOneof(0));
+
+  /// counter 가격 × k 로 선형 환산. k=1 → 단순 가격차(원월−근월, KODEX200−TIGER200),
+  /// k≠1 → 이종 가격축(KODEX200 − K200선물×ETF배수). 선형이라 역방향(인버스)은 표현 불가.
+  @$pb.TagNumber(1)
+  PairV2LinearPricing get linear => $_getN(0);
+  @$pb.TagNumber(1)
+  set linear(PairV2LinearPricing value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasLinear() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearLinear() => $_clearField(1);
+  @$pb.TagNumber(1)
+  PairV2LinearPricing ensureLinear() => $_ensure(0);
+
+  /// nav = F × tracking_multiple. ETF 마스터의 tracking_asset.multiple 이 필요하다.
+  @$pb.TagNumber(2)
+  PairV2IndexTrackingPricing get indexTracking => $_getN(1);
+  @$pb.TagNumber(2)
+  set indexTracking(PairV2IndexTrackingPricing value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasIndexTracking() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIndexTracking() => $_clearField(2);
+  @$pb.TagNumber(2)
+  PairV2IndexTrackingPricing ensureIndexTracking() => $_ensure(1);
+
+  /// 레버리지·인버스 ETF 의 선물 기반 NAV. basis 를 쓰는 유일한 변종이다.
+  @$pb.TagNumber(3)
+  PairV2LeverageFuturePricing get leverageFuture => $_getN(2);
+  @$pb.TagNumber(3)
+  set leverageFuture(PairV2LeverageFuturePricing value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasLeverageFuture() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLeverageFuture() => $_clearField(3);
+  @$pb.TagNumber(3)
+  PairV2LeverageFuturePricing ensureLeverageFuture() => $_ensure(2);
+
+  /// PDF flatten(단일 선물 + Cash) 기반 선형 환산. flattened 구성 필수.
+  @$pb.TagNumber(4)
+  PairV2PdfDecomposePricing get pdfDecompose => $_getN(3);
+  @$pb.TagNumber(4)
+  set pdfDecompose(PairV2PdfDecomposePricing value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPdfDecompose() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPdfDecompose() => $_clearField(4);
+  @$pb.TagNumber(4)
+  PairV2PdfDecomposePricing ensurePdfDecompose() => $_ensure(3);
+}
+
+/// counter 가격 × k 선형 환산
+class PairV2LinearPricing extends $pb.GeneratedMessage {
+  factory PairV2LinearPricing({
+    $core.double? k,
+  }) {
+    final result = create();
+    if (k != null) result.k = k;
+    return result;
+  }
+
+  PairV2LinearPricing._();
+
+  factory PairV2LinearPricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2LinearPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2LinearPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'k', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2LinearPricing clone() => PairV2LinearPricing()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2LinearPricing copyWith(void Function(PairV2LinearPricing) updates) => super.copyWith((message) => updates(message as PairV2LinearPricing)) as PairV2LinearPricing;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2LinearPricing create() => PairV2LinearPricing._();
+  @$core.override
+  PairV2LinearPricing createEmptyInstance() => create();
+  static $pb.PbList<PairV2LinearPricing> createRepeated() => $pb.PbList<PairV2LinearPricing>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2LinearPricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2LinearPricing>(create);
+  static PairV2LinearPricing? _defaultInstance;
+
+  /// k 는 양수 필수. counter.side != base.side 여야 한다(역방향은 NAV 변종 사용).
+  @$pb.TagNumber(1)
+  $core.double get k => $_getN(0);
+  @$pb.TagNumber(1)
+  set k($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasK() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearK() => $_clearField(1);
+}
+
+/// 지수추종 NAV — nav = F × tracking_multiple. 파라미터 없음(basis 미적용).
+class PairV2IndexTrackingPricing extends $pb.GeneratedMessage {
+  factory PairV2IndexTrackingPricing() => create();
+
+  PairV2IndexTrackingPricing._();
+
+  factory PairV2IndexTrackingPricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2IndexTrackingPricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2IndexTrackingPricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2IndexTrackingPricing clone() => PairV2IndexTrackingPricing()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2IndexTrackingPricing copyWith(void Function(PairV2IndexTrackingPricing) updates) => super.copyWith((message) => updates(message as PairV2IndexTrackingPricing)) as PairV2IndexTrackingPricing;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2IndexTrackingPricing create() => PairV2IndexTrackingPricing._();
+  @$core.override
+  PairV2IndexTrackingPricing createEmptyInstance() => create();
+  static $pb.PbList<PairV2IndexTrackingPricing> createRepeated() => $pb.PbList<PairV2IndexTrackingPricing>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2IndexTrackingPricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2IndexTrackingPricing>(create);
+  static PairV2IndexTrackingPricing? _defaultInstance;
+}
+
+/// 레버리지/인버스 선물 기반 NAV.
+class PairV2LeverageFuturePricing extends $pb.GeneratedMessage {
+  factory PairV2LeverageFuturePricing({
+    $core.double? basis,
+  }) {
+    final result = create();
+    if (basis != null) result.basis = basis;
+    return result;
+  }
+
+  PairV2LeverageFuturePricing._();
+
+  factory PairV2LeverageFuturePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2LeverageFuturePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2LeverageFuturePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'basis', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2LeverageFuturePricing clone() => PairV2LeverageFuturePricing()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2LeverageFuturePricing copyWith(void Function(PairV2LeverageFuturePricing) updates) => super.copyWith((message) => updates(message as PairV2LeverageFuturePricing)) as PairV2LeverageFuturePricing;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2LeverageFuturePricing create() => PairV2LeverageFuturePricing._();
+  @$core.override
+  PairV2LeverageFuturePricing createEmptyInstance() => create();
+  static $pb.PbList<PairV2LeverageFuturePricing> createRepeated() => $pb.PbList<PairV2LeverageFuturePricing>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2LeverageFuturePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2LeverageFuturePricing>(create);
+  static PairV2LeverageFuturePricing? _defaultInstance;
+
+  /// NAV 베이시스 — 선물 가격축(포인트). 선물 틱(0.05)을 표현할 수 있도록 실수다.
+  @$pb.TagNumber(1)
+  $core.double get basis => $_getN(0);
+  @$pb.TagNumber(1)
+  set basis($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasBasis() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBasis() => $_clearField(1);
+}
+
+/// PDF 분해 NAV — flatten 후 단일 선물 구성 전제. 파라미터 없음(basis 미적용).
+class PairV2PdfDecomposePricing extends $pb.GeneratedMessage {
+  factory PairV2PdfDecomposePricing() => create();
+
+  PairV2PdfDecomposePricing._();
+
+  factory PairV2PdfDecomposePricing.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory PairV2PdfDecomposePricing.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PairV2PdfDecomposePricing', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2PdfDecomposePricing clone() => PairV2PdfDecomposePricing()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  PairV2PdfDecomposePricing copyWith(void Function(PairV2PdfDecomposePricing) updates) => super.copyWith((message) => updates(message as PairV2PdfDecomposePricing)) as PairV2PdfDecomposePricing;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static PairV2PdfDecomposePricing create() => PairV2PdfDecomposePricing._();
+  @$core.override
+  PairV2PdfDecomposePricing createEmptyInstance() => create();
+  static $pb.PbList<PairV2PdfDecomposePricing> createRepeated() => $pb.PbList<PairV2PdfDecomposePricing>();
+  @$core.pragma('dart2js:noInline')
+  static PairV2PdfDecomposePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2PdfDecomposePricing>(create);
+  static PairV2PdfDecomposePricing? _defaultInstance;
+}
+
 enum PairV2SpreadType_Kind {
   scaled, 
   nav, 
   notSet
 }
 
-/// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위.
+/// [DEPRECATED] counter 가격을 base 가격축으로 옮기는 방법. PairV2Pricing 을 쓴다.
+@$core.Deprecated('This message is deprecated')
 class PairV2SpreadType extends $pb.GeneratedMessage {
   factory PairV2SpreadType({
     PairV2ScaledSpread? scaled,
@@ -637,6 +944,7 @@ class PairV2NavSpread extends $pb.GeneratedMessage {
 /// ETF↔Future 페어의 NAV 환산 설정 — Pair 레벨 단일 공유. spread 가 NavSpread 일 때 base
 /// 목표가 산출에 사용한다. nav_kind 는 실제 EtfPricing/PricingContext 조립에 쓰는 파라미터
 /// 없는 태그다 (실 조립은 런w타임에 선물 + ETF 엔티티에서 수행).
+@$core.Deprecated('This message is deprecated')
 class PairV2Nav extends $pb.GeneratedMessage {
   factory PairV2Nav({
     $4.EtfNavKind? navKind,
