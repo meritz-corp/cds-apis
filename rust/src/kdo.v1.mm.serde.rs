@@ -9165,14 +9165,10 @@ impl serde::Serialize for SpreadDecomposition {
         }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.SpreadDecomposition", len)?;
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("base_bid", ToString::to_string(&self.base_bid).as_str())?;
+            struct_ser.serialize_field("base_bid", &self.base_bid)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("base_ask", ToString::to_string(&self.base_ask).as_str())?;
+            struct_ser.serialize_field("base_ask", &self.base_ask)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -9325,17 +9321,13 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                             if base_bid__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("baseBid"));
                             }
-                            base_bid__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            base_bid__ = Some(map_.next_value()?);
                         }
                         GeneratedField::BaseAsk => {
                             if base_ask__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("baseAsk"));
                             }
-                            base_ask__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            base_ask__ = Some(map_.next_value()?);
                         }
                         GeneratedField::MomentumShift => {
                             if momentum_shift__.is_some() {

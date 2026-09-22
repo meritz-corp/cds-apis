@@ -998,14 +998,14 @@ pub struct ListMmFillHistoryResponse {
 }
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpreadDecomposition {
-    /// Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)
-    #[prost(int64, tag="1")]
-    pub base_bid: i64,
-    /// Pricing 직후 ask (NAV + ask_adjustment, Price internal representation)
-    #[prost(int64, tag="2")]
-    pub base_ask: i64,
+    /// Pricing 직후 bid. base_bid = mid − tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: "9997.5")
+    #[prost(string, tag="1")]
+    pub base_bid: ::prost::alloc::string::String,
+    /// Pricing 직후 ask. base_ask = mid + tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: "9997.5")
+    #[prost(string, tag="2")]
+    pub base_ask: ::prost::alloc::string::String,
     /// Momentum 가산량 (부호 포함, bid·ask 동일, Price internal representation)
     #[prost(int64, tag="3")]
     pub momentum_shift: i64,

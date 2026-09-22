@@ -2297,13 +2297,11 @@
       "properties": {
         "baseBid": {
           "type": "string",
-          "format": "int64",
-          "title": "Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)"
+          "title": "Pricing 직후 bid. base_bid = mid − tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: \"9997.5\")"
         },
         "baseAsk": {
           "type": "string",
-          "format": "int64",
-          "title": "Pricing 직후 ask (NAV + ask_adjustment, Price internal representation)"
+          "title": "Pricing 직후 ask. base_ask = mid + tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: \"9997.5\")"
         },
         "momentumShift": {
           "type": "string",

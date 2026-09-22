@@ -1071,11 +1071,11 @@ message ListMmFillHistoryResponse {
 
 // 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 message SpreadDecomposition {
-  // Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)
-  int64 base_bid = 1;
+  // Pricing 직후 bid. base_bid = mid − tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: "9997.5")
+  string base_bid = 1;
 
-  // Pricing 직후 ask (NAV + ask_adjustment, Price internal representation)
-  int64 base_ask = 2;
+  // Pricing 직후 ask. base_ask = mid + tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: "9997.5")
+  string base_ask = 2;
 
   // Momentum 가산량 (부호 포함, bid·ask 동일, Price internal representation)
   int64 momentum_shift = 3;

@@ -4897,8 +4897,8 @@ class ListMmFillHistoryResponse extends $pb.GeneratedMessage {
 /// 호가 산출 단계별 contribution. 최종 호가 = base + momentum + exposure_shift + market_bias + ma_cross_shift.
 class SpreadDecomposition extends $pb.GeneratedMessage {
   factory SpreadDecomposition({
-    $fixnum.Int64? baseBid,
-    $fixnum.Int64? baseAsk,
+    $core.String? baseBid,
+    $core.String? baseAsk,
     $fixnum.Int64? momentumShift,
     $fixnum.Int64? exposureShift,
     $fixnum.Int64? marketBiasShift,
@@ -4928,8 +4928,8 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   factory SpreadDecomposition.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpreadDecomposition', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'baseBid')
-    ..aInt64(2, _omitFieldNames ? '' : 'baseAsk')
+    ..aOS(1, _omitFieldNames ? '' : 'baseBid')
+    ..aOS(2, _omitFieldNames ? '' : 'baseAsk')
     ..aInt64(3, _omitFieldNames ? '' : 'momentumShift')
     ..aInt64(4, _omitFieldNames ? '' : 'exposureShift')
     ..aInt64(5, _omitFieldNames ? '' : 'marketBiasShift')
@@ -4958,21 +4958,21 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   static SpreadDecomposition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SpreadDecomposition>(create);
   static SpreadDecomposition? _defaultInstance;
 
-  /// Pricing 직후 bid (NAV + bid_adjustment, Price internal representation)
+  /// Pricing 직후 bid. base_bid = mid − tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: "9997.5")
   @$pb.TagNumber(1)
-  $fixnum.Int64 get baseBid => $_getI64(0);
+  $core.String get baseBid => $_getSZ(0);
   @$pb.TagNumber(1)
-  set baseBid($fixnum.Int64 value) => $_setInt64(0, value);
+  set baseBid($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
   $core.bool hasBaseBid() => $_has(0);
   @$pb.TagNumber(1)
   void clearBaseBid() => $_clearField(1);
 
-  /// Pricing 직후 ask (NAV + ask_adjustment, Price internal representation)
+  /// Pricing 직후 ask. base_ask = mid + tick×base_half_ticks. 원(KRW) 단위 소수 포함 문자열 (예: "9997.5")
   @$pb.TagNumber(2)
-  $fixnum.Int64 get baseAsk => $_getI64(1);
+  $core.String get baseAsk => $_getSZ(1);
   @$pb.TagNumber(2)
-  set baseAsk($fixnum.Int64 value) => $_setInt64(1, value);
+  set baseAsk($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
   $core.bool hasBaseAsk() => $_has(1);
   @$pb.TagNumber(2)

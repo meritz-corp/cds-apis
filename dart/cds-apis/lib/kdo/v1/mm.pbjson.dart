@@ -1140,8 +1140,8 @@ final $typed_data.Uint8List listMmFillHistoryResponseDescriptor = $convert.base6
 const SpreadDecomposition$json = {
   '1': 'SpreadDecomposition',
   '2': [
-    {'1': 'base_bid', '3': 1, '4': 1, '5': 3, '10': 'baseBid'},
-    {'1': 'base_ask', '3': 2, '4': 1, '5': 3, '10': 'baseAsk'},
+    {'1': 'base_bid', '3': 1, '4': 1, '5': 9, '10': 'baseBid'},
+    {'1': 'base_ask', '3': 2, '4': 1, '5': 9, '10': 'baseAsk'},
     {'1': 'momentum_shift', '3': 3, '4': 1, '5': 3, '10': 'momentumShift'},
     {'1': 'exposure_shift', '3': 4, '4': 1, '5': 3, '10': 'exposureShift'},
     {'1': 'market_bias_shift', '3': 5, '4': 1, '5': 3, '10': 'marketBiasShift'},
@@ -1155,8 +1155,8 @@ const SpreadDecomposition$json = {
 
 /// Descriptor for `SpreadDecomposition`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List spreadDecompositionDescriptor = $convert.base64Decode(
-    'ChNTcHJlYWREZWNvbXBvc2l0aW9uEhkKCGJhc2VfYmlkGAEgASgDUgdiYXNlQmlkEhkKCGJhc2'
-    'VfYXNrGAIgASgDUgdiYXNlQXNrEiUKDm1vbWVudHVtX3NoaWZ0GAMgASgDUg1tb21lbnR1bVNo'
+    'ChNTcHJlYWREZWNvbXBvc2l0aW9uEhkKCGJhc2VfYmlkGAEgASgJUgdiYXNlQmlkEhkKCGJhc2'
+    'VfYXNrGAIgASgJUgdiYXNlQXNrEiUKDm1vbWVudHVtX3NoaWZ0GAMgASgDUg1tb21lbnR1bVNo'
     'aWZ0EiUKDmV4cG9zdXJlX3NoaWZ0GAQgASgDUg1leHBvc3VyZVNoaWZ0EioKEW1hcmtldF9iaW'
     'FzX3NoaWZ0GAUgASgDUg9tYXJrZXRCaWFzU2hpZnQSGwoJZmluYWxfYmlkGAYgASgDUghmaW5h'
     'bEJpZBIbCglmaW5hbF9hc2sYByABKANSCGZpbmFsQXNrEiQKDm1hX2Nyb3NzX3NoaWZ0GAggAS'
