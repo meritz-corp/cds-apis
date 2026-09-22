@@ -2234,12 +2234,10 @@ impl serde::Serialize for OrderLogFillStatistics {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLogFillStatistics", len)?;
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("total_fills", ToString::to_string(&self.total_fills).as_str())?;
+            len += 1;
         }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.order_log.OrderLogFillStatistics", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
@@ -2253,12 +2251,22 @@ impl serde::Serialize for OrderLogFillStatistics {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("buy_count", ToString::to_string(&self.buy_count).as_str())?;
+            struct_ser.serialize_field("buy_quantity", ToString::to_string(&self.buy_quantity).as_str())?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("sell_count", ToString::to_string(&self.sell_count).as_str())?;
+            struct_ser.serialize_field("buy_amount", ToString::to_string(&self.buy_amount).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sell_quantity", ToString::to_string(&self.sell_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("sell_amount", ToString::to_string(&self.sell_amount).as_str())?;
         }
         struct_ser.end()
     }
@@ -2270,25 +2278,28 @@ impl<'de> serde::Deserialize<'de> for OrderLogFillStatistics {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "total_fills",
-            "totalFills",
             "total_quantity",
             "totalQuantity",
             "total_amount",
             "totalAmount",
-            "buy_count",
-            "buyCount",
-            "sell_count",
-            "sellCount",
+            "buy_quantity",
+            "buyQuantity",
+            "buy_amount",
+            "buyAmount",
+            "sell_quantity",
+            "sellQuantity",
+            "sell_amount",
+            "sellAmount",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            TotalFills,
             TotalQuantity,
             TotalAmount,
-            BuyCount,
-            SellCount,
+            BuyQuantity,
+            BuyAmount,
+            SellQuantity,
+            SellAmount,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2311,11 +2322,12 @@ impl<'de> serde::Deserialize<'de> for OrderLogFillStatistics {
                         E: serde::de::Error,
                     {
                         match value {
-                            "totalFills" | "total_fills" => Ok(GeneratedField::TotalFills),
                             "totalQuantity" | "total_quantity" => Ok(GeneratedField::TotalQuantity),
                             "totalAmount" | "total_amount" => Ok(GeneratedField::TotalAmount),
-                            "buyCount" | "buy_count" => Ok(GeneratedField::BuyCount),
-                            "sellCount" | "sell_count" => Ok(GeneratedField::SellCount),
+                            "buyQuantity" | "buy_quantity" => Ok(GeneratedField::BuyQuantity),
+                            "buyAmount" | "buy_amount" => Ok(GeneratedField::BuyAmount),
+                            "sellQuantity" | "sell_quantity" => Ok(GeneratedField::SellQuantity),
+                            "sellAmount" | "sell_amount" => Ok(GeneratedField::SellAmount),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2335,21 +2347,14 @@ impl<'de> serde::Deserialize<'de> for OrderLogFillStatistics {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut total_fills__ = None;
                 let mut total_quantity__ = None;
                 let mut total_amount__ = None;
-                let mut buy_count__ = None;
-                let mut sell_count__ = None;
+                let mut buy_quantity__ = None;
+                let mut buy_amount__ = None;
+                let mut sell_quantity__ = None;
+                let mut sell_amount__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::TotalFills => {
-                            if total_fills__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("totalFills"));
-                            }
-                            total_fills__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::TotalQuantity => {
                             if total_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("totalQuantity"));
@@ -2366,19 +2371,35 @@ impl<'de> serde::Deserialize<'de> for OrderLogFillStatistics {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::BuyCount => {
-                            if buy_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("buyCount"));
+                        GeneratedField::BuyQuantity => {
+                            if buy_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyQuantity"));
                             }
-                            buy_count__ = 
+                            buy_quantity__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::SellCount => {
-                            if sell_count__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sellCount"));
+                        GeneratedField::BuyAmount => {
+                            if buy_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("buyAmount"));
                             }
-                            sell_count__ = 
+                            buy_amount__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellQuantity => {
+                            if sell_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellQuantity"));
+                            }
+                            sell_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SellAmount => {
+                            if sell_amount__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sellAmount"));
+                            }
+                            sell_amount__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -2388,11 +2409,12 @@ impl<'de> serde::Deserialize<'de> for OrderLogFillStatistics {
                     }
                 }
                 Ok(OrderLogFillStatistics {
-                    total_fills: total_fills__.unwrap_or_default(),
                     total_quantity: total_quantity__.unwrap_or_default(),
                     total_amount: total_amount__.unwrap_or_default(),
-                    buy_count: buy_count__.unwrap_or_default(),
-                    sell_count: sell_count__.unwrap_or_default(),
+                    buy_quantity: buy_quantity__.unwrap_or_default(),
+                    buy_amount: buy_amount__.unwrap_or_default(),
+                    sell_quantity: sell_quantity__.unwrap_or_default(),
+                    sell_amount: sell_amount__.unwrap_or_default(),
                 })
             }
         }

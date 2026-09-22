@@ -139,20 +139,29 @@ final $typed_data.Uint8List orderLogDescriptor = $convert.base64Decode(
 const OrderLogFillStatistics$json = {
   '1': 'OrderLogFillStatistics',
   '2': [
-    {'1': 'total_fills', '3': 1, '4': 1, '5': 3, '10': 'totalFills'},
     {'1': 'total_quantity', '3': 2, '4': 1, '5': 3, '10': 'totalQuantity'},
     {'1': 'total_amount', '3': 3, '4': 1, '5': 3, '10': 'totalAmount'},
-    {'1': 'buy_count', '3': 4, '4': 1, '5': 3, '10': 'buyCount'},
-    {'1': 'sell_count', '3': 5, '4': 1, '5': 3, '10': 'sellCount'},
+    {'1': 'buy_quantity', '3': 6, '4': 1, '5': 3, '10': 'buyQuantity'},
+    {'1': 'buy_amount', '3': 7, '4': 1, '5': 3, '10': 'buyAmount'},
+    {'1': 'sell_quantity', '3': 8, '4': 1, '5': 3, '10': 'sellQuantity'},
+    {'1': 'sell_amount', '3': 9, '4': 1, '5': 3, '10': 'sellAmount'},
   ],
+  '9': [
+    {'1': 1, '2': 2},
+    {'1': 4, '2': 5},
+    {'1': 5, '2': 6},
+  ],
+  '10': ['total_fills', 'buy_count', 'sell_count'],
 };
 
 /// Descriptor for `OrderLogFillStatistics`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List orderLogFillStatisticsDescriptor = $convert.base64Decode(
-    'ChZPcmRlckxvZ0ZpbGxTdGF0aXN0aWNzEh8KC3RvdGFsX2ZpbGxzGAEgASgDUgp0b3RhbEZpbG'
-    'xzEiUKDnRvdGFsX3F1YW50aXR5GAIgASgDUg10b3RhbFF1YW50aXR5EiEKDHRvdGFsX2Ftb3Vu'
-    'dBgDIAEoA1ILdG90YWxBbW91bnQSGwoJYnV5X2NvdW50GAQgASgDUghidXlDb3VudBIdCgpzZW'
-    'xsX2NvdW50GAUgASgDUglzZWxsQ291bnQ=');
+    'ChZPcmRlckxvZ0ZpbGxTdGF0aXN0aWNzEiUKDnRvdGFsX3F1YW50aXR5GAIgASgDUg10b3RhbF'
+    'F1YW50aXR5EiEKDHRvdGFsX2Ftb3VudBgDIAEoA1ILdG90YWxBbW91bnQSIQoMYnV5X3F1YW50'
+    'aXR5GAYgASgDUgtidXlRdWFudGl0eRIdCgpidXlfYW1vdW50GAcgASgDUglidXlBbW91bnQSIw'
+    'oNc2VsbF9xdWFudGl0eRgIIAEoA1IMc2VsbFF1YW50aXR5Eh8KC3NlbGxfYW1vdW50GAkgASgD'
+    'UgpzZWxsQW1vdW50SgQIARACSgQIBBAFSgQIBRAGUgt0b3RhbF9maWxsc1IJYnV5X2NvdW50Ug'
+    'pzZWxsX2NvdW50');
 
 @$core.Deprecated('Use listOrderLogsRequestDescriptor instead')
 const ListOrderLogsRequest$json = {

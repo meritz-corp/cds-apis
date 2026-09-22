@@ -90,21 +90,24 @@ pub struct OrderLog {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OrderLogFillStatistics {
-    /// 총 체결 건수
-    #[prost(int64, tag="1")]
-    pub total_fills: i64,
     /// 총 체결 수량
     #[prost(int64, tag="2")]
     pub total_quantity: i64,
     /// 총 체결 금액
     #[prost(int64, tag="3")]
     pub total_amount: i64,
-    /// 매수 체결 건수
-    #[prost(int64, tag="4")]
-    pub buy_count: i64,
-    /// 매도 체결 건수
-    #[prost(int64, tag="5")]
-    pub sell_count: i64,
+    /// 매수 체결 수량
+    #[prost(int64, tag="6")]
+    pub buy_quantity: i64,
+    /// 매수 체결 금액
+    #[prost(int64, tag="7")]
+    pub buy_amount: i64,
+    /// 매도 체결 수량
+    #[prost(int64, tag="8")]
+    pub sell_quantity: i64,
+    /// 매도 체결 금액
+    #[prost(int64, tag="9")]
+    pub sell_amount: i64,
 }
 // ========== Request/Response Messages ==========
 

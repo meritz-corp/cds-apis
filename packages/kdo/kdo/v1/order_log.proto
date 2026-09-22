@@ -236,8 +236,8 @@ enum LastAskBidTpCode {
 
 
 message OrderLogFillStatistics {
-  // 총 체결 건수
-  int64 total_fills = 1;
+  reserved 1, 4, 5;
+  reserved "total_fills", "buy_count", "sell_count";
 
   // 총 체결 수량
   int64 total_quantity = 2;
@@ -245,11 +245,17 @@ message OrderLogFillStatistics {
   // 총 체결 금액
   int64 total_amount = 3;
 
-  // 매수 체결 건수
-  int64 buy_count = 4;
+  // 매수 체결 수량
+  int64 buy_quantity = 6;
 
-  // 매도 체결 건수
-  int64 sell_count = 5;
+  // 매수 체결 금액
+  int64 buy_amount = 7;
+
+  // 매도 체결 수량
+  int64 sell_quantity = 8;
+
+  // 매도 체결 금액
+  int64 sell_amount = 9;
 }
 
 // ========== Request/Response Messages ==========

@@ -881,11 +881,6 @@
     "order_logOrderLogFillStatistics": {
       "type": "object",
       "properties": {
-        "totalFills": {
-          "type": "string",
-          "format": "int64",
-          "title": "총 체결 건수"
-        },
         "totalQuantity": {
           "type": "string",
           "format": "int64",
@@ -896,15 +891,25 @@
           "format": "int64",
           "title": "총 체결 금액"
         },
-        "buyCount": {
+        "buyQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "매수 체결 건수"
+          "title": "매수 체결 수량"
         },
-        "sellCount": {
+        "buyAmount": {
           "type": "string",
           "format": "int64",
-          "title": "매도 체결 건수"
+          "title": "매수 체결 금액"
+        },
+        "sellQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 체결 수량"
+        },
+        "sellAmount": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 체결 금액"
         }
       }
     },
