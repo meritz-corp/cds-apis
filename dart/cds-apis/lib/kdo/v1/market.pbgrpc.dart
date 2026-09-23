@@ -99,6 +99,11 @@ class MarketServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getMarketSession, request, options: options);
   }
 
+  /// 현재 minimal 시세 피드가 구독(파싱 필터)중인 심볼 조회 — 운영 진단용
+  $grpc.ResponseFuture<$0.GetMinimalFeedSymbolsResponse> getMinimalFeedSymbols($1.Empty request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getMinimalFeedSymbols, request, options: options);
+  }
+
     // method descriptors
 
   static final _$streamEtfOrderbook = $grpc.ClientMethod<$0.StreamEtfOrderbookRequest, $0.EtfOrderbookData>(
@@ -153,6 +158,10 @@ class MarketServiceClient extends $grpc.Client {
       '/kdo.v1.market.MarketService/GetMarketSession',
       ($1.Empty value) => value.writeToBuffer(),
       $0.GetMarketSessionResponse.fromBuffer);
+  static final _$getMinimalFeedSymbols = $grpc.ClientMethod<$1.Empty, $0.GetMinimalFeedSymbolsResponse>(
+      '/kdo.v1.market.MarketService/GetMinimalFeedSymbols',
+      ($1.Empty value) => value.writeToBuffer(),
+      $0.GetMinimalFeedSymbolsResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.market.MarketService')
@@ -251,6 +260,13 @@ abstract class MarketServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
         ($0.GetMarketSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.Empty, $0.GetMinimalFeedSymbolsResponse>(
+        'GetMinimalFeedSymbols',
+        getMinimalFeedSymbols_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.Empty.fromBuffer(value),
+        ($0.GetMinimalFeedSymbolsResponse value) => value.writeToBuffer()));
   }
 
   $async.Stream<$0.EtfOrderbookData> streamEtfOrderbook_Pre($grpc.ServiceCall $call, $async.Future<$0.StreamEtfOrderbookRequest> $request) async* {
@@ -330,5 +346,11 @@ abstract class MarketServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetMarketSessionResponse> getMarketSession($grpc.ServiceCall call, $1.Empty request);
+
+  $async.Future<$0.GetMinimalFeedSymbolsResponse> getMinimalFeedSymbols_Pre($grpc.ServiceCall $call, $async.Future<$1.Empty> $request) async {
+    return getMinimalFeedSymbols($call, await $request);
+  }
+
+  $async.Future<$0.GetMinimalFeedSymbolsResponse> getMinimalFeedSymbols($grpc.ServiceCall call, $1.Empty request);
 
 }

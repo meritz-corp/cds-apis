@@ -16,6 +16,29 @@
     "application/json"
   ],
   "paths": {
+    "/v1/market/minimal-feed-symbols": {
+      "get": {
+        "summary": "현재 minimal 시세 피드가 구독(파싱 필터)중인 심볼 조회 — 운영 진단용",
+        "operationId": "MarketService_GetMinimalFeedSymbols",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/marketGetMinimalFeedSymbolsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MarketService"
+        ]
+      }
+    },
     "/v1/market/raw-messages/sockets": {
       "post": {
         "summary": "새로운 Raw 메시지 스트리밍 UDP 소켓 추가",
@@ -820,6 +843,36 @@
           "title": "세션 한글 이름 (예: \"이상무\", \"시가단일가\")"
         }
       }
+    },
+    "marketGetMinimalFeedSymbolsResponse": {
+      "type": "object",
+      "properties": {
+        "symbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "피드가 실제 파싱 필터로 사용 중인 심볼 (feed start 시점 스냅샷).\n이 목록에 없는 심볼은 minimal broadcast 로 나가지 않는다."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "symbols 개수"
+        },
+        "registeredSymbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "MarketService 가 등록한 심볼 목록. 피드는 start 시점에만 필터를 확정하므로\n기동 후 갱신분은 symbols 에 반영되지 않을 수 있다 (두 목록이 다르면 재기동 필요)."
+        },
+        "registeredCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "registered_symbols 개수"
+        }
+      },
+      "title": "현재 minimal 시세 피드 구독 심볼 (운영 진단용)"
     },
     "marketRawMarketMessage": {
       "type": "object",

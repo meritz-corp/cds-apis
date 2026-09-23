@@ -244,4 +244,22 @@ extension type MarketServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 현재 minimal 시세 피드가 구독(파싱 필터)중인 심볼 조회 — 운영 진단용
+  Future<kdov1market.GetMinimalFeedSymbolsResponse> getMinimalFeedSymbols(
+    googleprotobufempty.Empty input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.MarketService.getMinimalFeedSymbols,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

@@ -457,6 +457,36 @@ pub mod market_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn get_minimal_feed_symbols(
+            &mut self,
+            request: impl tonic::IntoRequest<()>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetMinimalFeedSymbolsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.market.MarketService/GetMinimalFeedSymbols",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.market.MarketService",
+                        "GetMinimalFeedSymbols",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -603,6 +633,13 @@ pub mod market_service_server {
             request: tonic::Request<()>,
         ) -> std::result::Result<
             tonic::Response<super::GetMarketSessionResponse>,
+            tonic::Status,
+        >;
+        async fn get_minimal_feed_symbols(
+            &self,
+            request: tonic::Request<()>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetMinimalFeedSymbolsResponse>,
             tonic::Status,
         >;
     }
@@ -1301,6 +1338,50 @@ pub mod market_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = GetMarketSessionSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.market.MarketService/GetMinimalFeedSymbols" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetMinimalFeedSymbolsSvc<T: MarketService>(pub Arc<T>);
+                    impl<T: MarketService> tonic::server::UnaryService<()>
+                    for GetMinimalFeedSymbolsSvc<T> {
+                        type Response = super::GetMinimalFeedSymbolsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(&mut self, request: tonic::Request<()>) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as MarketService>::get_minimal_feed_symbols(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = GetMinimalFeedSymbolsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

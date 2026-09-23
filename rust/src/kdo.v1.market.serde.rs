@@ -1231,6 +1231,158 @@ impl<'de> serde::Deserialize<'de> for GetMarketSessionResponse {
         deserializer.deserialize_struct("kdo.v1.market.GetMarketSessionResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for GetMinimalFeedSymbolsResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.market.GetMinimalFeedSymbolsResponse", len)?;
+        if true {
+            struct_ser.serialize_field("symbols", &self.symbols)?;
+        }
+        if true {
+            struct_ser.serialize_field("count", &self.count)?;
+        }
+        if true {
+            struct_ser.serialize_field("registered_symbols", &self.registered_symbols)?;
+        }
+        if true {
+            struct_ser.serialize_field("registered_count", &self.registered_count)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetMinimalFeedSymbolsResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "symbols",
+            "count",
+            "registered_symbols",
+            "registeredSymbols",
+            "registered_count",
+            "registeredCount",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Symbols,
+            Count,
+            RegisteredSymbols,
+            RegisteredCount,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "symbols" => Ok(GeneratedField::Symbols),
+                            "count" => Ok(GeneratedField::Count),
+                            "registeredSymbols" | "registered_symbols" => Ok(GeneratedField::RegisteredSymbols),
+                            "registeredCount" | "registered_count" => Ok(GeneratedField::RegisteredCount),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetMinimalFeedSymbolsResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.market.GetMinimalFeedSymbolsResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetMinimalFeedSymbolsResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut symbols__ = None;
+                let mut count__ = None;
+                let mut registered_symbols__ = None;
+                let mut registered_count__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Symbols => {
+                            if symbols__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("symbols"));
+                            }
+                            symbols__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Count => {
+                            if count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("count"));
+                            }
+                            count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RegisteredSymbols => {
+                            if registered_symbols__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("registeredSymbols"));
+                            }
+                            registered_symbols__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::RegisteredCount => {
+                            if registered_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("registeredCount"));
+                            }
+                            registered_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetMinimalFeedSymbolsResponse {
+                    symbols: symbols__.unwrap_or_default(),
+                    count: count__.unwrap_or_default(),
+                    registered_symbols: registered_symbols__.unwrap_or_default(),
+                    registered_count: registered_count__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.market.GetMinimalFeedSymbolsResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for GetUserEtfOrderBookRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>

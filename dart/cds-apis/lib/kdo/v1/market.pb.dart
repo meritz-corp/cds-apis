@@ -1224,6 +1224,83 @@ class GetMarketSessionResponse extends $pb.GeneratedMessage {
   void clearSessionName() => $_clearField(3);
 }
 
+/// 현재 minimal 시세 피드 구독 심볼 (운영 진단용)
+class GetMinimalFeedSymbolsResponse extends $pb.GeneratedMessage {
+  factory GetMinimalFeedSymbolsResponse({
+    $core.Iterable<$core.String>? symbols,
+    $core.int? count,
+    $core.Iterable<$core.String>? registeredSymbols,
+    $core.int? registeredCount,
+  }) {
+    final result = create();
+    if (symbols != null) result.symbols.addAll(symbols);
+    if (count != null) result.count = count;
+    if (registeredSymbols != null) result.registeredSymbols.addAll(registeredSymbols);
+    if (registeredCount != null) result.registeredCount = registeredCount;
+    return result;
+  }
+
+  GetMinimalFeedSymbolsResponse._();
+
+  factory GetMinimalFeedSymbolsResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetMinimalFeedSymbolsResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetMinimalFeedSymbolsResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.market'), createEmptyInstance: create)
+    ..pPS(1, _omitFieldNames ? '' : 'symbols')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'count', $pb.PbFieldType.O3)
+    ..pPS(3, _omitFieldNames ? '' : 'registeredSymbols')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'registeredCount', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetMinimalFeedSymbolsResponse clone() => GetMinimalFeedSymbolsResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetMinimalFeedSymbolsResponse copyWith(void Function(GetMinimalFeedSymbolsResponse) updates) => super.copyWith((message) => updates(message as GetMinimalFeedSymbolsResponse)) as GetMinimalFeedSymbolsResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetMinimalFeedSymbolsResponse create() => GetMinimalFeedSymbolsResponse._();
+  @$core.override
+  GetMinimalFeedSymbolsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetMinimalFeedSymbolsResponse> createRepeated() => $pb.PbList<GetMinimalFeedSymbolsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetMinimalFeedSymbolsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetMinimalFeedSymbolsResponse>(create);
+  static GetMinimalFeedSymbolsResponse? _defaultInstance;
+
+  /// 피드가 실제 파싱 필터로 사용 중인 심볼 (feed start 시점 스냅샷).
+  /// 이 목록에 없는 심볼은 minimal broadcast 로 나가지 않는다.
+  @$pb.TagNumber(1)
+  $pb.PbList<$core.String> get symbols => $_getList(0);
+
+  /// symbols 개수
+  @$pb.TagNumber(2)
+  $core.int get count => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set count($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasCount() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCount() => $_clearField(2);
+
+  /// MarketService 가 등록한 심볼 목록. 피드는 start 시점에만 필터를 확정하므로
+  /// 기동 후 갱신분은 symbols 에 반영되지 않을 수 있다 (두 목록이 다르면 재기동 필요).
+  @$pb.TagNumber(3)
+  $pb.PbList<$core.String> get registeredSymbols => $_getList(2);
+
+  /// registered_symbols 개수
+  @$pb.TagNumber(4)
+  $core.int get registeredCount => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set registeredCount($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasRegisteredCount() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRegisteredCount() => $_clearField(4);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

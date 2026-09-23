@@ -116,4 +116,12 @@ abstract final class MarketService {
     googleprotobufempty.Empty.new,
     kdov1market.GetMarketSessionResponse.new,
   );
+
+  /// 현재 minimal 시세 피드가 구독(파싱 필터)중인 심볼 조회 — 운영 진단용
+  static const getMinimalFeedSymbols = connect.Spec(
+    '/$name/GetMinimalFeedSymbols',
+    connect.StreamType.unary,
+    googleprotobufempty.Empty.new,
+    kdov1market.GetMinimalFeedSymbolsResponse.new,
+  );
 }

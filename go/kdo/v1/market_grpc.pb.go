@@ -49,6 +49,8 @@ type MarketServiceClient interface {
 	StreamRawMessages(ctx context.Context, in *StreamRawMessagesRequest, opts ...grpc.CallOption) (MarketService_StreamRawMessagesClient, error)
 	// 마켓 세션 정보 조회
 	GetMarketSession(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetMarketSessionResponse, error)
+	// 현재 minimal 시세 피드가 구독(파싱 필터)중인 심볼 조회 — 운영 진단용
+	GetMinimalFeedSymbols(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetMinimalFeedSymbolsResponse, error)
 }
 
 type marketServiceClient struct {
@@ -360,6 +362,15 @@ func (c *marketServiceClient) GetMarketSession(ctx context.Context, in *emptypb.
 	return out, nil
 }
 
+func (c *marketServiceClient) GetMinimalFeedSymbols(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetMinimalFeedSymbolsResponse, error) {
+	out := new(GetMinimalFeedSymbolsResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.market.MarketService/GetMinimalFeedSymbols", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MarketServiceServer is the server API for MarketService service.
 // All implementations must embed UnimplementedMarketServiceServer
 // for forward compatibility
@@ -390,6 +401,8 @@ type MarketServiceServer interface {
 	StreamRawMessages(*StreamRawMessagesRequest, MarketService_StreamRawMessagesServer) error
 	// 마켓 세션 정보 조회
 	GetMarketSession(context.Context, *emptypb.Empty) (*GetMarketSessionResponse, error)
+	// 현재 minimal 시세 피드가 구독(파싱 필터)중인 심볼 조회 — 운영 진단용
+	GetMinimalFeedSymbols(context.Context, *emptypb.Empty) (*GetMinimalFeedSymbolsResponse, error)
 	mustEmbedUnimplementedMarketServiceServer()
 }
 
@@ -435,6 +448,9 @@ func (UnimplementedMarketServiceServer) StreamRawMessages(*StreamRawMessagesRequ
 }
 func (UnimplementedMarketServiceServer) GetMarketSession(context.Context, *emptypb.Empty) (*GetMarketSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketSession not implemented")
+}
+func (UnimplementedMarketServiceServer) GetMinimalFeedSymbols(context.Context, *emptypb.Empty) (*GetMinimalFeedSymbolsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMinimalFeedSymbols not implemented")
 }
 func (UnimplementedMarketServiceServer) mustEmbedUnimplementedMarketServiceServer() {}
 
@@ -707,6 +723,24 @@ func _MarketService_GetMarketSession_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MarketService_GetMinimalFeedSymbols_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarketServiceServer).GetMinimalFeedSymbols(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.market.MarketService/GetMinimalFeedSymbols",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarketServiceServer).GetMinimalFeedSymbols(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MarketService_ServiceDesc is the grpc.ServiceDesc for MarketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -733,6 +767,10 @@ var MarketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMarketSession",
 			Handler:    _MarketService_GetMarketSession_Handler,
+		},
+		{
+			MethodName: "GetMinimalFeedSymbols",
+			Handler:    _MarketService_GetMinimalFeedSymbols_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

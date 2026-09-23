@@ -245,6 +245,25 @@ pub struct GetMarketSessionResponse {
     #[prost(string, tag="3")]
     pub session_name: ::prost::alloc::string::String,
 }
+/// 현재 minimal 시세 피드 구독 심볼 (운영 진단용)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetMinimalFeedSymbolsResponse {
+    /// 피드가 실제 파싱 필터로 사용 중인 심볼 (feed start 시점 스냅샷).
+    /// 이 목록에 없는 심볼은 minimal broadcast 로 나가지 않는다.
+    #[prost(string, repeated, tag="1")]
+    pub symbols: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// symbols 개수
+    #[prost(int32, tag="2")]
+    pub count: i32,
+    /// MarketService 가 등록한 심볼 목록. 피드는 start 시점에만 필터를 확정하므로
+    /// 기동 후 갱신분은 symbols 에 반영되지 않을 수 있다 (두 목록이 다르면 재기동 필요).
+    #[prost(string, repeated, tag="3")]
+    pub registered_symbols: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// registered_symbols 개수
+    #[prost(int32, tag="4")]
+    pub registered_count: i32,
+}
 include!("kdo.v1.market.tonic.rs");
 include!("kdo.v1.market.serde.rs");
 // @@protoc_insertion_point(module)

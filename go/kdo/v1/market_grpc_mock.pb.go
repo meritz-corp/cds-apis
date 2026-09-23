@@ -2012,6 +2012,26 @@ func (mr *MockMarketServiceClientMockRecorder) GetMarketSession(ctx, in interfac
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketSession", reflect.TypeOf((*MockMarketServiceClient)(nil).GetMarketSession), varargs...)
 }
 
+// GetMinimalFeedSymbols mocks base method.
+func (m *MockMarketServiceClient) GetMinimalFeedSymbols(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetMinimalFeedSymbolsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetMinimalFeedSymbols", varargs...)
+	ret0, _ := ret[0].(*GetMinimalFeedSymbolsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMinimalFeedSymbols indicates an expected call of GetMinimalFeedSymbols.
+func (mr *MockMarketServiceClientMockRecorder) GetMinimalFeedSymbols(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMinimalFeedSymbols", reflect.TypeOf((*MockMarketServiceClient)(nil).GetMinimalFeedSymbols), varargs...)
+}
+
 // GetUserEtfOrderbook mocks base method.
 func (m *MockMarketServiceClient) GetUserEtfOrderbook(ctx context.Context, in *GetUserEtfOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error) {
 	m.ctrl.T.Helper()
@@ -2283,6 +2303,21 @@ func (m *MockMarketServiceServer) GetMarketSession(ctx context.Context, in *empt
 func (mr *MockMarketServiceServerMockRecorder) GetMarketSession(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarketSession", reflect.TypeOf((*MockMarketServiceServer)(nil).GetMarketSession), ctx, in)
+}
+
+// GetMinimalFeedSymbols mocks base method.
+func (m *MockMarketServiceServer) GetMinimalFeedSymbols(ctx context.Context, in *emptypb.Empty) (*GetMinimalFeedSymbolsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetMinimalFeedSymbols", ctx, in)
+	ret0, _ := ret[0].(*GetMinimalFeedSymbolsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetMinimalFeedSymbols indicates an expected call of GetMinimalFeedSymbols.
+func (mr *MockMarketServiceServerMockRecorder) GetMinimalFeedSymbols(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMinimalFeedSymbols", reflect.TypeOf((*MockMarketServiceServer)(nil).GetMinimalFeedSymbols), ctx, in)
 }
 
 // GetUserEtfOrderbook mocks base method.

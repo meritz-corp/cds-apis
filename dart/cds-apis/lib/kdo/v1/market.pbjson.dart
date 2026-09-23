@@ -291,3 +291,21 @@ final $typed_data.Uint8List getMarketSessionResponseDescriptor = $convert.base64
     '1tb24uU2Vzc2lvbklkUgdzZXNzaW9uEh0KCnNlc3Npb25faWQYAiABKAlSCXNlc3Npb25JZBIh'
     'CgxzZXNzaW9uX25hbWUYAyABKAlSC3Nlc3Npb25OYW1l');
 
+@$core.Deprecated('Use getMinimalFeedSymbolsResponseDescriptor instead')
+const GetMinimalFeedSymbolsResponse$json = {
+  '1': 'GetMinimalFeedSymbolsResponse',
+  '2': [
+    {'1': 'symbols', '3': 1, '4': 3, '5': 9, '10': 'symbols'},
+    {'1': 'count', '3': 2, '4': 1, '5': 5, '10': 'count'},
+    {'1': 'registered_symbols', '3': 3, '4': 3, '5': 9, '10': 'registeredSymbols'},
+    {'1': 'registered_count', '3': 4, '4': 1, '5': 5, '10': 'registeredCount'},
+  ],
+};
+
+/// Descriptor for `GetMinimalFeedSymbolsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMinimalFeedSymbolsResponseDescriptor = $convert.base64Decode(
+    'Ch1HZXRNaW5pbWFsRmVlZFN5bWJvbHNSZXNwb25zZRIYCgdzeW1ib2xzGAEgAygJUgdzeW1ib2'
+    'xzEhQKBWNvdW50GAIgASgFUgVjb3VudBItChJyZWdpc3RlcmVkX3N5bWJvbHMYAyADKAlSEXJl'
+    'Z2lzdGVyZWRTeW1ib2xzEikKEHJlZ2lzdGVyZWRfY291bnQYBCABKAVSD3JlZ2lzdGVyZWRDb3'
+    'VudA==');
+
