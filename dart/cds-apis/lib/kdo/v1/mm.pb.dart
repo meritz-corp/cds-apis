@@ -161,6 +161,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $core.bool? isLp,
     $core.bool? useQtyWeightedMid,
     $fixnum.Int64? f2mSampleIntervalMs,
+    $core.int? qtyWeightedMidLevels,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -184,6 +185,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (isLp != null) result.isLp = isLp;
     if (useQtyWeightedMid != null) result.useQtyWeightedMid = useQtyWeightedMid;
     if (f2mSampleIntervalMs != null) result.f2mSampleIntervalMs = f2mSampleIntervalMs;
+    if (qtyWeightedMidLevels != null) result.qtyWeightedMidLevels = qtyWeightedMidLevels;
     return result;
   }
 
@@ -214,6 +216,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOB(25, _omitFieldNames ? '' : 'isLp')
     ..aOB(26, _omitFieldNames ? '' : 'useQtyWeightedMid')
     ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'f2mSampleIntervalMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.int>(28, _omitFieldNames ? '' : 'qtyWeightedMidLevels', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -476,6 +479,20 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasF2mSampleIntervalMs() => $_has(20);
   @$pb.TagNumber(27)
   void clearF2mSampleIntervalMs() => $_clearField(27);
+
+  /// NAV 입력 microprice 계산에 사용할 호가 단계 수 (1~10, 기본 3).
+  /// use_qty_weighted_mid=true 일 때만 유효하다. 각 사이드 상위 N 호가의 잔량가중 평균가를
+  /// 낸 뒤 반대편 잔량으로 교차가중해 단일 microprice 를 만든다. 주식·ETF 호가는 10단,
+  /// 선물은 5단까지 공표되므로 실제로는 공표 단수까지만 반영된다.
+  /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (use_qty_weighted_mid 와 동일 패턴).
+  @$pb.TagNumber(28)
+  $core.int get qtyWeightedMidLevels => $_getIZ(21);
+  @$pb.TagNumber(28)
+  set qtyWeightedMidLevels($core.int value) => $_setUnsignedInt32(21, value);
+  @$pb.TagNumber(28)
+  $core.bool hasQtyWeightedMidLevels() => $_has(21);
+  @$pb.TagNumber(28)
+  void clearQtyWeightedMidLevels() => $_clearField(28);
 }
 
 enum MarketMakingPricing_Pricing {

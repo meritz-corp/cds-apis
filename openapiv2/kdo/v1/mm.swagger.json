@@ -1606,6 +1606,11 @@
           "type": "string",
           "format": "uint64",
           "description": "F2M(Fit to Market) 괴리 샘플링 최소 간격(밀리초). 자기 심볼 tick 이 이보다 촘촘히\n들어오면 샘플을 스킵해 시간창 MA 가 tick 버스트에 덜 휘둘리게 한다. 기본 100ms.\noptional: 미설정 시 기존값 유지. 0 은 무효값 — 서버가 거부."
+        },
+        "qtyWeightedMidLevels": {
+          "type": "integer",
+          "format": "int64",
+          "description": "NAV 입력 microprice 계산에 사용할 호가 단계 수 (1~10, 기본 3).\nuse_qty_weighted_mid=true 일 때만 유효하다. 각 사이드 상위 N 호가의 잔량가중 평균가를\n낸 뒤 반대편 잔량으로 교차가중해 단일 microprice 를 만든다. 주식·ETF 호가는 10단,\n선물은 5단까지 공표되므로 실제로는 공표 단수까지만 반영된다.\noptional: presence 로 \"설정 vs 미변경(기존값 유지)\" 를 구분한다 (use_qty_weighted_mid 와 동일 패턴)."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

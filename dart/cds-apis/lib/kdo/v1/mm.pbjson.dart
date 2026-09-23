@@ -106,6 +106,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'is_lp', '3': 25, '4': 1, '5': 8, '9': 4, '10': 'isLp', '17': true},
     {'1': 'use_qty_weighted_mid', '3': 26, '4': 1, '5': 8, '9': 5, '10': 'useQtyWeightedMid', '17': true},
     {'1': 'f2m_sample_interval_ms', '3': 27, '4': 1, '5': 4, '9': 6, '10': 'f2mSampleIntervalMs', '17': true},
+    {'1': 'qty_weighted_mid_levels', '3': 28, '4': 1, '5': 13, '9': 7, '10': 'qtyWeightedMidLevels', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -115,6 +116,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_is_lp'},
     {'1': '_use_qty_weighted_mid'},
     {'1': '_f2m_sample_interval_ms'},
+    {'1': '_qty_weighted_mid_levels'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -150,12 +152,14 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'Mm1fbWFfd2luZG93X3NlY3MYFyABKARIAlIPZjJtTWFXaW5kb3dTZWNziAEBEiAKCXRha2VfbW'
     '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBARIYCgVpc19scBgZIAEoCEgEUgRpc0xwiAEBEjQKFHVz'
     'ZV9xdHlfd2VpZ2h0ZWRfbWlkGBogASgISAVSEXVzZVF0eVdlaWdodGVkTWlkiAEBEjgKFmYybV'
-    '9zYW1wbGVfaW50ZXJ2YWxfbXMYGyABKARIBlITZjJtU2FtcGxlSW50ZXJ2YWxNc4gBAUIICgZf'
-    'YmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3'
-    'NCDAoKX3Rha2VfbW9kZUIICgZfaXNfbHBCFwoVX3VzZV9xdHlfd2VpZ2h0ZWRfbWlkQhkKF19m'
-    'Mm1fc2FtcGxlX2ludGVydmFsX21zSgQIBxAISgQICBAJSgQICxAMSgQIDBANSgQIDRAOSgQIDh'
-    'APUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJYXNrX2Jhc2lz'
-    'UgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
+    '9zYW1wbGVfaW50ZXJ2YWxfbXMYGyABKARIBlITZjJtU2FtcGxlSW50ZXJ2YWxNc4gBARI6Chdx'
+    'dHlfd2VpZ2h0ZWRfbWlkX2xldmVscxgcIAEoDUgHUhRxdHlXZWlnaHRlZE1pZExldmVsc4gBAU'
+    'IICgZfYmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF9zZWNzQhUKE19mMm1fbWFfd2luZG93'
+    'X3NlY3NCDAoKX3Rha2VfbW9kZUIICgZfaXNfbHBCFwoVX3VzZV9xdHlfd2VpZ2h0ZWRfbWlkQh'
+    'kKF19mMm1fc2FtcGxlX2ludGVydmFsX21zQhoKGF9xdHlfd2VpZ2h0ZWRfbWlkX2xldmVsc0oE'
+    'CAcQCEoECAgQCUoECAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza1'
+    '9hZGp1c3RtZW50UgliaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNl'
+    'dA==');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

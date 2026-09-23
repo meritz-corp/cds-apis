@@ -107,6 +107,13 @@ pub struct MarketMakingConfiguration {
     /// optional: 미설정 시 기존값 유지. 0 은 무효값 — 서버가 거부.
     #[prost(uint64, optional, tag="27")]
     pub f2m_sample_interval_ms: ::core::option::Option<u64>,
+    /// NAV 입력 microprice 계산에 사용할 호가 단계 수 (1~10, 기본 3).
+    /// use_qty_weighted_mid=true 일 때만 유효하다. 각 사이드 상위 N 호가의 잔량가중 평균가를
+    /// 낸 뒤 반대편 잔량으로 교차가중해 단일 microprice 를 만든다. 주식·ETF 호가는 10단,
+    /// 선물은 5단까지 공표되므로 실제로는 공표 단수까지만 반영된다.
+    /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (use_qty_weighted_mid 와 동일 패턴).
+    #[prost(uint32, optional, tag="28")]
+    pub qty_weighted_mid_levels: ::core::option::Option<u32>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
