@@ -319,6 +319,13 @@ message MarketMakingConfiguration {
   // 선물은 5단까지 공표되므로 실제로는 공표 단수까지만 반영된다.
   // optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (use_qty_weighted_mid 와 동일 패턴).
   optional uint32 qty_weighted_mid_levels = 28;
+
+  // 빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱 공격적인
+  // FAS 주문으로 전량 청산 + 자동정정 추격.
+  // enabled 시 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지),
+  // exposure_balancer 활성 필수.
+  // NULL/미설정 = 비활성. optional: presence 로 "설정 vs 미변경" 구분 (exposure_balancer 와 동일 패턴).
+  optional MarketMakingFastLiquidation fast_liquidation = 29;
 }
 
 // NAV pricing 상세 설정
@@ -503,6 +510,61 @@ message MarketMakingAdverseSelection {
 
   // 누적 adverse markout(원) 임계
   int64 loss_threshold_won = 5;
+}
+
+// 자동정정 방법 — 청산 주문 발행 후 미체결 시 가격 추격 방식
+message MarketMakingLiquidationAmend {
+  // 자동정정 시작 전 초기 대기 (ms). 주문 등록 직후 이 시간 동안은 정정하지 않고 최초 가격 유지.
+  uint64 initial_wait_ms = 1;
+
+  // 자동정정 방법 선택
+  oneof method {
+    // 최우선호가 추격 + 스프레드 잠식 방식.
+    // 상대측 1호가 잔량 비율이 opposite_qty_ratio_threshold 미만이면 상대측 최우선호가로 정정.
+    MarketMakingLiquidationSelfQuote self_quote = 2;
+
+    // 틱 임계 돌파 시 반대측 크로싱 공격 정정 방식.
+    // 자기 호가 대비 tick_threshold 틱 밀렸을 때 상대측을 강제 크로싱.
+    MarketMakingLiquidationStopLoss stop_loss = 3;
+  }
+}
+
+// 최우선호가 추격 정정 파라미터 (LiquidationAmendMethod::SelfQuote 대응)
+message MarketMakingLiquidationSelfQuote {
+  // 상대호가 잔량 비율 임계 (0.0 ~ 1.0).
+  // 상대측 1호가잔량 / 자측 1호가잔량 < 이 값이면 상대측 최우선호가로 정정.
+  double opposite_qty_ratio_threshold = 1;
+}
+
+// 틱 임계 돌파 정정 파라미터 (LiquidationAmendMethod::StopLoss 대응)
+message MarketMakingLiquidationStopLoss {
+  // 자기 발행 가격 기준 n틱 밀렸을 때 반대측 크로싱 공격 정정 발동.
+  int32 tick_threshold = 1;
+}
+
+// 빠른 청산(FastLiquidation) 설정.
+// 순노출(|net_exposure|) >= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱
+// 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.
+// 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수.
+message MarketMakingFastLiquidation {
+  // 활성화 여부. false = 나머지 파라미터 무시.
+  bool enabled = 1;
+
+  // 청산 트리거 최소 순노출 (주). |net_exposure| >= trigger_quantity 이면 청산 발동.
+  int64 trigger_quantity = 2;
+
+  // 자기 호가 대비 공격적으로 붙일 틱 수 (>= 1).
+  // 서버 검증: aggressive_ticks < 2×base_half_ticks (자전 방지).
+  int32 aggressive_ticks = 3;
+
+  // 청산 주문 종결 후 재발동까지 대기 (ms).
+  uint64 cooldown_ms = 4;
+
+  // Active 최대 지속 (ms). 초과 시 워치독이 자동정정 해제 + 취소.
+  uint64 max_active_ms = 5;
+
+  // 자동정정 추격 설정.
+  MarketMakingLiquidationAmend amend = 6;
 }
 
 // 통합 포지션 관리 설정 (soft rebalance + hard limit)

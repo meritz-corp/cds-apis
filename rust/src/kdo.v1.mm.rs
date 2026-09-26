@@ -114,6 +114,13 @@ pub struct MarketMakingConfiguration {
     /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (use_qty_weighted_mid 와 동일 패턴).
     #[prost(uint32, optional, tag="28")]
     pub qty_weighted_mid_levels: ::core::option::Option<u32>,
+    /// 빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱 공격적인
+    /// FAS 주문으로 전량 청산 + 자동정정 추격.
+    /// enabled 시 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지),
+    /// exposure_balancer 활성 필수.
+    /// NULL/미설정 = 비활성. optional: presence 로 "설정 vs 미변경" 구분 (exposure_balancer 와 동일 패턴).
+    #[prost(message, optional, tag="29")]
+    pub fast_liquidation: ::core::option::Option<MarketMakingFastLiquidation>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -345,6 +352,77 @@ pub struct MarketMakingAdverseSelection {
     /// 누적 adverse markout(원) 임계
     #[prost(int64, tag="5")]
     pub loss_threshold_won: i64,
+}
+/// 자동정정 방법 — 청산 주문 발행 후 미체결 시 가격 추격 방식
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingLiquidationAmend {
+    /// 자동정정 시작 전 초기 대기 (ms). 주문 등록 직후 이 시간 동안은 정정하지 않고 최초 가격 유지.
+    #[prost(uint64, tag="1")]
+    pub initial_wait_ms: u64,
+    /// 자동정정 방법 선택
+    #[prost(oneof="market_making_liquidation_amend::Method", tags="2, 3")]
+    pub method: ::core::option::Option<market_making_liquidation_amend::Method>,
+}
+/// Nested message and enum types in `MarketMakingLiquidationAmend`.
+pub mod market_making_liquidation_amend {
+    /// 자동정정 방법 선택
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Method {
+        /// 최우선호가 추격 + 스프레드 잠식 방식.
+        /// 상대측 1호가 잔량 비율이 opposite_qty_ratio_threshold 미만이면 상대측 최우선호가로 정정.
+        #[prost(message, tag="2")]
+        SelfQuote(super::MarketMakingLiquidationSelfQuote),
+        /// 틱 임계 돌파 시 반대측 크로싱 공격 정정 방식.
+        /// 자기 호가 대비 tick_threshold 틱 밀렸을 때 상대측을 강제 크로싱.
+        #[prost(message, tag="3")]
+        StopLoss(super::MarketMakingLiquidationStopLoss),
+    }
+}
+/// 최우선호가 추격 정정 파라미터 (LiquidationAmendMethod::SelfQuote 대응)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingLiquidationSelfQuote {
+    /// 상대호가 잔량 비율 임계 (0.0 ~ 1.0).
+    /// 상대측 1호가잔량 / 자측 1호가잔량 < 이 값이면 상대측 최우선호가로 정정.
+    #[prost(double, tag="1")]
+    pub opposite_qty_ratio_threshold: f64,
+}
+/// 틱 임계 돌파 정정 파라미터 (LiquidationAmendMethod::StopLoss 대응)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingLiquidationStopLoss {
+    /// 자기 발행 가격 기준 n틱 밀렸을 때 반대측 크로싱 공격 정정 발동.
+    #[prost(int32, tag="1")]
+    pub tick_threshold: i32,
+}
+/// 빠른 청산(FastLiquidation) 설정.
+/// 순노출(|net_exposure|) >= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱
+/// 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.
+/// 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingFastLiquidation {
+    /// 활성화 여부. false = 나머지 파라미터 무시.
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 청산 트리거 최소 순노출 (주). |net_exposure| >= trigger_quantity 이면 청산 발동.
+    #[prost(int64, tag="2")]
+    pub trigger_quantity: i64,
+    /// 자기 호가 대비 공격적으로 붙일 틱 수 (>= 1).
+    /// 서버 검증: aggressive_ticks < 2×base_half_ticks (자전 방지).
+    #[prost(int32, tag="3")]
+    pub aggressive_ticks: i32,
+    /// 청산 주문 종결 후 재발동까지 대기 (ms).
+    #[prost(uint64, tag="4")]
+    pub cooldown_ms: u64,
+    /// Active 최대 지속 (ms). 초과 시 워치독이 자동정정 해제 + 취소.
+    #[prost(uint64, tag="5")]
+    pub max_active_ms: u64,
+    /// 자동정정 추격 설정.
+    #[prost(message, optional, tag="6")]
+    pub amend: ::core::option::Option<MarketMakingLiquidationAmend>,
 }
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
 #[allow(clippy::derive_partial_eq_without_eq)]

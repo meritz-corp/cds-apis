@@ -1611,6 +1611,10 @@
           "type": "integer",
           "format": "int64",
           "description": "NAV 입력 microprice 계산에 사용할 호가 단계 수 (1~10, 기본 3).\nuse_qty_weighted_mid=true 일 때만 유효하다. 각 사이드 상위 N 호가의 잔량가중 평균가를\n낸 뒤 반대편 잔량으로 교차가중해 단일 microprice 를 만든다. 주식·ETF 호가는 10단,\n선물은 5단까지 공표되므로 실제로는 공표 단수까지만 반영된다.\noptional: presence 로 \"설정 vs 미변경(기존값 유지)\" 를 구분한다 (use_qty_weighted_mid 와 동일 패턴)."
+        },
+        "fastLiquidation": {
+          "$ref": "#/definitions/mmMarketMakingFastLiquidation",
+          "description": "빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱 공격적인\nFAS 주문으로 전량 청산 + 자동정정 추격.\nenabled 시 서버 검증 조건: aggressive_ticks \u003c 2×base_half_ticks (자전 방지),\nexposure_balancer 활성 필수.\nNULL/미설정 = 비활성. optional: presence 로 \"설정 vs 미변경\" 구분 (exposure_balancer 와 동일 패턴)."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -1674,6 +1678,81 @@
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"
+    },
+    "mmMarketMakingFastLiquidation": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "활성화 여부. false = 나머지 파라미터 무시."
+        },
+        "triggerQuantity": {
+          "type": "string",
+          "format": "int64",
+          "description": "청산 트리거 최소 순노출 (주). |net_exposure| \u003e= trigger_quantity 이면 청산 발동."
+        },
+        "aggressiveTicks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "자기 호가 대비 공격적으로 붙일 틱 수 (\u003e= 1).\n서버 검증: aggressive_ticks \u003c 2×base_half_ticks (자전 방지)."
+        },
+        "cooldownMs": {
+          "type": "string",
+          "format": "uint64",
+          "description": "청산 주문 종결 후 재발동까지 대기 (ms)."
+        },
+        "maxActiveMs": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Active 최대 지속 (ms). 초과 시 워치독이 자동정정 해제 + 취소."
+        },
+        "amend": {
+          "$ref": "#/definitions/mmMarketMakingLiquidationAmend",
+          "description": "자동정정 추격 설정."
+        }
+      },
+      "description": "빠른 청산(FastLiquidation) 설정.\n순노출(|net_exposure|) \u003e= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱\n공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.\n서버 검증 조건: aggressive_ticks \u003c 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수."
+    },
+    "mmMarketMakingLiquidationAmend": {
+      "type": "object",
+      "properties": {
+        "initialWaitMs": {
+          "type": "string",
+          "format": "uint64",
+          "description": "자동정정 시작 전 초기 대기 (ms). 주문 등록 직후 이 시간 동안은 정정하지 않고 최초 가격 유지."
+        },
+        "selfQuote": {
+          "$ref": "#/definitions/mmMarketMakingLiquidationSelfQuote",
+          "description": "최우선호가 추격 + 스프레드 잠식 방식.\n상대측 1호가 잔량 비율이 opposite_qty_ratio_threshold 미만이면 상대측 최우선호가로 정정."
+        },
+        "stopLoss": {
+          "$ref": "#/definitions/mmMarketMakingLiquidationStopLoss",
+          "description": "틱 임계 돌파 시 반대측 크로싱 공격 정정 방식.\n자기 호가 대비 tick_threshold 틱 밀렸을 때 상대측을 강제 크로싱."
+        }
+      },
+      "title": "자동정정 방법 — 청산 주문 발행 후 미체결 시 가격 추격 방식"
+    },
+    "mmMarketMakingLiquidationSelfQuote": {
+      "type": "object",
+      "properties": {
+        "oppositeQtyRatioThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "상대호가 잔량 비율 임계 (0.0 ~ 1.0).\n상대측 1호가잔량 / 자측 1호가잔량 \u003c 이 값이면 상대측 최우선호가로 정정."
+        }
+      },
+      "title": "최우선호가 추격 정정 파라미터 (LiquidationAmendMethod::SelfQuote 대응)"
+    },
+    "mmMarketMakingLiquidationStopLoss": {
+      "type": "object",
+      "properties": {
+        "tickThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "자기 발행 가격 기준 n틱 밀렸을 때 반대측 크로싱 공격 정정 발동."
+        }
+      },
+      "title": "틱 임계 돌파 정정 파라미터 (LiquidationAmendMethod::StopLoss 대응)"
     },
     "mmMarketMakingMaCross": {
       "type": "object",

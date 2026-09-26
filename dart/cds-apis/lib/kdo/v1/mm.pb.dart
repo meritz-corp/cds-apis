@@ -162,6 +162,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $core.bool? useQtyWeightedMid,
     $fixnum.Int64? f2mSampleIntervalMs,
     $core.int? qtyWeightedMidLevels,
+    MarketMakingFastLiquidation? fastLiquidation,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -186,6 +187,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (useQtyWeightedMid != null) result.useQtyWeightedMid = useQtyWeightedMid;
     if (f2mSampleIntervalMs != null) result.f2mSampleIntervalMs = f2mSampleIntervalMs;
     if (qtyWeightedMidLevels != null) result.qtyWeightedMidLevels = qtyWeightedMidLevels;
+    if (fastLiquidation != null) result.fastLiquidation = fastLiquidation;
     return result;
   }
 
@@ -217,6 +219,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOB(26, _omitFieldNames ? '' : 'useQtyWeightedMid')
     ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'f2mSampleIntervalMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.int>(28, _omitFieldNames ? '' : 'qtyWeightedMidLevels', $pb.PbFieldType.OU3)
+    ..aOM<MarketMakingFastLiquidation>(29, _omitFieldNames ? '' : 'fastLiquidation', subBuilder: MarketMakingFastLiquidation.create)
     ..hasRequiredFields = false
   ;
 
@@ -493,6 +496,22 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasQtyWeightedMidLevels() => $_has(21);
   @$pb.TagNumber(28)
   void clearQtyWeightedMidLevels() => $_clearField(28);
+
+  /// 빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱 공격적인
+  /// FAS 주문으로 전량 청산 + 자동정정 추격.
+  /// enabled 시 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지),
+  /// exposure_balancer 활성 필수.
+  /// NULL/미설정 = 비활성. optional: presence 로 "설정 vs 미변경" 구분 (exposure_balancer 와 동일 패턴).
+  @$pb.TagNumber(29)
+  MarketMakingFastLiquidation get fastLiquidation => $_getN(22);
+  @$pb.TagNumber(29)
+  set fastLiquidation(MarketMakingFastLiquidation value) => $_setField(29, value);
+  @$pb.TagNumber(29)
+  $core.bool hasFastLiquidation() => $_has(22);
+  @$pb.TagNumber(29)
+  void clearFastLiquidation() => $_clearField(29);
+  @$pb.TagNumber(29)
+  MarketMakingFastLiquidation ensureFastLiquidation() => $_ensure(22);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -1604,6 +1623,317 @@ class MarketMakingAdverseSelection extends $pb.GeneratedMessage {
   $core.bool hasLossThresholdWon() => $_has(4);
   @$pb.TagNumber(5)
   void clearLossThresholdWon() => $_clearField(5);
+}
+
+enum MarketMakingLiquidationAmend_Method {
+  selfQuote, 
+  stopLoss, 
+  notSet
+}
+
+/// 자동정정 방법 — 청산 주문 발행 후 미체결 시 가격 추격 방식
+class MarketMakingLiquidationAmend extends $pb.GeneratedMessage {
+  factory MarketMakingLiquidationAmend({
+    $fixnum.Int64? initialWaitMs,
+    MarketMakingLiquidationSelfQuote? selfQuote,
+    MarketMakingLiquidationStopLoss? stopLoss,
+  }) {
+    final result = create();
+    if (initialWaitMs != null) result.initialWaitMs = initialWaitMs;
+    if (selfQuote != null) result.selfQuote = selfQuote;
+    if (stopLoss != null) result.stopLoss = stopLoss;
+    return result;
+  }
+
+  MarketMakingLiquidationAmend._();
+
+  factory MarketMakingLiquidationAmend.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingLiquidationAmend.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static const $core.Map<$core.int, MarketMakingLiquidationAmend_Method> _MarketMakingLiquidationAmend_MethodByTag = {
+    2 : MarketMakingLiquidationAmend_Method.selfQuote,
+    3 : MarketMakingLiquidationAmend_Method.stopLoss,
+    0 : MarketMakingLiquidationAmend_Method.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingLiquidationAmend', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..oo(0, [2, 3])
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'initialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<MarketMakingLiquidationSelfQuote>(2, _omitFieldNames ? '' : 'selfQuote', subBuilder: MarketMakingLiquidationSelfQuote.create)
+    ..aOM<MarketMakingLiquidationStopLoss>(3, _omitFieldNames ? '' : 'stopLoss', subBuilder: MarketMakingLiquidationStopLoss.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationAmend clone() => MarketMakingLiquidationAmend()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationAmend copyWith(void Function(MarketMakingLiquidationAmend) updates) => super.copyWith((message) => updates(message as MarketMakingLiquidationAmend)) as MarketMakingLiquidationAmend;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationAmend create() => MarketMakingLiquidationAmend._();
+  @$core.override
+  MarketMakingLiquidationAmend createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingLiquidationAmend> createRepeated() => $pb.PbList<MarketMakingLiquidationAmend>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationAmend getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingLiquidationAmend>(create);
+  static MarketMakingLiquidationAmend? _defaultInstance;
+
+  MarketMakingLiquidationAmend_Method whichMethod() => _MarketMakingLiquidationAmend_MethodByTag[$_whichOneof(0)]!;
+  void clearMethod() => $_clearField($_whichOneof(0));
+
+  /// 자동정정 시작 전 초기 대기 (ms). 주문 등록 직후 이 시간 동안은 정정하지 않고 최초 가격 유지.
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get initialWaitMs => $_getI64(0);
+  @$pb.TagNumber(1)
+  set initialWaitMs($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasInitialWaitMs() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearInitialWaitMs() => $_clearField(1);
+
+  /// 최우선호가 추격 + 스프레드 잠식 방식.
+  /// 상대측 1호가 잔량 비율이 opposite_qty_ratio_threshold 미만이면 상대측 최우선호가로 정정.
+  @$pb.TagNumber(2)
+  MarketMakingLiquidationSelfQuote get selfQuote => $_getN(1);
+  @$pb.TagNumber(2)
+  set selfQuote(MarketMakingLiquidationSelfQuote value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSelfQuote() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSelfQuote() => $_clearField(2);
+  @$pb.TagNumber(2)
+  MarketMakingLiquidationSelfQuote ensureSelfQuote() => $_ensure(1);
+
+  /// 틱 임계 돌파 시 반대측 크로싱 공격 정정 방식.
+  /// 자기 호가 대비 tick_threshold 틱 밀렸을 때 상대측을 강제 크로싱.
+  @$pb.TagNumber(3)
+  MarketMakingLiquidationStopLoss get stopLoss => $_getN(2);
+  @$pb.TagNumber(3)
+  set stopLoss(MarketMakingLiquidationStopLoss value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasStopLoss() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStopLoss() => $_clearField(3);
+  @$pb.TagNumber(3)
+  MarketMakingLiquidationStopLoss ensureStopLoss() => $_ensure(2);
+}
+
+/// 최우선호가 추격 정정 파라미터 (LiquidationAmendMethod::SelfQuote 대응)
+class MarketMakingLiquidationSelfQuote extends $pb.GeneratedMessage {
+  factory MarketMakingLiquidationSelfQuote({
+    $core.double? oppositeQtyRatioThreshold,
+  }) {
+    final result = create();
+    if (oppositeQtyRatioThreshold != null) result.oppositeQtyRatioThreshold = oppositeQtyRatioThreshold;
+    return result;
+  }
+
+  MarketMakingLiquidationSelfQuote._();
+
+  factory MarketMakingLiquidationSelfQuote.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingLiquidationSelfQuote.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingLiquidationSelfQuote', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'oppositeQtyRatioThreshold', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationSelfQuote clone() => MarketMakingLiquidationSelfQuote()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationSelfQuote copyWith(void Function(MarketMakingLiquidationSelfQuote) updates) => super.copyWith((message) => updates(message as MarketMakingLiquidationSelfQuote)) as MarketMakingLiquidationSelfQuote;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationSelfQuote create() => MarketMakingLiquidationSelfQuote._();
+  @$core.override
+  MarketMakingLiquidationSelfQuote createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingLiquidationSelfQuote> createRepeated() => $pb.PbList<MarketMakingLiquidationSelfQuote>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationSelfQuote getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingLiquidationSelfQuote>(create);
+  static MarketMakingLiquidationSelfQuote? _defaultInstance;
+
+  /// 상대호가 잔량 비율 임계 (0.0 ~ 1.0).
+  /// 상대측 1호가잔량 / 자측 1호가잔량 < 이 값이면 상대측 최우선호가로 정정.
+  @$pb.TagNumber(1)
+  $core.double get oppositeQtyRatioThreshold => $_getN(0);
+  @$pb.TagNumber(1)
+  set oppositeQtyRatioThreshold($core.double value) => $_setDouble(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOppositeQtyRatioThreshold() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOppositeQtyRatioThreshold() => $_clearField(1);
+}
+
+/// 틱 임계 돌파 정정 파라미터 (LiquidationAmendMethod::StopLoss 대응)
+class MarketMakingLiquidationStopLoss extends $pb.GeneratedMessage {
+  factory MarketMakingLiquidationStopLoss({
+    $core.int? tickThreshold,
+  }) {
+    final result = create();
+    if (tickThreshold != null) result.tickThreshold = tickThreshold;
+    return result;
+  }
+
+  MarketMakingLiquidationStopLoss._();
+
+  factory MarketMakingLiquidationStopLoss.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingLiquidationStopLoss.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingLiquidationStopLoss', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'tickThreshold', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationStopLoss clone() => MarketMakingLiquidationStopLoss()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationStopLoss copyWith(void Function(MarketMakingLiquidationStopLoss) updates) => super.copyWith((message) => updates(message as MarketMakingLiquidationStopLoss)) as MarketMakingLiquidationStopLoss;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationStopLoss create() => MarketMakingLiquidationStopLoss._();
+  @$core.override
+  MarketMakingLiquidationStopLoss createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingLiquidationStopLoss> createRepeated() => $pb.PbList<MarketMakingLiquidationStopLoss>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationStopLoss getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingLiquidationStopLoss>(create);
+  static MarketMakingLiquidationStopLoss? _defaultInstance;
+
+  /// 자기 발행 가격 기준 n틱 밀렸을 때 반대측 크로싱 공격 정정 발동.
+  @$pb.TagNumber(1)
+  $core.int get tickThreshold => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set tickThreshold($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTickThreshold() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTickThreshold() => $_clearField(1);
+}
+
+/// 빠른 청산(FastLiquidation) 설정.
+/// 순노출(|net_exposure|) >= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱
+/// 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.
+/// 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수.
+class MarketMakingFastLiquidation extends $pb.GeneratedMessage {
+  factory MarketMakingFastLiquidation({
+    $core.bool? enabled,
+    $fixnum.Int64? triggerQuantity,
+    $core.int? aggressiveTicks,
+    $fixnum.Int64? cooldownMs,
+    $fixnum.Int64? maxActiveMs,
+    MarketMakingLiquidationAmend? amend,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (triggerQuantity != null) result.triggerQuantity = triggerQuantity;
+    if (aggressiveTicks != null) result.aggressiveTicks = aggressiveTicks;
+    if (cooldownMs != null) result.cooldownMs = cooldownMs;
+    if (maxActiveMs != null) result.maxActiveMs = maxActiveMs;
+    if (amend != null) result.amend = amend;
+    return result;
+  }
+
+  MarketMakingFastLiquidation._();
+
+  factory MarketMakingFastLiquidation.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingFastLiquidation.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingFastLiquidation', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..aInt64(2, _omitFieldNames ? '' : 'triggerQuantity')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'aggressiveTicks', $pb.PbFieldType.O3)
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'cooldownMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'maxActiveMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<MarketMakingLiquidationAmend>(6, _omitFieldNames ? '' : 'amend', subBuilder: MarketMakingLiquidationAmend.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingFastLiquidation clone() => MarketMakingFastLiquidation()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingFastLiquidation copyWith(void Function(MarketMakingFastLiquidation) updates) => super.copyWith((message) => updates(message as MarketMakingFastLiquidation)) as MarketMakingFastLiquidation;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingFastLiquidation create() => MarketMakingFastLiquidation._();
+  @$core.override
+  MarketMakingFastLiquidation createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingFastLiquidation> createRepeated() => $pb.PbList<MarketMakingFastLiquidation>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingFastLiquidation getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingFastLiquidation>(create);
+  static MarketMakingFastLiquidation? _defaultInstance;
+
+  /// 활성화 여부. false = 나머지 파라미터 무시.
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 청산 트리거 최소 순노출 (주). |net_exposure| >= trigger_quantity 이면 청산 발동.
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get triggerQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set triggerQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTriggerQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTriggerQuantity() => $_clearField(2);
+
+  /// 자기 호가 대비 공격적으로 붙일 틱 수 (>= 1).
+  /// 서버 검증: aggressive_ticks < 2×base_half_ticks (자전 방지).
+  @$pb.TagNumber(3)
+  $core.int get aggressiveTicks => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set aggressiveTicks($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAggressiveTicks() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAggressiveTicks() => $_clearField(3);
+
+  /// 청산 주문 종결 후 재발동까지 대기 (ms).
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get cooldownMs => $_getI64(3);
+  @$pb.TagNumber(4)
+  set cooldownMs($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCooldownMs() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCooldownMs() => $_clearField(4);
+
+  /// Active 최대 지속 (ms). 초과 시 워치독이 자동정정 해제 + 취소.
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get maxActiveMs => $_getI64(4);
+  @$pb.TagNumber(5)
+  set maxActiveMs($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasMaxActiveMs() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMaxActiveMs() => $_clearField(5);
+
+  /// 자동정정 추격 설정.
+  @$pb.TagNumber(6)
+  MarketMakingLiquidationAmend get amend => $_getN(5);
+  @$pb.TagNumber(6)
+  set amend(MarketMakingLiquidationAmend value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasAmend() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAmend() => $_clearField(6);
+  @$pb.TagNumber(6)
+  MarketMakingLiquidationAmend ensureAmend() => $_ensure(5);
 }
 
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)

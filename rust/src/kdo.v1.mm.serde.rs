@@ -4227,6 +4227,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4306,6 +4309,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.qty_weighted_mid_levels.as_ref() {
             struct_ser.serialize_field("qty_weighted_mid_levels", v)?;
         }
+        if let Some(v) = self.fast_liquidation.as_ref() {
+            struct_ser.serialize_field("fast_liquidation", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4356,6 +4362,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "f2mSampleIntervalMs",
             "qty_weighted_mid_levels",
             "qtyWeightedMidLevels",
+            "fast_liquidation",
+            "fastLiquidation",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4382,6 +4390,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             UseQtyWeightedMid,
             F2mSampleIntervalMs,
             QtyWeightedMidLevels,
+            FastLiquidation,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4426,6 +4435,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "useQtyWeightedMid" | "use_qty_weighted_mid" => Ok(GeneratedField::UseQtyWeightedMid),
                             "f2mSampleIntervalMs" | "f2m_sample_interval_ms" => Ok(GeneratedField::F2mSampleIntervalMs),
                             "qtyWeightedMidLevels" | "qty_weighted_mid_levels" => Ok(GeneratedField::QtyWeightedMidLevels),
+                            "fastLiquidation" | "fast_liquidation" => Ok(GeneratedField::FastLiquidation),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4467,6 +4477,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut use_qty_weighted_mid__ = None;
                 let mut f2m_sample_interval_ms__ = None;
                 let mut qty_weighted_mid_levels__ = None;
+                let mut fast_liquidation__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4617,6 +4628,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::FastLiquidation => {
+                            if fast_liquidation__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fastLiquidation"));
+                            }
+                            fast_liquidation__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4645,6 +4662,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     use_qty_weighted_mid: use_qty_weighted_mid__,
                     f2m_sample_interval_ms: f2m_sample_interval_ms__,
                     qty_weighted_mid_levels: qty_weighted_mid_levels__,
+                    fast_liquidation: fast_liquidation__,
                 })
             }
         }
@@ -4996,6 +5014,537 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingFastLiquidation {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingFastLiquidation", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("trigger_quantity", ToString::to_string(&self.trigger_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("aggressive_ticks", &self.aggressive_ticks)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("cooldown_ms", ToString::to_string(&self.cooldown_ms).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_active_ms", ToString::to_string(&self.max_active_ms).as_str())?;
+        }
+        if let Some(v) = self.amend.as_ref() {
+            struct_ser.serialize_field("amend", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingFastLiquidation {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "trigger_quantity",
+            "triggerQuantity",
+            "aggressive_ticks",
+            "aggressiveTicks",
+            "cooldown_ms",
+            "cooldownMs",
+            "max_active_ms",
+            "maxActiveMs",
+            "amend",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            TriggerQuantity,
+            AggressiveTicks,
+            CooldownMs,
+            MaxActiveMs,
+            Amend,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "triggerQuantity" | "trigger_quantity" => Ok(GeneratedField::TriggerQuantity),
+                            "aggressiveTicks" | "aggressive_ticks" => Ok(GeneratedField::AggressiveTicks),
+                            "cooldownMs" | "cooldown_ms" => Ok(GeneratedField::CooldownMs),
+                            "maxActiveMs" | "max_active_ms" => Ok(GeneratedField::MaxActiveMs),
+                            "amend" => Ok(GeneratedField::Amend),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingFastLiquidation;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingFastLiquidation")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingFastLiquidation, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut trigger_quantity__ = None;
+                let mut aggressive_ticks__ = None;
+                let mut cooldown_ms__ = None;
+                let mut max_active_ms__ = None;
+                let mut amend__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TriggerQuantity => {
+                            if trigger_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("triggerQuantity"));
+                            }
+                            trigger_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AggressiveTicks => {
+                            if aggressive_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("aggressiveTicks"));
+                            }
+                            aggressive_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CooldownMs => {
+                            if cooldown_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cooldownMs"));
+                            }
+                            cooldown_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxActiveMs => {
+                            if max_active_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxActiveMs"));
+                            }
+                            max_active_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Amend => {
+                            if amend__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("amend"));
+                            }
+                            amend__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingFastLiquidation {
+                    enabled: enabled__.unwrap_or_default(),
+                    trigger_quantity: trigger_quantity__.unwrap_or_default(),
+                    aggressive_ticks: aggressive_ticks__.unwrap_or_default(),
+                    cooldown_ms: cooldown_ms__.unwrap_or_default(),
+                    max_active_ms: max_active_ms__.unwrap_or_default(),
+                    amend: amend__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingFastLiquidation", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingLiquidationAmend {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if self.method.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingLiquidationAmend", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("initial_wait_ms", ToString::to_string(&self.initial_wait_ms).as_str())?;
+        }
+        if let Some(v) = self.method.as_ref() {
+            match v {
+                market_making_liquidation_amend::Method::SelfQuote(v) => {
+                    struct_ser.serialize_field("self_quote", v)?;
+                }
+                market_making_liquidation_amend::Method::StopLoss(v) => {
+                    struct_ser.serialize_field("stop_loss", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationAmend {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "initial_wait_ms",
+            "initialWaitMs",
+            "self_quote",
+            "selfQuote",
+            "stop_loss",
+            "stopLoss",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            InitialWaitMs,
+            SelfQuote,
+            StopLoss,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "initialWaitMs" | "initial_wait_ms" => Ok(GeneratedField::InitialWaitMs),
+                            "selfQuote" | "self_quote" => Ok(GeneratedField::SelfQuote),
+                            "stopLoss" | "stop_loss" => Ok(GeneratedField::StopLoss),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingLiquidationAmend;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingLiquidationAmend")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingLiquidationAmend, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut initial_wait_ms__ = None;
+                let mut method__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::InitialWaitMs => {
+                            if initial_wait_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("initialWaitMs"));
+                            }
+                            initial_wait_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::SelfQuote => {
+                            if method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("selfQuote"));
+                            }
+                            method__ = map_.next_value::<::std::option::Option<_>>()?.map(market_making_liquidation_amend::Method::SelfQuote)
+;
+                        }
+                        GeneratedField::StopLoss => {
+                            if method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("stopLoss"));
+                            }
+                            method__ = map_.next_value::<::std::option::Option<_>>()?.map(market_making_liquidation_amend::Method::StopLoss)
+;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingLiquidationAmend {
+                    initial_wait_ms: initial_wait_ms__.unwrap_or_default(),
+                    method: method__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingLiquidationAmend", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingLiquidationSelfQuote {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingLiquidationSelfQuote", len)?;
+        if true {
+            struct_ser.serialize_field("opposite_qty_ratio_threshold", &self.opposite_qty_ratio_threshold)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationSelfQuote {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "opposite_qty_ratio_threshold",
+            "oppositeQtyRatioThreshold",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            OppositeQtyRatioThreshold,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "oppositeQtyRatioThreshold" | "opposite_qty_ratio_threshold" => Ok(GeneratedField::OppositeQtyRatioThreshold),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingLiquidationSelfQuote;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingLiquidationSelfQuote")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingLiquidationSelfQuote, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut opposite_qty_ratio_threshold__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::OppositeQtyRatioThreshold => {
+                            if opposite_qty_ratio_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("oppositeQtyRatioThreshold"));
+                            }
+                            opposite_qty_ratio_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingLiquidationSelfQuote {
+                    opposite_qty_ratio_threshold: opposite_qty_ratio_threshold__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingLiquidationSelfQuote", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingLiquidationStopLoss {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingLiquidationStopLoss", len)?;
+        if true {
+            struct_ser.serialize_field("tick_threshold", &self.tick_threshold)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationStopLoss {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "tick_threshold",
+            "tickThreshold",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            TickThreshold,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "tickThreshold" | "tick_threshold" => Ok(GeneratedField::TickThreshold),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingLiquidationStopLoss;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingLiquidationStopLoss")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingLiquidationStopLoss, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut tick_threshold__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::TickThreshold => {
+                            if tick_threshold__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tickThreshold"));
+                            }
+                            tick_threshold__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingLiquidationStopLoss {
+                    tick_threshold: tick_threshold__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingLiquidationStopLoss", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingMaCross {

@@ -107,6 +107,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'use_qty_weighted_mid', '3': 26, '4': 1, '5': 8, '9': 5, '10': 'useQtyWeightedMid', '17': true},
     {'1': 'f2m_sample_interval_ms', '3': 27, '4': 1, '5': 4, '9': 6, '10': 'f2mSampleIntervalMs', '17': true},
     {'1': 'qty_weighted_mid_levels', '3': 28, '4': 1, '5': 13, '9': 7, '10': 'qtyWeightedMidLevels', '17': true},
+    {'1': 'fast_liquidation', '3': 29, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingFastLiquidation', '9': 8, '10': 'fastLiquidation', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -117,6 +118,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_use_qty_weighted_mid'},
     {'1': '_f2m_sample_interval_ms'},
     {'1': '_qty_weighted_mid_levels'},
+    {'1': '_fast_liquidation'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -153,13 +155,14 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBARIYCgVpc19scBgZIAEoCEgEUgRpc0xwiAEBEjQKFHVz'
     'ZV9xdHlfd2VpZ2h0ZWRfbWlkGBogASgISAVSEXVzZVF0eVdlaWdodGVkTWlkiAEBEjgKFmYybV'
     '9zYW1wbGVfaW50ZXJ2YWxfbXMYGyABKARIBlITZjJtU2FtcGxlSW50ZXJ2YWxNc4gBARI6Chdx'
-    'dHlfd2VpZ2h0ZWRfbWlkX2xldmVscxgcIAEoDUgHUhRxdHlXZWlnaHRlZE1pZExldmVsc4gBAU'
-    'IICgZfYmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF9zZWNzQhUKE19mMm1fbWFfd2luZG93'
-    'X3NlY3NCDAoKX3Rha2VfbW9kZUIICgZfaXNfbHBCFwoVX3VzZV9xdHlfd2VpZ2h0ZWRfbWlkQh'
-    'kKF19mMm1fc2FtcGxlX2ludGVydmFsX21zQhoKGF9xdHlfd2VpZ2h0ZWRfbWlkX2xldmVsc0oE'
-    'CAcQCEoECAgQCUoECAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza1'
-    '9hZGp1c3RtZW50UgliaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNl'
-    'dA==');
+    'dHlfd2VpZ2h0ZWRfbWlkX2xldmVscxgcIAEoDUgHUhRxdHlXZWlnaHRlZE1pZExldmVsc4gBAR'
+    'JWChBmYXN0X2xpcXVpZGF0aW9uGB0gASgLMiYua2RvLnYxLm1tLk1hcmtldE1ha2luZ0Zhc3RM'
+    'aXF1aWRhdGlvbkgIUg9mYXN0TGlxdWlkYXRpb26IAQFCCAoGX2Jhc2lzQhoKGF9mMm1fcmVmaX'
+    'RfaW50ZXJ2YWxfc2Vjc0IVChNfZjJtX21hX3dpbmRvd19zZWNzQgwKCl90YWtlX21vZGVCCAoG'
+    'X2lzX2xwQhcKFV91c2VfcXR5X3dlaWdodGVkX21pZEIZChdfZjJtX3NhbXBsZV9pbnRlcnZhbF'
+    '9tc0IaChhfcXR5X3dlaWdodGVkX21pZF9sZXZlbHNCEwoRX2Zhc3RfbGlxdWlkYXRpb25KBAgH'
+    'EAhKBAgIEAlKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9hZGp1c3RtZW50Ug5hc2tfYW'
+    'RqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZmZzZXRSCmFza19vZmZzZXQ=');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -384,6 +387,74 @@ final $typed_data.Uint8List marketMakingAdverseSelectionDescriptor = $convert.ba
     'QSIgoNZXZhbF9kZWxheV9tcxgCIAEoDVILZXZhbERlbGF5TXMSIAoMaGFsZl9saWZlX21zGAMg'
     'ASgNUgpoYWxmTGlmZU1zEh8KC2Nvb2xkb3duX21zGAQgASgNUgpjb29sZG93bk1zEiwKEmxvc3'
     'NfdGhyZXNob2xkX3dvbhgFIAEoA1IQbG9zc1RocmVzaG9sZFdvbg==');
+
+@$core.Deprecated('Use marketMakingLiquidationAmendDescriptor instead')
+const MarketMakingLiquidationAmend$json = {
+  '1': 'MarketMakingLiquidationAmend',
+  '2': [
+    {'1': 'initial_wait_ms', '3': 1, '4': 1, '5': 4, '10': 'initialWaitMs'},
+    {'1': 'self_quote', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLiquidationSelfQuote', '9': 0, '10': 'selfQuote'},
+    {'1': 'stop_loss', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLiquidationStopLoss', '9': 0, '10': 'stopLoss'},
+  ],
+  '8': [
+    {'1': 'method'},
+  ],
+};
+
+/// Descriptor for `MarketMakingLiquidationAmend`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingLiquidationAmendDescriptor = $convert.base64Decode(
+    'ChxNYXJrZXRNYWtpbmdMaXF1aWRhdGlvbkFtZW5kEiYKD2luaXRpYWxfd2FpdF9tcxgBIAEoBF'
+    'INaW5pdGlhbFdhaXRNcxJMCgpzZWxmX3F1b3RlGAIgASgLMisua2RvLnYxLm1tLk1hcmtldE1h'
+    'a2luZ0xpcXVpZGF0aW9uU2VsZlF1b3RlSABSCXNlbGZRdW90ZRJJCglzdG9wX2xvc3MYAyABKA'
+    'syKi5rZG8udjEubW0uTWFya2V0TWFraW5nTGlxdWlkYXRpb25TdG9wTG9zc0gAUghzdG9wTG9z'
+    'c0IICgZtZXRob2Q=');
+
+@$core.Deprecated('Use marketMakingLiquidationSelfQuoteDescriptor instead')
+const MarketMakingLiquidationSelfQuote$json = {
+  '1': 'MarketMakingLiquidationSelfQuote',
+  '2': [
+    {'1': 'opposite_qty_ratio_threshold', '3': 1, '4': 1, '5': 1, '10': 'oppositeQtyRatioThreshold'},
+  ],
+};
+
+/// Descriptor for `MarketMakingLiquidationSelfQuote`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingLiquidationSelfQuoteDescriptor = $convert.base64Decode(
+    'CiBNYXJrZXRNYWtpbmdMaXF1aWRhdGlvblNlbGZRdW90ZRI/ChxvcHBvc2l0ZV9xdHlfcmF0aW'
+    '9fdGhyZXNob2xkGAEgASgBUhlvcHBvc2l0ZVF0eVJhdGlvVGhyZXNob2xk');
+
+@$core.Deprecated('Use marketMakingLiquidationStopLossDescriptor instead')
+const MarketMakingLiquidationStopLoss$json = {
+  '1': 'MarketMakingLiquidationStopLoss',
+  '2': [
+    {'1': 'tick_threshold', '3': 1, '4': 1, '5': 5, '10': 'tickThreshold'},
+  ],
+};
+
+/// Descriptor for `MarketMakingLiquidationStopLoss`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingLiquidationStopLossDescriptor = $convert.base64Decode(
+    'Ch9NYXJrZXRNYWtpbmdMaXF1aWRhdGlvblN0b3BMb3NzEiUKDnRpY2tfdGhyZXNob2xkGAEgAS'
+    'gFUg10aWNrVGhyZXNob2xk');
+
+@$core.Deprecated('Use marketMakingFastLiquidationDescriptor instead')
+const MarketMakingFastLiquidation$json = {
+  '1': 'MarketMakingFastLiquidation',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'trigger_quantity', '3': 2, '4': 1, '5': 3, '10': 'triggerQuantity'},
+    {'1': 'aggressive_ticks', '3': 3, '4': 1, '5': 5, '10': 'aggressiveTicks'},
+    {'1': 'cooldown_ms', '3': 4, '4': 1, '5': 4, '10': 'cooldownMs'},
+    {'1': 'max_active_ms', '3': 5, '4': 1, '5': 4, '10': 'maxActiveMs'},
+    {'1': 'amend', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLiquidationAmend', '10': 'amend'},
+  ],
+};
+
+/// Descriptor for `MarketMakingFastLiquidation`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingFastLiquidationDescriptor = $convert.base64Decode(
+    'ChtNYXJrZXRNYWtpbmdGYXN0TGlxdWlkYXRpb24SGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZB'
+    'IpChB0cmlnZ2VyX3F1YW50aXR5GAIgASgDUg90cmlnZ2VyUXVhbnRpdHkSKQoQYWdncmVzc2l2'
+    'ZV90aWNrcxgDIAEoBVIPYWdncmVzc2l2ZVRpY2tzEh8KC2Nvb2xkb3duX21zGAQgASgEUgpjb2'
+    '9sZG93bk1zEiIKDW1heF9hY3RpdmVfbXMYBSABKARSC21heEFjdGl2ZU1zEj0KBWFtZW5kGAYg'
+    'ASgLMicua2RvLnYxLm1tLk1hcmtldE1ha2luZ0xpcXVpZGF0aW9uQW1lbmRSBWFtZW5k');
 
 @$core.Deprecated('Use marketMakingExposureBalancerDescriptor instead')
 const MarketMakingExposureBalancer$json = {
