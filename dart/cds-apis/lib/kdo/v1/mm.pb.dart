@@ -1628,6 +1628,7 @@ class MarketMakingAdverseSelection extends $pb.GeneratedMessage {
 enum MarketMakingLiquidationAmend_Method {
   selfQuote, 
   stopLoss, 
+  oppositeOffset, 
   notSet
 }
 
@@ -1637,11 +1638,13 @@ class MarketMakingLiquidationAmend extends $pb.GeneratedMessage {
     $fixnum.Int64? initialWaitMs,
     MarketMakingLiquidationSelfQuote? selfQuote,
     MarketMakingLiquidationStopLoss? stopLoss,
+    MarketMakingLiquidationOppositeOffset? oppositeOffset,
   }) {
     final result = create();
     if (initialWaitMs != null) result.initialWaitMs = initialWaitMs;
     if (selfQuote != null) result.selfQuote = selfQuote;
     if (stopLoss != null) result.stopLoss = stopLoss;
+    if (oppositeOffset != null) result.oppositeOffset = oppositeOffset;
     return result;
   }
 
@@ -1653,13 +1656,15 @@ class MarketMakingLiquidationAmend extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, MarketMakingLiquidationAmend_Method> _MarketMakingLiquidationAmend_MethodByTag = {
     2 : MarketMakingLiquidationAmend_Method.selfQuote,
     3 : MarketMakingLiquidationAmend_Method.stopLoss,
+    4 : MarketMakingLiquidationAmend_Method.oppositeOffset,
     0 : MarketMakingLiquidationAmend_Method.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingLiquidationAmend', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
-    ..oo(0, [2, 3])
+    ..oo(0, [2, 3, 4])
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'initialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<MarketMakingLiquidationSelfQuote>(2, _omitFieldNames ? '' : 'selfQuote', subBuilder: MarketMakingLiquidationSelfQuote.create)
     ..aOM<MarketMakingLiquidationStopLoss>(3, _omitFieldNames ? '' : 'stopLoss', subBuilder: MarketMakingLiquidationStopLoss.create)
+    ..aOM<MarketMakingLiquidationOppositeOffset>(4, _omitFieldNames ? '' : 'oppositeOffset', subBuilder: MarketMakingLiquidationOppositeOffset.create)
     ..hasRequiredFields = false
   ;
 
@@ -1718,6 +1723,19 @@ class MarketMakingLiquidationAmend extends $pb.GeneratedMessage {
   void clearStopLoss() => $_clearField(3);
   @$pb.TagNumber(3)
   MarketMakingLiquidationStopLoss ensureStopLoss() => $_ensure(2);
+
+  /// 상대호가 오프셋 정정 방식.
+  /// 상대 최우선호가에서 offset_ticks 틱 물러선 가격 유지 (최우선호가 확보, 상대호가 침범 없음).
+  @$pb.TagNumber(4)
+  MarketMakingLiquidationOppositeOffset get oppositeOffset => $_getN(3);
+  @$pb.TagNumber(4)
+  set oppositeOffset(MarketMakingLiquidationOppositeOffset value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOppositeOffset() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOppositeOffset() => $_clearField(4);
+  @$pb.TagNumber(4)
+  MarketMakingLiquidationOppositeOffset ensureOppositeOffset() => $_ensure(3);
 }
 
 /// 최우선호가 추격 정정 파라미터 (LiquidationAmendMethod::SelfQuote 대응)
@@ -1815,6 +1833,57 @@ class MarketMakingLiquidationStopLoss extends $pb.GeneratedMessage {
   $core.bool hasTickThreshold() => $_has(0);
   @$pb.TagNumber(1)
   void clearTickThreshold() => $_clearField(1);
+}
+
+/// 상대호가 오프셋 정정 파라미터 (LiquidationAmendMethod::OppositeOffset 대응)
+class MarketMakingLiquidationOppositeOffset extends $pb.GeneratedMessage {
+  factory MarketMakingLiquidationOppositeOffset({
+    $core.int? offsetTicks,
+  }) {
+    final result = create();
+    if (offsetTicks != null) result.offsetTicks = offsetTicks;
+    return result;
+  }
+
+  MarketMakingLiquidationOppositeOffset._();
+
+  factory MarketMakingLiquidationOppositeOffset.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingLiquidationOppositeOffset.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingLiquidationOppositeOffset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'offsetTicks', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationOppositeOffset clone() => MarketMakingLiquidationOppositeOffset()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLiquidationOppositeOffset copyWith(void Function(MarketMakingLiquidationOppositeOffset) updates) => super.copyWith((message) => updates(message as MarketMakingLiquidationOppositeOffset)) as MarketMakingLiquidationOppositeOffset;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationOppositeOffset create() => MarketMakingLiquidationOppositeOffset._();
+  @$core.override
+  MarketMakingLiquidationOppositeOffset createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingLiquidationOppositeOffset> createRepeated() => $pb.PbList<MarketMakingLiquidationOppositeOffset>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLiquidationOppositeOffset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingLiquidationOppositeOffset>(create);
+  static MarketMakingLiquidationOppositeOffset? _defaultInstance;
+
+  /// 상대 최우선호가에서 물러설 틱 수 (>= 1). 1 = 상대호가 직전 한 틱까지 붙는다.
+  /// 내 주문 제외 동일측 최우선호가는 한 틱 앞질러 확보하고, 스프레드에 빈 틱이 없으면
+  /// 그 최우선호가에 나란히 붙는다 (상대호가 침범 = 즉시체결 없음).
+  /// 정정은 공격 방향(매수 상향/매도 하향)으로만 한다.
+  @$pb.TagNumber(1)
+  $core.int get offsetTicks => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set offsetTicks($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOffsetTicks() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOffsetTicks() => $_clearField(1);
 }
 
 /// 빠른 청산(FastLiquidation) 설정.

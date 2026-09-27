@@ -395,6 +395,7 @@ const MarketMakingLiquidationAmend$json = {
     {'1': 'initial_wait_ms', '3': 1, '4': 1, '5': 4, '10': 'initialWaitMs'},
     {'1': 'self_quote', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLiquidationSelfQuote', '9': 0, '10': 'selfQuote'},
     {'1': 'stop_loss', '3': 3, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLiquidationStopLoss', '9': 0, '10': 'stopLoss'},
+    {'1': 'opposite_offset', '3': 4, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLiquidationOppositeOffset', '9': 0, '10': 'oppositeOffset'},
   ],
   '8': [
     {'1': 'method'},
@@ -407,7 +408,8 @@ final $typed_data.Uint8List marketMakingLiquidationAmendDescriptor = $convert.ba
     'INaW5pdGlhbFdhaXRNcxJMCgpzZWxmX3F1b3RlGAIgASgLMisua2RvLnYxLm1tLk1hcmtldE1h'
     'a2luZ0xpcXVpZGF0aW9uU2VsZlF1b3RlSABSCXNlbGZRdW90ZRJJCglzdG9wX2xvc3MYAyABKA'
     'syKi5rZG8udjEubW0uTWFya2V0TWFraW5nTGlxdWlkYXRpb25TdG9wTG9zc0gAUghzdG9wTG9z'
-    'c0IICgZtZXRob2Q=');
+    'cxJbCg9vcHBvc2l0ZV9vZmZzZXQYBCABKAsyMC5rZG8udjEubW0uTWFya2V0TWFraW5nTGlxdW'
+    'lkYXRpb25PcHBvc2l0ZU9mZnNldEgAUg5vcHBvc2l0ZU9mZnNldEIICgZtZXRob2Q=');
 
 @$core.Deprecated('Use marketMakingLiquidationSelfQuoteDescriptor instead')
 const MarketMakingLiquidationSelfQuote$json = {
@@ -434,6 +436,19 @@ const MarketMakingLiquidationStopLoss$json = {
 final $typed_data.Uint8List marketMakingLiquidationStopLossDescriptor = $convert.base64Decode(
     'Ch9NYXJrZXRNYWtpbmdMaXF1aWRhdGlvblN0b3BMb3NzEiUKDnRpY2tfdGhyZXNob2xkGAEgAS'
     'gFUg10aWNrVGhyZXNob2xk');
+
+@$core.Deprecated('Use marketMakingLiquidationOppositeOffsetDescriptor instead')
+const MarketMakingLiquidationOppositeOffset$json = {
+  '1': 'MarketMakingLiquidationOppositeOffset',
+  '2': [
+    {'1': 'offset_ticks', '3': 1, '4': 1, '5': 5, '10': 'offsetTicks'},
+  ],
+};
+
+/// Descriptor for `MarketMakingLiquidationOppositeOffset`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingLiquidationOppositeOffsetDescriptor = $convert.base64Decode(
+    'CiVNYXJrZXRNYWtpbmdMaXF1aWRhdGlvbk9wcG9zaXRlT2Zmc2V0EiEKDG9mZnNldF90aWNrcx'
+    'gBIAEoBVILb2Zmc2V0VGlja3M=');
 
 @$core.Deprecated('Use marketMakingFastLiquidationDescriptor instead')
 const MarketMakingFastLiquidation$json = {

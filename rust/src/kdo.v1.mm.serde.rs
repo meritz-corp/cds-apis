@@ -5242,6 +5242,9 @@ impl serde::Serialize for MarketMakingLiquidationAmend {
                 market_making_liquidation_amend::Method::StopLoss(v) => {
                     struct_ser.serialize_field("stop_loss", v)?;
                 }
+                market_making_liquidation_amend::Method::OppositeOffset(v) => {
+                    struct_ser.serialize_field("opposite_offset", v)?;
+                }
             }
         }
         struct_ser.end()
@@ -5260,6 +5263,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationAmend {
             "selfQuote",
             "stop_loss",
             "stopLoss",
+            "opposite_offset",
+            "oppositeOffset",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5267,6 +5272,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationAmend {
             InitialWaitMs,
             SelfQuote,
             StopLoss,
+            OppositeOffset,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5292,6 +5298,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationAmend {
                             "initialWaitMs" | "initial_wait_ms" => Ok(GeneratedField::InitialWaitMs),
                             "selfQuote" | "self_quote" => Ok(GeneratedField::SelfQuote),
                             "stopLoss" | "stop_loss" => Ok(GeneratedField::StopLoss),
+                            "oppositeOffset" | "opposite_offset" => Ok(GeneratedField::OppositeOffset),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5337,6 +5344,13 @@ impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationAmend {
                             method__ = map_.next_value::<::std::option::Option<_>>()?.map(market_making_liquidation_amend::Method::StopLoss)
 ;
                         }
+                        GeneratedField::OppositeOffset => {
+                            if method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("oppositeOffset"));
+                            }
+                            method__ = map_.next_value::<::std::option::Option<_>>()?.map(market_making_liquidation_amend::Method::OppositeOffset)
+;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5349,6 +5363,104 @@ impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationAmend {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingLiquidationAmend", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingLiquidationOppositeOffset {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingLiquidationOppositeOffset", len)?;
+        if true {
+            struct_ser.serialize_field("offset_ticks", &self.offset_ticks)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingLiquidationOppositeOffset {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "offset_ticks",
+            "offsetTicks",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            OffsetTicks,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "offsetTicks" | "offset_ticks" => Ok(GeneratedField::OffsetTicks),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingLiquidationOppositeOffset;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingLiquidationOppositeOffset")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingLiquidationOppositeOffset, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut offset_ticks__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::OffsetTicks => {
+                            if offset_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offsetTicks"));
+                            }
+                            offset_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingLiquidationOppositeOffset {
+                    offset_ticks: offset_ticks__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingLiquidationOppositeOffset", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingLiquidationSelfQuote {

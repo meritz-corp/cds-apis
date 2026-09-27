@@ -361,7 +361,7 @@ pub struct MarketMakingLiquidationAmend {
     #[prost(uint64, tag="1")]
     pub initial_wait_ms: u64,
     /// 자동정정 방법 선택
-    #[prost(oneof="market_making_liquidation_amend::Method", tags="2, 3")]
+    #[prost(oneof="market_making_liquidation_amend::Method", tags="2, 3, 4")]
     pub method: ::core::option::Option<market_making_liquidation_amend::Method>,
 }
 /// Nested message and enum types in `MarketMakingLiquidationAmend`.
@@ -378,6 +378,10 @@ pub mod market_making_liquidation_amend {
         /// 자기 호가 대비 tick_threshold 틱 밀렸을 때 상대측을 강제 크로싱.
         #[prost(message, tag="3")]
         StopLoss(super::MarketMakingLiquidationStopLoss),
+        /// 상대호가 오프셋 정정 방식.
+        /// 상대 최우선호가에서 offset_ticks 틱 물러선 가격 유지 (최우선호가 확보, 상대호가 침범 없음).
+        #[prost(message, tag="4")]
+        OppositeOffset(super::MarketMakingLiquidationOppositeOffset),
     }
 }
 /// 최우선호가 추격 정정 파라미터 (LiquidationAmendMethod::SelfQuote 대응)
@@ -396,6 +400,17 @@ pub struct MarketMakingLiquidationStopLoss {
     /// 자기 발행 가격 기준 n틱 밀렸을 때 반대측 크로싱 공격 정정 발동.
     #[prost(int32, tag="1")]
     pub tick_threshold: i32,
+}
+/// 상대호가 오프셋 정정 파라미터 (LiquidationAmendMethod::OppositeOffset 대응)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingLiquidationOppositeOffset {
+    /// 상대 최우선호가에서 물러설 틱 수 (>= 1). 1 = 상대호가 직전 한 틱까지 붙는다.
+    /// 내 주문 제외 동일측 최우선호가는 한 틱 앞질러 확보하고, 스프레드에 빈 틱이 없으면
+    /// 그 최우선호가에 나란히 붙는다 (상대호가 침범 = 즉시체결 없음).
+    /// 정정은 공격 방향(매수 상향/매도 하향)으로만 한다.
+    #[prost(int32, tag="1")]
+    pub offset_ticks: i32,
 }
 /// 빠른 청산(FastLiquidation) 설정.
 /// 순노출(|net_exposure|) >= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱
