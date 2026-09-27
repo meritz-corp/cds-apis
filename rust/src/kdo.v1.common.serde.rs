@@ -9,6 +9,7 @@ impl serde::Serialize for AmendMethodType {
             Self::Unspecified => "AMEND_METHOD_TYPE_UNSPECIFIED",
             Self::SelfQuote => "AMEND_METHOD_TYPE_SELF_QUOTE",
             Self::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
+            Self::OppositeOffset => "AMEND_METHOD_TYPE_OPPOSITE_OFFSET",
         };
         serializer.serialize_str(variant)
     }
@@ -23,6 +24,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
             "AMEND_METHOD_TYPE_UNSPECIFIED",
             "AMEND_METHOD_TYPE_SELF_QUOTE",
             "AMEND_METHOD_TYPE_STOP_LOSS",
+            "AMEND_METHOD_TYPE_OPPOSITE_OFFSET",
         ];
 
         struct GeneratedVisitor;
@@ -66,6 +68,7 @@ impl<'de> serde::Deserialize<'de> for AmendMethodType {
                     "AMEND_METHOD_TYPE_UNSPECIFIED" => Ok(AmendMethodType::Unspecified),
                     "AMEND_METHOD_TYPE_SELF_QUOTE" => Ok(AmendMethodType::SelfQuote),
                     "AMEND_METHOD_TYPE_STOP_LOSS" => Ok(AmendMethodType::StopLoss),
+                    "AMEND_METHOD_TYPE_OPPOSITE_OFFSET" => Ok(AmendMethodType::OppositeOffset),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

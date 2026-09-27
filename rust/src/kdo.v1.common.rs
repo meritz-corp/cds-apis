@@ -380,6 +380,9 @@ pub enum AmendMethodType {
     SelfQuote = 1,
     /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
     StopLoss = 4,
+    /// 상대호가 오프셋 정정: 상대 최우선호가에서 n틱 물러선 가격 유지
+    /// (내 주문 제외 동일측 최우선호가 확보, 상대호가 침범 없음). n 은 서버 프리셋(기본 2틱).
+    OppositeOffset = 10,
 }
 impl AmendMethodType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -391,6 +394,7 @@ impl AmendMethodType {
             AmendMethodType::Unspecified => "AMEND_METHOD_TYPE_UNSPECIFIED",
             AmendMethodType::SelfQuote => "AMEND_METHOD_TYPE_SELF_QUOTE",
             AmendMethodType::StopLoss => "AMEND_METHOD_TYPE_STOP_LOSS",
+            AmendMethodType::OppositeOffset => "AMEND_METHOD_TYPE_OPPOSITE_OFFSET",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -399,6 +403,7 @@ impl AmendMethodType {
             "AMEND_METHOD_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "AMEND_METHOD_TYPE_SELF_QUOTE" => Some(Self::SelfQuote),
             "AMEND_METHOD_TYPE_STOP_LOSS" => Some(Self::StopLoss),
+            "AMEND_METHOD_TYPE_OPPOSITE_OFFSET" => Some(Self::OppositeOffset),
             _ => None,
         }
     }

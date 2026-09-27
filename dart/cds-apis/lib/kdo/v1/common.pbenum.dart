@@ -208,11 +208,15 @@ class AmendMethodType extends $pb.ProtobufEnum {
   static const AmendMethodType AMEND_METHOD_TYPE_SELF_QUOTE = AmendMethodType._(1, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_SELF_QUOTE');
   /// 손절 정정: tick_threshold 이상 불리해지면 시장가로 전환
   static const AmendMethodType AMEND_METHOD_TYPE_STOP_LOSS = AmendMethodType._(4, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_STOP_LOSS');
+  /// 상대호가 오프셋 정정: 상대 최우선호가에서 n틱 물러선 가격 유지
+  /// (내 주문 제외 동일측 최우선호가 확보, 상대호가 침범 없음). n 은 서버 프리셋(기본 2틱).
+  static const AmendMethodType AMEND_METHOD_TYPE_OPPOSITE_OFFSET = AmendMethodType._(10, _omitEnumNames ? '' : 'AMEND_METHOD_TYPE_OPPOSITE_OFFSET');
 
   static const $core.List<AmendMethodType> values = <AmendMethodType> [
     AMEND_METHOD_TYPE_UNSPECIFIED,
     AMEND_METHOD_TYPE_SELF_QUOTE,
     AMEND_METHOD_TYPE_STOP_LOSS,
+    AMEND_METHOD_TYPE_OPPOSITE_OFFSET,
   ];
 
   static final $core.Map<$core.int, AmendMethodType> _byValue = $pb.ProtobufEnum.initByValue(values);
