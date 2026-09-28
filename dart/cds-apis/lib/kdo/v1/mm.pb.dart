@@ -2013,6 +2013,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     $fixnum.Int64? triggerQuantity,
     $core.double? priceSkewUnit,
     $fixnum.Int64? limitQuantity,
+    $core.double? minProfitUnit,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -2020,6 +2021,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     if (triggerQuantity != null) result.triggerQuantity = triggerQuantity;
     if (priceSkewUnit != null) result.priceSkewUnit = priceSkewUnit;
     if (limitQuantity != null) result.limitQuantity = limitQuantity;
+    if (minProfitUnit != null) result.minProfitUnit = minProfitUnit;
     return result;
   }
 
@@ -2034,6 +2036,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'triggerQuantity')
     ..a<$core.double>(7, _omitFieldNames ? '' : 'priceSkewUnit', $pb.PbFieldType.OD)
     ..aInt64(8, _omitFieldNames ? '' : 'limitQuantity')
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'minProfitUnit', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2103,6 +2106,18 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   $core.bool hasLimitQuantity() => $_has(4);
   @$pb.TagNumber(8)
   void clearLimitQuantity() => $_clearField(8);
+
+  /// opportunistic close 최소 이익폭 (원, 소수 허용). 현재 순포지션 취득단가 대비 이 값을 초과하는
+  /// 이익이 날 때만 기회 청산 FAK 를 발사한다. 0(기본) = 임계 없음 — 기존 동작과 동일.
+  /// price_skew_unit 과 같은 원 단위이며 틱 배수가 아니어도 된다.
+  @$pb.TagNumber(9)
+  $core.double get minProfitUnit => $_getN(5);
+  @$pb.TagNumber(9)
+  set minProfitUnit($core.double value) => $_setDouble(5, value);
+  @$pb.TagNumber(9)
+  $core.bool hasMinProfitUnit() => $_has(5);
+  @$pb.TagNumber(9)
+  void clearMinProfitUnit() => $_clearField(9);
 }
 
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)

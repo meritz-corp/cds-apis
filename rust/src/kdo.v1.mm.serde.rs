@@ -4862,6 +4862,9 @@ impl serde::Serialize for MarketMakingExposureBalancer {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4882,6 +4885,9 @@ impl serde::Serialize for MarketMakingExposureBalancer {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("limit_quantity", ToString::to_string(&self.limit_quantity).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("min_profit_unit", &self.min_profit_unit)?;
+        }
         struct_ser.end()
     }
 }
@@ -4901,6 +4907,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             "priceSkewUnit",
             "limit_quantity",
             "limitQuantity",
+            "min_profit_unit",
+            "minProfitUnit",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4910,6 +4918,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             TriggerQuantity,
             PriceSkewUnit,
             LimitQuantity,
+            MinProfitUnit,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4937,6 +4946,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                             "triggerQuantity" | "trigger_quantity" => Ok(GeneratedField::TriggerQuantity),
                             "priceSkewUnit" | "price_skew_unit" => Ok(GeneratedField::PriceSkewUnit),
                             "limitQuantity" | "limit_quantity" => Ok(GeneratedField::LimitQuantity),
+                            "minProfitUnit" | "min_profit_unit" => Ok(GeneratedField::MinProfitUnit),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4961,6 +4971,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                 let mut trigger_quantity__ = None;
                 let mut price_skew_unit__ = None;
                 let mut limit_quantity__ = None;
+                let mut min_profit_unit__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4999,6 +5010,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::MinProfitUnit => {
+                            if min_profit_unit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("minProfitUnit"));
+                            }
+                            min_profit_unit__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5010,6 +5029,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                     trigger_quantity: trigger_quantity__.unwrap_or_default(),
                     price_skew_unit: price_skew_unit__.unwrap_or_default(),
                     limit_quantity: limit_quantity__.unwrap_or_default(),
+                    min_profit_unit: min_profit_unit__.unwrap_or_default(),
                 })
             }
         }
