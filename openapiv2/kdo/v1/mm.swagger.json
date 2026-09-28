@@ -1676,10 +1676,15 @@
           "format": "int64",
           "title": "hard zone (절대 수량). 이 수량에서 같은 방향 수량 0 + shift 상한 ((limit_quantity/trigger_quantity) × price_skew_unit)"
         },
-        "minProfitUnit": {
+        "opportunisticTriggerUnit": {
           "type": "number",
           "format": "double",
-          "description": "opportunistic close 최소 이익폭 (원, 소수 허용). 현재 순포지션 취득단가 대비 이 값을 초과하는\n이익이 날 때만 기회 청산 FAK 를 발사한다. 0(기본) = 임계 없음 — 기존 동작과 동일.\nprice_skew_unit 과 같은 원 단위이며 틱 배수가 아니어도 된다."
+          "description": "opportunistic close 발동 최소 이익폭 (원, 소수 허용). 현재 순포지션 취득단가 대비 이 값을\n초과하는 이익이 날 때만 기회 청산 FAK 를 발사한다. 0(기본) = 임계 없음.\nprice_skew_unit 과 같은 원 단위이며 틱 배수가 아니어도 된다."
+        },
+        "opportunisticTriggerQuantity": {
+          "type": "string",
+          "format": "int64",
+          "description": "opportunistic close 발동 최소 순노출 수량 (주). |net_exposure| 가 이 값 미만이면 기회 청산을\n발사하지 않는다(게이트 — 증량하지 않는다). 0(기본) = 임계 없음.\n같은 메시지의 trigger_quantity(수량 축소·가격 스큐 임계)와는 무관한 별도 값이다."
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"

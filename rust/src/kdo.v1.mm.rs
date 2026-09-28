@@ -458,11 +458,16 @@ pub struct MarketMakingExposureBalancer {
     /// hard zone (절대 수량). 이 수량에서 같은 방향 수량 0 + shift 상한 ((limit_quantity/trigger_quantity) × price_skew_unit)
     #[prost(int64, tag="8")]
     pub limit_quantity: i64,
-    /// opportunistic close 최소 이익폭 (원, 소수 허용). 현재 순포지션 취득단가 대비 이 값을 초과하는
-    /// 이익이 날 때만 기회 청산 FAK 를 발사한다. 0(기본) = 임계 없음 — 기존 동작과 동일.
+    /// opportunistic close 발동 최소 이익폭 (원, 소수 허용). 현재 순포지션 취득단가 대비 이 값을
+    /// 초과하는 이익이 날 때만 기회 청산 FAK 를 발사한다. 0(기본) = 임계 없음.
     /// price_skew_unit 과 같은 원 단위이며 틱 배수가 아니어도 된다.
     #[prost(double, tag="9")]
-    pub min_profit_unit: f64,
+    pub opportunistic_trigger_unit: f64,
+    /// opportunistic close 발동 최소 순노출 수량 (주). |net_exposure| 가 이 값 미만이면 기회 청산을
+    /// 발사하지 않는다(게이트 — 증량하지 않는다). 0(기본) = 임계 없음.
+    /// 같은 메시지의 trigger_quantity(수량 축소·가격 스큐 임계)와는 무관한 별도 값이다.
+    #[prost(int64, tag="10")]
+    pub opportunistic_trigger_quantity: i64,
 }
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)
 #[allow(clippy::derive_partial_eq_without_eq)]

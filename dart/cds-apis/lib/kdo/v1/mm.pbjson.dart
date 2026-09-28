@@ -480,7 +480,8 @@ const MarketMakingExposureBalancer$json = {
     {'1': 'trigger_quantity', '3': 6, '4': 1, '5': 3, '10': 'triggerQuantity'},
     {'1': 'price_skew_unit', '3': 7, '4': 1, '5': 1, '10': 'priceSkewUnit'},
     {'1': 'limit_quantity', '3': 8, '4': 1, '5': 3, '10': 'limitQuantity'},
-    {'1': 'min_profit_unit', '3': 9, '4': 1, '5': 1, '10': 'minProfitUnit'},
+    {'1': 'opportunistic_trigger_unit', '3': 9, '4': 1, '5': 1, '10': 'opportunisticTriggerUnit'},
+    {'1': 'opportunistic_trigger_quantity', '3': 10, '4': 1, '5': 3, '10': 'opportunisticTriggerQuantity'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -496,9 +497,10 @@ final $typed_data.Uint8List marketMakingExposureBalancerDescriptor = $convert.ba
     'QSMwoVb3Bwb3J0dW5pc3RpY19lbmFibGVkGAUgASgIUhRvcHBvcnR1bmlzdGljRW5hYmxlZBIp'
     'ChB0cmlnZ2VyX3F1YW50aXR5GAYgASgDUg90cmlnZ2VyUXVhbnRpdHkSJgoPcHJpY2Vfc2tld1'
     '91bml0GAcgASgBUg1wcmljZVNrZXdVbml0EiUKDmxpbWl0X3F1YW50aXR5GAggASgDUg1saW1p'
-    'dFF1YW50aXR5EiYKD21pbl9wcm9maXRfdW5pdBgJIAEoAVINbWluUHJvZml0VW5pdEoECAIQA0'
-    'oECAMQBEoECAQQBVIQdHJpZ2dlcl9tdWx0aXBsZVIQcHJpY2Vfc2tld190aWNrc1IObGltaXRf'
-    'bXVsdGlwbGU=');
+    'dFF1YW50aXR5EjwKGm9wcG9ydHVuaXN0aWNfdHJpZ2dlcl91bml0GAkgASgBUhhvcHBvcnR1bm'
+    'lzdGljVHJpZ2dlclVuaXQSRAoeb3Bwb3J0dW5pc3RpY190cmlnZ2VyX3F1YW50aXR5GAogASgD'
+    'UhxvcHBvcnR1bmlzdGljVHJpZ2dlclF1YW50aXR5SgQIAhADSgQIAxAESgQIBBAFUhB0cmlnZ2'
+    'VyX211bHRpcGxlUhBwcmljZV9za2V3X3RpY2tzUg5saW1pdF9tdWx0aXBsZQ==');
 
 @$core.Deprecated('Use marketMakingQuantityLimitDescriptor instead')
 const MarketMakingQuantityLimit$json = {

@@ -2013,7 +2013,8 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     $fixnum.Int64? triggerQuantity,
     $core.double? priceSkewUnit,
     $fixnum.Int64? limitQuantity,
-    $core.double? minProfitUnit,
+    $core.double? opportunisticTriggerUnit,
+    $fixnum.Int64? opportunisticTriggerQuantity,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -2021,7 +2022,8 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     if (triggerQuantity != null) result.triggerQuantity = triggerQuantity;
     if (priceSkewUnit != null) result.priceSkewUnit = priceSkewUnit;
     if (limitQuantity != null) result.limitQuantity = limitQuantity;
-    if (minProfitUnit != null) result.minProfitUnit = minProfitUnit;
+    if (opportunisticTriggerUnit != null) result.opportunisticTriggerUnit = opportunisticTriggerUnit;
+    if (opportunisticTriggerQuantity != null) result.opportunisticTriggerQuantity = opportunisticTriggerQuantity;
     return result;
   }
 
@@ -2036,7 +2038,8 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     ..aInt64(6, _omitFieldNames ? '' : 'triggerQuantity')
     ..a<$core.double>(7, _omitFieldNames ? '' : 'priceSkewUnit', $pb.PbFieldType.OD)
     ..aInt64(8, _omitFieldNames ? '' : 'limitQuantity')
-    ..a<$core.double>(9, _omitFieldNames ? '' : 'minProfitUnit', $pb.PbFieldType.OD)
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'opportunisticTriggerUnit', $pb.PbFieldType.OD)
+    ..aInt64(10, _omitFieldNames ? '' : 'opportunisticTriggerQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -2107,17 +2110,29 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearLimitQuantity() => $_clearField(8);
 
-  /// opportunistic close 최소 이익폭 (원, 소수 허용). 현재 순포지션 취득단가 대비 이 값을 초과하는
-  /// 이익이 날 때만 기회 청산 FAK 를 발사한다. 0(기본) = 임계 없음 — 기존 동작과 동일.
+  /// opportunistic close 발동 최소 이익폭 (원, 소수 허용). 현재 순포지션 취득단가 대비 이 값을
+  /// 초과하는 이익이 날 때만 기회 청산 FAK 를 발사한다. 0(기본) = 임계 없음.
   /// price_skew_unit 과 같은 원 단위이며 틱 배수가 아니어도 된다.
   @$pb.TagNumber(9)
-  $core.double get minProfitUnit => $_getN(5);
+  $core.double get opportunisticTriggerUnit => $_getN(5);
   @$pb.TagNumber(9)
-  set minProfitUnit($core.double value) => $_setDouble(5, value);
+  set opportunisticTriggerUnit($core.double value) => $_setDouble(5, value);
   @$pb.TagNumber(9)
-  $core.bool hasMinProfitUnit() => $_has(5);
+  $core.bool hasOpportunisticTriggerUnit() => $_has(5);
   @$pb.TagNumber(9)
-  void clearMinProfitUnit() => $_clearField(9);
+  void clearOpportunisticTriggerUnit() => $_clearField(9);
+
+  /// opportunistic close 발동 최소 순노출 수량 (주). |net_exposure| 가 이 값 미만이면 기회 청산을
+  /// 발사하지 않는다(게이트 — 증량하지 않는다). 0(기본) = 임계 없음.
+  /// 같은 메시지의 trigger_quantity(수량 축소·가격 스큐 임계)와는 무관한 별도 값이다.
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get opportunisticTriggerQuantity => $_getI64(6);
+  @$pb.TagNumber(10)
+  set opportunisticTriggerQuantity($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(10)
+  $core.bool hasOpportunisticTriggerQuantity() => $_has(6);
+  @$pb.TagNumber(10)
+  void clearOpportunisticTriggerQuantity() => $_clearField(10);
 }
 
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)
