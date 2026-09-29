@@ -936,6 +936,7 @@ const ExposureBalancerState$json = {
     {'1': 'bid_scale', '3': 3, '4': 1, '5': 1, '10': 'bidScale'},
     {'1': 'ask_scale', '3': 4, '4': 1, '5': 1, '10': 'askScale'},
     {'1': 'price_shift', '3': 5, '4': 1, '5': 1, '10': 'priceShift'},
+    {'1': 'position_avg_price', '3': 6, '4': 1, '5': 1, '10': 'positionAvgPrice'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -947,8 +948,8 @@ const ExposureBalancerState$json = {
 final $typed_data.Uint8List exposureBalancerStateDescriptor = $convert.base64Decode(
     'ChVFeHBvc3VyZUJhbGFuY2VyU3RhdGUSIQoMbmV0X2V4cG9zdXJlGAEgASgDUgtuZXRFeHBvc3'
     'VyZRIbCgliaWRfc2NhbGUYAyABKAFSCGJpZFNjYWxlEhsKCWFza19zY2FsZRgEIAEoAVIIYXNr'
-    'U2NhbGUSHwoLcHJpY2Vfc2hpZnQYBSABKAFSCnByaWNlU2hpZnRKBAgCEANSEXByaWNlX3NoaW'
-    'Z0X3RpY2tz');
+    'U2NhbGUSHwoLcHJpY2Vfc2hpZnQYBSABKAFSCnByaWNlU2hpZnQSLAoScG9zaXRpb25fYXZnX3'
+    'ByaWNlGAYgASgBUhBwb3NpdGlvbkF2Z1ByaWNlSgQIAhADUhFwcmljZV9zaGlmdF90aWNrcw==');
 
 @$core.Deprecated('Use mmStateUpdateDescriptor instead')
 const MmStateUpdate$json = {

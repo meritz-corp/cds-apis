@@ -721,6 +721,9 @@ impl serde::Serialize for ExposureBalancerState {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.ExposureBalancerState", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -735,6 +738,9 @@ impl serde::Serialize for ExposureBalancerState {
         }
         if true {
             struct_ser.serialize_field("price_shift", &self.price_shift)?;
+        }
+        if true {
+            struct_ser.serialize_field("position_avg_price", &self.position_avg_price)?;
         }
         struct_ser.end()
     }
@@ -754,6 +760,8 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
             "askScale",
             "price_shift",
             "priceShift",
+            "position_avg_price",
+            "positionAvgPrice",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -762,6 +770,7 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
             BidScale,
             AskScale,
             PriceShift,
+            PositionAvgPrice,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -788,6 +797,7 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                             "bidScale" | "bid_scale" => Ok(GeneratedField::BidScale),
                             "askScale" | "ask_scale" => Ok(GeneratedField::AskScale),
                             "priceShift" | "price_shift" => Ok(GeneratedField::PriceShift),
+                            "positionAvgPrice" | "position_avg_price" => Ok(GeneratedField::PositionAvgPrice),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -811,6 +821,7 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                 let mut bid_scale__ = None;
                 let mut ask_scale__ = None;
                 let mut price_shift__ = None;
+                let mut position_avg_price__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::NetExposure => {
@@ -845,6 +856,14 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PositionAvgPrice => {
+                            if position_avg_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("positionAvgPrice"));
+                            }
+                            position_avg_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -855,6 +874,7 @@ impl<'de> serde::Deserialize<'de> for ExposureBalancerState {
                     bid_scale: bid_scale__.unwrap_or_default(),
                     ask_scale: ask_scale__.unwrap_or_default(),
                     price_shift: price_shift__.unwrap_or_default(),
+                    position_avg_price: position_avg_price__.unwrap_or_default(),
                 })
             }
         }

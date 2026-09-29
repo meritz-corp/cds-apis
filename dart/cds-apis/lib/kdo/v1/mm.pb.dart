@@ -4062,12 +4062,14 @@ class ExposureBalancerState extends $pb.GeneratedMessage {
     $core.double? bidScale,
     $core.double? askScale,
     $core.double? priceShift,
+    $core.double? positionAvgPrice,
   }) {
     final result = create();
     if (netExposure != null) result.netExposure = netExposure;
     if (bidScale != null) result.bidScale = bidScale;
     if (askScale != null) result.askScale = askScale;
     if (priceShift != null) result.priceShift = priceShift;
+    if (positionAvgPrice != null) result.positionAvgPrice = positionAvgPrice;
     return result;
   }
 
@@ -4081,6 +4083,7 @@ class ExposureBalancerState extends $pb.GeneratedMessage {
     ..a<$core.double>(3, _omitFieldNames ? '' : 'bidScale', $pb.PbFieldType.OD)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'askScale', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'priceShift', $pb.PbFieldType.OD)
+    ..a<$core.double>(6, _omitFieldNames ? '' : 'positionAvgPrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -4140,6 +4143,17 @@ class ExposureBalancerState extends $pb.GeneratedMessage {
   $core.bool hasPriceShift() => $_has(3);
   @$pb.TagNumber(5)
   void clearPriceShift() => $_clearField(5);
+
+  /// 현재 순포지션의 평균단가 (원, 소수 가능). 기회 청산(opportunistic close) 의 손익 기준가.
+  /// 0 = 포지션 없음(기준 미확정). 세션 누적 평균이 아니라 지금 열려 있는 방향을 만든 체결들의 가중평균.
+  @$pb.TagNumber(6)
+  $core.double get positionAvgPrice => $_getN(4);
+  @$pb.TagNumber(6)
+  set positionAvgPrice($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(6)
+  $core.bool hasPositionAvgPrice() => $_has(4);
+  @$pb.TagNumber(6)
+  void clearPositionAvgPrice() => $_clearField(6);
 }
 
 /// MM 엔진 런타임 상태 델타 메시지.
