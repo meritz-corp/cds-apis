@@ -497,7 +497,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(28)
   void clearQtyWeightedMidLevels() => $_clearField(28);
 
-  /// 빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱 공격적인
+  /// 빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱(0 이상) 공격적인
   /// FAS 주문으로 전량 청산 + 자동정정 추격.
   /// enabled 시 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지),
   /// exposure_balancer 활성 필수.
@@ -1888,7 +1888,7 @@ class MarketMakingLiquidationOppositeOffset extends $pb.GeneratedMessage {
 
 /// 빠른 청산(FastLiquidation) 설정.
 /// 순노출(|net_exposure|) >= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱
-/// 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.
+/// (>= 0, 0 = 자기 호가 그대로) 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.
 /// 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수.
 class MarketMakingFastLiquidation extends $pb.GeneratedMessage {
   factory MarketMakingFastLiquidation({
@@ -1961,8 +1961,9 @@ class MarketMakingFastLiquidation extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearTriggerQuantity() => $_clearField(2);
 
-  /// 자기 호가 대비 공격적으로 붙일 틱 수 (>= 1).
-  /// 서버 검증: aggressive_ticks < 2×base_half_ticks (자전 방지).
+  /// 자기 호가 대비 공격적으로 붙일 틱 수 (>= 0). 0 = 자기 호가 그대로 발주(가격 양보 없음,
+  /// 이후 자동정정이 추격). 서버 검증: aggressive_ticks < 2×base_half_ticks (자전 방지).
+  /// optional: presence 로 "설정(0 포함) vs 미설정" 구분 — 미설정 시 서버 기본값 1 적용.
   @$pb.TagNumber(3)
   $core.int get aggressiveTicks => $_getIZ(2);
   @$pb.TagNumber(3)

@@ -114,7 +114,7 @@ pub struct MarketMakingConfiguration {
     /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (use_qty_weighted_mid 와 동일 패턴).
     #[prost(uint32, optional, tag="28")]
     pub qty_weighted_mid_levels: ::core::option::Option<u32>,
-    /// 빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱 공격적인
+    /// 빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱(0 이상) 공격적인
     /// FAS 주문으로 전량 청산 + 자동정정 추격.
     /// enabled 시 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지),
     /// exposure_balancer 활성 필수.
@@ -414,7 +414,7 @@ pub struct MarketMakingLiquidationOppositeOffset {
 }
 /// 빠른 청산(FastLiquidation) 설정.
 /// 순노출(|net_exposure|) >= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱
-/// 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.
+/// (>= 0, 0 = 자기 호가 그대로) 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.
 /// 서버 검증 조건: aggressive_ticks < 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -425,10 +425,11 @@ pub struct MarketMakingFastLiquidation {
     /// 청산 트리거 최소 순노출 (주). |net_exposure| >= trigger_quantity 이면 청산 발동.
     #[prost(int64, tag="2")]
     pub trigger_quantity: i64,
-    /// 자기 호가 대비 공격적으로 붙일 틱 수 (>= 1).
-    /// 서버 검증: aggressive_ticks < 2×base_half_ticks (자전 방지).
-    #[prost(int32, tag="3")]
-    pub aggressive_ticks: i32,
+    /// 자기 호가 대비 공격적으로 붙일 틱 수 (>= 0). 0 = 자기 호가 그대로 발주(가격 양보 없음,
+    /// 이후 자동정정이 추격). 서버 검증: aggressive_ticks < 2×base_half_ticks (자전 방지).
+    /// optional: presence 로 "설정(0 포함) vs 미설정" 구분 — 미설정 시 서버 기본값 1 적용.
+    #[prost(int32, optional, tag="3")]
+    pub aggressive_ticks: ::core::option::Option<i32>,
     /// 청산 주문 종결 후 재발동까지 대기 (ms).
     #[prost(uint64, tag="4")]
     pub cooldown_ms: u64,

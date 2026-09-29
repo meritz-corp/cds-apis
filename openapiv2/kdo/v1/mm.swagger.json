@@ -1619,7 +1619,7 @@
         },
         "fastLiquidation": {
           "$ref": "#/definitions/mmMarketMakingFastLiquidation",
-          "description": "빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱 공격적인\nFAS 주문으로 전량 청산 + 자동정정 추격.\nenabled 시 서버 검증 조건: aggressive_ticks \u003c 2×base_half_ticks (자전 방지),\nexposure_balancer 활성 필수.\nNULL/미설정 = 비활성. optional: presence 로 \"설정 vs 미변경\" 구분 (exposure_balancer 와 동일 패턴)."
+          "description": "빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱(0 이상) 공격적인\nFAS 주문으로 전량 청산 + 자동정정 추격.\nenabled 시 서버 검증 조건: aggressive_ticks \u003c 2×base_half_ticks (자전 방지),\nexposure_balancer 활성 필수.\nNULL/미설정 = 비활성. optional: presence 로 \"설정 vs 미변경\" 구분 (exposure_balancer 와 동일 패턴)."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -1709,7 +1709,7 @@
         "aggressiveTicks": {
           "type": "integer",
           "format": "int32",
-          "description": "자기 호가 대비 공격적으로 붙일 틱 수 (\u003e= 1).\n서버 검증: aggressive_ticks \u003c 2×base_half_ticks (자전 방지)."
+          "description": "자기 호가 대비 공격적으로 붙일 틱 수 (\u003e= 0). 0 = 자기 호가 그대로 발주(가격 양보 없음,\n이후 자동정정이 추격). 서버 검증: aggressive_ticks \u003c 2×base_half_ticks (자전 방지).\noptional: presence 로 \"설정(0 포함) vs 미설정\" 구분 — 미설정 시 서버 기본값 1 적용."
         },
         "cooldownMs": {
           "type": "string",
@@ -1726,7 +1726,7 @@
           "description": "자동정정 추격 설정."
         }
       },
-      "description": "빠른 청산(FastLiquidation) 설정.\n순노출(|net_exposure|) \u003e= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱\n공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.\n서버 검증 조건: aggressive_ticks \u003c 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수."
+      "description": "빠른 청산(FastLiquidation) 설정.\n순노출(|net_exposure|) \u003e= trigger_quantity 이면 자기 호가 대비 aggressive_ticks 틱\n(\u003e= 0, 0 = 자기 호가 그대로) 공격적인 FAS 주문으로 전량 청산 + 자동정정 추격.\n서버 검증 조건: aggressive_ticks \u003c 2×base_half_ticks (자전 방지), exposure_balancer 활성 필수."
     },
     "mmMarketMakingLiquidationAmend": {
       "type": "object",

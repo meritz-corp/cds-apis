@@ -5113,8 +5113,8 @@ impl serde::Serialize for MarketMakingFastLiquidation {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("trigger_quantity", ToString::to_string(&self.trigger_quantity).as_str())?;
         }
-        if true {
-            struct_ser.serialize_field("aggressive_ticks", &self.aggressive_ticks)?;
+        if let Some(v) = self.aggressive_ticks.as_ref() {
+            struct_ser.serialize_field("aggressive_ticks", v)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -5233,7 +5233,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingFastLiquidation {
                                 return Err(serde::de::Error::duplicate_field("aggressiveTicks"));
                             }
                             aggressive_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
                         GeneratedField::CooldownMs => {
@@ -5266,7 +5266,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingFastLiquidation {
                 Ok(MarketMakingFastLiquidation {
                     enabled: enabled__.unwrap_or_default(),
                     trigger_quantity: trigger_quantity__.unwrap_or_default(),
-                    aggressive_ticks: aggressive_ticks__.unwrap_or_default(),
+                    aggressive_ticks: aggressive_ticks__,
                     cooldown_ms: cooldown_ms__.unwrap_or_default(),
                     max_active_ms: max_active_ms__.unwrap_or_default(),
                     amend: amend__,

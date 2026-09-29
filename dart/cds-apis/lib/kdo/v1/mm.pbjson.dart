@@ -456,20 +456,24 @@ const MarketMakingFastLiquidation$json = {
   '2': [
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'trigger_quantity', '3': 2, '4': 1, '5': 3, '10': 'triggerQuantity'},
-    {'1': 'aggressive_ticks', '3': 3, '4': 1, '5': 5, '10': 'aggressiveTicks'},
+    {'1': 'aggressive_ticks', '3': 3, '4': 1, '5': 5, '9': 0, '10': 'aggressiveTicks', '17': true},
     {'1': 'cooldown_ms', '3': 4, '4': 1, '5': 4, '10': 'cooldownMs'},
     {'1': 'max_active_ms', '3': 5, '4': 1, '5': 4, '10': 'maxActiveMs'},
     {'1': 'amend', '3': 6, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLiquidationAmend', '10': 'amend'},
+  ],
+  '8': [
+    {'1': '_aggressive_ticks'},
   ],
 };
 
 /// Descriptor for `MarketMakingFastLiquidation`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingFastLiquidationDescriptor = $convert.base64Decode(
     'ChtNYXJrZXRNYWtpbmdGYXN0TGlxdWlkYXRpb24SGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZB'
-    'IpChB0cmlnZ2VyX3F1YW50aXR5GAIgASgDUg90cmlnZ2VyUXVhbnRpdHkSKQoQYWdncmVzc2l2'
-    'ZV90aWNrcxgDIAEoBVIPYWdncmVzc2l2ZVRpY2tzEh8KC2Nvb2xkb3duX21zGAQgASgEUgpjb2'
-    '9sZG93bk1zEiIKDW1heF9hY3RpdmVfbXMYBSABKARSC21heEFjdGl2ZU1zEj0KBWFtZW5kGAYg'
-    'ASgLMicua2RvLnYxLm1tLk1hcmtldE1ha2luZ0xpcXVpZGF0aW9uQW1lbmRSBWFtZW5k');
+    'IpChB0cmlnZ2VyX3F1YW50aXR5GAIgASgDUg90cmlnZ2VyUXVhbnRpdHkSLgoQYWdncmVzc2l2'
+    'ZV90aWNrcxgDIAEoBUgAUg9hZ2dyZXNzaXZlVGlja3OIAQESHwoLY29vbGRvd25fbXMYBCABKA'
+    'RSCmNvb2xkb3duTXMSIgoNbWF4X2FjdGl2ZV9tcxgFIAEoBFILbWF4QWN0aXZlTXMSPQoFYW1l'
+    'bmQYBiABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5nTGlxdWlkYXRpb25BbWVuZFIFYW1lbm'
+    'RCEwoRX2FnZ3Jlc3NpdmVfdGlja3M=');
 
 @$core.Deprecated('Use marketMakingExposureBalancerDescriptor instead')
 const MarketMakingExposureBalancer$json = {
