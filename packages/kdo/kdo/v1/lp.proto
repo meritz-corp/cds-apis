@@ -201,6 +201,10 @@ message EtfLp {
 
   // 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
   bool ask_enabled = 25;
+
+  // 현재 LP 런타임 상태 (응답 전용 — DB 비저장, 런타임 context 에서 derive).
+  // context 미등록(enabled=false 등으로 서버에 등록되지 않은) LP 는 IDLE.
+  EtfLpState state = 26;
 }
 
 // 매수/매도 수량 한도

@@ -70,6 +70,10 @@ pub struct EtfLp {
     /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
     #[prost(bool, tag="25")]
     pub ask_enabled: bool,
+    /// 현재 LP 런타임 상태 (응답 전용 — DB 비저장, 런타임 context 에서 derive).
+    /// context 미등록(enabled=false 등으로 서버에 등록되지 않은) LP 는 IDLE.
+    #[prost(enumeration="EtfLpState", tag="26")]
+    pub state: i32,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]

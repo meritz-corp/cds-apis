@@ -113,6 +113,7 @@ const EtfLp$json = {
     {'1': 'portfolio_id', '3': 23, '4': 1, '5': 5, '10': 'portfolioId'},
     {'1': 'bid_enabled', '3': 24, '4': 1, '5': 8, '10': 'bidEnabled'},
     {'1': 'ask_enabled', '3': 25, '4': 1, '5': 8, '10': 'askEnabled'},
+    {'1': 'state', '3': 26, '4': 1, '5': 14, '6': '.kdo.v1.lp.EtfLpState', '10': 'state'},
   ],
   '8': [
     {'1': '_bid_adjustment'},
@@ -147,10 +148,11 @@ final $typed_data.Uint8List etfLpDescriptor = $convert.base64Decode(
     'aWNpbmdfc291cmNlX2xpcXVpZGl0eV9pbWJhbGFuY2VfZ3VhcmRfZW5hYmxlZBgWIAEoCFIrcH'
     'JpY2luZ1NvdXJjZUxpcXVpZGl0eUltYmFsYW5jZUd1YXJkRW5hYmxlZBIhCgxwb3J0Zm9saW9f'
     'aWQYFyABKAVSC3BvcnRmb2xpb0lkEh8KC2JpZF9lbmFibGVkGBggASgIUgpiaWRFbmFibGVkEh'
-    '8KC2Fza19lbmFibGVkGBkgASgIUgphc2tFbmFibGVkQhEKD19iaWRfYWRqdXN0bWVudEIRCg9f'
-    'YXNrX2FkanVzdG1lbnRCEwoRX21vbWVudHVtX2VuYWJsZWRCEgoQX21vbWVudHVtX3dpbmRvd0'
-    'IXChVfbW9tZW50dW1fc2Vuc2l0aXZpdHlCEQoPX3F1YW50aXR5X2xpbWl0QhQKEl9wcmVjb21w'
-    'dXRlX3BvbGljeUoECAcQCA==');
+    '8KC2Fza19lbmFibGVkGBkgASgIUgphc2tFbmFibGVkEisKBXN0YXRlGBogASgOMhUua2RvLnYx'
+    'LmxwLkV0ZkxwU3RhdGVSBXN0YXRlQhEKD19iaWRfYWRqdXN0bWVudEIRCg9fYXNrX2FkanVzdG'
+    '1lbnRCEwoRX21vbWVudHVtX2VuYWJsZWRCEgoQX21vbWVudHVtX3dpbmRvd0IXChVfbW9tZW50'
+    'dW1fc2Vuc2l0aXZpdHlCEQoPX3F1YW50aXR5X2xpbWl0QhQKEl9wcmVjb21wdXRlX3BvbGljeU'
+    'oECAcQCA==');
 
 @$core.Deprecated('Use etfLpQuantityLimitDescriptor instead')
 const EtfLpQuantityLimit$json = {

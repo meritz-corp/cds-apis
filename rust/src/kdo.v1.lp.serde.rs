@@ -413,6 +413,9 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -488,6 +491,11 @@ impl serde::Serialize for EtfLp {
         if true {
             struct_ser.serialize_field("ask_enabled", &self.ask_enabled)?;
         }
+        if true {
+            let v = EtfLpState::try_from(self.state)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
+            struct_ser.serialize_field("state", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -538,6 +546,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
+            "state",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -564,6 +573,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             PortfolioId,
             BidEnabled,
             AskEnabled,
+            State,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -608,6 +618,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "portfolioId" | "portfolio_id" => Ok(GeneratedField::PortfolioId),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
+                            "state" => Ok(GeneratedField::State),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -649,6 +660,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut portfolio_id__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
+                let mut state__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -805,6 +817,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             }
                             ask_enabled__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::State => {
+                            if state__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("state"));
+                            }
+                            state__ = Some(map_.next_value::<EtfLpState>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -833,6 +851,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     portfolio_id: portfolio_id__.unwrap_or_default(),
                     bid_enabled: bid_enabled__.unwrap_or_default(),
                     ask_enabled: ask_enabled__.unwrap_or_default(),
+                    state: state__.unwrap_or_default(),
                 })
             }
         }

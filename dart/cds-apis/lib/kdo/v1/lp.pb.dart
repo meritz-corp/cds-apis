@@ -47,6 +47,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.int? portfolioId,
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
+    EtfLpState? state,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -71,6 +72,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (portfolioId != null) result.portfolioId = portfolioId;
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
+    if (state != null) result.state = state;
     return result;
   }
 
@@ -102,6 +104,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..a<$core.int>(23, _omitFieldNames ? '' : 'portfolioId', $pb.PbFieldType.O3)
     ..aOB(24, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(25, _omitFieldNames ? '' : 'askEnabled')
+    ..e<EtfLpState>(26, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
     ..hasRequiredFields = false
   ;
 
@@ -346,6 +349,17 @@ class EtfLp extends $pb.GeneratedMessage {
   $core.bool hasAskEnabled() => $_has(21);
   @$pb.TagNumber(25)
   void clearAskEnabled() => $_clearField(25);
+
+  /// 현재 LP 런타임 상태 (응답 전용 — DB 비저장, 런타임 context 에서 derive).
+  /// context 미등록(enabled=false 등으로 서버에 등록되지 않은) LP 는 IDLE.
+  @$pb.TagNumber(26)
+  EtfLpState get state => $_getN(22);
+  @$pb.TagNumber(26)
+  set state(EtfLpState value) => $_setField(26, value);
+  @$pb.TagNumber(26)
+  $core.bool hasState() => $_has(22);
+  @$pb.TagNumber(26)
+  void clearState() => $_clearField(26);
 }
 
 /// 매수/매도 수량 한도
