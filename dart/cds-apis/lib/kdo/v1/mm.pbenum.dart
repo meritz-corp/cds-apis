@@ -50,6 +50,27 @@ class MarketMakingMomentumBlend extends $pb.ProtobufEnum {
   const MarketMakingMomentumBlend._(super.value, super.name);
 }
 
+/// MM take 모드 발주 메커니즘
+class MarketMakingTakeExecutionMethod extends $pb.ProtobufEnum {
+  /// 기본값 = NEW_AND_CANCEL(기존 동작). proto 기본값 0 → 구버전 클라이언트/DB 자동 호환.
+  static const MarketMakingTakeExecutionMethod MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED = MarketMakingTakeExecutionMethod._(0, _omitEnumNames ? '' : 'MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED');
+  /// 교차 tick 마다 신규 주문 발사 (is_lp=false → 네이티브 FAK, is_lp=true → FAS-LP 신규+후행취소)
+  static const MarketMakingTakeExecutionMethod MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL = MarketMakingTakeExecutionMethod._(1, _omitEnumNames ? '' : 'MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL');
+  /// 파킹 주문을 교차가로 전량정정 + 잔량취소 (is_lp=true 전용)
+  static const MarketMakingTakeExecutionMethod MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL = MarketMakingTakeExecutionMethod._(2, _omitEnumNames ? '' : 'MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL');
+
+  static const $core.List<MarketMakingTakeExecutionMethod> values = <MarketMakingTakeExecutionMethod> [
+    MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED,
+    MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL,
+    MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL,
+  ];
+
+  static final $core.List<MarketMakingTakeExecutionMethod?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static MarketMakingTakeExecutionMethod? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const MarketMakingTakeExecutionMethod._(super.value, super.name);
+}
+
 /// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" 과 "설정변경" 으로 구분
 class MmConfigEventType extends $pb.ProtobufEnum {
   static const MmConfigEventType MM_CONFIG_EVENT_TYPE_UNSPECIFIED = MmConfigEventType._(0, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_UNSPECIFIED');

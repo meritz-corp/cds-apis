@@ -4250,6 +4250,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4332,6 +4335,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.fast_liquidation.as_ref() {
             struct_ser.serialize_field("fast_liquidation", v)?;
         }
+        if let Some(v) = self.take_execution.as_ref() {
+            struct_ser.serialize_field("take_execution", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4384,6 +4390,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "qtyWeightedMidLevels",
             "fast_liquidation",
             "fastLiquidation",
+            "take_execution",
+            "takeExecution",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4411,6 +4419,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             F2mSampleIntervalMs,
             QtyWeightedMidLevels,
             FastLiquidation,
+            TakeExecution,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4456,6 +4465,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "f2mSampleIntervalMs" | "f2m_sample_interval_ms" => Ok(GeneratedField::F2mSampleIntervalMs),
                             "qtyWeightedMidLevels" | "qty_weighted_mid_levels" => Ok(GeneratedField::QtyWeightedMidLevels),
                             "fastLiquidation" | "fast_liquidation" => Ok(GeneratedField::FastLiquidation),
+                            "takeExecution" | "take_execution" => Ok(GeneratedField::TakeExecution),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4498,6 +4508,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut f2m_sample_interval_ms__ = None;
                 let mut qty_weighted_mid_levels__ = None;
                 let mut fast_liquidation__ = None;
+                let mut take_execution__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4654,6 +4665,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             fast_liquidation__ = map_.next_value()?;
                         }
+                        GeneratedField::TakeExecution => {
+                            if take_execution__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("takeExecution"));
+                            }
+                            take_execution__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4683,6 +4700,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     f2m_sample_interval_ms: f2m_sample_interval_ms__,
                     qty_weighted_mid_levels: qty_weighted_mid_levels__,
                     fast_liquidation: fast_liquidation__,
+                    take_execution: take_execution__,
                 })
             }
         }
@@ -7132,6 +7150,239 @@ impl<'de> serde::Deserialize<'de> for MarketMakingState {
                     "MARKET_MAKING_STATE_UNSPECIFIED" => Ok(MarketMakingState::Unspecified),
                     "MARKET_MAKING_STATE_IDLE" => Ok(MarketMakingState::Idle),
                     "MARKET_MAKING_STATE_RUNNING" => Ok(MarketMakingState::Running),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingTakeExecution {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingTakeExecution", len)?;
+        if true {
+            let v = MarketMakingTakeExecutionMethod::try_from(self.method)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.method)))?;
+            struct_ser.serialize_field("method", &v)?;
+        }
+        if true {
+            struct_ser.serialize_field("park_offset_ticks", &self.park_offset_ticks)?;
+        }
+        if true {
+            struct_ser.serialize_field("repark_tolerance_ticks", &self.repark_tolerance_ticks)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("park_ack_timeout_ms", ToString::to_string(&self.park_ack_timeout_ms).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingTakeExecution {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "method",
+            "park_offset_ticks",
+            "parkOffsetTicks",
+            "repark_tolerance_ticks",
+            "reparkToleranceTicks",
+            "park_ack_timeout_ms",
+            "parkAckTimeoutMs",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Method,
+            ParkOffsetTicks,
+            ReparkToleranceTicks,
+            ParkAckTimeoutMs,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "method" => Ok(GeneratedField::Method),
+                            "parkOffsetTicks" | "park_offset_ticks" => Ok(GeneratedField::ParkOffsetTicks),
+                            "reparkToleranceTicks" | "repark_tolerance_ticks" => Ok(GeneratedField::ReparkToleranceTicks),
+                            "parkAckTimeoutMs" | "park_ack_timeout_ms" => Ok(GeneratedField::ParkAckTimeoutMs),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingTakeExecution;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingTakeExecution")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingTakeExecution, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut method__ = None;
+                let mut park_offset_ticks__ = None;
+                let mut repark_tolerance_ticks__ = None;
+                let mut park_ack_timeout_ms__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Method => {
+                            if method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("method"));
+                            }
+                            method__ = Some(map_.next_value::<MarketMakingTakeExecutionMethod>()? as i32);
+                        }
+                        GeneratedField::ParkOffsetTicks => {
+                            if park_offset_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("parkOffsetTicks"));
+                            }
+                            park_offset_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ReparkToleranceTicks => {
+                            if repark_tolerance_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reparkToleranceTicks"));
+                            }
+                            repark_tolerance_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ParkAckTimeoutMs => {
+                            if park_ack_timeout_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("parkAckTimeoutMs"));
+                            }
+                            park_ack_timeout_ms__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingTakeExecution {
+                    method: method__.unwrap_or_default(),
+                    park_offset_ticks: park_offset_ticks__.unwrap_or_default(),
+                    repark_tolerance_ticks: repark_tolerance_ticks__.unwrap_or_default(),
+                    park_ack_timeout_ms: park_ack_timeout_ms__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingTakeExecution", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingTakeExecutionMethod {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED",
+            Self::NewAndCancel => "MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL",
+            Self::AmendAndCancel => "MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingTakeExecutionMethod {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED",
+            "MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL",
+            "MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingTakeExecutionMethod;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED" => Ok(MarketMakingTakeExecutionMethod::Unspecified),
+                    "MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL" => Ok(MarketMakingTakeExecutionMethod::NewAndCancel),
+                    "MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL" => Ok(MarketMakingTakeExecutionMethod::AmendAndCancel),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

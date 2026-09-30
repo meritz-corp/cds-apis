@@ -121,6 +121,15 @@ pub struct MarketMakingConfiguration {
     /// NULL/미설정 = 비활성. optional: presence 로 "설정 vs 미변경" 구분 (exposure_balancer 와 동일 패턴).
     #[prost(message, optional, tag="29")]
     pub fast_liquidation: ::core::option::Option<MarketMakingFastLiquidation>,
+    /// MM take 모드 발주 방식. 미설정 = 기존 동작(신규+취소) 유지.
+    /// AMEND_AND_CANCEL: 시장 같은 쪽 1호가에서 park_offset_ticks 틱 떨어진 곳에 LP 잔존호가(파킹)를
+    /// 깔아두고, 교차 tick 에 그 주문을 교차가로 전량정정 + 잔량취소한다(정정 1건만 크리티컬 경로).
+    /// 서버 검증: AMEND_AND_CANCEL 은 take_mode=true AND is_lp=true 필수(비-LP 는 네이티브 FAK 가
+    /// 메시지 1건으로 더 싸다), repark_tolerance_ticks < park_offset_ticks.
+    /// Running 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능.
+    /// optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴).
+    #[prost(message, optional, tag="30")]
+    pub take_execution: ::core::option::Option<MarketMakingTakeExecution>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -439,6 +448,30 @@ pub struct MarketMakingFastLiquidation {
     /// 자동정정 추격 설정.
     #[prost(message, optional, tag="6")]
     pub amend: ::core::option::Option<MarketMakingLiquidationAmend>,
+}
+/// MM take 모드(take_mode=true) 발주 방식.
+/// AMEND_AND_CANCEL: 시장 같은 쪽 1호가에서 park_offset_ticks 틱 떨어진 곳에 LP 잔존호가(파킹)를
+/// 깔아두고, 교차 tick 에 그 주문을 교차가로 전량정정 + 잔량취소한다(정정 1건만 크리티컬 경로).
+/// 서버 검증: AMEND_AND_CANCEL 은 take_mode=true AND is_lp=true 필수(비-LP 는 네이티브 FAK 가
+/// 메시지 1건으로 더 싸다), repark_tolerance_ticks < park_offset_ticks.
+/// Running 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingTakeExecution {
+    /// 발주 메커니즘 선택
+    #[prost(enumeration="MarketMakingTakeExecutionMethod", tag="1")]
+    pub method: i32,
+    /// 파킹 주문을 시장 같은 쪽 1호가에서 몇 틱 떨어뜨릴지 (>0, 기본 20). 멀수록 의도치 않은 체결
+    /// 위험이 낮지만 LP 호가는 정상호가범위를 벗어나면 거래소가 1108 로 거부한다.
+    #[prost(int32, tag="2")]
+    pub park_offset_ticks: i32,
+    /// 목표 파킹가와 현재 파킹가의 이격이 이 틱 수 이상이면 재파킹(취소+신규) (>0, 기본 10).
+    /// park_offset_ticks 보다 작아야 한다 — 크면 파킹 주문이 시장 안쪽에 노출된다.
+    #[prost(int32, tag="3")]
+    pub repark_tolerance_ticks: i32,
+    /// 파킹 신규 접수응답 대기 한도 (ms, >0, 기본 3000). 초과 시 경보.
+    #[prost(uint64, tag="4")]
+    pub park_ack_timeout_ms: u64,
 }
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1399,6 +1432,39 @@ impl MarketMakingMomentumBlend {
         match value {
             "MARKET_MAKING_MOMENTUM_BLEND_PRODUCT" => Some(Self::Product),
             "MARKET_MAKING_MOMENTUM_BLEND_AVERAGE" => Some(Self::Average),
+            _ => None,
+        }
+    }
+}
+/// MM take 모드 발주 메커니즘
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum MarketMakingTakeExecutionMethod {
+    /// 기본값 = NEW_AND_CANCEL(기존 동작). proto 기본값 0 → 구버전 클라이언트/DB 자동 호환.
+    Unspecified = 0,
+    /// 교차 tick 마다 신규 주문 발사 (is_lp=false → 네이티브 FAK, is_lp=true → FAS-LP 신규+후행취소)
+    NewAndCancel = 1,
+    /// 파킹 주문을 교차가로 전량정정 + 잔량취소 (is_lp=true 전용)
+    AmendAndCancel = 2,
+}
+impl MarketMakingTakeExecutionMethod {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            MarketMakingTakeExecutionMethod::Unspecified => "MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED",
+            MarketMakingTakeExecutionMethod::NewAndCancel => "MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL",
+            MarketMakingTakeExecutionMethod::AmendAndCancel => "MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED" => Some(Self::Unspecified),
+            "MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL" => Some(Self::NewAndCancel),
+            "MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL" => Some(Self::AmendAndCancel),
             _ => None,
         }
     }

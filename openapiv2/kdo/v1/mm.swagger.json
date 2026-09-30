@@ -1620,6 +1620,10 @@
         "fastLiquidation": {
           "$ref": "#/definitions/mmMarketMakingFastLiquidation",
           "description": "빠른 청산(Fast Liquidation) 설정. 순노출 임계 초과 시 자기 호가 대비 n틱(0 이상) 공격적인\nFAS 주문으로 전량 청산 + 자동정정 추격.\nenabled 시 서버 검증 조건: aggressive_ticks \u003c 2×base_half_ticks (자전 방지),\nexposure_balancer 활성 필수.\nNULL/미설정 = 비활성. optional: presence 로 \"설정 vs 미변경\" 구분 (exposure_balancer 와 동일 패턴)."
+        },
+        "takeExecution": {
+          "$ref": "#/definitions/mmMarketMakingTakeExecution",
+          "description": "MM take 모드 발주 방식. 미설정 = 기존 동작(신규+취소) 유지.\nAMEND_AND_CANCEL: 시장 같은 쪽 1호가에서 park_offset_ticks 틱 떨어진 곳에 LP 잔존호가(파킹)를\n깔아두고, 교차 tick 에 그 주문을 교차가로 전량정정 + 잔량취소한다(정정 1건만 크리티컬 경로).\n서버 검증: AMEND_AND_CANCEL 은 take_mode=true AND is_lp=true 필수(비-LP 는 네이티브 FAK 가\n메시지 1건으로 더 싸다), repark_tolerance_ticks \u003c park_offset_ticks.\nRunning 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능.\noptional: presence 로 \"설정 vs 미변경\" 구분 (fast_liquidation 과 동일 패턴)."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -2034,6 +2038,42 @@
       "default": "MARKET_MAKING_STATE_UNSPECIFIED",
       "description": "- MARKET_MAKING_STATE_IDLE: 대기\n - MARKET_MAKING_STATE_RUNNING: 활성",
       "title": "MM 상태"
+    },
+    "mmMarketMakingTakeExecution": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/mmMarketMakingTakeExecutionMethod",
+          "title": "발주 메커니즘 선택"
+        },
+        "parkOffsetTicks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "파킹 주문을 시장 같은 쪽 1호가에서 몇 틱 떨어뜨릴지 (\u003e0, 기본 20). 멀수록 의도치 않은 체결\n위험이 낮지만 LP 호가는 정상호가범위를 벗어나면 거래소가 1108 로 거부한다."
+        },
+        "reparkToleranceTicks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "목표 파킹가와 현재 파킹가의 이격이 이 틱 수 이상이면 재파킹(취소+신규) (\u003e0, 기본 10).\npark_offset_ticks 보다 작아야 한다 — 크면 파킹 주문이 시장 안쪽에 노출된다."
+        },
+        "parkAckTimeoutMs": {
+          "type": "string",
+          "format": "uint64",
+          "description": "파킹 신규 접수응답 대기 한도 (ms, \u003e0, 기본 3000). 초과 시 경보."
+        }
+      },
+      "description": "MM take 모드(take_mode=true) 발주 방식.\nAMEND_AND_CANCEL: 시장 같은 쪽 1호가에서 park_offset_ticks 틱 떨어진 곳에 LP 잔존호가(파킹)를\n깔아두고, 교차 tick 에 그 주문을 교차가로 전량정정 + 잔량취소한다(정정 1건만 크리티컬 경로).\n서버 검증: AMEND_AND_CANCEL 은 take_mode=true AND is_lp=true 필수(비-LP 는 네이티브 FAK 가\n메시지 1건으로 더 싸다), repark_tolerance_ticks \u003c park_offset_ticks.\nRunning 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능."
+    },
+    "mmMarketMakingTakeExecutionMethod": {
+      "type": "string",
+      "enum": [
+        "MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED",
+        "MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL",
+        "MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL"
+      ],
+      "default": "MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED",
+      "description": "- MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED: 기본값 = NEW_AND_CANCEL(기존 동작). proto 기본값 0 → 구버전 클라이언트/DB 자동 호환.\n - MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL: 교차 tick 마다 신규 주문 발사 (is_lp=false → 네이티브 FAK, is_lp=true → FAS-LP 신규+후행취소)\n - MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL: 파킹 주문을 교차가로 전량정정 + 잔량취소 (is_lp=true 전용)",
+      "title": "MM take 모드 발주 메커니즘"
     },
     "mmMarketMakingTradeAnalyzer": {
       "type": "object",

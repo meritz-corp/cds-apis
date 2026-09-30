@@ -44,6 +44,23 @@ final $typed_data.Uint8List marketMakingMomentumBlendDescriptor = $convert.base6
     'ChlNYXJrZXRNYWtpbmdNb21lbnR1bUJsZW5kEigKJE1BUktFVF9NQUtJTkdfTU9NRU5UVU1fQk'
     'xFTkRfUFJPRFVDVBAAEigKJE1BUktFVF9NQUtJTkdfTU9NRU5UVU1fQkxFTkRfQVZFUkFHRRAB');
 
+@$core.Deprecated('Use marketMakingTakeExecutionMethodDescriptor instead')
+const MarketMakingTakeExecutionMethod$json = {
+  '1': 'MarketMakingTakeExecutionMethod',
+  '2': [
+    {'1': 'MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED', '2': 0},
+    {'1': 'MARKET_MAKING_TAKE_EXECUTION_METHOD_NEW_AND_CANCEL', '2': 1},
+    {'1': 'MARKET_MAKING_TAKE_EXECUTION_METHOD_AMEND_AND_CANCEL', '2': 2},
+  ],
+};
+
+/// Descriptor for `MarketMakingTakeExecutionMethod`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List marketMakingTakeExecutionMethodDescriptor = $convert.base64Decode(
+    'Ch9NYXJrZXRNYWtpbmdUYWtlRXhlY3V0aW9uTWV0aG9kEjMKL01BUktFVF9NQUtJTkdfVEFLRV'
+    '9FWEVDVVRJT05fTUVUSE9EX1VOU1BFQ0lGSUVEEAASNgoyTUFSS0VUX01BS0lOR19UQUtFX0VY'
+    'RUNVVElPTl9NRVRIT0RfTkVXX0FORF9DQU5DRUwQARI4CjRNQVJLRVRfTUFLSU5HX1RBS0VfRV'
+    'hFQ1VUSU9OX01FVEhPRF9BTUVORF9BTkRfQ0FOQ0VMEAI=');
+
 @$core.Deprecated('Use mmConfigEventTypeDescriptor instead')
 const MmConfigEventType$json = {
   '1': 'MmConfigEventType',
@@ -108,6 +125,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'f2m_sample_interval_ms', '3': 27, '4': 1, '5': 4, '9': 6, '10': 'f2mSampleIntervalMs', '17': true},
     {'1': 'qty_weighted_mid_levels', '3': 28, '4': 1, '5': 13, '9': 7, '10': 'qtyWeightedMidLevels', '17': true},
     {'1': 'fast_liquidation', '3': 29, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingFastLiquidation', '9': 8, '10': 'fastLiquidation', '17': true},
+    {'1': 'take_execution', '3': 30, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTakeExecution', '9': 9, '10': 'takeExecution', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -119,6 +137,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_f2m_sample_interval_ms'},
     {'1': '_qty_weighted_mid_levels'},
     {'1': '_fast_liquidation'},
+    {'1': '_take_execution'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -157,12 +176,14 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     '9zYW1wbGVfaW50ZXJ2YWxfbXMYGyABKARIBlITZjJtU2FtcGxlSW50ZXJ2YWxNc4gBARI6Chdx'
     'dHlfd2VpZ2h0ZWRfbWlkX2xldmVscxgcIAEoDUgHUhRxdHlXZWlnaHRlZE1pZExldmVsc4gBAR'
     'JWChBmYXN0X2xpcXVpZGF0aW9uGB0gASgLMiYua2RvLnYxLm1tLk1hcmtldE1ha2luZ0Zhc3RM'
-    'aXF1aWRhdGlvbkgIUg9mYXN0TGlxdWlkYXRpb26IAQFCCAoGX2Jhc2lzQhoKGF9mMm1fcmVmaX'
-    'RfaW50ZXJ2YWxfc2Vjc0IVChNfZjJtX21hX3dpbmRvd19zZWNzQgwKCl90YWtlX21vZGVCCAoG'
-    'X2lzX2xwQhcKFV91c2VfcXR5X3dlaWdodGVkX21pZEIZChdfZjJtX3NhbXBsZV9pbnRlcnZhbF'
-    '9tc0IaChhfcXR5X3dlaWdodGVkX21pZF9sZXZlbHNCEwoRX2Zhc3RfbGlxdWlkYXRpb25KBAgH'
-    'EAhKBAgIEAlKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9hZGp1c3RtZW50Ug5hc2tfYW'
-    'RqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZmZzZXRSCmFza19vZmZzZXQ=');
+    'aXF1aWRhdGlvbkgIUg9mYXN0TGlxdWlkYXRpb26IAQESUAoOdGFrZV9leGVjdXRpb24YHiABKA'
+    'syJC5rZG8udjEubW0uTWFya2V0TWFraW5nVGFrZUV4ZWN1dGlvbkgJUg10YWtlRXhlY3V0aW9u'
+    'iAEBQggKBl9iYXNpc0IaChhfZjJtX3JlZml0X2ludGVydmFsX3NlY3NCFQoTX2YybV9tYV93aW'
+    '5kb3dfc2Vjc0IMCgpfdGFrZV9tb2RlQggKBl9pc19scEIXChVfdXNlX3F0eV93ZWlnaHRlZF9t'
+    'aWRCGQoXX2YybV9zYW1wbGVfaW50ZXJ2YWxfbXNCGgoYX3F0eV93ZWlnaHRlZF9taWRfbGV2ZW'
+    'xzQhMKEV9mYXN0X2xpcXVpZGF0aW9uQhEKD190YWtlX2V4ZWN1dGlvbkoECAcQCEoECAgQCUoE'
+    'CAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza19hZGp1c3RtZW50Ug'
+    'liaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNldA==');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -474,6 +495,25 @@ final $typed_data.Uint8List marketMakingFastLiquidationDescriptor = $convert.bas
     'RSCmNvb2xkb3duTXMSIgoNbWF4X2FjdGl2ZV9tcxgFIAEoBFILbWF4QWN0aXZlTXMSPQoFYW1l'
     'bmQYBiABKAsyJy5rZG8udjEubW0uTWFya2V0TWFraW5nTGlxdWlkYXRpb25BbWVuZFIFYW1lbm'
     'RCEwoRX2FnZ3Jlc3NpdmVfdGlja3M=');
+
+@$core.Deprecated('Use marketMakingTakeExecutionDescriptor instead')
+const MarketMakingTakeExecution$json = {
+  '1': 'MarketMakingTakeExecution',
+  '2': [
+    {'1': 'method', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingTakeExecutionMethod', '10': 'method'},
+    {'1': 'park_offset_ticks', '3': 2, '4': 1, '5': 5, '10': 'parkOffsetTicks'},
+    {'1': 'repark_tolerance_ticks', '3': 3, '4': 1, '5': 5, '10': 'reparkToleranceTicks'},
+    {'1': 'park_ack_timeout_ms', '3': 4, '4': 1, '5': 4, '10': 'parkAckTimeoutMs'},
+  ],
+};
+
+/// Descriptor for `MarketMakingTakeExecution`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingTakeExecutionDescriptor = $convert.base64Decode(
+    'ChlNYXJrZXRNYWtpbmdUYWtlRXhlY3V0aW9uEkIKBm1ldGhvZBgBIAEoDjIqLmtkby52MS5tbS'
+    '5NYXJrZXRNYWtpbmdUYWtlRXhlY3V0aW9uTWV0aG9kUgZtZXRob2QSKgoRcGFya19vZmZzZXRf'
+    'dGlja3MYAiABKAVSD3BhcmtPZmZzZXRUaWNrcxI0ChZyZXBhcmtfdG9sZXJhbmNlX3RpY2tzGA'
+    'MgASgFUhRyZXBhcmtUb2xlcmFuY2VUaWNrcxItChNwYXJrX2Fja190aW1lb3V0X21zGAQgASgE'
+    'UhBwYXJrQWNrVGltZW91dE1z');
 
 @$core.Deprecated('Use marketMakingExposureBalancerDescriptor instead')
 const MarketMakingExposureBalancer$json = {

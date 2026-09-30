@@ -163,6 +163,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $fixnum.Int64? f2mSampleIntervalMs,
     $core.int? qtyWeightedMidLevels,
     MarketMakingFastLiquidation? fastLiquidation,
+    MarketMakingTakeExecution? takeExecution,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -188,6 +189,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (f2mSampleIntervalMs != null) result.f2mSampleIntervalMs = f2mSampleIntervalMs;
     if (qtyWeightedMidLevels != null) result.qtyWeightedMidLevels = qtyWeightedMidLevels;
     if (fastLiquidation != null) result.fastLiquidation = fastLiquidation;
+    if (takeExecution != null) result.takeExecution = takeExecution;
     return result;
   }
 
@@ -220,6 +222,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(27, _omitFieldNames ? '' : 'f2mSampleIntervalMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.int>(28, _omitFieldNames ? '' : 'qtyWeightedMidLevels', $pb.PbFieldType.OU3)
     ..aOM<MarketMakingFastLiquidation>(29, _omitFieldNames ? '' : 'fastLiquidation', subBuilder: MarketMakingFastLiquidation.create)
+    ..aOM<MarketMakingTakeExecution>(30, _omitFieldNames ? '' : 'takeExecution', subBuilder: MarketMakingTakeExecution.create)
     ..hasRequiredFields = false
   ;
 
@@ -512,6 +515,24 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearFastLiquidation() => $_clearField(29);
   @$pb.TagNumber(29)
   MarketMakingFastLiquidation ensureFastLiquidation() => $_ensure(22);
+
+  /// MM take 모드 발주 방식. 미설정 = 기존 동작(신규+취소) 유지.
+  /// AMEND_AND_CANCEL: 시장 같은 쪽 1호가에서 park_offset_ticks 틱 떨어진 곳에 LP 잔존호가(파킹)를
+  /// 깔아두고, 교차 tick 에 그 주문을 교차가로 전량정정 + 잔량취소한다(정정 1건만 크리티컬 경로).
+  /// 서버 검증: AMEND_AND_CANCEL 은 take_mode=true AND is_lp=true 필수(비-LP 는 네이티브 FAK 가
+  /// 메시지 1건으로 더 싸다), repark_tolerance_ticks < park_offset_ticks.
+  /// Running 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능.
+  /// optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴).
+  @$pb.TagNumber(30)
+  MarketMakingTakeExecution get takeExecution => $_getN(23);
+  @$pb.TagNumber(30)
+  set takeExecution(MarketMakingTakeExecution value) => $_setField(30, value);
+  @$pb.TagNumber(30)
+  $core.bool hasTakeExecution() => $_has(23);
+  @$pb.TagNumber(30)
+  void clearTakeExecution() => $_clearField(30);
+  @$pb.TagNumber(30)
+  MarketMakingTakeExecution ensureTakeExecution() => $_ensure(23);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -2004,6 +2025,100 @@ class MarketMakingFastLiquidation extends $pb.GeneratedMessage {
   void clearAmend() => $_clearField(6);
   @$pb.TagNumber(6)
   MarketMakingLiquidationAmend ensureAmend() => $_ensure(5);
+}
+
+/// MM take 모드(take_mode=true) 발주 방식.
+/// AMEND_AND_CANCEL: 시장 같은 쪽 1호가에서 park_offset_ticks 틱 떨어진 곳에 LP 잔존호가(파킹)를
+/// 깔아두고, 교차 tick 에 그 주문을 교차가로 전량정정 + 잔량취소한다(정정 1건만 크리티컬 경로).
+/// 서버 검증: AMEND_AND_CANCEL 은 take_mode=true AND is_lp=true 필수(비-LP 는 네이티브 FAK 가
+/// 메시지 1건으로 더 싸다), repark_tolerance_ticks < park_offset_ticks.
+/// Running 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능.
+class MarketMakingTakeExecution extends $pb.GeneratedMessage {
+  factory MarketMakingTakeExecution({
+    MarketMakingTakeExecutionMethod? method,
+    $core.int? parkOffsetTicks,
+    $core.int? reparkToleranceTicks,
+    $fixnum.Int64? parkAckTimeoutMs,
+  }) {
+    final result = create();
+    if (method != null) result.method = method;
+    if (parkOffsetTicks != null) result.parkOffsetTicks = parkOffsetTicks;
+    if (reparkToleranceTicks != null) result.reparkToleranceTicks = reparkToleranceTicks;
+    if (parkAckTimeoutMs != null) result.parkAckTimeoutMs = parkAckTimeoutMs;
+    return result;
+  }
+
+  MarketMakingTakeExecution._();
+
+  factory MarketMakingTakeExecution.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingTakeExecution.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingTakeExecution', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..e<MarketMakingTakeExecutionMethod>(1, _omitFieldNames ? '' : 'method', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingTakeExecutionMethod.MARKET_MAKING_TAKE_EXECUTION_METHOD_UNSPECIFIED, valueOf: MarketMakingTakeExecutionMethod.valueOf, enumValues: MarketMakingTakeExecutionMethod.values)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'parkOffsetTicks', $pb.PbFieldType.O3)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'reparkToleranceTicks', $pb.PbFieldType.O3)
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'parkAckTimeoutMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingTakeExecution clone() => MarketMakingTakeExecution()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingTakeExecution copyWith(void Function(MarketMakingTakeExecution) updates) => super.copyWith((message) => updates(message as MarketMakingTakeExecution)) as MarketMakingTakeExecution;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingTakeExecution create() => MarketMakingTakeExecution._();
+  @$core.override
+  MarketMakingTakeExecution createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingTakeExecution> createRepeated() => $pb.PbList<MarketMakingTakeExecution>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingTakeExecution getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingTakeExecution>(create);
+  static MarketMakingTakeExecution? _defaultInstance;
+
+  /// 발주 메커니즘 선택
+  @$pb.TagNumber(1)
+  MarketMakingTakeExecutionMethod get method => $_getN(0);
+  @$pb.TagNumber(1)
+  set method(MarketMakingTakeExecutionMethod value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMethod() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMethod() => $_clearField(1);
+
+  /// 파킹 주문을 시장 같은 쪽 1호가에서 몇 틱 떨어뜨릴지 (>0, 기본 20). 멀수록 의도치 않은 체결
+  /// 위험이 낮지만 LP 호가는 정상호가범위를 벗어나면 거래소가 1108 로 거부한다.
+  @$pb.TagNumber(2)
+  $core.int get parkOffsetTicks => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set parkOffsetTicks($core.int value) => $_setSignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasParkOffsetTicks() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearParkOffsetTicks() => $_clearField(2);
+
+  /// 목표 파킹가와 현재 파킹가의 이격이 이 틱 수 이상이면 재파킹(취소+신규) (>0, 기본 10).
+  /// park_offset_ticks 보다 작아야 한다 — 크면 파킹 주문이 시장 안쪽에 노출된다.
+  @$pb.TagNumber(3)
+  $core.int get reparkToleranceTicks => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set reparkToleranceTicks($core.int value) => $_setSignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasReparkToleranceTicks() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearReparkToleranceTicks() => $_clearField(3);
+
+  /// 파킹 신규 접수응답 대기 한도 (ms, >0, 기본 3000). 초과 시 경보.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get parkAckTimeoutMs => $_getI64(3);
+  @$pb.TagNumber(4)
+  set parkAckTimeoutMs($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasParkAckTimeoutMs() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearParkAckTimeoutMs() => $_clearField(4);
 }
 
 /// 통합 포지션 관리 설정 (soft rebalance + hard limit)
