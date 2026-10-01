@@ -2393,6 +2393,237 @@ class GetEtfPricingStateResponse extends $pb.GeneratedMessage {
   void clearPrevFuture() => $_clearField(14);
 }
 
+/// CalcEtfNav
+class CalcEtfNavRequest extends $pb.GeneratedMessage {
+  factory CalcEtfNavRequest({
+    $core.String? etf,
+    $1.EtfPricing? pricing,
+    $core.Iterable<EtfConstituentPrice>? constituentPrices,
+    $core.String? askBasis,
+    $core.String? bidBasis,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (pricing != null) result.pricing = pricing;
+    if (constituentPrices != null) result.constituentPrices.addAll(constituentPrices);
+    if (askBasis != null) result.askBasis = askBasis;
+    if (bidBasis != null) result.bidBasis = bidBasis;
+    return result;
+  }
+
+  CalcEtfNavRequest._();
+
+  factory CalcEtfNavRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CalcEtfNavRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CalcEtfNavRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOM<$1.EtfPricing>(2, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
+    ..pc<EtfConstituentPrice>(3, _omitFieldNames ? '' : 'constituentPrices', $pb.PbFieldType.PM, subBuilder: EtfConstituentPrice.create)
+    ..aOS(4, _omitFieldNames ? '' : 'askBasis')
+    ..aOS(5, _omitFieldNames ? '' : 'bidBasis')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfNavRequest clone() => CalcEtfNavRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfNavRequest copyWith(void Function(CalcEtfNavRequest) updates) => super.copyWith((message) => updates(message as CalcEtfNavRequest)) as CalcEtfNavRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfNavRequest create() => CalcEtfNavRequest._();
+  @$core.override
+  CalcEtfNavRequest createEmptyInstance() => create();
+  static $pb.PbList<CalcEtfNavRequest> createRepeated() => $pb.PbList<CalcEtfNavRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfNavRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CalcEtfNavRequest>(create);
+  static CalcEtfNavRequest? _defaultInstance;
+
+  /// ETF 리소스 이름 (예: "etfs/069500")
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  /// pricing 모드 + 파라미터. PdfDecomposeHedge 는 flattened(재귀 분해) 바스켓으로 계산된다.
+  @$pb.TagNumber(2)
+  $1.EtfPricing get pricing => $_getN(1);
+  @$pb.TagNumber(2)
+  set pricing($1.EtfPricing value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPricing() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPricing() => $_clearField(2);
+  @$pb.TagNumber(2)
+  $1.EtfPricing ensurePricing() => $_ensure(1);
+
+  /// NAV 계산에 주입할 가격 목록. 생략된 구성종목은 전일종가로 평가된다.
+  /// Pdf* pricing = PDF 구성종목 심볼,
+  /// IndexTrackingHedge/FutureBasis/LeverageFuture = 추종 선물 심볼.
+  @$pb.TagNumber(3)
+  $pb.PbList<EtfConstituentPrice> get constituentPrices => $_getList(2);
+
+  /// 선물 베이시스 (FutureBasis / LeverageFuture 에서만 사용, 빈 문자열 = 0)
+  @$pb.TagNumber(4)
+  $core.String get askBasis => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set askBasis($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAskBasis() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAskBasis() => $_clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get bidBasis => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set bidBasis($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBidBasis() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBidBasis() => $_clearField(5);
+}
+
+/// NAV 계산에 주입할 구성종목 호가
+class EtfConstituentPrice extends $pb.GeneratedMessage {
+  factory EtfConstituentPrice({
+    $core.String? symbol,
+    $core.String? askPrice,
+    $core.String? bidPrice,
+  }) {
+    final result = create();
+    if (symbol != null) result.symbol = symbol;
+    if (askPrice != null) result.askPrice = askPrice;
+    if (bidPrice != null) result.bidPrice = bidPrice;
+    return result;
+  }
+
+  EtfConstituentPrice._();
+
+  factory EtfConstituentPrice.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory EtfConstituentPrice.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EtfConstituentPrice', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'symbol')
+    ..aOS(2, _omitFieldNames ? '' : 'askPrice')
+    ..aOS(3, _omitFieldNames ? '' : 'bidPrice')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfConstituentPrice clone() => EtfConstituentPrice()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  EtfConstituentPrice copyWith(void Function(EtfConstituentPrice) updates) => super.copyWith((message) => updates(message as EtfConstituentPrice)) as EtfConstituentPrice;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EtfConstituentPrice create() => EtfConstituentPrice._();
+  @$core.override
+  EtfConstituentPrice createEmptyInstance() => create();
+  static $pb.PbList<EtfConstituentPrice> createRepeated() => $pb.PbList<EtfConstituentPrice>();
+  @$core.pragma('dart2js:noInline')
+  static EtfConstituentPrice getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EtfConstituentPrice>(create);
+  static EtfConstituentPrice? _defaultInstance;
+
+  /// 구성종목(또는 추종 선물) 심볼
+  @$pb.TagNumber(1)
+  $core.String get symbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set symbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSymbol() => $_clearField(1);
+
+  /// 매도호가
+  @$pb.TagNumber(2)
+  $core.String get askPrice => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set askPrice($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasAskPrice() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAskPrice() => $_clearField(2);
+
+  /// 매수호가
+  @$pb.TagNumber(3)
+  $core.String get bidPrice => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set bidPrice($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasBidPrice() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBidPrice() => $_clearField(3);
+}
+
+class CalcEtfNavResponse extends $pb.GeneratedMessage {
+  factory CalcEtfNavResponse({
+    $core.String? askNav,
+    $core.String? bidNav,
+  }) {
+    final result = create();
+    if (askNav != null) result.askNav = askNav;
+    if (bidNav != null) result.bidNav = bidNav;
+    return result;
+  }
+
+  CalcEtfNavResponse._();
+
+  factory CalcEtfNavResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CalcEtfNavResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CalcEtfNavResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'askNav')
+    ..aOS(2, _omitFieldNames ? '' : 'bidNav')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfNavResponse clone() => CalcEtfNavResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CalcEtfNavResponse copyWith(void Function(CalcEtfNavResponse) updates) => super.copyWith((message) => updates(message as CalcEtfNavResponse)) as CalcEtfNavResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfNavResponse create() => CalcEtfNavResponse._();
+  @$core.override
+  CalcEtfNavResponse createEmptyInstance() => create();
+  static $pb.PbList<CalcEtfNavResponse> createRepeated() => $pb.PbList<CalcEtfNavResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CalcEtfNavResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CalcEtfNavResponse>(create);
+  static CalcEtfNavResponse? _defaultInstance;
+
+  /// ask 호가 기준 NAV
+  @$pb.TagNumber(1)
+  $core.String get askNav => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set askNav($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasAskNav() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAskNav() => $_clearField(1);
+
+  /// bid 호가 기준 NAV
+  @$pb.TagNumber(2)
+  $core.String get bidNav => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set bidNav($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBidNav() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBidNav() => $_clearField(2);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

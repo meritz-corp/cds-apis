@@ -73,6 +73,12 @@ class EtfServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getEtfPricingState, request, options: options);
   }
 
+  /// 주어진 구성종목 가격으로 ETF NAV 를 계산합니다 (조회 전용 — 서버 상태 변경 없음).
+  /// constituent_prices 에 없는 구성종목은 전일종가로 평가됩니다.
+  $grpc.ResponseFuture<$0.CalcEtfNavResponse> calcEtfNav($0.CalcEtfNavRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$calcEtfNav, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtf = $grpc.ClientMethod<$0.GetEtfRequest, $0.Etf>(
@@ -107,6 +113,10 @@ class EtfServiceClient extends $grpc.Client {
       '/kdo.v1.etf.EtfService/GetEtfPricingState',
       ($0.GetEtfPricingStateRequest value) => value.writeToBuffer(),
       $0.GetEtfPricingStateResponse.fromBuffer);
+  static final _$calcEtfNav = $grpc.ClientMethod<$0.CalcEtfNavRequest, $0.CalcEtfNavResponse>(
+      '/kdo.v1.etf.EtfService/CalcEtfNav',
+      ($0.CalcEtfNavRequest value) => value.writeToBuffer(),
+      $0.CalcEtfNavResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.etf.EtfService')
@@ -170,6 +180,13 @@ abstract class EtfServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetEtfPricingStateRequest.fromBuffer(value),
         ($0.GetEtfPricingStateResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CalcEtfNavRequest, $0.CalcEtfNavResponse>(
+        'CalcEtfNav',
+        calcEtfNav_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CalcEtfNavRequest.fromBuffer(value),
+        ($0.CalcEtfNavResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.Etf> getEtf_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfRequest> $request) async {
@@ -219,5 +236,11 @@ abstract class EtfServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetEtfPricingStateResponse> getEtfPricingState($grpc.ServiceCall call, $0.GetEtfPricingStateRequest request);
+
+  $async.Future<$0.CalcEtfNavResponse> calcEtfNav_Pre($grpc.ServiceCall $call, $async.Future<$0.CalcEtfNavRequest> $request) async {
+    return calcEtfNav($call, await $request);
+  }
+
+  $async.Future<$0.CalcEtfNavResponse> calcEtfNav($grpc.ServiceCall call, $0.CalcEtfNavRequest request);
 
 }

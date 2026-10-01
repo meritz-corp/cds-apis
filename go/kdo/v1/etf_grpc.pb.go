@@ -38,6 +38,9 @@ type EtfServiceClient interface {
 	// 특히 LeverageFuture는 k(stock_ratio), Nav0(constituent_adjusted_prev_nav),
 	// L(=unit_delta/Nav0, signed)을 노출해 외부에서 NAV 공식 검증 가능.
 	GetEtfPricingState(ctx context.Context, in *GetEtfPricingStateRequest, opts ...grpc.CallOption) (*GetEtfPricingStateResponse, error)
+	// 주어진 구성종목 가격으로 ETF NAV 를 계산합니다 (조회 전용 — 서버 상태 변경 없음).
+	// constituent_prices 에 없는 구성종목은 전일종가로 평가됩니다.
+	CalcEtfNav(ctx context.Context, in *CalcEtfNavRequest, opts ...grpc.CallOption) (*CalcEtfNavResponse, error)
 }
 
 type etfServiceClient struct {
@@ -120,6 +123,15 @@ func (c *etfServiceClient) GetEtfPricingState(ctx context.Context, in *GetEtfPri
 	return out, nil
 }
 
+func (c *etfServiceClient) CalcEtfNav(ctx context.Context, in *CalcEtfNavRequest, opts ...grpc.CallOption) (*CalcEtfNavResponse, error) {
+	out := new(CalcEtfNavResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.etf.EtfService/CalcEtfNav", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EtfServiceServer is the server API for EtfService service.
 // All implementations must embed UnimplementedEtfServiceServer
 // for forward compatibility
@@ -140,6 +152,9 @@ type EtfServiceServer interface {
 	// 특히 LeverageFuture는 k(stock_ratio), Nav0(constituent_adjusted_prev_nav),
 	// L(=unit_delta/Nav0, signed)을 노출해 외부에서 NAV 공식 검증 가능.
 	GetEtfPricingState(context.Context, *GetEtfPricingStateRequest) (*GetEtfPricingStateResponse, error)
+	// 주어진 구성종목 가격으로 ETF NAV 를 계산합니다 (조회 전용 — 서버 상태 변경 없음).
+	// constituent_prices 에 없는 구성종목은 전일종가로 평가됩니다.
+	CalcEtfNav(context.Context, *CalcEtfNavRequest) (*CalcEtfNavResponse, error)
 	mustEmbedUnimplementedEtfServiceServer()
 }
 
@@ -170,6 +185,9 @@ func (UnimplementedEtfServiceServer) GetEtfConstituents(context.Context, *GetEtf
 }
 func (UnimplementedEtfServiceServer) GetEtfPricingState(context.Context, *GetEtfPricingStateRequest) (*GetEtfPricingStateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEtfPricingState not implemented")
+}
+func (UnimplementedEtfServiceServer) CalcEtfNav(context.Context, *CalcEtfNavRequest) (*CalcEtfNavResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalcEtfNav not implemented")
 }
 func (UnimplementedEtfServiceServer) mustEmbedUnimplementedEtfServiceServer() {}
 
@@ -328,6 +346,24 @@ func _EtfService_GetEtfPricingState_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EtfService_CalcEtfNav_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CalcEtfNavRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EtfServiceServer).CalcEtfNav(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.etf.EtfService/CalcEtfNav",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EtfServiceServer).CalcEtfNav(ctx, req.(*CalcEtfNavRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EtfService_ServiceDesc is the grpc.ServiceDesc for EtfService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -366,6 +402,10 @@ var EtfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEtfPricingState",
 			Handler:    _EtfService_GetEtfPricingState_Handler,
+		},
+		{
+			MethodName: "CalcEtfNav",
+			Handler:    _EtfService_CalcEtfNav_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -180,6 +180,71 @@
         ]
       }
     },
+    "/v1/{etf}:calc_nav": {
+      "post": {
+        "summary": "주어진 구성종목 가격으로 ETF NAV 를 계산합니다 (조회 전용 — 서버 상태 변경 없음).\nconstituent_prices 에 없는 구성종목은 전일종가로 평가됩니다.",
+        "operationId": "EtfService_CalcEtfNav",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/etfCalcEtfNavResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "ETF 리소스 이름 (예: \"etfs/069500\")",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pricing": {
+                  "$ref": "#/definitions/commonEtfPricing",
+                  "description": "pricing 모드 + 파라미터. PdfDecomposeHedge 는 flattened(재귀 분해) 바스켓으로 계산된다."
+                },
+                "constituentPrices": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/etfEtfConstituentPrice"
+                  },
+                  "description": "NAV 계산에 주입할 가격 목록. 생략된 구성종목은 전일종가로 평가된다.\nPdf* pricing = PDF 구성종목 심볼,\nIndexTrackingHedge/FutureBasis/LeverageFuture = 추종 선물 심볼."
+                },
+                "askBasis": {
+                  "type": "string",
+                  "title": "선물 베이시스 (FutureBasis / LeverageFuture 에서만 사용, 빈 문자열 = 0)"
+                },
+                "bidBasis": {
+                  "type": "string"
+                }
+              },
+              "title": "CalcEtfNav",
+              "required": [
+                "pricing"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "EtfService"
+        ]
+      }
+    },
     "/v1/{etf}:calc_unit_price": {
       "post": {
         "summary": "ETF-선물 헷지 포지션의 단가를 계산합니다.",
@@ -503,6 +568,19 @@
       "description": "- PRODUCT_TYPE_FOREIGN: 국내 마스터·시세가 없는 해외 보유분 (미국채/미국ETF/해외주식 등, 평가금액만 고정 반영)",
       "title": "상품 타입"
     },
+    "etfCalcEtfNavResponse": {
+      "type": "object",
+      "properties": {
+        "askNav": {
+          "type": "string",
+          "title": "ask 호가 기준 NAV"
+        },
+        "bidNav": {
+          "type": "string",
+          "title": "bid 호가 기준 NAV"
+        }
+      }
+    },
     "etfCalcEtfUnitPriceResponse": {
       "type": "object",
       "properties": {
@@ -654,6 +732,29 @@
           "title": "unit_delta (구성종목 기반 NAV 계산용)"
         }
       }
+    },
+    "etfEtfConstituentPrice": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "title": "구성종목(또는 추종 선물) 심볼"
+        },
+        "askPrice": {
+          "type": "string",
+          "title": "매도호가"
+        },
+        "bidPrice": {
+          "type": "string",
+          "title": "매수호가"
+        }
+      },
+      "title": "NAV 계산에 주입할 구성종목 호가",
+      "required": [
+        "symbol",
+        "askPrice",
+        "bidPrice"
+      ]
     },
     "etfEtfPdfConstituent": {
       "type": "object",

@@ -34,6 +34,26 @@ func (m *MockEtfServiceClient) EXPECT() *MockEtfServiceClientMockRecorder {
 	return m.recorder
 }
 
+// CalcEtfNav mocks base method.
+func (m *MockEtfServiceClient) CalcEtfNav(ctx context.Context, in *CalcEtfNavRequest, opts ...grpc.CallOption) (*CalcEtfNavResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CalcEtfNav", varargs...)
+	ret0, _ := ret[0].(*CalcEtfNavResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CalcEtfNav indicates an expected call of CalcEtfNav.
+func (mr *MockEtfServiceClientMockRecorder) CalcEtfNav(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CalcEtfNav", reflect.TypeOf((*MockEtfServiceClient)(nil).CalcEtfNav), varargs...)
+}
+
 // CalcEtfUnitPrice mocks base method.
 func (m *MockEtfServiceClient) CalcEtfUnitPrice(ctx context.Context, in *CalcEtfUnitPriceRequest, opts ...grpc.CallOption) (*CalcEtfUnitPriceResponse, error) {
 	m.ctrl.T.Helper()
@@ -215,6 +235,21 @@ func NewMockEtfServiceServer(ctrl *gomock.Controller) *MockEtfServiceServer {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockEtfServiceServer) EXPECT() *MockEtfServiceServerMockRecorder {
 	return m.recorder
+}
+
+// CalcEtfNav mocks base method.
+func (m *MockEtfServiceServer) CalcEtfNav(ctx context.Context, in *CalcEtfNavRequest) (*CalcEtfNavResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CalcEtfNav", ctx, in)
+	ret0, _ := ret[0].(*CalcEtfNavResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CalcEtfNav indicates an expected call of CalcEtfNav.
+func (mr *MockEtfServiceServerMockRecorder) CalcEtfNav(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CalcEtfNav", reflect.TypeOf((*MockEtfServiceServer)(nil).CalcEtfNav), ctx, in)
 }
 
 // CalcEtfUnitPrice mocks base method.

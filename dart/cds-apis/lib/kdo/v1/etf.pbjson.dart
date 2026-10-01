@@ -578,3 +578,53 @@ final $typed_data.Uint8List getEtfPricingStateResponseDescriptor = $convert.base
     'ByZXZfbmF2QhQKEl9hY3R1YWxfbGV2ZXJhZ2VfbEINCgtfcHJldl9pbmRleEIOCgxfcHJldl9m'
     'dXR1cmU=');
 
+@$core.Deprecated('Use calcEtfNavRequestDescriptor instead')
+const CalcEtfNavRequest$json = {
+  '1': 'CalcEtfNavRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
+    {'1': 'pricing', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '8': {}, '10': 'pricing'},
+    {'1': 'constituent_prices', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.etf.EtfConstituentPrice', '10': 'constituentPrices'},
+    {'1': 'ask_basis', '3': 4, '4': 1, '5': 9, '10': 'askBasis'},
+    {'1': 'bid_basis', '3': 5, '4': 1, '5': 9, '10': 'bidBasis'},
+  ],
+};
+
+/// Descriptor for `CalcEtfNavRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List calcEtfNavRequestDescriptor = $convert.base64Decode(
+    'ChFDYWxjRXRmTmF2UmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZHNhcGlzLn'
+    'h5ei9FdGZSA2V0ZhI5CgdwcmljaW5nGAIgASgLMhkua2RvLnYxLmNvbW1vbi5FdGZQcmljaW5n'
+    'QgTiQQECUgdwcmljaW5nEk4KEmNvbnN0aXR1ZW50X3ByaWNlcxgDIAMoCzIfLmtkby52MS5ldG'
+    'YuRXRmQ29uc3RpdHVlbnRQcmljZVIRY29uc3RpdHVlbnRQcmljZXMSGwoJYXNrX2Jhc2lzGAQg'
+    'ASgJUghhc2tCYXNpcxIbCgliaWRfYmFzaXMYBSABKAlSCGJpZEJhc2lz');
+
+@$core.Deprecated('Use etfConstituentPriceDescriptor instead')
+const EtfConstituentPrice$json = {
+  '1': 'EtfConstituentPrice',
+  '2': [
+    {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'ask_price', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'askPrice'},
+    {'1': 'bid_price', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'bidPrice'},
+  ],
+};
+
+/// Descriptor for `EtfConstituentPrice`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List etfConstituentPriceDescriptor = $convert.base64Decode(
+    'ChNFdGZDb25zdGl0dWVudFByaWNlEhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEiEKCW'
+    'Fza19wcmljZRgCIAEoCUIE4kEBAlIIYXNrUHJpY2USIQoJYmlkX3ByaWNlGAMgASgJQgTiQQEC'
+    'UghiaWRQcmljZQ==');
+
+@$core.Deprecated('Use calcEtfNavResponseDescriptor instead')
+const CalcEtfNavResponse$json = {
+  '1': 'CalcEtfNavResponse',
+  '2': [
+    {'1': 'ask_nav', '3': 1, '4': 1, '5': 9, '10': 'askNav'},
+    {'1': 'bid_nav', '3': 2, '4': 1, '5': 9, '10': 'bidNav'},
+  ],
+};
+
+/// Descriptor for `CalcEtfNavResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List calcEtfNavResponseDescriptor = $convert.base64Decode(
+    'ChJDYWxjRXRmTmF2UmVzcG9uc2USFwoHYXNrX25hdhgBIAEoCVIGYXNrTmF2EhcKB2JpZF9uYX'
+    'YYAiABKAlSBmJpZE5hdg==');
+

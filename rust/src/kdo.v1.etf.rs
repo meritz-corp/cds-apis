@@ -465,6 +465,51 @@ pub struct GetEtfPricingStateResponse {
     #[prost(string, optional, tag="14")]
     pub prev_future: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// CalcEtfNav
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CalcEtfNavRequest {
+    /// ETF 리소스 이름 (예: "etfs/069500")
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// pricing 모드 + 파라미터. PdfDecomposeHedge 는 flattened(재귀 분해) 바스켓으로 계산된다.
+    #[prost(message, optional, tag="2")]
+    pub pricing: ::core::option::Option<super::common::EtfPricing>,
+    /// NAV 계산에 주입할 가격 목록. 생략된 구성종목은 전일종가로 평가된다.
+    /// Pdf* pricing = PDF 구성종목 심볼,
+    /// IndexTrackingHedge/FutureBasis/LeverageFuture = 추종 선물 심볼.
+    #[prost(message, repeated, tag="3")]
+    pub constituent_prices: ::prost::alloc::vec::Vec<EtfConstituentPrice>,
+    /// 선물 베이시스 (FutureBasis / LeverageFuture 에서만 사용, 빈 문자열 = 0)
+    #[prost(string, tag="4")]
+    pub ask_basis: ::prost::alloc::string::String,
+    #[prost(string, tag="5")]
+    pub bid_basis: ::prost::alloc::string::String,
+}
+/// NAV 계산에 주입할 구성종목 호가
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EtfConstituentPrice {
+    /// 구성종목(또는 추종 선물) 심볼
+    #[prost(string, tag="1")]
+    pub symbol: ::prost::alloc::string::String,
+    /// 매도호가
+    #[prost(string, tag="2")]
+    pub ask_price: ::prost::alloc::string::String,
+    /// 매수호가
+    #[prost(string, tag="3")]
+    pub bid_price: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CalcEtfNavResponse {
+    /// ask 호가 기준 NAV
+    #[prost(string, tag="1")]
+    pub ask_nav: ::prost::alloc::string::String,
+    /// bid 호가 기준 NAV
+    #[prost(string, tag="2")]
+    pub bid_nav: ::prost::alloc::string::String,
+}
 /// 복제 방법
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

@@ -152,4 +152,23 @@ extension type EtfServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 주어진 구성종목 가격으로 ETF NAV 를 계산합니다 (조회 전용 — 서버 상태 변경 없음).
+  /// constituent_prices 에 없는 구성종목은 전일종가로 평가됩니다.
+  Future<kdov1etf.CalcEtfNavResponse> calcEtfNav(
+    kdov1etf.CalcEtfNavRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.EtfService.calcEtfNav,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

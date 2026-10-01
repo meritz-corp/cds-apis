@@ -83,6 +83,16 @@ service EtfService {
         };
         option (google.api.method_signature) = "etf,pricing";
     }
+
+    // 주어진 구성종목 가격으로 ETF NAV 를 계산합니다 (조회 전용 — 서버 상태 변경 없음).
+    // constituent_prices 에 없는 구성종목은 전일종가로 평가됩니다.
+    rpc CalcEtfNav(CalcEtfNavRequest) returns (CalcEtfNavResponse) {
+        option (google.api.http) = {
+            post: "/v1/{etf=etfs/*}:calc_nav"
+            body: "*"
+        };
+        option (google.api.method_signature) = "etf,pricing";
+    }
 }
 
 
@@ -535,4 +545,47 @@ message GetEtfPricingStateResponse {
     // (FutureBasis는 prev_index만 채워짐)
     optional string prev_index = 13;
     optional string prev_future = 14;
+}
+
+// CalcEtfNav
+message CalcEtfNavRequest {
+    // ETF 리소스 이름 (예: "etfs/069500")
+    string etf = 1 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+            type: "kdo.cdsapis.xyz/Etf"
+        }
+    ];
+
+    // pricing 모드 + 파라미터. PdfDecomposeHedge 는 flattened(재귀 분해) 바스켓으로 계산된다.
+    kdo.v1.common.EtfPricing pricing = 2 [(google.api.field_behavior) = REQUIRED];
+
+    // NAV 계산에 주입할 가격 목록. 생략된 구성종목은 전일종가로 평가된다.
+    // Pdf* pricing = PDF 구성종목 심볼,
+    // IndexTrackingHedge/FutureBasis/LeverageFuture = 추종 선물 심볼.
+    repeated EtfConstituentPrice constituent_prices = 3;
+
+    // 선물 베이시스 (FutureBasis / LeverageFuture 에서만 사용, 빈 문자열 = 0)
+    string ask_basis = 4;
+    string bid_basis = 5;
+}
+
+// NAV 계산에 주입할 구성종목 호가
+message EtfConstituentPrice {
+    // 구성종목(또는 추종 선물) 심볼
+    string symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // 매도호가
+    string ask_price = 2 [(google.api.field_behavior) = REQUIRED];
+
+    // 매수호가
+    string bid_price = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CalcEtfNavResponse {
+    // ask 호가 기준 NAV
+    string ask_nav = 1;
+
+    // bid 호가 기준 NAV
+    string bid_nav = 2;
 }

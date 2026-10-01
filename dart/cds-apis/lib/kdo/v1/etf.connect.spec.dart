@@ -74,4 +74,13 @@ abstract final class EtfService {
     kdov1etf.GetEtfPricingStateRequest.new,
     kdov1etf.GetEtfPricingStateResponse.new,
   );
+
+  /// 주어진 구성종목 가격으로 ETF NAV 를 계산합니다 (조회 전용 — 서버 상태 변경 없음).
+  /// constituent_prices 에 없는 구성종목은 전일종가로 평가됩니다.
+  static const calcEtfNav = connect.Spec(
+    '/$name/CalcEtfNav',
+    connect.StreamType.unary,
+    kdov1etf.CalcEtfNavRequest.new,
+    kdov1etf.CalcEtfNavResponse.new,
+  );
 }
