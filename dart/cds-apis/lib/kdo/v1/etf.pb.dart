@@ -2490,17 +2490,24 @@ class CalcEtfNavRequest extends $pb.GeneratedMessage {
   void clearBidBasis() => $_clearField(5);
 }
 
-/// NAV 계산에 주입할 구성종목 호가
+/// NAV 계산에 주입할 구성종목 호가 (+ 1호가 잔량)
+/// ask_quantity / bid_quantity (1호가 잔량) 는 응답의 `micro_nav` (잔량가중 micro price NAV) 산출에만 쓰인다.
+/// 잔량이 양쪽 모두 양수인 구성종목이 하나라도 있으면 응답의 `micro_nav` 가 채워지고,
+/// 잔량 한쪽이 0 인 구성종목은 그 종목만 `(ask_price + bid_price) / 2` 로 폴백한다.
 class EtfConstituentPrice extends $pb.GeneratedMessage {
   factory EtfConstituentPrice({
     $core.String? symbol,
     $core.String? askPrice,
     $core.String? bidPrice,
+    $fixnum.Int64? askQuantity,
+    $fixnum.Int64? bidQuantity,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (askPrice != null) result.askPrice = askPrice;
     if (bidPrice != null) result.bidPrice = bidPrice;
+    if (askQuantity != null) result.askQuantity = askQuantity;
+    if (bidQuantity != null) result.bidQuantity = bidQuantity;
     return result;
   }
 
@@ -2513,6 +2520,8 @@ class EtfConstituentPrice extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'askPrice')
     ..aOS(3, _omitFieldNames ? '' : 'bidPrice')
+    ..aInt64(4, _omitFieldNames ? '' : 'askQuantity')
+    ..aInt64(5, _omitFieldNames ? '' : 'bidQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -2562,16 +2571,38 @@ class EtfConstituentPrice extends $pb.GeneratedMessage {
   $core.bool hasBidPrice() => $_has(2);
   @$pb.TagNumber(3)
   void clearBidPrice() => $_clearField(3);
+
+  /// 매도 1호가 잔량 (0 = 미제공). micro price 산출에만 쓰이며 ask_nav/bid_nav 에는 영향 없다.
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get askQuantity => $_getI64(3);
+  @$pb.TagNumber(4)
+  set askQuantity($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasAskQuantity() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAskQuantity() => $_clearField(4);
+
+  /// 매수 1호가 잔량 (0 = 미제공)
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get bidQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set bidQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBidQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBidQuantity() => $_clearField(5);
 }
 
 class CalcEtfNavResponse extends $pb.GeneratedMessage {
   factory CalcEtfNavResponse({
     $core.String? askNav,
     $core.String? bidNav,
+    $core.String? microNav,
   }) {
     final result = create();
     if (askNav != null) result.askNav = askNav;
     if (bidNav != null) result.bidNav = bidNav;
+    if (microNav != null) result.microNav = microNav;
     return result;
   }
 
@@ -2583,6 +2614,7 @@ class CalcEtfNavResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CalcEtfNavResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.etf'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'askNav')
     ..aOS(2, _omitFieldNames ? '' : 'bidNav')
+    ..aOS(3, _omitFieldNames ? '' : 'microNav')
     ..hasRequiredFields = false
   ;
 
@@ -2622,6 +2654,22 @@ class CalcEtfNavResponse extends $pb.GeneratedMessage {
   $core.bool hasBidNav() => $_has(1);
   @$pb.TagNumber(2)
   void clearBidNav() => $_clearField(2);
+
+  /// 구성종목 1호가 잔량가중 micro price 기준 단일 NAV.
+  /// micro = (ask_price × bid_quantity + bid_price × ask_quantity) / (bid_quantity + ask_quantity)
+  /// — 반대편 잔량으로 교차가중하므로 매수 잔량↑ 이면 매도호가 쪽으로 이동한다.
+  /// MM 런타임의 NAV 입력 microprice 와 같은 공식이되 호가 단계는 1호가로 고정이다
+  /// (MM 은 config `qty_weighted_mid_levels` 기본 3단).
+  /// FutureBasis / LeverageFuture 의 basis 는 (ask_basis + bid_basis) / 2 를 쓴다.
+  /// 구성종목 잔량이 하나도 들어오지 않으면 비어 있다.
+  @$pb.TagNumber(3)
+  $core.String get microNav => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set microNav($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMicroNav() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMicroNav() => $_clearField(3);
 }
 
 

@@ -486,7 +486,10 @@ pub struct CalcEtfNavRequest {
     #[prost(string, tag="5")]
     pub bid_basis: ::prost::alloc::string::String,
 }
-/// NAV 계산에 주입할 구성종목 호가
+/// NAV 계산에 주입할 구성종목 호가 (+ 1호가 잔량)
+/// ask_quantity / bid_quantity (1호가 잔량) 는 응답의 `micro_nav` (잔량가중 micro price NAV) 산출에만 쓰인다.
+/// 잔량이 양쪽 모두 양수인 구성종목이 하나라도 있으면 응답의 `micro_nav` 가 채워지고,
+/// 잔량 한쪽이 0 인 구성종목은 그 종목만 `(ask_price + bid_price) / 2` 로 폴백한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EtfConstituentPrice {
@@ -499,6 +502,12 @@ pub struct EtfConstituentPrice {
     /// 매수호가
     #[prost(string, tag="3")]
     pub bid_price: ::prost::alloc::string::String,
+    /// 매도 1호가 잔량 (0 = 미제공). micro price 산출에만 쓰이며 ask_nav/bid_nav 에는 영향 없다.
+    #[prost(int64, tag="4")]
+    pub ask_quantity: i64,
+    /// 매수 1호가 잔량 (0 = 미제공)
+    #[prost(int64, tag="5")]
+    pub bid_quantity: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -509,6 +518,15 @@ pub struct CalcEtfNavResponse {
     /// bid 호가 기준 NAV
     #[prost(string, tag="2")]
     pub bid_nav: ::prost::alloc::string::String,
+    /// 구성종목 1호가 잔량가중 micro price 기준 단일 NAV.
+    /// micro = (ask_price × bid_quantity + bid_price × ask_quantity) / (bid_quantity + ask_quantity)
+    /// — 반대편 잔량으로 교차가중하므로 매수 잔량↑ 이면 매도호가 쪽으로 이동한다.
+    /// MM 런타임의 NAV 입력 microprice 와 같은 공식이되 호가 단계는 1호가로 고정이다
+    /// (MM 은 config `qty_weighted_mid_levels` 기본 3단).
+    /// FutureBasis / LeverageFuture 의 basis 는 (ask_basis + bid_basis) / 2 를 쓴다.
+    /// 구성종목 잔량이 하나도 들어오지 않으면 비어 있다.
+    #[prost(string, optional, tag="3")]
+    pub micro_nav: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// 복제 방법
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

@@ -179,12 +179,18 @@ impl serde::Serialize for CalcEtfNavResponse {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.CalcEtfNavResponse", len)?;
         if true {
             struct_ser.serialize_field("ask_nav", &self.ask_nav)?;
         }
         if true {
             struct_ser.serialize_field("bid_nav", &self.bid_nav)?;
+        }
+        if let Some(v) = self.micro_nav.as_ref() {
+            struct_ser.serialize_field("micro_nav", v)?;
         }
         struct_ser.end()
     }
@@ -200,12 +206,15 @@ impl<'de> serde::Deserialize<'de> for CalcEtfNavResponse {
             "askNav",
             "bid_nav",
             "bidNav",
+            "micro_nav",
+            "microNav",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             AskNav,
             BidNav,
+            MicroNav,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -230,6 +239,7 @@ impl<'de> serde::Deserialize<'de> for CalcEtfNavResponse {
                         match value {
                             "askNav" | "ask_nav" => Ok(GeneratedField::AskNav),
                             "bidNav" | "bid_nav" => Ok(GeneratedField::BidNav),
+                            "microNav" | "micro_nav" => Ok(GeneratedField::MicroNav),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -251,6 +261,7 @@ impl<'de> serde::Deserialize<'de> for CalcEtfNavResponse {
             {
                 let mut ask_nav__ = None;
                 let mut bid_nav__ = None;
+                let mut micro_nav__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::AskNav => {
@@ -265,6 +276,12 @@ impl<'de> serde::Deserialize<'de> for CalcEtfNavResponse {
                             }
                             bid_nav__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::MicroNav => {
+                            if micro_nav__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("microNav"));
+                            }
+                            micro_nav__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -273,6 +290,7 @@ impl<'de> serde::Deserialize<'de> for CalcEtfNavResponse {
                 Ok(CalcEtfNavResponse {
                     ask_nav: ask_nav__.unwrap_or_default(),
                     bid_nav: bid_nav__.unwrap_or_default(),
+                    micro_nav: micro_nav__,
                 })
             }
         }
@@ -1702,6 +1720,12 @@ impl serde::Serialize for EtfConstituentPrice {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.etf.EtfConstituentPrice", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -1711,6 +1735,16 @@ impl serde::Serialize for EtfConstituentPrice {
         }
         if true {
             struct_ser.serialize_field("bid_price", &self.bid_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_quantity", ToString::to_string(&self.ask_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_quantity", ToString::to_string(&self.bid_quantity).as_str())?;
         }
         struct_ser.end()
     }
@@ -1727,6 +1761,10 @@ impl<'de> serde::Deserialize<'de> for EtfConstituentPrice {
             "askPrice",
             "bid_price",
             "bidPrice",
+            "ask_quantity",
+            "askQuantity",
+            "bid_quantity",
+            "bidQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1734,6 +1772,8 @@ impl<'de> serde::Deserialize<'de> for EtfConstituentPrice {
             Symbol,
             AskPrice,
             BidPrice,
+            AskQuantity,
+            BidQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1759,6 +1799,8 @@ impl<'de> serde::Deserialize<'de> for EtfConstituentPrice {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "askPrice" | "ask_price" => Ok(GeneratedField::AskPrice),
                             "bidPrice" | "bid_price" => Ok(GeneratedField::BidPrice),
+                            "askQuantity" | "ask_quantity" => Ok(GeneratedField::AskQuantity),
+                            "bidQuantity" | "bid_quantity" => Ok(GeneratedField::BidQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1781,6 +1823,8 @@ impl<'de> serde::Deserialize<'de> for EtfConstituentPrice {
                 let mut symbol__ = None;
                 let mut ask_price__ = None;
                 let mut bid_price__ = None;
+                let mut ask_quantity__ = None;
+                let mut bid_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -1801,6 +1845,22 @@ impl<'de> serde::Deserialize<'de> for EtfConstituentPrice {
                             }
                             bid_price__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::AskQuantity => {
+                            if ask_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askQuantity"));
+                            }
+                            ask_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BidQuantity => {
+                            if bid_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidQuantity"));
+                            }
+                            bid_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1810,6 +1870,8 @@ impl<'de> serde::Deserialize<'de> for EtfConstituentPrice {
                     symbol: symbol__.unwrap_or_default(),
                     ask_price: ask_price__.unwrap_or_default(),
                     bid_price: bid_price__.unwrap_or_default(),
+                    ask_quantity: ask_quantity__.unwrap_or_default(),
+                    bid_quantity: bid_quantity__.unwrap_or_default(),
                 })
             }
         }

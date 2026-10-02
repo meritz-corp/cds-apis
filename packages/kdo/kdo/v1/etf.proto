@@ -570,7 +570,10 @@ message CalcEtfNavRequest {
     string bid_basis = 5;
 }
 
-// NAV 계산에 주입할 구성종목 호가
+// NAV 계산에 주입할 구성종목 호가 (+ 1호가 잔량)
+// ask_quantity / bid_quantity (1호가 잔량) 는 응답의 `micro_nav` (잔량가중 micro price NAV) 산출에만 쓰인다.
+// 잔량이 양쪽 모두 양수인 구성종목이 하나라도 있으면 응답의 `micro_nav` 가 채워지고,
+// 잔량 한쪽이 0 인 구성종목은 그 종목만 `(ask_price + bid_price) / 2` 로 폴백한다.
 message EtfConstituentPrice {
     // 구성종목(또는 추종 선물) 심볼
     string symbol = 1 [(google.api.field_behavior) = REQUIRED];
@@ -580,6 +583,12 @@ message EtfConstituentPrice {
 
     // 매수호가
     string bid_price = 3 [(google.api.field_behavior) = REQUIRED];
+
+    // 매도 1호가 잔량 (0 = 미제공). micro price 산출에만 쓰이며 ask_nav/bid_nav 에는 영향 없다.
+    int64 ask_quantity = 4;
+
+    // 매수 1호가 잔량 (0 = 미제공)
+    int64 bid_quantity = 5;
 }
 
 message CalcEtfNavResponse {
@@ -588,4 +597,13 @@ message CalcEtfNavResponse {
 
     // bid 호가 기준 NAV
     string bid_nav = 2;
+
+    // 구성종목 1호가 잔량가중 micro price 기준 단일 NAV.
+    // micro = (ask_price × bid_quantity + bid_price × ask_quantity) / (bid_quantity + ask_quantity)
+    // — 반대편 잔량으로 교차가중하므로 매수 잔량↑ 이면 매도호가 쪽으로 이동한다.
+    // MM 런타임의 NAV 입력 microprice 와 같은 공식이되 호가 단계는 1호가로 고정이다
+    // (MM 은 config `qty_weighted_mid_levels` 기본 3단).
+    // FutureBasis / LeverageFuture 의 basis 는 (ask_basis + bid_basis) / 2 를 쓴다.
+    // 구성종목 잔량이 하나도 들어오지 않으면 비어 있다.
+    optional string micro_nav = 3;
 }

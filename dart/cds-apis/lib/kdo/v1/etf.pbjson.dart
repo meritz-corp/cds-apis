@@ -605,6 +605,8 @@ const EtfConstituentPrice$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'ask_price', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'askPrice'},
     {'1': 'bid_price', '3': 3, '4': 1, '5': 9, '8': {}, '10': 'bidPrice'},
+    {'1': 'ask_quantity', '3': 4, '4': 1, '5': 3, '10': 'askQuantity'},
+    {'1': 'bid_quantity', '3': 5, '4': 1, '5': 3, '10': 'bidQuantity'},
   ],
 };
 
@@ -612,7 +614,8 @@ const EtfConstituentPrice$json = {
 final $typed_data.Uint8List etfConstituentPriceDescriptor = $convert.base64Decode(
     'ChNFdGZDb25zdGl0dWVudFByaWNlEhwKBnN5bWJvbBgBIAEoCUIE4kEBAlIGc3ltYm9sEiEKCW'
     'Fza19wcmljZRgCIAEoCUIE4kEBAlIIYXNrUHJpY2USIQoJYmlkX3ByaWNlGAMgASgJQgTiQQEC'
-    'UghiaWRQcmljZQ==');
+    'UghiaWRQcmljZRIhCgxhc2tfcXVhbnRpdHkYBCABKANSC2Fza1F1YW50aXR5EiEKDGJpZF9xdW'
+    'FudGl0eRgFIAEoA1ILYmlkUXVhbnRpdHk=');
 
 @$core.Deprecated('Use calcEtfNavResponseDescriptor instead')
 const CalcEtfNavResponse$json = {
@@ -620,11 +623,16 @@ const CalcEtfNavResponse$json = {
   '2': [
     {'1': 'ask_nav', '3': 1, '4': 1, '5': 9, '10': 'askNav'},
     {'1': 'bid_nav', '3': 2, '4': 1, '5': 9, '10': 'bidNav'},
+    {'1': 'micro_nav', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'microNav', '17': true},
+  ],
+  '8': [
+    {'1': '_micro_nav'},
   ],
 };
 
 /// Descriptor for `CalcEtfNavResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List calcEtfNavResponseDescriptor = $convert.base64Decode(
     'ChJDYWxjRXRmTmF2UmVzcG9uc2USFwoHYXNrX25hdhgBIAEoCVIGYXNrTmF2EhcKB2JpZF9uYX'
-    'YYAiABKAlSBmJpZE5hdg==');
+    'YYAiABKAlSBmJpZE5hdhIgCgltaWNyb19uYXYYAyABKAlIAFIIbWljcm9OYXaIAQFCDAoKX21p'
+    'Y3JvX25hdg==');
 
