@@ -144,16 +144,21 @@ message ListFuturesRequest {
 
   // 필터링 조건 (optional, AIP-160)
   //
-  // Available Fields (아래 3개 외 필드는 INVALID_ARGUMENT):
-  // * symbol - 표준코드, 예: "KR4A01630008"
-  // * name   - 종목명, 예: "코스피200 F 202603"
-  // * code   - 단축코드, 예: "KA0163000"
+  // Available Fields (아래 4개 외 필드는 INVALID_ARGUMENT):
+  // * symbol      - 표준코드, 예: "KR4A01630008"
+  // * name        - 종목명, 예: "코스피200 F 202603"
+  // * code        - 단축코드, 예: "KA0163000"
+  // * market_type - 파생 유형. 마스터에 저장된 세분화 값이며 `Future.market_type`
+  //                 (KOSPI/KOSDAQ/DERIVATIVE) 응답 enum 과는 별개다.
+  //                 허용값: K200Future, K200MiniFuture, Q150Future, K300Future,
+  //                 SectorFuture, StockFuture, USDFuture, K200Option,
+  //                 WeeklyK200Option, Unspecified — 그 외 값은 INVALID_ARGUMENT
   //
-  // NOTE: market_type / future_option_type / tradable / underlying_code 은 서버 미구현 — 사용 시 INVALID_ARGUMENT
+  // NOTE: future_option_type / tradable / underlying_code 은 서버 미구현 — 사용 시 INVALID_ARGUMENT
   //
   // Operators:
-  // * `=` 정확일치 (대소문자 구분)
-  // * `:` 부분일치 (대소문자 무시)
+  // * `=` 정확일치 (대소문자 구분. market_type 만 대소문자 무시)
+  // * `:` 부분일치 (대소문자 무시. market_type 은 `=` 전용 — `:` 는 INVALID_ARGUMENT)
   // * 값은 큰따옴표로 감싼다
   //
   // Combining:
@@ -166,6 +171,8 @@ message ListFuturesRequest {
   // * symbol = "KR4A01630008"
   // * code = "KA0163000"
   // * name:"코스피200"
+  // * market_type = "StockFuture"
+  // * market_type = "K200Future" AND market_type = "Q150Future"  (지수선물 2종)
   string filter = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
