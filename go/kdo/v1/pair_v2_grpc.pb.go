@@ -55,6 +55,12 @@ type PairV2ServiceClient interface {
 	ListPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (*ListPairV2OrdersResponse, error)
 	// leg(base/counter)별 누적 집계 (상단 요약)
 	GetPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (*GetPairV2OrderSummaryResponse, error)
+	// 주문별 추적 목록 스트리밍 (하단 주문 표). 주문 상태 변경 이벤트마다 현재 목록 전체(최신순 1페이지)를 push.
+	// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
+	StreamPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrdersClient, error)
+	// leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+	// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+	StreamPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrderSummaryClient, error)
 	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
 	// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
 	ResetPairV2Session(ctx context.Context, in *ResetPairV2SessionRequest, opts ...grpc.CallOption) (*PairV2, error)
@@ -217,6 +223,70 @@ func (c *pairV2ServiceClient) GetPairV2OrderSummary(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *pairV2ServiceClient) StreamPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrdersClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PairV2Service_ServiceDesc.Streams[1], "/kdo.v1.pair_v2.PairV2Service/StreamPairV2Orders", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &pairV2ServiceStreamPairV2OrdersClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PairV2Service_StreamPairV2OrdersClient interface {
+	Recv() (*ListPairV2OrdersResponse, error)
+	grpc.ClientStream
+}
+
+type pairV2ServiceStreamPairV2OrdersClient struct {
+	grpc.ClientStream
+}
+
+func (x *pairV2ServiceStreamPairV2OrdersClient) Recv() (*ListPairV2OrdersResponse, error) {
+	m := new(ListPairV2OrdersResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *pairV2ServiceClient) StreamPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrderSummaryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &PairV2Service_ServiceDesc.Streams[2], "/kdo.v1.pair_v2.PairV2Service/StreamPairV2OrderSummary", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &pairV2ServiceStreamPairV2OrderSummaryClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PairV2Service_StreamPairV2OrderSummaryClient interface {
+	Recv() (*GetPairV2OrderSummaryResponse, error)
+	grpc.ClientStream
+}
+
+type pairV2ServiceStreamPairV2OrderSummaryClient struct {
+	grpc.ClientStream
+}
+
+func (x *pairV2ServiceStreamPairV2OrderSummaryClient) Recv() (*GetPairV2OrderSummaryResponse, error) {
+	m := new(GetPairV2OrderSummaryResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *pairV2ServiceClient) ResetPairV2Session(ctx context.Context, in *ResetPairV2SessionRequest, opts ...grpc.CallOption) (*PairV2, error) {
 	out := new(PairV2)
 	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/ResetPairV2Session", in, out, opts...)
@@ -262,6 +332,12 @@ type PairV2ServiceServer interface {
 	ListPairV2Orders(context.Context, *ListPairV2OrdersRequest) (*ListPairV2OrdersResponse, error)
 	// leg(base/counter)별 누적 집계 (상단 요약)
 	GetPairV2OrderSummary(context.Context, *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error)
+	// 주문별 추적 목록 스트리밍 (하단 주문 표). 주문 상태 변경 이벤트마다 현재 목록 전체(최신순 1페이지)를 push.
+	// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
+	StreamPairV2Orders(*ListPairV2OrdersRequest, PairV2Service_StreamPairV2OrdersServer) error
+	// leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+	// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+	StreamPairV2OrderSummary(*GetPairV2OrderSummaryRequest, PairV2Service_StreamPairV2OrderSummaryServer) error
 	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
 	// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
 	ResetPairV2Session(context.Context, *ResetPairV2SessionRequest) (*PairV2, error)
@@ -313,6 +389,12 @@ func (UnimplementedPairV2ServiceServer) ListPairV2Orders(context.Context, *ListP
 }
 func (UnimplementedPairV2ServiceServer) GetPairV2OrderSummary(context.Context, *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPairV2OrderSummary not implemented")
+}
+func (UnimplementedPairV2ServiceServer) StreamPairV2Orders(*ListPairV2OrdersRequest, PairV2Service_StreamPairV2OrdersServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamPairV2Orders not implemented")
+}
+func (UnimplementedPairV2ServiceServer) StreamPairV2OrderSummary(*GetPairV2OrderSummaryRequest, PairV2Service_StreamPairV2OrderSummaryServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamPairV2OrderSummary not implemented")
 }
 func (UnimplementedPairV2ServiceServer) ResetPairV2Session(context.Context, *ResetPairV2SessionRequest) (*PairV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPairV2Session not implemented")
@@ -585,6 +667,48 @@ func _PairV2Service_GetPairV2OrderSummary_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PairV2Service_StreamPairV2Orders_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListPairV2OrdersRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PairV2ServiceServer).StreamPairV2Orders(m, &pairV2ServiceStreamPairV2OrdersServer{stream})
+}
+
+type PairV2Service_StreamPairV2OrdersServer interface {
+	Send(*ListPairV2OrdersResponse) error
+	grpc.ServerStream
+}
+
+type pairV2ServiceStreamPairV2OrdersServer struct {
+	grpc.ServerStream
+}
+
+func (x *pairV2ServiceStreamPairV2OrdersServer) Send(m *ListPairV2OrdersResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _PairV2Service_StreamPairV2OrderSummary_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPairV2OrderSummaryRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PairV2ServiceServer).StreamPairV2OrderSummary(m, &pairV2ServiceStreamPairV2OrderSummaryServer{stream})
+}
+
+type PairV2Service_StreamPairV2OrderSummaryServer interface {
+	Send(*GetPairV2OrderSummaryResponse) error
+	grpc.ServerStream
+}
+
+type pairV2ServiceStreamPairV2OrderSummaryServer struct {
+	grpc.ServerStream
+}
+
+func (x *pairV2ServiceStreamPairV2OrderSummaryServer) Send(m *GetPairV2OrderSummaryResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _PairV2Service_ResetPairV2Session_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetPairV2SessionRequest)
 	if err := dec(in); err != nil {
@@ -671,6 +795,16 @@ var PairV2Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamPairV2Status",
 			Handler:       _PairV2Service_StreamPairV2Status_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamPairV2Orders",
+			Handler:       _PairV2Service_StreamPairV2Orders_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamPairV2OrderSummary",
+			Handler:       _PairV2Service_StreamPairV2OrderSummary_Handler,
 			ServerStreams: true,
 		},
 	},

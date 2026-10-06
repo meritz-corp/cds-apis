@@ -871,6 +871,85 @@ func local_request_PairV2Service_GetPairV2OrderSummary_0(ctx context.Context, ma
 
 }
 
+var (
+	filter_PairV2Service_StreamPairV2Orders_0 = &utilities.DoubleArray{Encoding: map[string]int{"pair_v2": 0, "pairV2": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+)
+
+func request_PairV2Service_StreamPairV2Orders_0(ctx context.Context, marshaler runtime.Marshaler, client PairV2ServiceClient, req *http.Request, pathParams map[string]string) (PairV2Service_StreamPairV2OrdersClient, runtime.ServerMetadata, error) {
+	var protoReq ListPairV2OrdersRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["pair_v2"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pair_v2")
+	}
+
+	protoReq.PairV2, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pair_v2", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_PairV2Service_StreamPairV2Orders_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.StreamPairV2Orders(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
+func request_PairV2Service_StreamPairV2OrderSummary_0(ctx context.Context, marshaler runtime.Marshaler, client PairV2ServiceClient, req *http.Request, pathParams map[string]string) (PairV2Service_StreamPairV2OrderSummaryClient, runtime.ServerMetadata, error) {
+	var protoReq GetPairV2OrderSummaryRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["pair_v2"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pair_v2")
+	}
+
+	protoReq.PairV2, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pair_v2", err)
+	}
+
+	stream, err := client.StreamPairV2OrderSummary(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 func request_PairV2Service_ResetPairV2Session_0(ctx context.Context, marshaler runtime.Marshaler, client PairV2ServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ResetPairV2SessionRequest
 	var metadata runtime.ServerMetadata
@@ -1277,6 +1356,20 @@ func RegisterPairV2ServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("GET", pattern_PairV2Service_StreamPairV2Orders_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("GET", pattern_PairV2Service_StreamPairV2OrderSummary_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	mux.Handle("POST", pattern_PairV2Service_ResetPairV2Session_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1651,6 +1744,50 @@ func RegisterPairV2ServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("GET", pattern_PairV2Service_StreamPairV2Orders_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.pair_v2.PairV2Service/StreamPairV2Orders", runtime.WithHTTPPathPattern("/v1/{pair_v2=pair_v2s/*}:streamOrders"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_PairV2Service_StreamPairV2Orders_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_PairV2Service_StreamPairV2Orders_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_PairV2Service_StreamPairV2OrderSummary_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.pair_v2.PairV2Service/StreamPairV2OrderSummary", runtime.WithHTTPPathPattern("/v1/{pair_v2=pair_v2s/*}:streamOrderSummary"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_PairV2Service_StreamPairV2OrderSummary_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_PairV2Service_StreamPairV2OrderSummary_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("POST", pattern_PairV2Service_ResetPairV2Session_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1705,6 +1842,10 @@ var (
 
 	pattern_PairV2Service_GetPairV2OrderSummary_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2, 2, 3}, []string{"v1", "pair_v2s", "pair_v2", "orderSummary"}, ""))
 
+	pattern_PairV2Service_StreamPairV2Orders_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pair_v2s", "pair_v2"}, "streamOrders"))
+
+	pattern_PairV2Service_StreamPairV2OrderSummary_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pair_v2s", "pair_v2"}, "streamOrderSummary"))
+
 	pattern_PairV2Service_ResetPairV2Session_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pair_v2s", "pair_v2"}, "resetSession"))
 )
 
@@ -1736,6 +1877,10 @@ var (
 	forward_PairV2Service_ListPairV2Orders_0 = runtime.ForwardResponseMessage
 
 	forward_PairV2Service_GetPairV2OrderSummary_0 = runtime.ForwardResponseMessage
+
+	forward_PairV2Service_StreamPairV2Orders_0 = runtime.ForwardResponseStream
+
+	forward_PairV2Service_StreamPairV2OrderSummary_0 = runtime.ForwardResponseStream
 
 	forward_PairV2Service_ResetPairV2Session_0 = runtime.ForwardResponseMessage
 )

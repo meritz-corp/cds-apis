@@ -116,6 +116,18 @@ class PairV2ServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getPairV2OrderSummary, request, options: options);
   }
 
+  /// 주문별 추적 목록 스트리밍 (하단 주문 표). 주문 상태 변경 이벤트마다 현재 목록 전체(최신순 1페이지)를 push.
+  /// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
+  $grpc.ResponseStream<$0.ListPairV2OrdersResponse> streamPairV2Orders($0.ListPairV2OrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamPairV2Orders, $async.Stream.fromIterable([request]), options: options);
+  }
+
+  /// leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+  /// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+  $grpc.ResponseStream<$0.GetPairV2OrderSummaryResponse> streamPairV2OrderSummary($0.GetPairV2OrderSummaryRequest request, {$grpc.CallOptions? options,}) {
+    return $createStreamingCall(_$streamPairV2OrderSummary, $async.Stream.fromIterable([request]), options: options);
+  }
+
   /// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
   /// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
   $grpc.ResponseFuture<$0.PairV2> resetPairV2Session($0.ResetPairV2SessionRequest request, {$grpc.CallOptions? options,}) {
@@ -178,6 +190,14 @@ class PairV2ServiceClient extends $grpc.Client {
       $0.ListPairV2OrdersResponse.fromBuffer);
   static final _$getPairV2OrderSummary = $grpc.ClientMethod<$0.GetPairV2OrderSummaryRequest, $0.GetPairV2OrderSummaryResponse>(
       '/kdo.v1.pair_v2.PairV2Service/GetPairV2OrderSummary',
+      ($0.GetPairV2OrderSummaryRequest value) => value.writeToBuffer(),
+      $0.GetPairV2OrderSummaryResponse.fromBuffer);
+  static final _$streamPairV2Orders = $grpc.ClientMethod<$0.ListPairV2OrdersRequest, $0.ListPairV2OrdersResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/StreamPairV2Orders',
+      ($0.ListPairV2OrdersRequest value) => value.writeToBuffer(),
+      $0.ListPairV2OrdersResponse.fromBuffer);
+  static final _$streamPairV2OrderSummary = $grpc.ClientMethod<$0.GetPairV2OrderSummaryRequest, $0.GetPairV2OrderSummaryResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/StreamPairV2OrderSummary',
       ($0.GetPairV2OrderSummaryRequest value) => value.writeToBuffer(),
       $0.GetPairV2OrderSummaryResponse.fromBuffer);
   static final _$resetPairV2Session = $grpc.ClientMethod<$0.ResetPairV2SessionRequest, $0.PairV2>(
@@ -289,6 +309,20 @@ abstract class PairV2ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetPairV2OrderSummaryRequest.fromBuffer(value),
         ($0.GetPairV2OrderSummaryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListPairV2OrdersRequest, $0.ListPairV2OrdersResponse>(
+        'StreamPairV2Orders',
+        streamPairV2Orders_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.ListPairV2OrdersRequest.fromBuffer(value),
+        ($0.ListPairV2OrdersResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetPairV2OrderSummaryRequest, $0.GetPairV2OrderSummaryResponse>(
+        'StreamPairV2OrderSummary',
+        streamPairV2OrderSummary_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) => $0.GetPairV2OrderSummaryRequest.fromBuffer(value),
+        ($0.GetPairV2OrderSummaryResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ResetPairV2SessionRequest, $0.PairV2>(
         'ResetPairV2Session',
         resetPairV2Session_Pre,
@@ -381,6 +415,18 @@ abstract class PairV2ServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.GetPairV2OrderSummaryResponse> getPairV2OrderSummary($grpc.ServiceCall call, $0.GetPairV2OrderSummaryRequest request);
+
+  $async.Stream<$0.ListPairV2OrdersResponse> streamPairV2Orders_Pre($grpc.ServiceCall $call, $async.Future<$0.ListPairV2OrdersRequest> $request) async* {
+    yield* streamPairV2Orders($call, await $request);
+  }
+
+  $async.Stream<$0.ListPairV2OrdersResponse> streamPairV2Orders($grpc.ServiceCall call, $0.ListPairV2OrdersRequest request);
+
+  $async.Stream<$0.GetPairV2OrderSummaryResponse> streamPairV2OrderSummary_Pre($grpc.ServiceCall $call, $async.Future<$0.GetPairV2OrderSummaryRequest> $request) async* {
+    yield* streamPairV2OrderSummary($call, await $request);
+  }
+
+  $async.Stream<$0.GetPairV2OrderSummaryResponse> streamPairV2OrderSummary($grpc.ServiceCall call, $0.GetPairV2OrderSummaryRequest request);
 
   $async.Future<$0.PairV2> resetPairV2Session_Pre($grpc.ServiceCall $call, $async.Future<$0.ResetPairV2SessionRequest> $request) async {
     return resetPairV2Session($call, await $request);

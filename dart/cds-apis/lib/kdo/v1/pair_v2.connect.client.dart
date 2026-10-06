@@ -272,6 +272,44 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 주문별 추적 목록 스트리밍 (하단 주문 표). 주문 상태 변경 이벤트마다 현재 목록 전체(최신순 1페이지)를 push.
+  /// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
+  Stream<kdov1pair_v2.ListPairV2OrdersResponse> streamPairV2Orders(
+    kdov1pair_v2.ListPairV2OrdersRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PairV2Service.streamPairV2Orders,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
+  /// leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+  /// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+  Stream<kdov1pair_v2.GetPairV2OrderSummaryResponse> streamPairV2OrderSummary(
+    kdov1pair_v2.GetPairV2OrderSummaryRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).server(
+      specs.PairV2Service.streamPairV2OrderSummary,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
   /// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
   Future<kdov1pair_v2.PairV2> resetPairV2Session(

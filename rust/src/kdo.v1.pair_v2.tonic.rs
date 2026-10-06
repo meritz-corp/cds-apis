@@ -444,6 +444,65 @@ pub mod pair_v2_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn stream_pair_v2_orders(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListPairV2OrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::ListPairV2OrdersResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.pair_v2.PairV2Service/StreamPairV2Orders",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.pair_v2.PairV2Service", "StreamPairV2Orders"),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
+        pub async fn stream_pair_v2_order_summary(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetPairV2OrderSummaryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::GetPairV2OrderSummaryResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.pair_v2.PairV2Service/StreamPairV2OrderSummary",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.pair_v2.PairV2Service",
+                        "StreamPairV2OrderSummary",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         pub async fn reset_pair_v2_session(
             &mut self,
             request: impl tonic::IntoRequest<super::ResetPairV2SessionRequest>,
@@ -561,6 +620,38 @@ pub mod pair_v2_service_server {
             request: tonic::Request<super::GetPairV2OrderSummaryRequest>,
         ) -> std::result::Result<
             tonic::Response<super::GetPairV2OrderSummaryResponse>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamPairV2Orders method.
+        type StreamPairV2OrdersStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::ListPairV2OrdersResponse,
+                    tonic::Status,
+                >,
+            >
+            + Send
+            + 'static;
+        async fn stream_pair_v2_orders(
+            &self,
+            request: tonic::Request<super::ListPairV2OrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamPairV2OrdersStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the StreamPairV2OrderSummary method.
+        type StreamPairV2OrderSummaryStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::GetPairV2OrderSummaryResponse,
+                    tonic::Status,
+                >,
+            >
+            + Send
+            + 'static;
+        async fn stream_pair_v2_order_summary(
+            &self,
+            request: tonic::Request<super::GetPairV2OrderSummaryRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::StreamPairV2OrderSummaryStream>,
             tonic::Status,
         >;
         async fn reset_pair_v2_session(
@@ -1294,6 +1385,105 @@ pub mod pair_v2_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.pair_v2.PairV2Service/StreamPairV2Orders" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamPairV2OrdersSvc<T: PairV2Service>(pub Arc<T>);
+                    impl<
+                        T: PairV2Service,
+                    > tonic::server::ServerStreamingService<
+                        super::ListPairV2OrdersRequest,
+                    > for StreamPairV2OrdersSvc<T> {
+                        type Response = super::ListPairV2OrdersResponse;
+                        type ResponseStream = T::StreamPairV2OrdersStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListPairV2OrdersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PairV2Service>::stream_pair_v2_orders(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamPairV2OrdersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.pair_v2.PairV2Service/StreamPairV2OrderSummary" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamPairV2OrderSummarySvc<T: PairV2Service>(pub Arc<T>);
+                    impl<
+                        T: PairV2Service,
+                    > tonic::server::ServerStreamingService<
+                        super::GetPairV2OrderSummaryRequest,
+                    > for StreamPairV2OrderSummarySvc<T> {
+                        type Response = super::GetPairV2OrderSummaryResponse;
+                        type ResponseStream = T::StreamPairV2OrderSummaryStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetPairV2OrderSummaryRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PairV2Service>::stream_pair_v2_order_summary(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StreamPairV2OrderSummarySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
