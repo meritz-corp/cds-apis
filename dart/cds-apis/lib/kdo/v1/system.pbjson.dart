@@ -199,3 +199,84 @@ final $typed_data.Uint8List fepClientInfoDescriptor = $convert.base64Decode(
     'UgASgJUg10cmFuc3BvcnRUeXBlEhIKBGhvc3QYBiABKAlSBGhvc3QSEgoEcG9ydBgHIAEoDVIE'
     'cG9ydBISCgRwYXRoGAggASgJUgRwYXRoEhoKCGhvc3RuYW1lGAkgASgJUghob3N0bmFtZQ==');
 
+@$core.Deprecated('Use getCpuAffinityRequestDescriptor instead')
+const GetCpuAffinityRequest$json = {
+  '1': 'GetCpuAffinityRequest',
+};
+
+/// Descriptor for `GetCpuAffinityRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getCpuAffinityRequestDescriptor = $convert.base64Decode(
+    'ChVHZXRDcHVBZmZpbml0eVJlcXVlc3Q=');
+
+@$core.Deprecated('Use getCpuAffinityResponseDescriptor instead')
+const GetCpuAffinityResponse$json = {
+  '1': 'GetCpuAffinityResponse',
+  '2': [
+    {'1': 'cpu_count', '3': 1, '4': 1, '5': 13, '10': 'cpuCount'},
+    {'1': 'cores', '3': 2, '4': 3, '5': 13, '10': 'cores'},
+    {'1': 'mode', '3': 3, '4': 1, '5': 9, '10': 'mode'},
+    {'1': 'core_allocations', '3': 4, '4': 3, '5': 11, '6': '.kdo.v1.system.CpuAffinityCore', '10': 'coreAllocations'},
+    {'1': 'pools', '3': 5, '4': 3, '5': 11, '6': '.kdo.v1.system.CpuAffinityPool', '10': 'pools'},
+    {'1': 'unpinned_roles', '3': 6, '4': 3, '5': 9, '10': 'unpinnedRoles'},
+    {'1': 'unassigned', '3': 7, '4': 3, '5': 11, '6': '.kdo.v1.system.CpuAffinityService', '10': 'unassigned'},
+  ],
+};
+
+/// Descriptor for `GetCpuAffinityResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getCpuAffinityResponseDescriptor = $convert.base64Decode(
+    'ChZHZXRDcHVBZmZpbml0eVJlc3BvbnNlEhsKCWNwdV9jb3VudBgBIAEoDVIIY3B1Q291bnQSFA'
+    'oFY29yZXMYAiADKA1SBWNvcmVzEhIKBG1vZGUYAyABKAlSBG1vZGUSSQoQY29yZV9hbGxvY2F0'
+    'aW9ucxgEIAMoCzIeLmtkby52MS5zeXN0ZW0uQ3B1QWZmaW5pdHlDb3JlUg9jb3JlQWxsb2NhdG'
+    'lvbnMSNAoFcG9vbHMYBSADKAsyHi5rZG8udjEuc3lzdGVtLkNwdUFmZmluaXR5UG9vbFIFcG9v'
+    'bHMSJQoOdW5waW5uZWRfcm9sZXMYBiADKAlSDXVucGlubmVkUm9sZXMSQQoKdW5hc3NpZ25lZB'
+    'gHIAMoCzIhLmtkby52MS5zeXN0ZW0uQ3B1QWZmaW5pdHlTZXJ2aWNlUgp1bmFzc2lnbmVk');
+
+@$core.Deprecated('Use cpuAffinityCoreDescriptor instead')
+const CpuAffinityCore$json = {
+  '1': 'CpuAffinityCore',
+  '2': [
+    {'1': 'core_id', '3': 1, '4': 1, '5': 13, '10': 'coreId'},
+    {'1': 'services', '3': 2, '4': 3, '5': 11, '6': '.kdo.v1.system.CpuAffinityService', '10': 'services'},
+    {'1': 'shared_core', '3': 3, '4': 1, '5': 8, '10': 'sharedCore'},
+    {'1': 'pool_key', '3': 4, '4': 1, '5': 9, '10': 'poolKey'},
+  ],
+};
+
+/// Descriptor for `CpuAffinityCore`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cpuAffinityCoreDescriptor = $convert.base64Decode(
+    'Cg9DcHVBZmZpbml0eUNvcmUSFwoHY29yZV9pZBgBIAEoDVIGY29yZUlkEj0KCHNlcnZpY2VzGA'
+    'IgAygLMiEua2RvLnYxLnN5c3RlbS5DcHVBZmZpbml0eVNlcnZpY2VSCHNlcnZpY2VzEh8KC3No'
+    'YXJlZF9jb3JlGAMgASgIUgpzaGFyZWRDb3JlEhkKCHBvb2xfa2V5GAQgASgJUgdwb29sS2V5');
+
+@$core.Deprecated('Use cpuAffinityPoolDescriptor instead')
+const CpuAffinityPool$json = {
+  '1': 'CpuAffinityPool',
+  '2': [
+    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'roles', '3': 2, '4': 3, '5': 9, '10': 'roles'},
+    {'1': 'reserved_cores', '3': 3, '4': 3, '5': 13, '10': 'reservedCores'},
+    {'1': 'used_cores', '3': 4, '4': 3, '5': 13, '10': 'usedCores'},
+  ],
+};
+
+/// Descriptor for `CpuAffinityPool`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cpuAffinityPoolDescriptor = $convert.base64Decode(
+    'Cg9DcHVBZmZpbml0eVBvb2wSEAoDa2V5GAEgASgJUgNrZXkSFAoFcm9sZXMYAiADKAlSBXJvbG'
+    'VzEiUKDnJlc2VydmVkX2NvcmVzGAMgAygNUg1yZXNlcnZlZENvcmVzEh0KCnVzZWRfY29yZXMY'
+    'BCADKA1SCXVzZWRDb3Jlcw==');
+
+@$core.Deprecated('Use cpuAffinityServiceDescriptor instead')
+const CpuAffinityService$json = {
+  '1': 'CpuAffinityService',
+  '2': [
+    {'1': 'role', '3': 1, '4': 1, '5': 9, '10': 'role'},
+    {'1': 'thread', '3': 2, '4': 1, '5': 9, '10': 'thread'},
+    {'1': 'pinned', '3': 3, '4': 1, '5': 8, '10': 'pinned'},
+  ],
+};
+
+/// Descriptor for `CpuAffinityService`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cpuAffinityServiceDescriptor = $convert.base64Decode(
+    'ChJDcHVBZmZpbml0eVNlcnZpY2USEgoEcm9sZRgBIAEoCVIEcm9sZRIWCgZ0aHJlYWQYAiABKA'
+    'lSBnRocmVhZBIWCgZwaW5uZWQYAyABKAhSBnBpbm5lZA==');
+

@@ -44,6 +44,80 @@
         }
       }
     },
+    "systemCpuAffinityCore": {
+      "type": "object",
+      "properties": {
+        "coreId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "CPU core id (0-indexed)."
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/systemCpuAffinityService"
+          },
+          "description": "Services allocated on this core. Empty means free (main scheduler)."
+        },
+        "sharedCore": {
+          "type": "boolean",
+          "description": "True when this is the shared core of a tightening mode."
+        },
+        "poolKey": {
+          "type": "string",
+          "description": "yaml pool key that reserved this core. Empty when the core is not pool-reserved."
+        }
+      }
+    },
+    "systemCpuAffinityPool": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "yaml pool key (etf_lp, mm, pair_v1 ...)."
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Roles covered by this key."
+        },
+        "reservedCores": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "Cores reserved for this pool."
+        },
+        "usedCores": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "Reserved cores that currently carry at least one instance."
+        }
+      }
+    },
+    "systemCpuAffinityService": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Role name (QuoteLp, MarketMaking, MarketFeed, Pair, PairV2 ...)."
+        },
+        "thread": {
+          "type": "string",
+          "description": "Instance key: \"symbol:fund\" for LP/MM, pair id for pair, a thread label for single-instance roles."
+        },
+        "pinned": {
+          "type": "boolean",
+          "description": "True when a thread actually pinned itself to the core.\nFalse means the core is reserved but the thread has not started yet."
+        }
+      }
+    },
     "systemFepClientInfo": {
       "type": "object",
       "properties": {
@@ -118,6 +192,56 @@
         "fep": {
           "$ref": "#/definitions/systemFepInfo",
           "title": "FEP connection info"
+        }
+      }
+    },
+    "systemGetCpuAffinityResponse": {
+      "type": "object",
+      "properties": {
+        "cpuCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total CPU cores visible to the process."
+        },
+        "cores": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "Cores eligible for allocation (yaml cpu_affinity.cores), ascending."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Allocation mode: \"easing\" | \"tightening_a\" | \"tightening_b\" | \"tightening_c\" | \"deep_tightening\"."
+        },
+        "coreAllocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/systemCpuAffinityCore"
+          },
+          "description": "Per-core view of every core in `cores`, including cores with nothing on them."
+        },
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/systemCpuAffinityPool"
+          },
+          "description": "Per-pool view (yaml cpu_affinity.pool): cores reserved for the pool vs cores actually in use."
+        },
+        "unpinnedRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Roles with no CPU affinity (pool: 0, or not listed in pool) — they run on the main scheduler."
+        },
+        "unassigned": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/systemCpuAffinityService"
+          },
+          "description": "Instances that requested a core but got none (easing allocates 1 core per instance).\nThese cannot start until a core frees up or the pool is widened."
         }
       }
     },

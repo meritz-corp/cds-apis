@@ -137,6 +137,82 @@ pub struct FepClientInfo {
     #[prost(string, tag="9")]
     pub hostname: ::prost::alloc::string::String,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GetCpuAffinityRequest {
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetCpuAffinityResponse {
+    /// Total CPU cores visible to the process.
+    #[prost(uint32, tag="1")]
+    pub cpu_count: u32,
+    /// Cores eligible for allocation (yaml cpu_affinity.cores), ascending.
+    #[prost(uint32, repeated, tag="2")]
+    pub cores: ::prost::alloc::vec::Vec<u32>,
+    /// Allocation mode: "easing" | "tightening_a" | "tightening_b" | "tightening_c" | "deep_tightening".
+    #[prost(string, tag="3")]
+    pub mode: ::prost::alloc::string::String,
+    /// Per-core view of every core in `cores`, including cores with nothing on them.
+    #[prost(message, repeated, tag="4")]
+    pub core_allocations: ::prost::alloc::vec::Vec<CpuAffinityCore>,
+    /// Per-pool view (yaml cpu_affinity.pool): cores reserved for the pool vs cores actually in use.
+    #[prost(message, repeated, tag="5")]
+    pub pools: ::prost::alloc::vec::Vec<CpuAffinityPool>,
+    /// Roles with no CPU affinity (pool: 0, or not listed in pool) — they run on the main scheduler.
+    #[prost(string, repeated, tag="6")]
+    pub unpinned_roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Instances that requested a core but got none (easing allocates 1 core per instance).
+    /// These cannot start until a core frees up or the pool is widened.
+    #[prost(message, repeated, tag="7")]
+    pub unassigned: ::prost::alloc::vec::Vec<CpuAffinityService>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CpuAffinityCore {
+    /// CPU core id (0-indexed).
+    #[prost(uint32, tag="1")]
+    pub core_id: u32,
+    /// Services allocated on this core. Empty means free (main scheduler).
+    #[prost(message, repeated, tag="2")]
+    pub services: ::prost::alloc::vec::Vec<CpuAffinityService>,
+    /// True when this is the shared core of a tightening mode.
+    #[prost(bool, tag="3")]
+    pub shared_core: bool,
+    /// yaml pool key that reserved this core. Empty when the core is not pool-reserved.
+    #[prost(string, tag="4")]
+    pub pool_key: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CpuAffinityPool {
+    /// yaml pool key (etf_lp, mm, pair_v1 ...).
+    #[prost(string, tag="1")]
+    pub key: ::prost::alloc::string::String,
+    /// Roles covered by this key.
+    #[prost(string, repeated, tag="2")]
+    pub roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Cores reserved for this pool.
+    #[prost(uint32, repeated, tag="3")]
+    pub reserved_cores: ::prost::alloc::vec::Vec<u32>,
+    /// Reserved cores that currently carry at least one instance.
+    #[prost(uint32, repeated, tag="4")]
+    pub used_cores: ::prost::alloc::vec::Vec<u32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CpuAffinityService {
+    /// Role name (QuoteLp, MarketMaking, MarketFeed, Pair, PairV2 ...).
+    #[prost(string, tag="1")]
+    pub role: ::prost::alloc::string::String,
+    /// Instance key: "symbol:fund" for LP/MM, pair id for pair, a thread label for single-instance roles.
+    #[prost(string, tag="2")]
+    pub thread: ::prost::alloc::string::String,
+    /// True when a thread actually pinned itself to the core.
+    /// False means the core is reserved but the thread has not started yet.
+    #[prost(bool, tag="3")]
+    pub pinned: bool,
+}
 include!("kdo.v1.system.tonic.rs");
 include!("kdo.v1.system.serde.rs");
 // @@protoc_insertion_point(module)

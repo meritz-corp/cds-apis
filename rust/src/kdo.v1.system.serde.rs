@@ -1,4 +1,438 @@
 // @generated
+impl serde::Serialize for CpuAffinityCore {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.system.CpuAffinityCore", len)?;
+        if true {
+            struct_ser.serialize_field("core_id", &self.core_id)?;
+        }
+        if true {
+            struct_ser.serialize_field("services", &self.services)?;
+        }
+        if true {
+            struct_ser.serialize_field("shared_core", &self.shared_core)?;
+        }
+        if true {
+            struct_ser.serialize_field("pool_key", &self.pool_key)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CpuAffinityCore {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "core_id",
+            "coreId",
+            "services",
+            "shared_core",
+            "sharedCore",
+            "pool_key",
+            "poolKey",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            CoreId,
+            Services,
+            SharedCore,
+            PoolKey,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "coreId" | "core_id" => Ok(GeneratedField::CoreId),
+                            "services" => Ok(GeneratedField::Services),
+                            "sharedCore" | "shared_core" => Ok(GeneratedField::SharedCore),
+                            "poolKey" | "pool_key" => Ok(GeneratedField::PoolKey),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CpuAffinityCore;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.system.CpuAffinityCore")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CpuAffinityCore, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut core_id__ = None;
+                let mut services__ = None;
+                let mut shared_core__ = None;
+                let mut pool_key__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::CoreId => {
+                            if core_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("coreId"));
+                            }
+                            core_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Services => {
+                            if services__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("services"));
+                            }
+                            services__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SharedCore => {
+                            if shared_core__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sharedCore"));
+                            }
+                            shared_core__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::PoolKey => {
+                            if pool_key__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("poolKey"));
+                            }
+                            pool_key__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CpuAffinityCore {
+                    core_id: core_id__.unwrap_or_default(),
+                    services: services__.unwrap_or_default(),
+                    shared_core: shared_core__.unwrap_or_default(),
+                    pool_key: pool_key__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.system.CpuAffinityCore", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CpuAffinityPool {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.system.CpuAffinityPool", len)?;
+        if true {
+            struct_ser.serialize_field("key", &self.key)?;
+        }
+        if true {
+            struct_ser.serialize_field("roles", &self.roles)?;
+        }
+        if true {
+            struct_ser.serialize_field("reserved_cores", &self.reserved_cores)?;
+        }
+        if true {
+            struct_ser.serialize_field("used_cores", &self.used_cores)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CpuAffinityPool {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "key",
+            "roles",
+            "reserved_cores",
+            "reservedCores",
+            "used_cores",
+            "usedCores",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Key,
+            Roles,
+            ReservedCores,
+            UsedCores,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "key" => Ok(GeneratedField::Key),
+                            "roles" => Ok(GeneratedField::Roles),
+                            "reservedCores" | "reserved_cores" => Ok(GeneratedField::ReservedCores),
+                            "usedCores" | "used_cores" => Ok(GeneratedField::UsedCores),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CpuAffinityPool;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.system.CpuAffinityPool")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CpuAffinityPool, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut key__ = None;
+                let mut roles__ = None;
+                let mut reserved_cores__ = None;
+                let mut used_cores__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Key => {
+                            if key__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("key"));
+                            }
+                            key__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Roles => {
+                            if roles__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("roles"));
+                            }
+                            roles__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ReservedCores => {
+                            if reserved_cores__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reservedCores"));
+                            }
+                            reserved_cores__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
+                        GeneratedField::UsedCores => {
+                            if used_cores__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("usedCores"));
+                            }
+                            used_cores__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CpuAffinityPool {
+                    key: key__.unwrap_or_default(),
+                    roles: roles__.unwrap_or_default(),
+                    reserved_cores: reserved_cores__.unwrap_or_default(),
+                    used_cores: used_cores__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.system.CpuAffinityPool", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for CpuAffinityService {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.system.CpuAffinityService", len)?;
+        if true {
+            struct_ser.serialize_field("role", &self.role)?;
+        }
+        if true {
+            struct_ser.serialize_field("thread", &self.thread)?;
+        }
+        if true {
+            struct_ser.serialize_field("pinned", &self.pinned)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for CpuAffinityService {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "role",
+            "thread",
+            "pinned",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Role,
+            Thread,
+            Pinned,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "role" => Ok(GeneratedField::Role),
+                            "thread" => Ok(GeneratedField::Thread),
+                            "pinned" => Ok(GeneratedField::Pinned),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = CpuAffinityService;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.system.CpuAffinityService")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CpuAffinityService, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut role__ = None;
+                let mut thread__ = None;
+                let mut pinned__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Role => {
+                            if role__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("role"));
+                            }
+                            role__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Thread => {
+                            if thread__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("thread"));
+                            }
+                            thread__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Pinned => {
+                            if pinned__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pinned"));
+                            }
+                            pinned__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(CpuAffinityService {
+                    role: role__.unwrap_or_default(),
+                    thread: thread__.unwrap_or_default(),
+                    pinned: pinned__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.system.CpuAffinityService", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FepClientInfo {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -550,6 +984,283 @@ impl<'de> serde::Deserialize<'de> for GetConnectionInfoResponse {
             }
         }
         deserializer.deserialize_struct("kdo.v1.system.GetConnectionInfoResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetCpuAffinityRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("kdo.v1.system.GetCpuAffinityRequest", len)?;
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetCpuAffinityRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                            Ok(GeneratedField::__SkipField__)
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetCpuAffinityRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.system.GetCpuAffinityRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetCpuAffinityRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                }
+                Ok(GetCpuAffinityRequest {
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.system.GetCpuAffinityRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetCpuAffinityResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.system.GetCpuAffinityResponse", len)?;
+        if true {
+            struct_ser.serialize_field("cpu_count", &self.cpu_count)?;
+        }
+        if true {
+            struct_ser.serialize_field("cores", &self.cores)?;
+        }
+        if true {
+            struct_ser.serialize_field("mode", &self.mode)?;
+        }
+        if true {
+            struct_ser.serialize_field("core_allocations", &self.core_allocations)?;
+        }
+        if true {
+            struct_ser.serialize_field("pools", &self.pools)?;
+        }
+        if true {
+            struct_ser.serialize_field("unpinned_roles", &self.unpinned_roles)?;
+        }
+        if true {
+            struct_ser.serialize_field("unassigned", &self.unassigned)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetCpuAffinityResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "cpu_count",
+            "cpuCount",
+            "cores",
+            "mode",
+            "core_allocations",
+            "coreAllocations",
+            "pools",
+            "unpinned_roles",
+            "unpinnedRoles",
+            "unassigned",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            CpuCount,
+            Cores,
+            Mode,
+            CoreAllocations,
+            Pools,
+            UnpinnedRoles,
+            Unassigned,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "cpuCount" | "cpu_count" => Ok(GeneratedField::CpuCount),
+                            "cores" => Ok(GeneratedField::Cores),
+                            "mode" => Ok(GeneratedField::Mode),
+                            "coreAllocations" | "core_allocations" => Ok(GeneratedField::CoreAllocations),
+                            "pools" => Ok(GeneratedField::Pools),
+                            "unpinnedRoles" | "unpinned_roles" => Ok(GeneratedField::UnpinnedRoles),
+                            "unassigned" => Ok(GeneratedField::Unassigned),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetCpuAffinityResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.system.GetCpuAffinityResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetCpuAffinityResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut cpu_count__ = None;
+                let mut cores__ = None;
+                let mut mode__ = None;
+                let mut core_allocations__ = None;
+                let mut pools__ = None;
+                let mut unpinned_roles__ = None;
+                let mut unassigned__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::CpuCount => {
+                            if cpu_count__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cpuCount"));
+                            }
+                            cpu_count__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Cores => {
+                            if cores__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cores"));
+                            }
+                            cores__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
+                        GeneratedField::Mode => {
+                            if mode__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("mode"));
+                            }
+                            mode__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::CoreAllocations => {
+                            if core_allocations__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("coreAllocations"));
+                            }
+                            core_allocations__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Pools => {
+                            if pools__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pools"));
+                            }
+                            pools__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::UnpinnedRoles => {
+                            if unpinned_roles__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unpinnedRoles"));
+                            }
+                            unpinned_roles__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Unassigned => {
+                            if unassigned__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unassigned"));
+                            }
+                            unassigned__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetCpuAffinityResponse {
+                    cpu_count: cpu_count__.unwrap_or_default(),
+                    cores: cores__.unwrap_or_default(),
+                    mode: mode__.unwrap_or_default(),
+                    core_allocations: core_allocations__.unwrap_or_default(),
+                    pools: pools__.unwrap_or_default(),
+                    unpinned_roles: unpinned_roles__.unwrap_or_default(),
+                    unassigned: unassigned__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.system.GetCpuAffinityResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetServerInfoRequest {

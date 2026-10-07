@@ -23,6 +23,11 @@ service SystemService {
 
   // StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
   rpc StopSymbolFund(StopSymbolFundRequest) returns (StopSymbolFundResponse) {}
+
+  // GetCpuAffinity returns the current CPU core allocation of the running KDO instance:
+  // per-core assignments, per-pool reserved vs in-use cores, roles running unpinned,
+  // and instances that could not get a core.
+  rpc GetCpuAffinity(GetCpuAffinityRequest) returns (GetCpuAffinityResponse) {}
 }
 
 message StopAllTradingRequest {}
@@ -103,4 +108,70 @@ message FepClientInfo {
   uint32 port = 7;            // port number (for tcp) or 0 (for unix)
   string path = 8;            // unix socket path (for unix) or empty (for tcp)
   string hostname = 9;        // resolved hostname/alias (e.g., "pfds11", "pfds14")
+}
+
+message GetCpuAffinityRequest {}
+
+message GetCpuAffinityResponse {
+  // Total CPU cores visible to the process.
+  uint32 cpu_count = 1;
+
+  // Cores eligible for allocation (yaml cpu_affinity.cores), ascending.
+  repeated uint32 cores = 2;
+
+  // Allocation mode: "easing" | "tightening_a" | "tightening_b" | "tightening_c" | "deep_tightening".
+  string mode = 3;
+
+  // Per-core view of every core in `cores`, including cores with nothing on them.
+  repeated CpuAffinityCore core_allocations = 4;
+
+  // Per-pool view (yaml cpu_affinity.pool): cores reserved for the pool vs cores actually in use.
+  repeated CpuAffinityPool pools = 5;
+
+  // Roles with no CPU affinity (pool: 0, or not listed in pool) — they run on the main scheduler.
+  repeated string unpinned_roles = 6;
+
+  // Instances that requested a core but got none (easing allocates 1 core per instance).
+  // These cannot start until a core frees up or the pool is widened.
+  repeated CpuAffinityService unassigned = 7;
+}
+
+message CpuAffinityCore {
+  // CPU core id (0-indexed).
+  uint32 core_id = 1;
+
+  // Services allocated on this core. Empty means free (main scheduler).
+  repeated CpuAffinityService services = 2;
+
+  // True when this is the shared core of a tightening mode.
+  bool shared_core = 3;
+
+  // yaml pool key that reserved this core. Empty when the core is not pool-reserved.
+  string pool_key = 4;
+}
+
+message CpuAffinityPool {
+  // yaml pool key (etf_lp, mm, pair_v1 ...).
+  string key = 1;
+
+  // Roles covered by this key.
+  repeated string roles = 2;
+
+  // Cores reserved for this pool.
+  repeated uint32 reserved_cores = 3;
+
+  // Reserved cores that currently carry at least one instance.
+  repeated uint32 used_cores = 4;
+}
+
+message CpuAffinityService {
+  // Role name (QuoteLp, MarketMaking, MarketFeed, Pair, PairV2 ...).
+  string role = 1;
+
+  // Instance key: "symbol:fund" for LP/MM, pair id for pair, a thread label for single-instance roles.
+  string thread = 2;
+
+  // True when a thread actually pinned itself to the core.
+  // False means the core is reserved but the thread has not started yet.
+  bool pinned = 3;
 }

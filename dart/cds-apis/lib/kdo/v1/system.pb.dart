@@ -788,6 +788,354 @@ class FepClientInfo extends $pb.GeneratedMessage {
   void clearHostname() => $_clearField(9);
 }
 
+class GetCpuAffinityRequest extends $pb.GeneratedMessage {
+  factory GetCpuAffinityRequest() => create();
+
+  GetCpuAffinityRequest._();
+
+  factory GetCpuAffinityRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetCpuAffinityRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetCpuAffinityRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetCpuAffinityRequest clone() => GetCpuAffinityRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetCpuAffinityRequest copyWith(void Function(GetCpuAffinityRequest) updates) => super.copyWith((message) => updates(message as GetCpuAffinityRequest)) as GetCpuAffinityRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetCpuAffinityRequest create() => GetCpuAffinityRequest._();
+  @$core.override
+  GetCpuAffinityRequest createEmptyInstance() => create();
+  static $pb.PbList<GetCpuAffinityRequest> createRepeated() => $pb.PbList<GetCpuAffinityRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetCpuAffinityRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCpuAffinityRequest>(create);
+  static GetCpuAffinityRequest? _defaultInstance;
+}
+
+class GetCpuAffinityResponse extends $pb.GeneratedMessage {
+  factory GetCpuAffinityResponse({
+    $core.int? cpuCount,
+    $core.Iterable<$core.int>? cores,
+    $core.String? mode,
+    $core.Iterable<CpuAffinityCore>? coreAllocations,
+    $core.Iterable<CpuAffinityPool>? pools,
+    $core.Iterable<$core.String>? unpinnedRoles,
+    $core.Iterable<CpuAffinityService>? unassigned,
+  }) {
+    final result = create();
+    if (cpuCount != null) result.cpuCount = cpuCount;
+    if (cores != null) result.cores.addAll(cores);
+    if (mode != null) result.mode = mode;
+    if (coreAllocations != null) result.coreAllocations.addAll(coreAllocations);
+    if (pools != null) result.pools.addAll(pools);
+    if (unpinnedRoles != null) result.unpinnedRoles.addAll(unpinnedRoles);
+    if (unassigned != null) result.unassigned.addAll(unassigned);
+    return result;
+  }
+
+  GetCpuAffinityResponse._();
+
+  factory GetCpuAffinityResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory GetCpuAffinityResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetCpuAffinityResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'cpuCount', $pb.PbFieldType.OU3)
+    ..p<$core.int>(2, _omitFieldNames ? '' : 'cores', $pb.PbFieldType.KU3)
+    ..aOS(3, _omitFieldNames ? '' : 'mode')
+    ..pc<CpuAffinityCore>(4, _omitFieldNames ? '' : 'coreAllocations', $pb.PbFieldType.PM, subBuilder: CpuAffinityCore.create)
+    ..pc<CpuAffinityPool>(5, _omitFieldNames ? '' : 'pools', $pb.PbFieldType.PM, subBuilder: CpuAffinityPool.create)
+    ..pPS(6, _omitFieldNames ? '' : 'unpinnedRoles')
+    ..pc<CpuAffinityService>(7, _omitFieldNames ? '' : 'unassigned', $pb.PbFieldType.PM, subBuilder: CpuAffinityService.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetCpuAffinityResponse clone() => GetCpuAffinityResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  GetCpuAffinityResponse copyWith(void Function(GetCpuAffinityResponse) updates) => super.copyWith((message) => updates(message as GetCpuAffinityResponse)) as GetCpuAffinityResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetCpuAffinityResponse create() => GetCpuAffinityResponse._();
+  @$core.override
+  GetCpuAffinityResponse createEmptyInstance() => create();
+  static $pb.PbList<GetCpuAffinityResponse> createRepeated() => $pb.PbList<GetCpuAffinityResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetCpuAffinityResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCpuAffinityResponse>(create);
+  static GetCpuAffinityResponse? _defaultInstance;
+
+  /// Total CPU cores visible to the process.
+  @$pb.TagNumber(1)
+  $core.int get cpuCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set cpuCount($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCpuCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCpuCount() => $_clearField(1);
+
+  /// Cores eligible for allocation (yaml cpu_affinity.cores), ascending.
+  @$pb.TagNumber(2)
+  $pb.PbList<$core.int> get cores => $_getList(1);
+
+  /// Allocation mode: "easing" | "tightening_a" | "tightening_b" | "tightening_c" | "deep_tightening".
+  @$pb.TagNumber(3)
+  $core.String get mode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set mode($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasMode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMode() => $_clearField(3);
+
+  /// Per-core view of every core in `cores`, including cores with nothing on them.
+  @$pb.TagNumber(4)
+  $pb.PbList<CpuAffinityCore> get coreAllocations => $_getList(3);
+
+  /// Per-pool view (yaml cpu_affinity.pool): cores reserved for the pool vs cores actually in use.
+  @$pb.TagNumber(5)
+  $pb.PbList<CpuAffinityPool> get pools => $_getList(4);
+
+  /// Roles with no CPU affinity (pool: 0, or not listed in pool) — they run on the main scheduler.
+  @$pb.TagNumber(6)
+  $pb.PbList<$core.String> get unpinnedRoles => $_getList(5);
+
+  /// Instances that requested a core but got none (easing allocates 1 core per instance).
+  /// These cannot start until a core frees up or the pool is widened.
+  @$pb.TagNumber(7)
+  $pb.PbList<CpuAffinityService> get unassigned => $_getList(6);
+}
+
+class CpuAffinityCore extends $pb.GeneratedMessage {
+  factory CpuAffinityCore({
+    $core.int? coreId,
+    $core.Iterable<CpuAffinityService>? services,
+    $core.bool? sharedCore,
+    $core.String? poolKey,
+  }) {
+    final result = create();
+    if (coreId != null) result.coreId = coreId;
+    if (services != null) result.services.addAll(services);
+    if (sharedCore != null) result.sharedCore = sharedCore;
+    if (poolKey != null) result.poolKey = poolKey;
+    return result;
+  }
+
+  CpuAffinityCore._();
+
+  factory CpuAffinityCore.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CpuAffinityCore.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CpuAffinityCore', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'coreId', $pb.PbFieldType.OU3)
+    ..pc<CpuAffinityService>(2, _omitFieldNames ? '' : 'services', $pb.PbFieldType.PM, subBuilder: CpuAffinityService.create)
+    ..aOB(3, _omitFieldNames ? '' : 'sharedCore')
+    ..aOS(4, _omitFieldNames ? '' : 'poolKey')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CpuAffinityCore clone() => CpuAffinityCore()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CpuAffinityCore copyWith(void Function(CpuAffinityCore) updates) => super.copyWith((message) => updates(message as CpuAffinityCore)) as CpuAffinityCore;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CpuAffinityCore create() => CpuAffinityCore._();
+  @$core.override
+  CpuAffinityCore createEmptyInstance() => create();
+  static $pb.PbList<CpuAffinityCore> createRepeated() => $pb.PbList<CpuAffinityCore>();
+  @$core.pragma('dart2js:noInline')
+  static CpuAffinityCore getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CpuAffinityCore>(create);
+  static CpuAffinityCore? _defaultInstance;
+
+  /// CPU core id (0-indexed).
+  @$pb.TagNumber(1)
+  $core.int get coreId => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set coreId($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasCoreId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCoreId() => $_clearField(1);
+
+  /// Services allocated on this core. Empty means free (main scheduler).
+  @$pb.TagNumber(2)
+  $pb.PbList<CpuAffinityService> get services => $_getList(1);
+
+  /// True when this is the shared core of a tightening mode.
+  @$pb.TagNumber(3)
+  $core.bool get sharedCore => $_getBF(2);
+  @$pb.TagNumber(3)
+  set sharedCore($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSharedCore() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSharedCore() => $_clearField(3);
+
+  /// yaml pool key that reserved this core. Empty when the core is not pool-reserved.
+  @$pb.TagNumber(4)
+  $core.String get poolKey => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set poolKey($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPoolKey() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPoolKey() => $_clearField(4);
+}
+
+class CpuAffinityPool extends $pb.GeneratedMessage {
+  factory CpuAffinityPool({
+    $core.String? key,
+    $core.Iterable<$core.String>? roles,
+    $core.Iterable<$core.int>? reservedCores,
+    $core.Iterable<$core.int>? usedCores,
+  }) {
+    final result = create();
+    if (key != null) result.key = key;
+    if (roles != null) result.roles.addAll(roles);
+    if (reservedCores != null) result.reservedCores.addAll(reservedCores);
+    if (usedCores != null) result.usedCores.addAll(usedCores);
+    return result;
+  }
+
+  CpuAffinityPool._();
+
+  factory CpuAffinityPool.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CpuAffinityPool.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CpuAffinityPool', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'key')
+    ..pPS(2, _omitFieldNames ? '' : 'roles')
+    ..p<$core.int>(3, _omitFieldNames ? '' : 'reservedCores', $pb.PbFieldType.KU3)
+    ..p<$core.int>(4, _omitFieldNames ? '' : 'usedCores', $pb.PbFieldType.KU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CpuAffinityPool clone() => CpuAffinityPool()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CpuAffinityPool copyWith(void Function(CpuAffinityPool) updates) => super.copyWith((message) => updates(message as CpuAffinityPool)) as CpuAffinityPool;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CpuAffinityPool create() => CpuAffinityPool._();
+  @$core.override
+  CpuAffinityPool createEmptyInstance() => create();
+  static $pb.PbList<CpuAffinityPool> createRepeated() => $pb.PbList<CpuAffinityPool>();
+  @$core.pragma('dart2js:noInline')
+  static CpuAffinityPool getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CpuAffinityPool>(create);
+  static CpuAffinityPool? _defaultInstance;
+
+  /// yaml pool key (etf_lp, mm, pair_v1 ...).
+  @$pb.TagNumber(1)
+  $core.String get key => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set key($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearKey() => $_clearField(1);
+
+  /// Roles covered by this key.
+  @$pb.TagNumber(2)
+  $pb.PbList<$core.String> get roles => $_getList(1);
+
+  /// Cores reserved for this pool.
+  @$pb.TagNumber(3)
+  $pb.PbList<$core.int> get reservedCores => $_getList(2);
+
+  /// Reserved cores that currently carry at least one instance.
+  @$pb.TagNumber(4)
+  $pb.PbList<$core.int> get usedCores => $_getList(3);
+}
+
+class CpuAffinityService extends $pb.GeneratedMessage {
+  factory CpuAffinityService({
+    $core.String? role,
+    $core.String? thread,
+    $core.bool? pinned,
+  }) {
+    final result = create();
+    if (role != null) result.role = role;
+    if (thread != null) result.thread = thread;
+    if (pinned != null) result.pinned = pinned;
+    return result;
+  }
+
+  CpuAffinityService._();
+
+  factory CpuAffinityService.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory CpuAffinityService.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CpuAffinityService', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.system'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'role')
+    ..aOS(2, _omitFieldNames ? '' : 'thread')
+    ..aOB(3, _omitFieldNames ? '' : 'pinned')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CpuAffinityService clone() => CpuAffinityService()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  CpuAffinityService copyWith(void Function(CpuAffinityService) updates) => super.copyWith((message) => updates(message as CpuAffinityService)) as CpuAffinityService;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static CpuAffinityService create() => CpuAffinityService._();
+  @$core.override
+  CpuAffinityService createEmptyInstance() => create();
+  static $pb.PbList<CpuAffinityService> createRepeated() => $pb.PbList<CpuAffinityService>();
+  @$core.pragma('dart2js:noInline')
+  static CpuAffinityService getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CpuAffinityService>(create);
+  static CpuAffinityService? _defaultInstance;
+
+  /// Role name (QuoteLp, MarketMaking, MarketFeed, Pair, PairV2 ...).
+  @$pb.TagNumber(1)
+  $core.String get role => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set role($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasRole() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRole() => $_clearField(1);
+
+  /// Instance key: "symbol:fund" for LP/MM, pair id for pair, a thread label for single-instance roles.
+  @$pb.TagNumber(2)
+  $core.String get thread => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set thread($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasThread() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearThread() => $_clearField(2);
+
+  /// True when a thread actually pinned itself to the core.
+  /// False means the core is reserved but the thread has not started yet.
+  @$pb.TagNumber(3)
+  $core.bool get pinned => $_getBF(2);
+  @$pb.TagNumber(3)
+  set pinned($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPinned() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPinned() => $_clearField(3);
+}
+
 
 const $core.bool _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const $core.bool _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

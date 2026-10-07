@@ -59,6 +59,13 @@ class SystemServiceClient extends $grpc.Client {
     return $createUnaryCall(_$stopSymbolFund, request, options: options);
   }
 
+  /// GetCpuAffinity returns the current CPU core allocation of the running KDO instance:
+  /// per-core assignments, per-pool reserved vs in-use cores, roles running unpinned,
+  /// and instances that could not get a core.
+  $grpc.ResponseFuture<$0.GetCpuAffinityResponse> getCpuAffinity($0.GetCpuAffinityRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getCpuAffinity, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getServerInfo = $grpc.ClientMethod<$0.GetServerInfoRequest, $0.GetServerInfoResponse>(
@@ -81,6 +88,10 @@ class SystemServiceClient extends $grpc.Client {
       '/kdo.v1.system.SystemService/StopSymbolFund',
       ($0.StopSymbolFundRequest value) => value.writeToBuffer(),
       $0.StopSymbolFundResponse.fromBuffer);
+  static final _$getCpuAffinity = $grpc.ClientMethod<$0.GetCpuAffinityRequest, $0.GetCpuAffinityResponse>(
+      '/kdo.v1.system.SystemService/GetCpuAffinity',
+      ($0.GetCpuAffinityRequest value) => value.writeToBuffer(),
+      $0.GetCpuAffinityResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.system.SystemService')
@@ -123,6 +134,13 @@ abstract class SystemServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.StopSymbolFundRequest.fromBuffer(value),
         ($0.StopSymbolFundResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetCpuAffinityRequest, $0.GetCpuAffinityResponse>(
+        'GetCpuAffinity',
+        getCpuAffinity_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetCpuAffinityRequest.fromBuffer(value),
+        ($0.GetCpuAffinityResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetServerInfoResponse> getServerInfo_Pre($grpc.ServiceCall $call, $async.Future<$0.GetServerInfoRequest> $request) async {
@@ -154,5 +172,11 @@ abstract class SystemServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.StopSymbolFundResponse> stopSymbolFund($grpc.ServiceCall call, $0.StopSymbolFundRequest request);
+
+  $async.Future<$0.GetCpuAffinityResponse> getCpuAffinity_Pre($grpc.ServiceCall $call, $async.Future<$0.GetCpuAffinityRequest> $request) async {
+    return getCpuAffinity($call, await $request);
+  }
+
+  $async.Future<$0.GetCpuAffinityResponse> getCpuAffinity($grpc.ServiceCall call, $0.GetCpuAffinityRequest request);
 
 }

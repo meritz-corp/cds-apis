@@ -33,6 +33,10 @@ type SystemServiceClient interface {
 	StopAllTrading(ctx context.Context, in *StopAllTradingRequest, opts ...grpc.CallOption) (*StopAllTradingResponse, error)
 	// StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
 	StopSymbolFund(ctx context.Context, in *StopSymbolFundRequest, opts ...grpc.CallOption) (*StopSymbolFundResponse, error)
+	// GetCpuAffinity returns the current CPU core allocation of the running KDO instance:
+	// per-core assignments, per-pool reserved vs in-use cores, roles running unpinned,
+	// and instances that could not get a core.
+	GetCpuAffinity(ctx context.Context, in *GetCpuAffinityRequest, opts ...grpc.CallOption) (*GetCpuAffinityResponse, error)
 }
 
 type systemServiceClient struct {
@@ -88,6 +92,15 @@ func (c *systemServiceClient) StopSymbolFund(ctx context.Context, in *StopSymbol
 	return out, nil
 }
 
+func (c *systemServiceClient) GetCpuAffinity(ctx context.Context, in *GetCpuAffinityRequest, opts ...grpc.CallOption) (*GetCpuAffinityResponse, error) {
+	out := new(GetCpuAffinityResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.system.SystemService/GetCpuAffinity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServiceServer is the server API for SystemService service.
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility
@@ -103,6 +116,10 @@ type SystemServiceServer interface {
 	StopAllTrading(context.Context, *StopAllTradingRequest) (*StopAllTradingResponse, error)
 	// StopSymbolFund stops all trading services that are running for the given (symbol, fund) pair.
 	StopSymbolFund(context.Context, *StopSymbolFundRequest) (*StopSymbolFundResponse, error)
+	// GetCpuAffinity returns the current CPU core allocation of the running KDO instance:
+	// per-core assignments, per-pool reserved vs in-use cores, roles running unpinned,
+	// and instances that could not get a core.
+	GetCpuAffinity(context.Context, *GetCpuAffinityRequest) (*GetCpuAffinityResponse, error)
 	mustEmbedUnimplementedSystemServiceServer()
 }
 
@@ -124,6 +141,9 @@ func (UnimplementedSystemServiceServer) StopAllTrading(context.Context, *StopAll
 }
 func (UnimplementedSystemServiceServer) StopSymbolFund(context.Context, *StopSymbolFundRequest) (*StopSymbolFundResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopSymbolFund not implemented")
+}
+func (UnimplementedSystemServiceServer) GetCpuAffinity(context.Context, *GetCpuAffinityRequest) (*GetCpuAffinityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCpuAffinity not implemented")
 }
 func (UnimplementedSystemServiceServer) mustEmbedUnimplementedSystemServiceServer() {}
 
@@ -228,6 +248,24 @@ func _SystemService_StopSymbolFund_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SystemService_GetCpuAffinity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCpuAffinityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).GetCpuAffinity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.system.SystemService/GetCpuAffinity",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).GetCpuAffinity(ctx, req.(*GetCpuAffinityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SystemService_ServiceDesc is the grpc.ServiceDesc for SystemService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -254,6 +292,10 @@ var SystemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopSymbolFund",
 			Handler:    _SystemService_StopSymbolFund_Handler,
+		},
+		{
+			MethodName: "GetCpuAffinity",
+			Handler:    _SystemService_GetCpuAffinity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

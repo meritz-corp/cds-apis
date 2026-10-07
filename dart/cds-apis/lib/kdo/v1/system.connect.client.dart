@@ -99,4 +99,24 @@ extension type SystemServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// GetCpuAffinity returns the current CPU core allocation of the running KDO instance:
+  /// per-core assignments, per-pool reserved vs in-use cores, roles running unpinned,
+  /// and instances that could not get a core.
+  Future<kdov1system.GetCpuAffinityResponse> getCpuAffinity(
+    kdov1system.GetCpuAffinityRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.SystemService.getCpuAffinity,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

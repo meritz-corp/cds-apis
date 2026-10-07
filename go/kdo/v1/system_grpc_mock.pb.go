@@ -54,6 +54,26 @@ func (mr *MockSystemServiceClientMockRecorder) GetConnectionInfo(ctx, in interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetConnectionInfo", reflect.TypeOf((*MockSystemServiceClient)(nil).GetConnectionInfo), varargs...)
 }
 
+// GetCpuAffinity mocks base method.
+func (m *MockSystemServiceClient) GetCpuAffinity(ctx context.Context, in *GetCpuAffinityRequest, opts ...grpc.CallOption) (*GetCpuAffinityResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetCpuAffinity", varargs...)
+	ret0, _ := ret[0].(*GetCpuAffinityResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCpuAffinity indicates an expected call of GetCpuAffinity.
+func (mr *MockSystemServiceClientMockRecorder) GetCpuAffinity(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCpuAffinity", reflect.TypeOf((*MockSystemServiceClient)(nil).GetCpuAffinity), varargs...)
+}
+
 // GetServerInfo mocks base method.
 func (m *MockSystemServiceClient) GetServerInfo(ctx context.Context, in *GetServerInfoRequest, opts ...grpc.CallOption) (*GetServerInfoResponse, error) {
 	m.ctrl.T.Helper()
@@ -170,6 +190,21 @@ func (m *MockSystemServiceServer) GetConnectionInfo(ctx context.Context, in *Get
 func (mr *MockSystemServiceServerMockRecorder) GetConnectionInfo(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetConnectionInfo", reflect.TypeOf((*MockSystemServiceServer)(nil).GetConnectionInfo), ctx, in)
+}
+
+// GetCpuAffinity mocks base method.
+func (m *MockSystemServiceServer) GetCpuAffinity(ctx context.Context, in *GetCpuAffinityRequest) (*GetCpuAffinityResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCpuAffinity", ctx, in)
+	ret0, _ := ret[0].(*GetCpuAffinityResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCpuAffinity indicates an expected call of GetCpuAffinity.
+func (mr *MockSystemServiceServerMockRecorder) GetCpuAffinity(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCpuAffinity", reflect.TypeOf((*MockSystemServiceServer)(nil).GetCpuAffinity), ctx, in)
 }
 
 // GetServerInfo mocks base method.

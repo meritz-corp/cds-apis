@@ -51,4 +51,14 @@ abstract final class SystemService {
     kdov1system.StopSymbolFundRequest.new,
     kdov1system.StopSymbolFundResponse.new,
   );
+
+  /// GetCpuAffinity returns the current CPU core allocation of the running KDO instance:
+  /// per-core assignments, per-pool reserved vs in-use cores, roles running unpinned,
+  /// and instances that could not get a core.
+  static const getCpuAffinity = connect.Spec(
+    '/$name/GetCpuAffinity',
+    connect.StreamType.unary,
+    kdov1system.GetCpuAffinityRequest.new,
+    kdov1system.GetCpuAffinityResponse.new,
+  );
 }
