@@ -4515,12 +4515,18 @@ impl serde::Serialize for StartEtfLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.StartEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if true {
+            struct_ser.serialize_field("allow_unpinned_start", &self.allow_unpinned_start)?;
         }
         struct_ser.end()
     }
@@ -4534,12 +4540,15 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
         const FIELDS: &[&str] = &[
             "etf",
             "fund",
+            "allow_unpinned_start",
+            "allowUnpinnedStart",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Etf,
             Fund,
+            AllowUnpinnedStart,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4564,6 +4573,7 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
+                            "allowUnpinnedStart" | "allow_unpinned_start" => Ok(GeneratedField::AllowUnpinnedStart),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4585,6 +4595,7 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
             {
                 let mut etf__ = None;
                 let mut fund__ = None;
+                let mut allow_unpinned_start__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Etf => {
@@ -4599,6 +4610,12 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::AllowUnpinnedStart => {
+                            if allow_unpinned_start__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("allowUnpinnedStart"));
+                            }
+                            allow_unpinned_start__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4607,6 +4624,7 @@ impl<'de> serde::Deserialize<'de> for StartEtfLpRequest {
                 Ok(StartEtfLpRequest {
                     etf: etf__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
+                    allow_unpinned_start: allow_unpinned_start__.unwrap_or_default(),
                 })
             }
         }

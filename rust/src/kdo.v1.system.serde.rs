@@ -321,6 +321,9 @@ impl serde::Serialize for CpuAffinityService {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.system.CpuAffinityService", len)?;
         if true {
             struct_ser.serialize_field("role", &self.role)?;
@@ -330,6 +333,9 @@ impl serde::Serialize for CpuAffinityService {
         }
         if true {
             struct_ser.serialize_field("pinned", &self.pinned)?;
+        }
+        if true {
+            struct_ser.serialize_field("unpinned_fallback", &self.unpinned_fallback)?;
         }
         struct_ser.end()
     }
@@ -344,6 +350,8 @@ impl<'de> serde::Deserialize<'de> for CpuAffinityService {
             "role",
             "thread",
             "pinned",
+            "unpinned_fallback",
+            "unpinnedFallback",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -351,6 +359,7 @@ impl<'de> serde::Deserialize<'de> for CpuAffinityService {
             Role,
             Thread,
             Pinned,
+            UnpinnedFallback,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -376,6 +385,7 @@ impl<'de> serde::Deserialize<'de> for CpuAffinityService {
                             "role" => Ok(GeneratedField::Role),
                             "thread" => Ok(GeneratedField::Thread),
                             "pinned" => Ok(GeneratedField::Pinned),
+                            "unpinnedFallback" | "unpinned_fallback" => Ok(GeneratedField::UnpinnedFallback),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -398,6 +408,7 @@ impl<'de> serde::Deserialize<'de> for CpuAffinityService {
                 let mut role__ = None;
                 let mut thread__ = None;
                 let mut pinned__ = None;
+                let mut unpinned_fallback__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Role => {
@@ -418,6 +429,12 @@ impl<'de> serde::Deserialize<'de> for CpuAffinityService {
                             }
                             pinned__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::UnpinnedFallback => {
+                            if unpinned_fallback__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unpinnedFallback"));
+                            }
+                            unpinned_fallback__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -427,6 +444,7 @@ impl<'de> serde::Deserialize<'de> for CpuAffinityService {
                     role: role__.unwrap_or_default(),
                     thread: thread__.unwrap_or_default(),
                     pinned: pinned__.unwrap_or_default(),
+                    unpinned_fallback: unpinned_fallback__.unwrap_or_default(),
                 })
             }
         }

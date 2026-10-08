@@ -557,6 +557,11 @@ pub struct StartEtfLpRequest {
     pub etf: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
+    /// true 면 CPU 풀에 빈 코어가 없어도 코어 핀 없이(메인 스케줄러) start 한다.
+    /// 코어 부족 start 는 기본적으로 RESOURCE_EXHAUSTED 로 거부되며, 클라이언트가 그 경고를
+    /// 운영자에게 보여주고 확인받은 경우에만 이 값을 true 로 재시도한다. 기본 false.
+    #[prost(bool, tag="3")]
+    pub allow_unpinned_start: bool,
 }
 /// ETF LP 시작 응답
 #[allow(clippy::derive_partial_eq_without_eq)]

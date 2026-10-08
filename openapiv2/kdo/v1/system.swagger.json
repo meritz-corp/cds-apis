@@ -115,6 +115,10 @@
         "pinned": {
           "type": "boolean",
           "description": "True when a thread actually pinned itself to the core.\nFalse means the core is reserved but the thread has not started yet."
+        },
+        "unpinnedFallback": {
+          "type": "boolean",
+          "description": "True when the instance got no core and the operator confirmed starting it\nunpinned (it runs on the main scheduler). Distinguishes \"running unpinned by\noperator confirmation\" from \"start blocked, waiting for a core\"."
         }
       }
     },
@@ -241,7 +245,7 @@
           "items": {
             "$ref": "#/definitions/systemCpuAffinityService"
           },
-          "description": "Instances that requested a core but got none (easing allocates 1 core per instance).\nThese cannot start until a core frees up or the pool is widened."
+          "description": "Instances that requested a core but got none (easing allocates 1 core per instance).\nEntries with unpinned_fallback = false cannot start until a core frees up or the pool\nis widened; entries with unpinned_fallback = true are running on the main scheduler\nbecause the operator confirmed starting them without a core."
         }
       }
     },

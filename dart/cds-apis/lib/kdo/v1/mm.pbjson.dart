@@ -694,6 +694,7 @@ const StartMarketMakingRequest$json = {
     {'1': 'config', '3': 2, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConfiguration', '10': 'config'},
     {'1': 'fund_code', '3': 3, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'slot_id', '3': 4, '4': 1, '5': 9, '10': 'slotId'},
+    {'1': 'allow_unpinned_start', '3': 5, '4': 1, '5': 8, '10': 'allowUnpinnedStart'},
   ],
 };
 
@@ -702,7 +703,7 @@ final $typed_data.Uint8List startMarketMakingRequestDescriptor = $convert.base64
     'ChhTdGFydE1hcmtldE1ha2luZ1JlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2'
     'wSPAoGY29uZmlnGAIgASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ0NvbmZpZ3VyYXRpb25S'
     'BmNvbmZpZxIbCglmdW5kX2NvZGUYAyABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYBCABKAlSBn'
-    'Nsb3RJZA==');
+    'Nsb3RJZBIwChRhbGxvd191bnBpbm5lZF9zdGFydBgFIAEoCFISYWxsb3dVbnBpbm5lZFN0YXJ0');
 
 @$core.Deprecated('Use startMarketMakingResponseDescriptor instead')
 const StartMarketMakingResponse$json = {

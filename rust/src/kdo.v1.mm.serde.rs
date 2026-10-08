@@ -10429,6 +10429,9 @@ impl serde::Serialize for StartMarketMakingRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.StartMarketMakingRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -10441,6 +10444,9 @@ impl serde::Serialize for StartMarketMakingRequest {
         }
         if true {
             struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
+        if true {
+            struct_ser.serialize_field("allow_unpinned_start", &self.allow_unpinned_start)?;
         }
         struct_ser.end()
     }
@@ -10458,6 +10464,8 @@ impl<'de> serde::Deserialize<'de> for StartMarketMakingRequest {
             "fundCode",
             "slot_id",
             "slotId",
+            "allow_unpinned_start",
+            "allowUnpinnedStart",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -10466,6 +10474,7 @@ impl<'de> serde::Deserialize<'de> for StartMarketMakingRequest {
             Config,
             FundCode,
             SlotId,
+            AllowUnpinnedStart,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -10492,6 +10501,7 @@ impl<'de> serde::Deserialize<'de> for StartMarketMakingRequest {
                             "config" => Ok(GeneratedField::Config),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
+                            "allowUnpinnedStart" | "allow_unpinned_start" => Ok(GeneratedField::AllowUnpinnedStart),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -10515,6 +10525,7 @@ impl<'de> serde::Deserialize<'de> for StartMarketMakingRequest {
                 let mut config__ = None;
                 let mut fund_code__ = None;
                 let mut slot_id__ = None;
+                let mut allow_unpinned_start__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -10541,6 +10552,12 @@ impl<'de> serde::Deserialize<'de> for StartMarketMakingRequest {
                             }
                             slot_id__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::AllowUnpinnedStart => {
+                            if allow_unpinned_start__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("allowUnpinnedStart"));
+                            }
+                            allow_unpinned_start__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -10551,6 +10568,7 @@ impl<'de> serde::Deserialize<'de> for StartMarketMakingRequest {
                     config: config__,
                     fund_code: fund_code__.unwrap_or_default(),
                     slot_id: slot_id__.unwrap_or_default(),
+                    allow_unpinned_start: allow_unpinned_start__.unwrap_or_default(),
                 })
             }
         }

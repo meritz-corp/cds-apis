@@ -684,6 +684,7 @@ const StartEtfLpRequest$json = {
   '2': [
     {'1': 'etf', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'etf'},
     {'1': 'fund', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'fund'},
+    {'1': 'allow_unpinned_start', '3': 3, '4': 1, '5': 8, '10': 'allowUnpinnedStart'},
   ],
 };
 
@@ -691,7 +692,8 @@ const StartEtfLpRequest$json = {
 final $typed_data.Uint8List startEtfLpRequestDescriptor = $convert.base64Decode(
     'ChFTdGFydEV0ZkxwUmVxdWVzdBIuCgNldGYYASABKAlCHOJBAQL6QRUKE2tkby5jZHNhcGlzLn'
     'h5ei9FdGZSA2V0ZhIxCgRmdW5kGAIgASgJQh3iQQEC+kEWChRrZG8uY2RzYXBpcy54eXovRnVu'
-    'ZFIEZnVuZA==');
+    'ZFIEZnVuZBIwChRhbGxvd191bnBpbm5lZF9zdGFydBgDIAEoCFISYWxsb3dVbnBpbm5lZFN0YX'
+    'J0');
 
 @$core.Deprecated('Use startEtfLpResponseDescriptor instead')
 const StartEtfLpResponse$json = {

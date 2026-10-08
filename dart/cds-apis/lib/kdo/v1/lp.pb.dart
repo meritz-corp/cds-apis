@@ -2505,10 +2505,12 @@ class StartEtfLpRequest extends $pb.GeneratedMessage {
   factory StartEtfLpRequest({
     $core.String? etf,
     $core.String? fund,
+    $core.bool? allowUnpinnedStart,
   }) {
     final result = create();
     if (etf != null) result.etf = etf;
     if (fund != null) result.fund = fund;
+    if (allowUnpinnedStart != null) result.allowUnpinnedStart = allowUnpinnedStart;
     return result;
   }
 
@@ -2520,6 +2522,7 @@ class StartEtfLpRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'StartEtfLpRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'etf')
     ..aOS(2, _omitFieldNames ? '' : 'fund')
+    ..aOB(3, _omitFieldNames ? '' : 'allowUnpinnedStart')
     ..hasRequiredFields = false
   ;
 
@@ -2557,6 +2560,18 @@ class StartEtfLpRequest extends $pb.GeneratedMessage {
   $core.bool hasFund() => $_has(1);
   @$pb.TagNumber(2)
   void clearFund() => $_clearField(2);
+
+  /// true 면 CPU 풀에 빈 코어가 없어도 코어 핀 없이(메인 스케줄러) start 한다.
+  /// 코어 부족 start 는 기본적으로 RESOURCE_EXHAUSTED 로 거부되며, 클라이언트가 그 경고를
+  /// 운영자에게 보여주고 확인받은 경우에만 이 값을 true 로 재시도한다. 기본 false.
+  @$pb.TagNumber(3)
+  $core.bool get allowUnpinnedStart => $_getBF(2);
+  @$pb.TagNumber(3)
+  set allowUnpinnedStart($core.bool value) => $_setBool(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasAllowUnpinnedStart() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAllowUnpinnedStart() => $_clearField(3);
 }
 
 /// ETF LP 시작 응답

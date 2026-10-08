@@ -2797,12 +2797,14 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
     MarketMakingConfiguration? config,
     $core.String? fundCode,
     $core.String? slotId,
+    $core.bool? allowUnpinnedStart,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (config != null) result.config = config;
     if (fundCode != null) result.fundCode = fundCode;
     if (slotId != null) result.slotId = slotId;
+    if (allowUnpinnedStart != null) result.allowUnpinnedStart = allowUnpinnedStart;
     return result;
   }
 
@@ -2816,6 +2818,7 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
     ..aOM<MarketMakingConfiguration>(2, _omitFieldNames ? '' : 'config', subBuilder: MarketMakingConfiguration.create)
     ..aOS(3, _omitFieldNames ? '' : 'fundCode')
     ..aOS(4, _omitFieldNames ? '' : 'slotId')
+    ..aOB(5, _omitFieldNames ? '' : 'allowUnpinnedStart')
     ..hasRequiredFields = false
   ;
 
@@ -2877,6 +2880,18 @@ class StartMarketMakingRequest extends $pb.GeneratedMessage {
   $core.bool hasSlotId() => $_has(3);
   @$pb.TagNumber(4)
   void clearSlotId() => $_clearField(4);
+
+  /// true 면 CPU 풀에 빈 코어가 없어도 코어 핀 없이(메인 스케줄러) start 한다.
+  /// 코어 부족 start 는 기본적으로 RESOURCE_EXHAUSTED 로 거부되며, 클라이언트가 그 경고를
+  /// 운영자에게 보여주고 확인받은 경우에만 이 값을 true 로 재시도한다. 기본 false.
+  @$pb.TagNumber(5)
+  $core.bool get allowUnpinnedStart => $_getBF(4);
+  @$pb.TagNumber(5)
+  set allowUnpinnedStart($core.bool value) => $_setBool(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasAllowUnpinnedStart() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAllowUnpinnedStart() => $_clearField(5);
 }
 
 class StartMarketMakingResponse extends $pb.GeneratedMessage {

@@ -132,7 +132,9 @@ message GetCpuAffinityResponse {
   repeated string unpinned_roles = 6;
 
   // Instances that requested a core but got none (easing allocates 1 core per instance).
-  // These cannot start until a core frees up or the pool is widened.
+  // Entries with unpinned_fallback = false cannot start until a core frees up or the pool
+  // is widened; entries with unpinned_fallback = true are running on the main scheduler
+  // because the operator confirmed starting them without a core.
   repeated CpuAffinityService unassigned = 7;
 }
 
@@ -174,4 +176,9 @@ message CpuAffinityService {
   // True when a thread actually pinned itself to the core.
   // False means the core is reserved but the thread has not started yet.
   bool pinned = 3;
+
+  // True when the instance got no core and the operator confirmed starting it
+  // unpinned (it runs on the main scheduler). Distinguishes "running unpinned by
+  // operator confirmation" from "start blocked, waiting for a core".
+  bool unpinned_fallback = 4;
 }

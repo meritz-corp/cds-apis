@@ -909,7 +909,9 @@ class GetCpuAffinityResponse extends $pb.GeneratedMessage {
   $pb.PbList<$core.String> get unpinnedRoles => $_getList(5);
 
   /// Instances that requested a core but got none (easing allocates 1 core per instance).
-  /// These cannot start until a core frees up or the pool is widened.
+  /// Entries with unpinned_fallback = false cannot start until a core frees up or the pool
+  /// is widened; entries with unpinned_fallback = true are running on the main scheduler
+  /// because the operator confirmed starting them without a core.
   @$pb.TagNumber(7)
   $pb.PbList<CpuAffinityService> get unassigned => $_getList(6);
 }
@@ -1067,11 +1069,13 @@ class CpuAffinityService extends $pb.GeneratedMessage {
     $core.String? role,
     $core.String? thread,
     $core.bool? pinned,
+    $core.bool? unpinnedFallback,
   }) {
     final result = create();
     if (role != null) result.role = role;
     if (thread != null) result.thread = thread;
     if (pinned != null) result.pinned = pinned;
+    if (unpinnedFallback != null) result.unpinnedFallback = unpinnedFallback;
     return result;
   }
 
@@ -1084,6 +1088,7 @@ class CpuAffinityService extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'role')
     ..aOS(2, _omitFieldNames ? '' : 'thread')
     ..aOB(3, _omitFieldNames ? '' : 'pinned')
+    ..aOB(4, _omitFieldNames ? '' : 'unpinnedFallback')
     ..hasRequiredFields = false
   ;
 
@@ -1134,6 +1139,18 @@ class CpuAffinityService extends $pb.GeneratedMessage {
   $core.bool hasPinned() => $_has(2);
   @$pb.TagNumber(3)
   void clearPinned() => $_clearField(3);
+
+  /// True when the instance got no core and the operator confirmed starting it
+  /// unpinned (it runs on the main scheduler). Distinguishes "running unpinned by
+  /// operator confirmation" from "start blocked, waiting for a core".
+  @$pb.TagNumber(4)
+  $core.bool get unpinnedFallback => $_getBF(3);
+  @$pb.TagNumber(4)
+  set unpinnedFallback($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasUnpinnedFallback() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUnpinnedFallback() => $_clearField(4);
 }
 
 

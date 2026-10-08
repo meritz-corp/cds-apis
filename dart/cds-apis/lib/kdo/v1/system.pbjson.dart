@@ -272,11 +272,13 @@ const CpuAffinityService$json = {
     {'1': 'role', '3': 1, '4': 1, '5': 9, '10': 'role'},
     {'1': 'thread', '3': 2, '4': 1, '5': 9, '10': 'thread'},
     {'1': 'pinned', '3': 3, '4': 1, '5': 8, '10': 'pinned'},
+    {'1': 'unpinned_fallback', '3': 4, '4': 1, '5': 8, '10': 'unpinnedFallback'},
   ],
 };
 
 /// Descriptor for `CpuAffinityService`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List cpuAffinityServiceDescriptor = $convert.base64Decode(
     'ChJDcHVBZmZpbml0eVNlcnZpY2USEgoEcm9sZRgBIAEoCVIEcm9sZRIWCgZ0aHJlYWQYAiABKA'
-    'lSBnRocmVhZBIWCgZwaW5uZWQYAyABKAhSBnBpbm5lZA==');
+    'lSBnRocmVhZBIWCgZwaW5uZWQYAyABKAhSBnBpbm5lZBIrChF1bnBpbm5lZF9mYWxsYmFjaxgE'
+    'IAEoCFIQdW5waW5uZWRGYWxsYmFjaw==');
 

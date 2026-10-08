@@ -163,7 +163,9 @@ pub struct GetCpuAffinityResponse {
     #[prost(string, repeated, tag="6")]
     pub unpinned_roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Instances that requested a core but got none (easing allocates 1 core per instance).
-    /// These cannot start until a core frees up or the pool is widened.
+    /// Entries with unpinned_fallback = false cannot start until a core frees up or the pool
+    /// is widened; entries with unpinned_fallback = true are running on the main scheduler
+    /// because the operator confirmed starting them without a core.
     #[prost(message, repeated, tag="7")]
     pub unassigned: ::prost::alloc::vec::Vec<CpuAffinityService>,
 }
@@ -212,6 +214,11 @@ pub struct CpuAffinityService {
     /// False means the core is reserved but the thread has not started yet.
     #[prost(bool, tag="3")]
     pub pinned: bool,
+    /// True when the instance got no core and the operator confirmed starting it
+    /// unpinned (it runs on the main scheduler). Distinguishes "running unpinned by
+    /// operator confirmation" from "start blocked, waiting for a core".
+    #[prost(bool, tag="4")]
+    pub unpinned_fallback: bool,
 }
 include!("kdo.v1.system.tonic.rs");
 include!("kdo.v1.system.serde.rs");
