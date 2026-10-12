@@ -87,6 +87,29 @@ final $typed_data.Uint8List etfLpStateDescriptor = $convert.base64Decode(
     'FURV9JRExFEAESGAoURVRGX0xQX1NUQVRFX1JVTk5JTkcQAhIZChVFVEZfTFBfU1RBVEVfU1RP'
     'UFBJTkcQAxIWChJFVEZfTFBfU1RBVEVfRVJST1IQBA==');
 
+@$core.Deprecated('Use reservationOrderStatusDescriptor instead')
+const ReservationOrderStatus$json = {
+  '1': 'ReservationOrderStatus',
+  '2': [
+    {'1': 'RESERVATION_ORDER_STATUS_UNSPECIFIED', '2': 0},
+    {'1': 'RESERVATION_ORDER_STATUS_REGISTERED', '2': 1},
+    {'1': 'RESERVATION_ORDER_STATUS_SENT', '2': 2},
+    {'1': 'RESERVATION_ORDER_STATUS_ACCEPTED', '2': 3},
+    {'1': 'RESERVATION_ORDER_STATUS_CLOSED', '2': 4},
+    {'1': 'RESERVATION_ORDER_STATUS_CANCELLED', '2': 5},
+    {'1': 'RESERVATION_ORDER_STATUS_FAILED', '2': 6},
+  ],
+};
+
+/// Descriptor for `ReservationOrderStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List reservationOrderStatusDescriptor = $convert.base64Decode(
+    'ChZSZXNlcnZhdGlvbk9yZGVyU3RhdHVzEigKJFJFU0VSVkFUSU9OX09SREVSX1NUQVRVU19VTl'
+    'NQRUNJRklFRBAAEicKI1JFU0VSVkFUSU9OX09SREVSX1NUQVRVU19SRUdJU1RFUkVEEAESIQod'
+    'UkVTRVJWQVRJT05fT1JERVJfU1RBVFVTX1NFTlQQAhIlCiFSRVNFUlZBVElPTl9PUkRFUl9TVE'
+    'FUVVNfQUNDRVBURUQQAxIjCh9SRVNFUlZBVElPTl9PUkRFUl9TVEFUVVNfQ0xPU0VEEAQSJgoi'
+    'UkVTRVJWQVRJT05fT1JERVJfU1RBVFVTX0NBTkNFTExFRBAFEiMKH1JFU0VSVkFUSU9OX09SRE'
+    'VSX1NUQVRVU19GQUlMRUQQBg==');
+
 @$core.Deprecated('Use etfLpDescriptor instead')
 const EtfLp$json = {
   '1': 'EtfLp',
@@ -878,4 +901,144 @@ final $typed_data.Uint8List etfLpFillSummaryDescriptor = $convert.base64Decode(
     'ChBFdGZMcEZpbGxTdW1tYXJ5EiUKA2V0ZhgBIAEoCzITLmtkby52MS5scC5GaWxsU3RhdFIDZX'
     'RmEisKBmhlZGdlcxgCIAMoCzITLmtkby52MS5scC5GaWxsU3RhdFIGaGVkZ2VzEhIKBGRhdGUY'
     'AyABKA1SBGRhdGU=');
+
+@$core.Deprecated('Use reservationOrderSpecDescriptor instead')
+const ReservationOrderSpec$json = {
+  '1': 'ReservationOrderSpec',
+  '2': [
+    {'1': 'side', '3': 1, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
+    {'1': 'price', '3': 2, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '10': 'quantity'},
+  ],
+};
+
+/// Descriptor for `ReservationOrderSpec`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List reservationOrderSpecDescriptor = $convert.base64Decode(
+    'ChRSZXNlcnZhdGlvbk9yZGVyU3BlYxIsCgRzaWRlGAEgASgOMhgua2RvLnYxLmNvbW1vbi5Pcm'
+    'RlclNpZGVSBHNpZGUSFAoFcHJpY2UYAiABKANSBXByaWNlEhoKCHF1YW50aXR5GAMgASgDUghx'
+    'dWFudGl0eQ==');
+
+@$core.Deprecated('Use registerReservationOrdersRequestDescriptor instead')
+const RegisterReservationOrdersRequest$json = {
+  '1': 'RegisterReservationOrdersRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '10': 'fund'},
+    {'1': 'orders', '3': 3, '4': 3, '5': 11, '6': '.kdo.v1.lp.ReservationOrderSpec', '10': 'orders'},
+    {'1': 'need_hedge', '3': 4, '4': 1, '5': 8, '9': 0, '10': 'needHedge', '17': true},
+  ],
+  '8': [
+    {'1': '_need_hedge'},
+  ],
+};
+
+/// Descriptor for `RegisterReservationOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List registerReservationOrdersRequestDescriptor = $convert.base64Decode(
+    'CiBSZWdpc3RlclJlc2VydmF0aW9uT3JkZXJzUmVxdWVzdBIQCgNldGYYASABKAlSA2V0ZhISCg'
+    'RmdW5kGAIgASgJUgRmdW5kEjcKBm9yZGVycxgDIAMoCzIfLmtkby52MS5scC5SZXNlcnZhdGlv'
+    'bk9yZGVyU3BlY1IGb3JkZXJzEiIKCm5lZWRfaGVkZ2UYBCABKAhIAFIJbmVlZEhlZGdliAEBQg'
+    '0KC19uZWVkX2hlZGdl');
+
+@$core.Deprecated('Use registerReservationOrdersResponseDescriptor instead')
+const RegisterReservationOrdersResponse$json = {
+  '1': 'RegisterReservationOrdersResponse',
+  '2': [
+    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.ReservationOrder', '10': 'orders'},
+  ],
+};
+
+/// Descriptor for `RegisterReservationOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List registerReservationOrdersResponseDescriptor = $convert.base64Decode(
+    'CiFSZWdpc3RlclJlc2VydmF0aW9uT3JkZXJzUmVzcG9uc2USMwoGb3JkZXJzGAEgAygLMhsua2'
+    'RvLnYxLmxwLlJlc2VydmF0aW9uT3JkZXJSBm9yZGVycw==');
+
+@$core.Deprecated('Use cancelReservationOrdersRequestDescriptor instead')
+const CancelReservationOrdersRequest$json = {
+  '1': 'CancelReservationOrdersRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '10': 'fund'},
+    {'1': 'ids', '3': 3, '4': 3, '5': 3, '10': 'ids'},
+  ],
+};
+
+/// Descriptor for `CancelReservationOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelReservationOrdersRequestDescriptor = $convert.base64Decode(
+    'Ch5DYW5jZWxSZXNlcnZhdGlvbk9yZGVyc1JlcXVlc3QSEAoDZXRmGAEgASgJUgNldGYSEgoEZn'
+    'VuZBgCIAEoCVIEZnVuZBIQCgNpZHMYAyADKANSA2lkcw==');
+
+@$core.Deprecated('Use cancelReservationOrdersResponseDescriptor instead')
+const CancelReservationOrdersResponse$json = {
+  '1': 'CancelReservationOrdersResponse',
+  '2': [
+    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.ReservationOrder', '10': 'orders'},
+  ],
+};
+
+/// Descriptor for `CancelReservationOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cancelReservationOrdersResponseDescriptor = $convert.base64Decode(
+    'Ch9DYW5jZWxSZXNlcnZhdGlvbk9yZGVyc1Jlc3BvbnNlEjMKBm9yZGVycxgBIAMoCzIbLmtkby'
+    '52MS5scC5SZXNlcnZhdGlvbk9yZGVyUgZvcmRlcnM=');
+
+@$core.Deprecated('Use listReservationOrdersRequestDescriptor instead')
+const ListReservationOrdersRequest$json = {
+  '1': 'ListReservationOrdersRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '10': 'fund'},
+  ],
+};
+
+/// Descriptor for `ListReservationOrdersRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listReservationOrdersRequestDescriptor = $convert.base64Decode(
+    'ChxMaXN0UmVzZXJ2YXRpb25PcmRlcnNSZXF1ZXN0EhAKA2V0ZhgBIAEoCVIDZXRmEhIKBGZ1bm'
+    'QYAiABKAlSBGZ1bmQ=');
+
+@$core.Deprecated('Use listReservationOrdersResponseDescriptor instead')
+const ListReservationOrdersResponse$json = {
+  '1': 'ListReservationOrdersResponse',
+  '2': [
+    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.ReservationOrder', '10': 'orders'},
+    {'1': 'send_at', '3': 2, '4': 1, '5': 9, '10': 'sendAt'},
+  ],
+};
+
+/// Descriptor for `ListReservationOrdersResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listReservationOrdersResponseDescriptor = $convert.base64Decode(
+    'Ch1MaXN0UmVzZXJ2YXRpb25PcmRlcnNSZXNwb25zZRIzCgZvcmRlcnMYASADKAsyGy5rZG8udj'
+    'EubHAuUmVzZXJ2YXRpb25PcmRlclIGb3JkZXJzEhcKB3NlbmRfYXQYAiABKAlSBnNlbmRBdA==');
+
+@$core.Deprecated('Use reservationOrderDescriptor instead')
+const ReservationOrder$json = {
+  '1': 'ReservationOrder',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'etf', '3': 2, '4': 1, '5': 9, '10': 'etf'},
+    {'1': 'fund', '3': 3, '4': 1, '5': 9, '10': 'fund'},
+    {'1': 'side', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '10': 'side'},
+    {'1': 'price', '3': 5, '4': 1, '5': 3, '10': 'price'},
+    {'1': 'quantity', '3': 6, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'need_hedge', '3': 7, '4': 1, '5': 8, '10': 'needHedge'},
+    {'1': 'status', '3': 8, '4': 1, '5': 14, '6': '.kdo.v1.lp.ReservationOrderStatus', '10': 'status'},
+    {'1': 'order_id', '3': 9, '4': 1, '5': 3, '10': 'orderId'},
+    {'1': 'message', '3': 10, '4': 1, '5': 9, '10': 'message'},
+    {'1': 'registered_by', '3': 11, '4': 1, '5': 9, '10': 'registeredBy'},
+    {'1': 'registered_at', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'registeredAt'},
+    {'1': 'sent_at', '3': 13, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'sentAt'},
+    {'1': 'closed_at', '3': 14, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'closedAt'},
+  ],
+};
+
+/// Descriptor for `ReservationOrder`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List reservationOrderDescriptor = $convert.base64Decode(
+    'ChBSZXNlcnZhdGlvbk9yZGVyEg4KAmlkGAEgASgDUgJpZBIQCgNldGYYAiABKAlSA2V0ZhISCg'
+    'RmdW5kGAMgASgJUgRmdW5kEiwKBHNpZGUYBCABKA4yGC5rZG8udjEuY29tbW9uLk9yZGVyU2lk'
+    'ZVIEc2lkZRIUCgVwcmljZRgFIAEoA1IFcHJpY2USGgoIcXVhbnRpdHkYBiABKANSCHF1YW50aX'
+    'R5Eh0KCm5lZWRfaGVkZ2UYByABKAhSCW5lZWRIZWRnZRI5CgZzdGF0dXMYCCABKA4yIS5rZG8u'
+    'djEubHAuUmVzZXJ2YXRpb25PcmRlclN0YXR1c1IGc3RhdHVzEhkKCG9yZGVyX2lkGAkgASgDUg'
+    'dvcmRlcklkEhgKB21lc3NhZ2UYCiABKAlSB21lc3NhZ2USIwoNcmVnaXN0ZXJlZF9ieRgLIAEo'
+    'CVIMcmVnaXN0ZXJlZEJ5Ej8KDXJlZ2lzdGVyZWRfYXQYDCABKAsyGi5nb29nbGUucHJvdG9idW'
+    'YuVGltZXN0YW1wUgxyZWdpc3RlcmVkQXQSMwoHc2VudF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90'
+    'b2J1Zi5UaW1lc3RhbXBSBnNlbnRBdBI3CgljbG9zZWRfYXQYDiABKAsyGi5nb29nbGUucHJvdG'
+    '9idWYuVGltZXN0YW1wUghjbG9zZWRBdA==');
 

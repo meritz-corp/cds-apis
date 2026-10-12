@@ -129,6 +129,15 @@ service LpService {
       body: "*"
     };
   }
+
+  // ETF LP 예약주문 등록. 장중 아무 때나 등록 → 다음 08:28 에 FEP 로 일괄 송신 (FEP 가 08:30 까지 보관 후 거래소로 송출).
+  rpc RegisterReservationOrders(RegisterReservationOrdersRequest) returns (RegisterReservationOrdersResponse);
+
+  // ETF LP 예약주문 취소. 송신 전이면 등록 취소, 송신 후면 취소 주문을 낸다.
+  rpc CancelReservationOrders(CancelReservationOrdersRequest) returns (CancelReservationOrdersResponse);
+
+  // ETF LP 예약주문 조회.
+  rpc ListReservationOrders(ListReservationOrdersRequest) returns (ListReservationOrdersResponse);
 }
 
 // ETF LP 설정
@@ -898,4 +907,71 @@ message EtfLpFillSummary {
   repeated FillStat hedges = 2;
   // 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
   uint32 date = 3;
+}
+
+// ========== Reservation Order Messages ==========
+
+// 예약주문 1건 입력 (가격·수량은 운영자 직접 입력)
+message ReservationOrderSpec {
+  kdo.v1.common.OrderSide side = 1;
+  int64 price = 2;     // 주문가 (원)
+  int64 quantity = 3;  // 주문수량
+}
+
+message RegisterReservationOrdersRequest {
+  string etf = 1;   // "etfs/{symbol}"
+  string fund = 2;  // "funds/{fund_code}"
+  repeated ReservationOrderSpec orders = 3;
+  optional bool need_hedge = 4;  // 미지정 시 true
+}
+
+message RegisterReservationOrdersResponse {
+  repeated ReservationOrder orders = 1;
+}
+
+message CancelReservationOrdersRequest {
+  string etf = 1;   // "etfs/{symbol}"
+  string fund = 2;  // "funds/{fund_code}"
+  repeated int64 ids = 3;  // 예약 등록번호. 비우면 이 LP 의 취소 가능한 예약 전부
+}
+
+message CancelReservationOrdersResponse {
+  repeated ReservationOrder orders = 1;  // 취소(요청)된 예약
+}
+
+message ListReservationOrdersRequest {
+  string etf = 1;   // "etfs/{symbol}". 비우면 전체 ETF
+  string fund = 2;  // "funds/{fund_code}". 비우면 전체 펀드
+}
+
+message ListReservationOrdersResponse {
+  repeated ReservationOrder orders = 1;
+  string send_at = 2;  // FEP 일괄 송신 시각 (KST HH:MM:SS)
+}
+
+message ReservationOrder {
+  int64 id = 1;                 // 예약 등록번호
+  string etf = 2;               // "etfs/{symbol}"
+  string fund = 3;              // "funds/{fund_code}"
+  kdo.v1.common.OrderSide side = 4;
+  int64 price = 5;              // 원
+  int64 quantity = 6;
+  bool need_hedge = 7;
+  ReservationOrderStatus status = 8;
+  int64 order_id = 9;           // 거래소 주문번호 (송신 후. 송신 전 0)
+  string message = 10;          // 종료·실패 사유
+  string registered_by = 11;    // 등록 요청자 (클라이언트 IP)
+  google.protobuf.Timestamp registered_at = 12;
+  google.protobuf.Timestamp sent_at = 13;
+  google.protobuf.Timestamp closed_at = 14;
+}
+
+enum ReservationOrderStatus {
+  RESERVATION_ORDER_STATUS_UNSPECIFIED = 0;
+  RESERVATION_ORDER_STATUS_REGISTERED = 1;  // 송신 대기 (다음 08:28)
+  RESERVATION_ORDER_STATUS_SENT = 2;        // FEP 송신 — 08:30 까지 FEP 보관
+  RESERVATION_ORDER_STATUS_ACCEPTED = 3;    // 거래소 접수 → ETF LP 가 관리
+  RESERVATION_ORDER_STATUS_CLOSED = 4;      // 종료 (LP 인수·전량 체결·취소·거부 — message 참고)
+  RESERVATION_ORDER_STATUS_CANCELLED = 5;   // 접수 전 취소 (송신 전 등록 취소 또는 송신 후 취소 요청)
+  RESERVATION_ORDER_STATUS_FAILED = 6;      // 송신 실패 또는 송신 시각을 놓침
 }

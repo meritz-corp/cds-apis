@@ -1,6 +1,6 @@
 [package]
 name = "ids-apis"
-version = "1.0.493"
+version = "1.0.494"
 edition = "2021"
 description = "IDS APIs in Rust"
 license = "MIT"

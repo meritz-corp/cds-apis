@@ -750,6 +750,17 @@
       },
       "title": "레버리지 선물 가격 산출"
     },
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
     "commonPdfDecomposeHedgePricing": {
       "type": "object",
       "description": "PDF 재귀 분해 헷지 가격 산출 (파라미터 없음)\nNAV 계산은 Etf.decomposed_constituents를 PdfNavHedge와 동일 공식으로 적용."
@@ -757,6 +768,18 @@
     "commonPdfNavHedgePricing": {
       "type": "object",
       "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
+    },
+    "lpCancelReservationOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpReservationOrder"
+          },
+          "title": "취소(요청)된 예약"
+        }
+      }
     },
     "lpEtfLp": {
       "type": "object",
@@ -1257,6 +1280,21 @@
         }
       }
     },
+    "lpListReservationOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpReservationOrder"
+          }
+        },
+        "sendAt": {
+          "type": "string",
+          "title": "FEP 일괄 송신 시각 (KST HH:MM:SS)"
+        }
+      }
+    },
     "lpLpPricing": {
       "type": "object",
       "properties": {
@@ -1287,6 +1325,111 @@
       "default": "POSITION_ADJUSTMENT_STRATEGY_UNSPECIFIED",
       "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
       "title": "순매매량 기반 조정 전략"
+    },
+    "lpRegisterReservationOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpReservationOrder"
+          }
+        }
+      }
+    },
+    "lpReservationOrder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "예약 등록번호"
+        },
+        "etf": {
+          "type": "string",
+          "title": "\"etfs/{symbol}\""
+        },
+        "fund": {
+          "type": "string",
+          "title": "\"funds/{fund_code}\""
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "원"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "needHedge": {
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/definitions/lpReservationOrderStatus"
+        },
+        "orderId": {
+          "type": "string",
+          "format": "int64",
+          "title": "거래소 주문번호 (송신 후. 송신 전 0)"
+        },
+        "message": {
+          "type": "string",
+          "title": "종료·실패 사유"
+        },
+        "registeredBy": {
+          "type": "string",
+          "title": "등록 요청자 (클라이언트 IP)"
+        },
+        "registeredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sentAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "closedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "lpReservationOrderSpec": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "$ref": "#/definitions/commonOrderSide"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문가 (원)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문수량"
+        }
+      },
+      "title": "예약주문 1건 입력 (가격·수량은 운영자 직접 입력)"
+    },
+    "lpReservationOrderStatus": {
+      "type": "string",
+      "enum": [
+        "RESERVATION_ORDER_STATUS_UNSPECIFIED",
+        "RESERVATION_ORDER_STATUS_REGISTERED",
+        "RESERVATION_ORDER_STATUS_SENT",
+        "RESERVATION_ORDER_STATUS_ACCEPTED",
+        "RESERVATION_ORDER_STATUS_CLOSED",
+        "RESERVATION_ORDER_STATUS_CANCELLED",
+        "RESERVATION_ORDER_STATUS_FAILED"
+      ],
+      "default": "RESERVATION_ORDER_STATUS_UNSPECIFIED",
+      "title": "- RESERVATION_ORDER_STATUS_REGISTERED: 송신 대기 (다음 08:28)\n - RESERVATION_ORDER_STATUS_SENT: FEP 송신 — 08:30 까지 FEP 보관\n - RESERVATION_ORDER_STATUS_ACCEPTED: 거래소 접수 → ETF LP 가 관리\n - RESERVATION_ORDER_STATUS_CLOSED: 종료 (LP 인수·전량 체결·취소·거부 — message 참고)\n - RESERVATION_ORDER_STATUS_CANCELLED: 접수 전 취소 (송신 전 등록 취소 또는 송신 후 취소 요청)\n - RESERVATION_ORDER_STATUS_FAILED: 송신 실패 또는 송신 시각을 놓침"
     },
     "lpStartEtfLpResponse": {
       "type": "object",

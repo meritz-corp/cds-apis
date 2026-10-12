@@ -402,6 +402,85 @@ pub mod lp_service_client {
                 .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ClearUserOrderBook"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn register_reservation_orders(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RegisterReservationOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RegisterReservationOrdersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lp.LpService/RegisterReservationOrders",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.lp.LpService", "RegisterReservationOrders"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn cancel_reservation_orders(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CancelReservationOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelReservationOrdersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lp.LpService/CancelReservationOrders",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("kdo.v1.lp.LpService", "CancelReservationOrders"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_reservation_orders(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListReservationOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListReservationOrdersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.lp.LpService/ListReservationOrders",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("kdo.v1.lp.LpService", "ListReservationOrders"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -509,6 +588,27 @@ pub mod lp_service_server {
             request: tonic::Request<super::ClearUserOrderBookRequest>,
         ) -> std::result::Result<
             tonic::Response<super::ClearUserOrderBookResponse>,
+            tonic::Status,
+        >;
+        async fn register_reservation_orders(
+            &self,
+            request: tonic::Request<super::RegisterReservationOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RegisterReservationOrdersResponse>,
+            tonic::Status,
+        >;
+        async fn cancel_reservation_orders(
+            &self,
+            request: tonic::Request<super::CancelReservationOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CancelReservationOrdersResponse>,
+            tonic::Status,
+        >;
+        async fn list_reservation_orders(
+            &self,
+            request: tonic::Request<super::ListReservationOrdersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListReservationOrdersResponse>,
             tonic::Status,
         >;
     }
@@ -1174,6 +1274,152 @@ pub mod lp_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = ClearUserOrderBookSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lp.LpService/RegisterReservationOrders" => {
+                    #[allow(non_camel_case_types)]
+                    struct RegisterReservationOrdersSvc<T: LpService>(pub Arc<T>);
+                    impl<
+                        T: LpService,
+                    > tonic::server::UnaryService<
+                        super::RegisterReservationOrdersRequest,
+                    > for RegisterReservationOrdersSvc<T> {
+                        type Response = super::RegisterReservationOrdersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::RegisterReservationOrdersRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LpService>::register_reservation_orders(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = RegisterReservationOrdersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lp.LpService/CancelReservationOrders" => {
+                    #[allow(non_camel_case_types)]
+                    struct CancelReservationOrdersSvc<T: LpService>(pub Arc<T>);
+                    impl<
+                        T: LpService,
+                    > tonic::server::UnaryService<super::CancelReservationOrdersRequest>
+                    for CancelReservationOrdersSvc<T> {
+                        type Response = super::CancelReservationOrdersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::CancelReservationOrdersRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LpService>::cancel_reservation_orders(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = CancelReservationOrdersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.lp.LpService/ListReservationOrders" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListReservationOrdersSvc<T: LpService>(pub Arc<T>);
+                    impl<
+                        T: LpService,
+                    > tonic::server::UnaryService<super::ListReservationOrdersRequest>
+                    for ListReservationOrdersSvc<T> {
+                        type Response = super::ListReservationOrdersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListReservationOrdersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as LpService>::list_reservation_orders(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListReservationOrdersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

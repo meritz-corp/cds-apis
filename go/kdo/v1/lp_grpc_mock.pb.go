@@ -761,6 +761,26 @@ func (m *MockLpServiceClient) EXPECT() *MockLpServiceClientMockRecorder {
 	return m.recorder
 }
 
+// CancelReservationOrders mocks base method.
+func (m *MockLpServiceClient) CancelReservationOrders(ctx context.Context, in *CancelReservationOrdersRequest, opts ...grpc.CallOption) (*CancelReservationOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CancelReservationOrders", varargs...)
+	ret0, _ := ret[0].(*CancelReservationOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelReservationOrders indicates an expected call of CancelReservationOrders.
+func (mr *MockLpServiceClientMockRecorder) CancelReservationOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelReservationOrders", reflect.TypeOf((*MockLpServiceClient)(nil).CancelReservationOrders), varargs...)
+}
+
 // ClearUserOrderBook mocks base method.
 func (m *MockLpServiceClient) ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest, opts ...grpc.CallOption) (*ClearUserOrderBookResponse, error) {
 	m.ctrl.T.Helper()
@@ -899,6 +919,46 @@ func (mr *MockLpServiceClientMockRecorder) ListEtfLps(ctx, in interface{}, opts 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceClient)(nil).ListEtfLps), varargs...)
+}
+
+// ListReservationOrders mocks base method.
+func (m *MockLpServiceClient) ListReservationOrders(ctx context.Context, in *ListReservationOrdersRequest, opts ...grpc.CallOption) (*ListReservationOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListReservationOrders", varargs...)
+	ret0, _ := ret[0].(*ListReservationOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListReservationOrders indicates an expected call of ListReservationOrders.
+func (mr *MockLpServiceClientMockRecorder) ListReservationOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListReservationOrders", reflect.TypeOf((*MockLpServiceClient)(nil).ListReservationOrders), varargs...)
+}
+
+// RegisterReservationOrders mocks base method.
+func (m *MockLpServiceClient) RegisterReservationOrders(ctx context.Context, in *RegisterReservationOrdersRequest, opts ...grpc.CallOption) (*RegisterReservationOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "RegisterReservationOrders", varargs...)
+	ret0, _ := ret[0].(*RegisterReservationOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterReservationOrders indicates an expected call of RegisterReservationOrders.
+func (mr *MockLpServiceClientMockRecorder) RegisterReservationOrders(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterReservationOrders", reflect.TypeOf((*MockLpServiceClient)(nil).RegisterReservationOrders), varargs...)
 }
 
 // StartEtfLp mocks base method.
@@ -1044,6 +1104,21 @@ func (m *MockLpServiceServer) EXPECT() *MockLpServiceServerMockRecorder {
 	return m.recorder
 }
 
+// CancelReservationOrders mocks base method.
+func (m *MockLpServiceServer) CancelReservationOrders(ctx context.Context, in *CancelReservationOrdersRequest) (*CancelReservationOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CancelReservationOrders", ctx, in)
+	ret0, _ := ret[0].(*CancelReservationOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelReservationOrders indicates an expected call of CancelReservationOrders.
+func (mr *MockLpServiceServerMockRecorder) CancelReservationOrders(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelReservationOrders", reflect.TypeOf((*MockLpServiceServer)(nil).CancelReservationOrders), ctx, in)
+}
+
 // ClearUserOrderBook mocks base method.
 func (m *MockLpServiceServer) ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest) (*ClearUserOrderBookResponse, error) {
 	m.ctrl.T.Helper()
@@ -1147,6 +1222,36 @@ func (m *MockLpServiceServer) ListEtfLps(ctx context.Context, in *ListEtfLpsRequ
 func (mr *MockLpServiceServerMockRecorder) ListEtfLps(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceServer)(nil).ListEtfLps), ctx, in)
+}
+
+// ListReservationOrders mocks base method.
+func (m *MockLpServiceServer) ListReservationOrders(ctx context.Context, in *ListReservationOrdersRequest) (*ListReservationOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListReservationOrders", ctx, in)
+	ret0, _ := ret[0].(*ListReservationOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListReservationOrders indicates an expected call of ListReservationOrders.
+func (mr *MockLpServiceServerMockRecorder) ListReservationOrders(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListReservationOrders", reflect.TypeOf((*MockLpServiceServer)(nil).ListReservationOrders), ctx, in)
+}
+
+// RegisterReservationOrders mocks base method.
+func (m *MockLpServiceServer) RegisterReservationOrders(ctx context.Context, in *RegisterReservationOrdersRequest) (*RegisterReservationOrdersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterReservationOrders", ctx, in)
+	ret0, _ := ret[0].(*RegisterReservationOrdersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterReservationOrders indicates an expected call of RegisterReservationOrders.
+func (mr *MockLpServiceServerMockRecorder) RegisterReservationOrders(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterReservationOrders", reflect.TypeOf((*MockLpServiceServer)(nil).RegisterReservationOrders), ctx, in)
 }
 
 // StartEtfLp mocks base method.

@@ -101,6 +101,21 @@ class LpServiceClient extends $grpc.Client {
     return $createUnaryCall(_$clearUserOrderBook, request, options: options);
   }
 
+  /// ETF LP 예약주문 등록. 장중 아무 때나 등록 → 다음 08:28 에 FEP 로 일괄 송신 (FEP 가 08:30 까지 보관 후 거래소로 송출).
+  $grpc.ResponseFuture<$0.RegisterReservationOrdersResponse> registerReservationOrders($0.RegisterReservationOrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$registerReservationOrders, request, options: options);
+  }
+
+  /// ETF LP 예약주문 취소. 송신 전이면 등록 취소, 송신 후면 취소 주문을 낸다.
+  $grpc.ResponseFuture<$0.CancelReservationOrdersResponse> cancelReservationOrders($0.CancelReservationOrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$cancelReservationOrders, request, options: options);
+  }
+
+  /// ETF LP 예약주문 조회.
+  $grpc.ResponseFuture<$0.ListReservationOrdersResponse> listReservationOrders($0.ListReservationOrdersRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listReservationOrders, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getEtfLp = $grpc.ClientMethod<$0.GetEtfLpRequest, $0.EtfLp>(
@@ -155,6 +170,18 @@ class LpServiceClient extends $grpc.Client {
       '/kdo.v1.lp.LpService/ClearUserOrderBook',
       ($0.ClearUserOrderBookRequest value) => value.writeToBuffer(),
       $0.ClearUserOrderBookResponse.fromBuffer);
+  static final _$registerReservationOrders = $grpc.ClientMethod<$0.RegisterReservationOrdersRequest, $0.RegisterReservationOrdersResponse>(
+      '/kdo.v1.lp.LpService/RegisterReservationOrders',
+      ($0.RegisterReservationOrdersRequest value) => value.writeToBuffer(),
+      $0.RegisterReservationOrdersResponse.fromBuffer);
+  static final _$cancelReservationOrders = $grpc.ClientMethod<$0.CancelReservationOrdersRequest, $0.CancelReservationOrdersResponse>(
+      '/kdo.v1.lp.LpService/CancelReservationOrders',
+      ($0.CancelReservationOrdersRequest value) => value.writeToBuffer(),
+      $0.CancelReservationOrdersResponse.fromBuffer);
+  static final _$listReservationOrders = $grpc.ClientMethod<$0.ListReservationOrdersRequest, $0.ListReservationOrdersResponse>(
+      '/kdo.v1.lp.LpService/ListReservationOrders',
+      ($0.ListReservationOrdersRequest value) => value.writeToBuffer(),
+      $0.ListReservationOrdersResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lp.LpService')
@@ -253,6 +280,27 @@ abstract class LpServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ClearUserOrderBookRequest.fromBuffer(value),
         ($0.ClearUserOrderBookResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.RegisterReservationOrdersRequest, $0.RegisterReservationOrdersResponse>(
+        'RegisterReservationOrders',
+        registerReservationOrders_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.RegisterReservationOrdersRequest.fromBuffer(value),
+        ($0.RegisterReservationOrdersResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.CancelReservationOrdersRequest, $0.CancelReservationOrdersResponse>(
+        'CancelReservationOrders',
+        cancelReservationOrders_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.CancelReservationOrdersRequest.fromBuffer(value),
+        ($0.CancelReservationOrdersResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListReservationOrdersRequest, $0.ListReservationOrdersResponse>(
+        'ListReservationOrders',
+        listReservationOrders_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListReservationOrdersRequest.fromBuffer(value),
+        ($0.ListReservationOrdersResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.EtfLp> getEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfLpRequest> $request) async {
@@ -332,5 +380,23 @@ abstract class LpServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.ClearUserOrderBookResponse> clearUserOrderBook($grpc.ServiceCall call, $0.ClearUserOrderBookRequest request);
+
+  $async.Future<$0.RegisterReservationOrdersResponse> registerReservationOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.RegisterReservationOrdersRequest> $request) async {
+    return registerReservationOrders($call, await $request);
+  }
+
+  $async.Future<$0.RegisterReservationOrdersResponse> registerReservationOrders($grpc.ServiceCall call, $0.RegisterReservationOrdersRequest request);
+
+  $async.Future<$0.CancelReservationOrdersResponse> cancelReservationOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.CancelReservationOrdersRequest> $request) async {
+    return cancelReservationOrders($call, await $request);
+  }
+
+  $async.Future<$0.CancelReservationOrdersResponse> cancelReservationOrders($grpc.ServiceCall call, $0.CancelReservationOrdersRequest request);
+
+  $async.Future<$0.ListReservationOrdersResponse> listReservationOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.ListReservationOrdersRequest> $request) async {
+    return listReservationOrders($call, await $request);
+  }
+
+  $async.Future<$0.ListReservationOrdersResponse> listReservationOrders($grpc.ServiceCall call, $0.ListReservationOrdersRequest request);
 
 }

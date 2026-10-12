@@ -110,9 +110,6 @@ pub mod kdo {
         pub mod fx {
             include!("kdo.v1.fx.rs");
         }
-        pub mod reservation_order {
-            include!("kdo.v1.reservation_order.rs");
-        }
     }
 }
 pub mod market {

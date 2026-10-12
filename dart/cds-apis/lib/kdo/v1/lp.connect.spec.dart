@@ -125,4 +125,28 @@ abstract final class LpService {
     kdov1lp.ClearUserOrderBookRequest.new,
     kdov1lp.ClearUserOrderBookResponse.new,
   );
+
+  /// ETF LP 예약주문 등록. 장중 아무 때나 등록 → 다음 08:28 에 FEP 로 일괄 송신 (FEP 가 08:30 까지 보관 후 거래소로 송출).
+  static const registerReservationOrders = connect.Spec(
+    '/$name/RegisterReservationOrders',
+    connect.StreamType.unary,
+    kdov1lp.RegisterReservationOrdersRequest.new,
+    kdov1lp.RegisterReservationOrdersResponse.new,
+  );
+
+  /// ETF LP 예약주문 취소. 송신 전이면 등록 취소, 송신 후면 취소 주문을 낸다.
+  static const cancelReservationOrders = connect.Spec(
+    '/$name/CancelReservationOrders',
+    connect.StreamType.unary,
+    kdov1lp.CancelReservationOrdersRequest.new,
+    kdov1lp.CancelReservationOrdersResponse.new,
+  );
+
+  /// ETF LP 예약주문 조회.
+  static const listReservationOrders = connect.Spec(
+    '/$name/ListReservationOrders',
+    connect.StreamType.unary,
+    kdov1lp.ListReservationOrdersRequest.new,
+    kdov1lp.ListReservationOrdersResponse.new,
+  );
 }
