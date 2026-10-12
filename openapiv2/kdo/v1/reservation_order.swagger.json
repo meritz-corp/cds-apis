@@ -1,0 +1,423 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "kdo/v1/reservation_order.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ReservationOrderService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/reservation-orders": {
+      "get": {
+        "summary": "영업일 예약주문 조회 (모든 서버). 시간표도 함께 내려준다.",
+        "operationId": "ReservationOrderService_ListReservationOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reservation_orderListReservationOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "businessDate",
+            "description": "영업일 YYYY-MM-DD. 비면 오늘(KST).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "owner.etfLp.etf",
+            "description": "\"etfs/{symbol}\"",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "owner.etfLp.fund",
+            "description": "\"funds/{fund_code}\"",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ReservationOrderService"
+        ]
+      }
+    },
+    "/v1/reservation-orders:cancel": {
+      "post": {
+        "summary": "예약주문 취소. order_ids 가 비면 소유 전략의 살아있는 예약주문 전부.",
+        "operationId": "ReservationOrderService_CancelReservationOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reservation_orderCancelReservationOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reservation_orderCancelReservationOrdersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ReservationOrderService"
+        ]
+      }
+    },
+    "/v1/reservation-orders:submit": {
+      "post": {
+        "summary": "예약주문 송신 (송신 마감 이전에만). 일부만 송신되면 response.error 에 사유가 담긴다.",
+        "operationId": "ReservationOrderService_SubmitReservationOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reservation_orderSubmitReservationOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reservation_orderSubmitReservationOrdersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ReservationOrderService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonOrderSide": {
+      "type": "string",
+      "enum": [
+        "ORDER_SIDE_UNSPECIFIED",
+        "ORDER_SIDE_BID",
+        "ORDER_SIDE_ASK"
+      ],
+      "default": "ORDER_SIDE_UNSPECIFIED",
+      "description": "- ORDER_SIDE_BID: 매수\n - ORDER_SIDE_ASK: 매도",
+      "title": "주문 방향"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "reservation_orderCancelReservationOrdersRequest": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "$ref": "#/definitions/reservation_orderReservationOwner"
+        },
+        "orderIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "취소할 예약주문의 거래소 주문번호. 비면 소유 전략의 살아있는 예약주문 전부."
+        }
+      },
+      "required": [
+        "owner"
+      ]
+    },
+    "reservation_orderCancelReservationOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "cancelSentCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "취소를 송신한 건수 (확정은 거래소 응답)"
+        }
+      }
+    },
+    "reservation_orderEtfLpReservationOwner": {
+      "type": "object",
+      "properties": {
+        "etf": {
+          "type": "string",
+          "title": "\"etfs/{symbol}\""
+        },
+        "fund": {
+          "type": "string",
+          "title": "\"funds/{fund_code}\""
+        }
+      },
+      "description": "ETF LP 소유자.",
+      "required": [
+        "etf",
+        "fund"
+      ]
+    },
+    "reservation_orderListReservationOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/reservation_orderReservationOrder"
+          }
+        },
+        "timetable": {
+          "$ref": "#/definitions/reservation_orderReservationTimetable"
+        }
+      }
+    },
+    "reservation_orderReservationCancelReason": {
+      "type": "string",
+      "enum": [
+        "RESERVATION_CANCEL_REASON_UNSPECIFIED",
+        "RESERVATION_CANCEL_REASON_CROSSING",
+        "RESERVATION_CANCEL_REASON_ADOPT_DEADLINE",
+        "RESERVATION_CANCEL_REASON_SHUTDOWN",
+        "RESERVATION_CANCEL_REASON_PREVIOUS_PROCESS",
+        "RESERVATION_CANCEL_REASON_OPERATOR"
+      ],
+      "default": "RESERVATION_CANCEL_REASON_UNSPECIFIED",
+      "title": "- RESERVATION_CANCEL_REASON_CROSSING: 시가 직전 상대 1호가 교차 (시가에 바로 체결될 가격)\n - RESERVATION_CANCEL_REASON_ADOPT_DEADLINE: 인수 마감까지 소유 전략 미가동\n - RESERVATION_CANCEL_REASON_SHUTDOWN: 서버 종료\n - RESERVATION_CANCEL_REASON_PREVIOUS_PROCESS: 재기동 전 프로세스가 낸 예약주문\n - RESERVATION_CANCEL_REASON_OPERATOR: 운영자 취소"
+    },
+    "reservation_orderReservationOrder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "businessDate": {
+          "type": "string",
+          "title": "YYYY-MM-DD"
+        },
+        "host": {
+          "type": "string",
+          "title": "송신 서버"
+        },
+        "owner": {
+          "$ref": "#/definitions/reservation_orderReservationOwner"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "fundCode": {
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "가격 (원)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "needHedge": {
+          "type": "boolean"
+        },
+        "orderId": {
+          "type": "string",
+          "format": "int64",
+          "title": "거래소 주문번호"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "$ref": "#/definitions/reservation_orderReservationOrderStatus"
+        },
+        "cancelReason": {
+          "$ref": "#/definitions/reservation_orderReservationCancelReason",
+          "title": "공통 서비스가 요청한 취소 사유 (거래소·전략이 취소한 경우 UNSPECIFIED)"
+        },
+        "rejectCode": {
+          "type": "string"
+        },
+        "requestedBy": {
+          "type": "string"
+        },
+        "submittedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "acceptedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "closedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "reservation_orderReservationOrderSpec": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "description": "종목. 비우면 소유자의 기본 종목 (ETF LP: 자기 ETF)."
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "가격 (원)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "description": "운영자가 입력하는 예약주문 한 건."
+    },
+    "reservation_orderReservationOrderStatus": {
+      "type": "string",
+      "enum": [
+        "RESERVATION_ORDER_STATUS_UNSPECIFIED",
+        "RESERVATION_ORDER_STATUS_SUBMITTED",
+        "RESERVATION_ORDER_STATUS_ACCEPTED",
+        "RESERVATION_ORDER_STATUS_PARTIALLY_FILLED",
+        "RESERVATION_ORDER_STATUS_ADOPTED",
+        "RESERVATION_ORDER_STATUS_FILLED",
+        "RESERVATION_ORDER_STATUS_CANCELLED",
+        "RESERVATION_ORDER_STATUS_REJECTED"
+      ],
+      "default": "RESERVATION_ORDER_STATUS_UNSPECIFIED",
+      "title": "- RESERVATION_ORDER_STATUS_SUBMITTED: FEP 보관 중 (08:30 송출 전)\n - RESERVATION_ORDER_STATUS_ACCEPTED: 거래소 접수\n - RESERVATION_ORDER_STATUS_ADOPTED: 소유 전략이 인수 (이후 전략 호가로 관리)"
+    },
+    "reservation_orderReservationOwner": {
+      "type": "object",
+      "properties": {
+        "etfLp": {
+          "$ref": "#/definitions/reservation_orderEtfLpReservationOwner"
+        }
+      },
+      "description": "예약주문을 내는 전략. 다른 전략(pair_v2 등)은 oneof 에 추가한다."
+    },
+    "reservation_orderReservationTimetable": {
+      "type": "object",
+      "properties": {
+        "submitCutoff": {
+          "type": "string",
+          "title": "이 시각 이전에만 송신 가능"
+        },
+        "crossingCheckAt": {
+          "type": "string",
+          "title": "시가 직전 상대 1호가 교차 점검 시각"
+        },
+        "adoptDeadline": {
+          "type": "string",
+          "title": "소유 전략 인수 마감 시각"
+        }
+      },
+      "title": "예약주문 시간표 (KST HH:MM:SS)"
+    },
+    "reservation_orderSubmitReservationOrdersRequest": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "$ref": "#/definitions/reservation_orderReservationOwner"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/reservation_orderReservationOrderSpec"
+          }
+        },
+        "needHedge": {
+          "type": "boolean",
+          "description": "체결 시 헷지 여부. 미지정이면 true."
+        }
+      },
+      "required": [
+        "owner",
+        "orders"
+      ]
+    },
+    "reservation_orderSubmitReservationOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/reservation_orderReservationOrder"
+          },
+          "title": "송신된 예약주문"
+        },
+        "error": {
+          "type": "string",
+          "title": "일부만 송신된 경우 실패 사유 (전부 송신 시 빈 문자열)"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
