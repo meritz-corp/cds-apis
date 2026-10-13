@@ -335,6 +335,11 @@ message MarketMakingConfiguration {
   // Running 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능.
   // optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴).
   optional MarketMakingTakeExecution take_execution = 30;
+
+  // 당일 손실 한도. 당일 손익이 -max_loss 이하가 되면 MM 정지(잔여 호가 취소 + 순노출 청산).
+  // Running 중 변경 허용(다음 판정부터 반영). max_loss=0 = 비활성.
+  // optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
+  optional MarketMakingLossLimit loss_limit = 31;
 }
 
 // NAV pricing 상세 설정
@@ -665,6 +670,15 @@ message MarketMakingQuantityLimit {
   // 서버가 매수(gross_buy)·매도(gross_sell) 양쪽에 동일 임계로 적용해,
   // 친 쪽만 호가 차단하고 양쪽 다 도달하면 전체 차단한다.
   int64 max_quantity = 3;
+}
+
+// MM 당일 손실 한도.
+// 당일 손익(실현 + 미실현, 평가가 = 자기 ETF mid — StreamMmFills 의 realized_pnl + unrealized_pnl
+// 과 같은 값, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면 서버가 MM 을 정지한다
+// (잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다.
+message MarketMakingLossLimit {
+  // 당일 최대 허용 손실 (원 단위, 양수). 0 = 비활성.
+  int64 max_loss = 1;
 }
 
 // ============================================================================

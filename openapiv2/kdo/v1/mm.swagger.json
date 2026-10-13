@@ -1628,6 +1628,10 @@
         "takeExecution": {
           "$ref": "#/definitions/mmMarketMakingTakeExecution",
           "description": "MM take 모드 발주 방식. 미설정 = 기존 동작(신규+취소) 유지.\nAMEND_AND_CANCEL: 시장 같은 쪽 1호가에서 park_offset_ticks 틱 떨어진 곳에 LP 잔존호가(파킹)를\n깔아두고, 교차 tick 에 그 주문을 교차가로 전량정정 + 잔량취소한다(정정 1건만 크리티컬 경로).\n서버 검증: AMEND_AND_CANCEL 은 take_mode=true AND is_lp=true 필수(비-LP 는 네이티브 FAK 가\n메시지 1건으로 더 싸다), repark_tolerance_ticks \u003c park_offset_ticks.\nRunning 중 method 전환 불가(정지 후 변경). 파킹 파라미터는 Running 중 변경 가능.\noptional: presence 로 \"설정 vs 미변경\" 구분 (fast_liquidation 과 동일 패턴)."
+        },
+        "lossLimit": {
+          "$ref": "#/definitions/mmMarketMakingLossLimit",
+          "description": "당일 손실 한도. 당일 손익이 -max_loss 이하가 되면 MM 정지(잔여 호가 취소 + 순노출 청산).\nRunning 중 변경 허용(다음 판정부터 반영). max_loss=0 = 비활성.\noptional: presence 로 \"설정 vs 미변경\" 구분 (fast_liquidation 과 동일 패턴) — 미설정 시 서버가 기존값 유지."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -1791,6 +1795,17 @@
         }
       },
       "title": "틱 임계 돌파 정정 파라미터 (LiquidationAmendMethod::StopLoss 대응)"
+    },
+    "mmMarketMakingLossLimit": {
+      "type": "object",
+      "properties": {
+        "maxLoss": {
+          "type": "string",
+          "format": "int64",
+          "description": "당일 최대 허용 손실 (원 단위, 양수). 0 = 비활성."
+        }
+      },
+      "description": "MM 당일 손실 한도.\n당일 손익(실현 + 미실현, 평가가 = 자기 ETF mid — StreamMmFills 의 realized_pnl + unrealized_pnl\n과 같은 값, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면 서버가 MM 을 정지한다\n(잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다."
     },
     "mmMarketMakingMaCross": {
       "type": "object",

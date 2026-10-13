@@ -130,6 +130,11 @@ pub struct MarketMakingConfiguration {
     /// optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴).
     #[prost(message, optional, tag="30")]
     pub take_execution: ::core::option::Option<MarketMakingTakeExecution>,
+    /// 당일 손실 한도. 당일 손익이 -max_loss 이하가 되면 MM 정지(잔여 호가 취소 + 순노출 청산).
+    /// Running 중 변경 허용(다음 판정부터 반영). max_loss=0 = 비활성.
+    /// optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
+    #[prost(message, optional, tag="31")]
+    pub loss_limit: ::core::option::Option<MarketMakingLossLimit>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -520,6 +525,17 @@ pub struct MarketMakingQuantityLimit {
     /// 친 쪽만 호가 차단하고 양쪽 다 도달하면 전체 차단한다.
     #[prost(int64, tag="3")]
     pub max_quantity: i64,
+}
+/// MM 당일 손실 한도.
+/// 당일 손익(실현 + 미실현, 평가가 = 자기 ETF mid — StreamMmFills 의 realized_pnl + unrealized_pnl
+/// 과 같은 값, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면 서버가 MM 을 정지한다
+/// (잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingLossLimit {
+    /// 당일 최대 허용 손실 (원 단위, 양수). 0 = 비활성.
+    #[prost(int64, tag="1")]
+    pub max_loss: i64,
 }
 // ============================================================================
 // Request/Response Messages

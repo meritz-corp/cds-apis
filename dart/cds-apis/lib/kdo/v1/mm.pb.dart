@@ -164,6 +164,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $core.int? qtyWeightedMidLevels,
     MarketMakingFastLiquidation? fastLiquidation,
     MarketMakingTakeExecution? takeExecution,
+    MarketMakingLossLimit? lossLimit,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -190,6 +191,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (qtyWeightedMidLevels != null) result.qtyWeightedMidLevels = qtyWeightedMidLevels;
     if (fastLiquidation != null) result.fastLiquidation = fastLiquidation;
     if (takeExecution != null) result.takeExecution = takeExecution;
+    if (lossLimit != null) result.lossLimit = lossLimit;
     return result;
   }
 
@@ -223,6 +225,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$core.int>(28, _omitFieldNames ? '' : 'qtyWeightedMidLevels', $pb.PbFieldType.OU3)
     ..aOM<MarketMakingFastLiquidation>(29, _omitFieldNames ? '' : 'fastLiquidation', subBuilder: MarketMakingFastLiquidation.create)
     ..aOM<MarketMakingTakeExecution>(30, _omitFieldNames ? '' : 'takeExecution', subBuilder: MarketMakingTakeExecution.create)
+    ..aOM<MarketMakingLossLimit>(31, _omitFieldNames ? '' : 'lossLimit', subBuilder: MarketMakingLossLimit.create)
     ..hasRequiredFields = false
   ;
 
@@ -533,6 +536,20 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearTakeExecution() => $_clearField(30);
   @$pb.TagNumber(30)
   MarketMakingTakeExecution ensureTakeExecution() => $_ensure(23);
+
+  /// 당일 손실 한도. 당일 손익이 -max_loss 이하가 되면 MM 정지(잔여 호가 취소 + 순노출 청산).
+  /// Running 중 변경 허용(다음 판정부터 반영). max_loss=0 = 비활성.
+  /// optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
+  @$pb.TagNumber(31)
+  MarketMakingLossLimit get lossLimit => $_getN(24);
+  @$pb.TagNumber(31)
+  set lossLimit(MarketMakingLossLimit value) => $_setField(31, value);
+  @$pb.TagNumber(31)
+  $core.bool hasLossLimit() => $_has(24);
+  @$pb.TagNumber(31)
+  void clearLossLimit() => $_clearField(31);
+  @$pb.TagNumber(31)
+  MarketMakingLossLimit ensureLossLimit() => $_ensure(24);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -2335,6 +2352,57 @@ class MarketMakingQuantityLimit extends $pb.GeneratedMessage {
   $core.bool hasMaxQuantity() => $_has(2);
   @$pb.TagNumber(3)
   void clearMaxQuantity() => $_clearField(3);
+}
+
+/// MM 당일 손실 한도.
+/// 당일 손익(실현 + 미실현, 평가가 = 자기 ETF mid — StreamMmFills 의 realized_pnl + unrealized_pnl
+/// 과 같은 값, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면 서버가 MM 을 정지한다
+/// (잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다.
+class MarketMakingLossLimit extends $pb.GeneratedMessage {
+  factory MarketMakingLossLimit({
+    $fixnum.Int64? maxLoss,
+  }) {
+    final result = create();
+    if (maxLoss != null) result.maxLoss = maxLoss;
+    return result;
+  }
+
+  MarketMakingLossLimit._();
+
+  factory MarketMakingLossLimit.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingLossLimit.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingLossLimit', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aInt64(1, _omitFieldNames ? '' : 'maxLoss')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLossLimit clone() => MarketMakingLossLimit()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingLossLimit copyWith(void Function(MarketMakingLossLimit) updates) => super.copyWith((message) => updates(message as MarketMakingLossLimit)) as MarketMakingLossLimit;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLossLimit create() => MarketMakingLossLimit._();
+  @$core.override
+  MarketMakingLossLimit createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingLossLimit> createRepeated() => $pb.PbList<MarketMakingLossLimit>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingLossLimit getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingLossLimit>(create);
+  static MarketMakingLossLimit? _defaultInstance;
+
+  /// 당일 최대 허용 손실 (원 단위, 양수). 0 = 비활성.
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get maxLoss => $_getI64(0);
+  @$pb.TagNumber(1)
+  set maxLoss($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMaxLoss() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMaxLoss() => $_clearField(1);
 }
 
 /// ListMarketMaking
