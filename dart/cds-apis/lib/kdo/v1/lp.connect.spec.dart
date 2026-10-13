@@ -126,27 +126,27 @@ abstract final class LpService {
     kdov1lp.ClearUserOrderBookResponse.new,
   );
 
-  /// ETF LP 예약주문 등록. 장중 아무 때나 등록 → 다음 08:28 에 FEP 로 일괄 송신 (FEP 가 08:30 까지 보관 후 거래소로 송출).
-  static const registerReservationOrders = connect.Spec(
-    '/$name/RegisterReservationOrders',
+  /// ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.
+  static const setReservation = connect.Spec(
+    '/$name/SetReservation',
     connect.StreamType.unary,
-    kdov1lp.RegisterReservationOrdersRequest.new,
-    kdov1lp.RegisterReservationOrdersResponse.new,
+    kdov1lp.SetReservationRequest.new,
+    kdov1lp.SetReservationResponse.new,
   );
 
-  /// ETF LP 예약주문 취소. 송신 전이면 등록 취소, 송신 후면 취소 주문을 낸다.
-  static const cancelReservationOrders = connect.Spec(
-    '/$name/CancelReservationOrders',
+  /// ETF LP 예약 설정 삭제. 오늘 송신한 예약주문이 남아 있으면 취소한다.
+  static const clearReservation = connect.Spec(
+    '/$name/ClearReservation',
     connect.StreamType.unary,
-    kdov1lp.CancelReservationOrdersRequest.new,
-    kdov1lp.CancelReservationOrdersResponse.new,
+    kdov1lp.ClearReservationRequest.new,
+    kdov1lp.ClearReservationResponse.new,
   );
 
-  /// ETF LP 예약주문 조회.
-  static const listReservationOrders = connect.Spec(
-    '/$name/ListReservationOrders',
+  /// ETF LP 예약 설정과 오늘 송신한 예약주문 상태 조회.
+  static const getReservation = connect.Spec(
+    '/$name/GetReservation',
     connect.StreamType.unary,
-    kdov1lp.ListReservationOrdersRequest.new,
-    kdov1lp.ListReservationOrdersResponse.new,
+    kdov1lp.GetReservationRequest.new,
+    kdov1lp.GetReservationResponse.new,
   );
 }

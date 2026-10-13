@@ -1,5 +1,5 @@
 // @generated
-impl serde::Serialize for CancelReservationOrdersRequest {
+impl serde::Serialize for ClearReservationRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -13,23 +13,17 @@ impl serde::Serialize for CancelReservationOrdersRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.CancelReservationOrdersRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ClearReservationRequest", len)?;
         if true {
             struct_ser.serialize_field("etf", &self.etf)?;
         }
         if true {
             struct_ser.serialize_field("fund", &self.fund)?;
         }
-        if true {
-            struct_ser.serialize_field("ids", &self.ids.iter().map(ToString::to_string).collect::<Vec<_>>())?;
-        }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for CancelReservationOrdersRequest {
+impl<'de> serde::Deserialize<'de> for ClearReservationRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -38,14 +32,12 @@ impl<'de> serde::Deserialize<'de> for CancelReservationOrdersRequest {
         const FIELDS: &[&str] = &[
             "etf",
             "fund",
-            "ids",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Etf,
             Fund,
-            Ids,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -70,7 +62,6 @@ impl<'de> serde::Deserialize<'de> for CancelReservationOrdersRequest {
                         match value {
                             "etf" => Ok(GeneratedField::Etf),
                             "fund" => Ok(GeneratedField::Fund),
-                            "ids" => Ok(GeneratedField::Ids),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -80,19 +71,18 @@ impl<'de> serde::Deserialize<'de> for CancelReservationOrdersRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = CancelReservationOrdersRequest;
+            type Value = ClearReservationRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.CancelReservationOrdersRequest")
+                formatter.write_str("struct kdo.v1.lp.ClearReservationRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CancelReservationOrdersRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ClearReservationRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut etf__ = None;
                 let mut fund__ = None;
-                let mut ids__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Etf => {
@@ -107,31 +97,21 @@ impl<'de> serde::Deserialize<'de> for CancelReservationOrdersRequest {
                             }
                             fund__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::Ids => {
-                            if ids__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("ids"));
-                            }
-                            ids__ = 
-                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
-                                    .into_iter().map(|x| x.0).collect())
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(CancelReservationOrdersRequest {
+                Ok(ClearReservationRequest {
                     etf: etf__.unwrap_or_default(),
                     fund: fund__.unwrap_or_default(),
-                    ids: ids__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.CancelReservationOrdersRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.ClearReservationRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for CancelReservationOrdersResponse {
+impl serde::Serialize for ClearReservationResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -142,26 +122,27 @@ impl serde::Serialize for CancelReservationOrdersResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.CancelReservationOrdersResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ClearReservationResponse", len)?;
         if true {
-            struct_ser.serialize_field("orders", &self.orders)?;
+            struct_ser.serialize_field("cancelled_orders", &self.cancelled_orders)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for CancelReservationOrdersResponse {
+impl<'de> serde::Deserialize<'de> for ClearReservationResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "orders",
+            "cancelled_orders",
+            "cancelledOrders",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Orders,
+            CancelledOrders,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -184,7 +165,7 @@ impl<'de> serde::Deserialize<'de> for CancelReservationOrdersResponse {
                         E: serde::de::Error,
                     {
                         match value {
-                            "orders" => Ok(GeneratedField::Orders),
+                            "cancelledOrders" | "cancelled_orders" => Ok(GeneratedField::CancelledOrders),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -194,36 +175,38 @@ impl<'de> serde::Deserialize<'de> for CancelReservationOrdersResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = CancelReservationOrdersResponse;
+            type Value = ClearReservationResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.CancelReservationOrdersResponse")
+                formatter.write_str("struct kdo.v1.lp.ClearReservationResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<CancelReservationOrdersResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ClearReservationResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut orders__ = None;
+                let mut cancelled_orders__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Orders => {
-                            if orders__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orders"));
+                        GeneratedField::CancelledOrders => {
+                            if cancelled_orders__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cancelledOrders"));
                             }
-                            orders__ = Some(map_.next_value()?);
+                            cancelled_orders__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(CancelReservationOrdersResponse {
-                    orders: orders__.unwrap_or_default(),
+                Ok(ClearReservationResponse {
+                    cancelled_orders: cancelled_orders__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.CancelReservationOrdersResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.ClearReservationResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ClearUserOrderBookRequest {
@@ -3513,6 +3496,248 @@ impl<'de> serde::Deserialize<'de> for GetEtfLpStatusRequest {
         deserializer.deserialize_struct("kdo.v1.lp.GetEtfLpStatusRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for GetReservationRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetReservationRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetReservationRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+            "fund",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            Fund,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "fund" => Ok(GeneratedField::Fund),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetReservationRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.GetReservationRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetReservationRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut fund__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetReservationRequest {
+                    etf: etf__.unwrap_or_default(),
+                    fund: fund__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.GetReservationRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GetReservationResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.GetReservationResponse", len)?;
+        if let Some(v) = self.reservation.as_ref() {
+            struct_ser.serialize_field("reservation", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("orders", &self.orders)?;
+        }
+        if true {
+            struct_ser.serialize_field("send_at", &self.send_at)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for GetReservationResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "reservation",
+            "orders",
+            "send_at",
+            "sendAt",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Reservation,
+            Orders,
+            SendAt,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "reservation" => Ok(GeneratedField::Reservation),
+                            "orders" => Ok(GeneratedField::Orders),
+                            "sendAt" | "send_at" => Ok(GeneratedField::SendAt),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = GetReservationResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.GetReservationResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GetReservationResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut reservation__ = None;
+                let mut orders__ = None;
+                let mut send_at__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Reservation => {
+                            if reservation__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reservation"));
+                            }
+                            reservation__ = map_.next_value()?;
+                        }
+                        GeneratedField::Orders => {
+                            if orders__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orders"));
+                            }
+                            orders__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::SendAt => {
+                            if send_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sendAt"));
+                            }
+                            send_at__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(GetReservationResponse {
+                    reservation: reservation__,
+                    orders: orders__.unwrap_or_default(),
+                    send_at: send_at__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.GetReservationResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for GetUserOrderBookRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4137,231 +4362,6 @@ impl<'de> serde::Deserialize<'de> for ListEtfLpsResponse {
         deserializer.deserialize_struct("kdo.v1.lp.ListEtfLpsResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for ListReservationOrdersRequest {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListReservationOrdersRequest", len)?;
-        if true {
-            struct_ser.serialize_field("etf", &self.etf)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund", &self.fund)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ListReservationOrdersRequest {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "etf",
-            "fund",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Etf,
-            Fund,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "etf" => Ok(GeneratedField::Etf),
-                            "fund" => Ok(GeneratedField::Fund),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListReservationOrdersRequest;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.ListReservationOrdersRequest")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListReservationOrdersRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut etf__ = None;
-                let mut fund__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Etf => {
-                            if etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etf"));
-                            }
-                            etf__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Fund => {
-                            if fund__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fund"));
-                            }
-                            fund__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ListReservationOrdersRequest {
-                    etf: etf__.unwrap_or_default(),
-                    fund: fund__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.ListReservationOrdersRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ListReservationOrdersResponse {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ListReservationOrdersResponse", len)?;
-        if true {
-            struct_ser.serialize_field("orders", &self.orders)?;
-        }
-        if true {
-            struct_ser.serialize_field("send_at", &self.send_at)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ListReservationOrdersResponse {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "orders",
-            "send_at",
-            "sendAt",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Orders,
-            SendAt,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "orders" => Ok(GeneratedField::Orders),
-                            "sendAt" | "send_at" => Ok(GeneratedField::SendAt),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ListReservationOrdersResponse;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.ListReservationOrdersResponse")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListReservationOrdersResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut orders__ = None;
-                let mut send_at__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Orders => {
-                            if orders__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orders"));
-                            }
-                            orders__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::SendAt => {
-                            if send_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sendAt"));
-                            }
-                            send_at__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ListReservationOrdersResponse {
-                    orders: orders__.unwrap_or_default(),
-                    send_at: send_at__.unwrap_or_default(),
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.ListReservationOrdersResponse", FIELDS, GeneratedVisitor)
-    }
-}
 impl serde::Serialize for LpPricing {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -4953,7 +4953,7 @@ impl<'de> serde::Deserialize<'de> for PricingSourceLiquidityImbalanceGuardState 
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
-impl serde::Serialize for RegisterReservationOrdersRequest {
+impl serde::Serialize for Reservation {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -4973,42 +4973,76 @@ impl serde::Serialize for RegisterReservationOrdersRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.RegisterReservationOrdersRequest", len)?;
         if true {
-            struct_ser.serialize_field("etf", &self.etf)?;
+            len += 1;
         }
         if true {
-            struct_ser.serialize_field("fund", &self.fund)?;
+            len += 1;
         }
         if true {
-            struct_ser.serialize_field("orders", &self.orders)?;
+            len += 1;
         }
-        if let Some(v) = self.need_hedge.as_ref() {
-            struct_ser.serialize_field("need_hedge", v)?;
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.Reservation", len)?;
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_price", ToString::to_string(&self.bid_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_price", ToString::to_string(&self.ask_price).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("depth", &self.depth)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("need_hedge", &self.need_hedge)?;
+        }
+        if true {
+            struct_ser.serialize_field("updated_by", &self.updated_by)?;
+        }
+        if let Some(v) = self.update_time.as_ref() {
+            struct_ser.serialize_field("update_time", v)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for RegisterReservationOrdersRequest {
+impl<'de> serde::Deserialize<'de> for Reservation {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "etf",
-            "fund",
-            "orders",
+            "bid_price",
+            "bidPrice",
+            "ask_price",
+            "askPrice",
+            "depth",
+            "quantity",
             "need_hedge",
             "needHedge",
+            "updated_by",
+            "updatedBy",
+            "update_time",
+            "updateTime",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Etf,
-            Fund,
-            Orders,
+            BidPrice,
+            AskPrice,
+            Depth,
+            Quantity,
             NeedHedge,
+            UpdatedBy,
+            UpdateTime,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5031,10 +5065,13 @@ impl<'de> serde::Deserialize<'de> for RegisterReservationOrdersRequest {
                         E: serde::de::Error,
                     {
                         match value {
-                            "etf" => Ok(GeneratedField::Etf),
-                            "fund" => Ok(GeneratedField::Fund),
-                            "orders" => Ok(GeneratedField::Orders),
+                            "bidPrice" | "bid_price" => Ok(GeneratedField::BidPrice),
+                            "askPrice" | "ask_price" => Ok(GeneratedField::AskPrice),
+                            "depth" => Ok(GeneratedField::Depth),
+                            "quantity" => Ok(GeneratedField::Quantity),
                             "needHedge" | "need_hedge" => Ok(GeneratedField::NeedHedge),
+                            "updatedBy" | "updated_by" => Ok(GeneratedField::UpdatedBy),
+                            "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5044,155 +5081,92 @@ impl<'de> serde::Deserialize<'de> for RegisterReservationOrdersRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = RegisterReservationOrdersRequest;
+            type Value = Reservation;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.RegisterReservationOrdersRequest")
+                formatter.write_str("struct kdo.v1.lp.Reservation")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<RegisterReservationOrdersRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Reservation, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut etf__ = None;
-                let mut fund__ = None;
-                let mut orders__ = None;
+                let mut bid_price__ = None;
+                let mut ask_price__ = None;
+                let mut depth__ = None;
+                let mut quantity__ = None;
                 let mut need_hedge__ = None;
+                let mut updated_by__ = None;
+                let mut update_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Etf => {
-                            if etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etf"));
+                        GeneratedField::BidPrice => {
+                            if bid_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidPrice"));
                             }
-                            etf__ = Some(map_.next_value()?);
+                            bid_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
-                        GeneratedField::Fund => {
-                            if fund__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fund"));
+                        GeneratedField::AskPrice => {
+                            if ask_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askPrice"));
                             }
-                            fund__ = Some(map_.next_value()?);
+                            ask_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
-                        GeneratedField::Orders => {
-                            if orders__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orders"));
+                        GeneratedField::Depth => {
+                            if depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
                             }
-                            orders__ = Some(map_.next_value()?);
+                            depth__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
                         }
                         GeneratedField::NeedHedge => {
                             if need_hedge__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("needHedge"));
                             }
-                            need_hedge__ = map_.next_value()?;
+                            need_hedge__ = Some(map_.next_value()?);
                         }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(RegisterReservationOrdersRequest {
-                    etf: etf__.unwrap_or_default(),
-                    fund: fund__.unwrap_or_default(),
-                    orders: orders__.unwrap_or_default(),
-                    need_hedge: need_hedge__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.RegisterReservationOrdersRequest", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for RegisterReservationOrdersResponse {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.RegisterReservationOrdersResponse", len)?;
-        if true {
-            struct_ser.serialize_field("orders", &self.orders)?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for RegisterReservationOrdersResponse {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "orders",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Orders,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "orders" => Ok(GeneratedField::Orders),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = RegisterReservationOrdersResponse;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.RegisterReservationOrdersResponse")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<RegisterReservationOrdersResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut orders__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
-                        GeneratedField::Orders => {
-                            if orders__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("orders"));
+                        GeneratedField::UpdatedBy => {
+                            if updated_by__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updatedBy"));
                             }
-                            orders__ = Some(map_.next_value()?);
+                            updated_by__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::UpdateTime => {
+                            if update_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updateTime"));
+                            }
+                            update_time__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(RegisterReservationOrdersResponse {
-                    orders: orders__.unwrap_or_default(),
+                Ok(Reservation {
+                    bid_price: bid_price__.unwrap_or_default(),
+                    ask_price: ask_price__.unwrap_or_default(),
+                    depth: depth__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    need_hedge: need_hedge__.unwrap_or_default(),
+                    updated_by: updated_by__.unwrap_or_default(),
+                    update_time: update_time__,
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.RegisterReservationOrdersResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.Reservation", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ReservationOrder {
@@ -5221,41 +5195,11 @@ impl serde::Serialize for ReservationOrder {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ReservationOrder", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("id", ToString::to_string(&self.id).as_str())?;
-        }
-        if true {
-            struct_ser.serialize_field("etf", &self.etf)?;
-        }
-        if true {
-            struct_ser.serialize_field("fund", &self.fund)?;
+            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
         }
         if true {
             let v = super::common::OrderSide::try_from(self.side)
@@ -5273,32 +5217,12 @@ impl serde::Serialize for ReservationOrder {
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("need_hedge", &self.need_hedge)?;
-        }
-        if true {
             let v = ReservationOrderStatus::try_from(self.status)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.status)))?;
             struct_ser.serialize_field("status", &v)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
-        }
-        if true {
             struct_ser.serialize_field("message", &self.message)?;
-        }
-        if true {
-            struct_ser.serialize_field("registered_by", &self.registered_by)?;
-        }
-        if let Some(v) = self.registered_at.as_ref() {
-            struct_ser.serialize_field("registered_at", v)?;
-        }
-        if let Some(v) = self.sent_at.as_ref() {
-            struct_ser.serialize_field("sent_at", v)?;
-        }
-        if let Some(v) = self.closed_at.as_ref() {
-            struct_ser.serialize_field("closed_at", v)?;
         }
         struct_ser.end()
     }
@@ -5310,44 +5234,23 @@ impl<'de> serde::Deserialize<'de> for ReservationOrder {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "id",
-            "etf",
-            "fund",
+            "order_id",
+            "orderId",
             "side",
             "price",
             "quantity",
-            "need_hedge",
-            "needHedge",
             "status",
-            "order_id",
-            "orderId",
             "message",
-            "registered_by",
-            "registeredBy",
-            "registered_at",
-            "registeredAt",
-            "sent_at",
-            "sentAt",
-            "closed_at",
-            "closedAt",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            Id,
-            Etf,
-            Fund,
+            OrderId,
             Side,
             Price,
             Quantity,
-            NeedHedge,
             Status,
-            OrderId,
             Message,
-            RegisteredBy,
-            RegisteredAt,
-            SentAt,
-            ClosedAt,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5370,20 +5273,12 @@ impl<'de> serde::Deserialize<'de> for ReservationOrder {
                         E: serde::de::Error,
                     {
                         match value {
-                            "id" => Ok(GeneratedField::Id),
-                            "etf" => Ok(GeneratedField::Etf),
-                            "fund" => Ok(GeneratedField::Fund),
+                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
                             "side" => Ok(GeneratedField::Side),
                             "price" => Ok(GeneratedField::Price),
                             "quantity" => Ok(GeneratedField::Quantity),
-                            "needHedge" | "need_hedge" => Ok(GeneratedField::NeedHedge),
                             "status" => Ok(GeneratedField::Status),
-                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
                             "message" => Ok(GeneratedField::Message),
-                            "registeredBy" | "registered_by" => Ok(GeneratedField::RegisteredBy),
-                            "registeredAt" | "registered_at" => Ok(GeneratedField::RegisteredAt),
-                            "sentAt" | "sent_at" => Ok(GeneratedField::SentAt),
-                            "closedAt" | "closed_at" => Ok(GeneratedField::ClosedAt),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5403,76 +5298,14 @@ impl<'de> serde::Deserialize<'de> for ReservationOrder {
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut id__ = None;
-                let mut etf__ = None;
-                let mut fund__ = None;
+                let mut order_id__ = None;
                 let mut side__ = None;
                 let mut price__ = None;
                 let mut quantity__ = None;
-                let mut need_hedge__ = None;
                 let mut status__ = None;
-                let mut order_id__ = None;
                 let mut message__ = None;
-                let mut registered_by__ = None;
-                let mut registered_at__ = None;
-                let mut sent_at__ = None;
-                let mut closed_at__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::Id => {
-                            if id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("id"));
-                            }
-                            id__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Etf => {
-                            if etf__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("etf"));
-                            }
-                            etf__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Fund => {
-                            if fund__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("fund"));
-                            }
-                            fund__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Side => {
-                            if side__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("side"));
-                            }
-                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
-                        }
-                        GeneratedField::Price => {
-                            if price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("price"));
-                            }
-                            price__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::Quantity => {
-                            if quantity__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("quantity"));
-                            }
-                            quantity__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
-                        GeneratedField::NeedHedge => {
-                            if need_hedge__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("needHedge"));
-                            }
-                            need_hedge__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Status => {
-                            if status__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("status"));
-                            }
-                            status__ = Some(map_.next_value::<ReservationOrderStatus>()? as i32);
-                        }
                         GeneratedField::OrderId => {
                             if order_id__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("orderId"));
@@ -5481,164 +5314,6 @@ impl<'de> serde::Deserialize<'de> for ReservationOrder {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::Message => {
-                            if message__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("message"));
-                            }
-                            message__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::RegisteredBy => {
-                            if registered_by__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("registeredBy"));
-                            }
-                            registered_by__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::RegisteredAt => {
-                            if registered_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("registeredAt"));
-                            }
-                            registered_at__ = map_.next_value()?;
-                        }
-                        GeneratedField::SentAt => {
-                            if sent_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("sentAt"));
-                            }
-                            sent_at__ = map_.next_value()?;
-                        }
-                        GeneratedField::ClosedAt => {
-                            if closed_at__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("closedAt"));
-                            }
-                            closed_at__ = map_.next_value()?;
-                        }
-                        GeneratedField::__SkipField__ => {
-                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
-                        }
-                    }
-                }
-                Ok(ReservationOrder {
-                    id: id__.unwrap_or_default(),
-                    etf: etf__.unwrap_or_default(),
-                    fund: fund__.unwrap_or_default(),
-                    side: side__.unwrap_or_default(),
-                    price: price__.unwrap_or_default(),
-                    quantity: quantity__.unwrap_or_default(),
-                    need_hedge: need_hedge__.unwrap_or_default(),
-                    status: status__.unwrap_or_default(),
-                    order_id: order_id__.unwrap_or_default(),
-                    message: message__.unwrap_or_default(),
-                    registered_by: registered_by__.unwrap_or_default(),
-                    registered_at: registered_at__,
-                    sent_at: sent_at__,
-                    closed_at: closed_at__,
-                })
-            }
-        }
-        deserializer.deserialize_struct("kdo.v1.lp.ReservationOrder", FIELDS, GeneratedVisitor)
-    }
-}
-impl serde::Serialize for ReservationOrderSpec {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        let mut len = 0;
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        if true {
-            len += 1;
-        }
-        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.ReservationOrderSpec", len)?;
-        if true {
-            let v = super::common::OrderSide::try_from(self.side)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
-            struct_ser.serialize_field("side", &v)?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
-        }
-        if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
-        }
-        struct_ser.end()
-    }
-}
-impl<'de> serde::Deserialize<'de> for ReservationOrderSpec {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "side",
-            "price",
-            "quantity",
-        ];
-
-        #[allow(clippy::enum_variant_names)]
-        enum GeneratedField {
-            Side,
-            Price,
-            Quantity,
-            __SkipField__,
-        }
-        impl<'de> serde::Deserialize<'de> for GeneratedField {
-            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
-            where
-                D: serde::Deserializer<'de>,
-            {
-                struct GeneratedVisitor;
-
-                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-                    type Value = GeneratedField;
-
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(formatter, "expected one of: {:?}", &FIELDS)
-                    }
-
-                    #[allow(unused_variables)]
-                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
-                    where
-                        E: serde::de::Error,
-                    {
-                        match value {
-                            "side" => Ok(GeneratedField::Side),
-                            "price" => Ok(GeneratedField::Price),
-                            "quantity" => Ok(GeneratedField::Quantity),
-                            _ => Ok(GeneratedField::__SkipField__),
-                        }
-                    }
-                }
-                deserializer.deserialize_identifier(GeneratedVisitor)
-            }
-        }
-        struct GeneratedVisitor;
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = ReservationOrderSpec;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct kdo.v1.lp.ReservationOrderSpec")
-            }
-
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ReservationOrderSpec, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
-            {
-                let mut side__ = None;
-                let mut price__ = None;
-                let mut quantity__ = None;
-                while let Some(k) = map_.next_key()? {
-                    match k {
                         GeneratedField::Side => {
                             if side__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("side"));
@@ -5661,19 +5336,34 @@ impl<'de> serde::Deserialize<'de> for ReservationOrderSpec {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::Status => {
+                            if status__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("status"));
+                            }
+                            status__ = Some(map_.next_value::<ReservationOrderStatus>()? as i32);
+                        }
+                        GeneratedField::Message => {
+                            if message__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("message"));
+                            }
+                            message__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(ReservationOrderSpec {
+                Ok(ReservationOrder {
+                    order_id: order_id__.unwrap_or_default(),
                     side: side__.unwrap_or_default(),
                     price: price__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
+                    status: status__.unwrap_or_default(),
+                    message: message__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("kdo.v1.lp.ReservationOrderSpec", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("kdo.v1.lp.ReservationOrder", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for ReservationOrderStatus {
@@ -5684,11 +5374,9 @@ impl serde::Serialize for ReservationOrderStatus {
     {
         let variant = match self {
             Self::Unspecified => "RESERVATION_ORDER_STATUS_UNSPECIFIED",
-            Self::Registered => "RESERVATION_ORDER_STATUS_REGISTERED",
             Self::Sent => "RESERVATION_ORDER_STATUS_SENT",
             Self::Accepted => "RESERVATION_ORDER_STATUS_ACCEPTED",
             Self::Closed => "RESERVATION_ORDER_STATUS_CLOSED",
-            Self::Cancelled => "RESERVATION_ORDER_STATUS_CANCELLED",
             Self::Failed => "RESERVATION_ORDER_STATUS_FAILED",
         };
         serializer.serialize_str(variant)
@@ -5702,11 +5390,9 @@ impl<'de> serde::Deserialize<'de> for ReservationOrderStatus {
     {
         const FIELDS: &[&str] = &[
             "RESERVATION_ORDER_STATUS_UNSPECIFIED",
-            "RESERVATION_ORDER_STATUS_REGISTERED",
             "RESERVATION_ORDER_STATUS_SENT",
             "RESERVATION_ORDER_STATUS_ACCEPTED",
             "RESERVATION_ORDER_STATUS_CLOSED",
-            "RESERVATION_ORDER_STATUS_CANCELLED",
             "RESERVATION_ORDER_STATUS_FAILED",
         ];
 
@@ -5749,17 +5435,324 @@ impl<'de> serde::Deserialize<'de> for ReservationOrderStatus {
             {
                 match value {
                     "RESERVATION_ORDER_STATUS_UNSPECIFIED" => Ok(ReservationOrderStatus::Unspecified),
-                    "RESERVATION_ORDER_STATUS_REGISTERED" => Ok(ReservationOrderStatus::Registered),
                     "RESERVATION_ORDER_STATUS_SENT" => Ok(ReservationOrderStatus::Sent),
                     "RESERVATION_ORDER_STATUS_ACCEPTED" => Ok(ReservationOrderStatus::Accepted),
                     "RESERVATION_ORDER_STATUS_CLOSED" => Ok(ReservationOrderStatus::Closed),
-                    "RESERVATION_ORDER_STATUS_CANCELLED" => Ok(ReservationOrderStatus::Cancelled),
                     "RESERVATION_ORDER_STATUS_FAILED" => Ok(ReservationOrderStatus::Failed),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
         }
         deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SetReservationRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.SetReservationRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf", &self.etf)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund", &self.fund)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("bid_price", ToString::to_string(&self.bid_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ask_price", ToString::to_string(&self.ask_price).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("depth", &self.depth)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if let Some(v) = self.need_hedge.as_ref() {
+            struct_ser.serialize_field("need_hedge", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SetReservationRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf",
+            "fund",
+            "bid_price",
+            "bidPrice",
+            "ask_price",
+            "askPrice",
+            "depth",
+            "quantity",
+            "need_hedge",
+            "needHedge",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Etf,
+            Fund,
+            BidPrice,
+            AskPrice,
+            Depth,
+            Quantity,
+            NeedHedge,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etf" => Ok(GeneratedField::Etf),
+                            "fund" => Ok(GeneratedField::Fund),
+                            "bidPrice" | "bid_price" => Ok(GeneratedField::BidPrice),
+                            "askPrice" | "ask_price" => Ok(GeneratedField::AskPrice),
+                            "depth" => Ok(GeneratedField::Depth),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "needHedge" | "need_hedge" => Ok(GeneratedField::NeedHedge),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SetReservationRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.SetReservationRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SetReservationRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf__ = None;
+                let mut fund__ = None;
+                let mut bid_price__ = None;
+                let mut ask_price__ = None;
+                let mut depth__ = None;
+                let mut quantity__ = None;
+                let mut need_hedge__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Etf => {
+                            if etf__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etf"));
+                            }
+                            etf__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BidPrice => {
+                            if bid_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidPrice"));
+                            }
+                            bid_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskPrice => {
+                            if ask_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askPrice"));
+                            }
+                            ask_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Depth => {
+                            if depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("depth"));
+                            }
+                            depth__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NeedHedge => {
+                            if need_hedge__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("needHedge"));
+                            }
+                            need_hedge__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SetReservationRequest {
+                    etf: etf__.unwrap_or_default(),
+                    fund: fund__.unwrap_or_default(),
+                    bid_price: bid_price__.unwrap_or_default(),
+                    ask_price: ask_price__.unwrap_or_default(),
+                    depth: depth__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    need_hedge: need_hedge__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.SetReservationRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SetReservationResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.SetReservationResponse", len)?;
+        if let Some(v) = self.reservation.as_ref() {
+            struct_ser.serialize_field("reservation", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SetReservationResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "reservation",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Reservation,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "reservation" => Ok(GeneratedField::Reservation),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SetReservationResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.lp.SetReservationResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SetReservationResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut reservation__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Reservation => {
+                            if reservation__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("reservation"));
+                            }
+                            reservation__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SetReservationResponse {
+                    reservation: reservation__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.lp.SetReservationResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for StartEtfLpRequest {

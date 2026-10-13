@@ -456,6 +456,47 @@
         ]
       }
     },
+    "/v1/lps/{etf}/{fund}/reservation": {
+      "get": {
+        "summary": "ETF LP 예약 설정과 오늘 송신한 예약주문 상태 조회.",
+        "operationId": "LpService_GetReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpGetReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "\"etfs/{symbol}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "description": "\"funds/{fund_code}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
     "/v1/lps/{etf}/{fund}/status": {
       "get": {
         "summary": "ETF LP 상태 조회",
@@ -585,6 +626,128 @@
             "schema": {
               "type": "object",
               "title": "사용자 주문 오더북 강제 비우기 요청"
+            }
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/lps/{etf}/{fund}:clearReservation": {
+      "post": {
+        "summary": "ETF LP 예약 설정 삭제. 오늘 송신한 예약주문이 남아 있으면 취소한다.",
+        "operationId": "LpService_ClearReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpClearReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "\"etfs/{symbol}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "description": "\"funds/{fund_code}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
+    "/v1/lps/{etf}/{fund}:setReservation": {
+      "post": {
+        "summary": "ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.",
+        "operationId": "LpService_SetReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpSetReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "\"etfs/{symbol}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "description": "\"funds/{fund_code}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bidPrice": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "매수 시작가 (원). 0 이면 매수 안 냄"
+                },
+                "askPrice": {
+                  "type": "string",
+                  "format": "int64",
+                  "title": "매도 시작가 (원). 0 이면 매도 안 냄"
+                },
+                "depth": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "quantity": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "needHedge": {
+                  "type": "boolean",
+                  "title": "미지정 시 true"
+                }
+              }
             }
           }
         ],
@@ -769,15 +932,13 @@
       "type": "object",
       "title": "분해 헷지 가격 산출 (추가 파라미터 없음)"
     },
-    "lpCancelReservationOrdersResponse": {
+    "lpClearReservationResponse": {
       "type": "object",
       "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/lpReservationOrder"
-          },
-          "title": "취소(요청)된 예약"
+        "cancelledOrders": {
+          "type": "integer",
+          "format": "int32",
+          "title": "취소 요청한 오늘 송신분 수"
         }
       }
     },
@@ -1248,6 +1409,26 @@
       },
       "description": "한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.\navg_price 는 서버에서 total_amount/qty 로 산출된 값."
     },
+    "lpGetReservationResponse": {
+      "type": "object",
+      "properties": {
+        "reservation": {
+          "$ref": "#/definitions/lpReservation",
+          "title": "설정이 없으면 비어 있음"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpReservationOrder"
+          },
+          "title": "오늘 송신한 예약주문"
+        },
+        "sendAt": {
+          "type": "string",
+          "title": "송신 시각 (KST HH:MM:SS)"
+        }
+      }
+    },
     "lpListEtfLpStatusesResponse": {
       "type": "object",
       "properties": {
@@ -1277,21 +1458,6 @@
         "nextPageToken": {
           "type": "string",
           "title": "다음 페이지 토큰"
-        }
-      }
-    },
-    "lpListReservationOrdersResponse": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/lpReservationOrder"
-          }
-        },
-        "sendAt": {
-          "type": "string",
-          "title": "FEP 일괄 송신 시각 (KST HH:MM:SS)"
         }
       }
     },
@@ -1326,32 +1492,50 @@
       "description": "- POSITION_ADJUSTMENT_STRATEGY_AVOIDANCE: 회피: 순매수 과다 시 매수offset 증가 (덜 공격적으로 매수)\n - POSITION_ADJUSTMENT_STRATEGY_TURNOVER: 매매회전: 순매수 과다 시 매도offset 감소 (더 공격적으로 매도)\n - POSITION_ADJUSTMENT_STRATEGY_ALL: 모두 적용: 순매수 과다 시 매수offset 증가 및 매도offset 감소",
       "title": "순매매량 기반 조정 전략"
     },
-    "lpRegisterReservationOrdersResponse": {
+    "lpReservation": {
       "type": "object",
       "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/lpReservationOrder"
-          }
+        "bidPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "매수 시작가 (원). 0 이면 매수 안 냄"
+        },
+        "askPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "매도 시작가 (원). 0 이면 매도 안 냄"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32",
+          "title": "측별 단수 (LP depth 이하)"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "단별 수량"
+        },
+        "needHedge": {
+          "type": "boolean"
+        },
+        "updatedBy": {
+          "type": "string",
+          "title": "설정한 클라이언트 IP"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
         }
-      }
+      },
+      "description": "ETF LP 예약 설정 — LP 호가와 같은 방식으로 시작가부터 호가단위 간격 depth 단, 단별 같은 수량."
     },
     "lpReservationOrder": {
       "type": "object",
       "properties": {
-        "id": {
+        "orderId": {
           "type": "string",
           "format": "int64",
-          "title": "예약 등록번호"
-        },
-        "etf": {
-          "type": "string",
-          "title": "\"etfs/{symbol}\""
-        },
-        "fund": {
-          "type": "string",
-          "title": "\"funds/{fund_code}\""
+          "title": "거래소 주문번호 (송신 실패면 0)"
         },
         "side": {
           "$ref": "#/definitions/commonOrderSide"
@@ -1365,71 +1549,35 @@
           "type": "string",
           "format": "int64"
         },
-        "needHedge": {
-          "type": "boolean"
-        },
         "status": {
           "$ref": "#/definitions/lpReservationOrderStatus"
-        },
-        "orderId": {
-          "type": "string",
-          "format": "int64",
-          "title": "거래소 주문번호 (송신 후. 송신 전 0)"
         },
         "message": {
           "type": "string",
           "title": "종료·실패 사유"
-        },
-        "registeredBy": {
-          "type": "string",
-          "title": "등록 요청자 (클라이언트 IP)"
-        },
-        "registeredAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "sentAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "closedAt": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "lpReservationOrderSpec": {
-      "type": "object",
-      "properties": {
-        "side": {
-          "$ref": "#/definitions/commonOrderSide"
-        },
-        "price": {
-          "type": "string",
-          "format": "int64",
-          "title": "주문가 (원)"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "주문수량"
         }
       },
-      "title": "예약주문 1건 입력 (가격·수량은 운영자 직접 입력)"
+      "title": "오늘 송신한 예약주문 1건"
     },
     "lpReservationOrderStatus": {
       "type": "string",
       "enum": [
         "RESERVATION_ORDER_STATUS_UNSPECIFIED",
-        "RESERVATION_ORDER_STATUS_REGISTERED",
         "RESERVATION_ORDER_STATUS_SENT",
         "RESERVATION_ORDER_STATUS_ACCEPTED",
         "RESERVATION_ORDER_STATUS_CLOSED",
-        "RESERVATION_ORDER_STATUS_CANCELLED",
         "RESERVATION_ORDER_STATUS_FAILED"
       ],
       "default": "RESERVATION_ORDER_STATUS_UNSPECIFIED",
-      "title": "- RESERVATION_ORDER_STATUS_REGISTERED: 송신 대기 (다음 08:28)\n - RESERVATION_ORDER_STATUS_SENT: FEP 송신 — 08:30 까지 FEP 보관\n - RESERVATION_ORDER_STATUS_ACCEPTED: 거래소 접수 → ETF LP 가 관리\n - RESERVATION_ORDER_STATUS_CLOSED: 종료 (LP 인수·전량 체결·취소·거부 — message 참고)\n - RESERVATION_ORDER_STATUS_CANCELLED: 접수 전 취소 (송신 전 등록 취소 또는 송신 후 취소 요청)\n - RESERVATION_ORDER_STATUS_FAILED: 송신 실패 또는 송신 시각을 놓침"
+      "title": "- RESERVATION_ORDER_STATUS_SENT: FEP 송신 — 08:30 까지 FEP 보관\n - RESERVATION_ORDER_STATUS_ACCEPTED: 거래소 접수 → ETF LP 북\n - RESERVATION_ORDER_STATUS_CLOSED: 종료 (LP 인수·전량 체결·취소·거부 — message 참고)\n - RESERVATION_ORDER_STATUS_FAILED: 송신 실패"
+    },
+    "lpSetReservationResponse": {
+      "type": "object",
+      "properties": {
+        "reservation": {
+          "$ref": "#/definitions/lpReservation"
+        }
+      }
     },
     "lpStartEtfLpResponse": {
       "type": "object",

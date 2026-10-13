@@ -254,16 +254,16 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ETF LP 예약주문 등록. 장중 아무 때나 등록 → 다음 08:28 에 FEP 로 일괄 송신 (FEP 가 08:30 까지 보관 후 거래소로 송출).
-  Future<kdov1lp.RegisterReservationOrdersResponse> registerReservationOrders(
-    kdov1lp.RegisterReservationOrdersRequest input, {
+  /// ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.
+  Future<kdov1lp.SetReservationResponse> setReservation(
+    kdov1lp.SetReservationRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.registerReservationOrders,
+      specs.LpService.setReservation,
       input,
       signal: signal,
       headers: headers,
@@ -272,16 +272,16 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ETF LP 예약주문 취소. 송신 전이면 등록 취소, 송신 후면 취소 주문을 낸다.
-  Future<kdov1lp.CancelReservationOrdersResponse> cancelReservationOrders(
-    kdov1lp.CancelReservationOrdersRequest input, {
+  /// ETF LP 예약 설정 삭제. 오늘 송신한 예약주문이 남아 있으면 취소한다.
+  Future<kdov1lp.ClearReservationResponse> clearReservation(
+    kdov1lp.ClearReservationRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.cancelReservationOrders,
+      specs.LpService.clearReservation,
       input,
       signal: signal,
       headers: headers,
@@ -290,16 +290,16 @@ extension type LpServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// ETF LP 예약주문 조회.
-  Future<kdov1lp.ListReservationOrdersResponse> listReservationOrders(
-    kdov1lp.ListReservationOrdersRequest input, {
+  /// ETF LP 예약 설정과 오늘 송신한 예약주문 상태 조회.
+  Future<kdov1lp.GetReservationResponse> getReservation(
+    kdov1lp.GetReservationRequest input, {
     connect.Headers? headers,
     connect.AbortSignal? signal,
     Function(connect.Headers)? onHeader,
     Function(connect.Headers)? onTrailer,
   }) {
     return connect.Client(_transport).unary(
-      specs.LpService.listReservationOrders,
+      specs.LpService.getReservation,
       input,
       signal: signal,
       headers: headers,

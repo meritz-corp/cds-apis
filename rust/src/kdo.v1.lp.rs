@@ -706,117 +706,118 @@ pub struct EtfLpFillSummary {
 }
 // ========== Reservation Order Messages ==========
 
-/// 예약주문 1건 입력 (가격·수량은 운영자 직접 입력)
+/// ETF LP 예약 설정 — LP 호가와 같은 방식으로 시작가부터 호가단위 간격 depth 단, 단별 같은 수량.
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct ReservationOrderSpec {
-    #[prost(enumeration="super::common::OrderSide", tag="1")]
-    pub side: i32,
-    /// 주문가 (원)
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Reservation {
+    /// 매수 시작가 (원). 0 이면 매수 안 냄
+    #[prost(int64, tag="1")]
+    pub bid_price: i64,
+    /// 매도 시작가 (원). 0 이면 매도 안 냄
     #[prost(int64, tag="2")]
-    pub price: i64,
-    /// 주문수량
-    #[prost(int64, tag="3")]
+    pub ask_price: i64,
+    /// 측별 단수 (LP depth 이하)
+    #[prost(int32, tag="3")]
+    pub depth: i32,
+    /// 단별 수량
+    #[prost(int64, tag="4")]
     pub quantity: i64,
+    #[prost(bool, tag="5")]
+    pub need_hedge: bool,
+    /// 설정한 클라이언트 IP
+    #[prost(string, tag="6")]
+    pub updated_by: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="7")]
+    pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+}
+/// 오늘 송신한 예약주문 1건
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReservationOrder {
+    /// 거래소 주문번호 (송신 실패면 0)
+    #[prost(int64, tag="1")]
+    pub order_id: i64,
+    #[prost(enumeration="super::common::OrderSide", tag="2")]
+    pub side: i32,
+    /// 원
+    #[prost(int64, tag="3")]
+    pub price: i64,
+    #[prost(int64, tag="4")]
+    pub quantity: i64,
+    #[prost(enumeration="ReservationOrderStatus", tag="5")]
+    pub status: i32,
+    /// 종료·실패 사유
+    #[prost(string, tag="6")]
+    pub message: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RegisterReservationOrdersRequest {
+pub struct SetReservationRequest {
     /// "etfs/{symbol}"
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     /// "funds/{fund_code}"
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
-    #[prost(message, repeated, tag="3")]
-    pub orders: ::prost::alloc::vec::Vec<ReservationOrderSpec>,
+    /// 매수 시작가 (원). 0 이면 매수 안 냄
+    #[prost(int64, tag="3")]
+    pub bid_price: i64,
+    /// 매도 시작가 (원). 0 이면 매도 안 냄
+    #[prost(int64, tag="4")]
+    pub ask_price: i64,
+    #[prost(int32, tag="5")]
+    pub depth: i32,
+    #[prost(int64, tag="6")]
+    pub quantity: i64,
     /// 미지정 시 true
-    #[prost(bool, optional, tag="4")]
+    #[prost(bool, optional, tag="7")]
     pub need_hedge: ::core::option::Option<bool>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RegisterReservationOrdersResponse {
-    #[prost(message, repeated, tag="1")]
-    pub orders: ::prost::alloc::vec::Vec<ReservationOrder>,
+pub struct SetReservationResponse {
+    #[prost(message, optional, tag="1")]
+    pub reservation: ::core::option::Option<Reservation>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CancelReservationOrdersRequest {
+pub struct ClearReservationRequest {
     /// "etfs/{symbol}"
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
     /// "funds/{fund_code}"
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
-    /// 예약 등록번호. 비우면 이 LP 의 취소 가능한 예약 전부
-    #[prost(int64, repeated, tag="3")]
-    pub ids: ::prost::alloc::vec::Vec<i64>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ClearReservationResponse {
+    /// 취소 요청한 오늘 송신분 수
+    #[prost(int32, tag="1")]
+    pub cancelled_orders: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CancelReservationOrdersResponse {
-    /// 취소(요청)된 예약
-    #[prost(message, repeated, tag="1")]
-    pub orders: ::prost::alloc::vec::Vec<ReservationOrder>,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListReservationOrdersRequest {
-    /// "etfs/{symbol}". 비우면 전체 ETF
+pub struct GetReservationRequest {
+    /// "etfs/{symbol}"
     #[prost(string, tag="1")]
     pub etf: ::prost::alloc::string::String,
-    /// "funds/{fund_code}". 비우면 전체 펀드
+    /// "funds/{fund_code}"
     #[prost(string, tag="2")]
     pub fund: ::prost::alloc::string::String,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListReservationOrdersResponse {
-    #[prost(message, repeated, tag="1")]
+pub struct GetReservationResponse {
+    /// 설정이 없으면 비어 있음
+    #[prost(message, optional, tag="1")]
+    pub reservation: ::core::option::Option<Reservation>,
+    /// 오늘 송신한 예약주문
+    #[prost(message, repeated, tag="2")]
     pub orders: ::prost::alloc::vec::Vec<ReservationOrder>,
-    /// FEP 일괄 송신 시각 (KST HH:MM:SS)
-    #[prost(string, tag="2")]
-    pub send_at: ::prost::alloc::string::String,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ReservationOrder {
-    /// 예약 등록번호
-    #[prost(int64, tag="1")]
-    pub id: i64,
-    /// "etfs/{symbol}"
-    #[prost(string, tag="2")]
-    pub etf: ::prost::alloc::string::String,
-    /// "funds/{fund_code}"
+    /// 송신 시각 (KST HH:MM:SS)
     #[prost(string, tag="3")]
-    pub fund: ::prost::alloc::string::String,
-    #[prost(enumeration="super::common::OrderSide", tag="4")]
-    pub side: i32,
-    /// 원
-    #[prost(int64, tag="5")]
-    pub price: i64,
-    #[prost(int64, tag="6")]
-    pub quantity: i64,
-    #[prost(bool, tag="7")]
-    pub need_hedge: bool,
-    #[prost(enumeration="ReservationOrderStatus", tag="8")]
-    pub status: i32,
-    /// 거래소 주문번호 (송신 후. 송신 전 0)
-    #[prost(int64, tag="9")]
-    pub order_id: i64,
-    /// 종료·실패 사유
-    #[prost(string, tag="10")]
-    pub message: ::prost::alloc::string::String,
-    /// 등록 요청자 (클라이언트 IP)
-    #[prost(string, tag="11")]
-    pub registered_by: ::prost::alloc::string::String,
-    #[prost(message, optional, tag="12")]
-    pub registered_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    #[prost(message, optional, tag="13")]
-    pub sent_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    #[prost(message, optional, tag="14")]
-    pub closed_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    pub send_at: ::prost::alloc::string::String,
 }
 /// pricing source 선물 1호가 잔량 imbalance guard 상태
 /// NORMAL: 매수/매도 1호가 잔량 균형 상태
@@ -974,18 +975,14 @@ impl EtfLpState {
 #[repr(i32)]
 pub enum ReservationOrderStatus {
     Unspecified = 0,
-    /// 송신 대기 (다음 08:28)
-    Registered = 1,
     /// FEP 송신 — 08:30 까지 FEP 보관
-    Sent = 2,
-    /// 거래소 접수 → ETF LP 가 관리
-    Accepted = 3,
+    Sent = 1,
+    /// 거래소 접수 → ETF LP 북
+    Accepted = 2,
     /// 종료 (LP 인수·전량 체결·취소·거부 — message 참고)
-    Closed = 4,
-    /// 접수 전 취소 (송신 전 등록 취소 또는 송신 후 취소 요청)
-    Cancelled = 5,
-    /// 송신 실패 또는 송신 시각을 놓침
-    Failed = 6,
+    Closed = 3,
+    /// 송신 실패
+    Failed = 4,
 }
 impl ReservationOrderStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -995,11 +992,9 @@ impl ReservationOrderStatus {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             ReservationOrderStatus::Unspecified => "RESERVATION_ORDER_STATUS_UNSPECIFIED",
-            ReservationOrderStatus::Registered => "RESERVATION_ORDER_STATUS_REGISTERED",
             ReservationOrderStatus::Sent => "RESERVATION_ORDER_STATUS_SENT",
             ReservationOrderStatus::Accepted => "RESERVATION_ORDER_STATUS_ACCEPTED",
             ReservationOrderStatus::Closed => "RESERVATION_ORDER_STATUS_CLOSED",
-            ReservationOrderStatus::Cancelled => "RESERVATION_ORDER_STATUS_CANCELLED",
             ReservationOrderStatus::Failed => "RESERVATION_ORDER_STATUS_FAILED",
         }
     }
@@ -1007,11 +1002,9 @@ impl ReservationOrderStatus {
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "RESERVATION_ORDER_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
-            "RESERVATION_ORDER_STATUS_REGISTERED" => Some(Self::Registered),
             "RESERVATION_ORDER_STATUS_SENT" => Some(Self::Sent),
             "RESERVATION_ORDER_STATUS_ACCEPTED" => Some(Self::Accepted),
             "RESERVATION_ORDER_STATUS_CLOSED" => Some(Self::Closed),
-            "RESERVATION_ORDER_STATUS_CANCELLED" => Some(Self::Cancelled),
             "RESERVATION_ORDER_STATUS_FAILED" => Some(Self::Failed),
             _ => None,
         }

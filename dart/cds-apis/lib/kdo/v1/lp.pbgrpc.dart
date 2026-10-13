@@ -101,19 +101,19 @@ class LpServiceClient extends $grpc.Client {
     return $createUnaryCall(_$clearUserOrderBook, request, options: options);
   }
 
-  /// ETF LP 예약주문 등록. 장중 아무 때나 등록 → 다음 08:28 에 FEP 로 일괄 송신 (FEP 가 08:30 까지 보관 후 거래소로 송출).
-  $grpc.ResponseFuture<$0.RegisterReservationOrdersResponse> registerReservationOrders($0.RegisterReservationOrdersRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$registerReservationOrders, request, options: options);
+  /// ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.
+  $grpc.ResponseFuture<$0.SetReservationResponse> setReservation($0.SetReservationRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$setReservation, request, options: options);
   }
 
-  /// ETF LP 예약주문 취소. 송신 전이면 등록 취소, 송신 후면 취소 주문을 낸다.
-  $grpc.ResponseFuture<$0.CancelReservationOrdersResponse> cancelReservationOrders($0.CancelReservationOrdersRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$cancelReservationOrders, request, options: options);
+  /// ETF LP 예약 설정 삭제. 오늘 송신한 예약주문이 남아 있으면 취소한다.
+  $grpc.ResponseFuture<$0.ClearReservationResponse> clearReservation($0.ClearReservationRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$clearReservation, request, options: options);
   }
 
-  /// ETF LP 예약주문 조회.
-  $grpc.ResponseFuture<$0.ListReservationOrdersResponse> listReservationOrders($0.ListReservationOrdersRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$listReservationOrders, request, options: options);
+  /// ETF LP 예약 설정과 오늘 송신한 예약주문 상태 조회.
+  $grpc.ResponseFuture<$0.GetReservationResponse> getReservation($0.GetReservationRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$getReservation, request, options: options);
   }
 
     // method descriptors
@@ -170,18 +170,18 @@ class LpServiceClient extends $grpc.Client {
       '/kdo.v1.lp.LpService/ClearUserOrderBook',
       ($0.ClearUserOrderBookRequest value) => value.writeToBuffer(),
       $0.ClearUserOrderBookResponse.fromBuffer);
-  static final _$registerReservationOrders = $grpc.ClientMethod<$0.RegisterReservationOrdersRequest, $0.RegisterReservationOrdersResponse>(
-      '/kdo.v1.lp.LpService/RegisterReservationOrders',
-      ($0.RegisterReservationOrdersRequest value) => value.writeToBuffer(),
-      $0.RegisterReservationOrdersResponse.fromBuffer);
-  static final _$cancelReservationOrders = $grpc.ClientMethod<$0.CancelReservationOrdersRequest, $0.CancelReservationOrdersResponse>(
-      '/kdo.v1.lp.LpService/CancelReservationOrders',
-      ($0.CancelReservationOrdersRequest value) => value.writeToBuffer(),
-      $0.CancelReservationOrdersResponse.fromBuffer);
-  static final _$listReservationOrders = $grpc.ClientMethod<$0.ListReservationOrdersRequest, $0.ListReservationOrdersResponse>(
-      '/kdo.v1.lp.LpService/ListReservationOrders',
-      ($0.ListReservationOrdersRequest value) => value.writeToBuffer(),
-      $0.ListReservationOrdersResponse.fromBuffer);
+  static final _$setReservation = $grpc.ClientMethod<$0.SetReservationRequest, $0.SetReservationResponse>(
+      '/kdo.v1.lp.LpService/SetReservation',
+      ($0.SetReservationRequest value) => value.writeToBuffer(),
+      $0.SetReservationResponse.fromBuffer);
+  static final _$clearReservation = $grpc.ClientMethod<$0.ClearReservationRequest, $0.ClearReservationResponse>(
+      '/kdo.v1.lp.LpService/ClearReservation',
+      ($0.ClearReservationRequest value) => value.writeToBuffer(),
+      $0.ClearReservationResponse.fromBuffer);
+  static final _$getReservation = $grpc.ClientMethod<$0.GetReservationRequest, $0.GetReservationResponse>(
+      '/kdo.v1.lp.LpService/GetReservation',
+      ($0.GetReservationRequest value) => value.writeToBuffer(),
+      $0.GetReservationResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.lp.LpService')
@@ -280,27 +280,27 @@ abstract class LpServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.ClearUserOrderBookRequest.fromBuffer(value),
         ($0.ClearUserOrderBookResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.RegisterReservationOrdersRequest, $0.RegisterReservationOrdersResponse>(
-        'RegisterReservationOrders',
-        registerReservationOrders_Pre,
+    $addMethod($grpc.ServiceMethod<$0.SetReservationRequest, $0.SetReservationResponse>(
+        'SetReservation',
+        setReservation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.RegisterReservationOrdersRequest.fromBuffer(value),
-        ($0.RegisterReservationOrdersResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.CancelReservationOrdersRequest, $0.CancelReservationOrdersResponse>(
-        'CancelReservationOrders',
-        cancelReservationOrders_Pre,
+        ($core.List<$core.int> value) => $0.SetReservationRequest.fromBuffer(value),
+        ($0.SetReservationResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ClearReservationRequest, $0.ClearReservationResponse>(
+        'ClearReservation',
+        clearReservation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.CancelReservationOrdersRequest.fromBuffer(value),
-        ($0.CancelReservationOrdersResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ListReservationOrdersRequest, $0.ListReservationOrdersResponse>(
-        'ListReservationOrders',
-        listReservationOrders_Pre,
+        ($core.List<$core.int> value) => $0.ClearReservationRequest.fromBuffer(value),
+        ($0.ClearReservationResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetReservationRequest, $0.GetReservationResponse>(
+        'GetReservation',
+        getReservation_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.ListReservationOrdersRequest.fromBuffer(value),
-        ($0.ListReservationOrdersResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.GetReservationRequest.fromBuffer(value),
+        ($0.GetReservationResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.EtfLp> getEtfLp_Pre($grpc.ServiceCall $call, $async.Future<$0.GetEtfLpRequest> $request) async {
@@ -381,22 +381,22 @@ abstract class LpServiceBase extends $grpc.Service {
 
   $async.Future<$0.ClearUserOrderBookResponse> clearUserOrderBook($grpc.ServiceCall call, $0.ClearUserOrderBookRequest request);
 
-  $async.Future<$0.RegisterReservationOrdersResponse> registerReservationOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.RegisterReservationOrdersRequest> $request) async {
-    return registerReservationOrders($call, await $request);
+  $async.Future<$0.SetReservationResponse> setReservation_Pre($grpc.ServiceCall $call, $async.Future<$0.SetReservationRequest> $request) async {
+    return setReservation($call, await $request);
   }
 
-  $async.Future<$0.RegisterReservationOrdersResponse> registerReservationOrders($grpc.ServiceCall call, $0.RegisterReservationOrdersRequest request);
+  $async.Future<$0.SetReservationResponse> setReservation($grpc.ServiceCall call, $0.SetReservationRequest request);
 
-  $async.Future<$0.CancelReservationOrdersResponse> cancelReservationOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.CancelReservationOrdersRequest> $request) async {
-    return cancelReservationOrders($call, await $request);
+  $async.Future<$0.ClearReservationResponse> clearReservation_Pre($grpc.ServiceCall $call, $async.Future<$0.ClearReservationRequest> $request) async {
+    return clearReservation($call, await $request);
   }
 
-  $async.Future<$0.CancelReservationOrdersResponse> cancelReservationOrders($grpc.ServiceCall call, $0.CancelReservationOrdersRequest request);
+  $async.Future<$0.ClearReservationResponse> clearReservation($grpc.ServiceCall call, $0.ClearReservationRequest request);
 
-  $async.Future<$0.ListReservationOrdersResponse> listReservationOrders_Pre($grpc.ServiceCall $call, $async.Future<$0.ListReservationOrdersRequest> $request) async {
-    return listReservationOrders($call, await $request);
+  $async.Future<$0.GetReservationResponse> getReservation_Pre($grpc.ServiceCall $call, $async.Future<$0.GetReservationRequest> $request) async {
+    return getReservation($call, await $request);
   }
 
-  $async.Future<$0.ListReservationOrdersResponse> listReservationOrders($grpc.ServiceCall call, $0.ListReservationOrdersRequest request);
+  $async.Future<$0.GetReservationResponse> getReservation($grpc.ServiceCall call, $0.GetReservationRequest request);
 
 }
