@@ -72,8 +72,8 @@ type InventoryServiceClient interface {
 	ResizeSessionInventory(ctx context.Context, in *ResizeSessionInventoryRequest, opts ...grpc.CallOption) (*ResizeSessionInventoryResponse, error)
 	// 세션 인벤토리 실시간 스트림.
 	// tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
-	// 세션이 등록 해제(ETF LP·MM 제거)되면 스트림이 자동 종료된다.
-	// ReleaseSessionInventory 뒤에는 세션이 남아 있어 0 balance 로 계속 흐른다.
+	// 세션은 한 번 등록되면 서버가 지우지 않는다 — 클라이언트가 끊을 때까지 계속 흐르고,
+	// ReleaseSessionInventory 뒤에도 0 balance 로 흐른다. 요청한 세션이 없으면 아무것도 보내지 않고 바로 끝난다.
 	StreamSessionInventory(ctx context.Context, in *GetSessionInventoryRequest, opts ...grpc.CallOption) (InventoryService_StreamSessionInventoryClient, error)
 }
 
@@ -379,8 +379,8 @@ type InventoryServiceServer interface {
 	ResizeSessionInventory(context.Context, *ResizeSessionInventoryRequest) (*ResizeSessionInventoryResponse, error)
 	// 세션 인벤토리 실시간 스트림.
 	// tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
-	// 세션이 등록 해제(ETF LP·MM 제거)되면 스트림이 자동 종료된다.
-	// ReleaseSessionInventory 뒤에는 세션이 남아 있어 0 balance 로 계속 흐른다.
+	// 세션은 한 번 등록되면 서버가 지우지 않는다 — 클라이언트가 끊을 때까지 계속 흐르고,
+	// ReleaseSessionInventory 뒤에도 0 balance 로 흐른다. 요청한 세션이 없으면 아무것도 보내지 않고 바로 끝난다.
 	StreamSessionInventory(*GetSessionInventoryRequest, InventoryService_StreamSessionInventoryServer) error
 	mustEmbedUnimplementedInventoryServiceServer()
 }
