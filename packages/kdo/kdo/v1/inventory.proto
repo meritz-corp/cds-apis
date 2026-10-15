@@ -143,8 +143,12 @@ service InventoryService {
   }
 
   // 세션 인벤토리 해제.
-  // 남은 balance 를 global inventory 에 반환한다.
-  // selling > 0 (미체결 매도 잔량) 인 경우 FAILED_PRECONDITION 으로 거부된다.
+  // balance 와 selling(미체결 매도 예약)을 모두 0 으로 만들고, 해제 직전 balance 만큼 global inventory 할당을 반환한다.
+  // 세션은 등록된 채 남는다 (ETF LP·MM 이 같은 세션을 계속 쓴다) — 다시 쓰려면 ResizeSessionInventory 로 balance 를 준다
+  // (AllocateSessionInventory 는 이미 있는 세션이라 거부된다).
+  // 세션을 쓰는 ETF LP·MM 이 주문을 내고 있을 수 있으면 FAILED_PRECONDITION 으로 거부된다
+  // (ETF LP: start 중·가동 중·정지 중이거나 오늘 예약주문이 살아 있을 때 / MM: 가동 중·정지 중일 때).
+  // 주문이 없는데 selling 이 남은 경우(누수)를 지우는 용도로도 쓴다.
   rpc ReleaseSessionInventory(ReleaseSessionInventoryRequest) returns (ReleaseSessionInventoryResponse) {
     option (google.api.http) = {
       post: "/v1/inventories/{fund=funds/*}:releaseSession"
@@ -162,9 +166,10 @@ service InventoryService {
   }
 
   // 세션 인벤토리 balance 재조정.
+  // balance 만 바꾸고 selling(미체결 매도 예약)은 그대로 둔다 — 살아 있는 매도 주문의 예약을 지우지 않는다.
   // Arc<SessionInventory> 의 내부 atomic balance 만 변경하므로
   // EtfContext 가 보유한 Arc 참조가 그대로 유효하다.
-  // selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다.
+  // selling > new_balance 이면 FAILED_PRECONDITION 으로 거부된다 — selling 까지 0 으로 지우려면 ReleaseSessionInventory.
   rpc ResizeSessionInventory(ResizeSessionInventoryRequest) returns (ResizeSessionInventoryResponse) {
     option (google.api.http) = {
       post: "/v1/inventories/{fund=funds/*}:resizeSession"
@@ -175,7 +180,8 @@ service InventoryService {
 
   // 세션 인벤토리 실시간 스트림.
   // tokio interval 기반 periodic polling (100ms 급) 으로 hotpath 영향 없음.
-  // 세션이 해제(release)되면 스트림이 자동 종료된다.
+  // 세션이 등록 해제(ETF LP·MM 제거)되면 스트림이 자동 종료된다.
+  // ReleaseSessionInventory 뒤에는 세션이 남아 있어 0 balance 로 계속 흐른다.
   rpc StreamSessionInventory(GetSessionInventoryRequest) returns (stream SessionInventory) {
     option (google.api.http) = {
       get: "/v1/inventories/{fund=funds/*}/{symbol=symbols/*}:streamSession"
