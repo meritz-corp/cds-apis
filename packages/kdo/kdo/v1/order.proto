@@ -49,6 +49,15 @@ service OrderService {
       body: "*"
     };
   }
+
+  // [테스트용] FEP 묶음 전송 검증 — 신규 주문 depth 건을 write 1회로 이어 붙여 보내고,
+  // 1초 뒤 남은 주문 전부를 write 1회로 취소한다. 한도 체크·재고 예약·주문장 반영은 SubmitOrder 와 같다.
+  rpc TestBatchSubmit(TestBatchSubmitRequest) returns (TestBatchSubmitResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders:test_batch_submit"
+      body: "*"
+    };
+  }
 }
 
 // ========== Enums ==========
@@ -255,6 +264,68 @@ message CancelAllOrdersResponse {
 
   // 결과 메시지
   string message = 2;
+}
+
+// ========== TestBatchSubmit ==========
+
+message TestBatchSubmitRequest {
+  // 펀드 코드 (필수)
+  string fund_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // 종목 코드 ISIN (필수)
+  string symbol = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 매수/매도 (필수). 매수는 price, price-1틱, … / 매도는 price, price+1틱, … 순으로 depth 건을 낸다.
+  kdo.v1.common.OrderSide side = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // 시작 가격 (필수)
+  string price = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // 주문 건수 = 가격 단계 수 (필수, 1~20)
+  uint32 depth = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // 건당 수량 (필수)
+  int64 quantity = 6 [(google.api.field_behavior) = REQUIRED];
+}
+
+message TestBatchSubmitResponse {
+  // 주문별 결과 (가격 단계 순)
+  repeated TestBatchOrderResult orders = 1;
+
+  // 신규 주문 묶음 전송 바이트 (write 1회)
+  int64 submit_bytes = 2;
+
+  // 취소 묶음 전송 바이트 (write 1회, 취소할 주문이 없으면 0)
+  int64 cancel_bytes = 3;
+
+  // 결과 요약
+  string message = 4;
+}
+
+message TestBatchOrderResult {
+  // 신규 주문 ID
+  uint64 order_id = 1;
+
+  // 주문 가격
+  string price = 2;
+
+  // 신규 주문 응답 (RECEIVED / REJECTED, 응답이 없으면 UNSPECIFIED)
+  OrderResultType submit_result = 3;
+
+  // 신규 주문 거부 코드 (REJECTED 일 때)
+  string submit_rejection_code = 4;
+
+  // 취소 전까지 체결된 수량
+  int64 filled_quantity = 5;
+
+  // 취소 주문 ID (취소를 보내지 않았으면 0)
+  uint64 cancel_order_id = 6;
+
+  // 취소 주문 응답 (RECEIVED / REJECTED, 응답이 없으면 UNSPECIFIED)
+  OrderResultType cancel_result = 7;
+
+  // 취소 주문 거부 코드 (REJECTED 일 때)
+  string cancel_rejection_code = 8;
 }
 
 // ========== StreamOrderResults ==========

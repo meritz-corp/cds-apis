@@ -50,4 +50,13 @@ abstract final class OrderService {
     kdov1order.CancelAllOrdersRequest.new,
     kdov1order.CancelAllOrdersResponse.new,
   );
+
+  /// [테스트용] FEP 묶음 전송 검증 — 신규 주문 depth 건을 write 1회로 이어 붙여 보내고,
+  /// 1초 뒤 남은 주문 전부를 write 1회로 취소한다. 한도 체크·재고 예약·주문장 반영은 SubmitOrder 와 같다.
+  static const testBatchSubmit = connect.Spec(
+    '/$name/TestBatchSubmit',
+    connect.StreamType.unary,
+    kdov1order.TestBatchSubmitRequest.new,
+    kdov1order.TestBatchSubmitResponse.new,
+  );
 }

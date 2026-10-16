@@ -314,6 +314,71 @@ final $typed_data.Uint8List cancelAllOrdersResponseDescriptor = $convert.base64D
     'ChdDYW5jZWxBbGxPcmRlcnNSZXNwb25zZRInCg9jYW5jZWxsZWRfY291bnQYASABKAVSDmNhbm'
     'NlbGxlZENvdW50EhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2U=');
 
+@$core.Deprecated('Use testBatchSubmitRequestDescriptor instead')
+const TestBatchSubmitRequest$json = {
+  '1': 'TestBatchSubmitRequest',
+  '2': [
+    {'1': 'fund_code', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'fundCode'},
+    {'1': 'symbol', '3': 2, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
+    {'1': 'side', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
+    {'1': 'price', '3': 4, '4': 1, '5': 9, '8': {}, '10': 'price'},
+    {'1': 'depth', '3': 5, '4': 1, '5': 13, '8': {}, '10': 'depth'},
+    {'1': 'quantity', '3': 6, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
+  ],
+};
+
+/// Descriptor for `TestBatchSubmitRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List testBatchSubmitRequestDescriptor = $convert.base64Decode(
+    'ChZUZXN0QmF0Y2hTdWJtaXRSZXF1ZXN0EiEKCWZ1bmRfY29kZRgBIAEoCUIE4kEBAlIIZnVuZE'
+    'NvZGUSHAoGc3ltYm9sGAIgASgJQgTiQQECUgZzeW1ib2wSMgoEc2lkZRgDIAEoDjIYLmtkby52'
+    'MS5jb21tb24uT3JkZXJTaWRlQgTiQQECUgRzaWRlEhoKBXByaWNlGAQgASgJQgTiQQECUgVwcm'
+    'ljZRIaCgVkZXB0aBgFIAEoDUIE4kEBAlIFZGVwdGgSIAoIcXVhbnRpdHkYBiABKANCBOJBAQJS'
+    'CHF1YW50aXR5');
+
+@$core.Deprecated('Use testBatchSubmitResponseDescriptor instead')
+const TestBatchSubmitResponse$json = {
+  '1': 'TestBatchSubmitResponse',
+  '2': [
+    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.order.TestBatchOrderResult', '10': 'orders'},
+    {'1': 'submit_bytes', '3': 2, '4': 1, '5': 3, '10': 'submitBytes'},
+    {'1': 'cancel_bytes', '3': 3, '4': 1, '5': 3, '10': 'cancelBytes'},
+    {'1': 'message', '3': 4, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `TestBatchSubmitResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List testBatchSubmitResponseDescriptor = $convert.base64Decode(
+    'ChdUZXN0QmF0Y2hTdWJtaXRSZXNwb25zZRI6CgZvcmRlcnMYASADKAsyIi5rZG8udjEub3JkZX'
+    'IuVGVzdEJhdGNoT3JkZXJSZXN1bHRSBm9yZGVycxIhCgxzdWJtaXRfYnl0ZXMYAiABKANSC3N1'
+    'Ym1pdEJ5dGVzEiEKDGNhbmNlbF9ieXRlcxgDIAEoA1ILY2FuY2VsQnl0ZXMSGAoHbWVzc2FnZR'
+    'gEIAEoCVIHbWVzc2FnZQ==');
+
+@$core.Deprecated('Use testBatchOrderResultDescriptor instead')
+const TestBatchOrderResult$json = {
+  '1': 'TestBatchOrderResult',
+  '2': [
+    {'1': 'order_id', '3': 1, '4': 1, '5': 4, '10': 'orderId'},
+    {'1': 'price', '3': 2, '4': 1, '5': 9, '10': 'price'},
+    {'1': 'submit_result', '3': 3, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderResultType', '10': 'submitResult'},
+    {'1': 'submit_rejection_code', '3': 4, '4': 1, '5': 9, '10': 'submitRejectionCode'},
+    {'1': 'filled_quantity', '3': 5, '4': 1, '5': 3, '10': 'filledQuantity'},
+    {'1': 'cancel_order_id', '3': 6, '4': 1, '5': 4, '10': 'cancelOrderId'},
+    {'1': 'cancel_result', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.order.OrderResultType', '10': 'cancelResult'},
+    {'1': 'cancel_rejection_code', '3': 8, '4': 1, '5': 9, '10': 'cancelRejectionCode'},
+  ],
+};
+
+/// Descriptor for `TestBatchOrderResult`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List testBatchOrderResultDescriptor = $convert.base64Decode(
+    'ChRUZXN0QmF0Y2hPcmRlclJlc3VsdBIZCghvcmRlcl9pZBgBIAEoBFIHb3JkZXJJZBIUCgVwcm'
+    'ljZRgCIAEoCVIFcHJpY2USQgoNc3VibWl0X3Jlc3VsdBgDIAEoDjIdLmtkby52MS5vcmRlci5P'
+    'cmRlclJlc3VsdFR5cGVSDHN1Ym1pdFJlc3VsdBIyChVzdWJtaXRfcmVqZWN0aW9uX2NvZGUYBC'
+    'ABKAlSE3N1Ym1pdFJlamVjdGlvbkNvZGUSJwoPZmlsbGVkX3F1YW50aXR5GAUgASgDUg5maWxs'
+    'ZWRRdWFudGl0eRImCg9jYW5jZWxfb3JkZXJfaWQYBiABKARSDWNhbmNlbE9yZGVySWQSQgoNY2'
+    'FuY2VsX3Jlc3VsdBgHIAEoDjIdLmtkby52MS5vcmRlci5PcmRlclJlc3VsdFR5cGVSDGNhbmNl'
+    'bFJlc3VsdBIyChVjYW5jZWxfcmVqZWN0aW9uX2NvZGUYCCABKAlSE2NhbmNlbFJlamVjdGlvbk'
+    'NvZGU=');
+
 @$core.Deprecated('Use streamOrderResultsRequestDescriptor instead')
 const StreamOrderResultsRequest$json = {
   '1': 'StreamOrderResultsRequest',

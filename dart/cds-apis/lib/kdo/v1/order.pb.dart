@@ -826,6 +826,336 @@ class CancelAllOrdersResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(2);
 }
 
+class TestBatchSubmitRequest extends $pb.GeneratedMessage {
+  factory TestBatchSubmitRequest({
+    $core.String? fundCode,
+    $core.String? symbol,
+    $2.OrderSide? side,
+    $core.String? price,
+    $core.int? depth,
+    $fixnum.Int64? quantity,
+  }) {
+    final result = create();
+    if (fundCode != null) result.fundCode = fundCode;
+    if (symbol != null) result.symbol = symbol;
+    if (side != null) result.side = side;
+    if (price != null) result.price = price;
+    if (depth != null) result.depth = depth;
+    if (quantity != null) result.quantity = quantity;
+    return result;
+  }
+
+  TestBatchSubmitRequest._();
+
+  factory TestBatchSubmitRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TestBatchSubmitRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TestBatchSubmitRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(2, _omitFieldNames ? '' : 'symbol')
+    ..e<$2.OrderSide>(3, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..aOS(4, _omitFieldNames ? '' : 'price')
+    ..a<$core.int>(5, _omitFieldNames ? '' : 'depth', $pb.PbFieldType.OU3)
+    ..aInt64(6, _omitFieldNames ? '' : 'quantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TestBatchSubmitRequest clone() => TestBatchSubmitRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TestBatchSubmitRequest copyWith(void Function(TestBatchSubmitRequest) updates) => super.copyWith((message) => updates(message as TestBatchSubmitRequest)) as TestBatchSubmitRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TestBatchSubmitRequest create() => TestBatchSubmitRequest._();
+  @$core.override
+  TestBatchSubmitRequest createEmptyInstance() => create();
+  static $pb.PbList<TestBatchSubmitRequest> createRepeated() => $pb.PbList<TestBatchSubmitRequest>();
+  @$core.pragma('dart2js:noInline')
+  static TestBatchSubmitRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestBatchSubmitRequest>(create);
+  static TestBatchSubmitRequest? _defaultInstance;
+
+  /// 펀드 코드 (필수)
+  @$pb.TagNumber(1)
+  $core.String get fundCode => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set fundCode($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasFundCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFundCode() => $_clearField(1);
+
+  /// 종목 코드 ISIN (필수)
+  @$pb.TagNumber(2)
+  $core.String get symbol => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set symbol($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSymbol() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSymbol() => $_clearField(2);
+
+  /// 매수/매도 (필수). 매수는 price, price-1틱, … / 매도는 price, price+1틱, … 순으로 depth 건을 낸다.
+  @$pb.TagNumber(3)
+  $2.OrderSide get side => $_getN(2);
+  @$pb.TagNumber(3)
+  set side($2.OrderSide value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSide() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSide() => $_clearField(3);
+
+  /// 시작 가격 (필수)
+  @$pb.TagNumber(4)
+  $core.String get price => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set price($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPrice() => $_clearField(4);
+
+  /// 주문 건수 = 가격 단계 수 (필수, 1~20)
+  @$pb.TagNumber(5)
+  $core.int get depth => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set depth($core.int value) => $_setUnsignedInt32(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasDepth() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDepth() => $_clearField(5);
+
+  /// 건당 수량 (필수)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get quantity => $_getI64(5);
+  @$pb.TagNumber(6)
+  set quantity($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasQuantity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearQuantity() => $_clearField(6);
+}
+
+class TestBatchSubmitResponse extends $pb.GeneratedMessage {
+  factory TestBatchSubmitResponse({
+    $core.Iterable<TestBatchOrderResult>? orders,
+    $fixnum.Int64? submitBytes,
+    $fixnum.Int64? cancelBytes,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (orders != null) result.orders.addAll(orders);
+    if (submitBytes != null) result.submitBytes = submitBytes;
+    if (cancelBytes != null) result.cancelBytes = cancelBytes;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  TestBatchSubmitResponse._();
+
+  factory TestBatchSubmitResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TestBatchSubmitResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TestBatchSubmitResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..pc<TestBatchOrderResult>(1, _omitFieldNames ? '' : 'orders', $pb.PbFieldType.PM, subBuilder: TestBatchOrderResult.create)
+    ..aInt64(2, _omitFieldNames ? '' : 'submitBytes')
+    ..aInt64(3, _omitFieldNames ? '' : 'cancelBytes')
+    ..aOS(4, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TestBatchSubmitResponse clone() => TestBatchSubmitResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TestBatchSubmitResponse copyWith(void Function(TestBatchSubmitResponse) updates) => super.copyWith((message) => updates(message as TestBatchSubmitResponse)) as TestBatchSubmitResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TestBatchSubmitResponse create() => TestBatchSubmitResponse._();
+  @$core.override
+  TestBatchSubmitResponse createEmptyInstance() => create();
+  static $pb.PbList<TestBatchSubmitResponse> createRepeated() => $pb.PbList<TestBatchSubmitResponse>();
+  @$core.pragma('dart2js:noInline')
+  static TestBatchSubmitResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestBatchSubmitResponse>(create);
+  static TestBatchSubmitResponse? _defaultInstance;
+
+  /// 주문별 결과 (가격 단계 순)
+  @$pb.TagNumber(1)
+  $pb.PbList<TestBatchOrderResult> get orders => $_getList(0);
+
+  /// 신규 주문 묶음 전송 바이트 (write 1회)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get submitBytes => $_getI64(1);
+  @$pb.TagNumber(2)
+  set submitBytes($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSubmitBytes() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSubmitBytes() => $_clearField(2);
+
+  /// 취소 묶음 전송 바이트 (write 1회, 취소할 주문이 없으면 0)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get cancelBytes => $_getI64(2);
+  @$pb.TagNumber(3)
+  set cancelBytes($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCancelBytes() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCancelBytes() => $_clearField(3);
+
+  /// 결과 요약
+  @$pb.TagNumber(4)
+  $core.String get message => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set message($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasMessage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMessage() => $_clearField(4);
+}
+
+class TestBatchOrderResult extends $pb.GeneratedMessage {
+  factory TestBatchOrderResult({
+    $fixnum.Int64? orderId,
+    $core.String? price,
+    OrderResultType? submitResult,
+    $core.String? submitRejectionCode,
+    $fixnum.Int64? filledQuantity,
+    $fixnum.Int64? cancelOrderId,
+    OrderResultType? cancelResult,
+    $core.String? cancelRejectionCode,
+  }) {
+    final result = create();
+    if (orderId != null) result.orderId = orderId;
+    if (price != null) result.price = price;
+    if (submitResult != null) result.submitResult = submitResult;
+    if (submitRejectionCode != null) result.submitRejectionCode = submitRejectionCode;
+    if (filledQuantity != null) result.filledQuantity = filledQuantity;
+    if (cancelOrderId != null) result.cancelOrderId = cancelOrderId;
+    if (cancelResult != null) result.cancelResult = cancelResult;
+    if (cancelRejectionCode != null) result.cancelRejectionCode = cancelRejectionCode;
+    return result;
+  }
+
+  TestBatchOrderResult._();
+
+  factory TestBatchOrderResult.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory TestBatchOrderResult.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TestBatchOrderResult', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.order'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2, _omitFieldNames ? '' : 'price')
+    ..e<OrderResultType>(3, _omitFieldNames ? '' : 'submitResult', $pb.PbFieldType.OE, defaultOrMaker: OrderResultType.ORDER_RESULT_TYPE_UNSPECIFIED, valueOf: OrderResultType.valueOf, enumValues: OrderResultType.values)
+    ..aOS(4, _omitFieldNames ? '' : 'submitRejectionCode')
+    ..aInt64(5, _omitFieldNames ? '' : 'filledQuantity')
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'cancelOrderId', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..e<OrderResultType>(7, _omitFieldNames ? '' : 'cancelResult', $pb.PbFieldType.OE, defaultOrMaker: OrderResultType.ORDER_RESULT_TYPE_UNSPECIFIED, valueOf: OrderResultType.valueOf, enumValues: OrderResultType.values)
+    ..aOS(8, _omitFieldNames ? '' : 'cancelRejectionCode')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TestBatchOrderResult clone() => TestBatchOrderResult()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  TestBatchOrderResult copyWith(void Function(TestBatchOrderResult) updates) => super.copyWith((message) => updates(message as TestBatchOrderResult)) as TestBatchOrderResult;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static TestBatchOrderResult create() => TestBatchOrderResult._();
+  @$core.override
+  TestBatchOrderResult createEmptyInstance() => create();
+  static $pb.PbList<TestBatchOrderResult> createRepeated() => $pb.PbList<TestBatchOrderResult>();
+  @$core.pragma('dart2js:noInline')
+  static TestBatchOrderResult getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TestBatchOrderResult>(create);
+  static TestBatchOrderResult? _defaultInstance;
+
+  /// 신규 주문 ID
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get orderId => $_getI64(0);
+  @$pb.TagNumber(1)
+  set orderId($fixnum.Int64 value) => $_setInt64(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasOrderId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearOrderId() => $_clearField(1);
+
+  /// 주문 가격
+  @$pb.TagNumber(2)
+  $core.String get price => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set price($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasPrice() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPrice() => $_clearField(2);
+
+  /// 신규 주문 응답 (RECEIVED / REJECTED, 응답이 없으면 UNSPECIFIED)
+  @$pb.TagNumber(3)
+  OrderResultType get submitResult => $_getN(2);
+  @$pb.TagNumber(3)
+  set submitResult(OrderResultType value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSubmitResult() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSubmitResult() => $_clearField(3);
+
+  /// 신규 주문 거부 코드 (REJECTED 일 때)
+  @$pb.TagNumber(4)
+  $core.String get submitRejectionCode => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set submitRejectionCode($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSubmitRejectionCode() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSubmitRejectionCode() => $_clearField(4);
+
+  /// 취소 전까지 체결된 수량
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get filledQuantity => $_getI64(4);
+  @$pb.TagNumber(5)
+  set filledQuantity($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasFilledQuantity() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearFilledQuantity() => $_clearField(5);
+
+  /// 취소 주문 ID (취소를 보내지 않았으면 0)
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get cancelOrderId => $_getI64(5);
+  @$pb.TagNumber(6)
+  set cancelOrderId($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasCancelOrderId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCancelOrderId() => $_clearField(6);
+
+  /// 취소 주문 응답 (RECEIVED / REJECTED, 응답이 없으면 UNSPECIFIED)
+  @$pb.TagNumber(7)
+  OrderResultType get cancelResult => $_getN(6);
+  @$pb.TagNumber(7)
+  set cancelResult(OrderResultType value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasCancelResult() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCancelResult() => $_clearField(7);
+
+  /// 취소 주문 거부 코드 (REJECTED 일 때)
+  @$pb.TagNumber(8)
+  $core.String get cancelRejectionCode => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set cancelRejectionCode($core.String value) => $_setString(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasCancelRejectionCode() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearCancelRejectionCode() => $_clearField(8);
+}
+
 class StreamOrderResultsRequest extends $pb.GeneratedMessage {
   factory StreamOrderResultsRequest({
     $core.String? fundCode,

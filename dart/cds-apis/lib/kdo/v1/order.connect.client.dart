@@ -98,4 +98,23 @@ extension type OrderServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// [테스트용] FEP 묶음 전송 검증 — 신규 주문 depth 건을 write 1회로 이어 붙여 보내고,
+  /// 1초 뒤 남은 주문 전부를 write 1회로 취소한다. 한도 체크·재고 예약·주문장 반영은 SubmitOrder 와 같다.
+  Future<kdov1order.TestBatchSubmitResponse> testBatchSubmit(
+    kdov1order.TestBatchSubmitRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.OrderService.testBatchSubmit,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }
