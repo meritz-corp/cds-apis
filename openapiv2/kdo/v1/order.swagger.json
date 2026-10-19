@@ -187,39 +187,6 @@
         ]
       }
     },
-    "/v1/orders:test_batch_submit": {
-      "post": {
-        "summary": "[테스트용] FEP 묶음 전송 검증 — 신규 주문 depth 건을 write 1회로 이어 붙여 보내고,\n1초 뒤 남은 주문 전부를 write 1회로 취소한다. 한도 체크·재고 예약·주문장 반영은 SubmitOrder 와 같다.",
-        "operationId": "OrderService_TestBatchSubmit",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/orderTestBatchSubmitResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/orderTestBatchSubmitRequest"
-            }
-          }
-        ],
-        "tags": [
-          "OrderService"
-        ]
-      }
-    },
     "/v1/orders:unfilled": {
       "get": {
         "summary": "미체결 주문 목록 조회",
@@ -450,18 +417,6 @@
       },
       "title": "주문 정보"
     },
-    "orderOrderResultType": {
-      "type": "string",
-      "enum": [
-        "ORDER_RESULT_TYPE_UNSPECIFIED",
-        "ORDER_RESULT_TYPE_RECEIVED",
-        "ORDER_RESULT_TYPE_REJECTED",
-        "ORDER_RESULT_TYPE_FILLED",
-        "ORDER_RESULT_TYPE_CANCELLED"
-      ],
-      "default": "ORDER_RESULT_TYPE_UNSPECIFIED",
-      "title": "- ORDER_RESULT_TYPE_RECEIVED: 접수됨\n - ORDER_RESULT_TYPE_REJECTED: 거부됨\n - ORDER_RESULT_TYPE_FILLED: 체결됨\n - ORDER_RESULT_TYPE_CANCELLED: 취소됨"
-    },
     "orderOrderStatus": {
       "type": "string",
       "enum": [
@@ -581,111 +536,6 @@
         "message": {
           "type": "string",
           "title": "결과 메시지"
-        }
-      }
-    },
-    "orderTestBatchOrderResult": {
-      "type": "object",
-      "properties": {
-        "orderId": {
-          "type": "string",
-          "format": "uint64",
-          "title": "신규 주문 ID"
-        },
-        "price": {
-          "type": "string",
-          "title": "주문 가격"
-        },
-        "submitResult": {
-          "$ref": "#/definitions/orderOrderResultType",
-          "title": "신규 주문 응답 (RECEIVED / REJECTED, 응답이 없으면 UNSPECIFIED)"
-        },
-        "submitRejectionCode": {
-          "type": "string",
-          "title": "신규 주문 거부 코드 (REJECTED 일 때)"
-        },
-        "filledQuantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "취소 전까지 체결된 수량"
-        },
-        "cancelOrderId": {
-          "type": "string",
-          "format": "uint64",
-          "title": "취소 주문 ID (취소를 보내지 않았으면 0)"
-        },
-        "cancelResult": {
-          "$ref": "#/definitions/orderOrderResultType",
-          "title": "취소 주문 응답 (RECEIVED / REJECTED, 응답이 없으면 UNSPECIFIED)"
-        },
-        "cancelRejectionCode": {
-          "type": "string",
-          "title": "취소 주문 거부 코드 (REJECTED 일 때)"
-        }
-      }
-    },
-    "orderTestBatchSubmitRequest": {
-      "type": "object",
-      "properties": {
-        "fundCode": {
-          "type": "string",
-          "title": "펀드 코드 (필수)"
-        },
-        "symbol": {
-          "type": "string",
-          "title": "종목 코드 ISIN (필수)"
-        },
-        "side": {
-          "$ref": "#/definitions/commonOrderSide",
-          "description": "매수/매도 (필수). 매수는 price, price-1틱, … / 매도는 price, price+1틱, … 순으로 depth 건을 낸다."
-        },
-        "price": {
-          "type": "string",
-          "title": "시작 가격 (필수)"
-        },
-        "depth": {
-          "type": "integer",
-          "format": "int64",
-          "title": "주문 건수 = 가격 단계 수 (필수, 1~20)"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64",
-          "title": "건당 수량 (필수)"
-        }
-      },
-      "required": [
-        "fundCode",
-        "symbol",
-        "side",
-        "price",
-        "depth",
-        "quantity"
-      ]
-    },
-    "orderTestBatchSubmitResponse": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/orderTestBatchOrderResult"
-          },
-          "title": "주문별 결과 (가격 단계 순)"
-        },
-        "submitBytes": {
-          "type": "string",
-          "format": "int64",
-          "title": "신규 주문 묶음 전송 바이트 (write 1회)"
-        },
-        "cancelBytes": {
-          "type": "string",
-          "format": "int64",
-          "title": "취소 묶음 전송 바이트 (write 1회, 취소할 주문이 없으면 0)"
-        },
-        "message": {
-          "type": "string",
-          "title": "결과 요약"
         }
       }
     },

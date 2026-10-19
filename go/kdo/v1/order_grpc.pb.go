@@ -32,9 +32,6 @@ type OrderServiceClient interface {
 	ListAllUnfilledOrders(ctx context.Context, in *ListAllUnfilledOrdersRequest, opts ...grpc.CallOption) (*ListAllUnfilledOrdersResponse, error)
 	// 전체 주문 취소
 	CancelAllOrders(ctx context.Context, in *CancelAllOrdersRequest, opts ...grpc.CallOption) (*CancelAllOrdersResponse, error)
-	// [테스트용] FEP 묶음 전송 검증 — 신규 주문 depth 건을 write 1회로 이어 붙여 보내고,
-	// 1초 뒤 남은 주문 전부를 write 1회로 취소한다. 한도 체크·재고 예약·주문장 반영은 SubmitOrder 와 같다.
-	TestBatchSubmit(ctx context.Context, in *TestBatchSubmitRequest, opts ...grpc.CallOption) (*TestBatchSubmitResponse, error)
 }
 
 type orderServiceClient struct {
@@ -90,15 +87,6 @@ func (c *orderServiceClient) CancelAllOrders(ctx context.Context, in *CancelAllO
 	return out, nil
 }
 
-func (c *orderServiceClient) TestBatchSubmit(ctx context.Context, in *TestBatchSubmitRequest, opts ...grpc.CallOption) (*TestBatchSubmitResponse, error) {
-	out := new(TestBatchSubmitResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.order.OrderService/TestBatchSubmit", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -113,9 +101,6 @@ type OrderServiceServer interface {
 	ListAllUnfilledOrders(context.Context, *ListAllUnfilledOrdersRequest) (*ListAllUnfilledOrdersResponse, error)
 	// 전체 주문 취소
 	CancelAllOrders(context.Context, *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error)
-	// [테스트용] FEP 묶음 전송 검증 — 신규 주문 depth 건을 write 1회로 이어 붙여 보내고,
-	// 1초 뒤 남은 주문 전부를 write 1회로 취소한다. 한도 체크·재고 예약·주문장 반영은 SubmitOrder 와 같다.
-	TestBatchSubmit(context.Context, *TestBatchSubmitRequest) (*TestBatchSubmitResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -137,9 +122,6 @@ func (UnimplementedOrderServiceServer) ListAllUnfilledOrders(context.Context, *L
 }
 func (UnimplementedOrderServiceServer) CancelAllOrders(context.Context, *CancelAllOrdersRequest) (*CancelAllOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelAllOrders not implemented")
-}
-func (UnimplementedOrderServiceServer) TestBatchSubmit(context.Context, *TestBatchSubmitRequest) (*TestBatchSubmitResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TestBatchSubmit not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -244,24 +226,6 @@ func _OrderService_CancelAllOrders_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrderService_TestBatchSubmit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TestBatchSubmitRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrderServiceServer).TestBatchSubmit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.order.OrderService/TestBatchSubmit",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).TestBatchSubmit(ctx, req.(*TestBatchSubmitRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -288,10 +252,6 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelAllOrders",
 			Handler:    _OrderService_CancelAllOrders_Handler,
-		},
-		{
-			MethodName: "TestBatchSubmit",
-			Handler:    _OrderService_TestBatchSubmit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -134,26 +134,6 @@ func (mr *MockOrderServiceClientMockRecorder) SubmitOrder(ctx, in interface{}, o
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitOrder", reflect.TypeOf((*MockOrderServiceClient)(nil).SubmitOrder), varargs...)
 }
 
-// TestBatchSubmit mocks base method.
-func (m *MockOrderServiceClient) TestBatchSubmit(ctx context.Context, in *TestBatchSubmitRequest, opts ...grpc.CallOption) (*TestBatchSubmitResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "TestBatchSubmit", varargs...)
-	ret0, _ := ret[0].(*TestBatchSubmitResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// TestBatchSubmit indicates an expected call of TestBatchSubmit.
-func (mr *MockOrderServiceClientMockRecorder) TestBatchSubmit(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TestBatchSubmit", reflect.TypeOf((*MockOrderServiceClient)(nil).TestBatchSubmit), varargs...)
-}
-
 // MockOrderServiceServer is a mock of OrderServiceServer interface.
 type MockOrderServiceServer struct {
 	ctrl     *gomock.Controller
@@ -250,19 +230,4 @@ func (m *MockOrderServiceServer) SubmitOrder(ctx context.Context, in *SubmitOrde
 func (mr *MockOrderServiceServerMockRecorder) SubmitOrder(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitOrder", reflect.TypeOf((*MockOrderServiceServer)(nil).SubmitOrder), ctx, in)
-}
-
-// TestBatchSubmit mocks base method.
-func (m *MockOrderServiceServer) TestBatchSubmit(ctx context.Context, in *TestBatchSubmitRequest) (*TestBatchSubmitResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "TestBatchSubmit", ctx, in)
-	ret0, _ := ret[0].(*TestBatchSubmitResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// TestBatchSubmit indicates an expected call of TestBatchSubmit.
-func (mr *MockOrderServiceServerMockRecorder) TestBatchSubmit(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TestBatchSubmit", reflect.TypeOf((*MockOrderServiceServer)(nil).TestBatchSubmit), ctx, in)
 }

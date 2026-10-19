@@ -58,12 +58,6 @@ class OrderServiceClient extends $grpc.Client {
     return $createUnaryCall(_$cancelAllOrders, request, options: options);
   }
 
-  /// [테스트용] FEP 묶음 전송 검증 — 신규 주문 depth 건을 write 1회로 이어 붙여 보내고,
-  /// 1초 뒤 남은 주문 전부를 write 1회로 취소한다. 한도 체크·재고 예약·주문장 반영은 SubmitOrder 와 같다.
-  $grpc.ResponseFuture<$0.TestBatchSubmitResponse> testBatchSubmit($0.TestBatchSubmitRequest request, {$grpc.CallOptions? options,}) {
-    return $createUnaryCall(_$testBatchSubmit, request, options: options);
-  }
-
     // method descriptors
 
   static final _$submitOrder = $grpc.ClientMethod<$0.SubmitOrderRequest, $0.SubmitOrderResponse>(
@@ -86,10 +80,6 @@ class OrderServiceClient extends $grpc.Client {
       '/kdo.v1.order.OrderService/CancelAllOrders',
       ($0.CancelAllOrdersRequest value) => value.writeToBuffer(),
       $0.CancelAllOrdersResponse.fromBuffer);
-  static final _$testBatchSubmit = $grpc.ClientMethod<$0.TestBatchSubmitRequest, $0.TestBatchSubmitResponse>(
-      '/kdo.v1.order.OrderService/TestBatchSubmit',
-      ($0.TestBatchSubmitRequest value) => value.writeToBuffer(),
-      $0.TestBatchSubmitResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.order.OrderService')
@@ -132,13 +122,6 @@ abstract class OrderServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CancelAllOrdersRequest.fromBuffer(value),
         ($0.CancelAllOrdersResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.TestBatchSubmitRequest, $0.TestBatchSubmitResponse>(
-        'TestBatchSubmit',
-        testBatchSubmit_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.TestBatchSubmitRequest.fromBuffer(value),
-        ($0.TestBatchSubmitResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.SubmitOrderResponse> submitOrder_Pre($grpc.ServiceCall $call, $async.Future<$0.SubmitOrderRequest> $request) async {
@@ -170,11 +153,5 @@ abstract class OrderServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.CancelAllOrdersResponse> cancelAllOrders($grpc.ServiceCall call, $0.CancelAllOrdersRequest request);
-
-  $async.Future<$0.TestBatchSubmitResponse> testBatchSubmit_Pre($grpc.ServiceCall $call, $async.Future<$0.TestBatchSubmitRequest> $request) async {
-    return testBatchSubmit($call, await $request);
-  }
-
-  $async.Future<$0.TestBatchSubmitResponse> testBatchSubmit($grpc.ServiceCall call, $0.TestBatchSubmitRequest request);
 
 }
