@@ -117,7 +117,16 @@ const MarketMakingConfiguration$json = {
     {'1': 'constituent_momentum', '3': 19, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingConstituentMomentum', '10': 'constituentMomentum'},
     {'1': 'adverse_selection', '3': 20, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingAdverseSelection', '10': 'adverseSelection'},
     {'1': 'proxy_momentum', '3': 21, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingProxyMomentum', '10': 'proxyMomentum'},
-    {'1': 'f2m_refit_interval_secs', '3': 22, '4': 1, '5': 4, '9': 1, '10': 'f2mRefitIntervalSecs', '17': true},
+    {
+      '1': 'f2m_refit_interval_secs',
+      '3': 22,
+      '4': 1,
+      '5': 4,
+      '8': {'3': true},
+      '9': 1,
+      '10': 'f2mRefitIntervalSecs',
+      '17': true,
+    },
     {'1': 'f2m_ma_window_secs', '3': 23, '4': 1, '5': 4, '9': 2, '10': 'f2mMaWindowSecs', '17': true},
     {'1': 'take_mode', '3': 24, '4': 1, '5': 8, '9': 3, '10': 'takeMode', '17': true},
     {'1': 'is_lp', '3': 25, '4': 1, '5': 8, '9': 4, '10': 'isLp', '17': true},
@@ -127,6 +136,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'fast_liquidation', '3': 29, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingFastLiquidation', '9': 8, '10': 'fastLiquidation', '17': true},
     {'1': 'take_execution', '3': 30, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTakeExecution', '9': 9, '10': 'takeExecution', '17': true},
     {'1': 'loss_limit', '3': 31, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLossLimit', '9': 10, '10': 'lossLimit', '17': true},
+    {'1': 'f2m_refit_interval_ms', '3': 32, '4': 1, '5': 4, '9': 11, '10': 'f2mRefitIntervalMs', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -140,6 +150,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_fast_liquidation'},
     {'1': '_take_execution'},
     {'1': '_loss_limit'},
+    {'1': '_f2m_refit_interval_ms'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -170,24 +181,25 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'JrZXRNYWtpbmdDb25zdGl0dWVudE1vbWVudHVtUhNjb25zdGl0dWVudE1vbWVudHVtElQKEWFk'
     'dmVyc2Vfc2VsZWN0aW9uGBQgASgLMicua2RvLnYxLm1tLk1hcmtldE1ha2luZ0FkdmVyc2VTZW'
     'xlY3Rpb25SEGFkdmVyc2VTZWxlY3Rpb24SSwoOcHJveHlfbW9tZW50dW0YFSABKAsyJC5rZG8u'
-    'djEubW0uTWFya2V0TWFraW5nUHJveHlNb21lbnR1bVINcHJveHlNb21lbnR1bRI6ChdmMm1fcm'
-    'VmaXRfaW50ZXJ2YWxfc2VjcxgWIAEoBEgBUhRmMm1SZWZpdEludGVydmFsU2Vjc4gBARIwChJm'
-    'Mm1fbWFfd2luZG93X3NlY3MYFyABKARIAlIPZjJtTWFXaW5kb3dTZWNziAEBEiAKCXRha2VfbW'
-    '9kZRgYIAEoCEgDUgh0YWtlTW9kZYgBARIYCgVpc19scBgZIAEoCEgEUgRpc0xwiAEBEjQKFHVz'
-    'ZV9xdHlfd2VpZ2h0ZWRfbWlkGBogASgISAVSEXVzZVF0eVdlaWdodGVkTWlkiAEBEjgKFmYybV'
-    '9zYW1wbGVfaW50ZXJ2YWxfbXMYGyABKARIBlITZjJtU2FtcGxlSW50ZXJ2YWxNc4gBARI6Chdx'
-    'dHlfd2VpZ2h0ZWRfbWlkX2xldmVscxgcIAEoDUgHUhRxdHlXZWlnaHRlZE1pZExldmVsc4gBAR'
-    'JWChBmYXN0X2xpcXVpZGF0aW9uGB0gASgLMiYua2RvLnYxLm1tLk1hcmtldE1ha2luZ0Zhc3RM'
-    'aXF1aWRhdGlvbkgIUg9mYXN0TGlxdWlkYXRpb26IAQESUAoOdGFrZV9leGVjdXRpb24YHiABKA'
-    'syJC5rZG8udjEubW0uTWFya2V0TWFraW5nVGFrZUV4ZWN1dGlvbkgJUg10YWtlRXhlY3V0aW9u'
-    'iAEBEkQKCmxvc3NfbGltaXQYHyABKAsyIC5rZG8udjEubW0uTWFya2V0TWFraW5nTG9zc0xpbW'
-    'l0SApSCWxvc3NMaW1pdIgBAUIICgZfYmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF9zZWNz'
-    'QhUKE19mMm1fbWFfd2luZG93X3NlY3NCDAoKX3Rha2VfbW9kZUIICgZfaXNfbHBCFwoVX3VzZV'
-    '9xdHlfd2VpZ2h0ZWRfbWlkQhkKF19mMm1fc2FtcGxlX2ludGVydmFsX21zQhoKGF9xdHlfd2Vp'
-    'Z2h0ZWRfbWlkX2xldmVsc0ITChFfZmFzdF9saXF1aWRhdGlvbkIRCg9fdGFrZV9leGVjdXRpb2'
-    '5CDQoLX2xvc3NfbGltaXRKBAgHEAhKBAgIEAlKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJp'
-    'ZF9hZGp1c3RtZW50Ug5hc2tfYWRqdXN0bWVudFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF'
-    '9vZmZzZXRSCmFza19vZmZzZXQ=');
+    'djEubW0uTWFya2V0TWFraW5nUHJveHlNb21lbnR1bVINcHJveHlNb21lbnR1bRI+ChdmMm1fcm'
+    'VmaXRfaW50ZXJ2YWxfc2VjcxgWIAEoBEICGAFIAVIUZjJtUmVmaXRJbnRlcnZhbFNlY3OIAQES'
+    'MAoSZjJtX21hX3dpbmRvd19zZWNzGBcgASgESAJSD2YybU1hV2luZG93U2Vjc4gBARIgCgl0YW'
+    'tlX21vZGUYGCABKAhIA1IIdGFrZU1vZGWIAQESGAoFaXNfbHAYGSABKAhIBFIEaXNMcIgBARI0'
+    'ChR1c2VfcXR5X3dlaWdodGVkX21pZBgaIAEoCEgFUhF1c2VRdHlXZWlnaHRlZE1pZIgBARI4Ch'
+    'ZmMm1fc2FtcGxlX2ludGVydmFsX21zGBsgASgESAZSE2YybVNhbXBsZUludGVydmFsTXOIAQES'
+    'OgoXcXR5X3dlaWdodGVkX21pZF9sZXZlbHMYHCABKA1IB1IUcXR5V2VpZ2h0ZWRNaWRMZXZlbH'
+    'OIAQESVgoQZmFzdF9saXF1aWRhdGlvbhgdIAEoCzImLmtkby52MS5tbS5NYXJrZXRNYWtpbmdG'
+    'YXN0TGlxdWlkYXRpb25ICFIPZmFzdExpcXVpZGF0aW9uiAEBElAKDnRha2VfZXhlY3V0aW9uGB'
+    '4gASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ1Rha2VFeGVjdXRpb25ICVINdGFrZUV4ZWN1'
+    'dGlvbogBARJECgpsb3NzX2xpbWl0GB8gASgLMiAua2RvLnYxLm1tLk1hcmtldE1ha2luZ0xvc3'
+    'NMaW1pdEgKUglsb3NzTGltaXSIAQESNgoVZjJtX3JlZml0X2ludGVydmFsX21zGCAgASgESAtS'
+    'EmYybVJlZml0SW50ZXJ2YWxNc4gBAUIICgZfYmFzaXNCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF'
+    '9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3NCDAoKX3Rha2VfbW9kZUIICgZfaXNfbHBCFwoV'
+    'X3VzZV9xdHlfd2VpZ2h0ZWRfbWlkQhkKF19mMm1fc2FtcGxlX2ludGVydmFsX21zQhoKGF9xdH'
+    'lfd2VpZ2h0ZWRfbWlkX2xldmVsc0ITChFfZmFzdF9saXF1aWRhdGlvbkIRCg9fdGFrZV9leGVj'
+    'dXRpb25CDQoLX2xvc3NfbGltaXRCGAoWX2YybV9yZWZpdF9pbnRlcnZhbF9tc0oECAcQCEoECA'
+    'gQCUoECAsQDEoECAwQDUoECA0QDkoECA4QD1IOYmlkX2FkanVzdG1lbnRSDmFza19hZGp1c3Rt'
+    'ZW50UgliaWRfYmFzaXNSCWFza19iYXNpc1IKYmlkX29mZnNldFIKYXNrX29mZnNldA==');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

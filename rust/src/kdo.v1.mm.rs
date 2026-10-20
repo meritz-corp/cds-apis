@@ -76,8 +76,10 @@ pub struct MarketMakingConfiguration {
     /// 운영자 지정 제3종목 체결강도 skew
     #[prost(message, optional, tag="21")]
     pub proxy_momentum: ::core::option::Option<MarketMakingProxyMomentum>,
-    /// F2M(Fit to Market) 주기적 시장추종 refit 간격 (초). 0 = 주기적 refit 비활성화
-    /// (수동 FitToMarket 은 계속 동작). optional: 미설정 시 기존값 유지, 명시적 0 = 비활성화. 기본 1초.
+    /// \[deprecated\] F2M refit 간격(초). f2m_refit_interval_ms 로 대체 — 1초 미만을 표현할 수 없다.
+    /// 구 클라이언트 호환용: 서버는 f2m_refit_interval_ms 가 없을 때만 이 값 ×1000 을 쓰고,
+    /// 응답에는 ms 를 초로 올림해 채운다(100ms → 1, 0 → 0 — 1초 미만 설정이 0=비활성으로 보이지 않도록).
+    #[deprecated]
     #[prost(uint64, optional, tag="22")]
     pub f2m_refit_interval_secs: ::core::option::Option<u64>,
     /// F2M(Fit to Market) 괴리 MA 시간창 (초). 시장가↔이론가 괴리를 이 시간창의 이동평균으로
@@ -135,6 +137,12 @@ pub struct MarketMakingConfiguration {
     /// optional: presence 로 "설정 vs 미변경" 구분 (fast_liquidation 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
     #[prost(message, optional, tag="31")]
     pub loss_limit: ::core::option::Option<MarketMakingLossLimit>,
+    /// F2M(Fit to Market) 주기적 시장추종 refit 간격 (밀리초). 시장가↔이론가 괴리 MA 를 이 주기로
+    /// f2m_shift 에 반영한다. 0 = 주기적 refit 비활성화(수동 FitToMarket 은 계속 동작), 그 외에는
+    /// 100 이상이어야 한다(서버가 거부). 기본 1000ms. f2m_refit_interval_secs(초)를 대체한다.
+    /// optional: 미설정 시 기존값 유지(구 f2m_refit_interval_secs 가 오면 그 값 ×1000), 명시적 0 = 비활성화.
+    #[prost(uint64, optional, tag="32")]
+    pub f2m_refit_interval_ms: ::core::option::Option<u64>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]

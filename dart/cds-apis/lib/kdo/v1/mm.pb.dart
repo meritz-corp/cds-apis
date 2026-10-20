@@ -155,6 +155,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingConstituentMomentum? constituentMomentum,
     MarketMakingAdverseSelection? adverseSelection,
     MarketMakingProxyMomentum? proxyMomentum,
+  @$core.Deprecated('This field is deprecated.')
     $fixnum.Int64? f2mRefitIntervalSecs,
     $fixnum.Int64? f2mMaWindowSecs,
     $core.bool? takeMode,
@@ -165,6 +166,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingFastLiquidation? fastLiquidation,
     MarketMakingTakeExecution? takeExecution,
     MarketMakingLossLimit? lossLimit,
+    $fixnum.Int64? f2mRefitIntervalMs,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -192,6 +194,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (fastLiquidation != null) result.fastLiquidation = fastLiquidation;
     if (takeExecution != null) result.takeExecution = takeExecution;
     if (lossLimit != null) result.lossLimit = lossLimit;
+    if (f2mRefitIntervalMs != null) result.f2mRefitIntervalMs = f2mRefitIntervalMs;
     return result;
   }
 
@@ -226,6 +229,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingFastLiquidation>(29, _omitFieldNames ? '' : 'fastLiquidation', subBuilder: MarketMakingFastLiquidation.create)
     ..aOM<MarketMakingTakeExecution>(30, _omitFieldNames ? '' : 'takeExecution', subBuilder: MarketMakingTakeExecution.create)
     ..aOM<MarketMakingLossLimit>(31, _omitFieldNames ? '' : 'lossLimit', subBuilder: MarketMakingLossLimit.create)
+    ..a<$fixnum.Int64>(32, _omitFieldNames ? '' : 'f2mRefitIntervalMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -416,14 +420,19 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(21)
   MarketMakingProxyMomentum ensureProxyMomentum() => $_ensure(14);
 
-  /// F2M(Fit to Market) 주기적 시장추종 refit 간격 (초). 0 = 주기적 refit 비활성화
-  /// (수동 FitToMarket 은 계속 동작). optional: 미설정 시 기존값 유지, 명시적 0 = 비활성화. 기본 1초.
+  /// [deprecated] F2M refit 간격(초). f2m_refit_interval_ms 로 대체 — 1초 미만을 표현할 수 없다.
+  /// 구 클라이언트 호환용: 서버는 f2m_refit_interval_ms 가 없을 때만 이 값 ×1000 을 쓰고,
+  /// 응답에는 ms 를 초로 올림해 채운다(100ms → 1, 0 → 0 — 1초 미만 설정이 0=비활성으로 보이지 않도록).
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(22)
   $fixnum.Int64 get f2mRefitIntervalSecs => $_getI64(15);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(22)
   set f2mRefitIntervalSecs($fixnum.Int64 value) => $_setInt64(15, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(22)
   $core.bool hasF2mRefitIntervalSecs() => $_has(15);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(22)
   void clearF2mRefitIntervalSecs() => $_clearField(22);
 
@@ -550,6 +559,19 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearLossLimit() => $_clearField(31);
   @$pb.TagNumber(31)
   MarketMakingLossLimit ensureLossLimit() => $_ensure(24);
+
+  /// F2M(Fit to Market) 주기적 시장추종 refit 간격 (밀리초). 시장가↔이론가 괴리 MA 를 이 주기로
+  /// f2m_shift 에 반영한다. 0 = 주기적 refit 비활성화(수동 FitToMarket 은 계속 동작), 그 외에는
+  /// 100 이상이어야 한다(서버가 거부). 기본 1000ms. f2m_refit_interval_secs(초)를 대체한다.
+  /// optional: 미설정 시 기존값 유지(구 f2m_refit_interval_secs 가 오면 그 값 ×1000), 명시적 0 = 비활성화.
+  @$pb.TagNumber(32)
+  $fixnum.Int64 get f2mRefitIntervalMs => $_getI64(25);
+  @$pb.TagNumber(32)
+  set f2mRefitIntervalMs($fixnum.Int64 value) => $_setInt64(25, value);
+  @$pb.TagNumber(32)
+  $core.bool hasF2mRefitIntervalMs() => $_has(25);
+  @$pb.TagNumber(32)
+  void clearF2mRefitIntervalMs() => $_clearField(32);
 }
 
 enum MarketMakingPricing_Pricing {
