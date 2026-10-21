@@ -49,6 +49,7 @@ class EtfLp extends $pb.GeneratedMessage {
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
     EtfLpState? state,
+    $core.bool? slowMode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -74,6 +75,7 @@ class EtfLp extends $pb.GeneratedMessage {
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
     if (state != null) result.state = state;
+    if (slowMode != null) result.slowMode = slowMode;
     return result;
   }
 
@@ -106,6 +108,7 @@ class EtfLp extends $pb.GeneratedMessage {
     ..aOB(24, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(25, _omitFieldNames ? '' : 'askEnabled')
     ..e<EtfLpState>(26, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: EtfLpState.ETF_LP_STATE_UNSPECIFIED, valueOf: EtfLpState.valueOf, enumValues: EtfLpState.values)
+    ..aOB(27, _omitFieldNames ? '' : 'slowMode')
     ..hasRequiredFields = false
   ;
 
@@ -361,6 +364,18 @@ class EtfLp extends $pb.GeneratedMessage {
   $core.bool hasState() => $_has(22);
   @$pb.TagNumber(26)
   void clearState() => $_clearField(26);
+
+  /// 저속 모드. true 면 전용 CPU 코어·호가 스레드 없이 메인 런타임에서 주기적으로 목표 오더북을 맞추고,
+  /// 발주를 LP 당 1초 5건(신규·정정·취소 합계)으로 제한한다. 속도보다 호가 유지가 목적인 LP 용.
+  /// LP 가 Idle/Error 일 때만 변경 가능.
+  @$pb.TagNumber(27)
+  $core.bool get slowMode => $_getBF(23);
+  @$pb.TagNumber(27)
+  set slowMode($core.bool value) => $_setBool(23, value);
+  @$pb.TagNumber(27)
+  $core.bool hasSlowMode() => $_has(23);
+  @$pb.TagNumber(27)
+  void clearSlowMode() => $_clearField(27);
 }
 
 /// 매수/매도 수량 한도
@@ -480,6 +495,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     $core.bool? pricingSourceLiquidityImbalanceGuardEnabled,
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
+    $core.bool? slowMode,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -505,6 +521,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     if (pricingSourceLiquidityImbalanceGuardEnabled != null) result.pricingSourceLiquidityImbalanceGuardEnabled = pricingSourceLiquidityImbalanceGuardEnabled;
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
+    if (slowMode != null) result.slowMode = slowMode;
     return result;
   }
 
@@ -537,6 +554,7 @@ class EtfLpStatus extends $pb.GeneratedMessage {
     ..aOB(25, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardEnabled')
     ..aOB(26, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(27, _omitFieldNames ? '' : 'askEnabled')
+    ..aOB(28, _omitFieldNames ? '' : 'slowMode')
     ..hasRequiredFields = false
   ;
 
@@ -793,6 +811,16 @@ class EtfLpStatus extends $pb.GeneratedMessage {
   $core.bool hasAskEnabled() => $_has(22);
   @$pb.TagNumber(27)
   void clearAskEnabled() => $_clearField(27);
+
+  /// 저속 모드 여부
+  @$pb.TagNumber(28)
+  $core.bool get slowMode => $_getBF(23);
+  @$pb.TagNumber(28)
+  set slowMode($core.bool value) => $_setBool(23, value);
+  @$pb.TagNumber(28)
+  $core.bool hasSlowMode() => $_has(23);
+  @$pb.TagNumber(28)
+  void clearSlowMode() => $_clearField(28);
 }
 
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -821,6 +849,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     PricingSourceLiquidityImbalanceGuardState? pricingSourceLiquidityImbalanceGuardState,
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
+    $core.bool? slowMode,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -846,6 +875,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     if (pricingSourceLiquidityImbalanceGuardState != null) result.pricingSourceLiquidityImbalanceGuardState = pricingSourceLiquidityImbalanceGuardState;
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
+    if (slowMode != null) result.slowMode = slowMode;
     return result;
   }
 
@@ -878,6 +908,7 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
     ..e<PricingSourceLiquidityImbalanceGuardState>(24, _omitFieldNames ? '' : 'pricingSourceLiquidityImbalanceGuardState', $pb.PbFieldType.OE, defaultOrMaker: PricingSourceLiquidityImbalanceGuardState.PRICING_SOURCE_LIQUIDITY_IMBALANCE_GUARD_STATE_UNSPECIFIED, valueOf: PricingSourceLiquidityImbalanceGuardState.valueOf, enumValues: PricingSourceLiquidityImbalanceGuardState.values)
     ..aOB(25, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(26, _omitFieldNames ? '' : 'askEnabled')
+    ..aOB(27, _omitFieldNames ? '' : 'slowMode')
     ..hasRequiredFields = false
   ;
 
@@ -1134,6 +1165,16 @@ class EtfLpStatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasAskEnabled() => $_has(22);
   @$pb.TagNumber(26)
   void clearAskEnabled() => $_clearField(26);
+
+  /// 저속 모드 여부 (변경 시에만 Some)
+  @$pb.TagNumber(27)
+  $core.bool get slowMode => $_getBF(23);
+  @$pb.TagNumber(27)
+  set slowMode($core.bool value) => $_setBool(23, value);
+  @$pb.TagNumber(27)
+  $core.bool hasSlowMode() => $_has(23);
+  @$pb.TagNumber(27)
+  void clearSlowMode() => $_clearField(27);
 }
 
 /// 자동 offset 조정 설정
@@ -2118,6 +2159,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $1.EtfPricing? pricing,
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
+    $core.bool? slowMode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2139,6 +2181,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (pricing != null) result.pricing = pricing;
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
+    if (slowMode != null) result.slowMode = slowMode;
     return result;
   }
 
@@ -2167,6 +2210,7 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..aOM<$1.EtfPricing>(18, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
     ..aOB(19, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(20, _omitFieldNames ? '' : 'askEnabled')
+    ..aOB(21, _omitFieldNames ? '' : 'slowMode')
     ..hasRequiredFields = false
   ;
 
@@ -2381,6 +2425,16 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   $core.bool hasAskEnabled() => $_has(18);
   @$pb.TagNumber(20)
   void clearAskEnabled() => $_clearField(20);
+
+  /// 저속 모드 (PATCH 시에만 명시). LP 가 Idle/Error 상태일 때만 변경 가능.
+  @$pb.TagNumber(21)
+  $core.bool get slowMode => $_getBF(19);
+  @$pb.TagNumber(21)
+  set slowMode($core.bool value) => $_setBool(19, value);
+  @$pb.TagNumber(21)
+  $core.bool hasSlowMode() => $_has(19);
+  @$pb.TagNumber(21)
+  void clearSlowMode() => $_clearField(21);
 }
 
 /// GetEtfLpStatus

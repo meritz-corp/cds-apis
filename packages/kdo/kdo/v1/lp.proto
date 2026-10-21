@@ -228,6 +228,11 @@ message EtfLp {
   // 현재 LP 런타임 상태 (응답 전용 — DB 비저장, 런타임 context 에서 derive).
   // context 미등록(enabled=false 등으로 서버에 등록되지 않은) LP 는 IDLE.
   EtfLpState state = 26;
+
+  // 저속 모드. true 면 전용 CPU 코어·호가 스레드 없이 메인 런타임에서 주기적으로 목표 오더북을 맞추고,
+  // 발주를 LP 당 1초 5건(신규·정정·취소 합계)으로 제한한다. 속도보다 호가 유지가 목적인 LP 용.
+  // LP 가 Idle/Error 일 때만 변경 가능.
+  bool slow_mode = 27;
 }
 
 // 매수/매도 수량 한도
@@ -326,6 +331,9 @@ message EtfLpStatus {
 
   // 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
   optional bool ask_enabled = 27;
+
+  // 저속 모드 여부
+  optional bool slow_mode = 28;
 }
 
 // ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
@@ -399,6 +407,9 @@ message EtfLpStatusUpdate {
 
   // 매도 호가 활성화 여부 (변경 시에만 Some)
   optional bool ask_enabled = 26;
+
+  // 저속 모드 여부 (변경 시에만 Some)
+  optional bool slow_mode = 27;
 }
 
 // pricing source 선물 1호가 잔량 imbalance guard 상태
@@ -716,6 +727,9 @@ message UpdateEtfLpRequest {
 
   // 매도 호가 활성화 여부 (PATCH 시에만 명시)
   optional bool ask_enabled = 20;
+
+  // 저속 모드 (PATCH 시에만 명시). LP 가 Idle/Error 상태일 때만 변경 가능.
+  optional bool slow_mode = 21;
 }
 
 

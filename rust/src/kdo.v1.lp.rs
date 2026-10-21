@@ -74,6 +74,11 @@ pub struct EtfLp {
     /// context 미등록(enabled=false 등으로 서버에 등록되지 않은) LP 는 IDLE.
     #[prost(enumeration="EtfLpState", tag="26")]
     pub state: i32,
+    /// 저속 모드. true 면 전용 CPU 코어·호가 스레드 없이 메인 런타임에서 주기적으로 목표 오더북을 맞추고,
+    /// 발주를 LP 당 1초 5건(신규·정정·취소 합계)으로 제한한다. 속도보다 호가 유지가 목적인 LP 용.
+    /// LP 가 Idle/Error 일 때만 변경 가능.
+    #[prost(bool, tag="27")]
+    pub slow_mode: bool,
 }
 /// 매수/매도 수량 한도
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -170,6 +175,9 @@ pub struct EtfLpStatus {
     /// 매도 호가 활성화 여부 (enabled=true 일 때만 적용. false=매도 호가 중단)
     #[prost(bool, optional, tag="27")]
     pub ask_enabled: ::core::option::Option<bool>,
+    /// 저속 모드 여부
+    #[prost(bool, optional, tag="28")]
+    pub slow_mode: ::core::option::Option<bool>,
 }
 /// ETF LP 상태 업데이트 메시지 (변화된 필드만 포함)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -243,6 +251,9 @@ pub struct EtfLpStatusUpdate {
     /// 매도 호가 활성화 여부 (변경 시에만 Some)
     #[prost(bool, optional, tag="26")]
     pub ask_enabled: ::core::option::Option<bool>,
+    /// 저속 모드 여부 (변경 시에만 Some)
+    #[prost(bool, optional, tag="27")]
+    pub slow_mode: ::core::option::Option<bool>,
 }
 /// 자동 offset 조정 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -530,6 +541,9 @@ pub struct UpdateEtfLpRequest {
     /// 매도 호가 활성화 여부 (PATCH 시에만 명시)
     #[prost(bool, optional, tag="20")]
     pub ask_enabled: ::core::option::Option<bool>,
+    /// 저속 모드 (PATCH 시에만 명시). LP 가 Idle/Error 상태일 때만 변경 가능.
+    #[prost(bool, optional, tag="21")]
+    pub slow_mode: ::core::option::Option<bool>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]

@@ -626,6 +626,9 @@ impl serde::Serialize for EtfLp {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLp", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -706,6 +709,9 @@ impl serde::Serialize for EtfLp {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.state)))?;
             struct_ser.serialize_field("state", &v)?;
         }
+        if true {
+            struct_ser.serialize_field("slow_mode", &self.slow_mode)?;
+        }
         struct_ser.end()
     }
 }
@@ -757,6 +763,8 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             "ask_enabled",
             "askEnabled",
             "state",
+            "slow_mode",
+            "slowMode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -784,6 +792,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
             BidEnabled,
             AskEnabled,
             State,
+            SlowMode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -829,6 +838,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
                             "state" => Ok(GeneratedField::State),
+                            "slowMode" | "slow_mode" => Ok(GeneratedField::SlowMode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -871,6 +881,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
                 let mut state__ = None;
+                let mut slow_mode__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -1033,6 +1044,12 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                             }
                             state__ = Some(map_.next_value::<EtfLpState>()? as i32);
                         }
+                        GeneratedField::SlowMode => {
+                            if slow_mode__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slowMode"));
+                            }
+                            slow_mode__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1062,6 +1079,7 @@ impl<'de> serde::Deserialize<'de> for EtfLp {
                     bid_enabled: bid_enabled__.unwrap_or_default(),
                     ask_enabled: ask_enabled__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
+                    slow_mode: slow_mode__.unwrap_or_default(),
                 })
             }
         }
@@ -1860,6 +1878,9 @@ impl serde::Serialize for EtfLpStatus {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.EtfLpStatus", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -1938,6 +1959,9 @@ impl serde::Serialize for EtfLpStatus {
         if let Some(v) = self.ask_enabled.as_ref() {
             struct_ser.serialize_field("ask_enabled", v)?;
         }
+        if let Some(v) = self.slow_mode.as_ref() {
+            struct_ser.serialize_field("slow_mode", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1990,6 +2014,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
+            "slow_mode",
+            "slowMode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2017,6 +2043,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
             PricingSourceLiquidityImbalanceGuardEnabled,
             BidEnabled,
             AskEnabled,
+            SlowMode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2062,6 +2089,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             "pricingSourceLiquidityImbalanceGuardEnabled" | "pricing_source_liquidity_imbalance_guard_enabled" => Ok(GeneratedField::PricingSourceLiquidityImbalanceGuardEnabled),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
+                            "slowMode" | "slow_mode" => Ok(GeneratedField::SlowMode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2104,6 +2132,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                 let mut pricing_source_liquidity_imbalance_guard_enabled__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
+                let mut slow_mode__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -2266,6 +2295,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                             }
                             ask_enabled__ = map_.next_value()?;
                         }
+                        GeneratedField::SlowMode => {
+                            if slow_mode__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slowMode"));
+                            }
+                            slow_mode__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2295,6 +2330,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatus {
                     pricing_source_liquidity_imbalance_guard_enabled: pricing_source_liquidity_imbalance_guard_enabled__.unwrap_or_default(),
                     bid_enabled: bid_enabled__,
                     ask_enabled: ask_enabled__,
+                    slow_mode: slow_mode__,
                 })
             }
         }
@@ -2309,6 +2345,9 @@ impl serde::Serialize for EtfLpStatusUpdate {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -2458,6 +2497,9 @@ impl serde::Serialize for EtfLpStatusUpdate {
         if let Some(v) = self.ask_enabled.as_ref() {
             struct_ser.serialize_field("ask_enabled", v)?;
         }
+        if let Some(v) = self.slow_mode.as_ref() {
+            struct_ser.serialize_field("slow_mode", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2510,6 +2552,8 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
+            "slow_mode",
+            "slowMode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2537,6 +2581,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
             PricingSourceLiquidityImbalanceGuardState,
             BidEnabled,
             AskEnabled,
+            SlowMode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2582,6 +2627,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             "pricingSourceLiquidityImbalanceGuardState" | "pricing_source_liquidity_imbalance_guard_state" => Ok(GeneratedField::PricingSourceLiquidityImbalanceGuardState),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
+                            "slowMode" | "slow_mode" => Ok(GeneratedField::SlowMode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2624,6 +2670,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                 let mut pricing_source_liquidity_imbalance_guard_state__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
+                let mut slow_mode__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::EtfSymbol => {
@@ -2786,6 +2833,12 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                             }
                             ask_enabled__ = map_.next_value()?;
                         }
+                        GeneratedField::SlowMode => {
+                            if slow_mode__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slowMode"));
+                            }
+                            slow_mode__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2815,6 +2868,7 @@ impl<'de> serde::Deserialize<'de> for EtfLpStatusUpdate {
                     pricing_source_liquidity_imbalance_guard_state: pricing_source_liquidity_imbalance_guard_state__,
                     bid_enabled: bid_enabled__,
                     ask_enabled: ask_enabled__,
+                    slow_mode: slow_mode__,
                 })
             }
         }
@@ -6784,6 +6838,9 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.lp.UpdateEtfLpRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -6848,6 +6905,9 @@ impl serde::Serialize for UpdateEtfLpRequest {
         if let Some(v) = self.ask_enabled.as_ref() {
             struct_ser.serialize_field("ask_enabled", v)?;
         }
+        if let Some(v) = self.slow_mode.as_ref() {
+            struct_ser.serialize_field("slow_mode", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -6892,6 +6952,8 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             "bidEnabled",
             "ask_enabled",
             "askEnabled",
+            "slow_mode",
+            "slowMode",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6915,6 +6977,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
             Pricing,
             BidEnabled,
             AskEnabled,
+            SlowMode,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6956,6 +7019,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             "pricing" => Ok(GeneratedField::Pricing),
                             "bidEnabled" | "bid_enabled" => Ok(GeneratedField::BidEnabled),
                             "askEnabled" | "ask_enabled" => Ok(GeneratedField::AskEnabled),
+                            "slowMode" | "slow_mode" => Ok(GeneratedField::SlowMode),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6994,6 +7058,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                 let mut pricing__ = None;
                 let mut bid_enabled__ = None;
                 let mut ask_enabled__ = None;
+                let mut slow_mode__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -7128,6 +7193,12 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                             }
                             ask_enabled__ = map_.next_value()?;
                         }
+                        GeneratedField::SlowMode => {
+                            if slow_mode__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slowMode"));
+                            }
+                            slow_mode__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -7153,6 +7224,7 @@ impl<'de> serde::Deserialize<'de> for UpdateEtfLpRequest {
                     pricing: pricing__,
                     bid_enabled: bid_enabled__,
                     ask_enabled: ask_enabled__,
+                    slow_mode: slow_mode__,
                 })
             }
         }
