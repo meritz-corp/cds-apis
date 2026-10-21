@@ -1684,6 +1684,7 @@ class ListPairV2ExecutionLogsRequest extends $pb.GeneratedMessage {
     PairV2ExecutionOutcome? outcome,
     $2.Timestamp? dispatchedFrom,
     $2.Timestamp? dispatchedTo,
+    $core.int? tradingDay,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
@@ -1692,6 +1693,7 @@ class ListPairV2ExecutionLogsRequest extends $pb.GeneratedMessage {
     if (outcome != null) result.outcome = outcome;
     if (dispatchedFrom != null) result.dispatchedFrom = dispatchedFrom;
     if (dispatchedTo != null) result.dispatchedTo = dispatchedTo;
+    if (tradingDay != null) result.tradingDay = tradingDay;
     return result;
   }
 
@@ -1707,6 +1709,7 @@ class ListPairV2ExecutionLogsRequest extends $pb.GeneratedMessage {
     ..e<PairV2ExecutionOutcome>(4, _omitFieldNames ? '' : 'outcome', $pb.PbFieldType.OE, defaultOrMaker: PairV2ExecutionOutcome.PAIR_V2_EXECUTION_OUTCOME_UNSPECIFIED, valueOf: PairV2ExecutionOutcome.valueOf, enumValues: PairV2ExecutionOutcome.values)
     ..aOM<$2.Timestamp>(5, _omitFieldNames ? '' : 'dispatchedFrom', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(6, _omitFieldNames ? '' : 'dispatchedTo', subBuilder: $2.Timestamp.create)
+    ..a<$core.int>(7, _omitFieldNames ? '' : 'tradingDay', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1791,6 +1794,17 @@ class ListPairV2ExecutionLogsRequest extends $pb.GeneratedMessage {
   void clearDispatchedTo() => $_clearField(6);
   @$pb.TagNumber(6)
   $2.Timestamp ensureDispatchedTo() => $_ensure(5);
+
+  /// 발주 영업일 (YYYYMMDD 정수, KST) — dispatched_at 을 그날 KST 00:00~24:00 으로 거른다.
+  /// dispatched_from/to 와 같이 주면 두 조건을 모두 적용한다. 미지정 시 날짜 제한 없음.
+  @$pb.TagNumber(7)
+  $core.int get tradingDay => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set tradingDay($core.int value) => $_setSignedInt32(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasTradingDay() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearTradingDay() => $_clearField(7);
 }
 
 class ListPairV2ExecutionLogsResponse extends $pb.GeneratedMessage {

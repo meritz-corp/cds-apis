@@ -539,12 +539,14 @@ const ListPairV2ExecutionLogsRequest$json = {
     {'1': 'outcome', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2ExecutionOutcome', '10': 'outcome'},
     {'1': 'dispatched_from', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '9': 2, '10': 'dispatchedFrom', '17': true},
     {'1': 'dispatched_to', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '9': 3, '10': 'dispatchedTo', '17': true},
+    {'1': 'trading_day', '3': 7, '4': 1, '5': 5, '9': 4, '10': 'tradingDay', '17': true},
   ],
   '8': [
     {'1': '_page_size'},
     {'1': '_page_token'},
     {'1': '_dispatched_from'},
     {'1': '_dispatched_to'},
+    {'1': '_trading_day'},
   ],
 };
 
@@ -556,8 +558,9 @@ final $typed_data.Uint8List listPairV2ExecutionLogsRequestDescriptor = $convert.
     'Rjb21lGAQgASgOMiYua2RvLnYxLnBhaXJfdjIuUGFpclYyRXhlY3V0aW9uT3V0Y29tZVIHb3V0'
     'Y29tZRJICg9kaXNwYXRjaGVkX2Zyb20YBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW'
     '1wSAJSDmRpc3BhdGNoZWRGcm9tiAEBEkQKDWRpc3BhdGNoZWRfdG8YBiABKAsyGi5nb29nbGUu'
-    'cHJvdG9idWYuVGltZXN0YW1wSANSDGRpc3BhdGNoZWRUb4gBAUIMCgpfcGFnZV9zaXplQg0KC1'
-    '9wYWdlX3Rva2VuQhIKEF9kaXNwYXRjaGVkX2Zyb21CEAoOX2Rpc3BhdGNoZWRfdG8=');
+    'cHJvdG9idWYuVGltZXN0YW1wSANSDGRpc3BhdGNoZWRUb4gBARIkCgt0cmFkaW5nX2RheRgHIA'
+    'EoBUgEUgp0cmFkaW5nRGF5iAEBQgwKCl9wYWdlX3NpemVCDQoLX3BhZ2VfdG9rZW5CEgoQX2Rp'
+    'c3BhdGNoZWRfZnJvbUIQCg5fZGlzcGF0Y2hlZF90b0IOCgxfdHJhZGluZ19kYXk=');
 
 @$core.Deprecated('Use listPairV2ExecutionLogsResponseDescriptor instead')
 const ListPairV2ExecutionLogsResponse$json = {

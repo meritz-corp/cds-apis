@@ -84,7 +84,8 @@ service PairV2Service {
     option (google.api.method_signature) = "pair_v2";
   }
 
-  // PairV2 실행 로그 목록 조회 (발사/스킵 시점 스냅샷, 페이징)
+  // PairV2 실행 로그 목록 조회 (발사 시점 스냅샷, 페이징). 스킵은 기록하지 않는다 —
+  // 발사를 막는 사유는 StreamPairV2Status.block_reason 으로 실시간 노출된다.
   rpc ListPairV2ExecutionLogs(ListPairV2ExecutionLogsRequest) returns (ListPairV2ExecutionLogsResponse) {
     option (google.api.http) = {
       get: "/v1/{pair_v2=pair_v2s/*}/executionLogs"
@@ -582,11 +583,11 @@ enum PairV2ExecutionOutcome {
   PAIR_V2_EXECUTION_OUTCOME_UNSPECIFIED = 0;
   // 양 다리 모두 제출 성공
   PAIR_V2_EXECUTION_OUTCOME_SUBMITTED = 1;
-  // 쿨다운 미충족
+  // 쿨다운 미충족 (v2 서버는 기록하지 않음 — 발사 차단 사유는 StreamPairV2Status.block_reason)
   PAIR_V2_EXECUTION_OUTCOME_SKIPPED_COOLDOWN = 2;
-  // base 누적(체결+미체결)이 max_base_quantity 도달
+  // base 누적(체결+미체결)이 max_base_quantity 도달 (v2 서버는 기록하지 않음)
   PAIR_V2_EXECUTION_OUTCOME_SKIPPED_MAX_QUANTITY = 3;
-  // 한쪽 호가 미형성 등으로 스프레드 산출 불가
+  // 한쪽 호가 미형성 등으로 스프레드 산출 불가 (v2 서버는 기록하지 않음)
   PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE = 4;
   // 한 다리만 제출 성공 — 반대 다리 없이 노출이 남는다
   PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE = 5;
@@ -618,6 +619,10 @@ message ListPairV2ExecutionLogsRequest {
 
   // 발주 시각 범위 끝 (exclusive). 미지정 시 상한 없음.
   optional google.protobuf.Timestamp dispatched_to = 6;
+
+  // 발주 영업일 (YYYYMMDD 정수, KST) — dispatched_at 을 그날 KST 00:00~24:00 으로 거른다.
+  // dispatched_from/to 와 같이 주면 두 조건을 모두 적용한다. 미지정 시 날짜 제한 없음.
+  optional int32 trading_day = 7;
 }
 
 message ListPairV2ExecutionLogsResponse {

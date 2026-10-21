@@ -68,11 +68,11 @@ class PairV2ExecutionOutcome extends $pb.ProtobufEnum {
   static const PairV2ExecutionOutcome PAIR_V2_EXECUTION_OUTCOME_UNSPECIFIED = PairV2ExecutionOutcome._(0, _omitEnumNames ? '' : 'PAIR_V2_EXECUTION_OUTCOME_UNSPECIFIED');
   /// 양 다리 모두 제출 성공
   static const PairV2ExecutionOutcome PAIR_V2_EXECUTION_OUTCOME_SUBMITTED = PairV2ExecutionOutcome._(1, _omitEnumNames ? '' : 'PAIR_V2_EXECUTION_OUTCOME_SUBMITTED');
-  /// 쿨다운 미충족
+  /// 쿨다운 미충족 (v2 서버는 기록하지 않음 — 발사 차단 사유는 StreamPairV2Status.block_reason)
   static const PairV2ExecutionOutcome PAIR_V2_EXECUTION_OUTCOME_SKIPPED_COOLDOWN = PairV2ExecutionOutcome._(2, _omitEnumNames ? '' : 'PAIR_V2_EXECUTION_OUTCOME_SKIPPED_COOLDOWN');
-  /// base 누적(체결+미체결)이 max_base_quantity 도달
+  /// base 누적(체결+미체결)이 max_base_quantity 도달 (v2 서버는 기록하지 않음)
   static const PairV2ExecutionOutcome PAIR_V2_EXECUTION_OUTCOME_SKIPPED_MAX_QUANTITY = PairV2ExecutionOutcome._(3, _omitEnumNames ? '' : 'PAIR_V2_EXECUTION_OUTCOME_SKIPPED_MAX_QUANTITY');
-  /// 한쪽 호가 미형성 등으로 스프레드 산출 불가
+  /// 한쪽 호가 미형성 등으로 스프레드 산출 불가 (v2 서버는 기록하지 않음)
   static const PairV2ExecutionOutcome PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE = PairV2ExecutionOutcome._(4, _omitEnumNames ? '' : 'PAIR_V2_EXECUTION_OUTCOME_SKIPPED_PRICE_UNAVAILABLE');
   /// 한 다리만 제출 성공 — 반대 다리 없이 노출이 남는다
   static const PairV2ExecutionOutcome PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE = PairV2ExecutionOutcome._(5, _omitEnumNames ? '' : 'PAIR_V2_EXECUTION_OUTCOME_PARTIAL_FAILURE');

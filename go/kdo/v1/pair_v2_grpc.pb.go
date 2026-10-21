@@ -37,7 +37,8 @@ type PairV2ServiceClient interface {
 	ActivatePairV2(ctx context.Context, in *ActivatePairV2Request, opts ...grpc.CallOption) (*PairV2, error)
 	// PairV2 일시 중지 (hot loop 중지, status → PAUSED)
 	PausePairV2(ctx context.Context, in *PausePairV2Request, opts ...grpc.CallOption) (*PairV2, error)
-	// PairV2 실행 로그 목록 조회 (발사/스킵 시점 스냅샷, 페이징)
+	// PairV2 실행 로그 목록 조회 (발사 시점 스냅샷, 페이징). 스킵은 기록하지 않는다 —
+	// 발사를 막는 사유는 StreamPairV2Status.block_reason 으로 실시간 노출된다.
 	ListPairV2ExecutionLogs(ctx context.Context, in *ListPairV2ExecutionLogsRequest, opts ...grpc.CallOption) (*ListPairV2ExecutionLogsResponse, error)
 	// PairV2 실시간 운영 단계(phase) 스트리밍 (변경 시마다 emit)
 	StreamPairV2Status(ctx context.Context, in *StreamPairV2StatusRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2StatusClient, error)
@@ -314,7 +315,8 @@ type PairV2ServiceServer interface {
 	ActivatePairV2(context.Context, *ActivatePairV2Request) (*PairV2, error)
 	// PairV2 일시 중지 (hot loop 중지, status → PAUSED)
 	PausePairV2(context.Context, *PausePairV2Request) (*PairV2, error)
-	// PairV2 실행 로그 목록 조회 (발사/스킵 시점 스냅샷, 페이징)
+	// PairV2 실행 로그 목록 조회 (발사 시점 스냅샷, 페이징). 스킵은 기록하지 않는다 —
+	// 발사를 막는 사유는 StreamPairV2Status.block_reason 으로 실시간 노출된다.
 	ListPairV2ExecutionLogs(context.Context, *ListPairV2ExecutionLogsRequest) (*ListPairV2ExecutionLogsResponse, error)
 	// PairV2 실시간 운영 단계(phase) 스트리밍 (변경 시마다 emit)
 	StreamPairV2Status(*StreamPairV2StatusRequest, PairV2Service_StreamPairV2StatusServer) error

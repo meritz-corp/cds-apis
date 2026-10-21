@@ -1289,6 +1289,9 @@ impl serde::Serialize for ListPairV2ExecutionLogsRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.ListPairV2ExecutionLogsRequest", len)?;
         if true {
             struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
@@ -1309,6 +1312,9 @@ impl serde::Serialize for ListPairV2ExecutionLogsRequest {
         }
         if let Some(v) = self.dispatched_to.as_ref() {
             struct_ser.serialize_field("dispatched_to", v)?;
+        }
+        if let Some(v) = self.trading_day.as_ref() {
+            struct_ser.serialize_field("trading_day", v)?;
         }
         struct_ser.end()
     }
@@ -1331,6 +1337,8 @@ impl<'de> serde::Deserialize<'de> for ListPairV2ExecutionLogsRequest {
             "dispatchedFrom",
             "dispatched_to",
             "dispatchedTo",
+            "trading_day",
+            "tradingDay",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1341,6 +1349,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2ExecutionLogsRequest {
             Outcome,
             DispatchedFrom,
             DispatchedTo,
+            TradingDay,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1369,6 +1378,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2ExecutionLogsRequest {
                             "outcome" => Ok(GeneratedField::Outcome),
                             "dispatchedFrom" | "dispatched_from" => Ok(GeneratedField::DispatchedFrom),
                             "dispatchedTo" | "dispatched_to" => Ok(GeneratedField::DispatchedTo),
+                            "tradingDay" | "trading_day" => Ok(GeneratedField::TradingDay),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1394,6 +1404,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2ExecutionLogsRequest {
                 let mut outcome__ = None;
                 let mut dispatched_from__ = None;
                 let mut dispatched_to__ = None;
+                let mut trading_day__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairV2 => {
@@ -1434,6 +1445,14 @@ impl<'de> serde::Deserialize<'de> for ListPairV2ExecutionLogsRequest {
                             }
                             dispatched_to__ = map_.next_value()?;
                         }
+                        GeneratedField::TradingDay => {
+                            if trading_day__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradingDay"));
+                            }
+                            trading_day__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1446,6 +1465,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2ExecutionLogsRequest {
                     outcome: outcome__.unwrap_or_default(),
                     dispatched_from: dispatched_from__,
                     dispatched_to: dispatched_to__,
+                    trading_day: trading_day__,
                 })
             }
         }

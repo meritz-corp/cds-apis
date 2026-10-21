@@ -77,7 +77,8 @@ class PairV2ServiceClient extends $grpc.Client {
     return $createUnaryCall(_$pausePairV2, request, options: options);
   }
 
-  /// PairV2 실행 로그 목록 조회 (발사/스킵 시점 스냅샷, 페이징)
+  /// PairV2 실행 로그 목록 조회 (발사 시점 스냅샷, 페이징). 스킵은 기록하지 않는다 —
+  /// 발사를 막는 사유는 StreamPairV2Status.block_reason 으로 실시간 노출된다.
   $grpc.ResponseFuture<$0.ListPairV2ExecutionLogsResponse> listPairV2ExecutionLogs($0.ListPairV2ExecutionLogsRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$listPairV2ExecutionLogs, request, options: options);
   }

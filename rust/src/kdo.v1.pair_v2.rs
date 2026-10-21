@@ -401,6 +401,10 @@ pub struct ListPairV2ExecutionLogsRequest {
     /// 발주 시각 범위 끝 (exclusive). 미지정 시 상한 없음.
     #[prost(message, optional, tag="6")]
     pub dispatched_to: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 발주 영업일 (YYYYMMDD 정수, KST) — dispatched_at 을 그날 KST 00:00~24:00 으로 거른다.
+    /// dispatched_from/to 와 같이 주면 두 조건을 모두 적용한다. 미지정 시 날짜 제한 없음.
+    #[prost(int32, optional, tag="7")]
+    pub trading_day: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -758,11 +762,11 @@ pub enum PairV2ExecutionOutcome {
     Unspecified = 0,
     /// 양 다리 모두 제출 성공
     Submitted = 1,
-    /// 쿨다운 미충족
+    /// 쿨다운 미충족 (v2 서버는 기록하지 않음 — 발사 차단 사유는 StreamPairV2Status.block_reason)
     SkippedCooldown = 2,
-    /// base 누적(체결+미체결)이 max_base_quantity 도달
+    /// base 누적(체결+미체결)이 max_base_quantity 도달 (v2 서버는 기록하지 않음)
     SkippedMaxQuantity = 3,
-    /// 한쪽 호가 미형성 등으로 스프레드 산출 불가
+    /// 한쪽 호가 미형성 등으로 스프레드 산출 불가 (v2 서버는 기록하지 않음)
     SkippedPriceUnavailable = 4,
     /// 한 다리만 제출 성공 — 반대 다리 없이 노출이 남는다
     PartialFailure = 5,
