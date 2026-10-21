@@ -367,7 +367,7 @@ class EtfLp extends $pb.GeneratedMessage {
 
   /// 저속 모드. true 면 전용 CPU 코어·호가 스레드 없이 메인 런타임에서 주기적으로 목표 오더북을 맞추고,
   /// 발주를 LP 당 1초 5건(신규·정정·취소 합계)으로 제한한다. 속도보다 호가 유지가 목적인 LP 용.
-  /// LP 가 Idle/Error 일 때만 변경 가능.
+  /// 기동 때 확정된다 — 런타임에 바꿀 수 없다(UpdateEtfLp 대상 아님). 바꾸려면 DB(master.etf_lp.slow_mode) 수정 후 서버 재기동.
   @$pb.TagNumber(27)
   $core.bool get slowMode => $_getBF(23);
   @$pb.TagNumber(27)
@@ -2159,7 +2159,6 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     $1.EtfPricing? pricing,
     $core.bool? bidEnabled,
     $core.bool? askEnabled,
-    $core.bool? slowMode,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -2181,7 +2180,6 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     if (pricing != null) result.pricing = pricing;
     if (bidEnabled != null) result.bidEnabled = bidEnabled;
     if (askEnabled != null) result.askEnabled = askEnabled;
-    if (slowMode != null) result.slowMode = slowMode;
     return result;
   }
 
@@ -2210,7 +2208,6 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
     ..aOM<$1.EtfPricing>(18, _omitFieldNames ? '' : 'pricing', subBuilder: $1.EtfPricing.create)
     ..aOB(19, _omitFieldNames ? '' : 'bidEnabled')
     ..aOB(20, _omitFieldNames ? '' : 'askEnabled')
-    ..aOB(21, _omitFieldNames ? '' : 'slowMode')
     ..hasRequiredFields = false
   ;
 
@@ -2425,16 +2422,6 @@ class UpdateEtfLpRequest extends $pb.GeneratedMessage {
   $core.bool hasAskEnabled() => $_has(18);
   @$pb.TagNumber(20)
   void clearAskEnabled() => $_clearField(20);
-
-  /// 저속 모드 (PATCH 시에만 명시). LP 가 Idle/Error 상태일 때만 변경 가능.
-  @$pb.TagNumber(21)
-  $core.bool get slowMode => $_getBF(19);
-  @$pb.TagNumber(21)
-  set slowMode($core.bool value) => $_setBool(19, value);
-  @$pb.TagNumber(21)
-  $core.bool hasSlowMode() => $_has(19);
-  @$pb.TagNumber(21)
-  void clearSlowMode() => $_clearField(21);
 }
 
 /// GetEtfLpStatus

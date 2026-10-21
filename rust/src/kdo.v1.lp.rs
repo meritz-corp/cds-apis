@@ -76,7 +76,7 @@ pub struct EtfLp {
     pub state: i32,
     /// 저속 모드. true 면 전용 CPU 코어·호가 스레드 없이 메인 런타임에서 주기적으로 목표 오더북을 맞추고,
     /// 발주를 LP 당 1초 5건(신규·정정·취소 합계)으로 제한한다. 속도보다 호가 유지가 목적인 LP 용.
-    /// LP 가 Idle/Error 일 때만 변경 가능.
+    /// 기동 때 확정된다 — 런타임에 바꿀 수 없다(UpdateEtfLp 대상 아님). 바꾸려면 DB(master.etf_lp.slow_mode) 수정 후 서버 재기동.
     #[prost(bool, tag="27")]
     pub slow_mode: bool,
 }
@@ -541,9 +541,6 @@ pub struct UpdateEtfLpRequest {
     /// 매도 호가 활성화 여부 (PATCH 시에만 명시)
     #[prost(bool, optional, tag="20")]
     pub ask_enabled: ::core::option::Option<bool>,
-    /// 저속 모드 (PATCH 시에만 명시). LP 가 Idle/Error 상태일 때만 변경 가능.
-    #[prost(bool, optional, tag="21")]
-    pub slow_mode: ::core::option::Option<bool>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
