@@ -607,6 +607,10 @@ pub struct ListPairV2OrdersRequest {
     /// true 면 살아있는(접수/부분체결) 주문만
     #[prost(bool, tag="4")]
     pub live_only: bool,
+    /// 주문 생성 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 전체 기간.
+    /// live_only=true 와 함께 주면 무시한다 — 살아있는 주문은 날짜와 무관하게 전부 반환.
+    #[prost(int32, optional, tag="5")]
+    pub trading_day: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -616,7 +620,7 @@ pub struct ListPairV2OrdersResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-/// leg별 누적 집계
+/// leg별 집계 — 발주/체결은 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PairV2LegSummary {
@@ -624,24 +628,25 @@ pub struct PairV2LegSummary {
     pub slot: i32,
     #[prost(string, tag="2")]
     pub symbol: ::prost::alloc::string::String,
-    /// 누적 발주 수량
+    /// 기준 영업일 발주 수량 (신규 주문만 — 정정은 잔량 이동이라 제외)
     #[prost(int64, tag="3")]
     pub ordered_quantity: i64,
-    /// 누적 체결 수량
+    /// 기준 영업일 체결 수량
     #[prost(int64, tag="4")]
     pub filled_quantity: i64,
-    /// 살아있는 미체결 합
+    /// 살아있는 미체결 합 — 기준 영업일과 무관하게 전체
     #[prost(int64, tag="5")]
     pub remaining_quantity: i64,
+    /// 기준 영업일 가중평균 체결가 (체결 없으면 빈 문자열)
     #[prost(string, tag="6")]
     pub average_fill_price: ::prost::alloc::string::String,
-    /// 체결금액 (원)
+    /// 기준 영업일 체결금액 (원)
     #[prost(int64, tag="7")]
     pub filled_amount: i64,
     /// 참조 현재가 (조회 시점, 없으면 빈 문자열)
     #[prost(string, tag="8")]
     pub reference_price: ::prost::alloc::string::String,
-    /// 미체결 × 참조가
+    /// 미체결 × 참조가 (remaining_quantity 와 같이 날짜 무관)
     #[prost(int64, tag="9")]
     pub remaining_amount: i64,
 }
@@ -650,13 +655,20 @@ pub struct PairV2LegSummary {
 pub struct GetPairV2OrderSummaryRequest {
     #[prost(string, tag="1")]
     pub pair_v2: ::prost::alloc::string::String,
+    /// 집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.
+    /// 발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
+    /// 살아있는 주문 전체, launch_count 는 실행 세션 기준이다.
+    /// StreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).
+    #[prost(int32, optional, tag="2")]
+    pub trading_day: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPairV2OrderSummaryResponse {
     #[prost(message, repeated, tag="1")]
     pub legs: ::prost::alloc::vec::Vec<PairV2LegSummary>,
-    /// 세션 발사 횟수 (실행 중 아니면 0)
+    /// 실행 세션 발사 횟수 — 영업일(trading_day)과 무관. 일시정지해도 유지되고,
+    /// 세션 초기화(ResetPairV2Session)·서버 재기동 시 0 부터 다시 센다.
     #[prost(uint32, tag="2")]
     pub launch_count: u32,
 }
@@ -904,6 +916,9 @@ pub enum PairV2OrderStatus {
     Amended = 5,
     Cancelled = 6,
     Rejected = 7,
+    /// 장 마감 소멸 — 당일 유효 주문이 체결/취소 확인 없이 영업일을 넘김.
+    /// 거래소는 소멸을 따로 통보하지 않으므로 서버 기동 시 전 영업일 이전의 미종결 주문을 이 상태로 닫는다.
+    Expired = 8,
 }
 impl PairV2OrderStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -920,6 +935,7 @@ impl PairV2OrderStatus {
             PairV2OrderStatus::Amended => "PAIR_V2_ORDER_STATUS_AMENDED",
             PairV2OrderStatus::Cancelled => "PAIR_V2_ORDER_STATUS_CANCELLED",
             PairV2OrderStatus::Rejected => "PAIR_V2_ORDER_STATUS_REJECTED",
+            PairV2OrderStatus::Expired => "PAIR_V2_ORDER_STATUS_EXPIRED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -933,6 +949,7 @@ impl PairV2OrderStatus {
             "PAIR_V2_ORDER_STATUS_AMENDED" => Some(Self::Amended),
             "PAIR_V2_ORDER_STATUS_CANCELLED" => Some(Self::Cancelled),
             "PAIR_V2_ORDER_STATUS_REJECTED" => Some(Self::Rejected),
+            "PAIR_V2_ORDER_STATUS_EXPIRED" => Some(Self::Expired),
             _ => None,
         }
     }

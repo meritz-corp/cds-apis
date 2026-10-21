@@ -739,9 +739,15 @@ impl serde::Serialize for GetPairV2OrderSummaryRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.GetPairV2OrderSummaryRequest", len)?;
         if true {
             struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
+        }
+        if let Some(v) = self.trading_day.as_ref() {
+            struct_ser.serialize_field("trading_day", v)?;
         }
         struct_ser.end()
     }
@@ -755,11 +761,14 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryRequest {
         const FIELDS: &[&str] = &[
             "pair_v2",
             "pairV2",
+            "trading_day",
+            "tradingDay",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             PairV2,
+            TradingDay,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -783,6 +792,7 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryRequest {
                     {
                         match value {
                             "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
+                            "tradingDay" | "trading_day" => Ok(GeneratedField::TradingDay),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -803,6 +813,7 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryRequest {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut pair_v2__ = None;
+                let mut trading_day__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairV2 => {
@@ -811,6 +822,14 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryRequest {
                             }
                             pair_v2__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::TradingDay => {
+                            if trading_day__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradingDay"));
+                            }
+                            trading_day__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -818,6 +837,7 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryRequest {
                 }
                 Ok(GetPairV2OrderSummaryRequest {
                     pair_v2: pair_v2__.unwrap_or_default(),
+                    trading_day: trading_day__,
                 })
             }
         }
@@ -1586,6 +1606,9 @@ impl serde::Serialize for ListPairV2OrdersRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.ListPairV2OrdersRequest", len)?;
         if true {
             struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
@@ -1598,6 +1621,9 @@ impl serde::Serialize for ListPairV2OrdersRequest {
         }
         if true {
             struct_ser.serialize_field("live_only", &self.live_only)?;
+        }
+        if let Some(v) = self.trading_day.as_ref() {
+            struct_ser.serialize_field("trading_day", v)?;
         }
         struct_ser.end()
     }
@@ -1617,6 +1643,8 @@ impl<'de> serde::Deserialize<'de> for ListPairV2OrdersRequest {
             "pageToken",
             "live_only",
             "liveOnly",
+            "trading_day",
+            "tradingDay",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1625,6 +1653,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2OrdersRequest {
             PageSize,
             PageToken,
             LiveOnly,
+            TradingDay,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1651,6 +1680,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2OrdersRequest {
                             "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
                             "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
                             "liveOnly" | "live_only" => Ok(GeneratedField::LiveOnly),
+                            "tradingDay" | "trading_day" => Ok(GeneratedField::TradingDay),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1674,6 +1704,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2OrdersRequest {
                 let mut page_size__ = None;
                 let mut page_token__ = None;
                 let mut live_only__ = None;
+                let mut trading_day__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairV2 => {
@@ -1702,6 +1733,14 @@ impl<'de> serde::Deserialize<'de> for ListPairV2OrdersRequest {
                             }
                             live_only__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::TradingDay => {
+                            if trading_day__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("tradingDay"));
+                            }
+                            trading_day__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1712,6 +1751,7 @@ impl<'de> serde::Deserialize<'de> for ListPairV2OrdersRequest {
                     page_size: page_size__,
                     page_token: page_token__,
                     live_only: live_only__.unwrap_or_default(),
+                    trading_day: trading_day__,
                 })
             }
         }
@@ -4588,6 +4628,7 @@ impl serde::Serialize for PairV2OrderStatus {
             Self::Amended => "PAIR_V2_ORDER_STATUS_AMENDED",
             Self::Cancelled => "PAIR_V2_ORDER_STATUS_CANCELLED",
             Self::Rejected => "PAIR_V2_ORDER_STATUS_REJECTED",
+            Self::Expired => "PAIR_V2_ORDER_STATUS_EXPIRED",
         };
         serializer.serialize_str(variant)
     }
@@ -4607,6 +4648,7 @@ impl<'de> serde::Deserialize<'de> for PairV2OrderStatus {
             "PAIR_V2_ORDER_STATUS_AMENDED",
             "PAIR_V2_ORDER_STATUS_CANCELLED",
             "PAIR_V2_ORDER_STATUS_REJECTED",
+            "PAIR_V2_ORDER_STATUS_EXPIRED",
         ];
 
         struct GeneratedVisitor;
@@ -4655,6 +4697,7 @@ impl<'de> serde::Deserialize<'de> for PairV2OrderStatus {
                     "PAIR_V2_ORDER_STATUS_AMENDED" => Ok(PairV2OrderStatus::Amended),
                     "PAIR_V2_ORDER_STATUS_CANCELLED" => Ok(PairV2OrderStatus::Cancelled),
                     "PAIR_V2_ORDER_STATUS_REJECTED" => Ok(PairV2OrderStatus::Rejected),
+                    "PAIR_V2_ORDER_STATUS_EXPIRED" => Ok(PairV2OrderStatus::Expired),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

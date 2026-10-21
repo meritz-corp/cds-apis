@@ -169,6 +169,9 @@ class PairV2OrderStatus extends $pb.ProtobufEnum {
   static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_AMENDED = PairV2OrderStatus._(5, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_AMENDED');
   static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_CANCELLED = PairV2OrderStatus._(6, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_CANCELLED');
   static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_REJECTED = PairV2OrderStatus._(7, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_REJECTED');
+  /// 장 마감 소멸 — 당일 유효 주문이 체결/취소 확인 없이 영업일을 넘김.
+  /// 거래소는 소멸을 따로 통보하지 않으므로 서버 기동 시 전 영업일 이전의 미종결 주문을 이 상태로 닫는다.
+  static const PairV2OrderStatus PAIR_V2_ORDER_STATUS_EXPIRED = PairV2OrderStatus._(8, _omitEnumNames ? '' : 'PAIR_V2_ORDER_STATUS_EXPIRED');
 
   static const $core.List<PairV2OrderStatus> values = <PairV2OrderStatus> [
     PAIR_V2_ORDER_STATUS_UNSPECIFIED,
@@ -179,9 +182,10 @@ class PairV2OrderStatus extends $pb.ProtobufEnum {
     PAIR_V2_ORDER_STATUS_AMENDED,
     PAIR_V2_ORDER_STATUS_CANCELLED,
     PAIR_V2_ORDER_STATUS_REJECTED,
+    PAIR_V2_ORDER_STATUS_EXPIRED,
   ];
 
-  static final $core.List<PairV2OrderStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
+  static final $core.List<PairV2OrderStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 8);
   static PairV2OrderStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const PairV2OrderStatus._(super.value, super.name);

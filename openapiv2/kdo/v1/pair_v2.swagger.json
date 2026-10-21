@@ -402,7 +402,7 @@
     },
     "/v1/{pairV2}/orderSummary": {
       "get": {
-        "summary": "leg(base/counter)별 누적 집계 (상단 요약)",
+        "summary": "leg(base/counter)별 영업일 집계 (상단 요약). 기준일은 요청의 trading_day (미지정 시 당일).",
         "operationId": "PairV2Service_GetPairV2OrderSummary",
         "responses": {
           "200": {
@@ -425,6 +425,14 @@
             "required": true,
             "type": "string",
             "pattern": "pairV2s/[^/]+"
+          },
+          {
+            "name": "tradingDay",
+            "description": "집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.\n발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게\n살아있는 주문 전체, launch_count 는 실행 세션 기준이다.\nStreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -477,6 +485,14 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "tradingDay",
+            "description": "주문 생성 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 전체 기간.\nlive_only=true 와 함께 주면 무시한다 — 살아있는 주문은 날짜와 무관하게 전부 반환.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -741,7 +757,7 @@
     },
     "/v1/{pairV2}:streamOrderSummary": {
       "get": {
-        "summary": "leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push\n(reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).",
+        "summary": "leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push\n(reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).",
         "operationId": "PairV2Service_StreamPairV2OrderSummary",
         "responses": {
           "200": {
@@ -773,6 +789,14 @@
             "required": true,
             "type": "string",
             "pattern": "pairV2s/[^/]+"
+          },
+          {
+            "name": "tradingDay",
+            "description": "집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.\n발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게\n살아있는 주문 전체, launch_count 는 실행 세션 기준이다.\nStreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -834,6 +858,14 @@
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "tradingDay",
+            "description": "주문 생성 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 전체 기간.\nlive_only=true 와 함께 주면 무시한다 — 살아있는 주문은 날짜와 무관하게 전부 반환.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -968,7 +1000,7 @@
         "launchCount": {
           "type": "integer",
           "format": "int64",
-          "title": "세션 발사 횟수 (실행 중 아니면 0)"
+          "description": "실행 세션 발사 횟수 — 영업일(trading_day)과 무관. 일시정지해도 유지되고,\n세션 초기화(ResetPairV2Session)·서버 재기동 시 0 부터 다시 센다."
         }
       }
     },
@@ -1334,25 +1366,26 @@
         "orderedQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "누적 발주 수량"
+          "title": "기준 영업일 발주 수량 (신규 주문만 — 정정은 잔량 이동이라 제외)"
         },
         "filledQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "누적 체결 수량"
+          "title": "기준 영업일 체결 수량"
         },
         "remainingQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "살아있는 미체결 합"
+          "title": "살아있는 미체결 합 — 기준 영업일과 무관하게 전체"
         },
         "averageFillPrice": {
-          "type": "string"
+          "type": "string",
+          "title": "기준 영업일 가중평균 체결가 (체결 없으면 빈 문자열)"
         },
         "filledAmount": {
           "type": "string",
           "format": "int64",
-          "title": "체결금액 (원)"
+          "title": "기준 영업일 체결금액 (원)"
         },
         "referencePrice": {
           "type": "string",
@@ -1361,10 +1394,10 @@
         "remainingAmount": {
           "type": "string",
           "format": "int64",
-          "title": "미체결 × 참조가"
+          "title": "미체결 × 참조가 (remaining_quantity 와 같이 날짜 무관)"
         }
       },
-      "title": "leg별 누적 집계"
+      "title": "leg별 집계 — 발주/체결은 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관"
     },
     "pair_v2PairV2LeverageFuturePricing": {
       "type": "object",
@@ -1485,10 +1518,11 @@
         "PAIR_V2_ORDER_STATUS_FILLED",
         "PAIR_V2_ORDER_STATUS_AMENDED",
         "PAIR_V2_ORDER_STATUS_CANCELLED",
-        "PAIR_V2_ORDER_STATUS_REJECTED"
+        "PAIR_V2_ORDER_STATUS_REJECTED",
+        "PAIR_V2_ORDER_STATUS_EXPIRED"
       ],
       "default": "PAIR_V2_ORDER_STATUS_UNSPECIFIED",
-      "description": "- PAIR_V2_ORDER_STATUS_SUBMITTED: 발주 요청 (접수 대기)\n - PAIR_V2_ORDER_STATUS_RECEIVED: 거래소 접수\n - PAIR_V2_ORDER_STATUS_AMENDED: 정정으로 대체됨",
+      "description": "- PAIR_V2_ORDER_STATUS_SUBMITTED: 발주 요청 (접수 대기)\n - PAIR_V2_ORDER_STATUS_RECEIVED: 거래소 접수\n - PAIR_V2_ORDER_STATUS_AMENDED: 정정으로 대체됨\n - PAIR_V2_ORDER_STATUS_EXPIRED: 장 마감 소멸 — 당일 유효 주문이 체결/취소 확인 없이 영업일을 넘김.\n거래소는 소멸을 따로 통보하지 않으므로 서버 기동 시 전 영업일 이전의 미종결 주문을 이 상태로 닫는다.",
       "title": "주문 단위 상태"
     },
     "pair_v2PairV2PdfDecomposePricing": {

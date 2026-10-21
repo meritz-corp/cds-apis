@@ -53,12 +53,12 @@ type PairV2ServiceClient interface {
 	AmendPairV2ResidualPct(ctx context.Context, in *AmendPairV2ResidualPctRequest, opts ...grpc.CallOption) (*AmendPairV2ResidualPctResponse, error)
 	// 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
 	ListPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (*ListPairV2OrdersResponse, error)
-	// leg(base/counter)별 누적 집계 (상단 요약)
+	// leg(base/counter)별 영업일 집계 (상단 요약). 기준일은 요청의 trading_day (미지정 시 당일).
 	GetPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (*GetPairV2OrderSummaryResponse, error)
 	// 주문별 추적 목록 스트리밍 (하단 주문 표). 주문 상태 변경 이벤트마다 현재 목록 전체(최신순 1페이지)를 push.
 	// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
 	StreamPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrdersClient, error)
-	// leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+	// leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
 	// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
 	StreamPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrderSummaryClient, error)
 	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
@@ -330,12 +330,12 @@ type PairV2ServiceServer interface {
 	AmendPairV2ResidualPct(context.Context, *AmendPairV2ResidualPctRequest) (*AmendPairV2ResidualPctResponse, error)
 	// 이 페어의 주문별 추적 목록 (하단 주문 표). 최신순.
 	ListPairV2Orders(context.Context, *ListPairV2OrdersRequest) (*ListPairV2OrdersResponse, error)
-	// leg(base/counter)별 누적 집계 (상단 요약)
+	// leg(base/counter)별 영업일 집계 (상단 요약). 기준일은 요청의 trading_day (미지정 시 당일).
 	GetPairV2OrderSummary(context.Context, *GetPairV2OrderSummaryRequest) (*GetPairV2OrderSummaryResponse, error)
 	// 주문별 추적 목록 스트리밍 (하단 주문 표). 주문 상태 변경 이벤트마다 현재 목록 전체(최신순 1페이지)를 push.
 	// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
 	StreamPairV2Orders(*ListPairV2OrdersRequest, PairV2Service_StreamPairV2OrdersServer) error
-	// leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+	// leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
 	// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
 	StreamPairV2OrderSummary(*GetPairV2OrderSummaryRequest, PairV2Service_StreamPairV2OrderSummaryServer) error
 	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.

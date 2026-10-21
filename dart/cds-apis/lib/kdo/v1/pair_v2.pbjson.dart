@@ -137,6 +137,7 @@ const PairV2OrderStatus$json = {
     {'1': 'PAIR_V2_ORDER_STATUS_AMENDED', '2': 5},
     {'1': 'PAIR_V2_ORDER_STATUS_CANCELLED', '2': 6},
     {'1': 'PAIR_V2_ORDER_STATUS_REJECTED', '2': 7},
+    {'1': 'PAIR_V2_ORDER_STATUS_EXPIRED', '2': 8},
   ],
 };
 
@@ -147,7 +148,8 @@ final $typed_data.Uint8List pairV2OrderStatusDescriptor = $convert.base64Decode(
     'U1RBVFVTX1JFQ0VJVkVEEAISKQolUEFJUl9WMl9PUkRFUl9TVEFUVVNfUEFSVElBTExZX0ZJTE'
     'xFRBADEh8KG1BBSVJfVjJfT1JERVJfU1RBVFVTX0ZJTExFRBAEEiAKHFBBSVJfVjJfT1JERVJf'
     'U1RBVFVTX0FNRU5ERUQQBRIiCh5QQUlSX1YyX09SREVSX1NUQVRVU19DQU5DRUxMRUQQBhIhCh'
-    '1QQUlSX1YyX09SREVSX1NUQVRVU19SRUpFQ1RFRBAH');
+    '1QQUlSX1YyX09SREVSX1NUQVRVU19SRUpFQ1RFRBAHEiAKHFBBSVJfVjJfT1JERVJfU1RBVFVT'
+    'X0VYUElSRUQQCA==');
 
 @$core.Deprecated('Use pairV2Descriptor instead')
 const PairV2$json = {
@@ -805,10 +807,12 @@ const ListPairV2OrdersRequest$json = {
     {'1': 'page_size', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'pageSize', '17': true},
     {'1': 'page_token', '3': 3, '4': 1, '5': 9, '9': 1, '10': 'pageToken', '17': true},
     {'1': 'live_only', '3': 4, '4': 1, '5': 8, '10': 'liveOnly'},
+    {'1': 'trading_day', '3': 5, '4': 1, '5': 5, '9': 2, '10': 'tradingDay', '17': true},
   ],
   '8': [
     {'1': '_page_size'},
     {'1': '_page_token'},
+    {'1': '_trading_day'},
   ],
 };
 
@@ -816,8 +820,9 @@ const ListPairV2OrdersRequest$json = {
 final $typed_data.Uint8List listPairV2OrdersRequestDescriptor = $convert.base64Decode(
     'ChdMaXN0UGFpclYyT3JkZXJzUmVxdWVzdBIdCgdwYWlyX3YyGAEgASgJQgTiQQECUgZwYWlyVj'
     'ISIAoJcGFnZV9zaXplGAIgASgFSABSCHBhZ2VTaXpliAEBEiIKCnBhZ2VfdG9rZW4YAyABKAlI'
-    'AVIJcGFnZVRva2VuiAEBEhsKCWxpdmVfb25seRgEIAEoCFIIbGl2ZU9ubHlCDAoKX3BhZ2Vfc2'
-    'l6ZUINCgtfcGFnZV90b2tlbg==');
+    'AVIJcGFnZVRva2VuiAEBEhsKCWxpdmVfb25seRgEIAEoCFIIbGl2ZU9ubHkSJAoLdHJhZGluZ1'
+    '9kYXkYBSABKAVIAlIKdHJhZGluZ0RheYgBAUIMCgpfcGFnZV9zaXplQg0KC19wYWdlX3Rva2Vu'
+    'Qg4KDF90cmFkaW5nX2RheQ==');
 
 @$core.Deprecated('Use listPairV2OrdersResponseDescriptor instead')
 const ListPairV2OrdersResponse$json = {
@@ -866,13 +871,18 @@ const GetPairV2OrderSummaryRequest$json = {
   '1': 'GetPairV2OrderSummaryRequest',
   '2': [
     {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pairV2'},
+    {'1': 'trading_day', '3': 2, '4': 1, '5': 5, '9': 0, '10': 'tradingDay', '17': true},
+  ],
+  '8': [
+    {'1': '_trading_day'},
   ],
 };
 
 /// Descriptor for `GetPairV2OrderSummaryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getPairV2OrderSummaryRequestDescriptor = $convert.base64Decode(
     'ChxHZXRQYWlyVjJPcmRlclN1bW1hcnlSZXF1ZXN0Eh0KB3BhaXJfdjIYASABKAlCBOJBAQJSBn'
-    'BhaXJWMg==');
+    'BhaXJWMhIkCgt0cmFkaW5nX2RheRgCIAEoBUgAUgp0cmFkaW5nRGF5iAEBQg4KDF90cmFkaW5n'
+    'X2RheQ==');
 
 @$core.Deprecated('Use getPairV2OrderSummaryResponseDescriptor instead')
 const GetPairV2OrderSummaryResponse$json = {

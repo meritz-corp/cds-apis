@@ -135,7 +135,7 @@ service PairV2Service {
     };
   }
 
-  // leg(base/counter)별 누적 집계 (상단 요약)
+  // leg(base/counter)별 영업일 집계 (상단 요약). 기준일은 요청의 trading_day (미지정 시 당일).
   rpc GetPairV2OrderSummary(GetPairV2OrderSummaryRequest) returns (GetPairV2OrderSummaryResponse) {
     option (google.api.http) = {
       get: "/v1/{pair_v2=pair_v2s/*}/orderSummary"
@@ -150,7 +150,7 @@ service PairV2Service {
     };
   }
 
-  // leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+  // leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
   // (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
   rpc StreamPairV2OrderSummary(GetPairV2OrderSummaryRequest) returns (stream GetPairV2OrderSummaryResponse) {
     option (google.api.http) = {
@@ -803,6 +803,9 @@ enum PairV2OrderStatus {
   PAIR_V2_ORDER_STATUS_AMENDED = 5;
   PAIR_V2_ORDER_STATUS_CANCELLED = 6;
   PAIR_V2_ORDER_STATUS_REJECTED = 7;
+  // 장 마감 소멸 — 당일 유효 주문이 체결/취소 확인 없이 영업일을 넘김.
+  // 거래소는 소멸을 따로 통보하지 않으므로 서버 기동 시 전 영업일 이전의 미종결 주문을 이 상태로 닫는다.
+  PAIR_V2_ORDER_STATUS_EXPIRED = 8;
 }
 
 // 페어 주문 추적 행
@@ -835,6 +838,9 @@ message ListPairV2OrdersRequest {
   optional string page_token = 3;
   // true 면 살아있는(접수/부분체결) 주문만
   bool live_only = 4;
+  // 주문 생성 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 전체 기간.
+  // live_only=true 와 함께 주면 무시한다 — 살아있는 주문은 날짜와 무관하게 전부 반환.
+  optional int32 trading_day = 5;
 }
 
 message ListPairV2OrdersResponse {
@@ -842,31 +848,38 @@ message ListPairV2OrdersResponse {
   string next_page_token = 2;
 }
 
-// leg별 누적 집계
+// leg별 집계 — 발주/체결은 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
 message PairV2LegSummary {
   PairV2Slot slot = 1;
   string symbol = 2;
-  // 누적 발주 수량
+  // 기준 영업일 발주 수량 (신규 주문만 — 정정은 잔량 이동이라 제외)
   int64 ordered_quantity = 3;
-  // 누적 체결 수량
+  // 기준 영업일 체결 수량
   int64 filled_quantity = 4;
-  // 살아있는 미체결 합
+  // 살아있는 미체결 합 — 기준 영업일과 무관하게 전체
   int64 remaining_quantity = 5;
+  // 기준 영업일 가중평균 체결가 (체결 없으면 빈 문자열)
   string average_fill_price = 6;
-  // 체결금액 (원)
+  // 기준 영업일 체결금액 (원)
   int64 filled_amount = 7;
   // 참조 현재가 (조회 시점, 없으면 빈 문자열)
   string reference_price = 8;
-  // 미체결 × 참조가
+  // 미체결 × 참조가 (remaining_quantity 와 같이 날짜 무관)
   int64 remaining_amount = 9;
 }
 
 message GetPairV2OrderSummaryRequest {
   string pair_v2 = 1 [(google.api.field_behavior) = REQUIRED];
+  // 집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.
+  // 발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
+  // 살아있는 주문 전체, launch_count 는 실행 세션 기준이다.
+  // StreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).
+  optional int32 trading_day = 2;
 }
 
 message GetPairV2OrderSummaryResponse {
   repeated PairV2LegSummary legs = 1;
-  // 세션 발사 횟수 (실행 중 아니면 0)
+  // 실행 세션 발사 횟수 — 영업일(trading_day)과 무관. 일시정지해도 유지되고,
+  // 세션 초기화(ResetPairV2Session)·서버 재기동 시 0 부터 다시 센다.
   uint32 launch_count = 2;
 }

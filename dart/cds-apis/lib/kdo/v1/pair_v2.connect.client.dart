@@ -254,7 +254,7 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// leg(base/counter)별 누적 집계 (상단 요약)
+  /// leg(base/counter)별 영업일 집계 (상단 요약). 기준일은 요청의 trading_day (미지정 시 당일).
   Future<kdov1pair_v2.GetPairV2OrderSummaryResponse> getPairV2OrderSummary(
     kdov1pair_v2.GetPairV2OrderSummaryRequest input, {
     connect.Headers? headers,
@@ -291,7 +291,7 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// leg(base/counter)별 누적 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
+  /// leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
   /// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
   Stream<kdov1pair_v2.GetPairV2OrderSummaryResponse> streamPairV2OrderSummary(
     kdov1pair_v2.GetPairV2OrderSummaryRequest input, {
