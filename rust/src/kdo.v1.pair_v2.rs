@@ -48,6 +48,7 @@ pub struct PairV2 {
     #[prost(message, optional, tag="11")]
     pub nav: ::core::option::Option<PairV2Nav>,
     /// base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다.
+    /// 총회차와 별개의 안전 상한이다.
     #[prost(int64, tag="12")]
     pub max_base_quantity: i64,
     /// 상태
@@ -61,7 +62,7 @@ pub struct PairV2 {
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     /// 중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).
     /// 수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.
-    /// 설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (서버 프로세스 내 세션).
+    /// 설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (실행 세션은 서버 재기동 후에도 이어진다).
     #[prost(uint32, optional, tag="16")]
     pub pause_launch_no: ::core::option::Option<u32>,
     /// 자동 발사 운영 시간창 시작 (KST "HH:MM:SS", 미설정 = 상시).
@@ -90,6 +91,14 @@ pub struct PairV2 {
     /// 하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다.
     #[prost(message, optional, tag="22")]
     pub pricing: ::core::option::Option<PairV2Pricing>,
+    /// 총회차 - 한 실행 세션에서 낼 회차 수 (1 이상). 다리별 총수량 = 1회 수량(entry.quantity) × 총회차.
+    /// k회차 다리별 발주량 = k회차 누적 목표 − 세션 발주수량(체결 + 미체결; 취소·거부·전송실패분은 빠진다)
+    /// → 취소·거부된 수량은 다음 회차가 되메운다 (mmm 바스켓의 누적 목표 방식).
+    /// 누적 목표는 회차를 낼 때마다 그 시점의 1회 수량을 더해 기록하므로, 세션 중 1회 수량을 바꾸면 다음 회차부터 적용된다.
+    /// 완료회차(launch_count)가 이 값에 도달하면 자동·수동 발사를 막는다 (OrderPairV2UntilRound 는 허용).
+    /// CreatePairV2 에서 미지정이면 max_base_quantity ÷ base.quantity (최소 1) 로 정한다.
+    #[prost(uint32, optional, tag="23")]
+    pub total_rounds: ::core::option::Option<u32>,
 }
 // ============================================================================
 // Pair Entry
@@ -111,7 +120,8 @@ pub struct PairV2Entry {
     /// 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
     #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
-    /// 주문 수량. base/counter 모두 명시적인 1회 발주량.
+    /// 1회 발주량 (base/counter 모두 명시). 회차 발주량은 누적 목표 − 세션 발주수량이라
+    /// 취소·거부분을 되메우는 회차에서는 이보다 클 수 있다 (PairV2.total_rounds 참조).
     #[prost(int64, tag="4")]
     pub quantity: i64,
     /// 호가 위치 — 스프레드 측정 기준이자 발주 가격. 미지정(UNSPECIFIED) 시 도메인 기본값
@@ -454,6 +464,28 @@ pub struct LaunchPairV2OnceResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OrderPairV2UntilRoundRequest {
+    /// 리소스 이름 (pair_v2s/{id})
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+    /// 목표회차 (1 ≤ target_round ≤ 완료회차)
+    #[prost(uint32, tag="2")]
+    pub target_round: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct OrderPairV2UntilRoundResponse {
+    /// 큐잉 성공 여부 (실제 발주는 핫루프 다음 tick 에서 실행)
+    #[prost(bool, tag="1")]
+    pub accepted: bool,
+    /// 요청 시점에 계산한 다리별 부족분 (실행 시점에 다시 계산한다)
+    #[prost(int64, tag="2")]
+    pub base_quantity: i64,
+    #[prost(int64, tag="3")]
+    pub counter_quantity: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetPairV2SessionRequest {
     #[prost(string, tag="1")]
     pub pair_v2: ::prost::alloc::string::String,
@@ -534,7 +566,7 @@ pub struct PairV2StatusUpdate {
     /// 스냅샷 시각
     #[prost(message, optional, tag="3")]
     pub updated_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
-    /// 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate 시 유지)
+    /// 완료회차 = 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate·서버 재기동 시 유지, ResetPairV2Session 으로 0)
     #[prost(uint32, tag="4")]
     pub launch_count: u32,
     /// 최근 측정 스프레드 (base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
@@ -558,6 +590,12 @@ pub struct PairV2StatusUpdate {
     /// 최근 발사 요청 오류. 다음 발주 성공/세션 초기화 시 해제.
     #[prost(string, optional, tag="11")]
     pub last_launch_error: ::core::option::Option<::prost::alloc::string::String>,
+    /// 다음 회차(완료회차+1)의 다리별 발주 예정 수량 = 1회 수량 + 되메울 수량(취소·거부분).
+    /// 실행 루프가 떠 있을 때만 채운다 (총회차를 모두 완료했거나 정지 중이면 미설정).
+    #[prost(int64, optional, tag="12")]
+    pub base_next_round_quantity: ::core::option::Option<i64>,
+    #[prost(int64, optional, tag="13")]
+    pub counter_next_round_quantity: ::core::option::Option<i64>,
 }
 /// 페어 주문 추적 행
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -671,8 +709,8 @@ pub struct GetPairV2OrderSummaryRequest {
 pub struct GetPairV2OrderSummaryResponse {
     #[prost(message, repeated, tag="1")]
     pub legs: ::prost::alloc::vec::Vec<PairV2LegSummary>,
-    /// 실행 세션 발사 횟수 — 영업일(trading_day)과 무관. 일시정지해도 유지되고,
-    /// 세션 초기화(ResetPairV2Session)·서버 재기동 시 0 부터 다시 센다.
+    /// 실행 세션 발사 횟수(완료회차) — 영업일(trading_day)과 무관. 일시정지·서버 재기동 후에도 이어지고,
+    /// 세션 초기화(ResetPairV2Session) 시 0 부터 다시 센다.
     #[prost(uint32, tag="2")]
     pub launch_count: u32,
 }
@@ -822,6 +860,8 @@ pub enum PairV2BlockReason {
     OrderValidation = 13,
     PartialFailure = 14,
     RuntimeError = 15,
+    /// 완료회차가 총회차(total_rounds)에 도달 — 자동·수동 발사 모두 차단 (목표회차까지 발주는 허용)
+    RoundsCompleted = 16,
 }
 impl PairV2BlockReason {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -846,6 +886,7 @@ impl PairV2BlockReason {
             PairV2BlockReason::OrderValidation => "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION",
             PairV2BlockReason::PartialFailure => "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE",
             PairV2BlockReason::RuntimeError => "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR",
+            PairV2BlockReason::RoundsCompleted => "PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -867,6 +908,7 @@ impl PairV2BlockReason {
             "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION" => Some(Self::OrderValidation),
             "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE" => Some(Self::PartialFailure),
             "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR" => Some(Self::RuntimeError),
+            "PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED" => Some(Self::RoundsCompleted),
             _ => None,
         }
     }

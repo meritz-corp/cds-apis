@@ -982,6 +982,26 @@ func (mr *MockPairV2ServiceClientMockRecorder) ListPairV2S(ctx, in interface{}, 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPairV2S", reflect.TypeOf((*MockPairV2ServiceClient)(nil).ListPairV2S), varargs...)
 }
 
+// OrderPairV2UntilRound mocks base method.
+func (m *MockPairV2ServiceClient) OrderPairV2UntilRound(ctx context.Context, in *OrderPairV2UntilRoundRequest, opts ...grpc.CallOption) (*OrderPairV2UntilRoundResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "OrderPairV2UntilRound", varargs...)
+	ret0, _ := ret[0].(*OrderPairV2UntilRoundResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// OrderPairV2UntilRound indicates an expected call of OrderPairV2UntilRound.
+func (mr *MockPairV2ServiceClientMockRecorder) OrderPairV2UntilRound(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderPairV2UntilRound", reflect.TypeOf((*MockPairV2ServiceClient)(nil).OrderPairV2UntilRound), varargs...)
+}
+
 // PausePairV2 mocks base method.
 func (m *MockPairV2ServiceClient) PausePairV2(ctx context.Context, in *PausePairV2Request, opts ...grpc.CallOption) (*PairV2, error) {
 	m.ctrl.T.Helper()
@@ -1288,6 +1308,21 @@ func (m *MockPairV2ServiceServer) ListPairV2S(ctx context.Context, in *ListPairV
 func (mr *MockPairV2ServiceServerMockRecorder) ListPairV2S(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPairV2S", reflect.TypeOf((*MockPairV2ServiceServer)(nil).ListPairV2S), ctx, in)
+}
+
+// OrderPairV2UntilRound mocks base method.
+func (m *MockPairV2ServiceServer) OrderPairV2UntilRound(ctx context.Context, in *OrderPairV2UntilRoundRequest) (*OrderPairV2UntilRoundResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "OrderPairV2UntilRound", ctx, in)
+	ret0, _ := ret[0].(*OrderPairV2UntilRoundResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// OrderPairV2UntilRound indicates an expected call of OrderPairV2UntilRound.
+func (mr *MockPairV2ServiceServerMockRecorder) OrderPairV2UntilRound(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderPairV2UntilRound", reflect.TypeOf((*MockPairV2ServiceServer)(nil).OrderPairV2UntilRound), ctx, in)
 }
 
 // PausePairV2 mocks base method.

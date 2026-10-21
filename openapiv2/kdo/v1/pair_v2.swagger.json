@@ -182,7 +182,7 @@
                 "maxBaseQuantity": {
                   "type": "string",
                   "format": "int64",
-                  "description": "base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다."
+                  "description": "base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다.\n총회차와 별개의 안전 상한이다."
                 },
                 "status": {
                   "$ref": "#/definitions/pair_v2PairV2Status",
@@ -204,7 +204,7 @@
                 "pauseLaunchNo": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.\n설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (서버 프로세스 내 세션)."
+                  "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.\n설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (실행 세션은 서버 재기동 후에도 이어진다)."
                 },
                 "tradingWindowStart": {
                   "type": "string",
@@ -230,6 +230,11 @@
                 "pricing": {
                   "$ref": "#/definitions/pair_v2PairV2Pricing",
                   "description": "counter 가격을 base 가격축으로 옮기는 방법 — 구 spread(선형/NAV) + nav(NavKind) 두 축을\n하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다."
+                },
+                "totalRounds": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "총회차 - 한 실행 세션에서 낼 회차 수 (1 이상). 다리별 총수량 = 1회 수량(entry.quantity) × 총회차.\nk회차 다리별 발주량 = k회차 누적 목표 − 세션 발주수량(체결 + 미체결; 취소·거부·전송실패분은 빠진다)\n→ 취소·거부된 수량은 다음 회차가 되메운다 (mmm 바스켓의 누적 목표 방식).\n누적 목표는 회차를 낼 때마다 그 시점의 1회 수량을 더해 기록하므로, 세션 중 1회 수량을 바꾸면 다음 회차부터 적용된다.\n완료회차(launch_count)가 이 값에 도달하면 자동·수동 발사를 막는다 (OrderPairV2UntilRound 는 허용).\nCreatePairV2 에서 미지정이면 max_base_quantity ÷ base.quantity (최소 1) 로 정한다."
                 }
               },
               "title": "수정할 PairV2",
@@ -643,7 +648,7 @@
     },
     "/v1/{pairV2}:launchOnce": {
       "post": {
-        "summary": "수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.\nPAUSED 상태에서도 허용하며 자동발주를 켜지 않는다. 중복 대기 요청은 FAILED_PRECONDITION.\n시세 유효성(양다리 5초 이내), 연속매매, 수량 상한, 주문/잔고 검증은 유지한다.\n대기 요청은 5초 뒤 만료된다. accepted는 접수이고 결과는 실행로그/상태 스트림에서 확인한다.",
+        "summary": "수동 1회 발사 - 스프레드 조건/쿨다운/중지회차를 무시하고 즉시 양다리 1회 발사를 큐잉.\nPAUSED 상태에서도 허용하며 자동발주를 켜지 않는다. 중복 대기 요청은 FAILED_PRECONDITION.\n시세 유효성(양다리 5초 이내), 연속매매, 수량 상한, 주문/잔고 검증은 유지한다.\n대기 요청은 5초 뒤 만료된다. accepted는 접수이고 결과는 실행로그/상태 스트림에서 확인한다.\n다음 회차(완료회차+1)를 낸다 — 다리별 수량은 누적 목표 − 세션 발주수량(되메움 포함).\n총회차를 모두 완료했으면 FAILED_PRECONDITION.",
         "operationId": "PairV2Service_LaunchPairV2Once",
         "responses": {
           "200": {
@@ -674,6 +679,57 @@
             "required": true,
             "schema": {
               "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "PairV2Service"
+        ]
+      }
+    },
+    "/v1/{pairV2}:orderUntilRound": {
+      "post": {
+        "summary": "목표회차까지 발주 (mmm \"목표회차까지발주\") - 1 ≤ target_round ≤ 완료회차(launch_count).\n다리별 부족분(target_round 회차 누적 목표 − 세션 발주수량)이 있는 다리만 발주하고, 완료회차는 올리지 않는다.\n수동 1회 발사와 같은 경로다: 스프레드/쿨다운/중지회차/시간창/체결률/슬리피지 조건은 무시하고,\n시세 유효성(양다리 5초 이내)·연속매매·수량 상한·주문/잔고 검증은 유지한다. PAUSED 에서도 허용하며 자동발주를 켜지 않는다.\n범위 밖 target_round 는 INVALID_ARGUMENT, 부족분이 없거나 다른 수동 요청이 대기 중이면 FAILED_PRECONDITION.\n대기 요청은 5초 뒤 만료된다. 결과는 실행로그/상태 스트림에서 확인한다.",
+        "operationId": "PairV2Service_OrderPairV2UntilRound",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pair_v2OrderPairV2UntilRoundResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairV2",
+            "description": "리소스 이름 (pair_v2s/{id})",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "pairV2s/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "targetRound": {
+                  "type": "integer",
+                  "format": "int64",
+                  "title": "목표회차 (1 ≤ target_round ≤ 완료회차)"
+                }
+              },
+              "required": [
+                "targetRound"
+              ]
             }
           }
         ],
@@ -725,7 +781,7 @@
     },
     "/v1/{pairV2}:resetSession": {
       "post": {
-        "summary": "명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.\n설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.",
+        "summary": "명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차(완료회차·회차별 누적 목표)와 누적 실행 상태를 초기화한다 (저장된 세션도 삭제).\n설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.",
         "operationId": "PairV2Service_ResetPairV2Session",
         "responses": {
           "200": {
@@ -1008,7 +1064,7 @@
         "launchCount": {
           "type": "integer",
           "format": "int64",
-          "description": "실행 세션 발사 횟수 — 영업일(trading_day)과 무관. 일시정지해도 유지되고,\n세션 초기화(ResetPairV2Session)·서버 재기동 시 0 부터 다시 센다."
+          "description": "실행 세션 발사 횟수(완료회차) — 영업일(trading_day)과 무관. 일시정지·서버 재기동 후에도 이어지고,\n세션 초기화(ResetPairV2Session) 시 0 부터 다시 센다."
         }
       }
     },
@@ -1076,6 +1132,24 @@
         }
       }
     },
+    "pair_v2OrderPairV2UntilRoundResponse": {
+      "type": "object",
+      "properties": {
+        "accepted": {
+          "type": "boolean",
+          "title": "큐잉 성공 여부 (실제 발주는 핫루프 다음 tick 에서 실행)"
+        },
+        "baseQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "요청 시점에 계산한 다리별 부족분 (실행 시점에 다시 계산한다)"
+        },
+        "counterQuantity": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "pair_v2PairV2": {
       "type": "object",
       "properties": {
@@ -1132,7 +1206,7 @@
         "maxBaseQuantity": {
           "type": "string",
           "format": "int64",
-          "description": "base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다."
+          "description": "base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다.\n총회차와 별개의 안전 상한이다."
         },
         "status": {
           "$ref": "#/definitions/pair_v2PairV2Status",
@@ -1154,7 +1228,7 @@
         "pauseLaunchNo": {
           "type": "integer",
           "format": "int64",
-          "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.\n설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (서버 프로세스 내 세션)."
+          "description": "중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).\n수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.\n설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (실행 세션은 서버 재기동 후에도 이어진다)."
         },
         "tradingWindowStart": {
           "type": "string",
@@ -1180,6 +1254,11 @@
         "pricing": {
           "$ref": "#/definitions/pair_v2PairV2Pricing",
           "description": "counter 가격을 base 가격축으로 옮기는 방법 — 구 spread(선형/NAV) + nav(NavKind) 두 축을\n하나로 합친 것. 신규 클라이언트는 이 필드만 쓴다."
+        },
+        "totalRounds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "총회차 - 한 실행 세션에서 낼 회차 수 (1 이상). 다리별 총수량 = 1회 수량(entry.quantity) × 총회차.\nk회차 다리별 발주량 = k회차 누적 목표 − 세션 발주수량(체결 + 미체결; 취소·거부·전송실패분은 빠진다)\n→ 취소·거부된 수량은 다음 회차가 되메운다 (mmm 바스켓의 누적 목표 방식).\n누적 목표는 회차를 낼 때마다 그 시점의 1회 수량을 더해 기록하므로, 세션 중 1회 수량을 바꾸면 다음 회차부터 적용된다.\n완료회차(launch_count)가 이 값에 도달하면 자동·수동 발사를 막는다 (OrderPairV2UntilRound 는 허용).\nCreatePairV2 에서 미지정이면 max_base_quantity ÷ base.quantity (최소 1) 로 정한다."
         }
       },
       "description": "PairV2 전략 — base·counter 지정 호가로 재는 스프레드가 target_spread 를 초과하면\n그 가격 그대로 양다리를 동시 발주한다.",
@@ -1228,9 +1307,11 @@
         "PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT",
         "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION",
         "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE",
-        "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR"
+        "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR",
+        "PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED"
       ],
-      "default": "PAIR_V2_BLOCK_REASON_UNSPECIFIED"
+      "default": "PAIR_V2_BLOCK_REASON_UNSPECIFIED",
+      "title": "- PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED: 완료회차가 총회차(total_rounds)에 도달 — 자동·수동 발사 모두 차단 (목표회차까지 발주는 허용)"
     },
     "pair_v2PairV2Entry": {
       "type": "object",
@@ -1250,7 +1331,7 @@
         "quantity": {
           "type": "string",
           "format": "int64",
-          "description": "주문 수량. base/counter 모두 명시적인 1회 발주량."
+          "description": "1회 발주량 (base/counter 모두 명시). 회차 발주량은 누적 목표 − 세션 발주수량이라\n취소·거부분을 되메우는 회차에서는 이보다 클 수 있다 (PairV2.total_rounds 참조)."
         },
         "priceSource": {
           "$ref": "#/definitions/commonRelativePriceSource",
@@ -1651,7 +1732,7 @@
         "launchCount": {
           "type": "integer",
           "format": "int64",
-          "title": "실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate 시 유지)"
+          "title": "완료회차 = 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate·서버 재기동 시 유지, ResetPairV2Session 으로 0)"
         },
         "currentSpread": {
           "type": "number",
@@ -1683,6 +1764,15 @@
         "lastLaunchError": {
           "type": "string",
           "description": "최근 발사 요청 오류. 다음 발주 성공/세션 초기화 시 해제."
+        },
+        "baseNextRoundQuantity": {
+          "type": "string",
+          "format": "int64",
+          "description": "다음 회차(완료회차+1)의 다리별 발주 예정 수량 = 1회 수량 + 되메울 수량(취소·거부분).\n실행 루프가 떠 있을 때만 채운다 (총회차를 모두 완료했거나 정지 중이면 미설정)."
+        },
+        "counterNextRoundQuantity": {
+          "type": "string",
+          "format": "int64"
         }
       },
       "title": "StreamPairV2Status 스트리밍 응답 — 운영 단계 변경 시마다 emit"

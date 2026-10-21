@@ -95,11 +95,26 @@ abstract final class PairV2Service {
   /// PAUSED 상태에서도 허용하며 자동발주를 켜지 않는다. 중복 대기 요청은 FAILED_PRECONDITION.
   /// 시세 유효성(양다리 5초 이내), 연속매매, 수량 상한, 주문/잔고 검증은 유지한다.
   /// 대기 요청은 5초 뒤 만료된다. accepted는 접수이고 결과는 실행로그/상태 스트림에서 확인한다.
+  /// 다음 회차(완료회차+1)를 낸다 — 다리별 수량은 누적 목표 − 세션 발주수량(되메움 포함).
+  /// 총회차를 모두 완료했으면 FAILED_PRECONDITION.
   static const launchPairV2Once = connect.Spec(
     '/$name/LaunchPairV2Once',
     connect.StreamType.unary,
     kdov1pair_v2.LaunchPairV2OnceRequest.new,
     kdov1pair_v2.LaunchPairV2OnceResponse.new,
+  );
+
+  /// 목표회차까지 발주 (mmm "목표회차까지발주") - 1 ≤ target_round ≤ 완료회차(launch_count).
+  /// 다리별 부족분(target_round 회차 누적 목표 − 세션 발주수량)이 있는 다리만 발주하고, 완료회차는 올리지 않는다.
+  /// 수동 1회 발사와 같은 경로다: 스프레드/쿨다운/중지회차/시간창/체결률/슬리피지 조건은 무시하고,
+  /// 시세 유효성(양다리 5초 이내)·연속매매·수량 상한·주문/잔고 검증은 유지한다. PAUSED 에서도 허용하며 자동발주를 켜지 않는다.
+  /// 범위 밖 target_round 는 INVALID_ARGUMENT, 부족분이 없거나 다른 수동 요청이 대기 중이면 FAILED_PRECONDITION.
+  /// 대기 요청은 5초 뒤 만료된다. 결과는 실행로그/상태 스트림에서 확인한다.
+  static const orderPairV2UntilRound = connect.Spec(
+    '/$name/OrderPairV2UntilRound',
+    connect.StreamType.unary,
+    kdov1pair_v2.OrderPairV2UntilRoundRequest.new,
+    kdov1pair_v2.OrderPairV2UntilRoundResponse.new,
   );
 
   /// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
@@ -153,7 +168,7 @@ abstract final class PairV2Service {
     kdov1pair_v2.GetPairV2OrderSummaryResponse.new,
   );
 
-  /// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차/누적 실행 상태 초기화.
+  /// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차(완료회차·회차별 누적 목표)와 누적 실행 상태를 초기화한다 (저장된 세션도 삭제).
   /// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
   static const resetPairV2Session = connect.Spec(
     '/$name/ResetPairV2Session',

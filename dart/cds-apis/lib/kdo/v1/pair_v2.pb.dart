@@ -53,6 +53,7 @@ class PairV2 extends $pb.GeneratedMessage {
     $core.bool? allowBorrowedSell,
     $core.double? minFillRatePct,
     PairV2Pricing? pricing,
+    $core.int? totalRounds,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -77,6 +78,7 @@ class PairV2 extends $pb.GeneratedMessage {
     if (allowBorrowedSell != null) result.allowBorrowedSell = allowBorrowedSell;
     if (minFillRatePct != null) result.minFillRatePct = minFillRatePct;
     if (pricing != null) result.pricing = pricing;
+    if (totalRounds != null) result.totalRounds = totalRounds;
     return result;
   }
 
@@ -108,6 +110,7 @@ class PairV2 extends $pb.GeneratedMessage {
     ..aOB(20, _omitFieldNames ? '' : 'allowBorrowedSell')
     ..a<$core.double>(21, _omitFieldNames ? '' : 'minFillRatePct', $pb.PbFieldType.OD)
     ..aOM<PairV2Pricing>(22, _omitFieldNames ? '' : 'pricing', subBuilder: PairV2Pricing.create)
+    ..a<$core.int>(23, _omitFieldNames ? '' : 'totalRounds', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -260,6 +263,7 @@ class PairV2 extends $pb.GeneratedMessage {
   PairV2Nav ensureNav() => $_ensure(10);
 
   /// base 다리 누적 상한 — 체결 + 미체결(inflight) 합산. 도달 시 신규 발사를 막는다.
+  /// 총회차와 별개의 안전 상한이다.
   @$pb.TagNumber(12)
   $fixnum.Int64 get maxBaseQuantity => $_getI64(11);
   @$pb.TagNumber(12)
@@ -305,7 +309,7 @@ class PairV2 extends $pb.GeneratedMessage {
 
   /// 중지회차 - 이번 실행 세션의 발사 횟수가 이 값에 도달하면 자동 발사를 중지 (미설정 = 제한 없음).
   /// 수동 발사도 횟수에 포함되지만 이 게이트는 무시한다. base 제출 성공 기준으로 센다.
-  /// 설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (서버 프로세스 내 세션).
+  /// 설정 변경/Pause/Activate 시 유지. ResetPairV2Session으로 초기화한다 (실행 세션은 서버 재기동 후에도 이어진다).
   @$pb.TagNumber(16)
   $core.int get pauseLaunchNo => $_getIZ(15);
   @$pb.TagNumber(16)
@@ -384,6 +388,21 @@ class PairV2 extends $pb.GeneratedMessage {
   void clearPricing() => $_clearField(22);
   @$pb.TagNumber(22)
   PairV2Pricing ensurePricing() => $_ensure(21);
+
+  /// 총회차 - 한 실행 세션에서 낼 회차 수 (1 이상). 다리별 총수량 = 1회 수량(entry.quantity) × 총회차.
+  /// k회차 다리별 발주량 = k회차 누적 목표 − 세션 발주수량(체결 + 미체결; 취소·거부·전송실패분은 빠진다)
+  /// → 취소·거부된 수량은 다음 회차가 되메운다 (mmm 바스켓의 누적 목표 방식).
+  /// 누적 목표는 회차를 낼 때마다 그 시점의 1회 수량을 더해 기록하므로, 세션 중 1회 수량을 바꾸면 다음 회차부터 적용된다.
+  /// 완료회차(launch_count)가 이 값에 도달하면 자동·수동 발사를 막는다 (OrderPairV2UntilRound 는 허용).
+  /// CreatePairV2 에서 미지정이면 max_base_quantity ÷ base.quantity (최소 1) 로 정한다.
+  @$pb.TagNumber(23)
+  $core.int get totalRounds => $_getIZ(22);
+  @$pb.TagNumber(23)
+  set totalRounds($core.int value) => $_setUnsignedInt32(22, value);
+  @$pb.TagNumber(23)
+  $core.bool hasTotalRounds() => $_has(22);
+  @$pb.TagNumber(23)
+  void clearTotalRounds() => $_clearField(23);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).
@@ -471,7 +490,8 @@ class PairV2Entry extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSide() => $_clearField(3);
 
-  /// 주문 수량. base/counter 모두 명시적인 1회 발주량.
+  /// 1회 발주량 (base/counter 모두 명시). 회차 발주량은 누적 목표 − 세션 발주수량이라
+  /// 취소·거부분을 되메우는 회차에서는 이보다 클 수 있다 (PairV2.total_rounds 참조).
   @$pb.TagNumber(4)
   $fixnum.Int64 get quantity => $_getI64(3);
   @$pb.TagNumber(4)
@@ -2029,6 +2049,138 @@ class LaunchPairV2OnceResponse extends $pb.GeneratedMessage {
   void clearReason() => $_clearField(2);
 }
 
+class OrderPairV2UntilRoundRequest extends $pb.GeneratedMessage {
+  factory OrderPairV2UntilRoundRequest({
+    $core.String? pairV2,
+    $core.int? targetRound,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    if (targetRound != null) result.targetRound = targetRound;
+    return result;
+  }
+
+  OrderPairV2UntilRoundRequest._();
+
+  factory OrderPairV2UntilRoundRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory OrderPairV2UntilRoundRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderPairV2UntilRoundRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'targetRound', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderPairV2UntilRoundRequest clone() => OrderPairV2UntilRoundRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderPairV2UntilRoundRequest copyWith(void Function(OrderPairV2UntilRoundRequest) updates) => super.copyWith((message) => updates(message as OrderPairV2UntilRoundRequest)) as OrderPairV2UntilRoundRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OrderPairV2UntilRoundRequest create() => OrderPairV2UntilRoundRequest._();
+  @$core.override
+  OrderPairV2UntilRoundRequest createEmptyInstance() => create();
+  static $pb.PbList<OrderPairV2UntilRoundRequest> createRepeated() => $pb.PbList<OrderPairV2UntilRoundRequest>();
+  @$core.pragma('dart2js:noInline')
+  static OrderPairV2UntilRoundRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OrderPairV2UntilRoundRequest>(create);
+  static OrderPairV2UntilRoundRequest? _defaultInstance;
+
+  /// 리소스 이름 (pair_v2s/{id})
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+
+  /// 목표회차 (1 ≤ target_round ≤ 완료회차)
+  @$pb.TagNumber(2)
+  $core.int get targetRound => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set targetRound($core.int value) => $_setUnsignedInt32(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasTargetRound() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTargetRound() => $_clearField(2);
+}
+
+class OrderPairV2UntilRoundResponse extends $pb.GeneratedMessage {
+  factory OrderPairV2UntilRoundResponse({
+    $core.bool? accepted,
+    $fixnum.Int64? baseQuantity,
+    $fixnum.Int64? counterQuantity,
+  }) {
+    final result = create();
+    if (accepted != null) result.accepted = accepted;
+    if (baseQuantity != null) result.baseQuantity = baseQuantity;
+    if (counterQuantity != null) result.counterQuantity = counterQuantity;
+    return result;
+  }
+
+  OrderPairV2UntilRoundResponse._();
+
+  factory OrderPairV2UntilRoundResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory OrderPairV2UntilRoundResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OrderPairV2UntilRoundResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'accepted')
+    ..aInt64(2, _omitFieldNames ? '' : 'baseQuantity')
+    ..aInt64(3, _omitFieldNames ? '' : 'counterQuantity')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderPairV2UntilRoundResponse clone() => OrderPairV2UntilRoundResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  OrderPairV2UntilRoundResponse copyWith(void Function(OrderPairV2UntilRoundResponse) updates) => super.copyWith((message) => updates(message as OrderPairV2UntilRoundResponse)) as OrderPairV2UntilRoundResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OrderPairV2UntilRoundResponse create() => OrderPairV2UntilRoundResponse._();
+  @$core.override
+  OrderPairV2UntilRoundResponse createEmptyInstance() => create();
+  static $pb.PbList<OrderPairV2UntilRoundResponse> createRepeated() => $pb.PbList<OrderPairV2UntilRoundResponse>();
+  @$core.pragma('dart2js:noInline')
+  static OrderPairV2UntilRoundResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OrderPairV2UntilRoundResponse>(create);
+  static OrderPairV2UntilRoundResponse? _defaultInstance;
+
+  /// 큐잉 성공 여부 (실제 발주는 핫루프 다음 tick 에서 실행)
+  @$pb.TagNumber(1)
+  $core.bool get accepted => $_getBF(0);
+  @$pb.TagNumber(1)
+  set accepted($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasAccepted() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccepted() => $_clearField(1);
+
+  /// 요청 시점에 계산한 다리별 부족분 (실행 시점에 다시 계산한다)
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get baseQuantity => $_getI64(1);
+  @$pb.TagNumber(2)
+  set baseQuantity($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasBaseQuantity() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBaseQuantity() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get counterQuantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set counterQuantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCounterQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCounterQuantity() => $_clearField(3);
+}
+
 class ResetPairV2SessionRequest extends $pb.GeneratedMessage {
   factory ResetPairV2SessionRequest({
     $core.String? pairV2,
@@ -2428,6 +2580,8 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     $core.double? previousFillRatePct,
     $core.bool? manualLaunchPending,
     $core.String? lastLaunchError,
+    $fixnum.Int64? baseNextRoundQuantity,
+    $fixnum.Int64? counterNextRoundQuantity,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
@@ -2441,6 +2595,8 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     if (previousFillRatePct != null) result.previousFillRatePct = previousFillRatePct;
     if (manualLaunchPending != null) result.manualLaunchPending = manualLaunchPending;
     if (lastLaunchError != null) result.lastLaunchError = lastLaunchError;
+    if (baseNextRoundQuantity != null) result.baseNextRoundQuantity = baseNextRoundQuantity;
+    if (counterNextRoundQuantity != null) result.counterNextRoundQuantity = counterNextRoundQuantity;
     return result;
   }
 
@@ -2461,6 +2617,8 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
     ..a<$core.double>(9, _omitFieldNames ? '' : 'previousFillRatePct', $pb.PbFieldType.OD)
     ..aOB(10, _omitFieldNames ? '' : 'manualLaunchPending')
     ..aOS(11, _omitFieldNames ? '' : 'lastLaunchError')
+    ..aInt64(12, _omitFieldNames ? '' : 'baseNextRoundQuantity')
+    ..aInt64(13, _omitFieldNames ? '' : 'counterNextRoundQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -2513,7 +2671,7 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $2.Timestamp ensureUpdatedAt() => $_ensure(2);
 
-  /// 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate 시 유지)
+  /// 완료회차 = 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate·서버 재기동 시 유지, ResetPairV2Session 으로 0)
   @$pb.TagNumber(4)
   $core.int get launchCount => $_getIZ(3);
   @$pb.TagNumber(4)
@@ -2592,6 +2750,26 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   $core.bool hasLastLaunchError() => $_has(10);
   @$pb.TagNumber(11)
   void clearLastLaunchError() => $_clearField(11);
+
+  /// 다음 회차(완료회차+1)의 다리별 발주 예정 수량 = 1회 수량 + 되메울 수량(취소·거부분).
+  /// 실행 루프가 떠 있을 때만 채운다 (총회차를 모두 완료했거나 정지 중이면 미설정).
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get baseNextRoundQuantity => $_getI64(11);
+  @$pb.TagNumber(12)
+  set baseNextRoundQuantity($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasBaseNextRoundQuantity() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearBaseNextRoundQuantity() => $_clearField(12);
+
+  @$pb.TagNumber(13)
+  $fixnum.Int64 get counterNextRoundQuantity => $_getI64(12);
+  @$pb.TagNumber(13)
+  set counterNextRoundQuantity($fixnum.Int64 value) => $_setInt64(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasCounterNextRoundQuantity() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearCounterNextRoundQuantity() => $_clearField(13);
 }
 
 /// 페어 주문 추적 행
@@ -3221,8 +3399,8 @@ class GetPairV2OrderSummaryResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $pb.PbList<PairV2LegSummary> get legs => $_getList(0);
 
-  /// 실행 세션 발사 횟수 — 영업일(trading_day)과 무관. 일시정지해도 유지되고,
-  /// 세션 초기화(ResetPairV2Session)·서버 재기동 시 0 부터 다시 센다.
+  /// 실행 세션 발사 횟수(완료회차) — 영업일(trading_day)과 무관. 일시정지·서버 재기동 후에도 이어지고,
+  /// 세션 초기화(ResetPairV2Session) 시 0 부터 다시 센다.
   @$pb.TagNumber(2)
   $core.int get launchCount => $_getIZ(1);
   @$pb.TagNumber(2)

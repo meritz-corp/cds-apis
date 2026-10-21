@@ -2138,6 +2138,261 @@ impl<'de> serde::Deserialize<'de> for ListPairV2sResponse {
         deserializer.deserialize_struct("kdo.v1.pair_v2.ListPairV2sResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for OrderPairV2UntilRoundRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.OrderPairV2UntilRoundRequest", len)?;
+        if true {
+            struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
+        }
+        if true {
+            struct_ser.serialize_field("target_round", &self.target_round)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrderPairV2UntilRoundRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pair_v2",
+            "pairV2",
+            "target_round",
+            "targetRound",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PairV2,
+            TargetRound,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
+                            "targetRound" | "target_round" => Ok(GeneratedField::TargetRound),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrderPairV2UntilRoundRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.OrderPairV2UntilRoundRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OrderPairV2UntilRoundRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pair_v2__ = None;
+                let mut target_round__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PairV2 => {
+                            if pair_v2__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pairV2"));
+                            }
+                            pair_v2__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::TargetRound => {
+                            if target_round__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("targetRound"));
+                            }
+                            target_round__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(OrderPairV2UntilRoundRequest {
+                    pair_v2: pair_v2__.unwrap_or_default(),
+                    target_round: target_round__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.OrderPairV2UntilRoundRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for OrderPairV2UntilRoundResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.OrderPairV2UntilRoundResponse", len)?;
+        if true {
+            struct_ser.serialize_field("accepted", &self.accepted)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_quantity", ToString::to_string(&self.base_quantity).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_quantity", ToString::to_string(&self.counter_quantity).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for OrderPairV2UntilRoundResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "accepted",
+            "base_quantity",
+            "baseQuantity",
+            "counter_quantity",
+            "counterQuantity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Accepted,
+            BaseQuantity,
+            CounterQuantity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "accepted" => Ok(GeneratedField::Accepted),
+                            "baseQuantity" | "base_quantity" => Ok(GeneratedField::BaseQuantity),
+                            "counterQuantity" | "counter_quantity" => Ok(GeneratedField::CounterQuantity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = OrderPairV2UntilRoundResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.OrderPairV2UntilRoundResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<OrderPairV2UntilRoundResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut accepted__ = None;
+                let mut base_quantity__ = None;
+                let mut counter_quantity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Accepted => {
+                            if accepted__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("accepted"));
+                            }
+                            accepted__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::BaseQuantity => {
+                            if base_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseQuantity"));
+                            }
+                            base_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterQuantity => {
+                            if counter_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterQuantity"));
+                            }
+                            counter_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(OrderPairV2UntilRoundResponse {
+                    accepted: accepted__.unwrap_or_default(),
+                    base_quantity: base_quantity__.unwrap_or_default(),
+                    counter_quantity: counter_quantity__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.OrderPairV2UntilRoundResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for PairV2 {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -2146,6 +2401,9 @@ impl serde::Serialize for PairV2 {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -2285,6 +2543,9 @@ impl serde::Serialize for PairV2 {
         if let Some(v) = self.pricing.as_ref() {
             struct_ser.serialize_field("pricing", v)?;
         }
+        if let Some(v) = self.total_rounds.as_ref() {
+            struct_ser.serialize_field("total_rounds", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2331,6 +2592,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             "min_fill_rate_pct",
             "minFillRatePct",
             "pricing",
+            "total_rounds",
+            "totalRounds",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2357,6 +2620,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             AllowBorrowedSell,
             MinFillRatePct,
             Pricing,
+            TotalRounds,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2401,6 +2665,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             "allowBorrowedSell" | "allow_borrowed_sell" => Ok(GeneratedField::AllowBorrowedSell),
                             "minFillRatePct" | "min_fill_rate_pct" => Ok(GeneratedField::MinFillRatePct),
                             "pricing" => Ok(GeneratedField::Pricing),
+                            "totalRounds" | "total_rounds" => Ok(GeneratedField::TotalRounds),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2442,6 +2707,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                 let mut allow_borrowed_sell__ = None;
                 let mut min_fill_rate_pct__ = None;
                 let mut pricing__ = None;
+                let mut total_rounds__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -2592,6 +2858,14 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             }
                             pricing__ = map_.next_value()?;
                         }
+                        GeneratedField::TotalRounds => {
+                            if total_rounds__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("totalRounds"));
+                            }
+                            total_rounds__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2620,6 +2894,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                     allow_borrowed_sell: allow_borrowed_sell__.unwrap_or_default(),
                     min_fill_rate_pct: min_fill_rate_pct__,
                     pricing: pricing__,
+                    total_rounds: total_rounds__,
                 })
             }
         }
@@ -2788,6 +3063,7 @@ impl serde::Serialize for PairV2BlockReason {
             Self::OrderValidation => "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION",
             Self::PartialFailure => "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE",
             Self::RuntimeError => "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR",
+            Self::RoundsCompleted => "PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED",
         };
         serializer.serialize_str(variant)
     }
@@ -2815,6 +3091,7 @@ impl<'de> serde::Deserialize<'de> for PairV2BlockReason {
             "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION",
             "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE",
             "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR",
+            "PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED",
         ];
 
         struct GeneratedVisitor;
@@ -2871,6 +3148,7 @@ impl<'de> serde::Deserialize<'de> for PairV2BlockReason {
                     "PAIR_V2_BLOCK_REASON_ORDER_VALIDATION" => Ok(PairV2BlockReason::OrderValidation),
                     "PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE" => Ok(PairV2BlockReason::PartialFailure),
                     "PAIR_V2_BLOCK_REASON_RUNTIME_ERROR" => Ok(PairV2BlockReason::RuntimeError),
+                    "PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED" => Ok(PairV2BlockReason::RoundsCompleted),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -5535,6 +5813,12 @@ impl serde::Serialize for PairV2StatusUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2StatusUpdate", len)?;
         if true {
             struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
@@ -5577,6 +5861,16 @@ impl serde::Serialize for PairV2StatusUpdate {
         if let Some(v) = self.last_launch_error.as_ref() {
             struct_ser.serialize_field("last_launch_error", v)?;
         }
+        if let Some(v) = self.base_next_round_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_next_round_quantity", ToString::to_string(&v).as_str())?;
+        }
+        if let Some(v) = self.counter_next_round_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_next_round_quantity", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -5608,6 +5902,10 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             "manualLaunchPending",
             "last_launch_error",
             "lastLaunchError",
+            "base_next_round_quantity",
+            "baseNextRoundQuantity",
+            "counter_next_round_quantity",
+            "counterNextRoundQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5623,6 +5921,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
             PreviousFillRatePct,
             ManualLaunchPending,
             LastLaunchError,
+            BaseNextRoundQuantity,
+            CounterNextRoundQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5656,6 +5956,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                             "previousFillRatePct" | "previous_fill_rate_pct" => Ok(GeneratedField::PreviousFillRatePct),
                             "manualLaunchPending" | "manual_launch_pending" => Ok(GeneratedField::ManualLaunchPending),
                             "lastLaunchError" | "last_launch_error" => Ok(GeneratedField::LastLaunchError),
+                            "baseNextRoundQuantity" | "base_next_round_quantity" => Ok(GeneratedField::BaseNextRoundQuantity),
+                            "counterNextRoundQuantity" | "counter_next_round_quantity" => Ok(GeneratedField::CounterNextRoundQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5686,6 +5988,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                 let mut previous_fill_rate_pct__ = None;
                 let mut manual_launch_pending__ = None;
                 let mut last_launch_error__ = None;
+                let mut base_next_round_quantity__ = None;
+                let mut counter_next_round_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairV2 => {
@@ -5764,6 +6068,22 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                             }
                             last_launch_error__ = map_.next_value()?;
                         }
+                        GeneratedField::BaseNextRoundQuantity => {
+                            if base_next_round_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseNextRoundQuantity"));
+                            }
+                            base_next_round_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::CounterNextRoundQuantity => {
+                            if counter_next_round_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterNextRoundQuantity"));
+                            }
+                            counter_next_round_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5781,6 +6101,8 @@ impl<'de> serde::Deserialize<'de> for PairV2StatusUpdate {
                     previous_fill_rate_pct: previous_fill_rate_pct__,
                     manual_launch_pending: manual_launch_pending__.unwrap_or_default(),
                     last_launch_error: last_launch_error__,
+                    base_next_round_quantity: base_next_round_quantity__,
+                    counter_next_round_quantity: counter_next_round_quantity__,
                 })
             }
         }

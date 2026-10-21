@@ -112,6 +112,8 @@ class PairV2BlockReason extends $pb.ProtobufEnum {
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_ORDER_VALIDATION = PairV2BlockReason._(13, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_ORDER_VALIDATION');
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE = PairV2BlockReason._(14, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE');
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_RUNTIME_ERROR = PairV2BlockReason._(15, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_RUNTIME_ERROR');
+  /// 완료회차가 총회차(total_rounds)에 도달 — 자동·수동 발사 모두 차단 (목표회차까지 발주는 허용)
+  static const PairV2BlockReason PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED = PairV2BlockReason._(16, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED');
 
   static const $core.List<PairV2BlockReason> values = <PairV2BlockReason> [
     PAIR_V2_BLOCK_REASON_UNSPECIFIED,
@@ -130,9 +132,10 @@ class PairV2BlockReason extends $pb.ProtobufEnum {
     PAIR_V2_BLOCK_REASON_ORDER_VALIDATION,
     PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE,
     PAIR_V2_BLOCK_REASON_RUNTIME_ERROR,
+    PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED,
   ];
 
-  static final $core.List<PairV2BlockReason?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 15);
+  static final $core.List<PairV2BlockReason?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 16);
   static PairV2BlockReason? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const PairV2BlockReason._(super.value, super.name);

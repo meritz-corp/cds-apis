@@ -92,6 +92,7 @@ const PairV2BlockReason$json = {
     {'1': 'PAIR_V2_BLOCK_REASON_ORDER_VALIDATION', '2': 13},
     {'1': 'PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE', '2': 14},
     {'1': 'PAIR_V2_BLOCK_REASON_RUNTIME_ERROR', '2': 15},
+    {'1': 'PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED', '2': 16},
   ],
 };
 
@@ -108,7 +109,8 @@ final $typed_data.Uint8List pairV2BlockReasonDescriptor = $convert.base64Decode(
     'X1YyX0JMT0NLX1JFQVNPTl9TTElQUEFHRRALEicKI1BBSVJfVjJfQkxPQ0tfUkVBU09OX1FVQU'
     '5USVRZX0xJTUlUEAwSKQolUEFJUl9WMl9CTE9DS19SRUFTT05fT1JERVJfVkFMSURBVElPThAN'
     'EigKJFBBSVJfVjJfQkxPQ0tfUkVBU09OX1BBUlRJQUxfRkFJTFVSRRAOEiYKIlBBSVJfVjJfQk'
-    'xPQ0tfUkVBU09OX1JVTlRJTUVfRVJST1IQDw==');
+    'xPQ0tfUkVBU09OX1JVTlRJTUVfRVJST1IQDxIpCiVQQUlSX1YyX0JMT0NLX1JFQVNPTl9ST1VO'
+    'RFNfQ09NUExFVEVEEBA=');
 
 @$core.Deprecated('Use pairV2SlotDescriptor instead')
 const PairV2Slot$json = {
@@ -193,6 +195,7 @@ const PairV2$json = {
     {'1': 'allow_borrowed_sell', '3': 20, '4': 1, '5': 8, '10': 'allowBorrowedSell'},
     {'1': 'min_fill_rate_pct', '3': 21, '4': 1, '5': 1, '9': 3, '10': 'minFillRatePct', '17': true},
     {'1': 'pricing', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2Pricing', '10': 'pricing'},
+    {'1': 'total_rounds', '3': 23, '4': 1, '5': 13, '9': 4, '10': 'totalRounds', '17': true},
   ],
   '7': {},
   '8': [
@@ -200,6 +203,7 @@ const PairV2$json = {
     {'1': '_trading_window_start'},
     {'1': '_trading_window_end'},
     {'1': '_min_fill_rate_pct'},
+    {'1': '_total_rounds'},
   ],
 };
 
@@ -223,10 +227,11 @@ final $typed_data.Uint8List pairV2Descriptor = $convert.base64Decode(
     'ABKAlIAlIQdHJhZGluZ1dpbmRvd0VuZIgBARIlCg5zbGlwcGFnZV9ndWFyZBgTIAEoCFINc2xp'
     'cHBhZ2VHdWFyZBIuChNhbGxvd19ib3Jyb3dlZF9zZWxsGBQgASgIUhFhbGxvd0JvcnJvd2VkU2'
     'VsbBIuChFtaW5fZmlsbF9yYXRlX3BjdBgVIAEoAUgDUg5taW5GaWxsUmF0ZVBjdIgBARI3Cgdw'
-    'cmljaW5nGBYgASgLMh0ua2RvLnYxLnBhaXJfdjIuUGFpclYyUHJpY2luZ1IHcHJpY2luZzov6k'
-    'EsChZrZG8uY2RzYXBpcy54eXovUGFpclYyEhJwYWlyX3Yycy97cGFpcl92Mn1CEgoQX3BhdXNl'
-    'X2xhdW5jaF9ub0IXChVfdHJhZGluZ193aW5kb3dfc3RhcnRCFQoTX3RyYWRpbmdfd2luZG93X2'
-    'VuZEIUChJfbWluX2ZpbGxfcmF0ZV9wY3Q=');
+    'cmljaW5nGBYgASgLMh0ua2RvLnYxLnBhaXJfdjIuUGFpclYyUHJpY2luZ1IHcHJpY2luZxImCg'
+    'x0b3RhbF9yb3VuZHMYFyABKA1IBFILdG90YWxSb3VuZHOIAQE6L+pBLAoWa2RvLmNkc2FwaXMu'
+    'eHl6L1BhaXJWMhIScGFpcl92MnMve3BhaXJfdjJ9QhIKEF9wYXVzZV9sYXVuY2hfbm9CFwoVX3'
+    'RyYWRpbmdfd2luZG93X3N0YXJ0QhUKE190cmFkaW5nX3dpbmRvd19lbmRCFAoSX21pbl9maWxs'
+    'X3JhdGVfcGN0Qg8KDV90b3RhbF9yb3VuZHM=');
 
 @$core.Deprecated('Use pairV2EntryDescriptor instead')
 const PairV2Entry$json = {
@@ -619,6 +624,36 @@ final $typed_data.Uint8List launchPairV2OnceResponseDescriptor = $convert.base64
     'ChhMYXVuY2hQYWlyVjJPbmNlUmVzcG9uc2USGgoIYWNjZXB0ZWQYASABKAhSCGFjY2VwdGVkEh'
     'YKBnJlYXNvbhgCIAEoCVIGcmVhc29u');
 
+@$core.Deprecated('Use orderPairV2UntilRoundRequestDescriptor instead')
+const OrderPairV2UntilRoundRequest$json = {
+  '1': 'OrderPairV2UntilRoundRequest',
+  '2': [
+    {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pairV2'},
+    {'1': 'target_round', '3': 2, '4': 1, '5': 13, '8': {}, '10': 'targetRound'},
+  ],
+};
+
+/// Descriptor for `OrderPairV2UntilRoundRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List orderPairV2UntilRoundRequestDescriptor = $convert.base64Decode(
+    'ChxPcmRlclBhaXJWMlVudGlsUm91bmRSZXF1ZXN0Eh0KB3BhaXJfdjIYASABKAlCBOJBAQJSBn'
+    'BhaXJWMhInCgx0YXJnZXRfcm91bmQYAiABKA1CBOJBAQJSC3RhcmdldFJvdW5k');
+
+@$core.Deprecated('Use orderPairV2UntilRoundResponseDescriptor instead')
+const OrderPairV2UntilRoundResponse$json = {
+  '1': 'OrderPairV2UntilRoundResponse',
+  '2': [
+    {'1': 'accepted', '3': 1, '4': 1, '5': 8, '10': 'accepted'},
+    {'1': 'base_quantity', '3': 2, '4': 1, '5': 3, '10': 'baseQuantity'},
+    {'1': 'counter_quantity', '3': 3, '4': 1, '5': 3, '10': 'counterQuantity'},
+  ],
+};
+
+/// Descriptor for `OrderPairV2UntilRoundResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List orderPairV2UntilRoundResponseDescriptor = $convert.base64Decode(
+    'Ch1PcmRlclBhaXJWMlVudGlsUm91bmRSZXNwb25zZRIaCghhY2NlcHRlZBgBIAEoCFIIYWNjZX'
+    'B0ZWQSIwoNYmFzZV9xdWFudGl0eRgCIAEoA1IMYmFzZVF1YW50aXR5EikKEGNvdW50ZXJfcXVh'
+    'bnRpdHkYAyABKANSD2NvdW50ZXJRdWFudGl0eQ==');
+
 @$core.Deprecated('Use resetPairV2SessionRequestDescriptor instead')
 const ResetPairV2SessionRequest$json = {
   '1': 'ResetPairV2SessionRequest',
@@ -735,6 +770,8 @@ const PairV2StatusUpdate$json = {
     {'1': 'previous_fill_rate_pct', '3': 9, '4': 1, '5': 1, '9': 3, '10': 'previousFillRatePct', '17': true},
     {'1': 'manual_launch_pending', '3': 10, '4': 1, '5': 8, '10': 'manualLaunchPending'},
     {'1': 'last_launch_error', '3': 11, '4': 1, '5': 9, '9': 4, '10': 'lastLaunchError', '17': true},
+    {'1': 'base_next_round_quantity', '3': 12, '4': 1, '5': 3, '9': 5, '10': 'baseNextRoundQuantity', '17': true},
+    {'1': 'counter_next_round_quantity', '3': 13, '4': 1, '5': 3, '9': 6, '10': 'counterNextRoundQuantity', '17': true},
   ],
   '8': [
     {'1': '_current_spread'},
@@ -742,6 +779,8 @@ const PairV2StatusUpdate$json = {
     {'1': '_counter_top_quantity'},
     {'1': '_previous_fill_rate_pct'},
     {'1': '_last_launch_error'},
+    {'1': '_base_next_round_quantity'},
+    {'1': '_counter_next_round_quantity'},
   ],
 };
 
@@ -757,9 +796,12 @@ final $typed_data.Uint8List pairV2StatusUpdateDescriptor = $convert.base64Decode
     'JWMkJsb2NrUmVhc29uUgtibG9ja1JlYXNvbhI4ChZwcmV2aW91c19maWxsX3JhdGVfcGN0GAkg'
     'ASgBSANSE3ByZXZpb3VzRmlsbFJhdGVQY3SIAQESMgoVbWFudWFsX2xhdW5jaF9wZW5kaW5nGA'
     'ogASgIUhNtYW51YWxMYXVuY2hQZW5kaW5nEi8KEWxhc3RfbGF1bmNoX2Vycm9yGAsgASgJSARS'
-    'D2xhc3RMYXVuY2hFcnJvcogBAUIRCg9fY3VycmVudF9zcHJlYWRCFAoSX2Jhc2VfdG9wX3F1YW'
-    '50aXR5QhcKFV9jb3VudGVyX3RvcF9xdWFudGl0eUIZChdfcHJldmlvdXNfZmlsbF9yYXRlX3Bj'
-    'dEIUChJfbGFzdF9sYXVuY2hfZXJyb3I=');
+    'D2xhc3RMYXVuY2hFcnJvcogBARI8ChhiYXNlX25leHRfcm91bmRfcXVhbnRpdHkYDCABKANIBV'
+    'IVYmFzZU5leHRSb3VuZFF1YW50aXR5iAEBEkIKG2NvdW50ZXJfbmV4dF9yb3VuZF9xdWFudGl0'
+    'eRgNIAEoA0gGUhhjb3VudGVyTmV4dFJvdW5kUXVhbnRpdHmIAQFCEQoPX2N1cnJlbnRfc3ByZW'
+    'FkQhQKEl9iYXNlX3RvcF9xdWFudGl0eUIXChVfY291bnRlcl90b3BfcXVhbnRpdHlCGQoXX3By'
+    'ZXZpb3VzX2ZpbGxfcmF0ZV9wY3RCFAoSX2xhc3RfbGF1bmNoX2Vycm9yQhsKGV9iYXNlX25leH'
+    'Rfcm91bmRfcXVhbnRpdHlCHgocX2NvdW50ZXJfbmV4dF9yb3VuZF9xdWFudGl0eQ==');
 
 @$core.Deprecated('Use pairV2OrderDescriptor instead')
 const PairV2Order$json = {
