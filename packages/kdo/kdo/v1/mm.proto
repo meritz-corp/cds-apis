@@ -356,8 +356,8 @@ message MarketMakingConfiguration {
 
   // 잔량 불균형 skew. 구성종목·nav-dep 호가마다 잔량 비중으로 skew 를 내고 NAV 비중만큼 합산해 호가에
   // 평행 가산한다(NAV pricing 전용 — 다른 pricing 에서 enabled=true 면 서버가 거부).
-  // 켜지면 NAV 입력은 use_qty_weighted_mid 와 무관하게 단순 중간가가 되고, 호가 단계 수는
-  // qty_weighted_mid_levels 를 따른다. Running 중 변경 허용(다음 tick 반영). 공식·예시는 MarketMakingQtyImbalance 주석.
+  // 켜지면 NAV 입력은 use_qty_weighted_mid 와 무관하게 단순 중간가가 되고, 잔량은 1호가만 본다
+  // (qty_weighted_mid_levels 와 무관). Running 중 변경 허용(다음 tick 반영). 공식·예시는 MarketMakingQtyImbalance 주석.
   // optional: presence 로 "설정 vs 미변경" 구분 (loss_limit 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
   optional MarketMakingQtyImbalance qty_imbalance = 35;
 }
@@ -703,9 +703,9 @@ message MarketMakingLossLimit {
 
 // 잔량 불균형 skew 설정.
 //
-// 구성종목·nav-dep 호가마다 매도 잔량 비중 x = 매도잔량 ÷ (매수잔량 + 매도잔량)
-// (상위 qty_weighted_mid_levels 단 합)으로 위치 p 를 정하고
-//   종목 skew = (매수가 + p × (매도가 - 매수가)) - 1호가 중간가   (매수가·매도가 = 사이드별 잔량가중 평균가, 1단이면 1호가)
+// 구성종목·nav-dep 호가마다 1호가 매도 잔량 비중 x = 매도1호가 잔량 ÷ (매수1호가 잔량 + 매도1호가 잔량)으로
+// 위치 p 를 정하고 (1호가만 본다 — qty_weighted_mid_levels 와 무관)
+//   종목 skew = (매수1호가 + p × (매도1호가 - 매수1호가)) - 1호가 중간가 = (p - ½) × 1호가 스프레드
 //   ETF skew  = Σ (종목 NAV 비중 × 종목 skew)                     (NAV 비중 = 종목 가격 1원 변화당 NAV 변화량)
 //   호가 기준 = NAV(중간가) + ETF skew (+ 다른 skew)
 // NAV 밖에서 더하므로 F2M(시장추종)이 이 skew 를 상쇄하지 않는다. 환선물(FX 오버레이 소스)은 대상이 아니다.
@@ -714,10 +714,10 @@ message MarketMakingLossLimit {
 //   x < θ        : p = 1 - θ × (x ÷ θ)^γ                       → linear(1 - x) 보다 매도호가 쪽
 //   θ ≤ x ≤ 50%  : p = ½ + (½ - θ) × ((½ - x) ÷ (½ - θ))^γ     → linear 보다 중간가 쪽 (잔량이 비슷하면 skew 를 덜 줌)
 //   50% 넘는 쪽은 대칭(매수 잔량이 얇으면 매수호가 쪽). θ·50% 에서 linear 와 만나 가격이 끊기지 않는다.
-//   sensitivity 0 = linear (현행 잔량가중 NAV 와 같은 값), 1 = 계단 (x < θ 매도호가, θ ~ 100-θ% 중간가, 그 밖 매수호가).
+//   sensitivity 0 = linear (1호가 잔량가중 microprice 와 같은 값), 1 = 계단 (x < θ 매도호가, θ ~ 100-θ% 중간가, 그 밖 매수호가).
 //
 // 예) PDF 에 구성종목 하나, ETF 1주 = 구성종목 1주. 구성종목 1호가 매수 1000 / 매도 2000, threshold_pct 20
-//   매도 비중   현행(잔량가중)   sensitivity 0.5   0.8      1
+//   매도 비중   linear(=0)      sensitivity 0.5   0.8      1
 //      5%        1950            1987.5          1999.8   2000
 //     10%        1900            1950            1993.8   2000
 //     20%        1800            1800            1800     2000→1500 (점프)
