@@ -4,8 +4,8 @@
 // PairV2 Entity
 // ============================================================================
 
-/// PairV2 전략 — base·counter 지정 호가로 재는 스프레드가 target_spread 를 초과하면
-/// 그 가격 그대로 양다리를 동시 발주한다.
+/// PairV2 전략 — base·counter 지정 호가로 재는 스프레드("선물 − 현물")가 target_spread 를
+/// 발사 방향(매수차 초과·매도차 미만)으로 넘으면 그 가격 그대로 양다리를 동시 발주한다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PairV2 {
@@ -21,7 +21,7 @@ pub struct PairV2 {
     /// Portfolio ID
     #[prost(int32, tag="4")]
     pub portfolio_id: i32,
-    /// Base 다리. side 가 매수차(BID)/매도차(ASK) 를 결정하고, quantity 가 1회 발주량.
+    /// Base 다리. side 가 방향을 정하고(base 가 현물이면 BID=매수차, 선물이면 BID=매도차), quantity 가 1회 발주량.
     #[prost(message, optional, tag="5")]
     pub base: ::core::option::Option<PairV2Entry>,
     /// Counter 다리. quantity는 명시적인 1회 발주량으로 그대로 사용한다.
@@ -32,8 +32,9 @@ pub struct PairV2 {
     #[deprecated]
     #[prost(message, optional, tag="7")]
     pub spread: ::core::option::Option<PairV2SpreadType>,
-    /// 진입 최소 스프레드. 현재 스프레드가 이 값을 "초과"할 때 발사. 단위 = base 가격 단위.
-    /// 캘린더 스프레드처럼 즉시 차익이 아닌 운용은 음수가 정상이다.
+    /// 목표 스프레드. 스프레드("선물 − 현물", 방향 무관)가 base 진입 이익이 커지는 쪽으로 이 값을
+    /// 넘으면 발사 — 현물 매수·선물 매도(매수차)는 "초과", 현물 매도·선물 매수(매도차)는 "미만".
+    /// 단위 = base 가격 단위. 캘린더 스프레드처럼 즉시 차익이 아닌 운용은 음수가 정상이다.
     #[prost(double, tag="8")]
     pub target_spread: f64,
     /// 발사 후 재발사까지 대기 (ms)
@@ -117,7 +118,7 @@ pub struct PairV2Entry {
     /// 주문에 사용할 펀드 코드
     #[prost(string, tag="2")]
     pub fund_code: ::prost::alloc::string::String,
-    /// 주문 방향 (base.side 가 스프레드 부호 규약의 기준)
+    /// 주문 방향 (base.side 가 발사 부등호의 기준 — 스프레드 부호는 방향과 무관)
     #[prost(enumeration="super::common::OrderSide", tag="3")]
     pub side: i32,
     /// 1회 발주량 (base/counter 모두 명시). 회차 발주량은 누적 목표 − 세션 발주수량이라
@@ -137,7 +138,9 @@ pub struct PairV2Entry {
 // ============================================================================
 
 /// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위이고,
-/// 의미는 "그 방향으로 진입했을 때의 실행가능 이익"이다.
+/// 의미는 방향과 무관한 "선물 − 현물" 차다 (mmm FutureMinusETF "선물*k − ETF" 와 같은 부호).
+/// 선물 다리가 하나면 그 다리를 앞에 두고(base 가 선물이면 base − counter 환산), 선물 다리가 없거나
+/// 둘이면(ETF끼리·캘린더) counter 환산 − base 로 잰다.
 ///
 /// linear 외 세 변종은 (ETF, Future) 상품쌍 전용이다 — 서버가 상품타입을 확인하고 아니면
 /// 페어 루프를 띄우지 않는다.
@@ -352,7 +355,7 @@ pub struct PairV2ExecutionLog {
     /// 실행 결과
     #[prost(enumeration="PairV2ExecutionOutcome", tag="2")]
     pub outcome: i32,
-    /// 발사 판정에 쓴 측정 스프레드 (base 가격 단위)
+    /// 발사 판정에 쓴 측정 스프레드 ("선물 − 현물", base 가격 단위)
     #[prost(double, tag="3")]
     pub spread: f64,
     /// 그 시점의 목표 스프레드 (설정 변경 이력 추적용)
@@ -569,7 +572,7 @@ pub struct PairV2StatusUpdate {
     /// 완료회차 = 실행 세션의 누적 발사 횟수 (설정 변경/Pause/Activate·서버 재기동 시 유지, ResetPairV2Session 으로 0)
     #[prost(uint32, tag="4")]
     pub launch_count: u32,
-    /// 최근 측정 스프레드 (base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
+    /// 최근 측정 스프레드 ("선물 − 현물", base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
     /// 시세 미수신 구간에는 실리지 않는다.
     #[prost(double, optional, tag="5")]
     pub current_spread: ::core::option::Option<f64>,

@@ -11,9 +11,9 @@ import "../../google/protobuf/empty.pb.dart" as googleprotobufempty;
 /// PairV2Service - 가격차(스프레드) 단일 트리거 페어 전략 관리 서비스 (V2)
 /// `kdo.v1.pair` 와 코드/스키마를 공유하지 않는 독립 패키지다 (lead_lag_v2/mm_v2 와 같은 포크 방식).
 /// 운영 중인 v1 PairService 를 보호하기 위한 의도적 격리이며, v1 메시지를 참조하지 않는다.
-/// v2 전략: base·counter 두 다리의 지정 호가로 스프레드를 재고, 목표치(target_spread)를
-/// 초과하면 그 가격 그대로 양다리를 동시에 발주한다. 미체결 잔량은 취소하지 않고
-/// auto_amend SelfQuote 가 추적 정정해 체결시킨다. v1 의 trigger×execution 2축 조합,
+/// v2 전략: base·counter 두 다리의 지정 호가로 스프레드("선물 − 현물")를 재고, 목표치(target_spread)를
+/// 발사 방향(매수차 초과·매도차 미만)으로 넘으면 그 가격 그대로 양다리를 동시에 발주한다.
+/// 미체결 잔량은 취소하지 않고 auto_amend SelfQuote 가 추적 정정해 체결시킨다. v1 의 trigger×execution 2축 조합,
 /// 수량 불균형 트리거, settle/recovery/balance 사이클은 없다.
 extension type PairV2ServiceClient (connect.Transport _transport) {
   /// 단일 PairV2 조회
