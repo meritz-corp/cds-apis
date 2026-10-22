@@ -58,7 +58,9 @@ type MarketMakingServiceClient interface {
 	// 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
 	// 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
 	ListMmFillHistory(ctx context.Context, in *ListMmFillHistoryRequest, opts ...grpc.CallOption) (*ListMmFillHistoryResponse, error)
-	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+	// Fit to Market: F2M 평행 skew 를 1회 설정한다.
+	// f2m_shift 미지정 = 괴리 EMA 를 리셋해 다음 자기 호가 tick 에 현재 시장 괴리(시장 mid − 이론가)로 즉시 재정렬,
+	// f2m_shift 지정 = 그 값(원)으로 바로 설정.
 	FitToMarket(ctx context.Context, in *FitToMarketRequest, opts ...grpc.CallOption) (*FitToMarketResponse, error)
 	// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
 	SaveMmPreset(ctx context.Context, in *SaveMmPresetRequest, opts ...grpc.CallOption) (*MmPreset, error)
@@ -369,7 +371,9 @@ type MarketMakingServiceServer interface {
 	// 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
 	// 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
 	ListMmFillHistory(context.Context, *ListMmFillHistoryRequest) (*ListMmFillHistoryResponse, error)
-	// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+	// Fit to Market: F2M 평행 skew 를 1회 설정한다.
+	// f2m_shift 미지정 = 괴리 EMA 를 리셋해 다음 자기 호가 tick 에 현재 시장 괴리(시장 mid − 이론가)로 즉시 재정렬,
+	// f2m_shift 지정 = 그 값(원)으로 바로 설정.
 	FitToMarket(context.Context, *FitToMarketRequest) (*FitToMarketResponse, error)
 	// 현재 라이브 MM 설정을 이름있는 프리셋으로 저장 (심볼별). 같은 이름이면 덮어쓴다.
 	SaveMmPreset(context.Context, *SaveMmPresetRequest) (*MmPreset, error)

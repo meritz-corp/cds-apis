@@ -269,7 +269,9 @@ extension type MarketMakingServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// Fit to Market: 현재 호가 중심을 ETF 시장 mid 가격으로 스냅하는 평행 skew를 1회 설정
+  /// Fit to Market: F2M 평행 skew 를 1회 설정한다.
+  /// f2m_shift 미지정 = 괴리 EMA 를 리셋해 다음 자기 호가 tick 에 현재 시장 괴리(시장 mid − 이론가)로 즉시 재정렬,
+  /// f2m_shift 지정 = 그 값(원)으로 바로 설정.
   Future<kdov1mm.FitToMarketResponse> fitToMarket(
     kdov1mm.FitToMarketRequest input, {
     connect.Headers? headers,

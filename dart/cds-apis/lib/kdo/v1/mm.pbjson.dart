@@ -1403,13 +1403,18 @@ const FitToMarketRequest$json = {
     {'1': 'symbol', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'symbol'},
     {'1': 'fund_code', '3': 2, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'slot_id', '3': 3, '4': 1, '5': 9, '10': 'slotId'},
+    {'1': 'f2m_shift', '3': 4, '4': 1, '5': 1, '9': 0, '10': 'f2mShift', '17': true},
+  ],
+  '8': [
+    {'1': '_f2m_shift'},
   ],
 };
 
 /// Descriptor for `FitToMarketRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fitToMarketRequestDescriptor = $convert.base64Decode(
     'ChJGaXRUb01hcmtldFJlcXVlc3QSHAoGc3ltYm9sGAEgASgJQgTiQQECUgZzeW1ib2wSGwoJZn'
-    'VuZF9jb2RlGAIgASgJUghmdW5kQ29kZRIXCgdzbG90X2lkGAMgASgJUgZzbG90SWQ=');
+    'VuZF9jb2RlGAIgASgJUghmdW5kQ29kZRIXCgdzbG90X2lkGAMgASgJUgZzbG90SWQSIAoJZjJt'
+    'X3NoaWZ0GAQgASgBSABSCGYybVNoaWZ0iAEBQgwKCl9mMm1fc2hpZnQ=');
 
 @$core.Deprecated('Use fitToMarketResponseDescriptor instead')
 const FitToMarketResponse$json = {

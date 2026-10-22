@@ -898,6 +898,9 @@ impl serde::Serialize for FitToMarketRequest {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.FitToMarketRequest", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -907,6 +910,9 @@ impl serde::Serialize for FitToMarketRequest {
         }
         if true {
             struct_ser.serialize_field("slot_id", &self.slot_id)?;
+        }
+        if let Some(v) = self.f2m_shift.as_ref() {
+            struct_ser.serialize_field("f2m_shift", v)?;
         }
         struct_ser.end()
     }
@@ -923,6 +929,8 @@ impl<'de> serde::Deserialize<'de> for FitToMarketRequest {
             "fundCode",
             "slot_id",
             "slotId",
+            "f2m_shift",
+            "f2mShift",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -930,6 +938,7 @@ impl<'de> serde::Deserialize<'de> for FitToMarketRequest {
             Symbol,
             FundCode,
             SlotId,
+            F2mShift,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -955,6 +964,7 @@ impl<'de> serde::Deserialize<'de> for FitToMarketRequest {
                             "symbol" => Ok(GeneratedField::Symbol),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
+                            "f2mShift" | "f2m_shift" => Ok(GeneratedField::F2mShift),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -977,6 +987,7 @@ impl<'de> serde::Deserialize<'de> for FitToMarketRequest {
                 let mut symbol__ = None;
                 let mut fund_code__ = None;
                 let mut slot_id__ = None;
+                let mut f2m_shift__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -997,6 +1008,14 @@ impl<'de> serde::Deserialize<'de> for FitToMarketRequest {
                             }
                             slot_id__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::F2mShift => {
+                            if f2m_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("f2mShift"));
+                            }
+                            f2m_shift__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1006,6 +1025,7 @@ impl<'de> serde::Deserialize<'de> for FitToMarketRequest {
                     symbol: symbol__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
                     slot_id: slot_id__.unwrap_or_default(),
+                    f2m_shift: f2m_shift__,
                 })
             }
         }

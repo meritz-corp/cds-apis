@@ -4710,7 +4710,7 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   SpreadDecomposition ensureDecomposition() => $_ensure(8);
 
-  /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
+  /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, 원 단위 정수 문자열(1원 미만 절사). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
   @$pb.TagNumber(12)
   $core.String get f2mShift => $_getSZ(9);
   @$pb.TagNumber(12)
@@ -5985,11 +5985,13 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
     $core.String? symbol,
     $core.String? fundCode,
     $core.String? slotId,
+    $core.double? f2mShift,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
     if (fundCode != null) result.fundCode = fundCode;
     if (slotId != null) result.slotId = slotId;
+    if (f2mShift != null) result.f2mShift = f2mShift;
     return result;
   }
 
@@ -6002,6 +6004,7 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'symbol')
     ..aOS(2, _omitFieldNames ? '' : 'fundCode')
     ..aOS(3, _omitFieldNames ? '' : 'slotId')
+    ..a<$core.double>(4, _omitFieldNames ? '' : 'f2mShift', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -6051,6 +6054,19 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
   $core.bool hasSlotId() => $_has(2);
   @$pb.TagNumber(3)
   void clearSlotId() => $_clearField(3);
+
+  /// 지정할 F2M 값 (원, 소수 허용, 부호 = 방향). 지정하면 F2M 평행 skew 를 이 값으로 바로 덮어쓴다.
+  /// 기준가의 ±2%(기준가 미상이면 ±2000원)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit
+  /// (f2m_refit_interval_ms > 0)이 켜져 있으면 다음 refit 에 덮인다 — 값을 유지하려면 f2m_refit_interval_ms = 0.
+  /// 미지정 = 기존 동작(현재 시장 괴리로 즉시 재정렬).
+  @$pb.TagNumber(4)
+  $core.double get f2mShift => $_getN(3);
+  @$pb.TagNumber(4)
+  set f2mShift($core.double value) => $_setDouble(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasF2mShift() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearF2mShift() => $_clearField(4);
 }
 
 class FitToMarketResponse extends $pb.GeneratedMessage {

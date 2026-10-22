@@ -1018,7 +1018,7 @@ pub struct MmStateUpdate {
     /// 호가 산출 단계별 분해 (변경 시에만 포함, 디버깅/튜닝용)
     #[prost(message, optional, tag="11")]
     pub decomposition: ::core::option::Option<SpreadDecomposition>,
-    /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, Price 내부표현값(string). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
+    /// 현재 적용 중인 F2M(Fit to Market) 평행 skew, 원 단위 정수 문자열(1원 미만 절사). 변경 시에만 포함, None이면 생략. 0 = 미적용/해제
     #[prost(string, optional, tag="12")]
     pub f2m_shift: ::core::option::Option<::prost::alloc::string::String>,
     /// MA 크로스 상태 (변경 시에만 포함)
@@ -1294,6 +1294,12 @@ pub struct FitToMarketRequest {
     /// 같은 (symbol,fund) 내 MM 슬롯 구분자. 빈 문자열 = 단일 인스턴스(default 슬롯).
     #[prost(string, tag="3")]
     pub slot_id: ::prost::alloc::string::String,
+    /// 지정할 F2M 값 (원, 소수 허용, 부호 = 방향). 지정하면 F2M 평행 skew 를 이 값으로 바로 덮어쓴다.
+    /// 기준가의 ±2%(기준가 미상이면 ±2000원)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit
+    /// (f2m_refit_interval_ms > 0)이 켜져 있으면 다음 refit 에 덮인다 — 값을 유지하려면 f2m_refit_interval_ms = 0.
+    /// 미지정 = 기존 동작(현재 시장 괴리로 즉시 재정렬).
+    #[prost(double, optional, tag="4")]
+    pub f2m_shift: ::core::option::Option<f64>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
