@@ -4259,6 +4259,12 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4352,6 +4358,12 @@ impl serde::Serialize for MarketMakingConfiguration {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("f2m_refit_interval_ms", ToString::to_string(&v).as_str())?;
         }
+        if let Some(v) = self.qty_weighted_mid_imbalance_threshold_pct.as_ref() {
+            struct_ser.serialize_field("qty_weighted_mid_imbalance_threshold_pct", v)?;
+        }
+        if let Some(v) = self.qty_weighted_mid_imbalance_exponent.as_ref() {
+            struct_ser.serialize_field("qty_weighted_mid_imbalance_exponent", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4410,6 +4422,10 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "lossLimit",
             "f2m_refit_interval_ms",
             "f2mRefitIntervalMs",
+            "qty_weighted_mid_imbalance_threshold_pct",
+            "qtyWeightedMidImbalanceThresholdPct",
+            "qty_weighted_mid_imbalance_exponent",
+            "qtyWeightedMidImbalanceExponent",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4440,6 +4456,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             TakeExecution,
             LossLimit,
             F2mRefitIntervalMs,
+            QtyWeightedMidImbalanceThresholdPct,
+            QtyWeightedMidImbalanceExponent,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4488,6 +4506,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "takeExecution" | "take_execution" => Ok(GeneratedField::TakeExecution),
                             "lossLimit" | "loss_limit" => Ok(GeneratedField::LossLimit),
                             "f2mRefitIntervalMs" | "f2m_refit_interval_ms" => Ok(GeneratedField::F2mRefitIntervalMs),
+                            "qtyWeightedMidImbalanceThresholdPct" | "qty_weighted_mid_imbalance_threshold_pct" => Ok(GeneratedField::QtyWeightedMidImbalanceThresholdPct),
+                            "qtyWeightedMidImbalanceExponent" | "qty_weighted_mid_imbalance_exponent" => Ok(GeneratedField::QtyWeightedMidImbalanceExponent),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4533,6 +4553,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut take_execution__ = None;
                 let mut loss_limit__ = None;
                 let mut f2m_refit_interval_ms__ = None;
+                let mut qty_weighted_mid_imbalance_threshold_pct__ = None;
+                let mut qty_weighted_mid_imbalance_exponent__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4709,6 +4731,22 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::QtyWeightedMidImbalanceThresholdPct => {
+                            if qty_weighted_mid_imbalance_threshold_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("qtyWeightedMidImbalanceThresholdPct"));
+                            }
+                            qty_weighted_mid_imbalance_threshold_pct__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::QtyWeightedMidImbalanceExponent => {
+                            if qty_weighted_mid_imbalance_exponent__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("qtyWeightedMidImbalanceExponent"));
+                            }
+                            qty_weighted_mid_imbalance_exponent__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4741,6 +4779,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     take_execution: take_execution__,
                     loss_limit: loss_limit__,
                     f2m_refit_interval_ms: f2m_refit_interval_ms__,
+                    qty_weighted_mid_imbalance_threshold_pct: qty_weighted_mid_imbalance_threshold_pct__,
+                    qty_weighted_mid_imbalance_exponent: qty_weighted_mid_imbalance_exponent__,
                 })
             }
         }

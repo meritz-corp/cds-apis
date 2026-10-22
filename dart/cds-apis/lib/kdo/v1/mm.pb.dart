@@ -167,6 +167,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingTakeExecution? takeExecution,
     MarketMakingLossLimit? lossLimit,
     $fixnum.Int64? f2mRefitIntervalMs,
+    $core.double? qtyWeightedMidImbalanceThresholdPct,
+    $core.double? qtyWeightedMidImbalanceExponent,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -195,6 +197,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (takeExecution != null) result.takeExecution = takeExecution;
     if (lossLimit != null) result.lossLimit = lossLimit;
     if (f2mRefitIntervalMs != null) result.f2mRefitIntervalMs = f2mRefitIntervalMs;
+    if (qtyWeightedMidImbalanceThresholdPct != null) result.qtyWeightedMidImbalanceThresholdPct = qtyWeightedMidImbalanceThresholdPct;
+    if (qtyWeightedMidImbalanceExponent != null) result.qtyWeightedMidImbalanceExponent = qtyWeightedMidImbalanceExponent;
     return result;
   }
 
@@ -230,6 +234,8 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingTakeExecution>(30, _omitFieldNames ? '' : 'takeExecution', subBuilder: MarketMakingTakeExecution.create)
     ..aOM<MarketMakingLossLimit>(31, _omitFieldNames ? '' : 'lossLimit', subBuilder: MarketMakingLossLimit.create)
     ..a<$fixnum.Int64>(32, _omitFieldNames ? '' : 'f2mRefitIntervalMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.double>(33, _omitFieldNames ? '' : 'qtyWeightedMidImbalanceThresholdPct', $pb.PbFieldType.OD)
+    ..a<$core.double>(34, _omitFieldNames ? '' : 'qtyWeightedMidImbalanceExponent', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -572,6 +578,54 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasF2mRefitIntervalMs() => $_has(25);
   @$pb.TagNumber(32)
   void clearF2mRefitIntervalMs() => $_clearField(32);
+
+  /// NAV 입력 microprice 잔량 불균형 가속 — 임계(%). 0 = 끔(기본, 현행 선형 그대로).
+  /// use_qty_weighted_mid=true 일 때만 유효하다. 유효 범위: 0(끔) 또는 0 < 값 ≤ 50 — 그 밖·NaN 은 서버가 거부.
+  ///
+  /// 매수 비중 s = 매수잔량 / (매수잔량 + 매도잔량)   (각 사이드 상위 qty_weighted_mid_levels 단 잔량 합)
+  ///   현행: microprice = 매수가 + s × (매도가 − 매수가)   — s 에 비례(선형)
+  ///   가속: s < 임계 이면 s 대신 s' = 임계 × (s ÷ 임계)^지수 를 쓴다 → 매수가 쪽으로 더 급격히 붙는다.
+  ///         매도 쪽도 대칭: 매도 비중(1 − s) < 임계 이면 s' = 1 − 임계 × ((1 − s) ÷ 임계)^지수 → 매도가 쪽으로.
+  ///         그 사이 구간은 현행과 같고, 비중 = 임계 지점에서 값이 이어진다(가격 점프 없음).
+  ///   매수가·매도가 = 각 사이드 상위 N단 잔량가중 평균가 (qty_weighted_mid_levels=1 이면 1호가).
+  ///
+  /// 예) 1호가 매수 1000원 / 매도 2000원, 임계 10, 지수 2 (qty_weighted_mid_levels=1)
+  ///   매수잔량 100 : 매도잔량 900 (매수 비중 10%) → 1100원 (현행 1100원, 임계 지점이라 동일)
+  ///   매수잔량  80 : 매도잔량 920 (매수 비중  8%) → 1064원 (현행 1080원)
+  ///   매수잔량  50 : 매도잔량 950 (매수 비중  5%) → 1025원 (현행 1050원)
+  ///   매수잔량  10 : 매도잔량 990 (매수 비중  1%) → 1001원 (현행 1010원)
+  ///   매수잔량 950 : 매도잔량  50 (매도 비중  5%) → 1975원 (현행 1950원)
+  ///
+  /// 자기 ETF·F2M 기준가와 순수 proxy 에는 영향 없다(구성종목·nav-dep 의 NAV 입력에만 적용).
+  /// Running 중 변경 허용(다음 tick 반영). 조회 응답에는 서버가 항상 현재값을 채운다.
+  /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (qty_weighted_mid_levels 와 동일 패턴).
+  @$pb.TagNumber(33)
+  $core.double get qtyWeightedMidImbalanceThresholdPct => $_getN(26);
+  @$pb.TagNumber(33)
+  set qtyWeightedMidImbalanceThresholdPct($core.double value) => $_setDouble(26, value);
+  @$pb.TagNumber(33)
+  $core.bool hasQtyWeightedMidImbalanceThresholdPct() => $_has(26);
+  @$pb.TagNumber(33)
+  void clearQtyWeightedMidImbalanceThresholdPct() => $_clearField(33);
+
+  /// NAV 입력 microprice 잔량 불균형 가속 — 지수(얼마나 급격하게). 1 ≤ 값 ≤ 10, 기본 2 — 그 밖·NaN 은 서버가 거부.
+  /// 1 = 현행 선형과 동일, 클수록 임계 아래에서 약한 쪽 호가로 더 급격히 붙는다.
+  /// qty_weighted_mid_imbalance_threshold_pct = 0(끔)이면 무시된다. 공식은 qty_weighted_mid_imbalance_threshold_pct 주석 참고.
+  ///
+  /// 예) 1호가 매수 1000원 / 매도 2000원, 임계 10, 매수 비중 5% (매수잔량 50 : 매도잔량 950)
+  ///   지수 1 → 1050원(현행)   지수 2 → 1025원   지수 3 → 1012.5원   지수 5 → 1003.1원
+  ///   같은 조건에서 매수 비중 8% 면: 지수 2 → 1064원, 지수 3 → 1051.2원, 지수 5 → 1032.8원
+  /// 10 초과를 막는 이유: 임계 근처가 계단처럼 변해 잔량 몇 주 변화에도 가격이 크게 튄다.
+  /// Running 중 변경 허용(다음 tick 반영). 조회 응답에는 서버가 항상 현재값을 채운다.
+  /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (qty_weighted_mid_levels 와 동일 패턴).
+  @$pb.TagNumber(34)
+  $core.double get qtyWeightedMidImbalanceExponent => $_getN(27);
+  @$pb.TagNumber(34)
+  set qtyWeightedMidImbalanceExponent($core.double value) => $_setDouble(27, value);
+  @$pb.TagNumber(34)
+  $core.bool hasQtyWeightedMidImbalanceExponent() => $_has(27);
+  @$pb.TagNumber(34)
+  void clearQtyWeightedMidImbalanceExponent() => $_clearField(34);
 }
 
 enum MarketMakingPricing_Pricing {
