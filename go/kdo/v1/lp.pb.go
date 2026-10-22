@@ -259,7 +259,7 @@ type ReservationOrderStatus int32
 
 const (
 	ReservationOrderStatus_RESERVATION_ORDER_STATUS_UNSPECIFIED ReservationOrderStatus = 0
-	ReservationOrderStatus_RESERVATION_ORDER_STATUS_SENT        ReservationOrderStatus = 1 // FEP 송신 — 08:30 까지 FEP 보관
+	ReservationOrderStatus_RESERVATION_ORDER_STATUS_SENT        ReservationOrderStatus = 1 // FEP 송신 — 08:30 전 송신분은 FEP 가 08:30 까지 보관
 	ReservationOrderStatus_RESERVATION_ORDER_STATUS_ACCEPTED    ReservationOrderStatus = 2 // 거래소 접수 → ETF LP 북
 	ReservationOrderStatus_RESERVATION_ORDER_STATUS_CLOSED      ReservationOrderStatus = 3 // 종료 (LP 인수·전량 체결·취소·거부 — message 참고)
 	ReservationOrderStatus_RESERVATION_ORDER_STATUS_FAILED      ReservationOrderStatus = 4 // 송신 실패
@@ -3464,6 +3464,108 @@ func (x *SetReservationResponse) GetReservation() *Reservation {
 	return nil
 }
 
+type SendReservationRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Etf  string `protobuf:"bytes,1,opt,name=etf,proto3" json:"etf,omitempty"`   // "etfs/{symbol}"
+	Fund string `protobuf:"bytes,2,opt,name=fund,proto3" json:"fund,omitempty"` // "funds/{fund_code}"
+}
+
+func (x *SendReservationRequest) Reset() {
+	*x = SendReservationRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_kdo_v1_lp_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendReservationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendReservationRequest) ProtoMessage() {}
+
+func (x *SendReservationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_kdo_v1_lp_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendReservationRequest.ProtoReflect.Descriptor instead.
+func (*SendReservationRequest) Descriptor() ([]byte, []int) {
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *SendReservationRequest) GetEtf() string {
+	if x != nil {
+		return x.Etf
+	}
+	return ""
+}
+
+func (x *SendReservationRequest) GetFund() string {
+	if x != nil {
+		return x.Fund
+	}
+	return ""
+}
+
+type SendReservationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Orders []*ReservationOrder `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"` // 이번에 보낸 예약주문 (실패분은 status FAILED, message 에 사유)
+}
+
+func (x *SendReservationResponse) Reset() {
+	*x = SendReservationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_kdo_v1_lp_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendReservationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendReservationResponse) ProtoMessage() {}
+
+func (x *SendReservationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_kdo_v1_lp_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendReservationResponse.ProtoReflect.Descriptor instead.
+func (*SendReservationResponse) Descriptor() ([]byte, []int) {
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *SendReservationResponse) GetOrders() []*ReservationOrder {
+	if x != nil {
+		return x.Orders
+	}
+	return nil
+}
+
 type ClearReservationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3476,7 +3578,7 @@ type ClearReservationRequest struct {
 func (x *ClearReservationRequest) Reset() {
 	*x = ClearReservationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[35]
+		mi := &file_kdo_v1_lp_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3489,7 +3591,7 @@ func (x *ClearReservationRequest) String() string {
 func (*ClearReservationRequest) ProtoMessage() {}
 
 func (x *ClearReservationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[35]
+	mi := &file_kdo_v1_lp_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3502,7 +3604,7 @@ func (x *ClearReservationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClearReservationRequest.ProtoReflect.Descriptor instead.
 func (*ClearReservationRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{35}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ClearReservationRequest) GetEtf() string {
@@ -3530,7 +3632,7 @@ type ClearReservationResponse struct {
 func (x *ClearReservationResponse) Reset() {
 	*x = ClearReservationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[36]
+		mi := &file_kdo_v1_lp_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3543,7 +3645,7 @@ func (x *ClearReservationResponse) String() string {
 func (*ClearReservationResponse) ProtoMessage() {}
 
 func (x *ClearReservationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[36]
+	mi := &file_kdo_v1_lp_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3556,7 +3658,7 @@ func (x *ClearReservationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClearReservationResponse.ProtoReflect.Descriptor instead.
 func (*ClearReservationResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{36}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ClearReservationResponse) GetCancelledOrders() int32 {
@@ -3578,7 +3680,7 @@ type GetReservationRequest struct {
 func (x *GetReservationRequest) Reset() {
 	*x = GetReservationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[37]
+		mi := &file_kdo_v1_lp_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3591,7 +3693,7 @@ func (x *GetReservationRequest) String() string {
 func (*GetReservationRequest) ProtoMessage() {}
 
 func (x *GetReservationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[37]
+	mi := &file_kdo_v1_lp_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3604,7 +3706,7 @@ func (x *GetReservationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetReservationRequest.ProtoReflect.Descriptor instead.
 func (*GetReservationRequest) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{37}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GetReservationRequest) GetEtf() string {
@@ -3634,7 +3736,7 @@ type GetReservationResponse struct {
 func (x *GetReservationResponse) Reset() {
 	*x = GetReservationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_kdo_v1_lp_proto_msgTypes[38]
+		mi := &file_kdo_v1_lp_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3647,7 +3749,7 @@ func (x *GetReservationResponse) String() string {
 func (*GetReservationResponse) ProtoMessage() {}
 
 func (x *GetReservationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kdo_v1_lp_proto_msgTypes[38]
+	mi := &file_kdo_v1_lp_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3660,7 +3762,7 @@ func (x *GetReservationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetReservationResponse.ProtoReflect.Descriptor instead.
 func (*GetReservationResponse) Descriptor() ([]byte, []int) {
-	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{38}
+	return file_kdo_v1_lp_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetReservationResponse) GetReservation() *Reservation {
@@ -4399,7 +4501,16 @@ var file_kdo_v1_lp_proto_rawDesc = []byte{
 	0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x16, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x52, 0x65, 0x73,
 	0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0b, 0x72, 0x65, 0x73, 0x65, 0x72, 0x76,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x3f, 0x0a, 0x17, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x3e, 0x0a, 0x16, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x73,
+	0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x10, 0x0a, 0x03, 0x65, 0x74, 0x66, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x65, 0x74,
+	0x66, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x75, 0x6e, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x66, 0x75, 0x6e, 0x64, 0x22, 0x4e, 0x0a, 0x17, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x73,
+	0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x33, 0x0a, 0x06, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x1b, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x52, 0x65, 0x73,
+	0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x06, 0x6f,
+	0x72, 0x64, 0x65, 0x72, 0x73, 0x22, 0x3f, 0x0a, 0x17, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65,
 	0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x12, 0x10, 0x0a, 0x03, 0x65, 0x74, 0x66, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x65,
 	0x74, 0x66, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x75, 0x6e, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
@@ -4485,7 +4596,7 @@ var file_kdo_v1_lp_proto_rawDesc = []byte{
 	0x52, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x43, 0x4c, 0x4f, 0x53, 0x45, 0x44, 0x10,
 	0x03, 0x12, 0x23, 0x0a, 0x1f, 0x52, 0x45, 0x53, 0x45, 0x52, 0x56, 0x41, 0x54, 0x49, 0x4f, 0x4e,
 	0x5f, 0x4f, 0x52, 0x44, 0x45, 0x52, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x46, 0x41,
-	0x49, 0x4c, 0x45, 0x44, 0x10, 0x04, 0x32, 0xc8, 0x12, 0x0a, 0x09, 0x4c, 0x70, 0x53, 0x65, 0x72,
+	0x49, 0x4c, 0x45, 0x44, 0x10, 0x04, 0x32, 0xe3, 0x13, 0x0a, 0x09, 0x4c, 0x70, 0x53, 0x65, 0x72,
 	0x76, 0x69, 0x63, 0x65, 0x12, 0x68, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x45, 0x74, 0x66, 0x4c, 0x70,
 	0x12, 0x1a, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x47, 0x65, 0x74,
 	0x45, 0x74, 0x66, 0x4c, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x6b,
@@ -4615,29 +4726,39 @@ var file_kdo_v1_lp_proto_rawDesc = []byte{
 	0x76, 0x31, 0x2f, 0x6c, 0x70, 0x73, 0x2f, 0x7b, 0x65, 0x74, 0x66, 0x3d, 0x65, 0x74, 0x66, 0x73,
 	0x2f, 0x2a, 0x7d, 0x2f, 0x7b, 0x66, 0x75, 0x6e, 0x64, 0x3d, 0x66, 0x75, 0x6e, 0x64, 0x73, 0x2f,
 	0x2a, 0x7d, 0x3a, 0x73, 0x65, 0x74, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x12, 0x9c, 0x01, 0x0a, 0x10, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65, 0x73, 0x65, 0x72,
-	0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x22, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e,
-	0x6c, 0x70, 0x2e, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x6b, 0x64, 0x6f,
-	0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65, 0x73, 0x65,
-	0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
-	0x3f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x39, 0x3a, 0x01, 0x2a, 0x22, 0x34, 0x2f, 0x76, 0x31, 0x2f,
-	0x6c, 0x70, 0x73, 0x2f, 0x7b, 0x65, 0x74, 0x66, 0x3d, 0x65, 0x74, 0x66, 0x73, 0x2f, 0x2a, 0x7d,
-	0x2f, 0x7b, 0x66, 0x75, 0x6e, 0x64, 0x3d, 0x66, 0x75, 0x6e, 0x64, 0x73, 0x2f, 0x2a, 0x7d, 0x3a,
-	0x63, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x8e, 0x01, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x12, 0x20, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e,
-	0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c,
-	0x70, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x37, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x31,
-	0x12, 0x2f, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x70, 0x73, 0x2f, 0x7b, 0x65, 0x74, 0x66, 0x3d, 0x65,
-	0x74, 0x66, 0x73, 0x2f, 0x2a, 0x7d, 0x2f, 0x7b, 0x66, 0x75, 0x6e, 0x64, 0x3d, 0x66, 0x75, 0x6e,
-	0x64, 0x73, 0x2f, 0x2a, 0x7d, 0x2f, 0x72, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x42, 0x2f, 0x5a, 0x2d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x6d, 0x65, 0x72, 0x69, 0x74, 0x7a, 0x2d, 0x63, 0x6f, 0x72, 0x70, 0x2f, 0x63, 0x64, 0x73, 0x2d,
-	0x61, 0x70, 0x69, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x6b, 0x64, 0x6f, 0x2f, 0x76, 0x31, 0x3b, 0x6b,
-	0x64, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x12, 0x98, 0x01, 0x0a, 0x0f, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c,
+	0x70, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76,
+	0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x3e, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x38, 0x3a, 0x01, 0x2a, 0x22, 0x33, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x70, 0x73,
+	0x2f, 0x7b, 0x65, 0x74, 0x66, 0x3d, 0x65, 0x74, 0x66, 0x73, 0x2f, 0x2a, 0x7d, 0x2f, 0x7b, 0x66,
+	0x75, 0x6e, 0x64, 0x3d, 0x66, 0x75, 0x6e, 0x64, 0x73, 0x2f, 0x2a, 0x7d, 0x3a, 0x73, 0x65, 0x6e,
+	0x64, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x9c, 0x01, 0x0a,
+	0x10, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x12, 0x22, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x43, 0x6c,
+	0x65, 0x61, 0x72, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c,
+	0x70, 0x2e, 0x43, 0x6c, 0x65, 0x61, 0x72, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x3f, 0x82, 0xd3, 0xe4, 0x93,
+	0x02, 0x39, 0x3a, 0x01, 0x2a, 0x22, 0x34, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x70, 0x73, 0x2f, 0x7b,
+	0x65, 0x74, 0x66, 0x3d, 0x65, 0x74, 0x66, 0x73, 0x2f, 0x2a, 0x7d, 0x2f, 0x7b, 0x66, 0x75, 0x6e,
+	0x64, 0x3d, 0x66, 0x75, 0x6e, 0x64, 0x73, 0x2f, 0x2a, 0x7d, 0x3a, 0x63, 0x6c, 0x65, 0x61, 0x72,
+	0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x8e, 0x01, 0x0a, 0x0e,
+	0x47, 0x65, 0x74, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x20,
+	0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x65,
+	0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x21, 0x2e, 0x6b, 0x64, 0x6f, 0x2e, 0x76, 0x31, 0x2e, 0x6c, 0x70, 0x2e, 0x47, 0x65, 0x74,
+	0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x37, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x31, 0x12, 0x2f, 0x2f, 0x76, 0x31,
+	0x2f, 0x6c, 0x70, 0x73, 0x2f, 0x7b, 0x65, 0x74, 0x66, 0x3d, 0x65, 0x74, 0x66, 0x73, 0x2f, 0x2a,
+	0x7d, 0x2f, 0x7b, 0x66, 0x75, 0x6e, 0x64, 0x3d, 0x66, 0x75, 0x6e, 0x64, 0x73, 0x2f, 0x2a, 0x7d,
+	0x2f, 0x72, 0x65, 0x73, 0x65, 0x72, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x2f, 0x5a, 0x2d,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x65, 0x72, 0x69, 0x74,
+	0x7a, 0x2d, 0x63, 0x6f, 0x72, 0x70, 0x2f, 0x63, 0x64, 0x73, 0x2d, 0x61, 0x70, 0x69, 0x73, 0x2f,
+	0x67, 0x6f, 0x2f, 0x6b, 0x64, 0x6f, 0x2f, 0x76, 0x31, 0x3b, 0x6b, 0x64, 0x6f, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4653,7 +4774,7 @@ func file_kdo_v1_lp_proto_rawDescGZIP() []byte {
 }
 
 var file_kdo_v1_lp_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_kdo_v1_lp_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(PricingSourceLiquidityImbalanceGuardState)(0), // 0: kdo.v1.lp.PricingSourceLiquidityImbalanceGuardState
 	(PrecomputePolicy)(0),                          // 1: kdo.v1.lp.PrecomputePolicy
@@ -4695,17 +4816,19 @@ var file_kdo_v1_lp_proto_goTypes = []interface{}{
 	(*ReservationOrder)(nil),                       // 37: kdo.v1.lp.ReservationOrder
 	(*SetReservationRequest)(nil),                  // 38: kdo.v1.lp.SetReservationRequest
 	(*SetReservationResponse)(nil),                 // 39: kdo.v1.lp.SetReservationResponse
-	(*ClearReservationRequest)(nil),                // 40: kdo.v1.lp.ClearReservationRequest
-	(*ClearReservationResponse)(nil),               // 41: kdo.v1.lp.ClearReservationResponse
-	(*GetReservationRequest)(nil),                  // 42: kdo.v1.lp.GetReservationRequest
-	(*GetReservationResponse)(nil),                 // 43: kdo.v1.lp.GetReservationResponse
-	(*EtfPricing)(nil),                             // 44: kdo.v1.common.EtfPricing
-	(*timestamppb.Timestamp)(nil),                  // 45: google.protobuf.Timestamp
-	(OrderSide)(0),                                 // 46: kdo.v1.common.OrderSide
+	(*SendReservationRequest)(nil),                 // 40: kdo.v1.lp.SendReservationRequest
+	(*SendReservationResponse)(nil),                // 41: kdo.v1.lp.SendReservationResponse
+	(*ClearReservationRequest)(nil),                // 42: kdo.v1.lp.ClearReservationRequest
+	(*ClearReservationResponse)(nil),               // 43: kdo.v1.lp.ClearReservationResponse
+	(*GetReservationRequest)(nil),                  // 44: kdo.v1.lp.GetReservationRequest
+	(*GetReservationResponse)(nil),                 // 45: kdo.v1.lp.GetReservationResponse
+	(*EtfPricing)(nil),                             // 46: kdo.v1.common.EtfPricing
+	(*timestamppb.Timestamp)(nil),                  // 47: google.protobuf.Timestamp
+	(OrderSide)(0),                                 // 48: kdo.v1.common.OrderSide
 }
 var file_kdo_v1_lp_proto_depIdxs = []int32{
 	9,  // 0: kdo.v1.lp.EtfLp.offset:type_name -> kdo.v1.lp.EtfLpOffset
-	44, // 1: kdo.v1.lp.EtfLp.pricing_method:type_name -> kdo.v1.common.EtfPricing
+	46, // 1: kdo.v1.lp.EtfLp.pricing_method:type_name -> kdo.v1.common.EtfPricing
 	6,  // 2: kdo.v1.lp.EtfLp.quantity_limit:type_name -> kdo.v1.lp.EtfLpQuantityLimit
 	1,  // 3: kdo.v1.lp.EtfLp.precompute_policy:type_name -> kdo.v1.lp.PrecomputePolicy
 	3,  // 4: kdo.v1.lp.EtfLp.state:type_name -> kdo.v1.lp.EtfLpState
@@ -4729,55 +4852,58 @@ var file_kdo_v1_lp_proto_depIdxs = []int32{
 	9,  // 22: kdo.v1.lp.UpdateEtfLpRequest.offset:type_name -> kdo.v1.lp.EtfLpOffset
 	6,  // 23: kdo.v1.lp.UpdateEtfLpRequest.quantity_limit:type_name -> kdo.v1.lp.EtfLpQuantityLimit
 	1,  // 24: kdo.v1.lp.UpdateEtfLpRequest.precompute_policy:type_name -> kdo.v1.lp.PrecomputePolicy
-	44, // 25: kdo.v1.lp.UpdateEtfLpRequest.pricing:type_name -> kdo.v1.common.EtfPricing
+	46, // 25: kdo.v1.lp.UpdateEtfLpRequest.pricing:type_name -> kdo.v1.common.EtfPricing
 	7,  // 26: kdo.v1.lp.StartEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
 	7,  // 27: kdo.v1.lp.StopEtfLpResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
 	7,  // 28: kdo.v1.lp.ClearUserOrderBookResponse.status:type_name -> kdo.v1.lp.EtfLpStatus
 	34, // 29: kdo.v1.lp.EtfLpFillSummary.etf:type_name -> kdo.v1.lp.FillStat
 	34, // 30: kdo.v1.lp.EtfLpFillSummary.hedges:type_name -> kdo.v1.lp.FillStat
-	45, // 31: kdo.v1.lp.Reservation.update_time:type_name -> google.protobuf.Timestamp
-	46, // 32: kdo.v1.lp.ReservationOrder.side:type_name -> kdo.v1.common.OrderSide
+	47, // 31: kdo.v1.lp.Reservation.update_time:type_name -> google.protobuf.Timestamp
+	48, // 32: kdo.v1.lp.ReservationOrder.side:type_name -> kdo.v1.common.OrderSide
 	4,  // 33: kdo.v1.lp.ReservationOrder.status:type_name -> kdo.v1.lp.ReservationOrderStatus
 	36, // 34: kdo.v1.lp.SetReservationResponse.reservation:type_name -> kdo.v1.lp.Reservation
-	36, // 35: kdo.v1.lp.GetReservationResponse.reservation:type_name -> kdo.v1.lp.Reservation
-	37, // 36: kdo.v1.lp.GetReservationResponse.orders:type_name -> kdo.v1.lp.ReservationOrder
-	15, // 37: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
-	16, // 38: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
-	20, // 39: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
-	21, // 40: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
-	18, // 41: kdo.v1.lp.LpService.ListEtfLpStatuses:input_type -> kdo.v1.lp.ListEtfLpStatusesRequest
-	32, // 42: kdo.v1.lp.LpService.GetEtfLpFillSummary:input_type -> kdo.v1.lp.GetEtfLpFillSummaryRequest
-	33, // 43: kdo.v1.lp.LpService.StreamEtfLpFills:input_type -> kdo.v1.lp.StreamEtfLpFillsRequest
-	22, // 44: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:input_type -> kdo.v1.lp.StreamEtfLpStatusUpdateRequest
-	23, // 45: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
-	25, // 46: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
-	28, // 47: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	28, // 48: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
-	30, // 49: kdo.v1.lp.LpService.ClearUserOrderBook:input_type -> kdo.v1.lp.ClearUserOrderBookRequest
-	38, // 50: kdo.v1.lp.LpService.SetReservation:input_type -> kdo.v1.lp.SetReservationRequest
-	40, // 51: kdo.v1.lp.LpService.ClearReservation:input_type -> kdo.v1.lp.ClearReservationRequest
-	42, // 52: kdo.v1.lp.LpService.GetReservation:input_type -> kdo.v1.lp.GetReservationRequest
-	5,  // 53: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
-	17, // 54: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
-	5,  // 55: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
-	7,  // 56: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
-	19, // 57: kdo.v1.lp.LpService.ListEtfLpStatuses:output_type -> kdo.v1.lp.ListEtfLpStatusesResponse
-	35, // 58: kdo.v1.lp.LpService.GetEtfLpFillSummary:output_type -> kdo.v1.lp.EtfLpFillSummary
-	35, // 59: kdo.v1.lp.LpService.StreamEtfLpFills:output_type -> kdo.v1.lp.EtfLpFillSummary
-	8,  // 60: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:output_type -> kdo.v1.lp.EtfLpStatusUpdate
-	24, // 61: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
-	26, // 62: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
-	29, // 63: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	29, // 64: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
-	31, // 65: kdo.v1.lp.LpService.ClearUserOrderBook:output_type -> kdo.v1.lp.ClearUserOrderBookResponse
-	39, // 66: kdo.v1.lp.LpService.SetReservation:output_type -> kdo.v1.lp.SetReservationResponse
-	41, // 67: kdo.v1.lp.LpService.ClearReservation:output_type -> kdo.v1.lp.ClearReservationResponse
-	43, // 68: kdo.v1.lp.LpService.GetReservation:output_type -> kdo.v1.lp.GetReservationResponse
-	53, // [53:69] is the sub-list for method output_type
-	37, // [37:53] is the sub-list for method input_type
-	37, // [37:37] is the sub-list for extension type_name
-	37, // [37:37] is the sub-list for extension extendee
-	0,  // [0:37] is the sub-list for field type_name
+	37, // 35: kdo.v1.lp.SendReservationResponse.orders:type_name -> kdo.v1.lp.ReservationOrder
+	36, // 36: kdo.v1.lp.GetReservationResponse.reservation:type_name -> kdo.v1.lp.Reservation
+	37, // 37: kdo.v1.lp.GetReservationResponse.orders:type_name -> kdo.v1.lp.ReservationOrder
+	15, // 38: kdo.v1.lp.LpService.GetEtfLp:input_type -> kdo.v1.lp.GetEtfLpRequest
+	16, // 39: kdo.v1.lp.LpService.ListEtfLps:input_type -> kdo.v1.lp.ListEtfLpsRequest
+	20, // 40: kdo.v1.lp.LpService.UpdateEtfLp:input_type -> kdo.v1.lp.UpdateEtfLpRequest
+	21, // 41: kdo.v1.lp.LpService.GetEtfLpStatus:input_type -> kdo.v1.lp.GetEtfLpStatusRequest
+	18, // 42: kdo.v1.lp.LpService.ListEtfLpStatuses:input_type -> kdo.v1.lp.ListEtfLpStatusesRequest
+	32, // 43: kdo.v1.lp.LpService.GetEtfLpFillSummary:input_type -> kdo.v1.lp.GetEtfLpFillSummaryRequest
+	33, // 44: kdo.v1.lp.LpService.StreamEtfLpFills:input_type -> kdo.v1.lp.StreamEtfLpFillsRequest
+	22, // 45: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:input_type -> kdo.v1.lp.StreamEtfLpStatusUpdateRequest
+	23, // 46: kdo.v1.lp.LpService.StartEtfLp:input_type -> kdo.v1.lp.StartEtfLpRequest
+	25, // 47: kdo.v1.lp.LpService.StopEtfLp:input_type -> kdo.v1.lp.StopEtfLpRequest
+	28, // 48: kdo.v1.lp.LpService.GetUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	28, // 49: kdo.v1.lp.LpService.StreamUserOrderbook:input_type -> kdo.v1.lp.GetUserOrderBookRequest
+	30, // 50: kdo.v1.lp.LpService.ClearUserOrderBook:input_type -> kdo.v1.lp.ClearUserOrderBookRequest
+	38, // 51: kdo.v1.lp.LpService.SetReservation:input_type -> kdo.v1.lp.SetReservationRequest
+	40, // 52: kdo.v1.lp.LpService.SendReservation:input_type -> kdo.v1.lp.SendReservationRequest
+	42, // 53: kdo.v1.lp.LpService.ClearReservation:input_type -> kdo.v1.lp.ClearReservationRequest
+	44, // 54: kdo.v1.lp.LpService.GetReservation:input_type -> kdo.v1.lp.GetReservationRequest
+	5,  // 55: kdo.v1.lp.LpService.GetEtfLp:output_type -> kdo.v1.lp.EtfLp
+	17, // 56: kdo.v1.lp.LpService.ListEtfLps:output_type -> kdo.v1.lp.ListEtfLpsResponse
+	5,  // 57: kdo.v1.lp.LpService.UpdateEtfLp:output_type -> kdo.v1.lp.EtfLp
+	7,  // 58: kdo.v1.lp.LpService.GetEtfLpStatus:output_type -> kdo.v1.lp.EtfLpStatus
+	19, // 59: kdo.v1.lp.LpService.ListEtfLpStatuses:output_type -> kdo.v1.lp.ListEtfLpStatusesResponse
+	35, // 60: kdo.v1.lp.LpService.GetEtfLpFillSummary:output_type -> kdo.v1.lp.EtfLpFillSummary
+	35, // 61: kdo.v1.lp.LpService.StreamEtfLpFills:output_type -> kdo.v1.lp.EtfLpFillSummary
+	8,  // 62: kdo.v1.lp.LpService.StreamEtfLpStatusUpdate:output_type -> kdo.v1.lp.EtfLpStatusUpdate
+	24, // 63: kdo.v1.lp.LpService.StartEtfLp:output_type -> kdo.v1.lp.StartEtfLpResponse
+	26, // 64: kdo.v1.lp.LpService.StopEtfLp:output_type -> kdo.v1.lp.StopEtfLpResponse
+	29, // 65: kdo.v1.lp.LpService.GetUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	29, // 66: kdo.v1.lp.LpService.StreamUserOrderbook:output_type -> kdo.v1.lp.UserOrderbookData
+	31, // 67: kdo.v1.lp.LpService.ClearUserOrderBook:output_type -> kdo.v1.lp.ClearUserOrderBookResponse
+	39, // 68: kdo.v1.lp.LpService.SetReservation:output_type -> kdo.v1.lp.SetReservationResponse
+	41, // 69: kdo.v1.lp.LpService.SendReservation:output_type -> kdo.v1.lp.SendReservationResponse
+	43, // 70: kdo.v1.lp.LpService.ClearReservation:output_type -> kdo.v1.lp.ClearReservationResponse
+	45, // 71: kdo.v1.lp.LpService.GetReservation:output_type -> kdo.v1.lp.GetReservationResponse
+	55, // [55:72] is the sub-list for method output_type
+	38, // [38:55] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_kdo_v1_lp_proto_init() }
@@ -5208,7 +5334,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ClearReservationRequest); i {
+			switch v := v.(*SendReservationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5220,7 +5346,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ClearReservationResponse); i {
+			switch v := v.(*SendReservationResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5232,7 +5358,7 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetReservationRequest); i {
+			switch v := v.(*ClearReservationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5244,6 +5370,30 @@ func file_kdo_v1_lp_proto_init() {
 			}
 		}
 		file_kdo_v1_lp_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClearReservationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_kdo_v1_lp_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetReservationRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_kdo_v1_lp_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetReservationResponse); i {
 			case 0:
 				return &v.state
@@ -5271,7 +5421,7 @@ func file_kdo_v1_lp_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_kdo_v1_lp_proto_rawDesc,
 			NumEnums:      5,
-			NumMessages:   39,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

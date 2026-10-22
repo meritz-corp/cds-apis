@@ -990,6 +990,33 @@ final $typed_data.Uint8List setReservationResponseDescriptor = $convert.base64De
     'ChZTZXRSZXNlcnZhdGlvblJlc3BvbnNlEjgKC3Jlc2VydmF0aW9uGAEgASgLMhYua2RvLnYxLm'
     'xwLlJlc2VydmF0aW9uUgtyZXNlcnZhdGlvbg==');
 
+@$core.Deprecated('Use sendReservationRequestDescriptor instead')
+const SendReservationRequest$json = {
+  '1': 'SendReservationRequest',
+  '2': [
+    {'1': 'etf', '3': 1, '4': 1, '5': 9, '10': 'etf'},
+    {'1': 'fund', '3': 2, '4': 1, '5': 9, '10': 'fund'},
+  ],
+};
+
+/// Descriptor for `SendReservationRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendReservationRequestDescriptor = $convert.base64Decode(
+    'ChZTZW5kUmVzZXJ2YXRpb25SZXF1ZXN0EhAKA2V0ZhgBIAEoCVIDZXRmEhIKBGZ1bmQYAiABKA'
+    'lSBGZ1bmQ=');
+
+@$core.Deprecated('Use sendReservationResponseDescriptor instead')
+const SendReservationResponse$json = {
+  '1': 'SendReservationResponse',
+  '2': [
+    {'1': 'orders', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.lp.ReservationOrder', '10': 'orders'},
+  ],
+};
+
+/// Descriptor for `SendReservationResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendReservationResponseDescriptor = $convert.base64Decode(
+    'ChdTZW5kUmVzZXJ2YXRpb25SZXNwb25zZRIzCgZvcmRlcnMYASADKAsyGy5rZG8udjEubHAuUm'
+    'VzZXJ2YXRpb25PcmRlclIGb3JkZXJz');
+
 @$core.Deprecated('Use clearReservationRequestDescriptor instead')
 const ClearReservationRequest$json = {
   '1': 'ClearReservationRequest',

@@ -941,6 +941,26 @@ func (mr *MockLpServiceClientMockRecorder) ListEtfLps(ctx, in interface{}, opts 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceClient)(nil).ListEtfLps), varargs...)
 }
 
+// SendReservation mocks base method.
+func (m *MockLpServiceClient) SendReservation(ctx context.Context, in *SendReservationRequest, opts ...grpc.CallOption) (*SendReservationResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SendReservation", varargs...)
+	ret0, _ := ret[0].(*SendReservationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SendReservation indicates an expected call of SendReservation.
+func (mr *MockLpServiceClientMockRecorder) SendReservation(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendReservation", reflect.TypeOf((*MockLpServiceClient)(nil).SendReservation), varargs...)
+}
+
 // SetReservation mocks base method.
 func (m *MockLpServiceClient) SetReservation(ctx context.Context, in *SetReservationRequest, opts ...grpc.CallOption) (*SetReservationResponse, error) {
 	m.ctrl.T.Helper()
@@ -1237,6 +1257,21 @@ func (m *MockLpServiceServer) ListEtfLps(ctx context.Context, in *ListEtfLpsRequ
 func (mr *MockLpServiceServerMockRecorder) ListEtfLps(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceServer)(nil).ListEtfLps), ctx, in)
+}
+
+// SendReservation mocks base method.
+func (m *MockLpServiceServer) SendReservation(ctx context.Context, in *SendReservationRequest) (*SendReservationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendReservation", ctx, in)
+	ret0, _ := ret[0].(*SendReservationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SendReservation indicates an expected call of SendReservation.
+func (mr *MockLpServiceServerMockRecorder) SendReservation(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendReservation", reflect.TypeOf((*MockLpServiceServer)(nil).SendReservation), ctx, in)
 }
 
 // SetReservation mocks base method.

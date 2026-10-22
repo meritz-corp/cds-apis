@@ -3797,6 +3797,104 @@ class SetReservationResponse extends $pb.GeneratedMessage {
   Reservation ensureReservation() => $_ensure(0);
 }
 
+class SendReservationRequest extends $pb.GeneratedMessage {
+  factory SendReservationRequest({
+    $core.String? etf,
+    $core.String? fund,
+  }) {
+    final result = create();
+    if (etf != null) result.etf = etf;
+    if (fund != null) result.fund = fund;
+    return result;
+  }
+
+  SendReservationRequest._();
+
+  factory SendReservationRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SendReservationRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SendReservationRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etf')
+    ..aOS(2, _omitFieldNames ? '' : 'fund')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SendReservationRequest clone() => SendReservationRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SendReservationRequest copyWith(void Function(SendReservationRequest) updates) => super.copyWith((message) => updates(message as SendReservationRequest)) as SendReservationRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SendReservationRequest create() => SendReservationRequest._();
+  @$core.override
+  SendReservationRequest createEmptyInstance() => create();
+  static $pb.PbList<SendReservationRequest> createRepeated() => $pb.PbList<SendReservationRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SendReservationRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendReservationRequest>(create);
+  static SendReservationRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etf => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etf($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtf() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtf() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fund => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fund($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFund() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFund() => $_clearField(2);
+}
+
+class SendReservationResponse extends $pb.GeneratedMessage {
+  factory SendReservationResponse({
+    $core.Iterable<ReservationOrder>? orders,
+  }) {
+    final result = create();
+    if (orders != null) result.orders.addAll(orders);
+    return result;
+  }
+
+  SendReservationResponse._();
+
+  factory SendReservationResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SendReservationResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SendReservationResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.lp'), createEmptyInstance: create)
+    ..pc<ReservationOrder>(1, _omitFieldNames ? '' : 'orders', $pb.PbFieldType.PM, subBuilder: ReservationOrder.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SendReservationResponse clone() => SendReservationResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SendReservationResponse copyWith(void Function(SendReservationResponse) updates) => super.copyWith((message) => updates(message as SendReservationResponse)) as SendReservationResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SendReservationResponse create() => SendReservationResponse._();
+  @$core.override
+  SendReservationResponse createEmptyInstance() => create();
+  static $pb.PbList<SendReservationResponse> createRepeated() => $pb.PbList<SendReservationResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SendReservationResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendReservationResponse>(create);
+  static SendReservationResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<ReservationOrder> get orders => $_getList(0);
+}
+
 class ClearReservationRequest extends $pb.GeneratedMessage {
   factory ClearReservationRequest({
     $core.String? etf,

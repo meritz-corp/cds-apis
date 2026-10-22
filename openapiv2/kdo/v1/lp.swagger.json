@@ -683,9 +683,58 @@
         ]
       }
     },
+    "/v1/lps/{etf}/{fund}:sendReservation": {
+      "post": {
+        "summary": "ETF LP 예약주문 수동 송신 — 저장된 예약 설정으로 오늘 예약주문을 지금 보낸다 (설정을 깜빡했거나 08:28 자동 송신이 실패·누락됐을 때).\n자동 송신이 끝난 뒤부터 시가 전 취소(08:59:55) 전까지, 오늘 살아 있는 예약주문이 없을 때만 된다. 08:30 이후 송신분은 바로 거래소에 접수된다.\n한 건도 못 보내면 FAILED_PRECONDITION (사유 포함). 일부만 실패하면 OK 이고 실패분은 orders 의 status FAILED + message.",
+        "operationId": "LpService_SendReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/lpSendReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etf",
+            "description": "\"etfs/{symbol}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "etfs/[^/]+"
+          },
+          {
+            "name": "fund",
+            "description": "\"funds/{fund_code}\"",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "funds/[^/]+"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "LpService"
+        ]
+      }
+    },
     "/v1/lps/{etf}/{fund}:setReservation": {
       "post": {
-        "summary": "ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.",
+        "summary": "ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.\n오늘 예약주문이 살아 있으면 송신 후 시가(09:00) 전에는 바꿀 수 없다 — 살아 있는 주문이 없으면(설정을 깜빡했거나 송신 실패) 저장한 뒤 SendReservation 으로 바로 보낼 수 있다.",
         "operationId": "LpService_SetReservation",
         "responses": {
           "200": {
@@ -1581,7 +1630,19 @@
         "RESERVATION_ORDER_STATUS_FAILED"
       ],
       "default": "RESERVATION_ORDER_STATUS_UNSPECIFIED",
-      "title": "- RESERVATION_ORDER_STATUS_SENT: FEP 송신 — 08:30 까지 FEP 보관\n - RESERVATION_ORDER_STATUS_ACCEPTED: 거래소 접수 → ETF LP 북\n - RESERVATION_ORDER_STATUS_CLOSED: 종료 (LP 인수·전량 체결·취소·거부 — message 참고)\n - RESERVATION_ORDER_STATUS_FAILED: 송신 실패"
+      "title": "- RESERVATION_ORDER_STATUS_SENT: FEP 송신 — 08:30 전 송신분은 FEP 가 08:30 까지 보관\n - RESERVATION_ORDER_STATUS_ACCEPTED: 거래소 접수 → ETF LP 북\n - RESERVATION_ORDER_STATUS_CLOSED: 종료 (LP 인수·전량 체결·취소·거부 — message 참고)\n - RESERVATION_ORDER_STATUS_FAILED: 송신 실패"
+    },
+    "lpSendReservationResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lpReservationOrder"
+          },
+          "title": "이번에 보낸 예약주문 (실패분은 status FAILED, message 에 사유)"
+        }
+      }
     },
     "lpSetReservationResponse": {
       "type": "object",

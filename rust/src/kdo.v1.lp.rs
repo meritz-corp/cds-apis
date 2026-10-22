@@ -792,6 +792,23 @@ pub struct SetReservationResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SendReservationRequest {
+    /// "etfs/{symbol}"
+    #[prost(string, tag="1")]
+    pub etf: ::prost::alloc::string::String,
+    /// "funds/{fund_code}"
+    #[prost(string, tag="2")]
+    pub fund: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SendReservationResponse {
+    /// 이번에 보낸 예약주문 (실패분은 status FAILED, message 에 사유)
+    #[prost(message, repeated, tag="1")]
+    pub orders: ::prost::alloc::vec::Vec<ReservationOrder>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClearReservationRequest {
     /// "etfs/{symbol}"
     #[prost(string, tag="1")]
@@ -986,7 +1003,7 @@ impl EtfLpState {
 #[repr(i32)]
 pub enum ReservationOrderStatus {
     Unspecified = 0,
-    /// FEP 송신 — 08:30 까지 FEP 보관
+    /// FEP 송신 — 08:30 전 송신분은 FEP 가 08:30 까지 보관
     Sent = 1,
     /// 거래소 접수 → ETF LP 북
     Accepted = 2,
