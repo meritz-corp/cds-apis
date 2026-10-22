@@ -137,8 +137,27 @@ const MarketMakingConfiguration$json = {
     {'1': 'take_execution', '3': 30, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingTakeExecution', '9': 9, '10': 'takeExecution', '17': true},
     {'1': 'loss_limit', '3': 31, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingLossLimit', '9': 10, '10': 'lossLimit', '17': true},
     {'1': 'f2m_refit_interval_ms', '3': 32, '4': 1, '5': 4, '9': 11, '10': 'f2mRefitIntervalMs', '17': true},
-    {'1': 'qty_weighted_mid_imbalance_threshold_pct', '3': 33, '4': 1, '5': 1, '9': 12, '10': 'qtyWeightedMidImbalanceThresholdPct', '17': true},
-    {'1': 'qty_weighted_mid_imbalance_exponent', '3': 34, '4': 1, '5': 1, '9': 13, '10': 'qtyWeightedMidImbalanceExponent', '17': true},
+    {
+      '1': 'qty_weighted_mid_imbalance_threshold_pct',
+      '3': 33,
+      '4': 1,
+      '5': 1,
+      '8': {'3': true},
+      '9': 12,
+      '10': 'qtyWeightedMidImbalanceThresholdPct',
+      '17': true,
+    },
+    {
+      '1': 'qty_weighted_mid_imbalance_exponent',
+      '3': 34,
+      '4': 1,
+      '5': 1,
+      '8': {'3': true},
+      '9': 13,
+      '10': 'qtyWeightedMidImbalanceExponent',
+      '17': true,
+    },
+    {'1': 'qty_imbalance', '3': 35, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQtyImbalance', '9': 14, '10': 'qtyImbalance', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -155,6 +174,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_f2m_refit_interval_ms'},
     {'1': '_qty_weighted_mid_imbalance_threshold_pct'},
     {'1': '_qty_weighted_mid_imbalance_exponent'},
+    {'1': '_qty_imbalance'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -197,18 +217,20 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     '4gASgLMiQua2RvLnYxLm1tLk1hcmtldE1ha2luZ1Rha2VFeGVjdXRpb25ICVINdGFrZUV4ZWN1'
     'dGlvbogBARJECgpsb3NzX2xpbWl0GB8gASgLMiAua2RvLnYxLm1tLk1hcmtldE1ha2luZ0xvc3'
     'NMaW1pdEgKUglsb3NzTGltaXSIAQESNgoVZjJtX3JlZml0X2ludGVydmFsX21zGCAgASgESAtS'
-    'EmYybVJlZml0SW50ZXJ2YWxNc4gBARJaCihxdHlfd2VpZ2h0ZWRfbWlkX2ltYmFsYW5jZV90aH'
-    'Jlc2hvbGRfcGN0GCEgASgBSAxSI3F0eVdlaWdodGVkTWlkSW1iYWxhbmNlVGhyZXNob2xkUGN0'
-    'iAEBElEKI3F0eV93ZWlnaHRlZF9taWRfaW1iYWxhbmNlX2V4cG9uZW50GCIgASgBSA1SH3F0eV'
-    'dlaWdodGVkTWlkSW1iYWxhbmNlRXhwb25lbnSIAQFCCAoGX2Jhc2lzQhoKGF9mMm1fcmVmaXRf'
-    'aW50ZXJ2YWxfc2Vjc0IVChNfZjJtX21hX3dpbmRvd19zZWNzQgwKCl90YWtlX21vZGVCCAoGX2'
-    'lzX2xwQhcKFV91c2VfcXR5X3dlaWdodGVkX21pZEIZChdfZjJtX3NhbXBsZV9pbnRlcnZhbF9t'
-    'c0IaChhfcXR5X3dlaWdodGVkX21pZF9sZXZlbHNCEwoRX2Zhc3RfbGlxdWlkYXRpb25CEQoPX3'
-    'Rha2VfZXhlY3V0aW9uQg0KC19sb3NzX2xpbWl0QhgKFl9mMm1fcmVmaXRfaW50ZXJ2YWxfbXNC'
-    'KwopX3F0eV93ZWlnaHRlZF9taWRfaW1iYWxhbmNlX3RocmVzaG9sZF9wY3RCJgokX3F0eV93ZW'
-    'lnaHRlZF9taWRfaW1iYWxhbmNlX2V4cG9uZW50SgQIBxAISgQICBAJSgQICxAMSgQIDBANSgQI'
-    'DRAOSgQIDhAPUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJYX'
-    'NrX2Jhc2lzUgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
+    'EmYybVJlZml0SW50ZXJ2YWxNc4gBARJeCihxdHlfd2VpZ2h0ZWRfbWlkX2ltYmFsYW5jZV90aH'
+    'Jlc2hvbGRfcGN0GCEgASgBQgIYAUgMUiNxdHlXZWlnaHRlZE1pZEltYmFsYW5jZVRocmVzaG9s'
+    'ZFBjdIgBARJVCiNxdHlfd2VpZ2h0ZWRfbWlkX2ltYmFsYW5jZV9leHBvbmVudBgiIAEoAUICGA'
+    'FIDVIfcXR5V2VpZ2h0ZWRNaWRJbWJhbGFuY2VFeHBvbmVudIgBARJNCg1xdHlfaW1iYWxhbmNl'
+    'GCMgASgLMiMua2RvLnYxLm1tLk1hcmtldE1ha2luZ1F0eUltYmFsYW5jZUgOUgxxdHlJbWJhbG'
+    'FuY2WIAQFCCAoGX2Jhc2lzQhoKGF9mMm1fcmVmaXRfaW50ZXJ2YWxfc2Vjc0IVChNfZjJtX21h'
+    'X3dpbmRvd19zZWNzQgwKCl90YWtlX21vZGVCCAoGX2lzX2xwQhcKFV91c2VfcXR5X3dlaWdodG'
+    'VkX21pZEIZChdfZjJtX3NhbXBsZV9pbnRlcnZhbF9tc0IaChhfcXR5X3dlaWdodGVkX21pZF9s'
+    'ZXZlbHNCEwoRX2Zhc3RfbGlxdWlkYXRpb25CEQoPX3Rha2VfZXhlY3V0aW9uQg0KC19sb3NzX2'
+    'xpbWl0QhgKFl9mMm1fcmVmaXRfaW50ZXJ2YWxfbXNCKwopX3F0eV93ZWlnaHRlZF9taWRfaW1i'
+    'YWxhbmNlX3RocmVzaG9sZF9wY3RCJgokX3F0eV93ZWlnaHRlZF9taWRfaW1iYWxhbmNlX2V4cG'
+    '9uZW50QhAKDl9xdHlfaW1iYWxhbmNlSgQIBxAISgQICBAJSgQICxAMSgQIDBANSgQIDRAOSgQI'
+    'DhAPUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJYXNrX2Jhc2'
+    'lzUgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -612,6 +634,22 @@ const MarketMakingLossLimit$json = {
 /// Descriptor for `MarketMakingLossLimit`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingLossLimitDescriptor = $convert.base64Decode(
     'ChVNYXJrZXRNYWtpbmdMb3NzTGltaXQSGQoIbWF4X2xvc3MYASABKANSB21heExvc3M=');
+
+@$core.Deprecated('Use marketMakingQtyImbalanceDescriptor instead')
+const MarketMakingQtyImbalance$json = {
+  '1': 'MarketMakingQtyImbalance',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'threshold_pct', '3': 2, '4': 1, '5': 1, '10': 'thresholdPct'},
+    {'1': 'sensitivity', '3': 3, '4': 1, '5': 1, '10': 'sensitivity'},
+  ],
+};
+
+/// Descriptor for `MarketMakingQtyImbalance`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingQtyImbalanceDescriptor = $convert.base64Decode(
+    'ChhNYXJrZXRNYWtpbmdRdHlJbWJhbGFuY2USGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZBIjCg'
+    '10aHJlc2hvbGRfcGN0GAIgASgBUgx0aHJlc2hvbGRQY3QSIAoLc2Vuc2l0aXZpdHkYAyABKAFS'
+    'C3NlbnNpdGl2aXR5');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {
@@ -1327,6 +1365,7 @@ const SpreadDecomposition$json = {
     {'1': 'ma_cross_shift', '3': 8, '4': 1, '5': 3, '10': 'maCrossShift'},
     {'1': 'constituent_momentum_shift', '3': 9, '4': 1, '5': 3, '10': 'constituentMomentumShift'},
     {'1': 'proxy_momentum_shift', '3': 10, '4': 1, '5': 3, '10': 'proxyMomentumShift'},
+    {'1': 'qty_imbalance_shift', '3': 11, '4': 1, '5': 3, '10': 'qtyImbalanceShift'},
   ],
 };
 
@@ -1339,7 +1378,8 @@ final $typed_data.Uint8List spreadDecompositionDescriptor = $convert.base64Decod
     'bEJpZBIbCglmaW5hbF9hc2sYByABKANSCGZpbmFsQXNrEiQKDm1hX2Nyb3NzX3NoaWZ0GAggAS'
     'gDUgxtYUNyb3NzU2hpZnQSPAoaY29uc3RpdHVlbnRfbW9tZW50dW1fc2hpZnQYCSABKANSGGNv'
     'bnN0aXR1ZW50TW9tZW50dW1TaGlmdBIwChRwcm94eV9tb21lbnR1bV9zaGlmdBgKIAEoA1IScH'
-    'JveHlNb21lbnR1bVNoaWZ0');
+    'JveHlNb21lbnR1bVNoaWZ0Ei4KE3F0eV9pbWJhbGFuY2Vfc2hpZnQYCyABKANSEXF0eUltYmFs'
+    'YW5jZVNoaWZ0');
 
 @$core.Deprecated('Use streamMmStateUpdateRequestDescriptor instead')
 const StreamMmStateUpdateRequest$json = {

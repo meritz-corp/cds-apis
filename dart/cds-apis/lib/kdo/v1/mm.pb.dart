@@ -167,8 +167,11 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingTakeExecution? takeExecution,
     MarketMakingLossLimit? lossLimit,
     $fixnum.Int64? f2mRefitIntervalMs,
+  @$core.Deprecated('This field is deprecated.')
     $core.double? qtyWeightedMidImbalanceThresholdPct,
+  @$core.Deprecated('This field is deprecated.')
     $core.double? qtyWeightedMidImbalanceExponent,
+    MarketMakingQtyImbalance? qtyImbalance,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -199,6 +202,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (f2mRefitIntervalMs != null) result.f2mRefitIntervalMs = f2mRefitIntervalMs;
     if (qtyWeightedMidImbalanceThresholdPct != null) result.qtyWeightedMidImbalanceThresholdPct = qtyWeightedMidImbalanceThresholdPct;
     if (qtyWeightedMidImbalanceExponent != null) result.qtyWeightedMidImbalanceExponent = qtyWeightedMidImbalanceExponent;
+    if (qtyImbalance != null) result.qtyImbalance = qtyImbalance;
     return result;
   }
 
@@ -236,6 +240,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(32, _omitFieldNames ? '' : 'f2mRefitIntervalMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$core.double>(33, _omitFieldNames ? '' : 'qtyWeightedMidImbalanceThresholdPct', $pb.PbFieldType.OD)
     ..a<$core.double>(34, _omitFieldNames ? '' : 'qtyWeightedMidImbalanceExponent', $pb.PbFieldType.OD)
+    ..aOM<MarketMakingQtyImbalance>(35, _omitFieldNames ? '' : 'qtyImbalance', subBuilder: MarketMakingQtyImbalance.create)
     ..hasRequiredFields = false
   ;
 
@@ -579,53 +584,49 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$pb.TagNumber(32)
   void clearF2mRefitIntervalMs() => $_clearField(32);
 
-  /// NAV 입력 microprice 잔량 불균형 가속 — 임계(%). 0 = 끔(기본, 현행 선형 그대로).
-  /// use_qty_weighted_mid=true 일 때만 유효하다. 유효 범위: 0(끔) 또는 0 < 값 ≤ 50 — 그 밖·NaN 은 서버가 거부.
-  ///
-  /// 매수 비중 s = 매수잔량 / (매수잔량 + 매도잔량)   (각 사이드 상위 qty_weighted_mid_levels 단 잔량 합)
-  ///   현행: microprice = 매수가 + s × (매도가 − 매수가)   — s 에 비례(선형)
-  ///   가속: s < 임계 이면 s 대신 s' = 임계 × (s ÷ 임계)^지수 를 쓴다 → 매수가 쪽으로 더 급격히 붙는다.
-  ///         매도 쪽도 대칭: 매도 비중(1 − s) < 임계 이면 s' = 1 − 임계 × ((1 − s) ÷ 임계)^지수 → 매도가 쪽으로.
-  ///         그 사이 구간은 현행과 같고, 비중 = 임계 지점에서 값이 이어진다(가격 점프 없음).
-  ///   매수가·매도가 = 각 사이드 상위 N단 잔량가중 평균가 (qty_weighted_mid_levels=1 이면 1호가).
-  ///
-  /// 예) 1호가 매수 1000원 / 매도 2000원, 임계 10, 지수 2 (qty_weighted_mid_levels=1)
-  ///   매수잔량 100 : 매도잔량 900 (매수 비중 10%) → 1100원 (현행 1100원, 임계 지점이라 동일)
-  ///   매수잔량  80 : 매도잔량 920 (매수 비중  8%) → 1064원 (현행 1080원)
-  ///   매수잔량  50 : 매도잔량 950 (매수 비중  5%) → 1025원 (현행 1050원)
-  ///   매수잔량  10 : 매도잔량 990 (매수 비중  1%) → 1001원 (현행 1010원)
-  ///   매수잔량 950 : 매도잔량  50 (매도 비중  5%) → 1975원 (현행 1950원)
-  ///
-  /// 자기 ETF·F2M 기준가와 순수 proxy 에는 영향 없다(구성종목·nav-dep 의 NAV 입력에만 적용).
-  /// Running 중 변경 허용(다음 tick 반영). 조회 응답에는 서버가 항상 현재값을 채운다.
-  /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (qty_weighted_mid_levels 와 동일 패턴).
+  /// [deprecated] 미사용 — 서버가 읽지도 채우지도 않는다. 잔량 불균형은 qty_imbalance(35) 로 대체됐다.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(33)
   $core.double get qtyWeightedMidImbalanceThresholdPct => $_getN(26);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(33)
   set qtyWeightedMidImbalanceThresholdPct($core.double value) => $_setDouble(26, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(33)
   $core.bool hasQtyWeightedMidImbalanceThresholdPct() => $_has(26);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(33)
   void clearQtyWeightedMidImbalanceThresholdPct() => $_clearField(33);
 
-  /// NAV 입력 microprice 잔량 불균형 가속 — 지수(얼마나 급격하게). 1 ≤ 값 ≤ 10, 기본 2 — 그 밖·NaN 은 서버가 거부.
-  /// 1 = 현행 선형과 동일, 클수록 임계 아래에서 약한 쪽 호가로 더 급격히 붙는다.
-  /// qty_weighted_mid_imbalance_threshold_pct = 0(끔)이면 무시된다. 공식은 qty_weighted_mid_imbalance_threshold_pct 주석 참고.
-  ///
-  /// 예) 1호가 매수 1000원 / 매도 2000원, 임계 10, 매수 비중 5% (매수잔량 50 : 매도잔량 950)
-  ///   지수 1 → 1050원(현행)   지수 2 → 1025원   지수 3 → 1012.5원   지수 5 → 1003.1원
-  ///   같은 조건에서 매수 비중 8% 면: 지수 2 → 1064원, 지수 3 → 1051.2원, 지수 5 → 1032.8원
-  /// 10 초과를 막는 이유: 임계 근처가 계단처럼 변해 잔량 몇 주 변화에도 가격이 크게 튄다.
-  /// Running 중 변경 허용(다음 tick 반영). 조회 응답에는 서버가 항상 현재값을 채운다.
-  /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (qty_weighted_mid_levels 와 동일 패턴).
+  /// [deprecated] 미사용 — 서버가 읽지도 채우지도 않는다. 잔량 불균형은 qty_imbalance(35) 로 대체됐다.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(34)
   $core.double get qtyWeightedMidImbalanceExponent => $_getN(27);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(34)
   set qtyWeightedMidImbalanceExponent($core.double value) => $_setDouble(27, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(34)
   $core.bool hasQtyWeightedMidImbalanceExponent() => $_has(27);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(34)
   void clearQtyWeightedMidImbalanceExponent() => $_clearField(34);
+
+  /// 잔량 불균형 skew. 구성종목·nav-dep 호가마다 잔량 비중으로 skew 를 내고 NAV 비중만큼 합산해 호가에
+  /// 평행 가산한다(NAV pricing 전용 — 다른 pricing 에서 enabled=true 면 서버가 거부).
+  /// 켜지면 NAV 입력은 use_qty_weighted_mid 와 무관하게 단순 중간가가 되고, 호가 단계 수는
+  /// qty_weighted_mid_levels 를 따른다. Running 중 변경 허용(다음 tick 반영). 공식·예시는 MarketMakingQtyImbalance 주석.
+  /// optional: presence 로 "설정 vs 미변경" 구분 (loss_limit 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
+  @$pb.TagNumber(35)
+  MarketMakingQtyImbalance get qtyImbalance => $_getN(28);
+  @$pb.TagNumber(35)
+  set qtyImbalance(MarketMakingQtyImbalance value) => $_setField(35, value);
+  @$pb.TagNumber(35)
+  $core.bool hasQtyImbalance() => $_has(28);
+  @$pb.TagNumber(35)
+  void clearQtyImbalance() => $_clearField(35);
+  @$pb.TagNumber(35)
+  MarketMakingQtyImbalance ensureQtyImbalance() => $_ensure(28);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -2479,6 +2480,103 @@ class MarketMakingLossLimit extends $pb.GeneratedMessage {
   $core.bool hasMaxLoss() => $_has(0);
   @$pb.TagNumber(1)
   void clearMaxLoss() => $_clearField(1);
+}
+
+/// 잔량 불균형 skew 설정.
+///
+/// 구성종목·nav-dep 호가마다 매도 잔량 비중 x = 매도잔량 ÷ (매수잔량 + 매도잔량)
+/// (상위 qty_weighted_mid_levels 단 합)으로 위치 p 를 정하고
+///   종목 skew = (매수가 + p × (매도가 - 매수가)) - 1호가 중간가   (매수가·매도가 = 사이드별 잔량가중 평균가, 1단이면 1호가)
+///   ETF skew  = Σ (종목 NAV 비중 × 종목 skew)                     (NAV 비중 = 종목 가격 1원 변화당 NAV 변화량)
+///   호가 기준 = NAV(중간가) + ETF skew (+ 다른 skew)
+/// NAV 밖에서 더하므로 F2M(시장추종)이 이 skew 를 상쇄하지 않는다. 환선물(FX 오버레이 소스)은 대상이 아니다.
+///
+/// 위치 p (매도 기준, 임계 θ = threshold_pct, 지수 γ = 1 ÷ (1 - sensitivity)):
+///   x < θ        : p = 1 - θ × (x ÷ θ)^γ                       → linear(1 - x) 보다 매도호가 쪽
+///   θ ≤ x ≤ 50%  : p = ½ + (½ - θ) × ((½ - x) ÷ (½ - θ))^γ     → linear 보다 중간가 쪽 (잔량이 비슷하면 skew 를 덜 줌)
+///   50% 넘는 쪽은 대칭(매수 잔량이 얇으면 매수호가 쪽). θ·50% 에서 linear 와 만나 가격이 끊기지 않는다.
+///   sensitivity 0 = linear (현행 잔량가중 NAV 와 같은 값), 1 = 계단 (x < θ 매도호가, θ ~ 100-θ% 중간가, 그 밖 매수호가).
+///
+/// 예) PDF 에 구성종목 하나, ETF 1주 = 구성종목 1주. 구성종목 1호가 매수 1000 / 매도 2000, threshold_pct 20
+///   매도 비중   현행(잔량가중)   sensitivity 0.5   0.8      1
+///      5%        1950            1987.5          1999.8   2000
+///     10%        1900            1950            1993.8   2000
+///     20%        1800            1800            1800     2000→1500 (점프)
+///     30%        1700            1633.3          1539.5   1500
+///     50%        1500            1500            1500     1500
+///   매도 비중 10%·sensitivity 0.5: NAV(중간가) 1500 + skew (0.95 - 0.5) × 1000 = +450 → 호가 기준 1950.
+class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
+  factory MarketMakingQtyImbalance({
+    $core.bool? enabled,
+    $core.double? thresholdPct,
+    $core.double? sensitivity,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (thresholdPct != null) result.thresholdPct = thresholdPct;
+    if (sensitivity != null) result.sensitivity = sensitivity;
+    return result;
+  }
+
+  MarketMakingQtyImbalance._();
+
+  factory MarketMakingQtyImbalance.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingQtyImbalance.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingQtyImbalance', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..a<$core.double>(2, _omitFieldNames ? '' : 'thresholdPct', $pb.PbFieldType.OD)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'sensitivity', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingQtyImbalance clone() => MarketMakingQtyImbalance()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingQtyImbalance copyWith(void Function(MarketMakingQtyImbalance) updates) => super.copyWith((message) => updates(message as MarketMakingQtyImbalance)) as MarketMakingQtyImbalance;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingQtyImbalance create() => MarketMakingQtyImbalance._();
+  @$core.override
+  MarketMakingQtyImbalance createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingQtyImbalance> createRepeated() => $pb.PbList<MarketMakingQtyImbalance>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingQtyImbalance getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingQtyImbalance>(create);
+  static MarketMakingQtyImbalance? _defaultInstance;
+
+  /// 사용 여부. NAV pricing 에서만 켤 수 있다.
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 임계 θ (%, 0~50). 한쪽 잔량 비중이 이 값 미만이면 linear 보다 그 반대 호가 쪽으로 더 붙는다.
+  /// 범위 밖·NaN 은 서버가 거부.
+  @$pb.TagNumber(2)
+  $core.double get thresholdPct => $_getN(1);
+  @$pb.TagNumber(2)
+  set thresholdPct($core.double value) => $_setDouble(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasThresholdPct() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearThresholdPct() => $_clearField(2);
+
+  /// 민감도 (0~1). 0 = linear, 1 = 계단, 사이 값은 위 거듭제곱 곡선. 범위 밖·NaN 은 서버가 거부.
+  @$pb.TagNumber(3)
+  $core.double get sensitivity => $_getN(2);
+  @$pb.TagNumber(3)
+  set sensitivity($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasSensitivity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSensitivity() => $_clearField(3);
 }
 
 /// ListMarketMaking
@@ -5642,6 +5740,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     $fixnum.Int64? maCrossShift,
     $fixnum.Int64? constituentMomentumShift,
     $fixnum.Int64? proxyMomentumShift,
+    $fixnum.Int64? qtyImbalanceShift,
   }) {
     final result = create();
     if (baseBid != null) result.baseBid = baseBid;
@@ -5654,6 +5753,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     if (maCrossShift != null) result.maCrossShift = maCrossShift;
     if (constituentMomentumShift != null) result.constituentMomentumShift = constituentMomentumShift;
     if (proxyMomentumShift != null) result.proxyMomentumShift = proxyMomentumShift;
+    if (qtyImbalanceShift != null) result.qtyImbalanceShift = qtyImbalanceShift;
     return result;
   }
 
@@ -5673,6 +5773,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'maCrossShift')
     ..aInt64(9, _omitFieldNames ? '' : 'constituentMomentumShift')
     ..aInt64(10, _omitFieldNames ? '' : 'proxyMomentumShift')
+    ..aInt64(11, _omitFieldNames ? '' : 'qtyImbalanceShift')
     ..hasRequiredFields = false
   ;
 
@@ -5792,6 +5893,16 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   $core.bool hasProxyMomentumShift() => $_has(9);
   @$pb.TagNumber(10)
   void clearProxyMomentumShift() => $_clearField(10);
+
+  /// 잔량 불균형 skew 가산량 (부호 포함, bid·ask 동일, 원 단위 정수 — 소수 절삭)
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get qtyImbalanceShift => $_getI64(10);
+  @$pb.TagNumber(11)
+  set qtyImbalanceShift($fixnum.Int64 value) => $_setInt64(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasQtyImbalanceShift() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearQtyImbalanceShift() => $_clearField(11);
 }
 
 /// StreamMmStateUpdate

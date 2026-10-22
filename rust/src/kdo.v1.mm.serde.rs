@@ -4265,6 +4265,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4364,6 +4367,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.qty_weighted_mid_imbalance_exponent.as_ref() {
             struct_ser.serialize_field("qty_weighted_mid_imbalance_exponent", v)?;
         }
+        if let Some(v) = self.qty_imbalance.as_ref() {
+            struct_ser.serialize_field("qty_imbalance", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4426,6 +4432,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "qtyWeightedMidImbalanceThresholdPct",
             "qty_weighted_mid_imbalance_exponent",
             "qtyWeightedMidImbalanceExponent",
+            "qty_imbalance",
+            "qtyImbalance",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4458,6 +4466,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             F2mRefitIntervalMs,
             QtyWeightedMidImbalanceThresholdPct,
             QtyWeightedMidImbalanceExponent,
+            QtyImbalance,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4508,6 +4517,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "f2mRefitIntervalMs" | "f2m_refit_interval_ms" => Ok(GeneratedField::F2mRefitIntervalMs),
                             "qtyWeightedMidImbalanceThresholdPct" | "qty_weighted_mid_imbalance_threshold_pct" => Ok(GeneratedField::QtyWeightedMidImbalanceThresholdPct),
                             "qtyWeightedMidImbalanceExponent" | "qty_weighted_mid_imbalance_exponent" => Ok(GeneratedField::QtyWeightedMidImbalanceExponent),
+                            "qtyImbalance" | "qty_imbalance" => Ok(GeneratedField::QtyImbalance),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4555,6 +4565,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut f2m_refit_interval_ms__ = None;
                 let mut qty_weighted_mid_imbalance_threshold_pct__ = None;
                 let mut qty_weighted_mid_imbalance_exponent__ = None;
+                let mut qty_imbalance__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4747,6 +4758,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::QtyImbalance => {
+                            if qty_imbalance__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("qtyImbalance"));
+                            }
+                            qty_imbalance__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4781,6 +4798,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     f2m_refit_interval_ms: f2m_refit_interval_ms__,
                     qty_weighted_mid_imbalance_threshold_pct: qty_weighted_mid_imbalance_threshold_pct__,
                     qty_weighted_mid_imbalance_exponent: qty_weighted_mid_imbalance_exponent__,
+                    qty_imbalance: qty_imbalance__,
                 })
             }
         }
@@ -7117,6 +7135,140 @@ impl<'de> serde::Deserialize<'de> for MarketMakingProxyMomentum {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingProxyMomentum", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingQtyImbalance {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingQtyImbalance", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            struct_ser.serialize_field("threshold_pct", &self.threshold_pct)?;
+        }
+        if true {
+            struct_ser.serialize_field("sensitivity", &self.sensitivity)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalance {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "threshold_pct",
+            "thresholdPct",
+            "sensitivity",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            ThresholdPct,
+            Sensitivity,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "thresholdPct" | "threshold_pct" => Ok(GeneratedField::ThresholdPct),
+                            "sensitivity" => Ok(GeneratedField::Sensitivity),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingQtyImbalance;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingQtyImbalance")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingQtyImbalance, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut threshold_pct__ = None;
+                let mut sensitivity__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ThresholdPct => {
+                            if threshold_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("thresholdPct"));
+                            }
+                            threshold_pct__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Sensitivity => {
+                            if sensitivity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sensitivity"));
+                            }
+                            sensitivity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingQtyImbalance {
+                    enabled: enabled__.unwrap_or_default(),
+                    threshold_pct: threshold_pct__.unwrap_or_default(),
+                    sensitivity: sensitivity__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingQtyImbalance", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingQuantityLimit {
@@ -10337,6 +10489,9 @@ impl serde::Serialize for SpreadDecomposition {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.SpreadDecomposition", len)?;
         if true {
             struct_ser.serialize_field("base_bid", &self.base_bid)?;
@@ -10384,6 +10539,11 @@ impl serde::Serialize for SpreadDecomposition {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("proxy_momentum_shift", ToString::to_string(&self.proxy_momentum_shift).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("qty_imbalance_shift", ToString::to_string(&self.qty_imbalance_shift).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -10414,6 +10574,8 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             "constituentMomentumShift",
             "proxy_momentum_shift",
             "proxyMomentumShift",
+            "qty_imbalance_shift",
+            "qtyImbalanceShift",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -10428,6 +10590,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             MaCrossShift,
             ConstituentMomentumShift,
             ProxyMomentumShift,
+            QtyImbalanceShift,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -10460,6 +10623,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                             "maCrossShift" | "ma_cross_shift" => Ok(GeneratedField::MaCrossShift),
                             "constituentMomentumShift" | "constituent_momentum_shift" => Ok(GeneratedField::ConstituentMomentumShift),
                             "proxyMomentumShift" | "proxy_momentum_shift" => Ok(GeneratedField::ProxyMomentumShift),
+                            "qtyImbalanceShift" | "qty_imbalance_shift" => Ok(GeneratedField::QtyImbalanceShift),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -10489,6 +10653,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                 let mut ma_cross_shift__ = None;
                 let mut constituent_momentum_shift__ = None;
                 let mut proxy_momentum_shift__ = None;
+                let mut qty_imbalance_shift__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BaseBid => {
@@ -10567,6 +10732,14 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::QtyImbalanceShift => {
+                            if qty_imbalance_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("qtyImbalanceShift"));
+                            }
+                            qty_imbalance_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -10583,6 +10756,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                     ma_cross_shift: ma_cross_shift__.unwrap_or_default(),
                     constituent_momentum_shift: constituent_momentum_shift__.unwrap_or_default(),
                     proxy_momentum_shift: proxy_momentum_shift__.unwrap_or_default(),
+                    qty_imbalance_shift: qty_imbalance_shift__.unwrap_or_default(),
                 })
             }
         }

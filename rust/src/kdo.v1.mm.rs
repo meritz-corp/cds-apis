@@ -143,40 +143,21 @@ pub struct MarketMakingConfiguration {
     /// optional: 미설정 시 기존값 유지(구 f2m_refit_interval_secs 가 오면 그 값 ×1000), 명시적 0 = 비활성화.
     #[prost(uint64, optional, tag="32")]
     pub f2m_refit_interval_ms: ::core::option::Option<u64>,
-    /// NAV 입력 microprice 잔량 불균형 가속 — 임계(%). 0 = 끔(기본, 현행 선형 그대로).
-    /// use_qty_weighted_mid=true 일 때만 유효하다. 유효 범위: 0(끔) 또는 0 < 값 ≤ 50 — 그 밖·NaN 은 서버가 거부.
-    ///
-    /// 매수 비중 s = 매수잔량 / (매수잔량 + 매도잔량)   (각 사이드 상위 qty_weighted_mid_levels 단 잔량 합)
-    ///    현행: microprice = 매수가 + s × (매도가 − 매수가)   — s 에 비례(선형)
-    ///    가속: s < 임계 이면 s 대신 s' = 임계 × (s ÷ 임계)^지수 를 쓴다 → 매수가 쪽으로 더 급격히 붙는다.
-    ///          매도 쪽도 대칭: 매도 비중(1 − s) < 임계 이면 s' = 1 − 임계 × ((1 − s) ÷ 임계)^지수 → 매도가 쪽으로.
-    ///          그 사이 구간은 현행과 같고, 비중 = 임계 지점에서 값이 이어진다(가격 점프 없음).
-    ///    매수가·매도가 = 각 사이드 상위 N단 잔량가중 평균가 (qty_weighted_mid_levels=1 이면 1호가).
-    ///
-    /// 예) 1호가 매수 1000원 / 매도 2000원, 임계 10, 지수 2 (qty_weighted_mid_levels=1)
-    ///    매수잔량 100 : 매도잔량 900 (매수 비중 10%) → 1100원 (현행 1100원, 임계 지점이라 동일)
-    ///    매수잔량  80 : 매도잔량 920 (매수 비중  8%) → 1064원 (현행 1080원)
-    ///    매수잔량  50 : 매도잔량 950 (매수 비중  5%) → 1025원 (현행 1050원)
-    ///    매수잔량  10 : 매도잔량 990 (매수 비중  1%) → 1001원 (현행 1010원)
-    ///    매수잔량 950 : 매도잔량  50 (매도 비중  5%) → 1975원 (현행 1950원)
-    ///
-    /// 자기 ETF·F2M 기준가와 순수 proxy 에는 영향 없다(구성종목·nav-dep 의 NAV 입력에만 적용).
-    /// Running 중 변경 허용(다음 tick 반영). 조회 응답에는 서버가 항상 현재값을 채운다.
-    /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (qty_weighted_mid_levels 와 동일 패턴).
+    /// \[deprecated\] 미사용 — 서버가 읽지도 채우지도 않는다. 잔량 불균형은 qty_imbalance(35) 로 대체됐다.
+    #[deprecated]
     #[prost(double, optional, tag="33")]
     pub qty_weighted_mid_imbalance_threshold_pct: ::core::option::Option<f64>,
-    /// NAV 입력 microprice 잔량 불균형 가속 — 지수(얼마나 급격하게). 1 ≤ 값 ≤ 10, 기본 2 — 그 밖·NaN 은 서버가 거부.
-    /// 1 = 현행 선형과 동일, 클수록 임계 아래에서 약한 쪽 호가로 더 급격히 붙는다.
-    /// qty_weighted_mid_imbalance_threshold_pct = 0(끔)이면 무시된다. 공식은 qty_weighted_mid_imbalance_threshold_pct 주석 참고.
-    ///
-    /// 예) 1호가 매수 1000원 / 매도 2000원, 임계 10, 매수 비중 5% (매수잔량 50 : 매도잔량 950)
-    ///    지수 1 → 1050원(현행)   지수 2 → 1025원   지수 3 → 1012.5원   지수 5 → 1003.1원
-    ///    같은 조건에서 매수 비중 8% 면: 지수 2 → 1064원, 지수 3 → 1051.2원, 지수 5 → 1032.8원
-    /// 10 초과를 막는 이유: 임계 근처가 계단처럼 변해 잔량 몇 주 변화에도 가격이 크게 튄다.
-    /// Running 중 변경 허용(다음 tick 반영). 조회 응답에는 서버가 항상 현재값을 채운다.
-    /// optional: presence 로 "설정 vs 미변경(기존값 유지)" 를 구분한다 (qty_weighted_mid_levels 와 동일 패턴).
+    /// \[deprecated\] 미사용 — 서버가 읽지도 채우지도 않는다. 잔량 불균형은 qty_imbalance(35) 로 대체됐다.
+    #[deprecated]
     #[prost(double, optional, tag="34")]
     pub qty_weighted_mid_imbalance_exponent: ::core::option::Option<f64>,
+    /// 잔량 불균형 skew. 구성종목·nav-dep 호가마다 잔량 비중으로 skew 를 내고 NAV 비중만큼 합산해 호가에
+    /// 평행 가산한다(NAV pricing 전용 — 다른 pricing 에서 enabled=true 면 서버가 거부).
+    /// 켜지면 NAV 입력은 use_qty_weighted_mid 와 무관하게 단순 중간가가 되고, 호가 단계 수는
+    /// qty_weighted_mid_levels 를 따른다. Running 중 변경 허용(다음 tick 반영). 공식·예시는 MarketMakingQtyImbalance 주석.
+    /// optional: presence 로 "설정 vs 미변경" 구분 (loss_limit 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
+    #[prost(message, optional, tag="35")]
+    pub qty_imbalance: ::core::option::Option<MarketMakingQtyImbalance>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -578,6 +559,43 @@ pub struct MarketMakingLossLimit {
     /// 당일 최대 허용 손실 (원 단위, 양수). 0 = 비활성.
     #[prost(int64, tag="1")]
     pub max_loss: i64,
+}
+/// 잔량 불균형 skew 설정.
+///
+/// 구성종목·nav-dep 호가마다 매도 잔량 비중 x = 매도잔량 ÷ (매수잔량 + 매도잔량)
+/// (상위 qty_weighted_mid_levels 단 합)으로 위치 p 를 정하고
+///    종목 skew = (매수가 + p × (매도가 - 매수가)) - 1호가 중간가   (매수가·매도가 = 사이드별 잔량가중 평균가, 1단이면 1호가)
+///    ETF skew  = Σ (종목 NAV 비중 × 종목 skew)                     (NAV 비중 = 종목 가격 1원 변화당 NAV 변화량)
+///    호가 기준 = NAV(중간가) + ETF skew (+ 다른 skew)
+/// NAV 밖에서 더하므로 F2M(시장추종)이 이 skew 를 상쇄하지 않는다. 환선물(FX 오버레이 소스)은 대상이 아니다.
+///
+/// 위치 p (매도 기준, 임계 θ = threshold_pct, 지수 γ = 1 ÷ (1 - sensitivity)):
+///    x < θ        : p = 1 - θ × (x ÷ θ)^γ                       → linear(1 - x) 보다 매도호가 쪽
+///    θ ≤ x ≤ 50%  : p = ½ + (½ - θ) × ((½ - x) ÷ (½ - θ))^γ     → linear 보다 중간가 쪽 (잔량이 비슷하면 skew 를 덜 줌)
+///    50% 넘는 쪽은 대칭(매수 잔량이 얇으면 매수호가 쪽). θ·50% 에서 linear 와 만나 가격이 끊기지 않는다.
+///    sensitivity 0 = linear (현행 잔량가중 NAV 와 같은 값), 1 = 계단 (x < θ 매도호가, θ ~ 100-θ% 중간가, 그 밖 매수호가).
+///
+/// 예) PDF 에 구성종목 하나, ETF 1주 = 구성종목 1주. 구성종목 1호가 매수 1000 / 매도 2000, threshold_pct 20
+///    매도 비중   현행(잔량가중)   sensitivity 0.5   0.8      1
+///       5%        1950            1987.5          1999.8   2000
+///      10%        1900            1950            1993.8   2000
+///      20%        1800            1800            1800     2000→1500 (점프)
+///      30%        1700            1633.3          1539.5   1500
+///      50%        1500            1500            1500     1500
+///    매도 비중 10%·sensitivity 0.5: NAV(중간가) 1500 + skew (0.95 - 0.5) × 1000 = +450 → 호가 기준 1950.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingQtyImbalance {
+    /// 사용 여부. NAV pricing 에서만 켤 수 있다.
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 임계 θ (%, 0~50). 한쪽 잔량 비중이 이 값 미만이면 linear 보다 그 반대 호가 쪽으로 더 붙는다.
+    /// 범위 밖·NaN 은 서버가 거부.
+    #[prost(double, tag="2")]
+    pub threshold_pct: f64,
+    /// 민감도 (0~1). 0 = linear, 1 = 계단, 사이 값은 위 거듭제곱 곡선. 범위 밖·NaN 은 서버가 거부.
+    #[prost(double, tag="3")]
+    pub sensitivity: f64,
 }
 // ============================================================================
 // Request/Response Messages
@@ -1241,6 +1259,9 @@ pub struct SpreadDecomposition {
     /// ProxyMomentum(제3종목 체결강도) 가산량 (부호 포함, bid·ask 동일, Price internal representation)
     #[prost(int64, tag="10")]
     pub proxy_momentum_shift: i64,
+    /// 잔량 불균형 skew 가산량 (부호 포함, bid·ask 동일, 원 단위 정수 — 소수 절삭)
+    #[prost(int64, tag="11")]
+    pub qty_imbalance_shift: i64,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages
