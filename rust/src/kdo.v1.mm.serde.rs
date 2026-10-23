@@ -7771,6 +7771,9 @@ impl serde::Serialize for MarketMakingTradeAnalyzer {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingTradeAnalyzer", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -7799,6 +7802,9 @@ impl serde::Serialize for MarketMakingTradeAnalyzer {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("decay_unit_qty", ToString::to_string(&self.decay_unit_qty).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("book_depth", &self.book_depth)?;
+        }
         struct_ser.end()
     }
 }
@@ -7822,6 +7828,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
             "minBookQty",
             "decay_unit_qty",
             "decayUnitQty",
+            "book_depth",
+            "bookDepth",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -7833,6 +7841,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
             NetDecayRatio,
             MinBookQty,
             DecayUnitQty,
+            BookDepth,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -7862,6 +7871,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                             "netDecayRatio" | "net_decay_ratio" => Ok(GeneratedField::NetDecayRatio),
                             "minBookQty" | "min_book_qty" => Ok(GeneratedField::MinBookQty),
                             "decayUnitQty" | "decay_unit_qty" => Ok(GeneratedField::DecayUnitQty),
+                            "bookDepth" | "book_depth" => Ok(GeneratedField::BookDepth),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -7888,6 +7898,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                 let mut net_decay_ratio__ = None;
                 let mut min_book_qty__ = None;
                 let mut decay_unit_qty__ = None;
+                let mut book_depth__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -7944,6 +7955,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BookDepth => {
+                            if book_depth__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bookDepth"));
+                            }
+                            book_depth__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -7957,6 +7976,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingTradeAnalyzer {
                     net_decay_ratio: net_decay_ratio__.unwrap_or_default(),
                     min_book_qty: min_book_qty__.unwrap_or_default(),
                     decay_unit_qty: decay_unit_qty__.unwrap_or_default(),
+                    book_depth: book_depth__.unwrap_or_default(),
                 })
             }
         }

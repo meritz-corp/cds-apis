@@ -974,6 +974,7 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
     $core.double? netDecayRatio,
     $fixnum.Int64? minBookQty,
     $fixnum.Int64? decayUnitQty,
+    $core.int? bookDepth,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -983,6 +984,7 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
     if (netDecayRatio != null) result.netDecayRatio = netDecayRatio;
     if (minBookQty != null) result.minBookQty = minBookQty;
     if (decayUnitQty != null) result.decayUnitQty = decayUnitQty;
+    if (bookDepth != null) result.bookDepth = bookDepth;
     return result;
   }
 
@@ -999,6 +1001,7 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
     ..a<$core.double>(5, _omitFieldNames ? '' : 'netDecayRatio', $pb.PbFieldType.OD)
     ..aInt64(6, _omitFieldNames ? '' : 'minBookQty')
     ..aInt64(7, _omitFieldNames ? '' : 'decayUnitQty')
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'bookDepth', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -1090,6 +1093,18 @@ class MarketMakingTradeAnalyzer extends $pb.GeneratedMessage {
   $core.bool hasDecayUnitQty() => $_has(6);
   @$pb.TagNumber(7)
   void clearDecayUnitQty() => $_clearField(7);
+
+  /// strength 분모(호가 평균 잔량)에 쓰는 상위 호가 단계 수 (1~10, 10 초과는 10). 0 = 미지정 → 기본 5.
+  /// 주식·ETF 는 10단, 선물은 5단까지만 공표되므로 실제로는 min(설정값, 공표 단수)만 집계된다.
+  /// 값이 바뀌면 강도 정규화기가 리셋되어 워밍업(약 40 tick) 동안 strength = 0 이다.
+  @$pb.TagNumber(8)
+  $core.int get bookDepth => $_getIZ(7);
+  @$pb.TagNumber(8)
+  set bookDepth($core.int value) => $_setUnsignedInt32(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasBookDepth() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearBookDepth() => $_clearField(8);
 }
 
 /// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)

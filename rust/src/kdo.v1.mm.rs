@@ -251,6 +251,11 @@ pub struct MarketMakingTradeAnalyzer {
     /// 100주x1건으로 들어오든 같은 스텝 수를 소비하게 한다.
     #[prost(int64, tag="7")]
     pub decay_unit_qty: i64,
+    /// strength 분모(호가 평균 잔량)에 쓰는 상위 호가 단계 수 (1~10, 10 초과는 10). 0 = 미지정 → 기본 5.
+    /// 주식·ETF 는 10단, 선물은 5단까지만 공표되므로 실제로는 min(설정값, 공표 단수)만 집계된다.
+    /// 값이 바뀌면 강도 정규화기가 리셋되어 워밍업(약 40 tick) 동안 strength = 0 이다.
+    #[prost(uint32, tag="8")]
+    pub book_depth: u32,
 }
 /// Momentum 설정 (갤럭티코 DecoByTrade 포팅 — ratio/strength 기반 양쪽 동일 shift)
 #[allow(clippy::derive_partial_eq_without_eq)]

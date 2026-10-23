@@ -321,6 +321,7 @@ const MarketMakingTradeAnalyzer$json = {
     {'1': 'net_decay_ratio', '3': 5, '4': 1, '5': 1, '10': 'netDecayRatio'},
     {'1': 'min_book_qty', '3': 6, '4': 1, '5': 3, '10': 'minBookQty'},
     {'1': 'decay_unit_qty', '3': 7, '4': 1, '5': 3, '10': 'decayUnitQty'},
+    {'1': 'book_depth', '3': 8, '4': 1, '5': 13, '10': 'bookDepth'},
   ],
 };
 
@@ -331,7 +332,7 @@ final $typed_data.Uint8List marketMakingTradeAnalyzerDescriptor = $convert.base6
     'cnZhbF9zZWNzGAMgASgEUhFkZWNheUludGVydmFsU2VjcxIqChF0b3RhbF9kZWNheV9yYXRpbx'
     'gEIAEoAVIPdG90YWxEZWNheVJhdGlvEiYKD25ldF9kZWNheV9yYXRpbxgFIAEoAVINbmV0RGVj'
     'YXlSYXRpbxIgCgxtaW5fYm9va19xdHkYBiABKANSCm1pbkJvb2tRdHkSJAoOZGVjYXlfdW5pdF'
-    '9xdHkYByABKANSDGRlY2F5VW5pdFF0eQ==');
+    '9xdHkYByABKANSDGRlY2F5VW5pdFF0eRIdCgpib29rX2RlcHRoGAggASgNUglib29rRGVwdGg=');
 
 @$core.Deprecated('Use marketMakingMomentumDescriptor instead')
 const MarketMakingMomentum$json = {

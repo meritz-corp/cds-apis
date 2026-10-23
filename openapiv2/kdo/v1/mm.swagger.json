@@ -2174,6 +2174,11 @@
           "type": "string",
           "format": "int64",
           "description": "count 감쇠 1스텝을 채우는 gross 체결 수량. 0 = 기존 체결 1건당 1스텝(레거시).\n감쇠를 체결 건수가 아닌 거래량에 걸어, 같은 물량이 1주x100건으로 들어오든\n100주x1건으로 들어오든 같은 스텝 수를 소비하게 한다."
+        },
+        "bookDepth": {
+          "type": "integer",
+          "format": "int64",
+          "description": "strength 분모(호가 평균 잔량)에 쓰는 상위 호가 단계 수 (1~10, 10 초과는 10). 0 = 미지정 → 기본 5.\n주식·ETF 는 10단, 선물은 5단까지만 공표되므로 실제로는 min(설정값, 공표 단수)만 집계된다.\n값이 바뀌면 강도 정규화기가 리셋되어 워밍업(약 40 tick) 동안 strength = 0 이다."
         }
       },
       "title": "Trade Analyzer 설정 (갤럭티코 SingleTradeAnalyzer 포팅 — 시장 체결 추종)"
