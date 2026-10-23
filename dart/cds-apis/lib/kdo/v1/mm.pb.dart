@@ -6669,7 +6669,7 @@ class DeleteMmPresetResponse extends $pb.GeneratedMessage {
   void clearMessage() => $_clearField(1);
 }
 
-/// MM 시작/설정변경 시점에 저장된 설정 스냅샷
+/// MM 시작/설정변경/F2M 지정 시점에 저장된 설정 스냅샷
 class MmConfigSnapshot extends $pb.GeneratedMessage {
   factory MmConfigSnapshot({
     $core.String? symbol,
@@ -6678,6 +6678,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
     MmConfigEventType? eventType,
     $core.String? fundCode,
     $core.String? slotId,
+    $core.double? f2mShift,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -6686,6 +6687,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
     if (eventType != null) result.eventType = eventType;
     if (fundCode != null) result.fundCode = fundCode;
     if (slotId != null) result.slotId = slotId;
+    if (f2mShift != null) result.f2mShift = f2mShift;
     return result;
   }
 
@@ -6701,6 +6703,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
     ..e<MmConfigEventType>(4, _omitFieldNames ? '' : 'eventType', $pb.PbFieldType.OE, defaultOrMaker: MmConfigEventType.MM_CONFIG_EVENT_TYPE_UNSPECIFIED, valueOf: MmConfigEventType.valueOf, enumValues: MmConfigEventType.values)
     ..aOS(5, _omitFieldNames ? '' : 'fundCode')
     ..aOS(6, _omitFieldNames ? '' : 'slotId')
+    ..a<$core.double>(7, _omitFieldNames ? '' : 'f2mShift', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -6753,7 +6756,7 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearStartTime() => $_clearField(3);
 
-  /// 스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
+  /// 스냅샷 계기(시작/설정변경/F2M 지정). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
   @$pb.TagNumber(4)
   MmConfigEventType get eventType => $_getN(3);
   @$pb.TagNumber(4)
@@ -6782,6 +6785,17 @@ class MmConfigSnapshot extends $pb.GeneratedMessage {
   $core.bool hasSlotId() => $_has(5);
   @$pb.TagNumber(6)
   void clearSlotId() => $_clearField(6);
+
+  /// F2M_SET 일 때 적용된 F2M 값 (원, 소수 허용, 부호 = 방향, clamp 후 — FitToMarketRequest.f2m_shift 와 같은 단위).
+  /// 다른 계기는 미설정. config 는 그 시점 설정 그대로다(F2M 은 설정이 아닌 런타임 값).
+  @$pb.TagNumber(7)
+  $core.double get f2mShift => $_getN(6);
+  @$pb.TagNumber(7)
+  set f2mShift($core.double value) => $_setDouble(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasF2mShift() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearF2mShift() => $_clearField(7);
 }
 
 /// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회

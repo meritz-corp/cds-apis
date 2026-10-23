@@ -1419,7 +1419,7 @@ pub struct DeleteMmPresetResponse {
     #[prost(string, tag="1")]
     pub message: ::prost::alloc::string::String,
 }
-/// MM 시작/설정변경 시점에 저장된 설정 스냅샷
+/// MM 시작/설정변경/F2M 지정 시점에 저장된 설정 스냅샷
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MmConfigSnapshot {
@@ -1432,7 +1432,7 @@ pub struct MmConfigSnapshot {
     /// 시각 (unix epoch seconds)
     #[prost(int64, tag="3")]
     pub start_time: i64,
-    /// 스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
+    /// 스냅샷 계기(시작/설정변경/F2M 지정). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주
     #[prost(enumeration="MmConfigEventType", tag="4")]
     pub event_type: i32,
     /// 펀드 코드 — 같은 심볼을 여러 펀드로 운용할 때 구분용.
@@ -1441,6 +1441,10 @@ pub struct MmConfigSnapshot {
     /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
     #[prost(string, tag="6")]
     pub slot_id: ::prost::alloc::string::String,
+    /// F2M_SET 일 때 적용된 F2M 값 (원, 소수 허용, 부호 = 방향, clamp 후 — FitToMarketRequest.f2m_shift 와 같은 단위).
+    /// 다른 계기는 미설정. config 는 그 시점 설정 그대로다(F2M 은 설정이 아닌 런타임 값).
+    #[prost(double, optional, tag="7")]
+    pub f2m_shift: ::core::option::Option<f64>,
 }
 /// ListMmConfigHistory — 심볼의 설정 스냅샷 히스토리 조회
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1568,7 +1572,7 @@ impl MarketMakingTakeExecutionMethod {
 // MM 설정 스냅샷 히스토리 (MM 시작 시마다 자동 누적, 프리셋과 별개)
 // ============================================================================
 
-/// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" 과 "설정변경" 으로 구분
+/// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" · "설정변경" · "F2M 지정" 으로 구분
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum MmConfigEventType {
@@ -1577,6 +1581,8 @@ pub enum MmConfigEventType {
     Start = 1,
     /// 실행 중 설정 변경(update_config)
     ConfigUpdate = 2,
+    /// F2M 값 직접 지정(FitToMarket 에 f2m_shift 지정, 정지 중 포함). 적용값 = MmConfigSnapshot.f2m_shift
+    F2mSet = 3,
 }
 impl MmConfigEventType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1588,6 +1594,7 @@ impl MmConfigEventType {
             MmConfigEventType::Unspecified => "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
             MmConfigEventType::Start => "MM_CONFIG_EVENT_TYPE_START",
             MmConfigEventType::ConfigUpdate => "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE",
+            MmConfigEventType::F2mSet => "MM_CONFIG_EVENT_TYPE_F2M_SET",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1596,6 +1603,7 @@ impl MmConfigEventType {
             "MM_CONFIG_EVENT_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
             "MM_CONFIG_EVENT_TYPE_START" => Some(Self::Start),
             "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE" => Some(Self::ConfigUpdate),
+            "MM_CONFIG_EVENT_TYPE_F2M_SET" => Some(Self::F2mSet),
             _ => None,
         }
     }

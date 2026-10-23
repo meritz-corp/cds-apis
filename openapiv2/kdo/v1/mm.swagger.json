@@ -2192,11 +2192,12 @@
       "enum": [
         "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
         "MM_CONFIG_EVENT_TYPE_START",
-        "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE"
+        "MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE",
+        "MM_CONFIG_EVENT_TYPE_F2M_SET"
       ],
       "default": "MM_CONFIG_EVENT_TYPE_UNSPECIFIED",
-      "description": "- MM_CONFIG_EVENT_TYPE_START: MM 시작(start_mm)\n - MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE: 실행 중 설정 변경(update_config)",
-      "title": "스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 \"시작\" 과 \"설정변경\" 으로 구분"
+      "description": "- MM_CONFIG_EVENT_TYPE_START: MM 시작(start_mm)\n - MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE: 실행 중 설정 변경(update_config)\n - MM_CONFIG_EVENT_TYPE_F2M_SET: F2M 값 직접 지정(FitToMarket 에 f2m_shift 지정, 정지 중 포함). 적용값 = MmConfigSnapshot.f2m_shift",
+      "title": "스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 \"시작\" · \"설정변경\" · \"F2M 지정\" 으로 구분"
     },
     "mmMmConfigSnapshot": {
       "type": "object",
@@ -2216,7 +2217,7 @@
         },
         "eventType": {
           "$ref": "#/definitions/mmMmConfigEventType",
-          "title": "스냅샷 계기(시작/설정변경). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주"
+          "title": "스냅샷 계기(시작/설정변경/F2M 지정). 구 레코드는 UNSPECIFIED → 소비자가 START 로 간주"
         },
         "fundCode": {
           "type": "string",
@@ -2225,9 +2226,14 @@
         "slotId": {
           "type": "string",
           "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
+        },
+        "f2mShift": {
+          "type": "number",
+          "format": "double",
+          "description": "F2M_SET 일 때 적용된 F2M 값 (원, 소수 허용, 부호 = 방향, clamp 후 — FitToMarketRequest.f2m_shift 와 같은 단위).\n다른 계기는 미설정. config 는 그 시점 설정 그대로다(F2M 은 설정이 아닌 런타임 값)."
         }
       },
-      "title": "MM 시작/설정변경 시점에 저장된 설정 스냅샷"
+      "title": "MM 시작/설정변경/F2M 지정 시점에 저장된 설정 스냅샷"
     },
     "mmMmDailyPnl": {
       "type": "object",

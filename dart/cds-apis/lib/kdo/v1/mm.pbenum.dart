@@ -71,19 +71,21 @@ class MarketMakingTakeExecutionMethod extends $pb.ProtobufEnum {
   const MarketMakingTakeExecutionMethod._(super.value, super.name);
 }
 
-/// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" 과 "설정변경" 으로 구분
+/// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" · "설정변경" · "F2M 지정" 으로 구분
 class MmConfigEventType extends $pb.ProtobufEnum {
   static const MmConfigEventType MM_CONFIG_EVENT_TYPE_UNSPECIFIED = MmConfigEventType._(0, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_UNSPECIFIED');
   static const MmConfigEventType MM_CONFIG_EVENT_TYPE_START = MmConfigEventType._(1, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_START');
   static const MmConfigEventType MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE = MmConfigEventType._(2, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE');
+  static const MmConfigEventType MM_CONFIG_EVENT_TYPE_F2M_SET = MmConfigEventType._(3, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_F2M_SET');
 
   static const $core.List<MmConfigEventType> values = <MmConfigEventType> [
     MM_CONFIG_EVENT_TYPE_UNSPECIFIED,
     MM_CONFIG_EVENT_TYPE_START,
     MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE,
+    MM_CONFIG_EVENT_TYPE_F2M_SET,
   ];
 
-  static final $core.List<MmConfigEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static final $core.List<MmConfigEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 3);
   static MmConfigEventType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const MmConfigEventType._(super.value, super.name);

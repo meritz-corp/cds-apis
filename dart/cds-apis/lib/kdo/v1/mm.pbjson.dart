@@ -68,6 +68,7 @@ const MmConfigEventType$json = {
     {'1': 'MM_CONFIG_EVENT_TYPE_UNSPECIFIED', '2': 0},
     {'1': 'MM_CONFIG_EVENT_TYPE_START', '2': 1},
     {'1': 'MM_CONFIG_EVENT_TYPE_CONFIG_UPDATE', '2': 2},
+    {'1': 'MM_CONFIG_EVENT_TYPE_F2M_SET', '2': 3},
   ],
 };
 
@@ -75,7 +76,7 @@ const MmConfigEventType$json = {
 final $typed_data.Uint8List mmConfigEventTypeDescriptor = $convert.base64Decode(
     'ChFNbUNvbmZpZ0V2ZW50VHlwZRIkCiBNTV9DT05GSUdfRVZFTlRfVFlQRV9VTlNQRUNJRklFRB'
     'AAEh4KGk1NX0NPTkZJR19FVkVOVF9UWVBFX1NUQVJUEAESJgoiTU1fQ09ORklHX0VWRU5UX1RZ'
-    'UEVfQ09ORklHX1VQREFURRAC');
+    'UEVfQ09ORklHX1VQREFURRACEiAKHE1NX0NPTkZJR19FVkVOVF9UWVBFX0YyTV9TRVQQAw==');
 
 @$core.Deprecated('Use marketMakingDescriptor instead')
 const MarketMaking$json = {
@@ -1550,6 +1551,10 @@ const MmConfigSnapshot$json = {
     {'1': 'event_type', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.mm.MmConfigEventType', '10': 'eventType'},
     {'1': 'fund_code', '3': 5, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'slot_id', '3': 6, '4': 1, '5': 9, '10': 'slotId'},
+    {'1': 'f2m_shift', '3': 7, '4': 1, '5': 1, '9': 0, '10': 'f2mShift', '17': true},
+  ],
+  '8': [
+    {'1': '_f2m_shift'},
   ],
 };
 
@@ -1559,7 +1564,8 @@ final $typed_data.Uint8List mmConfigSnapshotDescriptor = $convert.base64Decode(
     'EoCzIkLmtkby52MS5tbS5NYXJrZXRNYWtpbmdDb25maWd1cmF0aW9uUgZjb25maWcSHQoKc3Rh'
     'cnRfdGltZRgDIAEoA1IJc3RhcnRUaW1lEjsKCmV2ZW50X3R5cGUYBCABKA4yHC5rZG8udjEubW'
     '0uTW1Db25maWdFdmVudFR5cGVSCWV2ZW50VHlwZRIbCglmdW5kX2NvZGUYBSABKAlSCGZ1bmRD'
-    'b2RlEhcKB3Nsb3RfaWQYBiABKAlSBnNsb3RJZA==');
+    'b2RlEhcKB3Nsb3RfaWQYBiABKAlSBnNsb3RJZBIgCglmMm1fc2hpZnQYByABKAFIAFIIZjJtU2'
+    'hpZnSIAQFCDAoKX2YybV9zaGlmdA==');
 
 @$core.Deprecated('Use listMmConfigHistoryRequestDescriptor instead')
 const ListMmConfigHistoryRequest$json = {
