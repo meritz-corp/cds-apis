@@ -432,7 +432,7 @@ type MarketMakingConfiguration struct {
 	QtyImbalance *MarketMakingQtyImbalance `protobuf:"bytes,35,opt,name=qty_imbalance,json=qtyImbalance,proto3,oneof" json:"qty_imbalance,omitempty"`
 	// F2M(Fit to Market) 밴드. F2M 평행 skew 를 [lower, upper](원) 안으로 cap 한다 — 괴리 EMA refit 과
 	// FitToMarket 직접 지정 모두. 공식·예시는 MarketMakingF2mBand 주석. Running 중 변경 허용(현재 F2M 도
-	// 바로 새 밴드로 잘린다). 서버 검증: lower <= 0 <= upper.
+	// 바로 새 밴드로 잘린다). 서버 검증: lower <= upper (0 을 포함하지 않아도 된다).
 	// optional: presence 로 "설정 vs 미변경" 구분 (qty_imbalance 와 동일 패턴) — 미설정 시 서버가 기존값 유지.
 	F2MBand *MarketMakingF2MBand `protobuf:"bytes,36,opt,name=f2m_band,json=f2mBand,proto3,oneof" json:"f2m_band,omitempty"`
 }
@@ -2486,12 +2486,15 @@ func (x *MarketMakingQtyImbalance) GetSensitivity() float64 {
 //	F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)
 //
 // 괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.
-// 기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한은 그대로 두고 그 안에서 더 좁힌다 — 밴드가 더 넓으면 안전 상한이 우선.
-// lower <= 0 <= upper 라 0(F2M 미적용·리셋)은 늘 밴드 안이다(cap 만 하고 한쪽으로 미는 편향은 만들지 않는다).
+// 기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한이 우선한다 — 밴드를 그 안으로 잘라 적용하고, 밴드 전체가
+// 안전 상한 밖이면 가까운 안전 상한 경계 값이 된다.
+// 0 을 포함하지 않아도 된다(예: lower 5, upper 20 = F2M 을 늘 +5~+20 안에). 그때는 F2M 이 0 이 되는 순간
+// (MM 등록 직후·Reset·밴드를 켤 때)에도 가까운 경계 값이 된다. lower = upper 면 F2M 이 그 값으로 고정된다
+// (둘 다 0 = F2M 미사용).
 //
 // 예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.
 //
-//	대칭 밴드는 lower = -upper. lower = upper = 0 이면 F2M 을 쓰지 않는 것과 같다.
+//	lower 5, upper 20:   괴리 EMA 0 → F2M +5, +12 → F2M +12, +40 → F2M +20.
 type MarketMakingF2MBand struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2499,9 +2502,9 @@ type MarketMakingF2MBand struct {
 
 	// 사용 여부. false = 안전 상한만 적용(기존 동작).
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// 하한 (원 단위 정수, 0 이하). 양수면 서버가 거부.
+	// 하한 (원 단위 정수). upper 보다 크면 서버가 거부.
 	Lower int64 `protobuf:"varint,2,opt,name=lower,proto3" json:"lower,omitempty"`
-	// 상한 (원 단위 정수, 0 이상). 음수면 서버가 거부.
+	// 상한 (원 단위 정수, lower 이상).
 	Upper int64 `protobuf:"varint,3,opt,name=upper,proto3" json:"upper,omitempty"`
 }
 

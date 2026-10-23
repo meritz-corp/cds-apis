@@ -1659,7 +1659,7 @@
         },
         "f2mBand": {
           "$ref": "#/definitions/mmMarketMakingF2mBand",
-          "description": "F2M(Fit to Market) 밴드. F2M 평행 skew 를 [lower, upper](원) 안으로 cap 한다 — 괴리 EMA refit 과\nFitToMarket 직접 지정 모두. 공식·예시는 MarketMakingF2mBand 주석. Running 중 변경 허용(현재 F2M 도\n바로 새 밴드로 잘린다). 서버 검증: lower \u003c= 0 \u003c= upper.\noptional: presence 로 \"설정 vs 미변경\" 구분 (qty_imbalance 와 동일 패턴) — 미설정 시 서버가 기존값 유지."
+          "description": "F2M(Fit to Market) 밴드. F2M 평행 skew 를 [lower, upper](원) 안으로 cap 한다 — 괴리 EMA refit 과\nFitToMarket 직접 지정 모두. 공식·예시는 MarketMakingF2mBand 주석. Running 중 변경 허용(현재 F2M 도\n바로 새 밴드로 잘린다). 서버 검증: lower \u003c= upper (0 을 포함하지 않아도 된다).\noptional: presence 로 \"설정 vs 미변경\" 구분 (qty_imbalance 와 동일 패턴) — 미설정 시 서버가 기존값 유지."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -1744,15 +1744,15 @@
         "lower": {
           "type": "string",
           "format": "int64",
-          "description": "하한 (원 단위 정수, 0 이하). 양수면 서버가 거부."
+          "description": "하한 (원 단위 정수). upper 보다 크면 서버가 거부."
         },
         "upper": {
           "type": "string",
           "format": "int64",
-          "description": "상한 (원 단위 정수, 0 이상). 음수면 서버가 거부."
+          "description": "상한 (원 단위 정수, lower 이상)."
         }
       },
-      "description": "F2M(Fit to Market) 밴드.\n\nF2M 평행 skew 가 [lower, upper](원)를 벗어나면 가까운 경계 값으로 cap 한다:\n  F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)\n괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.\n기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한은 그대로 두고 그 안에서 더 좁힌다 — 밴드가 더 넓으면 안전 상한이 우선.\nlower \u003c= 0 \u003c= upper 라 0(F2M 미적용·리셋)은 늘 밴드 안이다(cap 만 하고 한쪽으로 미는 편향은 만들지 않는다).\n\n예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.\n  대칭 밴드는 lower = -upper. lower = upper = 0 이면 F2M 을 쓰지 않는 것과 같다."
+      "description": "F2M(Fit to Market) 밴드.\n\nF2M 평행 skew 가 [lower, upper](원)를 벗어나면 가까운 경계 값으로 cap 한다:\n  F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)\n괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.\n기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한이 우선한다 — 밴드를 그 안으로 잘라 적용하고, 밴드 전체가\n안전 상한 밖이면 가까운 안전 상한 경계 값이 된다.\n0 을 포함하지 않아도 된다(예: lower 5, upper 20 = F2M 을 늘 +5~+20 안에). 그때는 F2M 이 0 이 되는 순간\n(MM 등록 직후·Reset·밴드를 켤 때)에도 가까운 경계 값이 된다. lower = upper 면 F2M 이 그 값으로 고정된다\n(둘 다 0 = F2M 미사용).\n\n예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.\n    lower 5, upper 20:   괴리 EMA 0 → F2M +5, +12 → F2M +12, +40 → F2M +20."
     },
     "mmMarketMakingFastLiquidation": {
       "type": "object",
