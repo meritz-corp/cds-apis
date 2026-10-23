@@ -1008,7 +1008,7 @@
                 "f2mShift": {
                   "type": "number",
                   "format": "double",
-                  "description": "지정할 F2M 값 (원, 소수 허용, 부호 = 방향). 지정하면 F2M 평행 skew 를 이 값으로 바로 덮어쓴다.\n기준가의 ±2%(기준가 미상이면 ±2000원)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit\n(f2m_refit_interval_ms \u003e 0)이 켜져 있으면 다음 refit 에 덮인다 — 값을 유지하려면 f2m_refit_interval_ms = 0.\n미지정 = 기존 동작(현재 시장 괴리로 즉시 재정렬)."
+                  "description": "지정할 F2M 값 (원, 소수 허용, 부호 = 방향). 지정하면 F2M 평행 skew 를 이 값으로 바로 덮어쓴다.\n기준가의 ±2%(기준가 미상이면 ±2000원)와 f2m_band(켜져 있으면)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit\n(f2m_refit_interval_ms \u003e 0)이 켜져 있으면 다음 refit 에 덮인다 — 값을 유지하려면 f2m_refit_interval_ms = 0.\n미지정 = 기존 동작(현재 시장 괴리로 즉시 재정렬)."
                 }
               },
               "title": "FitToMarket"
@@ -1656,6 +1656,10 @@
         "qtyImbalance": {
           "$ref": "#/definitions/mmMarketMakingQtyImbalance",
           "description": "잔량 불균형 skew. 구성종목·nav-dep 호가마다 잔량 비중으로 skew 를 내고 NAV 비중만큼 합산해 호가에\n평행 가산한다(NAV pricing 전용 — 다른 pricing 에서 enabled=true 면 서버가 거부).\n켜지면 NAV 입력은 use_qty_weighted_mid 와 무관하게 단순 중간가가 되고, 잔량은 1호가만 본다\n(qty_weighted_mid_levels 와 무관). Running 중 변경 허용(다음 tick 반영). 공식·예시는 MarketMakingQtyImbalance 주석.\noptional: presence 로 \"설정 vs 미변경\" 구분 (loss_limit 과 동일 패턴) — 미설정 시 서버가 기존값 유지."
+        },
+        "f2mBand": {
+          "$ref": "#/definitions/mmMarketMakingF2mBand",
+          "description": "F2M(Fit to Market) 밴드. F2M 평행 skew 를 [lower, upper](원) 안으로 cap 한다 — 괴리 EMA refit 과\nFitToMarket 직접 지정 모두. 공식·예시는 MarketMakingF2mBand 주석. Running 중 변경 허용(현재 F2M 도\n바로 새 밴드로 잘린다). 서버 검증: lower \u003c= 0 \u003c= upper.\noptional: presence 로 \"설정 vs 미변경\" 구분 (qty_imbalance 와 동일 패턴) — 미설정 시 서버가 기존값 유지."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"
@@ -1729,6 +1733,26 @@
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"
+    },
+    "mmMarketMakingF2mBand": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "사용 여부. false = 안전 상한만 적용(기존 동작)."
+        },
+        "lower": {
+          "type": "string",
+          "format": "int64",
+          "description": "하한 (원 단위 정수, 0 이하). 양수면 서버가 거부."
+        },
+        "upper": {
+          "type": "string",
+          "format": "int64",
+          "description": "상한 (원 단위 정수, 0 이상). 음수면 서버가 거부."
+        }
+      },
+      "description": "F2M(Fit to Market) 밴드.\n\nF2M 평행 skew 가 [lower, upper](원)를 벗어나면 가까운 경계 값으로 cap 한다:\n  F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)\n괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.\n기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한은 그대로 두고 그 안에서 더 좁힌다 — 밴드가 더 넓으면 안전 상한이 우선.\nlower \u003c= 0 \u003c= upper 라 0(F2M 미적용·리셋)은 늘 밴드 안이다(cap 만 하고 한쪽으로 미는 편향은 만들지 않는다).\n\n예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.\n  대칭 밴드는 lower = -upper. lower = upper = 0 이면 F2M 을 쓰지 않는 것과 같다."
     },
     "mmMarketMakingFastLiquidation": {
       "type": "object",

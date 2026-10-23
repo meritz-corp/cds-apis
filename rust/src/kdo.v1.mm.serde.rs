@@ -4288,6 +4288,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4390,6 +4393,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.qty_imbalance.as_ref() {
             struct_ser.serialize_field("qty_imbalance", v)?;
         }
+        if let Some(v) = self.f2m_band.as_ref() {
+            struct_ser.serialize_field("f2m_band", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4454,6 +4460,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "qtyWeightedMidImbalanceExponent",
             "qty_imbalance",
             "qtyImbalance",
+            "f2m_band",
+            "f2mBand",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4487,6 +4495,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             QtyWeightedMidImbalanceThresholdPct,
             QtyWeightedMidImbalanceExponent,
             QtyImbalance,
+            F2mBand,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4538,6 +4547,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "qtyWeightedMidImbalanceThresholdPct" | "qty_weighted_mid_imbalance_threshold_pct" => Ok(GeneratedField::QtyWeightedMidImbalanceThresholdPct),
                             "qtyWeightedMidImbalanceExponent" | "qty_weighted_mid_imbalance_exponent" => Ok(GeneratedField::QtyWeightedMidImbalanceExponent),
                             "qtyImbalance" | "qty_imbalance" => Ok(GeneratedField::QtyImbalance),
+                            "f2mBand" | "f2m_band" => Ok(GeneratedField::F2mBand),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4586,6 +4596,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut qty_weighted_mid_imbalance_threshold_pct__ = None;
                 let mut qty_weighted_mid_imbalance_exponent__ = None;
                 let mut qty_imbalance__ = None;
+                let mut f2m_band__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4784,6 +4795,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             qty_imbalance__ = map_.next_value()?;
                         }
+                        GeneratedField::F2mBand => {
+                            if f2m_band__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("f2mBand"));
+                            }
+                            f2m_band__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4819,6 +4836,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     qty_weighted_mid_imbalance_threshold_pct: qty_weighted_mid_imbalance_threshold_pct__,
                     qty_weighted_mid_imbalance_exponent: qty_weighted_mid_imbalance_exponent__,
                     qty_imbalance: qty_imbalance__,
+                    f2m_band: f2m_band__,
                 })
             }
         }
@@ -5212,6 +5230,143 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingF2mBand {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingF2mBand", len)?;
+        if true {
+            struct_ser.serialize_field("enabled", &self.enabled)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("lower", ToString::to_string(&self.lower).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("upper", ToString::to_string(&self.upper).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingF2mBand {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "enabled",
+            "lower",
+            "upper",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Enabled,
+            Lower,
+            Upper,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "enabled" => Ok(GeneratedField::Enabled),
+                            "lower" => Ok(GeneratedField::Lower),
+                            "upper" => Ok(GeneratedField::Upper),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingF2mBand;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.mm.MarketMakingF2mBand")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<MarketMakingF2mBand, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut enabled__ = None;
+                let mut lower__ = None;
+                let mut upper__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Enabled => {
+                            if enabled__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("enabled"));
+                            }
+                            enabled__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Lower => {
+                            if lower__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lower"));
+                            }
+                            lower__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Upper => {
+                            if upper__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("upper"));
+                            }
+                            upper__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(MarketMakingF2mBand {
+                    enabled: enabled__.unwrap_or_default(),
+                    lower: lower__.unwrap_or_default(),
+                    upper: upper__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.mm.MarketMakingF2mBand", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingFastLiquidation {

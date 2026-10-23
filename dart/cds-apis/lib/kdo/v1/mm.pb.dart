@@ -172,6 +172,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   @$core.Deprecated('This field is deprecated.')
     $core.double? qtyWeightedMidImbalanceExponent,
     MarketMakingQtyImbalance? qtyImbalance,
+    MarketMakingF2mBand? f2mBand,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -203,6 +204,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (qtyWeightedMidImbalanceThresholdPct != null) result.qtyWeightedMidImbalanceThresholdPct = qtyWeightedMidImbalanceThresholdPct;
     if (qtyWeightedMidImbalanceExponent != null) result.qtyWeightedMidImbalanceExponent = qtyWeightedMidImbalanceExponent;
     if (qtyImbalance != null) result.qtyImbalance = qtyImbalance;
+    if (f2mBand != null) result.f2mBand = f2mBand;
     return result;
   }
 
@@ -241,6 +243,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$core.double>(33, _omitFieldNames ? '' : 'qtyWeightedMidImbalanceThresholdPct', $pb.PbFieldType.OD)
     ..a<$core.double>(34, _omitFieldNames ? '' : 'qtyWeightedMidImbalanceExponent', $pb.PbFieldType.OD)
     ..aOM<MarketMakingQtyImbalance>(35, _omitFieldNames ? '' : 'qtyImbalance', subBuilder: MarketMakingQtyImbalance.create)
+    ..aOM<MarketMakingF2mBand>(36, _omitFieldNames ? '' : 'f2mBand', subBuilder: MarketMakingF2mBand.create)
     ..hasRequiredFields = false
   ;
 
@@ -627,6 +630,21 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearQtyImbalance() => $_clearField(35);
   @$pb.TagNumber(35)
   MarketMakingQtyImbalance ensureQtyImbalance() => $_ensure(28);
+
+  /// F2M(Fit to Market) 밴드. F2M 평행 skew 를 [lower, upper](원) 안으로 cap 한다 — 괴리 EMA refit 과
+  /// FitToMarket 직접 지정 모두. 공식·예시는 MarketMakingF2mBand 주석. Running 중 변경 허용(현재 F2M 도
+  /// 바로 새 밴드로 잘린다). 서버 검증: lower <= 0 <= upper.
+  /// optional: presence 로 "설정 vs 미변경" 구분 (qty_imbalance 와 동일 패턴) — 미설정 시 서버가 기존값 유지.
+  @$pb.TagNumber(36)
+  MarketMakingF2mBand get f2mBand => $_getN(29);
+  @$pb.TagNumber(36)
+  set f2mBand(MarketMakingF2mBand value) => $_setField(36, value);
+  @$pb.TagNumber(36)
+  $core.bool hasF2mBand() => $_has(29);
+  @$pb.TagNumber(36)
+  void clearF2mBand() => $_clearField(36);
+  @$pb.TagNumber(36)
+  MarketMakingF2mBand ensureF2mBand() => $_ensure(29);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -2592,6 +2610,89 @@ class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
   $core.bool hasSensitivity() => $_has(2);
   @$pb.TagNumber(3)
   void clearSensitivity() => $_clearField(3);
+}
+
+/// F2M(Fit to Market) 밴드.
+///
+/// F2M 평행 skew 가 [lower, upper](원)를 벗어나면 가까운 경계 값으로 cap 한다:
+///   F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)
+/// 괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.
+/// 기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한은 그대로 두고 그 안에서 더 좁힌다 — 밴드가 더 넓으면 안전 상한이 우선.
+/// lower <= 0 <= upper 라 0(F2M 미적용·리셋)은 늘 밴드 안이다(cap 만 하고 한쪽으로 미는 편향은 만들지 않는다).
+///
+/// 예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.
+///   대칭 밴드는 lower = -upper. lower = upper = 0 이면 F2M 을 쓰지 않는 것과 같다.
+class MarketMakingF2mBand extends $pb.GeneratedMessage {
+  factory MarketMakingF2mBand({
+    $core.bool? enabled,
+    $fixnum.Int64? lower,
+    $fixnum.Int64? upper,
+  }) {
+    final result = create();
+    if (enabled != null) result.enabled = enabled;
+    if (lower != null) result.lower = lower;
+    if (upper != null) result.upper = upper;
+    return result;
+  }
+
+  MarketMakingF2mBand._();
+
+  factory MarketMakingF2mBand.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory MarketMakingF2mBand.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MarketMakingF2mBand', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.mm'), createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'enabled')
+    ..aInt64(2, _omitFieldNames ? '' : 'lower')
+    ..aInt64(3, _omitFieldNames ? '' : 'upper')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingF2mBand clone() => MarketMakingF2mBand()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  MarketMakingF2mBand copyWith(void Function(MarketMakingF2mBand) updates) => super.copyWith((message) => updates(message as MarketMakingF2mBand)) as MarketMakingF2mBand;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingF2mBand create() => MarketMakingF2mBand._();
+  @$core.override
+  MarketMakingF2mBand createEmptyInstance() => create();
+  static $pb.PbList<MarketMakingF2mBand> createRepeated() => $pb.PbList<MarketMakingF2mBand>();
+  @$core.pragma('dart2js:noInline')
+  static MarketMakingF2mBand getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MarketMakingF2mBand>(create);
+  static MarketMakingF2mBand? _defaultInstance;
+
+  /// 사용 여부. false = 안전 상한만 적용(기존 동작).
+  @$pb.TagNumber(1)
+  $core.bool get enabled => $_getBF(0);
+  @$pb.TagNumber(1)
+  set enabled($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEnabled() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEnabled() => $_clearField(1);
+
+  /// 하한 (원 단위 정수, 0 이하). 양수면 서버가 거부.
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get lower => $_getI64(1);
+  @$pb.TagNumber(2)
+  set lower($fixnum.Int64 value) => $_setInt64(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasLower() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLower() => $_clearField(2);
+
+  /// 상한 (원 단위 정수, 0 이상). 음수면 서버가 거부.
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get upper => $_getI64(2);
+  @$pb.TagNumber(3)
+  set upper($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasUpper() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpper() => $_clearField(3);
 }
 
 /// ListMarketMaking
@@ -6071,7 +6172,7 @@ class FitToMarketRequest extends $pb.GeneratedMessage {
   void clearSlotId() => $_clearField(3);
 
   /// 지정할 F2M 값 (원, 소수 허용, 부호 = 방향). 지정하면 F2M 평행 skew 를 이 값으로 바로 덮어쓴다.
-  /// 기준가의 ±2%(기준가 미상이면 ±2000원)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit
+  /// 기준가의 ±2%(기준가 미상이면 ±2000원)와 f2m_band(켜져 있으면)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit
   /// (f2m_refit_interval_ms > 0)이 켜져 있으면 다음 refit 에 덮인다 — 값을 유지하려면 f2m_refit_interval_ms = 0.
   /// 미지정 = 기존 동작(현재 시장 괴리로 즉시 재정렬).
   @$pb.TagNumber(4)

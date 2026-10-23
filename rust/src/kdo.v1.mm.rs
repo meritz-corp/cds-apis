@@ -158,6 +158,12 @@ pub struct MarketMakingConfiguration {
     /// optional: presence 로 "설정 vs 미변경" 구분 (loss_limit 과 동일 패턴) — 미설정 시 서버가 기존값 유지.
     #[prost(message, optional, tag="35")]
     pub qty_imbalance: ::core::option::Option<MarketMakingQtyImbalance>,
+    /// F2M(Fit to Market) 밴드. F2M 평행 skew 를 [lower, upper](원) 안으로 cap 한다 — 괴리 EMA refit 과
+    /// FitToMarket 직접 지정 모두. 공식·예시는 MarketMakingF2mBand 주석. Running 중 변경 허용(현재 F2M 도
+    /// 바로 새 밴드로 잘린다). 서버 검증: lower <= 0 <= upper.
+    /// optional: presence 로 "설정 vs 미변경" 구분 (qty_imbalance 와 동일 패턴) — 미설정 시 서버가 기존값 유지.
+    #[prost(message, optional, tag="36")]
+    pub f2m_band: ::core::option::Option<MarketMakingF2mBand>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -601,6 +607,29 @@ pub struct MarketMakingQtyImbalance {
     /// 민감도 (0~1). 0 = linear, 1 = 계단, 사이 값은 위 거듭제곱 곡선. 범위 밖·NaN 은 서버가 거부.
     #[prost(double, tag="3")]
     pub sensitivity: f64,
+}
+/// F2M(Fit to Market) 밴드.
+///
+/// F2M 평행 skew 가 [lower, upper](원)를 벗어나면 가까운 경계 값으로 cap 한다:
+///    F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)
+/// 괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.
+/// 기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한은 그대로 두고 그 안에서 더 좁힌다 — 밴드가 더 넓으면 안전 상한이 우선.
+/// lower <= 0 <= upper 라 0(F2M 미적용·리셋)은 늘 밴드 안이다(cap 만 하고 한쪽으로 미는 편향은 만들지 않는다).
+///
+/// 예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.
+///    대칭 밴드는 lower = -upper. lower = upper = 0 이면 F2M 을 쓰지 않는 것과 같다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct MarketMakingF2mBand {
+    /// 사용 여부. false = 안전 상한만 적용(기존 동작).
+    #[prost(bool, tag="1")]
+    pub enabled: bool,
+    /// 하한 (원 단위 정수, 0 이하). 양수면 서버가 거부.
+    #[prost(int64, tag="2")]
+    pub lower: i64,
+    /// 상한 (원 단위 정수, 0 이상). 음수면 서버가 거부.
+    #[prost(int64, tag="3")]
+    pub upper: i64,
 }
 // ============================================================================
 // Request/Response Messages
@@ -1300,7 +1329,7 @@ pub struct FitToMarketRequest {
     #[prost(string, tag="3")]
     pub slot_id: ::prost::alloc::string::String,
     /// 지정할 F2M 값 (원, 소수 허용, 부호 = 방향). 지정하면 F2M 평행 skew 를 이 값으로 바로 덮어쓴다.
-    /// 기준가의 ±2%(기준가 미상이면 ±2000원)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit
+    /// 기준가의 ±2%(기준가 미상이면 ±2000원)와 f2m_band(켜져 있으면)로 clamp 된다. 괴리 EMA 는 건드리지 않으므로 주기적 refit
     /// (f2m_refit_interval_ms > 0)이 켜져 있으면 다음 refit 에 덮인다 — 값을 유지하려면 f2m_refit_interval_ms = 0.
     /// 미지정 = 기존 동작(현재 시장 괴리로 즉시 재정렬).
     #[prost(double, optional, tag="4")]

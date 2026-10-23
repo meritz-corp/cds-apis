@@ -159,6 +159,7 @@ const MarketMakingConfiguration$json = {
       '17': true,
     },
     {'1': 'qty_imbalance', '3': 35, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQtyImbalance', '9': 14, '10': 'qtyImbalance', '17': true},
+    {'1': 'f2m_band', '3': 36, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingF2mBand', '9': 15, '10': 'f2mBand', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -176,6 +177,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_qty_weighted_mid_imbalance_threshold_pct'},
     {'1': '_qty_weighted_mid_imbalance_exponent'},
     {'1': '_qty_imbalance'},
+    {'1': '_f2m_band'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -223,15 +225,16 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'ZFBjdIgBARJVCiNxdHlfd2VpZ2h0ZWRfbWlkX2ltYmFsYW5jZV9leHBvbmVudBgiIAEoAUICGA'
     'FIDVIfcXR5V2VpZ2h0ZWRNaWRJbWJhbGFuY2VFeHBvbmVudIgBARJNCg1xdHlfaW1iYWxhbmNl'
     'GCMgASgLMiMua2RvLnYxLm1tLk1hcmtldE1ha2luZ1F0eUltYmFsYW5jZUgOUgxxdHlJbWJhbG'
-    'FuY2WIAQFCCAoGX2Jhc2lzQhoKGF9mMm1fcmVmaXRfaW50ZXJ2YWxfc2Vjc0IVChNfZjJtX21h'
-    'X3dpbmRvd19zZWNzQgwKCl90YWtlX21vZGVCCAoGX2lzX2xwQhcKFV91c2VfcXR5X3dlaWdodG'
-    'VkX21pZEIZChdfZjJtX3NhbXBsZV9pbnRlcnZhbF9tc0IaChhfcXR5X3dlaWdodGVkX21pZF9s'
-    'ZXZlbHNCEwoRX2Zhc3RfbGlxdWlkYXRpb25CEQoPX3Rha2VfZXhlY3V0aW9uQg0KC19sb3NzX2'
-    'xpbWl0QhgKFl9mMm1fcmVmaXRfaW50ZXJ2YWxfbXNCKwopX3F0eV93ZWlnaHRlZF9taWRfaW1i'
-    'YWxhbmNlX3RocmVzaG9sZF9wY3RCJgokX3F0eV93ZWlnaHRlZF9taWRfaW1iYWxhbmNlX2V4cG'
-    '9uZW50QhAKDl9xdHlfaW1iYWxhbmNlSgQIBxAISgQICBAJSgQICxAMSgQIDBANSgQIDRAOSgQI'
-    'DhAPUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJYXNrX2Jhc2'
-    'lzUgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
+    'FuY2WIAQESPgoIZjJtX2JhbmQYJCABKAsyHi5rZG8udjEubW0uTWFya2V0TWFraW5nRjJtQmFu'
+    'ZEgPUgdmMm1CYW5kiAEBQggKBl9iYXNpc0IaChhfZjJtX3JlZml0X2ludGVydmFsX3NlY3NCFQ'
+    'oTX2YybV9tYV93aW5kb3dfc2Vjc0IMCgpfdGFrZV9tb2RlQggKBl9pc19scEIXChVfdXNlX3F0'
+    'eV93ZWlnaHRlZF9taWRCGQoXX2YybV9zYW1wbGVfaW50ZXJ2YWxfbXNCGgoYX3F0eV93ZWlnaH'
+    'RlZF9taWRfbGV2ZWxzQhMKEV9mYXN0X2xpcXVpZGF0aW9uQhEKD190YWtlX2V4ZWN1dGlvbkIN'
+    'CgtfbG9zc19saW1pdEIYChZfZjJtX3JlZml0X2ludGVydmFsX21zQisKKV9xdHlfd2VpZ2h0ZW'
+    'RfbWlkX2ltYmFsYW5jZV90aHJlc2hvbGRfcGN0QiYKJF9xdHlfd2VpZ2h0ZWRfbWlkX2ltYmFs'
+    'YW5jZV9leHBvbmVudEIQCg5fcXR5X2ltYmFsYW5jZUILCglfZjJtX2JhbmRKBAgHEAhKBAgIEA'
+    'lKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9hZGp1c3RtZW50Ug5hc2tfYWRqdXN0bWVu'
+    'dFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZmZzZXRSCmFza19vZmZzZXQ=');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -652,6 +655,21 @@ final $typed_data.Uint8List marketMakingQtyImbalanceDescriptor = $convert.base64
     'ChhNYXJrZXRNYWtpbmdRdHlJbWJhbGFuY2USGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZBIjCg'
     '10aHJlc2hvbGRfcGN0GAIgASgBUgx0aHJlc2hvbGRQY3QSIAoLc2Vuc2l0aXZpdHkYAyABKAFS'
     'C3NlbnNpdGl2aXR5');
+
+@$core.Deprecated('Use marketMakingF2mBandDescriptor instead')
+const MarketMakingF2mBand$json = {
+  '1': 'MarketMakingF2mBand',
+  '2': [
+    {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
+    {'1': 'lower', '3': 2, '4': 1, '5': 3, '10': 'lower'},
+    {'1': 'upper', '3': 3, '4': 1, '5': 3, '10': 'upper'},
+  ],
+};
+
+/// Descriptor for `MarketMakingF2mBand`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List marketMakingF2mBandDescriptor = $convert.base64Decode(
+    'ChNNYXJrZXRNYWtpbmdGMm1CYW5kEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSFAoFbG93ZX'
+    'IYAiABKANSBWxvd2VyEhQKBXVwcGVyGAMgASgDUgV1cHBlcg==');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {
