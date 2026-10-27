@@ -1660,6 +1660,11 @@
         "f2mBand": {
           "$ref": "#/definitions/mmMarketMakingF2mBand",
           "description": "F2M(Fit to Market) 밴드. F2M 평행 skew 를 [lower, upper](원) 안으로 cap 한다 — 괴리 EMA refit 과\nFitToMarket 직접 지정 모두. 공식·예시는 MarketMakingF2mBand 주석. Running 중 변경 허용(현재 F2M 도\n바로 새 밴드로 잘린다). 서버 검증: lower \u003c= upper (0 을 포함하지 않아도 된다).\noptional: presence 로 \"설정 vs 미변경\" 구분 (qty_imbalance 와 동일 패턴) — 미설정 시 서버가 기존값 유지."
+        },
+        "version": {
+          "type": "string",
+          "format": "uint64",
+          "description": "설정 버전 (낙관적 동시성 제어 — 다른 사람이 먼저 바꾼 설정을 모르고 덮어쓰는 실수 방지).\n서버가 이 MM 설정을 저장할 때마다 1씩 올린다(UpdateMarketMaking·UpdateMarketMakingConfig·config 를 실은\nStartMarketMaking·ApplyMmPreset). 응답(Get/ListMarketMaking·UpdateMarketMaking·UpdateMarketMakingConfig·\nApplyMmPreset)에는 현재 저장 버전이 채워진다. MmPreset·MmConfigSnapshot 의 config 에는 채우지 않는다.\n요청에 조회로 받은 version 을 그대로 실으면, 그 사이 다른 저장으로 버전이 바뀐 경우 서버가 저장하지 않고\nABORTED 로 거부한다(이 서비스에서 ABORTED 는 버전 충돌 전용). 클라이언트는 GetMarketMaking 으로 최신 설정과\nversion 을 다시 받아 그 설정 위에서 다시 수정해 저장한다 — version 만 바꿔 예전 값을 다시 보내면 덮어쓰기가 된다.\noptional: 미설정 = 버전 검사 없이 저장(구 클라이언트 호환)."
         }
       },
       "title": "MM 엔진 설정 (MmConfig 대응)"

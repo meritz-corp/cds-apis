@@ -160,6 +160,7 @@ const MarketMakingConfiguration$json = {
     },
     {'1': 'qty_imbalance', '3': 35, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQtyImbalance', '9': 14, '10': 'qtyImbalance', '17': true},
     {'1': 'f2m_band', '3': 36, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingF2mBand', '9': 15, '10': 'f2mBand', '17': true},
+    {'1': 'version', '3': 37, '4': 1, '5': 4, '9': 16, '10': 'version', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -178,6 +179,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_qty_weighted_mid_imbalance_exponent'},
     {'1': '_qty_imbalance'},
     {'1': '_f2m_band'},
+    {'1': '_version'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -226,15 +228,16 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'FIDVIfcXR5V2VpZ2h0ZWRNaWRJbWJhbGFuY2VFeHBvbmVudIgBARJNCg1xdHlfaW1iYWxhbmNl'
     'GCMgASgLMiMua2RvLnYxLm1tLk1hcmtldE1ha2luZ1F0eUltYmFsYW5jZUgOUgxxdHlJbWJhbG'
     'FuY2WIAQESPgoIZjJtX2JhbmQYJCABKAsyHi5rZG8udjEubW0uTWFya2V0TWFraW5nRjJtQmFu'
-    'ZEgPUgdmMm1CYW5kiAEBQggKBl9iYXNpc0IaChhfZjJtX3JlZml0X2ludGVydmFsX3NlY3NCFQ'
-    'oTX2YybV9tYV93aW5kb3dfc2Vjc0IMCgpfdGFrZV9tb2RlQggKBl9pc19scEIXChVfdXNlX3F0'
-    'eV93ZWlnaHRlZF9taWRCGQoXX2YybV9zYW1wbGVfaW50ZXJ2YWxfbXNCGgoYX3F0eV93ZWlnaH'
-    'RlZF9taWRfbGV2ZWxzQhMKEV9mYXN0X2xpcXVpZGF0aW9uQhEKD190YWtlX2V4ZWN1dGlvbkIN'
-    'CgtfbG9zc19saW1pdEIYChZfZjJtX3JlZml0X2ludGVydmFsX21zQisKKV9xdHlfd2VpZ2h0ZW'
-    'RfbWlkX2ltYmFsYW5jZV90aHJlc2hvbGRfcGN0QiYKJF9xdHlfd2VpZ2h0ZWRfbWlkX2ltYmFs'
-    'YW5jZV9leHBvbmVudEIQCg5fcXR5X2ltYmFsYW5jZUILCglfZjJtX2JhbmRKBAgHEAhKBAgIEA'
-    'lKBAgLEAxKBAgMEA1KBAgNEA5KBAgOEA9SDmJpZF9hZGp1c3RtZW50Ug5hc2tfYWRqdXN0bWVu'
-    'dFIJYmlkX2Jhc2lzUglhc2tfYmFzaXNSCmJpZF9vZmZzZXRSCmFza19vZmZzZXQ=');
+    'ZEgPUgdmMm1CYW5kiAEBEh0KB3ZlcnNpb24YJSABKARIEFIHdmVyc2lvbogBAUIICgZfYmFzaX'
+    'NCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3NCDAoK'
+    'X3Rha2VfbW9kZUIICgZfaXNfbHBCFwoVX3VzZV9xdHlfd2VpZ2h0ZWRfbWlkQhkKF19mMm1fc2'
+    'FtcGxlX2ludGVydmFsX21zQhoKGF9xdHlfd2VpZ2h0ZWRfbWlkX2xldmVsc0ITChFfZmFzdF9s'
+    'aXF1aWRhdGlvbkIRCg9fdGFrZV9leGVjdXRpb25CDQoLX2xvc3NfbGltaXRCGAoWX2YybV9yZW'
+    'ZpdF9pbnRlcnZhbF9tc0IrCilfcXR5X3dlaWdodGVkX21pZF9pbWJhbGFuY2VfdGhyZXNob2xk'
+    'X3BjdEImCiRfcXR5X3dlaWdodGVkX21pZF9pbWJhbGFuY2VfZXhwb25lbnRCEAoOX3F0eV9pbW'
+    'JhbGFuY2VCCwoJX2YybV9iYW5kQgoKCF92ZXJzaW9uSgQIBxAISgQICBAJSgQICxAMSgQIDBAN'
+    'SgQIDRAOSgQIDhAPUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1'
+    'IJYXNrX2Jhc2lzUgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {

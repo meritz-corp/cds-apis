@@ -173,6 +173,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     $core.double? qtyWeightedMidImbalanceExponent,
     MarketMakingQtyImbalance? qtyImbalance,
     MarketMakingF2mBand? f2mBand,
+    $fixnum.Int64? version,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -205,6 +206,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (qtyWeightedMidImbalanceExponent != null) result.qtyWeightedMidImbalanceExponent = qtyWeightedMidImbalanceExponent;
     if (qtyImbalance != null) result.qtyImbalance = qtyImbalance;
     if (f2mBand != null) result.f2mBand = f2mBand;
+    if (version != null) result.version = version;
     return result;
   }
 
@@ -244,6 +246,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..a<$core.double>(34, _omitFieldNames ? '' : 'qtyWeightedMidImbalanceExponent', $pb.PbFieldType.OD)
     ..aOM<MarketMakingQtyImbalance>(35, _omitFieldNames ? '' : 'qtyImbalance', subBuilder: MarketMakingQtyImbalance.create)
     ..aOM<MarketMakingF2mBand>(36, _omitFieldNames ? '' : 'f2mBand', subBuilder: MarketMakingF2mBand.create)
+    ..a<$fixnum.Int64>(37, _omitFieldNames ? '' : 'version', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -645,6 +648,23 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   void clearF2mBand() => $_clearField(36);
   @$pb.TagNumber(36)
   MarketMakingF2mBand ensureF2mBand() => $_ensure(29);
+
+  /// 설정 버전 (낙관적 동시성 제어 — 다른 사람이 먼저 바꾼 설정을 모르고 덮어쓰는 실수 방지).
+  /// 서버가 이 MM 설정을 저장할 때마다 1씩 올린다(UpdateMarketMaking·UpdateMarketMakingConfig·config 를 실은
+  /// StartMarketMaking·ApplyMmPreset). 응답(Get/ListMarketMaking·UpdateMarketMaking·UpdateMarketMakingConfig·
+  /// ApplyMmPreset)에는 현재 저장 버전이 채워진다. MmPreset·MmConfigSnapshot 의 config 에는 채우지 않는다.
+  /// 요청에 조회로 받은 version 을 그대로 실으면, 그 사이 다른 저장으로 버전이 바뀐 경우 서버가 저장하지 않고
+  /// ABORTED 로 거부한다(이 서비스에서 ABORTED 는 버전 충돌 전용). 클라이언트는 GetMarketMaking 으로 최신 설정과
+  /// version 을 다시 받아 그 설정 위에서 다시 수정해 저장한다 — version 만 바꿔 예전 값을 다시 보내면 덮어쓰기가 된다.
+  /// optional: 미설정 = 버전 검사 없이 저장(구 클라이언트 호환).
+  @$pb.TagNumber(37)
+  $fixnum.Int64 get version => $_getI64(30);
+  @$pb.TagNumber(37)
+  set version($fixnum.Int64 value) => $_setInt64(30, value);
+  @$pb.TagNumber(37)
+  $core.bool hasVersion() => $_has(30);
+  @$pb.TagNumber(37)
+  void clearVersion() => $_clearField(37);
 }
 
 enum MarketMakingPricing_Pricing {

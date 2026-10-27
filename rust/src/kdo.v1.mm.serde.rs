@@ -4291,6 +4291,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4396,6 +4399,11 @@ impl serde::Serialize for MarketMakingConfiguration {
         if let Some(v) = self.f2m_band.as_ref() {
             struct_ser.serialize_field("f2m_band", v)?;
         }
+        if let Some(v) = self.version.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("version", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -4462,6 +4470,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "qtyImbalance",
             "f2m_band",
             "f2mBand",
+            "version",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4496,6 +4505,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             QtyWeightedMidImbalanceExponent,
             QtyImbalance,
             F2mBand,
+            Version,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4548,6 +4558,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "qtyWeightedMidImbalanceExponent" | "qty_weighted_mid_imbalance_exponent" => Ok(GeneratedField::QtyWeightedMidImbalanceExponent),
                             "qtyImbalance" | "qty_imbalance" => Ok(GeneratedField::QtyImbalance),
                             "f2mBand" | "f2m_band" => Ok(GeneratedField::F2mBand),
+                            "version" => Ok(GeneratedField::Version),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4597,6 +4608,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut qty_weighted_mid_imbalance_exponent__ = None;
                 let mut qty_imbalance__ = None;
                 let mut f2m_band__ = None;
+                let mut version__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4801,6 +4813,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             }
                             f2m_band__ = map_.next_value()?;
                         }
+                        GeneratedField::Version => {
+                            if version__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("version"));
+                            }
+                            version__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4837,6 +4857,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     qty_weighted_mid_imbalance_exponent: qty_weighted_mid_imbalance_exponent__,
                     qty_imbalance: qty_imbalance__,
                     f2m_band: f2m_band__,
+                    version: version__,
                 })
             }
         }
