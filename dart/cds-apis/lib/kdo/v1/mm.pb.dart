@@ -2278,6 +2278,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     $fixnum.Int64? limitQuantity,
     $core.double? opportunisticTriggerUnit,
     $fixnum.Int64? opportunisticTriggerQuantity,
+    $core.bool? priceSkewSameSideOnly,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -2287,6 +2288,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     if (limitQuantity != null) result.limitQuantity = limitQuantity;
     if (opportunisticTriggerUnit != null) result.opportunisticTriggerUnit = opportunisticTriggerUnit;
     if (opportunisticTriggerQuantity != null) result.opportunisticTriggerQuantity = opportunisticTriggerQuantity;
+    if (priceSkewSameSideOnly != null) result.priceSkewSameSideOnly = priceSkewSameSideOnly;
     return result;
   }
 
@@ -2303,6 +2305,7 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'limitQuantity')
     ..a<$core.double>(9, _omitFieldNames ? '' : 'opportunisticTriggerUnit', $pb.PbFieldType.OD)
     ..aInt64(10, _omitFieldNames ? '' : 'opportunisticTriggerQuantity')
+    ..aOB(11, _omitFieldNames ? '' : 'priceSkewSameSideOnly')
     ..hasRequiredFields = false
   ;
 
@@ -2396,6 +2399,17 @@ class MarketMakingExposureBalancer extends $pb.GeneratedMessage {
   $core.bool hasOpportunisticTriggerQuantity() => $_has(6);
   @$pb.TagNumber(10)
   void clearOpportunisticTriggerQuantity() => $_clearField(10);
+
+  /// true 면 exposure 가격 skew 를 노출을 늘리는 쪽 호가에만 적용한다 — 순매도(shift +)면 ask 만 올리고,
+  /// 순매수(shift −)면 bid 만 내린다. false(기본) = 기존처럼 bid·ask 평행이동.
+  @$pb.TagNumber(11)
+  $core.bool get priceSkewSameSideOnly => $_getBF(7);
+  @$pb.TagNumber(11)
+  set priceSkewSameSideOnly($core.bool value) => $_setBool(7, value);
+  @$pb.TagNumber(11)
+  $core.bool hasPriceSkewSameSideOnly() => $_has(7);
+  @$pb.TagNumber(11)
+  void clearPriceSkewSameSideOnly() => $_clearField(11);
 }
 
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)

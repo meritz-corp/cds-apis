@@ -1735,6 +1735,10 @@
           "type": "string",
           "format": "int64",
           "description": "opportunistic close 발동 최소 순노출 수량 (주). |net_exposure| 가 이 값 미만이면 기회 청산을\n발사하지 않는다(게이트 — 증량하지 않는다). 0(기본) = 임계 없음.\n같은 메시지의 trigger_quantity(수량 축소·가격 스큐 임계)와는 무관한 별도 값이다."
+        },
+        "priceSkewSameSideOnly": {
+          "type": "boolean",
+          "description": "true 면 exposure 가격 skew 를 노출을 늘리는 쪽 호가에만 적용한다 — 순매도(shift +)면 ask 만 올리고,\n순매수(shift −)면 bid 만 내린다. false(기본) = 기존처럼 bid·ask 평행이동."
         }
       },
       "title": "통합 포지션 관리 설정 (soft rebalance + hard limit)"

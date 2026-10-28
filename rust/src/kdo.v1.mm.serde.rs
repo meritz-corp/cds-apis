@@ -5063,6 +5063,9 @@ impl serde::Serialize for MarketMakingExposureBalancer {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingExposureBalancer", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -5091,6 +5094,9 @@ impl serde::Serialize for MarketMakingExposureBalancer {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("opportunistic_trigger_quantity", ToString::to_string(&self.opportunistic_trigger_quantity).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("price_skew_same_side_only", &self.price_skew_same_side_only)?;
+        }
         struct_ser.end()
     }
 }
@@ -5114,6 +5120,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             "opportunisticTriggerUnit",
             "opportunistic_trigger_quantity",
             "opportunisticTriggerQuantity",
+            "price_skew_same_side_only",
+            "priceSkewSameSideOnly",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5125,6 +5133,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
             LimitQuantity,
             OpportunisticTriggerUnit,
             OpportunisticTriggerQuantity,
+            PriceSkewSameSideOnly,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5154,6 +5163,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                             "limitQuantity" | "limit_quantity" => Ok(GeneratedField::LimitQuantity),
                             "opportunisticTriggerUnit" | "opportunistic_trigger_unit" => Ok(GeneratedField::OpportunisticTriggerUnit),
                             "opportunisticTriggerQuantity" | "opportunistic_trigger_quantity" => Ok(GeneratedField::OpportunisticTriggerQuantity),
+                            "priceSkewSameSideOnly" | "price_skew_same_side_only" => Ok(GeneratedField::PriceSkewSameSideOnly),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5180,6 +5190,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                 let mut limit_quantity__ = None;
                 let mut opportunistic_trigger_unit__ = None;
                 let mut opportunistic_trigger_quantity__ = None;
+                let mut price_skew_same_side_only__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -5234,6 +5245,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PriceSkewSameSideOnly => {
+                            if price_skew_same_side_only__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priceSkewSameSideOnly"));
+                            }
+                            price_skew_same_side_only__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5247,6 +5264,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingExposureBalancer {
                     limit_quantity: limit_quantity__.unwrap_or_default(),
                     opportunistic_trigger_unit: opportunistic_trigger_unit__.unwrap_or_default(),
                     opportunistic_trigger_quantity: opportunistic_trigger_quantity__.unwrap_or_default(),
+                    price_skew_same_side_only: price_skew_same_side_only__.unwrap_or_default(),
                 })
             }
         }

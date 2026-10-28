@@ -551,6 +551,10 @@ pub struct MarketMakingExposureBalancer {
     /// 같은 메시지의 trigger_quantity(수량 축소·가격 스큐 임계)와는 무관한 별도 값이다.
     #[prost(int64, tag="10")]
     pub opportunistic_trigger_quantity: i64,
+    /// true 면 exposure 가격 skew 를 노출을 늘리는 쪽 호가에만 적용한다 — 순매도(shift +)면 ask 만 올리고,
+    /// 순매수(shift −)면 bid 만 내린다. false(기본) = 기존처럼 bid·ask 평행이동.
+    #[prost(bool, tag="11")]
+    pub price_skew_same_side_only: bool,
 }
 /// 순포지션 수량 한도 설정 (방향별 호가 차단)
 #[allow(clippy::derive_partial_eq_without_eq)]
