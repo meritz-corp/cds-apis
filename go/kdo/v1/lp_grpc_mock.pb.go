@@ -761,26 +761,6 @@ func (m *MockLpServiceClient) EXPECT() *MockLpServiceClientMockRecorder {
 	return m.recorder
 }
 
-// ClearReservation mocks base method.
-func (m *MockLpServiceClient) ClearReservation(ctx context.Context, in *ClearReservationRequest, opts ...grpc.CallOption) (*ClearReservationResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ClearReservation", varargs...)
-	ret0, _ := ret[0].(*ClearReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ClearReservation indicates an expected call of ClearReservation.
-func (mr *MockLpServiceClientMockRecorder) ClearReservation(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClearReservation", reflect.TypeOf((*MockLpServiceClient)(nil).ClearReservation), varargs...)
-}
-
 // ClearUserOrderBook mocks base method.
 func (m *MockLpServiceClient) ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest, opts ...grpc.CallOption) (*ClearUserOrderBookResponse, error) {
 	m.ctrl.T.Helper()
@@ -861,26 +841,6 @@ func (mr *MockLpServiceClientMockRecorder) GetEtfLpStatus(ctx, in interface{}, o
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLpStatus", reflect.TypeOf((*MockLpServiceClient)(nil).GetEtfLpStatus), varargs...)
 }
 
-// GetReservation mocks base method.
-func (m *MockLpServiceClient) GetReservation(ctx context.Context, in *GetReservationRequest, opts ...grpc.CallOption) (*GetReservationResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetReservation", varargs...)
-	ret0, _ := ret[0].(*GetReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetReservation indicates an expected call of GetReservation.
-func (mr *MockLpServiceClientMockRecorder) GetReservation(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReservation", reflect.TypeOf((*MockLpServiceClient)(nil).GetReservation), varargs...)
-}
-
 // GetUserOrderbook mocks base method.
 func (m *MockLpServiceClient) GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest, opts ...grpc.CallOption) (*UserOrderbookData, error) {
 	m.ctrl.T.Helper()
@@ -939,46 +899,6 @@ func (mr *MockLpServiceClientMockRecorder) ListEtfLps(ctx, in interface{}, opts 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceClient)(nil).ListEtfLps), varargs...)
-}
-
-// SendReservation mocks base method.
-func (m *MockLpServiceClient) SendReservation(ctx context.Context, in *SendReservationRequest, opts ...grpc.CallOption) (*SendReservationResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "SendReservation", varargs...)
-	ret0, _ := ret[0].(*SendReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SendReservation indicates an expected call of SendReservation.
-func (mr *MockLpServiceClientMockRecorder) SendReservation(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendReservation", reflect.TypeOf((*MockLpServiceClient)(nil).SendReservation), varargs...)
-}
-
-// SetReservation mocks base method.
-func (m *MockLpServiceClient) SetReservation(ctx context.Context, in *SetReservationRequest, opts ...grpc.CallOption) (*SetReservationResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []interface{}{ctx, in}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "SetReservation", varargs...)
-	ret0, _ := ret[0].(*SetReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SetReservation indicates an expected call of SetReservation.
-func (mr *MockLpServiceClientMockRecorder) SetReservation(ctx, in interface{}, opts ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{ctx, in}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetReservation", reflect.TypeOf((*MockLpServiceClient)(nil).SetReservation), varargs...)
 }
 
 // StartEtfLp mocks base method.
@@ -1124,21 +1044,6 @@ func (m *MockLpServiceServer) EXPECT() *MockLpServiceServerMockRecorder {
 	return m.recorder
 }
 
-// ClearReservation mocks base method.
-func (m *MockLpServiceServer) ClearReservation(ctx context.Context, in *ClearReservationRequest) (*ClearReservationResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ClearReservation", ctx, in)
-	ret0, _ := ret[0].(*ClearReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ClearReservation indicates an expected call of ClearReservation.
-func (mr *MockLpServiceServerMockRecorder) ClearReservation(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClearReservation", reflect.TypeOf((*MockLpServiceServer)(nil).ClearReservation), ctx, in)
-}
-
 // ClearUserOrderBook mocks base method.
 func (m *MockLpServiceServer) ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest) (*ClearUserOrderBookResponse, error) {
 	m.ctrl.T.Helper()
@@ -1199,21 +1104,6 @@ func (mr *MockLpServiceServerMockRecorder) GetEtfLpStatus(ctx, in interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEtfLpStatus", reflect.TypeOf((*MockLpServiceServer)(nil).GetEtfLpStatus), ctx, in)
 }
 
-// GetReservation mocks base method.
-func (m *MockLpServiceServer) GetReservation(ctx context.Context, in *GetReservationRequest) (*GetReservationResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetReservation", ctx, in)
-	ret0, _ := ret[0].(*GetReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetReservation indicates an expected call of GetReservation.
-func (mr *MockLpServiceServerMockRecorder) GetReservation(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReservation", reflect.TypeOf((*MockLpServiceServer)(nil).GetReservation), ctx, in)
-}
-
 // GetUserOrderbook mocks base method.
 func (m *MockLpServiceServer) GetUserOrderbook(ctx context.Context, in *GetUserOrderBookRequest) (*UserOrderbookData, error) {
 	m.ctrl.T.Helper()
@@ -1257,36 +1147,6 @@ func (m *MockLpServiceServer) ListEtfLps(ctx context.Context, in *ListEtfLpsRequ
 func (mr *MockLpServiceServerMockRecorder) ListEtfLps(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEtfLps", reflect.TypeOf((*MockLpServiceServer)(nil).ListEtfLps), ctx, in)
-}
-
-// SendReservation mocks base method.
-func (m *MockLpServiceServer) SendReservation(ctx context.Context, in *SendReservationRequest) (*SendReservationResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendReservation", ctx, in)
-	ret0, _ := ret[0].(*SendReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SendReservation indicates an expected call of SendReservation.
-func (mr *MockLpServiceServerMockRecorder) SendReservation(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendReservation", reflect.TypeOf((*MockLpServiceServer)(nil).SendReservation), ctx, in)
-}
-
-// SetReservation mocks base method.
-func (m *MockLpServiceServer) SetReservation(ctx context.Context, in *SetReservationRequest) (*SetReservationResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetReservation", ctx, in)
-	ret0, _ := ret[0].(*SetReservationResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// SetReservation indicates an expected call of SetReservation.
-func (mr *MockLpServiceServerMockRecorder) SetReservation(ctx, in interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetReservation", reflect.TypeOf((*MockLpServiceServer)(nil).SetReservation), ctx, in)
 }
 
 // StartEtfLp mocks base method.

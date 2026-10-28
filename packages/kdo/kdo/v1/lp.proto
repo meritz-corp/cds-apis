@@ -4,7 +4,6 @@ package kdo.v1.lp;
 
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
 import "google/api/client.proto";
@@ -127,40 +126,6 @@ service LpService {
     option (google.api.http) = {
       post: "/v1/lps/{etf=etfs/*}/{fund=funds/*}:clearOrderBook"
       body: "*"
-    };
-  }
-
-  // ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.
-  // 오늘 예약주문이 살아 있으면 송신 후 시가(09:00) 전에는 바꿀 수 없다 — 살아 있는 주문이 없으면(설정을 깜빡했거나 송신 실패) 저장한 뒤 SendReservation 으로 바로 보낼 수 있다.
-  rpc SetReservation(SetReservationRequest) returns (SetReservationResponse) {
-    option (google.api.http) = {
-      post: "/v1/lps/{etf=etfs/*}/{fund=funds/*}:setReservation"
-      body: "*"
-    };
-  }
-
-  // ETF LP 예약주문 수동 송신 — 저장된 예약 설정으로 오늘 예약주문을 지금 보낸다 (설정을 깜빡했거나 08:28 자동 송신이 실패·누락됐을 때).
-  // 자동 송신이 끝난 뒤부터 시가 전 취소(08:59:55) 전까지, 오늘 살아 있는 예약주문이 없을 때만 된다. 08:30 이후 송신분은 바로 거래소에 접수된다.
-  // 한 건도 못 보내면 FAILED_PRECONDITION (사유 포함). 일부만 실패하면 OK 이고 실패분은 orders 의 status FAILED + message.
-  rpc SendReservation(SendReservationRequest) returns (SendReservationResponse) {
-    option (google.api.http) = {
-      post: "/v1/lps/{etf=etfs/*}/{fund=funds/*}:sendReservation"
-      body: "*"
-    };
-  }
-
-  // ETF LP 예약 설정 삭제. 오늘 송신한 예약주문이 남아 있으면 취소한다.
-  rpc ClearReservation(ClearReservationRequest) returns (ClearReservationResponse) {
-    option (google.api.http) = {
-      post: "/v1/lps/{etf=etfs/*}/{fund=funds/*}:clearReservation"
-      body: "*"
-    };
-  }
-
-  // ETF LP 예약 설정과 오늘 송신한 예약주문 상태 조회.
-  rpc GetReservation(GetReservationRequest) returns (GetReservationResponse) {
-    option (google.api.http) = {
-      get: "/v1/lps/{etf=etfs/*}/{fund=funds/*}/reservation"
     };
   }
 }
@@ -947,78 +912,4 @@ message EtfLpFillSummary {
   repeated FillStat hedges = 2;
   // 통계 영업일 YYYYMMDD (KST). 다른 RPC(GetOrderChainRequest.date)와 동일 규약
   uint32 date = 3;
-}
-
-// ========== Reservation Order Messages ==========
-
-// ETF LP 예약 설정 — LP 호가와 같은 방식으로 시작가부터 호가단위 간격 depth 단, 단별 같은 수량.
-message Reservation {
-  int64 bid_price = 1;                       // 매수 시작가 (원). 0 이면 매수 안 냄
-  int64 ask_price = 2;                       // 매도 시작가 (원). 0 이면 매도 안 냄
-  int32 depth = 3;                           // 측별 단수 (LP depth 이하)
-  int64 quantity = 4;                        // 단별 수량
-  bool need_hedge = 5;
-  string updated_by = 6;                     // 설정한 클라이언트 IP
-  google.protobuf.Timestamp update_time = 7;
-}
-
-// 오늘 송신한 예약주문 1건
-message ReservationOrder {
-  int64 order_id = 1;                        // 거래소 주문번호 (송신 실패면 0)
-  kdo.v1.common.OrderSide side = 2;
-  int64 price = 3;                           // 원
-  int64 quantity = 4;
-  ReservationOrderStatus status = 5;
-  string message = 6;                        // 종료·실패 사유
-}
-
-enum ReservationOrderStatus {
-  RESERVATION_ORDER_STATUS_UNSPECIFIED = 0;
-  RESERVATION_ORDER_STATUS_SENT = 1;         // FEP 송신 — 08:30 전 송신분은 FEP 가 08:30 까지 보관
-  RESERVATION_ORDER_STATUS_ACCEPTED = 2;     // 거래소 접수 → ETF LP 북
-  RESERVATION_ORDER_STATUS_CLOSED = 3;       // 종료 (LP 인수·전량 체결·취소·거부 — message 참고)
-  RESERVATION_ORDER_STATUS_FAILED = 4;       // 송신 실패
-}
-
-message SetReservationRequest {
-  string etf = 1;                            // "etfs/{symbol}"
-  string fund = 2;                           // "funds/{fund_code}"
-  int64 bid_price = 3;                       // 매수 시작가 (원). 0 이면 매수 안 냄
-  int64 ask_price = 4;                       // 매도 시작가 (원). 0 이면 매도 안 냄
-  int32 depth = 5;
-  int64 quantity = 6;
-  optional bool need_hedge = 7;              // 미지정 시 true
-}
-
-message SetReservationResponse {
-  Reservation reservation = 1;
-}
-
-message SendReservationRequest {
-  string etf = 1;                            // "etfs/{symbol}"
-  string fund = 2;                           // "funds/{fund_code}"
-}
-
-message SendReservationResponse {
-  repeated ReservationOrder orders = 1;      // 이번에 보낸 예약주문 (실패분은 status FAILED, message 에 사유)
-}
-
-message ClearReservationRequest {
-  string etf = 1;                            // "etfs/{symbol}"
-  string fund = 2;                           // "funds/{fund_code}"
-}
-
-message ClearReservationResponse {
-  int32 cancelled_orders = 1;                // 취소 요청한 오늘 송신분 수
-}
-
-message GetReservationRequest {
-  string etf = 1;                            // "etfs/{symbol}"
-  string fund = 2;                           // "funds/{fund_code}"
-}
-
-message GetReservationResponse {
-  Reservation reservation = 1;               // 설정이 없으면 비어 있음
-  repeated ReservationOrder orders = 2;      // 오늘 송신한 예약주문
-  string send_at = 3;                        // 송신 시각 (KST HH:MM:SS)
 }

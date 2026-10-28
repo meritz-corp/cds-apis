@@ -113,26 +113,5 @@ class EtfLpState extends $pb.ProtobufEnum {
   const EtfLpState._(super.value, super.name);
 }
 
-class ReservationOrderStatus extends $pb.ProtobufEnum {
-  static const ReservationOrderStatus RESERVATION_ORDER_STATUS_UNSPECIFIED = ReservationOrderStatus._(0, _omitEnumNames ? '' : 'RESERVATION_ORDER_STATUS_UNSPECIFIED');
-  static const ReservationOrderStatus RESERVATION_ORDER_STATUS_SENT = ReservationOrderStatus._(1, _omitEnumNames ? '' : 'RESERVATION_ORDER_STATUS_SENT');
-  static const ReservationOrderStatus RESERVATION_ORDER_STATUS_ACCEPTED = ReservationOrderStatus._(2, _omitEnumNames ? '' : 'RESERVATION_ORDER_STATUS_ACCEPTED');
-  static const ReservationOrderStatus RESERVATION_ORDER_STATUS_CLOSED = ReservationOrderStatus._(3, _omitEnumNames ? '' : 'RESERVATION_ORDER_STATUS_CLOSED');
-  static const ReservationOrderStatus RESERVATION_ORDER_STATUS_FAILED = ReservationOrderStatus._(4, _omitEnumNames ? '' : 'RESERVATION_ORDER_STATUS_FAILED');
-
-  static const $core.List<ReservationOrderStatus> values = <ReservationOrderStatus> [
-    RESERVATION_ORDER_STATUS_UNSPECIFIED,
-    RESERVATION_ORDER_STATUS_SENT,
-    RESERVATION_ORDER_STATUS_ACCEPTED,
-    RESERVATION_ORDER_STATUS_CLOSED,
-    RESERVATION_ORDER_STATUS_FAILED,
-  ];
-
-  static final $core.List<ReservationOrderStatus?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
-  static ReservationOrderStatus? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
-
-  const ReservationOrderStatus._(super.value, super.name);
-}
-
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

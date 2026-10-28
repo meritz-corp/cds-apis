@@ -51,17 +51,6 @@ type LpServiceClient interface {
 	// LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
 	// 운영 중 좀비 주문이 누적된 경우 수동 복구용.
 	ClearUserOrderBook(ctx context.Context, in *ClearUserOrderBookRequest, opts ...grpc.CallOption) (*ClearUserOrderBookResponse, error)
-	// ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.
-	// 오늘 예약주문이 살아 있으면 송신 후 시가(09:00) 전에는 바꿀 수 없다 — 살아 있는 주문이 없으면(설정을 깜빡했거나 송신 실패) 저장한 뒤 SendReservation 으로 바로 보낼 수 있다.
-	SetReservation(ctx context.Context, in *SetReservationRequest, opts ...grpc.CallOption) (*SetReservationResponse, error)
-	// ETF LP 예약주문 수동 송신 — 저장된 예약 설정으로 오늘 예약주문을 지금 보낸다 (설정을 깜빡했거나 08:28 자동 송신이 실패·누락됐을 때).
-	// 자동 송신이 끝난 뒤부터 시가 전 취소(08:59:55) 전까지, 오늘 살아 있는 예약주문이 없을 때만 된다. 08:30 이후 송신분은 바로 거래소에 접수된다.
-	// 한 건도 못 보내면 FAILED_PRECONDITION (사유 포함). 일부만 실패하면 OK 이고 실패분은 orders 의 status FAILED + message.
-	SendReservation(ctx context.Context, in *SendReservationRequest, opts ...grpc.CallOption) (*SendReservationResponse, error)
-	// ETF LP 예약 설정 삭제. 오늘 송신한 예약주문이 남아 있으면 취소한다.
-	ClearReservation(ctx context.Context, in *ClearReservationRequest, opts ...grpc.CallOption) (*ClearReservationResponse, error)
-	// ETF LP 예약 설정과 오늘 송신한 예약주문 상태 조회.
-	GetReservation(ctx context.Context, in *GetReservationRequest, opts ...grpc.CallOption) (*GetReservationResponse, error)
 }
 
 type lpServiceClient struct {
@@ -258,42 +247,6 @@ func (c *lpServiceClient) ClearUserOrderBook(ctx context.Context, in *ClearUserO
 	return out, nil
 }
 
-func (c *lpServiceClient) SetReservation(ctx context.Context, in *SetReservationRequest, opts ...grpc.CallOption) (*SetReservationResponse, error) {
-	out := new(SetReservationResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/SetReservation", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *lpServiceClient) SendReservation(ctx context.Context, in *SendReservationRequest, opts ...grpc.CallOption) (*SendReservationResponse, error) {
-	out := new(SendReservationResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/SendReservation", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *lpServiceClient) ClearReservation(ctx context.Context, in *ClearReservationRequest, opts ...grpc.CallOption) (*ClearReservationResponse, error) {
-	out := new(ClearReservationResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/ClearReservation", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *lpServiceClient) GetReservation(ctx context.Context, in *GetReservationRequest, opts ...grpc.CallOption) (*GetReservationResponse, error) {
-	out := new(GetReservationResponse)
-	err := c.cc.Invoke(ctx, "/kdo.v1.lp.LpService/GetReservation", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // LpServiceServer is the server API for LpService service.
 // All implementations must embed UnimplementedLpServiceServer
 // for forward compatibility
@@ -327,17 +280,6 @@ type LpServiceServer interface {
 	// LP 가 Idle / Stopping / Error 상태일 때만 사용 가능.
 	// 운영 중 좀비 주문이 누적된 경우 수동 복구용.
 	ClearUserOrderBook(context.Context, *ClearUserOrderBookRequest) (*ClearUserOrderBookResponse, error)
-	// ETF LP 예약 설정 — 매일 08:28 에 이 설정으로 예약 오더북을 만들어 FEP 로 송신한다 (FEP 가 08:30 까지 보관 후 거래소로 송출). 다시 설정하면 덮어쓴다.
-	// 오늘 예약주문이 살아 있으면 송신 후 시가(09:00) 전에는 바꿀 수 없다 — 살아 있는 주문이 없으면(설정을 깜빡했거나 송신 실패) 저장한 뒤 SendReservation 으로 바로 보낼 수 있다.
-	SetReservation(context.Context, *SetReservationRequest) (*SetReservationResponse, error)
-	// ETF LP 예약주문 수동 송신 — 저장된 예약 설정으로 오늘 예약주문을 지금 보낸다 (설정을 깜빡했거나 08:28 자동 송신이 실패·누락됐을 때).
-	// 자동 송신이 끝난 뒤부터 시가 전 취소(08:59:55) 전까지, 오늘 살아 있는 예약주문이 없을 때만 된다. 08:30 이후 송신분은 바로 거래소에 접수된다.
-	// 한 건도 못 보내면 FAILED_PRECONDITION (사유 포함). 일부만 실패하면 OK 이고 실패분은 orders 의 status FAILED + message.
-	SendReservation(context.Context, *SendReservationRequest) (*SendReservationResponse, error)
-	// ETF LP 예약 설정 삭제. 오늘 송신한 예약주문이 남아 있으면 취소한다.
-	ClearReservation(context.Context, *ClearReservationRequest) (*ClearReservationResponse, error)
-	// ETF LP 예약 설정과 오늘 송신한 예약주문 상태 조회.
-	GetReservation(context.Context, *GetReservationRequest) (*GetReservationResponse, error)
 	mustEmbedUnimplementedLpServiceServer()
 }
 
@@ -383,18 +325,6 @@ func (UnimplementedLpServiceServer) StreamUserOrderbook(*GetUserOrderBookRequest
 }
 func (UnimplementedLpServiceServer) ClearUserOrderBook(context.Context, *ClearUserOrderBookRequest) (*ClearUserOrderBookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClearUserOrderBook not implemented")
-}
-func (UnimplementedLpServiceServer) SetReservation(context.Context, *SetReservationRequest) (*SetReservationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetReservation not implemented")
-}
-func (UnimplementedLpServiceServer) SendReservation(context.Context, *SendReservationRequest) (*SendReservationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendReservation not implemented")
-}
-func (UnimplementedLpServiceServer) ClearReservation(context.Context, *ClearReservationRequest) (*ClearReservationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ClearReservation not implemented")
-}
-func (UnimplementedLpServiceServer) GetReservation(context.Context, *GetReservationRequest) (*GetReservationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReservation not implemented")
 }
 func (UnimplementedLpServiceServer) mustEmbedUnimplementedLpServiceServer() {}
 
@@ -652,78 +582,6 @@ func _LpService_ClearUserOrderBook_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LpService_SetReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetReservationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LpServiceServer).SetReservation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/SetReservation",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).SetReservation(ctx, req.(*SetReservationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LpService_SendReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendReservationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LpServiceServer).SendReservation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/SendReservation",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).SendReservation(ctx, req.(*SendReservationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LpService_ClearReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClearReservationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LpServiceServer).ClearReservation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/ClearReservation",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).ClearReservation(ctx, req.(*ClearReservationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LpService_GetReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetReservationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LpServiceServer).GetReservation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/kdo.v1.lp.LpService/GetReservation",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LpServiceServer).GetReservation(ctx, req.(*GetReservationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // LpService_ServiceDesc is the grpc.ServiceDesc for LpService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -770,22 +628,6 @@ var LpService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClearUserOrderBook",
 			Handler:    _LpService_ClearUserOrderBook_Handler,
-		},
-		{
-			MethodName: "SetReservation",
-			Handler:    _LpService_SetReservation_Handler,
-		},
-		{
-			MethodName: "SendReservation",
-			Handler:    _LpService_SendReservation_Handler,
-		},
-		{
-			MethodName: "ClearReservation",
-			Handler:    _LpService_ClearReservation_Handler,
-		},
-		{
-			MethodName: "GetReservation",
-			Handler:    _LpService_GetReservation_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
