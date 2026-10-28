@@ -441,7 +441,7 @@
           },
           {
             "name": "tradingDay",
-            "description": "집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.\n발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게\n살아있는 주문 전체, launch_count 는 실행 세션 기준이다.\nStreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).",
+            "description": "집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.\n발주/체결/자동취소 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게\n살아있는 주문 전체, launch_count 는 실행 세션 기준이다.\nStreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -856,7 +856,7 @@
           },
           {
             "name": "tradingDay",
-            "description": "집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.\n발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게\n살아있는 주문 전체, launch_count 는 실행 세션 기준이다.\nStreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).",
+            "description": "집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.\n발주/체결/자동취소 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게\n살아있는 주문 전체, launch_count 는 실행 세션 기준이다.\nStreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -1465,7 +1465,7 @@
         "remainingQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "살아있는 미체결 합 — 기준 영업일과 무관하게 전체"
+          "title": "살아있는 주문의 미체결(호가에 남아 있는 수량) 합 — 기준 영업일과 무관하게 전체"
         },
         "averageFillPrice": {
           "type": "string",
@@ -1474,7 +1474,7 @@
         "filledAmount": {
           "type": "string",
           "format": "int64",
-          "title": "기준 영업일 체결금액 (원)"
+          "title": "기준 영업일 체결금액 (원 — 선물은 계약승수 반영)"
         },
         "referencePrice": {
           "type": "string",
@@ -1483,10 +1483,15 @@
         "remainingAmount": {
           "type": "string",
           "format": "int64",
-          "title": "미체결 × 참조가 (remaining_quantity 와 같이 날짜 무관)"
+          "title": "미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)"
+        },
+        "autoCancelledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "기준 영업일 자동취소 수량 (명시적 취소 제외)"
         }
       },
-      "title": "leg별 집계 — 발주/체결은 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관"
+      "title": "leg별 집계 — 발주/체결/자동취소는 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관"
     },
     "pair_v2PairV2LeverageFuturePricing": {
       "type": "object",
@@ -1577,7 +1582,7 @@
         "remainingQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "살아있는 상태에서만 \u003e0"
+          "title": "미체결 — 호가에 남아 있는 수량 (주문 − 체결 − 자동취소). 살아있는 상태에서만 \u003e0"
         },
         "averageFillPrice": {
           "type": "string",
@@ -1593,6 +1598,11 @@
         "updateTime": {
           "type": "string",
           "format": "date-time"
+        },
+        "autoCancelledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "자동취소 수량 누적 — 거래소 자동취소(SMP·실시간가격제한 등, 부분취소 포함). 명시적 취소(잔량 취소)는 포함하지 않는다"
         }
       },
       "title": "페어 주문 추적 행"

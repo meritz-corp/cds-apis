@@ -884,13 +884,15 @@ message PairV2Order {
   string order_price = 8;
   int64 order_quantity = 9;
   int64 filled_quantity = 10;
-  // 살아있는 상태에서만 >0
+  // 미체결 — 호가에 남아 있는 수량 (주문 − 체결 − 자동취소). 살아있는 상태에서만 >0
   int64 remaining_quantity = 11;
   // 체결 없으면 빈 문자열
   string average_fill_price = 12;
   PairV2OrderStatus status = 13;
   google.protobuf.Timestamp create_time = 14;
   google.protobuf.Timestamp update_time = 15;
+  // 자동취소 수량 누적 — 거래소 자동취소(SMP·실시간가격제한 등, 부분취소 포함). 명시적 취소(잔량 취소)는 포함하지 않는다
+  int64 auto_cancelled_quantity = 16;
 }
 
 message ListPairV2OrdersRequest {
@@ -909,7 +911,7 @@ message ListPairV2OrdersResponse {
   string next_page_token = 2;
 }
 
-// leg별 집계 — 발주/체결은 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
+// leg별 집계 — 발주/체결/자동취소는 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
 message PairV2LegSummary {
   PairV2Slot slot = 1;
   string symbol = 2;
@@ -917,22 +919,24 @@ message PairV2LegSummary {
   int64 ordered_quantity = 3;
   // 기준 영업일 체결 수량
   int64 filled_quantity = 4;
-  // 살아있는 미체결 합 — 기준 영업일과 무관하게 전체
+  // 살아있는 주문의 미체결(호가에 남아 있는 수량) 합 — 기준 영업일과 무관하게 전체
   int64 remaining_quantity = 5;
   // 기준 영업일 가중평균 체결가 (체결 없으면 빈 문자열)
   string average_fill_price = 6;
-  // 기준 영업일 체결금액 (원)
+  // 기준 영업일 체결금액 (원 — 선물은 계약승수 반영)
   int64 filled_amount = 7;
   // 참조 현재가 (조회 시점, 없으면 빈 문자열)
   string reference_price = 8;
-  // 미체결 × 참조가 (remaining_quantity 와 같이 날짜 무관)
+  // 미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)
   int64 remaining_amount = 9;
+  // 기준 영업일 자동취소 수량 (명시적 취소 제외)
+  int64 auto_cancelled_quantity = 10;
 }
 
 message GetPairV2OrderSummaryRequest {
   string pair_v2 = 1 [(google.api.field_behavior) = REQUIRED];
   // 집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.
-  // 발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
+  // 발주/체결/자동취소 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
   // 살아있는 주문 전체, launch_count 는 실행 세션 기준이다.
   // StreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).
   optional int32 trading_day = 2;

@@ -571,6 +571,7 @@ const BasketExecutionOrderRelation$json = {
     {'1': 'remaining_quantity', '3': 11, '4': 1, '5': 3, '10': 'remainingQuantity'},
     {'1': 'average_fill_price', '3': 12, '4': 1, '5': 9, '10': 'averageFillPrice'},
     {'1': 'status', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.basket.BasketExecutionOrderStatus', '10': 'status'},
+    {'1': 'auto_cancelled_quantity', '3': 14, '4': 1, '5': 3, '10': 'autoCancelledQuantity'},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -589,8 +590,9 @@ final $typed_data.Uint8List basketExecutionOrderRelationDescriptor = $convert.ba
     '9yZGVyUXVhbnRpdHkSJwoPZmlsbGVkX3F1YW50aXR5GAogASgDUg5maWxsZWRRdWFudGl0eRIt'
     'ChJyZW1haW5pbmdfcXVhbnRpdHkYCyABKANSEXJlbWFpbmluZ1F1YW50aXR5EiwKEmF2ZXJhZ2'
     'VfZmlsbF9wcmljZRgMIAEoCVIQYXZlcmFnZUZpbGxQcmljZRJBCgZzdGF0dXMYDSABKA4yKS5r'
-    'ZG8udjEuYmFza2V0LkJhc2tldEV4ZWN1dGlvbk9yZGVyU3RhdHVzUgZzdGF0dXNCFAoSX29yaW'
-    'dpbmFsX29yZGVyX2lk');
+    'ZG8udjEuYmFza2V0LkJhc2tldEV4ZWN1dGlvbk9yZGVyU3RhdHVzUgZzdGF0dXMSNgoXYXV0b1'
+    '9jYW5jZWxsZWRfcXVhbnRpdHkYDiABKANSFWF1dG9DYW5jZWxsZWRRdWFudGl0eUIUChJfb3Jp'
+    'Z2luYWxfb3JkZXJfaWQ=');
 
 @$core.Deprecated('Use createBasketExecutionRequestDescriptor instead')
 const CreateBasketExecutionRequest$json = {

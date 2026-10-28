@@ -3909,6 +3909,9 @@ impl serde::Serialize for PairV2LegSummary {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2LegSummary", len)?;
         if true {
             let v = PairV2Slot::try_from(self.slot)
@@ -3949,6 +3952,11 @@ impl serde::Serialize for PairV2LegSummary {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("remaining_amount", ToString::to_string(&self.remaining_amount).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("auto_cancelled_quantity", ToString::to_string(&self.auto_cancelled_quantity).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -3975,6 +3983,8 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
             "referencePrice",
             "remaining_amount",
             "remainingAmount",
+            "auto_cancelled_quantity",
+            "autoCancelledQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -3988,6 +3998,7 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
             FilledAmount,
             ReferencePrice,
             RemainingAmount,
+            AutoCancelledQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4019,6 +4030,7 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                             "filledAmount" | "filled_amount" => Ok(GeneratedField::FilledAmount),
                             "referencePrice" | "reference_price" => Ok(GeneratedField::ReferencePrice),
                             "remainingAmount" | "remaining_amount" => Ok(GeneratedField::RemainingAmount),
+                            "autoCancelledQuantity" | "auto_cancelled_quantity" => Ok(GeneratedField::AutoCancelledQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4047,6 +4059,7 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                 let mut filled_amount__ = None;
                 let mut reference_price__ = None;
                 let mut remaining_amount__ = None;
+                let mut auto_cancelled_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Slot => {
@@ -4113,6 +4126,14 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::AutoCancelledQuantity => {
+                            if auto_cancelled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("autoCancelledQuantity"));
+                            }
+                            auto_cancelled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4128,6 +4149,7 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                     filled_amount: filled_amount__.unwrap_or_default(),
                     reference_price: reference_price__.unwrap_or_default(),
                     remaining_amount: remaining_amount__.unwrap_or_default(),
+                    auto_cancelled_quantity: auto_cancelled_quantity__.unwrap_or_default(),
                 })
             }
         }
@@ -4590,6 +4612,9 @@ impl serde::Serialize for PairV2Order {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2Order", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -4652,6 +4677,11 @@ impl serde::Serialize for PairV2Order {
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("auto_cancelled_quantity", ToString::to_string(&self.auto_cancelled_quantity).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -4688,6 +4718,8 @@ impl<'de> serde::Deserialize<'de> for PairV2Order {
             "createTime",
             "update_time",
             "updateTime",
+            "auto_cancelled_quantity",
+            "autoCancelledQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4707,6 +4739,7 @@ impl<'de> serde::Deserialize<'de> for PairV2Order {
             Status,
             CreateTime,
             UpdateTime,
+            AutoCancelledQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4744,6 +4777,7 @@ impl<'de> serde::Deserialize<'de> for PairV2Order {
                             "status" => Ok(GeneratedField::Status),
                             "createTime" | "create_time" => Ok(GeneratedField::CreateTime),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
+                            "autoCancelledQuantity" | "auto_cancelled_quantity" => Ok(GeneratedField::AutoCancelledQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4778,6 +4812,7 @@ impl<'de> serde::Deserialize<'de> for PairV2Order {
                 let mut status__ = None;
                 let mut create_time__ = None;
                 let mut update_time__ = None;
+                let mut auto_cancelled_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::PairId => {
@@ -4884,6 +4919,14 @@ impl<'de> serde::Deserialize<'de> for PairV2Order {
                             }
                             update_time__ = map_.next_value()?;
                         }
+                        GeneratedField::AutoCancelledQuantity => {
+                            if auto_cancelled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("autoCancelledQuantity"));
+                            }
+                            auto_cancelled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4905,6 +4948,7 @@ impl<'de> serde::Deserialize<'de> for PairV2Order {
                     status: status__.unwrap_or_default(),
                     create_time: create_time__,
                     update_time: update_time__,
+                    auto_cancelled_quantity: auto_cancelled_quantity__.unwrap_or_default(),
                 })
             }
         }

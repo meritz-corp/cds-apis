@@ -822,6 +822,7 @@ const PairV2Order$json = {
     {'1': 'status', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2OrderStatus', '10': 'status'},
     {'1': 'create_time', '3': 14, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createTime'},
     {'1': 'update_time', '3': 15, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updateTime'},
+    {'1': 'auto_cancelled_quantity', '3': 16, '4': 1, '5': 3, '10': 'autoCancelledQuantity'},
   ],
   '8': [
     {'1': '_original_order_id'},
@@ -841,8 +842,9 @@ final $typed_data.Uint8List pairV2OrderDescriptor = $convert.base64Decode(
     'ASgJUhBhdmVyYWdlRmlsbFByaWNlEjkKBnN0YXR1cxgNIAEoDjIhLmtkby52MS5wYWlyX3YyLl'
     'BhaXJWMk9yZGVyU3RhdHVzUgZzdGF0dXMSOwoLY3JlYXRlX3RpbWUYDiABKAsyGi5nb29nbGUu'
     'cHJvdG9idWYuVGltZXN0YW1wUgpjcmVhdGVUaW1lEjsKC3VwZGF0ZV90aW1lGA8gASgLMhouZ2'
-    '9vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIKdXBkYXRlVGltZUIUChJfb3JpZ2luYWxfb3JkZXJf'
-    'aWQ=');
+    '9vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIKdXBkYXRlVGltZRI2ChdhdXRvX2NhbmNlbGxlZF9x'
+    'dWFudGl0eRgQIAEoA1IVYXV0b0NhbmNlbGxlZFF1YW50aXR5QhQKEl9vcmlnaW5hbF9vcmRlcl'
+    '9pZA==');
 
 @$core.Deprecated('Use listPairV2OrdersRequestDescriptor instead')
 const ListPairV2OrdersRequest$json = {
@@ -897,6 +899,7 @@ const PairV2LegSummary$json = {
     {'1': 'filled_amount', '3': 7, '4': 1, '5': 3, '10': 'filledAmount'},
     {'1': 'reference_price', '3': 8, '4': 1, '5': 9, '10': 'referencePrice'},
     {'1': 'remaining_amount', '3': 9, '4': 1, '5': 3, '10': 'remainingAmount'},
+    {'1': 'auto_cancelled_quantity', '3': 10, '4': 1, '5': 3, '10': 'autoCancelledQuantity'},
   ],
 };
 
@@ -908,8 +911,8 @@ final $typed_data.Uint8List pairV2LegSummaryDescriptor = $convert.base64Decode(
     'F1YW50aXR5Ei0KEnJlbWFpbmluZ19xdWFudGl0eRgFIAEoA1IRcmVtYWluaW5nUXVhbnRpdHkS'
     'LAoSYXZlcmFnZV9maWxsX3ByaWNlGAYgASgJUhBhdmVyYWdlRmlsbFByaWNlEiMKDWZpbGxlZF'
     '9hbW91bnQYByABKANSDGZpbGxlZEFtb3VudBInCg9yZWZlcmVuY2VfcHJpY2UYCCABKAlSDnJl'
-    'ZmVyZW5jZVByaWNlEikKEHJlbWFpbmluZ19hbW91bnQYCSABKANSD3JlbWFpbmluZ0Ftb3VudA'
-    '==');
+    'ZmVyZW5jZVByaWNlEikKEHJlbWFpbmluZ19hbW91bnQYCSABKANSD3JlbWFpbmluZ0Ftb3VudB'
+    'I2ChdhdXRvX2NhbmNlbGxlZF9xdWFudGl0eRgKIAEoA1IVYXV0b0NhbmNlbGxlZFF1YW50aXR5');
 
 @$core.Deprecated('Use getPairV2OrderSummaryRequestDescriptor instead')
 const GetPairV2OrderSummaryRequest$json = {

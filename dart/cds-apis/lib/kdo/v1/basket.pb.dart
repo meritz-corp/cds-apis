@@ -1875,6 +1875,7 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
     $fixnum.Int64? remainingQuantity,
     $core.String? averageFillPrice,
     BasketExecutionOrderStatus? status,
+    $fixnum.Int64? autoCancelledQuantity,
   }) {
     final result = create();
     if (id != null) result.id = id;
@@ -1890,6 +1891,7 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
     if (remainingQuantity != null) result.remainingQuantity = remainingQuantity;
     if (averageFillPrice != null) result.averageFillPrice = averageFillPrice;
     if (status != null) result.status = status;
+    if (autoCancelledQuantity != null) result.autoCancelledQuantity = autoCancelledQuantity;
     return result;
   }
 
@@ -1912,6 +1914,7 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
     ..aInt64(11, _omitFieldNames ? '' : 'remainingQuantity')
     ..aOS(12, _omitFieldNames ? '' : 'averageFillPrice')
     ..e<BasketExecutionOrderStatus>(13, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: BasketExecutionOrderStatus.BASKET_EXECUTION_ORDER_STATUS_UNSPECIFIED, valueOf: BasketExecutionOrderStatus.valueOf, enumValues: BasketExecutionOrderStatus.values)
+    ..aInt64(14, _omitFieldNames ? '' : 'autoCancelledQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -2034,7 +2037,7 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearFilledQuantity() => $_clearField(10);
 
-  /// 미체결수량 (접수/부분체결 상태에서만 >0, 터미널 상태는 0)
+  /// 미체결수량 — 호가에 남아 있는 수량 (주문 − 체결 − 자동취소). 접수/부분체결 상태에서만 >0, 터미널 상태는 0
   @$pb.TagNumber(11)
   $fixnum.Int64 get remainingQuantity => $_getI64(10);
   @$pb.TagNumber(11)
@@ -2063,6 +2066,16 @@ class BasketExecutionOrderRelation extends $pb.GeneratedMessage {
   $core.bool hasStatus() => $_has(12);
   @$pb.TagNumber(13)
   void clearStatus() => $_clearField(13);
+
+  /// 자동취소 수량 누적 (부분취소 포함). 명시적 취소는 포함하지 않는다
+  @$pb.TagNumber(14)
+  $fixnum.Int64 get autoCancelledQuantity => $_getI64(13);
+  @$pb.TagNumber(14)
+  set autoCancelledQuantity($fixnum.Int64 value) => $_setInt64(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasAutoCancelledQuantity() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearAutoCancelledQuantity() => $_clearField(14);
 }
 
 class CreateBasketExecutionRequest extends $pb.GeneratedMessage {

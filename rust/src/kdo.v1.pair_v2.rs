@@ -627,7 +627,7 @@ pub struct PairV2Order {
     pub order_quantity: i64,
     #[prost(int64, tag="10")]
     pub filled_quantity: i64,
-    /// 살아있는 상태에서만 >0
+    /// 미체결 — 호가에 남아 있는 수량 (주문 − 체결 − 자동취소). 살아있는 상태에서만 >0
     #[prost(int64, tag="11")]
     pub remaining_quantity: i64,
     /// 체결 없으면 빈 문자열
@@ -639,6 +639,9 @@ pub struct PairV2Order {
     pub create_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
     #[prost(message, optional, tag="15")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 자동취소 수량 누적 — 거래소 자동취소(SMP·실시간가격제한 등, 부분취소 포함). 명시적 취소(잔량 취소)는 포함하지 않는다
+    #[prost(int64, tag="16")]
+    pub auto_cancelled_quantity: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -665,7 +668,7 @@ pub struct ListPairV2OrdersResponse {
     #[prost(string, tag="2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
-/// leg별 집계 — 발주/체결은 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
+/// leg별 집계 — 발주/체결/자동취소는 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PairV2LegSummary {
@@ -679,21 +682,24 @@ pub struct PairV2LegSummary {
     /// 기준 영업일 체결 수량
     #[prost(int64, tag="4")]
     pub filled_quantity: i64,
-    /// 살아있는 미체결 합 — 기준 영업일과 무관하게 전체
+    /// 살아있는 주문의 미체결(호가에 남아 있는 수량) 합 — 기준 영업일과 무관하게 전체
     #[prost(int64, tag="5")]
     pub remaining_quantity: i64,
     /// 기준 영업일 가중평균 체결가 (체결 없으면 빈 문자열)
     #[prost(string, tag="6")]
     pub average_fill_price: ::prost::alloc::string::String,
-    /// 기준 영업일 체결금액 (원)
+    /// 기준 영업일 체결금액 (원 — 선물은 계약승수 반영)
     #[prost(int64, tag="7")]
     pub filled_amount: i64,
     /// 참조 현재가 (조회 시점, 없으면 빈 문자열)
     #[prost(string, tag="8")]
     pub reference_price: ::prost::alloc::string::String,
-    /// 미체결 × 참조가 (remaining_quantity 와 같이 날짜 무관)
+    /// 미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)
     #[prost(int64, tag="9")]
     pub remaining_amount: i64,
+    /// 기준 영업일 자동취소 수량 (명시적 취소 제외)
+    #[prost(int64, tag="10")]
+    pub auto_cancelled_quantity: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -701,7 +707,7 @@ pub struct GetPairV2OrderSummaryRequest {
     #[prost(string, tag="1")]
     pub pair_v2: ::prost::alloc::string::String,
     /// 집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.
-    /// 발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
+    /// 발주/체결/자동취소 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
     /// 살아있는 주문 전체, launch_count 는 실행 세션 기준이다.
     /// StreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).
     #[prost(int32, optional, tag="2")]

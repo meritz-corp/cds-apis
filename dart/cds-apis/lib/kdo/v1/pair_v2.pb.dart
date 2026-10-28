@@ -2793,6 +2793,7 @@ class PairV2Order extends $pb.GeneratedMessage {
     PairV2OrderStatus? status,
     $2.Timestamp? createTime,
     $2.Timestamp? updateTime,
+    $fixnum.Int64? autoCancelledQuantity,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -2810,6 +2811,7 @@ class PairV2Order extends $pb.GeneratedMessage {
     if (status != null) result.status = status;
     if (createTime != null) result.createTime = createTime;
     if (updateTime != null) result.updateTime = updateTime;
+    if (autoCancelledQuantity != null) result.autoCancelledQuantity = autoCancelledQuantity;
     return result;
   }
 
@@ -2834,6 +2836,7 @@ class PairV2Order extends $pb.GeneratedMessage {
     ..e<PairV2OrderStatus>(13, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: PairV2OrderStatus.PAIR_V2_ORDER_STATUS_UNSPECIFIED, valueOf: PairV2OrderStatus.valueOf, enumValues: PairV2OrderStatus.values)
     ..aOM<$2.Timestamp>(14, _omitFieldNames ? '' : 'createTime', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(15, _omitFieldNames ? '' : 'updateTime', subBuilder: $2.Timestamp.create)
+    ..aInt64(16, _omitFieldNames ? '' : 'autoCancelledQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -2947,7 +2950,7 @@ class PairV2Order extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearFilledQuantity() => $_clearField(10);
 
-  /// 살아있는 상태에서만 >0
+  /// 미체결 — 호가에 남아 있는 수량 (주문 − 체결 − 자동취소). 살아있는 상태에서만 >0
   @$pb.TagNumber(11)
   $fixnum.Int64 get remainingQuantity => $_getI64(10);
   @$pb.TagNumber(11)
@@ -2997,6 +3000,16 @@ class PairV2Order extends $pb.GeneratedMessage {
   void clearUpdateTime() => $_clearField(15);
   @$pb.TagNumber(15)
   $2.Timestamp ensureUpdateTime() => $_ensure(14);
+
+  /// 자동취소 수량 누적 — 거래소 자동취소(SMP·실시간가격제한 등, 부분취소 포함). 명시적 취소(잔량 취소)는 포함하지 않는다
+  @$pb.TagNumber(16)
+  $fixnum.Int64 get autoCancelledQuantity => $_getI64(15);
+  @$pb.TagNumber(16)
+  set autoCancelledQuantity($fixnum.Int64 value) => $_setInt64(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasAutoCancelledQuantity() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearAutoCancelledQuantity() => $_clearField(16);
 }
 
 class ListPairV2OrdersRequest extends $pb.GeneratedMessage {
@@ -3148,7 +3161,7 @@ class ListPairV2OrdersResponse extends $pb.GeneratedMessage {
   void clearNextPageToken() => $_clearField(2);
 }
 
-/// leg별 집계 — 발주/체결은 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
+/// leg별 집계 — 발주/체결/자동취소는 GetPairV2OrderSummaryRequest.trading_day 영업일 기준, 미체결은 날짜 무관
 class PairV2LegSummary extends $pb.GeneratedMessage {
   factory PairV2LegSummary({
     PairV2Slot? slot,
@@ -3160,6 +3173,7 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
     $fixnum.Int64? filledAmount,
     $core.String? referencePrice,
     $fixnum.Int64? remainingAmount,
+    $fixnum.Int64? autoCancelledQuantity,
   }) {
     final result = create();
     if (slot != null) result.slot = slot;
@@ -3171,6 +3185,7 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
     if (filledAmount != null) result.filledAmount = filledAmount;
     if (referencePrice != null) result.referencePrice = referencePrice;
     if (remainingAmount != null) result.remainingAmount = remainingAmount;
+    if (autoCancelledQuantity != null) result.autoCancelledQuantity = autoCancelledQuantity;
     return result;
   }
 
@@ -3189,6 +3204,7 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
     ..aInt64(7, _omitFieldNames ? '' : 'filledAmount')
     ..aOS(8, _omitFieldNames ? '' : 'referencePrice')
     ..aInt64(9, _omitFieldNames ? '' : 'remainingAmount')
+    ..aInt64(10, _omitFieldNames ? '' : 'autoCancelledQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -3247,7 +3263,7 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearFilledQuantity() => $_clearField(4);
 
-  /// 살아있는 미체결 합 — 기준 영업일과 무관하게 전체
+  /// 살아있는 주문의 미체결(호가에 남아 있는 수량) 합 — 기준 영업일과 무관하게 전체
   @$pb.TagNumber(5)
   $fixnum.Int64 get remainingQuantity => $_getI64(4);
   @$pb.TagNumber(5)
@@ -3267,7 +3283,7 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearAverageFillPrice() => $_clearField(6);
 
-  /// 기준 영업일 체결금액 (원)
+  /// 기준 영업일 체결금액 (원 — 선물은 계약승수 반영)
   @$pb.TagNumber(7)
   $fixnum.Int64 get filledAmount => $_getI64(6);
   @$pb.TagNumber(7)
@@ -3287,7 +3303,7 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearReferencePrice() => $_clearField(8);
 
-  /// 미체결 × 참조가 (remaining_quantity 와 같이 날짜 무관)
+  /// 미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)
   @$pb.TagNumber(9)
   $fixnum.Int64 get remainingAmount => $_getI64(8);
   @$pb.TagNumber(9)
@@ -3296,6 +3312,16 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
   $core.bool hasRemainingAmount() => $_has(8);
   @$pb.TagNumber(9)
   void clearRemainingAmount() => $_clearField(9);
+
+  /// 기준 영업일 자동취소 수량 (명시적 취소 제외)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get autoCancelledQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set autoCancelledQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasAutoCancelledQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearAutoCancelledQuantity() => $_clearField(10);
 }
 
 class GetPairV2OrderSummaryRequest extends $pb.GeneratedMessage {
@@ -3347,7 +3373,7 @@ class GetPairV2OrderSummaryRequest extends $pb.GeneratedMessage {
   void clearPairV2() => $_clearField(1);
 
   /// 집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.
-  /// 발주/체결 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
+  /// 발주/체결/자동취소 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
   /// 살아있는 주문 전체, launch_count 는 실행 세션 기준이다.
   /// StreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).
   @$pb.TagNumber(2)

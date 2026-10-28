@@ -1188,7 +1188,7 @@
         "remainingQuantity": {
           "type": "string",
           "format": "int64",
-          "title": "미체결수량 (접수/부분체결 상태에서만 \u003e0, 터미널 상태는 0)"
+          "title": "미체결수량 — 호가에 남아 있는 수량 (주문 − 체결 − 자동취소). 접수/부분체결 상태에서만 \u003e0, 터미널 상태는 0"
         },
         "averageFillPrice": {
           "type": "string",
@@ -1197,6 +1197,11 @@
         "status": {
           "$ref": "#/definitions/basketBasketExecutionOrderStatus",
           "title": "주문 상태"
+        },
+        "autoCancelledQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "자동취소 수량 누적 (부분취소 포함). 명시적 취소는 포함하지 않는다"
         }
       },
       "title": "바스켓 실행 주문 연결 이력 (실행 항목 ↔ 주문 감사 추적)"

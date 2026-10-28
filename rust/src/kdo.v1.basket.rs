@@ -439,7 +439,7 @@ pub struct BasketExecutionOrderRelation {
     /// 체결수량 (누적)
     #[prost(int64, tag="10")]
     pub filled_quantity: i64,
-    /// 미체결수량 (접수/부분체결 상태에서만 >0, 터미널 상태는 0)
+    /// 미체결수량 — 호가에 남아 있는 수량 (주문 − 체결 − 자동취소). 접수/부분체결 상태에서만 >0, 터미널 상태는 0
     #[prost(int64, tag="11")]
     pub remaining_quantity: i64,
     /// 평균 체결가격 (체결 없으면 빈 문자열)
@@ -448,6 +448,9 @@ pub struct BasketExecutionOrderRelation {
     /// 주문 상태
     #[prost(enumeration="BasketExecutionOrderStatus", tag="13")]
     pub status: i32,
+    /// 자동취소 수량 누적 (부분취소 포함). 명시적 취소는 포함하지 않는다
+    #[prost(int64, tag="14")]
+    pub auto_cancelled_quantity: i64,
 }
 // ============================================================================
 // Basket Execution Request/Response Messages

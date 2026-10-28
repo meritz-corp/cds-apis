@@ -1834,6 +1834,9 @@ impl serde::Serialize for BasketExecutionOrderRelation {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.basket.BasketExecutionOrderRelation", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -1892,6 +1895,11 @@ impl serde::Serialize for BasketExecutionOrderRelation {
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.status)))?;
             struct_ser.serialize_field("status", &v)?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("auto_cancelled_quantity", ToString::to_string(&self.auto_cancelled_quantity).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -1926,6 +1934,8 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
             "average_fill_price",
             "averageFillPrice",
             "status",
+            "auto_cancelled_quantity",
+            "autoCancelledQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1943,6 +1953,7 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
             RemainingQuantity,
             AverageFillPrice,
             Status,
+            AutoCancelledQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1978,6 +1989,7 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                             "remainingQuantity" | "remaining_quantity" => Ok(GeneratedField::RemainingQuantity),
                             "averageFillPrice" | "average_fill_price" => Ok(GeneratedField::AverageFillPrice),
                             "status" => Ok(GeneratedField::Status),
+                            "autoCancelledQuantity" | "auto_cancelled_quantity" => Ok(GeneratedField::AutoCancelledQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2010,6 +2022,7 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                 let mut remaining_quantity__ = None;
                 let mut average_fill_price__ = None;
                 let mut status__ = None;
+                let mut auto_cancelled_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -2106,6 +2119,14 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                             }
                             status__ = Some(map_.next_value::<BasketExecutionOrderStatus>()? as i32);
                         }
+                        GeneratedField::AutoCancelledQuantity => {
+                            if auto_cancelled_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("autoCancelledQuantity"));
+                            }
+                            auto_cancelled_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2125,6 +2146,7 @@ impl<'de> serde::Deserialize<'de> for BasketExecutionOrderRelation {
                     remaining_quantity: remaining_quantity__.unwrap_or_default(),
                     average_fill_price: average_fill_price__.unwrap_or_default(),
                     status: status__.unwrap_or_default(),
+                    auto_cancelled_quantity: auto_cancelled_quantity__.unwrap_or_default(),
                 })
             }
         }
