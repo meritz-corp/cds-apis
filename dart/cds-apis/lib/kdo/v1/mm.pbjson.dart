@@ -351,6 +351,7 @@ const MarketMakingMomentum$json = {
     {'1': 'ratio_threshold', '3': 4, '4': 1, '5': 1, '10': 'ratioThreshold'},
     {'1': 'strength_threshold', '3': 5, '4': 1, '5': 1, '10': 'strengthThreshold'},
     {'1': 'blend', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingMomentumBlend', '10': 'blend'},
+    {'1': 'ratio_only', '3': 7, '4': 1, '5': 8, '10': 'ratioOnly'},
   ],
 };
 
@@ -360,7 +361,8 @@ final $typed_data.Uint8List marketMakingMomentumDescriptor = $convert.base64Deco
     '9wcG9zaXRlGAIgASgIUgppc09wcG9zaXRlEhkKCG1heF9za2V3GAMgASgBUgdtYXhTa2V3EicK'
     'D3JhdGlvX3RocmVzaG9sZBgEIAEoAVIOcmF0aW9UaHJlc2hvbGQSLQoSc3RyZW5ndGhfdGhyZX'
     'Nob2xkGAUgASgBUhFzdHJlbmd0aFRocmVzaG9sZBI6CgVibGVuZBgGIAEoDjIkLmtkby52MS5t'
-    'bS5NYXJrZXRNYWtpbmdNb21lbnR1bUJsZW5kUgVibGVuZA==');
+    'bS5NYXJrZXRNYWtpbmdNb21lbnR1bUJsZW5kUgVibGVuZBIdCgpyYXRpb19vbmx5GAcgASgIUg'
+    'lyYXRpb09ubHk=');
 
 @$core.Deprecated('Use marketMakingMarketBiasDescriptor instead')
 const MarketMakingMarketBias$json = {

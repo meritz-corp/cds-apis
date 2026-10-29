@@ -1154,6 +1154,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
     $core.double? ratioThreshold,
     $core.double? strengthThreshold,
     MarketMakingMomentumBlend? blend,
+    $core.bool? ratioOnly,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -1162,6 +1163,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
     if (ratioThreshold != null) result.ratioThreshold = ratioThreshold;
     if (strengthThreshold != null) result.strengthThreshold = strengthThreshold;
     if (blend != null) result.blend = blend;
+    if (ratioOnly != null) result.ratioOnly = ratioOnly;
     return result;
   }
 
@@ -1177,6 +1179,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
     ..a<$core.double>(4, _omitFieldNames ? '' : 'ratioThreshold', $pb.PbFieldType.OD)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'strengthThreshold', $pb.PbFieldType.OD)
     ..e<MarketMakingMomentumBlend>(6, _omitFieldNames ? '' : 'blend', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingMomentumBlend.MARKET_MAKING_MOMENTUM_BLEND_PRODUCT, valueOf: MarketMakingMomentumBlend.valueOf, enumValues: MarketMakingMomentumBlend.values)
+    ..aOB(7, _omitFieldNames ? '' : 'ratioOnly')
     ..hasRequiredFields = false
   ;
 
@@ -1237,7 +1240,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearRatioThreshold() => $_clearField(4);
 
-  /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
+  /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100) — ratio_only=true 면 미사용
   @$pb.TagNumber(5)
   $core.double get strengthThreshold => $_getN(4);
   @$pb.TagNumber(5)
@@ -1247,7 +1250,7 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   void clearStrengthThreshold() => $_clearField(5);
 
-  /// ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작)
+  /// ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작) — ratio_only=true 면 미사용
   @$pb.TagNumber(6)
   MarketMakingMomentumBlend get blend => $_getN(5);
   @$pb.TagNumber(6)
@@ -1256,6 +1259,19 @@ class MarketMakingMomentum extends $pb.GeneratedMessage {
   $core.bool hasBlend() => $_has(5);
   @$pb.TagNumber(6)
   void clearBlend() => $_clearField(6);
+
+  /// true = strength 를 보지 않고 ratio 만으로 shift 를 계산한다(strength_threshold·blend 미사용).
+  /// shift = max_skew × (|ratio| − ratio_threshold) / (1 − ratio_threshold). 재계산 40회 워밍업 뒤부터 발동.
+  /// 체결 공백 뒤 소수 체결 쏠림은 analyzer total_decay_ratio=1.0, 잔체결 연타는 decay_unit_qty≈평균 클립으로 줄인다.
+  /// 기본값 false = 기존 동작(ratio·strength 결합).
+  @$pb.TagNumber(7)
+  $core.bool get ratioOnly => $_getBF(6);
+  @$pb.TagNumber(7)
+  set ratioOnly($core.bool value) => $_setBool(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasRatioOnly() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearRatioOnly() => $_clearField(7);
 }
 
 /// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)

@@ -289,12 +289,18 @@ pub struct MarketMakingMomentum {
     /// ratio 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p2/100)
     #[prost(double, tag="4")]
     pub ratio_threshold: f64,
-    /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100)
+    /// strength 발동 임계 ∈ [0, 1) (갤럭티코 pInfo.p3/100) — ratio_only=true 면 미사용
     #[prost(double, tag="5")]
     pub strength_threshold: f64,
-    /// ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작)
+    /// ratio·strength 결합 방식. 기본값 PRODUCT(0) = 곱(f×g, 기존 동작) — ratio_only=true 면 미사용
     #[prost(enumeration="MarketMakingMomentumBlend", tag="6")]
     pub blend: i32,
+    /// true = strength 를 보지 않고 ratio 만으로 shift 를 계산한다(strength_threshold·blend 미사용).
+    /// shift = max_skew × (|ratio| − ratio_threshold) / (1 − ratio_threshold). 재계산 40회 워밍업 뒤부터 발동.
+    /// 체결 공백 뒤 소수 체결 쏠림은 analyzer total_decay_ratio=1.0, 잔체결 연타는 decay_unit_qty≈평균 클립으로 줄인다.
+    /// 기본값 false = 기존 동작(ratio·strength 결합).
+    #[prost(bool, tag="7")]
+    pub ratio_only: bool,
 }
 /// MarketBias 설정 (갤럭티코 DecoByTradeAcc 포팅 — 장기 누적 영구 skew)
 #[allow(clippy::derive_partial_eq_without_eq)]
