@@ -1482,6 +1482,7 @@ class Order extends $pb.GeneratedMessage {
     $fixnum.Int64? createdAt,
     $fixnum.Int64? updatedAt,
     $core.String? fundCode,
+    $core.String? userArea,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
@@ -1494,6 +1495,7 @@ class Order extends $pb.GeneratedMessage {
     if (createdAt != null) result.createdAt = createdAt;
     if (updatedAt != null) result.updatedAt = updatedAt;
     if (fundCode != null) result.fundCode = fundCode;
+    if (userArea != null) result.userArea = userArea;
     return result;
   }
 
@@ -1513,6 +1515,7 @@ class Order extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'createdAt')
     ..aInt64(9, _omitFieldNames ? '' : 'updatedAt')
     ..aOS(10, _omitFieldNames ? '' : 'fundCode')
+    ..aOS(11, _omitFieldNames ? '' : 'userArea')
     ..hasRequiredFields = false
   ;
 
@@ -1632,6 +1635,16 @@ class Order extends $pb.GeneratedMessage {
   $core.bool hasFundCode() => $_has(9);
   @$pb.TagNumber(10)
   void clearFundCode() => $_clearField(10);
+
+  /// 사용자 영역 (JSON: OrderContext — OrderLog.user_area 와 같은 형식). context 없는 주문은 미설정
+  @$pb.TagNumber(11)
+  $core.String get userArea => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set userArea($core.String value) => $_setString(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasUserArea() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearUserArea() => $_clearField(11);
 }
 
 

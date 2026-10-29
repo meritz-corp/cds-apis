@@ -413,6 +413,10 @@
         "fundCode": {
           "type": "string",
           "title": "펀드 코드"
+        },
+        "userArea": {
+          "type": "string",
+          "title": "사용자 영역 (JSON: OrderContext — OrderLog.user_area 와 같은 형식). context 없는 주문은 미설정"
         }
       },
       "title": "주문 정보"

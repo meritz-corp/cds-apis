@@ -468,6 +468,10 @@ const Order$json = {
     {'1': 'created_at', '3': 8, '4': 1, '5': 3, '10': 'createdAt'},
     {'1': 'updated_at', '3': 9, '4': 1, '5': 3, '10': 'updatedAt'},
     {'1': 'fund_code', '3': 10, '4': 1, '5': 9, '10': 'fundCode'},
+    {'1': 'user_area', '3': 11, '4': 1, '5': 9, '9': 0, '10': 'userArea', '17': true},
+  ],
+  '8': [
+    {'1': '_user_area'},
   ],
 };
 
@@ -479,5 +483,6 @@ final $typed_data.Uint8List orderDescriptor = $convert.base64Decode(
     'cKD2ZpbGxlZF9xdWFudGl0eRgGIAEoA1IOZmlsbGVkUXVhbnRpdHkSMQoGc3RhdHVzGAcgASgO'
     'Mhkua2RvLnYxLm9yZGVyLk9yZGVyU3RhdHVzUgZzdGF0dXMSHQoKY3JlYXRlZF9hdBgIIAEoA1'
     'IJY3JlYXRlZEF0Eh0KCnVwZGF0ZWRfYXQYCSABKANSCXVwZGF0ZWRBdBIbCglmdW5kX2NvZGUY'
-    'CiABKAlSCGZ1bmRDb2Rl');
+    'CiABKAlSCGZ1bmRDb2RlEiAKCXVzZXJfYXJlYRgLIAEoCUgAUgh1c2VyQXJlYYgBAUIMCgpfdX'
+    'Nlcl9hcmVh');
 

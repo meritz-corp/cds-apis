@@ -384,4 +384,7 @@ message Order {
 
   // 펀드 코드
   string fund_code = 10;
+
+  // 사용자 영역 (JSON: OrderContext — OrderLog.user_area 와 같은 형식). context 없는 주문은 미설정
+  optional string user_area = 11;
 }

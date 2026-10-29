@@ -320,6 +320,9 @@ pub struct Order {
     /// 펀드 코드
     #[prost(string, tag="10")]
     pub fund_code: ::prost::alloc::string::String,
+    /// 사용자 영역 (JSON: OrderContext — OrderLog.user_area 와 같은 형식). context 없는 주문은 미설정
+    #[prost(string, optional, tag="11")]
+    pub user_area: ::core::option::Option<::prost::alloc::string::String>,
 }
 // ========== Enums ==========
 
