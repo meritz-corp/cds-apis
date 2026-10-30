@@ -8958,6 +8958,9 @@ impl serde::Serialize for MmFillSummary {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmFillSummary", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -8984,6 +8987,9 @@ impl serde::Serialize for MmFillSummary {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("unrealized_pnl", ToString::to_string(&self.unrealized_pnl).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("open_avg_price", &self.open_avg_price)?;
         }
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -9013,6 +9019,8 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             "realizedPnl",
             "unrealized_pnl",
             "unrealizedPnl",
+            "open_avg_price",
+            "openAvgPrice",
             "fund_code",
             "fundCode",
             "slot_id",
@@ -9027,6 +9035,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
             SellAvgPrice,
             RealizedPnl,
             UnrealizedPnl,
+            OpenAvgPrice,
             FundCode,
             SlotId,
             __SkipField__,
@@ -9057,6 +9066,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                             "sellAvgPrice" | "sell_avg_price" => Ok(GeneratedField::SellAvgPrice),
                             "realizedPnl" | "realized_pnl" => Ok(GeneratedField::RealizedPnl),
                             "unrealizedPnl" | "unrealized_pnl" => Ok(GeneratedField::UnrealizedPnl),
+                            "openAvgPrice" | "open_avg_price" => Ok(GeneratedField::OpenAvgPrice),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -9084,6 +9094,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                 let mut sell_avg_price__ = None;
                 let mut realized_pnl__ = None;
                 let mut unrealized_pnl__ = None;
+                let mut open_avg_price__ = None;
                 let mut fund_code__ = None;
                 let mut slot_id__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -9136,6 +9147,14 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::OpenAvgPrice => {
+                            if open_avg_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("openAvgPrice"));
+                            }
+                            open_avg_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::FundCode => {
                             if fund_code__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("fundCode"));
@@ -9160,6 +9179,7 @@ impl<'de> serde::Deserialize<'de> for MmFillSummary {
                     sell_avg_price: sell_avg_price__.unwrap_or_default(),
                     realized_pnl: realized_pnl__.unwrap_or_default(),
                     unrealized_pnl: unrealized_pnl__.unwrap_or_default(),
+                    open_avg_price: open_avg_price__.unwrap_or_default(),
                     fund_code: fund_code__.unwrap_or_default(),
                     slot_id: slot_id__.unwrap_or_default(),
                 })

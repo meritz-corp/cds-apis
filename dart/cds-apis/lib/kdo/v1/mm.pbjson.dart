@@ -1188,6 +1188,7 @@ const MmFillSummary$json = {
     {'1': 'sell_avg_price', '3': 4, '4': 1, '5': 1, '10': 'sellAvgPrice'},
     {'1': 'realized_pnl', '3': 7, '4': 1, '5': 3, '10': 'realizedPnl'},
     {'1': 'unrealized_pnl', '3': 8, '4': 1, '5': 3, '10': 'unrealizedPnl'},
+    {'1': 'open_avg_price', '3': 12, '4': 1, '5': 1, '10': 'openAvgPrice'},
     {'1': 'fund_code', '3': 10, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'slot_id', '3': 11, '4': 1, '5': 9, '10': 'slotId'},
   ],
@@ -1205,9 +1206,10 @@ final $typed_data.Uint8List mmFillSummaryDescriptor = $convert.base64Decode(
     'V5X2F2Z19wcmljZRgCIAEoAVILYnV5QXZnUHJpY2USIwoNc2VsbF9xdWFudGl0eRgDIAEoA1IM'
     'c2VsbFF1YW50aXR5EiQKDnNlbGxfYXZnX3ByaWNlGAQgASgBUgxzZWxsQXZnUHJpY2USIQoMcm'
     'VhbGl6ZWRfcG5sGAcgASgDUgtyZWFsaXplZFBubBIlCg51bnJlYWxpemVkX3BubBgIIAEoA1IN'
-    'dW5yZWFsaXplZFBubBIbCglmdW5kX2NvZGUYCiABKAlSCGZ1bmRDb2RlEhcKB3Nsb3RfaWQYCy'
-    'ABKAlSBnNsb3RJZEoECAUQBkoECAYQB0oECAkQClIOYnV5X2ZpbGxfY291bnRSD3NlbGxfZmls'
-    'bF9jb3VudFIPdmFsdWF0aW9uX3ByaWNl');
+    'dW5yZWFsaXplZFBubBIkCg5vcGVuX2F2Z19wcmljZRgMIAEoAVIMb3BlbkF2Z1ByaWNlEhsKCW'
+    'Z1bmRfY29kZRgKIAEoCVIIZnVuZENvZGUSFwoHc2xvdF9pZBgLIAEoCVIGc2xvdElkSgQIBRAG'
+    'SgQIBhAHSgQICRAKUg5idXlfZmlsbF9jb3VudFIPc2VsbF9maWxsX2NvdW50Ug92YWx1YXRpb2'
+    '5fcHJpY2U=');
 
 @$core.Deprecated('Use listMmPnlHistoryRequestDescriptor instead')
 const ListMmPnlHistoryRequest$json = {

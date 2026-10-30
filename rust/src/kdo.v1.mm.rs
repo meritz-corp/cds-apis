@@ -1123,12 +1123,16 @@ pub struct MmFillSummary {
     pub sell_quantity: i64,
     #[prost(double, tag="4")]
     pub sell_avg_price: f64,
-    /// 당일 실현손익 (원 단위, 평균단가법)
+    /// 당일 실현손익 (원 단위, 선입선출 — 먼저 체결된 수량부터 닫는다)
     #[prost(int64, tag="7")]
     pub realized_pnl: i64,
-    /// 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
+    /// 미실현손익 (원 단위, 열린 로트 평가액 = 순포지션 × (평가가 − open_avg_price))
     #[prost(int64, tag="8")]
     pub unrealized_pnl: i64,
+    /// 열린 로트 평단 (원, 소수 가능) — 아직 안 닫힌 수량의 선입선출 가중평균 체결가. 롱·숏 모두 양수, 순포지션 0 이면 0.
+    /// ExposureBalancerState.position_avg_price(기회 청산 기준 이동평균 단가)와 다른 값이다.
+    #[prost(double, tag="12")]
+    pub open_avg_price: f64,
     /// 펀드 코드 — 클라이언트가 같은 심볼의 여러 펀드 스트림을 구분용.
     #[prost(string, tag="10")]
     pub fund_code: ::prost::alloc::string::String,
@@ -1167,7 +1171,7 @@ pub struct MmPnlPoint {
     /// 버킷 시작 시각 (unix epoch seconds)
     #[prost(int64, tag="1")]
     pub time: i64,
-    /// 당일 실현손익 (원, 평균단가법)
+    /// 당일 실현손익 (원, 선입선출 — kdo #561 배포 전 샘플은 평균단가법)
     #[prost(int64, tag="2")]
     pub realized_pnl: i64,
     /// 미실현손익 (원)
@@ -1211,7 +1215,7 @@ pub struct MmDailyPnl {
     /// 영업일 (KST, YYYYMMDD)
     #[prost(uint32, tag="1")]
     pub date: u32,
-    /// 마감 시점 실현손익 (원, 평균단가법) — 그날 마지막 샘플 값
+    /// 마감 시점 실현손익 (원, 선입선출 — kdo #561 배포 전 날짜는 평균단가법) — 그날 마지막 샘플 값
     #[prost(int64, tag="2")]
     pub realized_pnl: i64,
     /// 마감 시점 미실현손익 (원) — 그날 마지막 샘플 값

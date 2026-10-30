@@ -5032,6 +5032,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
     $fixnum.Int64? unrealizedPnl,
     $core.String? fundCode,
     $core.String? slotId,
+    $core.double? openAvgPrice,
   }) {
     final result = create();
     if (buyQuantity != null) result.buyQuantity = buyQuantity;
@@ -5042,6 +5043,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
     if (unrealizedPnl != null) result.unrealizedPnl = unrealizedPnl;
     if (fundCode != null) result.fundCode = fundCode;
     if (slotId != null) result.slotId = slotId;
+    if (openAvgPrice != null) result.openAvgPrice = openAvgPrice;
     return result;
   }
 
@@ -5059,6 +5061,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
     ..aInt64(8, _omitFieldNames ? '' : 'unrealizedPnl')
     ..aOS(10, _omitFieldNames ? '' : 'fundCode')
     ..aOS(11, _omitFieldNames ? '' : 'slotId')
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'openAvgPrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -5117,7 +5120,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearSellAvgPrice() => $_clearField(4);
 
-  /// 당일 실현손익 (원 단위, 평균단가법)
+  /// 당일 실현손익 (원 단위, 선입선출 — 먼저 체결된 수량부터 닫는다)
   @$pb.TagNumber(7)
   $fixnum.Int64 get realizedPnl => $_getI64(4);
   @$pb.TagNumber(7)
@@ -5127,7 +5130,7 @@ class MmFillSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearRealizedPnl() => $_clearField(7);
 
-  /// 미실현손익 (원 단위, 순포지션 × (평가가 − 평단))
+  /// 미실현손익 (원 단위, 열린 로트 평가액 = 순포지션 × (평가가 − open_avg_price))
   @$pb.TagNumber(8)
   $fixnum.Int64 get unrealizedPnl => $_getI64(5);
   @$pb.TagNumber(8)
@@ -5156,6 +5159,17 @@ class MmFillSummary extends $pb.GeneratedMessage {
   $core.bool hasSlotId() => $_has(7);
   @$pb.TagNumber(11)
   void clearSlotId() => $_clearField(11);
+
+  /// 열린 로트 평단 (원, 소수 가능) — 아직 안 닫힌 수량의 선입선출 가중평균 체결가. 롱·숏 모두 양수, 순포지션 0 이면 0.
+  /// ExposureBalancerState.position_avg_price(기회 청산 기준 이동평균 단가)와 다른 값이다.
+  @$pb.TagNumber(12)
+  $core.double get openAvgPrice => $_getN(8);
+  @$pb.TagNumber(12)
+  set openAvgPrice($core.double value) => $_setDouble(8, value);
+  @$pb.TagNumber(12)
+  $core.bool hasOpenAvgPrice() => $_has(8);
+  @$pb.TagNumber(12)
+  void clearOpenAvgPrice() => $_clearField(12);
 }
 
 /// ListMmPnlHistory
@@ -5328,7 +5342,7 @@ class MmPnlPoint extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearTime() => $_clearField(1);
 
-  /// 당일 실현손익 (원, 평균단가법)
+  /// 당일 실현손익 (원, 선입선출 — kdo #561 배포 전 샘플은 평균단가법)
   @$pb.TagNumber(2)
   $fixnum.Int64 get realizedPnl => $_getI64(1);
   @$pb.TagNumber(2)
@@ -5565,7 +5579,7 @@ class MmDailyPnl extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearDate() => $_clearField(1);
 
-  /// 마감 시점 실현손익 (원, 평균단가법) — 그날 마지막 샘플 값
+  /// 마감 시점 실현손익 (원, 선입선출 — kdo #561 배포 전 날짜는 평균단가법) — 그날 마지막 샘플 값
   @$pb.TagNumber(2)
   $fixnum.Int64 get realizedPnl => $_getI64(1);
   @$pb.TagNumber(2)
