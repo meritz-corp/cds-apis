@@ -196,6 +196,7 @@ const PairV2$json = {
     {'1': 'min_fill_rate_pct', '3': 21, '4': 1, '5': 1, '9': 3, '10': 'minFillRatePct', '17': true},
     {'1': 'pricing', '3': 22, '4': 1, '5': 11, '6': '.kdo.v1.pair_v2.PairV2Pricing', '10': 'pricing'},
     {'1': 'total_rounds', '3': 23, '4': 1, '5': 13, '9': 4, '10': 'totalRounds', '17': true},
+    {'1': 'spread_alert', '3': 24, '4': 1, '5': 8, '9': 5, '10': 'spreadAlert', '17': true},
   ],
   '7': {},
   '8': [
@@ -204,6 +205,7 @@ const PairV2$json = {
     {'1': '_trading_window_end'},
     {'1': '_min_fill_rate_pct'},
     {'1': '_total_rounds'},
+    {'1': '_spread_alert'},
   ],
 };
 
@@ -228,10 +230,11 @@ final $typed_data.Uint8List pairV2Descriptor = $convert.base64Decode(
     'cHBhZ2VHdWFyZBIuChNhbGxvd19ib3Jyb3dlZF9zZWxsGBQgASgIUhFhbGxvd0JvcnJvd2VkU2'
     'VsbBIuChFtaW5fZmlsbF9yYXRlX3BjdBgVIAEoAUgDUg5taW5GaWxsUmF0ZVBjdIgBARI3Cgdw'
     'cmljaW5nGBYgASgLMh0ua2RvLnYxLnBhaXJfdjIuUGFpclYyUHJpY2luZ1IHcHJpY2luZxImCg'
-    'x0b3RhbF9yb3VuZHMYFyABKA1IBFILdG90YWxSb3VuZHOIAQE6L+pBLAoWa2RvLmNkc2FwaXMu'
-    'eHl6L1BhaXJWMhIScGFpcl92MnMve3BhaXJfdjJ9QhIKEF9wYXVzZV9sYXVuY2hfbm9CFwoVX3'
-    'RyYWRpbmdfd2luZG93X3N0YXJ0QhUKE190cmFkaW5nX3dpbmRvd19lbmRCFAoSX21pbl9maWxs'
-    'X3JhdGVfcGN0Qg8KDV90b3RhbF9yb3VuZHM=');
+    'x0b3RhbF9yb3VuZHMYFyABKA1IBFILdG90YWxSb3VuZHOIAQESJgoMc3ByZWFkX2FsZXJ0GBgg'
+    'ASgISAVSC3NwcmVhZEFsZXJ0iAEBOi/qQSwKFmtkby5jZHNhcGlzLnh5ei9QYWlyVjISEnBhaX'
+    'JfdjJzL3twYWlyX3YyfUISChBfcGF1c2VfbGF1bmNoX25vQhcKFV90cmFkaW5nX3dpbmRvd19z'
+    'dGFydEIVChNfdHJhZGluZ193aW5kb3dfZW5kQhQKEl9taW5fZmlsbF9yYXRlX3BjdEIPCg1fdG'
+    '90YWxfcm91bmRzQg8KDV9zcHJlYWRfYWxlcnQ=');
 
 @$core.Deprecated('Use pairV2EntryDescriptor instead')
 const PairV2Entry$json = {

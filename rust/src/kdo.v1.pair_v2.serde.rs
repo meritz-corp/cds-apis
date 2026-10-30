@@ -2470,6 +2470,9 @@ impl serde::Serialize for PairV2 {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -2546,6 +2549,9 @@ impl serde::Serialize for PairV2 {
         if let Some(v) = self.total_rounds.as_ref() {
             struct_ser.serialize_field("total_rounds", v)?;
         }
+        if let Some(v) = self.spread_alert.as_ref() {
+            struct_ser.serialize_field("spread_alert", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -2594,6 +2600,8 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             "pricing",
             "total_rounds",
             "totalRounds",
+            "spread_alert",
+            "spreadAlert",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2621,6 +2629,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
             MinFillRatePct,
             Pricing,
             TotalRounds,
+            SpreadAlert,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2666,6 +2675,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                             "minFillRatePct" | "min_fill_rate_pct" => Ok(GeneratedField::MinFillRatePct),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "totalRounds" | "total_rounds" => Ok(GeneratedField::TotalRounds),
+                            "spreadAlert" | "spread_alert" => Ok(GeneratedField::SpreadAlert),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2708,6 +2718,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                 let mut min_fill_rate_pct__ = None;
                 let mut pricing__ = None;
                 let mut total_rounds__ = None;
+                let mut spread_alert__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -2866,6 +2877,12 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::SpreadAlert => {
+                            if spread_alert__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("spreadAlert"));
+                            }
+                            spread_alert__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2895,6 +2912,7 @@ impl<'de> serde::Deserialize<'de> for PairV2 {
                     min_fill_rate_pct: min_fill_rate_pct__,
                     pricing: pricing__,
                     total_rounds: total_rounds__,
+                    spread_alert: spread_alert__,
                 })
             }
         }

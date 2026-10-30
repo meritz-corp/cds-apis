@@ -100,6 +100,14 @@ pub struct PairV2 {
     /// CreatePairV2 에서 미지정이면 max_base_quantity ÷ base.quantity (최소 1) 로 정한다.
     #[prost(uint32, optional, tag="23")]
     pub total_rounds: ::core::option::Option<u32>,
+    /// 스프레드 조건 알림 - true 면 정지(PAUSED) 중에도 스프레드가 발사 조건(target_spread 를 매수차는 초과·매도차는 미만)에
+    /// 들어서는 순간 발주 없이 알림을 보낸다 (Warning, event_type "SpreadAlert"). 자동 발사 중(ACTIVE)인 페어는 알리지 않는다.
+    /// 판정은 자동 발사와 같은 시세 기준(양다리 연속매매·5초 이내 호가)에서 스프레드 조건만 본다 — 쿨다운·총회차·운영시간창·
+    /// 슬리피지 가드 등은 보지 않는다. 조건에 머무는 동안은 다시 알리지 않고, 경계를 들락날락해도 페어별 1분에 한 번까지만 알린다.
+    /// 서버마다 따로 판정해 그 서버에 접속한 사용자에게 보낸다.
+    /// UpdatePairV2 전체 교체(update_mask 없음)에서 미지정이면 기존 값을 유지한다. CreatePairV2 에서 미지정이면 false.
+    #[prost(bool, optional, tag="24")]
+    pub spread_alert: ::core::option::Option<bool>,
 }
 // ============================================================================
 // Pair Entry

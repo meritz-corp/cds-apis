@@ -54,6 +54,7 @@ class PairV2 extends $pb.GeneratedMessage {
     $core.double? minFillRatePct,
     PairV2Pricing? pricing,
     $core.int? totalRounds,
+    $core.bool? spreadAlert,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -79,6 +80,7 @@ class PairV2 extends $pb.GeneratedMessage {
     if (minFillRatePct != null) result.minFillRatePct = minFillRatePct;
     if (pricing != null) result.pricing = pricing;
     if (totalRounds != null) result.totalRounds = totalRounds;
+    if (spreadAlert != null) result.spreadAlert = spreadAlert;
     return result;
   }
 
@@ -111,6 +113,7 @@ class PairV2 extends $pb.GeneratedMessage {
     ..a<$core.double>(21, _omitFieldNames ? '' : 'minFillRatePct', $pb.PbFieldType.OD)
     ..aOM<PairV2Pricing>(22, _omitFieldNames ? '' : 'pricing', subBuilder: PairV2Pricing.create)
     ..a<$core.int>(23, _omitFieldNames ? '' : 'totalRounds', $pb.PbFieldType.OU3)
+    ..aOB(24, _omitFieldNames ? '' : 'spreadAlert')
     ..hasRequiredFields = false
   ;
 
@@ -404,6 +407,21 @@ class PairV2 extends $pb.GeneratedMessage {
   $core.bool hasTotalRounds() => $_has(22);
   @$pb.TagNumber(23)
   void clearTotalRounds() => $_clearField(23);
+
+  /// 스프레드 조건 알림 - true 면 정지(PAUSED) 중에도 스프레드가 발사 조건(target_spread 를 매수차는 초과·매도차는 미만)에
+  /// 들어서는 순간 발주 없이 알림을 보낸다 (Warning, event_type "SpreadAlert"). 자동 발사 중(ACTIVE)인 페어는 알리지 않는다.
+  /// 판정은 자동 발사와 같은 시세 기준(양다리 연속매매·5초 이내 호가)에서 스프레드 조건만 본다 — 쿨다운·총회차·운영시간창·
+  /// 슬리피지 가드 등은 보지 않는다. 조건에 머무는 동안은 다시 알리지 않고, 경계를 들락날락해도 페어별 1분에 한 번까지만 알린다.
+  /// 서버마다 따로 판정해 그 서버에 접속한 사용자에게 보낸다.
+  /// UpdatePairV2 전체 교체(update_mask 없음)에서 미지정이면 기존 값을 유지한다. CreatePairV2 에서 미지정이면 false.
+  @$pb.TagNumber(24)
+  $core.bool get spreadAlert => $_getBF(23);
+  @$pb.TagNumber(24)
+  set spreadAlert($core.bool value) => $_setBool(23, value);
+  @$pb.TagNumber(24)
+  $core.bool hasSpreadAlert() => $_has(23);
+  @$pb.TagNumber(24)
+  void clearSpreadAlert() => $_clearField(24);
 }
 
 /// 페어의 한쪽 엔트리 (단일 심볼 주문 스펙).

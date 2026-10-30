@@ -235,6 +235,10 @@
                   "type": "integer",
                   "format": "int64",
                   "description": "총회차 - 한 실행 세션에서 낼 회차 수 (1 이상). 다리별 총수량 = 1회 수량(entry.quantity) × 총회차.\nk회차 다리별 발주량 = k회차 누적 목표 − 세션 발주수량(체결 + 미체결; 취소·거부·전송실패분은 빠진다)\n→ 취소·거부된 수량은 다음 회차가 되메운다 (mmm 바스켓의 누적 목표 방식).\n누적 목표는 회차를 낼 때마다 그 시점의 1회 수량을 더해 기록하므로, 세션 중 1회 수량을 바꾸면 다음 회차부터 적용된다.\n완료회차(launch_count)가 이 값에 도달하면 자동·수동 발사를 막는다 (OrderPairV2UntilRound 는 허용).\nCreatePairV2 에서 미지정이면 max_base_quantity ÷ base.quantity (최소 1) 로 정한다."
+                },
+                "spreadAlert": {
+                  "type": "boolean",
+                  "description": "스프레드 조건 알림 - true 면 정지(PAUSED) 중에도 스프레드가 발사 조건(target_spread 를 매수차는 초과·매도차는 미만)에\n들어서는 순간 발주 없이 알림을 보낸다 (Warning, event_type \"SpreadAlert\"). 자동 발사 중(ACTIVE)인 페어는 알리지 않는다.\n판정은 자동 발사와 같은 시세 기준(양다리 연속매매·5초 이내 호가)에서 스프레드 조건만 본다 — 쿨다운·총회차·운영시간창·\n슬리피지 가드 등은 보지 않는다. 조건에 머무는 동안은 다시 알리지 않고, 경계를 들락날락해도 페어별 1분에 한 번까지만 알린다.\n서버마다 따로 판정해 그 서버에 접속한 사용자에게 보낸다.\nUpdatePairV2 전체 교체(update_mask 없음)에서 미지정이면 기존 값을 유지한다. CreatePairV2 에서 미지정이면 false."
                 }
               },
               "title": "수정할 PairV2",
@@ -1259,6 +1263,10 @@
           "type": "integer",
           "format": "int64",
           "description": "총회차 - 한 실행 세션에서 낼 회차 수 (1 이상). 다리별 총수량 = 1회 수량(entry.quantity) × 총회차.\nk회차 다리별 발주량 = k회차 누적 목표 − 세션 발주수량(체결 + 미체결; 취소·거부·전송실패분은 빠진다)\n→ 취소·거부된 수량은 다음 회차가 되메운다 (mmm 바스켓의 누적 목표 방식).\n누적 목표는 회차를 낼 때마다 그 시점의 1회 수량을 더해 기록하므로, 세션 중 1회 수량을 바꾸면 다음 회차부터 적용된다.\n완료회차(launch_count)가 이 값에 도달하면 자동·수동 발사를 막는다 (OrderPairV2UntilRound 는 허용).\nCreatePairV2 에서 미지정이면 max_base_quantity ÷ base.quantity (최소 1) 로 정한다."
+        },
+        "spreadAlert": {
+          "type": "boolean",
+          "description": "스프레드 조건 알림 - true 면 정지(PAUSED) 중에도 스프레드가 발사 조건(target_spread 를 매수차는 초과·매도차는 미만)에\n들어서는 순간 발주 없이 알림을 보낸다 (Warning, event_type \"SpreadAlert\"). 자동 발사 중(ACTIVE)인 페어는 알리지 않는다.\n판정은 자동 발사와 같은 시세 기준(양다리 연속매매·5초 이내 호가)에서 스프레드 조건만 본다 — 쿨다운·총회차·운영시간창·\n슬리피지 가드 등은 보지 않는다. 조건에 머무는 동안은 다시 알리지 않고, 경계를 들락날락해도 페어별 1분에 한 번까지만 알린다.\n서버마다 따로 판정해 그 서버에 접속한 사용자에게 보낸다.\nUpdatePairV2 전체 교체(update_mask 없음)에서 미지정이면 기존 값을 유지한다. CreatePairV2 에서 미지정이면 false."
         }
       },
       "description": "PairV2 전략 — base·counter 지정 호가로 재는 스프레드(\"선물 − 현물\")가 target_spread 를\n발사 방향(매수차 초과·매도차 미만)으로 넘으면 그 가격 그대로 양다리를 동시 발주한다.",
