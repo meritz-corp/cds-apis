@@ -1353,6 +1353,7 @@ const MmFillPoint$json = {
     {'1': 'time', '3': 1, '4': 1, '5': 3, '10': 'time'},
     {'1': 'buy_volume', '3': 4, '4': 1, '5': 3, '10': 'buyVolume'},
     {'1': 'sell_volume', '3': 5, '4': 1, '5': 3, '10': 'sellVolume'},
+    {'1': 'net_position', '3': 6, '4': 1, '5': 3, '10': 'netPosition'},
   ],
   '9': [
     {'1': 2, '2': 3},
@@ -1364,8 +1365,9 @@ const MmFillPoint$json = {
 /// Descriptor for `MmFillPoint`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mmFillPointDescriptor = $convert.base64Decode(
     'CgtNbUZpbGxQb2ludBISCgR0aW1lGAEgASgDUgR0aW1lEh0KCmJ1eV92b2x1bWUYBCABKANSCW'
-    'J1eVZvbHVtZRIfCgtzZWxsX3ZvbHVtZRgFIAEoA1IKc2VsbFZvbHVtZUoECAIQA0oECAMQBFIM'
-    'YnV5X3F1YW50aXR5Ug1zZWxsX3F1YW50aXR5');
+    'J1eVZvbHVtZRIfCgtzZWxsX3ZvbHVtZRgFIAEoA1IKc2VsbFZvbHVtZRIhCgxuZXRfcG9zaXRp'
+    'b24YBiABKANSC25ldFBvc2l0aW9uSgQIAhADSgQIAxAEUgxidXlfcXVhbnRpdHlSDXNlbGxfcX'
+    'VhbnRpdHk=');
 
 @$core.Deprecated('Use listMmFillHistoryResponseDescriptor instead')
 const ListMmFillHistoryResponse$json = {

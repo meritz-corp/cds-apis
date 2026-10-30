@@ -581,9 +581,10 @@ pub struct MarketMakingQuantityLimit {
     pub max_quantity: i64,
 }
 /// MM 당일 손실 한도.
-/// 당일 손익(실현 + 미실현, 평가가 = 자기 ETF mid — StreamMmFills 의 realized_pnl + unrealized_pnl
-/// 과 같은 값, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면 서버가 MM 을 정지한다
-/// (잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다.
+/// 당일 손익(실현 + 미실현, 평균단가법, 평가가 = 자기 ETF mid, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면
+/// 서버가 MM 을 정지한다 (잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다.
+/// StreamMmFills 의 realized_pnl + unrealized_pnl(선입선출)과는 평가가가 있으면 1원 이내로 같고,
+/// 평가가 미수신(mid 0)이면 한도는 실현손익만으로 판정해 값이 다를 수 있다.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MarketMakingLossLimit {
@@ -1278,6 +1279,11 @@ pub struct MmFillPoint {
     /// 이 버킷 구간에서 체결된 매도량.
     #[prost(int64, tag="5")]
     pub sell_volume: i64,
+    /// 이 버킷의 마지막 샘플 시점 순포지션 (MM 당일 누적 매수 − 매도, 롱 +). 구간 증분이 아니라 그 시점 값이다.
+    /// 엔진 노출(ExposureBalancerState.net_exposure)과 같은 체결로 갱신돼 평소엔 같지만,
+    /// 같은 날 재기동하면 이 값은 저장해 둔 당일 누적을 이어 가고 엔진 노출은 0 부터 다시 센다.
+    #[prost(int64, tag="6")]
+    pub net_position: i64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

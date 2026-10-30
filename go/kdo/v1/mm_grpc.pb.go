@@ -55,7 +55,7 @@ type MarketMakingServiceClient interface {
 	// 날짜별 비교·집계는 이 RPC 를 쓴다.
 	ListMmDailyPnl(ctx context.Context, in *ListMmDailyPnlRequest, opts ...grpc.CallOption) (*ListMmDailyPnlResponse, error)
 	// 시간별 체결량 조회 — 저장된 손익 샘플의 당일 누적 체결수량을 버킷 간격으로 잘라
-	// 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
+	// 그 버킷 구간에서 체결된 양과 버킷 마지막 시점 순포지션을 함께 반환한다.
 	// 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
 	ListMmFillHistory(ctx context.Context, in *ListMmFillHistoryRequest, opts ...grpc.CallOption) (*ListMmFillHistoryResponse, error)
 	// Fit to Market: F2M 평행 skew 를 1회 설정한다.
@@ -368,7 +368,7 @@ type MarketMakingServiceServer interface {
 	// 날짜별 비교·집계는 이 RPC 를 쓴다.
 	ListMmDailyPnl(context.Context, *ListMmDailyPnlRequest) (*ListMmDailyPnlResponse, error)
 	// 시간별 체결량 조회 — 저장된 손익 샘플의 당일 누적 체결수량을 버킷 간격으로 잘라
-	// 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
+	// 그 버킷 구간에서 체결된 양과 버킷 마지막 시점 순포지션을 함께 반환한다.
 	// 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
 	ListMmFillHistory(context.Context, *ListMmFillHistoryRequest) (*ListMmFillHistoryResponse, error)
 	// Fit to Market: F2M 평행 skew 를 1회 설정한다.

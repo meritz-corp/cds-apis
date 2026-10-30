@@ -122,7 +122,7 @@ abstract final class MarketMakingService {
   );
 
   /// 시간별 체결량 조회 — 저장된 손익 샘플의 당일 누적 체결수량을 버킷 간격으로 잘라
-  /// 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
+  /// 그 버킷 구간에서 체결된 양과 버킷 마지막 시점 순포지션을 함께 반환한다.
   /// 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
   static const listMmFillHistory = connect.Spec(
     '/$name/ListMmFillHistory',

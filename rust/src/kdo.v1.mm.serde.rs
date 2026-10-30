@@ -8800,6 +8800,9 @@ impl serde::Serialize for MmFillPoint {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmFillPoint", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -8816,6 +8819,11 @@ impl serde::Serialize for MmFillPoint {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("sell_volume", ToString::to_string(&self.sell_volume).as_str())?;
         }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_position", ToString::to_string(&self.net_position).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -8831,6 +8839,8 @@ impl<'de> serde::Deserialize<'de> for MmFillPoint {
             "buyVolume",
             "sell_volume",
             "sellVolume",
+            "net_position",
+            "netPosition",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -8838,6 +8848,7 @@ impl<'de> serde::Deserialize<'de> for MmFillPoint {
             Time,
             BuyVolume,
             SellVolume,
+            NetPosition,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -8863,6 +8874,7 @@ impl<'de> serde::Deserialize<'de> for MmFillPoint {
                             "time" => Ok(GeneratedField::Time),
                             "buyVolume" | "buy_volume" => Ok(GeneratedField::BuyVolume),
                             "sellVolume" | "sell_volume" => Ok(GeneratedField::SellVolume),
+                            "netPosition" | "net_position" => Ok(GeneratedField::NetPosition),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -8885,6 +8897,7 @@ impl<'de> serde::Deserialize<'de> for MmFillPoint {
                 let mut time__ = None;
                 let mut buy_volume__ = None;
                 let mut sell_volume__ = None;
+                let mut net_position__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Time => {
@@ -8911,6 +8924,14 @@ impl<'de> serde::Deserialize<'de> for MmFillPoint {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::NetPosition => {
+                            if net_position__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netPosition"));
+                            }
+                            net_position__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -8920,6 +8941,7 @@ impl<'de> serde::Deserialize<'de> for MmFillPoint {
                     time: time__.unwrap_or_default(),
                     buy_volume: buy_volume__.unwrap_or_default(),
                     sell_volume: sell_volume__.unwrap_or_default(),
+                    net_position: net_position__.unwrap_or_default(),
                 })
             }
         }

@@ -125,7 +125,7 @@ service MarketMakingService {
   }
 
   // 시간별 체결량 조회 — 저장된 손익 샘플의 당일 누적 체결수량을 버킷 간격으로 잘라
-  // 버킷 마지막 누적값과 그 버킷 구간에서 체결된 양을 함께 반환한다.
+  // 그 버킷 구간에서 체결된 양과 버킷 마지막 시점 순포지션을 함께 반환한다.
   // 손익 시계열(ListMmPnlHistory)과 같은 구간·버킷 파라미터를 쓰므로 같은 축에 겹쳐 그릴 수 있다.
   rpc ListMmFillHistory(ListMmFillHistoryRequest) returns (ListMmFillHistoryResponse) {
     option (google.api.http) = {
@@ -726,9 +726,10 @@ message MarketMakingQuantityLimit {
 }
 
 // MM 당일 손실 한도.
-// 당일 손익(실현 + 미실현, 평가가 = 자기 ETF mid — StreamMmFills 의 realized_pnl + unrealized_pnl
-// 과 같은 값, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면 서버가 MM 을 정지한다
-// (잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다.
+// 당일 손익(실현 + 미실현, 평균단가법, 평가가 = 자기 ETF mid, 슬롯 단위, 수수료 제외)이 -max_loss 이하가 되면
+// 서버가 MM 을 정지한다 (잔여 호가 전량 취소 + 순노출 청산, 자동 재개 없음). 한도를 넘은 상태에서는 start 가 거부된다.
+// StreamMmFills 의 realized_pnl + unrealized_pnl(선입선출)과는 평가가가 있으면 1원 이내로 같고,
+// 평가가 미수신(mid 0)이면 한도는 실현손익만으로 판정해 값이 다를 수 있다.
 message MarketMakingLossLimit {
   // 당일 최대 허용 손실 (원 단위, 양수). 0 = 비활성.
   int64 max_loss = 1;
@@ -1334,6 +1335,11 @@ message MmFillPoint {
 
   // 이 버킷 구간에서 체결된 매도량.
   int64 sell_volume = 5;
+
+  // 이 버킷의 마지막 샘플 시점 순포지션 (MM 당일 누적 매수 − 매도, 롱 +). 구간 증분이 아니라 그 시점 값이다.
+  // 엔진 노출(ExposureBalancerState.net_exposure)과 같은 체결로 갱신돼 평소엔 같지만,
+  // 같은 날 재기동하면 이 값은 저장해 둔 당일 누적을 이어 가고 엔진 노출은 0 부터 다시 센다.
+  int64 net_position = 6;
 }
 
 message ListMmFillHistoryResponse {
