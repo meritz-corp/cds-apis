@@ -670,13 +670,18 @@ const MarketMakingF2mBand$json = {
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'lower', '3': 2, '4': 1, '5': 3, '10': 'lower'},
     {'1': 'upper', '3': 3, '4': 1, '5': 3, '10': 'upper'},
+    {'1': 'one_sided_outside', '3': 4, '4': 1, '5': 8, '9': 0, '10': 'oneSidedOutside', '17': true},
+  ],
+  '8': [
+    {'1': '_one_sided_outside'},
   ],
 };
 
 /// Descriptor for `MarketMakingF2mBand`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List marketMakingF2mBandDescriptor = $convert.base64Decode(
     'ChNNYXJrZXRNYWtpbmdGMm1CYW5kEhgKB2VuYWJsZWQYASABKAhSB2VuYWJsZWQSFAoFbG93ZX'
-    'IYAiABKANSBWxvd2VyEhQKBXVwcGVyGAMgASgDUgV1cHBlcg==');
+    'IYAiABKANSBWxvd2VyEhQKBXVwcGVyGAMgASgDUgV1cHBlchIvChFvbmVfc2lkZWRfb3V0c2lk'
+    'ZRgEIAEoCEgAUg9vbmVTaWRlZE91dHNpZGWIAQFCFAoSX29uZV9zaWRlZF9vdXRzaWRl');
 
 @$core.Deprecated('Use listMarketMakingRequestDescriptor instead')
 const ListMarketMakingRequest$json = {
@@ -1117,6 +1122,8 @@ const MmStateUpdate$json = {
     {'1': 'proxy_momentum', '3': 15, '4': 1, '5': 11, '6': '.kdo.v1.mm.ProxyMomentumState', '9': 11, '10': 'proxyMomentum', '17': true},
     {'1': 'fund_code', '3': 16, '4': 1, '5': 9, '10': 'fundCode'},
     {'1': 'slot_id', '3': 17, '4': 1, '5': 9, '10': 'slotId'},
+    {'1': 'bid_f2m_band_blocked', '3': 18, '4': 1, '5': 8, '9': 12, '10': 'bidF2mBandBlocked', '17': true},
+    {'1': 'ask_f2m_band_blocked', '3': 19, '4': 1, '5': 8, '9': 13, '10': 'askF2mBandBlocked', '17': true},
   ],
   '8': [
     {'1': '_state'},
@@ -1131,6 +1138,8 @@ const MmStateUpdate$json = {
     {'1': '_ma_cross'},
     {'1': '_constituent_momentum'},
     {'1': '_proxy_momentum'},
+    {'1': '_bid_f2m_band_blocked'},
+    {'1': '_ask_f2m_band_blocked'},
   ],
   '9': [
     {'1': 9, '2': 10},
@@ -1156,11 +1165,14 @@ final $typed_data.Uint8List mmStateUpdateDescriptor = $convert.base64Decode(
     'bnRNb21lbnR1bVN0YXRlSApSE2NvbnN0aXR1ZW50TW9tZW50dW2IAQESSQoOcHJveHlfbW9tZW'
     '50dW0YDyABKAsyHS5rZG8udjEubW0uUHJveHlNb21lbnR1bVN0YXRlSAtSDXByb3h5TW9tZW50'
     'dW2IAQESGwoJZnVuZF9jb2RlGBAgASgJUghmdW5kQ29kZRIXCgdzbG90X2lkGBEgASgJUgZzbG'
-    '90SWRCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5hbHl6ZXJCFAoSX2V4cG9z'
-    'dXJlX2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3F1b3RlQgwKCl9iaWRfcXVvdG'
-    'VCEAoOX2RlY29tcG9zaXRpb25CDAoKX2YybV9zaGlmdEILCglfbWFfY3Jvc3NCFwoVX2NvbnN0'
-    'aXR1ZW50X21vbWVudHVtQhEKD19wcm94eV9tb21lbnR1bUoECAkQCkoECAoQC1IKYmlkX29mZn'
-    'NldFIKYXNrX29mZnNldA==');
+    '90SWQSNAoUYmlkX2YybV9iYW5kX2Jsb2NrZWQYEiABKAhIDFIRYmlkRjJtQmFuZEJsb2NrZWSI'
+    'AQESNAoUYXNrX2YybV9iYW5kX2Jsb2NrZWQYEyABKAhIDVIRYXNrRjJtQmFuZEJsb2NrZWSIAQ'
+    'FCCAoGX3N0YXRlQgsKCV9tb21lbnR1bUIRCg9fdHJhZGVfYW5hbHl6ZXJCFAoSX2V4cG9zdXJl'
+    'X2JhbGFuY2VyQg4KDF9tYXJrZXRfYmlhc0IMCgpfYXNrX3F1b3RlQgwKCl9iaWRfcXVvdGVCEA'
+    'oOX2RlY29tcG9zaXRpb25CDAoKX2YybV9zaGlmdEILCglfbWFfY3Jvc3NCFwoVX2NvbnN0aXR1'
+    'ZW50X21vbWVudHVtQhEKD19wcm94eV9tb21lbnR1bUIXChVfYmlkX2YybV9iYW5kX2Jsb2NrZW'
+    'RCFwoVX2Fza19mMm1fYmFuZF9ibG9ja2VkSgQICRAKSgQIChALUgpiaWRfb2Zmc2V0Ugphc2tf'
+    'b2Zmc2V0');
 
 @$core.Deprecated('Use streamMmFillsRequestDescriptor instead')
 const StreamMmFillsRequest$json = {

@@ -642,6 +642,7 @@ pub struct MarketMakingQtyImbalance {
 ///
 /// 예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.
 ///      lower 5, upper 20:   괴리 EMA 0 → F2M +5, +12 → F2M +12, +40 → F2M +20.
+///      one_sided_outside = true, lower -20, upper 30: 괴리 EMA +45 → F2M +30·매도만, -35 → F2M -20·매수만, +10 → 양쪽.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MarketMakingF2mBand {
@@ -654,6 +655,14 @@ pub struct MarketMakingF2mBand {
     /// 상한 (원 단위 정수, lower 이상).
     #[prost(int64, tag="3")]
     pub upper: i64,
+    /// 밴드 밖 한쪽 호가. true 면 F2M 을 정하는 값(괴리 EMA 또는 FitToMarket 지정값)이 적용 상한 위일 때 매수 호가를,
+    /// 적용 하한 아래일 때 매도 호가를 뺀다(그쪽 호가 취소·미발주, take 모드면 그쪽 발사 안 함). 적용 상한·하한 = 기준가
+    /// 안전 상한 안으로 자른 밴드 — F2M 이 잘리는 경계. 값이 밴드 안으로 돌아오면 다음 refit 에서 다시 양쪽 호가한다
+    /// (주기 refit 0 이면 FitToMarket 때만 다시 판정). Reset·MM 등록 직후엔 판정할 값이 없어 양쪽 호가.
+    /// enabled 일 때만 동작. lower = upper(F2M 고정)와 함께 켜면 서버가 거부한다 — 밴드 안쪽이 없어 늘 한쪽이 빠진다.
+    /// optional: 미설정이면 서버가 기존값 유지 — 이 필드를 모르는 구 클라이언트가 밴드를 저장해도 꺼지지 않는다.
+    #[prost(bool, optional, tag="4")]
+    pub one_sided_outside: ::core::option::Option<bool>,
 }
 // ============================================================================
 // Request/Response Messages
@@ -1094,6 +1103,13 @@ pub struct MmStateUpdate {
     /// 같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용.
     #[prost(string, tag="17")]
     pub slot_id: ::prost::alloc::string::String,
+    /// F2M 밴드 밖 한쪽 호가(MarketMakingF2mBand.one_sided_outside)로 매수 호가를 뺀 상태 — F2M 을 정하는 값이 적용 상한 위.
+    /// 변경 시에만 포함.
+    #[prost(bool, optional, tag="18")]
+    pub bid_f2m_band_blocked: ::core::option::Option<bool>,
+    /// F2M 밴드 밖 한쪽 호가로 매도 호가를 뺀 상태 — F2M 을 정하는 값이 적용 하한 아래. 변경 시에만 포함.
+    #[prost(bool, optional, tag="19")]
+    pub ask_f2m_band_blocked: ::core::option::Option<bool>,
 }
 /// StreamMmFills
 #[allow(clippy::derive_partial_eq_without_eq)]

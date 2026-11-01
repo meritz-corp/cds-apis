@@ -2676,16 +2676,19 @@ class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
 ///
 /// 예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.
 ///     lower 5, upper 20:   괴리 EMA 0 → F2M +5, +12 → F2M +12, +40 → F2M +20.
+///     one_sided_outside = true, lower -20, upper 30: 괴리 EMA +45 → F2M +30·매도만, -35 → F2M -20·매수만, +10 → 양쪽.
 class MarketMakingF2mBand extends $pb.GeneratedMessage {
   factory MarketMakingF2mBand({
     $core.bool? enabled,
     $fixnum.Int64? lower,
     $fixnum.Int64? upper,
+    $core.bool? oneSidedOutside,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (lower != null) result.lower = lower;
     if (upper != null) result.upper = upper;
+    if (oneSidedOutside != null) result.oneSidedOutside = oneSidedOutside;
     return result;
   }
 
@@ -2698,6 +2701,7 @@ class MarketMakingF2mBand extends $pb.GeneratedMessage {
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..aInt64(2, _omitFieldNames ? '' : 'lower')
     ..aInt64(3, _omitFieldNames ? '' : 'upper')
+    ..aOB(4, _omitFieldNames ? '' : 'oneSidedOutside')
     ..hasRequiredFields = false
   ;
 
@@ -2747,6 +2751,21 @@ class MarketMakingF2mBand extends $pb.GeneratedMessage {
   $core.bool hasUpper() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpper() => $_clearField(3);
+
+  /// 밴드 밖 한쪽 호가. true 면 F2M 을 정하는 값(괴리 EMA 또는 FitToMarket 지정값)이 적용 상한 위일 때 매수 호가를,
+  /// 적용 하한 아래일 때 매도 호가를 뺀다(그쪽 호가 취소·미발주, take 모드면 그쪽 발사 안 함). 적용 상한·하한 = 기준가
+  /// 안전 상한 안으로 자른 밴드 — F2M 이 잘리는 경계. 값이 밴드 안으로 돌아오면 다음 refit 에서 다시 양쪽 호가한다
+  /// (주기 refit 0 이면 FitToMarket 때만 다시 판정). Reset·MM 등록 직후엔 판정할 값이 없어 양쪽 호가.
+  /// enabled 일 때만 동작. lower = upper(F2M 고정)와 함께 켜면 서버가 거부한다 — 밴드 안쪽이 없어 늘 한쪽이 빠진다.
+  /// optional: 미설정이면 서버가 기존값 유지 — 이 필드를 모르는 구 클라이언트가 밴드를 저장해도 꺼지지 않는다.
+  @$pb.TagNumber(4)
+  $core.bool get oneSidedOutside => $_getBF(3);
+  @$pb.TagNumber(4)
+  set oneSidedOutside($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOneSidedOutside() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOneSidedOutside() => $_clearField(4);
 }
 
 /// ListMarketMaking
@@ -4719,6 +4738,8 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ProxyMomentumState? proxyMomentum,
     $core.String? fundCode,
     $core.String? slotId,
+    $core.bool? bidF2mBandBlocked,
+    $core.bool? askF2mBandBlocked,
   }) {
     final result = create();
     if (symbol != null) result.symbol = symbol;
@@ -4736,6 +4757,8 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     if (proxyMomentum != null) result.proxyMomentum = proxyMomentum;
     if (fundCode != null) result.fundCode = fundCode;
     if (slotId != null) result.slotId = slotId;
+    if (bidF2mBandBlocked != null) result.bidF2mBandBlocked = bidF2mBandBlocked;
+    if (askF2mBandBlocked != null) result.askF2mBandBlocked = askF2mBandBlocked;
     return result;
   }
 
@@ -4760,6 +4783,8 @@ class MmStateUpdate extends $pb.GeneratedMessage {
     ..aOM<ProxyMomentumState>(15, _omitFieldNames ? '' : 'proxyMomentum', subBuilder: ProxyMomentumState.create)
     ..aOS(16, _omitFieldNames ? '' : 'fundCode')
     ..aOS(17, _omitFieldNames ? '' : 'slotId')
+    ..aOB(18, _omitFieldNames ? '' : 'bidF2mBandBlocked')
+    ..aOB(19, _omitFieldNames ? '' : 'askF2mBandBlocked')
     ..hasRequiredFields = false
   ;
 
@@ -4945,6 +4970,27 @@ class MmStateUpdate extends $pb.GeneratedMessage {
   $core.bool hasSlotId() => $_has(14);
   @$pb.TagNumber(17)
   void clearSlotId() => $_clearField(17);
+
+  /// F2M 밴드 밖 한쪽 호가(MarketMakingF2mBand.one_sided_outside)로 매수 호가를 뺀 상태 — F2M 을 정하는 값이 적용 상한 위.
+  /// 변경 시에만 포함.
+  @$pb.TagNumber(18)
+  $core.bool get bidF2mBandBlocked => $_getBF(15);
+  @$pb.TagNumber(18)
+  set bidF2mBandBlocked($core.bool value) => $_setBool(15, value);
+  @$pb.TagNumber(18)
+  $core.bool hasBidF2mBandBlocked() => $_has(15);
+  @$pb.TagNumber(18)
+  void clearBidF2mBandBlocked() => $_clearField(18);
+
+  /// F2M 밴드 밖 한쪽 호가로 매도 호가를 뺀 상태 — F2M 을 정하는 값이 적용 하한 아래. 변경 시에만 포함.
+  @$pb.TagNumber(19)
+  $core.bool get askF2mBandBlocked => $_getBF(16);
+  @$pb.TagNumber(19)
+  set askF2mBandBlocked($core.bool value) => $_setBool(16, value);
+  @$pb.TagNumber(19)
+  $core.bool hasAskF2mBandBlocked() => $_has(16);
+  @$pb.TagNumber(19)
+  void clearAskF2mBandBlocked() => $_clearField(19);
 }
 
 /// StreamMmFills

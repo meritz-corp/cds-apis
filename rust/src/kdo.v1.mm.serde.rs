@@ -5288,6 +5288,9 @@ impl serde::Serialize for MarketMakingF2mBand {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingF2mBand", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -5302,6 +5305,9 @@ impl serde::Serialize for MarketMakingF2mBand {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("upper", ToString::to_string(&self.upper).as_str())?;
         }
+        if let Some(v) = self.one_sided_outside.as_ref() {
+            struct_ser.serialize_field("one_sided_outside", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -5315,6 +5321,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingF2mBand {
             "enabled",
             "lower",
             "upper",
+            "one_sided_outside",
+            "oneSidedOutside",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -5322,6 +5330,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingF2mBand {
             Enabled,
             Lower,
             Upper,
+            OneSidedOutside,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -5347,6 +5356,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingF2mBand {
                             "enabled" => Ok(GeneratedField::Enabled),
                             "lower" => Ok(GeneratedField::Lower),
                             "upper" => Ok(GeneratedField::Upper),
+                            "oneSidedOutside" | "one_sided_outside" => Ok(GeneratedField::OneSidedOutside),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -5369,6 +5379,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingF2mBand {
                 let mut enabled__ = None;
                 let mut lower__ = None;
                 let mut upper__ = None;
+                let mut one_sided_outside__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -5393,6 +5404,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingF2mBand {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::OneSidedOutside => {
+                            if one_sided_outside__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("oneSidedOutside"));
+                            }
+                            one_sided_outside__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -5402,6 +5419,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingF2mBand {
                     enabled: enabled__.unwrap_or_default(),
                     lower: lower__.unwrap_or_default(),
                     upper: upper__.unwrap_or_default(),
+                    one_sided_outside: one_sided_outside__,
                 })
             }
         }
@@ -9615,6 +9633,12 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MmStateUpdate", len)?;
         if true {
             struct_ser.serialize_field("symbol", &self.symbol)?;
@@ -9663,6 +9687,12 @@ impl serde::Serialize for MmStateUpdate {
         if true {
             struct_ser.serialize_field("slot_id", &self.slot_id)?;
         }
+        if let Some(v) = self.bid_f2m_band_blocked.as_ref() {
+            struct_ser.serialize_field("bid_f2m_band_blocked", v)?;
+        }
+        if let Some(v) = self.ask_f2m_band_blocked.as_ref() {
+            struct_ser.serialize_field("ask_f2m_band_blocked", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -9699,6 +9729,10 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             "fundCode",
             "slot_id",
             "slotId",
+            "bid_f2m_band_blocked",
+            "bidF2mBandBlocked",
+            "ask_f2m_band_blocked",
+            "askF2mBandBlocked",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -9718,6 +9752,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
             ProxyMomentum,
             FundCode,
             SlotId,
+            BidF2mBandBlocked,
+            AskF2mBandBlocked,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -9755,6 +9791,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             "proxyMomentum" | "proxy_momentum" => Ok(GeneratedField::ProxyMomentum),
                             "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
                             "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
+                            "bidF2mBandBlocked" | "bid_f2m_band_blocked" => Ok(GeneratedField::BidF2mBandBlocked),
+                            "askF2mBandBlocked" | "ask_f2m_band_blocked" => Ok(GeneratedField::AskF2mBandBlocked),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -9789,6 +9827,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                 let mut proxy_momentum__ = None;
                 let mut fund_code__ = None;
                 let mut slot_id__ = None;
+                let mut bid_f2m_band_blocked__ = None;
+                let mut ask_f2m_band_blocked__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Symbol => {
@@ -9881,6 +9921,18 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                             }
                             slot_id__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::BidF2mBandBlocked => {
+                            if bid_f2m_band_blocked__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidF2mBandBlocked"));
+                            }
+                            bid_f2m_band_blocked__ = map_.next_value()?;
+                        }
+                        GeneratedField::AskF2mBandBlocked => {
+                            if ask_f2m_band_blocked__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askF2mBandBlocked"));
+                            }
+                            ask_f2m_band_blocked__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -9902,6 +9954,8 @@ impl<'de> serde::Deserialize<'de> for MmStateUpdate {
                     proxy_momentum: proxy_momentum__,
                     fund_code: fund_code__.unwrap_or_default(),
                     slot_id: slot_id__.unwrap_or_default(),
+                    bid_f2m_band_blocked: bid_f2m_band_blocked__,
+                    ask_f2m_band_blocked: ask_f2m_band_blocked__,
                 })
             }
         }

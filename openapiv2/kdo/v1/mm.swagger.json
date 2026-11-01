@@ -1759,9 +1759,13 @@
           "type": "string",
           "format": "int64",
           "description": "상한 (원 단위 정수, lower 이상)."
+        },
+        "oneSidedOutside": {
+          "type": "boolean",
+          "description": "밴드 밖 한쪽 호가. true 면 F2M 을 정하는 값(괴리 EMA 또는 FitToMarket 지정값)이 적용 상한 위일 때 매수 호가를,\n적용 하한 아래일 때 매도 호가를 뺀다(그쪽 호가 취소·미발주, take 모드면 그쪽 발사 안 함). 적용 상한·하한 = 기준가\n안전 상한 안으로 자른 밴드 — F2M 이 잘리는 경계. 값이 밴드 안으로 돌아오면 다음 refit 에서 다시 양쪽 호가한다\n(주기 refit 0 이면 FitToMarket 때만 다시 판정). Reset·MM 등록 직후엔 판정할 값이 없어 양쪽 호가.\nenabled 일 때만 동작. lower = upper(F2M 고정)와 함께 켜면 서버가 거부한다 — 밴드 안쪽이 없어 늘 한쪽이 빠진다.\noptional: 미설정이면 서버가 기존값 유지 — 이 필드를 모르는 구 클라이언트가 밴드를 저장해도 꺼지지 않는다."
         }
       },
-      "description": "F2M(Fit to Market) 밴드.\n\nF2M 평행 skew 가 [lower, upper](원)를 벗어나면 가까운 경계 값으로 cap 한다:\n  F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)\n괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.\n기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한이 우선한다 — 밴드를 그 안으로 잘라 적용하고, 밴드 전체가\n안전 상한 밖이면 가까운 안전 상한 경계 값이 된다.\n0 을 포함하지 않아도 된다(예: lower 5, upper 20 = F2M 을 늘 +5~+20 안에). 그때는 F2M 이 0 이 되는 순간\n(MM 등록 직후·Reset·밴드를 켤 때)에도 가까운 경계 값이 된다. lower = upper 면 F2M 이 그 값으로 고정된다\n(둘 다 0 = F2M 미사용).\n\n예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.\n    lower 5, upper 20:   괴리 EMA 0 → F2M +5, +12 → F2M +12, +40 → F2M +20."
+      "description": "F2M(Fit to Market) 밴드.\n\nF2M 평행 skew 가 [lower, upper](원)를 벗어나면 가까운 경계 값으로 cap 한다:\n  F2M = min(max(괴리 EMA 또는 FitToMarket 지정값, lower), upper)\n괴리 EMA 자체는 계속 시장을 따라가므로, 시장이 밴드 안으로 돌아오면 F2M 도 다시 따라간다.\n기준가 ±2%(기준가 미상이면 ±2000원) 안전 상한이 우선한다 — 밴드를 그 안으로 잘라 적용하고, 밴드 전체가\n안전 상한 밖이면 가까운 안전 상한 경계 값이 된다.\n0 을 포함하지 않아도 된다(예: lower 5, upper 20 = F2M 을 늘 +5~+20 안에). 그때는 F2M 이 0 이 되는 순간\n(MM 등록 직후·Reset·밴드를 켤 때)에도 가까운 경계 값이 된다. lower = upper 면 F2M 이 그 값으로 고정된다\n(둘 다 0 = F2M 미사용).\n\n예) lower -20, upper 30: 괴리 EMA +45 → F2M +30, -35 → F2M -20, +10 → F2M +10.\n    lower 5, upper 20:   괴리 EMA 0 → F2M +5, +12 → F2M +12, +40 → F2M +20.\n    one_sided_outside = true, lower -20, upper 30: 괴리 EMA +45 → F2M +30·매도만, -35 → F2M -20·매수만, +10 → 양쪽."
     },
     "mmMarketMakingFastLiquidation": {
       "type": "object",
@@ -2505,6 +2509,14 @@
         "slotId": {
           "type": "string",
           "description": "같은 (symbol,fund) 내 MM 슬롯 구분자 (단일 인스턴스는 'default'). fund_code 와 동일하게 응답 self-description 용."
+        },
+        "bidF2mBandBlocked": {
+          "type": "boolean",
+          "description": "F2M 밴드 밖 한쪽 호가(MarketMakingF2mBand.one_sided_outside)로 매수 호가를 뺀 상태 — F2M 을 정하는 값이 적용 상한 위.\n변경 시에만 포함."
+        },
+        "askF2mBandBlocked": {
+          "type": "boolean",
+          "description": "F2M 밴드 밖 한쪽 호가로 매도 호가를 뺀 상태 — F2M 을 정하는 값이 적용 하한 아래. 변경 시에만 포함."
         }
       },
       "description": "MM 엔진 런타임 상태 델타 메시지.\n스트리밍 시 set된 필드만 변경분을 의미하며, 변경이 없는 필드는 생략된다.\nsymbol은 항상 포함된다."
