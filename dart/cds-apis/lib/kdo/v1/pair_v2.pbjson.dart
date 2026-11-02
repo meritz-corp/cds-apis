@@ -307,13 +307,21 @@ final $typed_data.Uint8List pairV2IndexTrackingPricingDescriptor = $convert.base
 const PairV2LeverageFuturePricing$json = {
   '1': 'PairV2LeverageFuturePricing',
   '2': [
-    {'1': 'basis', '3': 1, '4': 1, '5': 1, '10': 'basis'},
+    {
+      '1': 'basis',
+      '3': 1,
+      '4': 1,
+      '5': 1,
+      '8': {'3': true},
+      '10': 'basis',
+    },
   ],
 };
 
 /// Descriptor for `PairV2LeverageFuturePricing`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pairV2LeverageFuturePricingDescriptor = $convert.base64Decode(
-    'ChtQYWlyVjJMZXZlcmFnZUZ1dHVyZVByaWNpbmcSFAoFYmFzaXMYASABKAFSBWJhc2lz');
+    'ChtQYWlyVjJMZXZlcmFnZUZ1dHVyZVByaWNpbmcSGAoFYmFzaXMYASABKAFCAhgBUgViYXNpcw'
+    '==');
 
 @$core.Deprecated('Use pairV2PdfDecomposePricingDescriptor instead')
 const PairV2PdfDecomposePricing$json = {

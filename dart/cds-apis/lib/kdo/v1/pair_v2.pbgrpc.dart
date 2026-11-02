@@ -27,7 +27,8 @@ export 'pair_v2.pb.dart';
 /// 운영 중인 v1 PairService 를 보호하기 위한 의도적 격리이며, v1 메시지를 참조하지 않는다.
 ///
 /// v2 전략: base·counter 두 다리의 지정 호가로 스프레드("선물 − 현물")를 재고, 목표치(target_spread)를
-/// 발사 방향(매수차 초과·매도차 미만)으로 넘으면 그 가격 그대로 양다리를 동시에 발주한다.
+/// 발사 방향(매수차 초과·매도차 미만, leverage_future 는 선물 매도 초과·선물 매수 미만)으로 넘으면
+/// 그 가격 그대로 양다리를 동시에 발주한다.
 /// 미체결 잔량은 취소하지 않고 auto_amend SelfQuote 가 추적 정정해 체결시킨다. v1 의 trigger×execution 2축 조합,
 /// 수량 불균형 트리거, settle/recovery/balance 사이클은 없다.
 @$pb.GrpcServiceName('kdo.v1.pair_v2.PairV2Service')

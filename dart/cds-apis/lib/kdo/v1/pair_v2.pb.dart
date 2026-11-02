@@ -26,7 +26,8 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 export 'pair_v2.pbenum.dart';
 
 /// PairV2 전략 — base·counter 지정 호가로 재는 스프레드("선물 − 현물")가 target_spread 를
-/// 발사 방향(매수차 초과·매도차 미만)으로 넘으면 그 가격 그대로 양다리를 동시 발주한다.
+/// 발사 방향(매수차 초과·매도차 미만, leverage_future 는 선물 매도 초과·선물 매수 미만)으로 넘으면
+/// 그 가격 그대로 양다리를 동시 발주한다.
 class PairV2 extends $pb.GeneratedMessage {
   factory PairV2({
     $core.String? name,
@@ -219,6 +220,8 @@ class PairV2 extends $pb.GeneratedMessage {
   /// 목표 스프레드. 스프레드("선물 − 현물", 방향 무관)가 base 진입 이익이 커지는 쪽으로 이 값을
   /// 넘으면 발사 — 현물 매수·선물 매도(매수차)는 "초과", 현물 매도·선물 매수(매도차)는 "미만".
   /// 단위 = base 가격 단위. 캘린더 스프레드처럼 즉시 차익이 아닌 운용은 음수가 정상이다.
+  /// pricing 이 leverage_future 면 스프레드는 시장 basis(선물 − ETF 가 내재한 기초지수)라 단위가 선물 가격 단위이고,
+  /// 부등호는 선물 다리 방향이 정한다 — 선물 매도는 "초과", 선물 매수는 "미만"(두 다리가 같은 방향이어도).
   @$pb.TagNumber(8)
   $core.double get targetSpread => $_getN(7);
   @$pb.TagNumber(8)
@@ -408,8 +411,9 @@ class PairV2 extends $pb.GeneratedMessage {
   @$pb.TagNumber(23)
   void clearTotalRounds() => $_clearField(23);
 
-  /// 스프레드 조건 알림 - true 면 정지(PAUSED) 중에도 스프레드가 발사 조건(target_spread 를 매수차는 초과·매도차는 미만)에
-  /// 들어서는 순간 발주 없이 알림을 보낸다 (Warning, event_type "SpreadAlert"). 자동 발사 중(ACTIVE)인 페어는 알리지 않는다.
+  /// 스프레드 조건 알림 - true 면 정지(PAUSED) 중에도 스프레드가 발사 조건(target_spread 를 매수차는 초과·매도차는 미만,
+  /// leverage_future 는 선물 매도 초과·선물 매수 미만)에 들어서는 순간 발주 없이 알림을 보낸다 (Warning, event_type "SpreadAlert").
+  /// 자동 발사 중(ACTIVE)인 페어는 알리지 않는다.
   /// 판정은 자동 발사와 같은 시세 기준(양다리 연속매매·5초 이내 호가)에서 스프레드 조건만 본다 — 쿨다운·총회차·운영시간창·
   /// 슬리피지 가드 등은 보지 않는다. 조건에 머무는 동안은 다시 알리지 않고, 경계를 들락날락해도 페어별 1분에 한 번까지만 알린다.
   /// 서버마다 따로 판정해 그 서버에 접속한 사용자에게 보낸다.
@@ -499,7 +503,8 @@ class PairV2Entry extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearFundCode() => $_clearField(2);
 
-  /// 주문 방향 (base.side 가 발사 부등호의 기준 — 스프레드 부호는 방향과 무관)
+  /// 주문 방향 (base.side 가 발사 부등호의 기준 — 스프레드 부호는 방향과 무관).
+  /// pricing 이 leverage_future 면 base 대신 선물 다리의 side 가 기준이다 (선물 매도 = 초과, 선물 매수 = 미만).
   @$pb.TagNumber(3)
   $4.OrderSide get side => $_getN(2);
   @$pb.TagNumber(3)
@@ -550,8 +555,8 @@ enum PairV2Pricing_Kind {
   notSet
 }
 
-/// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 항상 base 가격 단위이고,
-/// 의미는 방향과 무관한 "선물 − 현물" 차다 (mmm FutureMinusETF "선물*k − ETF" 와 같은 부호).
+/// counter 가격을 base 가격축으로 옮기는 방법. 결과 스프레드의 단위는 base 가격 단위이고(leverage_future 만
+/// 시장 basis 라 선물 가격 단위), 의미는 방향과 무관한 "선물 − 현물" 차다 (mmm FutureMinusETF "선물*k − ETF" 와 같은 부호).
 /// 선물 다리가 하나면 그 다리를 앞에 두고(base 가 선물이면 base − counter 환산), 선물 다리가 없거나
 /// 둘이면(ETF끼리·캘린더) counter 환산 − base 로 잰다.
 ///
@@ -638,7 +643,9 @@ class PairV2Pricing extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   PairV2IndexTrackingPricing ensureIndexTracking() => $_ensure(1);
 
-  /// 레버리지·인버스 ETF 의 선물 기반 NAV. basis 를 쓰는 유일한 변종이다.
+  /// 레버리지·인버스 ETF — 스프레드 = 시장 basis: 선물 가격 − ETF 가격이 내재한 기초지수(선물 기반 NAV 식을
+  /// basis 에 대해 푼 값, mmm 레버선물 바스켓과 같은 식). 단위 = 선물 가격 단위.
+  /// 현물 비중이 0 인 ETF(선물·현금만 보유)는 basis 를 정의할 수 없어 CreatePairV2·UpdatePairV2 가 INVALID_ARGUMENT 로 거부한다.
   @$pb.TagNumber(3)
   PairV2LeverageFuturePricing get leverageFuture => $_getN(2);
   @$pb.TagNumber(3)
@@ -742,9 +749,10 @@ class PairV2IndexTrackingPricing extends $pb.GeneratedMessage {
   static PairV2IndexTrackingPricing? _defaultInstance;
 }
 
-/// 레버리지/인버스 선물 기반 NAV.
+/// 레버리지/인버스 선물 기반 NAV 식으로 잰 시장 basis. 파라미터 없음.
 class PairV2LeverageFuturePricing extends $pb.GeneratedMessage {
   factory PairV2LeverageFuturePricing({
+  @$core.Deprecated('This field is deprecated.')
     $core.double? basis,
   }) {
     final result = create();
@@ -779,13 +787,17 @@ class PairV2LeverageFuturePricing extends $pb.GeneratedMessage {
   static PairV2LeverageFuturePricing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PairV2LeverageFuturePricing>(create);
   static PairV2LeverageFuturePricing? _defaultInstance;
 
-  /// NAV 베이시스 — 선물 가격축(포인트). 선물 틱(0.05)을 표현할 수 있도록 실수다.
+  /// [DEPRECATED] 서버가 쓰지 않는다 — 스프레드가 시장 basis 자체라 설정 basis 가 없다. 보내도 버리고 응답은 0.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   $core.double get basis => $_getN(0);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   set basis($core.double value) => $_setDouble(0, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   $core.bool hasBasis() => $_has(0);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   void clearBasis() => $_clearField(1);
 }
@@ -1594,7 +1606,8 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearOutcome() => $_clearField(2);
 
-  /// 발사 판정에 쓴 측정 스프레드 ("선물 − 현물", base 가격 단위)
+  /// 발사 판정에 쓴 측정 스프레드 ("선물 − 현물", base 가격 단위).
+  /// pricing 이 leverage_future 면 시장 basis 라 선물 가격 단위다.
   @$pb.TagNumber(3)
   $core.double get spread => $_getN(2);
   @$pb.TagNumber(3)
@@ -2703,7 +2716,7 @@ class PairV2StatusUpdate extends $pb.GeneratedMessage {
   void clearLaunchCount() => $_clearField(4);
 
   /// 최근 측정 스프레드 ("선물 − 현물", base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
-  /// 시세 미수신 구간에는 실리지 않는다.
+  /// pricing 이 leverage_future 면 시장 basis 라 선물 가격 단위다. 시세 미수신 구간에는 실리지 않는다.
   @$pb.TagNumber(5)
   $core.double get currentSpread => $_getN(4);
   @$pb.TagNumber(5)
