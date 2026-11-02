@@ -949,6 +949,10 @@ const GetPairV2OrderSummaryResponse$json = {
   '2': [
     {'1': 'legs', '3': 1, '4': 3, '5': 11, '6': '.kdo.v1.pair_v2.PairV2LegSummary', '10': 'legs'},
     {'1': 'launch_count', '3': 2, '4': 1, '5': 13, '10': 'launchCount'},
+    {'1': 'filled_spread', '3': 3, '4': 1, '5': 1, '9': 0, '10': 'filledSpread', '17': true},
+  ],
+  '8': [
+    {'1': '_filled_spread'},
   ],
 };
 
@@ -956,5 +960,6 @@ const GetPairV2OrderSummaryResponse$json = {
 final $typed_data.Uint8List getPairV2OrderSummaryResponseDescriptor = $convert.base64Decode(
     'Ch1HZXRQYWlyVjJPcmRlclN1bW1hcnlSZXNwb25zZRI0CgRsZWdzGAEgAygLMiAua2RvLnYxLn'
     'BhaXJfdjIuUGFpclYyTGVnU3VtbWFyeVIEbGVncxIhCgxsYXVuY2hfY291bnQYAiABKA1SC2xh'
-    'dW5jaENvdW50');
+    'dW5jaENvdW50EigKDWZpbGxlZF9zcHJlYWQYAyABKAFIAFIMZmlsbGVkU3ByZWFkiAEBQhAKDl'
+    '9maWxsZWRfc3ByZWFk');
 

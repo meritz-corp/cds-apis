@@ -858,12 +858,18 @@ impl serde::Serialize for GetPairV2OrderSummaryResponse {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.GetPairV2OrderSummaryResponse", len)?;
         if true {
             struct_ser.serialize_field("legs", &self.legs)?;
         }
         if true {
             struct_ser.serialize_field("launch_count", &self.launch_count)?;
+        }
+        if let Some(v) = self.filled_spread.as_ref() {
+            struct_ser.serialize_field("filled_spread", v)?;
         }
         struct_ser.end()
     }
@@ -878,12 +884,15 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryResponse {
             "legs",
             "launch_count",
             "launchCount",
+            "filled_spread",
+            "filledSpread",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Legs,
             LaunchCount,
+            FilledSpread,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -908,6 +917,7 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryResponse {
                         match value {
                             "legs" => Ok(GeneratedField::Legs),
                             "launchCount" | "launch_count" => Ok(GeneratedField::LaunchCount),
+                            "filledSpread" | "filled_spread" => Ok(GeneratedField::FilledSpread),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -929,6 +939,7 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryResponse {
             {
                 let mut legs__ = None;
                 let mut launch_count__ = None;
+                let mut filled_spread__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Legs => {
@@ -945,6 +956,14 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryResponse {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::FilledSpread => {
+                            if filled_spread__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filledSpread"));
+                            }
+                            filled_spread__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -953,6 +972,7 @@ impl<'de> serde::Deserialize<'de> for GetPairV2OrderSummaryResponse {
                 Ok(GetPairV2OrderSummaryResponse {
                     legs: legs__.unwrap_or_default(),
                     launch_count: launch_count__.unwrap_or_default(),
+                    filled_spread: filled_spread__,
                 })
             }
         }

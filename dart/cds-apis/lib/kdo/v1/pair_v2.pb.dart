@@ -3404,7 +3404,7 @@ class GetPairV2OrderSummaryRequest extends $pb.GeneratedMessage {
   void clearPairV2() => $_clearField(1);
 
   /// 집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.
-  /// 발주/체결/자동취소 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
+  /// 발주/체결/자동취소 수량·평균체결가·체결금액·체결 스프레드(filled_spread)에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
   /// 살아있는 주문 전체, launch_count 는 실행 세션 기준이다.
   /// StreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).
   @$pb.TagNumber(2)
@@ -3421,10 +3421,12 @@ class GetPairV2OrderSummaryResponse extends $pb.GeneratedMessage {
   factory GetPairV2OrderSummaryResponse({
     $core.Iterable<PairV2LegSummary>? legs,
     $core.int? launchCount,
+    $core.double? filledSpread,
   }) {
     final result = create();
     if (legs != null) result.legs.addAll(legs);
     if (launchCount != null) result.launchCount = launchCount;
+    if (filledSpread != null) result.filledSpread = filledSpread;
     return result;
   }
 
@@ -3436,6 +3438,7 @@ class GetPairV2OrderSummaryResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPairV2OrderSummaryResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
     ..pc<PairV2LegSummary>(1, _omitFieldNames ? '' : 'legs', $pb.PbFieldType.PM, subBuilder: PairV2LegSummary.create)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'launchCount', $pb.PbFieldType.OU3)
+    ..a<$core.double>(3, _omitFieldNames ? '' : 'filledSpread', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -3469,6 +3472,19 @@ class GetPairV2OrderSummaryResponse extends $pb.GeneratedMessage {
   $core.bool hasLaunchCount() => $_has(1);
   @$pb.TagNumber(2)
   void clearLaunchCount() => $_clearField(2);
+
+  /// 체결 스프레드 — 기준 영업일 두 다리의 평균체결가(legs.average_fill_price)로 잰 스프레드.
+  /// PairV2StatusUpdate.current_spread·PairV2.target_spread 와 같은 "선물 − 현물"·단위다 (base 가격 단위,
+  /// pricing 이 leverage_future 면 시장 basis 라 선물 가격 단위). 환산은 현재 설정(pricing) 기준이고 틱 정렬은 하지 않는다.
+  /// 어느 한 다리라도 그날 체결이 없거나 스프레드를 잴 수 없으면(상품 조회·NAV 환산 준비 실패) 미설정.
+  @$pb.TagNumber(3)
+  $core.double get filledSpread => $_getN(2);
+  @$pb.TagNumber(3)
+  set filledSpread($core.double value) => $_setDouble(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasFilledSpread() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFilledSpread() => $_clearField(3);
 }
 
 
