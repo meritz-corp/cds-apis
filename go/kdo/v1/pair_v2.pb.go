@@ -3401,8 +3401,8 @@ type GetPairV2OrderSummaryRequest struct {
 
 	PairV2 string `protobuf:"bytes,1,opt,name=pair_v2,json=pairV2,proto3" json:"pair_v2,omitempty"`
 	// 집계 기준 영업일 (YYYYMMDD 정수, KST). 미지정 시 당일.
-	// 발주/체결/자동취소 수량·평균체결가·체결금액·체결 스프레드(filled_spread)에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
-	// 살아있는 주문 전체, launch_count 는 실행 세션 기준이다.
+	// 발주/체결/자동취소 수량·평균체결가·체결금액에만 적용된다 — 미체결(remaining_*)은 날짜와 무관하게
+	// 살아있는 주문 전체, launch_count 는 실행 세션 기준이고, filled_spread 는 당일 조회에서만 채운다.
 	// StreamPairV2OrderSummary 에서 미지정이면 push 마다 당일을 다시 계산한다 (자정에 자동 전환).
 	TradingDay *int32 `protobuf:"varint,2,opt,name=trading_day,json=tradingDay,proto3,oneof" json:"trading_day,omitempty"`
 }
@@ -3462,10 +3462,11 @@ type GetPairV2OrderSummaryResponse struct {
 	// 실행 세션 발사 횟수(완료회차) — 영업일(trading_day)과 무관. 일시정지·서버 재기동 후에도 이어지고,
 	// 세션 초기화(ResetPairV2Session) 시 0 부터 다시 센다.
 	LaunchCount uint32 `protobuf:"varint,2,opt,name=launch_count,json=launchCount,proto3" json:"launch_count,omitempty"`
-	// 체결 스프레드 — 기준 영업일 두 다리의 평균체결가(legs.average_fill_price)로 잰 스프레드.
+	// 체결 스프레드 — 당일 두 다리의 평균체결가(legs.average_fill_price)로 잰 스프레드.
 	// PairV2StatusUpdate.current_spread·PairV2.target_spread 와 같은 "선물 − 현물"·단위다 (base 가격 단위,
 	// pricing 이 leverage_future 면 시장 basis 라 선물 가격 단위). 환산은 현재 설정(pricing) 기준이고 틱 정렬은 하지 않는다.
-	// 어느 한 다리라도 그날 체결이 없거나 스프레드를 잴 수 없으면(상품 조회·NAV 환산 준비 실패) 미설정.
+	// 당일 조회(trading_day 미지정 또는 오늘)에서만 채운다 — 환산에 쓰는 전일 NAV·전일 종가가 오늘 것이라 과거 영업일 체결에는 맞지 않는다.
+	// 어느 한 다리라도 당일 체결이 없거나 스프레드를 잴 수 없으면(상품 조회·NAV 환산 준비 실패) 미설정.
 	FilledSpread *float64 `protobuf:"fixed64,3,opt,name=filled_spread,json=filledSpread,proto3,oneof" json:"filled_spread,omitempty"`
 }
 
