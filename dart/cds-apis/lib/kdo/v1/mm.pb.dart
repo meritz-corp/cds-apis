@@ -2594,7 +2594,7 @@ class MarketMakingLossLimit extends $pb.GeneratedMessage {
 ///   호가 기준 = NAV(중간가) + ETF skew (+ 다른 skew)
 /// NAV 밖에서 더하므로 F2M(시장추종)이 이 skew 를 상쇄하지 않는다. 환선물(FX 오버레이 소스)은 대상이 아니다.
 ///
-/// 위치 p (매도 기준, 임계 θ = threshold_pct, 지수 γ = 1 ÷ (1 - sensitivity)):
+/// 위치 p — kind = CURVE (매도 기준, 임계 θ = threshold_pct, 지수 γ = 1 ÷ (1 - sensitivity)):
 ///   x < θ        : p = 1 - θ × (x ÷ θ)^γ                       → linear(1 - x) 보다 매도호가 쪽
 ///   θ ≤ x ≤ 50%  : p = ½ + (½ - θ) × ((½ - x) ÷ (½ - θ))^γ     → linear 보다 중간가 쪽 (잔량이 비슷하면 skew 를 덜 줌)
 ///   50% 넘는 쪽은 대칭(매수 잔량이 얇으면 매수호가 쪽). θ·50% 에서 linear 와 만나 가격이 끊기지 않는다.
@@ -2608,16 +2608,34 @@ class MarketMakingLossLimit extends $pb.GeneratedMessage {
 ///     30%        1700            1633.3          1539.5   1500
 ///     50%        1500            1500            1500     1500
 ///   매도 비중 10%·sensitivity 0.5: NAV(중간가) 1500 + skew (0.95 - 0.5) × 1000 = +450 → 호가 기준 1950.
+///
+/// 위치 p — kind = BEND (꺾임 b = bend_pct):
+///   p = ½ + (1 - 2b) × (½ - x)                                → 종목 skew = (1 - 2b) × linear skew
+///   잔량 비중에 비례해 움직이되(linear 의 1 - 2b 배), 한쪽 잔량이 바닥나도 그쪽 1호가에서 스프레드의 b 만큼 못 미친
+///   곳까지만 간다. 그 1호가가 다 체결돼 호가가 한 칸 밀리면 새 1호가로 다시 계산되므로 나머지는 그때 한 번에 움직인다(꺾임).
+///   b = 0 → linear (sensitivity 0 과 같은 값), b = 50% → 1호가 중간가 그대로 (skew 0).
+///
+/// 예) 같은 1호가 매수 1000 / 매도 2000
+///   매도 비중   bend 0(=linear)   25      40      50
+///      5%        1950            1725    1590    1500
+///     10%        1900            1700    1580    1500
+///     30%        1700            1600    1540    1500
+///     50%        1500            1500    1500    1500
+///   매도 비중 10%·bend_pct 25: linear skew (0.9 - 0.5) × 1000 = 400 → skew (1 - 2 × 0.25) × 400 = +200 → 호가 기준 1700.
 class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
   factory MarketMakingQtyImbalance({
     $core.bool? enabled,
     $core.double? thresholdPct,
     $core.double? sensitivity,
+    MarketMakingQtyImbalanceKind? kind,
+    $core.double? bendPct,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
     if (thresholdPct != null) result.thresholdPct = thresholdPct;
     if (sensitivity != null) result.sensitivity = sensitivity;
+    if (kind != null) result.kind = kind;
+    if (bendPct != null) result.bendPct = bendPct;
     return result;
   }
 
@@ -2630,6 +2648,8 @@ class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
     ..aOB(1, _omitFieldNames ? '' : 'enabled')
     ..a<$core.double>(2, _omitFieldNames ? '' : 'thresholdPct', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'sensitivity', $pb.PbFieldType.OD)
+    ..e<MarketMakingQtyImbalanceKind>(4, _omitFieldNames ? '' : 'kind', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingQtyImbalanceKind.MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE, valueOf: MarketMakingQtyImbalanceKind.valueOf, enumValues: MarketMakingQtyImbalanceKind.values)
+    ..a<$core.double>(5, _omitFieldNames ? '' : 'bendPct', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -2660,7 +2680,7 @@ class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearEnabled() => $_clearField(1);
 
-  /// 임계 θ (%, 0~50). 한쪽 잔량 비중이 이 값 미만이면 linear 보다 그 반대 호가 쪽으로 더 붙는다.
+  /// 임계 θ (%, 0~50). 한쪽 잔량 비중이 이 값 미만이면 linear 보다 그 반대 호가 쪽으로 더 붙는다. kind = CURVE 에서만 쓴다.
   /// 범위 밖·NaN 은 서버가 거부.
   @$pb.TagNumber(2)
   $core.double get thresholdPct => $_getN(1);
@@ -2671,7 +2691,7 @@ class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   void clearThresholdPct() => $_clearField(2);
 
-  /// 민감도 (0~1). 0 = linear, 1 = 계단, 사이 값은 위 거듭제곱 곡선. 범위 밖·NaN 은 서버가 거부.
+  /// 민감도 (0~1). 0 = linear, 1 = 계단, 사이 값은 위 거듭제곱 곡선. kind = CURVE 에서만 쓴다. 범위 밖·NaN 은 서버가 거부.
   @$pb.TagNumber(3)
   $core.double get sensitivity => $_getN(2);
   @$pb.TagNumber(3)
@@ -2680,6 +2700,29 @@ class MarketMakingQtyImbalance extends $pb.GeneratedMessage {
   $core.bool hasSensitivity() => $_has(2);
   @$pb.TagNumber(3)
   void clearSensitivity() => $_clearField(3);
+
+  /// 유형. CURVE(기본) = threshold_pct·sensitivity 곡선, BEND = bend_pct 꺾임.
+  /// optional: 미설정이면 서버가 기존값 유지 — 이 필드를 모르는 구 클라이언트가 저장해도 유형이 바뀌지 않는다.
+  @$pb.TagNumber(4)
+  MarketMakingQtyImbalanceKind get kind => $_getN(3);
+  @$pb.TagNumber(4)
+  set kind(MarketMakingQtyImbalanceKind value) => $_setField(4, value);
+  @$pb.TagNumber(4)
+  $core.bool hasKind() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearKind() => $_clearField(4);
+
+  /// 꺾임 b (%, 0~50). 한쪽 잔량이 바닥날 때 그쪽 1호가에서 스프레드의 몇 % 못 미친 곳까지 갈지 — kind = BEND 에서만 쓴다.
+  /// 0 = linear, 50 = 1호가 중간가 그대로(skew 0). 범위 밖·NaN 은 kind 와 무관하게 서버가 거부. 서버 기본 25.
+  /// optional: 미설정이면 서버가 기존값 유지(kind 와 같은 이유).
+  @$pb.TagNumber(5)
+  $core.double get bendPct => $_getN(4);
+  @$pb.TagNumber(5)
+  set bendPct($core.double value) => $_setDouble(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasBendPct() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBendPct() => $_clearField(5);
 }
 
 /// F2M(Fit to Market) 밴드.

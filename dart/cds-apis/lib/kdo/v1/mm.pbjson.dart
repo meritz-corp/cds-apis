@@ -61,6 +61,21 @@ final $typed_data.Uint8List marketMakingTakeExecutionMethodDescriptor = $convert
     'RUNVVElPTl9NRVRIT0RfTkVXX0FORF9DQU5DRUwQARI4CjRNQVJLRVRfTUFLSU5HX1RBS0VfRV'
     'hFQ1VUSU9OX01FVEhPRF9BTUVORF9BTkRfQ0FOQ0VMEAI=');
 
+@$core.Deprecated('Use marketMakingQtyImbalanceKindDescriptor instead')
+const MarketMakingQtyImbalanceKind$json = {
+  '1': 'MarketMakingQtyImbalanceKind',
+  '2': [
+    {'1': 'MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE', '2': 0},
+    {'1': 'MARKET_MAKING_QTY_IMBALANCE_KIND_BEND', '2': 1},
+  ],
+};
+
+/// Descriptor for `MarketMakingQtyImbalanceKind`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List marketMakingQtyImbalanceKindDescriptor = $convert.base64Decode(
+    'ChxNYXJrZXRNYWtpbmdRdHlJbWJhbGFuY2VLaW5kEioKJk1BUktFVF9NQUtJTkdfUVRZX0lNQk'
+    'FMQU5DRV9LSU5EX0NVUlZFEAASKQolTUFSS0VUX01BS0lOR19RVFlfSU1CQUxBTkNFX0tJTkRf'
+    'QkVORBAB');
+
 @$core.Deprecated('Use mmConfigEventTypeDescriptor instead')
 const MmConfigEventType$json = {
   '1': 'MmConfigEventType',
@@ -657,6 +672,12 @@ const MarketMakingQtyImbalance$json = {
     {'1': 'enabled', '3': 1, '4': 1, '5': 8, '10': 'enabled'},
     {'1': 'threshold_pct', '3': 2, '4': 1, '5': 1, '10': 'thresholdPct'},
     {'1': 'sensitivity', '3': 3, '4': 1, '5': 1, '10': 'sensitivity'},
+    {'1': 'kind', '3': 4, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingQtyImbalanceKind', '9': 0, '10': 'kind', '17': true},
+    {'1': 'bend_pct', '3': 5, '4': 1, '5': 1, '9': 1, '10': 'bendPct', '17': true},
+  ],
+  '8': [
+    {'1': '_kind'},
+    {'1': '_bend_pct'},
   ],
 };
 
@@ -664,7 +685,9 @@ const MarketMakingQtyImbalance$json = {
 final $typed_data.Uint8List marketMakingQtyImbalanceDescriptor = $convert.base64Decode(
     'ChhNYXJrZXRNYWtpbmdRdHlJbWJhbGFuY2USGAoHZW5hYmxlZBgBIAEoCFIHZW5hYmxlZBIjCg'
     '10aHJlc2hvbGRfcGN0GAIgASgBUgx0aHJlc2hvbGRQY3QSIAoLc2Vuc2l0aXZpdHkYAyABKAFS'
-    'C3NlbnNpdGl2aXR5');
+    'C3NlbnNpdGl2aXR5EkAKBGtpbmQYBCABKA4yJy5rZG8udjEubW0uTWFya2V0TWFraW5nUXR5SW'
+    '1iYWxhbmNlS2luZEgAUgRraW5kiAEBEh4KCGJlbmRfcGN0GAUgASgBSAFSB2JlbmRQY3SIAQFC'
+    'BwoFX2tpbmRCCwoJX2JlbmRfcGN0');
 
 @$core.Deprecated('Use marketMakingF2mBandDescriptor instead')
 const MarketMakingF2mBand$json = {

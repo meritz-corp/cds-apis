@@ -2106,15 +2106,34 @@
         "thresholdPct": {
           "type": "number",
           "format": "double",
-          "description": "임계 θ (%, 0~50). 한쪽 잔량 비중이 이 값 미만이면 linear 보다 그 반대 호가 쪽으로 더 붙는다.\n범위 밖·NaN 은 서버가 거부."
+          "description": "임계 θ (%, 0~50). 한쪽 잔량 비중이 이 값 미만이면 linear 보다 그 반대 호가 쪽으로 더 붙는다. kind = CURVE 에서만 쓴다.\n범위 밖·NaN 은 서버가 거부."
         },
         "sensitivity": {
           "type": "number",
           "format": "double",
-          "description": "민감도 (0~1). 0 = linear, 1 = 계단, 사이 값은 위 거듭제곱 곡선. 범위 밖·NaN 은 서버가 거부."
+          "description": "민감도 (0~1). 0 = linear, 1 = 계단, 사이 값은 위 거듭제곱 곡선. kind = CURVE 에서만 쓴다. 범위 밖·NaN 은 서버가 거부."
+        },
+        "kind": {
+          "$ref": "#/definitions/mmMarketMakingQtyImbalanceKind",
+          "description": "유형. CURVE(기본) = threshold_pct·sensitivity 곡선, BEND = bend_pct 꺾임.\noptional: 미설정이면 서버가 기존값 유지 — 이 필드를 모르는 구 클라이언트가 저장해도 유형이 바뀌지 않는다."
+        },
+        "bendPct": {
+          "type": "number",
+          "format": "double",
+          "description": "꺾임 b (%, 0~50). 한쪽 잔량이 바닥날 때 그쪽 1호가에서 스프레드의 몇 % 못 미친 곳까지 갈지 — kind = BEND 에서만 쓴다.\n0 = linear, 50 = 1호가 중간가 그대로(skew 0). 범위 밖·NaN 은 kind 와 무관하게 서버가 거부. 서버 기본 25.\noptional: 미설정이면 서버가 기존값 유지(kind 와 같은 이유)."
         }
       },
-      "description": "잔량 불균형 skew 설정.\n\n구성종목·nav-dep 호가마다 1호가 매도 잔량 비중 x = 매도1호가 잔량 ÷ (매수1호가 잔량 + 매도1호가 잔량)으로\n위치 p 를 정하고 (1호가만 본다 — qty_weighted_mid_levels 와 무관)\n  종목 skew = (매수1호가 + p × (매도1호가 - 매수1호가)) - 1호가 중간가 = (p - ½) × 1호가 스프레드\n  ETF skew  = Σ (종목 NAV 비중 × 종목 skew)                     (NAV 비중 = 종목 가격 1원 변화당 NAV 변화량)\n  호가 기준 = NAV(중간가) + ETF skew (+ 다른 skew)\nNAV 밖에서 더하므로 F2M(시장추종)이 이 skew 를 상쇄하지 않는다. 환선물(FX 오버레이 소스)은 대상이 아니다.\n\n위치 p (매도 기준, 임계 θ = threshold_pct, 지수 γ = 1 ÷ (1 - sensitivity)):\n  x \u003c θ        : p = 1 - θ × (x ÷ θ)^γ                       → linear(1 - x) 보다 매도호가 쪽\n  θ ≤ x ≤ 50%  : p = ½ + (½ - θ) × ((½ - x) ÷ (½ - θ))^γ     → linear 보다 중간가 쪽 (잔량이 비슷하면 skew 를 덜 줌)\n  50% 넘는 쪽은 대칭(매수 잔량이 얇으면 매수호가 쪽). θ·50% 에서 linear 와 만나 가격이 끊기지 않는다.\n  sensitivity 0 = linear (1호가 잔량가중 microprice 와 같은 값), 1 = 계단 (x \u003c θ 매도호가, θ ~ 100-θ% 중간가, 그 밖 매수호가).\n\n예) PDF 에 구성종목 하나, ETF 1주 = 구성종목 1주. 구성종목 1호가 매수 1000 / 매도 2000, threshold_pct 20\n  매도 비중   linear(=0)      sensitivity 0.5   0.8      1\n     5%        1950            1987.5          1999.8   2000\n    10%        1900            1950            1993.8   2000\n    20%        1800            1800            1800     2000→1500 (점프)\n    30%        1700            1633.3          1539.5   1500\n    50%        1500            1500            1500     1500\n  매도 비중 10%·sensitivity 0.5: NAV(중간가) 1500 + skew (0.95 - 0.5) × 1000 = +450 → 호가 기준 1950."
+      "description": "잔량 불균형 skew 설정.\n\n구성종목·nav-dep 호가마다 1호가 매도 잔량 비중 x = 매도1호가 잔량 ÷ (매수1호가 잔량 + 매도1호가 잔량)으로\n위치 p 를 정하고 (1호가만 본다 — qty_weighted_mid_levels 와 무관)\n  종목 skew = (매수1호가 + p × (매도1호가 - 매수1호가)) - 1호가 중간가 = (p - ½) × 1호가 스프레드\n  ETF skew  = Σ (종목 NAV 비중 × 종목 skew)                     (NAV 비중 = 종목 가격 1원 변화당 NAV 변화량)\n  호가 기준 = NAV(중간가) + ETF skew (+ 다른 skew)\nNAV 밖에서 더하므로 F2M(시장추종)이 이 skew 를 상쇄하지 않는다. 환선물(FX 오버레이 소스)은 대상이 아니다.\n\n위치 p — kind = CURVE (매도 기준, 임계 θ = threshold_pct, 지수 γ = 1 ÷ (1 - sensitivity)):\n  x \u003c θ        : p = 1 - θ × (x ÷ θ)^γ                       → linear(1 - x) 보다 매도호가 쪽\n  θ ≤ x ≤ 50%  : p = ½ + (½ - θ) × ((½ - x) ÷ (½ - θ))^γ     → linear 보다 중간가 쪽 (잔량이 비슷하면 skew 를 덜 줌)\n  50% 넘는 쪽은 대칭(매수 잔량이 얇으면 매수호가 쪽). θ·50% 에서 linear 와 만나 가격이 끊기지 않는다.\n  sensitivity 0 = linear (1호가 잔량가중 microprice 와 같은 값), 1 = 계단 (x \u003c θ 매도호가, θ ~ 100-θ% 중간가, 그 밖 매수호가).\n\n예) PDF 에 구성종목 하나, ETF 1주 = 구성종목 1주. 구성종목 1호가 매수 1000 / 매도 2000, threshold_pct 20\n  매도 비중   linear(=0)      sensitivity 0.5   0.8      1\n     5%        1950            1987.5          1999.8   2000\n    10%        1900            1950            1993.8   2000\n    20%        1800            1800            1800     2000→1500 (점프)\n    30%        1700            1633.3          1539.5   1500\n    50%        1500            1500            1500     1500\n  매도 비중 10%·sensitivity 0.5: NAV(중간가) 1500 + skew (0.95 - 0.5) × 1000 = +450 → 호가 기준 1950.\n\n위치 p — kind = BEND (꺾임 b = bend_pct):\n  p = ½ + (1 - 2b) × (½ - x)                                → 종목 skew = (1 - 2b) × linear skew\n  잔량 비중에 비례해 움직이되(linear 의 1 - 2b 배), 한쪽 잔량이 바닥나도 그쪽 1호가에서 스프레드의 b 만큼 못 미친\n  곳까지만 간다. 그 1호가가 다 체결돼 호가가 한 칸 밀리면 새 1호가로 다시 계산되므로 나머지는 그때 한 번에 움직인다(꺾임).\n  b = 0 → linear (sensitivity 0 과 같은 값), b = 50% → 1호가 중간가 그대로 (skew 0).\n\n예) 같은 1호가 매수 1000 / 매도 2000\n  매도 비중   bend 0(=linear)   25      40      50\n     5%        1950            1725    1590    1500\n    10%        1900            1700    1580    1500\n    30%        1700            1600    1540    1500\n    50%        1500            1500    1500    1500\n  매도 비중 10%·bend_pct 25: linear skew (0.9 - 0.5) × 1000 = 400 → skew (1 - 2 × 0.25) × 400 = +200 → 호가 기준 1700."
+    },
+    "mmMarketMakingQtyImbalanceKind": {
+      "type": "string",
+      "enum": [
+        "MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE",
+        "MARKET_MAKING_QTY_IMBALANCE_KIND_BEND"
+      ],
+      "default": "MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE",
+      "description": "- MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE: threshold_pct·sensitivity 곡선. proto 기본값 0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)\n - MARKET_MAKING_QTY_IMBALANCE_KIND_BEND: bend_pct 꺾임 — linear 를 1호가 앞 bend_pct 지점까지만 따라간다",
+      "title": "잔량 불균형 skew 유형"
     },
     "mmMarketMakingQuantityLimit": {
       "type": "object",

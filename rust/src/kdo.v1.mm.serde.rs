@@ -7424,6 +7424,12 @@ impl serde::Serialize for MarketMakingQtyImbalance {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingQtyImbalance", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -7433,6 +7439,14 @@ impl serde::Serialize for MarketMakingQtyImbalance {
         }
         if true {
             struct_ser.serialize_field("sensitivity", &self.sensitivity)?;
+        }
+        if let Some(v) = self.kind.as_ref() {
+            let v = MarketMakingQtyImbalanceKind::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("kind", &v)?;
+        }
+        if let Some(v) = self.bend_pct.as_ref() {
+            struct_ser.serialize_field("bend_pct", v)?;
         }
         struct_ser.end()
     }
@@ -7448,6 +7462,9 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalance {
             "threshold_pct",
             "thresholdPct",
             "sensitivity",
+            "kind",
+            "bend_pct",
+            "bendPct",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -7455,6 +7472,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalance {
             Enabled,
             ThresholdPct,
             Sensitivity,
+            Kind,
+            BendPct,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -7480,6 +7499,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalance {
                             "enabled" => Ok(GeneratedField::Enabled),
                             "thresholdPct" | "threshold_pct" => Ok(GeneratedField::ThresholdPct),
                             "sensitivity" => Ok(GeneratedField::Sensitivity),
+                            "kind" => Ok(GeneratedField::Kind),
+                            "bendPct" | "bend_pct" => Ok(GeneratedField::BendPct),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -7502,6 +7523,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalance {
                 let mut enabled__ = None;
                 let mut threshold_pct__ = None;
                 let mut sensitivity__ = None;
+                let mut kind__ = None;
+                let mut bend_pct__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -7526,6 +7549,20 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalance {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::Kind => {
+                            if kind__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("kind"));
+                            }
+                            kind__ = map_.next_value::<::std::option::Option<MarketMakingQtyImbalanceKind>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::BendPct => {
+                            if bend_pct__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bendPct"));
+                            }
+                            bend_pct__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -7535,10 +7572,83 @@ impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalance {
                     enabled: enabled__.unwrap_or_default(),
                     threshold_pct: threshold_pct__.unwrap_or_default(),
                     sensitivity: sensitivity__.unwrap_or_default(),
+                    kind: kind__,
+                    bend_pct: bend_pct__,
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingQtyImbalance", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingQtyImbalanceKind {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Curve => "MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE",
+            Self::Bend => "MARKET_MAKING_QTY_IMBALANCE_KIND_BEND",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingQtyImbalanceKind {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE",
+            "MARKET_MAKING_QTY_IMBALANCE_KIND_BEND",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingQtyImbalanceKind;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE" => Ok(MarketMakingQtyImbalanceKind::Curve),
+                    "MARKET_MAKING_QTY_IMBALANCE_KIND_BEND" => Ok(MarketMakingQtyImbalanceKind::Bend),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingQuantityLimit {

@@ -71,6 +71,24 @@ class MarketMakingTakeExecutionMethod extends $pb.ProtobufEnum {
   const MarketMakingTakeExecutionMethod._(super.value, super.name);
 }
 
+/// 잔량 불균형 skew 유형
+class MarketMakingQtyImbalanceKind extends $pb.ProtobufEnum {
+  /// threshold_pct·sensitivity 곡선. proto 기본값 0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)
+  static const MarketMakingQtyImbalanceKind MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE = MarketMakingQtyImbalanceKind._(0, _omitEnumNames ? '' : 'MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE');
+  /// bend_pct 꺾임 — linear 를 1호가 앞 bend_pct 지점까지만 따라간다
+  static const MarketMakingQtyImbalanceKind MARKET_MAKING_QTY_IMBALANCE_KIND_BEND = MarketMakingQtyImbalanceKind._(1, _omitEnumNames ? '' : 'MARKET_MAKING_QTY_IMBALANCE_KIND_BEND');
+
+  static const $core.List<MarketMakingQtyImbalanceKind> values = <MarketMakingQtyImbalanceKind> [
+    MARKET_MAKING_QTY_IMBALANCE_KIND_CURVE,
+    MARKET_MAKING_QTY_IMBALANCE_KIND_BEND,
+  ];
+
+  static final $core.List<MarketMakingQtyImbalanceKind?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static MarketMakingQtyImbalanceKind? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const MarketMakingQtyImbalanceKind._(super.value, super.name);
+}
+
 /// 스냅샷이 남은 계기 — 분석기(mm_analyzer)가 세션을 "시작" · "설정변경" · "F2M 지정" 으로 구분
 class MmConfigEventType extends $pb.ProtobufEnum {
   static const MmConfigEventType MM_CONFIG_EVENT_TYPE_UNSPECIFIED = MmConfigEventType._(0, _omitEnumNames ? '' : 'MM_CONFIG_EVENT_TYPE_UNSPECIFIED');
