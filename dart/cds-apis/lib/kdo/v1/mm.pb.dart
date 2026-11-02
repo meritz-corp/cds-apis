@@ -174,6 +174,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     MarketMakingQtyImbalance? qtyImbalance,
     MarketMakingF2mBand? f2mBand,
     $fixnum.Int64? version,
+    $core.double? manualSkew,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -207,6 +208,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     if (qtyImbalance != null) result.qtyImbalance = qtyImbalance;
     if (f2mBand != null) result.f2mBand = f2mBand;
     if (version != null) result.version = version;
+    if (manualSkew != null) result.manualSkew = manualSkew;
     return result;
   }
 
@@ -247,6 +249,7 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
     ..aOM<MarketMakingQtyImbalance>(35, _omitFieldNames ? '' : 'qtyImbalance', subBuilder: MarketMakingQtyImbalance.create)
     ..aOM<MarketMakingF2mBand>(36, _omitFieldNames ? '' : 'f2mBand', subBuilder: MarketMakingF2mBand.create)
     ..a<$fixnum.Int64>(37, _omitFieldNames ? '' : 'version', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.double>(38, _omitFieldNames ? '' : 'manualSkew', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -665,6 +668,22 @@ class MarketMakingConfiguration extends $pb.GeneratedMessage {
   $core.bool hasVersion() => $_has(30);
   @$pb.TagNumber(37)
   void clearVersion() => $_clearField(37);
+
+  /// 수동 skew (원, 소수 허용, 부호 = 방향). 매수·매도 호가를 이 값만큼 같이 옮긴다 — 스프레드 폭은 그대로,
+  /// + 면 둘 다 위로(매수 쪽 공격적), − 면 둘 다 아래로. 다른 skew(momentum·exposure·MA 크로스·F2M 등)와 합산한 뒤
+  /// 틱 정렬 전에 더한다. F2M 괴리는 skew 를 뺀 이론가 기준이라 F2M 이 이 값을 상쇄하지 않고, f2m_band 와도 무관하다.
+  /// take 모드 교차 판정·빠른 청산 기준가(자기 호가)도 이 값만큼 움직인다. 상한 없음(유한한 수만 — NaN·무한대는 서버가
+  /// 거부). 0 = 꺼짐(기본). Running 중 변경 허용(다음 tick 반영). 호가에 더한 값은 SpreadDecomposition.manual_skew_shift.
+  /// ApplyMmPreset 은 이 값을 바꾸지 않는다(현재 값 유지) — MmPreset.config 의 값은 프리셋 저장 시점 값일 뿐이다.
+  /// optional: presence 로 "설정 vs 미변경" 구분 (f2m_band 와 동일 패턴) — 미설정 시 서버가 기존값 유지.
+  @$pb.TagNumber(38)
+  $core.double get manualSkew => $_getN(31);
+  @$pb.TagNumber(38)
+  set manualSkew($core.double value) => $_setDouble(31, value);
+  @$pb.TagNumber(38)
+  $core.bool hasManualSkew() => $_has(31);
+  @$pb.TagNumber(38)
+  void clearManualSkew() => $_clearField(38);
 }
 
 enum MarketMakingPricing_Pricing {
@@ -5986,6 +6005,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     $fixnum.Int64? constituentMomentumShift,
     $fixnum.Int64? proxyMomentumShift,
     $fixnum.Int64? qtyImbalanceShift,
+    $core.double? manualSkewShift,
   }) {
     final result = create();
     if (baseBid != null) result.baseBid = baseBid;
@@ -5999,6 +6019,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     if (constituentMomentumShift != null) result.constituentMomentumShift = constituentMomentumShift;
     if (proxyMomentumShift != null) result.proxyMomentumShift = proxyMomentumShift;
     if (qtyImbalanceShift != null) result.qtyImbalanceShift = qtyImbalanceShift;
+    if (manualSkewShift != null) result.manualSkewShift = manualSkewShift;
     return result;
   }
 
@@ -6019,6 +6040,7 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
     ..aInt64(9, _omitFieldNames ? '' : 'constituentMomentumShift')
     ..aInt64(10, _omitFieldNames ? '' : 'proxyMomentumShift')
     ..aInt64(11, _omitFieldNames ? '' : 'qtyImbalanceShift')
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'manualSkewShift', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -6148,6 +6170,16 @@ class SpreadDecomposition extends $pb.GeneratedMessage {
   $core.bool hasQtyImbalanceShift() => $_has(10);
   @$pb.TagNumber(11)
   void clearQtyImbalanceShift() => $_clearField(11);
+
+  /// 수동 skew 가산량 (MarketMakingConfiguration.manual_skew, 부호 포함, bid·ask 동일, 원 단위 소수 포함)
+  @$pb.TagNumber(12)
+  $core.double get manualSkewShift => $_getN(11);
+  @$pb.TagNumber(12)
+  set manualSkewShift($core.double value) => $_setDouble(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasManualSkewShift() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearManualSkewShift() => $_clearField(12);
 }
 
 /// StreamMmStateUpdate

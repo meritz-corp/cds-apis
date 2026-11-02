@@ -174,6 +174,15 @@ pub struct MarketMakingConfiguration {
     /// optional: 미설정 = 버전 검사 없이 저장(구 클라이언트 호환).
     #[prost(uint64, optional, tag="37")]
     pub version: ::core::option::Option<u64>,
+    /// 수동 skew (원, 소수 허용, 부호 = 방향). 매수·매도 호가를 이 값만큼 같이 옮긴다 — 스프레드 폭은 그대로,
+    /// + 면 둘 다 위로(매수 쪽 공격적), − 면 둘 다 아래로. 다른 skew(momentum·exposure·MA 크로스·F2M 등)와 합산한 뒤
+    /// 틱 정렬 전에 더한다. F2M 괴리는 skew 를 뺀 이론가 기준이라 F2M 이 이 값을 상쇄하지 않고, f2m_band 와도 무관하다.
+    /// take 모드 교차 판정·빠른 청산 기준가(자기 호가)도 이 값만큼 움직인다. 상한 없음(유한한 수만 — NaN·무한대는 서버가
+    /// 거부). 0 = 꺼짐(기본). Running 중 변경 허용(다음 tick 반영). 호가에 더한 값은 SpreadDecomposition.manual_skew_shift.
+    /// ApplyMmPreset 은 이 값을 바꾸지 않는다(현재 값 유지) — MmPreset.config 의 값은 프리셋 저장 시점 값일 뿐이다.
+    /// optional: presence 로 "설정 vs 미변경" 구분 (f2m_band 와 동일 패턴) — 미설정 시 서버가 기존값 유지.
+    #[prost(double, optional, tag="38")]
+    pub manual_skew: ::core::option::Option<f64>,
 }
 /// NAV pricing 상세 설정
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1345,6 +1354,9 @@ pub struct SpreadDecomposition {
     /// 잔량 불균형 skew 가산량 (부호 포함, bid·ask 동일, 원 단위 정수 — 소수 절삭)
     #[prost(int64, tag="11")]
     pub qty_imbalance_shift: i64,
+    /// 수동 skew 가산량 (MarketMakingConfiguration.manual_skew, 부호 포함, bid·ask 동일, 원 단위 소수 포함)
+    #[prost(double, tag="12")]
+    pub manual_skew_shift: f64,
 }
 // ============================================================================
 // MM 엔진 상태 Request Messages

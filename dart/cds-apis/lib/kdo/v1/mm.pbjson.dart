@@ -161,6 +161,7 @@ const MarketMakingConfiguration$json = {
     {'1': 'qty_imbalance', '3': 35, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingQtyImbalance', '9': 14, '10': 'qtyImbalance', '17': true},
     {'1': 'f2m_band', '3': 36, '4': 1, '5': 11, '6': '.kdo.v1.mm.MarketMakingF2mBand', '9': 15, '10': 'f2mBand', '17': true},
     {'1': 'version', '3': 37, '4': 1, '5': 4, '9': 16, '10': 'version', '17': true},
+    {'1': 'manual_skew', '3': 38, '4': 1, '5': 1, '9': 17, '10': 'manualSkew', '17': true},
   ],
   '8': [
     {'1': '_basis'},
@@ -180,6 +181,7 @@ const MarketMakingConfiguration$json = {
     {'1': '_qty_imbalance'},
     {'1': '_f2m_band'},
     {'1': '_version'},
+    {'1': '_manual_skew'},
   ],
   '9': [
     {'1': 7, '2': 8},
@@ -228,16 +230,17 @@ final $typed_data.Uint8List marketMakingConfigurationDescriptor = $convert.base6
     'FIDVIfcXR5V2VpZ2h0ZWRNaWRJbWJhbGFuY2VFeHBvbmVudIgBARJNCg1xdHlfaW1iYWxhbmNl'
     'GCMgASgLMiMua2RvLnYxLm1tLk1hcmtldE1ha2luZ1F0eUltYmFsYW5jZUgOUgxxdHlJbWJhbG'
     'FuY2WIAQESPgoIZjJtX2JhbmQYJCABKAsyHi5rZG8udjEubW0uTWFya2V0TWFraW5nRjJtQmFu'
-    'ZEgPUgdmMm1CYW5kiAEBEh0KB3ZlcnNpb24YJSABKARIEFIHdmVyc2lvbogBAUIICgZfYmFzaX'
-    'NCGgoYX2YybV9yZWZpdF9pbnRlcnZhbF9zZWNzQhUKE19mMm1fbWFfd2luZG93X3NlY3NCDAoK'
-    'X3Rha2VfbW9kZUIICgZfaXNfbHBCFwoVX3VzZV9xdHlfd2VpZ2h0ZWRfbWlkQhkKF19mMm1fc2'
-    'FtcGxlX2ludGVydmFsX21zQhoKGF9xdHlfd2VpZ2h0ZWRfbWlkX2xldmVsc0ITChFfZmFzdF9s'
-    'aXF1aWRhdGlvbkIRCg9fdGFrZV9leGVjdXRpb25CDQoLX2xvc3NfbGltaXRCGAoWX2YybV9yZW'
-    'ZpdF9pbnRlcnZhbF9tc0IrCilfcXR5X3dlaWdodGVkX21pZF9pbWJhbGFuY2VfdGhyZXNob2xk'
-    'X3BjdEImCiRfcXR5X3dlaWdodGVkX21pZF9pbWJhbGFuY2VfZXhwb25lbnRCEAoOX3F0eV9pbW'
-    'JhbGFuY2VCCwoJX2YybV9iYW5kQgoKCF92ZXJzaW9uSgQIBxAISgQICBAJSgQICxAMSgQIDBAN'
-    'SgQIDRAOSgQIDhAPUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1'
-    'IJYXNrX2Jhc2lzUgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
+    'ZEgPUgdmMm1CYW5kiAEBEh0KB3ZlcnNpb24YJSABKARIEFIHdmVyc2lvbogBARIkCgttYW51YW'
+    'xfc2tldxgmIAEoAUgRUgptYW51YWxTa2V3iAEBQggKBl9iYXNpc0IaChhfZjJtX3JlZml0X2lu'
+    'dGVydmFsX3NlY3NCFQoTX2YybV9tYV93aW5kb3dfc2Vjc0IMCgpfdGFrZV9tb2RlQggKBl9pc1'
+    '9scEIXChVfdXNlX3F0eV93ZWlnaHRlZF9taWRCGQoXX2YybV9zYW1wbGVfaW50ZXJ2YWxfbXNC'
+    'GgoYX3F0eV93ZWlnaHRlZF9taWRfbGV2ZWxzQhMKEV9mYXN0X2xpcXVpZGF0aW9uQhEKD190YW'
+    'tlX2V4ZWN1dGlvbkINCgtfbG9zc19saW1pdEIYChZfZjJtX3JlZml0X2ludGVydmFsX21zQisK'
+    'KV9xdHlfd2VpZ2h0ZWRfbWlkX2ltYmFsYW5jZV90aHJlc2hvbGRfcGN0QiYKJF9xdHlfd2VpZ2'
+    'h0ZWRfbWlkX2ltYmFsYW5jZV9leHBvbmVudEIQCg5fcXR5X2ltYmFsYW5jZUILCglfZjJtX2Jh'
+    'bmRCCgoIX3ZlcnNpb25CDgoMX21hbnVhbF9za2V3SgQIBxAISgQICBAJSgQICxAMSgQIDBANSg'
+    'QIDRAOSgQIDhAPUg5iaWRfYWRqdXN0bWVudFIOYXNrX2FkanVzdG1lbnRSCWJpZF9iYXNpc1IJ'
+    'YXNrX2Jhc2lzUgpiaWRfb2Zmc2V0Ugphc2tfb2Zmc2V0');
 
 @$core.Deprecated('Use marketMakingPricingDescriptor instead')
 const MarketMakingPricing$json = {
@@ -1409,6 +1412,7 @@ const SpreadDecomposition$json = {
     {'1': 'constituent_momentum_shift', '3': 9, '4': 1, '5': 3, '10': 'constituentMomentumShift'},
     {'1': 'proxy_momentum_shift', '3': 10, '4': 1, '5': 3, '10': 'proxyMomentumShift'},
     {'1': 'qty_imbalance_shift', '3': 11, '4': 1, '5': 3, '10': 'qtyImbalanceShift'},
+    {'1': 'manual_skew_shift', '3': 12, '4': 1, '5': 1, '10': 'manualSkewShift'},
   ],
 };
 
@@ -1422,7 +1426,7 @@ final $typed_data.Uint8List spreadDecompositionDescriptor = $convert.base64Decod
     'gDUgxtYUNyb3NzU2hpZnQSPAoaY29uc3RpdHVlbnRfbW9tZW50dW1fc2hpZnQYCSABKANSGGNv'
     'bnN0aXR1ZW50TW9tZW50dW1TaGlmdBIwChRwcm94eV9tb21lbnR1bV9zaGlmdBgKIAEoA1IScH'
     'JveHlNb21lbnR1bVNoaWZ0Ei4KE3F0eV9pbWJhbGFuY2Vfc2hpZnQYCyABKANSEXF0eUltYmFs'
-    'YW5jZVNoaWZ0');
+    'YW5jZVNoaWZ0EioKEW1hbnVhbF9za2V3X3NoaWZ0GAwgASgBUg9tYW51YWxTa2V3U2hpZnQ=');
 
 @$core.Deprecated('Use streamMmStateUpdateRequestDescriptor instead')
 const StreamMmStateUpdateRequest$json = {

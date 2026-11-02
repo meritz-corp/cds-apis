@@ -4294,6 +4294,9 @@ impl serde::Serialize for MarketMakingConfiguration {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingConfiguration", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -4404,6 +4407,9 @@ impl serde::Serialize for MarketMakingConfiguration {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("version", ToString::to_string(&v).as_str())?;
         }
+        if let Some(v) = self.manual_skew.as_ref() {
+            struct_ser.serialize_field("manual_skew", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -4471,6 +4477,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             "f2m_band",
             "f2mBand",
             "version",
+            "manual_skew",
+            "manualSkew",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -4506,6 +4514,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
             QtyImbalance,
             F2mBand,
             Version,
+            ManualSkew,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -4559,6 +4568,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                             "qtyImbalance" | "qty_imbalance" => Ok(GeneratedField::QtyImbalance),
                             "f2mBand" | "f2m_band" => Ok(GeneratedField::F2mBand),
                             "version" => Ok(GeneratedField::Version),
+                            "manualSkew" | "manual_skew" => Ok(GeneratedField::ManualSkew),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -4609,6 +4619,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                 let mut qty_imbalance__ = None;
                 let mut f2m_band__ = None;
                 let mut version__ = None;
+                let mut manual_skew__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -4821,6 +4832,14 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                                 map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
                             ;
                         }
+                        GeneratedField::ManualSkew => {
+                            if manual_skew__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("manualSkew"));
+                            }
+                            manual_skew__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -4858,6 +4877,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingConfiguration {
                     qty_imbalance: qty_imbalance__,
                     f2m_band: f2m_band__,
                     version: version__,
+                    manual_skew: manual_skew__,
                 })
             }
         }
@@ -10863,6 +10883,9 @@ impl serde::Serialize for SpreadDecomposition {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.SpreadDecomposition", len)?;
         if true {
             struct_ser.serialize_field("base_bid", &self.base_bid)?;
@@ -10915,6 +10938,9 @@ impl serde::Serialize for SpreadDecomposition {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("qty_imbalance_shift", ToString::to_string(&self.qty_imbalance_shift).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("manual_skew_shift", &self.manual_skew_shift)?;
+        }
         struct_ser.end()
     }
 }
@@ -10947,6 +10973,8 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             "proxyMomentumShift",
             "qty_imbalance_shift",
             "qtyImbalanceShift",
+            "manual_skew_shift",
+            "manualSkewShift",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -10962,6 +10990,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
             ConstituentMomentumShift,
             ProxyMomentumShift,
             QtyImbalanceShift,
+            ManualSkewShift,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -10995,6 +11024,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                             "constituentMomentumShift" | "constituent_momentum_shift" => Ok(GeneratedField::ConstituentMomentumShift),
                             "proxyMomentumShift" | "proxy_momentum_shift" => Ok(GeneratedField::ProxyMomentumShift),
                             "qtyImbalanceShift" | "qty_imbalance_shift" => Ok(GeneratedField::QtyImbalanceShift),
+                            "manualSkewShift" | "manual_skew_shift" => Ok(GeneratedField::ManualSkewShift),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -11025,6 +11055,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                 let mut constituent_momentum_shift__ = None;
                 let mut proxy_momentum_shift__ = None;
                 let mut qty_imbalance_shift__ = None;
+                let mut manual_skew_shift__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::BaseBid => {
@@ -11111,6 +11142,14 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::ManualSkewShift => {
+                            if manual_skew_shift__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("manualSkewShift"));
+                            }
+                            manual_skew_shift__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -11128,6 +11167,7 @@ impl<'de> serde::Deserialize<'de> for SpreadDecomposition {
                     constituent_momentum_shift: constituent_momentum_shift__.unwrap_or_default(),
                     proxy_momentum_shift: proxy_momentum_shift__.unwrap_or_default(),
                     qty_imbalance_shift: qty_imbalance_shift__.unwrap_or_default(),
+                    manual_skew_shift: manual_skew_shift__.unwrap_or_default(),
                 })
             }
         }
