@@ -541,6 +541,14 @@ pub struct UpdateEtfLpRequest {
     /// 매도 호가 활성화 여부 (PATCH 시에만 명시)
     #[prost(bool, optional, tag="20")]
     pub ask_enabled: ::core::option::Option<bool>,
+    /// 시장 1호가 기준 adj 자동 입력 (pricing 이 지수추종 index_tracking_hedge 일 때만). 값 = n 틱, 0 = 1호가에 붙임.
+    /// 서버가 그 순간의 NAV·시장 1호가로 bid_adjustment·ask_adjustment 를 계산해 저장한다 —
+    /// offset·호가단위를 반영한 최종 1호가가 매수 = 시장 매수1호가 − n틱, 매도 = 시장 매도1호가 + n틱.
+    /// 시장 1호가는 화면 그대로(내 LP 호가 포함)라 내 호가가 1호가면 실행할 때마다 n틱씩 더 밀린다.
+    /// LP 정지 중에도 된다(시세 캐시의 추종 선물 1호가로 NAV 재계산). 지수추종이 아니거나 시세가 없으면 FAILED_PRECONDITION,
+    /// bid_adjustment·ask_adjustment 와 같이 보내면 INVALID_ARGUMENT. 계산된 adj 는 응답 EtfLp 에 담긴다.
+    #[prost(uint32, optional, tag="22")]
+    pub adjustment_ticks_from_best: ::core::option::Option<u32>,
 }
 /// GetEtfLpStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
