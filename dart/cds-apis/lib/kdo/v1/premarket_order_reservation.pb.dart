@@ -41,7 +41,6 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     $core.double? askAdjustment,
     $core.int? bidOffsetTicks,
     $core.int? askOffsetTicks,
-    $core.String? updatedBy,
     $3.Timestamp? updateTime,
   }) {
     final result = create();
@@ -59,7 +58,6 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (bidOffsetTicks != null) result.bidOffsetTicks = bidOffsetTicks;
     if (askOffsetTicks != null) result.askOffsetTicks = askOffsetTicks;
-    if (updatedBy != null) result.updatedBy = updatedBy;
     if (updateTime != null) result.updateTime = updateTime;
     return result;
   }
@@ -84,7 +82,6 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     ..a<$core.double>(12, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..a<$core.int>(13, _omitFieldNames ? '' : 'bidOffsetTicks', $pb.PbFieldType.O3)
     ..a<$core.int>(14, _omitFieldNames ? '' : 'askOffsetTicks', $pb.PbFieldType.O3)
-    ..aOS(15, _omitFieldNames ? '' : 'updatedBy')
     ..aOM<$3.Timestamp>(16, _omitFieldNames ? '' : 'updateTime', subBuilder: $3.Timestamp.create)
     ..hasRequiredFields = false
   ;
@@ -247,26 +244,16 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   void clearAskOffsetTicks() => $_clearField(14);
 
-  /// 저장한 클라이언트 IP
-  @$pb.TagNumber(15)
-  $core.String get updatedBy => $_getSZ(14);
-  @$pb.TagNumber(15)
-  set updatedBy($core.String value) => $_setString(14, value);
-  @$pb.TagNumber(15)
-  $core.bool hasUpdatedBy() => $_has(14);
-  @$pb.TagNumber(15)
-  void clearUpdatedBy() => $_clearField(15);
-
   @$pb.TagNumber(16)
-  $3.Timestamp get updateTime => $_getN(15);
+  $3.Timestamp get updateTime => $_getN(14);
   @$pb.TagNumber(16)
   set updateTime($3.Timestamp value) => $_setField(16, value);
   @$pb.TagNumber(16)
-  $core.bool hasUpdateTime() => $_has(15);
+  $core.bool hasUpdateTime() => $_has(14);
   @$pb.TagNumber(16)
   void clearUpdateTime() => $_clearField(16);
   @$pb.TagNumber(16)
-  $3.Timestamp ensureUpdateTime() => $_ensure(15);
+  $3.Timestamp ensureUpdateTime() => $_ensure(14);
 }
 
 /// 장전 예약주문 주문 1건
@@ -732,7 +719,7 @@ class UpdatePremarketOrderReservationRequest extends $pb.GeneratedMessage {
   static UpdatePremarketOrderReservationRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdatePremarketOrderReservationRequest>(create);
   static UpdatePremarketOrderReservationRequest? _defaultInstance;
 
-  /// updated_by·update_time 은 무시(서버가 채움)
+  /// update_time 은 무시(서버가 채움)
   @$pb.TagNumber(1)
   PremarketOrderReservation get premarketOrderReservation => $_getN(0);
   @$pb.TagNumber(1)

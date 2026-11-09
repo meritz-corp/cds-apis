@@ -615,9 +615,6 @@ impl serde::Serialize for PremarketOrderReservation {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.premarket_order_reservation.PremarketOrderReservation", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -669,9 +666,6 @@ impl serde::Serialize for PremarketOrderReservation {
         if true {
             struct_ser.serialize_field("ask_offset_ticks", &self.ask_offset_ticks)?;
         }
-        if true {
-            struct_ser.serialize_field("updated_by", &self.updated_by)?;
-        }
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
         }
@@ -710,8 +704,6 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
             "bidOffsetTicks",
             "ask_offset_ticks",
             "askOffsetTicks",
-            "updated_by",
-            "updatedBy",
             "update_time",
             "updateTime",
         ];
@@ -732,7 +724,6 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
             AskAdjustment,
             BidOffsetTicks,
             AskOffsetTicks,
-            UpdatedBy,
             UpdateTime,
             __SkipField__,
         }
@@ -770,7 +761,6 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "bidOffsetTicks" | "bid_offset_ticks" => Ok(GeneratedField::BidOffsetTicks),
                             "askOffsetTicks" | "ask_offset_ticks" => Ok(GeneratedField::AskOffsetTicks),
-                            "updatedBy" | "updated_by" => Ok(GeneratedField::UpdatedBy),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -805,7 +795,6 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                 let mut ask_adjustment__ = None;
                 let mut bid_offset_ticks__ = None;
                 let mut ask_offset_ticks__ = None;
-                let mut updated_by__ = None;
                 let mut update_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -915,12 +904,6 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::UpdatedBy => {
-                            if updated_by__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("updatedBy"));
-                            }
-                            updated_by__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::UpdateTime => {
                             if update_time__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("updateTime"));
@@ -947,7 +930,6 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
                     bid_offset_ticks: bid_offset_ticks__.unwrap_or_default(),
                     ask_offset_ticks: ask_offset_ticks__.unwrap_or_default(),
-                    updated_by: updated_by__.unwrap_or_default(),
                     update_time: update_time__,
                 })
             }

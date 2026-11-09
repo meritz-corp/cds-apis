@@ -79,9 +79,12 @@ const PremarketOrderReservation$json = {
     {'1': 'ask_adjustment', '3': 12, '4': 1, '5': 1, '10': 'askAdjustment'},
     {'1': 'bid_offset_ticks', '3': 13, '4': 1, '5': 5, '10': 'bidOffsetTicks'},
     {'1': 'ask_offset_ticks', '3': 14, '4': 1, '5': 5, '10': 'askOffsetTicks'},
-    {'1': 'updated_by', '3': 15, '4': 1, '5': 9, '8': {}, '10': 'updatedBy'},
     {'1': 'update_time', '3': 16, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
+  '9': [
+    {'1': 15, '2': 16},
+  ],
+  '10': ['updated_by'],
 };
 
 /// Descriptor for `PremarketOrderReservation`. Decode as a `google.protobuf.DescriptorProto`.
@@ -95,9 +98,8 @@ final $typed_data.Uint8List premarketOrderReservationDescriptor = $convert.base6
     'IAEoAVIIYXNrQmFzaXMSJQoOYmlkX2FkanVzdG1lbnQYCyABKAFSDWJpZEFkanVzdG1lbnQSJQ'
     'oOYXNrX2FkanVzdG1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSKAoQYmlkX29mZnNldF90aWNr'
     'cxgNIAEoBVIOYmlkT2Zmc2V0VGlja3MSKAoQYXNrX29mZnNldF90aWNrcxgOIAEoBVIOYXNrT2'
-    'Zmc2V0VGlja3MSIwoKdXBkYXRlZF9ieRgPIAEoCUIE4kEBA1IJdXBkYXRlZEJ5EkEKC3VwZGF0'
-    'ZV90aW1lGBAgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVG'
-    'ltZQ==');
+    'Zmc2V0VGlja3MSQQoLdXBkYXRlX3RpbWUYECABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0'
+    'YW1wQgTiQQEDUgp1cGRhdGVUaW1lSgQIDxAQUgp1cGRhdGVkX2J5');
 
 @$core.Deprecated('Use premarketOrderReservationItemDescriptor instead')
 const PremarketOrderReservationItem$json = {

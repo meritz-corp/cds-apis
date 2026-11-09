@@ -47,9 +47,6 @@ pub struct PremarketOrderReservation {
     /// 0 이상
     #[prost(int32, tag="14")]
     pub ask_offset_ticks: i32,
-    /// 저장한 클라이언트 IP
-    #[prost(string, tag="15")]
-    pub updated_by: ::prost::alloc::string::String,
     #[prost(message, optional, tag="16")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
@@ -133,7 +130,7 @@ pub struct ListPremarketOrderReservationsResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePremarketOrderReservationRequest {
-    /// updated_by·update_time 은 무시(서버가 채움)
+    /// update_time 은 무시(서버가 채움)
     #[prost(message, optional, tag="1")]
     pub premarket_order_reservation: ::core::option::Option<PremarketOrderReservation>,
 }

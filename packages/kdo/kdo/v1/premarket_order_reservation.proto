@@ -129,8 +129,8 @@ message PremarketOrderReservation {
   // 0 이상
   int32 ask_offset_ticks = 14;
 
-  // 저장한 클라이언트 IP
-  string updated_by = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
+  reserved 15; // was: updated_by (저장한 클라이언트 IP)
+  reserved "updated_by";
 
   google.protobuf.Timestamp update_time = 16 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
@@ -236,7 +236,7 @@ message ListPremarketOrderReservationsResponse {
 }
 
 message UpdatePremarketOrderReservationRequest {
-  // updated_by·update_time 은 무시(서버가 채움)
+  // update_time 은 무시(서버가 채움)
   PremarketOrderReservation premarket_order_reservation = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
