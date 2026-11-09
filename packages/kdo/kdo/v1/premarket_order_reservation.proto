@@ -1,0 +1,264 @@
+syntax = "proto3";
+
+package kdo.v1.premarket_order_reservation;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/client.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "kdo/v1/common.proto";
+import "kdo/v1/lp.proto";
+
+option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
+
+// 장전 예약주문 서비스 — 08:30 호가접수 개시 전에 설정값으로 ETF 주문을 내고(FEP 가 보관했다가 08:30 에 거래소로 송출),
+// 08:59:55 부터 장 마감까지 NAV 기준가보다 공격적인 주문을 취소한다. 신규·정정은 하지 않는다.
+// (ETF, 펀드) 단위로 설정·start·stop 하며 같은 종목·펀드의 ETF LP 와 동시에 돌 수 있다.
+// 장전 예약주문 체결과 그 헷지 체결은 ETF LP 체결 통계와 따로 집계된다.
+service PremarketOrderReservationService {
+  // 장전 예약주문 조회
+  rpc GetPremarketOrderReservation(GetPremarketOrderReservationRequest) returns (PremarketOrderReservation) {
+    option (google.api.http) = {
+      get: "/v1/premarket_order_reservations/{etf_symbol}/{fund_code}"
+    };
+    option (google.api.method_signature) = "etf_symbol,fund_code";
+  }
+
+  // 장전 예약주문 목록
+  rpc ListPremarketOrderReservations(ListPremarketOrderReservationsRequest) returns (ListPremarketOrderReservationsResponse) {
+    option (google.api.http) = {
+      get: "/v1/premarket_order_reservations"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 오늘 실행 중인 (ETF, 펀드)는 바꿀 수 없다(FAILED_PRECONDITION).
+  rpc UpdatePremarketOrderReservation(UpdatePremarketOrderReservationRequest) returns (PremarketOrderReservation) {
+    option (google.api.http) = {
+      post: "/v1/premarket_order_reservations/{premarket_order_reservation.etf_symbol}/{premarket_order_reservation.fund_code}"
+      body: "*"
+    };
+    option (google.api.method_signature) = "premarket_order_reservation";
+  }
+
+  // 장전 예약주문 삭제 — 실행 중이면 FAILED_PRECONDITION.
+  rpc DeletePremarketOrderReservation(DeletePremarketOrderReservationRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/premarket_order_reservations/{etf_symbol}/{fund_code}"
+    };
+    option (google.api.method_signature) = "etf_symbol,fund_code";
+  }
+
+  // 장전 예약주문 시작 — 08:28 전이면 08:28 에, 08:28 ~ 08:59:55 면 바로 송신한다(08:30 이후 송신분은 바로 거래소 동시호가 접수).
+  // 08:59:55 이후이거나 이미 실행 중이면 FAILED_PRECONDITION. 주문자 식별정보는 start 한 사람 기준.
+  rpc StartPremarketOrderReservation(StartPremarketOrderReservationRequest) returns (PremarketOrderReservationStatus) {
+    option (google.api.http) = {
+      post: "/v1/premarket_order_reservations/{etf_symbol}/{fund_code}:start"
+      body: "*"
+    };
+  }
+
+  // 장전 예약주문 정지 — 살아 있는 주문을 전부 취소한다. 08:30 전 FEP 가 보관 중인 주문은 08:30 에 접수되는 대로 취소한다.
+  rpc StopPremarketOrderReservation(StopPremarketOrderReservationRequest) returns (PremarketOrderReservationStatus) {
+    option (google.api.http) = {
+      post: "/v1/premarket_order_reservations/{etf_symbol}/{fund_code}:stop"
+      body: "*"
+    };
+  }
+
+  // 오늘 시작한 장전 예약주문 상태 목록
+  rpc ListPremarketOrderReservationStatuses(ListPremarketOrderReservationStatusesRequest) returns (ListPremarketOrderReservationStatusesResponse) {
+    option (google.api.http) = {
+      get: "/v1/premarket_order_reservations/statuses"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 상태 스트림 — 상태·주문·체결이 바뀔 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.
+  rpc StreamPremarketOrderReservationStatuses(StreamPremarketOrderReservationStatusesRequest) returns (stream PremarketOrderReservationStatus) {
+    option (google.api.http) = {
+      get: "/v1/premarket_order_reservations/statuses:stream"
+    };
+    option (google.api.method_signature) = "";
+  }
+}
+
+// ========== Reservation ==========
+
+// 장전 예약주문 — (ETF, 펀드) 당 하나. 시작가부터 호가단위 간격으로 depth 단, 단별 같은 수량을 낸다.
+message PremarketOrderReservation {
+  string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // 매수 시작가(원). 0 이면 매수 안 냄
+  int64 bid_price = 3;
+
+  // 매도 시작가(원). 0 이면 매도 안 냄
+  int64 ask_price = 4;
+
+  // 측별 단수 (1~10)
+  uint32 depth = 5;
+
+  // 단별 수량 (매수·매도 공통)
+  int64 quantity = 6;
+
+  // 호가단위(원)
+  int64 tick_size = 7;
+
+  // 취소 기준가 = NAV(pricing·basis 로 계산) + adjustment ∓ offset 틱, 호가단위 맞춤 (ETF LP 1호가와 같은 식).
+  // 매수가 > 기준 매수가, 매도가 < 기준 매도가면 취소한다.
+  kdo.v1.common.EtfPricing pricing = 8;
+
+  // 원
+  double bid_basis = 9;
+
+  // 원
+  double ask_basis = 10;
+
+  // 원
+  double bid_adjustment = 11;
+
+  // 원
+  double ask_adjustment = 12;
+
+  // 0 이상
+  int32 bid_offset_ticks = 13;
+
+  // 0 이상
+  int32 ask_offset_ticks = 14;
+
+  // 저장한 클라이언트 IP
+  string updated_by = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  google.protobuf.Timestamp update_time = 16 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// ========== Status ==========
+
+// 장전 예약주문 실행 상태
+enum PremarketOrderReservationState {
+  PREMARKET_ORDER_RESERVATION_STATE_UNSPECIFIED = 0;
+  // start 됨 — 송신 시각(08:28) 대기
+  PREMARKET_ORDER_RESERVATION_STATE_WAITING = 1;
+  // 송신함 — 감시 시작(08:59:55) 전. 08:30 전이면 FEP 보관 중
+  PREMARKET_ORDER_RESERVATION_STATE_SENT = 2;
+  // NAV 기준 취소 감시 중 (08:59:55 ~ 장 마감)
+  PREMARKET_ORDER_RESERVATION_STATE_MONITORING = 3;
+  // stop — 남은 주문 취소 확인 대기
+  PREMARKET_ORDER_RESERVATION_STATE_STOPPING = 4;
+  // 끝 — stop·전량 종료·장 마감·송신 실패 (message 참고)
+  PREMARKET_ORDER_RESERVATION_STATE_STOPPED = 5;
+}
+
+// 장전 예약주문 주문 1건의 상태
+enum PremarketOrderReservationItemState {
+  PREMARKET_ORDER_RESERVATION_ITEM_STATE_UNSPECIFIED = 0;
+  // 송신 — 08:30 전 송신분은 FEP 가 보관
+  PREMARKET_ORDER_RESERVATION_ITEM_STATE_SENT = 1;
+  // 거래소 접수 (부분 체결 포함)
+  PREMARKET_ORDER_RESERVATION_ITEM_STATE_ACCEPTED = 2;
+  // 전량 체결
+  PREMARKET_ORDER_RESERVATION_ITEM_STATE_FILLED = 3;
+  // 취소 — NAV 기준·stop·자동취소 (message)
+  PREMARKET_ORDER_RESERVATION_ITEM_STATE_CANCELLED = 4;
+  // 거래소 거부
+  PREMARKET_ORDER_RESERVATION_ITEM_STATE_REJECTED = 5;
+  // 송신 실패
+  PREMARKET_ORDER_RESERVATION_ITEM_STATE_FAILED = 6;
+}
+
+// 장전 예약주문 주문 1건
+message PremarketOrderReservationItem {
+  // 거래소 주문번호 (송신 실패면 0)
+  int64 order_id = 1;
+
+  kdo.v1.common.OrderSide side = 2;
+
+  // 원
+  int64 price = 3;
+
+  int64 quantity = 4;
+
+  int64 filled_quantity = 5;
+
+  PremarketOrderReservationItemState state = 6;
+
+  // 취소를 보냈거나, 접수되면 보낼 예정
+  bool cancel_requested = 7;
+
+  // 취소·거부·실패 사유
+  string message = 8;
+}
+
+message PremarketOrderReservationStatus {
+  string etf_symbol = 1;
+
+  string fund_code = 2;
+
+  PremarketOrderReservationState state = 3;
+
+  // 마지막 상태 사유
+  string message = 4;
+
+  repeated PremarketOrderReservationItem orders = 5;
+
+  // 장전 예약주문 ETF 체결
+  kdo.v1.lp.FillStat etf_fill = 6;
+
+  // 장전 예약주문 체결이 낸 헷지 체결 (헷지 종목별)
+  repeated kdo.v1.lp.FillStat hedge_fills = 7;
+
+  // 현재 취소 기준 매수가(원). NAV 준비 전이면 0
+  int64 bid_threshold = 8;
+
+  // 현재 취소 기준 매도가(원). NAV 준비 전이면 0
+  int64 ask_threshold = 9;
+
+  // 영업일 YYYYMMDD (KST)
+  uint32 date = 10;
+
+  google.protobuf.Timestamp started_at = 11;
+}
+
+// ========== Request/Response Messages ==========
+
+message GetPremarketOrderReservationRequest {
+  string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ListPremarketOrderReservationsRequest {}
+
+message ListPremarketOrderReservationsResponse {
+  repeated PremarketOrderReservation premarket_order_reservations = 1;
+}
+
+message UpdatePremarketOrderReservationRequest {
+  // updated_by·update_time 은 무시(서버가 채움)
+  PremarketOrderReservation premarket_order_reservation = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message DeletePremarketOrderReservationRequest {
+  string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message StartPremarketOrderReservationRequest {
+  string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message StopPremarketOrderReservationRequest {
+  string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
+  string fund_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ListPremarketOrderReservationStatusesRequest {}
+
+message ListPremarketOrderReservationStatusesResponse {
+  repeated PremarketOrderReservationStatus statuses = 1;
+}
+
+message StreamPremarketOrderReservationStatusesRequest {}

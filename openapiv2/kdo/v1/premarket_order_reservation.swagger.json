@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "kdo/v1/reservation_order.proto",
+    "title": "kdo/v1/premarket_order_reservation.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "ReservationOrderService"
+      "name": "PremarketOrderReservationService"
     }
   ],
   "consumes": [
@@ -16,15 +16,15 @@
     "application/json"
   ],
   "paths": {
-    "/v1/reservation_orders/settings": {
+    "/v1/premarket_order_reservations": {
       "get": {
-        "summary": "예약주문 설정 목록",
-        "operationId": "ReservationOrderService_ListReservationOrderSettings",
+        "summary": "장전 예약주문 목록",
+        "operationId": "PremarketOrderReservationService_ListPremarketOrderReservations",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/reservation_orderListReservationOrderSettingsResponse"
+              "$ref": "#/definitions/premarket_order_reservationListPremarketOrderReservationsResponse"
             }
           },
           "default": {
@@ -35,19 +35,19 @@
           }
         },
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       }
     },
-    "/v1/reservation_orders/statuses": {
+    "/v1/premarket_order_reservations/statuses": {
       "get": {
-        "summary": "오늘 시작한 예약주문 상태 목록",
-        "operationId": "ReservationOrderService_ListReservationOrderStatuses",
+        "summary": "오늘 시작한 장전 예약주문 상태 목록",
+        "operationId": "PremarketOrderReservationService_ListPremarketOrderReservationStatuses",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/reservation_orderListReservationOrderStatusesResponse"
+              "$ref": "#/definitions/premarket_order_reservationListPremarketOrderReservationStatusesResponse"
             }
           },
           "default": {
@@ -58,14 +58,14 @@
           }
         },
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       }
     },
-    "/v1/reservation_orders/statuses:stream": {
+    "/v1/premarket_order_reservations/statuses:stream": {
       "get": {
         "summary": "상태 스트림 — 상태·주문·체결이 바뀔 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.",
-        "operationId": "ReservationOrderService_StreamReservationOrderStatuses",
+        "operationId": "PremarketOrderReservationService_StreamPremarketOrderReservationStatuses",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
@@ -73,13 +73,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/reservation_orderReservationOrderStatus"
+                  "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservationStatus"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of reservation_orderReservationOrderStatus"
+              "title": "Stream result of premarket_order_reservationPremarketOrderReservationStatus"
             }
           },
           "default": {
@@ -90,19 +90,19 @@
           }
         },
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       }
     },
-    "/v1/reservation_orders/{etfSymbol}/{fundCode}/setting": {
+    "/v1/premarket_order_reservations/{etfSymbol}/{fundCode}": {
       "get": {
-        "summary": "예약주문 설정 조회",
-        "operationId": "ReservationOrderService_GetReservationOrderSetting",
+        "summary": "장전 예약주문 조회",
+        "operationId": "PremarketOrderReservationService_GetPremarketOrderReservation",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/reservation_orderReservationOrderSetting"
+              "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservation"
             }
           },
           "default": {
@@ -127,12 +127,12 @@
           }
         ],
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       },
       "delete": {
-        "summary": "예약주문 설정 삭제 — 실행 중이면 FAILED_PRECONDITION.",
-        "operationId": "ReservationOrderService_DeleteReservationOrderSetting",
+        "summary": "장전 예약주문 삭제 — 실행 중이면 FAILED_PRECONDITION.",
+        "operationId": "PremarketOrderReservationService_DeletePremarketOrderReservation",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -163,19 +163,19 @@
           }
         ],
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       }
     },
-    "/v1/reservation_orders/{etfSymbol}/{fundCode}:start": {
+    "/v1/premarket_order_reservations/{etfSymbol}/{fundCode}:start": {
       "post": {
-        "summary": "예약주문 시작 — 08:28 전이면 08:28 에, 08:28 ~ 08:59:55 면 바로 송신한다(08:30 이후 송신분은 바로 거래소 동시호가 접수).\n08:59:55 이후이거나 이미 실행 중이면 FAILED_PRECONDITION. 주문자 식별정보는 start 한 사람 기준.",
-        "operationId": "ReservationOrderService_StartReservationOrder",
+        "summary": "장전 예약주문 시작 — 08:28 전이면 08:28 에, 08:28 ~ 08:59:55 면 바로 송신한다(08:30 이후 송신분은 바로 거래소 동시호가 접수).\n08:59:55 이후이거나 이미 실행 중이면 FAILED_PRECONDITION. 주문자 식별정보는 start 한 사람 기준.",
+        "operationId": "PremarketOrderReservationService_StartPremarketOrderReservation",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/reservation_orderReservationOrderStatus"
+              "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservationStatus"
             }
           },
           "default": {
@@ -208,19 +208,19 @@
           }
         ],
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       }
     },
-    "/v1/reservation_orders/{etfSymbol}/{fundCode}:stop": {
+    "/v1/premarket_order_reservations/{etfSymbol}/{fundCode}:stop": {
       "post": {
-        "summary": "예약주문 정지 — 살아 있는 주문을 전부 취소한다. 08:30 전 FEP 가 보관 중인 주문은 08:30 에 접수되는 대로 취소한다.",
-        "operationId": "ReservationOrderService_StopReservationOrder",
+        "summary": "장전 예약주문 정지 — 살아 있는 주문을 전부 취소한다. 08:30 전 FEP 가 보관 중인 주문은 08:30 에 접수되는 대로 취소한다.",
+        "operationId": "PremarketOrderReservationService_StopPremarketOrderReservation",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/reservation_orderReservationOrderStatus"
+              "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservationStatus"
             }
           },
           "default": {
@@ -253,19 +253,19 @@
           }
         ],
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       }
     },
-    "/v1/reservation_orders/{setting.etfSymbol}/{setting.fundCode}/setting": {
+    "/v1/premarket_order_reservations/{premarketOrderReservation.etfSymbol}/{premarketOrderReservation.fundCode}": {
       "post": {
-        "summary": "예약주문 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 오늘 실행 중인 (ETF, 펀드)는 바꿀 수 없다(FAILED_PRECONDITION).",
-        "operationId": "ReservationOrderService_UpdateReservationOrderSetting",
+        "summary": "장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 오늘 실행 중인 (ETF, 펀드)는 바꿀 수 없다(FAILED_PRECONDITION).",
+        "operationId": "PremarketOrderReservationService_UpdatePremarketOrderReservation",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/reservation_orderReservationOrderSetting"
+              "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservation"
             }
           },
           "default": {
@@ -277,13 +277,13 @@
         },
         "parameters": [
           {
-            "name": "setting.etfSymbol",
+            "name": "premarketOrderReservation.etfSymbol",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "setting.fundCode",
+            "name": "premarketOrderReservation.fundCode",
             "in": "path",
             "required": true,
             "type": "string"
@@ -295,7 +295,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "setting": {
+                "premarketOrderReservation": {
                   "type": "object",
                   "properties": {
                     "bidPrice": {
@@ -375,7 +375,7 @@
           }
         ],
         "tags": [
-          "ReservationOrderService"
+          "PremarketOrderReservationService"
         ]
       }
     }
@@ -478,90 +478,29 @@
       },
       "description": "한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.\navg_price 는 서버에서 total_amount/qty 로 산출된 값."
     },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "reservation_orderListReservationOrderSettingsResponse": {
-      "type": "object",
-      "properties": {
-        "settings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/reservation_orderReservationOrderSetting"
-          }
-        }
-      }
-    },
-    "reservation_orderListReservationOrderStatusesResponse": {
+    "premarket_order_reservationListPremarketOrderReservationStatusesResponse": {
       "type": "object",
       "properties": {
         "statuses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/reservation_orderReservationOrderStatus"
+            "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservationStatus"
           }
         }
       }
     },
-    "reservation_orderReservationOrderItem": {
+    "premarket_order_reservationListPremarketOrderReservationsResponse": {
       "type": "object",
       "properties": {
-        "orderId": {
-          "type": "string",
-          "format": "int64",
-          "title": "거래소 주문번호 (송신 실패면 0)"
-        },
-        "side": {
-          "$ref": "#/definitions/commonOrderSide"
-        },
-        "price": {
-          "type": "string",
-          "format": "int64",
-          "title": "원"
-        },
-        "quantity": {
-          "type": "string",
-          "format": "int64"
-        },
-        "filledQuantity": {
-          "type": "string",
-          "format": "int64"
-        },
-        "state": {
-          "$ref": "#/definitions/reservation_orderReservationOrderItemState"
-        },
-        "cancelRequested": {
-          "type": "boolean",
-          "title": "취소를 보냈거나, 접수되면 보낼 예정"
-        },
-        "message": {
-          "type": "string",
-          "title": "취소·거부·실패 사유"
+        "premarketOrderReservations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservation"
+          }
         }
       }
     },
-    "reservation_orderReservationOrderItemState": {
-      "type": "string",
-      "enum": [
-        "RESERVATION_ORDER_ITEM_STATE_UNSPECIFIED",
-        "RESERVATION_ORDER_ITEM_STATE_SENT",
-        "RESERVATION_ORDER_ITEM_STATE_ACCEPTED",
-        "RESERVATION_ORDER_ITEM_STATE_FILLED",
-        "RESERVATION_ORDER_ITEM_STATE_CANCELLED",
-        "RESERVATION_ORDER_ITEM_STATE_REJECTED",
-        "RESERVATION_ORDER_ITEM_STATE_FAILED"
-      ],
-      "default": "RESERVATION_ORDER_ITEM_STATE_UNSPECIFIED",
-      "description": "- RESERVATION_ORDER_ITEM_STATE_SENT: 송신 — 08:30 전 송신분은 FEP 가 보관\n - RESERVATION_ORDER_ITEM_STATE_ACCEPTED: 거래소 접수 (부분 체결 포함)\n - RESERVATION_ORDER_ITEM_STATE_FILLED: 전량 체결\n - RESERVATION_ORDER_ITEM_STATE_CANCELLED: 취소 — NAV 기준·stop·자동취소 (message)\n - RESERVATION_ORDER_ITEM_STATE_REJECTED: 거래소 거부\n - RESERVATION_ORDER_ITEM_STATE_FAILED: 송신 실패",
-      "title": "예약주문 1건의 상태"
-    },
-    "reservation_orderReservationOrderSetting": {
+    "premarket_order_reservationPremarketOrderReservation": {
       "type": "object",
       "properties": {
         "etfSymbol": {
@@ -640,27 +579,80 @@
           "readOnly": true
         }
       },
-      "description": "예약주문 설정 — (ETF, 펀드) 당 하나. 시작가부터 호가단위 간격으로 depth 단, 단별 같은 수량을 낸다.",
+      "description": "장전 예약주문 — (ETF, 펀드) 당 하나. 시작가부터 호가단위 간격으로 depth 단, 단별 같은 수량을 낸다.",
       "required": [
         "etfSymbol",
         "fundCode"
       ]
     },
-    "reservation_orderReservationOrderState": {
+    "premarket_order_reservationPremarketOrderReservationItem": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "int64",
+          "title": "거래소 주문번호 (송신 실패면 0)"
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "원"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "filledQuantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservationItemState"
+        },
+        "cancelRequested": {
+          "type": "boolean",
+          "title": "취소를 보냈거나, 접수되면 보낼 예정"
+        },
+        "message": {
+          "type": "string",
+          "title": "취소·거부·실패 사유"
+        }
+      },
+      "title": "장전 예약주문 주문 1건"
+    },
+    "premarket_order_reservationPremarketOrderReservationItemState": {
       "type": "string",
       "enum": [
-        "RESERVATION_ORDER_STATE_UNSPECIFIED",
-        "RESERVATION_ORDER_STATE_WAITING",
-        "RESERVATION_ORDER_STATE_SENT",
-        "RESERVATION_ORDER_STATE_MONITORING",
-        "RESERVATION_ORDER_STATE_STOPPING",
-        "RESERVATION_ORDER_STATE_STOPPED"
+        "PREMARKET_ORDER_RESERVATION_ITEM_STATE_UNSPECIFIED",
+        "PREMARKET_ORDER_RESERVATION_ITEM_STATE_SENT",
+        "PREMARKET_ORDER_RESERVATION_ITEM_STATE_ACCEPTED",
+        "PREMARKET_ORDER_RESERVATION_ITEM_STATE_FILLED",
+        "PREMARKET_ORDER_RESERVATION_ITEM_STATE_CANCELLED",
+        "PREMARKET_ORDER_RESERVATION_ITEM_STATE_REJECTED",
+        "PREMARKET_ORDER_RESERVATION_ITEM_STATE_FAILED"
       ],
-      "default": "RESERVATION_ORDER_STATE_UNSPECIFIED",
-      "description": "- RESERVATION_ORDER_STATE_WAITING: start 됨 — 송신 시각(08:28) 대기\n - RESERVATION_ORDER_STATE_SENT: 송신함 — 감시 시작(08:59:55) 전. 08:30 전이면 FEP 보관 중\n - RESERVATION_ORDER_STATE_MONITORING: NAV 기준 취소 감시 중 (08:59:55 ~ 장 마감)\n - RESERVATION_ORDER_STATE_STOPPING: stop — 남은 주문 취소 확인 대기\n - RESERVATION_ORDER_STATE_STOPPED: 끝 — stop·전량 종료·장 마감·송신 실패 (message 참고)",
-      "title": "예약주문 실행 상태"
+      "default": "PREMARKET_ORDER_RESERVATION_ITEM_STATE_UNSPECIFIED",
+      "description": "- PREMARKET_ORDER_RESERVATION_ITEM_STATE_SENT: 송신 — 08:30 전 송신분은 FEP 가 보관\n - PREMARKET_ORDER_RESERVATION_ITEM_STATE_ACCEPTED: 거래소 접수 (부분 체결 포함)\n - PREMARKET_ORDER_RESERVATION_ITEM_STATE_FILLED: 전량 체결\n - PREMARKET_ORDER_RESERVATION_ITEM_STATE_CANCELLED: 취소 — NAV 기준·stop·자동취소 (message)\n - PREMARKET_ORDER_RESERVATION_ITEM_STATE_REJECTED: 거래소 거부\n - PREMARKET_ORDER_RESERVATION_ITEM_STATE_FAILED: 송신 실패",
+      "title": "장전 예약주문 주문 1건의 상태"
     },
-    "reservation_orderReservationOrderStatus": {
+    "premarket_order_reservationPremarketOrderReservationState": {
+      "type": "string",
+      "enum": [
+        "PREMARKET_ORDER_RESERVATION_STATE_UNSPECIFIED",
+        "PREMARKET_ORDER_RESERVATION_STATE_WAITING",
+        "PREMARKET_ORDER_RESERVATION_STATE_SENT",
+        "PREMARKET_ORDER_RESERVATION_STATE_MONITORING",
+        "PREMARKET_ORDER_RESERVATION_STATE_STOPPING",
+        "PREMARKET_ORDER_RESERVATION_STATE_STOPPED"
+      ],
+      "default": "PREMARKET_ORDER_RESERVATION_STATE_UNSPECIFIED",
+      "description": "- PREMARKET_ORDER_RESERVATION_STATE_WAITING: start 됨 — 송신 시각(08:28) 대기\n - PREMARKET_ORDER_RESERVATION_STATE_SENT: 송신함 — 감시 시작(08:59:55) 전. 08:30 전이면 FEP 보관 중\n - PREMARKET_ORDER_RESERVATION_STATE_MONITORING: NAV 기준 취소 감시 중 (08:59:55 ~ 장 마감)\n - PREMARKET_ORDER_RESERVATION_STATE_STOPPING: stop — 남은 주문 취소 확인 대기\n - PREMARKET_ORDER_RESERVATION_STATE_STOPPED: 끝 — stop·전량 종료·장 마감·송신 실패 (message 참고)",
+      "title": "장전 예약주문 실행 상태"
+    },
+    "premarket_order_reservationPremarketOrderReservationStatus": {
       "type": "object",
       "properties": {
         "etfSymbol": {
@@ -670,7 +662,7 @@
           "type": "string"
         },
         "state": {
-          "$ref": "#/definitions/reservation_orderReservationOrderState"
+          "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservationState"
         },
         "message": {
           "type": "string",
@@ -679,19 +671,19 @@
         "orders": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/reservation_orderReservationOrderItem"
+            "$ref": "#/definitions/premarket_order_reservationPremarketOrderReservationItem"
           }
         },
         "etfFill": {
           "$ref": "#/definitions/lpFillStat",
-          "title": "예약주문 ETF 체결"
+          "title": "장전 예약주문 ETF 체결"
         },
         "hedgeFills": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/lpFillStat"
           },
-          "title": "예약주문 체결이 낸 헷지 체결 (헷지 종목별)"
+          "title": "장전 예약주문 체결이 낸 헷지 체결 (헷지 종목별)"
         },
         "bidThreshold": {
           "type": "string",
@@ -713,6 +705,15 @@
           "format": "date-time"
         }
       }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
     },
     "rpcStatus": {
       "type": "object",

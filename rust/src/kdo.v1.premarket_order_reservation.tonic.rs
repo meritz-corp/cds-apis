@@ -1,14 +1,14 @@
 // @generated
 /// Generated client implementations.
-pub mod reservation_order_service_client {
+pub mod premarket_order_reservation_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct ReservationOrderServiceClient<T> {
+    pub struct PremarketOrderReservationServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl ReservationOrderServiceClient<tonic::transport::Channel> {
+    impl PremarketOrderReservationServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -19,7 +19,7 @@ pub mod reservation_order_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> ReservationOrderServiceClient<T>
+    impl<T> PremarketOrderReservationServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -37,7 +37,7 @@ pub mod reservation_order_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> ReservationOrderServiceClient<InterceptedService<T, F>>
+        ) -> PremarketOrderReservationServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -51,7 +51,7 @@ pub mod reservation_order_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            ReservationOrderServiceClient::new(
+            PremarketOrderReservationServiceClient::new(
                 InterceptedService::new(inner, interceptor),
             )
         }
@@ -86,11 +86,11 @@ pub mod reservation_order_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn get_reservation_order_setting(
+        pub async fn get_premarket_order_reservation(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetReservationOrderSettingRequest>,
+            request: impl tonic::IntoRequest<super::GetPremarketOrderReservationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderSetting>,
+            tonic::Response<super::PremarketOrderReservation>,
             tonic::Status,
         > {
             self.inner
@@ -104,23 +104,25 @@ pub mod reservation_order_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/GetReservationOrderSetting",
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/GetPremarketOrderReservation",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "GetReservationOrderSetting",
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "GetPremarketOrderReservation",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn list_reservation_order_settings(
+        pub async fn list_premarket_order_reservations(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListReservationOrderSettingsRequest>,
+            request: impl tonic::IntoRequest<
+                super::ListPremarketOrderReservationsRequest,
+            >,
         ) -> std::result::Result<
-            tonic::Response<super::ListReservationOrderSettingsResponse>,
+            tonic::Response<super::ListPremarketOrderReservationsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -134,23 +136,25 @@ pub mod reservation_order_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/ListReservationOrderSettings",
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/ListPremarketOrderReservations",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "ListReservationOrderSettings",
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "ListPremarketOrderReservations",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_reservation_order_setting(
+        pub async fn update_premarket_order_reservation(
             &mut self,
-            request: impl tonic::IntoRequest<super::UpdateReservationOrderSettingRequest>,
+            request: impl tonic::IntoRequest<
+                super::UpdatePremarketOrderReservationRequest,
+            >,
         ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderSetting>,
+            tonic::Response<super::PremarketOrderReservation>,
             tonic::Status,
         > {
             self.inner
@@ -164,21 +168,23 @@ pub mod reservation_order_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/UpdateReservationOrderSetting",
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/UpdatePremarketOrderReservation",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "UpdateReservationOrderSetting",
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "UpdatePremarketOrderReservation",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn delete_reservation_order_setting(
+        pub async fn delete_premarket_order_reservation(
             &mut self,
-            request: impl tonic::IntoRequest<super::DeleteReservationOrderSettingRequest>,
+            request: impl tonic::IntoRequest<
+                super::DeletePremarketOrderReservationRequest,
+            >,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
             self.inner
                 .ready()
@@ -191,115 +197,25 @@ pub mod reservation_order_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/DeleteReservationOrderSetting",
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/DeletePremarketOrderReservation",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "DeleteReservationOrderSetting",
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "DeletePremarketOrderReservation",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn start_reservation_order(
-            &mut self,
-            request: impl tonic::IntoRequest<super::StartReservationOrderRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderStatus>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/StartReservationOrder",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "StartReservationOrder",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn stop_reservation_order(
-            &mut self,
-            request: impl tonic::IntoRequest<super::StopReservationOrderRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderStatus>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/StopReservationOrder",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "StopReservationOrder",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn list_reservation_order_statuses(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ListReservationOrderStatusesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListReservationOrderStatusesResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/ListReservationOrderStatuses",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "ListReservationOrderStatuses",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn stream_reservation_order_statuses(
+        pub async fn start_premarket_order_reservation(
             &mut self,
             request: impl tonic::IntoRequest<
-                super::StreamReservationOrderStatusesRequest,
+                super::StartPremarketOrderReservationRequest,
             >,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::ReservationOrderStatus>>,
+            tonic::Response<super::PremarketOrderReservationStatus>,
             tonic::Status,
         > {
             self.inner
@@ -313,14 +229,110 @@ pub mod reservation_order_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/kdo.v1.reservation_order.ReservationOrderService/StreamReservationOrderStatuses",
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/StartPremarketOrderReservation",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "kdo.v1.reservation_order.ReservationOrderService",
-                        "StreamReservationOrderStatuses",
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "StartPremarketOrderReservation",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stop_premarket_order_reservation(
+            &mut self,
+            request: impl tonic::IntoRequest<super::StopPremarketOrderReservationRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::PremarketOrderReservationStatus>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/StopPremarketOrderReservation",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "StopPremarketOrderReservation",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_premarket_order_reservation_statuses(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::ListPremarketOrderReservationStatusesRequest,
+            >,
+        ) -> std::result::Result<
+            tonic::Response<super::ListPremarketOrderReservationStatusesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/ListPremarketOrderReservationStatuses",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "ListPremarketOrderReservationStatuses",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn stream_premarket_order_reservation_statuses(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::StreamPremarketOrderReservationStatusesRequest,
+            >,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::PremarketOrderReservationStatus>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/StreamPremarketOrderReservationStatuses",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.premarket_order_reservation.PremarketOrderReservationService",
+                        "StreamPremarketOrderReservationStatuses",
                     ),
                 );
             self.inner.server_streaming(req, path, codec).await
@@ -328,81 +340,88 @@ pub mod reservation_order_service_client {
     }
 }
 /// Generated server implementations.
-pub mod reservation_order_service_server {
+pub mod premarket_order_reservation_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with ReservationOrderServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with PremarketOrderReservationServiceServer.
     #[async_trait]
-    pub trait ReservationOrderService: Send + Sync + 'static {
-        async fn get_reservation_order_setting(
+    pub trait PremarketOrderReservationService: Send + Sync + 'static {
+        async fn get_premarket_order_reservation(
             &self,
-            request: tonic::Request<super::GetReservationOrderSettingRequest>,
+            request: tonic::Request<super::GetPremarketOrderReservationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderSetting>,
+            tonic::Response<super::PremarketOrderReservation>,
             tonic::Status,
         >;
-        async fn list_reservation_order_settings(
+        async fn list_premarket_order_reservations(
             &self,
-            request: tonic::Request<super::ListReservationOrderSettingsRequest>,
+            request: tonic::Request<super::ListPremarketOrderReservationsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListReservationOrderSettingsResponse>,
+            tonic::Response<super::ListPremarketOrderReservationsResponse>,
             tonic::Status,
         >;
-        async fn update_reservation_order_setting(
+        async fn update_premarket_order_reservation(
             &self,
-            request: tonic::Request<super::UpdateReservationOrderSettingRequest>,
+            request: tonic::Request<super::UpdatePremarketOrderReservationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderSetting>,
+            tonic::Response<super::PremarketOrderReservation>,
             tonic::Status,
         >;
-        async fn delete_reservation_order_setting(
+        async fn delete_premarket_order_reservation(
             &self,
-            request: tonic::Request<super::DeleteReservationOrderSettingRequest>,
+            request: tonic::Request<super::DeletePremarketOrderReservationRequest>,
         ) -> std::result::Result<tonic::Response<()>, tonic::Status>;
-        async fn start_reservation_order(
+        async fn start_premarket_order_reservation(
             &self,
-            request: tonic::Request<super::StartReservationOrderRequest>,
+            request: tonic::Request<super::StartPremarketOrderReservationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderStatus>,
+            tonic::Response<super::PremarketOrderReservationStatus>,
             tonic::Status,
         >;
-        async fn stop_reservation_order(
+        async fn stop_premarket_order_reservation(
             &self,
-            request: tonic::Request<super::StopReservationOrderRequest>,
+            request: tonic::Request<super::StopPremarketOrderReservationRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ReservationOrderStatus>,
+            tonic::Response<super::PremarketOrderReservationStatus>,
             tonic::Status,
         >;
-        async fn list_reservation_order_statuses(
+        async fn list_premarket_order_reservation_statuses(
             &self,
-            request: tonic::Request<super::ListReservationOrderStatusesRequest>,
+            request: tonic::Request<super::ListPremarketOrderReservationStatusesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ListReservationOrderStatusesResponse>,
+            tonic::Response<super::ListPremarketOrderReservationStatusesResponse>,
             tonic::Status,
         >;
-        /// Server streaming response type for the StreamReservationOrderStatuses method.
-        type StreamReservationOrderStatusesStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::ReservationOrderStatus, tonic::Status>,
+        /// Server streaming response type for the StreamPremarketOrderReservationStatuses method.
+        type StreamPremarketOrderReservationStatusesStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::PremarketOrderReservationStatus,
+                    tonic::Status,
+                >,
             >
             + Send
             + 'static;
-        async fn stream_reservation_order_statuses(
+        async fn stream_premarket_order_reservation_statuses(
             &self,
-            request: tonic::Request<super::StreamReservationOrderStatusesRequest>,
+            request: tonic::Request<
+                super::StreamPremarketOrderReservationStatusesRequest,
+            >,
         ) -> std::result::Result<
-            tonic::Response<Self::StreamReservationOrderStatusesStream>,
+            tonic::Response<Self::StreamPremarketOrderReservationStatusesStream>,
             tonic::Status,
         >;
     }
     #[derive(Debug)]
-    pub struct ReservationOrderServiceServer<T: ReservationOrderService> {
+    pub struct PremarketOrderReservationServiceServer<
+        T: PremarketOrderReservationService,
+    > {
         inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    impl<T: ReservationOrderService> ReservationOrderServiceServer<T> {
+    impl<T: PremarketOrderReservationService> PremarketOrderReservationServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -454,9 +473,9 @@ pub mod reservation_order_service_server {
         }
     }
     impl<T, B> tonic::codegen::Service<http::Request<B>>
-    for ReservationOrderServiceServer<T>
+    for PremarketOrderReservationServiceServer<T>
     where
-        T: ReservationOrderService,
+        T: PremarketOrderReservationService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -471,17 +490,19 @@ pub mod reservation_order_service_server {
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             match req.uri().path() {
-                "/kdo.v1.reservation_order.ReservationOrderService/GetReservationOrderSetting" => {
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/GetPremarketOrderReservation" => {
                     #[allow(non_camel_case_types)]
-                    struct GetReservationOrderSettingSvc<T: ReservationOrderService>(
+                    struct GetPremarketOrderReservationSvc<
+                        T: PremarketOrderReservationService,
+                    >(
                         pub Arc<T>,
                     );
                     impl<
-                        T: ReservationOrderService,
+                        T: PremarketOrderReservationService,
                     > tonic::server::UnaryService<
-                        super::GetReservationOrderSettingRequest,
-                    > for GetReservationOrderSettingSvc<T> {
-                        type Response = super::ReservationOrderSetting;
+                        super::GetPremarketOrderReservationRequest,
+                    > for GetPremarketOrderReservationSvc<T> {
+                        type Response = super::PremarketOrderReservation;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -489,12 +510,12 @@ pub mod reservation_order_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::GetReservationOrderSettingRequest,
+                                super::GetPremarketOrderReservationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as ReservationOrderService>::get_reservation_order_setting(
+                                <T as PremarketOrderReservationService>::get_premarket_order_reservation(
                                         &inner,
                                         request,
                                     )
@@ -509,7 +530,7 @@ pub mod reservation_order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = GetReservationOrderSettingSvc(inner);
+                        let method = GetPremarketOrderReservationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -525,17 +546,19 @@ pub mod reservation_order_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.reservation_order.ReservationOrderService/ListReservationOrderSettings" => {
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/ListPremarketOrderReservations" => {
                     #[allow(non_camel_case_types)]
-                    struct ListReservationOrderSettingsSvc<T: ReservationOrderService>(
+                    struct ListPremarketOrderReservationsSvc<
+                        T: PremarketOrderReservationService,
+                    >(
                         pub Arc<T>,
                     );
                     impl<
-                        T: ReservationOrderService,
+                        T: PremarketOrderReservationService,
                     > tonic::server::UnaryService<
-                        super::ListReservationOrderSettingsRequest,
-                    > for ListReservationOrderSettingsSvc<T> {
-                        type Response = super::ListReservationOrderSettingsResponse;
+                        super::ListPremarketOrderReservationsRequest,
+                    > for ListPremarketOrderReservationsSvc<T> {
+                        type Response = super::ListPremarketOrderReservationsResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -543,12 +566,12 @@ pub mod reservation_order_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::ListReservationOrderSettingsRequest,
+                                super::ListPremarketOrderReservationsRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as ReservationOrderService>::list_reservation_order_settings(
+                                <T as PremarketOrderReservationService>::list_premarket_order_reservations(
                                         &inner,
                                         request,
                                     )
@@ -563,7 +586,7 @@ pub mod reservation_order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ListReservationOrderSettingsSvc(inner);
+                        let method = ListPremarketOrderReservationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -579,17 +602,19 @@ pub mod reservation_order_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.reservation_order.ReservationOrderService/UpdateReservationOrderSetting" => {
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/UpdatePremarketOrderReservation" => {
                     #[allow(non_camel_case_types)]
-                    struct UpdateReservationOrderSettingSvc<T: ReservationOrderService>(
+                    struct UpdatePremarketOrderReservationSvc<
+                        T: PremarketOrderReservationService,
+                    >(
                         pub Arc<T>,
                     );
                     impl<
-                        T: ReservationOrderService,
+                        T: PremarketOrderReservationService,
                     > tonic::server::UnaryService<
-                        super::UpdateReservationOrderSettingRequest,
-                    > for UpdateReservationOrderSettingSvc<T> {
-                        type Response = super::ReservationOrderSetting;
+                        super::UpdatePremarketOrderReservationRequest,
+                    > for UpdatePremarketOrderReservationSvc<T> {
+                        type Response = super::PremarketOrderReservation;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -597,12 +622,12 @@ pub mod reservation_order_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::UpdateReservationOrderSettingRequest,
+                                super::UpdatePremarketOrderReservationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as ReservationOrderService>::update_reservation_order_setting(
+                                <T as PremarketOrderReservationService>::update_premarket_order_reservation(
                                         &inner,
                                         request,
                                     )
@@ -617,7 +642,7 @@ pub mod reservation_order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = UpdateReservationOrderSettingSvc(inner);
+                        let method = UpdatePremarketOrderReservationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -633,16 +658,18 @@ pub mod reservation_order_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.reservation_order.ReservationOrderService/DeleteReservationOrderSetting" => {
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/DeletePremarketOrderReservation" => {
                     #[allow(non_camel_case_types)]
-                    struct DeleteReservationOrderSettingSvc<T: ReservationOrderService>(
+                    struct DeletePremarketOrderReservationSvc<
+                        T: PremarketOrderReservationService,
+                    >(
                         pub Arc<T>,
                     );
                     impl<
-                        T: ReservationOrderService,
+                        T: PremarketOrderReservationService,
                     > tonic::server::UnaryService<
-                        super::DeleteReservationOrderSettingRequest,
-                    > for DeleteReservationOrderSettingSvc<T> {
+                        super::DeletePremarketOrderReservationRequest,
+                    > for DeletePremarketOrderReservationSvc<T> {
                         type Response = ();
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
@@ -651,12 +678,12 @@ pub mod reservation_order_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::DeleteReservationOrderSettingRequest,
+                                super::DeletePremarketOrderReservationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as ReservationOrderService>::delete_reservation_order_setting(
+                                <T as PremarketOrderReservationService>::delete_premarket_order_reservation(
                                         &inner,
                                         request,
                                     )
@@ -671,7 +698,7 @@ pub mod reservation_order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = DeleteReservationOrderSettingSvc(inner);
+                        let method = DeletePremarketOrderReservationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -687,119 +714,19 @@ pub mod reservation_order_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.reservation_order.ReservationOrderService/StartReservationOrder" => {
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/StartPremarketOrderReservation" => {
                     #[allow(non_camel_case_types)]
-                    struct StartReservationOrderSvc<T: ReservationOrderService>(
+                    struct StartPremarketOrderReservationSvc<
+                        T: PremarketOrderReservationService,
+                    >(
                         pub Arc<T>,
                     );
                     impl<
-                        T: ReservationOrderService,
-                    > tonic::server::UnaryService<super::StartReservationOrderRequest>
-                    for StartReservationOrderSvc<T> {
-                        type Response = super::ReservationOrderStatus;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::StartReservationOrderRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ReservationOrderService>::start_reservation_order(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = StartReservationOrderSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.reservation_order.ReservationOrderService/StopReservationOrder" => {
-                    #[allow(non_camel_case_types)]
-                    struct StopReservationOrderSvc<T: ReservationOrderService>(
-                        pub Arc<T>,
-                    );
-                    impl<
-                        T: ReservationOrderService,
-                    > tonic::server::UnaryService<super::StopReservationOrderRequest>
-                    for StopReservationOrderSvc<T> {
-                        type Response = super::ReservationOrderStatus;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::StopReservationOrderRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as ReservationOrderService>::stop_reservation_order(
-                                        &inner,
-                                        request,
-                                    )
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = StopReservationOrderSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/kdo.v1.reservation_order.ReservationOrderService/ListReservationOrderStatuses" => {
-                    #[allow(non_camel_case_types)]
-                    struct ListReservationOrderStatusesSvc<T: ReservationOrderService>(
-                        pub Arc<T>,
-                    );
-                    impl<
-                        T: ReservationOrderService,
+                        T: PremarketOrderReservationService,
                     > tonic::server::UnaryService<
-                        super::ListReservationOrderStatusesRequest,
-                    > for ListReservationOrderStatusesSvc<T> {
-                        type Response = super::ListReservationOrderStatusesResponse;
+                        super::StartPremarketOrderReservationRequest,
+                    > for StartPremarketOrderReservationSvc<T> {
+                        type Response = super::PremarketOrderReservationStatus;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
@@ -807,12 +734,12 @@ pub mod reservation_order_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::ListReservationOrderStatusesRequest,
+                                super::StartPremarketOrderReservationRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as ReservationOrderService>::list_reservation_order_statuses(
+                                <T as PremarketOrderReservationService>::start_premarket_order_reservation(
                                         &inner,
                                         request,
                                     )
@@ -827,7 +754,7 @@ pub mod reservation_order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = ListReservationOrderStatusesSvc(inner);
+                        let method = StartPremarketOrderReservationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -843,18 +770,132 @@ pub mod reservation_order_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/kdo.v1.reservation_order.ReservationOrderService/StreamReservationOrderStatuses" => {
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/StopPremarketOrderReservation" => {
                     #[allow(non_camel_case_types)]
-                    struct StreamReservationOrderStatusesSvc<T: ReservationOrderService>(
+                    struct StopPremarketOrderReservationSvc<
+                        T: PremarketOrderReservationService,
+                    >(
                         pub Arc<T>,
                     );
                     impl<
-                        T: ReservationOrderService,
+                        T: PremarketOrderReservationService,
+                    > tonic::server::UnaryService<
+                        super::StopPremarketOrderReservationRequest,
+                    > for StopPremarketOrderReservationSvc<T> {
+                        type Response = super::PremarketOrderReservationStatus;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::StopPremarketOrderReservationRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PremarketOrderReservationService>::stop_premarket_order_reservation(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = StopPremarketOrderReservationSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/ListPremarketOrderReservationStatuses" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListPremarketOrderReservationStatusesSvc<
+                        T: PremarketOrderReservationService,
+                    >(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PremarketOrderReservationService,
+                    > tonic::server::UnaryService<
+                        super::ListPremarketOrderReservationStatusesRequest,
+                    > for ListPremarketOrderReservationStatusesSvc<T> {
+                        type Response = super::ListPremarketOrderReservationStatusesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::ListPremarketOrderReservationStatusesRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PremarketOrderReservationService>::list_premarket_order_reservation_statuses(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ListPremarketOrderReservationStatusesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.premarket_order_reservation.PremarketOrderReservationService/StreamPremarketOrderReservationStatuses" => {
+                    #[allow(non_camel_case_types)]
+                    struct StreamPremarketOrderReservationStatusesSvc<
+                        T: PremarketOrderReservationService,
+                    >(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PremarketOrderReservationService,
                     > tonic::server::ServerStreamingService<
-                        super::StreamReservationOrderStatusesRequest,
-                    > for StreamReservationOrderStatusesSvc<T> {
-                        type Response = super::ReservationOrderStatus;
-                        type ResponseStream = T::StreamReservationOrderStatusesStream;
+                        super::StreamPremarketOrderReservationStatusesRequest,
+                    > for StreamPremarketOrderReservationStatusesSvc<T> {
+                        type Response = super::PremarketOrderReservationStatus;
+                        type ResponseStream = T::StreamPremarketOrderReservationStatusesStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
@@ -862,12 +903,12 @@ pub mod reservation_order_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::StreamReservationOrderStatusesRequest,
+                                super::StreamPremarketOrderReservationStatusesRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as ReservationOrderService>::stream_reservation_order_statuses(
+                                <T as PremarketOrderReservationService>::stream_premarket_order_reservation_statuses(
                                         &inner,
                                         request,
                                     )
@@ -882,7 +923,7 @@ pub mod reservation_order_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = StreamReservationOrderStatusesSvc(inner);
+                        let method = StreamPremarketOrderReservationStatusesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -916,7 +957,8 @@ pub mod reservation_order_service_server {
             }
         }
     }
-    impl<T: ReservationOrderService> Clone for ReservationOrderServiceServer<T> {
+    impl<T: PremarketOrderReservationService> Clone
+    for PremarketOrderReservationServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -928,8 +970,8 @@ pub mod reservation_order_service_server {
             }
         }
     }
-    impl<T: ReservationOrderService> tonic::server::NamedService
-    for ReservationOrderServiceServer<T> {
-        const NAME: &'static str = "kdo.v1.reservation_order.ReservationOrderService";
+    impl<T: PremarketOrderReservationService> tonic::server::NamedService
+    for PremarketOrderReservationServiceServer<T> {
+        const NAME: &'static str = "kdo.v1.premarket_order_reservation.PremarketOrderReservationService";
     }
 }
