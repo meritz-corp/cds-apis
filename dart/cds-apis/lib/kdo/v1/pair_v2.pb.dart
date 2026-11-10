@@ -3202,7 +3202,6 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
     $fixnum.Int64? remainingQuantity,
     $core.String? averageFillPrice,
     $fixnum.Int64? filledAmount,
-    $core.String? referencePrice,
     $fixnum.Int64? remainingAmount,
     $fixnum.Int64? autoCancelledQuantity,
   }) {
@@ -3214,7 +3213,6 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
     if (remainingQuantity != null) result.remainingQuantity = remainingQuantity;
     if (averageFillPrice != null) result.averageFillPrice = averageFillPrice;
     if (filledAmount != null) result.filledAmount = filledAmount;
-    if (referencePrice != null) result.referencePrice = referencePrice;
     if (remainingAmount != null) result.remainingAmount = remainingAmount;
     if (autoCancelledQuantity != null) result.autoCancelledQuantity = autoCancelledQuantity;
     return result;
@@ -3233,7 +3231,6 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
     ..aInt64(5, _omitFieldNames ? '' : 'remainingQuantity')
     ..aOS(6, _omitFieldNames ? '' : 'averageFillPrice')
     ..aInt64(7, _omitFieldNames ? '' : 'filledAmount')
-    ..aOS(8, _omitFieldNames ? '' : 'referencePrice')
     ..aInt64(9, _omitFieldNames ? '' : 'remainingAmount')
     ..aInt64(10, _omitFieldNames ? '' : 'autoCancelledQuantity')
     ..hasRequiredFields = false
@@ -3324,33 +3321,23 @@ class PairV2LegSummary extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearFilledAmount() => $_clearField(7);
 
-  /// 참조 현재가 (조회 시점, 없으면 빈 문자열)
-  @$pb.TagNumber(8)
-  $core.String get referencePrice => $_getSZ(7);
-  @$pb.TagNumber(8)
-  set referencePrice($core.String value) => $_setString(7, value);
-  @$pb.TagNumber(8)
-  $core.bool hasReferencePrice() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearReferencePrice() => $_clearField(8);
-
-  /// 미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)
+  /// 미체결 × 현재가(최근 체결가, 없으면 1호가 중간가) × 계약승수 (원, remaining_quantity 와 같이 날짜 무관, 시세 없으면 0)
   @$pb.TagNumber(9)
-  $fixnum.Int64 get remainingAmount => $_getI64(8);
+  $fixnum.Int64 get remainingAmount => $_getI64(7);
   @$pb.TagNumber(9)
-  set remainingAmount($fixnum.Int64 value) => $_setInt64(8, value);
+  set remainingAmount($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(9)
-  $core.bool hasRemainingAmount() => $_has(8);
+  $core.bool hasRemainingAmount() => $_has(7);
   @$pb.TagNumber(9)
   void clearRemainingAmount() => $_clearField(9);
 
   /// 기준 영업일 자동취소 수량 (명시적 취소 제외)
   @$pb.TagNumber(10)
-  $fixnum.Int64 get autoCancelledQuantity => $_getI64(9);
+  $fixnum.Int64 get autoCancelledQuantity => $_getI64(8);
   @$pb.TagNumber(10)
-  set autoCancelledQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  set autoCancelledQuantity($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(10)
-  $core.bool hasAutoCancelledQuantity() => $_has(9);
+  $core.bool hasAutoCancelledQuantity() => $_has(8);
   @$pb.TagNumber(10)
   void clearAutoCancelledQuantity() => $_clearField(10);
 }

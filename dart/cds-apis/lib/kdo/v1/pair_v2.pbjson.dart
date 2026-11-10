@@ -908,10 +908,13 @@ const PairV2LegSummary$json = {
     {'1': 'remaining_quantity', '3': 5, '4': 1, '5': 3, '10': 'remainingQuantity'},
     {'1': 'average_fill_price', '3': 6, '4': 1, '5': 9, '10': 'averageFillPrice'},
     {'1': 'filled_amount', '3': 7, '4': 1, '5': 3, '10': 'filledAmount'},
-    {'1': 'reference_price', '3': 8, '4': 1, '5': 9, '10': 'referencePrice'},
     {'1': 'remaining_amount', '3': 9, '4': 1, '5': 3, '10': 'remainingAmount'},
     {'1': 'auto_cancelled_quantity', '3': 10, '4': 1, '5': 3, '10': 'autoCancelledQuantity'},
   ],
+  '9': [
+    {'1': 8, '2': 9},
+  ],
+  '10': ['reference_price'],
 };
 
 /// Descriptor for `PairV2LegSummary`. Decode as a `google.protobuf.DescriptorProto`.
@@ -921,9 +924,9 @@ final $typed_data.Uint8List pairV2LegSummaryDescriptor = $convert.base64Decode(
     'AyABKANSD29yZGVyZWRRdWFudGl0eRInCg9maWxsZWRfcXVhbnRpdHkYBCABKANSDmZpbGxlZF'
     'F1YW50aXR5Ei0KEnJlbWFpbmluZ19xdWFudGl0eRgFIAEoA1IRcmVtYWluaW5nUXVhbnRpdHkS'
     'LAoSYXZlcmFnZV9maWxsX3ByaWNlGAYgASgJUhBhdmVyYWdlRmlsbFByaWNlEiMKDWZpbGxlZF'
-    '9hbW91bnQYByABKANSDGZpbGxlZEFtb3VudBInCg9yZWZlcmVuY2VfcHJpY2UYCCABKAlSDnJl'
-    'ZmVyZW5jZVByaWNlEikKEHJlbWFpbmluZ19hbW91bnQYCSABKANSD3JlbWFpbmluZ0Ftb3VudB'
-    'I2ChdhdXRvX2NhbmNlbGxlZF9xdWFudGl0eRgKIAEoA1IVYXV0b0NhbmNlbGxlZFF1YW50aXR5');
+    '9hbW91bnQYByABKANSDGZpbGxlZEFtb3VudBIpChByZW1haW5pbmdfYW1vdW50GAkgASgDUg9y'
+    'ZW1haW5pbmdBbW91bnQSNgoXYXV0b19jYW5jZWxsZWRfcXVhbnRpdHkYCiABKANSFWF1dG9DYW'
+    '5jZWxsZWRRdWFudGl0eUoECAgQCVIPcmVmZXJlbmNlX3ByaWNl');
 
 @$core.Deprecated('Use getPairV2OrderSummaryRequestDescriptor instead')
 const GetPairV2OrderSummaryRequest$json = {

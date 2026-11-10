@@ -168,7 +168,7 @@ service PairV2Service {
   }
 
   // leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
-  // (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+  // (remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
   rpc StreamPairV2OrderSummary(GetPairV2OrderSummaryRequest) returns (stream GetPairV2OrderSummaryResponse) {
     option (google.api.http) = {
       get: "/v1/{pair_v2=pair_v2s/*}:streamOrderSummary"
@@ -942,9 +942,9 @@ message PairV2LegSummary {
   string average_fill_price = 6;
   // 기준 영업일 체결금액 (원 — 선물은 계약승수 반영)
   int64 filled_amount = 7;
-  // 참조 현재가 (조회 시점, 없으면 빈 문자열)
-  string reference_price = 8;
-  // 미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)
+  reserved 8; // was: reference_price (참조 현재가)
+  reserved "reference_price";
+  // 미체결 × 현재가(최근 체결가, 없으면 1호가 중간가) × 계약승수 (원, remaining_quantity 와 같이 날짜 무관, 시세 없으면 0)
   int64 remaining_amount = 9;
   // 기준 영업일 자동취소 수량 (명시적 취소 제외)
   int64 auto_cancelled_quantity = 10;

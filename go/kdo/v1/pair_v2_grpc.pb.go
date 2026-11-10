@@ -69,7 +69,7 @@ type PairV2ServiceClient interface {
 	// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
 	StreamPairV2Orders(ctx context.Context, in *ListPairV2OrdersRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrdersClient, error)
 	// leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
-	// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+	// (remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
 	StreamPairV2OrderSummary(ctx context.Context, in *GetPairV2OrderSummaryRequest, opts ...grpc.CallOption) (PairV2Service_StreamPairV2OrderSummaryClient, error)
 	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차(완료회차·회차별 누적 목표)와 누적 실행 상태를 초기화한다 (저장된 세션도 삭제).
 	// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.
@@ -365,7 +365,7 @@ type PairV2ServiceServer interface {
 	// 요청/응답은 ListPairV2Orders 와 동일 — 클라는 수신 즉시 표를 통째로 교체한다.
 	StreamPairV2Orders(*ListPairV2OrdersRequest, PairV2Service_StreamPairV2OrdersServer) error
 	// leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
-	// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+	// (remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
 	StreamPairV2OrderSummary(*GetPairV2OrderSummaryRequest, PairV2Service_StreamPairV2OrderSummaryServer) error
 	// 명시적인 새 실행 시작 준비. PAUSED이고 미체결이 없을 때만 회차(완료회차·회차별 누적 목표)와 누적 실행 상태를 초기화한다 (저장된 세션도 삭제).
 	// 설정 수정, 일시정지, 재활성화는 실행 상태를 유지한다. 초기화 자체는 자동발주를 켜지 않는다.

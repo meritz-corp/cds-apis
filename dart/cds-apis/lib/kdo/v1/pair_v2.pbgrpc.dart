@@ -137,7 +137,7 @@ class PairV2ServiceClient extends $grpc.Client {
   }
 
   /// leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push
-  /// (reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
+  /// (remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).
   $grpc.ResponseStream<$0.GetPairV2OrderSummaryResponse> streamPairV2OrderSummary($0.GetPairV2OrderSummaryRequest request, {$grpc.CallOptions? options,}) {
     return $createStreamingCall(_$streamPairV2OrderSummary, $async.Stream.fromIterable([request]), options: options);
   }

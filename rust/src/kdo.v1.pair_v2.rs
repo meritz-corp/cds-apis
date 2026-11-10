@@ -708,10 +708,7 @@ pub struct PairV2LegSummary {
     /// 기준 영업일 체결금액 (원 — 선물은 계약승수 반영)
     #[prost(int64, tag="7")]
     pub filled_amount: i64,
-    /// 참조 현재가 (조회 시점, 없으면 빈 문자열)
-    #[prost(string, tag="8")]
-    pub reference_price: ::prost::alloc::string::String,
-    /// 미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)
+    /// 미체결 × 현재가(최근 체결가, 없으면 1호가 중간가) × 계약승수 (원, remaining_quantity 와 같이 날짜 무관, 시세 없으면 0)
     #[prost(int64, tag="9")]
     pub remaining_amount: i64,
     /// 기준 영업일 자동취소 수량 (명시적 취소 제외)

@@ -825,7 +825,7 @@
     },
     "/v1/{pairV2}:streamOrderSummary": {
       "get": {
-        "summary": "leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push\n(reference_price/remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).",
+        "summary": "leg(base/counter)별 영업일 집계 스트리밍 (상단 요약). 주문 이벤트 + 주기 tick 으로 push\n(remaining_amount 가 실시간 시세 기반이라 주문이 없어도 갱신이 필요하다).",
         "operationId": "PairV2Service_StreamPairV2OrderSummary",
         "responses": {
           "200": {
@@ -1489,14 +1489,10 @@
           "format": "int64",
           "title": "기준 영업일 체결금액 (원 — 선물은 계약승수 반영)"
         },
-        "referencePrice": {
-          "type": "string",
-          "title": "참조 현재가 (조회 시점, 없으면 빈 문자열)"
-        },
         "remainingAmount": {
           "type": "string",
           "format": "int64",
-          "title": "미체결 × 참조가 × 계약승수 (원, remaining_quantity 와 같이 날짜 무관)"
+          "title": "미체결 × 현재가(최근 체결가, 없으면 1호가 중간가) × 계약승수 (원, remaining_quantity 와 같이 날짜 무관, 시세 없으면 0)"
         },
         "autoCancelledQuantity": {
           "type": "string",

@@ -3947,9 +3947,6 @@ impl serde::Serialize for PairV2LegSummary {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2LegSummary", len)?;
         if true {
             let v = PairV2Slot::try_from(self.slot)
@@ -3983,9 +3980,6 @@ impl serde::Serialize for PairV2LegSummary {
             struct_ser.serialize_field("filled_amount", ToString::to_string(&self.filled_amount).as_str())?;
         }
         if true {
-            struct_ser.serialize_field("reference_price", &self.reference_price)?;
-        }
-        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("remaining_amount", ToString::to_string(&self.remaining_amount).as_str())?;
@@ -4017,8 +4011,6 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
             "averageFillPrice",
             "filled_amount",
             "filledAmount",
-            "reference_price",
-            "referencePrice",
             "remaining_amount",
             "remainingAmount",
             "auto_cancelled_quantity",
@@ -4034,7 +4026,6 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
             RemainingQuantity,
             AverageFillPrice,
             FilledAmount,
-            ReferencePrice,
             RemainingAmount,
             AutoCancelledQuantity,
             __SkipField__,
@@ -4066,7 +4057,6 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                             "remainingQuantity" | "remaining_quantity" => Ok(GeneratedField::RemainingQuantity),
                             "averageFillPrice" | "average_fill_price" => Ok(GeneratedField::AverageFillPrice),
                             "filledAmount" | "filled_amount" => Ok(GeneratedField::FilledAmount),
-                            "referencePrice" | "reference_price" => Ok(GeneratedField::ReferencePrice),
                             "remainingAmount" | "remaining_amount" => Ok(GeneratedField::RemainingAmount),
                             "autoCancelledQuantity" | "auto_cancelled_quantity" => Ok(GeneratedField::AutoCancelledQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -4095,7 +4085,6 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                 let mut remaining_quantity__ = None;
                 let mut average_fill_price__ = None;
                 let mut filled_amount__ = None;
-                let mut reference_price__ = None;
                 let mut remaining_amount__ = None;
                 let mut auto_cancelled_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -4150,12 +4139,6 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::ReferencePrice => {
-                            if reference_price__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("referencePrice"));
-                            }
-                            reference_price__ = Some(map_.next_value()?);
-                        }
                         GeneratedField::RemainingAmount => {
                             if remaining_amount__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("remainingAmount"));
@@ -4185,7 +4168,6 @@ impl<'de> serde::Deserialize<'de> for PairV2LegSummary {
                     remaining_quantity: remaining_quantity__.unwrap_or_default(),
                     average_fill_price: average_fill_price__.unwrap_or_default(),
                     filled_amount: filled_amount__.unwrap_or_default(),
-                    reference_price: reference_price__.unwrap_or_default(),
                     remaining_amount: remaining_amount__.unwrap_or_default(),
                     auto_cancelled_quantity: auto_cancelled_quantity__.unwrap_or_default(),
                 })
