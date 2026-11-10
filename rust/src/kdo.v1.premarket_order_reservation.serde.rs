@@ -661,10 +661,10 @@ impl serde::Serialize for PremarketOrderReservation {
             struct_ser.serialize_field("ask_adjustment", &self.ask_adjustment)?;
         }
         if true {
-            struct_ser.serialize_field("bid_offset_ticks", &self.bid_offset_ticks)?;
+            struct_ser.serialize_field("bid_offset", &self.bid_offset)?;
         }
         if true {
-            struct_ser.serialize_field("ask_offset_ticks", &self.ask_offset_ticks)?;
+            struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
         }
         if let Some(v) = self.update_time.as_ref() {
             struct_ser.serialize_field("update_time", v)?;
@@ -700,10 +700,10 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
-            "bid_offset_ticks",
-            "bidOffsetTicks",
-            "ask_offset_ticks",
-            "askOffsetTicks",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
             "update_time",
             "updateTime",
         ];
@@ -722,8 +722,8 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
             AskBasis,
             BidAdjustment,
             AskAdjustment,
-            BidOffsetTicks,
-            AskOffsetTicks,
+            BidOffset,
+            AskOffset,
             UpdateTime,
             __SkipField__,
         }
@@ -759,8 +759,8 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
-                            "bidOffsetTicks" | "bid_offset_ticks" => Ok(GeneratedField::BidOffsetTicks),
-                            "askOffsetTicks" | "ask_offset_ticks" => Ok(GeneratedField::AskOffsetTicks),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -793,8 +793,8 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                 let mut ask_basis__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
-                let mut bid_offset_ticks__ = None;
-                let mut ask_offset_ticks__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 let mut update_time__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -888,19 +888,19 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::BidOffsetTicks => {
-                            if bid_offset_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("bidOffsetTicks"));
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
                             }
-                            bid_offset_ticks__ = 
+                            bid_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::AskOffsetTicks => {
-                            if ask_offset_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("askOffsetTicks"));
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
                             }
-                            ask_offset_ticks__ = 
+                            ask_offset__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -928,8 +928,8 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                     ask_basis: ask_basis__.unwrap_or_default(),
                     bid_adjustment: bid_adjustment__.unwrap_or_default(),
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
-                    bid_offset_ticks: bid_offset_ticks__.unwrap_or_default(),
-                    ask_offset_ticks: ask_offset_ticks__.unwrap_or_default(),
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
                     update_time: update_time__,
                 })
             }

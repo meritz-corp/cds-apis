@@ -77,14 +77,16 @@ const PremarketOrderReservation$json = {
     {'1': 'ask_basis', '3': 10, '4': 1, '5': 1, '10': 'askBasis'},
     {'1': 'bid_adjustment', '3': 11, '4': 1, '5': 1, '10': 'bidAdjustment'},
     {'1': 'ask_adjustment', '3': 12, '4': 1, '5': 1, '10': 'askAdjustment'},
-    {'1': 'bid_offset_ticks', '3': 13, '4': 1, '5': 5, '10': 'bidOffsetTicks'},
-    {'1': 'ask_offset_ticks', '3': 14, '4': 1, '5': 5, '10': 'askOffsetTicks'},
+    {'1': 'bid_offset', '3': 17, '4': 1, '5': 1, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 18, '4': 1, '5': 1, '10': 'askOffset'},
     {'1': 'update_time', '3': 16, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
   '9': [
+    {'1': 13, '2': 14},
+    {'1': 14, '2': 15},
     {'1': 15, '2': 16},
   ],
-  '10': ['updated_by'],
+  '10': ['bid_offset_ticks', 'ask_offset_ticks', 'updated_by'],
 };
 
 /// Descriptor for `PremarketOrderReservation`. Decode as a `google.protobuf.DescriptorProto`.
@@ -96,10 +98,11 @@ final $typed_data.Uint8List premarketOrderReservationDescriptor = $convert.base6
     'IAEoA1IIdGlja1NpemUSMwoHcHJpY2luZxgIIAEoCzIZLmtkby52MS5jb21tb24uRXRmUHJpY2'
     'luZ1IHcHJpY2luZxIbCgliaWRfYmFzaXMYCSABKAFSCGJpZEJhc2lzEhsKCWFza19iYXNpcxgK'
     'IAEoAVIIYXNrQmFzaXMSJQoOYmlkX2FkanVzdG1lbnQYCyABKAFSDWJpZEFkanVzdG1lbnQSJQ'
-    'oOYXNrX2FkanVzdG1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSKAoQYmlkX29mZnNldF90aWNr'
-    'cxgNIAEoBVIOYmlkT2Zmc2V0VGlja3MSKAoQYXNrX29mZnNldF90aWNrcxgOIAEoBVIOYXNrT2'
-    'Zmc2V0VGlja3MSQQoLdXBkYXRlX3RpbWUYECABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0'
-    'YW1wQgTiQQEDUgp1cGRhdGVUaW1lSgQIDxAQUgp1cGRhdGVkX2J5');
+    'oOYXNrX2FkanVzdG1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSHQoKYmlkX29mZnNldBgRIAEo'
+    'AVIJYmlkT2Zmc2V0Eh0KCmFza19vZmZzZXQYEiABKAFSCWFza09mZnNldBJBCgt1cGRhdGVfdG'
+    'ltZRgQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWVK'
+    'BAgNEA5KBAgOEA9KBAgPEBBSEGJpZF9vZmZzZXRfdGlja3NSEGFza19vZmZzZXRfdGlja3NSCn'
+    'VwZGF0ZWRfYnk=');
 
 @$core.Deprecated('Use premarketOrderReservationItemDescriptor instead')
 const PremarketOrderReservationItem$json = {

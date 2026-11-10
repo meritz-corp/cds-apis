@@ -39,9 +39,9 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     $core.double? askBasis,
     $core.double? bidAdjustment,
     $core.double? askAdjustment,
-    $core.int? bidOffsetTicks,
-    $core.int? askOffsetTicks,
     $3.Timestamp? updateTime,
+    $core.double? bidOffset,
+    $core.double? askOffset,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -56,9 +56,9 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     if (askBasis != null) result.askBasis = askBasis;
     if (bidAdjustment != null) result.bidAdjustment = bidAdjustment;
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
-    if (bidOffsetTicks != null) result.bidOffsetTicks = bidOffsetTicks;
-    if (askOffsetTicks != null) result.askOffsetTicks = askOffsetTicks;
     if (updateTime != null) result.updateTime = updateTime;
+    if (bidOffset != null) result.bidOffset = bidOffset;
+    if (askOffset != null) result.askOffset = askOffset;
     return result;
   }
 
@@ -80,9 +80,9 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     ..a<$core.double>(10, _omitFieldNames ? '' : 'askBasis', $pb.PbFieldType.OD)
     ..a<$core.double>(11, _omitFieldNames ? '' : 'bidAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(12, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
-    ..a<$core.int>(13, _omitFieldNames ? '' : 'bidOffsetTicks', $pb.PbFieldType.O3)
-    ..a<$core.int>(14, _omitFieldNames ? '' : 'askOffsetTicks', $pb.PbFieldType.O3)
     ..aOM<$3.Timestamp>(16, _omitFieldNames ? '' : 'updateTime', subBuilder: $3.Timestamp.create)
+    ..a<$core.double>(17, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(18, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -224,36 +224,37 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   void clearAskAdjustment() => $_clearField(12);
 
-  /// 0 이상
-  @$pb.TagNumber(13)
-  $core.int get bidOffsetTicks => $_getIZ(12);
-  @$pb.TagNumber(13)
-  set bidOffsetTicks($core.int value) => $_setSignedInt32(12, value);
-  @$pb.TagNumber(13)
-  $core.bool hasBidOffsetTicks() => $_has(12);
-  @$pb.TagNumber(13)
-  void clearBidOffsetTicks() => $_clearField(13);
-
-  /// 0 이상
-  @$pb.TagNumber(14)
-  $core.int get askOffsetTicks => $_getIZ(13);
-  @$pb.TagNumber(14)
-  set askOffsetTicks($core.int value) => $_setSignedInt32(13, value);
-  @$pb.TagNumber(14)
-  $core.bool hasAskOffsetTicks() => $_has(13);
-  @$pb.TagNumber(14)
-  void clearAskOffsetTicks() => $_clearField(14);
-
   @$pb.TagNumber(16)
-  $3.Timestamp get updateTime => $_getN(14);
+  $3.Timestamp get updateTime => $_getN(12);
   @$pb.TagNumber(16)
   set updateTime($3.Timestamp value) => $_setField(16, value);
   @$pb.TagNumber(16)
-  $core.bool hasUpdateTime() => $_has(14);
+  $core.bool hasUpdateTime() => $_has(12);
   @$pb.TagNumber(16)
   void clearUpdateTime() => $_clearField(16);
   @$pb.TagNumber(16)
-  $3.Timestamp ensureUpdateTime() => $_ensure(14);
+  $3.Timestamp ensureUpdateTime() => $_ensure(12);
+
+  /// 틱 (소수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위). 기준 매수가 = 매수 NAV + bid_adjustment − 호가단위 × 이 값
+  @$pb.TagNumber(17)
+  $core.double get bidOffset => $_getN(13);
+  @$pb.TagNumber(17)
+  set bidOffset($core.double value) => $_setDouble(13, value);
+  @$pb.TagNumber(17)
+  $core.bool hasBidOffset() => $_has(13);
+  @$pb.TagNumber(17)
+  void clearBidOffset() => $_clearField(17);
+
+  /// 틱 (소수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위). 기준 매도가 = 매도 NAV + ask_adjustment + 호가단위 × 이 값.
+  /// 한쪽은 음수여도 되지만 bid_offset + ask_offset 은 0 이상이어야 한다 (ETF LP 와 같은 규칙)
+  @$pb.TagNumber(18)
+  $core.double get askOffset => $_getN(14);
+  @$pb.TagNumber(18)
+  set askOffset($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(18)
+  $core.bool hasAskOffset() => $_has(14);
+  @$pb.TagNumber(18)
+  void clearAskOffset() => $_clearField(18);
 }
 
 /// 장전 예약주문 주문 1건

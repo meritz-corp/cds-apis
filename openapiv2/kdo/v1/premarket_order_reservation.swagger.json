@@ -347,15 +347,15 @@
                       "format": "double",
                       "title": "원"
                     },
-                    "bidOffsetTicks": {
-                      "type": "integer",
-                      "format": "int32",
-                      "title": "0 이상"
+                    "bidOffset": {
+                      "type": "number",
+                      "format": "double",
+                      "title": "틱 (소수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위). 기준 매수가 = 매수 NAV + bid_adjustment − 호가단위 × 이 값"
                     },
-                    "askOffsetTicks": {
-                      "type": "integer",
-                      "format": "int32",
-                      "title": "0 이상"
+                    "askOffset": {
+                      "type": "number",
+                      "format": "double",
+                      "title": "틱 (소수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위). 기준 매도가 = 매도 NAV + ask_adjustment + 호가단위 × 이 값.\n한쪽은 음수여도 되지만 bid_offset + ask_offset 은 0 이상이어야 한다 (ETF LP 와 같은 규칙)"
                     },
                     "updateTime": {
                       "type": "string",
@@ -553,15 +553,15 @@
           "format": "double",
           "title": "원"
         },
-        "bidOffsetTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "0 이상"
+        "bidOffset": {
+          "type": "number",
+          "format": "double",
+          "title": "틱 (소수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위). 기준 매수가 = 매수 NAV + bid_adjustment − 호가단위 × 이 값"
         },
-        "askOffsetTicks": {
-          "type": "integer",
-          "format": "int32",
-          "title": "0 이상"
+        "askOffset": {
+          "type": "number",
+          "format": "double",
+          "title": "틱 (소수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위). 기준 매도가 = 매도 NAV + ask_adjustment + 호가단위 × 이 값.\n한쪽은 음수여도 되지만 bid_offset + ask_offset 은 0 이상이어야 한다 (ETF LP 와 같은 규칙)"
         },
         "updateTime": {
           "type": "string",
