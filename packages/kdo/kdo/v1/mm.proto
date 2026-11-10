@@ -516,7 +516,15 @@ message MarketMakingMarketBias {
   int64 max_bias = 7;
 }
 
-// MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라
+// MA 크로스 입력 가격
+enum MarketMakingMaCrossPriceSource {
+  // 자기 ETF 시장 1호가 중간가. proto 기본값 0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)
+  MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID = 0;
+  // 거래소 공표 실시간 NAV(BV03S/BW03S, 1~2초 주기). 아직 못 받았으면 샘플을 건너뛴다(중간가로 대신 채우지 않음)
+  MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV = 1;
+}
+
+// MA 크로스 skew — 단기/장기 이동평균(price_source 가격, 1초 샘플)의 골든/데드 크로스 상태에 따라
 // 호가 중심을 평행이동. 골든(단기>장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0.
 message MarketMakingMaCross {
   bool enabled = 1;
@@ -532,6 +540,9 @@ message MarketMakingMaCross {
   // 단기 MA 기울기 측정 lookback(초). 단기 MA를 이 초 전 값과 비교해 부호 판정.
   // 0이면 코드에서 1로 clamp
   uint64 slope_lookback_secs = 6;
+  // MA 입력 가격 (기본 MID). presence 로 "설정 vs 미변경" 구분 — 설정 변경 요청에서 미설정(구버전 클라이언트)이면
+  // 서버가 기존 값을 유지한다(새로 만들 때는 MID). 바꾸면 서버가 샘플을 비우고 장기 윈도우만큼 다시 워밍업한다(그동안 skew 0).
+  optional MarketMakingMaCrossPriceSource price_source = 7;
 }
 
 // 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)

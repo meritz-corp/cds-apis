@@ -44,6 +44,21 @@ final $typed_data.Uint8List marketMakingMomentumBlendDescriptor = $convert.base6
     'ChlNYXJrZXRNYWtpbmdNb21lbnR1bUJsZW5kEigKJE1BUktFVF9NQUtJTkdfTU9NRU5UVU1fQk'
     'xFTkRfUFJPRFVDVBAAEigKJE1BUktFVF9NQUtJTkdfTU9NRU5UVU1fQkxFTkRfQVZFUkFHRRAB');
 
+@$core.Deprecated('Use marketMakingMaCrossPriceSourceDescriptor instead')
+const MarketMakingMaCrossPriceSource$json = {
+  '1': 'MarketMakingMaCrossPriceSource',
+  '2': [
+    {'1': 'MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID', '2': 0},
+    {'1': 'MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV', '2': 1},
+  ],
+};
+
+/// Descriptor for `MarketMakingMaCrossPriceSource`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List marketMakingMaCrossPriceSourceDescriptor = $convert.base64Decode(
+    'Ch5NYXJrZXRNYWtpbmdNYUNyb3NzUHJpY2VTb3VyY2USKwonTUFSS0VUX01BS0lOR19NQV9DUk'
+    '9TU19QUklDRV9TT1VSQ0VfTUlEEAASLworTUFSS0VUX01BS0lOR19NQV9DUk9TU19QUklDRV9T'
+    'T1VSQ0VfS1JYX05BVhAB');
+
 @$core.Deprecated('Use marketMakingTakeExecutionMethodDescriptor instead')
 const MarketMakingTakeExecutionMethod$json = {
   '1': 'MarketMakingTakeExecutionMethod',
@@ -414,6 +429,10 @@ const MarketMakingMaCross$json = {
     {'1': 'skew_unit', '3': 4, '4': 1, '5': 3, '10': 'skewUnit'},
     {'1': 'slope_gated', '3': 5, '4': 1, '5': 8, '10': 'slopeGated'},
     {'1': 'slope_lookback_secs', '3': 6, '4': 1, '5': 4, '10': 'slopeLookbackSecs'},
+    {'1': 'price_source', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.mm.MarketMakingMaCrossPriceSource', '9': 0, '10': 'priceSource', '17': true},
+  ],
+  '8': [
+    {'1': '_price_source'},
   ],
 };
 
@@ -423,7 +442,9 @@ final $typed_data.Uint8List marketMakingMaCrossDescriptor = $convert.base64Decod
     'Rfd2luZG93X3NlY3MYAiABKARSD3Nob3J0V2luZG93U2VjcxIoChBsb25nX3dpbmRvd19zZWNz'
     'GAMgASgEUg5sb25nV2luZG93U2VjcxIbCglza2V3X3VuaXQYBCABKANSCHNrZXdVbml0Eh8KC3'
     'Nsb3BlX2dhdGVkGAUgASgIUgpzbG9wZUdhdGVkEi4KE3Nsb3BlX2xvb2tiYWNrX3NlY3MYBiAB'
-    'KARSEXNsb3BlTG9va2JhY2tTZWNz');
+    'KARSEXNsb3BlTG9va2JhY2tTZWNzElEKDHByaWNlX3NvdXJjZRgHIAEoDjIpLmtkby52MS5tbS'
+    '5NYXJrZXRNYWtpbmdNYUNyb3NzUHJpY2VTb3VyY2VIAFILcHJpY2VTb3VyY2WIAQFCDwoNX3By'
+    'aWNlX3NvdXJjZQ==');
 
 @$core.Deprecated('Use marketMakingConstituentMomentumDescriptor instead')
 const MarketMakingConstituentMomentum$json = {

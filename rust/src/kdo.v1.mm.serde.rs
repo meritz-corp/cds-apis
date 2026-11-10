@@ -6215,6 +6215,9 @@ impl serde::Serialize for MarketMakingMaCross {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.mm.MarketMakingMaCross", len)?;
         if true {
             struct_ser.serialize_field("enabled", &self.enabled)?;
@@ -6242,6 +6245,11 @@ impl serde::Serialize for MarketMakingMaCross {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("slope_lookback_secs", ToString::to_string(&self.slope_lookback_secs).as_str())?;
         }
+        if let Some(v) = self.price_source.as_ref() {
+            let v = MarketMakingMaCrossPriceSource::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("price_source", &v)?;
+        }
         struct_ser.end()
     }
 }
@@ -6263,6 +6271,8 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
             "slopeGated",
             "slope_lookback_secs",
             "slopeLookbackSecs",
+            "price_source",
+            "priceSource",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -6273,6 +6283,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
             SkewUnit,
             SlopeGated,
             SlopeLookbackSecs,
+            PriceSource,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -6301,6 +6312,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                             "skewUnit" | "skew_unit" => Ok(GeneratedField::SkewUnit),
                             "slopeGated" | "slope_gated" => Ok(GeneratedField::SlopeGated),
                             "slopeLookbackSecs" | "slope_lookback_secs" => Ok(GeneratedField::SlopeLookbackSecs),
+                            "priceSource" | "price_source" => Ok(GeneratedField::PriceSource),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -6326,6 +6338,7 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                 let mut skew_unit__ = None;
                 let mut slope_gated__ = None;
                 let mut slope_lookback_secs__ = None;
+                let mut price_source__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Enabled => {
@@ -6372,6 +6385,12 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::PriceSource => {
+                            if price_source__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("priceSource"));
+                            }
+                            price_source__ = map_.next_value::<::std::option::Option<MarketMakingMaCrossPriceSource>>()?.map(|x| x as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -6384,10 +6403,82 @@ impl<'de> serde::Deserialize<'de> for MarketMakingMaCross {
                     skew_unit: skew_unit__.unwrap_or_default(),
                     slope_gated: slope_gated__.unwrap_or_default(),
                     slope_lookback_secs: slope_lookback_secs__.unwrap_or_default(),
+                    price_source: price_source__,
                 })
             }
         }
         deserializer.deserialize_struct("kdo.v1.mm.MarketMakingMaCross", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for MarketMakingMaCrossPriceSource {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Mid => "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID",
+            Self::KrxNav => "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for MarketMakingMaCrossPriceSource {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID",
+            "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = MarketMakingMaCrossPriceSource;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID" => Ok(MarketMakingMaCrossPriceSource::Mid),
+                    "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV" => Ok(MarketMakingMaCrossPriceSource::KrxNav),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for MarketMakingMarketBias {

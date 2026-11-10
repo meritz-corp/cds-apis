@@ -337,7 +337,7 @@ pub struct MarketMakingMarketBias {
     #[prost(int64, tag="7")]
     pub max_bias: i64,
 }
-/// MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라
+/// MA 크로스 skew — 단기/장기 이동평균(price_source 가격, 1초 샘플)의 골든/데드 크로스 상태에 따라
 /// 호가 중심을 평행이동. 골든(단기>장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -361,6 +361,10 @@ pub struct MarketMakingMaCross {
     /// 0이면 코드에서 1로 clamp
     #[prost(uint64, tag="6")]
     pub slope_lookback_secs: u64,
+    /// MA 입력 가격 (기본 MID). presence 로 "설정 vs 미변경" 구분 — 설정 변경 요청에서 미설정(구버전 클라이언트)이면
+    /// 서버가 기존 값을 유지한다(새로 만들 때는 MID). 바꾸면 서버가 샘플을 비우고 장기 윈도우만큼 다시 워밍업한다(그동안 skew 0).
+    #[prost(enumeration="MarketMakingMaCrossPriceSource", optional, tag="7")]
+    pub price_source: ::core::option::Option<i32>,
 }
 /// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1644,6 +1648,35 @@ impl MarketMakingMomentumBlend {
         match value {
             "MARKET_MAKING_MOMENTUM_BLEND_PRODUCT" => Some(Self::Product),
             "MARKET_MAKING_MOMENTUM_BLEND_AVERAGE" => Some(Self::Average),
+            _ => None,
+        }
+    }
+}
+/// MA 크로스 입력 가격
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum MarketMakingMaCrossPriceSource {
+    /// 자기 ETF 시장 1호가 중간가. proto 기본값 0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)
+    Mid = 0,
+    /// 거래소 공표 실시간 NAV(BV03S/BW03S, 1~2초 주기). 아직 못 받았으면 샘플을 건너뛴다(중간가로 대신 채우지 않음)
+    KrxNav = 1,
+}
+impl MarketMakingMaCrossPriceSource {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            MarketMakingMaCrossPriceSource::Mid => "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID",
+            MarketMakingMaCrossPriceSource::KrxNav => "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID" => Some(Self::Mid),
+            "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV" => Some(Self::KrxNav),
             _ => None,
         }
     }

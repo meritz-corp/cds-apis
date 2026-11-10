@@ -1902,9 +1902,23 @@
           "type": "string",
           "format": "uint64",
           "title": "단기 MA 기울기 측정 lookback(초). 단기 MA를 이 초 전 값과 비교해 부호 판정.\n0이면 코드에서 1로 clamp"
+        },
+        "priceSource": {
+          "$ref": "#/definitions/mmMarketMakingMaCrossPriceSource",
+          "description": "MA 입력 가격 (기본 MID). presence 로 \"설정 vs 미변경\" 구분 — 설정 변경 요청에서 미설정(구버전 클라이언트)이면\n서버가 기존 값을 유지한다(새로 만들 때는 MID). 바꾸면 서버가 샘플을 비우고 장기 윈도우만큼 다시 워밍업한다(그동안 skew 0)."
         }
       },
-      "description": "MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라\n호가 중심을 평행이동. 골든(단기\u003e장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0."
+      "description": "MA 크로스 skew — 단기/장기 이동평균(price_source 가격, 1초 샘플)의 골든/데드 크로스 상태에 따라\n호가 중심을 평행이동. 골든(단기\u003e장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0."
+    },
+    "mmMarketMakingMaCrossPriceSource": {
+      "type": "string",
+      "enum": [
+        "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID",
+        "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV"
+      ],
+      "default": "MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID",
+      "description": "- MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID: 자기 ETF 시장 1호가 중간가. proto 기본값 0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)\n - MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV: 거래소 공표 실시간 NAV(BV03S/BW03S, 1~2초 주기). 아직 못 받았으면 샘플을 건너뛴다(중간가로 대신 채우지 않음)",
+      "title": "MA 크로스 입력 가격"
     },
     "mmMarketMakingMarketBias": {
       "type": "object",

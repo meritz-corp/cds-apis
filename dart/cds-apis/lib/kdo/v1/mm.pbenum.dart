@@ -50,6 +50,24 @@ class MarketMakingMomentumBlend extends $pb.ProtobufEnum {
   const MarketMakingMomentumBlend._(super.value, super.name);
 }
 
+/// MA 크로스 입력 가격
+class MarketMakingMaCrossPriceSource extends $pb.ProtobufEnum {
+  /// 자기 ETF 시장 1호가 중간가. proto 기본값 0 → 구버전 클라이언트/DB 자동 호환(기존 동작 유지)
+  static const MarketMakingMaCrossPriceSource MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID = MarketMakingMaCrossPriceSource._(0, _omitEnumNames ? '' : 'MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID');
+  /// 거래소 공표 실시간 NAV(BV03S/BW03S, 1~2초 주기). 아직 못 받았으면 샘플을 건너뛴다(중간가로 대신 채우지 않음)
+  static const MarketMakingMaCrossPriceSource MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV = MarketMakingMaCrossPriceSource._(1, _omitEnumNames ? '' : 'MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV');
+
+  static const $core.List<MarketMakingMaCrossPriceSource> values = <MarketMakingMaCrossPriceSource> [
+    MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID,
+    MARKET_MAKING_MA_CROSS_PRICE_SOURCE_KRX_NAV,
+  ];
+
+  static final $core.List<MarketMakingMaCrossPriceSource?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static MarketMakingMaCrossPriceSource? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const MarketMakingMaCrossPriceSource._(super.value, super.name);
+}
+
 /// MM take 모드 발주 메커니즘
 class MarketMakingTakeExecutionMethod extends $pb.ProtobufEnum {
   /// 기본값 = NEW_AND_CANCEL(기존 동작). proto 기본값 0 → 구버전 클라이언트/DB 자동 호환.

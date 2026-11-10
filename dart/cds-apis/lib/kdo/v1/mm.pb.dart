@@ -1419,7 +1419,7 @@ class MarketMakingMarketBias extends $pb.GeneratedMessage {
   void clearMaxBias() => $_clearField(7);
 }
 
-/// MA 크로스 skew — 단기/장기 이동평균(mid 기반, 1초 샘플)의 골든/데드 크로스 상태에 따라
+/// MA 크로스 skew — 단기/장기 이동평균(price_source 가격, 1초 샘플)의 골든/데드 크로스 상태에 따라
 /// 호가 중심을 평행이동. 골든(단기>장기) = +skew_unit, 데드 = −skew_unit, 중립/워밍업 = 0.
 class MarketMakingMaCross extends $pb.GeneratedMessage {
   factory MarketMakingMaCross({
@@ -1429,6 +1429,7 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
     $fixnum.Int64? skewUnit,
     $core.bool? slopeGated,
     $fixnum.Int64? slopeLookbackSecs,
+    MarketMakingMaCrossPriceSource? priceSource,
   }) {
     final result = create();
     if (enabled != null) result.enabled = enabled;
@@ -1437,6 +1438,7 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
     if (skewUnit != null) result.skewUnit = skewUnit;
     if (slopeGated != null) result.slopeGated = slopeGated;
     if (slopeLookbackSecs != null) result.slopeLookbackSecs = slopeLookbackSecs;
+    if (priceSource != null) result.priceSource = priceSource;
     return result;
   }
 
@@ -1452,6 +1454,7 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
     ..aInt64(4, _omitFieldNames ? '' : 'skewUnit')
     ..aOB(5, _omitFieldNames ? '' : 'slopeGated')
     ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'slopeLookbackSecs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..e<MarketMakingMaCrossPriceSource>(7, _omitFieldNames ? '' : 'priceSource', $pb.PbFieldType.OE, defaultOrMaker: MarketMakingMaCrossPriceSource.MARKET_MAKING_MA_CROSS_PRICE_SOURCE_MID, valueOf: MarketMakingMaCrossPriceSource.valueOf, enumValues: MarketMakingMaCrossPriceSource.values)
     ..hasRequiredFields = false
   ;
 
@@ -1532,6 +1535,17 @@ class MarketMakingMaCross extends $pb.GeneratedMessage {
   $core.bool hasSlopeLookbackSecs() => $_has(5);
   @$pb.TagNumber(6)
   void clearSlopeLookbackSecs() => $_clearField(6);
+
+  /// MA 입력 가격 (기본 MID). presence 로 "설정 vs 미변경" 구분 — 설정 변경 요청에서 미설정(구버전 클라이언트)이면
+  /// 서버가 기존 값을 유지한다(새로 만들 때는 MID). 바꾸면 서버가 샘플을 비우고 장기 윈도우만큼 다시 워밍업한다(그동안 skew 0).
+  @$pb.TagNumber(7)
+  MarketMakingMaCrossPriceSource get priceSource => $_getN(6);
+  @$pb.TagNumber(7)
+  set priceSource(MarketMakingMaCrossPriceSource value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasPriceSource() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPriceSource() => $_clearField(7);
 }
 
 /// 상위 N개 구성종목 체결강도 → 즉각 호가 평행 shift (자기 ETF momentum 의 구성종목 확장)
