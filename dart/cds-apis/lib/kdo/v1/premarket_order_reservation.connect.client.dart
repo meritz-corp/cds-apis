@@ -49,7 +49,9 @@ extension type PremarketOrderReservationServiceClient (connect.Transport _transp
     );
   }
 
-  /// 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 오늘 실행 중인 (ETF, 펀드)는 바꿀 수 없다(FAILED_PRECONDITION).
+  /// 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·offset 만 바꿀 수 있고 실행에 바로 반영된다
+  /// (취소 기준가 재계산, 감시 중이면 즉시 취소 판정. 기준을 다시 풀어도 취소된 주문은 다시 내지 않는다).
+  /// 실행 중에 그 밖의 값(시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
   Future<kdov1premarket_order_reservation.PremarketOrderReservation> updatePremarketOrderReservation(
     kdov1premarket_order_reservation.UpdatePremarketOrderReservationRequest input, {
     connect.Headers? headers,
@@ -140,7 +142,7 @@ extension type PremarketOrderReservationServiceClient (connect.Transport _transp
     );
   }
 
-  /// 상태 스트림 — 상태·주문·체결이 바뀔 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.
+  /// 상태 스트림 — 상태·주문·체결이 바뀌거나 실행 중 설정을 바꿀 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.
   Stream<kdov1premarket_order_reservation.PremarketOrderReservationStatus> streamPremarketOrderReservationStatuses(
     kdov1premarket_order_reservation.StreamPremarketOrderReservationStatusesRequest input, {
     connect.Headers? headers,

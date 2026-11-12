@@ -27,7 +27,9 @@ type PremarketOrderReservationServiceClient interface {
 	GetPremarketOrderReservation(ctx context.Context, in *GetPremarketOrderReservationRequest, opts ...grpc.CallOption) (*PremarketOrderReservation, error)
 	// 장전 예약주문 목록
 	ListPremarketOrderReservations(ctx context.Context, in *ListPremarketOrderReservationsRequest, opts ...grpc.CallOption) (*ListPremarketOrderReservationsResponse, error)
-	// 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 오늘 실행 중인 (ETF, 펀드)는 바꿀 수 없다(FAILED_PRECONDITION).
+	// 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·offset 만 바꿀 수 있고 실행에 바로 반영된다
+	// (취소 기준가 재계산, 감시 중이면 즉시 취소 판정. 기준을 다시 풀어도 취소된 주문은 다시 내지 않는다).
+	// 실행 중에 그 밖의 값(시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
 	UpdatePremarketOrderReservation(ctx context.Context, in *UpdatePremarketOrderReservationRequest, opts ...grpc.CallOption) (*PremarketOrderReservation, error)
 	// 장전 예약주문 삭제 — 실행 중이면 FAILED_PRECONDITION.
 	DeletePremarketOrderReservation(ctx context.Context, in *DeletePremarketOrderReservationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -38,7 +40,7 @@ type PremarketOrderReservationServiceClient interface {
 	StopPremarketOrderReservation(ctx context.Context, in *StopPremarketOrderReservationRequest, opts ...grpc.CallOption) (*PremarketOrderReservationStatus, error)
 	// 오늘 시작한 장전 예약주문 상태 목록
 	ListPremarketOrderReservationStatuses(ctx context.Context, in *ListPremarketOrderReservationStatusesRequest, opts ...grpc.CallOption) (*ListPremarketOrderReservationStatusesResponse, error)
-	// 상태 스트림 — 상태·주문·체결이 바뀔 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.
+	// 상태 스트림 — 상태·주문·체결이 바뀌거나 실행 중 설정을 바꿀 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.
 	StreamPremarketOrderReservationStatuses(ctx context.Context, in *StreamPremarketOrderReservationStatusesRequest, opts ...grpc.CallOption) (PremarketOrderReservationService_StreamPremarketOrderReservationStatusesClient, error)
 }
 
@@ -153,7 +155,9 @@ type PremarketOrderReservationServiceServer interface {
 	GetPremarketOrderReservation(context.Context, *GetPremarketOrderReservationRequest) (*PremarketOrderReservation, error)
 	// 장전 예약주문 목록
 	ListPremarketOrderReservations(context.Context, *ListPremarketOrderReservationsRequest) (*ListPremarketOrderReservationsResponse, error)
-	// 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 오늘 실행 중인 (ETF, 펀드)는 바꿀 수 없다(FAILED_PRECONDITION).
+	// 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·offset 만 바꿀 수 있고 실행에 바로 반영된다
+	// (취소 기준가 재계산, 감시 중이면 즉시 취소 판정. 기준을 다시 풀어도 취소된 주문은 다시 내지 않는다).
+	// 실행 중에 그 밖의 값(시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
 	UpdatePremarketOrderReservation(context.Context, *UpdatePremarketOrderReservationRequest) (*PremarketOrderReservation, error)
 	// 장전 예약주문 삭제 — 실행 중이면 FAILED_PRECONDITION.
 	DeletePremarketOrderReservation(context.Context, *DeletePremarketOrderReservationRequest) (*emptypb.Empty, error)
@@ -164,7 +168,7 @@ type PremarketOrderReservationServiceServer interface {
 	StopPremarketOrderReservation(context.Context, *StopPremarketOrderReservationRequest) (*PremarketOrderReservationStatus, error)
 	// 오늘 시작한 장전 예약주문 상태 목록
 	ListPremarketOrderReservationStatuses(context.Context, *ListPremarketOrderReservationStatusesRequest) (*ListPremarketOrderReservationStatusesResponse, error)
-	// 상태 스트림 — 상태·주문·체결이 바뀔 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.
+	// 상태 스트림 — 상태·주문·체결이 바뀌거나 실행 중 설정을 바꿀 때마다 그 (ETF, 펀드)의 상태 전체를 보낸다. 감시 중엔 기준가 갱신을 위해 1초마다도 보낸다.
 	StreamPremarketOrderReservationStatuses(*StreamPremarketOrderReservationStatusesRequest, PremarketOrderReservationService_StreamPremarketOrderReservationStatusesServer) error
 	mustEmbedUnimplementedPremarketOrderReservationServiceServer()
 }
