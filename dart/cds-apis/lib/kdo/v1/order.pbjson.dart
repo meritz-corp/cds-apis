@@ -63,13 +63,15 @@ const QuickOrderOrigin$json = {
     {'1': 'QUICK_ORDER_ORIGIN_UNSPECIFIED', '2': 0},
     {'1': 'QUICK_ORDER_ORIGIN_MM', '2': 1},
     {'1': 'QUICK_ORDER_ORIGIN_QUOTE', '2': 2},
+    {'1': 'QUICK_ORDER_ORIGIN_PAIR_V2', '2': 3},
   ],
 };
 
 /// Descriptor for `QuickOrderOrigin`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List quickOrderOriginDescriptor = $convert.base64Decode(
     'ChBRdWlja09yZGVyT3JpZ2luEiIKHlFVSUNLX09SREVSX09SSUdJTl9VTlNQRUNJRklFRBAAEh'
-    'kKFVFVSUNLX09SREVSX09SSUdJTl9NTRABEhwKGFFVSUNLX09SREVSX09SSUdJTl9RVU9URRAC');
+    'kKFVFVSUNLX09SREVSX09SSUdJTl9NTRABEhwKGFFVSUNLX09SREVSX09SSUdJTl9RVU9URRAC'
+    'Eh4KGlFVSUNLX09SREVSX09SSUdJTl9QQUlSX1YyEAM=');
 
 @$core.Deprecated('Use orderStatusDescriptor instead')
 const OrderStatus$json = {
@@ -123,6 +125,7 @@ const SubmitOrderRequest$json = {
     {'1': 'auto_amend_initial_wait_ms', '3': 12, '4': 1, '5': 4, '9': 4, '10': 'autoAmendInitialWaitMs', '17': true},
     {'1': 'quick_order_origin', '3': 13, '4': 1, '5': 14, '6': '.kdo.v1.order.QuickOrderOrigin', '9': 5, '10': 'quickOrderOrigin', '17': true},
     {'1': 'slot_id', '3': 14, '4': 1, '5': 9, '9': 6, '10': 'slotId', '17': true},
+    {'1': 'pair_v2_id', '3': 15, '4': 1, '5': 5, '9': 7, '10': 'pairV2Id', '17': true},
   ],
   '8': [
     {'1': '_auto_amend_strategy'},
@@ -132,6 +135,7 @@ const SubmitOrderRequest$json = {
     {'1': '_auto_amend_initial_wait_ms'},
     {'1': '_quick_order_origin'},
     {'1': '_slot_id'},
+    {'1': '_pair_v2_id'},
   ],
 };
 
@@ -150,10 +154,10 @@ final $typed_data.Uint8List submitOrderRequestDescriptor = $convert.base64Decode
     'bmVlZEhlZGdliAEBEj8KGmF1dG9fYW1lbmRfaW5pdGlhbF93YWl0X21zGAwgASgESARSFmF1dG'
     '9BbWVuZEluaXRpYWxXYWl0TXOIAQESUQoScXVpY2tfb3JkZXJfb3JpZ2luGA0gASgOMh4ua2Rv'
     'LnYxLm9yZGVyLlF1aWNrT3JkZXJPcmlnaW5IBVIQcXVpY2tPcmRlck9yaWdpbogBARIcCgdzbG'
-    '90X2lkGA4gASgJSAZSBnNsb3RJZIgBAUIWChRfYXV0b19hbWVuZF9zdHJhdGVneUITChFfbGlt'
-    'aXRfcHJpY2VfdHlwZUISChBfb3JkZXJfY29uZGl0aW9uQg0KC19uZWVkX2hlZGdlQh0KG19hdX'
-    'RvX2FtZW5kX2luaXRpYWxfd2FpdF9tc0IVChNfcXVpY2tfb3JkZXJfb3JpZ2luQgoKCF9zbG90'
-    'X2lk');
+    '90X2lkGA4gASgJSAZSBnNsb3RJZIgBARIhCgpwYWlyX3YyX2lkGA8gASgFSAdSCHBhaXJWMklk'
+    'iAEBQhYKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5QhMKEV9saW1pdF9wcmljZV90eXBlQhIKEF9vcm'
+    'Rlcl9jb25kaXRpb25CDQoLX25lZWRfaGVkZ2VCHQobX2F1dG9fYW1lbmRfaW5pdGlhbF93YWl0'
+    'X21zQhUKE19xdWlja19vcmRlcl9vcmlnaW5CCgoIX3Nsb3RfaWRCDQoLX3BhaXJfdjJfaWQ=');
 
 @$core.Deprecated('Use submitOrderResponseDescriptor instead')
 const SubmitOrderResponse$json = {

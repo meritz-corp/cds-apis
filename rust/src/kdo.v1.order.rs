@@ -52,6 +52,11 @@ pub struct SubmitOrderRequest {
     /// default 슬롯. quick_order_origin 이 MM 이 아니면 무시된다.
     #[prost(string, optional, tag="14")]
     pub slot_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// pair_v2 퀵주문(quick_order_origin=PAIR_V2)의 귀속 페어 id (필수). 종목·펀드·매매방향이 그 페어의
+    /// base 또는 counter 다리와 같아야 한다. 주문은 그 페어 주문으로 추적되고 회차 누적 발주수량에 들어가
+    /// 그만큼 다음 회차가 덜 낸다 (완료회차는 올리지 않는다). quick_order_origin 이 PAIR_V2 가 아니면 무시된다.
+    #[prost(int32, optional, tag="15")]
+    pub pair_v2_id: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -428,6 +433,8 @@ pub enum QuickOrderOrigin {
     Mm = 1,
     /// Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨
     Quote = 2,
+    /// pair_v2 화면 — 그 페어 주문(PairV2Context)으로 나가 페어 주문 추적·회차 누적 발주수량에 들어감 (pair_v2_id 필수, 퀵주문 체결 통계에는 안 들어감)
+    PairV2 = 3,
 }
 impl QuickOrderOrigin {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -439,6 +446,7 @@ impl QuickOrderOrigin {
             QuickOrderOrigin::Unspecified => "QUICK_ORDER_ORIGIN_UNSPECIFIED",
             QuickOrderOrigin::Mm => "QUICK_ORDER_ORIGIN_MM",
             QuickOrderOrigin::Quote => "QUICK_ORDER_ORIGIN_QUOTE",
+            QuickOrderOrigin::PairV2 => "QUICK_ORDER_ORIGIN_PAIR_V2",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -447,6 +455,7 @@ impl QuickOrderOrigin {
             "QUICK_ORDER_ORIGIN_UNSPECIFIED" => Some(Self::Unspecified),
             "QUICK_ORDER_ORIGIN_MM" => Some(Self::Mm),
             "QUICK_ORDER_ORIGIN_QUOTE" => Some(Self::Quote),
+            "QUICK_ORDER_ORIGIN_PAIR_V2" => Some(Self::PairV2),
             _ => None,
         }
     }

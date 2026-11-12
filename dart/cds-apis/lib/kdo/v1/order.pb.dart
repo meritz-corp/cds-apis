@@ -39,6 +39,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? autoAmendInitialWaitMs,
     QuickOrderOrigin? quickOrderOrigin,
     $core.String? slotId,
+    $core.int? pairV2Id,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -55,6 +56,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (autoAmendInitialWaitMs != null) result.autoAmendInitialWaitMs = autoAmendInitialWaitMs;
     if (quickOrderOrigin != null) result.quickOrderOrigin = quickOrderOrigin;
     if (slotId != null) result.slotId = slotId;
+    if (pairV2Id != null) result.pairV2Id = pairV2Id;
     return result;
   }
 
@@ -78,6 +80,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'autoAmendInitialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..e<QuickOrderOrigin>(13, _omitFieldNames ? '' : 'quickOrderOrigin', $pb.PbFieldType.OE, defaultOrMaker: QuickOrderOrigin.QUICK_ORDER_ORIGIN_UNSPECIFIED, valueOf: QuickOrderOrigin.valueOf, enumValues: QuickOrderOrigin.values)
     ..aOS(14, _omitFieldNames ? '' : 'slotId')
+    ..a<$core.int>(15, _omitFieldNames ? '' : 'pairV2Id', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -242,6 +245,18 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasSlotId() => $_has(13);
   @$pb.TagNumber(14)
   void clearSlotId() => $_clearField(14);
+
+  /// pair_v2 퀵주문(quick_order_origin=PAIR_V2)의 귀속 페어 id (필수). 종목·펀드·매매방향이 그 페어의
+  /// base 또는 counter 다리와 같아야 한다. 주문은 그 페어 주문으로 추적되고 회차 누적 발주수량에 들어가
+  /// 그만큼 다음 회차가 덜 낸다 (완료회차는 올리지 않는다). quick_order_origin 이 PAIR_V2 가 아니면 무시된다.
+  @$pb.TagNumber(15)
+  $core.int get pairV2Id => $_getIZ(14);
+  @$pb.TagNumber(15)
+  set pairV2Id($core.int value) => $_setSignedInt32(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasPairV2Id() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearPairV2Id() => $_clearField(15);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {

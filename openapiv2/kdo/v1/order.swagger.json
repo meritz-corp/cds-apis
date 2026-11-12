@@ -436,10 +436,11 @@
       "enum": [
         "QUICK_ORDER_ORIGIN_UNSPECIFIED",
         "QUICK_ORDER_ORIGIN_MM",
-        "QUICK_ORDER_ORIGIN_QUOTE"
+        "QUICK_ORDER_ORIGIN_QUOTE",
+        "QUICK_ORDER_ORIGIN_PAIR_V2"
       ],
       "default": "QUICK_ORDER_ORIGIN_UNSPECIFIED",
-      "description": "퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.\n\n - QUICK_ORDER_ORIGIN_UNSPECIFIED: 일반 퀵주문 (출처 미지정)\n - QUICK_ORDER_ORIGIN_MM: MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨\n - QUICK_ORDER_ORIGIN_QUOTE: Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨"
+      "description": "퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.\n\n - QUICK_ORDER_ORIGIN_UNSPECIFIED: 일반 퀵주문 (출처 미지정)\n - QUICK_ORDER_ORIGIN_MM: MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨\n - QUICK_ORDER_ORIGIN_QUOTE: Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨\n - QUICK_ORDER_ORIGIN_PAIR_V2: pair_v2 화면 — 그 페어 주문(PairV2Context)으로 나가 페어 주문 추적·회차 누적 발주수량에 들어감 (pair_v2_id 필수, 퀵주문 체결 통계에는 안 들어감)"
     },
     "orderQuoteType": {
       "type": "string",
@@ -513,6 +514,11 @@
         "slotId": {
           "type": "string",
           "description": "MM 퀵주문(quick_order_origin=MM)의 슬롯 귀속. 같은 (symbol,fund) 에 여러 MM 슬롯이\n동시에 돌 때 어느 슬롯의 체결통계/노출에 귀속할지 지정한다. 미지정(빈 문자열)이면\ndefault 슬롯. quick_order_origin 이 MM 이 아니면 무시된다."
+        },
+        "pairV2Id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "pair_v2 퀵주문(quick_order_origin=PAIR_V2)의 귀속 페어 id (필수). 종목·펀드·매매방향이 그 페어의\nbase 또는 counter 다리와 같아야 한다. 주문은 그 페어 주문으로 추적되고 회차 누적 발주수량에 들어가\n그만큼 다음 회차가 덜 낸다 (완료회차는 올리지 않는다). quick_order_origin 이 PAIR_V2 가 아니면 무시된다."
         }
       },
       "required": [
