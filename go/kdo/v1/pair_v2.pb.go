@@ -221,11 +221,13 @@ const (
 	PairV2BlockReason_PAIR_V2_BLOCK_REASON_TRADING_WINDOW         PairV2BlockReason = 8
 	PairV2BlockReason_PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT           PairV2BlockReason = 9
 	PairV2BlockReason_PAIR_V2_BLOCK_REASON_FILL_RATE              PairV2BlockReason = 10
-	PairV2BlockReason_PAIR_V2_BLOCK_REASON_SLIPPAGE               PairV2BlockReason = 11
-	PairV2BlockReason_PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT         PairV2BlockReason = 12
-	PairV2BlockReason_PAIR_V2_BLOCK_REASON_ORDER_VALIDATION       PairV2BlockReason = 13
-	PairV2BlockReason_PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE        PairV2BlockReason = 14
-	PairV2BlockReason_PAIR_V2_BLOCK_REASON_RUNTIME_ERROR          PairV2BlockReason = 15
+	// 슬리피지 가드(slippage_guard): 상대호가 깊이를 다 더해도 회차 수량이 모자라거나, 그 수량을 채우는
+	// 호가 가격으로 잰 스프레드가 목표에 못 미침 (1호가 기준 스프레드는 목표를 넘은 상태)
+	PairV2BlockReason_PAIR_V2_BLOCK_REASON_SLIPPAGE         PairV2BlockReason = 11
+	PairV2BlockReason_PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT   PairV2BlockReason = 12
+	PairV2BlockReason_PAIR_V2_BLOCK_REASON_ORDER_VALIDATION PairV2BlockReason = 13
+	PairV2BlockReason_PAIR_V2_BLOCK_REASON_PARTIAL_FAILURE  PairV2BlockReason = 14
+	PairV2BlockReason_PAIR_V2_BLOCK_REASON_RUNTIME_ERROR    PairV2BlockReason = 15
 	// 완료회차가 총회차(total_rounds)에 도달 — 자동·수동 발사 모두 차단 (목표회차까지 발주는 허용)
 	PairV2BlockReason_PAIR_V2_BLOCK_REASON_ROUNDS_COMPLETED PairV2BlockReason = 16
 )
@@ -481,9 +483,13 @@ type PairV2 struct {
 	TradingWindowStart *string `protobuf:"bytes,17,opt,name=trading_window_start,json=tradingWindowStart,proto3,oneof" json:"trading_window_start,omitempty"`
 	// 자동 발사 운영 시간창 종료 (KST "HH:MM:SS", 미설정 = 상시)
 	TradingWindowEnd *string `protobuf:"bytes,18,opt,name=trading_window_end,json=tradingWindowEnd,proto3,oneof" json:"trading_window_end,omitempty"`
-	// 슬리피지 가드 - true 면 양다리의 발주 호가(BEST_TAKE=상대, BEST_MAKE=자기) 잔량이 발주수량 이상일 때만
-	// 자동 발사한다 (잔량 부족 = 즉시 체결 불가/슬리피지 위험 → 발사 보류).
-	// 수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false.
+	// 슬리피지 가드 - true 면 상대호가(BEST_TAKE) 다리를 1호가부터 잔량을 누적해 이번 회차 발주수량(되메움 포함)을
+	// 다 채우는 첫 호가의 가격으로 다시 재고, 그 가격에서도 스프레드가 목표(target_spread)를 넘을 때만 그 가격
+	// 지정가로 자동 발사한다. 호가가 그대로면 전량이 바로 체결되고 평균 체결가는 잰 가격과 같거나 유리하다.
+	// 단계 수 제한은 없고 시세에 보이는 호가(ETF·주식·주식선물 10단, 지수선물 5단)까지 본다. 다 더해도 수량이
+	// 모자라거나 그 가격에서 목표에 못 미치면 보류한다 (PAIR_V2_BLOCK_REASON_SLIPPAGE).
+	// 1호가 잔량이 충분하면 false 와 같다. 자기호가(BEST_MAKE) 다리는 가드와 무관하게 자기 1호가에 낸다.
+	// false 면 1호가 가격으로 재고 낸다. 수동 발사(LaunchPairV2Once)는 가드를 무시한다. 기본 false.
 	SlippageGuard bool `protobuf:"varint,19,opt,name=slippage_guard,json=slippageGuard,proto3" json:"slippage_guard,omitempty"`
 	// 일반 매도 가능 수량 부족 시 차입 재고 사용 허용. 기본 false.
 	// 수동/자동 모두 적용하며, 체크와 예약은 동일 잔고 잠금 아래 수행한다.
@@ -2814,10 +2820,12 @@ type PairV2StatusUpdate struct {
 	LaunchCount uint32 `protobuf:"varint,4,opt,name=launch_count,json=launchCount,proto3" json:"launch_count,omitempty"`
 	// 최근 측정 스프레드 ("선물 − 현물", base 가격 단위, 약 1초 주기 스로틀 — mmm 화면 "시장가격" 대응).
 	// pricing 이 leverage_future 면 시장 basis 라 선물 가격 단위다. 시세 미수신 구간에는 실리지 않는다.
+	// 1호가(발주 레벨) 가격 기준이다 — 슬리피지 가드가 깊이 가격으로 다시 잰 값은 발사 때 실행로그 spread 에 남는다.
 	CurrentSpread *float64 `protobuf:"fixed64,5,opt,name=current_spread,json=currentSpread,proto3,oneof" json:"current_spread,omitempty"`
-	// base 다리의 발주 방향 상대호가 1호가 잔량 (측정 시점, ~1초 주기 — 슬리피지 가드 판단 근거 표시용)
+	// base 다리의 발주 레벨 1호가 잔량 (BEST_TAKE=상대, BEST_MAKE=자기 1호가 — 측정 시점, ~1초 주기, 표시용).
+	// 슬리피지 가드는 이 값만이 아니라 회차 수량을 채울 때까지 상대호가 깊이를 누적해 판단한다 (slippage_guard).
 	BaseTopQuantity *int64 `protobuf:"varint,6,opt,name=base_top_quantity,json=baseTopQuantity,proto3,oneof" json:"base_top_quantity,omitempty"`
-	// counter 다리의 발주 방향 상대호가 1호가 잔량
+	// counter 다리의 발주 레벨 1호가 잔량 (base_top_quantity 와 같은 기준)
 	CounterTopQuantity *int64 `protobuf:"varint,7,opt,name=counter_top_quantity,json=counterTopQuantity,proto3,oneof" json:"counter_top_quantity,omitempty"`
 	// 현재 자동 발사를 막는 주된 사유. 여러 조건 미충족 시 서버 판정 우선순위의 첫 사유.
 	BlockReason PairV2BlockReason `protobuf:"varint,8,opt,name=block_reason,json=blockReason,proto3,enum=kdo.v1.pair_v2.PairV2BlockReason" json:"block_reason,omitempty"`

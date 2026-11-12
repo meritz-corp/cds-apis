@@ -107,6 +107,8 @@ class PairV2BlockReason extends $pb.ProtobufEnum {
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_TRADING_WINDOW = PairV2BlockReason._(8, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_TRADING_WINDOW');
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT = PairV2BlockReason._(9, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_LAUNCH_LIMIT');
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_FILL_RATE = PairV2BlockReason._(10, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_FILL_RATE');
+  /// 슬리피지 가드(slippage_guard): 상대호가 깊이를 다 더해도 회차 수량이 모자라거나, 그 수량을 채우는
+  /// 호가 가격으로 잰 스프레드가 목표에 못 미침 (1호가 기준 스프레드는 목표를 넘은 상태)
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_SLIPPAGE = PairV2BlockReason._(11, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_SLIPPAGE');
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT = PairV2BlockReason._(12, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_QUANTITY_LIMIT');
   static const PairV2BlockReason PAIR_V2_BLOCK_REASON_ORDER_VALIDATION = PairV2BlockReason._(13, _omitEnumNames ? '' : 'PAIR_V2_BLOCK_REASON_ORDER_VALIDATION');
