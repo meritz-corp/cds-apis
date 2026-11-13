@@ -109,6 +109,16 @@ class PairV2ServiceClient extends $grpc.Client {
     return $createUnaryCall(_$orderPairV2UntilRound, request, options: options);
   }
 
+  /// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리
+  /// 설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
+  /// 들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).
+  /// PAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).
+  /// 주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.
+  /// 실행 세션을 이어 받을 수 없거나(재기동 복원 불가) 이벤트 누락으로 장부가 어긋났으면 FAILED_PRECONDITION.
+  $grpc.ResponseFuture<$0.SubmitPairV2LegOrderResponse> submitPairV2LegOrder($0.SubmitPairV2LegOrderRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$submitPairV2LegOrder, request, options: options);
+  }
+
   /// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
   $grpc.ResponseFuture<$0.CancelPairV2ResidualResponse> cancelPairV2Residual($0.CancelPairV2ResidualRequest request, {$grpc.CallOptions? options,}) {
     return $createUnaryCall(_$cancelPairV2Residual, request, options: options);
@@ -194,6 +204,10 @@ class PairV2ServiceClient extends $grpc.Client {
       '/kdo.v1.pair_v2.PairV2Service/OrderPairV2UntilRound',
       ($0.OrderPairV2UntilRoundRequest value) => value.writeToBuffer(),
       $0.OrderPairV2UntilRoundResponse.fromBuffer);
+  static final _$submitPairV2LegOrder = $grpc.ClientMethod<$0.SubmitPairV2LegOrderRequest, $0.SubmitPairV2LegOrderResponse>(
+      '/kdo.v1.pair_v2.PairV2Service/SubmitPairV2LegOrder',
+      ($0.SubmitPairV2LegOrderRequest value) => value.writeToBuffer(),
+      $0.SubmitPairV2LegOrderResponse.fromBuffer);
   static final _$cancelPairV2Residual = $grpc.ClientMethod<$0.CancelPairV2ResidualRequest, $0.CancelPairV2ResidualResponse>(
       '/kdo.v1.pair_v2.PairV2Service/CancelPairV2Residual',
       ($0.CancelPairV2ResidualRequest value) => value.writeToBuffer(),
@@ -306,6 +320,13 @@ abstract class PairV2ServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.OrderPairV2UntilRoundRequest.fromBuffer(value),
         ($0.OrderPairV2UntilRoundResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SubmitPairV2LegOrderRequest, $0.SubmitPairV2LegOrderResponse>(
+        'SubmitPairV2LegOrder',
+        submitPairV2LegOrder_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.SubmitPairV2LegOrderRequest.fromBuffer(value),
+        ($0.SubmitPairV2LegOrderResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.CancelPairV2ResidualRequest, $0.CancelPairV2ResidualResponse>(
         'CancelPairV2Residual',
         cancelPairV2Residual_Pre,
@@ -422,6 +443,12 @@ abstract class PairV2ServiceBase extends $grpc.Service {
   }
 
   $async.Future<$0.OrderPairV2UntilRoundResponse> orderPairV2UntilRound($grpc.ServiceCall call, $0.OrderPairV2UntilRoundRequest request);
+
+  $async.Future<$0.SubmitPairV2LegOrderResponse> submitPairV2LegOrder_Pre($grpc.ServiceCall $call, $async.Future<$0.SubmitPairV2LegOrderRequest> $request) async {
+    return submitPairV2LegOrder($call, await $request);
+  }
+
+  $async.Future<$0.SubmitPairV2LegOrderResponse> submitPairV2LegOrder($grpc.ServiceCall call, $0.SubmitPairV2LegOrderRequest request);
 
   $async.Future<$0.CancelPairV2ResidualResponse> cancelPairV2Residual_Pre($grpc.ServiceCall $call, $async.Future<$0.CancelPairV2ResidualRequest> $request) async {
     return cancelPairV2Residual($call, await $request);

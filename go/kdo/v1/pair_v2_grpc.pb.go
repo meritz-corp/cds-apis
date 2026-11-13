@@ -56,6 +56,13 @@ type PairV2ServiceClient interface {
 	// 범위 밖 target_round 는 INVALID_ARGUMENT, 부족분이 없거나 다른 수동 요청이 대기 중이면 FAILED_PRECONDITION.
 	// 대기 요청은 5초 뒤 만료된다. 결과는 실행로그/상태 스트림에서 확인한다.
 	OrderPairV2UntilRound(ctx context.Context, in *OrderPairV2UntilRoundRequest, opts ...grpc.CallOption) (*OrderPairV2UntilRoundResponse, error)
+	// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리
+	// 설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
+	// 들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).
+	// PAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).
+	// 주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.
+	// 실행 세션을 이어 받을 수 없거나(재기동 복원 불가) 이벤트 누락으로 장부가 어긋났으면 FAILED_PRECONDITION.
+	SubmitPairV2LegOrder(ctx context.Context, in *SubmitPairV2LegOrderRequest, opts ...grpc.CallOption) (*SubmitPairV2LegOrderResponse, error)
 	// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
 	CancelPairV2Residual(ctx context.Context, in *CancelPairV2ResidualRequest, opts ...grpc.CallOption) (*CancelPairV2ResidualResponse, error)
 	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
@@ -200,6 +207,15 @@ func (c *pairV2ServiceClient) LaunchPairV2Once(ctx context.Context, in *LaunchPa
 func (c *pairV2ServiceClient) OrderPairV2UntilRound(ctx context.Context, in *OrderPairV2UntilRoundRequest, opts ...grpc.CallOption) (*OrderPairV2UntilRoundResponse, error) {
 	out := new(OrderPairV2UntilRoundResponse)
 	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/OrderPairV2UntilRound", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pairV2ServiceClient) SubmitPairV2LegOrder(ctx context.Context, in *SubmitPairV2LegOrderRequest, opts ...grpc.CallOption) (*SubmitPairV2LegOrderResponse, error) {
+	out := new(SubmitPairV2LegOrderResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.pair_v2.PairV2Service/SubmitPairV2LegOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -352,6 +368,13 @@ type PairV2ServiceServer interface {
 	// 범위 밖 target_round 는 INVALID_ARGUMENT, 부족분이 없거나 다른 수동 요청이 대기 중이면 FAILED_PRECONDITION.
 	// 대기 요청은 5초 뒤 만료된다. 결과는 실행로그/상태 스트림에서 확인한다.
 	OrderPairV2UntilRound(context.Context, *OrderPairV2UntilRoundRequest) (*OrderPairV2UntilRoundResponse, error)
+	// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리
+	// 설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
+	// 들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).
+	// PAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).
+	// 주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.
+	// 실행 세션을 이어 받을 수 없거나(재기동 복원 불가) 이벤트 누락으로 장부가 어긋났으면 FAILED_PRECONDITION.
+	SubmitPairV2LegOrder(context.Context, *SubmitPairV2LegOrderRequest) (*SubmitPairV2LegOrderResponse, error)
 	// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
 	CancelPairV2Residual(context.Context, *CancelPairV2ResidualRequest) (*CancelPairV2ResidualResponse, error)
 	// 미체결 잔량 정정 - 현재가 대비 ±amend_pct% 공격적 가격으로 일괄 정정 (mmm "미체결 1% 정정" 대응).
@@ -409,6 +432,9 @@ func (UnimplementedPairV2ServiceServer) LaunchPairV2Once(context.Context, *Launc
 }
 func (UnimplementedPairV2ServiceServer) OrderPairV2UntilRound(context.Context, *OrderPairV2UntilRoundRequest) (*OrderPairV2UntilRoundResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrderPairV2UntilRound not implemented")
+}
+func (UnimplementedPairV2ServiceServer) SubmitPairV2LegOrder(context.Context, *SubmitPairV2LegOrderRequest) (*SubmitPairV2LegOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitPairV2LegOrder not implemented")
 }
 func (UnimplementedPairV2ServiceServer) CancelPairV2Residual(context.Context, *CancelPairV2ResidualRequest) (*CancelPairV2ResidualResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelPairV2Residual not implemented")
@@ -645,6 +671,24 @@ func _PairV2Service_OrderPairV2UntilRound_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PairV2Service_SubmitPairV2LegOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitPairV2LegOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PairV2ServiceServer).SubmitPairV2LegOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.pair_v2.PairV2Service/SubmitPairV2LegOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PairV2ServiceServer).SubmitPairV2LegOrder(ctx, req.(*SubmitPairV2LegOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PairV2Service_CancelPairV2Residual_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CancelPairV2ResidualRequest)
 	if err := dec(in); err != nil {
@@ -823,6 +867,10 @@ var PairV2Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OrderPairV2UntilRound",
 			Handler:    _PairV2Service_OrderPairV2UntilRound_Handler,
+		},
+		{
+			MethodName: "SubmitPairV2LegOrder",
+			Handler:    _PairV2Service_SubmitPairV2LegOrder_Handler,
 		},
 		{
 			MethodName: "CancelPairV2Residual",

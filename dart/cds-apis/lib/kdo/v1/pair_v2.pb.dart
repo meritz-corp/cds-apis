@@ -19,6 +19,7 @@ import '../../google/protobuf/field_mask.pb.dart' as $3;
 import '../../google/protobuf/timestamp.pb.dart' as $2;
 import 'common.pbenum.dart' as $4;
 import 'hedge.pbenum.dart' as $5;
+import 'order.pbenum.dart' as $6;
 import 'pair_v2.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -2217,6 +2218,185 @@ class OrderPairV2UntilRoundResponse extends $pb.GeneratedMessage {
   $core.bool hasCounterQuantity() => $_has(2);
   @$pb.TagNumber(3)
   void clearCounterQuantity() => $_clearField(3);
+}
+
+class SubmitPairV2LegOrderRequest extends $pb.GeneratedMessage {
+  factory SubmitPairV2LegOrderRequest({
+    $core.String? pairV2,
+    PairV2Slot? slot,
+    $fixnum.Int64? quantity,
+    $core.String? price,
+    $6.LimitPriceType? limitPriceType,
+    $4.OrderConditionType? orderCondition,
+    $4.AmendMethodType? autoAmendStrategy,
+    $fixnum.Int64? autoAmendInitialWaitMs,
+  }) {
+    final result = create();
+    if (pairV2 != null) result.pairV2 = pairV2;
+    if (slot != null) result.slot = slot;
+    if (quantity != null) result.quantity = quantity;
+    if (price != null) result.price = price;
+    if (limitPriceType != null) result.limitPriceType = limitPriceType;
+    if (orderCondition != null) result.orderCondition = orderCondition;
+    if (autoAmendStrategy != null) result.autoAmendStrategy = autoAmendStrategy;
+    if (autoAmendInitialWaitMs != null) result.autoAmendInitialWaitMs = autoAmendInitialWaitMs;
+    return result;
+  }
+
+  SubmitPairV2LegOrderRequest._();
+
+  factory SubmitPairV2LegOrderRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SubmitPairV2LegOrderRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubmitPairV2LegOrderRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'pairV2')
+    ..e<PairV2Slot>(2, _omitFieldNames ? '' : 'slot', $pb.PbFieldType.OE, defaultOrMaker: PairV2Slot.PAIR_V2_SLOT_UNSPECIFIED, valueOf: PairV2Slot.valueOf, enumValues: PairV2Slot.values)
+    ..aInt64(3, _omitFieldNames ? '' : 'quantity')
+    ..aOS(4, _omitFieldNames ? '' : 'price')
+    ..e<$6.LimitPriceType>(5, _omitFieldNames ? '' : 'limitPriceType', $pb.PbFieldType.OE, defaultOrMaker: $6.LimitPriceType.LIMIT_PRICE_TYPE_UNSPECIFIED, valueOf: $6.LimitPriceType.valueOf, enumValues: $6.LimitPriceType.values)
+    ..e<$4.OrderConditionType>(6, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $4.OrderConditionType.valueOf, enumValues: $4.OrderConditionType.values)
+    ..e<$4.AmendMethodType>(7, _omitFieldNames ? '' : 'autoAmendStrategy', $pb.PbFieldType.OE, defaultOrMaker: $4.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $4.AmendMethodType.valueOf, enumValues: $4.AmendMethodType.values)
+    ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'autoAmendInitialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitPairV2LegOrderRequest clone() => SubmitPairV2LegOrderRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitPairV2LegOrderRequest copyWith(void Function(SubmitPairV2LegOrderRequest) updates) => super.copyWith((message) => updates(message as SubmitPairV2LegOrderRequest)) as SubmitPairV2LegOrderRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubmitPairV2LegOrderRequest create() => SubmitPairV2LegOrderRequest._();
+  @$core.override
+  SubmitPairV2LegOrderRequest createEmptyInstance() => create();
+  static $pb.PbList<SubmitPairV2LegOrderRequest> createRepeated() => $pb.PbList<SubmitPairV2LegOrderRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SubmitPairV2LegOrderRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubmitPairV2LegOrderRequest>(create);
+  static SubmitPairV2LegOrderRequest? _defaultInstance;
+
+  /// 리소스 이름 (pair_v2s/{id})
+  @$pb.TagNumber(1)
+  $core.String get pairV2 => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pairV2($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasPairV2() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPairV2() => $_clearField(1);
+
+  /// 주문할 다리 (BASE / COUNTER) — 종목·펀드·매매방향·LP 여부는 그 다리 설정을 쓴다
+  @$pb.TagNumber(2)
+  PairV2Slot get slot => $_getN(1);
+  @$pb.TagNumber(2)
+  set slot(PairV2Slot value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasSlot() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSlot() => $_clearField(2);
+
+  /// 수량 (> 0)
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get quantity => $_getI64(2);
+  @$pb.TagNumber(3)
+  set quantity($fixnum.Int64 value) => $_setInt64(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasQuantity() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearQuantity() => $_clearField(3);
+
+  /// 지정가. limit_price_type 을 상대·자기호가 계열로 주면 비워도 된다 (그 호가로 정한다)
+  @$pb.TagNumber(4)
+  $core.String get price => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set price($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPrice() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPrice() => $_clearField(4);
+
+  /// 지정가 가격 결정 방식 (미지정 시 price 를 쓴다)
+  @$pb.TagNumber(5)
+  $6.LimitPriceType get limitPriceType => $_getN(4);
+  @$pb.TagNumber(5)
+  set limitPriceType($6.LimitPriceType value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasLimitPriceType() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLimitPriceType() => $_clearField(5);
+
+  /// 호가조건 (미지정 시 FAS, 일반 지정가)
+  @$pb.TagNumber(6)
+  $4.OrderConditionType get orderCondition => $_getN(5);
+  @$pb.TagNumber(6)
+  set orderCondition($4.OrderConditionType value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasOrderCondition() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearOrderCondition() => $_clearField(6);
+
+  /// 자동정정 전략 (미지정 시 자동정정 없음)
+  @$pb.TagNumber(7)
+  $4.AmendMethodType get autoAmendStrategy => $_getN(6);
+  @$pb.TagNumber(7)
+  set autoAmendStrategy($4.AmendMethodType value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasAutoAmendStrategy() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearAutoAmendStrategy() => $_clearField(7);
+
+  /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get autoAmendInitialWaitMs => $_getI64(7);
+  @$pb.TagNumber(8)
+  set autoAmendInitialWaitMs($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasAutoAmendInitialWaitMs() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearAutoAmendInitialWaitMs() => $_clearField(8);
+}
+
+class SubmitPairV2LegOrderResponse extends $pb.GeneratedMessage {
+  factory SubmitPairV2LegOrderResponse({
+    $core.Iterable<$fixnum.Int64>? orderIds,
+  }) {
+    final result = create();
+    if (orderIds != null) result.orderIds.addAll(orderIds);
+    return result;
+  }
+
+  SubmitPairV2LegOrderResponse._();
+
+  factory SubmitPairV2LegOrderResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SubmitPairV2LegOrderResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SubmitPairV2LegOrderResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.pair_v2'), createEmptyInstance: create)
+    ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'orderIds', $pb.PbFieldType.KU6)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitPairV2LegOrderResponse clone() => SubmitPairV2LegOrderResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SubmitPairV2LegOrderResponse copyWith(void Function(SubmitPairV2LegOrderResponse) updates) => super.copyWith((message) => updates(message as SubmitPairV2LegOrderResponse)) as SubmitPairV2LegOrderResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SubmitPairV2LegOrderResponse create() => SubmitPairV2LegOrderResponse._();
+  @$core.override
+  SubmitPairV2LegOrderResponse createEmptyInstance() => create();
+  static $pb.PbList<SubmitPairV2LegOrderResponse> createRepeated() => $pb.PbList<SubmitPairV2LegOrderResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SubmitPairV2LegOrderResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SubmitPairV2LegOrderResponse>(create);
+  static SubmitPairV2LegOrderResponse? _defaultInstance;
+
+  /// 낸 주문 ID — 선물 1회 주문 금액 한도를 넘으면 여러 자식 주문으로 나뉜다 (뒤쪽 자식이 실패하면 낸 것까지만)
+  @$pb.TagNumber(1)
+  $pb.PbList<$fixnum.Int64> get orderIds => $_getList(0);
 }
 
 class ResetPairV2SessionRequest extends $pb.GeneratedMessage {

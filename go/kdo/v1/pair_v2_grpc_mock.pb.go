@@ -1102,6 +1102,26 @@ func (mr *MockPairV2ServiceClientMockRecorder) StreamPairV2Status(ctx, in interf
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamPairV2Status", reflect.TypeOf((*MockPairV2ServiceClient)(nil).StreamPairV2Status), varargs...)
 }
 
+// SubmitPairV2LegOrder mocks base method.
+func (m *MockPairV2ServiceClient) SubmitPairV2LegOrder(ctx context.Context, in *SubmitPairV2LegOrderRequest, opts ...grpc.CallOption) (*SubmitPairV2LegOrderResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "SubmitPairV2LegOrder", varargs...)
+	ret0, _ := ret[0].(*SubmitPairV2LegOrderResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SubmitPairV2LegOrder indicates an expected call of SubmitPairV2LegOrder.
+func (mr *MockPairV2ServiceClientMockRecorder) SubmitPairV2LegOrder(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitPairV2LegOrder", reflect.TypeOf((*MockPairV2ServiceClient)(nil).SubmitPairV2LegOrder), varargs...)
+}
+
 // UpdatePairV2 mocks base method.
 func (m *MockPairV2ServiceClient) UpdatePairV2(ctx context.Context, in *UpdatePairV2Request, opts ...grpc.CallOption) (*PairV2, error) {
 	m.ctrl.T.Helper()
@@ -1395,6 +1415,21 @@ func (m *MockPairV2ServiceServer) StreamPairV2Status(blob *StreamPairV2StatusReq
 func (mr *MockPairV2ServiceServerMockRecorder) StreamPairV2Status(blob, server interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StreamPairV2Status", reflect.TypeOf((*MockPairV2ServiceServer)(nil).StreamPairV2Status), blob, server)
+}
+
+// SubmitPairV2LegOrder mocks base method.
+func (m *MockPairV2ServiceServer) SubmitPairV2LegOrder(ctx context.Context, in *SubmitPairV2LegOrderRequest) (*SubmitPairV2LegOrderResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SubmitPairV2LegOrder", ctx, in)
+	ret0, _ := ret[0].(*SubmitPairV2LegOrderResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SubmitPairV2LegOrder indicates an expected call of SubmitPairV2LegOrder.
+func (mr *MockPairV2ServiceServerMockRecorder) SubmitPairV2LegOrder(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitPairV2LegOrder", reflect.TypeOf((*MockPairV2ServiceServer)(nil).SubmitPairV2LegOrder), ctx, in)
 }
 
 // UpdatePairV2 mocks base method.

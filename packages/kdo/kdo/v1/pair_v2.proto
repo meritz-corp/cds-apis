@@ -11,6 +11,7 @@ import "google/api/resource.proto";
 import "google/api/client.proto";
 import "kdo/v1/hedge.proto";
 import "kdo/v1/common.proto";
+import "kdo/v1/order.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -124,6 +125,19 @@ service PairV2Service {
   rpc OrderPairV2UntilRound(OrderPairV2UntilRoundRequest) returns (OrderPairV2UntilRoundResponse) {
     option (google.api.http) = {
       post: "/v1/{pair_v2=pair_v2s/*}:orderUntilRound"
+      body: "*"
+    };
+  }
+
+  // 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리
+  // 설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
+  // 들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).
+  // PAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).
+  // 주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.
+  // 실행 세션을 이어 받을 수 없거나(재기동 복원 불가) 이벤트 누락으로 장부가 어긋났으면 FAILED_PRECONDITION.
+  rpc SubmitPairV2LegOrder(SubmitPairV2LegOrderRequest) returns (SubmitPairV2LegOrderResponse) {
+    option (google.api.http) = {
+      post: "/v1/{pair_v2=pair_v2s/*}:submitLegOrder"
       body: "*"
     };
   }
@@ -738,6 +752,43 @@ message OrderPairV2UntilRoundResponse {
   // 요청 시점에 계산한 다리별 부족분 (실행 시점에 다시 계산한다)
   int64 base_quantity = 2;
   int64 counter_quantity = 3;
+}
+
+message SubmitPairV2LegOrderRequest {
+  // 리소스 이름 (pair_v2s/{id})
+  string pair_v2 = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 주문할 다리 (BASE / COUNTER) — 종목·펀드·매매방향·LP 여부는 그 다리 설정을 쓴다
+  PairV2Slot slot = 2 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 수량 (> 0)
+  int64 quantity = 3 [
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // 지정가. limit_price_type 을 상대·자기호가 계열로 주면 비워도 된다 (그 호가로 정한다)
+  string price = 4;
+
+  // 지정가 가격 결정 방식 (미지정 시 price 를 쓴다)
+  optional kdo.v1.order.LimitPriceType limit_price_type = 5;
+
+  // 호가조건 (미지정 시 FAS, 일반 지정가)
+  optional kdo.v1.common.OrderConditionType order_condition = 6;
+
+  // 자동정정 전략 (미지정 시 자동정정 없음)
+  optional kdo.v1.common.AmendMethodType auto_amend_strategy = 7;
+
+  // 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0
+  optional uint64 auto_amend_initial_wait_ms = 8;
+}
+
+message SubmitPairV2LegOrderResponse {
+  // 낸 주문 ID — 선물 1회 주문 금액 한도를 넘으면 여러 자식 주문으로 나뉜다 (뒤쪽 자식이 실패하면 낸 것까지만)
+  repeated uint64 order_ids = 1;
 }
 
 message ResetPairV2SessionRequest {

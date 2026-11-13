@@ -226,6 +226,29 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
     );
   }
 
+  /// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리
+  /// 설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
+  /// 들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).
+  /// PAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).
+  /// 주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.
+  /// 실행 세션을 이어 받을 수 없거나(재기동 복원 불가) 이벤트 누락으로 장부가 어긋났으면 FAILED_PRECONDITION.
+  Future<kdov1pair_v2.SubmitPairV2LegOrderResponse> submitPairV2LegOrder(
+    kdov1pair_v2.SubmitPairV2LegOrderRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.PairV2Service.submitPairV2LegOrder,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
+
   /// 미체결 잔량 전량 취소 - 이 페어 소유(PairV2Context) 주문만 취소. auto_amend 추적은 취소 확인과 함께 종료된다.
   Future<kdov1pair_v2.CancelPairV2ResidualResponse> cancelPairV2Residual(
     kdov1pair_v2.CancelPairV2ResidualRequest input, {

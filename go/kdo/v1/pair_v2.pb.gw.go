@@ -681,6 +681,74 @@ func local_request_PairV2Service_OrderPairV2UntilRound_0(ctx context.Context, ma
 
 }
 
+func request_PairV2Service_SubmitPairV2LegOrder_0(ctx context.Context, marshaler runtime.Marshaler, client PairV2ServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SubmitPairV2LegOrderRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["pair_v2"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pair_v2")
+	}
+
+	protoReq.PairV2, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pair_v2", err)
+	}
+
+	msg, err := client.SubmitPairV2LegOrder(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_PairV2Service_SubmitPairV2LegOrder_0(ctx context.Context, marshaler runtime.Marshaler, server PairV2ServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SubmitPairV2LegOrderRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["pair_v2"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "pair_v2")
+	}
+
+	protoReq.PairV2, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "pair_v2", err)
+	}
+
+	msg, err := server.SubmitPairV2LegOrder(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 func request_PairV2Service_CancelPairV2Residual_0(ctx context.Context, marshaler runtime.Marshaler, client PairV2ServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CancelPairV2ResidualRequest
 	var metadata runtime.ServerMetadata
@@ -1378,6 +1446,31 @@ func RegisterPairV2ServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("POST", pattern_PairV2Service_SubmitPairV2LegOrder_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/kdo.v1.pair_v2.PairV2Service/SubmitPairV2LegOrder", runtime.WithHTTPPathPattern("/v1/{pair_v2=pair_v2s/*}:submitLegOrder"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_PairV2Service_SubmitPairV2LegOrder_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_PairV2Service_SubmitPairV2LegOrder_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("POST", pattern_PairV2Service_CancelPairV2Residual_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1800,6 +1893,28 @@ func RegisterPairV2ServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 
 	})
 
+	mux.Handle("POST", pattern_PairV2Service_SubmitPairV2LegOrder_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/kdo.v1.pair_v2.PairV2Service/SubmitPairV2LegOrder", runtime.WithHTTPPathPattern("/v1/{pair_v2=pair_v2s/*}:submitLegOrder"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_PairV2Service_SubmitPairV2LegOrder_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_PairV2Service_SubmitPairV2LegOrder_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("POST", pattern_PairV2Service_CancelPairV2Residual_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1980,6 +2095,8 @@ var (
 
 	pattern_PairV2Service_OrderPairV2UntilRound_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pair_v2s", "pair_v2"}, "orderUntilRound"))
 
+	pattern_PairV2Service_SubmitPairV2LegOrder_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pair_v2s", "pair_v2"}, "submitLegOrder"))
+
 	pattern_PairV2Service_CancelPairV2Residual_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pair_v2s", "pair_v2"}, "cancelResidual"))
 
 	pattern_PairV2Service_AmendPairV2ResidualPct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v1", "pair_v2s", "pair_v2"}, "amendResidualPct"))
@@ -2017,6 +2134,8 @@ var (
 	forward_PairV2Service_LaunchPairV2Once_0 = runtime.ForwardResponseMessage
 
 	forward_PairV2Service_OrderPairV2UntilRound_0 = runtime.ForwardResponseMessage
+
+	forward_PairV2Service_SubmitPairV2LegOrder_0 = runtime.ForwardResponseMessage
 
 	forward_PairV2Service_CancelPairV2Residual_0 = runtime.ForwardResponseMessage
 

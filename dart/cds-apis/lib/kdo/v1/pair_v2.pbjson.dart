@@ -665,6 +665,54 @@ final $typed_data.Uint8List orderPairV2UntilRoundResponseDescriptor = $convert.b
     'B0ZWQSIwoNYmFzZV9xdWFudGl0eRgCIAEoA1IMYmFzZVF1YW50aXR5EikKEGNvdW50ZXJfcXVh'
     'bnRpdHkYAyABKANSD2NvdW50ZXJRdWFudGl0eQ==');
 
+@$core.Deprecated('Use submitPairV2LegOrderRequestDescriptor instead')
+const SubmitPairV2LegOrderRequest$json = {
+  '1': 'SubmitPairV2LegOrderRequest',
+  '2': [
+    {'1': 'pair_v2', '3': 1, '4': 1, '5': 9, '8': {}, '10': 'pairV2'},
+    {'1': 'slot', '3': 2, '4': 1, '5': 14, '6': '.kdo.v1.pair_v2.PairV2Slot', '8': {}, '10': 'slot'},
+    {'1': 'quantity', '3': 3, '4': 1, '5': 3, '8': {}, '10': 'quantity'},
+    {'1': 'price', '3': 4, '4': 1, '5': 9, '10': 'price'},
+    {'1': 'limit_price_type', '3': 5, '4': 1, '5': 14, '6': '.kdo.v1.order.LimitPriceType', '9': 0, '10': 'limitPriceType', '17': true},
+    {'1': 'order_condition', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderConditionType', '9': 1, '10': 'orderCondition', '17': true},
+    {'1': 'auto_amend_strategy', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '9': 2, '10': 'autoAmendStrategy', '17': true},
+    {'1': 'auto_amend_initial_wait_ms', '3': 8, '4': 1, '5': 4, '9': 3, '10': 'autoAmendInitialWaitMs', '17': true},
+  ],
+  '8': [
+    {'1': '_limit_price_type'},
+    {'1': '_order_condition'},
+    {'1': '_auto_amend_strategy'},
+    {'1': '_auto_amend_initial_wait_ms'},
+  ],
+};
+
+/// Descriptor for `SubmitPairV2LegOrderRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List submitPairV2LegOrderRequestDescriptor = $convert.base64Decode(
+    'ChtTdWJtaXRQYWlyVjJMZWdPcmRlclJlcXVlc3QSHQoHcGFpcl92MhgBIAEoCUIE4kEBAlIGcG'
+    'FpclYyEjQKBHNsb3QYAiABKA4yGi5rZG8udjEucGFpcl92Mi5QYWlyVjJTbG90QgTiQQECUgRz'
+    'bG90EiAKCHF1YW50aXR5GAMgASgDQgTiQQECUghxdWFudGl0eRIUCgVwcmljZRgEIAEoCVIFcH'
+    'JpY2USSwoQbGltaXRfcHJpY2VfdHlwZRgFIAEoDjIcLmtkby52MS5vcmRlci5MaW1pdFByaWNl'
+    'VHlwZUgAUg5saW1pdFByaWNlVHlwZYgBARJPCg9vcmRlcl9jb25kaXRpb24YBiABKA4yIS5rZG'
+    '8udjEuY29tbW9uLk9yZGVyQ29uZGl0aW9uVHlwZUgBUg5vcmRlckNvbmRpdGlvbogBARJTChNh'
+    'dXRvX2FtZW5kX3N0cmF0ZWd5GAcgASgOMh4ua2RvLnYxLmNvbW1vbi5BbWVuZE1ldGhvZFR5cG'
+    'VIAlIRYXV0b0FtZW5kU3RyYXRlZ3mIAQESPwoaYXV0b19hbWVuZF9pbml0aWFsX3dhaXRfbXMY'
+    'CCABKARIA1IWYXV0b0FtZW5kSW5pdGlhbFdhaXRNc4gBAUITChFfbGltaXRfcHJpY2VfdHlwZU'
+    'ISChBfb3JkZXJfY29uZGl0aW9uQhYKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5Qh0KG19hdXRvX2Ft'
+    'ZW5kX2luaXRpYWxfd2FpdF9tcw==');
+
+@$core.Deprecated('Use submitPairV2LegOrderResponseDescriptor instead')
+const SubmitPairV2LegOrderResponse$json = {
+  '1': 'SubmitPairV2LegOrderResponse',
+  '2': [
+    {'1': 'order_ids', '3': 1, '4': 3, '5': 4, '10': 'orderIds'},
+  ],
+};
+
+/// Descriptor for `SubmitPairV2LegOrderResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List submitPairV2LegOrderResponseDescriptor = $convert.base64Decode(
+    'ChxTdWJtaXRQYWlyVjJMZWdPcmRlclJlc3BvbnNlEhsKCW9yZGVyX2lkcxgBIAMoBFIIb3JkZX'
+    'JJZHM=');
+
 @$core.Deprecated('Use resetPairV2SessionRequestDescriptor instead')
 const ResetPairV2SessionRequest$json = {
   '1': 'ResetPairV2SessionRequest',

@@ -510,6 +510,41 @@ pub struct OrderPairV2UntilRoundResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubmitPairV2LegOrderRequest {
+    /// 리소스 이름 (pair_v2s/{id})
+    #[prost(string, tag="1")]
+    pub pair_v2: ::prost::alloc::string::String,
+    /// 주문할 다리 (BASE / COUNTER) — 종목·펀드·매매방향·LP 여부는 그 다리 설정을 쓴다
+    #[prost(enumeration="PairV2Slot", tag="2")]
+    pub slot: i32,
+    /// 수량 (> 0)
+    #[prost(int64, tag="3")]
+    pub quantity: i64,
+    /// 지정가. limit_price_type 을 상대·자기호가 계열로 주면 비워도 된다 (그 호가로 정한다)
+    #[prost(string, tag="4")]
+    pub price: ::prost::alloc::string::String,
+    /// 지정가 가격 결정 방식 (미지정 시 price 를 쓴다)
+    #[prost(enumeration="super::order::LimitPriceType", optional, tag="5")]
+    pub limit_price_type: ::core::option::Option<i32>,
+    /// 호가조건 (미지정 시 FAS, 일반 지정가)
+    #[prost(enumeration="super::common::OrderConditionType", optional, tag="6")]
+    pub order_condition: ::core::option::Option<i32>,
+    /// 자동정정 전략 (미지정 시 자동정정 없음)
+    #[prost(enumeration="super::common::AmendMethodType", optional, tag="7")]
+    pub auto_amend_strategy: ::core::option::Option<i32>,
+    /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0
+    #[prost(uint64, optional, tag="8")]
+    pub auto_amend_initial_wait_ms: ::core::option::Option<u64>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubmitPairV2LegOrderResponse {
+    /// 낸 주문 ID — 선물 1회 주문 금액 한도를 넘으면 여러 자식 주문으로 나뉜다 (뒤쪽 자식이 실패하면 낸 것까지만)
+    #[prost(uint64, repeated, tag="1")]
+    pub order_ids: ::prost::alloc::vec::Vec<u64>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetPairV2SessionRequest {
     #[prost(string, tag="1")]
     pub pair_v2: ::prost::alloc::string::String,

@@ -357,6 +357,36 @@ pub mod pair_v2_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        pub async fn submit_pair_v2_leg_order(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubmitPairV2LegOrderRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SubmitPairV2LegOrderResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/kdo.v1.pair_v2.PairV2Service/SubmitPairV2LegOrder",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "kdo.v1.pair_v2.PairV2Service",
+                        "SubmitPairV2LegOrder",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn cancel_pair_v2_residual(
             &mut self,
             request: impl tonic::IntoRequest<super::CancelPairV2ResidualRequest>,
@@ -629,6 +659,13 @@ pub mod pair_v2_service_server {
             request: tonic::Request<super::OrderPairV2UntilRoundRequest>,
         ) -> std::result::Result<
             tonic::Response<super::OrderPairV2UntilRoundResponse>,
+            tonic::Status,
+        >;
+        async fn submit_pair_v2_leg_order(
+            &self,
+            request: tonic::Request<super::SubmitPairV2LegOrderRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SubmitPairV2LegOrderResponse>,
             tonic::Status,
         >;
         async fn cancel_pair_v2_residual(
@@ -1267,6 +1304,55 @@ pub mod pair_v2_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = OrderPairV2UntilRoundSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/kdo.v1.pair_v2.PairV2Service/SubmitPairV2LegOrder" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubmitPairV2LegOrderSvc<T: PairV2Service>(pub Arc<T>);
+                    impl<
+                        T: PairV2Service,
+                    > tonic::server::UnaryService<super::SubmitPairV2LegOrderRequest>
+                    for SubmitPairV2LegOrderSvc<T> {
+                        type Response = super::SubmitPairV2LegOrderResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SubmitPairV2LegOrderRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PairV2Service>::submit_pair_v2_leg_order(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = SubmitPairV2LegOrderSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

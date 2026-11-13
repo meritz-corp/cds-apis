@@ -2319,7 +2319,6 @@ impl serde::Serialize for QuickOrderOrigin {
             Self::Unspecified => "QUICK_ORDER_ORIGIN_UNSPECIFIED",
             Self::Mm => "QUICK_ORDER_ORIGIN_MM",
             Self::Quote => "QUICK_ORDER_ORIGIN_QUOTE",
-            Self::PairV2 => "QUICK_ORDER_ORIGIN_PAIR_V2",
         };
         serializer.serialize_str(variant)
     }
@@ -2334,7 +2333,6 @@ impl<'de> serde::Deserialize<'de> for QuickOrderOrigin {
             "QUICK_ORDER_ORIGIN_UNSPECIFIED",
             "QUICK_ORDER_ORIGIN_MM",
             "QUICK_ORDER_ORIGIN_QUOTE",
-            "QUICK_ORDER_ORIGIN_PAIR_V2",
         ];
 
         struct GeneratedVisitor;
@@ -2378,7 +2376,6 @@ impl<'de> serde::Deserialize<'de> for QuickOrderOrigin {
                     "QUICK_ORDER_ORIGIN_UNSPECIFIED" => Ok(QuickOrderOrigin::Unspecified),
                     "QUICK_ORDER_ORIGIN_MM" => Ok(QuickOrderOrigin::Mm),
                     "QUICK_ORDER_ORIGIN_QUOTE" => Ok(QuickOrderOrigin::Quote),
-                    "QUICK_ORDER_ORIGIN_PAIR_V2" => Ok(QuickOrderOrigin::PairV2),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -2843,9 +2840,6 @@ impl serde::Serialize for SubmitOrderRequest {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.order.SubmitOrderRequest", len)?;
         if true {
             struct_ser.serialize_field("fund_code", &self.fund_code)?;
@@ -2905,9 +2899,6 @@ impl serde::Serialize for SubmitOrderRequest {
         if let Some(v) = self.slot_id.as_ref() {
             struct_ser.serialize_field("slot_id", v)?;
         }
-        if let Some(v) = self.pair_v2_id.as_ref() {
-            struct_ser.serialize_field("pair_v2_id", v)?;
-        }
         struct_ser.end()
     }
 }
@@ -2942,8 +2933,6 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             "quickOrderOrigin",
             "slot_id",
             "slotId",
-            "pair_v2_id",
-            "pairV2Id",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2962,7 +2951,6 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
             AutoAmendInitialWaitMs,
             QuickOrderOrigin,
             SlotId,
-            PairV2Id,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2999,7 +2987,6 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             "autoAmendInitialWaitMs" | "auto_amend_initial_wait_ms" => Ok(GeneratedField::AutoAmendInitialWaitMs),
                             "quickOrderOrigin" | "quick_order_origin" => Ok(GeneratedField::QuickOrderOrigin),
                             "slotId" | "slot_id" => Ok(GeneratedField::SlotId),
-                            "pairV2Id" | "pair_v2_id" => Ok(GeneratedField::PairV2Id),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -3033,7 +3020,6 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                 let mut auto_amend_initial_wait_ms__ = None;
                 let mut quick_order_origin__ = None;
                 let mut slot_id__ = None;
-                let mut pair_v2_id__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::FundCode => {
@@ -3124,14 +3110,6 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                             }
                             slot_id__ = map_.next_value()?;
                         }
-                        GeneratedField::PairV2Id => {
-                            if pair_v2_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("pairV2Id"));
-                            }
-                            pair_v2_id__ = 
-                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
-                            ;
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -3152,7 +3130,6 @@ impl<'de> serde::Deserialize<'de> for SubmitOrderRequest {
                     auto_amend_initial_wait_ms: auto_amend_initial_wait_ms__,
                     quick_order_origin: quick_order_origin__,
                     slot_id: slot_id__,
-                    pair_v2_id: pair_v2_id__,
                 })
             }
         }

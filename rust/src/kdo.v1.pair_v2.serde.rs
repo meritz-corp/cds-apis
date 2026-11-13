@@ -6461,6 +6461,340 @@ impl<'de> serde::Deserialize<'de> for StreamPairV2StatusRequest {
         deserializer.deserialize_struct("kdo.v1.pair_v2.StreamPairV2StatusRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for SubmitPairV2LegOrderRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.SubmitPairV2LegOrderRequest", len)?;
+        if true {
+            struct_ser.serialize_field("pair_v2", &self.pair_v2)?;
+        }
+        if true {
+            let v = PairV2Slot::try_from(self.slot)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.slot)))?;
+            struct_ser.serialize_field("slot", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("price", &self.price)?;
+        }
+        if let Some(v) = self.limit_price_type.as_ref() {
+            let v = super::order::LimitPriceType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("limit_price_type", &v)?;
+        }
+        if let Some(v) = self.order_condition.as_ref() {
+            let v = super::common::OrderConditionType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("order_condition", &v)?;
+        }
+        if let Some(v) = self.auto_amend_strategy.as_ref() {
+            let v = super::common::AmendMethodType::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("auto_amend_strategy", &v)?;
+        }
+        if let Some(v) = self.auto_amend_initial_wait_ms.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("auto_amend_initial_wait_ms", ToString::to_string(&v).as_str())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SubmitPairV2LegOrderRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "pair_v2",
+            "pairV2",
+            "slot",
+            "quantity",
+            "price",
+            "limit_price_type",
+            "limitPriceType",
+            "order_condition",
+            "orderCondition",
+            "auto_amend_strategy",
+            "autoAmendStrategy",
+            "auto_amend_initial_wait_ms",
+            "autoAmendInitialWaitMs",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            PairV2,
+            Slot,
+            Quantity,
+            Price,
+            LimitPriceType,
+            OrderCondition,
+            AutoAmendStrategy,
+            AutoAmendInitialWaitMs,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "pairV2" | "pair_v2" => Ok(GeneratedField::PairV2),
+                            "slot" => Ok(GeneratedField::Slot),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "price" => Ok(GeneratedField::Price),
+                            "limitPriceType" | "limit_price_type" => Ok(GeneratedField::LimitPriceType),
+                            "orderCondition" | "order_condition" => Ok(GeneratedField::OrderCondition),
+                            "autoAmendStrategy" | "auto_amend_strategy" => Ok(GeneratedField::AutoAmendStrategy),
+                            "autoAmendInitialWaitMs" | "auto_amend_initial_wait_ms" => Ok(GeneratedField::AutoAmendInitialWaitMs),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SubmitPairV2LegOrderRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.SubmitPairV2LegOrderRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SubmitPairV2LegOrderRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut pair_v2__ = None;
+                let mut slot__ = None;
+                let mut quantity__ = None;
+                let mut price__ = None;
+                let mut limit_price_type__ = None;
+                let mut order_condition__ = None;
+                let mut auto_amend_strategy__ = None;
+                let mut auto_amend_initial_wait_ms__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::PairV2 => {
+                            if pair_v2__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pairV2"));
+                            }
+                            pair_v2__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Slot => {
+                            if slot__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("slot"));
+                            }
+                            slot__ = Some(map_.next_value::<PairV2Slot>()? as i32);
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Price => {
+                            if price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("price"));
+                            }
+                            price__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::LimitPriceType => {
+                            if limit_price_type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limitPriceType"));
+                            }
+                            limit_price_type__ = map_.next_value::<::std::option::Option<super::order::LimitPriceType>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::OrderCondition => {
+                            if order_condition__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderCondition"));
+                            }
+                            order_condition__ = map_.next_value::<::std::option::Option<super::common::OrderConditionType>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::AutoAmendStrategy => {
+                            if auto_amend_strategy__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("autoAmendStrategy"));
+                            }
+                            auto_amend_strategy__ = map_.next_value::<::std::option::Option<super::common::AmendMethodType>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::AutoAmendInitialWaitMs => {
+                            if auto_amend_initial_wait_ms__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("autoAmendInitialWaitMs"));
+                            }
+                            auto_amend_initial_wait_ms__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SubmitPairV2LegOrderRequest {
+                    pair_v2: pair_v2__.unwrap_or_default(),
+                    slot: slot__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    price: price__.unwrap_or_default(),
+                    limit_price_type: limit_price_type__,
+                    order_condition: order_condition__,
+                    auto_amend_strategy: auto_amend_strategy__,
+                    auto_amend_initial_wait_ms: auto_amend_initial_wait_ms__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.SubmitPairV2LegOrderRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SubmitPairV2LegOrderResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.SubmitPairV2LegOrderResponse", len)?;
+        if true {
+            struct_ser.serialize_field("order_ids", &self.order_ids.iter().map(ToString::to_string).collect::<Vec<_>>())?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SubmitPairV2LegOrderResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "order_ids",
+            "orderIds",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            OrderIds,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "orderIds" | "order_ids" => Ok(GeneratedField::OrderIds),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SubmitPairV2LegOrderResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.pair_v2.SubmitPairV2LegOrderResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SubmitPairV2LegOrderResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut order_ids__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::OrderIds => {
+                            if order_ids__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderIds"));
+                            }
+                            order_ids__ = 
+                                Some(map_.next_value::<Vec<::pbjson::private::NumberDeserialize<_>>>()?
+                                    .into_iter().map(|x| x.0).collect())
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SubmitPairV2LegOrderResponse {
+                    order_ids: order_ids__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.pair_v2.SubmitPairV2LegOrderResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for UpdatePairV2Request {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
