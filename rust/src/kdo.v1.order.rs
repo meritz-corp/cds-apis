@@ -52,6 +52,12 @@ pub struct SubmitOrderRequest {
     /// default 슬롯. quick_order_origin 이 MM 이 아니면 무시된다.
     #[prost(string, optional, tag="14")]
     pub slot_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// ETF LP 헷지 퀵주문(quick_order_origin=QUOTE_HEDGE)의 귀속 — 그 ETF LP 의 Hedge.id (LookupHedge 응답의 id).
+    /// 체결이 그 ETF LP 체결 요약(GetEtfLpFillSummary/StreamEtfLpFills)의 헷지 행에 반영된다.
+    /// 미지정/0 이면 귀속되지 않는다. KRX 전문에 36진수 2자로 실려 0~1295 만 정확히 귀속된다.
+    /// quick_order_origin 이 QUOTE_HEDGE 가 아니면 무시된다.
+    #[prost(int32, optional, tag="16")]
+    pub hedge_id: ::core::option::Option<i32>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -428,6 +434,8 @@ pub enum QuickOrderOrigin {
     Mm = 1,
     /// Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨
     Quote = 2,
+    /// ETF LP 화면 헷지 링크 퀵창 — 체결이 그 ETF LP(hedge_id) 헷지 체결통계에 반영됨
+    QuoteHedge = 4,
 }
 impl QuickOrderOrigin {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -439,6 +447,7 @@ impl QuickOrderOrigin {
             QuickOrderOrigin::Unspecified => "QUICK_ORDER_ORIGIN_UNSPECIFIED",
             QuickOrderOrigin::Mm => "QUICK_ORDER_ORIGIN_MM",
             QuickOrderOrigin::Quote => "QUICK_ORDER_ORIGIN_QUOTE",
+            QuickOrderOrigin::QuoteHedge => "QUICK_ORDER_ORIGIN_QUOTE_HEDGE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -447,6 +456,7 @@ impl QuickOrderOrigin {
             "QUICK_ORDER_ORIGIN_UNSPECIFIED" => Some(Self::Unspecified),
             "QUICK_ORDER_ORIGIN_MM" => Some(Self::Mm),
             "QUICK_ORDER_ORIGIN_QUOTE" => Some(Self::Quote),
+            "QUICK_ORDER_ORIGIN_QUOTE_HEDGE" => Some(Self::QuoteHedge),
             _ => None,
         }
     }

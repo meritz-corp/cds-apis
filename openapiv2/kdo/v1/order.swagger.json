@@ -436,10 +436,11 @@
       "enum": [
         "QUICK_ORDER_ORIGIN_UNSPECIFIED",
         "QUICK_ORDER_ORIGIN_MM",
-        "QUICK_ORDER_ORIGIN_QUOTE"
+        "QUICK_ORDER_ORIGIN_QUOTE",
+        "QUICK_ORDER_ORIGIN_QUOTE_HEDGE"
       ],
       "default": "QUICK_ORDER_ORIGIN_UNSPECIFIED",
-      "description": "퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.\n\n - QUICK_ORDER_ORIGIN_UNSPECIFIED: 일반 퀵주문 (출처 미지정)\n - QUICK_ORDER_ORIGIN_MM: MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨\n - QUICK_ORDER_ORIGIN_QUOTE: Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨"
+      "description": "퀵주문(SubmitOrder 직접 제출) 출처. 해당 전략의 체결통계 귀속에 쓴다.\n\n - QUICK_ORDER_ORIGIN_UNSPECIFIED: 일반 퀵주문 (출처 미지정)\n - QUICK_ORDER_ORIGIN_MM: MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨\n - QUICK_ORDER_ORIGIN_QUOTE: Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨\n - QUICK_ORDER_ORIGIN_QUOTE_HEDGE: ETF LP 화면 헷지 링크 퀵창 — 체결이 그 ETF LP(hedge_id) 헷지 체결통계에 반영됨"
     },
     "orderQuoteType": {
       "type": "string",
@@ -513,6 +514,11 @@
         "slotId": {
           "type": "string",
           "description": "MM 퀵주문(quick_order_origin=MM)의 슬롯 귀속. 같은 (symbol,fund) 에 여러 MM 슬롯이\n동시에 돌 때 어느 슬롯의 체결통계/노출에 귀속할지 지정한다. 미지정(빈 문자열)이면\ndefault 슬롯. quick_order_origin 이 MM 이 아니면 무시된다."
+        },
+        "hedgeId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ETF LP 헷지 퀵주문(quick_order_origin=QUOTE_HEDGE)의 귀속 — 그 ETF LP 의 Hedge.id (LookupHedge 응답의 id).\n체결이 그 ETF LP 체결 요약(GetEtfLpFillSummary/StreamEtfLpFills)의 헷지 행에 반영된다.\n미지정/0 이면 귀속되지 않는다. KRX 전문에 36진수 2자로 실려 0~1295 만 정확히 귀속된다.\nquick_order_origin 이 QUOTE_HEDGE 가 아니면 무시된다."
         }
       },
       "required": [

@@ -81,6 +81,7 @@ enum QuickOrderOrigin {
   QUICK_ORDER_ORIGIN_UNSPECIFIED = 0;  // 일반 퀵주문 (출처 미지정)
   QUICK_ORDER_ORIGIN_MM = 1;           // MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨
   QUICK_ORDER_ORIGIN_QUOTE = 2;        // Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨
+  QUICK_ORDER_ORIGIN_QUOTE_HEDGE = 4;  // ETF LP 화면 헷지 링크 퀵창 — 체결이 그 ETF LP(hedge_id) 헷지 체결통계에 반영됨
 }
 
 enum OrderStatus {
@@ -150,6 +151,12 @@ message SubmitOrderRequest {
   // 15 = pair_v2_id (1.0.541 에서만, 미사용) — pair_v2 다리 주문은 PairV2Service.SubmitPairV2LegOrder 로 낸다
   reserved 15;
   reserved "pair_v2_id";
+
+  // ETF LP 헷지 퀵주문(quick_order_origin=QUOTE_HEDGE)의 귀속 — 그 ETF LP 의 Hedge.id (LookupHedge 응답의 id).
+  // 체결이 그 ETF LP 체결 요약(GetEtfLpFillSummary/StreamEtfLpFills)의 헷지 행에 반영된다.
+  // 미지정/0 이면 귀속되지 않는다. KRX 전문에 36진수 2자로 실려 0~1295 만 정확히 귀속된다.
+  // quick_order_origin 이 QUOTE_HEDGE 가 아니면 무시된다.
+  optional int32 hedge_id = 16;
 }
 
 message SubmitOrderResponse {

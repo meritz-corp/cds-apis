@@ -68,14 +68,16 @@ class QuickOrderOrigin extends $pb.ProtobufEnum {
   static const QuickOrderOrigin QUICK_ORDER_ORIGIN_UNSPECIFIED = QuickOrderOrigin._(0, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_UNSPECIFIED');
   static const QuickOrderOrigin QUICK_ORDER_ORIGIN_MM = QuickOrderOrigin._(1, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_MM');
   static const QuickOrderOrigin QUICK_ORDER_ORIGIN_QUOTE = QuickOrderOrigin._(2, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_QUOTE');
+  static const QuickOrderOrigin QUICK_ORDER_ORIGIN_QUOTE_HEDGE = QuickOrderOrigin._(4, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_QUOTE_HEDGE');
 
   static const $core.List<QuickOrderOrigin> values = <QuickOrderOrigin> [
     QUICK_ORDER_ORIGIN_UNSPECIFIED,
     QUICK_ORDER_ORIGIN_MM,
     QUICK_ORDER_ORIGIN_QUOTE,
+    QUICK_ORDER_ORIGIN_QUOTE_HEDGE,
   ];
 
-  static final $core.List<QuickOrderOrigin?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  static final $core.List<QuickOrderOrigin?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
   static QuickOrderOrigin? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const QuickOrderOrigin._(super.value, super.name);

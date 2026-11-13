@@ -39,6 +39,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? autoAmendInitialWaitMs,
     QuickOrderOrigin? quickOrderOrigin,
     $core.String? slotId,
+    $core.int? hedgeId,
   }) {
     final result = create();
     if (fundCode != null) result.fundCode = fundCode;
@@ -55,6 +56,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     if (autoAmendInitialWaitMs != null) result.autoAmendInitialWaitMs = autoAmendInitialWaitMs;
     if (quickOrderOrigin != null) result.quickOrderOrigin = quickOrderOrigin;
     if (slotId != null) result.slotId = slotId;
+    if (hedgeId != null) result.hedgeId = hedgeId;
     return result;
   }
 
@@ -78,6 +80,7 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'autoAmendInitialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..e<QuickOrderOrigin>(13, _omitFieldNames ? '' : 'quickOrderOrigin', $pb.PbFieldType.OE, defaultOrMaker: QuickOrderOrigin.QUICK_ORDER_ORIGIN_UNSPECIFIED, valueOf: QuickOrderOrigin.valueOf, enumValues: QuickOrderOrigin.values)
     ..aOS(14, _omitFieldNames ? '' : 'slotId')
+    ..a<$core.int>(16, _omitFieldNames ? '' : 'hedgeId', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -242,6 +245,19 @@ class SubmitOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasSlotId() => $_has(13);
   @$pb.TagNumber(14)
   void clearSlotId() => $_clearField(14);
+
+  /// ETF LP 헷지 퀵주문(quick_order_origin=QUOTE_HEDGE)의 귀속 — 그 ETF LP 의 Hedge.id (LookupHedge 응답의 id).
+  /// 체결이 그 ETF LP 체결 요약(GetEtfLpFillSummary/StreamEtfLpFills)의 헷지 행에 반영된다.
+  /// 미지정/0 이면 귀속되지 않는다. KRX 전문에 36진수 2자로 실려 0~1295 만 정확히 귀속된다.
+  /// quick_order_origin 이 QUOTE_HEDGE 가 아니면 무시된다.
+  @$pb.TagNumber(16)
+  $core.int get hedgeId => $_getIZ(14);
+  @$pb.TagNumber(16)
+  set hedgeId($core.int value) => $_setSignedInt32(14, value);
+  @$pb.TagNumber(16)
+  $core.bool hasHedgeId() => $_has(14);
+  @$pb.TagNumber(16)
+  void clearHedgeId() => $_clearField(16);
 }
 
 class SubmitOrderResponse extends $pb.GeneratedMessage {
