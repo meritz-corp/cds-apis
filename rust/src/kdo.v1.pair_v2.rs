@@ -514,7 +514,7 @@ pub struct SubmitPairV2LegOrderRequest {
     /// 리소스 이름 (pair_v2s/{id})
     #[prost(string, tag="1")]
     pub pair_v2: ::prost::alloc::string::String,
-    /// 주문할 다리 (BASE / COUNTER) — 종목·펀드·매매방향·LP 여부는 그 다리 설정을 쓴다
+    /// 주문할 다리 (BASE / COUNTER) — 종목·펀드·LP 여부는 그 다리 설정을 쓴다 (매매방향은 side 로 확인한다)
     #[prost(enumeration="PairV2Slot", tag="2")]
     pub slot: i32,
     /// 수량 (> 0)
@@ -535,6 +535,10 @@ pub struct SubmitPairV2LegOrderRequest {
     /// 자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0
     #[prost(uint64, optional, tag="8")]
     pub auto_amend_initial_wait_ms: ::core::option::Option<u64>,
+    /// 매매방향 (BID / ASK) — 퀵창에서 누른 버튼 방향을 그대로 싣는다. 그 다리 설정 방향과 다르거나 미지정(UNSPECIFIED)이면
+    /// INVALID_ARGUMENT (서버가 다리 방향으로 바꿔 내지 않는다)
+    #[prost(enumeration="super::common::OrderSide", tag="9")]
+    pub side: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

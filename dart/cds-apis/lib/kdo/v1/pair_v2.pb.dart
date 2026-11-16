@@ -2230,6 +2230,7 @@ class SubmitPairV2LegOrderRequest extends $pb.GeneratedMessage {
     $4.OrderConditionType? orderCondition,
     $4.AmendMethodType? autoAmendStrategy,
     $fixnum.Int64? autoAmendInitialWaitMs,
+    $4.OrderSide? side,
   }) {
     final result = create();
     if (pairV2 != null) result.pairV2 = pairV2;
@@ -2240,6 +2241,7 @@ class SubmitPairV2LegOrderRequest extends $pb.GeneratedMessage {
     if (orderCondition != null) result.orderCondition = orderCondition;
     if (autoAmendStrategy != null) result.autoAmendStrategy = autoAmendStrategy;
     if (autoAmendInitialWaitMs != null) result.autoAmendInitialWaitMs = autoAmendInitialWaitMs;
+    if (side != null) result.side = side;
     return result;
   }
 
@@ -2257,6 +2259,7 @@ class SubmitPairV2LegOrderRequest extends $pb.GeneratedMessage {
     ..e<$4.OrderConditionType>(6, _omitFieldNames ? '' : 'orderCondition', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderConditionType.ORDER_CONDITION_TYPE_UNSPECIFIED, valueOf: $4.OrderConditionType.valueOf, enumValues: $4.OrderConditionType.values)
     ..e<$4.AmendMethodType>(7, _omitFieldNames ? '' : 'autoAmendStrategy', $pb.PbFieldType.OE, defaultOrMaker: $4.AmendMethodType.AMEND_METHOD_TYPE_UNSPECIFIED, valueOf: $4.AmendMethodType.valueOf, enumValues: $4.AmendMethodType.values)
     ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'autoAmendInitialWaitMs', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..e<$4.OrderSide>(9, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $4.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $4.OrderSide.valueOf, enumValues: $4.OrderSide.values)
     ..hasRequiredFields = false
   ;
 
@@ -2287,7 +2290,7 @@ class SubmitPairV2LegOrderRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPairV2() => $_clearField(1);
 
-  /// 주문할 다리 (BASE / COUNTER) — 종목·펀드·매매방향·LP 여부는 그 다리 설정을 쓴다
+  /// 주문할 다리 (BASE / COUNTER) — 종목·펀드·LP 여부는 그 다리 설정을 쓴다 (매매방향은 side 로 확인한다)
   @$pb.TagNumber(2)
   PairV2Slot get slot => $_getN(1);
   @$pb.TagNumber(2)
@@ -2356,6 +2359,17 @@ class SubmitPairV2LegOrderRequest extends $pb.GeneratedMessage {
   $core.bool hasAutoAmendInitialWaitMs() => $_has(7);
   @$pb.TagNumber(8)
   void clearAutoAmendInitialWaitMs() => $_clearField(8);
+
+  /// 매매방향 (BID / ASK) — 퀵창에서 누른 버튼 방향을 그대로 싣는다. 그 다리 설정 방향과 다르거나 미지정(UNSPECIFIED)이면
+  /// INVALID_ARGUMENT (서버가 다리 방향으로 바꿔 내지 않는다)
+  @$pb.TagNumber(9)
+  $4.OrderSide get side => $_getN(8);
+  @$pb.TagNumber(9)
+  set side($4.OrderSide value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasSide() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearSide() => $_clearField(9);
 }
 
 class SubmitPairV2LegOrderResponse extends $pb.GeneratedMessage {

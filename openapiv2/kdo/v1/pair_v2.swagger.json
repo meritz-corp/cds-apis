@@ -985,7 +985,7 @@
     },
     "/v1/{pairV2}:submitLegOrder": {
       "post": {
-        "summary": "다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리\n설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에\n들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).\nPAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).\n주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.\n실행 세션을 이어 받을 수 없거나(재기동 복원 불가) 이벤트 누락으로 장부가 어긋났으면 FAILED_PRECONDITION.",
+        "summary": "다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·LP 여부는 그 다리 설정을\n쓰고 헷지 누적은 하지 않는다 (발사와 같다). 매매방향(side)은 그 다리 방향과 같아야 하고 다르거나 미지정이면\nINVALID_ARGUMENT — 퀵창에서 반대 방향을 눌렀는데 다리 방향으로 나가지 않게 한다. 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에\n들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).\nPAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).\n주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.\n실행 세션을 이어 받을 수 없거나(재기동 복원 불가) 이벤트 누락으로 장부가 어긋났으면 FAILED_PRECONDITION.",
         "operationId": "PairV2Service_SubmitPairV2LegOrder",
         "responses": {
           "200": {
@@ -1019,7 +1019,7 @@
               "properties": {
                 "slot": {
                   "$ref": "#/definitions/pair_v2PairV2Slot",
-                  "title": "주문할 다리 (BASE / COUNTER) — 종목·펀드·매매방향·LP 여부는 그 다리 설정을 쓴다"
+                  "title": "주문할 다리 (BASE / COUNTER) — 종목·펀드·LP 여부는 그 다리 설정을 쓴다 (매매방향은 side 로 확인한다)"
                 },
                 "quantity": {
                   "type": "string",
@@ -1046,11 +1046,16 @@
                   "type": "string",
                   "format": "uint64",
                   "title": "자동정정 시작 전 초기 대기 시간 (ms). auto_amend_strategy 지정 시에만 유효, 미지정 시 0"
+                },
+                "side": {
+                  "$ref": "#/definitions/commonOrderSide",
+                  "title": "매매방향 (BID / ASK) — 퀵창에서 누른 버튼 방향을 그대로 싣는다. 그 다리 설정 방향과 다르거나 미지정(UNSPECIFIED)이면\nINVALID_ARGUMENT (서버가 다리 방향으로 바꿔 내지 않는다)"
                 }
               },
               "required": [
                 "slot",
-                "quantity"
+                "quantity",
+                "side"
               ]
             }
           }

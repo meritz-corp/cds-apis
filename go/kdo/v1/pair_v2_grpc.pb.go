@@ -56,8 +56,9 @@ type PairV2ServiceClient interface {
 	// 범위 밖 target_round 는 INVALID_ARGUMENT, 부족분이 없거나 다른 수동 요청이 대기 중이면 FAILED_PRECONDITION.
 	// 대기 요청은 5초 뒤 만료된다. 결과는 실행로그/상태 스트림에서 확인한다.
 	OrderPairV2UntilRound(ctx context.Context, in *OrderPairV2UntilRoundRequest, opts ...grpc.CallOption) (*OrderPairV2UntilRoundResponse, error)
-	// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리
-	// 설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
+	// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·LP 여부는 그 다리 설정을
+	// 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 매매방향(side)은 그 다리 방향과 같아야 하고 다르거나 미지정이면
+	// INVALID_ARGUMENT — 퀵창에서 반대 방향을 눌렀는데 다리 방향으로 나가지 않게 한다. 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
 	// 들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).
 	// PAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).
 	// 주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.
@@ -368,8 +369,9 @@ type PairV2ServiceServer interface {
 	// 범위 밖 target_round 는 INVALID_ARGUMENT, 부족분이 없거나 다른 수동 요청이 대기 중이면 FAILED_PRECONDITION.
 	// 대기 요청은 5초 뒤 만료된다. 결과는 실행로그/상태 스트림에서 확인한다.
 	OrderPairV2UntilRound(context.Context, *OrderPairV2UntilRoundRequest) (*OrderPairV2UntilRoundResponse, error)
-	// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·매매방향·LP 여부는 그 다리
-	// 설정을 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
+	// 다리 수동 주문 (pair_v2 화면 퀵주문) - 이 페어의 한 다리로 지정가 주문을 낸다. 종목·펀드·LP 여부는 그 다리 설정을
+	// 쓰고 헷지 누적은 하지 않는다 (발사와 같다). 매매방향(side)은 그 다리 방향과 같아야 하고 다르거나 미지정이면
+	// INVALID_ARGUMENT — 퀵창에서 반대 방향을 눌렀는데 다리 방향으로 나가지 않게 한다. 주문은 페어 주문(PairV2Context)으로 추적되고 회차 누적 발주수량에
 	// 들어가 그만큼 다음 회차가 덜 낸다 — 완료회차·체결률은 그대로다 (목표회차까지 발주와 같은 장부 처리).
 	// PAUSED 에서도 허용하며 자동발주를 켜지 않는다. 페어 펀드가 배정된 서버에서만 받는다 (회차 장부가 그 서버 메모리에 있다).
 	// 주문 한도·펀드 한도·잔고 검증과 선물 1회 주문 금액 한도 분할은 퀵주문과 같다.

@@ -677,6 +677,7 @@ const SubmitPairV2LegOrderRequest$json = {
     {'1': 'order_condition', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderConditionType', '9': 1, '10': 'orderCondition', '17': true},
     {'1': 'auto_amend_strategy', '3': 7, '4': 1, '5': 14, '6': '.kdo.v1.common.AmendMethodType', '9': 2, '10': 'autoAmendStrategy', '17': true},
     {'1': 'auto_amend_initial_wait_ms', '3': 8, '4': 1, '5': 4, '9': 3, '10': 'autoAmendInitialWaitMs', '17': true},
+    {'1': 'side', '3': 9, '4': 1, '5': 14, '6': '.kdo.v1.common.OrderSide', '8': {}, '10': 'side'},
   ],
   '8': [
     {'1': '_limit_price_type'},
@@ -696,9 +697,10 @@ final $typed_data.Uint8List submitPairV2LegOrderRequestDescriptor = $convert.bas
     '8udjEuY29tbW9uLk9yZGVyQ29uZGl0aW9uVHlwZUgBUg5vcmRlckNvbmRpdGlvbogBARJTChNh'
     'dXRvX2FtZW5kX3N0cmF0ZWd5GAcgASgOMh4ua2RvLnYxLmNvbW1vbi5BbWVuZE1ldGhvZFR5cG'
     'VIAlIRYXV0b0FtZW5kU3RyYXRlZ3mIAQESPwoaYXV0b19hbWVuZF9pbml0aWFsX3dhaXRfbXMY'
-    'CCABKARIA1IWYXV0b0FtZW5kSW5pdGlhbFdhaXRNc4gBAUITChFfbGltaXRfcHJpY2VfdHlwZU'
-    'ISChBfb3JkZXJfY29uZGl0aW9uQhYKFF9hdXRvX2FtZW5kX3N0cmF0ZWd5Qh0KG19hdXRvX2Ft'
-    'ZW5kX2luaXRpYWxfd2FpdF9tcw==');
+    'CCABKARIA1IWYXV0b0FtZW5kSW5pdGlhbFdhaXRNc4gBARIyCgRzaWRlGAkgASgOMhgua2RvLn'
+    'YxLmNvbW1vbi5PcmRlclNpZGVCBOJBAQJSBHNpZGVCEwoRX2xpbWl0X3ByaWNlX3R5cGVCEgoQ'
+    'X29yZGVyX2NvbmRpdGlvbkIWChRfYXV0b19hbWVuZF9zdHJhdGVneUIdChtfYXV0b19hbWVuZF'
+    '9pbml0aWFsX3dhaXRfbXM=');
 
 @$core.Deprecated('Use submitPairV2LegOrderResponseDescriptor instead')
 const SubmitPairV2LegOrderResponse$json = {
