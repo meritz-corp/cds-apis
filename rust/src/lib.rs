@@ -113,6 +113,9 @@ pub mod kdo {
         pub mod premarket_order_reservation {
             include!("kdo.v1.premarket_order_reservation.rs");
         }
+        pub mod spread_capture {
+            include!("kdo.v1.spread_capture.rs");
+        }
     }
 }
 pub mod market {
