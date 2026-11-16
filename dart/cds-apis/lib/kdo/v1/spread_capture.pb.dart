@@ -177,8 +177,9 @@ class SpreadCapture extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearTickSize() => $_clearField(7);
 
-  /// 공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE 만 허용.
-  /// 공정가 = NAV(pricing·basis) + adjustment
+  /// 공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.
+  /// PDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,
+  /// 선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment
   @$pb.TagNumber(8)
   $2.EtfPricing get pricing => $_getN(7);
   @$pb.TagNumber(8)

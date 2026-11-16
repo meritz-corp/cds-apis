@@ -226,8 +226,9 @@ type SpreadCapture struct {
 	Quantity int64 `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	// ETF 호가단위(원) — 단 간격이자 틱 경계 간격
 	TickSize int64 `protobuf:"varint,7,opt,name=tick_size,json=tickSize,proto3" json:"tick_size,omitempty"`
-	// 공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE 만 허용.
-	// 공정가 = NAV(pricing·basis) + adjustment
+	// 공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.
+	// PDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,
+	// 선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment
 	Pricing *EtfPricing `protobuf:"bytes,8,opt,name=pricing,proto3" json:"pricing,omitempty"`
 	// 원
 	BidBasis float64 `protobuf:"fixed64,9,opt,name=bid_basis,json=bidBasis,proto3" json:"bid_basis,omitempty"`
