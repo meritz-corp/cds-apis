@@ -91,11 +91,14 @@ const SpreadCapture$json = {
     {'1': 'ask_adjustment', '3': 12, '4': 1, '5': 1, '10': 'askAdjustment'},
     {'1': 'threshold_ticks', '3': 13, '4': 1, '5': 1, '10': 'thresholdTicks'},
     {'1': 'reentry_ticks', '3': 14, '4': 1, '5': 1, '10': 'reentryTicks'},
-    {'1': 'flatten_slippage_ticks', '3': 15, '4': 1, '5': 3, '10': 'flattenSlippageTicks'},
     {'1': 'flatten_amend_ticks', '3': 18, '4': 1, '5': 1, '10': 'flattenAmendTicks'},
     {'1': 'max_net_quantity', '3': 16, '4': 1, '5': 3, '10': 'maxNetQuantity'},
     {'1': 'update_time', '3': 17, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
+  '9': [
+    {'1': 15, '2': 16},
+  ],
+  '10': ['flatten_slippage_ticks'],
 };
 
 /// Descriptor for `SpreadCapture`. Decode as a `google.protobuf.DescriptorProto`.
@@ -108,11 +111,11 @@ final $typed_data.Uint8List spreadCaptureDescriptor = $convert.base64Decode(
     'IbCgliaWRfYmFzaXMYCSABKAFSCGJpZEJhc2lzEhsKCWFza19iYXNpcxgKIAEoAVIIYXNrQmFz'
     'aXMSJQoOYmlkX2FkanVzdG1lbnQYCyABKAFSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG'
     '1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSJwoPdGhyZXNob2xkX3RpY2tzGA0gASgBUg50aHJl'
-    'c2hvbGRUaWNrcxIjCg1yZWVudHJ5X3RpY2tzGA4gASgBUgxyZWVudHJ5VGlja3MSNAoWZmxhdH'
-    'Rlbl9zbGlwcGFnZV90aWNrcxgPIAEoA1IUZmxhdHRlblNsaXBwYWdlVGlja3MSLgoTZmxhdHRl'
-    'bl9hbWVuZF90aWNrcxgSIAEoAVIRZmxhdHRlbkFtZW5kVGlja3MSKAoQbWF4X25ldF9xdWFudG'
-    'l0eRgQIAEoA1IObWF4TmV0UXVhbnRpdHkSQQoLdXBkYXRlX3RpbWUYESABKAsyGi5nb29nbGUu'
-    'cHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1l');
+    'c2hvbGRUaWNrcxIjCg1yZWVudHJ5X3RpY2tzGA4gASgBUgxyZWVudHJ5VGlja3MSLgoTZmxhdH'
+    'Rlbl9hbWVuZF90aWNrcxgSIAEoAVIRZmxhdHRlbkFtZW5kVGlja3MSKAoQbWF4X25ldF9xdWFu'
+    'dGl0eRgQIAEoA1IObWF4TmV0UXVhbnRpdHkSQQoLdXBkYXRlX3RpbWUYESABKAsyGi5nb29nbG'
+    'UucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1lSgQIDxAQUhZmbGF0dGVuX3Ns'
+    'aXBwYWdlX3RpY2tz');
 
 @$core.Deprecated('Use spreadCaptureOrderDescriptor instead')
 const SpreadCaptureOrder$json = {

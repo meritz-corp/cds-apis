@@ -48,9 +48,6 @@ pub struct SpreadCapture {
     /// 되돌림 여유 (선물 틱, 소수 가능) — 전환 구간에서 원래 안전 구간으로 돌아가려면 경계에서 임계 + 이만큼 멀어져야 한다
     #[prost(double, tag="14")]
     pub reentry_ticks: f64,
-    /// 청산 허용 슬리피지 (ETF 틱) — 전환 구간 청산 지정가 = 경계 가격 ± 이 값 × 호가단위, 마감 청산 IOC = 시장 상대 1호가 ± 이 값 × 호가단위
-    #[prost(int64, tag="15")]
-    pub flatten_slippage_ticks: i64,
     /// 청산 정정 임계 (선물 틱, 소수 가능) — 전환 구간 청산은 경계 가격 지정가로 내고 남은 수량은 그 가격에 둔다.
     /// 공정가가 그 경계를 이만큼 넘어가면(매도 청산은 아래로, 매수 청산은 위로) 한 호가단위 불리한 가격으로 정정한다.
     /// 0 이상, 임계 + 이 값(원 환산)은 호가단위보다 작아야 한다
@@ -260,9 +257,9 @@ pub enum SpreadCaptureZone {
     Unspecified = 0,
     /// 안전 구간 — 틱 경계에서 임계 넘게 떨어짐. 매수·매도 1호가부터 깐다
     Safe = 1,
-    /// 상승 전환 구간 — 위 경계에 임계 안으로 다가옴. 경계 가격엔 주문을 두지 않고 매도 노출을 청산한다
+    /// 상승 전환 구간 — 위 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고 매도 노출을 경계 가격 매수 지정가로 청산한다
     Rising = 2,
-    /// 하락 전환 구간 — 아래 경계에 임계 안으로 다가옴. 경계 가격엔 주문을 두지 않고 매수 노출을 청산한다
+    /// 하락 전환 구간 — 아래 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고 매수 노출을 경계 가격 매도 지정가로 청산한다
     Falling = 3,
 }
 impl SpreadCaptureZone {
@@ -289,7 +286,7 @@ impl SpreadCaptureZone {
         }
     }
 }
-/// 상주 주문 1건의 상태
+/// 살아 있는 주문 1건의 상태 — 상주 호가 또는 전환 구간 청산
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SpreadCaptureOrderState {

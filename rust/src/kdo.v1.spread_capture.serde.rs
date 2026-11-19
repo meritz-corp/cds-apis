@@ -621,9 +621,6 @@ impl serde::Serialize for SpreadCapture {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCapture", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -676,11 +673,6 @@ impl serde::Serialize for SpreadCapture {
             struct_ser.serialize_field("reentry_ticks", &self.reentry_ticks)?;
         }
         if true {
-            #[allow(clippy::needless_borrow)]
-            #[allow(clippy::needless_borrows_for_generic_args)]
-            struct_ser.serialize_field("flatten_slippage_ticks", ToString::to_string(&self.flatten_slippage_ticks).as_str())?;
-        }
-        if true {
             struct_ser.serialize_field("flatten_amend_ticks", &self.flatten_amend_ticks)?;
         }
         if true {
@@ -726,8 +718,6 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             "thresholdTicks",
             "reentry_ticks",
             "reentryTicks",
-            "flatten_slippage_ticks",
-            "flattenSlippageTicks",
             "flatten_amend_ticks",
             "flattenAmendTicks",
             "max_net_quantity",
@@ -752,7 +742,6 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             AskAdjustment,
             ThresholdTicks,
             ReentryTicks,
-            FlattenSlippageTicks,
             FlattenAmendTicks,
             MaxNetQuantity,
             UpdateTime,
@@ -792,7 +781,6 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "thresholdTicks" | "threshold_ticks" => Ok(GeneratedField::ThresholdTicks),
                             "reentryTicks" | "reentry_ticks" => Ok(GeneratedField::ReentryTicks),
-                            "flattenSlippageTicks" | "flatten_slippage_ticks" => Ok(GeneratedField::FlattenSlippageTicks),
                             "flattenAmendTicks" | "flatten_amend_ticks" => Ok(GeneratedField::FlattenAmendTicks),
                             "maxNetQuantity" | "max_net_quantity" => Ok(GeneratedField::MaxNetQuantity),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
@@ -829,7 +817,6 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                 let mut ask_adjustment__ = None;
                 let mut threshold_ticks__ = None;
                 let mut reentry_ticks__ = None;
-                let mut flatten_slippage_ticks__ = None;
                 let mut flatten_amend_ticks__ = None;
                 let mut max_net_quantity__ = None;
                 let mut update_time__ = None;
@@ -941,14 +928,6 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
-                        GeneratedField::FlattenSlippageTicks => {
-                            if flatten_slippage_ticks__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("flattenSlippageTicks"));
-                            }
-                            flatten_slippage_ticks__ = 
-                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
-                        }
                         GeneratedField::FlattenAmendTicks => {
                             if flatten_amend_ticks__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("flattenAmendTicks"));
@@ -991,7 +970,6 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
                     threshold_ticks: threshold_ticks__.unwrap_or_default(),
                     reentry_ticks: reentry_ticks__.unwrap_or_default(),
-                    flatten_slippage_ticks: flatten_slippage_ticks__.unwrap_or_default(),
                     flatten_amend_ticks: flatten_amend_ticks__.unwrap_or_default(),
                     max_net_quantity: max_net_quantity__.unwrap_or_default(),
                     update_time: update_time__,

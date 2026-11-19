@@ -51,7 +51,7 @@ extension type SpreadCaptureServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// 스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·임계·되돌림 여유·청산 슬리피지·최대 순노출만
+  /// 스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·임계·되돌림 여유·청산 정정 임계·최대 순노출만
   /// 바꿀 수 있고 실행에 바로 반영된다. 실행 중에 그 밖의 값(장전 시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
   Future<kdov1spread_capture.SpreadCapture> updateSpreadCapture(
     kdov1spread_capture.UpdateSpreadCaptureRequest input, {

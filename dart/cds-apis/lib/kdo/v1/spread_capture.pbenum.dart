@@ -52,9 +52,9 @@ class SpreadCaptureZone extends $pb.ProtobufEnum {
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_UNSPECIFIED = SpreadCaptureZone._(0, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_UNSPECIFIED');
   /// 안전 구간 — 틱 경계에서 임계 넘게 떨어짐. 매수·매도 1호가부터 깐다
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_SAFE = SpreadCaptureZone._(1, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_SAFE');
-  /// 상승 전환 구간 — 위 경계에 임계 안으로 다가옴. 경계 가격엔 주문을 두지 않고 매도 노출을 청산한다
+  /// 상승 전환 구간 — 위 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고 매도 노출을 경계 가격 매수 지정가로 청산한다
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_RISING = SpreadCaptureZone._(2, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_RISING');
-  /// 하락 전환 구간 — 아래 경계에 임계 안으로 다가옴. 경계 가격엔 주문을 두지 않고 매수 노출을 청산한다
+  /// 하락 전환 구간 — 아래 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고 매수 노출을 경계 가격 매도 지정가로 청산한다
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_FALLING = SpreadCaptureZone._(3, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_FALLING');
 
   static const $core.List<SpreadCaptureZone> values = <SpreadCaptureZone> [
@@ -70,7 +70,7 @@ class SpreadCaptureZone extends $pb.ProtobufEnum {
   const SpreadCaptureZone._(super.value, super.name);
 }
 
-/// 상주 주문 1건의 상태
+/// 살아 있는 주문 1건의 상태 — 상주 호가 또는 전환 구간 청산
 class SpreadCaptureOrderState extends $pb.ProtobufEnum {
   static const SpreadCaptureOrderState SPREAD_CAPTURE_ORDER_STATE_UNSPECIFIED = SpreadCaptureOrderState._(0, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ORDER_STATE_UNSPECIFIED');
   /// 송신 — 접수 대기 (08:30 전 송신분은 FEP 가 보관)

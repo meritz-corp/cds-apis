@@ -41,7 +41,6 @@ class SpreadCapture extends $pb.GeneratedMessage {
     $core.double? askAdjustment,
     $core.double? thresholdTicks,
     $core.double? reentryTicks,
-    $fixnum.Int64? flattenSlippageTicks,
     $fixnum.Int64? maxNetQuantity,
     $3.Timestamp? updateTime,
     $core.double? flattenAmendTicks,
@@ -61,7 +60,6 @@ class SpreadCapture extends $pb.GeneratedMessage {
     if (askAdjustment != null) result.askAdjustment = askAdjustment;
     if (thresholdTicks != null) result.thresholdTicks = thresholdTicks;
     if (reentryTicks != null) result.reentryTicks = reentryTicks;
-    if (flattenSlippageTicks != null) result.flattenSlippageTicks = flattenSlippageTicks;
     if (maxNetQuantity != null) result.maxNetQuantity = maxNetQuantity;
     if (updateTime != null) result.updateTime = updateTime;
     if (flattenAmendTicks != null) result.flattenAmendTicks = flattenAmendTicks;
@@ -88,7 +86,6 @@ class SpreadCapture extends $pb.GeneratedMessage {
     ..a<$core.double>(12, _omitFieldNames ? '' : 'askAdjustment', $pb.PbFieldType.OD)
     ..a<$core.double>(13, _omitFieldNames ? '' : 'thresholdTicks', $pb.PbFieldType.OD)
     ..a<$core.double>(14, _omitFieldNames ? '' : 'reentryTicks', $pb.PbFieldType.OD)
-    ..aInt64(15, _omitFieldNames ? '' : 'flattenSlippageTicks')
     ..aInt64(16, _omitFieldNames ? '' : 'maxNetQuantity')
     ..aOM<$3.Timestamp>(17, _omitFieldNames ? '' : 'updateTime', subBuilder: $3.Timestamp.create)
     ..a<$core.double>(18, _omitFieldNames ? '' : 'flattenAmendTicks', $pb.PbFieldType.OD)
@@ -254,46 +251,36 @@ class SpreadCapture extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   void clearReentryTicks() => $_clearField(14);
 
-  /// 청산 허용 슬리피지 (ETF 틱) — 전환 구간 청산 지정가 = 경계 가격 ± 이 값 × 호가단위, 마감 청산 IOC = 시장 상대 1호가 ± 이 값 × 호가단위
-  @$pb.TagNumber(15)
-  $fixnum.Int64 get flattenSlippageTicks => $_getI64(14);
-  @$pb.TagNumber(15)
-  set flattenSlippageTicks($fixnum.Int64 value) => $_setInt64(14, value);
-  @$pb.TagNumber(15)
-  $core.bool hasFlattenSlippageTicks() => $_has(14);
-  @$pb.TagNumber(15)
-  void clearFlattenSlippageTicks() => $_clearField(15);
-
   /// 최대 순노출 (주) — 순노출이 이 이상이면 노출을 키우는 쪽의 빈 단을 다시 채우지 않는다
   @$pb.TagNumber(16)
-  $fixnum.Int64 get maxNetQuantity => $_getI64(15);
+  $fixnum.Int64 get maxNetQuantity => $_getI64(14);
   @$pb.TagNumber(16)
-  set maxNetQuantity($fixnum.Int64 value) => $_setInt64(15, value);
+  set maxNetQuantity($fixnum.Int64 value) => $_setInt64(14, value);
   @$pb.TagNumber(16)
-  $core.bool hasMaxNetQuantity() => $_has(15);
+  $core.bool hasMaxNetQuantity() => $_has(14);
   @$pb.TagNumber(16)
   void clearMaxNetQuantity() => $_clearField(16);
 
   @$pb.TagNumber(17)
-  $3.Timestamp get updateTime => $_getN(16);
+  $3.Timestamp get updateTime => $_getN(15);
   @$pb.TagNumber(17)
   set updateTime($3.Timestamp value) => $_setField(17, value);
   @$pb.TagNumber(17)
-  $core.bool hasUpdateTime() => $_has(16);
+  $core.bool hasUpdateTime() => $_has(15);
   @$pb.TagNumber(17)
   void clearUpdateTime() => $_clearField(17);
   @$pb.TagNumber(17)
-  $3.Timestamp ensureUpdateTime() => $_ensure(16);
+  $3.Timestamp ensureUpdateTime() => $_ensure(15);
 
   /// 청산 정정 임계 (선물 틱, 소수 가능) — 전환 구간 청산은 경계 가격 지정가로 내고 남은 수량은 그 가격에 둔다.
   /// 공정가가 그 경계를 이만큼 넘어가면(매도 청산은 아래로, 매수 청산은 위로) 한 호가단위 불리한 가격으로 정정한다.
   /// 0 이상, 임계 + 이 값(원 환산)은 호가단위보다 작아야 한다
   @$pb.TagNumber(18)
-  $core.double get flattenAmendTicks => $_getN(17);
+  $core.double get flattenAmendTicks => $_getN(16);
   @$pb.TagNumber(18)
-  set flattenAmendTicks($core.double value) => $_setDouble(17, value);
+  set flattenAmendTicks($core.double value) => $_setDouble(16, value);
   @$pb.TagNumber(18)
-  $core.bool hasFlattenAmendTicks() => $_has(17);
+  $core.bool hasFlattenAmendTicks() => $_has(16);
   @$pb.TagNumber(18)
   void clearFlattenAmendTicks() => $_clearField(18);
 }
