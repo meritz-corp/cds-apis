@@ -92,6 +92,7 @@ const SpreadCapture$json = {
     {'1': 'threshold_ticks', '3': 13, '4': 1, '5': 1, '10': 'thresholdTicks'},
     {'1': 'reentry_ticks', '3': 14, '4': 1, '5': 1, '10': 'reentryTicks'},
     {'1': 'flatten_slippage_ticks', '3': 15, '4': 1, '5': 3, '10': 'flattenSlippageTicks'},
+    {'1': 'flatten_amend_ticks', '3': 18, '4': 1, '5': 1, '10': 'flattenAmendTicks'},
     {'1': 'max_net_quantity', '3': 16, '4': 1, '5': 3, '10': 'maxNetQuantity'},
     {'1': 'update_time', '3': 17, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '10': 'updateTime'},
   ],
@@ -108,9 +109,10 @@ final $typed_data.Uint8List spreadCaptureDescriptor = $convert.base64Decode(
     'aXMSJQoOYmlkX2FkanVzdG1lbnQYCyABKAFSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG'
     '1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSJwoPdGhyZXNob2xkX3RpY2tzGA0gASgBUg50aHJl'
     'c2hvbGRUaWNrcxIjCg1yZWVudHJ5X3RpY2tzGA4gASgBUgxyZWVudHJ5VGlja3MSNAoWZmxhdH'
-    'Rlbl9zbGlwcGFnZV90aWNrcxgPIAEoA1IUZmxhdHRlblNsaXBwYWdlVGlja3MSKAoQbWF4X25l'
-    'dF9xdWFudGl0eRgQIAEoA1IObWF4TmV0UXVhbnRpdHkSQQoLdXBkYXRlX3RpbWUYESABKAsyGi'
-    '5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1l');
+    'Rlbl9zbGlwcGFnZV90aWNrcxgPIAEoA1IUZmxhdHRlblNsaXBwYWdlVGlja3MSLgoTZmxhdHRl'
+    'bl9hbWVuZF90aWNrcxgSIAEoAVIRZmxhdHRlbkFtZW5kVGlja3MSKAoQbWF4X25ldF9xdWFudG'
+    'l0eRgQIAEoA1IObWF4TmV0UXVhbnRpdHkSQQoLdXBkYXRlX3RpbWUYESABKAsyGi5nb29nbGUu'
+    'cHJvdG9idWYuVGltZXN0YW1wQgTiQQEDUgp1cGRhdGVUaW1l');
 
 @$core.Deprecated('Use spreadCaptureOrderDescriptor instead')
 const SpreadCaptureOrder$json = {
@@ -123,6 +125,7 @@ const SpreadCaptureOrder$json = {
     {'1': 'filled_quantity', '3': 5, '4': 1, '5': 3, '10': 'filledQuantity'},
     {'1': 'state', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.spread_capture.SpreadCaptureOrderState', '10': 'state'},
     {'1': 'moving_to', '3': 7, '4': 1, '5': 3, '10': 'movingTo'},
+    {'1': 'flatten', '3': 8, '4': 1, '5': 8, '10': 'flatten'},
   ],
 };
 
@@ -133,7 +136,7 @@ final $typed_data.Uint8List spreadCaptureOrderDescriptor = $convert.base64Decode
     'cmljZRIaCghxdWFudGl0eRgEIAEoA1IIcXVhbnRpdHkSJwoPZmlsbGVkX3F1YW50aXR5GAUgAS'
     'gDUg5maWxsZWRRdWFudGl0eRJECgVzdGF0ZRgGIAEoDjIuLmtkby52MS5zcHJlYWRfY2FwdHVy'
     'ZS5TcHJlYWRDYXB0dXJlT3JkZXJTdGF0ZVIFc3RhdGUSGwoJbW92aW5nX3RvGAcgASgDUghtb3'
-    'ZpbmdUbw==');
+    'ZpbmdUbxIYCgdmbGF0dGVuGAggASgIUgdmbGF0dGVu');
 
 @$core.Deprecated('Use spreadCaptureStatusDescriptor instead')
 const SpreadCaptureStatus$json = {

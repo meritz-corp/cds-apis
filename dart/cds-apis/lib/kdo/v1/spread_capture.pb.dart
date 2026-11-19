@@ -44,6 +44,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     $fixnum.Int64? flattenSlippageTicks,
     $fixnum.Int64? maxNetQuantity,
     $3.Timestamp? updateTime,
+    $core.double? flattenAmendTicks,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -63,6 +64,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     if (flattenSlippageTicks != null) result.flattenSlippageTicks = flattenSlippageTicks;
     if (maxNetQuantity != null) result.maxNetQuantity = maxNetQuantity;
     if (updateTime != null) result.updateTime = updateTime;
+    if (flattenAmendTicks != null) result.flattenAmendTicks = flattenAmendTicks;
     return result;
   }
 
@@ -89,6 +91,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     ..aInt64(15, _omitFieldNames ? '' : 'flattenSlippageTicks')
     ..aInt64(16, _omitFieldNames ? '' : 'maxNetQuantity')
     ..aOM<$3.Timestamp>(17, _omitFieldNames ? '' : 'updateTime', subBuilder: $3.Timestamp.create)
+    ..a<$core.double>(18, _omitFieldNames ? '' : 'flattenAmendTicks', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -251,7 +254,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   void clearReentryTicks() => $_clearField(14);
 
-  /// 청산 IOC 허용 슬리피지 (ETF 틱) — 지정가 = 경계 가격 ± 이 값 × 호가단위
+  /// 청산 허용 슬리피지 (ETF 틱) — 전환 구간 청산 지정가 = 경계 가격 ± 이 값 × 호가단위, 마감 청산 IOC = 시장 상대 1호가 ± 이 값 × 호가단위
   @$pb.TagNumber(15)
   $fixnum.Int64 get flattenSlippageTicks => $_getI64(14);
   @$pb.TagNumber(15)
@@ -281,9 +284,21 @@ class SpreadCapture extends $pb.GeneratedMessage {
   void clearUpdateTime() => $_clearField(17);
   @$pb.TagNumber(17)
   $3.Timestamp ensureUpdateTime() => $_ensure(16);
+
+  /// 청산 정정 임계 (선물 틱, 소수 가능) — 전환 구간 청산은 경계 가격 지정가로 내고 남은 수량은 그 가격에 둔다.
+  /// 공정가가 그 경계를 이만큼 넘어가면(매도 청산은 아래로, 매수 청산은 위로) 한 호가단위 불리한 가격으로 정정한다.
+  /// 0 이상, 임계 + 이 값(원 환산)은 호가단위보다 작아야 한다
+  @$pb.TagNumber(18)
+  $core.double get flattenAmendTicks => $_getN(17);
+  @$pb.TagNumber(18)
+  set flattenAmendTicks($core.double value) => $_setDouble(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasFlattenAmendTicks() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearFlattenAmendTicks() => $_clearField(18);
 }
 
-/// 상주 주문 1건
+/// 살아 있는 주문 1건 — 상주 호가 또는 전환 구간 청산
 class SpreadCaptureOrder extends $pb.GeneratedMessage {
   factory SpreadCaptureOrder({
     $fixnum.Int64? orderId,
@@ -293,6 +308,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     $fixnum.Int64? filledQuantity,
     SpreadCaptureOrderState? state,
     $fixnum.Int64? movingTo,
+    $core.bool? flatten,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
@@ -302,6 +318,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     if (filledQuantity != null) result.filledQuantity = filledQuantity;
     if (state != null) result.state = state;
     if (movingTo != null) result.movingTo = movingTo;
+    if (flatten != null) result.flatten = flatten;
     return result;
   }
 
@@ -318,6 +335,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     ..aInt64(5, _omitFieldNames ? '' : 'filledQuantity')
     ..e<SpreadCaptureOrderState>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: SpreadCaptureOrderState.SPREAD_CAPTURE_ORDER_STATE_UNSPECIFIED, valueOf: SpreadCaptureOrderState.valueOf, enumValues: SpreadCaptureOrderState.values)
     ..aInt64(7, _omitFieldNames ? '' : 'movingTo')
+    ..aOB(8, _omitFieldNames ? '' : 'flatten')
     ..hasRequiredFields = false
   ;
 
@@ -403,6 +421,16 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
   $core.bool hasMovingTo() => $_has(6);
   @$pb.TagNumber(7)
   void clearMovingTo() => $_clearField(7);
+
+  /// 전환 구간 청산 주문(일반 지정가)이면 true, 상주 호가(LP)면 false
+  @$pb.TagNumber(8)
+  $core.bool get flatten => $_getBF(7);
+  @$pb.TagNumber(8)
+  set flatten($core.bool value) => $_setBool(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasFlatten() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearFlatten() => $_clearField(8);
 }
 
 class SpreadCaptureStatus extends $pb.GeneratedMessage {
@@ -585,7 +613,7 @@ class SpreadCaptureStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   void clearNetQuantity() => $_clearField(10);
 
-  /// 살아 있는 상주 주문 (매수 높은 가격 → 매도 낮은 가격 순)
+  /// 살아 있는 주문 — 상주 호가와 전환 구간 청산 (매수 높은 가격 → 매도 낮은 가격 순)
   @$pb.TagNumber(11)
   $pb.PbList<SpreadCaptureOrder> get orders => $_getList(10);
 
@@ -601,7 +629,7 @@ class SpreadCaptureStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $4.FillStat ensureEtfFill() => $_ensure(11);
 
-  /// 청산 IOC 발주 횟수
+  /// 청산 주문 발주 횟수 (전환 구간 청산 지정가 신규 + 마감 청산 IOC)
   @$pb.TagNumber(13)
   $fixnum.Int64 get flattenCount => $_getI64(12);
   @$pb.TagNumber(13)
@@ -611,7 +639,7 @@ class SpreadCaptureStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   void clearFlattenCount() => $_clearField(13);
 
-  /// 청산 IOC 체결 수량
+  /// 청산 주문 체결 수량
   @$pb.TagNumber(14)
   $fixnum.Int64 get flattenQuantity => $_getI64(13);
   @$pb.TagNumber(14)

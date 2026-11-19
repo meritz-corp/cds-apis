@@ -621,6 +621,9 @@ impl serde::Serialize for SpreadCapture {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCapture", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -678,6 +681,9 @@ impl serde::Serialize for SpreadCapture {
             struct_ser.serialize_field("flatten_slippage_ticks", ToString::to_string(&self.flatten_slippage_ticks).as_str())?;
         }
         if true {
+            struct_ser.serialize_field("flatten_amend_ticks", &self.flatten_amend_ticks)?;
+        }
+        if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("max_net_quantity", ToString::to_string(&self.max_net_quantity).as_str())?;
@@ -722,6 +728,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             "reentryTicks",
             "flatten_slippage_ticks",
             "flattenSlippageTicks",
+            "flatten_amend_ticks",
+            "flattenAmendTicks",
             "max_net_quantity",
             "maxNetQuantity",
             "update_time",
@@ -745,6 +753,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             ThresholdTicks,
             ReentryTicks,
             FlattenSlippageTicks,
+            FlattenAmendTicks,
             MaxNetQuantity,
             UpdateTime,
             __SkipField__,
@@ -784,6 +793,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                             "thresholdTicks" | "threshold_ticks" => Ok(GeneratedField::ThresholdTicks),
                             "reentryTicks" | "reentry_ticks" => Ok(GeneratedField::ReentryTicks),
                             "flattenSlippageTicks" | "flatten_slippage_ticks" => Ok(GeneratedField::FlattenSlippageTicks),
+                            "flattenAmendTicks" | "flatten_amend_ticks" => Ok(GeneratedField::FlattenAmendTicks),
                             "maxNetQuantity" | "max_net_quantity" => Ok(GeneratedField::MaxNetQuantity),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -820,6 +830,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                 let mut threshold_ticks__ = None;
                 let mut reentry_ticks__ = None;
                 let mut flatten_slippage_ticks__ = None;
+                let mut flatten_amend_ticks__ = None;
                 let mut max_net_quantity__ = None;
                 let mut update_time__ = None;
                 while let Some(k) = map_.next_key()? {
@@ -938,6 +949,14 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::FlattenAmendTicks => {
+                            if flatten_amend_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("flattenAmendTicks"));
+                            }
+                            flatten_amend_ticks__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::MaxNetQuantity => {
                             if max_net_quantity__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("maxNetQuantity"));
@@ -973,6 +992,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                     threshold_ticks: threshold_ticks__.unwrap_or_default(),
                     reentry_ticks: reentry_ticks__.unwrap_or_default(),
                     flatten_slippage_ticks: flatten_slippage_ticks__.unwrap_or_default(),
+                    flatten_amend_ticks: flatten_amend_ticks__.unwrap_or_default(),
                     max_net_quantity: max_net_quantity__.unwrap_or_default(),
                     update_time: update_time__,
                 })
@@ -989,6 +1009,9 @@ impl serde::Serialize for SpreadCaptureOrder {
     {
         use serde::ser::SerializeStruct;
         let mut len = 0;
+        if true {
+            len += 1;
+        }
         if true {
             len += 1;
         }
@@ -1046,6 +1069,9 @@ impl serde::Serialize for SpreadCaptureOrder {
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("moving_to", ToString::to_string(&self.moving_to).as_str())?;
         }
+        if true {
+            struct_ser.serialize_field("flatten", &self.flatten)?;
+        }
         struct_ser.end()
     }
 }
@@ -1066,6 +1092,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
             "state",
             "moving_to",
             "movingTo",
+            "flatten",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1077,6 +1104,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
             FilledQuantity,
             State,
             MovingTo,
+            Flatten,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1106,6 +1134,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                             "filledQuantity" | "filled_quantity" => Ok(GeneratedField::FilledQuantity),
                             "state" => Ok(GeneratedField::State),
                             "movingTo" | "moving_to" => Ok(GeneratedField::MovingTo),
+                            "flatten" => Ok(GeneratedField::Flatten),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1132,6 +1161,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                 let mut filled_quantity__ = None;
                 let mut state__ = None;
                 let mut moving_to__ = None;
+                let mut flatten__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::OrderId => {
@@ -1186,6 +1216,12 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::Flatten => {
+                            if flatten__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("flatten"));
+                            }
+                            flatten__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1199,6 +1235,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                     filled_quantity: filled_quantity__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     moving_to: moving_to__.unwrap_or_default(),
+                    flatten: flatten__.unwrap_or_default(),
                 })
             }
         }

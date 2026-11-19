@@ -48,16 +48,21 @@ pub struct SpreadCapture {
     /// 되돌림 여유 (선물 틱, 소수 가능) — 전환 구간에서 원래 안전 구간으로 돌아가려면 경계에서 임계 + 이만큼 멀어져야 한다
     #[prost(double, tag="14")]
     pub reentry_ticks: f64,
-    /// 청산 IOC 허용 슬리피지 (ETF 틱) — 지정가 = 경계 가격 ± 이 값 × 호가단위
+    /// 청산 허용 슬리피지 (ETF 틱) — 전환 구간 청산 지정가 = 경계 가격 ± 이 값 × 호가단위, 마감 청산 IOC = 시장 상대 1호가 ± 이 값 × 호가단위
     #[prost(int64, tag="15")]
     pub flatten_slippage_ticks: i64,
+    /// 청산 정정 임계 (선물 틱, 소수 가능) — 전환 구간 청산은 경계 가격 지정가로 내고 남은 수량은 그 가격에 둔다.
+    /// 공정가가 그 경계를 이만큼 넘어가면(매도 청산은 아래로, 매수 청산은 위로) 한 호가단위 불리한 가격으로 정정한다.
+    /// 0 이상, 임계 + 이 값(원 환산)은 호가단위보다 작아야 한다
+    #[prost(double, tag="18")]
+    pub flatten_amend_ticks: f64,
     /// 최대 순노출 (주) — 순노출이 이 이상이면 노출을 키우는 쪽의 빈 단을 다시 채우지 않는다
     #[prost(int64, tag="16")]
     pub max_net_quantity: i64,
     #[prost(message, optional, tag="17")]
     pub update_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
-/// 상주 주문 1건
+/// 살아 있는 주문 1건 — 상주 호가 또는 전환 구간 청산
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpreadCaptureOrder {
@@ -78,6 +83,9 @@ pub struct SpreadCaptureOrder {
     /// 정정 중이면 옮길 가격(원), 아니면 0
     #[prost(int64, tag="7")]
     pub moving_to: i64,
+    /// 전환 구간 청산 주문(일반 지정가)이면 true, 상주 호가(LP)면 false
+    #[prost(bool, tag="8")]
+    pub flatten: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -108,16 +116,16 @@ pub struct SpreadCaptureStatus {
     /// 순노출 (주, 매수 +) — 오늘 이 실행의 상주·청산 체결 합
     #[prost(int64, tag="10")]
     pub net_quantity: i64,
-    /// 살아 있는 상주 주문 (매수 높은 가격 → 매도 낮은 가격 순)
+    /// 살아 있는 주문 — 상주 호가와 전환 구간 청산 (매수 높은 가격 → 매도 낮은 가격 순)
     #[prost(message, repeated, tag="11")]
     pub orders: ::prost::alloc::vec::Vec<SpreadCaptureOrder>,
     /// 오늘 ETF 체결 (상주·청산 합)
     #[prost(message, optional, tag="12")]
     pub etf_fill: ::core::option::Option<super::lp::FillStat>,
-    /// 청산 IOC 발주 횟수
+    /// 청산 주문 발주 횟수 (전환 구간 청산 지정가 신규 + 마감 청산 IOC)
     #[prost(int64, tag="13")]
     pub flatten_count: i64,
-    /// 청산 IOC 체결 수량
+    /// 청산 주문 체결 수량
     #[prost(int64, tag="14")]
     pub flatten_quantity: i64,
     /// 마지막 전환 때 선물 시세 수신 → 경계 주문 송신 반환까지 (µs). 아직 없으면 0
