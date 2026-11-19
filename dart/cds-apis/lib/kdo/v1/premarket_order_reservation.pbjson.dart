@@ -71,6 +71,7 @@ const PremarketOrderReservation$json = {
     {'1': 'ask_price', '3': 4, '4': 1, '5': 3, '10': 'askPrice'},
     {'1': 'depth', '3': 5, '4': 1, '5': 13, '10': 'depth'},
     {'1': 'quantity', '3': 6, '4': 1, '5': 3, '10': 'quantity'},
+    {'1': 'orders_per_level', '3': 19, '4': 1, '5': 13, '10': 'ordersPerLevel'},
     {'1': 'tick_size', '3': 7, '4': 1, '5': 3, '10': 'tickSize'},
     {'1': 'pricing', '3': 8, '4': 1, '5': 11, '6': '.kdo.v1.common.EtfPricing', '10': 'pricing'},
     {'1': 'bid_basis', '3': 9, '4': 1, '5': 1, '10': 'bidBasis'},
@@ -94,15 +95,15 @@ final $typed_data.Uint8List premarketOrderReservationDescriptor = $convert.base6
     'ChlQcmVtYXJrZXRPcmRlclJlc2VydmF0aW9uEiMKCmV0Zl9zeW1ib2wYASABKAlCBOJBAQJSCW'
     'V0ZlN5bWJvbBIhCglmdW5kX2NvZGUYAiABKAlCBOJBAQJSCGZ1bmRDb2RlEhsKCWJpZF9wcmlj'
     'ZRgDIAEoA1IIYmlkUHJpY2USGwoJYXNrX3ByaWNlGAQgASgDUghhc2tQcmljZRIUCgVkZXB0aB'
-    'gFIAEoDVIFZGVwdGgSGgoIcXVhbnRpdHkYBiABKANSCHF1YW50aXR5EhsKCXRpY2tfc2l6ZRgH'
-    'IAEoA1IIdGlja1NpemUSMwoHcHJpY2luZxgIIAEoCzIZLmtkby52MS5jb21tb24uRXRmUHJpY2'
-    'luZ1IHcHJpY2luZxIbCgliaWRfYmFzaXMYCSABKAFSCGJpZEJhc2lzEhsKCWFza19iYXNpcxgK'
-    'IAEoAVIIYXNrQmFzaXMSJQoOYmlkX2FkanVzdG1lbnQYCyABKAFSDWJpZEFkanVzdG1lbnQSJQ'
-    'oOYXNrX2FkanVzdG1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSHQoKYmlkX29mZnNldBgRIAEo'
-    'AVIJYmlkT2Zmc2V0Eh0KCmFza19vZmZzZXQYEiABKAFSCWFza09mZnNldBJBCgt1cGRhdGVfdG'
-    'ltZRgQIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWVK'
-    'BAgNEA5KBAgOEA9KBAgPEBBSEGJpZF9vZmZzZXRfdGlja3NSEGFza19vZmZzZXRfdGlja3NSCn'
-    'VwZGF0ZWRfYnk=');
+    'gFIAEoDVIFZGVwdGgSGgoIcXVhbnRpdHkYBiABKANSCHF1YW50aXR5EigKEG9yZGVyc19wZXJf'
+    'bGV2ZWwYEyABKA1SDm9yZGVyc1BlckxldmVsEhsKCXRpY2tfc2l6ZRgHIAEoA1IIdGlja1Npem'
+    'USMwoHcHJpY2luZxgIIAEoCzIZLmtkby52MS5jb21tb24uRXRmUHJpY2luZ1IHcHJpY2luZxIb'
+    'CgliaWRfYmFzaXMYCSABKAFSCGJpZEJhc2lzEhsKCWFza19iYXNpcxgKIAEoAVIIYXNrQmFzaX'
+    'MSJQoOYmlkX2FkanVzdG1lbnQYCyABKAFSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG1l'
+    'bnQYDCABKAFSDWFza0FkanVzdG1lbnQSHQoKYmlkX29mZnNldBgRIAEoAVIJYmlkT2Zmc2V0Eh'
+    '0KCmFza19vZmZzZXQYEiABKAFSCWFza09mZnNldBJBCgt1cGRhdGVfdGltZRgQIAEoCzIaLmdv'
+    'b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWVKBAgNEA5KBAgOEA9KBA'
+    'gPEBBSEGJpZF9vZmZzZXRfdGlja3NSEGFza19vZmZzZXRfdGlja3NSCnVwZGF0ZWRfYnk=');
 
 @$core.Deprecated('Use premarketOrderReservationItemDescriptor instead')
 const PremarketOrderReservationItem$json = {

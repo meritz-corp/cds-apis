@@ -33,7 +33,7 @@ abstract final class PremarketOrderReservationService {
 
   /// 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·offset 만 바꿀 수 있고 실행에 바로 반영된다
   /// (취소 기준가 재계산, 감시 중이면 즉시 취소 판정. 기준을 다시 풀어도 취소된 주문은 다시 내지 않는다).
-  /// 실행 중에 그 밖의 값(시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
+  /// 실행 중에 그 밖의 값(시작가·depth·수량·단별 주문 수·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
   static const updatePremarketOrderReservation = connect.Spec(
     '/$name/UpdatePremarketOrderReservation',
     connect.StreamType.unary,

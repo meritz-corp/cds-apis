@@ -615,6 +615,9 @@ impl serde::Serialize for PremarketOrderReservation {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.premarket_order_reservation.PremarketOrderReservation", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -639,6 +642,9 @@ impl serde::Serialize for PremarketOrderReservation {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("orders_per_level", &self.orders_per_level)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -689,6 +695,8 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
             "askPrice",
             "depth",
             "quantity",
+            "orders_per_level",
+            "ordersPerLevel",
             "tick_size",
             "tickSize",
             "pricing",
@@ -716,6 +724,7 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
             AskPrice,
             Depth,
             Quantity,
+            OrdersPerLevel,
             TickSize,
             Pricing,
             BidBasis,
@@ -753,6 +762,7 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                             "askPrice" | "ask_price" => Ok(GeneratedField::AskPrice),
                             "depth" => Ok(GeneratedField::Depth),
                             "quantity" => Ok(GeneratedField::Quantity),
+                            "ordersPerLevel" | "orders_per_level" => Ok(GeneratedField::OrdersPerLevel),
                             "tickSize" | "tick_size" => Ok(GeneratedField::TickSize),
                             "pricing" => Ok(GeneratedField::Pricing),
                             "bidBasis" | "bid_basis" => Ok(GeneratedField::BidBasis),
@@ -787,6 +797,7 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                 let mut ask_price__ = None;
                 let mut depth__ = None;
                 let mut quantity__ = None;
+                let mut orders_per_level__ = None;
                 let mut tick_size__ = None;
                 let mut pricing__ = None;
                 let mut bid_basis__ = None;
@@ -839,6 +850,14 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                                 return Err(serde::de::Error::duplicate_field("quantity"));
                             }
                             quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::OrdersPerLevel => {
+                            if orders_per_level__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ordersPerLevel"));
+                            }
+                            orders_per_level__ = 
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
@@ -922,6 +941,7 @@ impl<'de> serde::Deserialize<'de> for PremarketOrderReservation {
                     ask_price: ask_price__.unwrap_or_default(),
                     depth: depth__.unwrap_or_default(),
                     quantity: quantity__.unwrap_or_default(),
+                    orders_per_level: orders_per_level__.unwrap_or_default(),
                     tick_size: tick_size__.unwrap_or_default(),
                     pricing: pricing__,
                     bid_basis: bid_basis__.unwrap_or_default(),

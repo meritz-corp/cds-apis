@@ -24,7 +24,7 @@ export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
 
 export 'premarket_order_reservation.pbenum.dart';
 
-/// 장전 예약주문 — (ETF, 펀드) 당 하나. 시작가부터 호가단위 간격으로 depth 단, 단별 같은 수량을 낸다.
+/// 장전 예약주문 — (ETF, 펀드) 당 하나. 시작가부터 호가단위 간격으로 depth 단, 단마다 quantity 짜리 주문을 orders_per_level 건 낸다.
 class PremarketOrderReservation extends $pb.GeneratedMessage {
   factory PremarketOrderReservation({
     $core.String? etfSymbol,
@@ -42,6 +42,7 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     $3.Timestamp? updateTime,
     $core.double? bidOffset,
     $core.double? askOffset,
+    $core.int? ordersPerLevel,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -59,6 +60,7 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     if (updateTime != null) result.updateTime = updateTime;
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
+    if (ordersPerLevel != null) result.ordersPerLevel = ordersPerLevel;
     return result;
   }
 
@@ -83,6 +85,7 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
     ..aOM<$3.Timestamp>(16, _omitFieldNames ? '' : 'updateTime', subBuilder: $3.Timestamp.create)
     ..a<$core.double>(17, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
     ..a<$core.double>(18, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
+    ..a<$core.int>(19, _omitFieldNames ? '' : 'ordersPerLevel', $pb.PbFieldType.OU3)
     ..hasRequiredFields = false
   ;
 
@@ -151,7 +154,7 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   void clearDepth() => $_clearField(5);
 
-  /// 단별 수량 (매수·매도 공통)
+  /// 주문 1건 수량 (매수·매도 공통). 단별 총수량 = quantity × orders_per_level
   @$pb.TagNumber(6)
   $fixnum.Int64 get quantity => $_getI64(5);
   @$pb.TagNumber(6)
@@ -255,6 +258,18 @@ class PremarketOrderReservation extends $pb.GeneratedMessage {
   $core.bool hasAskOffset() => $_has(14);
   @$pb.TagNumber(18)
   void clearAskOffset() => $_clearField(18);
+
+  /// 단별 주문 수 — 같은 가격에 quantity 짜리 주문을 이만큼 낸다 (1회 주문 한도 때문에 수량만으로는 못 까는 수량을 한 호가에 깔 때).
+  /// 0 이면 1 (이 필드를 모르는 클라이언트). 총 주문 수(depth × 매수·매도 측 수 × 이 값)는 50 이하 —
+  /// 08:30 에 한꺼번에 접수돼 (펀드, 종목) 초당 주문 수 한도에 걸리지 않게
+  @$pb.TagNumber(19)
+  $core.int get ordersPerLevel => $_getIZ(15);
+  @$pb.TagNumber(19)
+  set ordersPerLevel($core.int value) => $_setUnsignedInt32(15, value);
+  @$pb.TagNumber(19)
+  $core.bool hasOrdersPerLevel() => $_has(15);
+  @$pb.TagNumber(19)
+  void clearOrdersPerLevel() => $_clearField(19);
 }
 
 /// 장전 예약주문 주문 1건

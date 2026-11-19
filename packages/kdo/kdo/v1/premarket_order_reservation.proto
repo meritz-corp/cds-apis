@@ -35,7 +35,7 @@ service PremarketOrderReservationService {
 
   // 장전 예약주문 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·offset 만 바꿀 수 있고 실행에 바로 반영된다
   // (취소 기준가 재계산, 감시 중이면 즉시 취소 판정. 기준을 다시 풀어도 취소된 주문은 다시 내지 않는다).
-  // 실행 중에 그 밖의 값(시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
+  // 실행 중에 그 밖의 값(시작가·depth·수량·단별 주문 수·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
   rpc UpdatePremarketOrderReservation(UpdatePremarketOrderReservationRequest) returns (PremarketOrderReservation) {
     option (google.api.http) = {
       post: "/v1/premarket_order_reservations/{premarket_order_reservation.etf_symbol}/{premarket_order_reservation.fund_code}"
@@ -88,7 +88,7 @@ service PremarketOrderReservationService {
 
 // ========== Reservation ==========
 
-// 장전 예약주문 — (ETF, 펀드) 당 하나. 시작가부터 호가단위 간격으로 depth 단, 단별 같은 수량을 낸다.
+// 장전 예약주문 — (ETF, 펀드) 당 하나. 시작가부터 호가단위 간격으로 depth 단, 단마다 quantity 짜리 주문을 orders_per_level 건 낸다.
 message PremarketOrderReservation {
   string etf_symbol = 1 [(google.api.field_behavior) = REQUIRED];
 
@@ -103,8 +103,13 @@ message PremarketOrderReservation {
   // 측별 단수 (1~10)
   uint32 depth = 5;
 
-  // 단별 수량 (매수·매도 공통)
+  // 주문 1건 수량 (매수·매도 공통). 단별 총수량 = quantity × orders_per_level
   int64 quantity = 6;
+
+  // 단별 주문 수 — 같은 가격에 quantity 짜리 주문을 이만큼 낸다 (1회 주문 한도 때문에 수량만으로는 못 까는 수량을 한 호가에 깔 때).
+  // 0 이면 1 (이 필드를 모르는 클라이언트). 총 주문 수(depth × 매수·매도 측 수 × 이 값)는 50 이하 —
+  // 08:30 에 한꺼번에 접수돼 (펀드, 종목) 초당 주문 수 한도에 걸리지 않게
+  uint32 orders_per_level = 19;
 
   // 호가단위(원)
   int64 tick_size = 7;
