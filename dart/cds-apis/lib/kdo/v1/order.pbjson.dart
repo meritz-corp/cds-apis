@@ -64,6 +64,7 @@ const QuickOrderOrigin$json = {
     {'1': 'QUICK_ORDER_ORIGIN_MM', '2': 1},
     {'1': 'QUICK_ORDER_ORIGIN_QUOTE', '2': 2},
     {'1': 'QUICK_ORDER_ORIGIN_QUOTE_HEDGE', '2': 4},
+    {'1': 'QUICK_ORDER_ORIGIN_SPREAD_CAPTURE', '2': 5},
   ],
   '4': [
     {'1': 3, '2': 3},
@@ -75,8 +76,8 @@ const QuickOrderOrigin$json = {
 final $typed_data.Uint8List quickOrderOriginDescriptor = $convert.base64Decode(
     'ChBRdWlja09yZGVyT3JpZ2luEiIKHlFVSUNLX09SREVSX09SSUdJTl9VTlNQRUNJRklFRBAAEh'
     'kKFVFVSUNLX09SREVSX09SSUdJTl9NTRABEhwKGFFVSUNLX09SREVSX09SSUdJTl9RVU9URRAC'
-    'EiIKHlFVSUNLX09SREVSX09SSUdJTl9RVU9URV9IRURHRRAEIgQIAxADKhpRVUlDS19PUkRFUl'
-    '9PUklHSU5fUEFJUl9WMg==');
+    'EiIKHlFVSUNLX09SREVSX09SSUdJTl9RVU9URV9IRURHRRAEEiUKIVFVSUNLX09SREVSX09SSU'
+    'dJTl9TUFJFQURfQ0FQVFVSRRAFIgQIAxADKhpRVUlDS19PUkRFUl9PUklHSU5fUEFJUl9WMg==');
 
 @$core.Deprecated('Use orderStatusDescriptor instead')
 const OrderStatus$json = {

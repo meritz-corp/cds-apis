@@ -436,6 +436,8 @@ pub enum QuickOrderOrigin {
     Quote = 2,
     /// ETF LP 화면 헷지 링크 퀵창 — 체결이 그 ETF LP(hedge_id) 헷지 체결통계에 반영됨
     QuoteHedge = 4,
+    /// 스프레드 캡처 화면 퀵창 — 체결이 그 (ETF, 펀드) 스프레드 캡처의 순노출·체결통계에 반영됨
+    SpreadCapture = 5,
 }
 impl QuickOrderOrigin {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -448,6 +450,7 @@ impl QuickOrderOrigin {
             QuickOrderOrigin::Mm => "QUICK_ORDER_ORIGIN_MM",
             QuickOrderOrigin::Quote => "QUICK_ORDER_ORIGIN_QUOTE",
             QuickOrderOrigin::QuoteHedge => "QUICK_ORDER_ORIGIN_QUOTE_HEDGE",
+            QuickOrderOrigin::SpreadCapture => "QUICK_ORDER_ORIGIN_SPREAD_CAPTURE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -457,6 +460,7 @@ impl QuickOrderOrigin {
             "QUICK_ORDER_ORIGIN_MM" => Some(Self::Mm),
             "QUICK_ORDER_ORIGIN_QUOTE" => Some(Self::Quote),
             "QUICK_ORDER_ORIGIN_QUOTE_HEDGE" => Some(Self::QuoteHedge),
+            "QUICK_ORDER_ORIGIN_SPREAD_CAPTURE" => Some(Self::SpreadCapture),
             _ => None,
         }
     }

@@ -69,15 +69,18 @@ class QuickOrderOrigin extends $pb.ProtobufEnum {
   static const QuickOrderOrigin QUICK_ORDER_ORIGIN_MM = QuickOrderOrigin._(1, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_MM');
   static const QuickOrderOrigin QUICK_ORDER_ORIGIN_QUOTE = QuickOrderOrigin._(2, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_QUOTE');
   static const QuickOrderOrigin QUICK_ORDER_ORIGIN_QUOTE_HEDGE = QuickOrderOrigin._(4, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_QUOTE_HEDGE');
+  /// 스프레드 캡처 화면 퀵창 — 체결이 그 (ETF, 펀드) 스프레드 캡처의 순노출·체결통계에 반영됨
+  static const QuickOrderOrigin QUICK_ORDER_ORIGIN_SPREAD_CAPTURE = QuickOrderOrigin._(5, _omitEnumNames ? '' : 'QUICK_ORDER_ORIGIN_SPREAD_CAPTURE');
 
   static const $core.List<QuickOrderOrigin> values = <QuickOrderOrigin> [
     QUICK_ORDER_ORIGIN_UNSPECIFIED,
     QUICK_ORDER_ORIGIN_MM,
     QUICK_ORDER_ORIGIN_QUOTE,
     QUICK_ORDER_ORIGIN_QUOTE_HEDGE,
+    QUICK_ORDER_ORIGIN_SPREAD_CAPTURE,
   ];
 
-  static final $core.List<QuickOrderOrigin?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static final $core.List<QuickOrderOrigin?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 5);
   static QuickOrderOrigin? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
 
   const QuickOrderOrigin._(super.value, super.name);

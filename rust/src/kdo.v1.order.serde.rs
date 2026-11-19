@@ -2320,6 +2320,7 @@ impl serde::Serialize for QuickOrderOrigin {
             Self::Mm => "QUICK_ORDER_ORIGIN_MM",
             Self::Quote => "QUICK_ORDER_ORIGIN_QUOTE",
             Self::QuoteHedge => "QUICK_ORDER_ORIGIN_QUOTE_HEDGE",
+            Self::SpreadCapture => "QUICK_ORDER_ORIGIN_SPREAD_CAPTURE",
         };
         serializer.serialize_str(variant)
     }
@@ -2335,6 +2336,7 @@ impl<'de> serde::Deserialize<'de> for QuickOrderOrigin {
             "QUICK_ORDER_ORIGIN_MM",
             "QUICK_ORDER_ORIGIN_QUOTE",
             "QUICK_ORDER_ORIGIN_QUOTE_HEDGE",
+            "QUICK_ORDER_ORIGIN_SPREAD_CAPTURE",
         ];
 
         struct GeneratedVisitor;
@@ -2379,6 +2381,7 @@ impl<'de> serde::Deserialize<'de> for QuickOrderOrigin {
                     "QUICK_ORDER_ORIGIN_MM" => Ok(QuickOrderOrigin::Mm),
                     "QUICK_ORDER_ORIGIN_QUOTE" => Ok(QuickOrderOrigin::Quote),
                     "QUICK_ORDER_ORIGIN_QUOTE_HEDGE" => Ok(QuickOrderOrigin::QuoteHedge),
+                    "QUICK_ORDER_ORIGIN_SPREAD_CAPTURE" => Ok(QuickOrderOrigin::SpreadCapture),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

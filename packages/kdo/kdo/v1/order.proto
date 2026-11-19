@@ -82,6 +82,8 @@ enum QuickOrderOrigin {
   QUICK_ORDER_ORIGIN_MM = 1;           // MM 퀵주문 화면 — 체결이 MM 서비스 체결통계에 반영됨
   QUICK_ORDER_ORIGIN_QUOTE = 2;        // Quote(ETF LP) 퀵주문 화면 — 체결이 quote 서비스 체결통계에 반영됨
   QUICK_ORDER_ORIGIN_QUOTE_HEDGE = 4;  // ETF LP 화면 헷지 링크 퀵창 — 체결이 그 ETF LP(hedge_id) 헷지 체결통계에 반영됨
+  // 스프레드 캡처 화면 퀵창 — 체결이 그 (ETF, 펀드) 스프레드 캡처의 순노출·체결통계에 반영됨
+  QUICK_ORDER_ORIGIN_SPREAD_CAPTURE = 5;
 }
 
 enum OrderStatus {
