@@ -388,12 +388,22 @@ pub struct PairV2ExecutionLog {
     /// Counter 측 주문 ID (발주 성공 시)
     #[prost(uint64, optional, tag="6")]
     pub counter_order_id: ::core::option::Option<u64>,
-    /// base 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
+    /// deprecated — base 발주가의 정수 원 절삭값(선물 900.75 → 900). base_order_price 를 쓴다.
+    /// 구 클라이언트 호환용으로 서버가 계속 채운다.
+    #[deprecated]
     #[prost(int64, tag="7")]
     pub base_price: i64,
-    /// counter 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
+    /// deprecated — counter 발주가의 정수 원 절삭값(선물 900.75 → 900). counter_order_price 를 쓴다.
+    /// 구 클라이언트 호환용으로 서버가 계속 채운다.
+    #[deprecated]
     #[prost(int64, tag="8")]
     pub counter_price: i64,
+    /// base 발주가 = 스프레드 측정에 쓴 그 가격 (원, 소수 그대로 — 선물은 소수 둘째 자리까지, 예: 900.75)
+    #[prost(double, tag="15")]
+    pub base_order_price: f64,
+    /// counter 발주가 = 스프레드 측정에 쓴 그 가격 (원, 소수 그대로 — 선물은 소수 둘째 자리까지, 예: 900.75)
+    #[prost(double, tag="16")]
+    pub counter_order_price: f64,
     /// base 발주 수량
     #[prost(int64, tag="9")]
     pub base_qty: i64,

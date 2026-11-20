@@ -1524,7 +1524,9 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
     $core.double? targetSpread,
     $fixnum.Int64? baseOrderId,
     $fixnum.Int64? counterOrderId,
+  @$core.Deprecated('This field is deprecated.')
     $fixnum.Int64? basePrice,
+  @$core.Deprecated('This field is deprecated.')
     $fixnum.Int64? counterPrice,
     $fixnum.Int64? baseQty,
     $fixnum.Int64? counterQty,
@@ -1532,6 +1534,8 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
     $fixnum.Int64? triggerToCounterSubmitUs,
     $2.Timestamp? dispatchedAt,
     $core.String? detail,
+    $core.double? baseOrderPrice,
+    $core.double? counterOrderPrice,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1548,6 +1552,8 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
     if (triggerToCounterSubmitUs != null) result.triggerToCounterSubmitUs = triggerToCounterSubmitUs;
     if (dispatchedAt != null) result.dispatchedAt = dispatchedAt;
     if (detail != null) result.detail = detail;
+    if (baseOrderPrice != null) result.baseOrderPrice = baseOrderPrice;
+    if (counterOrderPrice != null) result.counterOrderPrice = counterOrderPrice;
     return result;
   }
 
@@ -1571,6 +1577,8 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
     ..aInt64(12, _omitFieldNames ? '' : 'triggerToCounterSubmitUs')
     ..aOM<$2.Timestamp>(13, _omitFieldNames ? '' : 'dispatchedAt', subBuilder: $2.Timestamp.create)
     ..aOS(14, _omitFieldNames ? '' : 'detail')
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'baseOrderPrice', $pb.PbFieldType.OD)
+    ..a<$core.double>(16, _omitFieldNames ? '' : 'counterOrderPrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1652,23 +1660,33 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearCounterOrderId() => $_clearField(6);
 
-  /// base 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
+  /// deprecated — base 발주가의 정수 원 절삭값(선물 900.75 → 900). base_order_price 를 쓴다.
+  /// 구 클라이언트 호환용으로 서버가 계속 채운다.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   $fixnum.Int64 get basePrice => $_getI64(6);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   set basePrice($fixnum.Int64 value) => $_setInt64(6, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   $core.bool hasBasePrice() => $_has(6);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
   void clearBasePrice() => $_clearField(7);
 
-  /// counter 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
+  /// deprecated — counter 발주가의 정수 원 절삭값(선물 900.75 → 900). counter_order_price 를 쓴다.
+  /// 구 클라이언트 호환용으로 서버가 계속 채운다.
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   $fixnum.Int64 get counterPrice => $_getI64(7);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   set counterPrice($fixnum.Int64 value) => $_setInt64(7, value);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   $core.bool hasCounterPrice() => $_has(7);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   void clearCounterPrice() => $_clearField(8);
 
@@ -1733,6 +1751,26 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
   $core.bool hasDetail() => $_has(13);
   @$pb.TagNumber(14)
   void clearDetail() => $_clearField(14);
+
+  /// base 발주가 = 스프레드 측정에 쓴 그 가격 (원, 소수 그대로 — 선물은 소수 둘째 자리까지, 예: 900.75)
+  @$pb.TagNumber(15)
+  $core.double get baseOrderPrice => $_getN(14);
+  @$pb.TagNumber(15)
+  set baseOrderPrice($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasBaseOrderPrice() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearBaseOrderPrice() => $_clearField(15);
+
+  /// counter 발주가 = 스프레드 측정에 쓴 그 가격 (원, 소수 그대로 — 선물은 소수 둘째 자리까지, 예: 900.75)
+  @$pb.TagNumber(16)
+  $core.double get counterOrderPrice => $_getN(15);
+  @$pb.TagNumber(16)
+  set counterOrderPrice($core.double value) => $_setDouble(15, value);
+  @$pb.TagNumber(16)
+  $core.bool hasCounterOrderPrice() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearCounterOrderPrice() => $_clearField(16);
 }
 
 class ListPairV2ExecutionLogsRequest extends $pb.GeneratedMessage {

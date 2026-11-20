@@ -3437,6 +3437,12 @@ impl serde::Serialize for PairV2ExecutionLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2ExecutionLog", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -3471,6 +3477,12 @@ impl serde::Serialize for PairV2ExecutionLog {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("counter_price", ToString::to_string(&self.counter_price).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("base_order_price", &self.base_order_price)?;
+        }
+        if true {
+            struct_ser.serialize_field("counter_order_price", &self.counter_order_price)?;
         }
         if true {
             #[allow(clippy::needless_borrow)]
@@ -3522,6 +3534,10 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
             "basePrice",
             "counter_price",
             "counterPrice",
+            "base_order_price",
+            "baseOrderPrice",
+            "counter_order_price",
+            "counterOrderPrice",
             "base_qty",
             "baseQty",
             "counter_qty",
@@ -3545,6 +3561,8 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
             CounterOrderId,
             BasePrice,
             CounterPrice,
+            BaseOrderPrice,
+            CounterOrderPrice,
             BaseQty,
             CounterQty,
             TriggerToBaseSubmitUs,
@@ -3581,6 +3599,8 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                             "counterOrderId" | "counter_order_id" => Ok(GeneratedField::CounterOrderId),
                             "basePrice" | "base_price" => Ok(GeneratedField::BasePrice),
                             "counterPrice" | "counter_price" => Ok(GeneratedField::CounterPrice),
+                            "baseOrderPrice" | "base_order_price" => Ok(GeneratedField::BaseOrderPrice),
+                            "counterOrderPrice" | "counter_order_price" => Ok(GeneratedField::CounterOrderPrice),
                             "baseQty" | "base_qty" => Ok(GeneratedField::BaseQty),
                             "counterQty" | "counter_qty" => Ok(GeneratedField::CounterQty),
                             "triggerToBaseSubmitUs" | "trigger_to_base_submit_us" => Ok(GeneratedField::TriggerToBaseSubmitUs),
@@ -3614,6 +3634,8 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                 let mut counter_order_id__ = None;
                 let mut base_price__ = None;
                 let mut counter_price__ = None;
+                let mut base_order_price__ = None;
+                let mut counter_order_price__ = None;
                 let mut base_qty__ = None;
                 let mut counter_qty__ = None;
                 let mut trigger_to_base_submit_us__ = None;
@@ -3684,6 +3706,22 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BaseOrderPrice => {
+                            if base_order_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseOrderPrice"));
+                            }
+                            base_order_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterOrderPrice => {
+                            if counter_order_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterOrderPrice"));
+                            }
+                            counter_order_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::BaseQty => {
                             if base_qty__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("baseQty"));
@@ -3742,6 +3780,8 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                     counter_order_id: counter_order_id__,
                     base_price: base_price__.unwrap_or_default(),
                     counter_price: counter_price__.unwrap_or_default(),
+                    base_order_price: base_order_price__.unwrap_or_default(),
+                    counter_order_price: counter_order_price__.unwrap_or_default(),
                     base_qty: base_qty__.unwrap_or_default(),
                     counter_qty: counter_qty__.unwrap_or_default(),
                     trigger_to_base_submit_us: trigger_to_base_submit_us__.unwrap_or_default(),

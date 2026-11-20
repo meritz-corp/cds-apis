@@ -617,11 +617,19 @@ message PairV2ExecutionLog {
   // Counter 측 주문 ID (발주 성공 시)
   optional uint64 counter_order_id = 6;
 
-  // base 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
-  int64 base_price = 7;
+  // deprecated — base 발주가의 정수 원 절삭값(선물 900.75 → 900). base_order_price 를 쓴다.
+  // 구 클라이언트 호환용으로 서버가 계속 채운다.
+  int64 base_price = 7 [deprecated = true];
 
-  // counter 발주가 = 스프레드 측정에 쓴 그 가격 (원, raw int64)
-  int64 counter_price = 8;
+  // deprecated — counter 발주가의 정수 원 절삭값(선물 900.75 → 900). counter_order_price 를 쓴다.
+  // 구 클라이언트 호환용으로 서버가 계속 채운다.
+  int64 counter_price = 8 [deprecated = true];
+
+  // base 발주가 = 스프레드 측정에 쓴 그 가격 (원, 소수 그대로 — 선물은 소수 둘째 자리까지, 예: 900.75)
+  double base_order_price = 15;
+
+  // counter 발주가 = 스프레드 측정에 쓴 그 가격 (원, 소수 그대로 — 선물은 소수 둘째 자리까지, 예: 900.75)
+  double counter_order_price = 16;
 
   // base 발주 수량
   int64 base_qty = 9;
