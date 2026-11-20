@@ -534,14 +534,20 @@ const PairV2ExecutionLog$json = {
     {'1': 'counter_order_price', '3': 16, '4': 1, '5': 1, '10': 'counterOrderPrice'},
     {'1': 'base_qty', '3': 9, '4': 1, '5': 3, '10': 'baseQty'},
     {'1': 'counter_qty', '3': 10, '4': 1, '5': 3, '10': 'counterQty'},
+    {'1': 'base_filled_qty', '3': 17, '4': 1, '5': 3, '10': 'baseFilledQty'},
+    {'1': 'base_average_fill_price', '3': 18, '4': 1, '5': 1, '9': 2, '10': 'baseAverageFillPrice', '17': true},
+    {'1': 'counter_filled_qty', '3': 19, '4': 1, '5': 3, '10': 'counterFilledQty'},
+    {'1': 'counter_average_fill_price', '3': 20, '4': 1, '5': 1, '9': 3, '10': 'counterAverageFillPrice', '17': true},
     {'1': 'trigger_to_base_submit_us', '3': 11, '4': 1, '5': 3, '10': 'triggerToBaseSubmitUs'},
     {'1': 'trigger_to_counter_submit_us', '3': 12, '4': 1, '5': 3, '10': 'triggerToCounterSubmitUs'},
     {'1': 'dispatched_at', '3': 13, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'dispatchedAt'},
-    {'1': 'detail', '3': 14, '4': 1, '5': 9, '9': 2, '10': 'detail', '17': true},
+    {'1': 'detail', '3': 14, '4': 1, '5': 9, '9': 4, '10': 'detail', '17': true},
   ],
   '8': [
     {'1': '_base_order_id'},
     {'1': '_counter_order_id'},
+    {'1': '_base_average_fill_price'},
+    {'1': '_counter_average_fill_price'},
     {'1': '_detail'},
   ],
 };
@@ -556,12 +562,17 @@ final $typed_data.Uint8List pairV2ExecutionLogDescriptor = $convert.base64Decode
     'EoA0ICGAFSCWJhc2VQcmljZRInCg1jb3VudGVyX3ByaWNlGAggASgDQgIYAVIMY291bnRlclBy'
     'aWNlEigKEGJhc2Vfb3JkZXJfcHJpY2UYDyABKAFSDmJhc2VPcmRlclByaWNlEi4KE2NvdW50ZX'
     'Jfb3JkZXJfcHJpY2UYECABKAFSEWNvdW50ZXJPcmRlclByaWNlEhkKCGJhc2VfcXR5GAkgASgD'
-    'UgdiYXNlUXR5Eh8KC2NvdW50ZXJfcXR5GAogASgDUgpjb3VudGVyUXR5EjgKGXRyaWdnZXJfdG'
-    '9fYmFzZV9zdWJtaXRfdXMYCyABKANSFXRyaWdnZXJUb0Jhc2VTdWJtaXRVcxI+Chx0cmlnZ2Vy'
-    'X3RvX2NvdW50ZXJfc3VibWl0X3VzGAwgASgDUhh0cmlnZ2VyVG9Db3VudGVyU3VibWl0VXMSPw'
-    'oNZGlzcGF0Y2hlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSDGRpc3Bh'
-    'dGNoZWRBdBIbCgZkZXRhaWwYDiABKAlIAlIGZGV0YWlsiAEBQhAKDl9iYXNlX29yZGVyX2lkQh'
-    'MKEV9jb3VudGVyX29yZGVyX2lkQgkKB19kZXRhaWw=');
+    'UgdiYXNlUXR5Eh8KC2NvdW50ZXJfcXR5GAogASgDUgpjb3VudGVyUXR5EiYKD2Jhc2VfZmlsbG'
+    'VkX3F0eRgRIAEoA1INYmFzZUZpbGxlZFF0eRI6ChdiYXNlX2F2ZXJhZ2VfZmlsbF9wcmljZRgS'
+    'IAEoAUgCUhRiYXNlQXZlcmFnZUZpbGxQcmljZYgBARIsChJjb3VudGVyX2ZpbGxlZF9xdHkYEy'
+    'ABKANSEGNvdW50ZXJGaWxsZWRRdHkSQAoaY291bnRlcl9hdmVyYWdlX2ZpbGxfcHJpY2UYFCAB'
+    'KAFIA1IXY291bnRlckF2ZXJhZ2VGaWxsUHJpY2WIAQESOAoZdHJpZ2dlcl90b19iYXNlX3N1Ym'
+    '1pdF91cxgLIAEoA1IVdHJpZ2dlclRvQmFzZVN1Ym1pdFVzEj4KHHRyaWdnZXJfdG9fY291bnRl'
+    'cl9zdWJtaXRfdXMYDCABKANSGHRyaWdnZXJUb0NvdW50ZXJTdWJtaXRVcxI/Cg1kaXNwYXRjaG'
+    'VkX2F0GA0gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIMZGlzcGF0Y2hlZEF0EhsK'
+    'BmRldGFpbBgOIAEoCUgEUgZkZXRhaWyIAQFCEAoOX2Jhc2Vfb3JkZXJfaWRCEwoRX2NvdW50ZX'
+    'Jfb3JkZXJfaWRCGgoYX2Jhc2VfYXZlcmFnZV9maWxsX3ByaWNlQh0KG19jb3VudGVyX2F2ZXJh'
+    'Z2VfZmlsbF9wcmljZUIJCgdfZGV0YWls');
 
 @$core.Deprecated('Use listPairV2ExecutionLogsRequestDescriptor instead')
 const ListPairV2ExecutionLogsRequest$json = {

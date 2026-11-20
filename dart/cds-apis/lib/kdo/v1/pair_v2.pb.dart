@@ -1511,11 +1511,12 @@ class PausePairV2Request extends $pb.GeneratedMessage {
   void clearPairV2() => $_clearField(1);
 }
 
-/// 페어 실행 로그 레코드 — 발주(또는 스킵) 시점 스냅샷.
+/// 페어 실행 로그 레코드 — 발주(또는 스킵) 시점 스냅샷 + 조회 시점에 붙이는 그 발사 회차의 다리별 체결.
 ///
-/// 체결·슬리피지 필드는 없다. v2 는 미체결을 취소하지 않고 auto_amend 가 추적하므로
-/// 한 번의 발사가 여러 시점에 나눠 체결되고, 발사↔체결 1:1 매칭 자체가 성립하지 않는다.
-/// 체결 내역은 전 서비스 공통 SoT 인 order_log 에서 order_id lineage 로 조인한다.
+/// v2 는 미체결을 취소하지 않고 auto_amend 가 정정하며 추적하므로, 한 번의 발사가 여러 시점·가격에 나눠 체결된다.
+/// 그래서 *_filled_qty·*_average_fill_price 는 발사 시점 값이 아니라, 그 발사 회차(cycle_id)의 주문(정정 주문 포함)에
+/// 조회 시점까지 쌓인 체결을 다리별로 모은 값이다 (ListPairV2Orders 주문 추적과 같은 출처). 체결이 늘면 다시 조회해야 갱신된다.
+/// 회차를 알 수 없는 옛 기록은 체결 수량 0·평균체결가 미설정.
 class PairV2ExecutionLog extends $pb.GeneratedMessage {
   factory PairV2ExecutionLog({
     $core.int? pairId,
@@ -1536,6 +1537,10 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
     $core.String? detail,
     $core.double? baseOrderPrice,
     $core.double? counterOrderPrice,
+    $fixnum.Int64? baseFilledQty,
+    $core.double? baseAverageFillPrice,
+    $fixnum.Int64? counterFilledQty,
+    $core.double? counterAverageFillPrice,
   }) {
     final result = create();
     if (pairId != null) result.pairId = pairId;
@@ -1554,6 +1559,10 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
     if (detail != null) result.detail = detail;
     if (baseOrderPrice != null) result.baseOrderPrice = baseOrderPrice;
     if (counterOrderPrice != null) result.counterOrderPrice = counterOrderPrice;
+    if (baseFilledQty != null) result.baseFilledQty = baseFilledQty;
+    if (baseAverageFillPrice != null) result.baseAverageFillPrice = baseAverageFillPrice;
+    if (counterFilledQty != null) result.counterFilledQty = counterFilledQty;
+    if (counterAverageFillPrice != null) result.counterAverageFillPrice = counterAverageFillPrice;
     return result;
   }
 
@@ -1579,6 +1588,10 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
     ..aOS(14, _omitFieldNames ? '' : 'detail')
     ..a<$core.double>(15, _omitFieldNames ? '' : 'baseOrderPrice', $pb.PbFieldType.OD)
     ..a<$core.double>(16, _omitFieldNames ? '' : 'counterOrderPrice', $pb.PbFieldType.OD)
+    ..aInt64(17, _omitFieldNames ? '' : 'baseFilledQty')
+    ..a<$core.double>(18, _omitFieldNames ? '' : 'baseAverageFillPrice', $pb.PbFieldType.OD)
+    ..aInt64(19, _omitFieldNames ? '' : 'counterFilledQty')
+    ..a<$core.double>(20, _omitFieldNames ? '' : 'counterAverageFillPrice', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -1660,7 +1673,7 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearCounterOrderId() => $_clearField(6);
 
-  /// deprecated — base 발주가의 정수 원 절삭값(선물 900.75 → 900). base_order_price 를 쓴다.
+  /// [DEPRECATED] base 발주가의 정수 원 절삭값(선물 900.75 → 900). base_order_price 를 쓴다.
   /// 구 클라이언트 호환용으로 서버가 계속 채운다.
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(7)
@@ -1675,7 +1688,7 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearBasePrice() => $_clearField(7);
 
-  /// deprecated — counter 발주가의 정수 원 절삭값(선물 900.75 → 900). counter_order_price 를 쓴다.
+  /// [DEPRECATED] counter 발주가의 정수 원 절삭값(선물 900.75 → 900). counter_order_price 를 쓴다.
   /// 구 클라이언트 호환용으로 서버가 계속 채운다.
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
@@ -1771,6 +1784,46 @@ class PairV2ExecutionLog extends $pb.GeneratedMessage {
   $core.bool hasCounterOrderPrice() => $_has(15);
   @$pb.TagNumber(16)
   void clearCounterOrderPrice() => $_clearField(16);
+
+  /// base 체결 수량 — 이 발사 회차 주문(정정 주문 포함)의 체결 합, 조회 시점 기준
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get baseFilledQty => $_getI64(16);
+  @$pb.TagNumber(17)
+  set baseFilledQty($fixnum.Int64 value) => $_setInt64(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasBaseFilledQty() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearBaseFilledQty() => $_clearField(17);
+
+  /// base 가중평균 체결가 (원, 소수 그대로) — 이 발사 회차 주문(정정 주문 포함)의 체결 기준. 체결이 없으면 미설정
+  @$pb.TagNumber(18)
+  $core.double get baseAverageFillPrice => $_getN(17);
+  @$pb.TagNumber(18)
+  set baseAverageFillPrice($core.double value) => $_setDouble(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasBaseAverageFillPrice() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearBaseAverageFillPrice() => $_clearField(18);
+
+  /// counter 체결 수량 — 이 발사 회차 주문(정정 주문 포함)의 체결 합, 조회 시점 기준
+  @$pb.TagNumber(19)
+  $fixnum.Int64 get counterFilledQty => $_getI64(18);
+  @$pb.TagNumber(19)
+  set counterFilledQty($fixnum.Int64 value) => $_setInt64(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasCounterFilledQty() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearCounterFilledQty() => $_clearField(19);
+
+  /// counter 가중평균 체결가 (원, 소수 그대로) — 이 발사 회차 주문(정정 주문 포함)의 체결 기준. 체결이 없으면 미설정
+  @$pb.TagNumber(20)
+  $core.double get counterAverageFillPrice => $_getN(19);
+  @$pb.TagNumber(20)
+  set counterAverageFillPrice($core.double value) => $_setDouble(19, value);
+  @$pb.TagNumber(20)
+  $core.bool hasCounterAverageFillPrice() => $_has(19);
+  @$pb.TagNumber(20)
+  void clearCounterAverageFillPrice() => $_clearField(20);
 }
 
 class ListPairV2ExecutionLogsRequest extends $pb.GeneratedMessage {

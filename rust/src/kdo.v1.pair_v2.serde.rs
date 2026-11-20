@@ -3443,6 +3443,18 @@ impl serde::Serialize for PairV2ExecutionLog {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.pair_v2.PairV2ExecutionLog", len)?;
         if true {
             struct_ser.serialize_field("pair_id", &self.pair_id)?;
@@ -3497,6 +3509,22 @@ impl serde::Serialize for PairV2ExecutionLog {
         if true {
             #[allow(clippy::needless_borrow)]
             #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("base_filled_qty", ToString::to_string(&self.base_filled_qty).as_str())?;
+        }
+        if let Some(v) = self.base_average_fill_price.as_ref() {
+            struct_ser.serialize_field("base_average_fill_price", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("counter_filled_qty", ToString::to_string(&self.counter_filled_qty).as_str())?;
+        }
+        if let Some(v) = self.counter_average_fill_price.as_ref() {
+            struct_ser.serialize_field("counter_average_fill_price", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
             struct_ser.serialize_field("trigger_to_base_submit_us", ToString::to_string(&self.trigger_to_base_submit_us).as_str())?;
         }
         if true {
@@ -3542,6 +3570,14 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
             "baseQty",
             "counter_qty",
             "counterQty",
+            "base_filled_qty",
+            "baseFilledQty",
+            "base_average_fill_price",
+            "baseAverageFillPrice",
+            "counter_filled_qty",
+            "counterFilledQty",
+            "counter_average_fill_price",
+            "counterAverageFillPrice",
             "trigger_to_base_submit_us",
             "triggerToBaseSubmitUs",
             "trigger_to_counter_submit_us",
@@ -3565,6 +3601,10 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
             CounterOrderPrice,
             BaseQty,
             CounterQty,
+            BaseFilledQty,
+            BaseAverageFillPrice,
+            CounterFilledQty,
+            CounterAverageFillPrice,
             TriggerToBaseSubmitUs,
             TriggerToCounterSubmitUs,
             DispatchedAt,
@@ -3603,6 +3643,10 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                             "counterOrderPrice" | "counter_order_price" => Ok(GeneratedField::CounterOrderPrice),
                             "baseQty" | "base_qty" => Ok(GeneratedField::BaseQty),
                             "counterQty" | "counter_qty" => Ok(GeneratedField::CounterQty),
+                            "baseFilledQty" | "base_filled_qty" => Ok(GeneratedField::BaseFilledQty),
+                            "baseAverageFillPrice" | "base_average_fill_price" => Ok(GeneratedField::BaseAverageFillPrice),
+                            "counterFilledQty" | "counter_filled_qty" => Ok(GeneratedField::CounterFilledQty),
+                            "counterAverageFillPrice" | "counter_average_fill_price" => Ok(GeneratedField::CounterAverageFillPrice),
                             "triggerToBaseSubmitUs" | "trigger_to_base_submit_us" => Ok(GeneratedField::TriggerToBaseSubmitUs),
                             "triggerToCounterSubmitUs" | "trigger_to_counter_submit_us" => Ok(GeneratedField::TriggerToCounterSubmitUs),
                             "dispatchedAt" | "dispatched_at" => Ok(GeneratedField::DispatchedAt),
@@ -3638,6 +3682,10 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                 let mut counter_order_price__ = None;
                 let mut base_qty__ = None;
                 let mut counter_qty__ = None;
+                let mut base_filled_qty__ = None;
+                let mut base_average_fill_price__ = None;
+                let mut counter_filled_qty__ = None;
+                let mut counter_average_fill_price__ = None;
                 let mut trigger_to_base_submit_us__ = None;
                 let mut trigger_to_counter_submit_us__ = None;
                 let mut dispatched_at__ = None;
@@ -3738,6 +3786,38 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BaseFilledQty => {
+                            if base_filled_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseFilledQty"));
+                            }
+                            base_filled_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::BaseAverageFillPrice => {
+                            if base_average_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("baseAverageFillPrice"));
+                            }
+                            base_average_fill_price__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::CounterFilledQty => {
+                            if counter_filled_qty__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterFilledQty"));
+                            }
+                            counter_filled_qty__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::CounterAverageFillPrice => {
+                            if counter_average_fill_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("counterAverageFillPrice"));
+                            }
+                            counter_average_fill_price__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::TriggerToBaseSubmitUs => {
                             if trigger_to_base_submit_us__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("triggerToBaseSubmitUs"));
@@ -3784,6 +3864,10 @@ impl<'de> serde::Deserialize<'de> for PairV2ExecutionLog {
                     counter_order_price: counter_order_price__.unwrap_or_default(),
                     base_qty: base_qty__.unwrap_or_default(),
                     counter_qty: counter_qty__.unwrap_or_default(),
+                    base_filled_qty: base_filled_qty__.unwrap_or_default(),
+                    base_average_fill_price: base_average_fill_price__,
+                    counter_filled_qty: counter_filled_qty__.unwrap_or_default(),
+                    counter_average_fill_price: counter_average_fill_price__,
                     trigger_to_base_submit_us: trigger_to_base_submit_us__.unwrap_or_default(),
                     trigger_to_counter_submit_us: trigger_to_counter_submit_us__.unwrap_or_default(),
                     dispatched_at: dispatched_at__,

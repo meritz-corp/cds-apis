@@ -143,7 +143,7 @@ extension type PairV2ServiceClient (connect.Transport _transport) {
     );
   }
 
-  /// PairV2 실행 로그 목록 조회 (발사 시점 스냅샷, 페이징). 스킵은 기록하지 않는다 —
+  /// PairV2 실행 로그 목록 조회 (발사 시점 스냅샷 + 조회 시점의 그 회차 체결, 페이징). 스킵은 기록하지 않는다 —
   /// 발사를 막는 사유는 StreamPairV2Status.block_reason 으로 실시간 노출된다.
   Future<kdov1pair_v2.ListPairV2ExecutionLogsResponse> listPairV2ExecutionLogs(
     kdov1pair_v2.ListPairV2ExecutionLogsRequest input, {
