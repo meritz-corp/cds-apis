@@ -231,6 +231,14 @@ pub struct Notification {
     /// 심볼 무관 알림(System/Custom 등)은 비어있음.
     #[prost(string, optional, tag="15")]
     pub symbol: ::core::option::Option<::prost::alloc::string::String>,
+    /// 알림이 속한 펀드 (optional).
+    /// Format: funds/{fund_code}
+    /// 한 펀드에 속한 알림(ETF LP·선물 LP·MM·퀵주문 오류·주문 한도 경고·스프레드 캡처·장전 예약주문·한도 정지·TPS 초과)이 채운다.
+    /// 펀드가 하나로 정해지지 않는 알림(System·Custom, 두 다리 펀드가 다를 수 있는 Pair/PairV2)은 비어있음.
+    /// 알림 DB 는 서버들이 공유해 ListNotifications 에 다른 서버에서 생긴 알림도 섞인다 —
+    /// 클라이언트는 ListFundsForCaller(접속 서버 담당 펀드)와 대조해 그 서버 담당 펀드의 알림만 보여줄 수 있다.
+    #[prost(string, optional, tag="16")]
+    pub fund: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Type of the notification
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]

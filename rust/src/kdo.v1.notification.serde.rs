@@ -1002,6 +1002,9 @@ impl serde::Serialize for Notification {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.notification.Notification", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -1054,6 +1057,9 @@ impl serde::Serialize for Notification {
         if let Some(v) = self.symbol.as_ref() {
             struct_ser.serialize_field("symbol", v)?;
         }
+        if let Some(v) = self.fund.as_ref() {
+            struct_ser.serialize_field("fund", v)?;
+        }
         struct_ser.end()
     }
 }
@@ -1083,6 +1089,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
             "acknowledge_time",
             "acknowledgeTime",
             "symbol",
+            "fund",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -1102,6 +1109,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
             ExpireTime,
             AcknowledgeTime,
             Symbol,
+            Fund,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -1139,6 +1147,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
                             "expireTime" | "expire_time" => Ok(GeneratedField::ExpireTime),
                             "acknowledgeTime" | "acknowledge_time" => Ok(GeneratedField::AcknowledgeTime),
                             "symbol" => Ok(GeneratedField::Symbol),
+                            "fund" => Ok(GeneratedField::Fund),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -1173,6 +1182,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
                 let mut expire_time__ = None;
                 let mut acknowledge_time__ = None;
                 let mut symbol__ = None;
+                let mut fund__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -1269,6 +1279,12 @@ impl<'de> serde::Deserialize<'de> for Notification {
                             }
                             symbol__ = map_.next_value()?;
                         }
+                        GeneratedField::Fund => {
+                            if fund__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fund"));
+                            }
+                            fund__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -1290,6 +1306,7 @@ impl<'de> serde::Deserialize<'de> for Notification {
                     expire_time: expire_time__,
                     acknowledge_time: acknowledge_time__,
                     symbol: symbol__,
+                    fund: fund__,
                 })
             }
         }

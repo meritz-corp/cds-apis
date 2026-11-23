@@ -235,6 +235,7 @@ const Notification$json = {
     {'1': 'expire_time', '3': 13, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '9': 2, '10': 'expireTime', '17': true},
     {'1': 'acknowledge_time', '3': 14, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '8': {}, '9': 3, '10': 'acknowledgeTime', '17': true},
     {'1': 'symbol', '3': 15, '4': 1, '5': 9, '8': {}, '9': 4, '10': 'symbol', '17': true},
+    {'1': 'fund', '3': 16, '4': 1, '5': 9, '8': {}, '9': 5, '10': 'fund', '17': true},
   ],
   '3': [Notification_MetadataEntry$json],
   '7': {},
@@ -244,6 +245,7 @@ const Notification$json = {
     {'1': '_expire_time'},
     {'1': '_acknowledge_time'},
     {'1': '_symbol'},
+    {'1': '_fund'},
   ],
 };
 
@@ -273,9 +275,10 @@ final $typed_data.Uint8List notificationDescriptor = $convert.base64Decode(
     'ltZXN0YW1wQgTiQQEDUgpjcmVhdGVUaW1lEkYKC2V4cGlyZV90aW1lGA0gASgLMhouZ29vZ2xl'
     'LnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA0gCUgpleHBpcmVUaW1liAEBElAKEGFja25vd2xlZG'
     'dlX3RpbWUYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgTiQQEDSANSD2Fja25v'
-    'd2xlZGdlVGltZYgBARIhCgZzeW1ib2wYDyABKAlCBOJBAQNIBFIGc3ltYm9siAEBGjsKDU1ldG'
-    'FkYXRhRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSFAoFdmFsdWUYAiABKAlSBXZhbHVlOgI4ATpC'
-    '6kE/ChxrZG8uY2RzYXBpcy54eXovTm90aWZpY2F0aW9uEh9ub3RpZmljYXRpb25zL3tub3RpZm'
-    'ljYXRpb25faWR9QgwKCl9wb3J0Zm9saW9CEQoPX25hdmlnYXRpb25fdXJsQg4KDF9leHBpcmVf'
-    'dGltZUITChFfYWNrbm93bGVkZ2VfdGltZUIJCgdfc3ltYm9s');
+    'd2xlZGdlVGltZYgBARIhCgZzeW1ib2wYDyABKAlCBOJBAQNIBFIGc3ltYm9siAEBEjYKBGZ1bm'
+    'QYECABKAlCHeJBAQP6QRYKFGtkby5jZHNhcGlzLnh5ei9GdW5kSAVSBGZ1bmSIAQEaOwoNTWV0'
+    'YWRhdGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBOk'
+    'LqQT8KHGtkby5jZHNhcGlzLnh5ei9Ob3RpZmljYXRpb24SH25vdGlmaWNhdGlvbnMve25vdGlm'
+    'aWNhdGlvbl9pZH1CDAoKX3BvcnRmb2xpb0IRCg9fbmF2aWdhdGlvbl91cmxCDgoMX2V4cGlyZV'
+    '90aW1lQhMKEV9hY2tub3dsZWRnZV90aW1lQgkKB19zeW1ib2xCBwoFX2Z1bmQ=');
 
