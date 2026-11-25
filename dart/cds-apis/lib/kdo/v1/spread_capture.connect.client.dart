@@ -163,4 +163,23 @@ extension type SpreadCaptureServiceClient (connect.Transport _transport) {
       onTrailer: onTrailer,
     );
   }
+
+  /// 포지션 사이클 목록 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지의 체결·청산 주문 경과와 그때 공정가. 최근에 저장된 것부터.
+  /// 사이클은 닫힐 때(또는 노출을 남긴 채 실행이 끝날 때) 저장된다. 이 서버에서 아직 열려 있는 사이클은 첫 페이지 맨 앞에 붙는다(page_size 밖).
+  Future<kdov1spread_capture.ListSpreadCaptureCyclesResponse> listSpreadCaptureCycles(
+    kdov1spread_capture.ListSpreadCaptureCyclesRequest input, {
+    connect.Headers? headers,
+    connect.AbortSignal? signal,
+    Function(connect.Headers)? onHeader,
+    Function(connect.Headers)? onTrailer,
+  }) {
+    return connect.Client(_transport).unary(
+      specs.SpreadCaptureService.listSpreadCaptureCycles,
+      input,
+      signal: signal,
+      headers: headers,
+      onHeader: onHeader,
+      onTrailer: onTrailer,
+    );
+  }
 }

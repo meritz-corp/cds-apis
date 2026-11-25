@@ -9,6 +9,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "kdo/v1/common.proto";
 import "kdo/v1/lp.proto";
+import "kdo/v1/order_log.proto";
 
 option go_package = "github.com/meritz-corp/cds-apis/go/kdo/v1;kdo";
 
@@ -85,6 +86,15 @@ service SpreadCaptureService {
   rpc StreamSpreadCaptureStatuses(StreamSpreadCaptureStatusesRequest) returns (stream SpreadCaptureStatus) {
     option (google.api.http) = {
       get: "/v1/spread_captures/statuses:stream"
+    };
+    option (google.api.method_signature) = "";
+  }
+
+  // 포지션 사이클 목록 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지의 체결·청산 주문 경과와 그때 공정가. 최근에 저장된 것부터.
+  // 사이클은 닫힐 때(또는 노출을 남긴 채 실행이 끝날 때) 저장된다. 이 서버에서 아직 열려 있는 사이클은 첫 페이지 맨 앞에 붙는다(page_size 밖).
+  rpc ListSpreadCaptureCycles(ListSpreadCaptureCyclesRequest) returns (ListSpreadCaptureCyclesResponse) {
+    option (google.api.http) = {
+      get: "/v1/spread_captures/cycles"
     };
     option (google.api.method_signature) = "";
   }
@@ -270,6 +280,151 @@ message SpreadCaptureStatus {
   google.protobuf.Timestamp started_at = 17;
 }
 
+// ========== Cycle ==========
+
+// 사이클 이벤트 종류
+enum SpreadCaptureCycleEventType {
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED = 0;
+  // 체결 — 상주 호가·전환 구간 청산·마감 청산·화면 퀵주문 (purpose 로 구분)
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED = 1;
+  // 청산 신규 송신 (전환 구간 청산·마감 청산 IOC)
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT = 2;
+  // 청산 가격 정정 송신 (from_price → price)
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT = 3;
+  // 청산 취소 송신
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT = 4;
+  // 청산 주문 수량이 취소됨 — 보낸 취소의 확인 또는 거래소 자동취소(message 에 사유)
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED = 5;
+  // 청산 신규·정정·취소 거부 (message 에 사유)
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED = 6;
+  // 안전 구간이 바뀜 (zone·zone_price 가 새 구간)
+  SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED = 7;
+}
+
+// 사이클 주문의 용도
+enum SpreadCaptureOrderPurpose {
+  SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED = 0;
+  // 상주 호가
+  SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE = 1;
+  // 전환 구간 청산
+  SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN = 2;
+  // 마감 청산 IOC
+  SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT = 3;
+  // 화면 퀵주문
+  SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER = 4;
+}
+
+// 사이클 이벤트 — 체결·청산 주문 경과·안전 구간 변경과 그때 공정가
+message SpreadCaptureCycleEvent {
+  // 서버가 처리한 시각 — 이벤트는 이 순서다. 체결은 통보를 처리한 시각이라 거래소 체결(exchange_time)보다 늦다
+  google.protobuf.Timestamp time = 1;
+
+  SpreadCaptureCycleEventType type = 2;
+
+  // 주문 용도. ZONE_CHANGED 면 UNSPECIFIED
+  SpreadCaptureOrderPurpose purpose = 3;
+
+  // 주문번호 — 정정 송신이면 정정 주문번호. ZONE_CHANGED 면 0
+  int64 order_id = 4;
+
+  // 정정 송신이면 원주문번호, 정정·취소 거부면 원주문번호. 그 밖엔 0
+  int64 original_order_id = 5;
+
+  // ZONE_CHANGED 면 UNSPECIFIED
+  kdo.v1.common.OrderSide side = 6;
+
+  // 주문·체결 가격(원). 정정 송신이면 옮길 가격. ZONE_CHANGED 면 0
+  int64 price = 7;
+
+  // 정정 전 가격(원). 정정 송신이 아니면 0
+  int64 from_price = 8;
+
+  // 주문·체결·취소 수량 (주). ZONE_CHANGED·거부면 0
+  int64 quantity = 9;
+
+  // 체결만 — make·take·단일가
+  kdo.v1.order_log.LastAskBidTpCode last_ask_bid_tp_code = 10;
+
+  // 체결만 — 거래소 체결 시각 (ms)
+  google.protobuf.Timestamp exchange_time = 11;
+
+  // 그때 알던 공정가 매수 쪽(원) — 체결은 거래소 체결 시각, 나머지는 time 기준. 모르면(선물 시세 이상·실행 종료 뒤) 없음
+  optional double fair_bid = 12;
+
+  // 그때 알던 공정가 매도 쪽(원)
+  optional double fair_ask = 13;
+
+  // 앞 이벤트 뒤 이 이벤트까지 공정가 매수 쪽 최저(원). 없으면 모름
+  optional double fair_low = 14;
+
+  // 앞 이벤트 뒤 이 이벤트까지 공정가 매도 쪽 최고(원). 없으면 모름
+  optional double fair_high = 15;
+
+  // 그때 구간. ZONE_CHANGED 면 새 구간
+  SpreadCaptureZone zone = 16;
+
+  // 안전 구간이면 매수 1호가(원), 전환 구간이면 경계 가격(원). 모르면 0
+  int64 zone_price = 17;
+
+  // 이 이벤트 뒤 순노출 (주, 매수 +)
+  int64 net_quantity = 18;
+
+  // 거부·자동취소 사유
+  string message = 19;
+}
+
+// 포지션 사이클 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지. 한 체결로 방향이 뒤집히면 닫고 남은 수량으로 새 사이클을 연다.
+message SpreadCaptureCycle {
+  string etf_symbol = 1;
+
+  string fund_code = 2;
+
+  // 실행 시작 시각 — seq 와 함께 사이클을 가리킨다
+  google.protobuf.Timestamp run_started_at = 3;
+
+  // 그 실행의 몇 번째 사이클인지 (1부터)
+  uint32 seq = 4;
+
+  // 연 방향 — BID 매수 노출, ASK 매도 노출
+  kdo.v1.common.OrderSide side = 5;
+
+  // 연 체결의 거래소 시각
+  google.protobuf.Timestamp opened_at = 6;
+
+  // 순노출이 0 이 된 체결의 거래소 시각. 없으면 아직 열려 있거나 노출을 남긴 채 실행이 끝났다
+  google.protobuf.Timestamp closed_at = 7;
+
+  // 연 방향 체결 수량 합 (주)
+  int64 entry_quantity = 8;
+
+  // 연 방향 평균 체결가 (원)
+  double entry_price = 9;
+
+  // 반대 방향 체결 수량 합 (주)
+  int64 exit_quantity = 10;
+
+  // 반대 방향 평균 체결가 (원). 체결이 없으면 0
+  double exit_price = 11;
+
+  // 사이클 동안 최대 순노출 (주, 절댓값)
+  int64 max_quantity = 12;
+
+  // 실현 손익 (원, 수수료·세금 제외) — 청산한 수량 몫(평균 진입가 기준). 닫혔으면 사이클 전체 손익
+  double realized_pnl = 13;
+
+  // 사이클 동안 공정가 매수 쪽 최저(원). 없으면 모름
+  optional double fair_low = 14;
+
+  // 사이클 동안 공정가 매도 쪽 최고(원). 없으면 모름
+  optional double fair_high = 15;
+
+  // 경과 (time 순) — 첫 이벤트가 연 체결이다
+  repeated SpreadCaptureCycleEvent events = 16;
+
+  // 상한을 넘어 events 에 남기지 않은 이벤트 수 (수량·손익에는 반영된다)
+  uint32 omitted_events = 17;
+}
+
 // ========== Request/Response Messages ==========
 
 message GetSpreadCaptureRequest {
@@ -310,3 +465,27 @@ message ListSpreadCaptureStatusesResponse {
 }
 
 message StreamSpreadCaptureStatusesRequest {}
+
+message ListSpreadCaptureCyclesRequest {
+  // 비우면 전체
+  string etf_symbol = 1;
+
+  // 비우면 전체
+  string fund_code = 2;
+
+  // 사이클을 연 영업일 (YYYYMMDD, KST). 미지정 시 날짜 제한 없음
+  optional uint32 date = 3;
+
+  // 페이지 크기 (기본: 20, 최대: 100)
+  optional int32 page_size = 4;
+
+  // 이전 응답의 next_page_token 을 그대로 전달. 최초 조회는 미지정
+  optional string page_token = 5;
+}
+
+message ListSpreadCaptureCyclesResponse {
+  repeated SpreadCaptureCycle cycles = 1;
+
+  // 다음 페이지 토큰 (더 없으면 빈 문자열)
+  string next_page_token = 2;
+}

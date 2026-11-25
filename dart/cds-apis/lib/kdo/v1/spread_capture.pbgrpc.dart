@@ -84,6 +84,12 @@ class SpreadCaptureServiceClient extends $grpc.Client {
     return $createStreamingCall(_$streamSpreadCaptureStatuses, $async.Stream.fromIterable([request]), options: options);
   }
 
+  /// 포지션 사이클 목록 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지의 체결·청산 주문 경과와 그때 공정가. 최근에 저장된 것부터.
+  /// 사이클은 닫힐 때(또는 노출을 남긴 채 실행이 끝날 때) 저장된다. 이 서버에서 아직 열려 있는 사이클은 첫 페이지 맨 앞에 붙는다(page_size 밖).
+  $grpc.ResponseFuture<$0.ListSpreadCaptureCyclesResponse> listSpreadCaptureCycles($0.ListSpreadCaptureCyclesRequest request, {$grpc.CallOptions? options,}) {
+    return $createUnaryCall(_$listSpreadCaptureCycles, request, options: options);
+  }
+
     // method descriptors
 
   static final _$getSpreadCapture = $grpc.ClientMethod<$0.GetSpreadCaptureRequest, $0.SpreadCapture>(
@@ -118,6 +124,10 @@ class SpreadCaptureServiceClient extends $grpc.Client {
       '/kdo.v1.spread_capture.SpreadCaptureService/StreamSpreadCaptureStatuses',
       ($0.StreamSpreadCaptureStatusesRequest value) => value.writeToBuffer(),
       $0.SpreadCaptureStatus.fromBuffer);
+  static final _$listSpreadCaptureCycles = $grpc.ClientMethod<$0.ListSpreadCaptureCyclesRequest, $0.ListSpreadCaptureCyclesResponse>(
+      '/kdo.v1.spread_capture.SpreadCaptureService/ListSpreadCaptureCycles',
+      ($0.ListSpreadCaptureCyclesRequest value) => value.writeToBuffer(),
+      $0.ListSpreadCaptureCyclesResponse.fromBuffer);
 }
 
 @$pb.GrpcServiceName('kdo.v1.spread_capture.SpreadCaptureService')
@@ -181,6 +191,13 @@ abstract class SpreadCaptureServiceBase extends $grpc.Service {
         true,
         ($core.List<$core.int> value) => $0.StreamSpreadCaptureStatusesRequest.fromBuffer(value),
         ($0.SpreadCaptureStatus value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListSpreadCaptureCyclesRequest, $0.ListSpreadCaptureCyclesResponse>(
+        'ListSpreadCaptureCycles',
+        listSpreadCaptureCycles_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.ListSpreadCaptureCyclesRequest.fromBuffer(value),
+        ($0.ListSpreadCaptureCyclesResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.SpreadCapture> getSpreadCapture_Pre($grpc.ServiceCall $call, $async.Future<$0.GetSpreadCaptureRequest> $request) async {
@@ -230,5 +247,11 @@ abstract class SpreadCaptureServiceBase extends $grpc.Service {
   }
 
   $async.Stream<$0.SpreadCaptureStatus> streamSpreadCaptureStatuses($grpc.ServiceCall call, $0.StreamSpreadCaptureStatusesRequest request);
+
+  $async.Future<$0.ListSpreadCaptureCyclesResponse> listSpreadCaptureCycles_Pre($grpc.ServiceCall $call, $async.Future<$0.ListSpreadCaptureCyclesRequest> $request) async {
+    return listSpreadCaptureCycles($call, await $request);
+  }
+
+  $async.Future<$0.ListSpreadCaptureCyclesResponse> listSpreadCaptureCycles($grpc.ServiceCall call, $0.ListSpreadCaptureCyclesRequest request);
 
 }

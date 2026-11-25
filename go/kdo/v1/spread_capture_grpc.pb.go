@@ -43,6 +43,9 @@ type SpreadCaptureServiceClient interface {
 	ListSpreadCaptureStatuses(ctx context.Context, in *ListSpreadCaptureStatusesRequest, opts ...grpc.CallOption) (*ListSpreadCaptureStatusesResponse, error)
 	// 상태 스트림 — 상태·구간·주문·체결이 바뀌면 그 (ETF, 펀드)의 상태 전체를 보낸다. 실행 중엔 공정가 갱신을 위해 1초마다도 보낸다.
 	StreamSpreadCaptureStatuses(ctx context.Context, in *StreamSpreadCaptureStatusesRequest, opts ...grpc.CallOption) (SpreadCaptureService_StreamSpreadCaptureStatusesClient, error)
+	// 포지션 사이클 목록 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지의 체결·청산 주문 경과와 그때 공정가. 최근에 저장된 것부터.
+	// 사이클은 닫힐 때(또는 노출을 남긴 채 실행이 끝날 때) 저장된다. 이 서버에서 아직 열려 있는 사이클은 첫 페이지 맨 앞에 붙는다(page_size 밖).
+	ListSpreadCaptureCycles(ctx context.Context, in *ListSpreadCaptureCyclesRequest, opts ...grpc.CallOption) (*ListSpreadCaptureCyclesResponse, error)
 }
 
 type spreadCaptureServiceClient struct {
@@ -148,6 +151,15 @@ func (x *spreadCaptureServiceStreamSpreadCaptureStatusesClient) Recv() (*SpreadC
 	return m, nil
 }
 
+func (c *spreadCaptureServiceClient) ListSpreadCaptureCycles(ctx context.Context, in *ListSpreadCaptureCyclesRequest, opts ...grpc.CallOption) (*ListSpreadCaptureCyclesResponse, error) {
+	out := new(ListSpreadCaptureCyclesResponse)
+	err := c.cc.Invoke(ctx, "/kdo.v1.spread_capture.SpreadCaptureService/ListSpreadCaptureCycles", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SpreadCaptureServiceServer is the server API for SpreadCaptureService service.
 // All implementations must embed UnimplementedSpreadCaptureServiceServer
 // for forward compatibility
@@ -172,6 +184,9 @@ type SpreadCaptureServiceServer interface {
 	ListSpreadCaptureStatuses(context.Context, *ListSpreadCaptureStatusesRequest) (*ListSpreadCaptureStatusesResponse, error)
 	// 상태 스트림 — 상태·구간·주문·체결이 바뀌면 그 (ETF, 펀드)의 상태 전체를 보낸다. 실행 중엔 공정가 갱신을 위해 1초마다도 보낸다.
 	StreamSpreadCaptureStatuses(*StreamSpreadCaptureStatusesRequest, SpreadCaptureService_StreamSpreadCaptureStatusesServer) error
+	// 포지션 사이클 목록 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지의 체결·청산 주문 경과와 그때 공정가. 최근에 저장된 것부터.
+	// 사이클은 닫힐 때(또는 노출을 남긴 채 실행이 끝날 때) 저장된다. 이 서버에서 아직 열려 있는 사이클은 첫 페이지 맨 앞에 붙는다(page_size 밖).
+	ListSpreadCaptureCycles(context.Context, *ListSpreadCaptureCyclesRequest) (*ListSpreadCaptureCyclesResponse, error)
 	mustEmbedUnimplementedSpreadCaptureServiceServer()
 }
 
@@ -202,6 +217,9 @@ func (UnimplementedSpreadCaptureServiceServer) ListSpreadCaptureStatuses(context
 }
 func (UnimplementedSpreadCaptureServiceServer) StreamSpreadCaptureStatuses(*StreamSpreadCaptureStatusesRequest, SpreadCaptureService_StreamSpreadCaptureStatusesServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamSpreadCaptureStatuses not implemented")
+}
+func (UnimplementedSpreadCaptureServiceServer) ListSpreadCaptureCycles(context.Context, *ListSpreadCaptureCyclesRequest) (*ListSpreadCaptureCyclesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSpreadCaptureCycles not implemented")
 }
 func (UnimplementedSpreadCaptureServiceServer) mustEmbedUnimplementedSpreadCaptureServiceServer() {}
 
@@ -363,6 +381,24 @@ func (x *spreadCaptureServiceStreamSpreadCaptureStatusesServer) Send(m *SpreadCa
 	return x.ServerStream.SendMsg(m)
 }
 
+func _SpreadCaptureService_ListSpreadCaptureCycles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSpreadCaptureCyclesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SpreadCaptureServiceServer).ListSpreadCaptureCycles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kdo.v1.spread_capture.SpreadCaptureService/ListSpreadCaptureCycles",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SpreadCaptureServiceServer).ListSpreadCaptureCycles(ctx, req.(*ListSpreadCaptureCyclesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SpreadCaptureService_ServiceDesc is the grpc.ServiceDesc for SpreadCaptureService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -397,6 +433,10 @@ var SpreadCaptureService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSpreadCaptureStatuses",
 			Handler:    _SpreadCaptureService_ListSpreadCaptureStatuses_Handler,
+		},
+		{
+			MethodName: "ListSpreadCaptureCycles",
+			Handler:    _SpreadCaptureService_ListSpreadCaptureCycles_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

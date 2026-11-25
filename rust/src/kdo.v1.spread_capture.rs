@@ -138,6 +138,121 @@ pub struct SpreadCaptureStatus {
     #[prost(message, optional, tag="17")]
     pub started_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
+/// 사이클 이벤트 — 체결·청산 주문 경과·안전 구간 변경과 그때 공정가
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpreadCaptureCycleEvent {
+    /// 서버가 처리한 시각 — 이벤트는 이 순서다. 체결은 통보를 처리한 시각이라 거래소 체결(exchange_time)보다 늦다
+    #[prost(message, optional, tag="1")]
+    pub time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    #[prost(enumeration="SpreadCaptureCycleEventType", tag="2")]
+    pub r#type: i32,
+    /// 주문 용도. ZONE_CHANGED 면 UNSPECIFIED
+    #[prost(enumeration="SpreadCaptureOrderPurpose", tag="3")]
+    pub purpose: i32,
+    /// 주문번호 — 정정 송신이면 정정 주문번호. ZONE_CHANGED 면 0
+    #[prost(int64, tag="4")]
+    pub order_id: i64,
+    /// 정정 송신이면 원주문번호, 정정·취소 거부면 원주문번호. 그 밖엔 0
+    #[prost(int64, tag="5")]
+    pub original_order_id: i64,
+    /// ZONE_CHANGED 면 UNSPECIFIED
+    #[prost(enumeration="super::common::OrderSide", tag="6")]
+    pub side: i32,
+    /// 주문·체결 가격(원). 정정 송신이면 옮길 가격. ZONE_CHANGED 면 0
+    #[prost(int64, tag="7")]
+    pub price: i64,
+    /// 정정 전 가격(원). 정정 송신이 아니면 0
+    #[prost(int64, tag="8")]
+    pub from_price: i64,
+    /// 주문·체결·취소 수량 (주). ZONE_CHANGED·거부면 0
+    #[prost(int64, tag="9")]
+    pub quantity: i64,
+    /// 체결만 — make·take·단일가
+    #[prost(enumeration="super::order_log::LastAskBidTpCode", tag="10")]
+    pub last_ask_bid_tp_code: i32,
+    /// 체결만 — 거래소 체결 시각 (ms)
+    #[prost(message, optional, tag="11")]
+    pub exchange_time: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 그때 알던 공정가 매수 쪽(원) — 체결은 거래소 체결 시각, 나머지는 time 기준. 모르면(선물 시세 이상·실행 종료 뒤) 없음
+    #[prost(double, optional, tag="12")]
+    pub fair_bid: ::core::option::Option<f64>,
+    /// 그때 알던 공정가 매도 쪽(원)
+    #[prost(double, optional, tag="13")]
+    pub fair_ask: ::core::option::Option<f64>,
+    /// 앞 이벤트 뒤 이 이벤트까지 공정가 매수 쪽 최저(원). 없으면 모름
+    #[prost(double, optional, tag="14")]
+    pub fair_low: ::core::option::Option<f64>,
+    /// 앞 이벤트 뒤 이 이벤트까지 공정가 매도 쪽 최고(원). 없으면 모름
+    #[prost(double, optional, tag="15")]
+    pub fair_high: ::core::option::Option<f64>,
+    /// 그때 구간. ZONE_CHANGED 면 새 구간
+    #[prost(enumeration="SpreadCaptureZone", tag="16")]
+    pub zone: i32,
+    /// 안전 구간이면 매수 1호가(원), 전환 구간이면 경계 가격(원). 모르면 0
+    #[prost(int64, tag="17")]
+    pub zone_price: i64,
+    /// 이 이벤트 뒤 순노출 (주, 매수 +)
+    #[prost(int64, tag="18")]
+    pub net_quantity: i64,
+    /// 거부·자동취소 사유
+    #[prost(string, tag="19")]
+    pub message: ::prost::alloc::string::String,
+}
+/// 포지션 사이클 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지. 한 체결로 방향이 뒤집히면 닫고 남은 수량으로 새 사이클을 연다.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpreadCaptureCycle {
+    #[prost(string, tag="1")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 실행 시작 시각 — seq 와 함께 사이클을 가리킨다
+    #[prost(message, optional, tag="3")]
+    pub run_started_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 그 실행의 몇 번째 사이클인지 (1부터)
+    #[prost(uint32, tag="4")]
+    pub seq: u32,
+    /// 연 방향 — BID 매수 노출, ASK 매도 노출
+    #[prost(enumeration="super::common::OrderSide", tag="5")]
+    pub side: i32,
+    /// 연 체결의 거래소 시각
+    #[prost(message, optional, tag="6")]
+    pub opened_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 순노출이 0 이 된 체결의 거래소 시각. 없으면 아직 열려 있거나 노출을 남긴 채 실행이 끝났다
+    #[prost(message, optional, tag="7")]
+    pub closed_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 연 방향 체결 수량 합 (주)
+    #[prost(int64, tag="8")]
+    pub entry_quantity: i64,
+    /// 연 방향 평균 체결가 (원)
+    #[prost(double, tag="9")]
+    pub entry_price: f64,
+    /// 반대 방향 체결 수량 합 (주)
+    #[prost(int64, tag="10")]
+    pub exit_quantity: i64,
+    /// 반대 방향 평균 체결가 (원). 체결이 없으면 0
+    #[prost(double, tag="11")]
+    pub exit_price: f64,
+    /// 사이클 동안 최대 순노출 (주, 절댓값)
+    #[prost(int64, tag="12")]
+    pub max_quantity: i64,
+    /// 실현 손익 (원, 수수료·세금 제외) — 청산한 수량 몫(평균 진입가 기준). 닫혔으면 사이클 전체 손익
+    #[prost(double, tag="13")]
+    pub realized_pnl: f64,
+    /// 사이클 동안 공정가 매수 쪽 최저(원). 없으면 모름
+    #[prost(double, optional, tag="14")]
+    pub fair_low: ::core::option::Option<f64>,
+    /// 사이클 동안 공정가 매도 쪽 최고(원). 없으면 모름
+    #[prost(double, optional, tag="15")]
+    pub fair_high: ::core::option::Option<f64>,
+    /// 경과 (time 순) — 첫 이벤트가 연 체결이다
+    #[prost(message, repeated, tag="16")]
+    pub events: ::prost::alloc::vec::Vec<SpreadCaptureCycleEvent>,
+    /// 상한을 넘어 events 에 남기지 않은 이벤트 수 (수량·손익에는 반영된다)
+    #[prost(uint32, tag="17")]
+    pub omitted_events: u32,
+}
 // ========== Request/Response Messages ==========
 
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -202,6 +317,34 @@ pub struct ListSpreadCaptureStatusesResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StreamSpreadCaptureStatusesRequest {
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListSpreadCaptureCyclesRequest {
+    /// 비우면 전체
+    #[prost(string, tag="1")]
+    pub etf_symbol: ::prost::alloc::string::String,
+    /// 비우면 전체
+    #[prost(string, tag="2")]
+    pub fund_code: ::prost::alloc::string::String,
+    /// 사이클을 연 영업일 (YYYYMMDD, KST). 미지정 시 날짜 제한 없음
+    #[prost(uint32, optional, tag="3")]
+    pub date: ::core::option::Option<u32>,
+    /// 페이지 크기 (기본: 20, 최대: 100)
+    #[prost(int32, optional, tag="4")]
+    pub page_size: ::core::option::Option<i32>,
+    /// 이전 응답의 next_page_token 을 그대로 전달. 최초 조회는 미지정
+    #[prost(string, optional, tag="5")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListSpreadCaptureCyclesResponse {
+    #[prost(message, repeated, tag="1")]
+    pub cycles: ::prost::alloc::vec::Vec<SpreadCaptureCycle>,
+    /// 다음 페이지 토큰 (더 없으면 빈 문자열)
+    #[prost(string, tag="2")]
+    pub next_page_token: ::prost::alloc::string::String,
 }
 // ========== Status ==========
 
@@ -326,6 +469,100 @@ impl SpreadCaptureOrderState {
             "SPREAD_CAPTURE_ORDER_STATE_LIVE" => Some(Self::Live),
             "SPREAD_CAPTURE_ORDER_STATE_MOVING" => Some(Self::Moving),
             "SPREAD_CAPTURE_ORDER_STATE_CANCELLING" => Some(Self::Cancelling),
+            _ => None,
+        }
+    }
+}
+// ========== Cycle ==========
+
+/// 사이클 이벤트 종류
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum SpreadCaptureCycleEventType {
+    Unspecified = 0,
+    /// 체결 — 상주 호가·전환 구간 청산·마감 청산·화면 퀵주문 (purpose 로 구분)
+    Filled = 1,
+    /// 청산 신규 송신 (전환 구간 청산·마감 청산 IOC)
+    FlattenSent = 2,
+    /// 청산 가격 정정 송신 (from_price → price)
+    FlattenAmendSent = 3,
+    /// 청산 취소 송신
+    FlattenCancelSent = 4,
+    /// 청산 주문 수량이 취소됨 — 보낸 취소의 확인 또는 거래소 자동취소(message 에 사유)
+    FlattenCancelled = 5,
+    /// 청산 신규·정정·취소 거부 (message 에 사유)
+    FlattenRejected = 6,
+    /// 안전 구간이 바뀜 (zone·zone_price 가 새 구간)
+    ZoneChanged = 7,
+}
+impl SpreadCaptureCycleEventType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SpreadCaptureCycleEventType::Unspecified => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED",
+            SpreadCaptureCycleEventType::Filled => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED",
+            SpreadCaptureCycleEventType::FlattenSent => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT",
+            SpreadCaptureCycleEventType::FlattenAmendSent => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT",
+            SpreadCaptureCycleEventType::FlattenCancelSent => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT",
+            SpreadCaptureCycleEventType::FlattenCancelled => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED",
+            SpreadCaptureCycleEventType::FlattenRejected => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED",
+            SpreadCaptureCycleEventType::ZoneChanged => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED" => Some(Self::Filled),
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT" => Some(Self::FlattenSent),
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT" => Some(Self::FlattenAmendSent),
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT" => Some(Self::FlattenCancelSent),
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED" => Some(Self::FlattenCancelled),
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED" => Some(Self::FlattenRejected),
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED" => Some(Self::ZoneChanged),
+            _ => None,
+        }
+    }
+}
+/// 사이클 주문의 용도
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum SpreadCaptureOrderPurpose {
+    Unspecified = 0,
+    /// 상주 호가
+    Quote = 1,
+    /// 전환 구간 청산
+    BoundaryFlatten = 2,
+    /// 마감 청산 IOC
+    CloseOut = 3,
+    /// 화면 퀵주문
+    QuickOrder = 4,
+}
+impl SpreadCaptureOrderPurpose {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SpreadCaptureOrderPurpose::Unspecified => "SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED",
+            SpreadCaptureOrderPurpose::Quote => "SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE",
+            SpreadCaptureOrderPurpose::BoundaryFlatten => "SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN",
+            SpreadCaptureOrderPurpose::CloseOut => "SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT",
+            SpreadCaptureOrderPurpose::QuickOrder => "SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED" => Some(Self::Unspecified),
+            "SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE" => Some(Self::Quote),
+            "SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN" => Some(Self::BoundaryFlatten),
+            "SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT" => Some(Self::CloseOut),
+            "SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER" => Some(Self::QuickOrder),
             _ => None,
         }
     }

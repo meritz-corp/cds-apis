@@ -96,5 +96,66 @@ class SpreadCaptureOrderState extends $pb.ProtobufEnum {
   const SpreadCaptureOrderState._(super.value, super.name);
 }
 
+/// 사이클 이벤트 종류
+class SpreadCaptureCycleEventType extends $pb.ProtobufEnum {
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED = SpreadCaptureCycleEventType._(0, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED');
+  /// 체결 — 상주 호가·전환 구간 청산·마감 청산·화면 퀵주문 (purpose 로 구분)
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED = SpreadCaptureCycleEventType._(1, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED');
+  /// 청산 신규 송신 (전환 구간 청산·마감 청산 IOC)
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT = SpreadCaptureCycleEventType._(2, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT');
+  /// 청산 가격 정정 송신 (from_price → price)
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT = SpreadCaptureCycleEventType._(3, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT');
+  /// 청산 취소 송신
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT = SpreadCaptureCycleEventType._(4, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT');
+  /// 청산 주문 수량이 취소됨 — 보낸 취소의 확인 또는 거래소 자동취소(message 에 사유)
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED = SpreadCaptureCycleEventType._(5, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED');
+  /// 청산 신규·정정·취소 거부 (message 에 사유)
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED = SpreadCaptureCycleEventType._(6, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED');
+  /// 안전 구간이 바뀜 (zone·zone_price 가 새 구간)
+  static const SpreadCaptureCycleEventType SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED = SpreadCaptureCycleEventType._(7, _omitEnumNames ? '' : 'SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED');
+
+  static const $core.List<SpreadCaptureCycleEventType> values = <SpreadCaptureCycleEventType> [
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED,
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED,
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT,
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT,
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT,
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED,
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED,
+    SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED,
+  ];
+
+  static final $core.List<SpreadCaptureCycleEventType?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 7);
+  static SpreadCaptureCycleEventType? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const SpreadCaptureCycleEventType._(super.value, super.name);
+}
+
+/// 사이클 주문의 용도
+class SpreadCaptureOrderPurpose extends $pb.ProtobufEnum {
+  static const SpreadCaptureOrderPurpose SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED = SpreadCaptureOrderPurpose._(0, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED');
+  /// 상주 호가
+  static const SpreadCaptureOrderPurpose SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE = SpreadCaptureOrderPurpose._(1, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE');
+  /// 전환 구간 청산
+  static const SpreadCaptureOrderPurpose SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN = SpreadCaptureOrderPurpose._(2, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN');
+  /// 마감 청산 IOC
+  static const SpreadCaptureOrderPurpose SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT = SpreadCaptureOrderPurpose._(3, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT');
+  /// 화면 퀵주문
+  static const SpreadCaptureOrderPurpose SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER = SpreadCaptureOrderPurpose._(4, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER');
+
+  static const $core.List<SpreadCaptureOrderPurpose> values = <SpreadCaptureOrderPurpose> [
+    SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED,
+    SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE,
+    SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN,
+    SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT,
+    SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER,
+  ];
+
+  static final $core.List<SpreadCaptureOrderPurpose?> _byValue = $pb.ProtobufEnum.$_initByValueList(values, 4);
+  static SpreadCaptureOrderPurpose? valueOf($core.int value) =>  value < 0 || value >= _byValue.length ? null : _byValue[value];
+
+  const SpreadCaptureOrderPurpose._(super.value, super.name);
+}
+
 
 const $core.bool _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

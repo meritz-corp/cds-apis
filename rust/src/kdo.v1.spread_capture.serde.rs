@@ -227,6 +227,290 @@ impl<'de> serde::Deserialize<'de> for GetSpreadCaptureRequest {
         deserializer.deserialize_struct("kdo.v1.spread_capture.GetSpreadCaptureRequest", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for ListSpreadCaptureCyclesRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.ListSpreadCaptureCyclesRequest", len)?;
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if let Some(v) = self.date.as_ref() {
+            struct_ser.serialize_field("date", v)?;
+        }
+        if let Some(v) = self.page_size.as_ref() {
+            struct_ser.serialize_field("page_size", v)?;
+        }
+        if let Some(v) = self.page_token.as_ref() {
+            struct_ser.serialize_field("page_token", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListSpreadCaptureCyclesRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf_symbol",
+            "etfSymbol",
+            "fund_code",
+            "fundCode",
+            "date",
+            "page_size",
+            "pageSize",
+            "page_token",
+            "pageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EtfSymbol,
+            FundCode,
+            Date,
+            PageSize,
+            PageToken,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "date" => Ok(GeneratedField::Date),
+                            "pageSize" | "page_size" => Ok(GeneratedField::PageSize),
+                            "pageToken" | "page_token" => Ok(GeneratedField::PageToken),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListSpreadCaptureCyclesRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.spread_capture.ListSpreadCaptureCyclesRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListSpreadCaptureCyclesRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf_symbol__ = None;
+                let mut fund_code__ = None;
+                let mut date__ = None;
+                let mut page_size__ = None;
+                let mut page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Date => {
+                            if date__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("date"));
+                            }
+                            date__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::PageSize => {
+                            if page_size__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageSize"));
+                            }
+                            page_size__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::PageToken => {
+                            if page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("pageToken"));
+                            }
+                            page_token__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListSpreadCaptureCyclesRequest {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    date: date__,
+                    page_size: page_size__,
+                    page_token: page_token__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.spread_capture.ListSpreadCaptureCyclesRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ListSpreadCaptureCyclesResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.ListSpreadCaptureCyclesResponse", len)?;
+        if true {
+            struct_ser.serialize_field("cycles", &self.cycles)?;
+        }
+        if true {
+            struct_ser.serialize_field("next_page_token", &self.next_page_token)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ListSpreadCaptureCyclesResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "cycles",
+            "next_page_token",
+            "nextPageToken",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Cycles,
+            NextPageToken,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "cycles" => Ok(GeneratedField::Cycles),
+                            "nextPageToken" | "next_page_token" => Ok(GeneratedField::NextPageToken),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ListSpreadCaptureCyclesResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.spread_capture.ListSpreadCaptureCyclesResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ListSpreadCaptureCyclesResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut cycles__ = None;
+                let mut next_page_token__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Cycles => {
+                            if cycles__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("cycles"));
+                            }
+                            cycles__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::NextPageToken => {
+                            if next_page_token__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("nextPageToken"));
+                            }
+                            next_page_token__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ListSpreadCaptureCyclesResponse {
+                    cycles: cycles__.unwrap_or_default(),
+                    next_page_token: next_page_token__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.spread_capture.ListSpreadCaptureCyclesResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ListSpreadCaptureStatusesRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -999,6 +1283,962 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
         deserializer.deserialize_struct("kdo.v1.spread_capture.SpreadCapture", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for SpreadCaptureCycle {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCaptureCycle", len)?;
+        if true {
+            struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
+        }
+        if true {
+            struct_ser.serialize_field("fund_code", &self.fund_code)?;
+        }
+        if let Some(v) = self.run_started_at.as_ref() {
+            struct_ser.serialize_field("run_started_at", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("seq", &self.seq)?;
+        }
+        if true {
+            let v = super::common::OrderSide::try_from(self.side)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
+            struct_ser.serialize_field("side", &v)?;
+        }
+        if let Some(v) = self.opened_at.as_ref() {
+            struct_ser.serialize_field("opened_at", v)?;
+        }
+        if let Some(v) = self.closed_at.as_ref() {
+            struct_ser.serialize_field("closed_at", v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("entry_quantity", ToString::to_string(&self.entry_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("entry_price", &self.entry_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("exit_quantity", ToString::to_string(&self.exit_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("exit_price", &self.exit_price)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("max_quantity", ToString::to_string(&self.max_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("realized_pnl", &self.realized_pnl)?;
+        }
+        if let Some(v) = self.fair_low.as_ref() {
+            struct_ser.serialize_field("fair_low", v)?;
+        }
+        if let Some(v) = self.fair_high.as_ref() {
+            struct_ser.serialize_field("fair_high", v)?;
+        }
+        if true {
+            struct_ser.serialize_field("events", &self.events)?;
+        }
+        if true {
+            struct_ser.serialize_field("omitted_events", &self.omitted_events)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SpreadCaptureCycle {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "etf_symbol",
+            "etfSymbol",
+            "fund_code",
+            "fundCode",
+            "run_started_at",
+            "runStartedAt",
+            "seq",
+            "side",
+            "opened_at",
+            "openedAt",
+            "closed_at",
+            "closedAt",
+            "entry_quantity",
+            "entryQuantity",
+            "entry_price",
+            "entryPrice",
+            "exit_quantity",
+            "exitQuantity",
+            "exit_price",
+            "exitPrice",
+            "max_quantity",
+            "maxQuantity",
+            "realized_pnl",
+            "realizedPnl",
+            "fair_low",
+            "fairLow",
+            "fair_high",
+            "fairHigh",
+            "events",
+            "omitted_events",
+            "omittedEvents",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            EtfSymbol,
+            FundCode,
+            RunStartedAt,
+            Seq,
+            Side,
+            OpenedAt,
+            ClosedAt,
+            EntryQuantity,
+            EntryPrice,
+            ExitQuantity,
+            ExitPrice,
+            MaxQuantity,
+            RealizedPnl,
+            FairLow,
+            FairHigh,
+            Events,
+            OmittedEvents,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "etfSymbol" | "etf_symbol" => Ok(GeneratedField::EtfSymbol),
+                            "fundCode" | "fund_code" => Ok(GeneratedField::FundCode),
+                            "runStartedAt" | "run_started_at" => Ok(GeneratedField::RunStartedAt),
+                            "seq" => Ok(GeneratedField::Seq),
+                            "side" => Ok(GeneratedField::Side),
+                            "openedAt" | "opened_at" => Ok(GeneratedField::OpenedAt),
+                            "closedAt" | "closed_at" => Ok(GeneratedField::ClosedAt),
+                            "entryQuantity" | "entry_quantity" => Ok(GeneratedField::EntryQuantity),
+                            "entryPrice" | "entry_price" => Ok(GeneratedField::EntryPrice),
+                            "exitQuantity" | "exit_quantity" => Ok(GeneratedField::ExitQuantity),
+                            "exitPrice" | "exit_price" => Ok(GeneratedField::ExitPrice),
+                            "maxQuantity" | "max_quantity" => Ok(GeneratedField::MaxQuantity),
+                            "realizedPnl" | "realized_pnl" => Ok(GeneratedField::RealizedPnl),
+                            "fairLow" | "fair_low" => Ok(GeneratedField::FairLow),
+                            "fairHigh" | "fair_high" => Ok(GeneratedField::FairHigh),
+                            "events" => Ok(GeneratedField::Events),
+                            "omittedEvents" | "omitted_events" => Ok(GeneratedField::OmittedEvents),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SpreadCaptureCycle;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.spread_capture.SpreadCaptureCycle")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SpreadCaptureCycle, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut etf_symbol__ = None;
+                let mut fund_code__ = None;
+                let mut run_started_at__ = None;
+                let mut seq__ = None;
+                let mut side__ = None;
+                let mut opened_at__ = None;
+                let mut closed_at__ = None;
+                let mut entry_quantity__ = None;
+                let mut entry_price__ = None;
+                let mut exit_quantity__ = None;
+                let mut exit_price__ = None;
+                let mut max_quantity__ = None;
+                let mut realized_pnl__ = None;
+                let mut fair_low__ = None;
+                let mut fair_high__ = None;
+                let mut events__ = None;
+                let mut omitted_events__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::EtfSymbol => {
+                            if etf_symbol__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("etfSymbol"));
+                            }
+                            etf_symbol__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::FundCode => {
+                            if fund_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fundCode"));
+                            }
+                            fund_code__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::RunStartedAt => {
+                            if run_started_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("runStartedAt"));
+                            }
+                            run_started_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::Seq => {
+                            if seq__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("seq"));
+                            }
+                            seq__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Side => {
+                            if side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("side"));
+                            }
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
+                        }
+                        GeneratedField::OpenedAt => {
+                            if opened_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("openedAt"));
+                            }
+                            opened_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::ClosedAt => {
+                            if closed_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("closedAt"));
+                            }
+                            closed_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::EntryQuantity => {
+                            if entry_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("entryQuantity"));
+                            }
+                            entry_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::EntryPrice => {
+                            if entry_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("entryPrice"));
+                            }
+                            entry_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ExitQuantity => {
+                            if exit_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitQuantity"));
+                            }
+                            exit_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::ExitPrice => {
+                            if exit_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exitPrice"));
+                            }
+                            exit_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::MaxQuantity => {
+                            if max_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("maxQuantity"));
+                            }
+                            max_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::RealizedPnl => {
+                            if realized_pnl__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("realizedPnl"));
+                            }
+                            realized_pnl__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FairLow => {
+                            if fair_low__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fairLow"));
+                            }
+                            fair_low__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::FairHigh => {
+                            if fair_high__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fairHigh"));
+                            }
+                            fair_high__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::Events => {
+                            if events__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("events"));
+                            }
+                            events__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::OmittedEvents => {
+                            if omitted_events__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("omittedEvents"));
+                            }
+                            omitted_events__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SpreadCaptureCycle {
+                    etf_symbol: etf_symbol__.unwrap_or_default(),
+                    fund_code: fund_code__.unwrap_or_default(),
+                    run_started_at: run_started_at__,
+                    seq: seq__.unwrap_or_default(),
+                    side: side__.unwrap_or_default(),
+                    opened_at: opened_at__,
+                    closed_at: closed_at__,
+                    entry_quantity: entry_quantity__.unwrap_or_default(),
+                    entry_price: entry_price__.unwrap_or_default(),
+                    exit_quantity: exit_quantity__.unwrap_or_default(),
+                    exit_price: exit_price__.unwrap_or_default(),
+                    max_quantity: max_quantity__.unwrap_or_default(),
+                    realized_pnl: realized_pnl__.unwrap_or_default(),
+                    fair_low: fair_low__,
+                    fair_high: fair_high__,
+                    events: events__.unwrap_or_default(),
+                    omitted_events: omitted_events__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.spread_capture.SpreadCaptureCycle", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SpreadCaptureCycleEvent {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCaptureCycleEvent", len)?;
+        if let Some(v) = self.time.as_ref() {
+            struct_ser.serialize_field("time", v)?;
+        }
+        if true {
+            let v = SpreadCaptureCycleEventType::try_from(self.r#type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
+            struct_ser.serialize_field("type", &v)?;
+        }
+        if true {
+            let v = SpreadCaptureOrderPurpose::try_from(self.purpose)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.purpose)))?;
+            struct_ser.serialize_field("purpose", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("order_id", ToString::to_string(&self.order_id).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("original_order_id", ToString::to_string(&self.original_order_id).as_str())?;
+        }
+        if true {
+            let v = super::common::OrderSide::try_from(self.side)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.side)))?;
+            struct_ser.serialize_field("side", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("price", ToString::to_string(&self.price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("from_price", ToString::to_string(&self.from_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("quantity", ToString::to_string(&self.quantity).as_str())?;
+        }
+        if true {
+            let v = super::order_log::LastAskBidTpCode::try_from(self.last_ask_bid_tp_code)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.last_ask_bid_tp_code)))?;
+            struct_ser.serialize_field("last_ask_bid_tp_code", &v)?;
+        }
+        if let Some(v) = self.exchange_time.as_ref() {
+            struct_ser.serialize_field("exchange_time", v)?;
+        }
+        if let Some(v) = self.fair_bid.as_ref() {
+            struct_ser.serialize_field("fair_bid", v)?;
+        }
+        if let Some(v) = self.fair_ask.as_ref() {
+            struct_ser.serialize_field("fair_ask", v)?;
+        }
+        if let Some(v) = self.fair_low.as_ref() {
+            struct_ser.serialize_field("fair_low", v)?;
+        }
+        if let Some(v) = self.fair_high.as_ref() {
+            struct_ser.serialize_field("fair_high", v)?;
+        }
+        if true {
+            let v = SpreadCaptureZone::try_from(self.zone)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.zone)))?;
+            struct_ser.serialize_field("zone", &v)?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("zone_price", ToString::to_string(&self.zone_price).as_str())?;
+        }
+        if true {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("net_quantity", ToString::to_string(&self.net_quantity).as_str())?;
+        }
+        if true {
+            struct_ser.serialize_field("message", &self.message)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for SpreadCaptureCycleEvent {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "time",
+            "type",
+            "purpose",
+            "order_id",
+            "orderId",
+            "original_order_id",
+            "originalOrderId",
+            "side",
+            "price",
+            "from_price",
+            "fromPrice",
+            "quantity",
+            "last_ask_bid_tp_code",
+            "lastAskBidTpCode",
+            "exchange_time",
+            "exchangeTime",
+            "fair_bid",
+            "fairBid",
+            "fair_ask",
+            "fairAsk",
+            "fair_low",
+            "fairLow",
+            "fair_high",
+            "fairHigh",
+            "zone",
+            "zone_price",
+            "zonePrice",
+            "net_quantity",
+            "netQuantity",
+            "message",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Time,
+            Type,
+            Purpose,
+            OrderId,
+            OriginalOrderId,
+            Side,
+            Price,
+            FromPrice,
+            Quantity,
+            LastAskBidTpCode,
+            ExchangeTime,
+            FairBid,
+            FairAsk,
+            FairLow,
+            FairHigh,
+            Zone,
+            ZonePrice,
+            NetQuantity,
+            Message,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "time" => Ok(GeneratedField::Time),
+                            "type" => Ok(GeneratedField::Type),
+                            "purpose" => Ok(GeneratedField::Purpose),
+                            "orderId" | "order_id" => Ok(GeneratedField::OrderId),
+                            "originalOrderId" | "original_order_id" => Ok(GeneratedField::OriginalOrderId),
+                            "side" => Ok(GeneratedField::Side),
+                            "price" => Ok(GeneratedField::Price),
+                            "fromPrice" | "from_price" => Ok(GeneratedField::FromPrice),
+                            "quantity" => Ok(GeneratedField::Quantity),
+                            "lastAskBidTpCode" | "last_ask_bid_tp_code" => Ok(GeneratedField::LastAskBidTpCode),
+                            "exchangeTime" | "exchange_time" => Ok(GeneratedField::ExchangeTime),
+                            "fairBid" | "fair_bid" => Ok(GeneratedField::FairBid),
+                            "fairAsk" | "fair_ask" => Ok(GeneratedField::FairAsk),
+                            "fairLow" | "fair_low" => Ok(GeneratedField::FairLow),
+                            "fairHigh" | "fair_high" => Ok(GeneratedField::FairHigh),
+                            "zone" => Ok(GeneratedField::Zone),
+                            "zonePrice" | "zone_price" => Ok(GeneratedField::ZonePrice),
+                            "netQuantity" | "net_quantity" => Ok(GeneratedField::NetQuantity),
+                            "message" => Ok(GeneratedField::Message),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SpreadCaptureCycleEvent;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct kdo.v1.spread_capture.SpreadCaptureCycleEvent")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<SpreadCaptureCycleEvent, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut time__ = None;
+                let mut r#type__ = None;
+                let mut purpose__ = None;
+                let mut order_id__ = None;
+                let mut original_order_id__ = None;
+                let mut side__ = None;
+                let mut price__ = None;
+                let mut from_price__ = None;
+                let mut quantity__ = None;
+                let mut last_ask_bid_tp_code__ = None;
+                let mut exchange_time__ = None;
+                let mut fair_bid__ = None;
+                let mut fair_ask__ = None;
+                let mut fair_low__ = None;
+                let mut fair_high__ = None;
+                let mut zone__ = None;
+                let mut zone_price__ = None;
+                let mut net_quantity__ = None;
+                let mut message__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Time => {
+                            if time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("time"));
+                            }
+                            time__ = map_.next_value()?;
+                        }
+                        GeneratedField::Type => {
+                            if r#type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("type"));
+                            }
+                            r#type__ = Some(map_.next_value::<SpreadCaptureCycleEventType>()? as i32);
+                        }
+                        GeneratedField::Purpose => {
+                            if purpose__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("purpose"));
+                            }
+                            purpose__ = Some(map_.next_value::<SpreadCaptureOrderPurpose>()? as i32);
+                        }
+                        GeneratedField::OrderId => {
+                            if order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("orderId"));
+                            }
+                            order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::OriginalOrderId => {
+                            if original_order_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("originalOrderId"));
+                            }
+                            original_order_id__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Side => {
+                            if side__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("side"));
+                            }
+                            side__ = Some(map_.next_value::<super::common::OrderSide>()? as i32);
+                        }
+                        GeneratedField::Price => {
+                            if price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("price"));
+                            }
+                            price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::FromPrice => {
+                            if from_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fromPrice"));
+                            }
+                            from_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Quantity => {
+                            if quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("quantity"));
+                            }
+                            quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::LastAskBidTpCode => {
+                            if last_ask_bid_tp_code__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("lastAskBidTpCode"));
+                            }
+                            last_ask_bid_tp_code__ = Some(map_.next_value::<super::order_log::LastAskBidTpCode>()? as i32);
+                        }
+                        GeneratedField::ExchangeTime => {
+                            if exchange_time__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("exchangeTime"));
+                            }
+                            exchange_time__ = map_.next_value()?;
+                        }
+                        GeneratedField::FairBid => {
+                            if fair_bid__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fairBid"));
+                            }
+                            fair_bid__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::FairAsk => {
+                            if fair_ask__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fairAsk"));
+                            }
+                            fair_ask__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::FairLow => {
+                            if fair_low__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fairLow"));
+                            }
+                            fair_low__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::FairHigh => {
+                            if fair_high__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fairHigh"));
+                            }
+                            fair_high__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::Zone => {
+                            if zone__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("zone"));
+                            }
+                            zone__ = Some(map_.next_value::<SpreadCaptureZone>()? as i32);
+                        }
+                        GeneratedField::ZonePrice => {
+                            if zone_price__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("zonePrice"));
+                            }
+                            zone_price__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::NetQuantity => {
+                            if net_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("netQuantity"));
+                            }
+                            net_quantity__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Message => {
+                            if message__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("message"));
+                            }
+                            message__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(SpreadCaptureCycleEvent {
+                    time: time__,
+                    r#type: r#type__.unwrap_or_default(),
+                    purpose: purpose__.unwrap_or_default(),
+                    order_id: order_id__.unwrap_or_default(),
+                    original_order_id: original_order_id__.unwrap_or_default(),
+                    side: side__.unwrap_or_default(),
+                    price: price__.unwrap_or_default(),
+                    from_price: from_price__.unwrap_or_default(),
+                    quantity: quantity__.unwrap_or_default(),
+                    last_ask_bid_tp_code: last_ask_bid_tp_code__.unwrap_or_default(),
+                    exchange_time: exchange_time__,
+                    fair_bid: fair_bid__,
+                    fair_ask: fair_ask__,
+                    fair_low: fair_low__,
+                    fair_high: fair_high__,
+                    zone: zone__.unwrap_or_default(),
+                    zone_price: zone_price__.unwrap_or_default(),
+                    net_quantity: net_quantity__.unwrap_or_default(),
+                    message: message__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("kdo.v1.spread_capture.SpreadCaptureCycleEvent", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SpreadCaptureCycleEventType {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED",
+            Self::Filled => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED",
+            Self::FlattenSent => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT",
+            Self::FlattenAmendSent => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT",
+            Self::FlattenCancelSent => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT",
+            Self::FlattenCancelled => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED",
+            Self::FlattenRejected => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED",
+            Self::ZoneChanged => "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for SpreadCaptureCycleEventType {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED",
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED",
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT",
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT",
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT",
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED",
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED",
+            "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SpreadCaptureCycleEventType;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED" => Ok(SpreadCaptureCycleEventType::Unspecified),
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED" => Ok(SpreadCaptureCycleEventType::Filled),
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT" => Ok(SpreadCaptureCycleEventType::FlattenSent),
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT" => Ok(SpreadCaptureCycleEventType::FlattenAmendSent),
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT" => Ok(SpreadCaptureCycleEventType::FlattenCancelSent),
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED" => Ok(SpreadCaptureCycleEventType::FlattenCancelled),
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED" => Ok(SpreadCaptureCycleEventType::FlattenRejected),
+                    "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED" => Ok(SpreadCaptureCycleEventType::ZoneChanged),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
 impl serde::Serialize for SpreadCaptureOrder {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -1238,6 +2478,86 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
             }
         }
         deserializer.deserialize_struct("kdo.v1.spread_capture.SpreadCaptureOrder", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for SpreadCaptureOrderPurpose {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Unspecified => "SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED",
+            Self::Quote => "SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE",
+            Self::BoundaryFlatten => "SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN",
+            Self::CloseOut => "SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT",
+            Self::QuickOrder => "SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for SpreadCaptureOrderPurpose {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED",
+            "SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE",
+            "SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN",
+            "SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT",
+            "SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = SpreadCaptureOrderPurpose;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED" => Ok(SpreadCaptureOrderPurpose::Unspecified),
+                    "SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE" => Ok(SpreadCaptureOrderPurpose::Quote),
+                    "SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN" => Ok(SpreadCaptureOrderPurpose::BoundaryFlatten),
+                    "SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT" => Ok(SpreadCaptureOrderPurpose::CloseOut),
+                    "SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER" => Ok(SpreadCaptureOrderPurpose::QuickOrder),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
     }
 }
 impl serde::Serialize for SpreadCaptureOrderState {

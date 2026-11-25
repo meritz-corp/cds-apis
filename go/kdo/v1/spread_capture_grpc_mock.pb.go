@@ -318,6 +318,26 @@ func (mr *MockSpreadCaptureServiceClientMockRecorder) GetSpreadCapture(ctx, in i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSpreadCapture", reflect.TypeOf((*MockSpreadCaptureServiceClient)(nil).GetSpreadCapture), varargs...)
 }
 
+// ListSpreadCaptureCycles mocks base method.
+func (m *MockSpreadCaptureServiceClient) ListSpreadCaptureCycles(ctx context.Context, in *ListSpreadCaptureCyclesRequest, opts ...grpc.CallOption) (*ListSpreadCaptureCyclesResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ListSpreadCaptureCycles", varargs...)
+	ret0, _ := ret[0].(*ListSpreadCaptureCyclesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListSpreadCaptureCycles indicates an expected call of ListSpreadCaptureCycles.
+func (mr *MockSpreadCaptureServiceClientMockRecorder) ListSpreadCaptureCycles(ctx, in interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSpreadCaptureCycles", reflect.TypeOf((*MockSpreadCaptureServiceClient)(nil).ListSpreadCaptureCycles), varargs...)
+}
+
 // ListSpreadCaptureStatuses mocks base method.
 func (m *MockSpreadCaptureServiceClient) ListSpreadCaptureStatuses(ctx context.Context, in *ListSpreadCaptureStatusesRequest, opts ...grpc.CallOption) (*ListSpreadCaptureStatusesResponse, error) {
 	m.ctrl.T.Helper()
@@ -489,6 +509,21 @@ func (m *MockSpreadCaptureServiceServer) GetSpreadCapture(ctx context.Context, i
 func (mr *MockSpreadCaptureServiceServerMockRecorder) GetSpreadCapture(ctx, in interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSpreadCapture", reflect.TypeOf((*MockSpreadCaptureServiceServer)(nil).GetSpreadCapture), ctx, in)
+}
+
+// ListSpreadCaptureCycles mocks base method.
+func (m *MockSpreadCaptureServiceServer) ListSpreadCaptureCycles(ctx context.Context, in *ListSpreadCaptureCyclesRequest) (*ListSpreadCaptureCyclesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListSpreadCaptureCycles", ctx, in)
+	ret0, _ := ret[0].(*ListSpreadCaptureCyclesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListSpreadCaptureCycles indicates an expected call of ListSpreadCaptureCycles.
+func (mr *MockSpreadCaptureServiceServerMockRecorder) ListSpreadCaptureCycles(ctx, in interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSpreadCaptureCycles", reflect.TypeOf((*MockSpreadCaptureServiceServer)(nil).ListSpreadCaptureCycles), ctx, in)
 }
 
 // ListSpreadCaptureStatuses mocks base method.

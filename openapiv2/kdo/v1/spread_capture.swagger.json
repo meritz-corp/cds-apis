@@ -39,6 +39,68 @@
         ]
       }
     },
+    "/v1/spread_captures/cycles": {
+      "get": {
+        "summary": "포지션 사이클 목록 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지의 체결·청산 주문 경과와 그때 공정가. 최근에 저장된 것부터.\n사이클은 닫힐 때(또는 노출을 남긴 채 실행이 끝날 때) 저장된다. 이 서버에서 아직 열려 있는 사이클은 첫 페이지 맨 앞에 붙는다(page_size 밖).",
+        "operationId": "SpreadCaptureService_ListSpreadCaptureCycles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/spread_captureListSpreadCaptureCyclesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "etfSymbol",
+            "description": "비우면 전체",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fundCode",
+            "description": "비우면 전체",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "description": "사이클을 연 영업일 (YYYYMMDD, KST). 미지정 시 날짜 제한 없음",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "페이지 크기 (기본: 20, 최대: 100)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageToken",
+            "description": "이전 응답의 next_page_token 을 그대로 전달. 최초 조회는 미지정",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SpreadCaptureService"
+        ]
+      }
+    },
     "/v1/spread_captures/statuses": {
       "get": {
         "summary": "오늘 시작한 스프레드 캡처 상태 목록",
@@ -488,6 +550,18 @@
       },
       "description": "한 종목(ETF 또는 헷지 선물)의 매수/매도 체결 요약.\navg_price 는 서버에서 total_amount/qty 로 산출된 값."
     },
+    "order_logLastAskBidTpCode": {
+      "type": "string",
+      "enum": [
+        "LAST_ASK_BID_TP_CODE_UNSPECIFIED",
+        "TAKE",
+        "MAKE",
+        "SINGLE_PRICE"
+      ],
+      "default": "LAST_ASK_BID_TP_CODE_UNSPECIFIED",
+      "description": "- SINGLE_PRICE: 단일가(동시호가/시가·종가/VI/시간외) 체결",
+      "title": "매수도체결구분 (make/take)"
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -512,6 +586,21 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "spread_captureListSpreadCaptureCyclesResponse": {
+      "type": "object",
+      "properties": {
+        "cycles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/spread_captureSpreadCaptureCycle"
+          }
+        },
+        "nextPageToken": {
+          "type": "string",
+          "title": "다음 페이지 토큰 (더 없으면 빈 문자열)"
         }
       }
     },
@@ -632,6 +721,204 @@
         "fundCode"
       ]
     },
+    "spread_captureSpreadCaptureCycle": {
+      "type": "object",
+      "properties": {
+        "etfSymbol": {
+          "type": "string"
+        },
+        "fundCode": {
+          "type": "string"
+        },
+        "runStartedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "실행 시작 시각 — seq 와 함께 사이클을 가리킨다"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int64",
+          "title": "그 실행의 몇 번째 사이클인지 (1부터)"
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide",
+          "title": "연 방향 — BID 매수 노출, ASK 매도 노출"
+        },
+        "openedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "연 체결의 거래소 시각"
+        },
+        "closedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "순노출이 0 이 된 체결의 거래소 시각. 없으면 아직 열려 있거나 노출을 남긴 채 실행이 끝났다"
+        },
+        "entryQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "연 방향 체결 수량 합 (주)"
+        },
+        "entryPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "연 방향 평균 체결가 (원)"
+        },
+        "exitQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "반대 방향 체결 수량 합 (주)"
+        },
+        "exitPrice": {
+          "type": "number",
+          "format": "double",
+          "title": "반대 방향 평균 체결가 (원). 체결이 없으면 0"
+        },
+        "maxQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "사이클 동안 최대 순노출 (주, 절댓값)"
+        },
+        "realizedPnl": {
+          "type": "number",
+          "format": "double",
+          "title": "실현 손익 (원, 수수료·세금 제외) — 청산한 수량 몫(평균 진입가 기준). 닫혔으면 사이클 전체 손익"
+        },
+        "fairLow": {
+          "type": "number",
+          "format": "double",
+          "title": "사이클 동안 공정가 매수 쪽 최저(원). 없으면 모름"
+        },
+        "fairHigh": {
+          "type": "number",
+          "format": "double",
+          "title": "사이클 동안 공정가 매도 쪽 최고(원). 없으면 모름"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/spread_captureSpreadCaptureCycleEvent"
+          },
+          "title": "경과 (time 순) — 첫 이벤트가 연 체결이다"
+        },
+        "omittedEvents": {
+          "type": "integer",
+          "format": "int64",
+          "title": "상한을 넘어 events 에 남기지 않은 이벤트 수 (수량·손익에는 반영된다)"
+        }
+      },
+      "description": "포지션 사이클 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지. 한 체결로 방향이 뒤집히면 닫고 남은 수량으로 새 사이클을 연다."
+    },
+    "spread_captureSpreadCaptureCycleEvent": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "서버가 처리한 시각 — 이벤트는 이 순서다. 체결은 통보를 처리한 시각이라 거래소 체결(exchange_time)보다 늦다"
+        },
+        "type": {
+          "$ref": "#/definitions/spread_captureSpreadCaptureCycleEventType"
+        },
+        "purpose": {
+          "$ref": "#/definitions/spread_captureSpreadCaptureOrderPurpose",
+          "title": "주문 용도. ZONE_CHANGED 면 UNSPECIFIED"
+        },
+        "orderId": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문번호 — 정정 송신이면 정정 주문번호. ZONE_CHANGED 면 0"
+        },
+        "originalOrderId": {
+          "type": "string",
+          "format": "int64",
+          "title": "정정 송신이면 원주문번호, 정정·취소 거부면 원주문번호. 그 밖엔 0"
+        },
+        "side": {
+          "$ref": "#/definitions/commonOrderSide",
+          "title": "ZONE_CHANGED 면 UNSPECIFIED"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문·체결 가격(원). 정정 송신이면 옮길 가격. ZONE_CHANGED 면 0"
+        },
+        "fromPrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "정정 전 가격(원). 정정 송신이 아니면 0"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "주문·체결·취소 수량 (주). ZONE_CHANGED·거부면 0"
+        },
+        "lastAskBidTpCode": {
+          "$ref": "#/definitions/order_logLastAskBidTpCode",
+          "title": "체결만 — make·take·단일가"
+        },
+        "exchangeTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "체결만 — 거래소 체결 시각 (ms)"
+        },
+        "fairBid": {
+          "type": "number",
+          "format": "double",
+          "title": "그때 알던 공정가 매수 쪽(원) — 체결은 거래소 체결 시각, 나머지는 time 기준. 모르면(선물 시세 이상·실행 종료 뒤) 없음"
+        },
+        "fairAsk": {
+          "type": "number",
+          "format": "double",
+          "title": "그때 알던 공정가 매도 쪽(원)"
+        },
+        "fairLow": {
+          "type": "number",
+          "format": "double",
+          "title": "앞 이벤트 뒤 이 이벤트까지 공정가 매수 쪽 최저(원). 없으면 모름"
+        },
+        "fairHigh": {
+          "type": "number",
+          "format": "double",
+          "title": "앞 이벤트 뒤 이 이벤트까지 공정가 매도 쪽 최고(원). 없으면 모름"
+        },
+        "zone": {
+          "$ref": "#/definitions/spread_captureSpreadCaptureZone",
+          "title": "그때 구간. ZONE_CHANGED 면 새 구간"
+        },
+        "zonePrice": {
+          "type": "string",
+          "format": "int64",
+          "title": "안전 구간이면 매수 1호가(원), 전환 구간이면 경계 가격(원). 모르면 0"
+        },
+        "netQuantity": {
+          "type": "string",
+          "format": "int64",
+          "title": "이 이벤트 뒤 순노출 (주, 매수 +)"
+        },
+        "message": {
+          "type": "string",
+          "title": "거부·자동취소 사유"
+        }
+      },
+      "title": "사이클 이벤트 — 체결·청산 주문 경과·안전 구간 변경과 그때 공정가"
+    },
+    "spread_captureSpreadCaptureCycleEventType": {
+      "type": "string",
+      "enum": [
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED",
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED",
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT",
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT",
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT",
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED",
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED",
+        "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED"
+      ],
+      "default": "SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED",
+      "description": "- SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FILLED: 체결 — 상주 호가·전환 구간 청산·마감 청산·화면 퀵주문 (purpose 로 구분)\n - SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_SENT: 청산 신규 송신 (전환 구간 청산·마감 청산 IOC)\n - SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_AMEND_SENT: 청산 가격 정정 송신 (from_price → price)\n - SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCEL_SENT: 청산 취소 송신\n - SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_CANCELLED: 청산 주문 수량이 취소됨 — 보낸 취소의 확인 또는 거래소 자동취소(message 에 사유)\n - SPREAD_CAPTURE_CYCLE_EVENT_TYPE_FLATTEN_REJECTED: 청산 신규·정정·취소 거부 (message 에 사유)\n - SPREAD_CAPTURE_CYCLE_EVENT_TYPE_ZONE_CHANGED: 안전 구간이 바뀜 (zone·zone_price 가 새 구간)",
+      "title": "사이클 이벤트 종류"
+    },
     "spread_captureSpreadCaptureOrder": {
       "type": "object",
       "properties": {
@@ -670,6 +957,19 @@
         }
       },
       "title": "살아 있는 주문 1건 — 상주 호가 또는 전환 구간 청산"
+    },
+    "spread_captureSpreadCaptureOrderPurpose": {
+      "type": "string",
+      "enum": [
+        "SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED",
+        "SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE",
+        "SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN",
+        "SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT",
+        "SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER"
+      ],
+      "default": "SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED",
+      "description": "- SPREAD_CAPTURE_ORDER_PURPOSE_QUOTE: 상주 호가\n - SPREAD_CAPTURE_ORDER_PURPOSE_BOUNDARY_FLATTEN: 전환 구간 청산\n - SPREAD_CAPTURE_ORDER_PURPOSE_CLOSE_OUT: 마감 청산 IOC\n - SPREAD_CAPTURE_ORDER_PURPOSE_QUICK_ORDER: 화면 퀵주문",
+      "title": "사이클 주문의 용도"
     },
     "spread_captureSpreadCaptureOrderState": {
       "type": "string",

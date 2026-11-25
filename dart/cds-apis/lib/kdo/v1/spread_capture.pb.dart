@@ -18,6 +18,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../../google/protobuf/timestamp.pb.dart' as $3;
 import 'common.pb.dart' as $2;
 import 'lp.pb.dart' as $4;
+import 'order_log.pbenum.dart' as $5;
 import 'spread_capture.pbenum.dart';
 
 export 'package:protobuf/protobuf.dart' show GeneratedMessageGenericExtensions;
@@ -682,6 +683,545 @@ class SpreadCaptureStatus extends $pb.GeneratedMessage {
   $3.Timestamp ensureStartedAt() => $_ensure(16);
 }
 
+/// 사이클 이벤트 — 체결·청산 주문 경과·안전 구간 변경과 그때 공정가
+class SpreadCaptureCycleEvent extends $pb.GeneratedMessage {
+  factory SpreadCaptureCycleEvent({
+    $3.Timestamp? time,
+    SpreadCaptureCycleEventType? type,
+    SpreadCaptureOrderPurpose? purpose,
+    $fixnum.Int64? orderId,
+    $fixnum.Int64? originalOrderId,
+    $2.OrderSide? side,
+    $fixnum.Int64? price,
+    $fixnum.Int64? fromPrice,
+    $fixnum.Int64? quantity,
+    $5.LastAskBidTpCode? lastAskBidTpCode,
+    $3.Timestamp? exchangeTime,
+    $core.double? fairBid,
+    $core.double? fairAsk,
+    $core.double? fairLow,
+    $core.double? fairHigh,
+    SpreadCaptureZone? zone,
+    $fixnum.Int64? zonePrice,
+    $fixnum.Int64? netQuantity,
+    $core.String? message,
+  }) {
+    final result = create();
+    if (time != null) result.time = time;
+    if (type != null) result.type = type;
+    if (purpose != null) result.purpose = purpose;
+    if (orderId != null) result.orderId = orderId;
+    if (originalOrderId != null) result.originalOrderId = originalOrderId;
+    if (side != null) result.side = side;
+    if (price != null) result.price = price;
+    if (fromPrice != null) result.fromPrice = fromPrice;
+    if (quantity != null) result.quantity = quantity;
+    if (lastAskBidTpCode != null) result.lastAskBidTpCode = lastAskBidTpCode;
+    if (exchangeTime != null) result.exchangeTime = exchangeTime;
+    if (fairBid != null) result.fairBid = fairBid;
+    if (fairAsk != null) result.fairAsk = fairAsk;
+    if (fairLow != null) result.fairLow = fairLow;
+    if (fairHigh != null) result.fairHigh = fairHigh;
+    if (zone != null) result.zone = zone;
+    if (zonePrice != null) result.zonePrice = zonePrice;
+    if (netQuantity != null) result.netQuantity = netQuantity;
+    if (message != null) result.message = message;
+    return result;
+  }
+
+  SpreadCaptureCycleEvent._();
+
+  factory SpreadCaptureCycleEvent.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SpreadCaptureCycleEvent.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpreadCaptureCycleEvent', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.spread_capture'), createEmptyInstance: create)
+    ..aOM<$3.Timestamp>(1, _omitFieldNames ? '' : 'time', subBuilder: $3.Timestamp.create)
+    ..e<SpreadCaptureCycleEventType>(2, _omitFieldNames ? '' : 'type', $pb.PbFieldType.OE, defaultOrMaker: SpreadCaptureCycleEventType.SPREAD_CAPTURE_CYCLE_EVENT_TYPE_UNSPECIFIED, valueOf: SpreadCaptureCycleEventType.valueOf, enumValues: SpreadCaptureCycleEventType.values)
+    ..e<SpreadCaptureOrderPurpose>(3, _omitFieldNames ? '' : 'purpose', $pb.PbFieldType.OE, defaultOrMaker: SpreadCaptureOrderPurpose.SPREAD_CAPTURE_ORDER_PURPOSE_UNSPECIFIED, valueOf: SpreadCaptureOrderPurpose.valueOf, enumValues: SpreadCaptureOrderPurpose.values)
+    ..aInt64(4, _omitFieldNames ? '' : 'orderId')
+    ..aInt64(5, _omitFieldNames ? '' : 'originalOrderId')
+    ..e<$2.OrderSide>(6, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..aInt64(7, _omitFieldNames ? '' : 'price')
+    ..aInt64(8, _omitFieldNames ? '' : 'fromPrice')
+    ..aInt64(9, _omitFieldNames ? '' : 'quantity')
+    ..e<$5.LastAskBidTpCode>(10, _omitFieldNames ? '' : 'lastAskBidTpCode', $pb.PbFieldType.OE, defaultOrMaker: $5.LastAskBidTpCode.LAST_ASK_BID_TP_CODE_UNSPECIFIED, valueOf: $5.LastAskBidTpCode.valueOf, enumValues: $5.LastAskBidTpCode.values)
+    ..aOM<$3.Timestamp>(11, _omitFieldNames ? '' : 'exchangeTime', subBuilder: $3.Timestamp.create)
+    ..a<$core.double>(12, _omitFieldNames ? '' : 'fairBid', $pb.PbFieldType.OD)
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'fairAsk', $pb.PbFieldType.OD)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'fairLow', $pb.PbFieldType.OD)
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'fairHigh', $pb.PbFieldType.OD)
+    ..e<SpreadCaptureZone>(16, _omitFieldNames ? '' : 'zone', $pb.PbFieldType.OE, defaultOrMaker: SpreadCaptureZone.SPREAD_CAPTURE_ZONE_UNSPECIFIED, valueOf: SpreadCaptureZone.valueOf, enumValues: SpreadCaptureZone.values)
+    ..aInt64(17, _omitFieldNames ? '' : 'zonePrice')
+    ..aInt64(18, _omitFieldNames ? '' : 'netQuantity')
+    ..aOS(19, _omitFieldNames ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SpreadCaptureCycleEvent clone() => SpreadCaptureCycleEvent()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SpreadCaptureCycleEvent copyWith(void Function(SpreadCaptureCycleEvent) updates) => super.copyWith((message) => updates(message as SpreadCaptureCycleEvent)) as SpreadCaptureCycleEvent;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SpreadCaptureCycleEvent create() => SpreadCaptureCycleEvent._();
+  @$core.override
+  SpreadCaptureCycleEvent createEmptyInstance() => create();
+  static $pb.PbList<SpreadCaptureCycleEvent> createRepeated() => $pb.PbList<SpreadCaptureCycleEvent>();
+  @$core.pragma('dart2js:noInline')
+  static SpreadCaptureCycleEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SpreadCaptureCycleEvent>(create);
+  static SpreadCaptureCycleEvent? _defaultInstance;
+
+  /// 서버가 처리한 시각 — 이벤트는 이 순서다. 체결은 통보를 처리한 시각이라 거래소 체결(exchange_time)보다 늦다
+  @$pb.TagNumber(1)
+  $3.Timestamp get time => $_getN(0);
+  @$pb.TagNumber(1)
+  set time($3.Timestamp value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasTime() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTime() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $3.Timestamp ensureTime() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  SpreadCaptureCycleEventType get type => $_getN(1);
+  @$pb.TagNumber(2)
+  set type(SpreadCaptureCycleEventType value) => $_setField(2, value);
+  @$pb.TagNumber(2)
+  $core.bool hasType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearType() => $_clearField(2);
+
+  /// 주문 용도. ZONE_CHANGED 면 UNSPECIFIED
+  @$pb.TagNumber(3)
+  SpreadCaptureOrderPurpose get purpose => $_getN(2);
+  @$pb.TagNumber(3)
+  set purpose(SpreadCaptureOrderPurpose value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasPurpose() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPurpose() => $_clearField(3);
+
+  /// 주문번호 — 정정 송신이면 정정 주문번호. ZONE_CHANGED 면 0
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get orderId => $_getI64(3);
+  @$pb.TagNumber(4)
+  set orderId($fixnum.Int64 value) => $_setInt64(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasOrderId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearOrderId() => $_clearField(4);
+
+  /// 정정 송신이면 원주문번호, 정정·취소 거부면 원주문번호. 그 밖엔 0
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get originalOrderId => $_getI64(4);
+  @$pb.TagNumber(5)
+  set originalOrderId($fixnum.Int64 value) => $_setInt64(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasOriginalOrderId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearOriginalOrderId() => $_clearField(5);
+
+  /// ZONE_CHANGED 면 UNSPECIFIED
+  @$pb.TagNumber(6)
+  $2.OrderSide get side => $_getN(5);
+  @$pb.TagNumber(6)
+  set side($2.OrderSide value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasSide() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSide() => $_clearField(6);
+
+  /// 주문·체결 가격(원). 정정 송신이면 옮길 가격. ZONE_CHANGED 면 0
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get price => $_getI64(6);
+  @$pb.TagNumber(7)
+  set price($fixnum.Int64 value) => $_setInt64(6, value);
+  @$pb.TagNumber(7)
+  $core.bool hasPrice() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPrice() => $_clearField(7);
+
+  /// 정정 전 가격(원). 정정 송신이 아니면 0
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get fromPrice => $_getI64(7);
+  @$pb.TagNumber(8)
+  set fromPrice($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasFromPrice() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearFromPrice() => $_clearField(8);
+
+  /// 주문·체결·취소 수량 (주). ZONE_CHANGED·거부면 0
+  @$pb.TagNumber(9)
+  $fixnum.Int64 get quantity => $_getI64(8);
+  @$pb.TagNumber(9)
+  set quantity($fixnum.Int64 value) => $_setInt64(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasQuantity() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearQuantity() => $_clearField(9);
+
+  /// 체결만 — make·take·단일가
+  @$pb.TagNumber(10)
+  $5.LastAskBidTpCode get lastAskBidTpCode => $_getN(9);
+  @$pb.TagNumber(10)
+  set lastAskBidTpCode($5.LastAskBidTpCode value) => $_setField(10, value);
+  @$pb.TagNumber(10)
+  $core.bool hasLastAskBidTpCode() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearLastAskBidTpCode() => $_clearField(10);
+
+  /// 체결만 — 거래소 체결 시각 (ms)
+  @$pb.TagNumber(11)
+  $3.Timestamp get exchangeTime => $_getN(10);
+  @$pb.TagNumber(11)
+  set exchangeTime($3.Timestamp value) => $_setField(11, value);
+  @$pb.TagNumber(11)
+  $core.bool hasExchangeTime() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearExchangeTime() => $_clearField(11);
+  @$pb.TagNumber(11)
+  $3.Timestamp ensureExchangeTime() => $_ensure(10);
+
+  /// 그때 알던 공정가 매수 쪽(원) — 체결은 거래소 체결 시각, 나머지는 time 기준. 모르면(선물 시세 이상·실행 종료 뒤) 없음
+  @$pb.TagNumber(12)
+  $core.double get fairBid => $_getN(11);
+  @$pb.TagNumber(12)
+  set fairBid($core.double value) => $_setDouble(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasFairBid() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearFairBid() => $_clearField(12);
+
+  /// 그때 알던 공정가 매도 쪽(원)
+  @$pb.TagNumber(13)
+  $core.double get fairAsk => $_getN(12);
+  @$pb.TagNumber(13)
+  set fairAsk($core.double value) => $_setDouble(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasFairAsk() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearFairAsk() => $_clearField(13);
+
+  /// 앞 이벤트 뒤 이 이벤트까지 공정가 매수 쪽 최저(원). 없으면 모름
+  @$pb.TagNumber(14)
+  $core.double get fairLow => $_getN(13);
+  @$pb.TagNumber(14)
+  set fairLow($core.double value) => $_setDouble(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasFairLow() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearFairLow() => $_clearField(14);
+
+  /// 앞 이벤트 뒤 이 이벤트까지 공정가 매도 쪽 최고(원). 없으면 모름
+  @$pb.TagNumber(15)
+  $core.double get fairHigh => $_getN(14);
+  @$pb.TagNumber(15)
+  set fairHigh($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasFairHigh() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearFairHigh() => $_clearField(15);
+
+  /// 그때 구간. ZONE_CHANGED 면 새 구간
+  @$pb.TagNumber(16)
+  SpreadCaptureZone get zone => $_getN(15);
+  @$pb.TagNumber(16)
+  set zone(SpreadCaptureZone value) => $_setField(16, value);
+  @$pb.TagNumber(16)
+  $core.bool hasZone() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearZone() => $_clearField(16);
+
+  /// 안전 구간이면 매수 1호가(원), 전환 구간이면 경계 가격(원). 모르면 0
+  @$pb.TagNumber(17)
+  $fixnum.Int64 get zonePrice => $_getI64(16);
+  @$pb.TagNumber(17)
+  set zonePrice($fixnum.Int64 value) => $_setInt64(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasZonePrice() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearZonePrice() => $_clearField(17);
+
+  /// 이 이벤트 뒤 순노출 (주, 매수 +)
+  @$pb.TagNumber(18)
+  $fixnum.Int64 get netQuantity => $_getI64(17);
+  @$pb.TagNumber(18)
+  set netQuantity($fixnum.Int64 value) => $_setInt64(17, value);
+  @$pb.TagNumber(18)
+  $core.bool hasNetQuantity() => $_has(17);
+  @$pb.TagNumber(18)
+  void clearNetQuantity() => $_clearField(18);
+
+  /// 거부·자동취소 사유
+  @$pb.TagNumber(19)
+  $core.String get message => $_getSZ(18);
+  @$pb.TagNumber(19)
+  set message($core.String value) => $_setString(18, value);
+  @$pb.TagNumber(19)
+  $core.bool hasMessage() => $_has(18);
+  @$pb.TagNumber(19)
+  void clearMessage() => $_clearField(19);
+}
+
+/// 포지션 사이클 — 순노출이 0 에서 생겨(open) 다시 0 이 될 때(close)까지. 한 체결로 방향이 뒤집히면 닫고 남은 수량으로 새 사이클을 연다.
+class SpreadCaptureCycle extends $pb.GeneratedMessage {
+  factory SpreadCaptureCycle({
+    $core.String? etfSymbol,
+    $core.String? fundCode,
+    $3.Timestamp? runStartedAt,
+    $core.int? seq,
+    $2.OrderSide? side,
+    $3.Timestamp? openedAt,
+    $3.Timestamp? closedAt,
+    $fixnum.Int64? entryQuantity,
+    $core.double? entryPrice,
+    $fixnum.Int64? exitQuantity,
+    $core.double? exitPrice,
+    $fixnum.Int64? maxQuantity,
+    $core.double? realizedPnl,
+    $core.double? fairLow,
+    $core.double? fairHigh,
+    $core.Iterable<SpreadCaptureCycleEvent>? events,
+    $core.int? omittedEvents,
+  }) {
+    final result = create();
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (runStartedAt != null) result.runStartedAt = runStartedAt;
+    if (seq != null) result.seq = seq;
+    if (side != null) result.side = side;
+    if (openedAt != null) result.openedAt = openedAt;
+    if (closedAt != null) result.closedAt = closedAt;
+    if (entryQuantity != null) result.entryQuantity = entryQuantity;
+    if (entryPrice != null) result.entryPrice = entryPrice;
+    if (exitQuantity != null) result.exitQuantity = exitQuantity;
+    if (exitPrice != null) result.exitPrice = exitPrice;
+    if (maxQuantity != null) result.maxQuantity = maxQuantity;
+    if (realizedPnl != null) result.realizedPnl = realizedPnl;
+    if (fairLow != null) result.fairLow = fairLow;
+    if (fairHigh != null) result.fairHigh = fairHigh;
+    if (events != null) result.events.addAll(events);
+    if (omittedEvents != null) result.omittedEvents = omittedEvents;
+    return result;
+  }
+
+  SpreadCaptureCycle._();
+
+  factory SpreadCaptureCycle.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory SpreadCaptureCycle.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SpreadCaptureCycle', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.spread_capture'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..aOM<$3.Timestamp>(3, _omitFieldNames ? '' : 'runStartedAt', subBuilder: $3.Timestamp.create)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'seq', $pb.PbFieldType.OU3)
+    ..e<$2.OrderSide>(5, _omitFieldNames ? '' : 'side', $pb.PbFieldType.OE, defaultOrMaker: $2.OrderSide.ORDER_SIDE_UNSPECIFIED, valueOf: $2.OrderSide.valueOf, enumValues: $2.OrderSide.values)
+    ..aOM<$3.Timestamp>(6, _omitFieldNames ? '' : 'openedAt', subBuilder: $3.Timestamp.create)
+    ..aOM<$3.Timestamp>(7, _omitFieldNames ? '' : 'closedAt', subBuilder: $3.Timestamp.create)
+    ..aInt64(8, _omitFieldNames ? '' : 'entryQuantity')
+    ..a<$core.double>(9, _omitFieldNames ? '' : 'entryPrice', $pb.PbFieldType.OD)
+    ..aInt64(10, _omitFieldNames ? '' : 'exitQuantity')
+    ..a<$core.double>(11, _omitFieldNames ? '' : 'exitPrice', $pb.PbFieldType.OD)
+    ..aInt64(12, _omitFieldNames ? '' : 'maxQuantity')
+    ..a<$core.double>(13, _omitFieldNames ? '' : 'realizedPnl', $pb.PbFieldType.OD)
+    ..a<$core.double>(14, _omitFieldNames ? '' : 'fairLow', $pb.PbFieldType.OD)
+    ..a<$core.double>(15, _omitFieldNames ? '' : 'fairHigh', $pb.PbFieldType.OD)
+    ..pc<SpreadCaptureCycleEvent>(16, _omitFieldNames ? '' : 'events', $pb.PbFieldType.PM, subBuilder: SpreadCaptureCycleEvent.create)
+    ..a<$core.int>(17, _omitFieldNames ? '' : 'omittedEvents', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SpreadCaptureCycle clone() => SpreadCaptureCycle()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  SpreadCaptureCycle copyWith(void Function(SpreadCaptureCycle) updates) => super.copyWith((message) => updates(message as SpreadCaptureCycle)) as SpreadCaptureCycle;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static SpreadCaptureCycle create() => SpreadCaptureCycle._();
+  @$core.override
+  SpreadCaptureCycle createEmptyInstance() => create();
+  static $pb.PbList<SpreadCaptureCycle> createRepeated() => $pb.PbList<SpreadCaptureCycle>();
+  @$core.pragma('dart2js:noInline')
+  static SpreadCaptureCycle getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SpreadCaptureCycle>(create);
+  static SpreadCaptureCycle? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get etfSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etfSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtfSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtfSymbol() => $_clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 실행 시작 시각 — seq 와 함께 사이클을 가리킨다
+  @$pb.TagNumber(3)
+  $3.Timestamp get runStartedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set runStartedAt($3.Timestamp value) => $_setField(3, value);
+  @$pb.TagNumber(3)
+  $core.bool hasRunStartedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRunStartedAt() => $_clearField(3);
+  @$pb.TagNumber(3)
+  $3.Timestamp ensureRunStartedAt() => $_ensure(2);
+
+  /// 그 실행의 몇 번째 사이클인지 (1부터)
+  @$pb.TagNumber(4)
+  $core.int get seq => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set seq($core.int value) => $_setUnsignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasSeq() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSeq() => $_clearField(4);
+
+  /// 연 방향 — BID 매수 노출, ASK 매도 노출
+  @$pb.TagNumber(5)
+  $2.OrderSide get side => $_getN(4);
+  @$pb.TagNumber(5)
+  set side($2.OrderSide value) => $_setField(5, value);
+  @$pb.TagNumber(5)
+  $core.bool hasSide() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearSide() => $_clearField(5);
+
+  /// 연 체결의 거래소 시각
+  @$pb.TagNumber(6)
+  $3.Timestamp get openedAt => $_getN(5);
+  @$pb.TagNumber(6)
+  set openedAt($3.Timestamp value) => $_setField(6, value);
+  @$pb.TagNumber(6)
+  $core.bool hasOpenedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearOpenedAt() => $_clearField(6);
+  @$pb.TagNumber(6)
+  $3.Timestamp ensureOpenedAt() => $_ensure(5);
+
+  /// 순노출이 0 이 된 체결의 거래소 시각. 없으면 아직 열려 있거나 노출을 남긴 채 실행이 끝났다
+  @$pb.TagNumber(7)
+  $3.Timestamp get closedAt => $_getN(6);
+  @$pb.TagNumber(7)
+  set closedAt($3.Timestamp value) => $_setField(7, value);
+  @$pb.TagNumber(7)
+  $core.bool hasClosedAt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearClosedAt() => $_clearField(7);
+  @$pb.TagNumber(7)
+  $3.Timestamp ensureClosedAt() => $_ensure(6);
+
+  /// 연 방향 체결 수량 합 (주)
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get entryQuantity => $_getI64(7);
+  @$pb.TagNumber(8)
+  set entryQuantity($fixnum.Int64 value) => $_setInt64(7, value);
+  @$pb.TagNumber(8)
+  $core.bool hasEntryQuantity() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearEntryQuantity() => $_clearField(8);
+
+  /// 연 방향 평균 체결가 (원)
+  @$pb.TagNumber(9)
+  $core.double get entryPrice => $_getN(8);
+  @$pb.TagNumber(9)
+  set entryPrice($core.double value) => $_setDouble(8, value);
+  @$pb.TagNumber(9)
+  $core.bool hasEntryPrice() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearEntryPrice() => $_clearField(9);
+
+  /// 반대 방향 체결 수량 합 (주)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get exitQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set exitQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasExitQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearExitQuantity() => $_clearField(10);
+
+  /// 반대 방향 평균 체결가 (원). 체결이 없으면 0
+  @$pb.TagNumber(11)
+  $core.double get exitPrice => $_getN(10);
+  @$pb.TagNumber(11)
+  set exitPrice($core.double value) => $_setDouble(10, value);
+  @$pb.TagNumber(11)
+  $core.bool hasExitPrice() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearExitPrice() => $_clearField(11);
+
+  /// 사이클 동안 최대 순노출 (주, 절댓값)
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get maxQuantity => $_getI64(11);
+  @$pb.TagNumber(12)
+  set maxQuantity($fixnum.Int64 value) => $_setInt64(11, value);
+  @$pb.TagNumber(12)
+  $core.bool hasMaxQuantity() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearMaxQuantity() => $_clearField(12);
+
+  /// 실현 손익 (원, 수수료·세금 제외) — 청산한 수량 몫(평균 진입가 기준). 닫혔으면 사이클 전체 손익
+  @$pb.TagNumber(13)
+  $core.double get realizedPnl => $_getN(12);
+  @$pb.TagNumber(13)
+  set realizedPnl($core.double value) => $_setDouble(12, value);
+  @$pb.TagNumber(13)
+  $core.bool hasRealizedPnl() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearRealizedPnl() => $_clearField(13);
+
+  /// 사이클 동안 공정가 매수 쪽 최저(원). 없으면 모름
+  @$pb.TagNumber(14)
+  $core.double get fairLow => $_getN(13);
+  @$pb.TagNumber(14)
+  set fairLow($core.double value) => $_setDouble(13, value);
+  @$pb.TagNumber(14)
+  $core.bool hasFairLow() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearFairLow() => $_clearField(14);
+
+  /// 사이클 동안 공정가 매도 쪽 최고(원). 없으면 모름
+  @$pb.TagNumber(15)
+  $core.double get fairHigh => $_getN(14);
+  @$pb.TagNumber(15)
+  set fairHigh($core.double value) => $_setDouble(14, value);
+  @$pb.TagNumber(15)
+  $core.bool hasFairHigh() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearFairHigh() => $_clearField(15);
+
+  /// 경과 (time 순) — 첫 이벤트가 연 체결이다
+  @$pb.TagNumber(16)
+  $pb.PbList<SpreadCaptureCycleEvent> get events => $_getList(15);
+
+  /// 상한을 넘어 events 에 남기지 않은 이벤트 수 (수량·손익에는 반영된다)
+  @$pb.TagNumber(17)
+  $core.int get omittedEvents => $_getIZ(16);
+  @$pb.TagNumber(17)
+  set omittedEvents($core.int value) => $_setUnsignedInt32(16, value);
+  @$pb.TagNumber(17)
+  $core.bool hasOmittedEvents() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearOmittedEvents() => $_clearField(17);
+}
+
 class GetSpreadCaptureRequest extends $pb.GeneratedMessage {
   factory GetSpreadCaptureRequest({
     $core.String? etfSymbol,
@@ -1131,6 +1671,158 @@ class StreamSpreadCaptureStatusesRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static StreamSpreadCaptureStatusesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamSpreadCaptureStatusesRequest>(create);
   static StreamSpreadCaptureStatusesRequest? _defaultInstance;
+}
+
+class ListSpreadCaptureCyclesRequest extends $pb.GeneratedMessage {
+  factory ListSpreadCaptureCyclesRequest({
+    $core.String? etfSymbol,
+    $core.String? fundCode,
+    $core.int? date,
+    $core.int? pageSize,
+    $core.String? pageToken,
+  }) {
+    final result = create();
+    if (etfSymbol != null) result.etfSymbol = etfSymbol;
+    if (fundCode != null) result.fundCode = fundCode;
+    if (date != null) result.date = date;
+    if (pageSize != null) result.pageSize = pageSize;
+    if (pageToken != null) result.pageToken = pageToken;
+    return result;
+  }
+
+  ListSpreadCaptureCyclesRequest._();
+
+  factory ListSpreadCaptureCyclesRequest.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListSpreadCaptureCyclesRequest.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSpreadCaptureCyclesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.spread_capture'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'etfSymbol')
+    ..aOS(2, _omitFieldNames ? '' : 'fundCode')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'date', $pb.PbFieldType.OU3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(5, _omitFieldNames ? '' : 'pageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSpreadCaptureCyclesRequest clone() => ListSpreadCaptureCyclesRequest()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSpreadCaptureCyclesRequest copyWith(void Function(ListSpreadCaptureCyclesRequest) updates) => super.copyWith((message) => updates(message as ListSpreadCaptureCyclesRequest)) as ListSpreadCaptureCyclesRequest;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListSpreadCaptureCyclesRequest create() => ListSpreadCaptureCyclesRequest._();
+  @$core.override
+  ListSpreadCaptureCyclesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListSpreadCaptureCyclesRequest> createRepeated() => $pb.PbList<ListSpreadCaptureCyclesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListSpreadCaptureCyclesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSpreadCaptureCyclesRequest>(create);
+  static ListSpreadCaptureCyclesRequest? _defaultInstance;
+
+  /// 비우면 전체
+  @$pb.TagNumber(1)
+  $core.String get etfSymbol => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set etfSymbol($core.String value) => $_setString(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasEtfSymbol() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearEtfSymbol() => $_clearField(1);
+
+  /// 비우면 전체
+  @$pb.TagNumber(2)
+  $core.String get fundCode => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set fundCode($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasFundCode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearFundCode() => $_clearField(2);
+
+  /// 사이클을 연 영업일 (YYYYMMDD, KST). 미지정 시 날짜 제한 없음
+  @$pb.TagNumber(3)
+  $core.int get date => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set date($core.int value) => $_setUnsignedInt32(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasDate() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearDate() => $_clearField(3);
+
+  /// 페이지 크기 (기본: 20, 최대: 100)
+  @$pb.TagNumber(4)
+  $core.int get pageSize => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set pageSize($core.int value) => $_setSignedInt32(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasPageSize() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPageSize() => $_clearField(4);
+
+  /// 이전 응답의 next_page_token 을 그대로 전달. 최초 조회는 미지정
+  @$pb.TagNumber(5)
+  $core.String get pageToken => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set pageToken($core.String value) => $_setString(4, value);
+  @$pb.TagNumber(5)
+  $core.bool hasPageToken() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPageToken() => $_clearField(5);
+}
+
+class ListSpreadCaptureCyclesResponse extends $pb.GeneratedMessage {
+  factory ListSpreadCaptureCyclesResponse({
+    $core.Iterable<SpreadCaptureCycle>? cycles,
+    $core.String? nextPageToken,
+  }) {
+    final result = create();
+    if (cycles != null) result.cycles.addAll(cycles);
+    if (nextPageToken != null) result.nextPageToken = nextPageToken;
+    return result;
+  }
+
+  ListSpreadCaptureCyclesResponse._();
+
+  factory ListSpreadCaptureCyclesResponse.fromBuffer($core.List<$core.int> data, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(data, registry);
+  factory ListSpreadCaptureCyclesResponse.fromJson($core.String json, [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ListSpreadCaptureCyclesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kdo.v1.spread_capture'), createEmptyInstance: create)
+    ..pc<SpreadCaptureCycle>(1, _omitFieldNames ? '' : 'cycles', $pb.PbFieldType.PM, subBuilder: SpreadCaptureCycle.create)
+    ..aOS(2, _omitFieldNames ? '' : 'nextPageToken')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSpreadCaptureCyclesResponse clone() => ListSpreadCaptureCyclesResponse()..mergeFromMessage(this);
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  ListSpreadCaptureCyclesResponse copyWith(void Function(ListSpreadCaptureCyclesResponse) updates) => super.copyWith((message) => updates(message as ListSpreadCaptureCyclesResponse)) as ListSpreadCaptureCyclesResponse;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ListSpreadCaptureCyclesResponse create() => ListSpreadCaptureCyclesResponse._();
+  @$core.override
+  ListSpreadCaptureCyclesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListSpreadCaptureCyclesResponse> createRepeated() => $pb.PbList<ListSpreadCaptureCyclesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListSpreadCaptureCyclesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListSpreadCaptureCyclesResponse>(create);
+  static ListSpreadCaptureCyclesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<SpreadCaptureCycle> get cycles => $_getList(0);
+
+  /// 다음 페이지 토큰 (더 없으면 빈 문자열)
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String value) => $_setString(1, value);
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => $_clearField(2);
 }
 
 
