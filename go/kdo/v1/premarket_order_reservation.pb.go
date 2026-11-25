@@ -188,10 +188,10 @@ type PremarketOrderReservation struct {
 	BidAdjustment float64 `protobuf:"fixed64,11,opt,name=bid_adjustment,json=bidAdjustment,proto3" json:"bid_adjustment,omitempty"`
 	// 원
 	AskAdjustment float64 `protobuf:"fixed64,12,opt,name=ask_adjustment,json=askAdjustment,proto3" json:"ask_adjustment,omitempty"`
-	// 틱 (소수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위). 기준 매수가 = 매수 NAV + bid_adjustment − 호가단위 × 이 값
+	// 틱 (소수·음수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위). 기준 매수가 = 매수 NAV + bid_adjustment − 호가단위 × 이 값
 	BidOffset float64 `protobuf:"fixed64,17,opt,name=bid_offset,json=bidOffset,proto3" json:"bid_offset,omitempty"`
-	// 틱 (소수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위). 기준 매도가 = 매도 NAV + ask_adjustment + 호가단위 × 이 값.
-	// 한쪽은 음수여도 되지만 bid_offset + ask_offset 은 0 이상이어야 한다 (ETF LP 와 같은 규칙)
+	// 틱 (소수·음수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위). 기준 매도가 = 매도 NAV + ask_adjustment + 호가단위 × 이 값.
+	// ETF LP 와 달리 bid_offset + ask_offset 에 제한이 없다 — 호가가 아니라 취소 기준이라 기준 매수가가 기준 매도가보다 높아져도 된다
 	AskOffset  float64                `protobuf:"fixed64,18,opt,name=ask_offset,json=askOffset,proto3" json:"ask_offset,omitempty"`
 	UpdateTime *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 }

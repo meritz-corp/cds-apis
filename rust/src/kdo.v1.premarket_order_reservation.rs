@@ -46,11 +46,11 @@ pub struct PremarketOrderReservation {
     /// 원
     #[prost(double, tag="12")]
     pub ask_adjustment: f64,
-    /// 틱 (소수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위). 기준 매수가 = 매수 NAV + bid_adjustment − 호가단위 × 이 값
+    /// 틱 (소수·음수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위). 기준 매수가 = 매수 NAV + bid_adjustment − 호가단위 × 이 값
     #[prost(double, tag="17")]
     pub bid_offset: f64,
-    /// 틱 (소수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위). 기준 매도가 = 매도 NAV + ask_adjustment + 호가단위 × 이 값.
-    /// 한쪽은 음수여도 되지만 bid_offset + ask_offset 은 0 이상이어야 한다 (ETF LP 와 같은 규칙)
+    /// 틱 (소수·음수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위). 기준 매도가 = 매도 NAV + ask_adjustment + 호가단위 × 이 값.
+    /// ETF LP 와 달리 bid_offset + ask_offset 에 제한이 없다 — 호가가 아니라 취소 기준이라 기준 매수가가 기준 매도가보다 높아져도 된다
     #[prost(double, tag="18")]
     pub ask_offset: f64,
     #[prost(message, optional, tag="16")]
