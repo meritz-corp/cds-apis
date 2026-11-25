@@ -44,6 +44,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     $fixnum.Int64? maxNetQuantity,
     $3.Timestamp? updateTime,
     $core.double? flattenAmendTicks,
+    $core.double? flattenStartTicks,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -63,6 +64,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     if (maxNetQuantity != null) result.maxNetQuantity = maxNetQuantity;
     if (updateTime != null) result.updateTime = updateTime;
     if (flattenAmendTicks != null) result.flattenAmendTicks = flattenAmendTicks;
+    if (flattenStartTicks != null) result.flattenStartTicks = flattenStartTicks;
     return result;
   }
 
@@ -89,6 +91,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     ..aInt64(16, _omitFieldNames ? '' : 'maxNetQuantity')
     ..aOM<$3.Timestamp>(17, _omitFieldNames ? '' : 'updateTime', subBuilder: $3.Timestamp.create)
     ..a<$core.double>(18, _omitFieldNames ? '' : 'flattenAmendTicks', $pb.PbFieldType.OD)
+    ..a<$core.double>(19, _omitFieldNames ? '' : 'flattenStartTicks', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -283,6 +286,17 @@ class SpreadCapture extends $pb.GeneratedMessage {
   $core.bool hasFlattenAmendTicks() => $_has(16);
   @$pb.TagNumber(18)
   void clearFlattenAmendTicks() => $_clearField(18);
+
+  /// 청산 시작 임계 (선물 틱, 소수 가능) — 공정가가 틱 경계까지 이만큼 남으면 불리한 방향 노출 청산을 시작한다(경계 쪽 호가는 임계에서 먼저 비킨다).
+  /// 0 이상, 임계 이하. 없으면 임계와 같다(호가를 비킬 때 바로 청산)
+  @$pb.TagNumber(19)
+  $core.double get flattenStartTicks => $_getN(17);
+  @$pb.TagNumber(19)
+  set flattenStartTicks($core.double value) => $_setDouble(17, value);
+  @$pb.TagNumber(19)
+  $core.bool hasFlattenStartTicks() => $_has(17);
+  @$pb.TagNumber(19)
+  void clearFlattenStartTicks() => $_clearField(19);
 }
 
 /// 살아 있는 주문 1건 — 상주 호가 또는 전환 구간 청산
@@ -636,7 +650,7 @@ class SpreadCaptureStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(14)
   void clearFlattenQuantity() => $_clearField(14);
 
-  /// 마지막 전환 때 선물 시세 수신 → 경계 주문 송신 반환까지 (µs). 아직 없으면 0
+  /// 마지막 전환·청산 시작 때 선물 시세 수신 → 경계 주문 송신 반환까지 (µs). 아직 없으면 0
   @$pb.TagNumber(15)
   $fixnum.Int64 get lastTriggerLatencyUs => $_getI64(14);
   @$pb.TagNumber(15)

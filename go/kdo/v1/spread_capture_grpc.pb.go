@@ -27,7 +27,7 @@ type SpreadCaptureServiceClient interface {
 	GetSpreadCapture(ctx context.Context, in *GetSpreadCaptureRequest, opts ...grpc.CallOption) (*SpreadCapture, error)
 	// 스프레드 캡처 설정 목록
 	ListSpreadCaptures(ctx context.Context, in *ListSpreadCapturesRequest, opts ...grpc.CallOption) (*ListSpreadCapturesResponse, error)
-	// 스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·임계·되돌림 여유·청산 정정 임계·최대 순노출만
+	// 스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·임계·되돌림 여유·청산 시작 임계·청산 정정 임계·최대 순노출만
 	// 바꿀 수 있고 실행에 바로 반영된다. 실행 중에 그 밖의 값(장전 시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
 	UpdateSpreadCapture(ctx context.Context, in *UpdateSpreadCaptureRequest, opts ...grpc.CallOption) (*SpreadCapture, error)
 	// 스프레드 캡처 설정 삭제 — 실행 중이면 FAILED_PRECONDITION.
@@ -156,7 +156,7 @@ type SpreadCaptureServiceServer interface {
 	GetSpreadCapture(context.Context, *GetSpreadCaptureRequest) (*SpreadCapture, error)
 	// 스프레드 캡처 설정 목록
 	ListSpreadCaptures(context.Context, *ListSpreadCapturesRequest) (*ListSpreadCapturesResponse, error)
-	// 스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·임계·되돌림 여유·청산 정정 임계·최대 순노출만
+	// 스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·임계·되돌림 여유·청산 시작 임계·청산 정정 임계·최대 순노출만
 	// 바꿀 수 있고 실행에 바로 반영된다. 실행 중에 그 밖의 값(장전 시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.
 	UpdateSpreadCapture(context.Context, *UpdateSpreadCaptureRequest) (*SpreadCapture, error)
 	// 스프레드 캡처 설정 삭제 — 실행 중이면 FAILED_PRECONDITION.

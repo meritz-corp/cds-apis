@@ -52,9 +52,9 @@ class SpreadCaptureZone extends $pb.ProtobufEnum {
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_UNSPECIFIED = SpreadCaptureZone._(0, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_UNSPECIFIED');
   /// 안전 구간 — 틱 경계에서 임계 넘게 떨어짐. 매수·매도 1호가부터 깐다
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_SAFE = SpreadCaptureZone._(1, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_SAFE');
-  /// 상승 전환 구간 — 위 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고 매도 노출을 경계 가격 매수 지정가로 청산한다
+  /// 상승 전환 구간 — 위 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고, 청산 시작 임계 안이면 매도 노출을 경계 가격 매수 지정가로 청산한다
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_RISING = SpreadCaptureZone._(2, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_RISING');
-  /// 하락 전환 구간 — 아래 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고 매수 노출을 경계 가격 매도 지정가로 청산한다
+  /// 하락 전환 구간 — 아래 경계에 임계 안으로 다가옴. 경계 가격엔 상주 호가를 두지 않고, 청산 시작 임계 안이면 매수 노출을 경계 가격 매도 지정가로 청산한다
   static const SpreadCaptureZone SPREAD_CAPTURE_ZONE_FALLING = SpreadCaptureZone._(3, _omitEnumNames ? '' : 'SPREAD_CAPTURE_ZONE_FALLING');
 
   static const $core.List<SpreadCaptureZone> values = <SpreadCaptureZone> [

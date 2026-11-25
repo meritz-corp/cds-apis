@@ -621,6 +621,9 @@ impl serde::Serialize for SpreadCapture {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCapture", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -672,6 +675,9 @@ impl serde::Serialize for SpreadCapture {
         if true {
             struct_ser.serialize_field("reentry_ticks", &self.reentry_ticks)?;
         }
+        if let Some(v) = self.flatten_start_ticks.as_ref() {
+            struct_ser.serialize_field("flatten_start_ticks", v)?;
+        }
         if true {
             struct_ser.serialize_field("flatten_amend_ticks", &self.flatten_amend_ticks)?;
         }
@@ -718,6 +724,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             "thresholdTicks",
             "reentry_ticks",
             "reentryTicks",
+            "flatten_start_ticks",
+            "flattenStartTicks",
             "flatten_amend_ticks",
             "flattenAmendTicks",
             "max_net_quantity",
@@ -742,6 +750,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             AskAdjustment,
             ThresholdTicks,
             ReentryTicks,
+            FlattenStartTicks,
             FlattenAmendTicks,
             MaxNetQuantity,
             UpdateTime,
@@ -781,6 +790,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
                             "thresholdTicks" | "threshold_ticks" => Ok(GeneratedField::ThresholdTicks),
                             "reentryTicks" | "reentry_ticks" => Ok(GeneratedField::ReentryTicks),
+                            "flattenStartTicks" | "flatten_start_ticks" => Ok(GeneratedField::FlattenStartTicks),
                             "flattenAmendTicks" | "flatten_amend_ticks" => Ok(GeneratedField::FlattenAmendTicks),
                             "maxNetQuantity" | "max_net_quantity" => Ok(GeneratedField::MaxNetQuantity),
                             "updateTime" | "update_time" => Ok(GeneratedField::UpdateTime),
@@ -817,6 +827,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                 let mut ask_adjustment__ = None;
                 let mut threshold_ticks__ = None;
                 let mut reentry_ticks__ = None;
+                let mut flatten_start_ticks__ = None;
                 let mut flatten_amend_ticks__ = None;
                 let mut max_net_quantity__ = None;
                 let mut update_time__ = None;
@@ -928,6 +939,14 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::FlattenStartTicks => {
+                            if flatten_start_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("flattenStartTicks"));
+                            }
+                            flatten_start_ticks__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::FlattenAmendTicks => {
                             if flatten_amend_ticks__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("flattenAmendTicks"));
@@ -970,6 +989,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
                     threshold_ticks: threshold_ticks__.unwrap_or_default(),
                     reentry_ticks: reentry_ticks__.unwrap_or_default(),
+                    flatten_start_ticks: flatten_start_ticks__,
                     flatten_amend_ticks: flatten_amend_ticks__.unwrap_or_default(),
                     max_net_quantity: max_net_quantity__.unwrap_or_default(),
                     update_time: update_time__,
