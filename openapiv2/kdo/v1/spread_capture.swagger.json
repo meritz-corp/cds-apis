@@ -321,7 +321,7 @@
     },
     "/v1/spread_captures/{spreadCapture.etfSymbol}/{spreadCapture.fundCode}": {
       "post": {
-        "summary": "스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·임계·되돌림 여유·청산 시작 임계·청산 정정 임계·최대 순노출만\n바꿀 수 있고 실행에 바로 반영된다. 실행 중에 그 밖의 값(장전 시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.",
+        "summary": "스프레드 캡처 설정 저장 — 없으면 만들고 있으면 덮어쓴다. 실행 중이면 basis·adjustment·offset·임계·되돌림 여유·청산 시작 임계·청산 정정 임계·최대 순노출만\n바꿀 수 있고 실행에 바로 반영된다. 실행 중에 그 밖의 값(장전 시작가·depth·수량·호가단위·pricing 종류)이 저장값과 다르면 FAILED_PRECONDITION.",
         "operationId": "SpreadCaptureService_UpdateSpreadCapture",
         "responses": {
           "200": {
@@ -387,7 +387,7 @@
                     },
                     "pricing": {
                       "$ref": "#/definitions/commonEtfPricing",
-                      "title": "공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.\nPDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,\n선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment"
+                      "title": "공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.\nPDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,\n선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment ∓ 호가단위 × offset"
                     },
                     "bidBasis": {
                       "type": "number",
@@ -408,6 +408,16 @@
                       "type": "number",
                       "format": "double",
                       "title": "원"
+                    },
+                    "bidOffset": {
+                      "type": "number",
+                      "format": "double",
+                      "title": "매수 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위·부호) — 매수 공정가를 호가단위 × 이 값만큼 내린다.\n시장이 NAV 보다 눌려 있으면 매수 +·매도 −, 떠 있으면 매수 −·매도 + 로 같은 크기를 넣어 공정가를 통째로 민다"
+                    },
+                    "askOffset": {
+                      "type": "number",
+                      "format": "double",
+                      "title": "매도 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위·부호) — 매도 공정가를 호가단위 × 이 값만큼 올린다.\nbid_offset + ask_offset 은 0 이상이어야 한다. 합만큼 공정가 폭이 넓어져 안전 구간이 남지 않으면 start·실행 중 변경에서 거부한다"
                     },
                     "thresholdTicks": {
                       "type": "number",
@@ -662,7 +672,7 @@
         },
         "pricing": {
           "$ref": "#/definitions/commonEtfPricing",
-          "title": "공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.\nPDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,\n선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment"
+          "title": "공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.\nPDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,\n선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment ∓ 호가단위 × offset"
         },
         "bidBasis": {
           "type": "number",
@@ -683,6 +693,16 @@
           "type": "number",
           "format": "double",
           "title": "원"
+        },
+        "bidOffset": {
+          "type": "number",
+          "format": "double",
+          "title": "매수 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위·부호) — 매수 공정가를 호가단위 × 이 값만큼 내린다.\n시장이 NAV 보다 눌려 있으면 매수 +·매도 −, 떠 있으면 매수 −·매도 + 로 같은 크기를 넣어 공정가를 통째로 민다"
+        },
+        "askOffset": {
+          "type": "number",
+          "format": "double",
+          "title": "매도 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위·부호) — 매도 공정가를 호가단위 × 이 값만큼 올린다.\nbid_offset + ask_offset 은 0 이상이어야 한다. 합만큼 공정가 폭이 넓어져 안전 구간이 남지 않으면 start·실행 중 변경에서 거부한다"
         },
         "thresholdTicks": {
           "type": "number",
@@ -1026,12 +1046,12 @@
         "fairBid": {
           "type": "number",
           "format": "double",
-          "title": "공정가(원) = 매수 NAV + bid_adjustment. 준비 전이면 0"
+          "title": "공정가(원) = 매수 NAV + bid_adjustment − 호가단위 × bid_offset. 준비 전이면 0"
         },
         "fairAsk": {
           "type": "number",
           "format": "double",
-          "title": "공정가(원) = 매도 NAV + ask_adjustment. 준비 전이면 0"
+          "title": "공정가(원) = 매도 NAV + ask_adjustment + 호가단위 × ask_offset. 준비 전이면 0"
         },
         "threshold": {
           "type": "number",

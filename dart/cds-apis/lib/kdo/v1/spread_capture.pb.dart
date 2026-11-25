@@ -46,6 +46,8 @@ class SpreadCapture extends $pb.GeneratedMessage {
     $3.Timestamp? updateTime,
     $core.double? flattenAmendTicks,
     $core.double? flattenStartTicks,
+    $core.double? bidOffset,
+    $core.double? askOffset,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -66,6 +68,8 @@ class SpreadCapture extends $pb.GeneratedMessage {
     if (updateTime != null) result.updateTime = updateTime;
     if (flattenAmendTicks != null) result.flattenAmendTicks = flattenAmendTicks;
     if (flattenStartTicks != null) result.flattenStartTicks = flattenStartTicks;
+    if (bidOffset != null) result.bidOffset = bidOffset;
+    if (askOffset != null) result.askOffset = askOffset;
     return result;
   }
 
@@ -93,6 +97,8 @@ class SpreadCapture extends $pb.GeneratedMessage {
     ..aOM<$3.Timestamp>(17, _omitFieldNames ? '' : 'updateTime', subBuilder: $3.Timestamp.create)
     ..a<$core.double>(18, _omitFieldNames ? '' : 'flattenAmendTicks', $pb.PbFieldType.OD)
     ..a<$core.double>(19, _omitFieldNames ? '' : 'flattenStartTicks', $pb.PbFieldType.OD)
+    ..a<$core.double>(20, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(21, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -183,7 +189,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
 
   /// 공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.
   /// PDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,
-  /// 선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment
+  /// 선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment ∓ 호가단위 × offset
   @$pb.TagNumber(8)
   $2.EtfPricing get pricing => $_getN(7);
   @$pb.TagNumber(8)
@@ -298,6 +304,28 @@ class SpreadCapture extends $pb.GeneratedMessage {
   $core.bool hasFlattenStartTicks() => $_has(17);
   @$pb.TagNumber(19)
   void clearFlattenStartTicks() => $_clearField(19);
+
+  /// 매수 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위·부호) — 매수 공정가를 호가단위 × 이 값만큼 내린다.
+  /// 시장이 NAV 보다 눌려 있으면 매수 +·매도 −, 떠 있으면 매수 −·매도 + 로 같은 크기를 넣어 공정가를 통째로 민다
+  @$pb.TagNumber(20)
+  $core.double get bidOffset => $_getN(18);
+  @$pb.TagNumber(20)
+  set bidOffset($core.double value) => $_setDouble(18, value);
+  @$pb.TagNumber(20)
+  $core.bool hasBidOffset() => $_has(18);
+  @$pb.TagNumber(20)
+  void clearBidOffset() => $_clearField(20);
+
+  /// 매도 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위·부호) — 매도 공정가를 호가단위 × 이 값만큼 올린다.
+  /// bid_offset + ask_offset 은 0 이상이어야 한다. 합만큼 공정가 폭이 넓어져 안전 구간이 남지 않으면 start·실행 중 변경에서 거부한다
+  @$pb.TagNumber(21)
+  $core.double get askOffset => $_getN(19);
+  @$pb.TagNumber(21)
+  set askOffset($core.double value) => $_setDouble(19, value);
+  @$pb.TagNumber(21)
+  $core.bool hasAskOffset() => $_has(19);
+  @$pb.TagNumber(21)
+  void clearAskOffset() => $_clearField(21);
 }
 
 /// 살아 있는 주문 1건 — 상주 호가 또는 전환 구간 청산
@@ -575,7 +603,7 @@ class SpreadCaptureStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearZonePrice() => $_clearField(6);
 
-  /// 공정가(원) = 매수 NAV + bid_adjustment. 준비 전이면 0
+  /// 공정가(원) = 매수 NAV + bid_adjustment − 호가단위 × bid_offset. 준비 전이면 0
   @$pb.TagNumber(7)
   $core.double get fairBid => $_getN(6);
   @$pb.TagNumber(7)
@@ -585,7 +613,7 @@ class SpreadCaptureStatus extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearFairBid() => $_clearField(7);
 
-  /// 공정가(원) = 매도 NAV + ask_adjustment. 준비 전이면 0
+  /// 공정가(원) = 매도 NAV + ask_adjustment + 호가단위 × ask_offset. 준비 전이면 0
   @$pb.TagNumber(8)
   $core.double get fairAsk => $_getN(7);
   @$pb.TagNumber(8)

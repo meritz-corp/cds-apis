@@ -27,7 +27,7 @@ pub struct SpreadCapture {
     pub tick_size: i64,
     /// 공정가 계산 방식 — 선물 하나로 계산하는 FUTURE_BASIS·LEVERAGE_FUTURE·INDEX_TRACKING_HEDGE·PDF_DECOMPOSE_HEDGE 만 허용.
     /// PDF_DECOMPOSE_HEDGE 는 하위 ETF 까지 분해한 PDF 에 선물이 하나만 남아야 한다(start 때 확인 — 곱버스처럼 추적 선물이 마스터에 없는 ETF 용,
-    /// 선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment
+    /// 선물 외 구성종목은 start 때 값으로 고정·basis 미적용). 공정가 = NAV(pricing·basis) + adjustment ∓ 호가단위 × offset
     #[prost(message, optional, tag="8")]
     pub pricing: ::core::option::Option<super::common::EtfPricing>,
     /// 원
@@ -42,6 +42,14 @@ pub struct SpreadCapture {
     /// 원
     #[prost(double, tag="12")]
     pub ask_adjustment: f64,
+    /// 매수 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.bid_offset 과 같은 단위·부호) — 매수 공정가를 호가단위 × 이 값만큼 내린다.
+    /// 시장이 NAV 보다 눌려 있으면 매수 +·매도 −, 떠 있으면 매수 −·매도 + 로 같은 크기를 넣어 공정가를 통째로 민다
+    #[prost(double, tag="20")]
+    pub bid_offset: f64,
+    /// 매도 offset (ETF 틱, 소수·음수 가능 — ETF LP EtfLpOffset.ask_offset 과 같은 단위·부호) — 매도 공정가를 호가단위 × 이 값만큼 올린다.
+    /// bid_offset + ask_offset 은 0 이상이어야 한다. 합만큼 공정가 폭이 넓어져 안전 구간이 남지 않으면 start·실행 중 변경에서 거부한다
+    #[prost(double, tag="21")]
+    pub ask_offset: f64,
     /// 임계 (선물 틱, 소수 가능) — 공정가가 틱 경계까지 이만큼 남으면 전환 구간에 들어간다
     #[prost(double, tag="13")]
     pub threshold_ticks: f64,
@@ -105,10 +113,10 @@ pub struct SpreadCaptureStatus {
     /// 안전 구간이면 매수 1호가(원), 전환 구간이면 경계 가격(원). 공정가 준비 전이면 0
     #[prost(int64, tag="6")]
     pub zone_price: i64,
-    /// 공정가(원) = 매수 NAV + bid_adjustment. 준비 전이면 0
+    /// 공정가(원) = 매수 NAV + bid_adjustment − 호가단위 × bid_offset. 준비 전이면 0
     #[prost(double, tag="7")]
     pub fair_bid: f64,
-    /// 공정가(원) = 매도 NAV + ask_adjustment. 준비 전이면 0
+    /// 공정가(원) = 매도 NAV + ask_adjustment + 호가단위 × ask_offset. 준비 전이면 0
     #[prost(double, tag="8")]
     pub fair_ask: f64,
     /// 임계를 ETF 가격으로 환산한 값(원)

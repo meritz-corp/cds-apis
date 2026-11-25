@@ -908,6 +908,12 @@ impl serde::Serialize for SpreadCapture {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCapture", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -952,6 +958,12 @@ impl serde::Serialize for SpreadCapture {
         }
         if true {
             struct_ser.serialize_field("ask_adjustment", &self.ask_adjustment)?;
+        }
+        if true {
+            struct_ser.serialize_field("bid_offset", &self.bid_offset)?;
+        }
+        if true {
+            struct_ser.serialize_field("ask_offset", &self.ask_offset)?;
         }
         if true {
             struct_ser.serialize_field("threshold_ticks", &self.threshold_ticks)?;
@@ -1004,6 +1016,10 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             "bidAdjustment",
             "ask_adjustment",
             "askAdjustment",
+            "bid_offset",
+            "bidOffset",
+            "ask_offset",
+            "askOffset",
             "threshold_ticks",
             "thresholdTicks",
             "reentry_ticks",
@@ -1032,6 +1048,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             AskBasis,
             BidAdjustment,
             AskAdjustment,
+            BidOffset,
+            AskOffset,
             ThresholdTicks,
             ReentryTicks,
             FlattenStartTicks,
@@ -1072,6 +1090,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                             "askBasis" | "ask_basis" => Ok(GeneratedField::AskBasis),
                             "bidAdjustment" | "bid_adjustment" => Ok(GeneratedField::BidAdjustment),
                             "askAdjustment" | "ask_adjustment" => Ok(GeneratedField::AskAdjustment),
+                            "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
+                            "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "thresholdTicks" | "threshold_ticks" => Ok(GeneratedField::ThresholdTicks),
                             "reentryTicks" | "reentry_ticks" => Ok(GeneratedField::ReentryTicks),
                             "flattenStartTicks" | "flatten_start_ticks" => Ok(GeneratedField::FlattenStartTicks),
@@ -1109,6 +1129,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                 let mut ask_basis__ = None;
                 let mut bid_adjustment__ = None;
                 let mut ask_adjustment__ = None;
+                let mut bid_offset__ = None;
+                let mut ask_offset__ = None;
                 let mut threshold_ticks__ = None;
                 let mut reentry_ticks__ = None;
                 let mut flatten_start_ticks__ = None;
@@ -1207,6 +1229,22 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::BidOffset => {
+                            if bid_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("bidOffset"));
+                            }
+                            bid_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::AskOffset => {
+                            if ask_offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("askOffset"));
+                            }
+                            ask_offset__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
                         GeneratedField::ThresholdTicks => {
                             if threshold_ticks__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("thresholdTicks"));
@@ -1271,6 +1309,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                     ask_basis: ask_basis__.unwrap_or_default(),
                     bid_adjustment: bid_adjustment__.unwrap_or_default(),
                     ask_adjustment: ask_adjustment__.unwrap_or_default(),
+                    bid_offset: bid_offset__.unwrap_or_default(),
+                    ask_offset: ask_offset__.unwrap_or_default(),
                     threshold_ticks: threshold_ticks__.unwrap_or_default(),
                     reentry_ticks: reentry_ticks__.unwrap_or_default(),
                     flatten_start_ticks: flatten_start_ticks__,

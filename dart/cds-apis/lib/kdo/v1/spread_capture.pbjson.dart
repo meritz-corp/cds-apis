@@ -135,6 +135,8 @@ const SpreadCapture$json = {
     {'1': 'ask_basis', '3': 10, '4': 1, '5': 1, '10': 'askBasis'},
     {'1': 'bid_adjustment', '3': 11, '4': 1, '5': 1, '10': 'bidAdjustment'},
     {'1': 'ask_adjustment', '3': 12, '4': 1, '5': 1, '10': 'askAdjustment'},
+    {'1': 'bid_offset', '3': 20, '4': 1, '5': 1, '10': 'bidOffset'},
+    {'1': 'ask_offset', '3': 21, '4': 1, '5': 1, '10': 'askOffset'},
     {'1': 'threshold_ticks', '3': 13, '4': 1, '5': 1, '10': 'thresholdTicks'},
     {'1': 'reentry_ticks', '3': 14, '4': 1, '5': 1, '10': 'reentryTicks'},
     {'1': 'flatten_start_ticks', '3': 19, '4': 1, '5': 1, '9': 0, '10': 'flattenStartTicks', '17': true},
@@ -160,13 +162,14 @@ final $typed_data.Uint8List spreadCaptureDescriptor = $convert.base64Decode(
     'emUSMwoHcHJpY2luZxgIIAEoCzIZLmtkby52MS5jb21tb24uRXRmUHJpY2luZ1IHcHJpY2luZx'
     'IbCgliaWRfYmFzaXMYCSABKAFSCGJpZEJhc2lzEhsKCWFza19iYXNpcxgKIAEoAVIIYXNrQmFz'
     'aXMSJQoOYmlkX2FkanVzdG1lbnQYCyABKAFSDWJpZEFkanVzdG1lbnQSJQoOYXNrX2FkanVzdG'
-    '1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSJwoPdGhyZXNob2xkX3RpY2tzGA0gASgBUg50aHJl'
-    'c2hvbGRUaWNrcxIjCg1yZWVudHJ5X3RpY2tzGA4gASgBUgxyZWVudHJ5VGlja3MSMwoTZmxhdH'
-    'Rlbl9zdGFydF90aWNrcxgTIAEoAUgAUhFmbGF0dGVuU3RhcnRUaWNrc4gBARIuChNmbGF0dGVu'
-    'X2FtZW5kX3RpY2tzGBIgASgBUhFmbGF0dGVuQW1lbmRUaWNrcxIoChBtYXhfbmV0X3F1YW50aX'
-    'R5GBAgASgDUg5tYXhOZXRRdWFudGl0eRJBCgt1cGRhdGVfdGltZRgRIAEoCzIaLmdvb2dsZS5w'
-    'cm90b2J1Zi5UaW1lc3RhbXBCBOJBAQNSCnVwZGF0ZVRpbWVCFgoUX2ZsYXR0ZW5fc3RhcnRfdG'
-    'lja3NKBAgPEBBSFmZsYXR0ZW5fc2xpcHBhZ2VfdGlja3M=');
+    '1lbnQYDCABKAFSDWFza0FkanVzdG1lbnQSHQoKYmlkX29mZnNldBgUIAEoAVIJYmlkT2Zmc2V0'
+    'Eh0KCmFza19vZmZzZXQYFSABKAFSCWFza09mZnNldBInCg90aHJlc2hvbGRfdGlja3MYDSABKA'
+    'FSDnRocmVzaG9sZFRpY2tzEiMKDXJlZW50cnlfdGlja3MYDiABKAFSDHJlZW50cnlUaWNrcxIz'
+    'ChNmbGF0dGVuX3N0YXJ0X3RpY2tzGBMgASgBSABSEWZsYXR0ZW5TdGFydFRpY2tziAEBEi4KE2'
+    'ZsYXR0ZW5fYW1lbmRfdGlja3MYEiABKAFSEWZsYXR0ZW5BbWVuZFRpY2tzEigKEG1heF9uZXRf'
+    'cXVhbnRpdHkYECABKANSDm1heE5ldFF1YW50aXR5EkEKC3VwZGF0ZV90aW1lGBEgASgLMhouZ2'
+    '9vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIE4kEBA1IKdXBkYXRlVGltZUIWChRfZmxhdHRlbl9z'
+    'dGFydF90aWNrc0oECA8QEFIWZmxhdHRlbl9zbGlwcGFnZV90aWNrcw==');
 
 @$core.Deprecated('Use spreadCaptureOrderDescriptor instead')
 const SpreadCaptureOrder$json = {
