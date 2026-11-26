@@ -172,8 +172,8 @@ type PremarketOrderReservation struct {
 	// 주문 1건 수량 (매수·매도 공통). 단별 총수량 = quantity × orders_per_level
 	Quantity int64 `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	// 단별 주문 수 — 같은 가격에 quantity 짜리 주문을 이만큼 낸다 (1회 주문 한도 때문에 수량만으로는 못 까는 수량을 한 호가에 깔 때).
-	// 0 이면 1 (이 필드를 모르는 클라이언트). 총 주문 수(depth × 매수·매도 측 수 × 이 값)는 50 이하 —
-	// 08:30 에 한꺼번에 접수돼 (펀드, 종목) 초당 주문 수 한도에 걸리지 않게
+	// 0 이면 1 (이 필드를 모르는 클라이언트). 총 주문 수(depth × 매수·매도 측 수 × 이 값)에 상한은 없다 —
+	// 08:30 에 한꺼번에 접수되므로 (펀드, 종목) 초당 주문 수 한도를 넘으면 넘은 접수마다 한도 초과 경고·cooldown 이 나간다
 	OrdersPerLevel uint32 `protobuf:"varint,19,opt,name=orders_per_level,json=ordersPerLevel,proto3" json:"orders_per_level,omitempty"`
 	// 호가단위(원)
 	TickSize int64 `protobuf:"varint,7,opt,name=tick_size,json=tickSize,proto3" json:"tick_size,omitempty"`
