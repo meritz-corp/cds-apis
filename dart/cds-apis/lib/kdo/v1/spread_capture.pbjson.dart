@@ -183,6 +183,7 @@ const SpreadCaptureOrder$json = {
     {'1': 'state', '3': 6, '4': 1, '5': 14, '6': '.kdo.v1.spread_capture.SpreadCaptureOrderState', '10': 'state'},
     {'1': 'moving_to', '3': 7, '4': 1, '5': 3, '10': 'movingTo'},
     {'1': 'flatten', '3': 8, '4': 1, '5': 8, '10': 'flatten'},
+    {'1': 'placed_at', '3': 9, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'placedAt'},
   ],
 };
 
@@ -193,7 +194,8 @@ final $typed_data.Uint8List spreadCaptureOrderDescriptor = $convert.base64Decode
     'cmljZRIaCghxdWFudGl0eRgEIAEoA1IIcXVhbnRpdHkSJwoPZmlsbGVkX3F1YW50aXR5GAUgAS'
     'gDUg5maWxsZWRRdWFudGl0eRJECgVzdGF0ZRgGIAEoDjIuLmtkby52MS5zcHJlYWRfY2FwdHVy'
     'ZS5TcHJlYWRDYXB0dXJlT3JkZXJTdGF0ZVIFc3RhdGUSGwoJbW92aW5nX3RvGAcgASgDUghtb3'
-    'ZpbmdUbxIYCgdmbGF0dGVuGAggASgIUgdmbGF0dGVu');
+    'ZpbmdUbxIYCgdmbGF0dGVuGAggASgIUgdmbGF0dGVuEjcKCXBsYWNlZF9hdBgJIAEoCzIaLmdv'
+    'b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCHBsYWNlZEF0');
 
 @$core.Deprecated('Use spreadCaptureStatusDescriptor instead')
 const SpreadCaptureStatus$json = {

@@ -339,6 +339,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     SpreadCaptureOrderState? state,
     $fixnum.Int64? movingTo,
     $core.bool? flatten,
+    $3.Timestamp? placedAt,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
@@ -349,6 +350,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     if (state != null) result.state = state;
     if (movingTo != null) result.movingTo = movingTo;
     if (flatten != null) result.flatten = flatten;
+    if (placedAt != null) result.placedAt = placedAt;
     return result;
   }
 
@@ -366,6 +368,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     ..e<SpreadCaptureOrderState>(6, _omitFieldNames ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: SpreadCaptureOrderState.SPREAD_CAPTURE_ORDER_STATE_UNSPECIFIED, valueOf: SpreadCaptureOrderState.valueOf, enumValues: SpreadCaptureOrderState.values)
     ..aInt64(7, _omitFieldNames ? '' : 'movingTo')
     ..aOB(8, _omitFieldNames ? '' : 'flatten')
+    ..aOM<$3.Timestamp>(9, _omitFieldNames ? '' : 'placedAt', subBuilder: $3.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -461,6 +464,18 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
   $core.bool hasFlatten() => $_has(7);
   @$pb.TagNumber(8)
   void clearFlatten() => $_clearField(8);
+
+  /// 지금 가격에 놓인 거래소 접수 시각 — 신규 접수 또는 마지막 가격 정정 접수의 거래소 시각. 접수 전(송신 중)이면 없음
+  @$pb.TagNumber(9)
+  $3.Timestamp get placedAt => $_getN(8);
+  @$pb.TagNumber(9)
+  set placedAt($3.Timestamp value) => $_setField(9, value);
+  @$pb.TagNumber(9)
+  $core.bool hasPlacedAt() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearPlacedAt() => $_clearField(9);
+  @$pb.TagNumber(9)
+  $3.Timestamp ensurePlacedAt() => $_ensure(8);
 }
 
 class SpreadCaptureStatus extends $pb.GeneratedMessage {

@@ -95,6 +95,9 @@ pub struct SpreadCaptureOrder {
     /// 전환 구간 청산 주문(일반 지정가)이면 true, 상주 호가(LP)면 false
     #[prost(bool, tag="8")]
     pub flatten: bool,
+    /// 지금 가격에 놓인 거래소 접수 시각 — 신규 접수 또는 마지막 가격 정정 접수의 거래소 시각. 접수 전(송신 중)이면 없음
+    #[prost(message, optional, tag="9")]
+    pub placed_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
