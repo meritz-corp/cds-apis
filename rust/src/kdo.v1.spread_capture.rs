@@ -98,6 +98,10 @@ pub struct SpreadCaptureOrder {
     /// 지금 가격에 놓인 거래소 접수 시각 — 신규 접수 또는 마지막 가격 정정 접수의 거래소 시각. 접수 전(송신 중)이면 없음
     #[prost(message, optional, tag="9")]
     pub placed_at: ::core::option::Option<super::super::super::google::protobuf::Timestamp>,
+    /// 이 주문 앞에 남은 수량의 상한(주) — 지금 가격에 놓인 뒤 그 가격 시장 잔량(이 주문 잔량 제외)에서 시작해 그 가격 시장 체결만큼 줄인다.
+    /// 앞 주문의 취소는 그 가격 잔량이 이 값 밑으로 줄 때만 반영된다. 접수 전·공개 10호가 밖·단일가면 없음(unset)
+    #[prost(int64, optional, tag="10")]
+    pub ahead_quantity: ::core::option::Option<i64>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

@@ -340,6 +340,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     $fixnum.Int64? movingTo,
     $core.bool? flatten,
     $3.Timestamp? placedAt,
+    $fixnum.Int64? aheadQuantity,
   }) {
     final result = create();
     if (orderId != null) result.orderId = orderId;
@@ -351,6 +352,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     if (movingTo != null) result.movingTo = movingTo;
     if (flatten != null) result.flatten = flatten;
     if (placedAt != null) result.placedAt = placedAt;
+    if (aheadQuantity != null) result.aheadQuantity = aheadQuantity;
     return result;
   }
 
@@ -369,6 +371,7 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
     ..aInt64(7, _omitFieldNames ? '' : 'movingTo')
     ..aOB(8, _omitFieldNames ? '' : 'flatten')
     ..aOM<$3.Timestamp>(9, _omitFieldNames ? '' : 'placedAt', subBuilder: $3.Timestamp.create)
+    ..aInt64(10, _omitFieldNames ? '' : 'aheadQuantity')
     ..hasRequiredFields = false
   ;
 
@@ -476,6 +479,17 @@ class SpreadCaptureOrder extends $pb.GeneratedMessage {
   void clearPlacedAt() => $_clearField(9);
   @$pb.TagNumber(9)
   $3.Timestamp ensurePlacedAt() => $_ensure(8);
+
+  /// 이 주문 앞에 남은 수량의 상한(주) — 지금 가격에 놓인 뒤 그 가격 시장 잔량(이 주문 잔량 제외)에서 시작해 그 가격 시장 체결만큼 줄인다.
+  /// 앞 주문의 취소는 그 가격 잔량이 이 값 밑으로 줄 때만 반영된다. 접수 전·공개 10호가 밖·단일가면 없음(unset)
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get aheadQuantity => $_getI64(9);
+  @$pb.TagNumber(10)
+  set aheadQuantity($fixnum.Int64 value) => $_setInt64(9, value);
+  @$pb.TagNumber(10)
+  $core.bool hasAheadQuantity() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearAheadQuantity() => $_clearField(10);
 }
 
 class SpreadCaptureStatus extends $pb.GeneratedMessage {

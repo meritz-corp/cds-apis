@@ -2314,6 +2314,9 @@ impl serde::Serialize for SpreadCaptureOrder {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCaptureOrder", len)?;
         if true {
             #[allow(clippy::needless_borrow)]
@@ -2356,6 +2359,11 @@ impl serde::Serialize for SpreadCaptureOrder {
         if let Some(v) = self.placed_at.as_ref() {
             struct_ser.serialize_field("placed_at", v)?;
         }
+        if let Some(v) = self.ahead_quantity.as_ref() {
+            #[allow(clippy::needless_borrow)]
+            #[allow(clippy::needless_borrows_for_generic_args)]
+            struct_ser.serialize_field("ahead_quantity", ToString::to_string(&v).as_str())?;
+        }
         struct_ser.end()
     }
 }
@@ -2379,6 +2387,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
             "flatten",
             "placed_at",
             "placedAt",
+            "ahead_quantity",
+            "aheadQuantity",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -2392,6 +2402,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
             MovingTo,
             Flatten,
             PlacedAt,
+            AheadQuantity,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -2423,6 +2434,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                             "movingTo" | "moving_to" => Ok(GeneratedField::MovingTo),
                             "flatten" => Ok(GeneratedField::Flatten),
                             "placedAt" | "placed_at" => Ok(GeneratedField::PlacedAt),
+                            "aheadQuantity" | "ahead_quantity" => Ok(GeneratedField::AheadQuantity),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -2451,6 +2463,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                 let mut moving_to__ = None;
                 let mut flatten__ = None;
                 let mut placed_at__ = None;
+                let mut ahead_quantity__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::OrderId => {
@@ -2517,6 +2530,14 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                             }
                             placed_at__ = map_.next_value()?;
                         }
+                        GeneratedField::AheadQuantity => {
+                            if ahead_quantity__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("aheadQuantity"));
+                            }
+                            ahead_quantity__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -2532,6 +2553,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCaptureOrder {
                     moving_to: moving_to__.unwrap_or_default(),
                     flatten: flatten__.unwrap_or_default(),
                     placed_at: placed_at__,
+                    ahead_quantity: ahead_quantity__,
                 })
             }
         }
