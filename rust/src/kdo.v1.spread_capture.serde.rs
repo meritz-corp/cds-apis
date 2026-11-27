@@ -914,6 +914,9 @@ impl serde::Serialize for SpreadCapture {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("kdo.v1.spread_capture.SpreadCapture", len)?;
         if true {
             struct_ser.serialize_field("etf_symbol", &self.etf_symbol)?;
@@ -967,6 +970,9 @@ impl serde::Serialize for SpreadCapture {
         }
         if true {
             struct_ser.serialize_field("threshold_ticks", &self.threshold_ticks)?;
+        }
+        if let Some(v) = self.unwind_threshold_ticks.as_ref() {
+            struct_ser.serialize_field("unwind_threshold_ticks", v)?;
         }
         if true {
             struct_ser.serialize_field("reentry_ticks", &self.reentry_ticks)?;
@@ -1022,6 +1028,8 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             "askOffset",
             "threshold_ticks",
             "thresholdTicks",
+            "unwind_threshold_ticks",
+            "unwindThresholdTicks",
             "reentry_ticks",
             "reentryTicks",
             "flatten_start_ticks",
@@ -1051,6 +1059,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
             BidOffset,
             AskOffset,
             ThresholdTicks,
+            UnwindThresholdTicks,
             ReentryTicks,
             FlattenStartTicks,
             FlattenAmendTicks,
@@ -1093,6 +1102,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                             "bidOffset" | "bid_offset" => Ok(GeneratedField::BidOffset),
                             "askOffset" | "ask_offset" => Ok(GeneratedField::AskOffset),
                             "thresholdTicks" | "threshold_ticks" => Ok(GeneratedField::ThresholdTicks),
+                            "unwindThresholdTicks" | "unwind_threshold_ticks" => Ok(GeneratedField::UnwindThresholdTicks),
                             "reentryTicks" | "reentry_ticks" => Ok(GeneratedField::ReentryTicks),
                             "flattenStartTicks" | "flatten_start_ticks" => Ok(GeneratedField::FlattenStartTicks),
                             "flattenAmendTicks" | "flatten_amend_ticks" => Ok(GeneratedField::FlattenAmendTicks),
@@ -1132,6 +1142,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                 let mut bid_offset__ = None;
                 let mut ask_offset__ = None;
                 let mut threshold_ticks__ = None;
+                let mut unwind_threshold_ticks__ = None;
                 let mut reentry_ticks__ = None;
                 let mut flatten_start_ticks__ = None;
                 let mut flatten_amend_ticks__ = None;
@@ -1253,6 +1264,14 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                                 Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
                             ;
                         }
+                        GeneratedField::UnwindThresholdTicks => {
+                            if unwind_threshold_ticks__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("unwindThresholdTicks"));
+                            }
+                            unwind_threshold_ticks__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
                         GeneratedField::ReentryTicks => {
                             if reentry_ticks__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("reentryTicks"));
@@ -1312,6 +1331,7 @@ impl<'de> serde::Deserialize<'de> for SpreadCapture {
                     bid_offset: bid_offset__.unwrap_or_default(),
                     ask_offset: ask_offset__.unwrap_or_default(),
                     threshold_ticks: threshold_ticks__.unwrap_or_default(),
+                    unwind_threshold_ticks: unwind_threshold_ticks__,
                     reentry_ticks: reentry_ticks__.unwrap_or_default(),
                     flatten_start_ticks: flatten_start_ticks__,
                     flatten_amend_ticks: flatten_amend_ticks__.unwrap_or_default(),

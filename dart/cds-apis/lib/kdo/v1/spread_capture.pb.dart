@@ -48,6 +48,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     $core.double? flattenStartTicks,
     $core.double? bidOffset,
     $core.double? askOffset,
+    $core.double? unwindThresholdTicks,
   }) {
     final result = create();
     if (etfSymbol != null) result.etfSymbol = etfSymbol;
@@ -70,6 +71,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     if (flattenStartTicks != null) result.flattenStartTicks = flattenStartTicks;
     if (bidOffset != null) result.bidOffset = bidOffset;
     if (askOffset != null) result.askOffset = askOffset;
+    if (unwindThresholdTicks != null) result.unwindThresholdTicks = unwindThresholdTicks;
     return result;
   }
 
@@ -99,6 +101,7 @@ class SpreadCapture extends $pb.GeneratedMessage {
     ..a<$core.double>(19, _omitFieldNames ? '' : 'flattenStartTicks', $pb.PbFieldType.OD)
     ..a<$core.double>(20, _omitFieldNames ? '' : 'bidOffset', $pb.PbFieldType.OD)
     ..a<$core.double>(21, _omitFieldNames ? '' : 'askOffset', $pb.PbFieldType.OD)
+    ..a<$core.double>(22, _omitFieldNames ? '' : 'unwindThresholdTicks', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -326,6 +329,18 @@ class SpreadCapture extends $pb.GeneratedMessage {
   $core.bool hasAskOffset() => $_has(19);
   @$pb.TagNumber(21)
   void clearAskOffset() => $_clearField(21);
+
+  /// 노출 해소 임계 (선물 틱, 소수 가능) — 순노출이 있으면 그 노출을 줄이는 쪽 경계(매수 노출이면 위 경계 매도, 매도 노출이면 아래 경계 매수)는
+  /// 공정가가 경계까지 이만큼 남을 때 비킨다(임계보다 경계 가까이에서 — 덜 비킨다). 원래 안전 구간으로 되돌아가는 선도 이 값 + 되돌림 여유.
+  /// 불리한 쪽(청산 쪽) 경계는 노출이 있어도 임계. 0 이상, 임계 이하. 없으면 임계와 같다
+  @$pb.TagNumber(22)
+  $core.double get unwindThresholdTicks => $_getN(20);
+  @$pb.TagNumber(22)
+  set unwindThresholdTicks($core.double value) => $_setDouble(20, value);
+  @$pb.TagNumber(22)
+  $core.bool hasUnwindThresholdTicks() => $_has(20);
+  @$pb.TagNumber(22)
+  void clearUnwindThresholdTicks() => $_clearField(22);
 }
 
 /// 살아 있는 주문 1건 — 상주 호가 또는 전환 구간 청산
